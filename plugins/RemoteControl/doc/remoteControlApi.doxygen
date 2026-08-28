@@ -404,7 +404,7 @@ Lists all registered StelProperties, in the format
         value,       // current value of the StelProperty
         variantType, // type string of the "value", as determined by QVariant::typeName
         typeString,  // type string of the StelProperty, as determined by QMetaProperty::typeName (may not be equal to "variantType")
-        typeEnum,    // enum value of the type of the StelProperty, as determined by StelProperty::getType
+        typeEnum,    // numeric QMetaType/QMetaProperty type value returned by StelProperty::getType() (Qt5: QMetaProperty::type() / Qt6: QMetaProperty::typeId()).
         canNotify,   // should be true
         isWritable   // should be true almost everywhere
      }
@@ -431,8 +431,8 @@ Returns the list of all stored location IDs (keys of StelLocationMgr::getAllMap)
 Returns the list of all known regions (StelLocationMgr::getRegionNames), as a JSON array of objects of format
 @code
 {
-    name, //the english country name
-    name_i18n //the localized country name (current language)
+    name,     // the english region name
+    name_i18n // the localized region name (current language)
 }
 @endcode
 

@@ -40,8 +40,8 @@ paths:
                     //current time information
                     time : {
                         jday,       //current Julian day
-                        deltaT,     //current deltaT as determined by the current dT algorithm
-                        gmtShift,   //the timezone shift to GMT
+                        deltaT,     //current deltaT as determined by the current dT algorithm [days]
+                        gmtShift,   //the timezone shift to GMT [days]
                         timeZone,   //the timezone name
                         utc,        //the time in UTC time zone as ISO8601 time string
                         local,      //the time in local time zone as ISO8601 time string
@@ -200,7 +200,7 @@ paths:
       description: |
         Directly alters the view direction. Use one of j2000, jNow or altAz. jNow can have a ref parameter.
         For efficiency, the calling program is required to prepare 3D vectors, not just provide angles.
-        Alternatively, alt and az can be given directly (and should then provide both!).
+        Alternatively, alt and/or az can be given directly.
                 
         |                   |
         |-------------------|
@@ -341,13 +341,20 @@ paths:
               schema:
                 type: string
                 example: ok
+        '400':
+          description: Bad request.
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: requires x or y parameter
 
   /main/time:
     post:
       tags:
         - Main Service
       summary: Modify Application Simulation Time
-      description: Changes the simulation time or clock speed inside the engine.
+      description: Changes the simulation time or clock speed (StelCore::setTimeRate()) inside the engine.
       requestBody:
         required: true
         content:
@@ -360,7 +367,7 @@ paths:
                   description: Julian day number [float] (J2000.0 = 2451545.0).
                 timerate:
                   type: number
-                  description: Rate multiplier step value, [days/second] (1.15740740740740740740e-5 for real-time speed; 0 stops, negative reverses).
+                  description: simulation time rate in Julian days per real second [Jdays/second] (1/86400=1.15740740740740740740e-5 for real-time speed; 0 stops, negative reverses).
       responses:
         '200':
           description: Simulation clock updated
@@ -373,16 +380,16 @@ paths:
       summary: Set current app focus/selection
       description: |
         If no parameters are given, the current selection is cleared. 
-        If the target parameter was given, the object to be selected is 
+        If the 'target' parameter was given, the object to be selected is 
         looked up by name (first the localized name is tried, then the english name). 
-        If the optional mode parameter is given, it determines how to change the view:
+        If the optional 'mode' parameter is given, it determines how to change the view:
         
         - The default is 'center' which selects the object and moves it into the view's center. 
         - If it is set to 'zoom', it automatically zooms in on the object (StelMovementMgr::autoZoomIn) 
           on selection and automatically zooms out when the selection is cleared. 
         - If it is set to 'mark', the selection is just marked, but no view adjustment is done. 
         
-        If the position parameter is used, it is interpreted as a coordinate in the J2000 frame, 
+        If the 'position' parameter is used, it is interpreted as a coordinate in the J2000 frame, 
         and focused using StelMovementMgr::moveToJ2000. The mode parameter has no effect here. 
                         
         |                   |
@@ -393,7 +400,7 @@ paths:
          
         The target parameter takes precedence over the position parameter, if both are given.
       requestBody:
-        required: true
+        required: false
         content:
           application/x-www-form-urlencoded:
             schema:
@@ -492,8 +499,16 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-
+                type: array
+                items:
+                  type: object
+                  properties:
+                    key:
+                      type: string
+                    name:
+                      type: string
+                    name_i18n:
+                      type: string
 
   /objects/listobjectsbytype:
     get:
@@ -502,8 +517,8 @@ paths:
       summary: Get Object Data of specified type.
       description: |
         Returns all objects of the specified type. 
-        If english is given and it evaluates to a "true" value, the english names will be returned,
-        otherwise the localized names will be returned. Returns a JSON string array.
+        If 'english' is an integer convertible to a nonzero value (normally 1), English names are returned. 
+        Otherwise the localized names will be returned. Returns a JSON string array.
 
       parameters:
         - name: type
@@ -526,7 +541,9 @@ paths:
           content:
             application/json:
               schema:
-                type: object
+                type: array
+                items:
+                  type: string
 
 
   /simbad/lookup:
@@ -680,8 +697,8 @@ paths:
         as a JSON array of objects of format
         
           {
-              name,     //the english region name
-              name_i18n //the localized region name (current language)
+              name,     // the english region name
+              name_i18n // the localized region name (current language)
           }
       responses:
         '200':
@@ -903,7 +920,7 @@ paths:
       
         ### Note
       
-        Will silently fail if a script is currently running.
+        Will fail with error message if a script is currently running.
       requestBody:
         required: true
         content:
@@ -916,7 +933,7 @@ paths:
                   description: Exact filename (e.g., sky_tours.ssc).
       responses:
         '200':
-          description: Script pipeline initialization successful
+          description: Script running successfully, or 'error: a script is already running'
 
   /scripts/direct:
     post:
@@ -945,7 +962,7 @@ paths:
                   description: use standard include folder
       responses:
         '200':
-          description: Script pipeline initialization successful
+          description: Script running successfully, or 'error: a script is already running'
 
   /scripts/stop:
     post:
@@ -1024,7 +1041,7 @@ paths:
                   value,       // the current value of the StelProperty
                   variantType, // the type string of the "value", as determined by QVariant::typeName
                   typeString,  // the type string of the StelProperty, as determined by QMetaProperty::typeName (may not be equal to "variantType")
-                  typeEnum,    // the enum value of the type of the StelProperty, as determined by StelProperty::getType
+                  typeEnum,    // numeric QMetaType/QMetaProperty type value returned by QMetaProperty::type().
                   canNotify,   // should be true
                   isWritable   // should be true almost everywhere
               }
