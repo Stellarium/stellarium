@@ -180,7 +180,10 @@ paths:
           required: false
           description: |
             governs refraction setting (applies to the jNow output only!). 
-            "On" applies refraction, "off" does not apply, and "auto" (or any other value) applies it when atmosphere setting is active.
+            
+            - "on" applies refraction, 
+            - "off" does not apply, and
+            - "auto" (or any other value) applies it when atmosphere setting is active.
           schema:
             type: string
       responses:
