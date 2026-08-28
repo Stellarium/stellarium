@@ -238,7 +238,7 @@ jobs:
         working-directory: build
         run: ctest --output-on-failure
 
- # CI on Windows (Qt6)
+  # CI on Windows (Qt6)
   ci-windows-qt6:
     name: "Windows (x86_64; qt6)"
     runs-on: windows-latest
@@ -279,7 +279,7 @@ jobs:
 #        cd ${{ github.workspace }}\build
 #        ctest --output-on-failure -C RelWithDebInfo
 
- # CI on Haiku (Qt6)
+  # CI on Haiku (Qt6)
   ci-haiku-qt6:
     name: "Haiku (amd64; qt6)"
     runs-on: ubuntu-latest
@@ -308,3 +308,38 @@ jobs:
           cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DENABLE_TESTING=On -DENABLE_SHOWMYSKY=Off -DENABLE_INDI=Off -DENABLE_XLSX=Off -DENABLE_QTWEBENGINE=Off -DENABLE_NLS=Off ..
           make -j 4
           ctest --output-on-failure
+
+  # CI on OpenBSD (Qt6)
+  ci-openbsd-qt6:
+    name: "OpenBSD (amd64; qt6)"
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.actor, 'transifex')"
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v7
+
+    - name: Build and run unit tests in OpenBSD
+      uses: vmactions/openbsd-vm@v1
+      id: openbsd-amd64-qt6
+      with:
+        # Use sh shell
+        usesh: true
+        # When using rsync, you can define copyback: false to not copy files back from the VM in to the host.
+        sync: rsync
+        copyback: false
+        prepare: |
+          pkg_add -aU cmake eigen3 glm exiv2 nlopt gpsd qt6-qxlsx qt6 gettext-runtime gettext-tools calcmysky fast-float indiclient md4c md4c-html
+
+        run: |
+          set -e -x
+          export DISPLAY=:0
+          mkdir builds
+          cd builds
+          cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DENABLE_TESTING=On -DENABLE_NLS=Off -DENABLE_QTWEBENGINE=Off "${{ github.workspace }}"
+          make -j 4
+          Xvfb :0 -ac -screen 0 1024x768x24+32 >/dev/null 2>&1 &
+          sleep 3
+          ctest --output-on-failure
+          sleep 1
+          pkill Xvfb
