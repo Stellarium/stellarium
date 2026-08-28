@@ -373,12 +373,13 @@ Lists all registered StelActions, in the format
     //translated StelAction group name
     <groupName> : [
         //all StelActions in the group <groupName>
-        <actionName> : {
+        {
                 id,	//the ID of the action
                 isCheckable,	//true if the action represents a boolean value
                 isChecked,	//if "isCheckable" is true, shows the current boolean state
                 text	//the translated description of the action
-        }
+        }, 
+		...
     ]
 }
 @endcode
