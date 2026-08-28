@@ -399,14 +399,14 @@ jobs:
         sync: rsync
         copyback: false
         prepare: |
-          /usr/sbin/pkg_add -u cmake eigen3 glm exiv2 nlopt gpsd qt6-qxlsx qt6 gettext-runtime gettext-tools calcmysky fast-float indiclient md4c md4c-html
+          /usr/sbin/pkg_add -u cmake exiv2 nlopt QXlsx qt6-qtbase qt6-qttools qt6-qtpositioning qt6-qtcharts qt6-qtmultimedia qt6-qtserialport gettext-lib fast_float indi md4c
 
         run: |
           set -e -x
           export DISPLAY=:0
           mkdir builds
           cd builds
-          cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DENABLE_TESTING=On -DENABLE_NLS=Off "${{ github.workspace }}"
+          cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DENABLE_TESTING=On -DENABLE_SHOWMYSKY=Off -DENABLE_GPS=OFF -DENABLE_NLS=Off "${{ github.workspace }}"
           make -j 4
           Xvfb :0 -ac -screen 0 1024x768x24+32 >/dev/null 2>&1 &
           sleep 3
