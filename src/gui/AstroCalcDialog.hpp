@@ -362,7 +362,7 @@ private slots:
 	//! Algorithm taken from calculating the rises, transits and sets.
 	void generateSolarEclipsesLocal();
 	void cleanupSolarEclipsesLocal();
-	void selectCurrentSolarEclipseLocal(const QModelIndex &modelIndex);
+	void selectCurrentSolarEclipseLocal(QTreeWidgetItem* item, int idx);
 	void saveSolarEclipsesLocal();
 
 	//! Calculating transits to fill the list.

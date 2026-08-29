@@ -380,7 +380,7 @@ void AstroCalcDialog::createDialogContent()
 	connect(ui->solareclipseslocalCleanupButton,   &QPushButton::clicked, this, &AstroCalcDialog::cleanupSolarEclipsesLocal);
 	connect(ui->solareclipseslocalSaveButton,      &QPushButton::clicked, this, &AstroCalcDialog::saveSolarEclipsesLocal);
 	connect(ui->solareclipselocalTreeWidget,       &QTreeWidget::clicked, this, [this]{ enableSolarEclipsesLocalSingleEclipseButtons(true); });
-	connect(ui->solareclipselocalTreeWidget,       &QTreeWidget::doubleClicked, this, &AstroCalcDialog::selectCurrentSolarEclipseLocal);
+	connect(ui->solareclipselocalTreeWidget,       &QTreeWidget::itemDoubleClicked, this, &AstroCalcDialog::selectCurrentSolarEclipseLocal);
 	initListTransit();
 	enableTransitsButtons(buttonState);
 	connect(ui->transitsCalculateButton, &QPushButton::clicked, this, &AstroCalcDialog::generateTransits);
@@ -3714,6 +3714,9 @@ void AstroCalcDialog::generateSolarEclipsesLocal()
 		double tmp = (startJD - approxJD - synodicMonth) / synodicMonth;
 		double InitJD = approxJD + int(tmp) * synodicMonth;
 
+		// Special date (-25000-01-01) outside valid range
+		double invalidJD = -7410192.;
+
 		// Search for solar eclipses at each New Moon
 		for (int i = 0; i <= elements+2; i++)
 		{
@@ -3911,26 +3914,48 @@ void AstroCalcDialog::generateSolarEclipsesLocal()
 								treeItem->setText(SolarEclipseLocalType, eclipseTypeStr);
 								treeItem->setText(SolarEclipseLocalFirstContact, localeMgr->getPrintableTimeLocal(JD1, core->getUTCOffset(JD1)));
 								if (centraleclipse && JD2<JD1) // central eclipse  in progress at Sunrise
+								{
 									treeItem->setText(SolarEclipseLocalFirstContact, dash);
+									treeItem->setData(SolarEclipseLocalFirstContact, Qt::UserRole, invalidJD);
+								}
+								else
+									treeItem->setData(SolarEclipseLocalFirstContact, Qt::UserRole, JD1);
 								treeItem->setToolTip(SolarEclipseLocalFirstContact, q_("Partial eclipse begins"));
 
 								if (centraleclipse)
+								{
 									treeItem->setText(SolarEclipseLocal2ndContact, localeMgr->getPrintableTimeLocal(JD2, core->getUTCOffset(JD2)));
+									treeItem->setData(SolarEclipseLocal2ndContact, Qt::UserRole, JD2);
+								}
 								else
+								{
 									treeItem->setText(SolarEclipseLocal2ndContact, dash);
+									treeItem->setData(SolarEclipseLocal2ndContact, Qt::UserRole, invalidJD);
+								}
 								treeItem->setToolTip(SolarEclipseLocal2ndContact, q_("Umbral total or annular eclipse begins"));
 								treeItem->setText(SolarEclipseLocalMaximum, localeMgr->getPrintableTimeLocal(JDmax, core->getUTCOffset(JDmax)));
 								treeItem->setToolTip(SolarEclipseLocalMaximum, q_("Greatest eclipse"));
 								treeItem->setText(SolarEclipseLocalMagnitude, magStr);
 								treeItem->setToolTip(SolarEclipseLocalMagnitude, q_("Eclipse magnitude"));
 								if (centraleclipse)
+								{
 									treeItem->setText(SolarEclipseLocal3rdContact, localeMgr->getPrintableTimeLocal(JD3, core->getUTCOffset(JD3)));
+									treeItem->setData(SolarEclipseLocal3rdContact, Qt::UserRole, JD3);
+								}
 								else
+								{
 									treeItem->setText(SolarEclipseLocal3rdContact, dash);
+									treeItem->setData(SolarEclipseLocal3rdContact, Qt::UserRole, invalidJD);
+								}
 								treeItem->setToolTip(SolarEclipseLocal3rdContact, q_("Umbral total or annular eclipse ends"));
 								treeItem->setText(SolarEclipseLocalLastContact, localeMgr->getPrintableTimeLocal(JD4, core->getUTCOffset(JD4)));
 								if (centraleclipse && JD3>JD4) // central eclipse in progress at Sunset
+								{
 									treeItem->setText(SolarEclipseLocalLastContact, dash);
+									treeItem->setData(SolarEclipseLocalLastContact, Qt::UserRole, invalidJD);
+								}
+								else
+									treeItem->setData(SolarEclipseLocalLastContact, Qt::UserRole, JD4);
 								treeItem->setToolTip(SolarEclipseLocalLastContact, q_("Partial eclipse ends"));
 								if (centraleclipse)
 									treeItem->setText(SolarEclipseLocalDuration, durationStr);
@@ -4346,11 +4371,14 @@ void AstroCalcDialog::enableSolarEclipsesLocalSingleEclipseButtons(bool enable)
 	ui->solareclipseslocalMapSaveButton->setEnabled(enable);
 }
 
-void AstroCalcDialog::selectCurrentSolarEclipseLocal(const QModelIndex& modelIndex)
+void AstroCalcDialog::selectCurrentSolarEclipseLocal(QTreeWidgetItem *item, int idx)
 {
-	// Find the Sun
-	const double JD = modelIndex.sibling(modelIndex.row(), SolarEclipseLocalDate).data(Qt::UserRole).toDouble();
-	goToObject("Sun", JD);
+	double JD = item->data(SolarEclipseLocalDate, Qt::UserRole).toDouble();
+	if (idx == SolarEclipseLocalFirstContact || idx == SolarEclipseLocal2ndContact || idx == SolarEclipseLocal3rdContact || idx == SolarEclipseLocalLastContact)
+		JD = item->data(idx, Qt::UserRole).toDouble();
+	// Find the Sun if the date & time is actual (>-25000-01-01)
+	if (JD > -7410192.0)
+		goToObject("Sun", JD);
 }
 
 void AstroCalcDialog::saveSolarEclipsesLocal()
