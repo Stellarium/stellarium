@@ -758,13 +758,13 @@ paths:
                   description: Known location ID.
                 latitude:
                   type: number
-                  description: geographical latitude, degrees.
+                  description: WGS84 geographical latitude, degrees.
                 longitude:
                   type: number
-                  description: geographical longitude, degrees.
+                  description: WGS84 geographical longitude, degrees.
                 altitude:
                   type: number
-                  description: altitude, metres.
+                  description: Altitude above mean sea level, metres.
                 name:
                   type: string
                   description: location name.
