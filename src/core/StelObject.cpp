@@ -2111,5 +2111,6 @@ QString StelObject::getSolarLunarNarration(const StelCore *core, const InfoStrin
 
 QString StelObject::getNarration(const StelCore *core, const InfoStringGroup &flags) const
 {
+	Q_UNUSED(core) Q_UNUSED(flags)
 	return getNameI18n();
 }

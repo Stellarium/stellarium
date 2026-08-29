@@ -208,6 +208,7 @@ void MapWidget::emitMapViewChanged()
 
 void MapWidget::makeSearchAreaOutline(const int width, const int height)
 {
+	Q_UNUSED(height)
 	constexpr double nMax = 128;
 	std::vector<QPointF> points;
 	for (double n = 0; n <= nMax; ++n)
@@ -356,6 +357,7 @@ void MapWidget::paintEvent(QPaintEvent*)
 
 void MapWidget::resizeEvent(QResizeEvent* event)
 {
+	Q_UNUSED(event)
 	updateScaledMapAndRect();
 }
 

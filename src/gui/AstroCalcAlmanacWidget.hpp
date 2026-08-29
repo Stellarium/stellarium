@@ -47,8 +47,10 @@ private:
 	class StelLocaleMgr* localeMgr;
 	QSettings* conf;
 
-	double sunriseJD, sunsetJD, moonriseJD, moonsetJD, civilDawnJD, civilDuskJD, nauticalDawnJD, nauticalDuskJD, astronomicalDawnJD, astronomicalDuskJD,
-	beforeSunriseJD, afterSunsetJD, minutesJD, customSunriseJD, customSunsetJD, customSunAltitude, customMoonriseJD, customMoonsetJD, customMoonAltitude;
+	double sunriseJD = 0., sunsetJD = 0., moonriseJD = 0., moonsetJD = 0., civilDawnJD = 0., civilDuskJD = 0.,
+	nauticalDawnJD = 0., nauticalDuskJD = 0., astronomicalDawnJD = 0., astronomicalDuskJD = 0., beforeSunriseJD = 0.,
+	afterSunsetJD = 0., minutesJD = 0., customSunriseJD = 0., customSunsetJD = 0., customSunAltitude = -7.,
+	customMoonriseJD = 0., customMoonsetJD = 0., customMoonAltitude = 18.;
 
 	void populateData();
 	// method to get a formatted string for date and time of equinox/solstice

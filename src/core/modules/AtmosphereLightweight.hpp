@@ -47,7 +47,7 @@ private:
 	QOpenGLVertexArrayObject renderVAO_;
 	QOpenGLBuffer preparationVBO_, renderVBO_;
 	QOpenGLBuffer indexBuffer_;
-	float sunRelativeBrightness_ = 1, moonRelativeBrightness_ = 0;
+	//float sunRelativeBrightness_ = 1, moonRelativeBrightness_ = 0;
 	StelProjectorP prevProjector_;
 	//! The FBOs where the mesh will be rendered and whose texture will be sampled on actual rendering to screen.
 	std::unique_ptr<class QOpenGLFramebufferObject> sunPrepFBO_, moonPrepFBO_;

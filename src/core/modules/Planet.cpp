@@ -4715,6 +4715,8 @@ void sSphere(Planet3DModel* model, const float radius, const float oneMinusOblat
 
 bool sMoon(Moon3DModel& model, const double equatorialRadius, const double oneMinusOblateness)
 {
+	Q_UNUSED(equatorialRadius)
+	Q_UNUSED(oneMinusOblateness)
 	try
 	{
 		const auto path = StelFileMgr::findFile("models/moon-vertices-indices.bin", StelFileMgr::File);

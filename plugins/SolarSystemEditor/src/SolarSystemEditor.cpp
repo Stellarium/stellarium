@@ -1049,9 +1049,8 @@ SsoElements SolarSystemEditor::readMpcOneLineMinorPlanetElements(const QString &
 			QRegularExpressionMatch astMatch;
 			if (column.indexOf(asteroidName, 0, &astMatch) == 0)
 			{
-				name = astMatch.captured(2);
+				name = astMatch.captured(2).trimmed();
 				name.replace(asteroidDate, ""); // remove date
-				name.trimmed();
 				result.insert("minor_planet_number", minorPlanetNumber);
 			}
 			else

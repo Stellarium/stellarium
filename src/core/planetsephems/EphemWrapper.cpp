@@ -289,7 +289,7 @@ void get_pluto_helio_coordsv(double jd,double xyz[3], double xyzdot[3], void* un
 
 void get_sun_helio_coordsv(double jd,double xyz[3], double xyzdot[3], void* unused)
 {
-	Q_UNUSED(unused)
+	Q_UNUSED(jd) Q_UNUSED(unused)
 	xyz[0]   =0.; xyz[1]   =0.; xyz[2]   =0.;
 	xyzdot[0]=0.; xyzdot[1]=0.; xyzdot[2]=0.;
 }
