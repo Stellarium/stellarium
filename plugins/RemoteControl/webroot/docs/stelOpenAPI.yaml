@@ -700,6 +700,13 @@ paths:
               name,     // the english region name
               name_i18n // the localized region name (current language)
           }
+      parameters:
+        - name: planet
+          in: query
+          required: false
+          description: english name of planet
+          schema:
+            type: string
       responses:
         '200':
           description: Location name collection
