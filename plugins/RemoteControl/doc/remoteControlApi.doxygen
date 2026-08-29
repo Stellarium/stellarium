@@ -23,7 +23,13 @@
 
 The \ref remoteControl "RemoteControl plugin" provides an HTTP-based interface to Stellarium, implemented on the server-side through implementations of AbstractAPIService.
 The APIController maintains the list of registered services, and dispatches HTTP requests to the right service.
-The API is accessible under the server path `/api/`. For example, if you have the server running on the default port of 8090,
+The API is accessible under the server path `/api/`. 
+
+The API of a running RemoteControl plugin webserver instance of Stellarium can be explored interactively 
+using a <a href="https://swagger.io/open-source/swagger-ui/">Swagger UI</a> 
+at <a href="http://localhost:8090/docs/index.html"> http://localhost:8090/docs/index.html</a>.
+
+To actually use the API in s web-based application, for example, if you have the server running on the default port of 8090,
 you can access the operation \ref rcObjectServiceFind of the ObjectService to look for objects with \c moon in their name by accessing
 \code
 http://localhost:8090/api/objects/find?str=moon
