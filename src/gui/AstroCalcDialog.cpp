@@ -4365,7 +4365,6 @@ void AstroCalcDialog::saveSolarEclipsesLocal()
 void AstroCalcDialog::setTransitHeaderNames()
 {
 	transitHeader = QStringList({
-		qc_("Date of mid-transit", "column name"),
 		// TRANSLATORS: The name of column in AstroCalc/Eclipses/Transits tool
 		q_("Planet"),
 		// TRANSLATORS: The name of column in AstroCalc/Eclipses/Transits tool
@@ -4801,8 +4800,7 @@ void AstroCalcDialog::generateTransits()
 						const double utcOffsetHrs = core->getUTCOffset(JDMid);
 						const double shift = utcOffsetHrs/24.;
 						ACTransitTreeWidgetItem* treeItem = new ACTransitTreeWidgetItem(ui->transitTreeWidget);
-						treeItem->setText(TransitDate, QString("%1 %2").arg(localeMgr->getPrintableDateLocal(JDMid, utcOffsetHrs), localeMgr->getPrintableTimeLocal(JDMid, utcOffsetHrs))); // local date and time
-						treeItem->setData(TransitDate, Qt::UserRole, JDMid);
+						QString transitMid = QString("%1 %2").arg(localeMgr->getPrintableDateLocal(JDMid, utcOffsetHrs), localeMgr->getPrintableTimeLocal(JDMid, utcOffsetHrs));
 						treeItem->setText(TransitPlanet, planetStr);
 						treeItem->setData(TransitPlanet, Qt::UserRole, planetStr);
 
@@ -4843,7 +4841,7 @@ void AstroCalcDialog::generateTransits()
 						{
 							if (saveTopocentric && altitudeMidtransit < 0.)
 								{
-									treeItem->setText(TransitMid, QString("(%1)").arg(localeMgr->getPrintableTimeLocal(JDMid, utcOffsetHrs)));
+									treeItem->setText(TransitMid, QString("(%1)").arg(transitMid));
 #if (QT_VERSION>=QT_VERSION_CHECK(5,15,0))
 									treeItem->setForeground(TransitMid, Qt::gray);
 #else
@@ -4851,12 +4849,12 @@ void AstroCalcDialog::generateTransits()
 #endif
 								}
 							else
-								treeItem->setText(TransitMid, localeMgr->getPrintableTimeLocal(JDMid, utcOffsetHrs));
+								treeItem->setText(TransitMid, transitMid);
 						}
 						else
 							treeItem->setText(TransitMid, dash);
-						treeItem->setData(TransitMid, Qt::UserRole, StelUtils::getHoursFromJulianDay(JDMid + shift));
-						treeItem->setToolTip(TransitMid, q_("The time of minimum angular distance of planet to Sun's center"));
+						treeItem->setData(TransitMid, Qt::UserRole, JDMid);
+						treeItem->setToolTip(TransitMid, q_("The date and time of minimum angular distance of planet to Sun's center"));
 						core->setUseTopocentricCoordinates(saveTopocentric);
 						core->setJD(JDMid);
 						core->update(0);
@@ -4969,7 +4967,6 @@ void AstroCalcDialog::generateTransits()
 						treeItem->setText(TransitObservableDuration, observableDurationStr);
 						treeItem->setData(TransitObservableDuration, Qt::UserRole, observableDuration);
 						treeItem->setToolTip(TransitObservableDuration, q_("Observable duration of transit"));
-						treeItem->setTextAlignment(TransitDate, Qt::AlignRight);
 						treeItem->setTextAlignment(TransitPlanet, Qt::AlignRight);
 						treeItem->setTextAlignment(TransitContact1, Qt::AlignCenter);
 						treeItem->setTextAlignment(TransitContact2, Qt::AlignCenter);
@@ -4994,7 +4991,7 @@ void AstroCalcDialog::generateTransits()
 		}
 
 		// sort-by-date
-		ui->transitTreeWidget->sortItems(TransitDate, Qt::AscendingOrder);
+		ui->transitTreeWidget->sortItems(TransitMid, Qt::AscendingOrder);
 		enableTransitsButtons(true);
 
 		StelApp::getInstance().enableBottomStelBarUpdates(true);
@@ -5025,7 +5022,7 @@ void AstroCalcDialog::selectCurrentTransit(const QModelIndex& modelIndex)
 {
 	// Find the planet
 	const QString name = modelIndex.sibling(modelIndex.row(), TransitPlanet).data(Qt::UserRole).toString();
-	const double JD = modelIndex.sibling(modelIndex.row(), TransitDate).data(Qt::UserRole).toDouble();
+	const double JD = modelIndex.sibling(modelIndex.row(), TransitMid).data(Qt::UserRole).toDouble();
 	goToObject(name, JD);
 }
 

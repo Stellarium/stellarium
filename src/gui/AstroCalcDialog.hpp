@@ -256,7 +256,6 @@ public:
 	//! Defines the number and the order of the columns in transit table
 	//! @enum TransitColumns
 	enum TransitColumns {
-		TransitDate,			//! date of mid-transit
 		TransitPlanet,			//! transit planet
 		TransitContact1,		//! time of exterior ingress
 		TransitContact2,		//! time of interior ingress
@@ -1097,7 +1096,7 @@ private:
 	{
 		int column = treeWidget()->sortColumn();
 
-		if (column == AstroCalcDialog::TransitDate || column == AstroCalcDialog::TransitContact1 || column == AstroCalcDialog::TransitContact2 || column == AstroCalcDialog::TransitContact3 || column == AstroCalcDialog::TransitContact4 || column == AstroCalcDialog::TransitMid || column == AstroCalcDialog::TransitSeparation || column == AstroCalcDialog::TransitDuration || column == AstroCalcDialog::TransitObservableDuration)
+		if (column == AstroCalcDialog::TransitContact1 || column == AstroCalcDialog::TransitContact2 || column == AstroCalcDialog::TransitContact3 || column == AstroCalcDialog::TransitContact4 || column == AstroCalcDialog::TransitMid || column == AstroCalcDialog::TransitSeparation || column == AstroCalcDialog::TransitDuration || column == AstroCalcDialog::TransitObservableDuration)
 		{
 			return data(column, Qt::UserRole).toFloat() < other.data(column, Qt::UserRole).toFloat();
 		}		
