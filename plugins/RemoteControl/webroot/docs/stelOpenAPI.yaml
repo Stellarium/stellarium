@@ -1,0 +1,1083 @@
+openapi: 3.0.3
+info:
+  title: Stellarium RemoteControl API
+  version: 1.1.4
+  description: |
+    Comprehensive interactive specification mapping the HTTP-based interface for the 
+    Stellarium Astronomy Software RemoteControl plug-in.
+    
+    ### Interface Capabilities:
+    * **Poll application state** with conditional modification parameter IDs.
+    * **Search catalogs**.
+    * **Manipulate the field of view** and view orientation vector coordinates.
+    * **Manipulate all internal settings (StelProperties) and trigger StelActions**.
+    * **Command embedded script playback**.
+servers:
+  - url: http://localhost:8090/api
+    description: Local Stellarium Instance
+paths:
+  /main/status:
+    get:
+      tags:
+        - Main Service
+      summary: Get Stellarium Application Status
+      description: |
+        Returns a comprehensive overview of the program's dynamic state. This operation can be polled every few moments to find out if some primary Stellarium state changed. It returns a JSON object with the following format:
+        
+                {
+                    //current location information, see StelLocation
+                    location : {
+                        name,
+                        role,
+                        planet,
+                        latitude,
+                        longitude,
+                        altitude,
+                        region,
+                        state,
+                        landscapeKey
+                    },
+                    //current time information
+                    time : {
+                        jday,       //current Julian day
+                        deltaT,     //current deltaT as determined by the current dT algorithm [days]
+                        gmtShift,   //the timezone shift to GMT [days]
+                        timeZone,   //the timezone name
+                        utc,        //the time in UTC time zone as ISO8601 time string
+                        local,      //the time in local time zone as ISO8601 time string
+                        isTimeNow,  //if true, the Stellarium time equals the current real-world time
+                        timerate    //the current time rate (in secs)
+                    },
+                    selectioninfo, //string that contains the information of the currently selected object, as returned by StelObject::getInfoString
+                    view : {
+                        fov     //current FOV
+                    },
+                 
+                    //the following is only inserted if an actionId parameter was given
+                    //see below for more info
+                    actionChanges : {
+                        id, //currently valid action id, the interface should update its own id to this value
+                        changes : {
+                                //a list of boolean actions that changed since the actionId parameter
+                                <actionName> : <actionValue>
+                        }
+                    },
+                    //the following is only inserted if an propId parameter was given
+                    //see below for more info
+                    propertyChanges : {
+                        id, //currently valid prop id, the interface should update its own id to this value
+                        changes : {
+                                //a list of properties that changed since the propId parameter
+                                <propName> : <propValue>
+                        }
+                    }
+                }
+
+        The actionChanges and propertyChanges sections allow a remote interface to track boolean StelAction and/or StelProperty changes. 
+        On the initial poll, you should pass -2 as propId and actionId. 
+        This indicates to the service that you want a full list of properties/actions and their current values. 
+        When receiving the answer, you should set your local propId /actionId to the id contained in actionChanges and propertyChanges, and re-send it with the next request as parameter again. 
+        This allows the MainService to find out which changes must be sent to you (it maintains a queue of action/property changes internally, 
+        incrementing the ID with each change), and you only have to process the differences instead of everything.        
+      parameters:
+        - name: actionId
+          in: query
+          required: false
+          description: |
+            Pass an integer tracking index sequence identifier. 
+            If provided, the system returns execution status changes only since this reference ID.
+          schema:
+            type: integer
+        - name: propId
+          in: query
+          required: false
+          description: |
+            Pass an integer property state sync reference value.
+            Filters the `propertyChanges` block to only expose keys modified since that operation index.
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful state summary JSON payload representation
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /main/plugins:
+    get:
+      tags:
+        - Main Service
+      summary: Retrieve list of installed plugins
+      description: |
+        Returns the list of all known plugins, as a JSON object of format:
+        
+                {
+                    //list of known plugins, in format:
+                    <pluginName> : {
+                        loadAtStartup,  //if to load the plugin at startup
+                        loaded,     //if the plugin is currently loaded
+                        //corresponds to the StelPluginInfo of the plugin
+                        info : {
+                                authors,
+                                contact,
+                                description,
+                                displayedName,
+                                startByDefault,
+                                version
+                        }
+                    }
+                }
+
+      responses:
+        '200':
+          description: Dictionary map indexing installed plugins
+
+
+
+  /main/view:
+    get:
+      tags:
+        - Main Service
+      summary: Get Current View Coordinates (AltAz / RA-Dec)
+      description: |
+        Returns the 3D view direction vector.
+        Includes azimuthal coordinates, right ascension, declination.
+        
+            {
+              //list of view directions, in format:
+              "j2000" : "[x,y,z]",
+              "jNow"  : "[x,y,z]",
+              "altAz" : "[x,y,z]"
+            }
+
+        Without the optional coord, all versions are returned. The returned values are 3D vectors.
+        
+        |                   |
+        |-------------------|
+        | x  = cos(δ)*cos(α)|
+        | y  = cos(δ)*sin(α)|
+        | z  = sin(δ)       |
+        
+        For the vector in altAz system, the actually returned values are based on an azimuth Az' counted from South (x=1) towards East (y=1), Az'=180-Az.
+        
+        |                      |
+        |----------------------|
+        | x = cos(alt)*cos(Az')|
+        | y = cos(alt)*sin(Az')|
+        | z = sin(alt)         |
+        
+
+      parameters:
+        - name: coord
+          in: query
+          required: false
+          description: Limit answer to requested. One of "j2000", "jNow", "altAz"
+          schema:
+            type: string
+        - name: ref
+          in: query
+          required: false
+          description: |
+            governs refraction setting (applies to the jNow output only!). 
+            
+            - "on" applies refraction, 
+            - "off" does not apply, and
+            - "auto" (or any other value) applies it when atmosphere setting is active.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Looking vectors coordinates returned successfully
+          content:
+            application/json:
+              schema:
+                type: object
+    post:
+      tags:
+        - Main Service
+      summary: Update View direction (3D vector)
+      description: |
+        Directly alters the view direction. Use one of j2000, jNow or altAz. jNow can have a ref parameter.
+        For efficiency, the calling program is required to prepare 3D vectors, not just provide angles.
+        Alternatively, alt and/or az can be given directly.
+                
+        |                   |
+        |-------------------|
+        | x  = cos(δ)*cos(α)|
+        | y  = cos(δ)*sin(α)|
+        | z  = sin(δ)       |
+        
+        For the vector in altAz system, the values are based on an azimuth Az' counted from South (x=1) towards East (y=1), Az'=180-Az:
+        
+        |                      |
+        |----------------------|
+        | x = cos(alt)*cos(Az')|
+        | y = cos(alt)*sin(Az')|
+        | z = sin(alt)         |
+        
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                ref: 
+                  type: string
+                  description: provided jNow coordinates to be understood as including refraction. 'on'/'off'/'auto' (or anything else; default.)
+                j2000:
+                  type: string
+                  description: JSON-encoded 3D view vector "[x, y, z]" in J2000 frame.
+                jNow:
+                  type: string
+                  description: JSON-encoded 3D view vector "[x, y, z]" in JNow frame.
+                altAz:
+                  type: string
+                  description: JSON-encoded 3D view vector in "[x, y, z]" alt/azimuthal frame.
+                az: 
+                  type: number
+                  description: azimuth, degrees.
+                alt: 
+                  type: number
+                  description: altitude above mathematical horizon, degrees.
+      responses:
+        '200':
+          description: Camera matrix adjusted safely
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: ok
+
+  /main/fov:
+    post:
+      tags:
+        - Main Service
+      summary: Update field of view
+      description: |
+        Directly alters the field of view.
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                fov:
+                  type: number
+                  description: Vertical field of view measured in degrees.
+      responses:
+        '200':
+          description: Field of view adjusted.
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: ok
+
+  /main/window:
+    post:
+      tags:
+        - Main Service
+      summary: Update window size
+      description: |
+        Modifies window size (if not fullscreen).
+        This can be useful e.g. when Stellarium provides image background inserts via spout.
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                w:
+                  type: integer
+                  description: Width, horizontal window size in pixels.
+                h:
+                  type: integer
+                  description: Height, vertical window size in pixels.
+      responses:
+        '200':
+          description: Window size adjusted.
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: ok
+
+  /main/move:
+    post:
+      tags:
+        - Main Service
+      summary: Update view direction
+      description: |
+        Interface for interactive moves.
+        Allows viewport movement, like using the arrow keys in the main program. 
+        This allows interfaces to create a "virtual joystick" to move the view manually. 
+        This operation defines the intended move direction. 
+        x and y define the intended move speed in azimuth and altitude (i.e. a negative x means left). Values of +-1.0 correspond to the same speed as used for the arrow keys. 
+        This operation works in conjunction with the update() method - until the movement is stopped 
+        (i.e. x and y are zero), or no move command has been received for a specified time 
+        (about a second), the movement is performed in the given directions.
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                x:
+                  type: number
+                  description: Movement speed in horizontal direction. Negative turns left.
+                y:
+                  type: number
+                  description: Movement speed in vertical direction. Negative turns down.
+      responses:
+        '200':
+          description: View direction changed.
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: ok
+        '400':
+          description: Bad request.
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: requires x or y parameter
+
+  /main/time:
+    post:
+      tags:
+        - Main Service
+      summary: Modify Application Simulation Time
+      description: Changes the simulation time or clock speed (StelCore::setTimeRate()) inside the engine.
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                time:
+                  type: number
+                  description: Julian day number [float] (J2000.0 = 2451545.0).
+                timerate:
+                  type: number
+                  description: simulation time rate in Julian days per real second [Jdays/second] (1/86400=1.15740740740740740740e-5 for real-time speed; 0 stops, negative reverses).
+      responses:
+        '200':
+          description: Simulation clock updated
+
+
+  /main/focus:
+    post:
+      tags:
+        - Main Service
+      summary: Set current app focus/selection
+      description: |
+        If no parameters are given, the current selection is cleared. 
+        If the 'target' parameter was given, the object to be selected is 
+        looked up by name (first the localized name is tried, then the english name). 
+        If the optional 'mode' parameter is given, it determines how to change the view:
+        
+        - The default is 'center' which selects the object and moves it into the view's center. 
+        - If it is set to 'zoom', it automatically zooms in on the object (StelMovementMgr::autoZoomIn) 
+          on selection and automatically zooms out when the selection is cleared. 
+        - If it is set to 'mark', the selection is just marked, but no view adjustment is done. 
+        
+        If the 'position' parameter is used, it is interpreted as a coordinate in the J2000 frame, 
+        and focused using StelMovementMgr::moveToJ2000. The mode parameter has no effect here. 
+                        
+        |                   |
+        |-------------------|
+        | x  = cos(δ)*cos(α)|
+        | y  = cos(δ)*sin(α)|
+        | z  = sin(δ)       |
+         
+        The target parameter takes precedence over the position parameter, if both are given.
+      requestBody:
+        required: false
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                target:
+                  type: string
+                  description: Name of a celestial object inside Stellarium.
+                mode:
+                  type: string
+                  description: Only valid when target is given. One of center|zoom|mark
+                position:
+                  type: string
+                  description: JSON-encoded 3D vector "[x, y, z]" in J2000 frame.
+      responses:
+        '200':
+          description: Focus/selection changed
+
+
+
+  /objects/find:
+    get:
+      tags:
+        - Object Service
+      summary: Query and Match Sky Objects
+      description: |
+        Finds objects which match the search string str, which may contain greek/unicode characters 
+        like in the SearchDialog. Returns a JSON String array of search matches.
+      parameters:
+        - name: str
+          in: query
+          required: true
+          description: Search term identifier parameter (e.g., 'Mars', 'M45').
+          schema:
+            type: string
+      responses:
+        '200':
+          description: JSON Array listing catalog identifiers
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+
+  /objects/info:
+    get:
+      tags:
+        - Object Service
+      summary: Get Selected Object Data
+      description: |
+        Exposes names, magnitudes, absolute angular size, position, distance, coordinates, 
+        and classification arrays for the item currently selected (if called without parameters) or 
+        the object with given name.
+      parameters:
+        - name: name
+          in: query
+          required: false
+          description: Search term identifier parameter (e.g., 'Mars', 'M45').
+          schema:
+            type: string
+        - name: format
+          in: query
+          required: false
+          description: one of 'json' or 'map' to provide JSON, any other or none for a HTML table.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Object data map (JSON or HTML as requested).
+          content:
+            application/json:
+              schema:
+                type: object
+            text/html:
+              schema:
+                type: string
+
+
+  /objects/listobjecttypes:
+    get:
+      tags:
+        - Object Service
+      summary: List all available object types.
+      description: |
+        Returns all object types available in the internal catalogs as a JSON array of objects of format
+
+            {
+                key,    //the internal key for the object type
+                name,   //the english name of the type
+                name_i18n //the type name in the current language
+            }
+      responses:
+        '200':
+          description: Object data map (JSON or HTML as requested).
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    key:
+                      type: string
+                    name:
+                      type: string
+                    name_i18n:
+                      type: string
+
+  /objects/listobjectsbytype:
+    get:
+      tags:
+        - Object Service
+      summary: Get Object Data of specified type.
+      description: |
+        Returns all objects of the specified type. 
+        If 'english' is an integer convertible to a nonzero value (normally 1), English names are returned. 
+        Otherwise the localized names will be returned. Returns a JSON string array.
+
+      parameters:
+        - name: type
+          in: query
+          required: true
+          description: |
+            Type identifier as listed in the 'key' entry in the 
+            list retrieved by /objects/listobjecttypes, e.g. "SolarSystem:comet" or "NebulaMgr:11".
+          schema:
+            type: string
+        - name: english
+          in: query
+          required: false
+          description: Returns english names if true, otherwise localized names.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List has been delivered.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+
+
+  /simbad/lookup:
+    get:
+      tags:
+        - Simbad Service 
+      summary: Perform SIMBAD lookup
+      description: |
+        Performs a SIMBAD lookup for the string str using the Stellarium-configured server and returns the results as a JSON object of format
+
+            {
+                status,      // the status of the lookup: either "empty" when nothing was found, "found" when at least 1 result was returned, and "error" if the lookup caused an error
+                status_i18n, // a localized status message for display
+                errorString, // if the status is "error", this contains more information about it
+                results: {
+                    names : [
+                            //an array of object names
+                    ],
+                    positions : [
+                            //an array of object positions (i.e. first one corresponds to first name, etc.)
+                            //format is an array of 3 numbers for each entry, i.e.:
+                            [1,2,3],...
+                    ]
+                }
+            }
+      parameters:
+        - name: str
+          in: query
+          required: true
+          description: |
+            Name to be searched 
+          schema:
+            type: string
+      responses:
+        '200':
+          description: SIMBAD result
+
+
+  /view/listlandscape:
+    get:
+      tags:
+        - View Service
+      summary: Retrieve Landscapes Collection List
+      description: |
+        Lists the installed landscapes as a JSON object of format
+        
+            {
+                <landscapeId> : <landscapeName>, //maps the landscape id to the translated landscape name
+                ...
+            }
+      responses:
+        '200':
+          description: Dictionary of landscapes
+
+  /view/landscapedescription/:
+    get:
+      tags:
+        - View Service
+      summary: Provides virtual filesystem access to the current landscape directory.
+      description: |
+        **Note that the slash at the end is mandatory!**
+        Provides virtual filesystem access to the current landscape directory. 
+        The operation can take a longer path in the URL. 
+        The remainder is used to access files in the landscape directory. 
+        If no longer path is given, the current HTML landscape description 
+        (as per LandscapeMgr::getCurrentLandscapeHtmlDescription) is returned. 
+        An example: landscapedescription/image.png returns image.png from the current landscape directory.
+
+        This operation allows to set up an HTML iframe or similar for the landscape description, 
+        including all images, etc. embedded in the HTML description.
+
+
+  /view/listskyculture:
+    get:
+      tags:
+        - View Service
+      summary: Retrieve Sky Cultures Collection List
+      description: |
+        Lists the installed sky cultures as a JSON object of format
+        
+            {
+                <skycultureId> : <skycultureName>, //maps the id to the translated name
+                ...
+            }
+      responses:
+        '200':
+          description: Dictionary of sky cultures
+
+  /view/skyculturedescription/:
+    get:
+      tags:
+        - View Service
+      summary: Provides virtual filesystem access to the current skyculture directory.
+      description: |
+        **Note that the slash at the end is mandatory!**
+        Provides virtual filesystem access to the current skyculture directory. 
+        The operation can take a longer path in the URL. 
+        The remainder is used to access files in the skyculture directory. 
+        If no longer path is given, the current HTML skyculture description 
+        (as per StelSkyCultureMgr::getCurrentSkyCultureHtmlDescription) is returned. 
+        An example: skyculturedescription/image.png returns image.png from the current skyculture directory.
+
+        This operation allows to set up an HTML iframe or similar for the skyculture description, 
+        including all images, etc. embedded in the HTML description.
+
+  /view/listprojection:
+    get:
+      tags:
+        - View Service
+      summary: Retrieve dict of projections
+      description: |
+        Lists the available projection types as a JSON object of format
+        
+            {
+                <projectionTypeKey> : <projectionName>, //maps the id to the translated name
+                ...
+            }
+      responses:
+        '200':
+          description: Array mapping available projections
+
+  /view/projectiondescription:
+    get:
+      tags:
+        - View Service
+      summary: Returns the HTML description of the current projection
+      description: |
+        Returns the HTML description of the current projection (StelProjector::getHtmlSummary) 
+      responses:
+        '200':
+          description: HTML description delivered.
+
+
+  /location/list:
+    get:
+      tags:
+        - Location Service
+      summary: Retrieve known locations
+      description: Returns the list of all stored location IDs (keys of StelLocationMgr::getAllMap) as JSON string array
+      responses:
+        '200':
+          description: Location name collection
+
+  /location/regionlist:
+    get:
+      tags:
+        - Location Service
+      summary: Retrieve known regions
+      description: |
+        Returns the list of all known regions (StelLocationMgr::getRegionNames), 
+        as a JSON array of objects of format
+        
+          {
+              name,     // the english region name
+              name_i18n // the localized region name (current language)
+          }
+      responses:
+        '200':
+          description: Location name collection
+
+  /location/planetlist:
+    get:
+      tags:
+        - Location Service
+      summary: Retrieve known planets
+      description: |
+        Returns the list of all solar system planet names, as a JSON array of dicts of format
+        
+          {
+              name,     //the english planet name
+              name_i18n //the localized planet name (current language)
+          }
+      responses:
+        '200':
+          description: Location name collection
+
+  /location/planetimage:
+    get:
+      tags:
+        - Location Service
+      summary: Retrieve planet texture image
+      description: |
+        Returns the planet texture image for the planet (english name)
+      parameters:
+        - name: planet
+          in: query
+          required: true
+          description: english name of planet
+          schema:
+            type: string
+      responses:
+        '200':
+          description: image retrieved
+        '404':
+          description: not found
+
+  /location/setlocationfields:
+    post:
+      tags:
+        - Location Service
+      summary: change current location
+      description: Directly manipulates view location. If 'id' is given, all other parameters are ignored.
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string
+                  description: Known location ID.
+                latitude:
+                  type: number
+                  description: WGS84 geographical latitude, degrees.
+                longitude:
+                  type: number
+                  description: WGS84 geographical longitude, degrees.
+                altitude:
+                  type: number
+                  description: Altitude above mean sea level, metres.
+                name:
+                  type: string
+                  description: location name.
+                region:
+                  type: string
+                  description: region name.
+                planet:
+                  type: string
+                  description: planet name.
+      responses:
+        '200':
+          description: location set.
+        '400':
+          description: invalid location id.
+
+
+  /locationsearch/search:
+    get:
+      tags:
+        - LocationSearch Service
+      summary: Search a location
+      description: |
+        Searches the term in the list of predefined locations of the StelLocationMgr, 
+        and returns a JSON string array of the results.
+      parameters:
+        - name: term
+          in: query
+          required: true
+          description: City title keyword context string
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Location name collection
+        '400':
+          description: empty term
+
+  /locationsearch/nearby:
+    get:
+      tags:
+        - LocationSearch Service
+      summary: Search locations near given coordinates
+      description: |
+        Searches for known locations on the given planet within 'radius' degrees of the given coordinates.
+        and returns a JSON string array of the results.
+      parameters:
+        - name: planet
+          in: query
+          required: true
+          description: english planet name, e.g. Earth (case sensitive)
+          example: Earth
+          schema:
+            type: string
+        - name: latitude
+          in: query
+          required: true
+          description: search center location latitude, degrees
+          schema:
+            type: number
+        - name: longitude
+          in: query
+          required: true
+          description: search center location longitude, degrees
+          schema:
+            type: number
+        - name: radius
+          in: query
+          required: true
+          description: search radius, degrees
+          example: 3
+          schema:
+            type: number
+      responses:
+        '200':
+          description: Location name collection (May be empty)
+
+
+  /scripts/list:
+    get:
+      tags:
+        - Script Service
+      summary: Lists all known script files, as a JSON string array.
+      description: Lists all known script files, as a JSON string array.
+      responses:
+        '200':
+          description: List of script filenames
+
+  /scripts/info:
+    get:
+      tags:
+        - Script Service
+      summary: Retrieve information about a script
+      description: |
+        Returns information about the script identified by id. If the optional parameter html is present (its value is ignored), 
+        the info is formatted using StelScriptMgr::getHtmlDescription and suitable for inclusion into an iframe element, 
+        otherwise this operation returns a JSON object of format: 
+        
+            {
+                id,                     // script ID
+                name,                   // english name of the script
+                name_localized,         // localized name of the script
+                description,            // english description of the script
+                description_localized,  // localized description of the script
+                author,                 // author(s) of the script
+                license,                // license of the script
+                version                 // version of the script
+            }
+      parameters:
+        - name: id
+          in: query
+          required: true
+          description: Script ID
+          schema:
+            type: string
+        - name: html
+          in: query
+          required: false
+          description: if given (any value), answer is HTML formatted.
+          schema:
+            type: string
+
+      responses:
+        '200':
+          description: script metadata JSON or HTML
+
+  /scripts/status:
+    get:
+      tags:
+        - Script Service
+      summary: Return script status
+      description: |
+        Returns the current script status as a JSON dict of format:
+        
+            {
+                scriptIsRunning,    //true if a script is running
+                runningScriptId     //the currently running script ID
+            }
+            
+        ### Note
+        
+        The StelScriptMgr also provides a StelProperty StelScriptMgr.runningScriptId that can be used to find out the active script.
+      responses:
+        '200':
+          description: Script status dict
+
+  /scripts/run:
+    post:
+      tags:
+        - Script Service
+      summary: Execute Named Script
+      description: |
+        Runs the script with the given id. 
+      
+        ### Note
+      
+        Will fail with error message if a script is currently running.
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string
+                  description: Exact filename (e.g., sky_tours.ssc).
+      responses:
+        '200':
+          description: |
+            Script running successfully, or 'error: a script is already running'
+
+  /scripts/direct:
+    post:
+      tags:
+        - Script Service
+      summary: Execute Script Code
+      description: |
+        Directly executes the given script code. 
+        If useIncludes is given and evaluates to true, the standard include folder will be used. 
+        
+        ### Note
+        
+        Script execution will fail if a script is already running.
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                code:
+                  type: string
+                  description: Script code. (Usually a short ad-hoc script.) 
+                useIncludes:
+                  type: boolean
+                  description: use standard include folder
+      responses:
+        '200':
+          description: |
+            Script running successfully, or 'error: a script is already running'
+
+  /scripts/stop:
+    post:
+      tags:
+        - Script Service
+      summary: Stops running script.
+      description: Stops the execution of a running script.
+      requestBody:
+        required: false
+      responses:
+        '200':
+          description: Script pipeline initialization successful
+
+
+  /stelaction/list:
+    get:
+      tags:
+        - StelAction Service
+      summary: List all StelActions
+      description: |
+        Lists all registered StelActions, in the format
+
+            {
+                //translated StelAction group name
+                <groupName> : [
+                    //all StelActions in the group <groupName>
+                    {
+                            id,             // the ID of the action
+                            isCheckable,    // true if the action represents a boolean value
+                            isChecked,      // if "isCheckable" is true, shows the current boolean state
+                            text            // the translated description of the action
+                    }, 
+                    ...
+                ]
+            }
+      responses:
+        '200':
+          description: Action name collection
+
+  /stelaction/do:
+    post:
+      tags:
+        - StelAction Service
+      summary: Trigger a StelAction
+      description: |
+        Triggers or toggles the StelAction specified by id. 
+        If it was a boolean action, returns the new state of the action (strings "true"/"false").
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string
+                  description: System toggle shortcut name (e.g., 'actionShow_Atmosphere').
+      responses:
+        '200':
+          description: |
+            Shortcut method fired (ok, or true/false results for toggle actions).
+            
+            When actions 'actionQuit_Global' or 'actionShow_Remote_Control' are given, 
+            these trigger asynchronously and the response body becomes "error: Stellarium or remote control closing!" instead 
+
+  /stelproperty/list:
+    get:
+      tags:
+        - StelProperty Service
+      summary: List all StelProperties
+      description: |
+        Lists all registered StelProperties, in the format
+
+            {
+              <propId> : {     // Usually "ModuleName.PropertyName"
+                  value,       // the current value of the StelProperty
+                  variantType, // the type string of the "value", as determined by QVariant::typeName
+                  typeString,  // the type string of the StelProperty, as determined by QMetaProperty::typeName (may not be equal to "variantType")
+                  typeEnum,    // numeric QMetaType/QMetaProperty type value returned by QMetaProperty::type().
+                  canNotify,   // should be true
+                  isWritable   // should be true almost everywhere
+              }
+            }
+        
+        ### Note ###
+        
+        The generic type conversions are done by QJsonValue::fromVariant
+
+      responses:
+        '200':
+          description: Property collection
+
+  /stelproperty/set:
+    post:
+      tags:
+        - StelProperty Service
+      summary: Modify module properties (StelProperty)
+      description: |
+        Sets the StelProperty identified by 'id' to the value 'value'. 
+        The value is converted to the StelProperty type using QVariant logic, an error is returned if this is somehow not possible.
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string
+                  description: Property name. This is usually ModuleName.PropertyName.
+                value:
+                  type: string
+                  description: String representation of new value.
+      responses:
+        '200':
+          description: Property set, or see error message in case of problems. 
