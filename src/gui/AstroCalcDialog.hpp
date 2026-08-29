@@ -369,7 +369,7 @@ private slots:
 	//! Algorithm taken from calculating the rises, transits and sets.
 	void generateTransits();
 	void cleanupTransits();
-	void selectCurrentTransit(const QModelIndex &modelIndex);
+	void selectCurrentTransit(QTreeWidgetItem* item, int idx);
 	void saveTransits();
 
 	void saveEclipseFiltersState();
@@ -724,6 +724,9 @@ private:
 
 	//! Memorize day for detecting rollover to next/prev one
 	int oldGraphJD = 0;
+
+	// Special date (-25000-01-01) outside valid range of eclipses
+	const double invalidJD = -7410192.;
 
 	//! Remember to redraw active plot when dialog becomes visible
 	bool graphPlotNeedsRefresh = false;

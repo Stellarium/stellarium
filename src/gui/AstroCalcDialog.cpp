@@ -386,7 +386,7 @@ void AstroCalcDialog::createDialogContent()
 	connect(ui->transitsCalculateButton, &QPushButton::clicked, this, &AstroCalcDialog::generateTransits);
 	connect(ui->transitsCleanupButton,   &QPushButton::clicked, this, &AstroCalcDialog::cleanupTransits);
 	connect(ui->transitsSaveButton,      &QPushButton::clicked, this, &AstroCalcDialog::saveTransits);
-	connect(ui->transitTreeWidget,       &QTreeWidget::doubleClicked, this, &AstroCalcDialog::selectCurrentTransit);
+	connect(ui->transitTreeWidget,       &QTreeWidget::itemDoubleClicked, this, &AstroCalcDialog::selectCurrentTransit);
 
 	connect(ui->eclipseFilterTotal,     &QCheckBox::clicked, this, &AstroCalcDialog::saveEclipseFiltersState);
 	connect(ui->eclipseFilterHybrid,    &QCheckBox::clicked, this, &AstroCalcDialog::saveEclipseFiltersState);
@@ -3714,9 +3714,6 @@ void AstroCalcDialog::generateSolarEclipsesLocal()
 		double tmp = (startJD - approxJD - synodicMonth) / synodicMonth;
 		double InitJD = approxJD + int(tmp) * synodicMonth;
 
-		// Special date (-25000-01-01) outside valid range
-		double invalidJD = -7410192.;
-
 		// Search for solar eclipses at each New Moon
 		for (int i = 0; i <= elements+2; i++)
 		{
@@ -4377,7 +4374,7 @@ void AstroCalcDialog::selectCurrentSolarEclipseLocal(QTreeWidgetItem *item, int 
 	if (idx == SolarEclipseLocalFirstContact || idx == SolarEclipseLocal2ndContact || idx == SolarEclipseLocal3rdContact || idx == SolarEclipseLocalLastContact)
 		JD = item->data(idx, Qt::UserRole).toDouble();
 	// Find the Sun if the date & time is actual (>-25000-01-01)
-	if (JD > -7410192.0)
+	if (JD > invalidJD)
 		goToObject("Sun", JD);
 }
 
@@ -4826,7 +4823,6 @@ void AstroCalcDialog::generateTransits()
 							}
 						}
 						const double utcOffsetHrs = core->getUTCOffset(JDMid);
-						const double shift = utcOffsetHrs/24.;
 						ACTransitTreeWidgetItem* treeItem = new ACTransitTreeWidgetItem(ui->transitTreeWidget);
 						QString transitMid = QString("%1 %2").arg(localeMgr->getPrintableDateLocal(JDMid, utcOffsetHrs), localeMgr->getPrintableTimeLocal(JDMid, utcOffsetHrs));
 						treeItem->setText(TransitPlanet, planetStr);
@@ -4848,7 +4844,7 @@ void AstroCalcDialog::generateTransits()
 						}
 						else
 							treeItem->setText(TransitContact1, dash);
-						treeItem->setData(TransitContact1, Qt::UserRole, StelUtils::getHoursFromJulianDay(JD1 + shift));
+						treeItem->setData(TransitContact1, Qt::UserRole, JD1);
 						treeItem->setToolTip(TransitContact1, q_("The time of first contact, the instant when the planet's disk is externally tangent to the Sun (transit begins)"));
 						if (transitData.ce <= 0.)
 								treeItem->setText(TransitContact2, dash);
@@ -4863,7 +4859,7 @@ void AstroCalcDialog::generateTransits()
 						}
 						else
 							treeItem->setText(TransitContact2, localeMgr->getPrintableTimeLocal(JD2, core->getUTCOffset(JD2)));
-						treeItem->setData(TransitContact2, Qt::UserRole, StelUtils::getHoursFromJulianDay(JD2 + shift));
+						treeItem->setData(TransitContact2, Qt::UserRole, JD2);
 						treeItem->setToolTip(TransitContact2, q_("The time of second contact, the entire disk of the planet is internally tangent to the Sun"));
 						if (transitMagnitude > 0.)
 						{
@@ -4913,7 +4909,7 @@ void AstroCalcDialog::generateTransits()
 						}
 						else
 							treeItem->setText(TransitContact3, localeMgr->getPrintableTimeLocal(JD3, core->getUTCOffset(JD3)));
-						treeItem->setData(TransitContact3, Qt::UserRole, StelUtils::getHoursFromJulianDay(JD3 + shift));
+						treeItem->setData(TransitContact3, Qt::UserRole, JD3);
 						treeItem->setToolTip(TransitContact3, q_("The time of third contact, the planet reaches the opposite limb and is once again internally tangent to the Sun"));
 						if (transitMagnitude > 0.)
 						{
@@ -4931,7 +4927,7 @@ void AstroCalcDialog::generateTransits()
 						}
 						else
 							treeItem->setText(TransitContact4, dash);
-						treeItem->setData(TransitContact4, Qt::UserRole, StelUtils::getHoursFromJulianDay(JD4 + shift));
+						treeItem->setData(TransitContact4, Qt::UserRole, JD4);
 						treeItem->setToolTip(TransitContact4, q_("The time of fourth contact, the planet's disk is externally tangent to the Sun (transit ends)"));
 						double totalDuration = 0.;
 						if (transitMagnitude > 0.)
@@ -5046,11 +5042,13 @@ void AstroCalcDialog::enableTransitsButtons(bool enable)
 	ui->transitsSaveButton->setEnabled(enable);
 }
 
-void AstroCalcDialog::selectCurrentTransit(const QModelIndex& modelIndex)
+void AstroCalcDialog::selectCurrentTransit(QTreeWidgetItem *item, int idx)
 {
 	// Find the planet
-	const QString name = modelIndex.sibling(modelIndex.row(), TransitPlanet).data(Qt::UserRole).toString();
-	const double JD = modelIndex.sibling(modelIndex.row(), TransitMid).data(Qt::UserRole).toDouble();
+	const QString name = item->data(TransitPlanet, Qt::UserRole).toString();
+	double JD = item->data(TransitMid, Qt::UserRole).toDouble();
+	if (idx == TransitContact1 || idx == TransitContact2 || idx == TransitContact3 || idx == TransitContact4)
+		JD = item->data(idx, Qt::UserRole).toDouble();
 	goToObject(name, JD);
 }
 
