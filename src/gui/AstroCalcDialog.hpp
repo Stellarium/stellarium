@@ -217,9 +217,9 @@ public:
 		SolarEclipseGamma,		//! gamma of solar eclipse
 		SolarEclipseMag,		//! greatest magnitude of solar eclipse
 		SolarEclipseLatitude,		//! latitude at greatest eclipse
-		SolarEclipseLongitude,	//! longitude at greatest eclipse
+		SolarEclipseLongitude,		//! longitude at greatest eclipse
 		SolarEclipseAltitude,		//! altitude of the Sun at greatest eclipse
-		SolarEclipsePathwidth,	//! pathwidth of total or annular solar eclipse
+		SolarEclipsePathwidth,		//! pathwidth of total or annular solar eclipse
 		SolarEclipseDuration,		//! central duration of total or annular solar eclipse
 		SolarEclipseCount		//! total number of columns
 	};
@@ -245,11 +245,11 @@ public:
 		SolarEclipseLocalType,		//! type of solar eclipse
 		SolarEclipseLocalFirstContact,	//! time of the beginning of partial solar eclipse
 		SolarEclipseLocal2ndContact,	//! time of the beginning of total/annular solar eclipse
-		SolarEclipseLocalMaximum,		//! time of maximum solar eclipse
+		SolarEclipseLocalMaximum,	//! time of maximum solar eclipse
 		SolarEclipseLocalMagnitude,	//! maximum magnitude of solar eclipse
 		SolarEclipseLocal3rdContact,	//! time of the end of total/annular solar eclipse
 		SolarEclipseLocalLastContact,	//! time of the end of partial solar eclipse
-		SolarEclipseLocalDuration,		//! duration of total/annular solar eclipse
+		SolarEclipseLocalDuration,	//! duration of total/annular solar eclipse
 		SolarEclipseLocalCount		//! total number of columns
 	};
 
