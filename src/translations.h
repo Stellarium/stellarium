@@ -890,6 +890,7 @@ class Translations
 		N_("New Folder");
 		N_("Show &hidden files");
 		N_("Search");
+		N_("No such file or directory");
 		// =========================================================================
 		// In preparation of narration. These should go away after merge of branch "narration".
 		NC_("Andromeda"          , "IAU constellation name");
