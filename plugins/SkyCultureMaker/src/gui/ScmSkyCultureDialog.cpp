@@ -826,6 +826,27 @@ void ScmSkyCultureDialog::populateLocationsTab(scm::ScmSkyCulture *sc)
 			new ScmPolygonInfoTreeItem(poly.id, poly.beginTime, endTimeStr, poly.polygon.size()));
 	}
 	ui->polygonCountValueLabel->setText(QString::number(sc->getLocations().size()));
+
+	// aggregate the culture's overall start / end time from the loaded polygons
+	const auto &locations = sc->getLocations();
+	if (!locations.isEmpty())
+	{
+		const int presentThreshold = ui->skyCultureCurrentTimeSpinBox->maximum();
+		int beginTime = locations.first().beginTime;
+		int endTime   = locations.first().endTime;
+		for (const auto &poly : locations)
+		{
+			if (poly.beginTime < beginTime) beginTime = poly.beginTime;
+			if (poly.endTime > endTime) endTime = poly.endTime;
+		}
+		ui->cultureBeginTimeValueLabel->setText(QString::number(beginTime));
+		ui->cultureEndTimeValueLabel->setText(endTime >= presentThreshold ? "∞" : QString::number(endTime));
+	}
+	else
+	{
+		ui->cultureBeginTimeValueLabel->setText("");
+		ui->cultureEndTimeValueLabel->setText("");
+	}
 }
 
 void ScmSkyCultureDialog::populateFromSkyCulture(scm::ScmSkyCulture *sc)
