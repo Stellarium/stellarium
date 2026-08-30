@@ -104,7 +104,7 @@ public:
 	//! For skycultures of worldwide applicability (mostly those adhering to IAU constellation borders), use "World".
 	QJsonArray region;
 	//! Sentinel begin year meaning "unknown/irrelevant" (earlier than any real historical date).
-	static constexpr int unknownBeginTime = -500000;
+	static constexpr int unknownBeginTime = -100000;
 	//! Sentinel end year meaning "up to the present", rendered as "∞" in the GUI.
 	static constexpr int presentEndTime = 9146;
 	//! Earliest available year

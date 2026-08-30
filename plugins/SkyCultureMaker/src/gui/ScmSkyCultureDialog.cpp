@@ -940,6 +940,10 @@ void ScmSkyCultureDialog::showAddPolygon()
 	ui->beginTimeSpinBox->setCustomMaximum(ui->skyCultureCurrentTimeSpinBox->maximum());
 	ui->endTimeSpinBox->setMaximum(ui->skyCultureCurrentTimeSpinBox->maximum());
 
+	// display "Unknown" at the earliest possible start
+	ui->beginTimeSpinBox->setDisplayCustomStringForValue(true);
+	ui->beginTimeSpinBox->setCustomStringForMin(q_("Unknown"));
+
 	// display a fitting char for cultures that still exist
 	ui->endTimeSpinBox->setDisplayCustomStringForValue(true);
 	ui->endTimeSpinBox->setCustomStringForMax("∞");
@@ -959,7 +963,7 @@ void ScmSkyCultureDialog::hideAddPolygon()
 
 void ScmSkyCultureDialog::initSkyCultureTime()
 {
-	int minYear = -6500; // should be small enough so that new cultures can always be added (who knows what will be discovered in the future)
+	int minYear = StelSkyCulture::unknownBeginTime;
 	int maxYear = QDateTime::currentDateTime().date().year();
 	int currentYear = maxYear;
 
@@ -969,6 +973,9 @@ void ScmSkyCultureDialog::initSkyCultureTime()
 
 	ui->skyCultureCurrentTimeSpinBox->setMinimum(minYear);
 	ui->skyCultureCurrentTimeSpinBox->setMaximum(maxYear);
+
+	ui->skyCultureCurrentTimeSpinBox->setDisplayCustomStringForValue(true);
+	ui->skyCultureCurrentTimeSpinBox->setCustomStringForMin(q_("Unknown"));
 
 	// reuse function to set Value of timeSlider, currentTimeSpinBox and MapGraphicsView
 	updateSkyCultureTimeValue(currentYear);
@@ -994,7 +1001,7 @@ void ScmSkyCultureDialog::addLocation(scm::CulturePolygon culturePoly)
 	QString endTimeString = QString::number(culturePoly.endTime);
 	if (culturePoly.endTime >= ui->skyCultureCurrentTimeSpinBox->maximum())
 	{
-		culturePoly.endTime = StelSkyCulture::presentEndTime; // special value for existing cultures
+		culturePoly.endTime = StelSkyCulture::presentEndTime;
 		endTimeString = "∞";
 	}
 
