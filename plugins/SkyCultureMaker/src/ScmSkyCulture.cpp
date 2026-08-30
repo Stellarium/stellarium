@@ -295,16 +295,6 @@ const QList<scm::CulturePolygon> &scm::ScmSkyCulture::getLocations() const
 	return locations;
 }
 
-int scm::ScmSkyCulture::getBeginTime() const
-{
-	return beginTime;
-}
-
-int scm::ScmSkyCulture::getEndTime() const
-{
-	return endTime;
-}
-
 bool scm::ScmSkyCulture::getFallbackToInternationalNames() const
 {
 	return fallbackToInternationalNames;

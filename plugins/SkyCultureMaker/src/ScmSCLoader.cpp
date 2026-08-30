@@ -124,8 +124,6 @@ bool ScmSCLoader::parseIndexJson(const QDir &dir, scm::ScmSkyCulture *sc, QStrin
 void ScmSCLoader::parseIndexJsonBasicFields(const QJsonObject &root, const QDir &dir, scm::ScmSkyCulture *sc)
 {
 	sc->setId(root["id"].toString(dir.dirName()));
-	sc->setBeginTime(root["beginTime"].toInt());
-	sc->setEndTime(root["endTime"].toInt());
 	sc->setFallbackToInternationalNames(root["fallback_to_international_names"].toBool(false));
 
 	scm::Description desc;

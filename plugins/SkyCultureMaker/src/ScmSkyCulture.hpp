@@ -160,16 +160,6 @@ public:
 	const QList<CulturePolygon> &getLocations() const;
 
 	/**
-	 * @brief Returns the earliest year associated with the sky culture's territory.
-	 */
-	int getBeginTime() const;
-
-	/**
-	 * @brief Returns the latest year associated with the sky culture's territory.
-	 */
-	int getEndTime() const;
-
-	/**
 	 * @brief Returns whether to fall back to international names when culture-specific names are absent.
 	 */
 	bool getFallbackToInternationalNames() const;

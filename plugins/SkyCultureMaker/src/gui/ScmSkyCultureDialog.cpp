@@ -27,6 +27,7 @@
 #include "StarMgr.hpp"
 #include "StelMovementMgr.hpp"
 #include "StelObjectMgr.hpp"
+#include "StelSkyCultureMgr.hpp"
 #include "ui_scmSkyCultureDialog.h"
 #include <cassert>
 #include <QCheckBox>
@@ -841,9 +842,13 @@ void ScmSkyCultureDialog::populateFromSkyCulture(scm::ScmSkyCulture *sc)
 	populateCommonNames(sc->getCulturalNames());
 	populateLocationsTab(sc);
 
-	// Set the time slider to the sky culture's end year
-	int displayYear   = sc->getEndTime();
+	// Set the time slider to the latest end year across the culture's territory polygons
 	const int maxYear = QDateTime::currentDateTime().date().year();
+	int displayYear   = 0;
+	for (const auto &poly : sc->getLocations())
+	{
+		if (poly.endTime > displayYear) displayYear = poly.endTime;
+	}
 	if (displayYear <= 0 || displayYear > maxYear) displayYear = maxYear;
 	updateSkyCultureTimeValue(displayYear);
 }
@@ -968,7 +973,7 @@ void ScmSkyCultureDialog::addLocation(scm::CulturePolygon culturePoly)
 	QString endTimeString = QString::number(culturePoly.endTime);
 	if (culturePoly.endTime >= ui->skyCultureCurrentTimeSpinBox->maximum())
 	{
-		culturePoly.endTime = 9146; // special value for existing cultures
+		culturePoly.endTime = StelSkyCulture::presentEndTime; // special value for existing cultures
 		endTimeString = "∞";
 	}
 
