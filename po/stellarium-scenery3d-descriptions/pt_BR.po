@@ -5,6 +5,7 @@
 # 
 # Translators:
 # Isaac Pinheiro <isaacpnh@gmail.com>, 2022
+# DC, 2026
 # 
 #, fuzzy
 msgid ""
@@ -13,7 +14,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
 "POT-Creation-Date: 2023-11-28 13:04+0700\n"
 "PO-Revision-Date: 2022-10-05 17:03+0000\n"
-"Last-Translator: Isaac Pinheiro <isaacpnh@gmail.com>, 2022\n"
+"Last-Translator: DC, 2026\n"
 "Language-Team: Portuguese (Brazil) (https://app.transifex.com/stellarium/teams/80998/pt_BR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -34,16 +35,16 @@ msgid ""
 "or some other details to find out how this plugin behaves. Then build and "
 "present your own work!"
 msgstr ""
-"Esta cena é mais útil quando usada como ensaio para seus próprios "
-"desenvolvimentos. Você deverá fazer uma cópia da pasta da cena e modificar à"
-" vontade, tente configurações materiais ou outros detalhes para descobrir "
-"como esta extensão se comporta. Então, construa e apresente seu próprio "
-"trabalho!"
+"Esta cena é útil principalmente como ambiente de testes para seus próprios "
+"desenvolvimentos. Você deve fazer uma cópia da pasta da cena e modificá-la à"
+" vontade, testar configurações de materiais ou outros detalhes para "
+"descobrir como este plug-in se comporta. Depois, compile e apresente seu "
+"próprio trabalho!"
 
 #. type: Content of: <h4>
 #: ../../scenery3d/Testscene/description.en.utf8:8
 msgid "Coordinate and orientation tests"
-msgstr "Coordenar e orientar testes"
+msgstr "Testes de coordenadas e de orientação"
 
 #. type: Content of: <p>
 #: ../../scenery3d/Testscene/description.en.utf8:10
@@ -57,15 +58,15 @@ msgid ""
 "absolutely and always point west-east, the grid lines hit the northern "
 "horizon slightly (4.2 deg) left of north!"
 msgstr ""
-"Os pilares mostrados aqui, como visto no centro da estrutura, demonstram uma"
-" visão aproximada (sem precisão!) para as posições do solstício/equinócio "
-"nascer-do-sol/pôr-do-sol nas latitudes da Europa central. Os pilares "
-"centrais fornecem uma linha leste-oeste. A grade de coordenadas do "
-"levantamento visível no chão não se alinha com o norte geográfico. Uma "
-"rotação de -4,2 graus (teste para convergência meridiana) precisa ser "
-"compensada, por exemplo, enquanto os pilares centrais precisam sempre e "
-"unicamente apontar para o oeste-leste, as linhas da grade atingem levemente "
-"o horizonte norte (4,2 graus) a sua esquerda!"
+"Os pilares mostrados aqui, vistos do centro da estrutura, fornecem uma visão"
+" aproximada (não de alta precisão!) das posições do nascer e do ocaso do Sol"
+" nos solstícios e equinócios em latitudes da Europa Central. Os pilares "
+"centrais fornecem uma linha leste-oeste. A grade de coordenadas topográficas"
+" visível no piso não está alinhada com o norte geográfico. Uma rotação de "
+"-4,2° (teste para a convergência dos meridianos) deve ser compensada, ou "
+"seja, embora os pilares centrais devam absoluta e sempre apontar na direção "
+"oeste-leste, as linhas da grade atingem o horizonte norte ligeiramente "
+"(4,2°) à esquerda do norte!"
 
 #. type: Content of: <p>
 #: ../../scenery3d/Testscene/description.en.utf8:19
@@ -73,13 +74,13 @@ msgid ""
 "Walkaround ground coordinates (Ctrl-R, T) should display the coordinates "
 "visible along the south and west border of the ground."
 msgstr ""
-"Coordenadas para navegação no solo (Ctrl+R, T) deverão mostrar as "
-"coordenadas visíveis pelas bordas sul e oeste do solo."
+"As coordenadas do terreno durante a caminhada (Ctrl+R, T) devem exibir as "
+"coordenadas visíveis ao longo das bordas sul e oeste do terreno."
 
 #. type: Content of: <h4>
 #: ../../scenery3d/Testscene/description.en.utf8:23
 msgid "Material test"
-msgstr "Teste material"
+msgstr "Teste de material"
 
 #. type: Content of: <p>
 #: ../../scenery3d/Testscene/description.en.utf8:25
@@ -88,9 +89,10 @@ msgid ""
 " can play with material parameters to create funny effects like "
 "semitransparent or glow-in-the-dark brick spheres."
 msgstr ""
-"Este modelo também é usado para testar a capacidade gráfica de uma extensão."
-" Você pode alterar os parâmetros dos materiais para criar efeitos cômicos "
-"como esferas semitransparentes ou com tijolos que brilham no escuro."
+"Este modelo também é usado para testar os recursos gráficos do plug-in. Você"
+" pode experimentar os parâmetros dos materiais para criar efeitos "
+"divertidos, como esferas de tijolos semitransparentes ou que brilham no "
+"escuro."
 
 #. type: Content of: <p>
 #: ../../scenery3d/Testscene/description.en.utf8:29
@@ -98,8 +100,9 @@ msgid ""
 "To test temporal features, the pillars and spheres are visible only from the"
 " years 2000 until 2020.  Edit the material file to change that!"
 msgstr ""
-"Para testar os recursos temporais, os pilares e esferas são visíveis apenas "
-"entre os anos de 2000 e 2020. Edite o arquivo do material para alterar isto."
+"Para testar recursos temporais, os pilares e as esferas ficam visíveis "
+"somente entre os anos 2000 e 2020. Edite o arquivo de materiais para alterar"
+" isso!"
 
 #. type: Content of: <h4>
 #: ../../scenery3d/Testscene/description.en.utf8:32
@@ -113,7 +116,7 @@ msgid ""
 "Testscene for Stellarium/scenery3d development. Export from SU8-Kerkythea-"
 "KT2OBJ."
 msgstr ""
-"Cena de teste para o desenvolvimento de Stellarium/scenery3d. Exporte de "
+"Cena de teste para o desenvolvimento do Stellarium/scenery3d. Exportada de "
 "SU8-Kerkythea-KT2OBJ."
 
 #. type: Content of: <h2>
@@ -127,7 +130,7 @@ msgid ""
 "Sterngarten (\"Star Garden\") is an open-air planetarium in the south-west "
 "of Vienna, demonstrating the solar year."
 msgstr ""
-"Sterngarten (\"Jardim das estrelas\") é um planetário de céu aberto no "
+"O Sterngarten (“Jardim das Estrelas”) é um planetário a céu aberto no "
 "sudoeste de Viena, demonstrando o ano solar."
 
 #. type: Content of: <h4>
@@ -142,9 +145,9 @@ msgid ""
 "Astronomical Bureau (1907) and Austrian Astronomical Society (1924). "
 "Director of first Vienna Planetarium (1927) and Urania observatory."
 msgstr ""
-"Univ. Prof. Dr. Oswald Thomas (1882 Kronstadt - 1963 Viena). Fundador, "
-"Agência Astronômica (1907) e Sociedade Astronômica Austríaca (1924). "
-"Director do primeiro Planetário de Viena (1927) e observatório de Urania."
+"Univ. Prof. Dr. Oswald Thomas (1882, Kronstadt - 1963, Viena). Fundador do "
+"Astronomical Bureau (1907) e da Sociedade Astronômica Austríaca (1924). "
+"Diretor do primeiro planetário de Viena (1927) e do observatório da Urania."
 
 #. type: Content of: <h4>
 #: ../../scenery3d/Sterngarten/description.en.utf8:14
@@ -163,14 +166,14 @@ msgid ""
 "Calendar)  and the monthly journal \"Der Sternenbote\" (The Starry "
 "Messenger)."
 msgstr ""
-"O Sterngarten foi desenvolvido pelo estudante de Thomas e seu sucessor na "
-"Agência Astronômica, Prof. Hermann Mucke (1935-2019) com seus colaboradores."
-" Mucke foi também secretário da Sociedade Astronômica Austríaca entre "
-"1963-2018, diretor do Planetário de Viena entre 1963-2001 e do observatório "
-"público de Viena, Urania, entre 1971-2001. Por mais de 60 anos, Mucke e a "
-"Sociedade publicaram o \"Österreichischer Himmelskalender\" (Calendário "
-"Celestial Austríaco) e mensalmente o jornal \"Der Sternenbote\" (O "
-"Mensageiro Estelar)."
+"O Sterngarten foi desenvolvido pelo aluno e sucessor de Thomas no "
+"Astronomical Bureau, Prof. Hermann Mucke (1935-2019), com seus "
+"colaboradores. Mucke também foi secretário da Sociedade Astronômica "
+"Austríaca de 1963-2018, diretor do planetário de Viena de 1963-2001 e do "
+"observatório público Vienna Urania de 1971-2001. Por mais de 60 anos, Mucke "
+"e a Sociedade publicaram o “Österreichischer Himmelskalender” (Calendário "
+"Celeste Austríaco) e a revista mensal “Der Sternenbote” (O Mensageiro das "
+"Estrelas)."
 
 #. type: Content of: <p>
 #: ../../scenery3d/Sterngarten/description.en.utf8:22
@@ -178,8 +181,8 @@ msgid ""
 "It was built 1997-2001 by the Austrian Astronomical Society, supported by "
 "public and private sponsors."
 msgstr ""
-"Foi construído entre 1997-2001 pela Sociedade Astronômica Austríaca, apoiado"
-" por patrocinadores públicos e privados."
+"Foi construído entre 1997-2001 pela Sociedade Astronômica Austríaca com o "
+"apoio de patrocinadores públicos e privados."
 
 #. type: Content of: <h4>
 #: ../../scenery3d/Sterngarten/description.en.utf8:24
