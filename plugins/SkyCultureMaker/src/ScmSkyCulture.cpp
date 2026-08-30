@@ -25,6 +25,7 @@
 #include "types/Classification.hpp"
 #include <utility>
 #include <QFile>
+#include <QRegularExpression>
 #include <QTextStream>
 
 void scm::ScmSkyCulture::setId(const QString &id)
@@ -68,6 +69,22 @@ scm::ScmConstellation *scm::ScmSkyCulture::getConstellation(const QString &id)
 {
 	auto it = std::find_if(constellations.begin(), constellations.end(),
 						   [&id](const std::unique_ptr<ScmConstellation> &c) { return c->getId() == id; });
+	return it != constellations.end() ? it->get() : nullptr;
+}
+
+scm::ScmConstellation *scm::ScmSkyCulture::getConstellationByEnglishName(const QString &englishName)
+{
+	// Removes every character that is not a letter or a digit so that symbols
+	// like apostrophes or punctuation are ignored during comparison.
+	static const QRegularExpression nonAlnum("[^\\p{L}\\p{N}]+");
+	auto normalize = [](const QString &s) { return s.toLower().remove(nonAlnum); };
+
+	const QString target = normalize(englishName);
+	if (target.isEmpty()) return nullptr;
+
+	auto it = std::find_if(constellations.begin(), constellations.end(),
+	                       [&](const std::unique_ptr<ScmConstellation> &c)
+	                       { return normalize(c->getCulturalName().translated) == target; });
 	return it != constellations.end() ? it->get() : nullptr;
 }
 
@@ -224,7 +241,7 @@ bool scm::ScmSkyCulture::saveDescriptionAsMarkdown(QFile &file)
 		out << "### About\n\n" << desc.about << "\n\n";
 		if (!desc.acknowledgements.trimmed().isEmpty())
 		{
-			out << "### Acknowledgements\n" << desc.acknowledgements << "\n\n";
+			out << "### Acknowledgements\n\n" << desc.acknowledgements << "\n\n";
 		}
 
 		out << "## License\n\n" << license.name << "\n\n";
@@ -261,6 +278,36 @@ bool scm::ScmSkyCulture::saveIllustrations(const QString &directory)
 const QString &scm::ScmSkyCulture::getId() const
 {
 	return id;
+}
+
+const scm::Description &scm::ScmSkyCulture::getDescription() const
+{
+	return description;
+}
+
+const QMap<QString, QList<scm::ScmCulturalName>> &scm::ScmSkyCulture::getCulturalNames() const
+{
+	return culturalNames;
+}
+
+const QList<scm::CulturePolygon> &scm::ScmSkyCulture::getLocations() const
+{
+	return locations;
+}
+
+int scm::ScmSkyCulture::getBeginTime() const
+{
+	return beginTime;
+}
+
+int scm::ScmSkyCulture::getEndTime() const
+{
+	return endTime;
+}
+
+bool scm::ScmSkyCulture::getFallbackToInternationalNames() const
+{
+	return fallbackToInternationalNames;
 }
 
 void scm::ScmSkyCulture::mergeLocations()

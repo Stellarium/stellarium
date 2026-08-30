@@ -1,0 +1,122 @@
+/*
+ * Sky Culture Maker plug-in for Stellarium
+ *
+ * Copyright (C) 2026 Luca-Philipp Grumbach
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+#ifndef SCMSCLOADER_HPP
+#define SCMSCLOADER_HPP
+
+#include "ScmSkyCulture.hpp"
+#include "StelUtils.hpp"
+#include <QDir>
+#include <QJsonArray>
+#include <QJsonObject>
+#include <QString>
+#include <QStringList>
+
+class QWidget;
+
+/**
+ * @brief Utility class for loading an existing sky culture.
+ */
+class ScmSCLoader
+{
+public:
+	/**
+	 * @brief Loads a sky culture from a given directory.
+	 *
+	 * The directory must contain at least an index.json file.
+	 * The files territory.geojson and description.md are loaded when present.
+	 *
+	 * @param dir                   Sky culture directory to load.
+	 * @param errorMsg              If non-null, receives a human-readable error
+	 *                              description on failure.
+	 * @param unrecognizedHeadings  If non-null, receives the list of headings in
+	 *                              description.md that could not be mapped to a
+	 *                              known section or constellation.
+	 * @return Newly heap-allocated ScmSkyCulture on success, nullptr on failure.
+	 */
+	static scm::ScmSkyCulture *loadFromDirectory(const QDir &dir, QString *errorMsg = nullptr,
+	                                             QStringList *unrecognizedHeadings = nullptr);
+
+	/**
+	 * @brief Opens a directory picker and loads the selected sky culture.
+	 *
+	 * @param parent                Parent widget for the file dialog (may be nullptr).
+	 * @param defaultPath           Initial directory shown in the picker.
+	 * @param errorMsg              If non-null, receives a human-readable error on failure.
+	 * @param unrecognizedHeadings  If non-null, receives the list of headings in
+	 *                              description.md that could not be mapped to a
+	 *                              known section or constellation.
+	 * @return Newly heap-allocated ScmSkyCulture, or nullptr if the user
+	 *         cancelled or loading failed.
+	 */
+	static scm::ScmSkyCulture *selectAndLoad(QWidget *parent = nullptr, const QString &defaultPath = {},
+	                                         QString *errorMsg                 = nullptr,
+	                                         QStringList *unrecognizedHeadings = nullptr);
+
+private:
+	enum class Section
+	{
+		None,
+		Introduction,
+		Description,
+		Sky,
+		MoonAndSun,
+		Planets,
+		Zodiac,
+		MilkyWay,
+		OtherObjects,
+		Constellations,
+		References,
+		Authors,
+		About,
+		Acknowledgements,
+		License
+	};
+
+	static inline Section sectionOf(const QString &heading)
+	{
+		const QString h = heading.toLower().trimmed();
+		if (h == L1S("introduction")) return Section::Introduction;
+		if (h == L1S("description")) return Section::Description;
+		if (h == L1S("sky")) return Section::Sky;
+		if (h == L1S("moon and sun")) return Section::MoonAndSun;
+		if (h == L1S("planets")) return Section::Planets;
+		if (h == L1S("zodiac")) return Section::Zodiac;
+		if (h == L1S("milky way")) return Section::MilkyWay;
+		if (h == L1S("other celestial objects")) return Section::OtherObjects;
+		if (h == L1S("constellations")) return Section::Constellations;
+		if (h == L1S("references")) return Section::References;
+		if (h == L1S("authors")) return Section::Authors;
+		if (h == L1S("about")) return Section::About;
+		if (h == L1S("acknowledgements")) return Section::Acknowledgements;
+		if (h == L1S("license")) return Section::License;
+		return Section::None;
+	}
+
+	static bool parseIndexJson(const QDir &dir, scm::ScmSkyCulture *sc, QString *errorMsg);
+	static void parseIndexJsonBasicFields(const QJsonObject &root, const QDir &dir, scm::ScmSkyCulture *sc);
+	static void parseIndexJsonConstellations(const QJsonArray &constellationsArr, const QDir &dir,
+	                                         scm::ScmSkyCulture *sc);
+	static void parseIndexJsonCommonNames(const QJsonObject &commonNamesObj, scm::ScmSkyCulture *sc);
+	static bool parseTerritoryGeoJson(const QDir &dir, scm::ScmSkyCulture *sc);
+	static bool parseDescriptionMd(const QDir &dir, scm::ScmSkyCulture *sc,
+	                               QStringList *unrecognizedHeadings = nullptr);
+};
+
+#endif // SCMSCLOADER_HPP

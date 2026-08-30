@@ -99,6 +99,7 @@ void MapWidget::mouseMoveEvent(QMouseEvent* event)
 
 	currentDragShift = position(event, devicePixelRatioF()) - dragStart;
 	updateScaledMapAndRect();
+	emitMapViewChanged();
 }
 
 void MapWidget::mouseReleaseEvent(QMouseEvent* event)
@@ -113,6 +114,7 @@ void MapWidget::mouseReleaseEvent(QMouseEvent* event)
 	if (moved)
 	{
 		updateScaledMapAndRect();
+		emitMapViewChanged();
 		return;
 	}
 
@@ -135,7 +137,7 @@ void MapWidget::wheelEvent(QWheelEvent* event)
 
 	const double delta = event->angleDelta().y();
 	const auto pos = position(event, devicePixelRatioF());
-	const auto offset = pos - QPointF(width(), height()) / 2.;
+	const auto offset = pos - QPointF(canvasWidth(), canvasHeight()) / 2.;
 
 	double zoomFactor = std::pow(2., delta / 120.);
 	const auto oldZoom = zoom;
@@ -149,6 +151,7 @@ void MapWidget::wheelEvent(QWheelEvent* event)
 	shift = (shift - offset) * zoomFactor + offset;
 
 	updateScaledMapAndRect();
+	emitMapViewChanged();
 }
 
 void MapWidget::setMap(const QPixmap &map)
@@ -158,8 +161,54 @@ void MapWidget::setMap(const QPixmap &map)
 	updateScaledMapAndRect();
 }
 
+void MapWidget::getMapView(double& centerLongitude,
+                           double& centerLatitude,
+                           double& currentZoom) const
+{
+	const double ratio = devicePixelRatioF();
+	const QPointF center(width() * ratio / 2.0,
+	                     height() * ratio / 2.0);
+	const auto view = mapPointToLonLat(center);
+	centerLongitude = view.longitude;
+	centerLatitude = view.latitude;
+	currentZoom = zoom;
+}
+
+void MapWidget::setMapView(double centerLongitude,
+                           double centerLatitude,
+                           double newZoom)
+{
+	if (newZoom < 1.0)
+		newZoom = 1.0;
+
+	const double ratio = devicePixelRatioF();
+	const QSizeF virtualSize(height() * 2.0 * ratio * newZoom,
+	                         height() * ratio * newZoom);
+	const QPointF widgetCenter(width() * ratio / 2.0,
+	                           height() * ratio / 2.0);
+	const QPointF mapRelative((centerLongitude + 180.0) / 360.0 * virtualSize.width(),
+	                          (centerLatitude - 90.0) / -180.0 * virtualSize.height());
+	const QPointF baseTopLeft(std::round((width() * ratio - virtualSize.width()) / 2.0),
+	                          std::round((height() * ratio - virtualSize.height()) / 2.0));
+
+	zoom = newZoom;
+	currentDragShift = QPointF(0, 0);
+	shift = widgetCenter - mapRelative - baseTopLeft;
+	updateScaledMapAndRect();
+}
+
+void MapWidget::emitMapViewChanged()
+{
+	double longitude = 0.0;
+	double latitude = 0.0;
+	double currentZoom = 1.0;
+	getMapView(longitude, latitude, currentZoom);
+	emit mapViewChanged(longitude, latitude, currentZoom);
+}
+
 void MapWidget::makeSearchAreaOutline(const int width, const int height)
 {
+	Q_UNUSED(height)
 	constexpr double nMax = 128;
 	std::vector<QPointF> points;
 	for (double n = 0; n <= nMax; ++n)
@@ -249,11 +298,10 @@ void MapWidget::paintEvent(QPaintEvent*)
 	painter.scale(1/ratio, 1/ratio); // Work in units of device pixels
 
 	const auto mainRect = mapRect.toRect();
-	const int windowWidth = width();
 	const int mapWidth = mainRect.width();
 	const QPoint horizShift(mapWidth, 0);
 	const int kMin = -1 - mainRect.x() / mapWidth + (mainRect.x() % mapWidth == 0);
-	const int kMax = (windowWidth - mainRect.x()) / mapWidth;
+	const int kMax = (canvasWidth() - mainRect.x()) / mapWidth;
 	if (mapRect.width() > scaledMap.width())
 		painter.setRenderHint(QPainter::SmoothPixmapTransform);
 	for (int k = kMin; k <= kMax; ++k)
@@ -309,13 +357,13 @@ void MapWidget::paintEvent(QPaintEvent*)
 
 void MapWidget::resizeEvent(QResizeEvent* event)
 {
+	Q_UNUSED(event)
 	updateScaledMapAndRect();
 }
 
 void MapWidget::updateScaledMapAndRect()
 {
-	const double ratio = devicePixelRatioF();
-	const auto virtualSize = height() * QSize(2, 1) * (ratio * zoom);
+	const auto virtualSize = canvasHeight() * QSize(2, 1) * zoom;
 	QSize realSize;
 	if (virtualSize.width() > map.width() || virtualSize.height() > map.height())
 		realSize = map.size();
@@ -333,19 +381,29 @@ void MapWidget::updateScaledMapAndRect()
 	while (shift.x() + currentDragShift.x() < -virtualSize.width())
 		shift.setX(shift.x() + virtualSize.width());
 
-	auto topLeft = QPointF(std::round(( width()*ratio-virtualSize.width ()) / 2.),
-	                       std::round((height()*ratio-virtualSize.height()) / 2.));
+	auto topLeft = QPointF(std::round(( canvasWidth()-virtualSize.width ()) / 2.),
+	                       std::round((canvasHeight()-virtualSize.height()) / 2.));
 	topLeft += shift + currentDragShift;
 
 	const auto topLeftBeforeFix = topLeft;
 	if (topLeft.y() > 0)
 		topLeft.setY(0);
-	else if (topLeft.y() + virtualSize.height() < height())
-		topLeft.setY(height() - virtualSize.height());
+	else if (topLeft.y() + virtualSize.height() < canvasHeight())
+		topLeft.setY(canvasHeight() - virtualSize.height());
 	shift += topLeft - topLeftBeforeFix;
 
 	mapRect = QRectF(topLeft, virtualSize);
 
 	searchAreaOutline = {};
 	update();
+}
+
+int MapWidget::canvasWidth() const
+{
+	return width() * devicePixelRatioF();
+}
+
+int MapWidget::canvasHeight() const
+{
+	return height() * devicePixelRatioF();
 }

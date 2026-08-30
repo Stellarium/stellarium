@@ -834,6 +834,7 @@ QString StelSkyCultureMgr::convertMarkdownLevel2SectionNarration(const QString& 
 							const qsizetype bodyStartPos, const qsizetype bodyEndPos,
 							const StelTranslator& trans)
 {
+	Q_UNUSED(sectionName)
 	//qDebug() << "=========convertMarkdownLevel2SectionNarration: " << sectionName;
 
 	auto textEng = markdown.mid(bodyStartPos, bodyEndPos - bodyStartPos);

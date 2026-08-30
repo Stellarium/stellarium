@@ -1868,6 +1868,7 @@ QString ConstellationMgr::getStelObjectType() const
 // For others: identify from convex hulls.
 QList<StelObjectP> ConstellationMgr::searchAround(const Vec3d& v, double limitFov, const StelCore* core) const
 {
+	Q_UNUSED(limitFov)
 	QList<StelObjectP> result;
 
 	if (StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureBoundariesType()==StelSkyCulture::BoundariesType::IAU)

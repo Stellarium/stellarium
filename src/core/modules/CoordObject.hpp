@@ -77,7 +77,11 @@ public:
 	{
 		return name;
 	}
-	QString getInfoString(const StelCore *core, const InfoStringGroup& flags=StelObject::AllInfo) const override {return QString();}
+	QString getInfoString(const StelCore *core, const InfoStringGroup& flags=StelObject::AllInfo) const override
+	{
+		Q_UNUSED(core) Q_UNUSED(flags)
+		return QString();
+	}
 
 private:
 	Vec3d XYZ;    //!< J2000 position, normalized

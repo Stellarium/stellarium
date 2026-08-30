@@ -31,14 +31,10 @@
 #include "StelCore.hpp"
 #include "StelDialog.hpp"
 #include "StelModule.hpp"
-#include "StelObjectModule.hpp"
 #include "StelTranslator.hpp"
-#include "VecMath.hpp"
 #include "types/DialogID.hpp"
 #include <QDir>
-#include <QFile>
 #include <QFont>
-#include <QMessageBox>
 
 class QPixmap;
 class StelButton;
@@ -124,6 +120,12 @@ public:
 	void setNewSkyCulture();
 
 	/**
+	 * @brief Sets the current sky culture.
+	 * @param skyCulture The sky culture to set.
+	 */
+	void setSkyCulture(scm::ScmSkyCulture *skyCulture);
+
+	/**
 	 * @brief Gets the current set sky culture.
 	 */
 	scm::ScmSkyCulture *getCurrentSkyCulture();
@@ -142,6 +144,12 @@ public:
 	 * @brief Triggers an update of the sky culture dialog.
 	 */
 	void updateSkyCultureDialog();
+
+	/**
+	 * @brief Populates all fields of the sky culture dialog from the current sky culture.
+	 *        Call this after setSkyCulture() when entering edit mode.
+	 */
+	void populateSkyCultureDialog();
 
 	/**
 	 * @brief Sets the current sky culture description.
@@ -186,6 +194,18 @@ public:
 	void stopScm();
 
 	/**
+	 * @brief Hides the core constellation display (lines, art, labels, boundaries),
+	 * remembering the previous states so they can be restored later.
+	 */
+	void hideCoreConstellationDisplay();
+
+	/**
+	 * @brief Restores the core constellation display to the state captured by
+	 * hideCoreConstellationDisplay().
+	 */
+	void restoreCoreConstellationDisplay();
+
+	/**
 	 * @brief Checks if any dialog is visible in the visibility map.
 	 * @return true if any dialog is visible, false otherwise
 	 */
@@ -211,30 +231,36 @@ public:
 
 	/**
 	 * @brief Displays an information message to the user.
-	 * 
-	 * @param parent The parent widget of the message box.
+	 *
 	 * @param dialogName The name of the dialog to be shown in the title bar.
 	 * @param message The message to be displayed.
 	 */
-	void showUserInfoMessage(QWidget *parent, const QString &dialogName, const QString &message);
+	void showUserInfoMessage(const QString &dialogName, const QString &message);
 
 	/**
 	 * @brief Displays a warning message to the user.
-	 * 
-	 * @param parent The parent widget of the message box.
+	 *
 	 * @param dialogName The name of the dialog to be shown in the title bar.
 	 * @param message The message to be displayed.
 	 */
-	void showUserWarningMessage(QWidget *parent, const QString &dialogName, const QString &message);
+	void showUserWarningMessage(const QString &dialogName, const QString &message);
 
 	/**
 	 * @brief Displays an error message to the user.
-	 * 
-	 * @param parent The parent widget of the message box.
+	 *
 	 * @param dialogName The name of the dialog to be shown in the title bar.
 	 * @param message The message to be displayed.
 	 */
-	void showUserErrorMessage(QWidget *parent, const QString &dialogName, const QString &message);
+	void showUserErrorMessage(const QString &dialogName, const QString &message);
+
+	/**
+	 * @brief Asks the user a yes/no question.
+	 *
+	 * @param dialogName The name of the dialog to be shown in the title bar.
+	 * @param message The question to be displayed.
+	 * @return true if the user confirmed, false otherwise.
+	 */
+	bool showUserConfirmMessage(const QString &dialogName, const QString &message);
 
 signals:
 	void eventIsScmEnabled(bool b);
@@ -274,6 +300,9 @@ private:
 
 	/// The artwork to temporary draw on the sky.
 	const scm::ScmConstellationArtwork *tempArtwork = nullptr;
+
+	/// Core constellation-display action states captured when the editor hides them, for restoration on stop.
+	QMap<QString, bool> savedConstellationActionStates;
 
 	/**
 	 * @brief Starts the Sky Culture Maker process

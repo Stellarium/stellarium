@@ -23,6 +23,10 @@
 
 #include "MapWidget.hpp"
 
+#include <QColor>
+#include <QImage>
+#include <QPainterPath>
+#include <QPointF>
 #include <QString>
 #include <QVector>
 
@@ -55,7 +59,8 @@ public:
 	enum OverlayMode
 	{
 		VisibilityOverlay,
-		TwilightLimitsOverlay
+		TwilightLimitsOverlay,
+		LiveTwilightMapOverlay
 	};
 
 	void setOverlayMode(OverlayMode mode);
@@ -97,8 +102,26 @@ public:
 	//! solstice limits. Pass a value outside (0, 90) to clear.
 	void setTwilightObliquity(double obliquityDeg);
 
+	//! Set Earth obliquity and optional current solar declination for
+	//! twilight limits. When computeDaily is true, twilight altitude
+	//! lines use sunDeclinationDeg instead of the solstice extrema.
+	void setTwilightLimits(double obliquityDeg, double sunDeclinationDeg,
+	                       bool computeDaily);
+
 	//! Hide all twilight/solstice limit lines.
 	void clearTwilightLimits();
+
+	//! Set the current subsolar and sublunar points on Earth.
+	//! Longitudes and latitudes are in geographic degrees.
+	void setTwilightMapData(double sunLongitudeDeg, double sunLatitudeDeg,
+	                        double moonLongitudeDeg, double moonLatitudeDeg);
+
+	//! Enable full Earth twilight zones. Disable this for atmosphere-free
+	//! terminator-only maps on other bodies.
+	void setTwilightMapFullTwilight(bool enabled);
+
+	//! Hide all live twilight map shading and symbols.
+	void clearTwilightMap();
 
 signals:
 	//! Forwarded to the dialog when the user clicked on the map and we
@@ -120,7 +143,33 @@ private:
 	                         const QChar& marker, const QColor& color) const;
 	void drawVisibilityOverlay(QPainter& painter) const;
 	void drawTwilightLimitsOverlay(QPainter& painter) const;
+	void drawTwilightMapOverlay(QPainter& painter);
+	void drawTwilightShade(QPainter& painter);
+	void renderTwilightShadePaths(QPainter& painter) const;
+	void invalidateTwilightShadeCache();
+	void renderTwilightMapOverlay(QPainter& painter);
+	void invalidateTwilightOverlayCache();
+	void drawTwilightContour(QPainter& painter, double altitudeDeg,
+	                         const QPen& pen) const;
+	QPainterPath twilightBelowAltitudePath(double altitudeDeg,
+	                                       const QRectF& mapRect) const;
+	QPainterPath twilightCapPath(double centerLongitudeDeg,
+	                             double centerLatitudeDeg,
+	                             double angularDistanceDeg,
+	                             const QRectF& mapRect) const;
+	QVector<QPointF> twilightSmallCirclePoints(double centerLongitudeDeg,
+	                                           double centerLatitudeDeg,
+	                                           double angularDistanceDeg,
+	                                           double xShift = 0.0) const;
+	QVector<QPointF> twilightContourPoints(double altitudeDeg) const;
+	void drawSubPointSymbol(QPainter& painter, double longitudeDeg,
+	                        double latitudeDeg, bool sun) const;
 	void drawPlaceLabels(QPainter& painter) const;
+	double twilightHorizonAltitudeDeg() const;
+	double sunAltitudeDegAt(double longitudeDeg, double latitudeDeg) const;
+	bool isPlaceLabelNearOverlay(const PlaceLabel& label,
+	                             double toleranceDeg,
+	                             const QVector<double>& lineLatitudes) const;
 	QVector<double> currentOverlayLatitudes() const;
 
 	OverlayMode currentOverlayMode = VisibilityOverlay;
@@ -132,6 +181,29 @@ private:
 
 	bool   hasTwilightObliquity = false;
 	double twilightObliquityDeg = 0.0;
+	double twilightSunDeclinationDeg = 0.0;
+	bool   twilightLimitsComputeDaily = false;
+
+	bool   hasTwilightMap = false;
+	double twilightSunLongitudeDeg = 0.0;
+	double twilightSunLatitudeDeg = 0.0;
+	double twilightMoonLongitudeDeg = 0.0;
+	double twilightMoonLatitudeDeg = 0.0;
+	bool   twilightMapFullTwilight = true;
+	QImage twilightShadeCache;
+	QSize  twilightShadeCacheImageSize;
+	double twilightShadeCacheRatio = 0.0;
+	double twilightShadeCacheLeft = 0.0;
+	double twilightShadeCacheTop = 0.0;
+	double twilightShadeCacheMapWidth = 0.0;
+	double twilightShadeCacheMapHeight = 0.0;
+	QImage twilightOverlayCache;
+	QSize  twilightOverlayCacheImageSize;
+	double twilightOverlayCacheRatio = 0.0;
+	double twilightOverlayCacheLeft = 0.0;
+	double twilightOverlayCacheTop = 0.0;
+	double twilightOverlayCacheMapWidth = 0.0;
+	double twilightOverlayCacheMapHeight = 0.0;
 
 	QVector<PlaceLabel> placeLabels;
 	bool showPlaceLabels = false;

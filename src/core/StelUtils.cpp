@@ -1578,6 +1578,7 @@ QString hoursToHmsStr(const double hours, const bool minutesOnly, const bool col
 
 QString hoursToHmsNarration(const double hours, const bool minutesOnly, const bool colonFormat)
 {
+	Q_UNUSED(colonFormat)
 	const QString sHours=qc_("hours", "object narration");
 	const QString sMinutes=qc_("minutes", "object narration");
 	const QString sAndStr=qc_("and", "object narration");

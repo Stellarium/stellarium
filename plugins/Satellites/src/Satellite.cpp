@@ -315,7 +315,7 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 	QString str;
 	QTextStream oss(&str);
 	static const QString degree = QChar(0x00B0);
-	const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
+	const bool withDecimalDegree = StelApp::getInstance().getFlagUseDecDegreesOther();
 	
 	if (flags & Name)
 	{
@@ -392,7 +392,8 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 			       .arg(1440.0/orbitalPeriod, 9, 'f', 5).arg(rpd) << "<br/>";
 		}
 		const double inclination = pSatWrapper->getOrbitalInclination();
-		oss << QString("%1: %2 (%3%4)").arg(q_("Inclination"), StelUtils::decDegToDmsStr(inclination), QString::number(inclination, 'f', 4), degree) << "<br/>";
+		QString incStr = withDecimalDegree ? QString("%1&deg;").arg(QString::number(inclination, 'f', 4)) : StelUtils::decDegToDmsStr(inclination);
+		oss << QString("%1: %2").arg(q_("Inclination"), incStr) << "<br/>";
 		oss << QString("%1: %2&deg;/%3&deg;").arg(q_("SubPoint (Lat./Long.)")).arg(latLongSubPointPosition[0], 5, 'f', 2).arg(latLongSubPointPosition[1], 5, 'f', 3) << "<br/>";
 		
 		//TODO: This one can be done better
@@ -405,7 +406,7 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 		// TRANSLATORS: TEME (True Equator, Mean Equinox) is an Earth-centered inertial coordinate system
 		oss << QString("%1: %2 %3").arg(q_("TEME velocity"), temeVel, qc_("km/s", "speed")) << "<br/>";
 
-		QString pha = StelApp::getInstance().getFlagShowDecimalDegrees() ?
+		QString pha = withDecimalDegree ?
 				StelUtils::radToDecDegStr(phaseAngle,4,false,true) :
 				StelUtils::radToDmsStr(phaseAngle, true);
 		oss << QString("%1: %2").arg(q_("Phase angle"), pha) << "<br />";

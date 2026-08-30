@@ -194,7 +194,7 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 	ViewportEdgeIntersectCallbackData* d = static_cast<ViewportEdgeIntersectCallbackData*>(userData);
 	const Vec4f tmpColor = d->sPainter->getColor();
 	d->sPainter->setColor(d->textColor);
-	const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
+	const bool withDecimalDegree = StelApp::getInstance().getFlagUseDecDegreesCoords();
 	const bool useSouthAzimuth = StelApp::getInstance().getFlagSouthAzimuthUsage();
 	const float ppx = static_cast<float>(d->sPainter->getProjector()->getDevicePixelsPerPixel());
 
@@ -328,7 +328,7 @@ void SkyGrid::draw(const StelCore* core) const
 		return;
 
 	const StelProjectorP prj = core->getProjection(frameType, (frameType!=StelCore::FrameAltAz && frameType!=StelCore::FrameFixedEquatorial) ? StelCore::RefractionAuto : StelCore::RefractionOff);
-	const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
+	const bool withDecimalDegree = StelApp::getInstance().getFlagUseDecDegreesCoords();
 	const bool usePolarDistance = StelApp::getInstance().getFlagPolarDistanceUsage();
 
 	// Look for all meridians and parallels intersecting with the disk bounding the viewport
@@ -1276,7 +1276,7 @@ void SkyLine::draw(StelPainter &sPainter, const float oldLineWidth) const
 									if (StelApp::getInstance().getFlagUseNegativeHourAngles() && (value > 180.) )
 										value -= 360.;
 								}
-								if (!StelApp::getInstance().getFlagShowDecimalDegrees())
+								if (!StelApp::getInstance().getFlagUseDecDegreesCoords())
 								{
 									value /= 15;
 									unit="h";

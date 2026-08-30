@@ -34,7 +34,7 @@ jobs:
                             libnlopt-cxx-dev libmd4c-dev libmd4c-html0-dev
 
     - name: Checkout repository
-      uses: actions/checkout@v6
+      uses: actions/checkout@v7
 
     - name: Configure CMake
       shell: bash
@@ -79,7 +79,7 @@ jobs:
                             flite speech-dispatcher speech-dispatcher-flite speech-dispatcher-espeak-ng
 
     - name: Checkout repository
-      uses: actions/checkout@v6
+      uses: actions/checkout@v7
 
     - name: Configure CMake
       shell: bash
@@ -124,7 +124,7 @@ jobs:
                             flite speech-dispatcher speech-dispatcher-flite speech-dispatcher-espeak-ng
 
     - name: Checkout repository
-      uses: actions/checkout@v6
+      uses: actions/checkout@v7
 
     - name: Configure CMake
       shell: bash
@@ -172,7 +172,7 @@ jobs:
                             flite speech-dispatcher speech-dispatcher-flite speech-dispatcher-espeak-ng
 
     - name: Checkout repository
-      uses: actions/checkout@v6
+      uses: actions/checkout@v7
 
     - name: Configure CMake
       shell: bash
@@ -213,7 +213,7 @@ jobs:
         brew install qt@6 nlopt exiv2 tidy-html5
 
     - name: Checkout repository
-      uses: actions/checkout@v6
+      uses: actions/checkout@v7
 
     - name: Configure CMake
       shell: bash
@@ -238,7 +238,7 @@ jobs:
         working-directory: build
         run: ctest --output-on-failure
 
- # CI on Windows (Qt6)
+  # CI on Windows (Qt6)
   ci-windows-qt6:
     name: "Windows (x86_64; qt6)"
     runs-on: windows-latest
@@ -246,7 +246,7 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v6
+      uses: actions/checkout@v7
 
     - name: Install Qt
       uses: jurplel/install-qt-action@v4
@@ -278,3 +278,104 @@ jobs:
 #      run: |
 #        cd ${{ github.workspace }}\build
 #        ctest --output-on-failure -C RelWithDebInfo
+
+  # CI on Haiku (Qt6)
+  ci-haiku-qt6:
+    name: "Haiku (amd64; qt6)"
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.actor, 'transifex')"
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v7
+
+    - name: Build and run unit tests in Haiku
+      uses: vmactions/haiku-vm@v1
+      id: haiku-qt6
+      with:
+        # Use sh shell
+        usesh: true
+        # When using rsync, you can define copyback: false to not copy files back from the VM in to the host.
+        sync: rsync
+        copyback: false
+        prepare: |
+          pkgman install -y nlopt_devel md4c_devel exiv2_devel qxlsx_qt6_devel cmake qt6_tools_devel qt6_charts_devel qt6_base_devel qt6_multimedia_devel qt6_positioning_devel qt6_serialport_devel qt6_svg_devel qt6_speech_devel qt6_imageformats_devel qt6_declarative_devel
+
+        run: |
+          set -e -x
+          mkdir builds
+          cd builds
+          cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DENABLE_TESTING=On -DENABLE_SHOWMYSKY=Off -DENABLE_INDI=Off -DENABLE_XLSX=Off -DENABLE_QTWEBENGINE=Off -DENABLE_NLS=Off ..
+          make -j 4
+          ctest --output-on-failure
+
+  # CI on OpenBSD (Qt6)
+  ci-openbsd-qt6:
+    name: "OpenBSD (amd64; qt6)"
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.actor, 'transifex')"
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v7
+
+    - name: Build and run unit tests in OpenBSD
+      uses: vmactions/openbsd-vm@v1
+      id: openbsd-amd64-qt6
+      with:
+        # Use sh shell
+        usesh: true
+        # When using rsync, you can define copyback: false to not copy files back from the VM in to the host.
+        sync: rsync
+        copyback: false
+        prepare: |
+          pkg_add -aU cmake eigen3 glm exiv2 nlopt gpsd qt6-qxlsx qt6 gettext-runtime gettext-tools calcmysky fast-float indiclient md4c md4c-html
+
+        run: |
+          set -e -x
+          export DISPLAY=:0
+          mkdir builds
+          cd builds
+          cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DENABLE_TESTING=On -DENABLE_NLS=Off -DENABLE_QTWEBENGINE=Off "${{ github.workspace }}"
+          make -j 4
+          Xvfb :0 -ac -screen 0 1024x768x24+32 >/dev/null 2>&1 &
+          sleep 3
+          ctest --output-on-failure
+          sleep 1
+          pkill Xvfb
+
+  # CI on FreeBSD (Qt6)
+  ci-freebsd-qt6:
+    name: "FreeBSD (amd64; qt6)"
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.actor, 'transifex')"
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v7
+
+    - name: Build and run unit tests in FreeBSD
+      uses: vmactions/freebsd-vm@v1
+      id: freebsd-amd64-qt6
+      with:
+        # Use sh shell
+        usesh: true
+        # When using rsync, you can define copyback: false to not copy files back from the VM in to the host.
+        sync: rsync
+        copyback: false
+        prepare: |
+          pkg install -y cmake eigen glm exiv2 fast_float nlopt md4c perl5 xorg-vfbserver gettext indi qt6-webengine qt6-base qt6-speech qt6-tools qt6-serialport qt6-location qt6-positioning qt6-multimedia qt6-charts
+
+        run: |
+          set -e -x
+          export DISPLAY=:0
+          mkdir builds
+          cd builds
+          cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DENABLE_TESTING=On -DENABLE_NLS=Off "${{ github.workspace }}"
+          make -j 4
+          Xvfb :0 -ac -screen 0 1024x768x24+32 >/dev/null 2>&1 &
+          sleep 3
+          ctest --output-on-failure
+          sleep 1
+          pkill Xvfb
+
