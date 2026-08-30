@@ -33,6 +33,7 @@
 #include <QDebug>
 #include <QFile>
 #include <QFileDialog>
+#include <QFileInfo>
 #include <QImage>
 #include <QJsonArray>
 #include <QJsonDocument>
@@ -224,6 +225,7 @@ void ScmSCLoader::parseIndexJsonConstellations(const QJsonArray &constellationsA
 			anchors[a].hip         = aObj["hip"].toInt();
 		}
 		scm::ScmConstellationArtwork artwork(anchors, image);
+		artwork.setSourceImageFileName(QFileInfo(imgFile).fileName());
 		artwork.setupArt();
 		constellation.setArtwork(artwork);
 	}
