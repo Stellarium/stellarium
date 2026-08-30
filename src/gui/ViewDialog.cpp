@@ -2061,7 +2061,7 @@ void ViewDialog::updateDefaultSkyCulture()
 	// The "unknown" begin sentinel is shown as text, the "present" end sentinel as ∞, instead of raw numbers.
 	const int beginTime = ui->culturesListWidget->currentItem()->data(Qt::UserRole).toInt();
 	const int endTime = ui->culturesListWidget->currentItem()->data(Qt::UserRole + 1).toInt();
-	ui->selectedCultureMinTimeValueLabel->setText(beginTime == StelSkyCulture::unknownBeginTime ? q_("Unknown") : QString::number(beginTime));
+	ui->selectedCultureMinTimeValueLabel->setText(beginTime == StelSkyCulture::unknownBeginTime ? qc_("Unknown", "Unknown date (year)") : QString::number(beginTime));
 	ui->selectedCultureMaxTimeValueLabel->setText(endTime == StelSkyCulture::presentEndTime ? "∞" : QString::number(endTime));
 
 	// Check that the useAsDefaultSkyCultureCheckBox needs to be updated

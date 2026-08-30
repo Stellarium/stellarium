@@ -942,7 +942,7 @@ void ScmSkyCultureDialog::showAddPolygon()
 
 	// display "Unknown" at the earliest possible start
 	ui->beginTimeSpinBox->setDisplayCustomStringForValue(true);
-	ui->beginTimeSpinBox->setCustomStringForMin(q_("Unknown"));
+	ui->beginTimeSpinBox->setCustomStringForMin(qc_("Unknown", "Unknown date (year)"));
 
 	// display a fitting char for cultures that still exist
 	ui->endTimeSpinBox->setDisplayCustomStringForValue(true);
@@ -975,7 +975,7 @@ void ScmSkyCultureDialog::initSkyCultureTime()
 	ui->skyCultureCurrentTimeSpinBox->setMaximum(maxYear);
 
 	ui->skyCultureCurrentTimeSpinBox->setDisplayCustomStringForValue(true);
-	ui->skyCultureCurrentTimeSpinBox->setCustomStringForMin(q_("Unknown"));
+	ui->skyCultureCurrentTimeSpinBox->setCustomStringForMin(qc_("Unknown", "Unknown date (year)"));
 
 	// reuse function to set Value of timeSlider, currentTimeSpinBox and MapGraphicsView
 	updateSkyCultureTimeValue(currentYear);
