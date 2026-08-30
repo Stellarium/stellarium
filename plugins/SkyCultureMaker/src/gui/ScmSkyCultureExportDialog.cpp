@@ -29,6 +29,8 @@
 #include <QFileDialog>
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <QTemporaryDir>
+#include <optional>
 
 ScmSkyCultureExportDialog::ScmSkyCultureExportDialog(SkyCultureMaker* maker)
 	: StelDialogSeparate("ScmSkyCultureExportDialog")
@@ -109,8 +111,8 @@ bool ScmSkyCultureExportDialog::exportSkyCulture()
 	QString skyCultureId = currentSkyCulture->getId();
 
 	// Let the user choose the export directory with skyCulturesPath as default
-	QDir skyCultureDirectory;
-	bool exportDirectoryChosen = chooseExportDirectory(skyCultureId, skyCultureDirectory);
+	QDir finalDirectory;
+	bool exportDirectoryChosen = chooseExportDirectory(skyCultureId, finalDirectory);
 	if (!exportDirectoryChosen)
 	{
 		qWarning() << "SkyCultureMaker: Could not export sky culture. User cancelled or failed to choose "
@@ -119,7 +121,11 @@ bool ScmSkyCultureExportDialog::exportSkyCulture()
 		return false; // User cancelled or failed to choose directory
 	}
 
-	if (skyCultureDirectory.exists())
+	const bool isOverwrite = finalDirectory.exists();
+	QDir skyCultureDirectory;
+	std::optional<QTemporaryDir> tempDir;
+
+	if (isOverwrite)
 	{
 		const bool overwrite = maker->showUserConfirmMessage(
 			ui->titleBar->title(),
@@ -129,17 +135,24 @@ bool ScmSkyCultureExportDialog::exportSkyCulture()
 			// don't close the dialog here, so the user can change the ID or cancel
 			return false;
 		}
-		if (!skyCultureDirectory.removeRecursively())
+
+		tempDir.emplace(finalDirectory.absolutePath() + ".scmtmp-XXXXXX");
+		if (!tempDir->isValid())
 		{
-			qWarning() << "SkyCultureMaker: Failed to remove existing sky culture directory at"
-				   << skyCultureDirectory.absolutePath();
+			qWarning() << "SkyCultureMaker: Failed to create temporary directory for sky culture export at"
+				   << finalDirectory.absolutePath();
 			maker->showUserErrorMessage(ui->titleBar->title(),
-			                            q_("Failed to overwrite the existing sky culture directory."));
+			                            q_("Failed to create a temporary directory for the export."));
 			return false;
 		}
+		skyCultureDirectory = QDir(tempDir->path());
+	}
+	else
+	{
+		skyCultureDirectory = finalDirectory;
 	}
 
-	// Create the sky culture directory
+	// Create the sky culture directory (already exists for the temporary directory case)
 	bool createdDirectorySuccessfully = skyCultureDirectory.mkpath(".");
 	if (!createdDirectorySuccessfully)
 	{
@@ -171,7 +184,8 @@ bool ScmSkyCultureExportDialog::exportSkyCulture()
 	if (scIndexJsonDoc.isNull() || scIndexJsonDoc.isEmpty())
 	{
 		qWarning() << "SkyCultureMaker: Failed to create JSON document for sky culture.";
-		maker->showUserErrorMessage(ui->titleBar->title(), q_("Failed to create JSON document for sky culture."));
+		maker->showUserErrorMessage(ui->titleBar->title(),
+		                            q_("Failed to create JSON document for sky culture."));
 		skyCultureDirectory.removeRecursively();
 		ScmSkyCultureExportDialog::close();
 		return false;
@@ -197,7 +211,8 @@ bool ScmSkyCultureExportDialog::exportSkyCulture()
 	if (scTerritoryGeoJsonDoc.isNull() || scTerritoryGeoJsonDoc.isEmpty())
 	{
 		qWarning() << "SkyCultureMaker: Failed to create JSON document for sky culture.";
-		maker->showUserErrorMessage(ui->titleBar->title(), q_("Failed to create GeoJSON document for sky culture."));
+		maker->showUserErrorMessage(ui->titleBar->title(),
+		                            q_("Failed to create GeoJSON document for sky culture."));
 		skyCultureDirectory.removeRecursively();
 		ScmSkyCultureExportDialog::close();
 		return false;
@@ -236,10 +251,54 @@ bool ScmSkyCultureExportDialog::exportSkyCulture()
 		return false;
 	}
 
+	// The export into the working directory fully succeeded. When overwriting, atomically swap the freshly
+	// exported directory in for the existing one, keeping a temporary backup so a failed swap can be rolled back.
+	if (isOverwrite)
+	{
+		tempDir->setAutoRemove(false);
+		const QString finalPath  = finalDirectory.absolutePath();
+		const QString tempPath   = skyCultureDirectory.absolutePath();
+		const QString backupPath = finalPath + ".scmbak";
+
+		// remove potential leftover backup from a previous failed run
+		QDir(backupPath).removeRecursively();
+
+		// move the existing sky culture aside as a backup
+		if (!QDir().rename(finalPath, backupPath))
+		{
+			qWarning() << "SkyCultureMaker: Failed to back up existing sky culture directory at"
+				   << finalPath;
+			maker->showUserErrorMessage(
+				ui->titleBar->title(),
+				q_("Failed to back up the existing sky culture. It was left unchanged."));
+			QDir(tempPath).removeRecursively();
+			ScmSkyCultureExportDialog::close();
+			return false;
+		}
+
+		// move the freshly exported sky culture into place
+		if (!QDir().rename(tempPath, finalPath))
+		{
+			qWarning() << "SkyCultureMaker: Failed to move exported sky culture into place at" << finalPath
+				   << ". The backup will be restored.";
+			// Roll back to the original sky culture.
+			QDir().rename(backupPath, finalPath);
+			QDir(tempPath).removeRecursively();
+			maker->showUserErrorMessage(
+				ui->titleBar->title(),
+				q_("Failed to replace the existing sky culture. It was restored from backup."));
+			ScmSkyCultureExportDialog::close();
+			return false;
+		}
+
+		// The new sky culture is in place; remove the backup.
+		//QDir(backupPath).removeRecursively();
+	}
+
 	maker->showUserInfoMessage(ui->titleBar->title(),
 	                            q_("Sky culture exported successfully to ") +
-	                            skyCultureDirectory.absolutePath());
-	qInfo() << "SkyCultureMaker: Sky culture exported successfully to" << skyCultureDirectory.absolutePath();
+	                            finalDirectory.absolutePath());
+	qInfo() << "SkyCultureMaker: Sky culture exported successfully to" << finalDirectory.absolutePath();
 	ScmSkyCultureExportDialog::close();
 
 	// Reload the sky cultures in Stellarium to make the new one available immediately
