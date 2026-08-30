@@ -218,7 +218,7 @@ Corresponding Western Constellation: Ursa Major
 
 <p><img src="illustrations/fisher.png" width="150" alt="Fisher" /></p>
 
-## List of Potawatomi Moons (Months)
+### List of Potawatomi Moons (Months)
 
 | Potawatomi Moon Name                                                                                  | English Translation                 | Corresponding Gregorian Month(s) |
 |-------------------------------------------------------------------------------------------------------|-------------------------------------|----------------------------------|
