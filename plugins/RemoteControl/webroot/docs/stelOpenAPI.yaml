@@ -243,12 +243,19 @@ paths:
                   description: altitude above mathematical horizon, degrees.
       responses:
         '200':
-          description: Camera matrix adjusted safely
+          description: View direction adjusted. 
           content:
             text/plain:
               schema:
                 type: string
                 example: ok
+        '400':
+          description: argument mismatch. 
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: invalid j2000|jNow|altAz format, use JSON array of 3 doubles; requires at least one of az,alt,j2000,jNow,altAz parameters
 
   /main/fov:
     post:
@@ -418,6 +425,8 @@ paths:
       responses:
         '200':
           description: Focus/selection changed
+        '400':
+          description: invalid position format (list contains other than 3 elements)
 
 
 
@@ -983,8 +992,8 @@ paths:
         required: false
       responses:
         '200':
-          description: Script pipeline initialization successful
-
+          description: Script stopped
+          
 
   /stelaction/list:
     get:
@@ -1033,6 +1042,7 @@ paths:
         '200':
           description: |
             Shortcut method fired (ok, or true/false results for toggle actions).
+            or 'error: invalid id parameter' when id not available in the actions list.
             
             When actions 'actionQuit_Global' or 'actionShow_Remote_Control' are given, 
             these trigger asynchronously and the response body becomes "error: Stellarium or remote control closing!" instead 
