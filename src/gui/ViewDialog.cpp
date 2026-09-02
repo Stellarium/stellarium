@@ -632,6 +632,9 @@ void ViewDialog::createDialogContent()
 
 	initSkyCultureTime();
 
+	lastKnownYear = QDateTime::currentDateTime().date().year();
+	connect(this, &StelDialog::visibleChanged, this, &ViewDialog::handleVisibleChanged);
+
 	connect(ui->skyCultureTimeSlider, &QSlider::valueChanged, this, &ViewDialog::updateSkyCultureTimeValue);
 	connect(ui->skyCultureCurrentTimeSpinBox, qOverload<int>(&QSpinBox::valueChanged), this, &ViewDialog::updateSkyCultureTimeValue);
 	connect(ui->skyCultureMapGraphicsView, &SkyCultureMapGraphicsView::timeValueChanged, this, &ViewDialog::updateSkyCultureTimeValue);
@@ -2121,6 +2124,19 @@ void ViewDialog::initSkyCultureTime()
 
 	// reuse function to set Value of timeSlider, currentTimeSpinBox and MapGraphicsView
 	updateSkyCultureTimeValue(currentYear);
+}
+
+void ViewDialog::handleVisibleChanged(bool visible)
+{
+	if (!visible)
+		return;
+	const int currentYear = QDateTime::currentDateTime().date().year();
+	if (currentYear == lastKnownYear)
+		return;
+	lastKnownYear = currentYear;
+	// Recompute the sky culture time slider limits and default year
+	populateLists();
+	initSkyCultureTime();
 }
 
 void ViewDialog::updateSkyCultureTimeValue(int year)
