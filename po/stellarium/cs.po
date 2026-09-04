@@ -9,8 +9,8 @@
 # J Nezbeda, 2026
 # Alexander V. Wolf <alex.v.wolf@gmail.com>, 2026
 # cardinot <mcardinot@gmail.com>, 2026
-# Pavel Sem, 2026
 # Zdeněk Moravec <moravec@hapteplice.cz>, 2026
+# Pavel Sem, 2026
 # 
 #, fuzzy
 msgid ""
@@ -19,7 +19,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
 "POT-Creation-Date: 2026-08-30 23:39+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
-"Last-Translator: Zdeněk Moravec <moravec@hapteplice.cz>, 2026\n"
+"Last-Translator: Pavel Sem, 2026\n"
 "Language-Team: Czech (https://app.transifex.com/stellarium/teams/80998/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1582,7 +1582,7 @@ msgstr "řetěz kráterů"
 #: src/core/modules/NomenclatureItem.cpp:731
 msgctxt "landform"
 msgid "cavus"
-msgstr "cavus"
+msgstr "prohlubeň"
 
 #. TRANSLATORS: Distinctive area of broken terrain
 #: src/core/modules/NomenclatureItem.cpp:733
@@ -1594,13 +1594,13 @@ msgstr "chaos"
 #: src/core/modules/NomenclatureItem.cpp:735
 msgctxt "landform"
 msgid "chasma"
-msgstr "chasma"
+msgstr "kaňon"
 
 #. TRANSLATORS: Small hills or knobs
 #: src/core/modules/NomenclatureItem.cpp:737
 msgctxt "landform"
 msgid "collis"
-msgstr "collis"
+msgstr "pahorek"
 
 #. TRANSLATORS: Ovoid-shaped feature
 #: src/core/modules/NomenclatureItem.cpp:739
@@ -1630,7 +1630,7 @@ msgstr "eruptivní centrum"
 #: src/core/modules/NomenclatureItem.cpp:747
 msgctxt "landform"
 msgid "facula"
-msgstr "facula"
+msgstr "fakule"
 
 #. TRANSLATORS: Pancake-like structure, or a row of such structures
 #: src/core/modules/NomenclatureItem.cpp:749
@@ -1667,7 +1667,7 @@ msgstr "fretum"
 #: src/core/modules/NomenclatureItem.cpp:759
 msgctxt "landform"
 msgid "fossa"
-msgstr "fossa"
+msgstr "příkop"
 
 #. TRANSLATORS: Island (islands), an isolated land area (or group of such
 #. areas) surrounded by, or nearly surrounded by, a liquid area (sea or lake)
@@ -1680,13 +1680,13 @@ msgstr "insula"
 #: src/core/modules/NomenclatureItem.cpp:763
 msgctxt "landform"
 msgid "labes"
-msgstr "labes"
+msgstr "sesuv půdy"
 
 #. TRANSLATORS: Complex of intersecting valleys or ridges
 #: src/core/modules/NomenclatureItem.cpp:765
 msgctxt "landform"
 msgid "labyrinthus"
-msgstr "labyrinthus"
+msgstr "labyrint"
 
 #. TRANSLATORS: Irregularly shaped depression on Titan having the appearance
 #. of a dry lake bed
@@ -1718,7 +1718,7 @@ msgstr "lenticula"
 #: src/core/modules/NomenclatureItem.cpp:775
 msgctxt "landform"
 msgid "linea"
-msgstr "linea"
+msgstr "linie"
 
 #. TRANSLATORS: Extension of plateau having rounded lobate or tongue-like
 #. boundaries
@@ -1731,7 +1731,7 @@ msgstr "lingula"
 #: src/core/modules/NomenclatureItem.cpp:779
 msgctxt "landform"
 msgid "macula"
-msgstr "macula"
+msgstr "tmavá skvrna"
 
 #. TRANSLATORS: "Sea"; on the Moon, low albedo, relatively smooth plain,
 #. generally of large extent; on Mars, dark albedo areas of no known
@@ -1746,7 +1746,7 @@ msgstr "moře"
 #: src/core/modules/NomenclatureItem.cpp:783
 msgctxt "landform"
 msgid "mensa"
-msgstr "mensa"
+msgstr "stolová hora"
 
 #. TRANSLATORS: Mountain
 #: src/core/modules/NomenclatureItem.cpp:785
@@ -1776,19 +1776,19 @@ msgstr "patera"
 #: src/core/modules/NomenclatureItem.cpp:793
 msgctxt "landform"
 msgid "planitia"
-msgstr "planitia"
+msgstr "planina"
 
 #. TRANSLATORS: Plateau or high plain
 #: src/core/modules/NomenclatureItem.cpp:795
 msgctxt "landform"
 msgid "planum"
-msgstr "planum"
+msgstr "náhorní rovina"
 
 #. TRANSLATORS: Cryo-volcanic features on Triton
 #: src/core/modules/NomenclatureItem.cpp:797
 msgctxt "landform"
 msgid "plume"
-msgstr "plume"
+msgstr "chochol"
 
 #. TRANSLATORS: "Cape"; headland promontoria
 #: src/core/modules/NomenclatureItem.cpp:799
@@ -1801,7 +1801,7 @@ msgstr "mys"
 #: src/core/modules/NomenclatureItem.cpp:801
 msgctxt "landform"
 msgid "regio"
-msgstr "regio"
+msgstr "oblast"
 
 #. TRANSLATORS: Reticular (netlike) pattern on Venus
 #: src/core/modules/NomenclatureItem.cpp:803
@@ -1863,7 +1863,7 @@ msgstr "záliv"
 #: src/core/modules/NomenclatureItem.cpp:821
 msgctxt "landform"
 msgid "terra"
-msgstr "terra"
+msgstr "pevnina"
 
 #. TRANSLATORS: Tile-like, polygonal terrain
 #: src/core/modules/NomenclatureItem.cpp:823
@@ -1875,13 +1875,13 @@ msgstr "tessera"
 #: src/core/modules/NomenclatureItem.cpp:825
 msgctxt "landform"
 msgid "tholus"
-msgstr "tholus"
+msgstr "kupovitá hora"
 
 #. TRANSLATORS: Dunes
 #: src/core/modules/NomenclatureItem.cpp:827
 msgctxt "landform"
 msgid "unda"
-msgstr "unda"
+msgstr "duna"
 
 #. TRANSLATORS: Valley
 #: src/core/modules/NomenclatureItem.cpp:829
@@ -1893,7 +1893,7 @@ msgstr "údolí"
 #: src/core/modules/NomenclatureItem.cpp:831
 msgctxt "landform"
 msgid "vastitas"
-msgstr "vastitas"
+msgstr "rozsáhlá rovina"
 
 #. TRANSLATORS: A streak or stripe of color
 #: src/core/modules/NomenclatureItem.cpp:833
@@ -11862,7 +11862,7 @@ msgstr "Katalog galaktických planetárních mlhovin"
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:382
 msgid "The Strasbourg-ESO Catalogue of Galactic Planetary Nebulae"
-msgstr "The Strasbourg-ESO Catalogue of Galactic Planetary Nebulae"
+msgstr "Katalog galaktických planetárních mlhovin Strasbourg-ESO"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:384
@@ -16045,7 +16045,7 @@ msgstr "žádný nevybrat"
 
 #: src/ui_viewDialog.h:4632
 msgid "Atlas of Peculiar Galaxies (Arp, 1966)"
-msgstr "Atlas of Peculiar Galaxies (Arp, 1966)"
+msgstr "Atlas pekuliárních galaxií (Arp, 1966)"
 
 #: src/ui_viewDialog.h:4635
 msgid "The Uppsala General Catalogue of Galaxies"
@@ -16053,19 +16053,18 @@ msgstr "The Uppsala General Catalogue of Galaxies"
 
 #: src/ui_viewDialog.h:4638
 msgid "Lynds' Catalogue of Bright Nebulae (Lynds, 1965)"
-msgstr "Lynds' Catalogue of Bright Nebulae (Lynds, 1965)"
+msgstr "Katalog světlých mlhovin (Lynds, 1965)"
 
 #: src/ui_viewDialog.h:4641
 msgid ""
 "A catalogue of Hα-emission regions in the southern Milky Way (Rodgers+, "
 "1960)"
 msgstr ""
-"A catalogue of Hα-emission regions in the southern Milky Way (Rodgers+, "
-"1960)"
+"Katalog oblastí s emisí Hα v jižní části Mléčné dráhy (Rodgers+, 1960)"
 
 #: src/ui_viewDialog.h:4644
 msgid "Catalogue of HII Regions (Sharpless, 1959)"
-msgstr "Catalogue of HII Regions (Sharpless, 1959)"
+msgstr "Katalog oblastí HII (Sharpless, 1959)"
 
 #: src/ui_viewDialog.h:4647
 msgid "New General Catalogue of Nebulae and Clusters of Stars"
@@ -16073,19 +16072,17 @@ msgstr "New General Catalogue of Nebulae and Clusters of Stars"
 
 #: src/ui_viewDialog.h:4656
 msgid "A Catalog of Rich Clusters of Galaxies (Abell+, 1989)"
-msgstr "A Catalog of Rich Clusters of Galaxies (Abell+, 1989)"
+msgstr "Katalog bohatých kup galaxií (Abell+, 1989)"
 
 #: src/ui_viewDialog.h:4659
 msgid ""
 "A Catalogue of Star Clusters shown on Franklin-Adams Chart Plates (Melotte, "
 "1915)"
-msgstr ""
-"A Catalogue of Star Clusters shown on Franklin-Adams Chart Plates (Melotte, "
-"1915)"
+msgstr "Katalog hvězdokup na deskách Franklin-Adamsova atlasu (Melotte, 1915)"
 
 #: src/ui_viewDialog.h:4662
 msgid "The Catalogue of Interacting Galaxies (Vorontsov-Velyaminov+, 2001)"
-msgstr "The Catalogue of Interacting Galaxies (Vorontsov-Velyaminov+, 2001)"
+msgstr "Katalog interagujících galaxií (Vorontsov-Velyaminov+, 2001)"
 
 #: src/ui_viewDialog.h:4665
 msgid "Catalogue of Reflection Nebulae (van den Bergh, 1966)"
@@ -16093,11 +16090,11 @@ msgstr "Katalog reflexních mlhovin (van den Bergh, 1966)"
 
 #: src/ui_viewDialog.h:4668
 msgid "The Catalogue of Galactic Planetary Nebulae (Kohoutek, 2001)"
-msgstr "The Catalogue of Galactic Planetary Nebulae (Kohoutek, 2001)"
+msgstr "Katalog galaktických planetárních mlhovin (Kohoutek, 2001)"
 
 #: src/ui_viewDialog.h:4671
 msgid "Catalog of Open Galactic Clusters (Collinder, 1931)"
-msgstr "Catalog of Open Galactic Clusters (Collinder, 1931)"
+msgstr "Katalog otevřených galaktických hvězdokup (Collinder, 1931)"
 
 #: src/ui_viewDialog.h:4674
 msgid ""
@@ -16109,19 +16106,19 @@ msgstr ""
 
 #: src/ui_viewDialog.h:4677
 msgid "Hickson Compact Group (Hickson+, 1982)"
-msgstr "Hickson Compact Group (Hickson+, 1982)"
+msgstr "Hicksonova kompaktní skupina (Hickson+, 1982)"
 
 #: src/ui_viewDialog.h:4680
 msgid ""
 "The Strasbourg-ESO Catalogue of Galactic Planetary Nebulae (Acker+, 1992)"
 msgstr ""
-"The Strasbourg-ESO Catalogue of Galactic Planetary Nebulae (Acker+, 1992)"
+"Katalog galaktických planetárních mlhovin Strasbourg-ESO (Acker+, 1992)"
 
 #: src/ui_viewDialog.h:4683
 msgid ""
 "Catalogue and distances of optically visible H II regions (Dickel+, 1969)"
 msgstr ""
-"Catalogue and distances of optically visible H II regions (Dickel+, 1969)"
+"Katalog a vzdálenosti opticky viditelných oblastí H II (Dickel+, 1969)"
 
 #: src/ui_viewDialog.h:4686
 msgid "ESO/Uppsala Survey of the ESO(B) Atlas (Lauberts, 1982)"
@@ -16129,15 +16126,15 @@ msgstr "ESO/Uppsala Survey of the ESO(B) Atlas (Lauberts, 1982)"
 
 #: src/ui_viewDialog.h:4689
 msgid "A catalogue of Galactic supernova remnants (Green, 2014)"
-msgstr "A catalogue of Galactic supernova remnants (Green, 2014)"
+msgstr "Katalog galaktických zbytků supernov (Green, 2014)"
 
 #: src/ui_viewDialog.h:4692
 msgid "Lynds' Catalogue of Dark Nebulae (Lynds, 1962)"
-msgstr "Lynds' Catalogue of Dark Nebulae (Lynds, 1962)"
+msgstr "Katalog temných mlhovin (Lynds, 1962)"
 
 #: src/ui_viewDialog.h:4695
 msgid "Barnard's Catalogue of 349 Dark Objects in the Sky (Barnard, 1927)"
-msgstr "Barnard's Catalogue of 349 Dark Objects in the Sky (Barnard, 1927)"
+msgstr "Barnardův katalog 349 temných objektů na obloze (Barnard, 1927)"
 
 #: src/ui_viewDialog.h:4698
 msgid "Index Catalogue of Nebulae and Clusters of Stars"
@@ -16154,7 +16151,7 @@ msgstr "Principal Galaxy Catalog"
 
 #: src/ui_viewDialog.h:4705
 msgid "Catalog of bright diffuse Galactic nebulae (Cederblad, 1946)"
-msgstr "Catalog of bright diffuse Galactic nebulae (Cederblad, 1946)"
+msgstr "Katalog jasných difuzních galaktických mlhovin (Cederblad, 1946)"
 
 #: src/ui_viewDialog.h:4708
 msgid ""
@@ -21818,14 +21815,14 @@ msgstr "viditelné"
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=active&FORMAT=csv
 #: plugins/Satellites/src/Satellites.cpp:3821
 msgid "active"
-msgstr "active"
+msgstr "aktivní"
 
 #. TRANSLATORS: Satellite group: Analyst Satellites
 #. TRANSLATORS: CelesTrak source [Analyst Satellites]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=analyst&FORMAT=csv
 #: plugins/Satellites/src/Satellites.cpp:3824
 msgid "analyst"
-msgstr "analyst"
+msgstr "analytické"
 
 #. TRANSLATORS: Satellite group: Weather (meteorological) satellites
 #. TRANSLATORS: CelesTrak source [Weather]:
@@ -21839,7 +21836,7 @@ msgstr "meteorologické"
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=resource&FORMAT=csv
 #: plugins/Satellites/src/Satellites.cpp:3833
 msgid "resource"
-msgstr "resource"
+msgstr "zdroje"
 
 #. TRANSLATORS: Satellite group: Search & Rescue (SARSAT) satellites
 #. TRANSLATORS: CelesTrak source [Search & Rescue (SARSAT)]:
@@ -22114,7 +22111,7 @@ msgstr "musson"
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=science&FORMAT=csv
 #: plugins/Satellites/src/Satellites.cpp:3951
 msgid "science"
-msgstr "science"
+msgstr "vědecké"
 
 #. TRANSLATORS: Satellite group: Geodetic satellites
 #: plugins/Satellites/src/Satellites.cpp:3953
@@ -22126,7 +22123,7 @@ msgstr "geodetické"
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=engineering&FORMAT=csv
 #: plugins/Satellites/src/Satellites.cpp:3956
 msgid "engineering"
-msgstr "engineering"
+msgstr "technické"
 
 #. TRANSLATORS: Satellite group: Education satellites
 #. TRANSLATORS: CelesTrak source [Education]:
@@ -22147,19 +22144,19 @@ msgstr "vojenské"
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=radar&FORMAT=csv
 #: plugins/Satellites/src/Satellites.cpp:3968
 msgid "radar"
-msgstr "radar"
+msgstr "radarové"
 
 #. TRANSLATORS: Satellite group: CubeSats (Cube Satellites)
 #. TRANSLATORS: CelesTrak source [CubeSats]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=cubesat&FORMAT=csv
 #: plugins/Satellites/src/Satellites.cpp:3971
 msgid "cubesat"
-msgstr "cubesat"
+msgstr "cubesaty"
 
 #. TRANSLATORS: Satellite group: Other satellites
 #: plugins/Satellites/src/Satellites.cpp:3973
 msgid "other"
-msgstr "other"
+msgstr "ostatní"
 
 #. TRANSLATORS: Satellite group: Meteosat
 #: plugins/Satellites/src/Satellites.cpp:3979
