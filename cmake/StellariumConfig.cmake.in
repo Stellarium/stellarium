@@ -1,0 +1,123 @@
+@PACKAGE_INIT@
+
+include(CMakeFindDependencyMacro)
+
+set(Stellarium_VERSION "@VERSION@")
+set(Stellarium_PLUGIN_ABI_ARCHITECTURE "@STELLARIUM_PLUGIN_ABI_ARCHITECTURE@")
+set(Stellarium_PLUGIN_ABI_BUILD_CONFIGURATION "@STELLARIUM_PLUGIN_ABI_CONFIGURATION@")
+set(Stellarium_PLUGIN_ABI_COMPILER_ID "@CMAKE_CXX_COMPILER_ID@")
+set(Stellarium_PLUGIN_ABI_COMPILER_VERSION "@CMAKE_CXX_COMPILER_VERSION@")
+set(Stellarium_PLUGIN_ABI_MSVC_TOOLSET_VERSION "@MSVC_TOOLSET_VERSION@")
+set(Stellarium_PLUGIN_ABI_MSVC_RUNTIME "@STELLARIUM_PLUGIN_ABI_MSVC_RUNTIME@")
+set(Stellarium_PLUGIN_ABI_QT_VERSION "@QT_VERSION@")
+set(Stellarium_PLUGIN_INTERFACE_IID "org.stellarium.StelPluginInterface/2.0")
+set(Stellarium_PLUGIN_SDK_HEADERS
+@STELLARIUM_PLUGIN_SDK_HEADERS_CMAKE@)
+set(Stellarium_PLUGIN_SDK_REQUIRED_COMPILE_DEFINITIONS
+@STELLARIUM_PLUGIN_SDK_COMPILE_DEFINITIONS_CMAKE@)
+set(Stellarium_PLUGIN_SDK_REQUIRED_QT_COMPONENTS Core Gui)
+
+if (NOT WIN32)
+	message(FATAL_ERROR
+		"This Stellarium @VERSION@ plug-in SDK requires Windows.")
+endif()
+
+if (NOT CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+	message(FATAL_ERROR
+		"This Stellarium @VERSION@ plug-in SDK requires MSVC; "
+		"the active compiler is '${CMAKE_CXX_COMPILER_ID}'.")
+endif()
+
+if (Stellarium_PLUGIN_ABI_MSVC_TOOLSET_VERSION)
+	if (NOT DEFINED MSVC_TOOLSET_VERSION OR
+		NOT "${MSVC_TOOLSET_VERSION}" STREQUAL
+			"${Stellarium_PLUGIN_ABI_MSVC_TOOLSET_VERSION}")
+		message(FATAL_ERROR
+			"This SDK requires MSVC toolset "
+			"v${Stellarium_PLUGIN_ABI_MSVC_TOOLSET_VERSION}; "
+			"the active toolset is '${MSVC_TOOLSET_VERSION}'.")
+	endif()
+endif()
+
+if (CMAKE_CONFIGURATION_TYPES)
+	set(_stellarium_unsupported_configurations "${CMAKE_CONFIGURATION_TYPES}")
+	list(REMOVE_ITEM _stellarium_unsupported_configurations Release)
+	if (_stellarium_unsupported_configurations OR
+		NOT "Release" IN_LIST CMAKE_CONFIGURATION_TYPES)
+		message(FATAL_ERROR
+			"This SDK requires a Release-only build. Configure with "
+			"-DCMAKE_CONFIGURATION_TYPES=Release.")
+	endif()
+	unset(_stellarium_unsupported_configurations)
+elseif (NOT CMAKE_BUILD_TYPE STREQUAL "Release")
+	message(FATAL_ERROR
+		"This SDK requires -DCMAKE_BUILD_TYPE=Release.")
+endif()
+
+if (CMAKE_MSVC_RUNTIME_LIBRARY AND
+	NOT CMAKE_MSVC_RUNTIME_LIBRARY STREQUAL "MultiThreadedDLL" AND
+	NOT CMAKE_MSVC_RUNTIME_LIBRARY STREQUAL
+		"MultiThreaded$<$<CONFIG:Debug>:Debug>DLL")
+	message(FATAL_ERROR
+		"This SDK requires the dynamic MSVC runtime (/MD).")
+endif()
+
+string(TOLOWER "${CMAKE_GENERATOR_PLATFORM}" _stellarium_platform)
+string(TOLOWER "${CMAKE_SYSTEM_PROCESSOR}" _stellarium_processor)
+if (Stellarium_PLUGIN_ABI_ARCHITECTURE STREQUAL "x64")
+	if (NOT CMAKE_SIZEOF_VOID_P EQUAL 8 OR
+		(_stellarium_platform AND
+		 NOT _stellarium_platform MATCHES "^(x64|amd64)$") OR
+		(NOT _stellarium_platform AND _stellarium_processor AND
+		 NOT _stellarium_processor MATCHES "^(x64|amd64|x86_64)$"))
+		message(FATAL_ERROR "This SDK requires Windows x64.")
+	endif()
+elseif (Stellarium_PLUGIN_ABI_ARCHITECTURE STREQUAL "arm64")
+	if (NOT CMAKE_SIZEOF_VOID_P EQUAL 8 OR
+		(_stellarium_platform AND
+		 NOT _stellarium_platform STREQUAL "arm64") OR
+		(NOT _stellarium_platform AND
+		 NOT _stellarium_processor MATCHES "^(arm64|aarch64)$"))
+		message(FATAL_ERROR "This SDK requires Windows ARM64.")
+	endif()
+elseif (Stellarium_PLUGIN_ABI_ARCHITECTURE STREQUAL "x86")
+	if (NOT CMAKE_SIZEOF_VOID_P EQUAL 4)
+		message(FATAL_ERROR "This SDK requires Windows x86.")
+	endif()
+endif()
+unset(_stellarium_platform)
+unset(_stellarium_processor)
+
+set(_stellarium_package_prefix_dir "${PACKAGE_PREFIX_DIR}")
+find_dependency(Qt6 @QT_VERSION@ EXACT COMPONENTS
+	${Stellarium_PLUGIN_SDK_REQUIRED_QT_COMPONENTS})
+set(PACKAGE_PREFIX_DIR "${_stellarium_package_prefix_dir}")
+unset(_stellarium_package_prefix_dir)
+
+set_and_check(Stellarium_INCLUDE_DIR
+	"@PACKAGE_STELLARIUM_PLUGIN_SDK_INCLUDEDIR@")
+set_and_check(Stellarium_CORE_INCLUDE_DIR
+	"${Stellarium_INCLUDE_DIR}/core")
+set_and_check(Stellarium_STELMAIN_LIBRARY
+	"@PACKAGE_CMAKE_INSTALL_LIBDIR@/stelMain.lib")
+set_and_check(Stellarium_STELMAIN_RUNTIME
+	"@PACKAGE_CMAKE_INSTALL_BINDIR@/stelMain.dll")
+set_and_check(Stellarium_PLUGIN_BUILD_INFO
+	"@PACKAGE_STELLARIUM_PLUGIN_SDK_DATADIR@/StellariumPluginBuildInfo.json")
+
+if (NOT TARGET Stellarium::stelMain)
+	add_library(Stellarium::stelMain SHARED IMPORTED)
+	set_target_properties(Stellarium::stelMain PROPERTIES
+		IMPORTED_CONFIGURATIONS RELEASE
+		IMPORTED_IMPLIB_RELEASE "${Stellarium_STELMAIN_LIBRARY}"
+		IMPORTED_LOCATION_RELEASE "${Stellarium_STELMAIN_RUNTIME}"
+		INTERFACE_COMPILE_DEFINITIONS
+			"${Stellarium_PLUGIN_SDK_REQUIRED_COMPILE_DEFINITIONS}"
+		INTERFACE_COMPILE_FEATURES cxx_std_17
+		INTERFACE_COMPILE_OPTIONS "/utf-8;/Zc:__cplusplus;/permissive-"
+		INTERFACE_INCLUDE_DIRECTORIES
+			"${Stellarium_INCLUDE_DIR};${Stellarium_CORE_INCLUDE_DIR}"
+		INTERFACE_LINK_LIBRARIES "Qt6::Core;Qt6::Gui")
+endif()
+
+check_required_components(Stellarium)
