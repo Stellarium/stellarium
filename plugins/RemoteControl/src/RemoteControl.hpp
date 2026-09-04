@@ -60,6 +60,14 @@ class RemoteControl : public StelModule
 		   READ getFlagEnableCors
 		   WRITE setFlagEnableCors
 		   NOTIFY flagEnableCorsChanged)
+	Q_PROPERTY(int maxRequestSize
+                  READ getMaxRequestSize
+                  WRITE setMaxRequestSize
+                  NOTIFY maxRequestSizeChanged)
+	Q_PROPERTY(int maxMultipartSize
+                  READ getMaxMultipartSize
+                  WRITE setMaxMultipartSize
+                  NOTIFY maxMultipartSizeChanged)
 public:
 	RemoteControl();
 	~RemoteControl() override;
@@ -135,6 +143,11 @@ public slots:
 	//! Stops the HTTP server gracefully
 	void stopServer();
 
+	int getMaxRequestSize() const { return maxRequestSize; }
+	int getMaxMultipartSize() const { return maxMultipartSize; }
+	void setMaxRequestSize(const int size);
+	void setMaxMultipartSize(const int size);
+
 signals:
 	//property notifiers
 	void flagEnabledChanged(bool val);
@@ -145,7 +158,8 @@ signals:
 	void portChanged(int val);
 	void passwordChanged(const QString& val);
 	void corsOriginChanged(const QString& val);
-
+	void maxRequestSizeChanged(int val);
+	void maxMultipartSizeChanged(int val);
 
 private:
 	//the http server
@@ -163,7 +177,8 @@ private:
 	int port;
 	int minThreads;
 	int maxThreads;
-
+	int maxRequestSize; // allow configuring mostly for sending scripts in 'direct' mode.
+	int maxMultipartSize;
 	StelButton* toolbarButton;
 
 	QSettings* conf;

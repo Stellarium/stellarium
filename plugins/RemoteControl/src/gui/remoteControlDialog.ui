@@ -31,7 +31,7 @@
    </property>
    <item>
     <widget class="TitleBar" name="titleBar">
-     <property name="title">
+     <property name="title" stdset="0">
       <string>Remote Control Plug-in Configuration</string>
      </property>
     </widget>
@@ -59,7 +59,7 @@
          </property>
         </widget>
        </item>
-       <item row="15" column="0">
+       <item row="17" column="0">
         <spacer name="verticalSpacer_3">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -72,7 +72,7 @@
          </property>
         </spacer>
        </item>
-       <item row="16" column="0" colspan="2">
+       <item row="18" column="0" colspan="2">
         <layout class="QHBoxLayout" name="horizontalLayout_7">
          <item>
           <widget class="QPushButton" name="restoreDefaultsButton">
@@ -160,24 +160,24 @@
          </property>
         </widget>
        </item>
-       <item row="11" column="0">
+       <item row="13" column="0">
         <widget class="QCheckBox" name="enableCorsCheckbox">
          <property name="text">
           <string>Enable CORS for the following origin</string>
          </property>
         </widget>
        </item>
-       <item row="11" column="1">
+       <item row="13" column="1">
         <widget class="QLineEdit" name="corsOriginEdit"/>
        </item>
-       <item row="12" column="0" colspan="2">
+       <item row="14" column="0" colspan="2">
         <widget class="QLabel" name="labelCors">
          <property name="text">
           <string>Cross-Origin Resource Sharing lets the specified website access and control your Stellarium.&lt;br/&gt;Specify &quot;*&quot; to let any website take control - do this at your own risk.</string>
          </property>
         </widget>
        </item>
-       <item row="13" column="0" colspan="2">
+       <item row="15" column="0" colspan="2">
         <widget class="QWidget" name="restartPanel" native="true">
          <layout class="QVBoxLayout" name="verticalLayout">
           <item>
@@ -221,6 +221,52 @@
          </property>
         </widget>
        </item>
+       <item row="11" column="0">
+        <widget class="QLabel" name="maximumRequestLabel">
+         <property name="text">
+          <string>Maximum Request Size</string>
+         </property>
+        </widget>
+       </item>
+       <item row="11" column="1">
+        <widget class="QSpinBox" name="maximumRequestSpinBox">
+         <property name="toolTip">
+          <string>Payload size may become larger than allowed by default size when sending large scripts directly.</string>
+         </property>
+         <property name="minimum">
+          <number>16384</number>
+         </property>
+         <property name="maximum">
+          <number>5242880</number>
+         </property>
+         <property name="singleStep">
+          <number>16384</number>
+         </property>
+        </widget>
+       </item>
+       <item row="12" column="0">
+        <widget class="QLabel" name="maximumMultipartLabel">
+         <property name="text">
+          <string>Maximum Multipart Size</string>
+         </property>
+        </widget>
+       </item>
+       <item row="12" column="1">
+        <widget class="QSpinBox" name="maximumMultipartSpinBox">
+         <property name="toolTip">
+          <string>Payload size may become larger than allowed by default size when sending large scripts directly.</string>
+         </property>
+         <property name="minimum">
+          <number>1048576</number>
+         </property>
+         <property name="maximum">
+          <number>5242880</number>
+         </property>
+         <property name="singleStep">
+          <number>1048576</number>
+         </property>
+        </widget>
+       </item>
       </layout>
      </widget>
      <widget class="QWidget" name="aboutTab">
@@ -253,11 +299,6 @@
    <extends>QFrame</extends>
    <header>Dialog.hpp</header>
    <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>StelCloseButton</class>
-   <extends>QPushButton</extends>
-   <header>gui/StelCloseButton.hpp</header>
   </customwidget>
  </customwidgets>
  <resources/>
