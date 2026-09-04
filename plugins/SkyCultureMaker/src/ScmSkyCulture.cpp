@@ -38,16 +38,6 @@ void scm::ScmSkyCulture::setFallbackToInternationalNames(bool fallback)
 	ScmSkyCulture::fallbackToInternationalNames = fallback;
 }
 
-void scm::ScmSkyCulture::setBeginTime(int beginTime)
-{
-	ScmSkyCulture::beginTime = beginTime;
-}
-
-void scm::ScmSkyCulture::setEndTime(int endTime)
-{
-	ScmSkyCulture::endTime = endTime;
-}
-
 scm::ScmConstellation &scm::ScmSkyCulture::addConstellation(const QString &id,
                                                             const std::vector<ConstellationLine> &lines,
                                                             const bool isDarkConstellation)
@@ -119,9 +109,6 @@ QJsonObject scm::ScmSkyCulture::toJson(const bool mergeLines) const
 		regionArray.append(REGIONS.at(currentRegion).name);
 	}
 	scJsonObj["region"] = regionArray;*/
-
-	scJsonObj["beginTime"] = beginTime;
-	scJsonObj["endTime"] = endTime;
 
 	// for some reason, the classification is inside an array, eg. ["historical"]
 	QJsonArray classificationArray = QJsonArray::fromStringList(
@@ -306,16 +293,6 @@ const QMap<QString, QList<scm::ScmCulturalName>> &scm::ScmSkyCulture::getCultura
 const QList<scm::CulturePolygon> &scm::ScmSkyCulture::getLocations() const
 {
 	return locations;
-}
-
-int scm::ScmSkyCulture::getBeginTime() const
-{
-	return beginTime;
-}
-
-int scm::ScmSkyCulture::getEndTime() const
-{
-	return endTime;
 }
 
 bool scm::ScmSkyCulture::getFallbackToInternationalNames() const

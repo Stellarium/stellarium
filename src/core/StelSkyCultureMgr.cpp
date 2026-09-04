@@ -39,8 +39,10 @@
 #include <QMap>
 #include <QMapIterator>
 #include <QDir>
+#include <QFile>
 #include <QJsonObject>
 #include <QJsonDocument>
+#include <QJsonArray>
 #include <QRegularExpression>
 #include <QMetaEnum>
 
@@ -163,6 +165,48 @@ StelSkyCultureMgr::~StelSkyCultureMgr()
 {
 }
 
+namespace
+{
+//! Sets the overall [begin, end] year span of a sky culture from the time properties of its
+//! territory.geojson polygon features. When no territory file or usable feature exists, the span
+//! defaults to the "unknown/present" sentinels.
+void deriveTimeSpanFromTerritory(const QString& cultureDir, int& beginTime, int& endTime)
+{
+	beginTime = StelSkyCulture::unknownBeginTime;
+	endTime   = StelSkyCulture::presentEndTime;
+
+	const QString filePath = StelFileMgr::findFile("skycultures/" + cultureDir + "/territory.geojson");
+	if (filePath.isEmpty()) return;
+
+	QFile file(filePath);
+	if (!file.open(QFile::ReadOnly)) return;
+
+	QJsonParseError error;
+	const auto jsonDoc = QJsonDocument::fromJson(file.readAll(), &error);
+	if (error.error != QJsonParseError::NoError || !jsonDoc.isObject()) return;
+
+	const auto features = jsonDoc.object().value("features").toArray();
+	bool found          = false;
+	for (const auto& feature : features)
+	{
+		const auto props = feature.toObject().value("properties").toObject();
+		const int featureBegin = props.value("beginTime").toInt(StelSkyCulture::unknownBeginTime);
+		const int featureEnd   = props.value("endTime").toInt(StelSkyCulture::presentEndTime);
+		if (!found)
+		{
+			beginTime = featureBegin;
+			endTime   = featureEnd;
+			found     = true;
+		}
+		else
+		{
+			beginTime = featureBegin < beginTime ? featureBegin : beginTime;
+			endTime   = featureEnd > endTime ? featureEnd : endTime;
+		}
+	}
+}
+} // anonymous namespace
+
 void StelSkyCultureMgr::makeCulturesList()
 {
 	QSet<QString> cultureDirNames = StelFileMgr::listContents("skycultures",StelFileMgr::Directory);
@@ -221,8 +265,9 @@ void StelSkyCultureMgr::makeCulturesList()
 			culture.region = QJsonArray();
 			culture.region.append(data["region"]);
 		}
-		culture.beginTime = data["beginTime"].toInt();
-		culture.endTime = data["endTime"].toInt();
+		// The culture's time span is derived from its territory polygons (territory.geojson);
+		// any dates in index.json are intentionally ignored.
+		deriveTimeSpanFromTerritory(dir, culture.beginTime, culture.endTime);
 		if (data["constellations"].isArray())
 		{
 			culture.constellations = data["constellations"].toArray();
