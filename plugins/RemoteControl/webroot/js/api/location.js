@@ -114,15 +114,43 @@ define(["jquery", "./remotecontrol", "./updatequeue"], function($, rc, UpdateQue
         performNearbySearch: performNearbySearch,
         performLocationSearch: performLocationSearch,
 
-        loadRegionList: function(callback) {
+        /**
+         * Load the list of regions from the server.
+         * The regions are filtered by the currently selected planet.
+         * If no planet is specified, all regions from all planets are returned.
+         * 
+         * @param {function} callback - Function to call with the region data on success.
+         * The callback receives the JSON response (array of region objects).
+         * @param {string} [planet] - Optional planet name to filter regions.
+         * If not provided, regions for the current planet are used.
+         * @returns {void}
+         */
+        loadRegionList: function(callback, planet) {
+            // If no planet specified, use the current planet from the UI
+            if (!planet) {
+                planet = locationUI.getCurrentPlanet() || 'Earth';
+            }
+            
             $.ajax({
                 url: "/api/location/regionlist",
+                method: 'GET',
+                data: { planet: planet },
+                dataType: 'json',
                 success: callback,
                 error: function(xhr, status, errorThrown) {
                     console.log("Error updating region list");
                     console.log("Error: " + errorThrown.message);
                     console.log("Status: " + status);
-                    alert(rc.tr("Could not retrieve region list"));
+                    // Fallback: try without planet parameter (backward compatibility)
+                    $.ajax({
+                        url: "/api/location/regionlist",
+                        method: 'GET',
+                        dataType: 'json',
+                        success: callback,
+                        error: function() {
+                            alert(rc.tr("Could not retrieve region list"));
+                        }
+                    });
                 }
             });
         },
