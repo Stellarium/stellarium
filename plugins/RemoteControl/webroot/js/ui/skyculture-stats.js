@@ -994,65 +994,81 @@ define(["jquery", "api/remotecontrol", "api/properties", "ui/stellarium-utils"],
 								}
 						}
             
-            // ============================================================
-            // STARS TABLE MATCHING
-            // ============================================================
-            else if (data.type === "star") {
-                if ($starsBody && $starsBody.length) {
-                    $starsBody.find('.clickable-row').each(function() {
-                        var $row = $(this);
-                        var rowId = $row.data('pattern-id');
-                        var rowName = $row.data('pattern-name');
-                        
-                        var rowIdStr = rowId ? String(rowId) : '';
-                        var rowNameStr = rowName ? String(rowName) : '';
-                        
-                        var rowMatched = false;
-                        
-                        // Match by ID (HIP number)
-                        for (var s = 0; s < searchIds.length; s++) {
-                            var searchId = String(searchIds[s]);
-                            if (!searchId) continue;
-                            if (rowIdStr === searchId) {
-                                rowMatched = true;
-                                break;
-                            }
-                        }
-                        
-                        // Match by name
-                        if (!rowMatched) {
-                            for (var n = 0; n < searchNames.length; n++) {
-                                var searchTerm = String(searchNames[n]);
-                                if (!searchTerm) continue;
-                                if (rowNameStr === searchTerm) {
-                                    rowMatched = true;
-                                    break;
-                                }
-                            }
-                        }
-                        
-                        // Case-insensitive fallback
-                        if (!rowMatched) {
-                            for (var n = 0; n < searchNames.length; n++) {
-                                var searchTerm = String(searchNames[n]).toLowerCase();
-                                if (!searchTerm) continue;
-                                if (rowNameStr.toLowerCase() === searchTerm) {
-                                    rowMatched = true;
-                                    break;
-                                }
-                            }
-                        }
-                        
-                        if (rowMatched) {
-                            $row.addClass('selected-row');
-                            selectedRow = $row;
-                            matched = true;
-                            console.log("[SkyCultureStats] ✓ Star row selected:", rowNameStr);
-                            return false;
-                        }
-                    });
-                }
-            }
+						// ============================================================
+						// STARS TABLE MATCHING - Enhanced for bidirectional sync
+						// ============================================================
+						else if (data.type === "star") {
+								if ($starsBody && $starsBody.length) {
+										$starsBody.find('.clickable-row').each(function() {
+												var $row = $(this);
+												var rowId = $row.data('pattern-id');
+												var rowName = $row.data('pattern-name');
+												
+												var rowIdStr = rowId ? String(rowId) : '';
+												var rowNameStr = rowName ? String(rowName) : '';
+												
+												var rowMatched = false;
+												
+												// Match by exact ID
+												for (var s = 0; s < searchIds.length; s++) {
+														var searchId = String(searchIds[s]);
+														if (!searchId) continue;
+														if (rowIdStr === searchId) {
+																rowMatched = true;
+																console.log("[SkyCultureStats] ✓ Star matched by exact ID:", rowIdStr);
+																break;
+														}
+												}
+												
+												// Match by partial ID
+												if (!rowMatched) {
+														for (var s = 0; s < searchIds.length; s++) {
+																var searchId = String(searchIds[s]);
+																if (!searchId || searchId.length < 2) continue;
+																if (rowIdStr.indexOf(searchId) !== -1) {
+																		rowMatched = true;
+																		console.log("[SkyCultureStats] ✓ Star matched by partial ID:", rowIdStr);
+																		break;
+																}
+														}
+												}
+												
+												// Match by name
+												if (!rowMatched) {
+														for (var n = 0; n < searchNames.length; n++) {
+																var searchTerm = String(searchNames[n]);
+																if (!searchTerm) continue;
+																if (rowNameStr === searchTerm) {
+																		rowMatched = true;
+																		console.log("[SkyCultureStats] ✓ Star matched by name:", rowNameStr);
+																		break;
+																}
+														}
+												}
+												
+												// Case-insensitive fallback
+												if (!rowMatched) {
+														for (var n = 0; n < searchNames.length; n++) {
+																var searchTerm = String(searchNames[n]).toLowerCase();
+																if (!searchTerm) continue;
+																if (rowNameStr.toLowerCase() === searchTerm) {
+																		rowMatched = true;
+																		console.log("[SkyCultureStats] ✓ Star matched by case-insensitive name:", rowNameStr);
+																		break;
+																}
+														}
+												}
+												
+												if (rowMatched) {
+														$row.addClass('selected-row');
+														selectedRow = $row;
+														matched = true;
+														console.log("[SkyCultureStats] ✓ Star row selected:", rowNameStr);
+														return false;
+												}
+										});
+								}
+						}
             
             // ============================================================
             // FALLBACK: If no match found, try partial matching in all tables

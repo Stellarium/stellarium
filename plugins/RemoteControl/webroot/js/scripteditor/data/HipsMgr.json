@@ -1,0 +1,170 @@
+[
+    {
+        "name": "getFlagShow",
+        "category": "HiPS Manager - Core",
+        "signature": "bool getFlagShow()",
+        "description": "Returns whether Hierarchical Progressive Survey (HiPS) images are currently displayed.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if HiPS surveys are visible, false if hidden",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.17.0",
+            "notes": "Introduced in Stellarium 0.17.0"
+        },
+        "example": "if (HipsMgr.getFlagShow()) {\n    core.debug(\"HiPS surveys are visible\");\n} else {\n    HipsMgr.setFlagShow(true);\n}"
+    },    
+    {
+        "name": "setFlagShow",
+        "category": "HiPS Manager - Core",
+        "signature": "void setFlagShow(bool visible)",
+        "description": "Shows or hides all Hierarchical Progressive Survey (HiPS) images.",
+        "parameters": [
+            {
+                "name": "visible",
+                "type": "bool",
+                "description": "true to show HiPS surveys, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.17.0",
+            "notes": "Introduced in Stellarium 0.17.0"
+        },
+        "example": "// Enable HiPS surveys\nHipsMgr.setFlagShow(true);\n\n// Disable HiPS surveys\nHipsMgr.setFlagShow(false);"
+    },
+    {
+        "name": "flagShow",
+        "category": "HiPS Manager - Properties",
+        "signature": "bool flagShow",
+        "description": "Property that controls whether HiPS surveys are displayed.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if HiPS surveys are visible",
+        "type": "property",
+        "alternative": "HipsMgr.getFlagShow() / HipsMgr.setFlagShow()",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.17.0",
+            "notes": "Q_PROPERTY exposed to scripting"
+        },
+        "example": "var visible = core.getStelProperty('HipsMgr.flagShow');\ncore.setStelProperty('HipsMgr.flagShow', true);"
+    },
+    {
+        "name": "loadSources",
+        "category": "HiPS Manager - Data Loading",
+        "signature": "void loadSources()",
+        "description": "Starts loading the default HiPS survey sources from online catalog servers.",
+        "parameters": [],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.17.0",
+            "notes": "Requires internet connection for first load"
+        },
+        "example": "if (!HipsMgr.isLoaded()) {\n    HipsMgr.loadSources();\n    core.debug(\"Loading HiPS surveys...\");\n}"
+    },
+    {
+        "name": "getSurveyByUrl",
+        "category": "HiPS Manager - Survey Access",
+        "signature": "HipsSurveyP getSurveyByUrl(QString url)",
+        "description": "Searches for and returns a HiPS survey by its URL.",
+        "parameters": [
+            {
+                "name": "url",
+                "type": "QString",
+                "description": "URL of the HiPS survey",
+                "required": true
+            }
+        ],
+        "returnType": "HipsSurveyP",
+        "returnDescription": "HiPS survey object, or null if not found",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.17.0",
+            "notes": "Returns a HipsSurveyP object"
+        },
+        "example": "var survey = HipsMgr.getSurveyByUrl(\"https://alasky.cds.unistra.fr/DSS/DSS2M\");\nif (survey) {\n    core.debug(\"Survey found: \" + survey.getShortName());\n    survey.setVisible(true);\n}"
+    },
+    {
+        "name": "getState",
+        "category": "HiPS Manager - Status",
+        "signature": "State getState()",
+        "description": "Returns the loading state of HiPS survey sources. Values: 0=Created, 1=Loading, 2=Loaded.",
+        "parameters": [],
+        "returnType": "State",
+        "returnDescription": "State: 0=Created, 1=Loading, 2=Loaded",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.17.0",
+            "notes": "Introduced in Stellarium 0.17.0"
+        },
+        "example": "var state = HipsMgr.getState();\nif (state === 0) {\n    core.debug(\"HiPS not loaded yet\");\n} else if (state === 1) {\n    core.debug(\"HiPS loading...\");\n} else if (state === 2) {\n    core.debug(\"HiPS loaded and ready\");\n}"
+    },
+    {
+        "name": "state",
+        "category": "HiPS Manager - Properties",
+        "signature": "State state",
+        "description": "Property that returns the loading state of HiPS survey sources. Read-only.",
+        "parameters": [],
+        "returnType": "State",
+        "returnDescription": "State: 0=Created, 1=Loading, 2=Loaded",
+        "type": "property",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.17.0",
+            "notes": "Q_PROPERTY exposed to scripting"
+        },
+        "example": "var state = core.getStelProperty('HipsMgr.state');\nif (state === 2) {\n    core.debug(\"HiPS surveys are ready\");\n}"
+    },
+    {
+        "name": "isLoaded",
+        "category": "HiPS Manager - Status",
+        "signature": "bool isLoaded()",
+        "description": "Returns whether HiPS survey sources have been successfully loaded.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if HiPS sources are loaded, false otherwise",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.17.0",
+            "notes": "Introduced in Stellarium 0.17.0"
+        },
+        "example": "if (HipsMgr.isLoaded()) {\n    core.debug(\"HiPS surveys are ready\");\n    HipsMgr.setFlagShow(true);\n}"
+    },
+    {
+        "name": "loaded",
+        "category": "HiPS Manager - Properties",
+        "signature": "bool loaded",
+        "description": "Property that returns whether HiPS survey sources have been loaded. Read-only.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if HiPS sources are loaded",
+        "type": "property",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.17.0",
+            "notes": "Q_PROPERTY exposed to scripting"
+        },
+        "example": "var isLoaded = core.getStelProperty('HipsMgr.loaded');\nif (isLoaded) {\n    core.debug(\"HiPS surveys are ready to use\");\n}"
+    }
+]

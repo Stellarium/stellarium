@@ -1,0 +1,649 @@
+[
+    {
+        "name": "getFlagShowQuasars",
+        "category": "Quasars - Core",
+        "signature": "bool getFlagShowQuasars()",
+        "description": "Returns whether quasars are displayed on the sky.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if quasars are visible",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Introduced in Stellarium 0.12.0"
+        },
+        "example": "if (Quasars.getFlagShowQuasars()) {\n    core.debug(\"Quasars are visible\");\n}"
+    },
+    {
+        "name": "setFlagShowQuasars",
+        "category": "Quasars - Core",
+        "signature": "void setFlagShowQuasars(bool visible)",
+        "description": "Shows or hides quasars on the sky.",
+        "parameters": [
+            {
+                "name": "visible",
+                "type": "bool",
+                "description": "true to show quasars",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Introduced in Stellarium 0.12.0"
+        },
+        "example": "Quasars.setFlagShowQuasars(true);"
+    },
+    {
+        "name": "quasarsVisible",
+        "category": "Quasars - Properties",
+        "signature": "bool quasarsVisible",
+        "description": "Property that controls whether quasars are displayed.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if quasars are visible",
+        "type": "property",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Q_PROPERTY exposed to scripting"
+        },
+        "example": "var visible = core.getStelProperty('Quasars.quasarsVisible');\ncore.setStelProperty('Quasars.quasarsVisible', true);"
+    },
+    {
+        "name": "getFlagUseQuasarMarkers",
+        "category": "Quasars - Display Mode",
+        "signature": "bool getFlagUseQuasarMarkers()",
+        "description": "Returns whether markers (icons) are used to display quasars instead of simple distribution points.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if markers are used, false if distribution mode is used",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Introduced in Stellarium 0.12.0"
+        },
+        "example": "if (Quasars.getFlagUseQuasarMarkers()) {\n    core.debug(\"Quasars shown with markers\");\n} else {\n    core.debug(\"Quasars shown as distribution points\");\n}"
+    },
+    {
+        "name": "setFlagUseQuasarMarkers",
+        "category": "Quasars - Display Mode",
+        "signature": "void setFlagUseQuasarMarkers(bool useMarkers)",
+        "description": "Sets whether markers (icons) should be used to display quasars.",
+        "parameters": [
+            {
+                "name": "useMarkers",
+                "type": "bool",
+                "description": "true to use markers, false to use distribution points",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Introduced in Stellarium 0.12.0"
+        },
+        "example": "// Use marker icons for quasars\nQuasars.setFlagUseQuasarMarkers(true);\n\n// Use simple distribution points\nQuasars.setFlagUseQuasarMarkers(false);"
+    },
+    {
+        "name": "flagMarkersMode",
+        "category": "Quasars - Properties",
+        "signature": "bool flagMarkersMode",
+        "description": "Property that controls whether markers are used for quasars.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if markers are used, false for distribution mode",
+        "type": "property",
+        "alternative": "Quasars.getFlagUseQuasarMarkers() / Quasars.setFlagUseQuasarMarkers()",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Q_PROPERTY exposed to scripting"
+        },
+        "example": "core.setStelProperty('Quasars.flagMarkersMode', true);"
+    },
+    {
+        "name": "getDisplayMode",
+        "category": "Quasars - Display Mode",
+        "signature": "bool getDisplayMode()",
+        "description": "Returns whether distribution mode is enabled for quasars (showing density distribution rather than individual markers).",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if distribution mode is enabled, false if not",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Introduced in Stellarium 0.12.0"
+        },
+        "example": "if (Quasars.getDisplayMode()) {\n    core.debug(\"Quasar distribution mode is enabled\");\n}"
+    },
+    {
+        "name": "setDisplayMode",
+        "category": "Quasars - Display Mode",
+        "signature": "void setDisplayMode(bool enabled)",
+        "description": "Enables or disables distribution mode for quasars (showing density distribution rather than individual markers).",
+        "parameters": [
+            {
+                "name": "enabled",
+                "type": "bool",
+                "description": "true to enable distribution mode, false to disable",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Introduced in Stellarium 0.12.0"
+        },
+        "example": "// Show quasar distribution density\nQuasars.setDisplayMode(true);\n\n// Show individual quasar markers\nQuasars.setDisplayMode(false);"
+    },
+    {
+        "name": "flagDisplayMode",
+        "category": "Quasars - Properties",
+        "signature": "bool flagDisplayMode",
+        "description": "Property that controls whether quasar distribution mode is enabled.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if distribution mode is enabled",
+        "type": "property",
+        "alternative": "Quasars.getDisplayMode() / Quasars.setDisplayMode()",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Q_PROPERTY exposed to scripting"
+        },
+        "example": "core.setStelProperty('Quasars.flagDisplayMode', true);"
+    },
+    {
+        "name": "getMarkerColor",
+        "category": "Quasars - Appearance",
+        "signature": "Vec3f getMarkerColor()",
+        "description": "⚠️ Returns the color for quasar markers. Use the property quasarsColor for reading via core.getStelProperty().",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "returnDescription": "RGB color (access via core.getStelProperty)",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Introduced in Stellarium 0.12.0"
+        },
+        "example": "var colorStr = core.getStelProperty('Quasars.quasarsColor');"
+    },
+   {
+        "name": "setMarkerColor",
+        "category": "Quasars - Appearance",
+        "signature": "void setMarkerColor(Vec3f color)",
+        "description": "Sets the color for quasar markers.",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Introduced in Stellarium 0.12.0"
+        },
+        "example": "var red = core.vec3f(1.0, 0.2, 0.2);\nQuasars.setMarkerColor(red);"
+    },
+    {
+        "name": "quasarsColor",
+        "category": "Quasars - Properties",
+        "signature": "Vec3f quasarsColor",
+        "description": "⚠️ Property that returns the quasar marker color as a string. For reading, use core.getStelProperty(). For writing, use Quasars.setMarkerColor().",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "returnDescription": "RGB color as string",
+        "type": "property",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Q_PROPERTY exposed to scripting"
+        },
+        "example": "var colorStr = core.getStelProperty('Quasars.quasarsColor');\nvar parts = colorStr.split(',');\nvar r = parseFloat(parts[0]);\nvar g = parseFloat(parts[1]);\nvar b = parseFloat(parts[2]);\ncore.debug(\"Quasar color: RGB(\" + r + \", \" + g + \", \" + b + \")\");\n\nvar newColor = core.vec3f(1.0, 0.5, 0.4);\nQuasars.setMarkerColor(newColor);"
+    },
+    {
+        "name": "getCountQuasars",
+        "category": "Quasars - Information",
+        "signature": "int getCountQuasars()",
+        "description": "Returns the number of quasars currently loaded in the catalog. The default catalog contains approximately 160,000 quasars.",
+        "parameters": [],
+        "returnType": "int",
+        "returnDescription": "Number of quasars in the catalog",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Introduced in Stellarium 0.12.0"
+        },
+        "example": "var count = Quasars.getCountQuasars();\ncore.debug(\"Quasars in catalog: \" + count);"
+    },
+    {
+        "name": "getUpdatesEnabled",
+        "category": "Quasars - Updates",
+        "signature": "bool getUpdatesEnabled()",
+        "description": "Returns whether automatic updates of the quasar catalog from the internet are enabled.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if automatic updates are enabled, false if disabled",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Requires internet connection for updates"
+        },
+        "example": "if (Quasars.getUpdatesEnabled()) {\n    core.debug(\"Automatic quasar catalog updates are enabled\");\n}"
+    },
+    {
+        "name": "setUpdatesEnabled",
+        "category": "Quasars - Updates",
+        "signature": "void setUpdatesEnabled(bool enabled)",
+        "description": "Enables or disables automatic updates of the quasar catalog from the internet.",
+        "parameters": [
+            {
+                "name": "enabled",
+                "type": "bool",
+                "description": "true to enable automatic updates, false to disable",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Introduced in Stellarium 0.12.0"
+        },
+        "example": "// Enable automatic catalog updates\nQuasars.setUpdatesEnabled(true);\n\n// Disable automatic updates\nQuasars.setUpdatesEnabled(false);"
+    },
+    {
+        "name": "updateJSON",
+        "category": "Quasars - Updates",
+        "signature": "void updateJSON()",
+        "description": "Manually triggers an immediate update of the quasar catalog JSON file from the configured online source (default: https://stellarium.org/json/quasars.json).",
+        "parameters": [],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Requires internet connection"
+        },
+        "example": "// Manually update quasar catalog\nQuasars.updateJSON();\ncore.debug(\"Quasar catalog update started...\");\n\n// Wait for update to complete\ncore.wait(30);\ncore.debug(\"Quasar catalog updated\");"
+    },
+    {
+        "name": "getLastUpdate",
+        "category": "Quasars - Updates",
+        "signature": "QDateTime getLastUpdate()",
+        "description": "Returns the date and time of the last successful quasar catalog update.",
+        "parameters": [],
+        "returnType": "QDateTime",
+        "returnDescription": "Date and time of last catalog update",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Introduced in Stellarium 0.12.0"
+        },
+        "example": "var lastUpdate = Quasars.getLastUpdate();\ncore.debug(\"Last quasar catalog update: \" + lastUpdate.toString());"
+    },
+    {
+        "name": "getUpdateFrequencyDays",
+        "category": "Quasars - Updates",
+        "signature": "int getUpdateFrequencyDays()",
+        "description": "Returns the frequency of automatic catalog updates in days. Default is 100 days.",
+        "parameters": [],
+        "returnType": "int",
+        "returnDescription": "Update frequency in days",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Introduced in Stellarium 0.12.0"
+        },
+        "example": "var freq = Quasars.getUpdateFrequencyDays();\ncore.debug(\"Update frequency: \" + freq + \" days\");"
+    },
+    {
+        "name": "setUpdateFrequencyDays",
+        "category": "Quasars - Updates",
+        "signature": "void setUpdateFrequencyDays(int days)",
+        "description": "Sets the frequency of automatic catalog updates in days.",
+        "parameters": [
+            {
+                "name": "days",
+                "type": "int",
+                "description": "Update frequency in days (recommended: 30-365)",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Introduced in Stellarium 0.12.0"
+        },
+        "example": "// Update monthly\nQuasars.setUpdateFrequencyDays(30);\n\n// Update yearly\nQuasars.setUpdateFrequencyDays(365);"
+    },
+    {
+        "name": "getSecondsToUpdate",
+        "category": "Quasars - Updates",
+        "signature": "int getSecondsToUpdate()",
+        "description": "Returns the number of seconds until the next scheduled automatic catalog update.",
+        "parameters": [],
+        "returnType": "int",
+        "returnDescription": "Seconds until next update",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Introduced in Stellarium 0.12.0"
+        },
+        "example": "var secs = Quasars.getSecondsToUpdate();\ncore.debug(\"Next update in: \" + secs + \" seconds\");"
+    },
+    {
+        "name": "getUpdateState",
+        "category": "Quasars - Updates",
+        "signature": "UpdateState getUpdateState()",
+        "description": "Returns the current update state. Values: 0=Updating, 1=CompleteNoUpdates, 2=CompleteUpdates, 3=DownloadError, 4=OtherError.",
+        "parameters": [],
+        "returnType": "UpdateState",
+        "returnDescription": "Update state (0-4)",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Introduced in Stellarium 0.12.0"
+        },
+        "example": "var state = Quasars.getUpdateState();\nif (state === 0) core.debug(\"Updating catalog...\");\nelse if (state === 1) core.debug(\"No updates needed\");\nelse if (state === 2) core.debug(\"Catalog updated successfully\");\nelse if (state === 3) core.debug(\"Download error occurred\");"
+    },
+    {
+        "name": "getEnableAtStartup",
+        "category": "Quasars - Configuration",
+        "signature": "bool getEnableAtStartup()",
+        "description": "Returns whether the Quasars plugin should be enabled automatically when Stellarium starts.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if enabled at startup, false otherwise",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Introduced in Stellarium 0.12.0"
+        },
+        "example": "if (Quasars.getEnableAtStartup()) {\n    core.debug(\"Quasars will load on next startup\");\n}"
+    },
+    {
+        "name": "setEnableAtStartup",
+        "category": "Quasars - Configuration",
+        "signature": "void setEnableAtStartup(bool enable)",
+        "description": "Sets whether the Quasars plugin should be enabled automatically when Stellarium starts.",
+        "parameters": [
+            {
+                "name": "enable",
+                "type": "bool",
+                "description": "true to enable at startup, false to disable",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Introduced in Stellarium 0.12.0"
+        },
+        "example": "// Enable Quasars on next startup\nQuasars.setEnableAtStartup(true);\n\n// Disable Quasars on next startup\nQuasars.setEnableAtStartup(false);"
+    },
+    {
+        "name": "getFlagShowQuasarsButton",
+        "category": "Quasars - GUI",
+        "signature": "bool getFlagShowQuasarsButton()",
+        "description": "Returns whether the Quasars plugin toolbar button is visible in the Stellarium GUI.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if button is visible, false if hidden",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Introduced in Stellarium 0.12.0"
+        },
+        "example": "if (Quasars.getFlagShowQuasarsButton()) {\n    core.debug(\"Quasars toolbar button is visible\");\n}"
+    },
+    {
+        "name": "setFlagShowQuasarsButton",
+        "category": "Quasars - GUI",
+        "signature": "void setFlagShowQuasarsButton(bool visible)",
+        "description": "Shows or hides the Quasars plugin toolbar button in the Stellarium GUI.",
+        "parameters": [
+            {
+                "name": "visible",
+                "type": "bool",
+                "description": "true to show button, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Introduced in Stellarium 0.12.0"
+        },
+        "example": "// Show Quasars button on toolbar\nQuasars.setFlagShowQuasarsButton(true);\n\n// Hide Quasars button\nQuasars.setFlagShowQuasarsButton(false);"
+    },
+    {
+        "name": "restoreDefaults",
+        "category": "Quasars - Configuration",
+        "signature": "void restoreDefaults()",
+        "description": "Restores all Quasars plugin settings and catalog to their default values. This will reset visibility, colors, update settings, and replace the catalog file.",
+        "parameters": [],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Introduced in Stellarium 0.12.0"
+        },
+        "example": "// Reset all Quasars plugin settings to defaults\nQuasars.restoreDefaults();\ncore.debug(\"Quasars settings restored to defaults\");"
+    },
+    {
+        "name": "getByID",
+        "category": "Quasars - Information",
+        "signature": "QuasarP getByID(QString id)",
+        "description": "Returns a quasar object by its designation ID.",
+        "parameters": [
+            {
+                "name": "id",
+                "type": "QString",
+                "description": "Quasar designation",
+                "required": true
+            }
+        ],
+        "returnType": "QuasarP",
+        "returnDescription": "Quasar object, or null if not found",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Introduced in Stellarium 0.12.0"
+        },
+        "example": "var quasar = Quasars.getByID(\"3C 273\");\nif (quasar) {\n    core.debug(\"Found 3C 273\");\n    core.moveToObject(quasar.getEnglishName(), 3);\n}"
+    },
+    {
+        "name": "getAllQuasars",
+        "category": "Quasars - Information",
+        "signature": "QList<QuasarP> getAllQuasars()",
+        "description": "Returns the list of all quasar objects currently loaded in the catalog.",
+        "parameters": [],
+        "returnType": "QList<QuasarP>",
+        "returnDescription": "List of all quasar objects",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Introduced in Stellarium 0.12.0"
+        },
+        "example": "var allQuasars = Quasars.getAllQuasars();\ncore.debug(\"Total quasars: \" + allQuasars.length);\n\n// Print first 10 quasar names\nfor (var i = 0; i < Math.min(10, allQuasars.length); i++) {\n    core.debug(allQuasars[i].getEnglishName());\n}"
+    },
+    {
+        "name": "searchByID",
+        "category": "Quasars - Search",
+        "signature": "StelObjectP searchByID(QString id)",
+        "description": "Searches for a quasar by its designation ID. Returns a StelObjectP that can be used with core.moveToObject() and other object functions.",
+        "parameters": [
+            {
+                "name": "id",
+                "type": "QString",
+                "description": "Quasar designation (e.g., '3C 273', '3C 279')",
+                "required": true
+            }
+        ],
+        "returnType": "StelObjectP",
+        "returnDescription": "Quasar as StelObject, or null if not found",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Alternative to getByID() that returns StelObjectP"
+        },
+        "example": "var quasar = Quasars.searchByID(\"3C 273\");\nif (quasar) {\n    core.debug(\"Moving to 3C 273\");\n    core.moveToObject(quasar.getEnglishName(), 3);\n}"
+    },
+    {
+        "name": "searchByName",
+        "category": "Quasars - Search",
+        "signature": "StelObjectP searchByName(QString name)",
+        "description": "Searches for a quasar by its English name or designation.",
+        "parameters": [
+            {
+                "name": "name",
+                "type": "QString",
+                "description": "Quasar name or designation (e.g., '3C 273', '3C 279')",
+                "required": true
+            }
+        ],
+        "returnType": "StelObjectP",
+        "returnDescription": "Quasar object, or null if not found",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Case-insensitive search"
+        },
+        "example": "var quasar = Quasars.searchByName(\"3C 273\");\nif (quasar) {\n    core.debug(\"Found quasar at redshift: \" + quasar.getRedshift());\n    core.moveToObject(quasar.getEnglishName(), 3);\n}"
+    },
+    {
+        "name": "listAllObjects",
+        "category": "Quasars - Information",
+        "signature": "QVector<QPair<QString,StelObjectP>> listAllObjects(bool inEnglish)",
+        "description": "Returns a list of all quasar objects with their names. This can be used for auto-completion and search.",
+        "parameters": [
+            {
+                "name": "inEnglish",
+                "type": "bool",
+                "description": "true to list English names, false for translated names",
+                "required": true
+            }
+        ],
+        "returnType": "QVector<QPair<QString,StelObjectP>>",
+        "returnDescription": "List of (name, object) pairs",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Introduced in Stellarium 0.12.0"
+        },
+        "example": "var objects = Quasars.listAllObjects(false);\ncore.debug(\"Total quasars in catalog: \" + objects.length);"
+    },
+    {
+        "name": "getName",
+        "category": "Quasars - Information",
+        "signature": "QString getName()",
+        "description": "Returns the display name of the Quasars plugin module.",
+        "parameters": [],
+        "returnType": "QString",
+        "returnDescription": "Module name ('Quasars')",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Introduced in Stellarium 0.12.0"
+        },
+        "example": "var name = Quasars.getName();\ncore.debug(\"Module: \" + name);"
+    },
+    {
+        "name": "getStelObjectType",
+        "category": "Quasars - Information",
+        "signature": "QString getStelObjectType()",
+        "description": "Returns the object type identifier for quasars. Used by StelObjectMgr to identify objects from this module.",
+        "parameters": [],
+        "returnType": "QString",
+        "returnDescription": "Object type ('Quasar')",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Introduced in Stellarium 0.12.0"
+        },
+        "example": "var objType = Quasars.getStelObjectType();\ncore.debug(\"Object type: \" + objType); // Returns 'Quasar'"
+    }
+]
