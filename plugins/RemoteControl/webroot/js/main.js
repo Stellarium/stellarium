@@ -1,7 +1,8 @@
 //This is the require.js main file for the main interface
 requirejs.config({
 	paths: {
-		jquery: "jquery-3.7.1"
+
+			jquery: "jquery-4.0.0"
 	},
 	//prolong js timeout
 	waitSeconds: 60,
