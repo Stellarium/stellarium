@@ -372,21 +372,6 @@ define(["jquery", "api/remotecontrol", "api/properties", "ui/stellarium-utils"],
         }
     }
 
-    /**
-     * Get current Stellarium language.
-     * @returns {string} Language code
-     */
-    function getCurrentLanguage() {
-        if (propApi) {
-            var lang = propApi.getStelProp("StelLocaleMgr.appLanguage");
-            if (lang) {
-                currentLanguage = lang;
-                return lang;
-            }
-        }
-        return currentLanguage;
-    }
-
     // =====================================================================
     // ROW TOGGLE LOGIC
     // =====================================================================
@@ -1956,7 +1941,6 @@ define(["jquery", "api/remotecontrol", "api/properties", "ui/stellarium-utils"],
             return;
         }
         
-        getCurrentLanguage();
         setupSearchHandlers();
         setupExportHandlers();
         setupSyncListener();
@@ -1993,6 +1977,5 @@ define(["jquery", "api/remotecontrol", "api/properties", "ui/stellarium-utils"],
         getAvailableCultures: function() { return availableCultures.slice(); },
         exportToCSV: exportToCSV,
         exportToJSON: exportToJSON,
-        getCurrentLanguage: getCurrentLanguage
     };
 });
