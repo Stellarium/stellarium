@@ -312,7 +312,7 @@ int main(int argc, char **argv)
 	int n=0;
 	for (const auto& i : StelFileMgr::getSearchPaths())
 	{
-		qInfo().noquote().nospace() << " [" << n << "]: " << QDir::toNativeSeparators(i);
+		qInfo().noquote().nospace() << "- [" << n << "]: " << QDir::toNativeSeparators(i);
 		++n;
 	}
 
