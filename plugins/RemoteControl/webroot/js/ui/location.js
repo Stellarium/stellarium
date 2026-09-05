@@ -124,6 +124,19 @@ define(["jquery", "api/location", "settings", "api/trunc", "./combobox"], functi
 		parent.append($loc_planet);
 	}
 
+	var pointerUpdateTimeout;
+
+	function updatePointerFromInputs() {
+			var lat = $loc_latitude.spinner("value");
+			var lon = $loc_longitude.spinner("value");
+			movePointer(lat, lon);
+	}
+
+	function debouncedUpdatePointer() {
+			if (pointerUpdateTimeout) clearTimeout(pointerUpdateTimeout);
+			pointerUpdateTimeout = setTimeout(updatePointerFromInputs, 50);
+	}
+
 	function initControls() {
 		$loc_mapimg = $("#loc_mapimg");
 		$loc_mapimg.click(locationFromMap);
@@ -144,6 +157,14 @@ define(["jquery", "api/location", "settings", "api/trunc", "./combobox"], functi
 				$loc_list.empty();
 			}
 		});
+    // Monitor container size changes
+    if (window.ResizeObserver) {
+        const observer = new ResizeObserver(debouncedUpdatePointer);
+        observer.observe($loc_mapimg[0]);
+    }
+    
+    // Pointer Debounce as fallback
+    $(window).on("resize", debouncedUpdatePointer);
 
 		$loc_latitude = $("#loc_latitude");
 		$loc_longitude = $("#loc_longitude");
