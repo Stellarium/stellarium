@@ -51,6 +51,7 @@ public:
 
 Vec4f TextureAverageComputer::getCurrentTextureDeepestMipLevelPixelGLES(const int width, const int height)
 {
+	Q_UNUSED(width) Q_UNUSED(height)
 	GL(gl.glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR));
 
 	blitTexProgram->bind();

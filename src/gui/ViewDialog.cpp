@@ -218,7 +218,7 @@ void ViewDialog::createDialogContent()
 	ui->currentFovSpinBox->setMinimum(app->getCore()->getMovementMgr()->getMinFov(), true);
 	ui->currentFovSpinBox->setMaximum(360.0, true);
 	ui->currentFovSpinBox->setWrapping(false);
-	setDisplayFormatForSpins(app->getFlagShowDecimalDegrees());
+	setDisplayFormatForSpins(app->getFlagUseDecDegreesOther());
 
 	// TODOs after properties merge:
 	// Jupiter's GRS should become property, and recheck the other "from trunk" entries.
@@ -618,7 +618,7 @@ void ViewDialog::createDialogContent()
 	// Projection
 	connect(ui->projectionListWidget, &QListWidget::currentTextChanged, this, &ViewDialog::changeProjection);
 	connect(StelApp::getInstance().getCore(), &StelCore::currentProjectionTypeChanged, this, &ViewDialog::projectionChanged);
-	connect(app, &StelApp::flagShowDecimalDegreesChanged, this, &ViewDialog::setDisplayFormatForSpins);
+	connect(app, &StelApp::flagUseDecDegreesOtherChanged, this, &ViewDialog::setDisplayFormatForSpins);
 	connectDoubleProperty(ui->viewportOffsetSpinBox, "StelMovementMgr.viewportVerticalOffsetTarget");
 	connectDoubleProperty(ui->userMaxFovSpinBox, "StelMovementMgr.userMaxFov");
 	connectDoubleProperty(ui->currentFovSpinBox, "StelMovementMgr.currentFov");

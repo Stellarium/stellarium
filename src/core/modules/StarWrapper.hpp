@@ -124,6 +124,7 @@ protected:
 
 	QString getVariabilityRangeInfoString(const StelCore *core, const InfoStringGroup& flags) const
 	{
+		Q_UNUSED(core)
 		StarId star_id=getStarId();
 		if (flags&Extra) // variable range
 		{
@@ -158,6 +159,7 @@ protected:
 	}
 	QString getVariabilityRangeNarration(const StelCore *core, const InfoStringGroup& flags) const
 	{
+		Q_UNUSED(core)
 		StarId star_id=getStarId();
 		if (flags&Extra) // variable range
 		{
@@ -236,6 +238,7 @@ protected:
 	}
 	QString getGcvsDataNarration(const StelCore *core, StarId star_id, QString spec=QString()) const
 	{
+		Q_UNUSED(spec)
 		QString str;
 		QTextStream oss(&str);
 

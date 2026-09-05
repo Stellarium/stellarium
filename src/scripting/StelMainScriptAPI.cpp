@@ -1379,7 +1379,7 @@ double StelMainScriptAPI::getViewDecJ2000Angle()
 	return dec*180/M_PI; // convert to degrees from radians
 }
 
-void StelMainScriptAPI::moveToObject(const QString& name, float duration)
+void StelMainScriptAPI::moveToObject(const QString& name, float duration, float shift)
 {
 	if (name.isEmpty())
 		return;
@@ -1389,17 +1389,91 @@ void StelMainScriptAPI::moveToObject(const QString& name, float duration)
 	StelObjectP obj = omgr->searchByName(name);
 
 	if (!obj.isNull())
-		mvmgr->moveToObject(obj, duration);
+	{
+		if (qFuzzyCompare(shift, 0.f))
+			mvmgr->moveToObject(obj, duration);
+		else
+		{
+			// The dome mode:
+			// The center of FOV in the dome is located in zenith and this is not very good for viewers, so, let's shift object from "zenith".
+			StelCore* core = StelApp::getInstance().getCore();
+
+			double sLat, sLon;
+			StelMovementMgr::MountMode mountMode=mvmgr->getMountMode();
+			if (mountMode==StelMovementMgr::MountEquinoxEquatorial)
+			{
+				StelUtils::rectToSphe(&sLon,&sLat,obj->getEquinoxEquatorialPosAuto(core));
+				sLat += shift*M_PI_180;
+
+				moveToRaDec(StelUtils::radToDecDegStr(sLon, 6), StelUtils::radToDecDegStr(sLat, 6), duration);
+			}
+			else
+			{
+				StelUtils::rectToSphe(&sLon,&sLat,obj->getAltAzPosAuto(core));
+				const double direction = StelApp::getInstance().getFlagSouthAzimuthUsage() ? 2. : 3.; // N is zero, E is 90 degrees
+				sLon = direction*M_PI - sLon;
+				if (sLon > M_PI*2)
+					sLon -= M_PI*2;
+				sLat += shift*M_PI_180;
+
+				moveToAltAzi(StelUtils::radToDecDegStr(sLat, 6), StelUtils::radToDecDegStr(sLon, 6), duration);
+			}
+		}
+	}
 }
 
-void StelMainScriptAPI::moveToSelectedObject(float duration)
+void StelMainScriptAPI::moveToSelectedObject(float duration, float shift)
 {
 	StelObjectMgr* omgr = GETSTELMODULE(StelObjectMgr);
 	if (omgr->getSelectedObject().isEmpty())
 		return;
 
 	StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
-	mvmgr->moveToObject(omgr->getSelectedObject()[0], duration); // Object may be without English name
+	StelObjectP obj = omgr->getSelectedObject()[0]; // Object may be without English name
+
+	if (qFuzzyCompare(shift, 0.f))
+		mvmgr->moveToObject(obj, duration);
+	else
+	{
+		// The dome mode:
+		// The center of FOV in the dome is located in zenith and this is not very good for viewers, so, let's shift object from "zenith".
+		StelCore* core = StelApp::getInstance().getCore();
+
+		double sLat, sLon;
+		StelMovementMgr::MountMode mountMode=mvmgr->getMountMode();
+		if (mountMode==StelMovementMgr::MountEquinoxEquatorial)
+		{
+			Vec3d aim = obj->getEquinoxEquatorialPosAuto(core);
+			StelUtils::rectToSphe(&sLon,&sLat,aim);
+			sLat += shift*M_PI_180;
+			StelUtils::spheToRect(sLon,sLat,aim);
+
+			// make up vector more stable:
+			Vec3d aimUp;
+			if (fabs(sLat)>(0.9*M_PI/2.0))
+				aimUp=Vec3d(-cos(sLon), -sin(sLon), 0.) * (sLat>0. ? 1. : -1. );
+			else
+				aimUp=core->equinoxEquToJ2000(Vec3d(0., 0., 1.), StelCore::RefractionOff);
+
+			mvmgr->moveToJ2000(core->equinoxEquToJ2000(aim, StelCore::RefractionOff), aimUp, duration);
+		}
+		else
+		{
+			Vec3d aim = obj->getAltAzPosAuto(core);
+			StelUtils::rectToSphe(&sLon,&sLat,aim);
+			sLat += shift*M_PI_180;
+			StelUtils::spheToRect(sLon,sLat,aim);
+
+			// make up vector more stable:
+			Vec3d aimUp;
+			if (fabs(sLat)>(0.9*M_PI/2.0))
+				aimUp=Vec3d(-cos(sLon), -sin(sLon), 0.) * (sLat>0. ? 1. : -1.);
+			else
+				aimUp=Vec3d(0., 0., 1.);
+
+			mvmgr->moveToAltAzi(aim, aimUp, duration);
+		}
+	}
 }
 
 void StelMainScriptAPI::moveToAltAzi(const QString& alt, const QString& azi, float duration)

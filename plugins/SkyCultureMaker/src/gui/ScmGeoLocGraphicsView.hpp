@@ -38,6 +38,15 @@ public:
 	void removePolygon(int id);
 	void reset();
 
+	/**
+	 * @brief Adds a polygon that was loaded from an existing sky culture file,
+	 *        converting from WGS84 coordinates to the map-view coordinate system.
+	 *        Unlike addCurrentPoly(), this does not emit addPolygonToCulture.
+	 *
+	 * @param polygon The CulturePolygon in WGS84 (lon/lat) coordinates.
+	 */
+	void addExistingPolygon(const scm::CulturePolygon &polygon);
+
 public slots:
 	/**
 	 * @brief Update the current time and visibility of all polygons.
@@ -125,6 +134,15 @@ private:
 	 * @return A float point polygon in real-world coordinates.
 	 */
 	QPolygonF convertViewToWGS84(const QPolygonF &viewCoordinatePolygon);
+
+	/**
+	 * @brief Convert the points of the given polygon from real-world coordinates
+	 *        to view coordinates.
+	 *
+	 * @param A float point polygon in real-world coordinates.
+	 * @return A float point polygon in view coordinates.
+	 */
+	QPolygonF convertWGS84ToView(const QPolygonF &wgs84Polygon);
 };
 
 #endif // SCMGEOLOCGRAPHICSVIEW_HPP

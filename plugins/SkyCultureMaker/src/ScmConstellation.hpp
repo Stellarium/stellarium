@@ -116,6 +116,14 @@ public:
 	const std::vector<ConstellationLine> &getLines() const;
 
 	/**
+	 * @brief Gets the J2000 direction to the constellation's center, i.e. the
+	 *        averaged position of all line endpoints used for the name label.
+	 *
+	 * @return Normalized J2000 direction vector.
+	 */
+	const Vec3d &getCenterPosition() const { return XYZname; }
+
+	/**
 	 * @brief Draws the constellation lines, name and artwork using default colors.
 	 *
 	 * @param core The core used for drawing.

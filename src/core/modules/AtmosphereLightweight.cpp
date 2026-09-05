@@ -634,6 +634,12 @@ void AtmosphereLightweight::computeColor(StelCore* core, const double JD, const 
                                          const Planet*const moon, const StelLocation& location, const float temperature,
                                          const float relativeHumidity, const float extinctionCoefficient, const bool noScatter)
 {
+	Q_UNUSED(JD)
+	Q_UNUSED(currentPlanet)
+	Q_UNUSED(location)
+	Q_UNUSED(temperature)
+	Q_UNUSED(relativeHumidity)
+	Q_UNUSED(extinctionCoefficient)
 	// No need to calculate if not visible
 	if (!fader.getInterstate())
 	{

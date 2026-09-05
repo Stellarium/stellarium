@@ -229,7 +229,7 @@ QString Comet::getInfoStringSize(const StelCore *core, const InfoStringGroup &fl
 	QString km = qc_("km", "distance");
 	// TRANSLATORS: Unit of measure for distance - milliones kilometers
 	QString Mkm = qc_("M km", "distance");
-	const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
+	const bool withDecimalDegree = StelApp::getInstance().getFlagUseDecDegreesOther();
 	QString str;
 	QTextStream oss(&str);
 
@@ -270,7 +270,7 @@ QString Comet::getInfoStringSize(const StelCore *core, const InfoStringGroup &fl
 
 QString Comet::getNarrationSize(const StelCore *core, const InfoStringGroup &flags) const
 {
-	const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
+	const bool withDecimalDegree = StelApp::getInstance().getFlagUseDecDegreesOther();
 	QString str;
 	QTextStream oss(&str);
 

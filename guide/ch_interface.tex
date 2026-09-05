@@ -410,6 +410,19 @@ from touch-enabled devices like smartphones.
   By default Stellarium use black color.
 \end{description}
 
+\subsubsection{Toolbar position} \newFeature{26.3}
+The \emph{Toolbar location} drop-down in the Planetarium options section of the Tools tab lets you
+dock both toolbars to any of the four screen corners:
+\begin{description}
+\item[Bottom-left] Default position: tool button bar at the bottom, dialog button bar on the left.
+\item[Bottom-right] Tool button bar at the bottom, dialog button bar on the right.
+\item[Top-left] Tool button bar at the top, dialog button bar on the left. When the tool button bar is at the top,
+  the status row (location, FOV, date/time) moves below the buttons so it remains visible when
+  the bar is partially hidden.
+\item[Top-right] Tool button bar at the top, dialog button bar on the right.
+\end{description}
+The selection is saved as \key{toolbar\_corner} (integer 0--3) in the \texttt{[gui]} section.
+
 \paragraph{Multithreading} \label{sec:gui:configuration:tools:threads} 
 For every frame, the positions of all planets and minor bodies of the Solar system are computed. 
 Most of the other time between frame updates is needed for the actual frame drawing, 

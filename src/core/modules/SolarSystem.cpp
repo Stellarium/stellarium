@@ -2060,6 +2060,7 @@ void SolarSystem::postDrawAsteroidMarkers(StelPainter *sPainter)
 // Draw a point source halo.
 bool SolarSystem::drawAsteroidMarker(StelCore* core, StelPainter* sPainter, const float x, const float y, Vec3f &color)
 {
+	Q_UNUSED(core)
 	const float reducer=markerFader.getInterstate();
 	if (reducer==0.)
 		return false;
