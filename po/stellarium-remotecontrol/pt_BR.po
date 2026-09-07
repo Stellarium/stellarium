@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-remotecontrol\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2026-08-24 18:46+0700\n"
+"POT-Creation-Date: 2026-09-07 19:13+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: DC, 2026\n"
 "Language-Team: Portuguese (Brazil) (https://app.transifex.com/stellarium/teams/80998/pt_BR/)\n"
@@ -141,6 +141,289 @@ msgstr "Mostrar Todos os Itens"
 msgid "Input did not match any item"
 msgstr "Entrada de dados não corresponde a nenhum item"
 
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:597
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1820
+msgid "No action"
+msgstr "Nenhuma ação"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:710
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2065
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2072
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2092
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2299
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2406
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2407
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2408
+msgid "No controller connected"
+msgstr "Nenhum controle conectado"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:717
+msgid "Vibration test sent to "
+msgstr "Teste de vibração enviado para"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:720
+msgid "Vibration not supported on this device/browser"
+msgstr "Vibração não suportada neste dispositivo/navegador"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1068
+msgid "Warning: This profile was created for a different controller type."
+msgstr "Aviso: este perfil foi criado para um tipo diferente de controle."
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1251 index.html:1355
+#: tablet7in.html:1424
+msgid "centered"
+msgstr "Centralizado"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1337
+msgid "East →"
+msgstr "Leste →"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1338
+msgid "North-East ↗"
+msgstr "Nordeste ↗"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1339
+msgid "North ↑"
+msgstr "Norte ↑"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1340
+msgid "North-West ↖"
+msgstr "Noroeste ↖"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1341
+msgid "West ←"
+msgstr "Oeste ←"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1342
+msgid "South-West ↙"
+msgstr "Sudoeste ↙"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1343
+msgid "South ↓"
+msgstr "Sul ↓"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1344
+msgid "South-East ↘"
+msgstr "Sudeste ↘"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1347
+msgid "fast"
+msgstr "rápido"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1347
+msgid "medium"
+msgstr "médio"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1347
+msgid "slow"
+msgstr "lento"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1579 index.html:1316
+#: tablet7in.html:1385
+msgid "No devices connected"
+msgstr "Nenhum dispositivo conectado"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1778
+msgid "Connect a controller to customize buttons"
+msgstr "Conecte um controle para personalizar os botões"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1848
+msgid "Button %1 mapped to %2"
+msgstr "Botão %1 mapeado para %2"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1879
+msgid "Please connect a controller first"
+msgstr "Por favor, conecte um controle primeiro"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1893
+msgid "Calibrating..."
+msgstr "Calibrando..."
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1894
+msgid "Move both joysticks in circles, then press any button to finish"
+msgstr ""
+"Mova ambos os joysticks em círculos e pressione qualquer botão para "
+"finalizar"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1943
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1949
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1975 index.html:1394
+#: tablet7in.html:1463
+msgid "Calibrate"
+msgstr "Calibrar"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1976
+msgid "Calibration complete! "
+msgstr "Calibração concluída!"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1976
+msgid " samples collected."
+msgstr "amostras coletadas."
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1986
+msgid "Calibrating... Collected %1 samples"
+msgstr "Calibrando... %1 amostras coletadas"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1988
+msgid "Move joysticks in circles, press any button to finish"
+msgstr ""
+"Mova os joysticks em círculos e pressione qualquer botão para finalizar"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1994
+msgid "Left X offset:"
+msgstr "Deslocamento X esquerdo:"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1995
+msgid "Left Y offset:"
+msgstr "Deslocamento Y esquerdo:"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1996
+msgid "Right X offset:"
+msgstr "Deslocamento X direito:"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1997
+msgid "Right Y offset:"
+msgstr "Deslocamento Y direito:"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2001
+msgid "Not calibrated"
+msgstr "Não calibrado"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2014
+msgid "Calibration reset for "
+msgstr "Calibração redefinida para"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2063
+msgid "Button mappings reset to defaults for "
+msgstr "Mapeamento de botões restaurado para o padrão de"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2086
+msgid "Profile exported: "
+msgstr "Perfil exportado:"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2103
+msgid "Profile imported successfully for "
+msgstr "Perfil importado com sucesso para"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2105
+msgid "Failed to import profile"
+msgstr "Falha ao importar o perfil"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2109
+msgid "Invalid profile file"
+msgstr "Arquivo de perfil inválido"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2183
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2277
+msgid "Vibration feedback enabled"
+msgstr "Feedback de vibração ativado"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2297
+msgid "Button mappings saved for "
+msgstr "Mapeamento de botões salvo para"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2321
+msgid "Scanning..."
+msgstr "Procurando..."
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2351
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2356
+msgid "Found "
+msgstr "Encontrado"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2351
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2356
+msgid " controller(s)"
+msgstr "controle(s)"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2358
+msgid "No controllers found. Please connect a controller and try again."
+msgstr ""
+"Nenhum controle encontrado. Por favor, conecte um controle e tente "
+"novamente."
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2414
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2415
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2416
+msgid "Controller data not available"
+msgstr "Dados do controle indisponíveis"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2434
+msgid "No button data available"
+msgstr "Nenhum dado de botão disponível"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2470
+msgid "No axis data available"
+msgstr "Nenhum dado de eixo disponível"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2476
+msgid "Left X"
+msgstr "X esquerdo"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2477
+msgid "Left Y"
+msgstr "Y esquerdo"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2478
+msgid "Right X"
+msgstr "X direito"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2479
+msgid "Right Y"
+msgstr "Y direito"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2480
+msgid "L2 Trigger"
+msgstr "Gatilho L2"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2481
+msgid "R2 Trigger"
+msgstr "Gatilho R2"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2520
+msgid "Device Name"
+msgstr "Nome do Dispositivo"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2521
+msgid "Vendor/Product ID"
+msgstr "ID do Fabricante/Produto"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2522
+msgid "Button Count"
+msgstr "Contagem de Botões"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2523
+msgid "Axis Count"
+msgstr "Contagem de Eixos"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2524
+msgid "Operating System"
+msgstr "Sistema Operacional"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2525
+msgid "Browser"
+msgstr "Navegador"
+
+#: plugins/RemoteControl/webroot/js/ui/search.js:82
+msgid "Culture Constellations"
+msgstr "Constelações da Cultura"
+
+#: plugins/RemoteControl/webroot/js/ui/search.js:83
+msgid "Culture Asterisms"
+msgstr "Asterismos da Cultura"
+
+#: plugins/RemoteControl/webroot/js/ui/search.js:84
+msgid "Culture Zodiac Signs"
+msgstr "Signos do Zodíaco da Cultura"
+
+#: plugins/RemoteControl/webroot/js/ui/search.js:85
+msgid "Culture Lunar Mansions"
+msgstr "Mansões Lunares da Cultura"
+
+#: plugins/RemoteControl/webroot/js/ui/search.js:86
+msgid "Culture Notable Stars"
+msgstr "Estrelas Notáveis da Cultura"
+
 #: plugins/RemoteControl/webroot/js/ui/search.js:132
 msgid "No items available for this culture"
 msgstr "Nenhum item disponível para esta cultura"
@@ -148,6 +431,103 @@ msgstr "Nenhum item disponível para esta cultura"
 #: plugins/RemoteControl/webroot/js/ui/search.js:432
 msgid "No current selection"
 msgstr "Sem seleção atual"
+
+#: plugins/RemoteControl/webroot/js/ui/skyculture.js:515
+msgid "No data available"
+msgstr "Nenhum dado disponível"
+
+#: plugins/RemoteControl/webroot/js/ui/skyculture.js:517
+#: plugins/RemoteControl/webroot/js/ui/skyculture.js:964
+msgid "No constellations available for this culture"
+msgstr "Nenhuma constelação disponível para esta cultura"
+
+#: plugins/RemoteControl/webroot/js/ui/skyculture.js:519
+#: plugins/RemoteControl/webroot/js/ui/skyculture.js:993
+msgid "No asterisms available for this culture"
+msgstr "Nenhum asterismo disponível para esta cultura"
+
+#: plugins/RemoteControl/webroot/js/ui/skyculture.js:521
+msgid "No zodiac data available for this culture"
+msgstr "Nenhum dado de zodíaco disponível para esta cultura"
+
+#: plugins/RemoteControl/webroot/js/ui/skyculture.js:523
+msgid "No lunar mansions data available for this culture"
+msgstr "Nenhum dado de mansões lunares disponível para esta cultura"
+
+#: plugins/RemoteControl/webroot/js/ui/skyculture.js:525
+msgid "No star name data available for this culture"
+msgstr "Nenhum dado de nomes de estrelas disponível para esta cultura"
+
+#: plugins/RemoteControl/webroot/js/ui/skyculture.js:1022
+msgid "No zodiac signs available for this culture"
+msgstr "Nenhum signo do zodíaco disponível para esta cultura"
+
+#: plugins/RemoteControl/webroot/js/ui/skyculture.js:1049
+msgid "No lunar mansions available for this culture"
+msgstr "Nenhuma mansão lunar disponível para esta cultura"
+
+#: plugins/RemoteControl/webroot/js/ui/skyculture.js:1075
+msgid "No star names available for this culture"
+msgstr "Nenhum nome de estrela disponível para esta cultura"
+
+#: plugins/RemoteControl/webroot/js/ui/skyculture.js:1119
+msgid "Loading constellations..."
+msgstr "Carregando constelações..."
+
+#: plugins/RemoteControl/webroot/js/ui/skyculture.js:1123
+msgid "Loading asterisms..."
+msgstr "Carregando asterismos..."
+
+#: plugins/RemoteControl/webroot/js/ui/skyculture.js:1127
+msgid "Loading zodiac signs..."
+msgstr "Carregando signos do zodíaco..."
+
+#: plugins/RemoteControl/webroot/js/ui/skyculture.js:1131
+msgid "Loading lunar mansions..."
+msgstr "Carregando mansões lunares..."
+
+#: plugins/RemoteControl/webroot/js/ui/skyculture.js:1135
+msgid "Loading star names..."
+msgstr "Carregando nomes de estrelas..."
+
+#: plugins/RemoteControl/webroot/js/ui/skyculture.js:1227
+msgid "No sky cultures available"
+msgstr "Nenhuma cultura celeste disponível"
+
+#: plugins/RemoteControl/webroot/js/ui/skyculture.js:1302
+msgid "Error loading sky cultures"
+msgstr "Erro ao carregar culturas celestes"
+
+#: plugins/RemoteControl/webroot/js/ui/stellarium-utils.js:436
+#: plugins/RemoteControl/webroot/js/ui/stellarium-utils.js:460
+#: plugins/RemoteControl/webroot/js/ui/stellarium-utils.js:473
+#: plugins/RemoteControl/webroot/js/ui/stellarium-utils.js:488
+msgid "Centering on: "
+msgstr "Centralizando em:"
+
+#: plugins/RemoteControl/webroot/js/ui/stellarium-utils.js:563
+msgid "Center on zodiac sign: "
+msgstr "Centralizar no signo do zodíaco:"
+
+#: plugins/RemoteControl/webroot/js/ui/stellarium-utils.js:580
+msgid "Centering on asterism: "
+msgstr "Centralizando no asterismo:"
+
+#: plugins/RemoteControl/webroot/js/ui/stellarium-utils.js:628
+msgid "Center on lunar mansion: "
+msgstr "Centralizar na mansão lunar:"
+
+#: plugins/RemoteControl/webroot/js/ui/stellarium-utils.js:752
+msgid "Cleared highlight: "
+msgstr "Destaque removido:"
+
+#: plugins/RemoteControl/webroot/js/ui/stellarium-utils.js:780
+msgid "Isolating constellation: "
+msgstr "Isolando constelação:"
+
+#: plugins/RemoteControl/webroot/js/ui/stellarium-utils.js:802
+msgid "All constellations visible"
+msgstr "Todas as constelações visíveis"
 
 #: index.html:7 tablet7in.html:7
 msgid "Stellarium remote control plugin"
@@ -794,15 +1174,11 @@ msgstr "Escanear"
 
 #: index.html:1311 tablet7in.html:1380
 msgid "Controller Settings"
-msgstr "Configurações do Controlador"
+msgstr "Configurações do Controle"
 
 #: index.html:1314 tablet7in.html:1383
 msgid "Active Device:"
 msgstr "Dispositivo Ativo:"
-
-#: index.html:1316 tablet7in.html:1385
-msgid "No devices connected"
-msgstr "Nenhum dispositivo conectado"
 
 #: index.html:1322 tablet7in.html:1391
 msgid "Device:"
@@ -836,10 +1212,6 @@ msgstr "Movimento da visualização"
 msgid "Direction:"
 msgstr "Direção:"
 
-#: index.html:1355 tablet7in.html:1424
-msgid "centered"
-msgstr "Centralizado"
-
 #: index.html:1360 tablet7in.html:1429
 msgid "Invert X"
 msgstr "Inverter X"
@@ -863,10 +1235,6 @@ msgstr "FOV atual:"
 #: index.html:1392 tablet7in.html:1461
 msgid "Joystick Calibration"
 msgstr "Calibração do Joystick"
-
-#: index.html:1394 tablet7in.html:1463
-msgid "Calibrate"
-msgstr "Calibrar"
 
 #: index.html:1400 tablet7in.html:1469
 msgid ""
