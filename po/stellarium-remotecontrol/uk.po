@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-remotecontrol\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2026-08-24 18:46+0700\n"
+"POT-Creation-Date: 2026-09-07 19:13+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>, 2026\n"
 "Language-Team: Ukrainian (https://app.transifex.com/stellarium/teams/80998/uk/)\n"
@@ -139,6 +139,287 @@ msgstr "Показати всі елементи"
 msgid "Input did not match any item"
 msgstr "Введене не відповідає жодному з елементів"
 
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:597
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1820
+msgid "No action"
+msgstr "Немає дії"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:710
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2065
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2072
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2092
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2299
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2406
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2407
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2408
+msgid "No controller connected"
+msgstr "Немає з'єднаних контролерів"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:717
+msgid "Vibration test sent to "
+msgstr "Перевірку вібрації надіслано до"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:720
+msgid "Vibration not supported on this device/browser"
+msgstr ""
+"На цьому пристрої або засобі навігації не передбачено підтримки вібрації"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1068
+msgid "Warning: This profile was created for a different controller type."
+msgstr "Попередження: профіль створено для іншого типу контролера."
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1251 index.html:1355
+#: tablet7in.html:1424
+msgid "centered"
+msgstr "центровано"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1337
+msgid "East →"
+msgstr "Схід →"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1338
+msgid "North-East ↗"
+msgstr "Північний схід ↗"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1339
+msgid "North ↑"
+msgstr "Північ ↑"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1340
+msgid "North-West ↖"
+msgstr "Північний захід ↖"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1341
+msgid "West ←"
+msgstr "Захід ←"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1342
+msgid "South-West ↙"
+msgstr "Південний захід ↙"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1343
+msgid "South ↓"
+msgstr "Південь ↓"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1344
+msgid "South-East ↘"
+msgstr "Південний схід ↘"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1347
+msgid "fast"
+msgstr "швидко"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1347
+msgid "medium"
+msgstr "посередньо"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1347
+msgid "slow"
+msgstr "повільно"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1579 index.html:1316
+#: tablet7in.html:1385
+msgid "No devices connected"
+msgstr "Немає з'єднаних пристроїв"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1778
+msgid "Connect a controller to customize buttons"
+msgstr "Встановіть з'єднання з контролером, щоб налаштувати кнопки"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1848
+msgid "Button %1 mapped to %2"
+msgstr "Кнопку %1 пов'язано із %2"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1879
+msgid "Please connect a controller first"
+msgstr "Будь ласка, спочатку встановіть з'єднання з контролером"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1893
+msgid "Calibrating..."
+msgstr "Калібруванння…"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1894
+msgid "Move both joysticks in circles, then press any button to finish"
+msgstr ""
+"Пересувайте стіки колами, потім натисніть будь-яку кнопку, щоб завершити."
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1943
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1949
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1975 index.html:1394
+#: tablet7in.html:1463
+msgid "Calibrate"
+msgstr "Калібрувати"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1976
+msgid "Calibration complete! "
+msgstr "Калібрування завершено!"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1976
+msgid " samples collected."
+msgstr "зразки зібрано."
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1986
+msgid "Calibrating... Collected %1 samples"
+msgstr "Калібрування... Зібрано %1 зразків"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1988
+msgid "Move joysticks in circles, press any button to finish"
+msgstr "Пересувайте стіки колами, натисніть будь-яку кнопку, щоб завершити"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1994
+msgid "Left X offset:"
+msgstr "Зсув лівої X:"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1995
+msgid "Left Y offset:"
+msgstr "Зсув правої Y:"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1996
+msgid "Right X offset:"
+msgstr "Зсув правої X:"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1997
+msgid "Right Y offset:"
+msgstr "Зсув правої Y:"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2001
+msgid "Not calibrated"
+msgstr "Не калібровано"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2014
+msgid "Calibration reset for "
+msgstr "Калібрування скинуто для"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2063
+msgid "Button mappings reset to defaults for "
+msgstr "Відновлено типову прив'язку кнопк для"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2086
+msgid "Profile exported: "
+msgstr "Профіль експортовано:"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2103
+msgid "Profile imported successfully for "
+msgstr "Профіль успішно імпортовано для"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2105
+msgid "Failed to import profile"
+msgstr "Не вдалося імпортувати профіль"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2109
+msgid "Invalid profile file"
+msgstr "Некоректний файл профілю"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2183
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2277
+msgid "Vibration feedback enabled"
+msgstr "Увімкнено вібраційну реакцію"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2297
+msgid "Button mappings saved for "
+msgstr "Прив'язку кнопок збережено для"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2321
+msgid "Scanning..."
+msgstr "Сканування…"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2351
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2356
+msgid "Found "
+msgstr "Знайдено"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2351
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2356
+msgid " controller(s)"
+msgstr "контролерів"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2358
+msgid "No controllers found. Please connect a controller and try again."
+msgstr ""
+"Контролерів не знайдено. Будь ласка, з'єднайте контролер і повторіть спробу."
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2414
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2415
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2416
+msgid "Controller data not available"
+msgstr "Дані контролера недоступні"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2434
+msgid "No button data available"
+msgstr "Дані кнопок недоступні"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2470
+msgid "No axis data available"
+msgstr "Дані осей недоступні"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2476
+msgid "Left X"
+msgstr "Ліва X"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2477
+msgid "Left Y"
+msgstr "Ліва Y"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2478
+msgid "Right X"
+msgstr "Права X"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2479
+msgid "Right Y"
+msgstr "Права Y"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2480
+msgid "L2 Trigger"
+msgstr "Перемикач L2"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2481
+msgid "R2 Trigger"
+msgstr "Перемикач R2"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2520
+msgid "Device Name"
+msgstr "Назва пристрою"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2521
+msgid "Vendor/Product ID"
+msgstr "Ідентифікатор виробника/продукту"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2522
+msgid "Button Count"
+msgstr "Кількість кнопок"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2523
+msgid "Axis Count"
+msgstr "Кількість осей"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2524
+msgid "Operating System"
+msgstr "Операційна система"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2525
+msgid "Browser"
+msgstr "Навігатор"
+
+#: plugins/RemoteControl/webroot/js/ui/search.js:82
+msgid "Culture Constellations"
+msgstr "Сузір'я картини неба"
+
+#: plugins/RemoteControl/webroot/js/ui/search.js:83
+msgid "Culture Asterisms"
+msgstr "Астеризми картини неба"
+
+#: plugins/RemoteControl/webroot/js/ui/search.js:84
+msgid "Culture Zodiac Signs"
+msgstr "Знаки зодіака картини неба"
+
+#: plugins/RemoteControl/webroot/js/ui/search.js:85
+msgid "Culture Lunar Mansions"
+msgstr "Місячні станції картини неба"
+
+#: plugins/RemoteControl/webroot/js/ui/search.js:86
+msgid "Culture Notable Stars"
+msgstr "Помітні зірки картини неба"
+
 #: plugins/RemoteControl/webroot/js/ui/search.js:132
 msgid "No items available for this culture"
 msgstr "Немає записів для цієї картини"
@@ -146,6 +427,103 @@ msgstr "Немає записів для цієї картини"
 #: plugins/RemoteControl/webroot/js/ui/search.js:432
 msgid "No current selection"
 msgstr "Зараз нічого не позначено"
+
+#: plugins/RemoteControl/webroot/js/ui/skyculture.js:515
+msgid "No data available"
+msgstr "Дані недоступні"
+
+#: plugins/RemoteControl/webroot/js/ui/skyculture.js:517
+#: plugins/RemoteControl/webroot/js/ui/skyculture.js:964
+msgid "No constellations available for this culture"
+msgstr "Для цієї картини неба сузір'я недоступні"
+
+#: plugins/RemoteControl/webroot/js/ui/skyculture.js:519
+#: plugins/RemoteControl/webroot/js/ui/skyculture.js:993
+msgid "No asterisms available for this culture"
+msgstr "Для цієї картини неба астеризми недоступні"
+
+#: plugins/RemoteControl/webroot/js/ui/skyculture.js:521
+msgid "No zodiac data available for this culture"
+msgstr "Для цієї картини неба дані зодіака недоступні"
+
+#: plugins/RemoteControl/webroot/js/ui/skyculture.js:523
+msgid "No lunar mansions data available for this culture"
+msgstr "Для цієї картини неба дані місячних станцій недоступні"
+
+#: plugins/RemoteControl/webroot/js/ui/skyculture.js:525
+msgid "No star name data available for this culture"
+msgstr "Для цієї картини неба назви зірок недоступні"
+
+#: plugins/RemoteControl/webroot/js/ui/skyculture.js:1022
+msgid "No zodiac signs available for this culture"
+msgstr "Для цієї картини неба знаки зодіака недоступні"
+
+#: plugins/RemoteControl/webroot/js/ui/skyculture.js:1049
+msgid "No lunar mansions available for this culture"
+msgstr "Для цієї картини неба місячні станції недоступні"
+
+#: plugins/RemoteControl/webroot/js/ui/skyculture.js:1075
+msgid "No star names available for this culture"
+msgstr "Для цієї картини назви зірок недоступні"
+
+#: plugins/RemoteControl/webroot/js/ui/skyculture.js:1119
+msgid "Loading constellations..."
+msgstr "Завантаження сузір'їв…"
+
+#: plugins/RemoteControl/webroot/js/ui/skyculture.js:1123
+msgid "Loading asterisms..."
+msgstr "Завантаження астеризмів…"
+
+#: plugins/RemoteControl/webroot/js/ui/skyculture.js:1127
+msgid "Loading zodiac signs..."
+msgstr "Завантаження знаків зодіака…"
+
+#: plugins/RemoteControl/webroot/js/ui/skyculture.js:1131
+msgid "Loading lunar mansions..."
+msgstr "Завантаження місячних станцій…"
+
+#: plugins/RemoteControl/webroot/js/ui/skyculture.js:1135
+msgid "Loading star names..."
+msgstr "Завантаження назв зірок…"
+
+#: plugins/RemoteControl/webroot/js/ui/skyculture.js:1227
+msgid "No sky cultures available"
+msgstr "Немає доступних картин неба"
+
+#: plugins/RemoteControl/webroot/js/ui/skyculture.js:1302
+msgid "Error loading sky cultures"
+msgstr "Помилка під час спроби завантаження картин неба"
+
+#: plugins/RemoteControl/webroot/js/ui/stellarium-utils.js:436
+#: plugins/RemoteControl/webroot/js/ui/stellarium-utils.js:460
+#: plugins/RemoteControl/webroot/js/ui/stellarium-utils.js:473
+#: plugins/RemoteControl/webroot/js/ui/stellarium-utils.js:488
+msgid "Centering on: "
+msgstr "Центрування:"
+
+#: plugins/RemoteControl/webroot/js/ui/stellarium-utils.js:563
+msgid "Center on zodiac sign: "
+msgstr "Центр на знаці зодіака:"
+
+#: plugins/RemoteControl/webroot/js/ui/stellarium-utils.js:580
+msgid "Centering on asterism: "
+msgstr "Центрування за астеризмом:"
+
+#: plugins/RemoteControl/webroot/js/ui/stellarium-utils.js:628
+msgid "Center on lunar mansion: "
+msgstr "Центрування за місячною станцією:"
+
+#: plugins/RemoteControl/webroot/js/ui/stellarium-utils.js:752
+msgid "Cleared highlight: "
+msgstr "Вилучене підсвічування:"
+
+#: plugins/RemoteControl/webroot/js/ui/stellarium-utils.js:780
+msgid "Isolating constellation: "
+msgstr "Ізолювання сузір'я:"
+
+#: plugins/RemoteControl/webroot/js/ui/stellarium-utils.js:802
+msgid "All constellations visible"
+msgstr "Видимими є усі сузір'я"
 
 #: index.html:7 tablet7in.html:7
 msgid "Stellarium remote control plugin"
@@ -797,10 +1175,6 @@ msgstr "Параметри контролера"
 msgid "Active Device:"
 msgstr "Активний пристрій:"
 
-#: index.html:1316 tablet7in.html:1385
-msgid "No devices connected"
-msgstr "Немає з'єднаних пристроїв"
-
 #: index.html:1322 tablet7in.html:1391
 msgid "Device:"
 msgstr "Пристрій:"
@@ -833,10 +1207,6 @@ msgstr "Пересування перегляду"
 msgid "Direction:"
 msgstr "Напрямок:"
 
-#: index.html:1355 tablet7in.html:1424
-msgid "centered"
-msgstr "центровано"
-
 #: index.html:1360 tablet7in.html:1429
 msgid "Invert X"
 msgstr "Інверсія X"
@@ -860,10 +1230,6 @@ msgstr "Поточне поле зору:"
 #: index.html:1392 tablet7in.html:1461
 msgid "Joystick Calibration"
 msgstr "Калібрування джойстика"
-
-#: index.html:1394 tablet7in.html:1463
-msgid "Calibrate"
-msgstr "Калібрувати"
 
 #: index.html:1400 tablet7in.html:1469
 msgid ""
