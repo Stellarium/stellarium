@@ -49,9 +49,9 @@ const QString AngleSpinBox::positivePrefix(PrefixType prefix)
 		case NormalPlus:
 			return("+");
 		case Longitude:
-			return(q_("E")+" ");
+			return(qc_("E", "longitude")+" ");
 		case Latitude:
-			return(q_("N")+" ");
+			return(qc_("N", "latitude")+" ");
 		case Normal:
 		default:
 			return("");
@@ -65,9 +65,9 @@ const QString AngleSpinBox::negativePrefix(PrefixType prefix)
 		case NormalPlus:
 			return(QLocale().negativeSign());
 		case Longitude:
-			return(q_("W")+" ");
+			return(qc_("W", "longitude")+" ");
 		case Latitude:
-			return(q_("S")+" ");
+			return(qc_("S", "latitude")+" ");
 		case Normal:
 		default:
 			return(QLocale().negativeSign());
@@ -85,7 +85,7 @@ AngleSpinBox::AngleSpinboxSection AngleSpinBox::getCurrentSection() const
 	const QString str = lineEdit()->text();
 	
 	// Regexp must not have "+-" immediately behind "[" !
-	static QRegularExpression cardExp("^["+q_("N")+q_("S")+q_("E")+q_("W")+"+-]");
+	static QRegularExpression cardExp("^["+qc_("N", "latitude")+qc_("S", "latitude")+qc_("E", "longitude")+qc_("W", "longitude")+"+-]");
 	int cPosMin = str.indexOf(cardExp, 0);
 	// without prefix (e.g. right ascension): avoid unwanted negating!
 	if ((cPosMin==-1) && (cursorPos==0)) {

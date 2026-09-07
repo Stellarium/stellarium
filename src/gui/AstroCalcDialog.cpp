@@ -71,7 +71,7 @@
 
 #include <QtCharts/QtCharts>
 #if (QT_VERSION<QT_VERSION_CHECK(6,0,0))
-using namespace QtCharts;
+using namespace QtCharts;core->getCurrentLocation()
 #endif
 
 #include "AstroCalcDialog.hpp"
@@ -393,6 +393,9 @@ void AstroCalcDialog::createDialogContent()
 	connect(ui->eclipseFilterAnnular,   &QCheckBox::clicked, this, &AstroCalcDialog::saveEclipseFiltersState);
 	connect(ui->eclipseFilterPartial,   &QCheckBox::clicked, this, &AstroCalcDialog::saveEclipseFiltersState);
 	connect(ui->eclipseFilterPenumbral, &QCheckBox::clicked, this, &AstroCalcDialog::saveEclipseFiltersState);
+	
+	connect(core, &StelCore::locationChanged, this, &AstroCalcDialog::enableLocalCoordinatesButton);
+	connect(ui->localCoordinates, &QPushButton::clicked, this, &AstroCalcDialog::goToLocalCoordinates);
 
 	// Let's use DMS and decimal degrees as acceptable values for "Maximum allowed separation" input box
 	ui->allowedSeparationSpinBox->setDisplayFormat(AngleSpinBox::DMSSymbols);
@@ -3064,9 +3067,16 @@ void AstroCalcDialog::generateLunarEclipses()
 
 		// sort-by-date
 		ui->lunareclipseTreeWidget->sortItems(LunarEclipseDate, Qt::AscendingOrder);
+		isLunarEclipsesComputed = true;
 		enableLunarEclipsesButtons(true);
-		enableLunarEclipsesCircumstancesButtons(false);
-		StelApp::getInstance().enableBottomStelBarUpdates(true);
+		enableLunarEclipsesCircumstancesButtons(false);		
+		if (isLocationChanged)
+		{
+			cleanupSolarEclipsesLocal();
+			cleanupTransits();
+		}
+		showLocalCoordinates();
+		StelApp::getInstance().enableBottomStelBarUpdates(true);		
 	}
 	else
 		cleanupLunarEclipses();
@@ -3076,6 +3086,8 @@ void AstroCalcDialog::cleanupLunarEclipses()
 {
 	ui->lunareclipseTreeWidget->clear();
 	ui->lunareclipsecontactsTreeWidget->clear();
+	isLunarEclipsesComputed = false;
+	cleanupLocalCoordinates();
 	enableLunarEclipsesButtons(false);
 	enableLunarEclipsesCircumstancesButtons(false);
 }
@@ -3435,6 +3447,68 @@ LocalSEparams localSolarEclipse(double JD,int contact,bool central) {
 	result.ce = ce;
 
 	return result;
+}
+
+void AstroCalcDialog::cleanupLocalCoordinates()
+{
+	if (!isSolarEclipsesComputed && !isLunarEclipsesComputed && !isTransitsComputed)
+	{
+		ui->localCoordinates->setText("");
+		ui->localCoordinates->setToolTip("");
+		ui->localCoordinates->setVisible(false);
+	}
+}
+
+void AstroCalcDialog::goToLocalCoordinates()
+{
+	ui->localCoordinates->setEnabled(false);
+	ui->localCoordinates->setToolTip(location.name);
+	ui->localCoordinates->setStyleSheet("");
+	isReturned = true;
+	core->moveObserverTo(location, 1.);
+}
+
+void AstroCalcDialog::enableLocalCoordinatesButton()
+{
+	if ((isSolarEclipsesComputed || isLunarEclipsesComputed || isTransitsComputed) && !isReturned)
+	{
+		ui->localCoordinates->setEnabled(true);
+		ui->localCoordinates->setToolTip(q_("Location is changed! Go to back..."));
+		ui->localCoordinates->setStyleSheet(QString("QPushButton{ background: red; }"));
+		isLocationChanged = true;
+	}
+}
+
+void AstroCalcDialog::showLocalCoordinates()
+{
+	location = core->getCurrentLocation();	
+	float lat  = location.getLatitude();
+	float lon = location.getLongitude();
+	QString pm;
+	if (lat >= 0)
+		pm = qc_("N", "latitude");
+	else
+	{
+		pm = qc_("S", "latitude");
+		lat *= -1;
+	}
+	QString latStr = QString("%1%2%3").arg(pm, QString::number(lat, 'f', 5), QChar(0x00B0));
+	if (lon >= 0)
+		pm = qc_("E", "longitude");
+	else
+	{
+		pm = qc_("W", "longitude");
+		lon *= -1;
+	}
+	QString lonStr = QString("%1%2%3").arg(pm, QString::number(lon, 'f', 5), QChar(0x00B0));
+
+	ui->localCoordinates->setText(QString("%1 %2").arg(latStr, lonStr));
+	ui->localCoordinates->setToolTip(location.name);
+	ui->localCoordinates->setVisible(true);
+	ui->localCoordinates->setEnabled(false);
+	ui->localCoordinates->setStyleSheet("");
+	isReturned = false;
+	isLocationChanged = false;
 }
 
 void AstroCalcDialog::generateSolarEclipses()
@@ -3981,8 +4055,15 @@ void AstroCalcDialog::generateSolarEclipsesLocal()
 
 		// sort-by-date
 		ui->solareclipselocalTreeWidget->sortItems(SolarEclipseLocalDate, Qt::AscendingOrder);
+		isSolarEclipsesComputed = true;
 		enableSolarEclipsesLocalButtons(true);
-		enableSolarEclipsesLocalSingleEclipseButtons(false);
+		enableSolarEclipsesLocalSingleEclipseButtons(false);		
+		if (isLocationChanged)
+		{
+			cleanupLunarEclipses();
+			cleanupTransits();
+		}
+		showLocalCoordinates();
 	}
 	else
 		cleanupSolarEclipsesLocal();
@@ -3991,7 +4072,7 @@ void AstroCalcDialog::generateSolarEclipsesLocal()
 void AstroCalcDialog::cleanupSolarEclipses()
 {
 	ui->solareclipseTreeWidget->clear();
-	ui->solareclipsecontactsTreeWidget->clear();
+	ui->solareclipsecontactsTreeWidget->clear();	
 	enableSolarEclipsesButtons(false);
 	enableSolarEclipsesCircumstancesButtons(false);
 }
@@ -4353,6 +4434,8 @@ void AstroCalcDialog::saveSolarEclipseMap(const bool local)
 void AstroCalcDialog::cleanupSolarEclipsesLocal()
 {
 	ui->solareclipselocalTreeWidget->clear();
+	isSolarEclipsesComputed = false;
+	cleanupLocalCoordinates();
 	enableSolarEclipsesLocalButtons(false);
 	enableSolarEclipsesLocalSingleEclipseButtons(false);
 }
@@ -5016,8 +5099,14 @@ void AstroCalcDialog::generateTransits()
 
 		// sort-by-date
 		ui->transitTreeWidget->sortItems(TransitMid, Qt::AscendingOrder);
-		enableTransitsButtons(true);
-
+		isTransitsComputed = true;
+		enableTransitsButtons(true);		
+		if (isLocationChanged)
+		{
+			cleanupSolarEclipsesLocal();
+			cleanupLunarEclipses();
+		}
+		showLocalCoordinates();
 		StelApp::getInstance().enableBottomStelBarUpdates(true);
 	}
 	else
@@ -5033,7 +5122,9 @@ void AstroCalcDialog::enableRTSButtons(bool enable)
 void AstroCalcDialog::cleanupTransits()
 {
 	ui->transitTreeWidget->clear();
-	enableTransitsButtons(false);
+	isTransitsComputed = false;
+	cleanupLocalCoordinates();
+	enableTransitsButtons(false);	
 }
 
 void AstroCalcDialog::enableTransitsButtons(bool enable)
@@ -7703,13 +7794,18 @@ void AstroCalcDialog::changeEclipsesTab(int index)
 		{3,	q_("Transits of Mercury and Venus across the Sun")}
 		};
 	ui->eclipseHeaderLabel->setText(headermap.value(index, q_("Table of solar eclipses")));
+	bool flag = (isSolarEclipsesComputed || isLunarEclipsesComputed || isTransitsComputed);
 	switch(index)
 	{
 	case 0: // Solar eclipses
-		ui->eclipseFilterWidget->setVisible(true);
+		//ui->eclipseFilterWidget->setVisible(true);
 		ui->eclipseFilterHybrid->setVisible(true);
 		ui->eclipseFilterAnnular->setVisible(true);
 		ui->eclipseFilterPenumbral->setVisible(false);
+		ui->eclipseFilterPartial->setVisible(true);
+		ui->eclipseFilterTotal->setVisible(true);
+		
+		ui->localCoordinates->setVisible(false);
 
 		ui->eclipseFilterTotal->setChecked(conf->value("astrocalc/eclipse_filter/global_solar/total_enabled", true).toBool());
 		ui->eclipseFilterHybrid->setChecked(conf->value("astrocalc/eclipse_filter/global_solar/hybrid_enabled", true).toBool());
@@ -7717,27 +7813,44 @@ void AstroCalcDialog::changeEclipsesTab(int index)
 		ui->eclipseFilterPartial->setChecked(conf->value("astrocalc/eclipse_filter/global_solar/partial_enabled", true).toBool());
 		break;
 	case 1: // Local solar eclipses
-		ui->eclipseFilterWidget->setVisible(true);
+		//ui->eclipseFilterWidget->setVisible(true);
 		ui->eclipseFilterHybrid->setVisible(false);
 		ui->eclipseFilterAnnular->setVisible(true);
 		ui->eclipseFilterPenumbral->setVisible(false);
+		ui->eclipseFilterPartial->setVisible(true);
+		ui->eclipseFilterTotal->setVisible(true);
+		
+		ui->localCoordinates->setVisible(flag);
 
 		ui->eclipseFilterTotal->setChecked(conf->value("astrocalc/eclipse_filter/local_solar/total_enabled", true).toBool());
 		ui->eclipseFilterAnnular->setChecked(conf->value("astrocalc/eclipse_filter/local_solar/annular_enabled", true).toBool());
 		ui->eclipseFilterPartial->setChecked(conf->value("astrocalc/eclipse_filter/local_solar/partial_enabled", true).toBool());
 		break;
 	case 2: // Lunar eclipses
-		ui->eclipseFilterWidget->setVisible(true);
+		//ui->eclipseFilterWidget->setVisible(true);
 		ui->eclipseFilterHybrid->setVisible(false);
 		ui->eclipseFilterAnnular->setVisible(false);
 		ui->eclipseFilterPenumbral->setVisible(true);
+		ui->eclipseFilterPartial->setVisible(true);
+		ui->eclipseFilterTotal->setVisible(true);
+		
+		ui->localCoordinates->setVisible(flag);
 
 		ui->eclipseFilterTotal->setChecked(conf->value("astrocalc/eclipse_filter/lunar/total_enabled", true).toBool());
 		ui->eclipseFilterPartial->setChecked(conf->value("astrocalc/eclipse_filter/lunar/partial_enabled", true).toBool());
 		ui->eclipseFilterPenumbral->setChecked(conf->value("astrocalc/eclipse_filter/lunar/penumbral_enabled", true).toBool());
 		break;
+	case 3: // Transits
+		ui->eclipseFilterHybrid->setVisible(false);
+		ui->eclipseFilterAnnular->setVisible(false);
+		ui->eclipseFilterPenumbral->setVisible(false);
+		ui->eclipseFilterTotal->setVisible(false);
+		ui->eclipseFilterPartial->setVisible(false);
+		
+		ui->localCoordinates->setVisible(flag);
+		break;
 	default:
-		ui->eclipseFilterWidget->setVisible(false);
+		//ui->eclipseFilterWidget->setVisible(false);
 		break;
 	}
 }
