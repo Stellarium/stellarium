@@ -71,7 +71,7 @@
 
 #include <QtCharts/QtCharts>
 #if (QT_VERSION<QT_VERSION_CHECK(6,0,0))
-using namespace QtCharts;core->getCurrentLocation()
+using namespace QtCharts;
 #endif
 
 #include "AstroCalcDialog.hpp"
