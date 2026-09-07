@@ -585,16 +585,16 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
         function getActionDisplayName(actionId) {
             // Check if it's an educational custom action
             if (EDUCATIONAL_CUSTOM_ACTIONS[actionId]) {
-                return _tr(EDUCATIONAL_CUSTOM_ACTIONS[actionId]);
+                return rc.tr(EDUCATIONAL_CUSTOM_ACTIONS[actionId]);
             }
             
             // Check if it's a native StelAction
             if (nativeActionData[actionId]) {
-                return _tr(nativeActionData[actionId].text);
+                return rc.tr(nativeActionData[actionId].text);
             }
             
             // Fallback for unknown actions
-            if (actionId === "none") return _tr("No action");
+            if (actionId === "none") return rc.tr("No action");
             return actionId;
         }
 
@@ -707,17 +707,17 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
         function testVibrationManual() {
             var device = gamepadManager ? gamepadManager.getActiveDevice() : null;
             if (!device) {
-                showNotification(_tr("No controller connected"));
+                showNotification(rc.tr("No controller connected"));
                 return;
             }
             
             // Use full intensity for test (0.8) regardless of settings
             var success = triggerVibration(400, 0.8);
             if (success) {
-                showNotification(_tr("Vibration test sent to ") + device.getDisplayInfo().name + 
+                showNotification(rc.tr("Vibration test sent to ") + device.getDisplayInfo().name + 
                         " (Intensity: " + Math.round(controllerSettings.vibrationIntensity * 100) + "%)");
             } else {
-                showNotification(_tr("Vibration not supported on this device/browser"));
+                showNotification(rc.tr("Vibration not supported on this device/browser"));
             }
         }
 
@@ -1065,7 +1065,7 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
             try {
                 if (profile.deviceInfo && profile.deviceInfo.uniqueId !== this.uniqueId) {
                     console.warn("[Gamepad] Importing profile from different device type.");
-                    showNotification(_tr("Warning: This profile was created for a different controller type."));
+                    showNotification(rc.tr("Warning: This profile was created for a different controller type."));
                 }
                 
                 if (profile.mappings) {
@@ -1248,7 +1248,7 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
                 if (direction) {
                     $currentDirection.text(direction);
                 } else if (this.isMoving === false) {
-                    $currentDirection.text(_tr("centered"));
+                    $currentDirection.text(rc.tr("centered"));
                 }
             }
 
@@ -1334,17 +1334,17 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
             var angle = Math.atan2(-leftY, leftX) * (180 / Math.PI);
             var direction = "";
             
-            if (angle >= -22.5 && angle < 22.5) direction = _tr("East →");
-            else if (angle >= 22.5 && angle < 67.5) direction = _tr("North-East ↗");
-            else if (angle >= 67.5 && angle < 112.5) direction = _tr("North ↑");
-            else if (angle >= 112.5 && angle < 157.5) direction = _tr("North-West ↖");
-            else if (angle >= 157.5 || angle < -157.5) direction = _tr("West ←");
-            else if (angle >= -157.5 && angle < -112.5) direction = _tr("South-West ↙");
-            else if (angle >= -112.5 && angle < -67.5) direction = _tr("South ↓");
-            else if (angle >= -67.5 && angle < -22.5) direction = _tr("South-East ↘");
+            if (angle >= -22.5 && angle < 22.5) direction = rc.tr("East →");
+            else if (angle >= 22.5 && angle < 67.5) direction = rc.tr("North-East ↗");
+            else if (angle >= 67.5 && angle < 112.5) direction = rc.tr("North ↑");
+            else if (angle >= 112.5 && angle < 157.5) direction = rc.tr("North-West ↖");
+            else if (angle >= 157.5 || angle < -157.5) direction = rc.tr("West ←");
+            else if (angle >= -157.5 && angle < -112.5) direction = rc.tr("South-West ↙");
+            else if (angle >= -112.5 && angle < -67.5) direction = rc.tr("South ↓");
+            else if (angle >= -67.5 && angle < -22.5) direction = rc.tr("South-East ↘");
             
             var intensity = Math.sqrt(leftX * leftX + leftY * leftY);
-            var speedText = intensity > 0.8 ? _tr("fast") : (intensity > 0.3 ? _tr("medium") : _tr("slow"));
+            var speedText = intensity > 0.8 ? rc.tr("fast") : (intensity > 0.3 ? rc.tr("medium") : rc.tr("slow"));
             
             return direction + " (" + speedText + ")";
         };
@@ -1359,7 +1359,7 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
 
         GamepadDevice.prototype.getButtonName = function(index) {
             var name = BUTTON_NAMES[index] || ("Button " + index);
-            return _tr(name);
+            return rc.tr(name);
         };
 
         GamepadDevice.prototype.getButtonCount = function() {
@@ -1540,8 +1540,8 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
         function updateConnectionStatus(connected, device) {
             if ($connectionStatus && $connectionStatus.length) {
                 $connectionStatus.html(connected ? 
-                        '<span style="color:#4CAF50;">● ' + _tr("Connected") + '</span>' : 
-                        '<span style="color:#f44336;">● ' + _tr("Disconnected") + '</span>');
+                        '<span style="color:#4CAF50;">● ' + rc.tr("Connected") + '</span>' : 
+                        '<span style="color:#f44336;">● ' + rc.tr("Disconnected") + '</span>');
             }
             
             if (connected && device && $deviceName && $deviceName.length) {
@@ -1576,7 +1576,7 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
             $deviceSelector.empty();
             
             if (devices.length === 0) {
-                $deviceSelector.append('<option value="">' + _tr("No devices connected") + '</option>');
+                $deviceSelector.append('<option value="">' + rc.tr("No devices connected") + '</option>');
                 $deviceSelector.prop('disabled', true);
                 return;
             }
@@ -1775,7 +1775,7 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
             $buttonCustomizationContainer.empty();
 
             if (!device) {
-                $buttonCustomizationContainer.html('<div class="no-device-message"><p>🔴 ' + _tr("Connect a controller to customize buttons") + '</p></div>');
+                $buttonCustomizationContainer.html('<div class="no-device-message"><p>🔴 ' + rc.tr("Connect a controller to customize buttons") + '</p></div>');
                 return;
             }
 
@@ -1800,7 +1800,7 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
                 for (var groupName in buttonGroups) {
                     var buttonIndices = buttonGroups[groupName];
                     var groupDiv = $("<div class='button-group'></div>");
-                    groupDiv.append("<div class='button-group-header'>" + _tr(groupName) + "</div>");
+                    groupDiv.append("<div class='button-group-header'>" + rc.tr(groupName) + "</div>");
 
                     for (var j = 0; j < buttonIndices.length; j++) {
                         var buttonId = buttonIndices[j];
@@ -1817,14 +1817,14 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
                         select.data("device-index", device.index);
 
                         // Add "No action" option
-                        select.append("<option value='none'>" + _tr("No action") + "</option>");
+                        select.append("<option value='none'>" + rc.tr("No action") + "</option>");
                         
                         // Add native StelActions from Stellarium
                         for (var category in actionStructure) {
                             var actionsList = actionStructure[category];
                             if (!actionsList || actionsList.length === 0) continue;
                             
-                            var optgroup = $("<optgroup>").attr("label", _tr(category));
+                            var optgroup = $("<optgroup>").attr("label", rc.tr(category));
                             for (var k = 0; k < actionsList.length; k++) {
                                 var action = actionsList[k];
                                 var displayName = getActionDisplayName(action);
@@ -1845,7 +1845,7 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
                                 var dev = gamepadManager ? gamepadManager.getActiveDevice() : null;
                                 if (dev) {
                                     dev.setButtonAction(btnId, newAction);
-                                    showNotification(_tr("Button %1 mapped to %2", btnName, getActionDisplayName(newAction)));
+                                    showNotification(rc.tr("Button %1 mapped to %2", btnName, getActionDisplayName(newAction)));
                                 }
                             };
                         })(buttonId, buttonName));
@@ -1876,7 +1876,7 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
         function startCalibration() {
             var device = gamepadManager ? gamepadManager.getActiveDevice() : null;
             if (!device) {
-                showNotification(_tr("Please connect a controller first"));
+                showNotification(rc.tr("Please connect a controller first"));
                 return;
             }
 
@@ -1890,8 +1890,8 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
                 isCalibrated: false
             };
 
-            if ($calibrateBtn) $calibrateBtn.text(_tr("Calibrating...")).addClass("calibrating");
-            showNotification(_tr("Move both joysticks in circles, then press any button to finish"));
+            if ($calibrateBtn) $calibrateBtn.text(rc.tr("Calibrating...")).addClass("calibrating");
+            showNotification(rc.tr("Move both joysticks in circles, then press any button to finish"));
             updateCalibrationDisplayForDevice(device, true);
 
             var collecting = true;
@@ -1940,13 +1940,13 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
             var device = gamepadManager ? gamepadManager.getActiveDevice() : null;
             if (!device) {
                 calibrationData.calibrationMode = false;
-                if ($calibrateBtn) $calibrateBtn.text(_tr("Calibrate")).removeClass("calibrating");
+                if ($calibrateBtn) $calibrateBtn.text(rc.tr("Calibrate")).removeClass("calibrating");
                 return;
             }
             
             if (!calibrationData.calibrationMode || calibrationData.samples.length === 0) {
                 calibrationData.calibrationMode = false;
-                if ($calibrateBtn) $calibrateBtn.text(_tr("Calibrate")).removeClass("calibrating");
+                if ($calibrateBtn) $calibrateBtn.text(rc.tr("Calibrate")).removeClass("calibrating");
                 return;
             }
 
@@ -1972,8 +1972,8 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
             
             calibrationData.calibrationMode = false;
 
-            if ($calibrateBtn) $calibrateBtn.text(_tr("Calibrate")).removeClass("calibrating");
-            showNotification(_tr("Calibration complete! ") + calibrationData.samples.length + _tr(" samples collected."));
+            if ($calibrateBtn) $calibrateBtn.text(rc.tr("Calibrate")).removeClass("calibrating");
+            showNotification(rc.tr("Calibration complete! ") + calibrationData.samples.length + rc.tr(" samples collected."));
             updateCalibrationDisplayForDevice(device);
         }
 
@@ -1983,22 +1983,22 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
 
             if (isCalibrating) {
                 container.html("<div class='calibration-status'>" + 
-                                _tr("Calibrating... Collected %1 samples", calibrationData.sampleCount) + 
+                                rc.tr("Calibrating... Collected %1 samples", calibrationData.sampleCount) + 
                                 "<br><span style='font-size:10px;'>" + 
-                                _tr("Move joysticks in circles, press any button to finish") + 
+                                rc.tr("Move joysticks in circles, press any button to finish") + 
                                 "</span></div>");
             } else if (device && device.calibrationData && device.calibrationData.isCalibrated) {
                 var data = device.calibrationData;
                 container.html(
                     "<div class='calibration-values'>" +
-                        "<div class='calibration-value-item'><span class='calibration-value-label'>" + _tr("Left X offset:") + "</span> <span class='calibration-value-number'>" + data.leftX.toFixed(4) + "</span></div>" +
-                        "<div class='calibration-value-item'><span class='calibration-value-label'>" + _tr("Left Y offset:") + "</span> <span class='calibration-value-number'>" + data.leftY.toFixed(4) + "</span></div>" +
-                        "<div class='calibration-value-item'><span class='calibration-value-label'>" + _tr("Right X offset:") + "</span> <span class='calibration-value-number'>" + data.rightX.toFixed(4) + "</span></div>" +
-                        "<div class='calibration-value-item'><span class='calibration-value-label'>" + _tr("Right Y offset:") + "</span> <span class='calibration-value-number'>" + data.rightY.toFixed(4) + "</span></div>" +
+                        "<div class='calibration-value-item'><span class='calibration-value-label'>" + rc.tr("Left X offset:") + "</span> <span class='calibration-value-number'>" + data.leftX.toFixed(4) + "</span></div>" +
+                        "<div class='calibration-value-item'><span class='calibration-value-label'>" + rc.tr("Left Y offset:") + "</span> <span class='calibration-value-number'>" + data.leftY.toFixed(4) + "</span></div>" +
+                        "<div class='calibration-value-item'><span class='calibration-value-label'>" + rc.tr("Right X offset:") + "</span> <span class='calibration-value-number'>" + data.rightX.toFixed(4) + "</span></div>" +
+                        "<div class='calibration-value-item'><span class='calibration-value-label'>" + rc.tr("Right Y offset:") + "</span> <span class='calibration-value-number'>" + data.rightY.toFixed(4) + "</span></div>" +
                     "</div>"
                 );
             } else {
-                container.html("<div class='calibration-status'>" + _tr("Not calibrated") + "</div>");
+                container.html("<div class='calibration-status'>" + rc.tr("Not calibrated") + "</div>");
             }
         }
 
@@ -2011,7 +2011,7 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
                 };
                 device.saveCalibration();
                 updateCalibrationDisplayForDevice(device);
-                showNotification(_tr("Calibration reset for ") + device.getDisplayInfo().name);
+                showNotification(rc.tr("Calibration reset for ") + device.getDisplayInfo().name);
             }
         }
 
@@ -2060,16 +2060,16 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
                 device.buttonMappings.clear();
                 device.saveButtonMappings();
                 populateButtonCustomization();
-                showNotification(_tr("Button mappings reset to defaults for ") + device.getDisplayInfo().name);
+                showNotification(rc.tr("Button mappings reset to defaults for ") + device.getDisplayInfo().name);
             } else {
-                showNotification(_tr("No controller connected"));
+                showNotification(rc.tr("No controller connected"));
             }
         }
 
         function exportProfile() {
             var device = gamepadManager ? gamepadManager.getActiveDevice() : null;
             if (!device) {
-                showNotification(_tr("No controller connected"));
+                showNotification(rc.tr("No controller connected"));
                 return;
             }
             
@@ -2083,13 +2083,13 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
             linkElement.setAttribute('download', profileName);
             linkElement.click();
             
-            showNotification(_tr("Profile exported: ") + profileName);
+            showNotification(rc.tr("Profile exported: ") + profileName);
         }
 
         function importProfile(file) {
             var device = gamepadManager ? gamepadManager.getActiveDevice() : null;
             if (!device) {
-                showNotification(_tr("No controller connected"));
+                showNotification(rc.tr("No controller connected"));
                 return;
             }
             
@@ -2100,13 +2100,13 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
                     if (device.importProfile(profile)) {
                         populateButtonCustomization();
                         updateCalibrationDisplayForDevice(device);
-                        showNotification(_tr("Profile imported successfully for ") + device.getDisplayInfo().name);
+                        showNotification(rc.tr("Profile imported successfully for ") + device.getDisplayInfo().name);
                     } else {
-                        showNotification(_tr("Failed to import profile"));
+                        showNotification(rc.tr("Failed to import profile"));
                     }
                 } catch(err) {
                     console.error("Import error:", err);
-                    showNotification(_tr("Invalid profile file"));
+                    showNotification(rc.tr("Invalid profile file"));
                 }
             };
             reader.readAsText(file);
@@ -2180,7 +2180,7 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
                     }
                     
                     showNotification(controllerSettings.vibrationFeedback ? 
-                            _tr("Vibration feedback enabled") : _tr("Vibration feedback disabled"));
+                            rc.tr("Vibration feedback enabled") : _tr("Vibration feedback disabled"));
                 });
                 
                 // Set initial visibility
@@ -2274,7 +2274,7 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
                     controllerSettings.vibrationFeedback = $(this).is(":checked");
                     saveSettings();
                     showNotification(controllerSettings.vibrationFeedback ? 
-                        _tr("Vibration feedback enabled") : _tr("Vibration feedback disabled"));
+                        rc.tr("Vibration feedback enabled") : _tr("Vibration feedback disabled"));
                 });
             }
             
@@ -2294,9 +2294,9 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
                 var device = gamepadManager ? gamepadManager.getActiveDevice() : null;
                 if (device) {
                     device.saveButtonMappings();
-                    showNotification(_tr("Button mappings saved for ") + device.getDisplayInfo().name);
+                    showNotification(rc.tr("Button mappings saved for ") + device.getDisplayInfo().name);
                 } else {
-                    showNotification(_tr("No controller connected"));
+                    showNotification(rc.tr("No controller connected"));
                 }
             });
             
@@ -2318,7 +2318,7 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
                 var originalText = $btn.text();
                 
                 // Show scanning feedback
-                $btn.text(_tr("Scanning...")).prop("disabled", true);
+                $btn.text(rc.tr("Scanning...")).prop("disabled", true);
                 
                 // Add scanning animation class
                 $btn.addClass("scanning");
@@ -2348,14 +2348,14 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
                         }
                         updateDeviceSelector();
                         populateButtonCustomization();
-                        showNotification(_tr("Found ") + gamepadManager.devices.size + _tr(" controller(s)"));
+                        showNotification(rc.tr("Found ") + gamepadManager.devices.size + rc.tr(" controller(s)"));
                     } else {
                         gamepadManager.scanForGamepads();
                         
                         if (gamepadManager.devices.size > 0) {
-                            showNotification(_tr("Found ") + gamepadManager.devices.size + _tr(" controller(s)"));
+                            showNotification(rc.tr("Found ") + gamepadManager.devices.size + rc.tr(" controller(s)"));
                         } else {
-                            showNotification(_tr("No controllers found. Please connect a controller and try again."));
+                            showNotification(rc.tr("No controllers found. Please connect a controller and try again."));
                         }
                     }
                 }
@@ -2403,17 +2403,17 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
             
             // If no device is connected or active device is null, clear all displays
             if (!device || activeDeviceIndex === null) {
-                $('#gp-buttons-container').html('<div class="loading-placeholder">' + _tr("No controller connected") + '</div>');
-                $('#gp-axes-container').html('<div class="loading-placeholder">' + _tr("No controller connected") + '</div>');
-                $('#gp-device-info-live').html('<div class="loading-placeholder">' + _tr("No controller connected") + '</div>');
+                $('#gp-buttons-container').html('<div class="loading-placeholder">' + rc.tr("No controller connected") + '</div>');
+                $('#gp-axes-container').html('<div class="loading-placeholder">' + rc.tr("No controller connected") + '</div>');
+                $('#gp-device-info-live').html('<div class="loading-placeholder">' + rc.tr("No controller connected") + '</div>');
                 return;
             }
             
             var gp = navigator.getGamepads()[device.index];
             if (!gp) {
-                $('#gp-buttons-container').html('<div class="loading-placeholder">' + _tr("Controller data not available") + '</div>');
-                $('#gp-axes-container').html('<div class="loading-placeholder">' + _tr("Controller data not available") + '</div>');
-                $('#gp-device-info-live').html('<div class="loading-placeholder">' + _tr("Controller data not available") + '</div>');
+                $('#gp-buttons-container').html('<div class="loading-placeholder">' + rc.tr("Controller data not available") + '</div>');
+                $('#gp-axes-container').html('<div class="loading-placeholder">' + rc.tr("Controller data not available") + '</div>');
+                $('#gp-device-info-live').html('<div class="loading-placeholder">' + rc.tr("Controller data not available") + '</div>');
                 return;
             }
             
@@ -2431,7 +2431,7 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
             $container.empty();
             
             if (!gamepad || !gamepad.buttons || gamepad.buttons.length === 0) {
-                $container.html('<div class="loading-placeholder">' + _tr("No button data available") + '</div>');
+                $container.html('<div class="loading-placeholder">' + rc.tr("No button data available") + '</div>');
                 return;
             }
             
@@ -2467,18 +2467,18 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
             $container.empty();
             
             if (!gamepad || !gamepad.axes || gamepad.axes.length === 0) {
-                $container.html('<div class="loading-placeholder">' + _tr("No axis data available") + '</div>');
+                $container.html('<div class="loading-placeholder">' + rc.tr("No axis data available") + '</div>');
                 return;
             }
             
             // Axis names
             var axisNames = {
-                0: _tr('Left X'),
-                1: _tr('Left Y'),
-                2: _tr('Right X'),
-                3: _tr('Right Y'),
-                4: _tr('L2 Trigger'),
-                5: _tr('R2 Trigger')
+                0: rc.tr('Left X'),
+                1: rc.tr('Left Y'),
+                2: rc.tr('Right X'),
+                3: rc.tr('Right Y'),
+                4: rc.tr('L2 Trigger'),
+                5: rc.tr('R2 Trigger')
             };
             
             var html = '';
@@ -2517,19 +2517,19 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
             var browserInfo = getBrowserInfo();
             
             var html = '';
-            html += '<div class="device-info-live-row"><span class="label">' + _tr("Device Name") + ':</span><span class="value">' + escapeHtml(info.name) + '</span></div>';
-            html += '<div class="device-info-live-row"><span class="label">' + _tr("Vendor/Product ID") + ':</span><span class="value">' + (device.vendorId ? device.vendorId + ':' + device.productId : 'Unknown') + '</span></div>';
-            html += '<div class="device-info-live-row"><span class="label">' + _tr("Button Count") + ':</span><span class="value">' + gamepad.buttons.length + '</span></div>';
-            html += '<div class="device-info-live-row"><span class="label">' + _tr("Axis Count") + ':</span><span class="value">' + (gamepad.axes ? gamepad.axes.length : 0) + '</span></div>';
-            html += '<div class="device-info-live-row"><span class="label">' + _tr("Operating System") + ':</span><span class="value">' + osInfo + '</span></div>';
-            html += '<div class="device-info-live-row"><span class="label">' + _tr("Browser") + ':</span><span class="value">' + browserInfo + '</span></div>';
+            html += '<div class="device-info-live-row"><span class="label">' + rc.tr("Device Name") + ':</span><span class="value">' + escapeHtml(info.name) + '</span></div>';
+            html += '<div class="device-info-live-row"><span class="label">' + rc.tr("Vendor/Product ID") + ':</span><span class="value">' + (device.vendorId ? device.vendorId + ':' + device.productId : 'Unknown') + '</span></div>';
+            html += '<div class="device-info-live-row"><span class="label">' + rc.tr("Button Count") + ':</span><span class="value">' + gamepad.buttons.length + '</span></div>';
+            html += '<div class="device-info-live-row"><span class="label">' + rc.tr("Axis Count") + ':</span><span class="value">' + (gamepad.axes ? gamepad.axes.length : 0) + '</span></div>';
+            html += '<div class="device-info-live-row"><span class="label">' + rc.tr("Operating System") + ':</span><span class="value">' + osInfo + '</span></div>';
+            html += '<div class="device-info-live-row"><span class="label">' + rc.tr("Browser") + ':</span><span class="value">' + browserInfo + '</span></div>';
             
             // Add browser-specific notes
             if (browserInfo.includes('Firefox') && info.name.includes('DualSense')) {
-                html += '<div class="device-info-live-row"><span class="label">' + _tr("Note") + ':</span><span class="value">Firefox may report PS5 DualSense axes differently. Verify using the Axes panel.</span></div>';
+                html += '<div class="device-info-live-row"><span class="label">' + rc.tr("Note") + ':</span><span class="value">Firefox may report PS5 DualSense axes differently. Verify using the Axes panel.</span></div>';
             }
             if (browserInfo.includes('Chrome') && info.name.includes('DualSense')) {
-                html += '<div class="device-info-live-row"><span class="label">' + _tr("Note") + ':</span><span class="value">Chrome provides full PS5 DualSense support including vibration.</span></div>';
+                html += '<div class="device-info-live-row"><span class="label">' + rc.tr("Note") + ':</span><span class="value">Chrome provides full PS5 DualSense support including vibration.</span></div>';
             }
             
             $container.html(html);
