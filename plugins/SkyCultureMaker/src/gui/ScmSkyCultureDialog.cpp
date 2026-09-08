@@ -82,7 +82,7 @@ void ScmSkyCultureDialog::setConstellations(std::vector<std::unique_ptr<scm::Scm
 		for (const auto &constellation : *constellations)
 		{
 			// Add the constellation to the list widget
-			ui->constellationsList->addItem(getDisplayNameFromConstellation(*constellation));
+			ui->constellationsList->addItem(constellation->getDisplayName());
 		}
 	}
 }
@@ -387,71 +387,39 @@ void ScmSkyCultureDialog::saveSkyCulture()
 
 void ScmSkyCultureDialog::editSelectedConstellation()
 {
-	auto selectedItems = ui->constellationsList->selectedItems();
-	if (!selectedItems.isEmpty() && constellations != nullptr)
+	auto selectedItems     = ui->constellationsList->selectedItems();
+	scm::ScmSkyCulture *sc = maker->getCurrentSkyCulture();
+	if (selectedItems.isEmpty() || sc == nullptr) return;
+
+	if (scm::ScmConstellation *constellation = sc->getConstellationByDisplayName(selectedItems.first()->text()))
 	{
-		QListWidgetItem *item     = selectedItems.first();
-		QString constellationName = item->text();
-
-		// Get Id by comparing to the display name
-		// This will always work, even when the constellation id
-		// or name contains special characters
-		QString selectedConstellationId = "";
-		for (const auto &constellation : *constellations)
-		{
-			if (constellationName == (getDisplayNameFromConstellation(*constellation)))
-			{
-				selectedConstellationId = constellation->getId();
-				break;
-			}
-		}
-
-		openConstellationDialog(selectedConstellationId);
+		openConstellationDialog(constellation->getId());
 	}
 }
 
 void ScmSkyCultureDialog::centerViewOnConstellation(QListWidgetItem *item)
 {
-	if (item == nullptr || constellations == nullptr)
-	{
-		return;
-	}
+	scm::ScmSkyCulture *sc = maker->getCurrentSkyCulture();
+	if (item == nullptr || sc == nullptr) return;
 
-	const QString displayName = item->text();
-	for (const auto &constellation : *constellations)
+	if (scm::ScmConstellation *constellation = sc->getConstellationByDisplayName(item->text()))
 	{
-		if (displayName == getDisplayNameFromConstellation(*constellation))
-		{
-			StelMovementMgr *mvmgr = GETSTELMODULE(StelMovementMgr);
-			mvmgr->moveToJ2000(constellation->getCenterPosition(),
-			                   mvmgr->mountFrameToJ2000(Vec3d(0., 0., 1.)), mvmgr->getAutoMoveDuration());
-			break;
-		}
+		StelMovementMgr *mvmgr = GETSTELMODULE(StelMovementMgr);
+		mvmgr->moveToJ2000(constellation->getCenterPosition(), mvmgr->mountFrameToJ2000(Vec3d(0., 0., 1.)),
+		                   mvmgr->getAutoMoveDuration());
 	}
 }
 
 void ScmSkyCultureDialog::removeSelectedConstellation()
 {
-	auto selectedItems = ui->constellationsList->selectedItems();
-	if (!selectedItems.isEmpty() && constellations != nullptr)
-	{
-		QListWidgetItem *item     = selectedItems.first();
-		QString constellationName = item->text();
+	auto selectedItems     = ui->constellationsList->selectedItems();
+	scm::ScmSkyCulture *sc = maker->getCurrentSkyCulture();
+	if (selectedItems.isEmpty() || sc == nullptr) return;
 
-		// Get Id by comparing to the display name
-		// This will always work, even when the constellation id
-		// or name contains special characters
-		QString selectedConstellationId = "";
-		for (const auto &constellation : *constellations)
-		{
-			if (constellationName == (getDisplayNameFromConstellation(*constellation)))
-			{
-				selectedConstellationId = constellation->getId();
-				break;
-			}
-		}
+	if (scm::ScmConstellation *constellation = sc->getConstellationByDisplayName(selectedItems.first()->text()))
+	{
 		// Remove the constellation from the SC
-		maker->getCurrentSkyCulture()->removeConstellation(selectedConstellationId);
+		sc->removeConstellation(constellation->getId());
 		// Disable removal button
 		ui->RemoveConstellationBtn->setEnabled(false);
 		// The reason for not just removing the constellation in the UI here is that
@@ -541,11 +509,6 @@ void ScmSkyCultureDialog::updateRemovePolygonButton()
 	{
 		ui->removePolygonButton->setEnabled(false);
 	}
-}
-
-QString ScmSkyCultureDialog::getDisplayNameFromConstellation(const scm::ScmConstellation &constellation) const
-{
-	return constellation.getCulturalName().translated + " (" + constellation.getId() + ")";
 }
 
 void ScmSkyCultureDialog::resetReferences()

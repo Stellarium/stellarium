@@ -94,6 +94,15 @@ public:
 	 */
 	ScmConstellation *getConstellationByEnglishName(const QString &englishName);
 
+	/**
+	 * @brief Gets a constellation from the sky culture by its display name, i.e. the
+	 *        translated name followed by the id, e.g. "The Market (tianquiztli)".
+	 *
+	 * @param displayName The display name to match.
+	 * @return Pointer to the matching constellation, or nullptr if none matches.
+	 */
+	ScmConstellation *getConstellationByDisplayName(const QString &displayName);
+
 	/// Returns a pointer to the constellations of the sky culture
 	/// Constellations are held as unique pointers, so the addresses
 	/// of the constellation objects remain valid even if the vector is modified.

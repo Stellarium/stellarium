@@ -144,14 +144,6 @@ private:
 		);
 
 	/**
-	 * @brief Gets the display name from a constellation.
-	 *
-	 * @param constellation The constellation to get the display name from.
-	 * @return The display name of the constellation.
-	 */
-	QString getDisplayNameFromConstellation(const scm::ScmConstellation &constellation) const;
-
-	/**
 	 * @brief Sets the id of the sky culture from the name.
 	 *
 	 * @param name The name to set the id from.

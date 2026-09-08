@@ -98,6 +98,14 @@ scm::ScmConstellation *scm::ScmSkyCulture::getConstellationByEnglishName(const Q
 	return it != constellations.end() ? it->get() : nullptr;
 }
 
+scm::ScmConstellation *scm::ScmSkyCulture::getConstellationByDisplayName(const QString &displayName)
+{
+	auto it = std::find_if(constellations.begin(), constellations.end(),
+	                       [&displayName](const std::unique_ptr<ScmConstellation> &c)
+	                       { return c->getDisplayName() == displayName; });
+	return it != constellations.end() ? it->get() : nullptr;
+}
+
 std::vector<std::unique_ptr<scm::ScmConstellation>> *scm::ScmSkyCulture::getConstellations()
 {
 	return &constellations;
