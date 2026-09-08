@@ -84,14 +84,14 @@ void ViewService::get(const QByteArray &operation, const APIParameters &paramete
 	else if (operation=="listskyculture")
 	{
 		//list installed skycultures
-		QMap<QString, StelSkyCulture> map = skyCulMgr->getDirToNameMap();
+		QMap<QString, QString> map = skyCulMgr->getDirToI18Map();
 
 		QJsonObject obj;
-		QMapIterator<QString,StelSkyCulture> it(map);
+		QMapIterator<QString, QString> it(map);
 		while(it.hasNext())
 		{
 			it.next();
-			obj.insert(it.key(),StelTranslator::globalTranslator->qtranslate(it.value().englishName));
+			obj.insert(it.key(), it.value());
 		}
 
 		response.writeJSON(QJsonDocument(obj));

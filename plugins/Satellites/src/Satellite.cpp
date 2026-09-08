@@ -392,9 +392,9 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 			       .arg(1440.0/orbitalPeriod, 9, 'f', 5).arg(rpd) << "<br/>";
 		}
 		const double inclination = pSatWrapper->getOrbitalInclination();
-		QString incStr = withDecimalDegree ? QString("%1&deg;").arg(QString::number(inclination, 'f', 4)) : StelUtils::decDegToDmsStr(inclination);
+		QString incStr = withDecimalDegree ? QString("%1%2").arg(QString::number(inclination, 'f', 4), degree) : StelUtils::decDegToDmsStr(inclination);
 		oss << QString("%1: %2").arg(q_("Inclination"), incStr) << "<br/>";
-		oss << QString("%1: %2&deg;/%3&deg;").arg(q_("SubPoint (Lat./Long.)")).arg(latLongSubPointPosition[0], 5, 'f', 2).arg(latLongSubPointPosition[1], 5, 'f', 3) << "<br/>";
+		oss << QString("%1: %2%4/%3%4").arg(q_("SubPoint (Lat./Long.)")).arg(latLongSubPointPosition[0], 5, 'f', 2).arg(latLongSubPointPosition[1], 5, 'f', 3).arg(degree) << "<br/>";
 		
 		//TODO: This one can be done better
 		const char* xyz = "<b>X:</b> %1, <b>Y:</b> %2, <b>Z:</b> %3";

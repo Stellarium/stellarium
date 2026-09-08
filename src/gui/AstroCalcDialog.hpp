@@ -297,9 +297,9 @@ signals:
 	void graphDayChanged();
 
 protected:
-        //! Initialize the dialog widgets and connect the signals/slots.
+	//! Initialize the dialog widgets and connect the signals/slots.
 	void createDialogContent() override;
-        Ui_astroCalcDialogForm *ui;
+	Ui_astroCalcDialogForm *ui;
 
 private slots:
 	void currentCelestialPositions();
@@ -373,6 +373,10 @@ private slots:
 	void saveTransits();
 
 	void saveEclipseFiltersState();
+	void showLocalCoordinates();
+	void cleanupLocalCoordinates();
+	void goToLocalCoordinates();
+	void enableLocalCoordinatesButton();
 
 	void saveEphemerisCelestialBody(int index);
 	void saveEphemerisSecondaryCelestialBody(int index);
@@ -485,6 +489,7 @@ private:
 	class StelLocaleMgr* localeMgr = nullptr;
 	class StelMovementMgr* mvMgr = nullptr;
 	class StelPropertyMgr* propMgr = nullptr;
+	StelLocation location;
 	//QStringListModel* wutModel = nulpltr;
 	//QSortFilterProxyModel *proxyModel = nullptr;
 	AstroCalcChart *altVsTimeChart = nullptr;
@@ -694,6 +699,13 @@ private:
 
 	bool flagPolarDistance = false;
 
+	// Flags for follow states of AstroCalc/Eclipses tools
+	bool isSolarEclipsesComputed = false;
+	bool isLunarEclipsesComputed = false;
+	bool isTransitsComputed = false;
+	bool isReturned = false;
+	bool isLocationChanged = false;
+	
 	// Signal that a plot has to be redone
 	bool plotAltVsTime = false;
 	bool plotAltVsTimeSun = false;
@@ -707,7 +719,7 @@ private:
 	bool plotAziVsTime = false;
 	bool followLatestSelectedObject = true;
 	bool computeRTS = false;
-	bool computeEphemeris = false;
+	bool computeEphemeris = false;	
 	int altVsTimePositiveLimit = 0, monthlyElevationPositiveLimit = 0, graphsDuration = 1, graphsStep = 24;
 	QStringList ephemerisHeader, phenomenaHeader, positionsHeader, hecPositionsHeader, wutHeader, rtsHeader, lunareclipseHeader, lunareclipsecontactsHeader, solareclipseHeader, solareclipsecontactsHeader, solareclipselocalHeader, transitHeader;
 	static double brightLimit;

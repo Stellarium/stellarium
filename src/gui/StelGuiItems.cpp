@@ -984,26 +984,26 @@ void BottomStelBar::updateText(bool updatePos, bool updateTopocentric)
 	{
 		updatePos = true;
 		location->setText(newLocation);
-		double lat = static_cast<double>(core->getCurrentLocation().getLatitude());
-		double lon = static_cast<double>(core->getCurrentLocation().getLongitude());
-		QString latStr, lonStr, pm;
-		if (lat >= 0)
-			pm = "N";
+		float lat = core->getCurrentLocation().getLatitude();
+		float lon = core->getCurrentLocation().getLongitude();
+		QString pm;
+		if (lat >= 0.f)
+			pm = qc_("N", "latitude");
 		else
 		{
-			pm = "S";
-			lat *= -1;
+			pm = qc_("S", "latitude");
+			lat *= -1.f;
 		}
-		latStr = QString("%1%2%3").arg(pm).arg(lat).arg(QChar(0x00B0));
-		if (lon >= 0)
-			pm = "E";
+		QString latStr = QString("%1%2%3").arg(pm, QString::number(lat, 'f', 5), QChar(0x00B0));
+		if (lon >= 0.f)
+			pm = qc_("E", "longitude");
 		else
 		{
-			pm = "W";
-			lon *= -1;
+			pm = qc_("W", "longitude");
+			lon *= -1.f;
 		}
-		lonStr = QString("%1%2%3").arg(pm).arg(lon).arg(QChar(0x00B0));
-		QString rho, weather;
+		QString lonStr = QString("%1%2%3").arg(pm, QString::number(lon, 'f', 5), QChar(0x00B0));
+		QString rho;
 		if (core->getUseTopocentricCoordinates())
 			rho = QString("%1 %2 %3").arg(q_("planetocentric distance")).arg(core->getCurrentObserver()->getDistanceFromCenter() * AU).arg(qc_("km", "distance"));
 		else
@@ -1016,7 +1016,7 @@ void BottomStelBar::updateText(bool updatePos, bool updateTopocentric)
 			if (core->getCurrentPlanet()->hasAtmosphere())
 			{
 				const StelPropertyMgr* propMgr=StelApp::getInstance().getStelPropertyManager();
-				weather = QString("%1: %2 %3; %4: %5 °C").arg(q_("Atmospheric pressure"), QString::number(propMgr->getStelPropertyValue("StelSkyDrawer.atmospherePressure").toDouble(), 'f', 2), qc_("mbar", "pressure unit"), q_("temperature"), QString::number(propMgr->getStelPropertyValue("StelSkyDrawer.atmosphereTemperature").toDouble(), 'f', 1));
+				QString weather = QString("%1: %2 %3; %4: %5 °C").arg(q_("Atmospheric pressure"), QString::number(propMgr->getStelPropertyValue("StelSkyDrawer.atmospherePressure").toDouble(), 'f', 2), qc_("mbar", "pressure unit"), q_("temperature"), QString::number(propMgr->getStelPropertyValue("StelSkyDrawer.atmosphereTemperature").toDouble(), 'f', 1));
 				location->setToolTip(QString("<p style='white-space:pre'>%1 %2; %3<br>%4</p>").arg(latStr, lonStr, rho, weather));
 			}
 			else if (core->getCurrentPlanet()->getPlanetType()==Planet::isObserver)
