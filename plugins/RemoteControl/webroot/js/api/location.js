@@ -126,11 +126,6 @@ define(["jquery", "./remotecontrol", "./updatequeue"], function($, rc, UpdateQue
          * @returns {void}
          */
         loadRegionList: function(callback, planet) {
-            // If no planet specified, use the current planet from the UI
-            if (!planet) {
-                planet = locationUI.getCurrentPlanet() || 'Earth';
-            }
-            
             $.ajax({
                 url: "/api/location/regionlist",
                 method: 'GET',
@@ -161,7 +156,7 @@ define(["jquery", "./remotecontrol", "./updatequeue"], function($, rc, UpdateQue
                 success: callback,
                 error: function(xhr, status, errorThrown) {
                     console.log("Error updating planet list");
-                    console.log("Error: " + errorThrown);
+                    console.log("Error: " + errorThrown.message);
                     console.log("Status: " + status);
                     alert(rc.tr("Could not retrieve planet list"));
                 }
