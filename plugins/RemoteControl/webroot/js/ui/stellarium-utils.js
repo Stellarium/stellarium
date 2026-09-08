@@ -132,19 +132,18 @@ define(["jquery", "api/remotecontrol", "api/viewcontrol", "api/actions", "api/pr
      * 
      * @param {string} message - Message to display
      */
-		function showNotification(message) {
-				var escapedMessage = escapeHtml(message);
-				var $notification = $(
-						'<div class="notification-message" style="position:fixed;top:20px;right:20px;' +
-						'padding:10px 15px;background:linear-gradient(#6B6E70, #3A3C3E);color:#fff;' +
-						'border-radius:5px;z-index:9999;box-shadow:0 2px 10px rgba(0,0,0,0.3);">' + 
-						escapedMessage + '</div>'
-				);
-				$("body").append($notification);
-				setTimeout(function() {
-						$notification.fadeOut(function() {$notification.remove(); });
-				}, 2000);
-		}
+    function showNotification(message) {
+        var $notification = $(
+            '<div class="notification-message" style="position:fixed;top:20px;right:20px;' +
+            'padding:10px 15px;background:linear-gradient(#6B6E70, #3A3C3E);color:#fff;' +
+            'border-radius:5px;z-index:9999;box-shadow:0 2px 10px rgba(0,0,0,0.3);">' + 
+            message + '</div>'
+        );
+        $("body").append($notification);
+        setTimeout(function() {
+            $notification.fadeOut(function() { $notification.remove(); });
+        }, 2000);
+    }
 
     /**
      * Clears any currently selected object to prevent view conflicts.
@@ -450,7 +449,7 @@ define(["jquery", "api/remotecontrol", "api/viewcontrol", "api/actions", "api/pr
                 setTimeout(function() {
                     setFov(zoomFov, 2);
                     var displayName = parsed.nativeName || directName;
-                    showNotification(_tr("Centering on: ") + displayName);
+                    showNotification(rc.tr("Centering on: ") + displayName);
                     emitObjectSelected(directName, objectId, objectType);
                     if (callback) callback(true, directName);
                 }, 300);
@@ -474,7 +473,7 @@ define(["jquery", "api/remotecontrol", "api/viewcontrol", "api/actions", "api/pr
                         setTimeout(function() {
                             setFov(zoomFov, 2);
                             var displayName = parsed.nativeName || correctName;
-                            showNotification(_tr("Centering on: ") + displayName);
+                            showNotification(rc.tr("Centering on: ") + displayName);
                             emitObjectSelected(correctName, objectId, objectType);
                             if (callback) callback(true, correctName);
                         }, 300);
@@ -487,7 +486,7 @@ define(["jquery", "api/remotecontrol", "api/viewcontrol", "api/actions", "api/pr
                         setTimeout(function() {
                             setFov(zoomFov, 2);
                             var displayName = parsed.nativeName || searchTerm;
-                            showNotification(_tr("Centering on: ") + displayName);
+                            showNotification(rc.tr("Centering on: ") + displayName);
                             emitObjectSelected(searchTerm, objectId, objectType);
                             if (callback) callback(true, searchTerm);
                         }, 300);
@@ -502,7 +501,7 @@ define(["jquery", "api/remotecontrol", "api/viewcontrol", "api/actions", "api/pr
                     setTimeout(function() {
                         setFov(zoomFov, 2);
                         var displayName = parsed.nativeName || searchTerm;
-                        showNotification(_tr("Centering on: ") + displayName);
+                        showNotification(rc.tr("Centering on: ") + displayName);
                         emitObjectSelected(searchTerm, objectId, objectType);
                         if (callback) callback(true, searchTerm);
                     }, 300);
@@ -577,7 +576,7 @@ define(["jquery", "api/remotecontrol", "api/viewcontrol", "api/actions", "api/pr
 						centerAndZoom(signName, 40, 2, signId || signName, "zodiac", callback);
 						
 						// Show notification to user
-						showNotification(_tr("Center on zodiac sign: ") + signName);
+						showNotification(rc.tr("Center on zodiac sign: ") + signName);
 				}, 50);
 		}
 
@@ -594,7 +593,7 @@ define(["jquery", "api/remotecontrol", "api/viewcontrol", "api/actions", "api/pr
         clearSelection();
         setTimeout(function() {
             centerAndZoom(asterismName, 30, 2, asterismId || asterismName, "asterism", callback);
-            showNotification(_tr("Centering on asterism: ") + asterismName);
+            showNotification(rc.tr("Centering on asterism: ") + asterismName);
         }, 50);
     }
 
@@ -642,7 +641,7 @@ define(["jquery", "api/remotecontrol", "api/viewcontrol", "api/actions", "api/pr
 						centerAndZoom(mansionName, 30, 2, mansionId || mansionName, "lunar", callback);
 						
 						// Show notification to user
-						showNotification(_tr("Center on lunar mansion: ") + mansionName);
+						showNotification(rc.tr("Center on lunar mansion: ") + mansionName);
 				}, 50);
 		}
 
@@ -773,7 +772,7 @@ define(["jquery", "api/remotecontrol", "api/viewcontrol", "api/actions", "api/pr
 						restoreConstellationDisplayStates();
 						currentIsolatedConstellation = null;
 						
-						showNotification(_tr("Cleared highlight: ") + searchTerm);
+						showNotification(rc.tr("Cleared highlight: ") + searchTerm);
 						emitObjectSelected("", "", "none");
 						return false;
 				} else {
@@ -836,7 +835,7 @@ define(["jquery", "api/remotecontrol", "api/viewcontrol", "api/actions", "api/pr
         currentIsolatedConstellation = null;
         
         emitObjectSelected("", "", "none");
-        showNotification(_tr("All constellations visible"));
+        showNotification(rc.tr("All constellations visible"));
     }
 
     /**
