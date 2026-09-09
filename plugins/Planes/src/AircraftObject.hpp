@@ -61,6 +61,8 @@ private:
 	double getElapsedSeconds() const;
 	Vec3d getAltAzPos(const StelCore* core, double elapsedSeconds=0.0) const;
 	float getScreenRotationDegrees(StelCore* core, const StelProjectorP& projector, const Vec3d& currentScreenPos) const;
+	double getSlantRange(const StelCore* core, const AircraftRecord& record) const;
+	double getGroundRange(const StelCore* core, const AircraftRecord& record) const;
 	QString labelText() const;
 	QString displayLabelText(int labelMode) const;
 
