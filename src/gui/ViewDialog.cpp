@@ -1721,7 +1721,7 @@ void ViewDialog::populateLists()
 	}
 
 	ui->skyCultureCurrentTimeSpinBox->setMinimum(globalBeginTime);
-	ui->skyCultureCurrentTimeSpinBox->setMaximum(currentYear);
+	ui->skyCultureCurrentTimeSpinBox->setMaximum(currentYear); // The slider maximum is always the current year
 	l->setCurrentItem(l->findItems(app.getSkyCultureMgr().getCurrentSkyCultureNameI18(), Qt::MatchExactly).at(0));    
 	l->blockSignals(false);
 
