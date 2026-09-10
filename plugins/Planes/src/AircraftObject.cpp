@@ -354,10 +354,10 @@ double AircraftObject::getSlantRange(const StelCore* core, const AircraftRecord&
 	if (!core) return 0.0;
 
 	const StelLocation& location = core->getCurrentLocation();
-	const double obsLat = static_cast<double>(location.getLatitude()) * M_PI / 180.0;
-	const double obsLon = static_cast<double>(location.getLongitude()) * M_PI / 180.0;
-	const double tgtLat = record.latitude * M_PI / 180.0;
-	const double tgtLon = record.longitude * M_PI / 180.0;
+	const double obsLat = static_cast<double>(location.getLatitude()) * M_PI_180;
+	const double obsLon = static_cast<double>(location.getLongitude()) * M_PI_180;
+	const double tgtLat = record.latitude * M_PI_180;
+	const double tgtLon = record.longitude * M_PI_180;
 
 	const Vec3d observer = toEcef(obsLat, obsLon, static_cast<double>(location.altitude));
 	const Vec3d aircraft = toEcef(tgtLat, tgtLon, record.altitudeMeters);
@@ -369,17 +369,7 @@ double AircraftObject::getGroundRange(const StelCore* core, const AircraftRecord
 	if (!core) return 0.0;
 
 	const StelLocation& location = core->getCurrentLocation();
-	const double obsLat = static_cast<double>(location.getLatitude()) * M_PI / 180.0;
-	const double obsLon = static_cast<double>(location.getLongitude()) * M_PI / 180.0;
-	const double tgtLat = record.latitude * M_PI / 180.0;
-	const double tgtLon = record.longitude * M_PI / 180.0;
-
-	const double dLat = tgtLat - obsLat;
-	const double dLon = normalizeLongitudeRadians(tgtLon - obsLon);
-
-	const double a = std::sin(dLat / 2.0) * std::sin(dLat / 2.0) + std::cos(obsLat) * std::cos(tgtLat) * std::sin(dLon / 2.0) * std::sin(dLon / 2.0);
-	const double c = 2.0 * std::atan2(std::sqrt(a), std::sqrt(1.0 - a));
-	return kEarthRadiusMeters * c;
+	return location.distanceKm(record.longitude, record.latitude) * 1000.0;
 }
 
 void AircraftObject::draw(StelCore* core, StelPainter* painter, bool drawLabels, int labelMode) const
