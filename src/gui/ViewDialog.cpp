@@ -1652,13 +1652,13 @@ void ViewDialog::populateLists()
 		l->addItem(new SeparatorListWidgetItem(q_("Other"), "Other"));
 	}
 
-	// find the slider limits across all cultures (needed in initSkyCultureTime)
+	// find the earliest real begin year across all cultures (needed in initSkyCultureTime)
 	// ---> evaluate it here so we don't need to iterate over all cultures multiple times.
-	// The "unknown" begin sentinel and the "present/∞" end sentinel are ignored so that cultures
-	// with no defined time range do not stretch the slider to its extremes.
+	// The "unknown" begin sentinel is ignored so that cultures with no defined start do not
+	// stretch the slider to its extreme. The slider maximum is always the current year, since a
+	// culture cannot end in the future (the "present/∞" end sentinel maps to the current year).
 	const int currentYear = QDateTime::currentDateTime().date().year();
 	int globalBeginTime = currentYear;
-	int globalEndTime = currentYear;
 #if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
 	QMultiMapIterator<QString, QString> cultureRegionIt(cultureRegionMap);
 #else
@@ -1679,11 +1679,6 @@ void ViewDialog::populateLists()
 		if (cultureBeginTime > StelSkyCulture::unknownBeginTime && cultureBeginTime < globalBeginTime)
 		{
 			globalBeginTime = cultureBeginTime;
-		}
-		// Find the latest real end year across all cultures
-		if (cultureEndTime < StelSkyCulture::presentEndTime && cultureEndTime > globalEndTime)
-		{
-			globalEndTime = cultureEndTime;
 		}
 
 		// When region is unknown (non UN-geoscheme), insert item under "other" separator,
@@ -1726,7 +1721,7 @@ void ViewDialog::populateLists()
 	}
 
 	ui->skyCultureCurrentTimeSpinBox->setMinimum(globalBeginTime);
-	ui->skyCultureCurrentTimeSpinBox->setMaximum(globalEndTime);
+	ui->skyCultureCurrentTimeSpinBox->setMaximum(currentYear); // The slider maximum is always the current year
 	l->setCurrentItem(l->findItems(app.getSkyCultureMgr().getCurrentSkyCultureNameI18(), Qt::MatchExactly).at(0));    
 	l->blockSignals(false);
 
