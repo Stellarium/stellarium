@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-remotecontrol\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2026-08-24 18:46+0700\n"
+"POT-Creation-Date: 2026-09-07 19:13+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Gediminas Tauras, 2026\n"
 "Language-Team: Lithuanian (https://app.transifex.com/stellarium/teams/80998/lt/)\n"
@@ -139,6 +139,288 @@ msgstr "Rodyti visus elementus"
 msgid "Input did not match any item"
 msgstr "Įvestis neatitiko jokio elemento"
 
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:597
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1820
+msgid "No action"
+msgstr "Veiksmo nėra"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:710
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2065
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2072
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2092
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2299
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2406
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2407
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2408
+msgid "No controller connected"
+msgstr "Valdiklis neprijungtas"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:717
+msgid "Vibration test sent to "
+msgstr "Vibracijos bandymas išsiųstas į"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:720
+msgid "Vibration not supported on this device/browser"
+msgstr "Vibracija nepalaikoma šiame įrenginyje / naršyklėje"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1068
+msgid "Warning: This profile was created for a different controller type."
+msgstr "Įspėjimas: šis profilis sukurtas kitokio tipo valdikliui."
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1251 index.html:1355
+#: tablet7in.html:1424
+msgid "centered"
+msgstr "centruota"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1337
+msgid "East →"
+msgstr "Rytai →"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1338
+msgid "North-East ↗"
+msgstr "Šiaurės Rytai ↗"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1339
+msgid "North ↑"
+msgstr "Šiaurė ↑"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1340
+msgid "North-West ↖"
+msgstr "Šiaurės Vakarai ↖"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1341
+msgid "West ←"
+msgstr "Vakarai ←"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1342
+msgid "South-West ↙"
+msgstr "Pietvakariai ↙"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1343
+msgid "South ↓"
+msgstr "Pietūs ↓"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1344
+msgid "South-East ↘"
+msgstr "Pietryčiai ↘"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1347
+msgid "fast"
+msgstr "greitai"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1347
+msgid "medium"
+msgstr "vidutiniškai"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1347
+msgid "slow"
+msgstr "lėtai"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1579 index.html:1316
+#: tablet7in.html:1385
+msgid "No devices connected"
+msgstr "Prijungtų įrenginių nėra"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1778
+msgid "Connect a controller to customize buttons"
+msgstr "Prijunkite valdiklį, kad pritaikytumėte mygtukus"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1848
+msgid "Button %1 mapped to %2"
+msgstr "Mygtukas %1 priskirtas %2"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1879
+msgid "Please connect a controller first"
+msgstr "Pirmiausia prijunkite valdiklį"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1893
+msgid "Calibrating..."
+msgstr "Kalibruojama..."
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1894
+msgid "Move both joysticks in circles, then press any button to finish"
+msgstr ""
+"Sukite abi vairasvirtis ratu, tada paspauskite bet kurį mygtuką, kad "
+"užbaigtumėte"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1943
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1949
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1975 index.html:1394
+#: tablet7in.html:1463
+msgid "Calibrate"
+msgstr "Kalibruoti"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1976
+msgid "Calibration complete! "
+msgstr "Kalibravimas baigtas! "
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1976
+msgid " samples collected."
+msgstr " mėginiai surinkti."
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1986
+msgid "Calibrating... Collected %1 samples"
+msgstr "Kalibruojama... Gauta %1 mėginių"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1988
+msgid "Move joysticks in circles, press any button to finish"
+msgstr ""
+"Sukite vairasvirtis ratu, tada paspauskite bet kurį mygtuką, kad "
+"užbaigtumėte"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1994
+msgid "Left X offset:"
+msgstr "Kairysis X poslinkis:"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1995
+msgid "Left Y offset:"
+msgstr "Kairysis Y poslinkis:"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1996
+msgid "Right X offset:"
+msgstr "Dešinysis X poslinkis:"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1997
+msgid "Right Y offset:"
+msgstr "Dešinysis Y poslinkis:"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2001
+msgid "Not calibrated"
+msgstr "Nekalibruota"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2014
+msgid "Calibration reset for "
+msgstr "Kalibravimo nustatymas iš naujo įrenginiui "
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2063
+msgid "Button mappings reset to defaults for "
+msgstr "Mygtukų priskyrimai atkurti į numatytuosius įrenginiui "
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2086
+msgid "Profile exported: "
+msgstr "Profilis eksportuotas:"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2103
+msgid "Profile imported successfully for "
+msgstr "Profilis sėkmingai importuotas įrenginiui "
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2105
+msgid "Failed to import profile"
+msgstr "Nepavyko importuoti profilio"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2109
+msgid "Invalid profile file"
+msgstr "Netinkamas profilio failas"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2183
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2277
+msgid "Vibration feedback enabled"
+msgstr "Vibracijos grįžtamasis ryšys įjungtas"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2297
+msgid "Button mappings saved for "
+msgstr "Mygtukų susiejimai išsaugoti įrenginiui"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2321
+msgid "Scanning..."
+msgstr "Skanuojama..."
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2351
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2356
+msgid "Found "
+msgstr "Rasta"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2351
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2356
+msgid " controller(s)"
+msgstr "valdiklis(iai)"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2358
+msgid "No controllers found. Please connect a controller and try again."
+msgstr "Valdiklių nerasta. Prijunkite valdiklį ir bandykite dar kartą."
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2414
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2415
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2416
+msgid "Controller data not available"
+msgstr "Duomenų apie valdiklį nėra"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2434
+msgid "No button data available"
+msgstr "Duomenų apie mygtuką nėra"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2470
+msgid "No axis data available"
+msgstr "Nėra ašies duomenų"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2476
+msgid "Left X"
+msgstr "Kairė X"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2477
+msgid "Left Y"
+msgstr "Kairė Y"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2478
+msgid "Right X"
+msgstr "Dešinė X"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2479
+msgid "Right Y"
+msgstr "Dešinė Y"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2480
+msgid "L2 Trigger"
+msgstr "L2 Trigeris"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2481
+msgid "R2 Trigger"
+msgstr "R2 Trigeris"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2520
+msgid "Device Name"
+msgstr "Įrenginio pavadinimas"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2521
+msgid "Vendor/Product ID"
+msgstr "Pardavėjo / Gaminio ID"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2522
+msgid "Button Count"
+msgstr "Mygtukų kiekis"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2523
+msgid "Axis Count"
+msgstr "Ašių kiekis"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2524
+msgid "Operating System"
+msgstr "Operacinė sistema"
+
+#: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2525
+msgid "Browser"
+msgstr "Naršyklė"
+
+#: plugins/RemoteControl/webroot/js/ui/search.js:82
+msgid "Culture Constellations"
+msgstr "Kultūros žvaigždynai"
+
+#: plugins/RemoteControl/webroot/js/ui/search.js:83
+msgid "Culture Asterisms"
+msgstr "Kultūros asterizmai"
+
+#: plugins/RemoteControl/webroot/js/ui/search.js:84
+msgid "Culture Zodiac Signs"
+msgstr "Kultūros zodiako ženklai"
+
+#: plugins/RemoteControl/webroot/js/ui/search.js:85
+msgid "Culture Lunar Mansions"
+msgstr "Kultūros mėnulio stotelės/dvarai"
+
+#: plugins/RemoteControl/webroot/js/ui/search.js:86
+msgid "Culture Notable Stars"
+msgstr "Kultūros žymios žvaigždės"
+
 #: plugins/RemoteControl/webroot/js/ui/search.js:132
 msgid "No items available for this culture"
 msgstr "Šiai kultūrai nėra jokių elementų"
@@ -146,6 +428,103 @@ msgstr "Šiai kultūrai nėra jokių elementų"
 #: plugins/RemoteControl/webroot/js/ui/search.js:432
 msgid "No current selection"
 msgstr "Nėra dabartinio pasirinkimo"
+
+#: plugins/RemoteControl/webroot/js/ui/skyculture.js:515
+msgid "No data available"
+msgstr "Duomenų nėra"
+
+#: plugins/RemoteControl/webroot/js/ui/skyculture.js:517
+#: plugins/RemoteControl/webroot/js/ui/skyculture.js:964
+msgid "No constellations available for this culture"
+msgstr "Šiai kultūrai nėra žinomų žvaigždynų"
+
+#: plugins/RemoteControl/webroot/js/ui/skyculture.js:519
+#: plugins/RemoteControl/webroot/js/ui/skyculture.js:993
+msgid "No asterisms available for this culture"
+msgstr "Šiai kultūrai nėra žinomų asterizmų"
+
+#: plugins/RemoteControl/webroot/js/ui/skyculture.js:521
+msgid "No zodiac data available for this culture"
+msgstr "Šiai kultūrai nėra žinomų zodiako duomenų"
+
+#: plugins/RemoteControl/webroot/js/ui/skyculture.js:523
+msgid "No lunar mansions data available for this culture"
+msgstr "Šiai kultūrai nėra duomenų apie Mėnulio dvarus"
+
+#: plugins/RemoteControl/webroot/js/ui/skyculture.js:525
+msgid "No star name data available for this culture"
+msgstr "Šiai kultūrai nėra duomenų apie žvaigždžių pavadinimus"
+
+#: plugins/RemoteControl/webroot/js/ui/skyculture.js:1022
+msgid "No zodiac signs available for this culture"
+msgstr "Šioje kultūroje nėra zodiako ženklų"
+
+#: plugins/RemoteControl/webroot/js/ui/skyculture.js:1049
+msgid "No lunar mansions available for this culture"
+msgstr "Šioje kultūroje nėra mėnulio dvarų"
+
+#: plugins/RemoteControl/webroot/js/ui/skyculture.js:1075
+msgid "No star names available for this culture"
+msgstr "Šioje kultūroje nėra žinomų žvaigždžių pavadinimų"
+
+#: plugins/RemoteControl/webroot/js/ui/skyculture.js:1119
+msgid "Loading constellations..."
+msgstr "Įkeliami žvaigždynai..."
+
+#: plugins/RemoteControl/webroot/js/ui/skyculture.js:1123
+msgid "Loading asterisms..."
+msgstr "Įkeliami asterizmai..."
+
+#: plugins/RemoteControl/webroot/js/ui/skyculture.js:1127
+msgid "Loading zodiac signs..."
+msgstr "Įkeliami zodiako ženklai..."
+
+#: plugins/RemoteControl/webroot/js/ui/skyculture.js:1131
+msgid "Loading lunar mansions..."
+msgstr "Įkeliami mėnulio dvarai..."
+
+#: plugins/RemoteControl/webroot/js/ui/skyculture.js:1135
+msgid "Loading star names..."
+msgstr "Įkeliami žvaigždžių pavadinimai..."
+
+#: plugins/RemoteControl/webroot/js/ui/skyculture.js:1227
+msgid "No sky cultures available"
+msgstr "Dangaus kultūrų nėra"
+
+#: plugins/RemoteControl/webroot/js/ui/skyculture.js:1302
+msgid "Error loading sky cultures"
+msgstr "Klaida įkeliant dangaus kultūras"
+
+#: plugins/RemoteControl/webroot/js/ui/stellarium-utils.js:436
+#: plugins/RemoteControl/webroot/js/ui/stellarium-utils.js:460
+#: plugins/RemoteControl/webroot/js/ui/stellarium-utils.js:473
+#: plugins/RemoteControl/webroot/js/ui/stellarium-utils.js:488
+msgid "Centering on: "
+msgstr "Centravimas pagal:"
+
+#: plugins/RemoteControl/webroot/js/ui/stellarium-utils.js:563
+msgid "Center on zodiac sign: "
+msgstr "Centras pagal zodiako ženklą:"
+
+#: plugins/RemoteControl/webroot/js/ui/stellarium-utils.js:580
+msgid "Centering on asterism: "
+msgstr "Centruojama pagal asterizmą:"
+
+#: plugins/RemoteControl/webroot/js/ui/stellarium-utils.js:628
+msgid "Center on lunar mansion: "
+msgstr "Centras mėnulio dvare:"
+
+#: plugins/RemoteControl/webroot/js/ui/stellarium-utils.js:752
+msgid "Cleared highlight: "
+msgstr "Išvalytas paryškinimas:"
+
+#: plugins/RemoteControl/webroot/js/ui/stellarium-utils.js:780
+msgid "Isolating constellation: "
+msgstr "Izoliuojamas žvaigždynas:"
+
+#: plugins/RemoteControl/webroot/js/ui/stellarium-utils.js:802
+msgid "All constellations visible"
+msgstr "Visi žvaigždynai matomi"
 
 #: index.html:7 tablet7in.html:7
 msgid "Stellarium remote control plugin"
@@ -799,10 +1178,6 @@ msgstr "Valdiklio nustatymai"
 msgid "Active Device:"
 msgstr "Aktyvuotas įrenginys:"
 
-#: index.html:1316 tablet7in.html:1385
-msgid "No devices connected"
-msgstr "Prijungtų įrenginių nėra"
-
 #: index.html:1322 tablet7in.html:1391
 msgid "Device:"
 msgstr "Įrenginys:"
@@ -835,10 +1210,6 @@ msgstr "Peržiūrėti judesį"
 msgid "Direction:"
 msgstr "Kryptis:"
 
-#: index.html:1355 tablet7in.html:1424
-msgid "centered"
-msgstr "centruota"
-
 #: index.html:1360 tablet7in.html:1429
 msgid "Invert X"
 msgstr "Invertuoti X"
@@ -862,10 +1233,6 @@ msgstr "Dabartinis RL:"
 #: index.html:1392 tablet7in.html:1461
 msgid "Joystick Calibration"
 msgstr "Vairalazdės kalibravimas"
-
-#: index.html:1394 tablet7in.html:1463
-msgid "Calibrate"
-msgstr "Kalibruoti"
 
 #: index.html:1400 tablet7in.html:1469
 msgid ""
