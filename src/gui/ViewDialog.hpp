@@ -136,6 +136,7 @@ private:
 	void connectGroupBox(class QGroupBox* groupBox, const QString& actionId);
 	void updateSkyCultureText();
 	void initSkyCultureTime();
+	void handleVisibleChanged(bool visible);
 	//! Make sure that no tabs icons are outside of the viewport.
 	//! @todo Limit the width to the width of the screen *available to the window*.
 	void updateTabBarListWidgetWidth();
@@ -149,6 +150,8 @@ private:
 	ConfigureOrbitColorsDialog * configureOrbitColorsDialog;
 
 	QTimer hipsUpdateTimer;
+	// Tracks the year that the sky-culture time limits were built for.
+	int lastKnownYear = 0;
 	struct PlanetSurveyPack
 	{
 		QTreeWidgetItem* planetItem = nullptr;
