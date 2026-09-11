@@ -16,6 +16,8 @@ SET( SkyCultureMaker_SRCS
      ScmConstellationArtwork.cpp
      ScmDraw.hpp
      ScmDraw.cpp
+     ScmSCLoader.hpp
+     ScmSCLoader.cpp
      ScmSkyCulture.hpp
      ScmSkyCulture.cpp
      SkyCultureMaker.hpp

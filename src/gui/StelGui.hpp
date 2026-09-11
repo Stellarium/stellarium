@@ -77,6 +77,8 @@ class StelGui : public QObject, public StelGuiBase
 	Q_PROPERTY(bool flagEnableFocusOnDaySpinner READ getFlagEnableFocusOnDaySpinner WRITE setFlagEnableFocusOnDaySpinner NOTIFY flagEnableFocusOnDaySpinnerChanged)
 	Q_PROPERTY(bool flagShowCardinalButton READ getFlagShowCardinalButton WRITE setFlagShowCardinalButton NOTIFY  flagShowCardinalButtonChanged)
 	Q_PROPERTY(bool flagShowCompassButton READ getFlagShowCompassButton WRITE setFlagShowCompassButton NOTIFY  flagShowCompassButtonChanged)
+	//! Toolbar corner: 0=bottom-left, 1=bottom-right, 2=top-left, 3=top-right
+	Q_PROPERTY(int toolbarCorner READ getToolbarCorner WRITE setToolbarCorner NOTIFY toolbarCornerChanged)
 
 public:
 	friend class ViewDialog;
@@ -297,6 +299,10 @@ public slots:
 	bool getAutoHideHorizontalButtonBar() const;
 	//! Get the auto-hide status of the vertical toolbar.
 	bool getAutoHideVerticalButtonBar() const;
+	//! Get the toolbar corner (0=bottom-left, 1=bottom-right, 2=top-left, 3=top-right).
+	int  getToolbarCorner() const;
+	//! Set the toolbar corner (0=bottom-left, 1=bottom-right, 2=top-left, 3=top-right).
+	void setToolbarCorner(int corner);
 
 signals:
 	void visibleChanged(bool b);
@@ -323,6 +329,7 @@ signals:
 	void flagShowAsterismLabelsButtonChanged(bool b);
 	void flagShowCardinalButtonChanged(bool b);
 	void flagShowCompassButtonChanged(bool b);
+	void toolbarCornerChanged(int corner);
 	void infoStringChanged();
 	void guiStyleChanged(const QString &style);
 	void htmlStyleChanged(const QString &style);

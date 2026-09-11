@@ -9,6 +9,15 @@
     {
       "id": "CON lokono 001",
       "lines": [[61084, 60718], [62434, 59747]],
+      "image": {
+        "file": "illustrations/hithi.png",
+        "size": [794, 808],
+        "anchors": [
+          {"pos": [344, 230], "hip": 61084},
+          {"pos": [634, 724], "hip": 60718},
+          {"pos": [272, 544], "hip": 62434}
+        ]
+      },
       "common_name": {"english": "Spirit of the black curassow", "native": "Hithikoya"}
     },
     {
@@ -29,21 +38,57 @@
     {
       "id": "CON lokono 005",
       "lines": [[21421, 20885, 20205, 20455, 20889]],
+      "image": {
+        "file": "illustrations/kamatala.png",
+        "size": [644, 451],
+        "anchors": [
+          {"pos": [172, 168], "hip": 20889},
+          {"pos": [381, 285], "hip": 20205},
+          {"pos": [164, 349], "hip": 21421}
+        ]
+      },
       "common_name": {"english": "Jaw of the tapir", "native": "Kama tâla"}
     },
     {
       "id": "CON lokono 006",
       "lines": [[64394, 64022, 62763, 62576, 60904, 60746, 60697, 60742], [60904, 61071, 61295], [60904, 60514, 60170], [60904, 60941], [60904, 60351, 60168], [60904, 60525, 60327], [60904, 60599], [60904, 60197]],
+      "image": {
+        "file": "illustrations/awarha.png",
+        "size": [1440, 1920],
+        "anchors": [
+          {"pos": [717, 615], "hip": 60904},
+          {"pos": [522, 1875], "hip": 64394},
+          {"pos": [546, 1221], "hip": 62576}
+        ]
+      },
       "common_name": {"english": "Spirit of the awara palm", "native": "Awarhakoya"}
     },
     {
       "id": "CON lokono 007",
       "lines": [[26126, 25861, 25473, 25142, 24817, 24607, 24203, 23680, 23123, 22797, 22549, 22449, 22509], [26207, 26366], [22509, 22833, 22957, 23607, 24197, 25216, 25555, 25790, 26093, 26207, 26366, 26518, 26487]],
+      "image": {
+        "file": "illustrations/kwakoya.png",
+        "size": [937, 850],
+        "anchors": [
+          {"pos": [195, 353], "hip": 26207},
+          {"pos": [271, 586], "hip": 25142},
+          {"pos": [599, 441], "hip": 22509}
+        ]
+      },
       "common_name": {"english": "Spirit of the blue crab", "native": "Kwakoya"}
     },
     {
       "id": "CON lokono 008",
       "lines": [[67301, 65378, 62956, 59774, 54061, 53910, 58001, 59774]],
+      "image": {
+        "file": "illustrations/anorha.png",
+        "size": [904, 563],
+        "anchors": [
+          {"pos": [10, 73], "hip": 67301},
+          {"pos": [192, 82], "hip": 65378},
+          {"pos": [613, 372], "hip": 53910}
+        ]
+      },
       "common_name": {"english": "Spirit of the cocoi heron", "native": "Anorhâkoya"}
     },
     {
@@ -59,8 +104,31 @@
     {
       "id": "CON lokono 012",
       "lines": [[93174, 93425, 93825, 94114, 94160, 94005, 93542, 92953, 91494, 90842, 90200, 89507, 88726, 87936, 87390, 87073, 86670, 87294, 87865, 90037, 90968, 91875, 92989, 93174], [90037, 89642, 90185, 90763, 91014, 91918, 91875], [89290, 90982, 92226, 91992, 90887]],
+      "image": {
+        "file": "illustrations/ifa.png",
+        "size": [1912, 1347],
+        "anchors": [
+          {"pos": [964, 224], "hip": 90185},
+          {"pos": [1620, 494], "hip": 86670},
+          {"pos": [1092, 382], "hip": 89642}
+        ]
+      },
       "common_name": {"english": "Spirit of the Muscovy duck", "native": "Ifakoya"}
-    }
+    },
+    {
+      "id": "CON lokono 013",
+      "lines": [[68702, 68702]],
+      "image": {
+        "file": "illustrations/aleti.png",
+        "size": [460, 763],
+        "anchors": [
+          {"pos": [283, 163], "hip": 68702},
+          {"pos": [160, 418], "hip": 71683},
+          {"pos": [264, 303], "hip": 70035}
+        ]
+      },
+      "common_name": {"english": "Torch", "native": "Alêti"}
+    }    
   ],
   "common_names": {
     "HIP 32349": [{"english": "Mali"}],

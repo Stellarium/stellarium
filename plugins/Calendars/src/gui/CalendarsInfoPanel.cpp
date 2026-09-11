@@ -20,6 +20,7 @@ Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 #include "Calendars.hpp"
 #include "CalendarsInfoPanel.hpp"
 #include "StelApp.hpp"
+#include "StelPropertyMgr.hpp"
 #include "SkyGui.hpp"
 
 #include <float.h>
@@ -105,7 +106,8 @@ CalendarsInfoPanel::CalendarsInfoPanel(Calendars* plugin,
 void CalendarsInfoPanel::updatePosition(bool resetPos)
 {
 #ifndef NO_GUI
-	qreal bottomBoundingHeight = static_cast<SkyGui*>(parentWidget)->getBottomBarHeight()+5.;
+	SkyGui* skyGui = static_cast<SkyGui*>(parentWidget);
+	qreal bottomBoundingHeight = skyGui->getBottomBarHeight()+5.;
 
 	if (sender() || resetPos)
 	{
@@ -113,8 +115,25 @@ void CalendarsInfoPanel::updatePosition(bool resetPos)
 		yPos=static_cast<qreal>(FLT_MAX);
 	}
 	qreal xPosCand = parentWidget->size().width() - boundingRect().width();
-	xPos=qMin(xPos, xPosCand);
 	qreal yPosCand = parentWidget->size().height() - boundingRect().height() - bottomBoundingHeight;
+
+	const int toolbarCorner = StelApp::getInstance()
+	                                  .getStelPropertyManager()
+	                                  ->getStelPropertyValue("StelGui.toolbarCorner")
+	                                  .toInt(); // (0=BL, 1=BR, 2=TL, 3=TR)
+	const qreal leftShift   = 12. + skyGui->getLeftBarRect().width(); // without help label
+	if (toolbarCorner == 1)
+	{
+		xPosCand -= leftShift;
+	}
+	else if (toolbarCorner == 3)
+	{
+		const QRectF barRect = skyGui->getLeftBarRect();
+		if (yPosCand < barRect.bottom() && (yPosCand + boundingRect().height()) > barRect.top())
+			xPosCand -= leftShift;
+	}
+
+	xPos=qMin(xPos, xPosCand);
 	yPos=qMin(yPos, yPosCand);
 	setPos(xPos, yPos);
 #endif

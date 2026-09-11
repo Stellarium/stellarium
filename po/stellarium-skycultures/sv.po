@@ -1,14 +1,15 @@
 # Translators:
 # Alexander V. Wolf <alex.v.wolf@gmail.com>, 2025
-# Karl Birgersson <birgerssonkarl@outlook.com>, 2026
 # cardinot <mcardinot@gmail.com>, 2026
+# Karl Birgersson <birgerssonkarl@outlook.com>, 2026
 # Daniel Nylander <po@danielnylander.se>, 2026
+# Jonatan Nyberg, 2026
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"Last-Translator: Daniel Nylander <po@danielnylander.se>, 2026\n"
+"Last-Translator: Jonatan Nyberg, 2026\n"
 "Language-Team: Swedish (https://app.transifex.com/stellarium/teams/80998/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1576,7 +1577,7 @@ msgstr "Vir"
 #. Dān, English: Luggage Pole
 #. Modern (H.A. Rey) constellation, native: SCALES
 #. Modern (Sternenkarten) constellation, native: Libra
-#. Tibetan constellation, pronounce: Sangwa
+#. Tibetan constellation, native: སྲང, pronounce: sang
 msgid "Libra"
 msgstr "Vågen"
 
@@ -2074,17 +2075,26 @@ msgid "Arg"
 msgstr "Arg"
 
 #. Arabic (Al-Sufi) constellation, native: الشجاع, pronounce: al-Shujā'
+#. Added context to avoid conflict with minor planet name
 #. Modern (Chinese) constellation, native: Hydra
+#. Added context to avoid conflict with minor planet name
 #. Modern (O. Hlad) constellation, native: Hydra
+#. Added context to avoid conflict with minor planet name
 #. Modern (Journey to the West) constellation, native: 红鳞大蟒, pronounce: Hóng
 #. Lín Dà Mǎng, English: Giant Red-Scaled Python
+#. Added context for byname value to avoid conflict with minor planet name
 #. Modern (H.A. Rey) constellation, native: HYDRA
+#. Added context to avoid conflict with minor planet name
 #. Modern (Sternenkarten) constellation, native: Hydra
+#. Added context to avoid conflict with minor planet name
+msgctxt "constellation name"
 msgid "Hydra"
 msgstr "Vattenormen"
 
 #. Pronounce entry for Arabic (Al-Sufi) constellation, native: الشجاع,
 #. English: Hydra
+#. Added context to avoid conflict with minor planet name
+msgctxt "constellation name"
 msgid "al-Shujā'"
 msgstr "al-Shujā'"
 
@@ -18617,6 +18627,7 @@ msgstr "BAL.TÉŠ.A (kakkab balti)"
 #. Abbreviation of constellation in Egyptian (Dendera) sky culture, name: Cas
 #. Abbreviation of constellation in Greek (Dante) sky culture, name: Canopus
 #. Abbreviation of constellation in Inuit sky culture, name: Never Moves
+#. Abbreviation of constellation in Lokono sky culture, name: Torch
 #. Abbreviation of constellation in Macedonian sky culture, name: Ploughman
 #. Abbreviation of constellation in Maya sky culture, name: Jaguar
 #. Abbreviation of asterism in Modern (Chinese) sky culture, name: Willow
@@ -19383,6 +19394,7 @@ msgstr "048"
 #. Korean constellation, native: 어(魚), pronounce: Eo
 #. Korean name for M 7, native: 어(魚)
 #. Modern (Chinese) asterism
+#. Potawatomi constellation, native: Gigo
 msgid "Fish"
 msgstr "Fisk"
 
@@ -19668,8 +19680,6 @@ msgstr "SUḪUR.MÁŠ (Sukhurmashu)"
 #. The Goat-Fish (demon)
 #. Abbreviation of constellation in Babylonian (Seleucid) sky culture, name:
 #. The Goat-Fish
-#. Abbreviation of constellation in Chinese sky culture, name: Celestial
-#. Temple
 #. Abbreviation of asterism in Modern (Chinese) sky culture, name: Official of
 #. Religious Ceremonies
 msgctxt "abbreviation"
@@ -20302,6 +20312,7 @@ msgstr "Eru"
 
 #. Pronounce entry for Babylonian (Seleucid) constellation, native: 𒈕,
 #. English: Dead Man
+#. Modern (IAU) name for HIP 97804, native: Pagru
 msgid "Pagru"
 msgstr "Pagru"
 
@@ -20501,6 +20512,7 @@ msgstr "Stora svalans stjärt"
 #. Chinese Song Dynasty Sky name for HIP 32349, native: 狼
 #. Chinese Xianglin Star Chart constellation, native: 狼, pronounce: Láng
 #. Japanese Yasui Map constellation, native: 狼(ろう), pronounce: Rō
+#. Potawatomi constellation, native: Mo’ëwé
 msgid "Wolf"
 msgstr "Varg"
 
@@ -20987,6 +20999,7 @@ msgstr "Spannmålsmagasin (rismagasin)"
 
 #. Pronounce entry for Balinese constellation, native: ᬮᬸᬫ᭄ᬩᬸᬂ, English:
 #. Granary (Paddy Storage)
+#. Modern (IAU) name for HIP 61966, native: Lumbung
 msgid "Lumbung"
 msgstr "Lumbung"
 
@@ -21088,6 +21101,7 @@ msgid "A Dragon"
 msgstr "En drake"
 
 #. Pronounce entry for Balinese constellation, native: ᬦᬕ, English: A Dragon
+#. Modern (IAU) name for HIP 64962, native: Naga
 msgid "Naga"
 msgstr "Naga"
 
@@ -21115,6 +21129,7 @@ msgid "A Prawn"
 msgstr "En räka"
 
 #. Pronounce entry for Balinese constellation, native: ᬳᬸᬤᬂ, English: A Prawn
+#. Modern (IAU) name for HIP 104139, native: Udang
 msgid "Udang"
 msgstr "Udang"
 
@@ -21184,6 +21199,7 @@ msgstr "Sötvattenkrabba"
 
 #. Pronounce entry for Balinese constellation, native: ᬬᬸᬬᬸ, English:
 #. Freshwater Crab
+#. Modern (IAU) name for HIP 43103, native: Yuyu
 msgid "Yuyu"
 msgstr "Yuyu"
 
@@ -21244,6 +21260,7 @@ msgstr "Begravningsbår"
 
 #. Pronounce entry for Balinese constellation, native: ᬩᬤᬾ, English: Funeral
 #. Bier
+#. Modern (IAU) name for HIP 24305, native: Bade
 msgid "Bade"
 msgstr "Bade"
 
@@ -23931,25 +23948,6 @@ msgstr "Mausoleum"
 msgid "Dà Líng"
 msgstr "Dà Líng"
 
-#. Chinese constellation, native: 天庙, pronounce: Tiān Miào
-#. Chinese Chenzhuo Sky (3rd Century) constellation, native: 天庙, pronounce:
-#. Tian Miao
-#. Chinese Song Dynasty Sky constellation, native: 天庙, pronounce: Tiān Miào
-#. Chinese Xianglin Star Chart constellation, native: 天庙, pronounce: Tiān Miào
-#. Japanese Yasui Map constellation, native: 天廟(てんびょう), pronounce: Tenbyō
-#. Korean constellation, native: 천묘(天廟), pronounce: Cheonmyo
-msgid "Celestial Temple"
-msgstr "Himmelskt tempel"
-
-#. Pronounce entry for Chinese constellation, native: 天庙, English: Celestial
-#. Temple
-#. Chinese Song Dynasty Sky constellation, native: 天庙, English: Celestial
-#. Temple
-#. Chinese Xianglin Star Chart constellation, native: 天庙, English: Celestial
-#. Temple
-msgid "Tiān Miào"
-msgstr "Tiān Miào"
-
 #. Chinese constellation, native: 帝席, pronounce: Dì Xí
 #. Pinyin transliteration
 #. Pinyin transliteration
@@ -24989,31 +24987,6 @@ msgstr "Hǎi Shí"
 msgctxt "abbreviation"
 msgid "091"
 msgstr "091"
-
-#. Chinese constellation, native: 军门, pronounce: Jūn Mén
-#. Chinese Chenzhuo Sky (3rd Century) constellation, native: 军门, pronounce:
-#. Jun Men
-#. Chinese Song Dynasty Sky constellation, native: 军门, pronounce: Jūn Mén
-#. Chinese Xianglin Star Chart constellation, native: 军门, pronounce: Jūn Mén
-#. Japanese Yasui Map constellation, native: 軍門(ぐんもん), pronounce: Gunmon
-#. Korean constellation, native: 군문(軍門), pronounce: Gunmun
-msgid "Military Gate"
-msgstr "Militärport"
-
-#. Pronounce entry for Chinese constellation, native: 军门, English: Military
-#. Gate
-#. Chinese Song Dynasty Sky constellation, native: 军门, English: Military Gate
-#. Chinese Xianglin Star Chart constellation, native: 军门, English: Military
-#. Gate
-msgid "Jūn Mén"
-msgstr "Jūn Mén"
-
-#. Abbreviation of constellation in Chinese sky culture, name: Military Gate
-#. Abbreviation of asterism in Modern (Chinese) sky culture, name: Official
-#. for the Royal Clan
-msgctxt "abbreviation"
-msgid "092"
-msgstr "092"
 
 #. Chinese constellation, native: 河鼓, pronounce: Hé Gǔ
 #. Pinyin transliteration
@@ -27240,29 +27213,6 @@ msgctxt "abbreviation"
 msgid "149"
 msgstr "149"
 
-#. Chinese constellation, native: 东瓯, pronounce: Dōng Ōu
-#. Chinese Chenzhuo Sky (3rd Century) constellation, native: 东瓯, pronounce:
-#. Dong Ou
-#. Chinese Song Dynasty Sky constellation, native: 东瓯, pronounce: Dōng Ōu
-#. Chinese Xianglin Star Chart constellation, native: 东瓯, pronounce: Dōng Ōu
-#. Japanese Yasui Map constellation, native: 東甌(とうおう), pronounce: Tōō
-#. Korean constellation, native: 동구(東甌), pronounce: Donggu
-msgid "Dongou"
-msgstr "Dongou"
-
-#. Pronounce entry for Chinese constellation, native: 东瓯, English: Dongou
-#. Chinese Song Dynasty Sky constellation, native: 东瓯, English: Dongou
-#. Chinese Xianglin Star Chart constellation, native: 东瓯, English: Dongou
-msgid "Dōng Ōu"
-msgstr "Dōng Ōu"
-
-#. Abbreviation of constellation in Chinese sky culture, name: Dongou
-#. Abbreviation of asterism in Modern (Chinese) sky culture, name: Official in
-#. Charge of the Forest
-msgctxt "abbreviation"
-msgid "150"
-msgstr "150"
-
 #. Chinese constellation, native: 南门, pronounce: Nán Mén
 #. Pinyin transliteration
 #. Pinyin transliteration
@@ -27817,32 +27767,6 @@ msgctxt "abbreviation"
 msgid "165"
 msgstr "165"
 
-#. Chinese constellation, native: 器府, pronounce: Qì Fǔ
-#. Chinese Chenzhuo Sky (3rd Century) constellation, native: 器府, pronounce: Qi
-#. Fu
-#. Chinese Song Dynasty Sky constellation, native: 器府, pronounce: Qì Fǔ
-#. Chinese Xianglin Star Chart constellation, native: 器府, pronounce: Qì Fǔ
-#. Japanese Yasui Map constellation, native: 器府(きふ), pronounce: Kifu
-#. Korean constellation, native: 기부(器府), pronounce: Gibu
-msgid "House for Musical Instruments"
-msgstr "Hus för musikinstrument"
-
-#. Pronounce entry for Chinese constellation, native: 器府, English: House for
-#. Musical Instruments
-#. Chinese Song Dynasty Sky constellation, native: 器府, English: House for
-#. Musical Instruments
-#. Chinese Xianglin Star Chart constellation, native: 器府, English: House for
-#. Musical Instruments
-msgid "Qì Fǔ"
-msgstr "Qì Fǔ"
-
-#. Abbreviation of constellation in Chinese sky culture, name: House for
-#. Musical Instruments
-#. Abbreviation of asterism in Modern (Chinese) sky culture, name: Left Flag
-msgctxt "abbreviation"
-msgid "166"
-msgstr "166"
-
 #. Chinese constellation, native: 骑官, pronounce: Qí Guān
 #. Pinyin transliteration
 #. Pinyin transliteration
@@ -27977,52 +27901,6 @@ msgstr "Qì"
 msgctxt "abbreviation"
 msgid "169"
 msgstr "169"
-
-#. Chinese constellation, native: 天稷, pronounce: Tiān Jì
-#. Chinese Chenzhuo Sky (3rd Century) constellation, native: 天稷, pronounce:
-#. Tian Ji
-#. Chinese Song Dynasty Sky constellation, native: 天稷, pronounce: Tiān Jì
-#. Chinese Xianglin Star Chart constellation, native: 天稷, pronounce: Tiān Jì
-#. Japanese Yasui Map constellation, native: 天稷(てんしょく), pronounce: Tenshoku
-msgid "Celestial Cereals"
-msgstr "Himmelskt spannmål"
-
-#. Pronounce entry for Chinese constellation, native: 天稷, English: Celestial
-#. Cereals
-#. Chinese constellation, native: 天记, English: Judge for Estimating the Age of
-#. Animals
-#. Chinese constellation, native: 天纪, English: Celestial Discipline
-#. Chinese Manchu asterism, native: 天记, English: Judge for Estimating the Age
-#. of Animals
-#. Chinese Manchu asterism, native: 天纪, English: Celestial Discipline
-#. Chinese Song Dynasty Sky constellation, native: 天纪, English: Celestial
-#. Discipline
-#. Chinese Song Dynasty Sky constellation, native: 天记, English: Judge for
-#. Estimating the Age of Animals
-#. Chinese Song Dynasty Sky constellation, native: 天稷, English: Celestial
-#. Cereals
-#. Chinese Xianglin Star Chart constellation, native: 天纪, English: Celestial
-#. Discipline
-#. Chinese Xianglin Star Chart constellation, native: 天记, English: Judge for
-#. Estimating the Age of Animals
-#. Chinese Xianglin Star Chart constellation, native: 天稷, English: Celestial
-#. Cereals
-#. Chinese Yuan Dynasty (14th Century) constellation, native: 天纪, English:
-#. Celestial Discipline
-#. Chinese Yuan Dynasty (14th Century) constellation, native: 天记, English:
-#. Judge for Estimating the Age of Animals
-#. Chinese Yuan Dynasty (14th Century) asterism, native: 天纪, English:
-#. Celestial Discipline
-msgid "Tiān Jì"
-msgstr "Tiān Jì"
-
-#. Abbreviation of constellation in Chinese sky culture, name: Celestial
-#. Cereals
-#. Abbreviation of asterism in Modern (Chinese) sky culture, name: Left
-#. Conductor
-msgctxt "abbreviation"
-msgid "170"
-msgstr "170"
 
 #. Chinese constellation, native: 青丘, pronounce: Qīng Qiū
 #. Pinyin transliteration
@@ -30301,6 +30179,33 @@ msgstr "226"
 msgid "Judge for Estimating the Age of Animals"
 msgstr "Domare som avgör åldern på djur"
 
+#. Pronounce entry for Chinese constellation, native: 天记, English: Judge for
+#. Estimating the Age of Animals
+#. Chinese constellation, native: 天纪, English: Celestial Discipline
+#. Chinese Manchu asterism, native: 天记, English: Judge for Estimating the Age
+#. of Animals
+#. Chinese Manchu asterism, native: 天纪, English: Celestial Discipline
+#. Chinese Song Dynasty Sky constellation, native: 天纪, English: Celestial
+#. Discipline
+#. Chinese Song Dynasty Sky constellation, native: 天记, English: Judge for
+#. Estimating the Age of Animals
+#. Chinese Song Dynasty Sky constellation, native: 天稷, English: Celestial
+#. Cereals
+#. Chinese Xianglin Star Chart constellation, native: 天纪, English: Celestial
+#. Discipline
+#. Chinese Xianglin Star Chart constellation, native: 天记, English: Judge for
+#. Estimating the Age of Animals
+#. Chinese Xianglin Star Chart constellation, native: 天稷, English: Celestial
+#. Cereals
+#. Chinese Yuan Dynasty (14th Century) constellation, native: 天纪, English:
+#. Celestial Discipline
+#. Chinese Yuan Dynasty (14th Century) constellation, native: 天记, English:
+#. Judge for Estimating the Age of Animals
+#. Chinese Yuan Dynasty (14th Century) asterism, native: 天纪, English:
+#. Celestial Discipline
+msgid "Tiān Jì"
+msgstr "Tiān Jì"
+
 #. Abbreviation of constellation in Chinese sky culture, name: Judge for
 #. Estimating the Age of Animals
 #. Abbreviation of asterism in Chinese Manchu sky culture, name: Judge for
@@ -31742,8 +31647,6 @@ msgstr "Byggmästare"
 
 #. Pronounce entry for Chinese constellation, native: 土司空, English: Master of
 #. Constructions
-#. Chinese constellation, native: 土司空(奎宿), English: Master of Constructions
-#. (In Legs Mansion)
 #. Chinese Manchu asterism, native: 土司空, English: Master of Constructions
 msgid "Tǔ Sī Kōng"
 msgstr "Tǔ Sī Kōng"
@@ -31905,29 +31808,6 @@ msgstr "Wáng Liáng"
 msgctxt "abbreviation"
 msgid "263"
 msgstr "263"
-
-#. Chinese constellation, native: 土司空(奎宿), pronounce: Tǔ Sī Kōng
-#. Chinese Chenzhuo Sky (3rd Century) constellation, native: 土司空(奎宿),
-#. pronounce: Tu Si Kong(Kui Xiu)
-#. Chinese Song Dynasty Sky constellation, native: 土司空(奎宿), pronounce: Tǔ Sī
-#. Kōng(Kuí Xiù)
-#. Chinese Xianglin Star Chart constellation, native: 土司空(奎宿), pronounce: Tǔ
-#. Sī Kōng(Kuí Xiù)
-#. Chinese Yuan Dynasty (14th Century) constellation, native: 土司空(奎宿),
-#. pronounce: Tǔ Sī Kōng(Kuí Xiù)
-#. Japanese Yasui Map constellation, native: 土司空(奎宿) (どしくう), pronounce:
-#. Doshikū
-#. Korean constellation, native: 토사공(司空), pronounce: Sagong
-#. Korean name for HIP   3419, native: 토사공(司空)
-msgid "Master of Constructions (In Legs Mansion)"
-msgstr "Byggmästare (i Benens hus)"
-
-#. Abbreviation of constellation in Chinese sky culture, name: Master of
-#. Constructions (In Legs Mansion)
-#. Abbreviation of asterism in Modern (Chinese) sky culture, name: Seat Flags
-msgctxt "abbreviation"
-msgid "264"
-msgstr "264"
 
 #. Chinese constellation, native: 文昌, pronounce: Wén Chāng
 #. Pinyin transliteration
@@ -34235,11 +34115,6 @@ msgstr "318"
 #. Needs confirmation, then remove edges (edges_type=none)
 #. Name of a zodiac sign or a lunar mansion in Chinese Yuan Dynasty (14th
 #. Century) sky culture, native: 角, pronounce: Jiǎo
-#. Name of a zodiac sign or a lunar mansion in Japanese Yasui Map sky culture,
-#. native: 角, pronounce: Kakushuku/SuBoshi
-#. Needs confirmation, then remove edges (edges_type=none)
-#. Name of a zodiac sign or a lunar mansion in Korean sky culture, native:
-#. 각(角), pronounce: Gak
 msgctxt "chinese lunar mansion"
 msgid "Horn"
 msgstr "Horn"
@@ -34279,11 +34154,6 @@ msgstr "Jiǎo"
 #. Needs confirmation, then remove edges (edges_type=none)
 #. Name of a zodiac sign or a lunar mansion in Chinese Yuan Dynasty (14th
 #. Century) sky culture, native: 亢, pronounce: Kàng
-#. Name of a zodiac sign or a lunar mansion in Japanese Yasui Map sky culture,
-#. native: 亢, pronounce: Kōshuku/AmiBoshi
-#. Needs confirmation, then remove edges (edges_type=none)
-#. Name of a zodiac sign or a lunar mansion in Korean sky culture, native:
-#. 항(亢), pronounce: Hang
 msgctxt "chinese lunar mansion"
 msgid "Neck"
 msgstr "Hals"
@@ -34326,11 +34196,6 @@ msgstr "Kàng"
 #. Needs confirmation, then remove edges (edges_type=none)
 #. Name of a zodiac sign or a lunar mansion in Chinese Yuan Dynasty (14th
 #. Century) sky culture, native: 氐, pronounce: Dī
-#. Name of a zodiac sign or a lunar mansion in Japanese Yasui Map sky culture,
-#. native: 氐, pronounce: Teishuku/TomoBoshi
-#. Needs confirmation, then remove edges (edges_type=none)
-#. Name of a zodiac sign or a lunar mansion in Korean sky culture, native:
-#. 저(氐), pronounce: Jeo
 msgctxt "chinese lunar mansion"
 msgid "Root"
 msgstr "Rot"
@@ -34373,11 +34238,6 @@ msgstr "Dī"
 #. Needs confirmation, then remove edges (edges_type=none)
 #. Name of a zodiac sign or a lunar mansion in Chinese Yuan Dynasty (14th
 #. Century) sky culture, native: 房, pronounce: Fáng
-#. Name of a zodiac sign or a lunar mansion in Japanese Yasui Map sky culture,
-#. native: 房, pronounce: Bōshuku/SoiBoshi
-#. Needs confirmation, then remove edges (edges_type=none)
-#. Name of a zodiac sign or a lunar mansion in Korean sky culture, native:
-#. 방(房), pronounce: Bang
 msgctxt "chinese lunar mansion"
 msgid "Room"
 msgstr "Rum"
@@ -34417,11 +34277,6 @@ msgstr "Fáng"
 #. Needs confirmation, then remove edges (edges_type=none)
 #. Name of a zodiac sign or a lunar mansion in Chinese Yuan Dynasty (14th
 #. Century) sky culture, native: 心, pronounce: Xīn
-#. Name of a zodiac sign or a lunar mansion in Japanese Yasui Map sky culture,
-#. native: 心, pronounce: Shinshuku/NakagoBoshi
-#. Needs confirmation, then remove edges (edges_type=none)
-#. Name of a zodiac sign or a lunar mansion in Korean sky culture, native:
-#. 심(心), pronounce: Sim
 msgctxt "chinese lunar mansion"
 msgid "Heart"
 msgstr "Hjärta"
@@ -34464,11 +34319,6 @@ msgstr "Xīn"
 #. Needs confirmation, then remove edges (edges_type=none)
 #. Name of a zodiac sign or a lunar mansion in Chinese Yuan Dynasty (14th
 #. Century) sky culture, native: 尾, pronounce: Wěi
-#. Name of a zodiac sign or a lunar mansion in Japanese Yasui Map sky culture,
-#. native: 尾, pronounce: Bishuku/AshitareBoshi
-#. Needs confirmation, then remove edges (edges_type=none)
-#. Name of a zodiac sign or a lunar mansion in Korean sky culture, native:
-#. 미(尾), pronounce: Mi
 msgctxt "chinese lunar mansion"
 msgid "Tail"
 msgstr "Svans"
@@ -34511,11 +34361,6 @@ msgstr "Wěi"
 #. Needs confirmation, then remove edges (edges_type=none)
 #. Name of a zodiac sign or a lunar mansion in Chinese Yuan Dynasty (14th
 #. Century) sky culture, native: 箕, pronounce: Jī
-#. Name of a zodiac sign or a lunar mansion in Japanese Yasui Map sky culture,
-#. native: 箕, pronounce: Kishuku/MiBoshi
-#. Needs confirmation, then remove edges (edges_type=none)
-#. Name of a zodiac sign or a lunar mansion in Korean sky culture, native:
-#. 기(箕), pronounce: Gi
 msgctxt "chinese lunar mansion"
 msgid "Winnowing Basket"
 msgstr "Tröskekorg"
@@ -34555,11 +34400,6 @@ msgstr "Jī"
 #. Needs confirmation, then remove edges (edges_type=none)
 #. Name of a zodiac sign or a lunar mansion in Chinese Yuan Dynasty (14th
 #. Century) sky culture, native: 斗, pronounce: Dǒu
-#. Name of a zodiac sign or a lunar mansion in Japanese Yasui Map sky culture,
-#. native: 斗, pronounce: Toshuku/HikitsuBoshi
-#. Needs confirmation, then remove edges (edges_type=none)
-#. Name of a zodiac sign or a lunar mansion in Korean sky culture, native:
-#. 두(斗), pronounce: Du
 msgctxt "chinese lunar mansion"
 msgid "Dipper"
 msgstr "Skopa"
@@ -34593,11 +34433,6 @@ msgstr "Dǒu"
 #. Needs confirmation, then remove edges (edges_type=none)
 #. Name of a zodiac sign or a lunar mansion in Chinese Yuan Dynasty (14th
 #. Century) sky culture, native: 牛, pronounce: Niú
-#. Name of a zodiac sign or a lunar mansion in Japanese Yasui Map sky culture,
-#. native: 牛, pronounce: Gyūshuku/InamiBoshi
-#. Needs confirmation, then remove edges (edges_type=none)
-#. Name of a zodiac sign or a lunar mansion in Korean sky culture, native:
-#. 우(牛), pronounce: U
 msgctxt "chinese lunar mansion"
 msgid "Ox"
 msgstr "Oxe"
@@ -34634,11 +34469,6 @@ msgstr "Niú"
 #. Needs confirmation, then remove edges (edges_type=none)
 #. Name of a zodiac sign or a lunar mansion in Chinese Yuan Dynasty (14th
 #. Century) sky culture, native: 女, pronounce: Nǚ
-#. Name of a zodiac sign or a lunar mansion in Japanese Yasui Map sky culture,
-#. native: 女, pronounce: Josho/UrukiBoshi
-#. Needs confirmation, then remove edges (edges_type=none)
-#. Name of a zodiac sign or a lunar mansion in Korean sky culture, native:
-#. 여(女), pronounce: Yeo
 msgctxt "chinese lunar mansion"
 msgid "Girl"
 msgstr "Flicka"
@@ -34678,11 +34508,6 @@ msgstr "Nǚ"
 #. Needs confirmation, then remove edges (edges_type=none)
 #. Name of a zodiac sign or a lunar mansion in Chinese Yuan Dynasty (14th
 #. Century) sky culture, native: 虚, pronounce: Xū
-#. Name of a zodiac sign or a lunar mansion in Japanese Yasui Map sky culture,
-#. native: 虚, pronounce: Koshuku/TomiteBoshi
-#. Needs confirmation, then remove edges (edges_type=none)
-#. Name of a zodiac sign or a lunar mansion in Korean sky culture, native:
-#. 허(虛), pronounce: Heo
 msgctxt "chinese lunar mansion"
 msgid "Emptiness"
 msgstr "Tomhet"
@@ -34725,11 +34550,6 @@ msgstr "Xū"
 #. Needs confirmation, then remove edges (edges_type=none)
 #. Name of a zodiac sign or a lunar mansion in Chinese Yuan Dynasty (14th
 #. Century) sky culture, native: 危, pronounce: Wēi
-#. Name of a zodiac sign or a lunar mansion in Japanese Yasui Map sky culture,
-#. native: 危, pronounce: Kishuku/UmiyameBoshi
-#. Needs confirmation, then remove edges (edges_type=none)
-#. Name of a zodiac sign or a lunar mansion in Korean sky culture, native:
-#. 위(危), pronounce: Wi
 msgctxt "chinese lunar mansion"
 msgid "Rooftop"
 msgstr "Tak"
@@ -34769,11 +34589,6 @@ msgstr "Wēi"
 #. Needs confirmation, then remove edges (edges_type=none)
 #. Name of a zodiac sign or a lunar mansion in Chinese Yuan Dynasty (14th
 #. Century) sky culture, native: 室, pronounce: Shì
-#. Name of a zodiac sign or a lunar mansion in Japanese Yasui Map sky culture,
-#. native: 室, pronounce: Shitsushuku/HatsuiBoshi
-#. Needs confirmation, then remove edges (edges_type=none)
-#. Name of a zodiac sign or a lunar mansion in Korean sky culture, native:
-#. 실(室), pronounce: Sil
 msgctxt "chinese lunar mansion"
 msgid "Encampment"
 msgstr "Lägerplats"
@@ -34810,11 +34625,6 @@ msgstr "Shì"
 #. Needs confirmation, then remove edges (edges_type=none)
 #. Name of a zodiac sign or a lunar mansion in Chinese Yuan Dynasty (14th
 #. Century) sky culture, native: 壁, pronounce: Bì
-#. Name of a zodiac sign or a lunar mansion in Japanese Yasui Map sky culture,
-#. native: 壁, pronounce: Hekishuku/NamameBoshi
-#. Needs confirmation, then remove edges (edges_type=none)
-#. Name of a zodiac sign or a lunar mansion in Korean sky culture, native:
-#. 벽(壁), pronounce: Byeok
 msgctxt "chinese lunar mansion"
 msgid "Wall"
 msgstr "Mur"
@@ -34865,11 +34675,6 @@ msgstr "Bì"
 #. Needs confirmation, then remove edges (edges_type=none)
 #. Name of a zodiac sign or a lunar mansion in Chinese Yuan Dynasty (14th
 #. Century) sky culture, native: 奎, pronounce: Kuí
-#. Name of a zodiac sign or a lunar mansion in Japanese Yasui Map sky culture,
-#. native: 奎, pronounce: Keishuku/TokakiBoshi
-#. Needs confirmation, then remove edges (edges_type=none)
-#. Name of a zodiac sign or a lunar mansion in Korean sky culture, native:
-#. 규(奎), pronounce: Gyu
 msgctxt "chinese lunar mansion"
 msgid "Legs"
 msgstr "Ben"
@@ -34912,11 +34717,6 @@ msgstr "Kuí"
 #. Needs confirmation, then remove edges (edges_type=none)
 #. Name of a zodiac sign or a lunar mansion in Chinese Yuan Dynasty (14th
 #. Century) sky culture, native: 娄, pronounce: Lóu
-#. Name of a zodiac sign or a lunar mansion in Japanese Yasui Map sky culture,
-#. native: 婁, pronounce: Rōshuku/TataraBoshi
-#. Needs confirmation, then remove edges (edges_type=none)
-#. Name of a zodiac sign or a lunar mansion in Korean sky culture, native:
-#. 루(婁), pronounce: Ru
 msgctxt "chinese lunar mansion"
 msgid "Bond"
 msgstr "Förbindelse"
@@ -34959,11 +34759,6 @@ msgstr "Lóu"
 #. Needs confirmation, then remove edges (edges_type=none)
 #. Name of a zodiac sign or a lunar mansion in Chinese Yuan Dynasty (14th
 #. Century) sky culture, native: 胃, pronounce: Wèi
-#. Name of a zodiac sign or a lunar mansion in Japanese Yasui Map sky culture,
-#. native: 胃, pronounce: Ishuku/EkieBoshi
-#. Needs confirmation, then remove edges (edges_type=none)
-#. Name of a zodiac sign or a lunar mansion in Korean sky culture, native:
-#. 위(胃), pronounce: Wi
 msgctxt "chinese lunar mansion"
 msgid "Stomach"
 msgstr "Mage"
@@ -35006,11 +34801,6 @@ msgstr "Wèi"
 #. Needs confirmation, then remove edges (edges_type=none)
 #. Name of a zodiac sign or a lunar mansion in Chinese Yuan Dynasty (14th
 #. Century) sky culture, native: 昴, pronounce: Mǎo
-#. Name of a zodiac sign or a lunar mansion in Japanese Yasui Map sky culture,
-#. native: 昴, pronounce: Bōshuku/SubaruBoshi
-#. Needs confirmation, then remove edges (edges_type=none)
-#. Name of a zodiac sign or a lunar mansion in Korean sky culture, native:
-#. 묘(昴), pronounce: Myo
 msgctxt "chinese lunar mansion"
 msgid "Hairy Head"
 msgstr "Hårigt huvud"
@@ -35053,11 +34843,6 @@ msgstr "Mǎo"
 #. Needs confirmation, then remove edges (edges_type=none)
 #. Name of a zodiac sign or a lunar mansion in Chinese Yuan Dynasty (14th
 #. Century) sky culture, native: 毕, pronounce: Bì
-#. Name of a zodiac sign or a lunar mansion in Japanese Yasui Map sky culture,
-#. native: 畢, pronounce: Hitsushuku/AmefuriBoshi
-#. Needs confirmation, then remove edges (edges_type=none)
-#. Name of a zodiac sign or a lunar mansion in Korean sky culture, native:
-#. 필(畢), pronounce: Pil
 msgctxt "chinese lunar mansion"
 msgid "Net"
 msgstr "Nät"
@@ -35076,11 +34861,6 @@ msgstr "Nät"
 #. Needs confirmation, then remove edges (edges_type=none)
 #. Name of a zodiac sign or a lunar mansion in Chinese Yuan Dynasty (14th
 #. Century) sky culture, native: 觜, pronounce: Zī
-#. Name of a zodiac sign or a lunar mansion in Japanese Yasui Map sky culture,
-#. native: 觜, pronounce: Shishuku/TorokiBoshi
-#. Needs confirmation, then remove edges (edges_type=none)
-#. Name of a zodiac sign or a lunar mansion in Korean sky culture, native:
-#. 자(觜), pronounce: Ja
 msgctxt "chinese lunar mansion"
 msgid "Turtle Beak"
 msgstr "Sköldpaddans näbb"
@@ -35120,11 +34900,6 @@ msgstr "Zī"
 #. Needs confirmation, then remove edges (edges_type=none)
 #. Name of a zodiac sign or a lunar mansion in Chinese Yuan Dynasty (14th
 #. Century) sky culture, native: 参, pronounce: Shēn
-#. Name of a zodiac sign or a lunar mansion in Japanese Yasui Map sky culture,
-#. native: 参, pronounce: Sanshuku/KagasukiBoshi
-#. Needs confirmation, then remove edges (edges_type=none)
-#. Name of a zodiac sign or a lunar mansion in Korean sky culture, native:
-#. 삼(參), pronounce: Sam
 msgctxt "chinese lunar mansion"
 msgid "Three Stars"
 msgstr "Tre stjärnor"
@@ -35164,11 +34939,6 @@ msgstr "Shēn"
 #. Needs confirmation, then remove edges (edges_type=none)
 #. Name of a zodiac sign or a lunar mansion in Chinese Yuan Dynasty (14th
 #. Century) sky culture, native: 井, pronounce: Jǐng
-#. Name of a zodiac sign or a lunar mansion in Japanese Yasui Map sky culture,
-#. native: 井, pronounce: Seishuku/ChichiriBoshi
-#. Needs confirmation, then remove edges (edges_type=none)
-#. Name of a zodiac sign or a lunar mansion in Korean sky culture, native:
-#. 정(井), pronounce: Jeong
 msgctxt "chinese lunar mansion"
 msgid "Well"
 msgstr "Brunn"
@@ -35205,11 +34975,6 @@ msgstr "Jǐng"
 #. Needs confirmation, then remove edges (edges_type=none)
 #. Name of a zodiac sign or a lunar mansion in Chinese Yuan Dynasty (14th
 #. Century) sky culture, native: 鬼, pronounce: Guǐ
-#. Name of a zodiac sign or a lunar mansion in Japanese Yasui Map sky culture,
-#. native: 鬼, pronounce: Kishuku/TamahomeBoshi
-#. Needs confirmation, then remove edges (edges_type=none)
-#. Name of a zodiac sign or a lunar mansion in Korean sky culture, native:
-#. 귀(鬼), pronounce: Gwi
 msgctxt "chinese lunar mansion"
 msgid "Ghost"
 msgstr "Spöke"
@@ -35249,11 +35014,6 @@ msgstr "Guǐ"
 #. Needs confirmation, then remove edges (edges_type=none)
 #. Name of a zodiac sign or a lunar mansion in Chinese Yuan Dynasty (14th
 #. Century) sky culture, native: 柳, pronounce: Liǔ
-#. Name of a zodiac sign or a lunar mansion in Japanese Yasui Map sky culture,
-#. native: 柳, pronounce: Ryūshuku/NurikoBoshi
-#. Needs confirmation, then remove edges (edges_type=none)
-#. Name of a zodiac sign or a lunar mansion in Korean sky culture, native:
-#. 류(柳), pronounce: Ryu
 msgctxt "chinese lunar mansion"
 msgid "Willow"
 msgstr "Pilträd"
@@ -35293,11 +35053,6 @@ msgstr "Liǔ"
 #. Needs confirmation, then remove edges (edges_type=none)
 #. Name of a zodiac sign or a lunar mansion in Chinese Yuan Dynasty (14th
 #. Century) sky culture, native: 星, pronounce: Xīng
-#. Name of a zodiac sign or a lunar mansion in Japanese Yasui Map sky culture,
-#. native: 星, pronounce: Seishuku/HotohoriBoshi
-#. Needs confirmation, then remove edges (edges_type=none)
-#. Name of a zodiac sign or a lunar mansion in Korean sky culture, native:
-#. 성(星), pronounce: Seong
 msgctxt "chinese lunar mansion"
 msgid "Star"
 msgstr "Stjärna"
@@ -35337,11 +35092,6 @@ msgstr "Xīng"
 #. Needs confirmation, then remove edges (edges_type=none)
 #. Name of a zodiac sign or a lunar mansion in Chinese Yuan Dynasty (14th
 #. Century) sky culture, native: 张, pronounce: Zhāng
-#. Name of a zodiac sign or a lunar mansion in Japanese Yasui Map sky culture,
-#. native: 張, pronounce: Chōshuku/ChirikoBoshi
-#. Needs confirmation, then remove edges (edges_type=none)
-#. Name of a zodiac sign or a lunar mansion in Korean sky culture, native:
-#. 장(張), pronounce: Jang
 msgctxt "chinese lunar mansion"
 msgid "Extended Net"
 msgstr "Utökat nät"
@@ -35384,11 +35134,6 @@ msgstr "Zhāng"
 #. Needs confirmation, then remove edges (edges_type=none)
 #. Name of a zodiac sign or a lunar mansion in Chinese Yuan Dynasty (14th
 #. Century) sky culture, native: 翼, pronounce: Yì
-#. Name of a zodiac sign or a lunar mansion in Japanese Yasui Map sky culture,
-#. native: 翼, pronounce: Yokushuku/TasukiBoshi
-#. Needs confirmation, then remove edges (edges_type=none)
-#. Name of a zodiac sign or a lunar mansion in Korean sky culture, native:
-#. 익(翼), pronounce: Ik
 msgctxt "chinese lunar mansion"
 msgid "Wings"
 msgstr "Vingar"
@@ -35431,11 +35176,6 @@ msgstr "Yì"
 #. Needs confirmation, then remove edges (edges_type=none)
 #. Name of a zodiac sign or a lunar mansion in Chinese Yuan Dynasty (14th
 #. Century) sky culture, native: 轸, pronounce: Zhěn
-#. Name of a zodiac sign or a lunar mansion in Japanese Yasui Map sky culture,
-#. native: 軫, pronounce: Shinshuku/MitsukakeBoshi
-#. Needs confirmation, then remove edges (edges_type=none)
-#. Name of a zodiac sign or a lunar mansion in Korean sky culture, native:
-#. 진(軫), pronounce: Jin
 msgctxt "chinese lunar mansion"
 msgid "Chariot"
 msgstr "Stridsvagn"
@@ -42477,8 +42217,6 @@ msgstr "Hējiēn zēng"
 #. Chinese Yuan Dynasty (14th Century) name for HIP  79882, native: 楚
 #. Japanese Yasui Map name for HIP 79882, native: 楚(そ)
 #. Modern (Chinese) name for HIP 79882
-#. Tibetan asterism, English: LM09
-#. Tibetan Lunar Mansion 9
 msgid "Chu"
 msgstr "Chu"
 
@@ -44295,7 +44033,7 @@ msgstr "Hégǔ"
 #. Chinese Song Dynasty Sky name for HIP 97649, native: 牵牛
 #. Modern (Chinese) name for HIP 97649
 msgid "Cowboy"
-msgstr "Cowboy"
+msgstr "Koherde"
 
 #. Pronounce entry for Chinese name for HIP 97649
 #. Chinese name for HIP 97649, native: 牛郎
@@ -46115,6 +45853,7 @@ msgstr "Canopy Support (bihang till Sänghimmel)"
 #. Korean constellation, native: 강(糠), English: Chaff
 #. Pronounce entry for Korean name for HIP  89290
 #. Korean name for HIP  89290, native: 강(糠)
+#. Modern (IAU) name for HIP 9598, native: Gang
 msgid "Gang"
 msgstr "Gang"
 
@@ -47596,6 +47335,7 @@ msgstr "01F"
 #. native: 平, English: Judging
 #. Chinese Chenzhuo Sky (3rd Century) constellation, native: 屏, English:
 #. Screen
+#. Modern (IAU) name for HIP 23685, native: Ping
 msgid "Ping"
 msgstr "Ping"
 
@@ -50166,6 +49906,21 @@ msgctxt "abbreviation"
 msgid "15C"
 msgstr "15C"
 
+#. Chinese Chenzhuo Sky (3rd Century) constellation, native: 土司空(奎宿),
+#. pronounce: Tu Si Kong(Kui Xiu)
+#. Chinese Song Dynasty Sky constellation, native: 土司空(奎宿), pronounce: Tǔ Sī
+#. Kōng(Kuí Xiù)
+#. Chinese Xianglin Star Chart constellation, native: 土司空(奎宿), pronounce: Tǔ
+#. Sī Kōng(Kuí Xiù)
+#. Chinese Yuan Dynasty (14th Century) constellation, native: 土司空(奎宿),
+#. pronounce: Tǔ Sī Kōng(Kuí Xiù)
+#. Japanese Yasui Map constellation, native: 土司空(奎宿) (どしくう), pronounce:
+#. Doshikū
+#. Korean constellation, native: 토사공(司空), pronounce: Sagong
+#. Korean name for HIP   3419, native: 토사공(司空)
+msgid "Master of Constructions (In Legs Mansion)"
+msgstr "Byggmästare (i Benens hus)"
+
 #. Pronounce entry for Chinese Chenzhuo Sky (3rd Century) constellation,
 #. native: 土司空(奎宿), English: Master of Constructions (In Legs Mansion)
 msgid "Tu Si Kong(Kui Xiu)"
@@ -51610,7 +51365,6 @@ msgstr "22Q"
 #. native: 狼, English: Wolf
 #. Pronounce entry for Chinese Chenzhuo Sky (3rd Century) name for HIP 32349
 #. Chinese Chenzhuo Sky (3rd Century) name for HIP 32349, native: 狼
-#. Tibetan constellation, English: Taurus
 msgid "Lang"
 msgstr "Lang"
 
@@ -51920,6 +51674,14 @@ msgctxt "abbreviation"
 msgid "25D"
 msgstr "25D"
 
+#. Chinese Chenzhuo Sky (3rd Century) constellation, native: 天稷, pronounce:
+#. Tian Ji
+#. Chinese Song Dynasty Sky constellation, native: 天稷, pronounce: Tiān Jì
+#. Chinese Xianglin Star Chart constellation, native: 天稷, pronounce: Tiān Jì
+#. Japanese Yasui Map constellation, native: 天稷(てんしょく), pronounce: Tenshoku
+msgid "Celestial Cereals"
+msgstr "Himmelskt spannmål"
+
 #. Abbreviation of constellation in Chinese Chenzhuo Sky (3rd Century) sky
 #. culture, name: Celestial Cereals
 #. Abbreviation of constellation in Chinese Song Dynasty Sky sky culture,
@@ -51947,6 +51709,15 @@ msgstr "25E"
 msgctxt "abbreviation"
 msgid "26A"
 msgstr "26A"
+
+#. Chinese Chenzhuo Sky (3rd Century) constellation, native: 天庙, pronounce:
+#. Tian Miao
+#. Chinese Song Dynasty Sky constellation, native: 天庙, pronounce: Tiān Miào
+#. Chinese Xianglin Star Chart constellation, native: 天庙, pronounce: Tiān Miào
+#. Japanese Yasui Map constellation, native: 天廟(てんびょう), pronounce: Tenbyō
+#. Korean constellation, native: 천묘(天廟), pronounce: Cheonmyo
+msgid "Celestial Temple"
+msgstr "Himmelskt tempel"
 
 #. Pronounce entry for Chinese Chenzhuo Sky (3rd Century) constellation,
 #. native: 天庙, English: Celestial Temple
@@ -51987,6 +51758,15 @@ msgstr "Yi"
 msgctxt "abbreviation"
 msgid "27A"
 msgstr "27A"
+
+#. Chinese Chenzhuo Sky (3rd Century) constellation, native: 东瓯, pronounce:
+#. Dong Ou
+#. Chinese Song Dynasty Sky constellation, native: 东瓯, pronounce: Dōng Ōu
+#. Chinese Xianglin Star Chart constellation, native: 东瓯, pronounce: Dōng Ōu
+#. Japanese Yasui Map constellation, native: 東甌(とうおう), pronounce: Tōō
+#. Korean constellation, native: 동구(東甌), pronounce: Donggu
+msgid "Dongou"
+msgstr "Dongou"
 
 #. Pronounce entry for Chinese Chenzhuo Sky (3rd Century) constellation,
 #. native: 东瓯, English: Dongou
@@ -52104,6 +51884,15 @@ msgctxt "abbreviation"
 msgid "28D"
 msgstr "28D"
 
+#. Chinese Chenzhuo Sky (3rd Century) constellation, native: 军门, pronounce:
+#. Jun Men
+#. Chinese Song Dynasty Sky constellation, native: 军门, pronounce: Jūn Mén
+#. Chinese Xianglin Star Chart constellation, native: 军门, pronounce: Jūn Mén
+#. Japanese Yasui Map constellation, native: 軍門(ぐんもん), pronounce: Gunmon
+#. Korean constellation, native: 군문(軍門), pronounce: Gunmun
+msgid "Military Gate"
+msgstr "Militärport"
+
 #. Pronounce entry for Chinese Chenzhuo Sky (3rd Century) constellation,
 #. native: 军门, English: Military Gate
 msgid "Jun Men"
@@ -52170,6 +51959,15 @@ msgstr "Qing Qiu"
 msgctxt "abbreviation"
 msgid "28G"
 msgstr "28G"
+
+#. Chinese Chenzhuo Sky (3rd Century) constellation, native: 器府, pronounce: Qi
+#. Fu
+#. Chinese Song Dynasty Sky constellation, native: 器府, pronounce: Qì Fǔ
+#. Chinese Xianglin Star Chart constellation, native: 器府, pronounce: Qì Fǔ
+#. Japanese Yasui Map constellation, native: 器府(きふ), pronounce: Kifu
+#. Korean constellation, native: 기부(器府), pronounce: Gibu
+msgid "House for Musical Instruments"
+msgstr "Hus för musikinstrument"
 
 #. Pronounce entry for Chinese Chenzhuo Sky (3rd Century) constellation,
 #. native: 器府, English: House for Musical Instruments
@@ -52612,6 +52410,7 @@ msgstr "Shangjiang"
 #. Chinese Chenzhuo Sky (3rd Century) name for HIP 58001, native: 天玑
 #. Pronounce entry for Chinese Chenzhuo Sky (3rd Century) name for HIP 92855
 #. Chinese Chenzhuo Sky (3rd Century) name for HIP 92855, native: 天机
+#. Modern (IAU) name for HIP 81693, native: Tianji
 msgid "Tianji"
 msgstr "Tianji"
 
@@ -54524,12 +54323,39 @@ msgstr "Láng"
 msgid "Jī Shī Qì"
 msgstr "Jī Shī Qì"
 
+#. Pronounce entry for Chinese Song Dynasty Sky constellation, native: 天庙,
+#. English: Celestial Temple
+#. Chinese Xianglin Star Chart constellation, native: 天庙, English: Celestial
+#. Temple
+msgid "Tiān Miào"
+msgstr "Tiān Miào"
+
+#. Pronounce entry for Chinese Song Dynasty Sky constellation, native: 东瓯,
+#. English: Dongou
+#. Chinese Xianglin Star Chart constellation, native: 东瓯, English: Dongou
+msgid "Dōng Ōu"
+msgstr "Dōng Ōu"
+
+#. Pronounce entry for Chinese Song Dynasty Sky constellation, native: 军门,
+#. English: Military Gate
+#. Chinese Xianglin Star Chart constellation, native: 军门, English: Military
+#. Gate
+msgid "Jūn Mén"
+msgstr "Jūn Mén"
+
 #. Pronounce entry for Chinese Song Dynasty Sky constellation, native:
 #. 土司空(轸宿), English: Master of Constructions (In Chariot Mansion)
 #. Chinese Xianglin Star Chart constellation, native: 土司空(轸宿), English: Master
 #. of Constructions (In Chariot Mansion)
 msgid "Tǔ Sī Kōng(Zhěn Xiù)"
 msgstr "Tǔ Sī Kōng(Zhěn Xiù)"
+
+#. Pronounce entry for Chinese Song Dynasty Sky constellation, native: 器府,
+#. English: House for Musical Instruments
+#. Chinese Xianglin Star Chart constellation, native: 器府, English: House for
+#. Musical Instruments
+msgid "Qì Fǔ"
+msgstr "Qì Fǔ"
 
 #. Chinese Song Dynasty Sky name for HIP 746, native: 距星
 #. Chinese Song Dynasty Sky name for HIP 813, native: 距星
@@ -55958,7 +55784,7 @@ msgstr "Tàibái"
 #. Chinese Yuan Dynasty (14th Century) constellation, native: 紫微垣, pronounce:
 #. Zǐ Wēi Yuán
 msgid "Purple Forbidden Enclosure"
-msgstr "Lila förbjuden inhägnad"
+msgstr "Purpurfärgade förbjudna inhägnaden"
 
 #. Pronounce entry for Chinese Xianglin Star Chart constellation, native: 紫微垣,
 #. English: Purple Forbidden Enclosure
@@ -55980,7 +55806,7 @@ msgstr "P00"
 #. Chinese Yuan Dynasty (14th Century) constellation, native: 太微垣, pronounce:
 #. Tài Wēi Yuán
 msgid "Supreme Palace Enclosure"
-msgstr "Överpalatsinhägnad"
+msgstr "Högsta palatsets inhägnad"
 
 #. Pronounce entry for Chinese Xianglin Star Chart constellation, native: 太微垣,
 #. English: Supreme Palace Enclosure
@@ -56686,7 +56512,7 @@ msgstr "Bird (bab.)"
 #. Lì Dà Xiān, English: Great Immortal Antelope
 #. Modern (H.A. Rey) constellation, native: RAM
 #. Modern (Sternenkarten) constellation, native: Aries
-#. Tibetan constellation, pronounce: Luk
+#. Tibetan constellation, native: ལུག, pronounce: lug
 msgid "Aries"
 msgstr "Väduren"
 
@@ -56706,7 +56532,7 @@ msgstr "Vädur"
 #. Wáng, English: Bull Demon King
 #. Modern (H.A. Rey) constellation, native: BULL
 #. Modern (Sternenkarten) constellation, native: Taurus
-#. Tibetan constellation, pronounce: Lang
+#. Tibetan constellation, native: གླང, pronounce: lang
 msgid "Taurus"
 msgstr "Oxen"
 
@@ -56719,7 +56545,7 @@ msgstr "Oxen"
 #. Horn King
 #. Modern (H.A. Rey) constellation, native: TWINS
 #. Modern (Sternenkarten) constellation, native: Gemini
-#. Tibetan constellation, pronounce: Trik
+#. Tibetan constellation, native: འཁྲིག, pronounce: chig
 msgid "Gemini"
 msgstr "Tvillingarna"
 
@@ -56735,7 +56561,7 @@ msgstr "Shu och Tefnut"
 #. Jiāng Jūn, English: Crab General
 #. Modern (H.A. Rey) constellation, native: CRAB
 #. Modern (Sternenkarten) constellation, native: Cancer
-#. Tibetan constellation, pronounce: Karkata
+#. Tibetan constellation, native: ཀརྚ་ཀ, pronounce: gar da ga
 msgid "Cancer"
 msgstr "Kräftan"
 
@@ -56795,7 +56621,7 @@ msgstr "Våg"
 #. Jīng, English: Scorpion Spirit
 #. Modern (H.A. Rey) constellation, native: SCORPION
 #. Modern (Sternenkarten) constellation, native: Scorpius
-#. Tibetan constellation, pronounce: Dikpa
+#. Tibetan constellation, native: སྡིག་པ, pronounce: dig ba
 msgid "Scorpius"
 msgstr "Skorpionen"
 
@@ -56807,7 +56633,7 @@ msgstr "Skorpionen"
 #. Guó Guó Wáng, English: Queen of the Womanland
 #. Modern (H.A. Rey) constellation, native: VIRGIN
 #. Modern (Sternenkarten) constellation, native: Virgo
-#. Tibetan constellation, pronounce: Pumo
+#. Tibetan constellation, native: བུ་མོ, pronounce: pu mo
 msgid "Virgo"
 msgstr "Jungfrun"
 
@@ -56822,7 +56648,7 @@ msgstr "Jungfru med sädesax"
 #. Xiè, English: Wooden Unicorn (Dou)
 #. Modern (H.A. Rey) constellation, native: ARCHER
 #. Modern (Sternenkarten) constellation, native: Sagittarius
-#. Tibetan constellation, pronounce: Zhu
+#. Tibetan constellation, native: གཞུ, pronounce: xu
 msgid "Sagittarius"
 msgstr "Skytten"
 
@@ -56833,7 +56659,7 @@ msgstr "Skytten"
 #. Lóng Huà Bái Mǎ, English: Jade Dragon Transforming into a White Horse
 #. Modern (H.A. Rey) constellation, native: GOAT
 #. Modern (Sternenkarten) constellation, native: Capricornus
-#. Tibetan constellation, pronounce: Chusin
+#. Tibetan constellation, native: ཆུ་སྲིན, pronounce: qu sin
 msgid "Capricornus"
 msgstr "Stenbocken"
 
@@ -56849,7 +56675,7 @@ msgstr "Get-fisk"
 #. Yīn Pú Sà, English: Guanyin (Avalokiteśvara)
 #. Modern (H.A. Rey) constellation, native: WATER CARRIER
 #. Modern (Sternenkarten) constellation, native: Aquarius
-#. Tibetan constellation, pronounce: Bumpa
+#. Tibetan constellation, native: བུམ་པ, pronounce: pum ba
 msgid "Aquarius"
 msgstr "Vattumannen"
 
@@ -56865,7 +56691,7 @@ msgstr "Vattnande man"
 #. Bēn Bōr Bà, Bà Bōr Bēn, English: Benborba & Baborben
 #. Modern (H.A. Rey) constellation, native: FISHES
 #. Modern (Sternenkarten) constellation, native: Pisces
-#. Tibetan constellation, pronounce: Nya
+#. Tibetan constellation, native: ཉ, pronounce: nya
 msgid "Pisces"
 msgstr "Fiskarna"
 
@@ -57020,6 +56846,7 @@ msgstr "Krona"
 #. Pronounce entry for Greek (Almagest) constellation, native: Στέφανος,
 #. English: Crown
 #. Greek (Farnese + Almagest) constellation, native: Στέφανος, English: Crown
+#. Modern (IAU) name for HIP 77048, native: Stephanos
 msgid "Stephanos"
 msgstr "Stephanos"
 
@@ -57164,6 +56991,7 @@ msgstr "Trigonos"
 #. Pronounce entry for Greek (Almagest) constellation, native: Κριός, English:
 #. Ram
 #. Greek (Farnese + Almagest) constellation, native: Κριός, English: Ram
+#. Modern (IAU) name for Gaia DR3 1999551612692096128 , native: Krios
 msgid "Krios"
 msgstr "Krios"
 
@@ -63853,7 +63681,7 @@ msgstr "NAK"
 #. Tóu Shī Zi, English: Nine-Headed Lion
 #. Modern (H.A. Rey) constellation, native: LION
 #. Modern (Sternenkarten) constellation, native: Leo
-#. Tibetan constellation, pronounce: Senge
+#. Tibetan constellation, native: སེང་གེ, pronounce: sêng gê
 msgid "Leo"
 msgstr "Lejonet"
 
@@ -68439,199 +68267,395 @@ msgctxt "abbreviation"
 msgid "J61"
 msgstr "J61"
 
+#. Name of a zodiac sign or a lunar mansion in Japanese Yasui Map sky culture,
+#. native: 角, pronounce: Kakushuku/SuBoshi
+#. Needs confirmation, then remove edges (edges_type=none)
+msgctxt "japanese lunar mansion"
+msgid "Horn"
+msgstr "Horn"
+
 #. Pronounce entry for a zodiac sign or a lunar mansion in Japanese Yasui Map
 #. sky culture, native: 角, English: Horn
 #. Needs confirmation, then remove edges (edges_type=none)
-msgctxt "chinese lunar mansion"
+msgctxt "japanese lunar mansion"
 msgid "Kakushuku/SuBoshi"
 msgstr "Kakushuku/SuBoshi"
+
+#. Name of a zodiac sign or a lunar mansion in Japanese Yasui Map sky culture,
+#. native: 亢, pronounce: Kōshuku/AmiBoshi
+#. Needs confirmation, then remove edges (edges_type=none)
+msgctxt "japanese lunar mansion"
+msgid "Neck"
+msgstr "Hals"
 
 #. Pronounce entry for a zodiac sign or a lunar mansion in Japanese Yasui Map
 #. sky culture, native: 亢, English: Neck
 #. Needs confirmation, then remove edges (edges_type=none)
-msgctxt "chinese lunar mansion"
+msgctxt "japanese lunar mansion"
 msgid "Kōshuku/AmiBoshi"
 msgstr "Kōshuku/AmiBoshi"
+
+#. Name of a zodiac sign or a lunar mansion in Japanese Yasui Map sky culture,
+#. native: 氐, pronounce: Teishuku/TomoBoshi
+#. Needs confirmation, then remove edges (edges_type=none)
+msgctxt "japanese lunar mansion"
+msgid "Root"
+msgstr "Rot"
 
 #. Pronounce entry for a zodiac sign or a lunar mansion in Japanese Yasui Map
 #. sky culture, native: 氐, English: Root
 #. Needs confirmation, then remove edges (edges_type=none)
-msgctxt "chinese lunar mansion"
+msgctxt "japanese lunar mansion"
 msgid "Teishuku/TomoBoshi"
 msgstr "Teishuku/TomoBoshi"
+
+#. Name of a zodiac sign or a lunar mansion in Japanese Yasui Map sky culture,
+#. native: 房, pronounce: Bōshuku/SoiBoshi
+#. Needs confirmation, then remove edges (edges_type=none)
+msgctxt "japanese lunar mansion"
+msgid "Room"
+msgstr "Rum"
 
 #. Pronounce entry for a zodiac sign or a lunar mansion in Japanese Yasui Map
 #. sky culture, native: 房, English: Room
 #. Needs confirmation, then remove edges (edges_type=none)
-msgctxt "chinese lunar mansion"
+msgctxt "japanese lunar mansion"
 msgid "Bōshuku/SoiBoshi"
 msgstr "Bōshuku/SoiBoshi"
+
+#. Name of a zodiac sign or a lunar mansion in Japanese Yasui Map sky culture,
+#. native: 心, pronounce: Shinshuku/NakagoBoshi
+#. Needs confirmation, then remove edges (edges_type=none)
+msgctxt "japanese lunar mansion"
+msgid "Heart"
+msgstr "Hjärta"
 
 #. Pronounce entry for a zodiac sign or a lunar mansion in Japanese Yasui Map
 #. sky culture, native: 心, English: Heart
 #. Needs confirmation, then remove edges (edges_type=none)
-msgctxt "chinese lunar mansion"
+msgctxt "japanese lunar mansion"
 msgid "Shinshuku/NakagoBoshi"
 msgstr "Shinshuku/NakagoBoshi"
+
+#. Name of a zodiac sign or a lunar mansion in Japanese Yasui Map sky culture,
+#. native: 尾, pronounce: Bishuku/AshitareBoshi
+#. Needs confirmation, then remove edges (edges_type=none)
+msgctxt "japanese lunar mansion"
+msgid "Tail"
+msgstr "Svans"
 
 #. Pronounce entry for a zodiac sign or a lunar mansion in Japanese Yasui Map
 #. sky culture, native: 尾, English: Tail
 #. Needs confirmation, then remove edges (edges_type=none)
-msgctxt "chinese lunar mansion"
+msgctxt "japanese lunar mansion"
 msgid "Bishuku/AshitareBoshi"
 msgstr "Bishuku/AshitareBoshi"
+
+#. Name of a zodiac sign or a lunar mansion in Japanese Yasui Map sky culture,
+#. native: 箕, pronounce: Kishuku/MiBoshi
+#. Needs confirmation, then remove edges (edges_type=none)
+msgctxt "japanese lunar mansion"
+msgid "Winnowing Basket"
+msgstr "Rensningskorg"
 
 #. Pronounce entry for a zodiac sign or a lunar mansion in Japanese Yasui Map
 #. sky culture, native: 箕, English: Winnowing Basket
 #. Needs confirmation, then remove edges (edges_type=none)
-msgctxt "chinese lunar mansion"
+msgctxt "japanese lunar mansion"
 msgid "Kishuku/MiBoshi"
 msgstr "Kishuku/MiBoshi"
+
+#. Name of a zodiac sign or a lunar mansion in Japanese Yasui Map sky culture,
+#. native: 斗, pronounce: Toshuku/HikitsuBoshi
+#. Needs confirmation, then remove edges (edges_type=none)
+msgctxt "japanese lunar mansion"
+msgid "Dipper"
+msgstr "Skopan"
 
 #. Pronounce entry for a zodiac sign or a lunar mansion in Japanese Yasui Map
 #. sky culture, native: 斗, English: Dipper
 #. Needs confirmation, then remove edges (edges_type=none)
-msgctxt "chinese lunar mansion"
+msgctxt "japanese lunar mansion"
 msgid "Toshuku/HikitsuBoshi"
 msgstr "Toshuku/HikitsuBoshi"
+
+#. Name of a zodiac sign or a lunar mansion in Japanese Yasui Map sky culture,
+#. native: 牛, pronounce: Gyūshuku/InamiBoshi
+#. Needs confirmation, then remove edges (edges_type=none)
+msgctxt "japanese lunar mansion"
+msgid "Ox"
+msgstr "Oxen"
 
 #. Pronounce entry for a zodiac sign or a lunar mansion in Japanese Yasui Map
 #. sky culture, native: 牛, English: Ox
 #. Needs confirmation, then remove edges (edges_type=none)
-msgctxt "chinese lunar mansion"
+msgctxt "japanese lunar mansion"
 msgid "Gyūshuku/InamiBoshi"
 msgstr "Gyūshuku/InamiBoshi"
+
+#. Name of a zodiac sign or a lunar mansion in Japanese Yasui Map sky culture,
+#. native: 女, pronounce: Josho/UrukiBoshi
+#. Needs confirmation, then remove edges (edges_type=none)
+msgctxt "japanese lunar mansion"
+msgid "Girl"
+msgstr "Flicka"
 
 #. Pronounce entry for a zodiac sign or a lunar mansion in Japanese Yasui Map
 #. sky culture, native: 女, English: Girl
 #. Needs confirmation, then remove edges (edges_type=none)
-msgctxt "chinese lunar mansion"
+msgctxt "japanese lunar mansion"
 msgid "Josho/UrukiBoshi"
 msgstr "Josho/UrukiBoshi"
+
+#. Name of a zodiac sign or a lunar mansion in Japanese Yasui Map sky culture,
+#. native: 虚, pronounce: Koshuku/TomiteBoshi
+#. Needs confirmation, then remove edges (edges_type=none)
+msgctxt "japanese lunar mansion"
+msgid "Emptiness"
+msgstr "Tomhet"
 
 #. Pronounce entry for a zodiac sign or a lunar mansion in Japanese Yasui Map
 #. sky culture, native: 虚, English: Emptiness
 #. Needs confirmation, then remove edges (edges_type=none)
-msgctxt "chinese lunar mansion"
+msgctxt "japanese lunar mansion"
 msgid "Koshuku/TomiteBoshi"
 msgstr "Koshuku/TomiteBoshi"
+
+#. Name of a zodiac sign or a lunar mansion in Japanese Yasui Map sky culture,
+#. native: 危, pronounce: Kishuku/UmiyameBoshi
+#. Needs confirmation, then remove edges (edges_type=none)
+msgctxt "japanese lunar mansion"
+msgid "Rooftop"
+msgstr "Takås"
 
 #. Pronounce entry for a zodiac sign or a lunar mansion in Japanese Yasui Map
 #. sky culture, native: 危, English: Rooftop
 #. Needs confirmation, then remove edges (edges_type=none)
-msgctxt "chinese lunar mansion"
+msgctxt "japanese lunar mansion"
 msgid "Kishuku/UmiyameBoshi"
 msgstr "Kishuku/UmiyameBoshi"
+
+#. Name of a zodiac sign or a lunar mansion in Japanese Yasui Map sky culture,
+#. native: 室, pronounce: Shitsushuku/HatsuiBoshi
+#. Needs confirmation, then remove edges (edges_type=none)
+msgctxt "japanese lunar mansion"
+msgid "Encampment"
+msgstr "Läger"
 
 #. Pronounce entry for a zodiac sign or a lunar mansion in Japanese Yasui Map
 #. sky culture, native: 室, English: Encampment
 #. Needs confirmation, then remove edges (edges_type=none)
-msgctxt "chinese lunar mansion"
+msgctxt "japanese lunar mansion"
 msgid "Shitsushuku/HatsuiBoshi"
 msgstr "Shitsushuku/HatsuiBoshi"
+
+#. Name of a zodiac sign or a lunar mansion in Japanese Yasui Map sky culture,
+#. native: 壁, pronounce: Hekishuku/NamameBoshi
+#. Needs confirmation, then remove edges (edges_type=none)
+msgctxt "japanese lunar mansion"
+msgid "Wall"
+msgstr "Mur"
 
 #. Pronounce entry for a zodiac sign or a lunar mansion in Japanese Yasui Map
 #. sky culture, native: 壁, English: Wall
 #. Needs confirmation, then remove edges (edges_type=none)
-msgctxt "chinese lunar mansion"
+msgctxt "japanese lunar mansion"
 msgid "Hekishuku/NamameBoshi"
 msgstr "Hekishuku/NamameBoshi"
+
+#. Name of a zodiac sign or a lunar mansion in Japanese Yasui Map sky culture,
+#. native: 奎, pronounce: Keishuku/TokakiBoshi
+#. Needs confirmation, then remove edges (edges_type=none)
+msgctxt "japanese lunar mansion"
+msgid "Legs"
+msgstr "Ben"
 
 #. Pronounce entry for a zodiac sign or a lunar mansion in Japanese Yasui Map
 #. sky culture, native: 奎, English: Legs
 #. Needs confirmation, then remove edges (edges_type=none)
-msgctxt "chinese lunar mansion"
+msgctxt "japanese lunar mansion"
 msgid "Keishuku/TokakiBoshi"
 msgstr "Keishuku/TokakiBoshi"
+
+#. Name of a zodiac sign or a lunar mansion in Japanese Yasui Map sky culture,
+#. native: 婁, pronounce: Rōshuku/TataraBoshi
+#. Needs confirmation, then remove edges (edges_type=none)
+msgctxt "japanese lunar mansion"
+msgid "Bond"
+msgstr "Band"
 
 #. Pronounce entry for a zodiac sign or a lunar mansion in Japanese Yasui Map
 #. sky culture, native: 婁, English: Bond
 #. Needs confirmation, then remove edges (edges_type=none)
-msgctxt "chinese lunar mansion"
+msgctxt "japanese lunar mansion"
 msgid "Rōshuku/TataraBoshi"
 msgstr "Rōshuku/TataraBoshi"
+
+#. Name of a zodiac sign or a lunar mansion in Japanese Yasui Map sky culture,
+#. native: 胃, pronounce: Ishuku/EkieBoshi
+#. Needs confirmation, then remove edges (edges_type=none)
+msgctxt "japanese lunar mansion"
+msgid "Stomach"
+msgstr "Mage"
 
 #. Pronounce entry for a zodiac sign or a lunar mansion in Japanese Yasui Map
 #. sky culture, native: 胃, English: Stomach
 #. Needs confirmation, then remove edges (edges_type=none)
-msgctxt "chinese lunar mansion"
+msgctxt "japanese lunar mansion"
 msgid "Ishuku/EkieBoshi"
 msgstr "Ishuku/EkieBoshi"
+
+#. Name of a zodiac sign or a lunar mansion in Japanese Yasui Map sky culture,
+#. native: 昴, pronounce: Bōshuku/SubaruBoshi
+#. Needs confirmation, then remove edges (edges_type=none)
+msgctxt "japanese lunar mansion"
+msgid "Hairy Head"
+msgstr "Hårigt huvud"
 
 #. Pronounce entry for a zodiac sign or a lunar mansion in Japanese Yasui Map
 #. sky culture, native: 昴, English: Hairy Head
 #. Needs confirmation, then remove edges (edges_type=none)
-msgctxt "chinese lunar mansion"
+msgctxt "japanese lunar mansion"
 msgid "Bōshuku/SubaruBoshi"
 msgstr "Bōshuku/SubaruBoshi"
+
+#. Name of a zodiac sign or a lunar mansion in Japanese Yasui Map sky culture,
+#. native: 畢, pronounce: Hitsushuku/AmefuriBoshi
+#. Needs confirmation, then remove edges (edges_type=none)
+msgctxt "japanese lunar mansion"
+msgid "Net"
+msgstr "Nät"
 
 #. Pronounce entry for a zodiac sign or a lunar mansion in Japanese Yasui Map
 #. sky culture, native: 畢, English: Net
 #. Needs confirmation, then remove edges (edges_type=none)
-msgctxt "chinese lunar mansion"
+msgctxt "japanese lunar mansion"
 msgid "Hitsushuku/AmefuriBoshi"
 msgstr "Hitsushuku/AmefuriBoshi"
+
+#. Name of a zodiac sign or a lunar mansion in Japanese Yasui Map sky culture,
+#. native: 觜, pronounce: Shishuku/TorokiBoshi
+#. Needs confirmation, then remove edges (edges_type=none)
+msgctxt "japanese lunar mansion"
+msgid "Turtle Beak"
+msgstr "Sköldpaddsnebb"
 
 #. Pronounce entry for a zodiac sign or a lunar mansion in Japanese Yasui Map
 #. sky culture, native: 觜, English: Turtle Beak
 #. Needs confirmation, then remove edges (edges_type=none)
-msgctxt "chinese lunar mansion"
+msgctxt "japanese lunar mansion"
 msgid "Shishuku/TorokiBoshi"
 msgstr "Shishuku/TorokiBoshi"
+
+#. Name of a zodiac sign or a lunar mansion in Japanese Yasui Map sky culture,
+#. native: 参, pronounce: Sanshuku/KagasukiBoshi
+#. Needs confirmation, then remove edges (edges_type=none)
+msgctxt "japanese lunar mansion"
+msgid "Three Stars"
+msgstr "Tre stjärnor"
 
 #. Pronounce entry for a zodiac sign or a lunar mansion in Japanese Yasui Map
 #. sky culture, native: 参, English: Three Stars
 #. Needs confirmation, then remove edges (edges_type=none)
-msgctxt "chinese lunar mansion"
+msgctxt "japanese lunar mansion"
 msgid "Sanshuku/KagasukiBoshi"
 msgstr "Sanshuku/KagasukiBoshi"
+
+#. Name of a zodiac sign or a lunar mansion in Japanese Yasui Map sky culture,
+#. native: 井, pronounce: Seishuku/ChichiriBoshi
+#. Needs confirmation, then remove edges (edges_type=none)
+msgctxt "japanese lunar mansion"
+msgid "Well"
+msgstr "Brunn"
 
 #. Pronounce entry for a zodiac sign or a lunar mansion in Japanese Yasui Map
 #. sky culture, native: 井, English: Well
 #. Needs confirmation, then remove edges (edges_type=none)
-msgctxt "chinese lunar mansion"
+msgctxt "japanese lunar mansion"
 msgid "Seishuku/ChichiriBoshi"
 msgstr "Seishuku/ChichiriBoshi"
+
+#. Name of a zodiac sign or a lunar mansion in Japanese Yasui Map sky culture,
+#. native: 鬼, pronounce: Kishuku/TamahomeBoshi
+#. Needs confirmation, then remove edges (edges_type=none)
+msgctxt "japanese lunar mansion"
+msgid "Ghost"
+msgstr "Spöke"
 
 #. Pronounce entry for a zodiac sign or a lunar mansion in Japanese Yasui Map
 #. sky culture, native: 鬼, English: Ghost
 #. Needs confirmation, then remove edges (edges_type=none)
-msgctxt "chinese lunar mansion"
+msgctxt "japanese lunar mansion"
 msgid "Kishuku/TamahomeBoshi"
 msgstr "Kishuku/TamahomeBoshi"
+
+#. Name of a zodiac sign or a lunar mansion in Japanese Yasui Map sky culture,
+#. native: 柳, pronounce: Ryūshuku/NurikoBoshi
+#. Needs confirmation, then remove edges (edges_type=none)
+msgctxt "japanese lunar mansion"
+msgid "Willow"
+msgstr "Vide"
 
 #. Pronounce entry for a zodiac sign or a lunar mansion in Japanese Yasui Map
 #. sky culture, native: 柳, English: Willow
 #. Needs confirmation, then remove edges (edges_type=none)
-msgctxt "chinese lunar mansion"
+msgctxt "japanese lunar mansion"
 msgid "Ryūshuku/NurikoBoshi"
 msgstr "Ryūshuku/NurikoBoshi"
+
+#. Name of a zodiac sign or a lunar mansion in Japanese Yasui Map sky culture,
+#. native: 星, pronounce: Seishuku/HotohoriBoshi
+#. Needs confirmation, then remove edges (edges_type=none)
+msgctxt "japanese lunar mansion"
+msgid "Star"
+msgstr "Stjärna"
 
 #. Pronounce entry for a zodiac sign or a lunar mansion in Japanese Yasui Map
 #. sky culture, native: 星, English: Star
 #. Needs confirmation, then remove edges (edges_type=none)
-msgctxt "chinese lunar mansion"
+msgctxt "japanese lunar mansion"
 msgid "Seishuku/HotohoriBoshi"
 msgstr "Seishuku/HotohoriBoshi"
+
+#. Name of a zodiac sign or a lunar mansion in Japanese Yasui Map sky culture,
+#. native: 張, pronounce: Chōshuku/ChirikoBoshi
+#. Needs confirmation, then remove edges (edges_type=none)
+msgctxt "japanese lunar mansion"
+msgid "Extended Net"
+msgstr "Utvidgat nät"
 
 #. Pronounce entry for a zodiac sign or a lunar mansion in Japanese Yasui Map
 #. sky culture, native: 張, English: Extended Net
 #. Needs confirmation, then remove edges (edges_type=none)
-msgctxt "chinese lunar mansion"
+msgctxt "japanese lunar mansion"
 msgid "Chōshuku/ChirikoBoshi"
 msgstr "Chōshuku/ChirikoBoshi"
+
+#. Name of a zodiac sign or a lunar mansion in Japanese Yasui Map sky culture,
+#. native: 翼, pronounce: Yokushuku/TasukiBoshi
+#. Needs confirmation, then remove edges (edges_type=none)
+msgctxt "japanese lunar mansion"
+msgid "Wings"
+msgstr "Vingar"
 
 #. Pronounce entry for a zodiac sign or a lunar mansion in Japanese Yasui Map
 #. sky culture, native: 翼, English: Wings
 #. Needs confirmation, then remove edges (edges_type=none)
-msgctxt "chinese lunar mansion"
+msgctxt "japanese lunar mansion"
 msgid "Yokushuku/TasukiBoshi"
 msgstr "Yokushuku/TasukiBoshi"
+
+#. Name of a zodiac sign or a lunar mansion in Japanese Yasui Map sky culture,
+#. native: 軫, pronounce: Shinshuku/MitsukakeBoshi
+#. Needs confirmation, then remove edges (edges_type=none)
+msgctxt "japanese lunar mansion"
+msgid "Chariot"
+msgstr "Vagn"
 
 #. Pronounce entry for a zodiac sign or a lunar mansion in Japanese Yasui Map
 #. sky culture, native: 軫, English: Chariot
 #. Needs confirmation, then remove edges (edges_type=none)
-msgctxt "chinese lunar mansion"
+msgctxt "japanese lunar mansion"
 msgid "Shinshuku/MitsukakeBoshi"
 msgstr "Shinshuku/MitsukakeBoshi"
 
@@ -69114,143 +69138,143 @@ msgstr "Rigil Kent"
 #. Pronounce entry for Korean constellation, native: 북극(北極), English: Northern
 #. Pole
 msgid "Bukgeuk"
-msgstr ""
+msgstr "Bukgeuk"
 
 #. Pronounce entry for Korean constellation, native: 사보(四輔), English: Four
 #. Advisors
 msgid "Sabo"
-msgstr ""
+msgstr "Sabo"
 
 #. Pronounce entry for Korean constellation, native: 천일(天一), English:
 #. Celestial One
 #. Pronounce entry for Korean name for HIP  61281
 #. Korean name for HIP  61281, native: 천일(天一)
 msgid "Cheon-il"
-msgstr ""
+msgstr "Cheon-il"
 
 #. Pronounce entry for Korean constellation, native: 태일(太一), English: Supreme
 #. One
 #. Pronounce entry for Korean name for HIP  60998
 #. Korean name for HIP  60998, native: 태일(太一)
 msgid "Taeil"
-msgstr ""
+msgstr "Taeil"
 
 #. Korean constellation, native: 자미(紫微), pronounce: Jami
 #. Korean constellation, native: 자미(紫微), pronounce: Jami
 msgid "Purple Forbidden Palace"
-msgstr ""
+msgstr "Det purpurfärgade förbjudna palatset"
 
 #. Pronounce entry for Korean constellation, native: 자미(紫微), English: Purple
 #. Forbidden Palace
 #. Korean constellation, native: 자미(紫微), English: Purple Forbidden Palace
 msgid "Jami"
-msgstr ""
+msgstr "Jami"
 
 #. Pronounce entry for Korean constellation, native: 음덕(陰德), English: Hidden
 #. Virtue
 msgid "Eumdeok"
-msgstr ""
+msgstr "Eumdeok"
 
 #. Pronounce entry for Korean constellation, native: 상서(尚書), English: Royal
 #. Secretary
 msgid "Sangseo"
-msgstr ""
+msgstr "Sangseo"
 
 #. Pronounce entry for Korean constellation, native: 여사(女史), English: Female
 #. Protocol
 #. Pronounce entry for Korean name for HIP  89937
 #. Korean name for HIP  89937, native: 여사(女史)
 msgid "Yeosa"
-msgstr ""
+msgstr "Yeosa"
 
 #. Pronounce entry for Korean constellation, native: 주하사(柱下史), English:
 #. Official of Royal Archives
 #. Pronounce entry for Korean name for HIP  86614
 #. Korean name for HIP  86614, native: 주하사(柱下史)
 msgid "Juhasa"
-msgstr ""
+msgstr "Juhasa"
 
 #. Korean constellation, native: 여어궁(女御宮), pronounce: Yeoeogung
 msgid "Palace of the Maids-in-waiting"
-msgstr ""
+msgstr "Hovdamernas palats"
 
 #. Pronounce entry for Korean constellation, native: 여어궁(女御宮), English: Palace
 #. of the Maids-in-waiting
 msgid "Yeoeogung"
-msgstr ""
+msgstr "Yeoeogung"
 
 #. Pronounce entry for Korean constellation, native: 천주(天柱), English:
 #. Celestial Pillar
 #. Korean constellation, native: 천주(天厨), English: Celestial Kitchen
 msgid "Cheonju"
-msgstr ""
+msgstr "Cheonju"
 
 #. Pronounce entry for Korean constellation, native: 대리(大理), English: Chief
 #. Judge
 msgid "Daeri"
-msgstr ""
+msgstr "Daeri"
 
 #. Pronounce entry for Korean constellation, native: 구진(勾陳), English: Curved
 #. Array
 msgid "Gujin"
-msgstr ""
+msgstr "Gujin"
 
 #. Pronounce entry for Korean constellation, native: 육갑(六甲), English: Six Jia
 msgid "Yukgap"
-msgstr ""
+msgstr "Yukgap"
 
 #. Pronounce entry for Korean constellation, native: 천황대제(天皇大帝), English:
 #. Great Emperor of Heaven
 #. Pronounce entry for Korean name for HIP   5372
 #. Korean name for HIP   5372, native: 천황대제(天皇大帝)
 msgid "Cheonhwangdaeje"
-msgstr ""
+msgstr "Cheonhwangdaeje"
 
 #. Pronounce entry for Korean constellation, native: 오제좌(五帝坐), English: Seats
 #. of the Five Emperors
 msgid "Ojejwa"
-msgstr ""
+msgstr "Ojejwa"
 
 #. Pronounce entry for Korean constellation, native: 화개(華蓋), English: Canopy
 #. of the Emperor
 msgid "Hwagae"
-msgstr ""
+msgstr "Hwagae"
 
 #. Pronounce entry for Korean constellation, native: 전사(傳舍), English: Guest
 #. House
 msgid "Jeonsa"
-msgstr ""
+msgstr "Jeonsa"
 
 #. Pronounce entry for Korean constellation, native: 내계(內階), English: Inner
 #. Steps
 msgid "Naegye"
-msgstr ""
+msgstr "Naegye"
 
 #. Pronounce entry for Korean constellation, native: 팔곡(八穀), English: Eight
 #. Kinds of Crops
 msgid "Palgok"
-msgstr ""
+msgstr "Palgok"
 
 #. Pronounce entry for Korean constellation, native: 천봉(天棓), English:
 #. Celestial Flail
 msgid "Cheonbong"
-msgstr ""
+msgstr "Cheonbong"
 
 #. Pronounce entry for Korean constellation, native: 천상(天床), English:
 #. Celestial Bed
 #. Korean constellation, native: 천상(天相), English: Celestial Premier
 msgid "Cheonsang"
-msgstr ""
+msgstr "Cheonsang"
 
 #. Pronounce entry for Korean constellation, native: 내주(內厨), English: Inner
 #. Kitchen
 msgid "Naeju"
-msgstr ""
+msgstr "Naeju"
 
 #. Pronounce entry for Korean constellation, native: 문창(文昌), English:
 #. Administrative Center
 msgid "Munchang"
-msgstr ""
+msgstr "Munchang"
 
 #. Pronounce entry for Korean constellation, native: 삼공(三公), English: Three
 #. Excellencies (Wuxian)
@@ -69259,58 +69283,58 @@ msgstr ""
 #. Pronounce entry for Korean name for HIP  36046
 #. Korean name for HIP  36046, native: 삼공(三公)
 msgid "Samgong"
-msgstr ""
+msgstr "Samgong"
 
 #. Pronounce entry for Korean constellation, native: 태존(太尊), English: Royals
 #. Pronounce entry for Korean name for HIP  50546
 #. Korean name for HIP  50546, native: 태존(太尊)
 msgid "Taejon"
-msgstr ""
+msgstr "Taejon"
 
 #. Pronounce entry for Korean constellation, native: 천뢰(天牢), English:
 #. Celestial Prison
 msgid "Cheolloe"
-msgstr ""
+msgstr "Cheolloe"
 
 #. Pronounce entry for Korean constellation, native: 태양수(太陽守), English: Guard
 #. of the Sun
 #. Pronounce entry for Korean name for HIP  54539
 #. Korean name for HIP  54539, native: 태양수(太陽守)
 msgid "Taeyangsu"
-msgstr ""
+msgstr "Taeyangsu"
 
 #. Pronounce entry for Korean constellation, native: 세(勢), English: Eunuch
 msgid "Se"
-msgstr ""
+msgstr "Se"
 
 #. Pronounce entry for Korean constellation, native: 상(相), English: Prime
 #. Minister
 #. Pronounce entry for Korean name for HIP  57399
 #. Korean name for HIP  57399, native: 상(相)
 msgid "Sang"
-msgstr ""
+msgstr "Sang"
 
 #. Pronounce entry for Korean constellation, native: 현과(玄戈), English: Sombre
 #. Lance
 msgid "Hyeongwa"
-msgstr ""
+msgstr "Hyeongwa"
 
 #. Pronounce entry for Korean constellation, native: 천리(天理), English: Judge
 #. for Nobility
 msgid "Cheolli"
-msgstr ""
+msgstr "Cheolli"
 
 #. Pronounce entry for Korean constellation, native: 북두(北斗), English: Northern
 #. Dipper
 msgid "Bukdu"
-msgstr ""
+msgstr "Bukdu"
 
 #. Pronounce entry for Korean constellation, native: 보(輔), English: Assistant
 #. (Vassal of Northern Dipper)
 #. Pronounce entry for Korean name for HIP  65477
 #. Korean name for HIP  65477, native: 보(輔)
 msgid "Bo"
-msgstr ""
+msgstr "Bo"
 
 #. Pronounce entry for Korean constellation, native: 천창(天槍), English:
 #. Celestial Spear
@@ -69318,7 +69342,7 @@ msgstr ""
 #. Pronounce entry for Korean name for HIP  28380
 #. Korean name for HIP  28380, native: 천창(天倉)
 msgid "Cheonchang"
-msgstr ""
+msgstr "Cheonchang"
 
 #. Korean constellation, native: 태미(太微), pronounce: Taemi
 #. Korean constellation, native: 태미(太微), pronounce: Taemi
@@ -69329,52 +69353,52 @@ msgstr "Det högsta palatset"
 #. Palace
 #. Korean constellation, native: 태미(太微), English: Supreme Palace
 msgid "Taemi"
-msgstr ""
+msgstr "Taemi"
 
 #. Pronounce entry for Korean constellation, native: 알자(謁者), English: Usher to
 #. the Court
 #. Pronounce entry for Korean name for HIP  60172
 #. Korean name for HIP  60172, native: 알자(謁者)
 msgid "Alja"
-msgstr ""
+msgstr "Alja"
 
 #. Pronounce entry for Korean constellation, native: 삼공내좌(三公內坐), English:
 #. Inner Seats of Three Excellencies
 msgid "Samgongnaejwa"
-msgstr ""
+msgstr "Samgongnaejwa"
 
 #. Pronounce entry for Korean constellation, native: 구경(九卿), English: Nine
 #. Senior Officers
 msgid "Gugyeong"
-msgstr ""
+msgstr "Gugyeong"
 
 #. Pronounce entry for Korean constellation, native: 오제후(五諸侯), English: Five
 #. Lords (In Supreme Palace Enclosure)
 #. Korean constellation, native: 오제후(五諸侯), English: Five Feudal Kings (In Well
 #. Mansion)
 msgid "Ojehu"
-msgstr ""
+msgstr "Ojehu"
 
 #. Pronounce entry for Korean constellation, native: 내병(內屏), English: Inner
 #. Screen
 msgid "Naebyeong"
-msgstr ""
+msgstr "Naebyeong"
 
 #. Korean constellation, native: 오제(五帝), pronounce: Oje
 msgid "Five Emperors"
-msgstr ""
+msgstr "Fem kejsare"
 
 #. Pronounce entry for Korean constellation, native: 오제(五帝), English: Five
 #. Emperors
 msgid "Oje"
-msgstr ""
+msgstr "Oje"
 
 #. Pronounce entry for Korean constellation, native: 행신(幸臣), English: Officer
 #. of Honour
 #. Pronounce entry for Korean name for HIP  58858
 #. Korean name for HIP  58858, native: 행신(幸臣)
 msgid "Haengsin"
-msgstr ""
+msgstr "Haengsin"
 
 #. Pronounce entry for Korean constellation, native: 태자(太子), English: Crown
 #. Prince
@@ -69385,7 +69409,7 @@ msgstr ""
 #. Pronounce entry for Korean name for HIP  57565
 #. Korean name for HIP  57565, native: 태자(太子)
 msgid "Taeja"
-msgstr ""
+msgstr "Taeja"
 
 #. Pronounce entry for Korean constellation, native: 종관(從官), English: Retinue
 #. (In Supreme Palace Enclosure)
@@ -69393,78 +69417,78 @@ msgstr ""
 #. Pronounce entry for Korean name for HIP  56975
 #. Korean name for HIP  56975, native: 종관(從官)
 msgid "Jonggwan"
-msgstr ""
+msgstr "Jonggwan"
 
 #. Pronounce entry for Korean constellation, native: 낭장(郎將), English: Captain
 #. of the Bodyguards
 #. Pronounce entry for Korean name for HIP  63125
 #. Korean name for HIP  63125, native: 낭장(郎將)
 msgid "Nangjang"
-msgstr ""
+msgstr "Nangjang"
 
 #. Pronounce entry for Korean constellation, native: 호분(虎賁), English:
 #. Emperor's Bodyguard
 #. Pronounce entry for Korean name for HIP  54951
 #. Korean name for HIP  54951, native: 호분(虎賁)
 msgid "Hobun"
-msgstr ""
+msgstr "Hobun"
 
 #. Pronounce entry for Korean constellation, native: 상진(常陳), English: Royal
 #. Guards
 msgid "Sangjin"
-msgstr ""
+msgstr "Sangjin"
 
 #. Pronounce entry for Korean constellation, native: 낭위(郎位), English: Officers
 #. of the Imperial Guard
 msgid "Nangwi"
-msgstr ""
+msgstr "Nangwi"
 
 #. Pronounce entry for Korean constellation, native: 명당(明堂), English: The Hall
 #. of Glory
 #. Pronounce entry for Korean name for HIP  80763
 #. Korean name for HIP  80763, native: 명당(明堂)
 msgid "Myeongdang"
-msgstr ""
+msgstr "Myeongdang"
 
 #. Pronounce entry for Korean constellation, native: 영대(靈臺), English:
 #. Astronomical Observatory
 msgid "Yeongdae"
-msgstr ""
+msgstr "Yeongdae"
 
 #. Pronounce entry for Korean constellation, native: 소미(少微), English: Junior
 #. Officers
 msgid "Somi"
-msgstr ""
+msgstr "Somi"
 
 #. Pronounce entry for Korean constellation, native: 장원(長垣), English: Long
 #. Wall
 msgid "Jangwon"
-msgstr ""
+msgstr "Jangwon"
 
 #. Pronounce entry for Korean constellation, native: 삼대(상대)(三台(上台)), English:
 #. Three Steps (Upper Step)
 msgid "Samdae(Sangdae)"
-msgstr ""
+msgstr "Samdae(Sangdae)"
 
 #. Pronounce entry for Korean constellation, native: 삼대(중대)(三台(中台)), English:
 #. Three Steps (Middle Step)
 msgid "Samdae(Jungdae)"
-msgstr ""
+msgstr "Samdae(Jungdae)"
 
 #. Pronounce entry for Korean constellation, native: 삼대(하대)(三台(下台)), English:
 #. Three Steps (Lower Step)
 msgid "Samdae(Hadae)"
-msgstr ""
+msgstr "Samdae(Hadae)"
 
 #. Pronounce entry for Korean constellation, native: 삼대(三台), English: Three
 #. Steps
 msgid "Samdae"
-msgstr ""
+msgstr "Samdae"
 
 #. Korean constellation, native: 천시(天市), pronounce: Cheonsi
 #. Korean constellation, native: 천시(天市), pronounce: Cheonsi
 msgid "Heavenly Market"
-msgstr ""
+msgstr "Himmelska marknaden"
 
 #. Pronounce entry for Korean constellation, native: 천시(天市), English: Heavenly
 #. Market
@@ -69473,110 +69497,110 @@ msgstr ""
 #. Pronounce entry for Korean name for HIP  26460
 #. Korean name for HIP  26460, native: 천시(天矢)
 msgid "Cheonsi"
-msgstr ""
+msgstr "Cheonsi"
 
 #. Pronounce entry for Korean constellation, native: 시루(市樓), English:
 #. Municipal Office
 msgid "Siru"
-msgstr ""
+msgstr "Siru"
 
 #. Pronounce entry for Korean constellation, native: 거사(車肆), English:
 #. Commodity Market
 msgid "Geosa"
-msgstr ""
+msgstr "Geosa"
 
 #. Pronounce entry for Korean constellation, native: 종정(宗正), English: Official
 #. for the Royal Clan
 msgid "Jongjeong"
-msgstr ""
+msgstr "Jongjeong"
 
 #. Pronounce entry for Korean constellation, native: 종인(宗人), English: Official
 #. of Religious Ceremonies
 msgid "Jongin"
-msgstr ""
+msgstr "Jongin"
 
 #. Pronounce entry for Korean constellation, native: 종성(宗星), English:
 #. Patriarchal Clan Stars
 msgid "Jongseong"
-msgstr ""
+msgstr "Jongseong"
 
 #. Pronounce entry for Korean constellation, native: 백도(帛度), English: Textile
 #. Ruler
 msgid "Baekdo"
-msgstr ""
+msgstr "Baekdo"
 
 #. Pronounce entry for Korean constellation, native: 도사(屠肆), English:
 #. Butcher's Shops
 msgid "Dosa"
-msgstr ""
+msgstr "Dosa"
 
 #. Pronounce entry for Korean constellation, native: 제좌(帝座), English:
 #. Emperor's Seat
 #. Pronounce entry for Korean name for HIP  84345
 #. Korean name for HIP  84345, native: 제좌(帝座)
 msgid "Jejwa"
-msgstr ""
+msgstr "Jejwa"
 
 #. Pronounce entry for Korean constellation, native: 환자(宦者), English: Eunuch
 #. Official
 msgid "Hwanja"
-msgstr ""
+msgstr "Hwanja"
 
 #. Pronounce entry for Korean constellation, native: 열사(列肆), English: Jewel
 #. Market
 msgid "Yeolsa"
-msgstr ""
+msgstr "Yeolsa"
 
 #. Pronounce entry for Korean constellation, native: 두(斗), English: Dipper for
 #. Liquids
 msgid "Du"
-msgstr ""
+msgstr "Du"
 
 #. Pronounce entry for Korean constellation, native: 곡(斛), English: Dipper for
 #. Solids
 #. Korean constellation, native: 곡(哭), English: Crying
 msgid "Gok"
-msgstr ""
+msgstr "Gok"
 
 #. Pronounce entry for Korean constellation, native: 관색(貫索), English: Coiled
 #. Thong
 msgid "Gwansaek"
-msgstr ""
+msgstr "Gwansaek"
 
 #. Pronounce entry for Korean constellation, native: 칠공(七公), English: Seven
 #. Excellencies
 msgid "Chilgong"
-msgstr ""
+msgstr "Chilgong"
 
 #. Pronounce entry for Korean constellation, native: 천기(天紀), English:
 #. Celestial Discipline
 #. Pronounce entry for Korean name for HIP  58001
 #. Korean name for HIP  58001, native: 천기(天璣)
 msgid "Cheongi"
-msgstr ""
+msgstr "Cheongi"
 
 #. Pronounce entry for Korean constellation, native: 여상(女牀), English: Woman's
 #. Bed
 msgid "Yeosang"
-msgstr ""
+msgstr "Yeosang"
 
 #. Korean constellation, native: 종대부(宗大夫), pronounce: Jongdaebu
 msgid "Patriarchal Clan Official"
-msgstr ""
+msgstr "Ämbetsman för den patriarkala klanen"
 
 #. Pronounce entry for Korean constellation, native: 종대부(宗大夫), English:
 #. Patriarchal Clan Official
 msgid "Jongdaebu"
-msgstr ""
+msgstr "Jongdaebu"
 
 #. Pronounce entry for Korean constellation, native: 각(角), English: Horn
 msgid "Gak"
-msgstr ""
+msgstr "Gak"
 
 #. Pronounce entry for Korean constellation, native: 평도(平道), English: Flat
 #. Road
 msgid "Pyeongdo"
-msgstr ""
+msgstr "Pyeongdo"
 
 #. Pronounce entry for Korean constellation, native: 천전(天田), English:
 #. Celestial Farmland (In Horn Mansion)
@@ -69584,32 +69608,32 @@ msgstr ""
 #. Mansion)
 #. Korean constellation, native: 천전(天錢), English: Celestial Money
 msgid "Cheonjeon"
-msgstr ""
+msgstr "Cheonjeon"
 
 #. Pronounce entry for Korean constellation, native: 진현(進賢), English:
 #. Recommending Virtuous Men
 #. Pronounce entry for Korean name for HIP  64238
 #. Korean name for HIP  64238, native: 진현(進賢)
 msgid "Jinhyeon"
-msgstr ""
+msgstr "Jinhyeon"
 
 #. Pronounce entry for Korean constellation, native: 주정(周鼎), English: Tripod
 #. of the Zhou
 msgid "Jujeong"
-msgstr ""
+msgstr "Jujeong"
 
 #. Pronounce entry for Korean constellation, native: 천문(天門), English:
 #. Celestial Gate
 msgid "Cheonmun"
-msgstr ""
+msgstr "Cheonmun"
 
 #. Pronounce entry for Korean constellation, native: 평(平), English: Judging
 msgid "Pyeong"
-msgstr ""
+msgstr "Pyeong"
 
 #. Pronounce entry for Korean constellation, native: 고루(庫樓), English: Arsenal
 msgid "Goru"
-msgstr ""
+msgstr "Goru"
 
 #. Pronounce entry for Korean constellation, native: 주(柱), English: Pillars
 #. (In Horn Mansion)
@@ -69618,56 +69642,56 @@ msgstr ""
 #. Korean constellation, native: 주(柱), English: Pillars (In Net Mansion)
 #. Korean constellation, native: 주(柱), English: Pillars (In Net Mansion)
 msgid "Ju"
-msgstr ""
+msgstr "Ju"
 
 #. Pronounce entry for Korean constellation, native: 형(衡), English: Railings
 msgid "Hyeong"
-msgstr ""
+msgstr "Hyeong"
 
 #. Pronounce entry for Korean constellation, native: 남문(南門), English: Southern
 #. Gate
 msgid "Nammun"
-msgstr ""
+msgstr "Nammun"
 
 #. Pronounce entry for Korean constellation, native: 항(亢), English: Neck
 msgid "Hang"
-msgstr ""
+msgstr "Hang"
 
 #. Pronounce entry for Korean constellation, native: 대각(大角), English: Great
 #. Horn
 #. Pronounce entry for Korean name for HIP  69673
 #. Korean name for HIP  69673, native: 대각(大角)
 msgid "Daegak"
-msgstr ""
+msgstr "Daegak"
 
 #. Pronounce entry for Korean constellation, native: 절위(折威), English:
 #. Executions
 msgid "Jeolwi"
-msgstr ""
+msgstr "Jeolwi"
 
 #. Korean constellation, native: 섭제(攝提), pronounce: Saptje
 #. Korean constellation, native: 섭제(攝提), pronounce: Saptje
 msgid "Conductor"
-msgstr ""
+msgstr "Anföraren"
 
 #. Pronounce entry for Korean constellation, native: 섭제(攝提), English:
 #. Conductor
 #. Korean constellation, native: 섭제(攝提), English: Conductor
 msgid "Saptje"
-msgstr ""
+msgstr "Saptje"
 
 #. Pronounce entry for Korean constellation, native: 돈완(頓頑), English: Trials
 msgid "Donwan"
-msgstr ""
+msgstr "Donwan"
 
 #. Pronounce entry for Korean constellation, native: 양문(陽門), English: Gate of
 #. Yang
 msgid "Yangmun"
-msgstr ""
+msgstr "Yangmun"
 
 #. Pronounce entry for Korean constellation, native: 저(氐), English: Root
 msgid "Jeo"
-msgstr ""
+msgstr "Jeo"
 
 #. Pronounce entry for Korean constellation, native: 천유(天乳), English:
 #. Celestial Milk
@@ -69675,70 +69699,70 @@ msgstr ""
 #. Pronounce entry for Korean name for HIP  77516
 #. Korean name for HIP  77516, native: 천유(天乳)
 msgid "Cheonyu"
-msgstr ""
+msgstr "Cheonyu"
 
 #. Pronounce entry for Korean constellation, native: 초요(招搖), English:
 #. Twinkling Indicator
 msgid "Choyo"
-msgstr ""
+msgstr "Choyo"
 
 #. Pronounce entry for Korean constellation, native: 경하(梗河), English:
 #. Celestial Lance
 msgid "Gyeongha"
-msgstr ""
+msgstr "Gyeongha"
 
 #. Pronounce entry for Korean constellation, native: 제석(帝席), English: Mattress
 #. of the Emperor
 msgid "Jeseok"
-msgstr ""
+msgstr "Jeseok"
 
 #. Pronounce entry for Korean constellation, native: 항지(亢池), English: Boats
 #. and Lake
 msgid "Hangji"
-msgstr ""
+msgstr "Hangji"
 
 #. Pronounce entry for Korean constellation, native: 기관(騎官), English: Imperial
 #. Guards
 msgid "Gigwan"
-msgstr ""
+msgstr "Gigwan"
 
 #. Pronounce entry for Korean constellation, native: 진거(陣車), English: Battle
 #. Chariots
 msgid "Jingeo"
-msgstr ""
+msgstr "Jingeo"
 
 #. Pronounce entry for Korean constellation, native: 거기(車騎), English: Chariots
 #. and Cavalry
 msgid "Geogi"
-msgstr ""
+msgstr "Geogi"
 
 #. Pronounce entry for Korean constellation, native: 천복(天輻), English:
 #. Celestial Spokes
 msgid "Cheonbok"
-msgstr ""
+msgstr "Cheonbok"
 
 #. Pronounce entry for Korean constellation, native: 기진장군(騎陣將軍), English:
 #. Chariots and Cavalry General
 #. Pronounce entry for Korean name for HIP  75647
 #. Korean name for HIP  75647, native: 기진장군(騎陣將軍)
 msgid "Gijinjanggun"
-msgstr ""
+msgstr "Gijinjanggun"
 
 #. Pronounce entry for Korean constellation, native: 방(房), English: Room
 msgid "Bang"
-msgstr ""
+msgstr "Bang"
 
 #. Pronounce entry for Korean constellation, native: 건폐(鍵閉), English: Door
 #. Bolt
 #. Pronounce entry for Korean name for HIP  79374
 #. Korean name for HIP  79374, native: 건폐(鍵閉)
 msgid "Geonpye"
-msgstr ""
+msgstr "Geonpye"
 
 #. Pronounce entry for Korean constellation, native: 구검(鈎鈐), English: Lock
 #. (Vassal of Room)
 msgid "Gugeom"
-msgstr ""
+msgstr "Gugeom"
 
 #. Pronounce entry for Korean constellation, native: 벌(罰), English: Punishment
 #. Korean constellation, native: 벌(伐), English: Send Armed Forces To Suppress
@@ -69751,36 +69775,36 @@ msgstr "Beol"
 #. Pronounce entry for Korean constellation, native: 동함(東咸), English: Eastern
 #. Door
 msgid "Dongham"
-msgstr ""
+msgstr "Dongham"
 
 #. Pronounce entry for Korean constellation, native: 서함(西咸), English: Western
 #. Door
 msgid "Seoham"
-msgstr ""
+msgstr "Seoham"
 
 #. Pronounce entry for Korean constellation, native: 일(日), English: Solar Star
 #. Pronounce entry for Korean name for HIP  76742
 #. Korean name for HIP  76742, native: 일(日)
 msgid "Il"
-msgstr ""
+msgstr "Il"
 
 #. Pronounce entry for Korean constellation, native: 심(心), English: Heart
 msgid "Sim"
-msgstr ""
+msgstr "Sim"
 
 #. Pronounce entry for Korean constellation, native: 적졸(積卒), English: Group of
 #. Soldiers
 msgid "Jeokjol"
-msgstr ""
+msgstr "Jeokjol"
 
 #. Pronounce entry for Korean constellation, native: 미(尾), English: Tail
 msgid "Mi"
-msgstr ""
+msgstr "Mi"
 
 #. Pronounce entry for Korean constellation, native: 귀(龜), English: Tortoise
 #. Korean constellation, native: 귀(鬼), English: Ghosts
 msgid "Gwi"
-msgstr ""
+msgstr "Gwi"
 
 #. Pronounce entry for Korean constellation, native: 천강(天江), English:
 #. Celestial River
@@ -69788,26 +69812,26 @@ msgstr ""
 #. Pronounce entry for Korean name for HIP 112948
 #. Korean name for HIP 112948, native: 천강(天綱)
 msgid "Cheongang"
-msgstr ""
+msgstr "Cheongang"
 
 #. Pronounce entry for Korean constellation, native: 부열(傅說), English: Fu Yue
 #. Pronounce entry for Korean name for HIP  87261
 #. Korean name for HIP  87261, native: 부열(傅說)
 msgid "Buyeol"
-msgstr ""
+msgstr "Buyeol"
 
 #. Pronounce entry for Korean constellation, native: 어(魚), English: Fish
 #. Pronounce entry for Korean name for M 7
 #. Korean name for M 7, native: 어(魚)
 msgid "Eo"
-msgstr ""
+msgstr "Eo"
 
 #. Pronounce entry for Korean constellation, native: 신궁(神宮), English: Changing
 #. Room (Vassal of Tail)
 #. Pronounce entry for Korean name for HIP  82545
 #. Korean name for HIP  82545, native: 신궁(神宮)
 msgid "Singung"
-msgstr ""
+msgstr "Singung"
 
 #. Korean constellation, native: 외저(外杵), pronounce: Oejeo
 msgid "Outer Pestle"
@@ -69816,7 +69840,7 @@ msgstr "Yttre mortelstöt"
 #. Pronounce entry for Korean constellation, native: 외저(外杵), English: Outer
 #. Pestle
 msgid "Oejeo"
-msgstr ""
+msgstr "Oejeo"
 
 #. Korean constellation, native: 남두(南斗), pronounce: Namdu
 msgid "South Dipper"
@@ -69825,122 +69849,122 @@ msgstr "Södra Karlavagnen"
 #. Pronounce entry for Korean constellation, native: 남두(南斗), English: South
 #. Dipper
 msgid "Namdu"
-msgstr ""
+msgstr "Namdu"
 
 #. Pronounce entry for Korean constellation, native: 건성(建星), English:
 #. Establishment Stars
 msgid "Geonseong"
-msgstr ""
+msgstr "Geonseong"
 
 #. Pronounce entry for Korean constellation, native: 천변(天弁), English: Market
 #. Officer
 msgid "Cheonbyeon"
-msgstr ""
+msgstr "Cheonbyeon"
 
 #. Pronounce entry for Korean constellation, native: 별(鱉), English: River
 #. Turtle
 msgid "Byeol"
-msgstr ""
+msgstr "Byeol"
 
 #. Pronounce entry for Korean constellation, native: 천계(天雞), English:
 #. Celestial Cock
 msgid "Cheongye"
-msgstr ""
+msgstr "Cheongye"
 
 #. Pronounce entry for Korean constellation, native: 천약(天鑰), English:
 #. Celestial Keyhole
 msgid "Cheonyak"
-msgstr ""
+msgstr "Cheonyak"
 
 #. Pronounce entry for Korean constellation, native: 구국(狗國), English:
 #. Territory of Dog
 msgid "Guguk"
-msgstr ""
+msgstr "Guguk"
 
 #. Pronounce entry for Korean constellation, native: 천연(天淵), English:
 #. Celestial Spring
 msgid "Cheonyeon"
-msgstr ""
+msgstr "Cheonyeon"
 
 #. Pronounce entry for Korean constellation, native: 구(狗), English: Dog
 #. Korean constellation, native: 구(臼), English: Mortar
 #. Korean constellation, native: 구(鈎), English: Hook
 msgid "Gu"
-msgstr ""
+msgstr "Gu"
 
 #. Pronounce entry for Korean constellation, native: 농장인(農丈人), English:
 #. Peasant
 #. Pronounce entry for Korean name for HIP  91014
 #. Korean name for HIP  91014, native: 농장인(農丈人)
 msgid "Nongjangin"
-msgstr ""
+msgstr "Nongjangin"
 
 #. Pronounce entry for Korean constellation, native: 견우(牽牛), English: Leading
 #. Ox
 msgid "Gyeonu"
-msgstr ""
+msgstr "Gyeonu"
 
 #. Pronounce entry for Korean constellation, native: 구감(九坎), English: Nine
 #. Water Wells
 msgid "Gugam"
-msgstr ""
+msgstr "Gugam"
 
 #. Pronounce entry for Korean constellation, native: 하고(河鼓), English: Drum at
 #. the River
 msgid "Hago"
-msgstr ""
+msgstr "Hago"
 
 #. Pronounce entry for Korean constellation, native: 직녀(織女), English: Weaving
 #. Girl
 #. Pronounce entry for Korean name for HIP  91262
 #. Korean name for HIP  91262, native: 직녀(織女)
 msgid "Jingnyeon"
-msgstr ""
+msgstr "Jingnyeon"
 
 #. Pronounce entry for Korean constellation, native: 좌기(左旗), English: Left
 #. Flag
 #. Korean constellation, native: 좌기(坐旗), English: Seat Flags
 msgid "Jwagi"
-msgstr ""
+msgstr "Jwagi"
 
 #. Pronounce entry for Korean constellation, native: 우기(右旗), English: Right
 #. Flag
 msgid "Ugi"
-msgstr ""
+msgstr "Ugi"
 
 #. Pronounce entry for Korean constellation, native: 천부(天桴), English:
 #. Celestial Drumstick
 msgid "Cheonbu"
-msgstr ""
+msgstr "Cheonbu"
 
 #. Pronounce entry for Korean constellation, native: 나언(羅堰), English: Network
 #. of Dykes
 msgid "Naeon"
-msgstr ""
+msgstr "Naeon"
 
 #. Pronounce entry for Korean constellation, native: 점대(漸臺), English:
 #. Clepsydra Terrace
 msgid "Jeomdae"
-msgstr ""
+msgstr "Jeomdae"
 
 #. Pronounce entry for Korean constellation, native: 연도(輦道), English: Imperial
 #. Passageway
 msgid "Yeondo"
-msgstr ""
+msgstr "Yeondo"
 
 #. Korean constellation, native: 수녀(須女), pronounce: Sunyeo
 msgid "Labor Woman"
-msgstr ""
+msgstr "Arbetande kvinna"
 
 #. Pronounce entry for Korean constellation, native: 수녀(須女), English: Labor
 #. Woman
 msgid "Sunyeo"
-msgstr ""
+msgstr "Sunyeo"
 
 #. Pronounce entry for Korean constellation, native: 십이국(十二國), English: Twelve
 #. States
 msgid "Sibiguk"
-msgstr ""
+msgstr "Sibiguk"
 
 #. Pronounce entry for Korean constellation, native: 월(越), English: Yue State
 #. Korean constellation, native: 월(月), English: Lunar Star
@@ -69952,11 +69976,11 @@ msgstr ""
 #. Pronounce entry for Korean name for HIP  29655
 #. Korean name for HIP  29655, native: 월(鉞)
 msgid "Wol"
-msgstr ""
+msgstr "Wol"
 
 #. Pronounce entry for Korean constellation, native: 대(代), English: Dai State
 msgid "Dae"
-msgstr ""
+msgstr "Dae"
 
 #. Pronounce entry for Korean constellation, native: 위(魏), English: Wei State
 #. Korean constellation, native: 위(危), English: Rooftop
@@ -69972,13 +69996,13 @@ msgstr "Wi"
 #. Pronounce entry for Korean name for HIP 104234
 #. Korean name for HIP 104234, native: 초(楚)
 msgid "Cho"
-msgstr ""
+msgstr "Cho"
 
 #. Pronounce entry for Korean constellation, native: 연(燕), English: Yan State
 #. Pronounce entry for Korean name for HIP 102831
 #. Korean name for HIP 102831, native: 연(燕)
 msgid "Yeon"
-msgstr ""
+msgstr "Yeon"
 
 #. Pronounce entry for Korean constellation, native: 제(齊), English: Qi State
 #. Pronounce entry for Korean name for HIP  72607
@@ -69986,7 +70010,7 @@ msgstr ""
 #. Pronounce entry for Korean name for HIP 102092
 #. Korean name for HIP 102092, native: 제(齊)
 msgid "Je"
-msgstr ""
+msgstr "Je"
 
 #. Pronounce entry for Korean constellation, native: 정(鄭), English: Zheng
 #. State
@@ -70000,90 +70024,88 @@ msgstr "Jeong"
 #. Pronounce entry for Korean constellation, native: 이주(離珠), English: Pearls
 #. on Ladies' Wear
 msgid "Iju"
-msgstr ""
+msgstr "Iju"
 
 #. Pronounce entry for Korean constellation, native: 패고(敗苽), English: Rotten
 #. Gourd
 msgid "Paego"
-msgstr ""
+msgstr "Paego"
 
 #. Pronounce entry for Korean constellation, native: 고(苽), English: Good Gourd
-#. Tibetan asterism, English: LM04
-#. Tibetan Lunar Mansion 4
 msgid "Go"
 msgstr "Go"
 
 #. Pronounce entry for Korean constellation, native: 천진(天津), English:
 #. Celestial Ford
 msgid "Cheonjin"
-msgstr ""
+msgstr "Cheonjin"
 
 #. Pronounce entry for Korean constellation, native: 해중(奚仲), English: Xi Zhong
 msgid "Haejung"
-msgstr ""
+msgstr "Haejung"
 
 #. Pronounce entry for Korean constellation, native: 부광(扶筐), English: Basket
 #. for Mulberry Leaves
 msgid "Bugwang"
-msgstr ""
+msgstr "Bugwang"
 
 #. Pronounce entry for Korean constellation, native: 허(虛), English: Emptiness
 msgid "Heo"
-msgstr ""
+msgstr "Heo"
 
 #. Pronounce entry for Korean constellation, native: 사명(司命), English: Deified
 #. Judge of Life
 msgid "Samyeong"
-msgstr ""
+msgstr "Samyeong"
 
 #. Pronounce entry for Korean constellation, native: 사록(司祿), English: Deified
 #. Judge of Rank
 msgid "Sarok"
-msgstr ""
+msgstr "Sarok"
 
 #. Pronounce entry for Korean constellation, native: 사위(司危), English: Deified
 #. Judge of Disaster and Good Fortune
 msgid "Sawi"
-msgstr ""
+msgstr "Sawi"
 
 #. Pronounce entry for Korean constellation, native: 사비(司非), English: Deified
 #. Judge of Right and Wrong
 msgid "Sabi"
-msgstr ""
+msgstr "Sabi"
 
 #. Pronounce entry for Korean constellation, native: 읍(泣), English: Weeping
 msgid "Eup"
-msgstr ""
+msgstr "Eup"
 
 #. Pronounce entry for Korean constellation, native: 천루성(天壘城), English:
 #. Celestial Ramparts
 msgid "Cheolluseong"
-msgstr ""
+msgstr "Cheolluseong"
 
 #. Pronounce entry for Korean constellation, native: 패구(敗臼), English: Decayed
 #. Mortar
 msgid "Paegu"
-msgstr ""
+msgstr "Paegu"
 
 #. Pronounce entry for Korean constellation, native: 이유(離瑜), English: Jade
 #. Ornament on Ladies' Wear
 msgid "Iyu"
-msgstr ""
+msgstr "Iyu"
 
 #. Pronounce entry for Korean constellation, native: 인성(人星), English: Humans
 #. Stars
 msgid "Inseong"
-msgstr ""
+msgstr "Inseong"
 
 #. Pronounce entry for Korean constellation, native: 내저(內杵), English: Inner
 #. Pestle
 msgid "Naejeo"
-msgstr ""
+msgstr "Naejeo"
 
 #. Pronounce entry for Korean constellation, native: 차부(車府), English: Big Yard
 #. for Chariots
 msgid "Chabu"
-msgstr ""
+msgstr "Chabu"
 
 #. Korean constellation, native: 구(鈎), pronounce: Gu
 msgid "Hook"
@@ -70091,114 +70113,114 @@ msgstr "Kroken"
 
 #. Pronounce entry for Korean constellation, native: 조부(造父), English: Zaofu
 msgid "Jobu"
-msgstr ""
+msgstr "Jobu"
 
 #. Pronounce entry for Korean constellation, native: 분묘(墳墓), English: Tomb
 #. (Vassal of Rooftop)
 msgid "Bunmyo"
-msgstr ""
+msgstr "Bunmyo"
 
 #. Pronounce entry for Korean constellation, native: 허량(虛梁), English: Temple
 msgid "Heoryang"
-msgstr ""
+msgstr "Heoryang"
 
 #. Pronounce entry for Korean constellation, native: 개옥(蓋屋), English: Roofing
 msgid "Gaeok"
-msgstr ""
+msgstr "Gaeok"
 
 #. Pronounce entry for Korean constellation, native: 실(室), English: Encampment
 msgid "Sil"
-msgstr ""
+msgstr "Sil"
 
 #. Pronounce entry for Korean constellation, native: 이궁(離宮), English: Resting
 #. Palace (Vassal of Encampment)
 msgid "Igung"
-msgstr ""
+msgstr "Igung"
 
 #. Pronounce entry for Korean constellation, native: 뇌전(雷電), English: Thunder
 #. and Lightning
 msgid "Noejeon"
-msgstr ""
+msgstr "Noejeon"
 
 #. Pronounce entry for Korean constellation, native: 누벽진(壘壁陣), English: Line
 #. of Ramparts
 msgid "Nubyeokjin"
-msgstr ""
+msgstr "Nubyeokjin"
 
 #. Pronounce entry for Korean constellation, native: 우림군(羽林軍), English: Palace
 #. Guard
 msgid "Urimgun"
-msgstr ""
+msgstr "Urimgun"
 
 #. Pronounce entry for Korean constellation, native: 부월(鈇鉞), English: Axe
 msgid "Buwol"
-msgstr ""
+msgstr "Buwol"
 
 #. Pronounce entry for Korean constellation, native: 북락사문(北落師門), English:
 #. North Gate of the Military Camp
 #. Pronounce entry for Korean name for HIP 113368
 #. Korean name for HIP 113368, native: 북락사문(北落師門)
 msgid "Bungnaksamun"
-msgstr ""
+msgstr "Bungnaksamun"
 
 #. Pronounce entry for Korean constellation, native: 팔괴(八魁), English: Net for
 #. Catching Birds
 msgid "Palgwae"
-msgstr ""
+msgstr "Palgwae"
 
 #. Pronounce entry for Korean constellation, native: 토공리(土公吏), English:
 #. Official for Materials Supply
 msgid "Togongni"
-msgstr ""
+msgstr "Togongni"
 
 #. Pronounce entry for Korean constellation, native: 등사(騰蛇), English: Flying
 #. Serpent
 msgid "Deungsa"
-msgstr ""
+msgstr "Deungsa"
 
 #. Pronounce entry for Korean constellation, native: 동벽(東壁), English: Eastern
 #. Wall
 msgid "Dongbyeok"
-msgstr ""
+msgstr "Dongbyeok"
 
 #. Pronounce entry for Korean constellation, native: 벽력(霹靂), English:
 #. Thunderbolt
 msgid "Byeongnyeok"
-msgstr ""
+msgstr "Byeongnyeok"
 
 #. Pronounce entry for Korean constellation, native: 운우(雲雨), English: Cloud
 #. and Rain
 msgid "Unu"
-msgstr ""
+msgstr "Unu"
 
 #. Pronounce entry for Korean constellation, native: 천구(天厩), English:
 #. Celestial Stable
 #. Korean constellation, native: 천구(天狗), English: Celestial Dog
 msgid "Cheongu"
-msgstr ""
+msgstr "Cheongu"
 
 #. Pronounce entry for Korean constellation, native: 부질(鈇鑕), English: Sickle
 msgid "Bujil"
-msgstr ""
+msgstr "Bujil"
 
 #. Pronounce entry for Korean constellation, native: 토공(土公), English: Official
 #. for Earthworks and Buildings
 msgid "Togong"
-msgstr ""
+msgstr "Togong"
 
 #. Pronounce entry for Korean constellation, native: 규(奎), English: Legs
 msgid "Gyu"
-msgstr ""
+msgstr "Gyu"
 
 #. Pronounce entry for Korean constellation, native: 외병(外屏), English: Outer
 #. Fence
 msgid "Oebyeong"
-msgstr ""
+msgstr "Oebyeong"
 
 #. Pronounce entry for Korean constellation, native: 천혼(天溷), English:
 #. Celestial Pigsty
 msgid "Cheonhon"
-msgstr ""
+msgstr "Cheonhon"
 
 #. Pronounce entry for Korean constellation, native: 토사공(司空), English: Master
 #. of Constructions (In Legs Mansion)
@@ -70207,74 +70229,74 @@ msgstr ""
 #. Pronounce entry for Korean name for HIP   3419
 #. Korean name for HIP   3419, native: 토사공(司空)
 msgid "Sagong"
-msgstr ""
+msgstr "Sagong"
 
 #. Pronounce entry for Korean constellation, native: 군남문(軍南門), English:
 #. Southern Military Gate
 #. Pronounce entry for Korean name for HIP   8796
 #. Korean name for HIP   8796, native: 군남문(軍南門)
 msgid "Gunnam Mun"
-msgstr ""
+msgstr "Gunnam Mun"
 
 #. Pronounce entry for Korean constellation, native: 각도(閣道), English: Flying
 #. Corridor
 msgid "Gakdo"
-msgstr ""
+msgstr "Gakdo"
 
 #. Pronounce entry for Korean constellation, native: 부로(附路), English:
 #. Auxiliary Road
 #. Pronounce entry for Korean name for HIP   5434
 #. Korean name for HIP   5434, native: 부로(附路)
 msgid "Buro"
-msgstr ""
+msgstr "Buro"
 
 #. Pronounce entry for Korean constellation, native: 왕량(王良), English: Wang
 #. Liang
 msgid "Wangnyang"
-msgstr ""
+msgstr "Wangnyang"
 
 #. Pronounce entry for Korean constellation, native: 책(策), English: Whip
 #. Pronounce entry for Korean name for HIP   2599
 #. Korean name for HIP   2599, native: 책(策)
 msgid "Chaek"
-msgstr ""
+msgstr "Chaek"
 
 #. Pronounce entry for Korean constellation, native: 좌경(左更), English: Official
 #. in Charge of the Forest
 msgid "Jwagyeong"
-msgstr ""
+msgstr "Jwagyeong"
 
 #. Pronounce entry for Korean constellation, native: 우경(右更), English: Official
 #. in Charge of Pasturing
 msgid "Ugyeong"
-msgstr ""
+msgstr "Ugyeong"
 
 #. Pronounce entry for Korean constellation, native: 천장군(天將軍), English:
 #. General of Heaven
 msgid "Cheonganggun"
-msgstr ""
+msgstr "Cheonganggun"
 
 #. Pronounce entry for Korean constellation, native: 천름(天廩), English:
 #. Celestial Foodstuff
 msgid "Cheolleum"
-msgstr ""
+msgstr "Cheolleum"
 
 #. Pronounce entry for Korean constellation, native: 천균(天囷), English: Circular
 #. Celestial Granary
 msgid "Cheongyun"
-msgstr ""
+msgstr "Cheongyun"
 
 #. Pronounce entry for Korean constellation, native: 대릉(大陵), English:
 #. Mausoleum
 msgid "Daereung"
-msgstr ""
+msgstr "Daereung"
 
 #. Pronounce entry for Korean constellation, native: 천선(天船), English:
 #. Celestial Boat
 #. Pronounce entry for Korean name for HIP  53910
 #. Korean name for HIP  53910, native: 천선(天璇)
 msgid "Cheonseon"
-msgstr ""
+msgstr "Cheonseon"
 
 #. Pronounce entry for Korean constellation, native: 적시(積尸), English: Heap of
 #. Corpses (In Stomach Mansion)
@@ -70285,7 +70307,7 @@ msgstr ""
 #. Pronounce entry for Korean name for M 44
 #. Korean name for M 44, native: 적시(積尸)
 msgid "Jeoksi"
-msgstr ""
+msgstr "Jeoksi"
 
 #. Pronounce entry for Korean constellation, native: 적수(積水), English: Stored
 #. water (In Stomach Mansion)
@@ -70296,76 +70318,76 @@ msgstr ""
 #. Pronounce entry for Korean name for HIP  36145
 #. Korean name for HIP  36145, native: 적수(積水)
 msgid "Jeoksu"
-msgstr ""
+msgstr "Jeoksu"
 
 #. Pronounce entry for Korean constellation, native: 묘(昴), English: Hairy Head
 msgid "Myo"
-msgstr ""
+msgstr "Myo"
 
 #. Pronounce entry for Korean constellation, native: 천아(天阿), English:
 #. Celestial Concave
 #. Pronounce entry for Korean name for HIP  21881
 #. Korean name for HIP  21881, native: 천아(天阿)
 msgid "Cheon-a"
-msgstr ""
+msgstr "Cheon-a"
 
 #. Pronounce entry for Korean constellation, native: 천음(天陰), English:
 #. Celestial Yin Force
 msgid "Cheon-eum"
-msgstr ""
+msgstr "Cheon-eum"
 
 #. Pronounce entry for Korean constellation, native: 추고(芻藁), English: Hay
 msgid "Chugo"
-msgstr ""
+msgstr "Chugo"
 
 #. Pronounce entry for Korean constellation, native: 천원(天苑), English:
 #. Celestial Meadows
 #. Korean constellation, native: 천원(天園), English: Celestial Orchard
 msgid "Cheon-won"
-msgstr ""
+msgstr "Cheon-won"
 
 #. Pronounce entry for Korean constellation, native: 권설(卷舌), English: Rolled
 #. Tongue
 msgid "Gwonseol"
-msgstr ""
+msgstr "Gwonseol"
 
 #. Pronounce entry for Korean constellation, native: 천참(天讒), English:
 #. Celestial Slander
 #. Pronounce entry for Korean name for HIP  17886
 #. Korean name for HIP  17886, native: 천참(天讒)
 msgid "Cheoncham"
-msgstr ""
+msgstr "Cheoncham"
 
 #. Pronounce entry for Korean constellation, native: 려석(礪石), English:
 #. Whetstone
 msgid "Ryeoseok"
-msgstr ""
+msgstr "Ryeoseok"
 
 #. Pronounce entry for Korean constellation, native: 필(畢), English: Net
 msgid "Pil"
-msgstr ""
+msgstr "Pil"
 
 #. Pronounce entry for Korean constellation, native: 부이(附耳), English: Whisper
 #. (Vassal of Net)
 #. Pronounce entry for Korean name for HIP  21683
 #. Korean name for HIP  21683, native: 부이(附耳)
 msgid "Bui"
-msgstr ""
+msgstr "Bui"
 
 #. Pronounce entry for Korean constellation, native: 천가(天街), English:
 #. Celestial Street
 msgid "Cheonga"
-msgstr ""
+msgstr "Cheonga"
 
 #. Pronounce entry for Korean constellation, native: 천절(天節), English:
 #. Celestial Tally
 msgid "Cheonjeol"
-msgstr ""
+msgstr "Cheonjeol"
 
 #. Pronounce entry for Korean constellation, native: 제왕(諸王), English: Feudal
 #. Kings
 msgid "Jewang"
-msgstr ""
+msgstr "Jewang"
 
 #. Pronounce entry for Korean constellation, native: 천고(天高), English:
 #. Celestial High Terrace
@@ -70374,78 +70396,78 @@ msgstr ""
 #. Pronounce entry for Korean name for HIP  24608
 #. Korean name for HIP  24608, native: 천고(天庫)
 msgid "Cheongo"
-msgstr ""
+msgstr "Cheongo"
 
 #. Pronounce entry for Korean constellation, native: 구주수구(九州殊口), English:
 #. Interpreters of Nine Dialects
 msgid "Gujusugu"
-msgstr ""
+msgstr "Gujusugu"
 
 #. Pronounce entry for Korean constellation, native: 오거(五車), English: Five
 #. Chariots
 msgid "Ogeo"
-msgstr ""
+msgstr "Ogeo"
 
 #. Pronounce entry for Korean constellation, native: 천황(天潢), English:
 #. Celestial Pier
 msgid "Cheonhwang"
-msgstr ""
+msgstr "Cheonhwang"
 
 #. Pronounce entry for Korean constellation, native: 함지(咸池), English: Pool of
 #. Harmony
 msgid "Hamji"
-msgstr ""
+msgstr "Hamji"
 
 #. Pronounce entry for Korean constellation, native: 천관(天關), English:
 #. Celestial Pass
 #. Pronounce entry for Korean name for HIP  26451
 #. Korean name for HIP  26451, native: 천관(天關)
 msgid "Cheongwan"
-msgstr ""
+msgstr "Cheongwan"
 
 #. Pronounce entry for Korean constellation, native: 삼기(參旗), English: Banner
 #. of Three Stars
 msgid "Samgi"
-msgstr ""
+msgstr "Samgi"
 
 #. Pronounce entry for Korean constellation, native: 구유(九斿), English: Imperial
 #. Military Flag
 msgid "Guyu"
-msgstr ""
+msgstr "Guyu"
 
 #. Pronounce entry for Korean constellation, native: 자(觜), English: Turtle
 #. Beak
 #. Korean constellation, native: 자(子), English: Son
 msgid "Ja"
-msgstr ""
+msgstr "Ja"
 
 #. Pronounce entry for Korean constellation, native: 사괴(司恠), English: Deity in
 #. Charge of Monsters
 msgid "Sagwae"
-msgstr ""
+msgstr "Sagwae"
 
 #. Pronounce entry for Korean constellation, native: 삼(參), English: Three
 #. Stars
 msgid "Sam"
-msgstr ""
+msgstr "Sam"
 
 #. Pronounce entry for Korean constellation, native: 옥정(玉井), English: Jade
 #. Well
 msgid "Okjeong"
-msgstr ""
+msgstr "Okjeong"
 
 #. Pronounce entry for Korean constellation, native: 병(屏), English: Screen
 msgid "Byeong"
-msgstr ""
+msgstr "Byeong"
 
 #. Pronounce entry for Korean constellation, native: 군정(軍井), English: Military
 #. Well
 msgid "Gunjeong"
-msgstr ""
+msgstr "Gunjeong"
 
 #. Pronounce entry for Korean constellation, native: 측(廁), English: Toilet
 msgid "Cheuk"
-msgstr ""
+msgstr "Cheuk"
 
 #. Korean constellation, native: 동정(東井), pronounce: Dongjeong
 msgid "East Well"
@@ -70454,98 +70476,98 @@ msgstr "Östra brunnen"
 #. Pronounce entry for Korean constellation, native: 동정(東井), English: East
 #. Well
 msgid "Dongjeong"
-msgstr ""
+msgstr "Dongjeong"
 
 #. Pronounce entry for Korean constellation, native: 남하(南河), English: South
 #. River
 msgid "Namha"
-msgstr ""
+msgstr "Namha"
 
 #. Pronounce entry for Korean constellation, native: 북하(北河), English: North
 #. River
 msgid "Bukha"
-msgstr ""
+msgstr "Bukha"
 
 #. Pronounce entry for Korean constellation, native: 천준(天樽), English:
 #. Celestial Wine Cup
 msgid "Cheonjun"
-msgstr ""
+msgstr "Cheonjun"
 
 #. Pronounce entry for Korean constellation, native: 적신(積薪), English: Pile of
 #. Firewood
 #. Pronounce entry for Korean name for HIP  37265
 #. Korean name for HIP  37265, native: 적신(積薪)
 msgid "Jeoksin"
-msgstr ""
+msgstr "Jeoksin"
 
 #. Pronounce entry for Korean constellation, native: 수부(水府), English: Official
 #. for Irrigation
 msgid "Subu"
-msgstr ""
+msgstr "Subu"
 
 #. Pronounce entry for Korean constellation, native: 수위(水位), English: Water
 #. Level
 msgid "Suwi"
-msgstr ""
+msgstr "Suwi"
 
 #. Pronounce entry for Korean constellation, native: 사독(四瀆), English: Four
 #. Channels
 msgid "Sadok"
-msgstr ""
+msgstr "Sadok"
 
 #. Pronounce entry for Korean constellation, native: 군시(軍市), English: Market
 #. for Soldiers
 msgid "Gunsi"
-msgstr ""
+msgstr "Gunsi"
 
 #. Pronounce entry for Korean constellation, native: 야계(野雞), English: Wild
 #. Cockerel
 #. Pronounce entry for Korean name for HIP  30324
 #. Korean name for HIP  30324, native: 야계(野雞)
 msgid "Yagye"
-msgstr ""
+msgstr "Yagye"
 
 #. Pronounce entry for Korean constellation, native: 장인(丈人), English:
 #. Grandfather
 msgid "Jangin"
-msgstr ""
+msgstr "Jangin"
 
 #. Pronounce entry for Korean constellation, native: 궐구(闕丘), English: Palace
 #. Gate
 msgid "Gwolgu"
-msgstr ""
+msgstr "Gwolgu"
 
 #. Pronounce entry for Korean constellation, native: 낭성(狼星), English: Wolf
 #. Star
 #. Pronounce entry for Korean name for HIP  32349
 #. Korean name for HIP  32349, native: 낭성(狼星)
 msgid "Nangseong"
-msgstr ""
+msgstr "Nangseong"
 
 #. Pronounce entry for Korean constellation, native: 호(弧), English: Bow
 msgid "Ho"
-msgstr ""
+msgstr "Ho"
 
 #. Pronounce entry for Korean constellation, native: 노인(老人), English: Old Man
 #. Pronounce entry for Korean name for HIP  30438
 #. Korean name for HIP  30438, native: 노인(老人)
 msgid "Noin"
-msgstr ""
+msgstr "Noin"
 
 #. Korean constellation, native: 적시(積尸), pronounce: Jeoksi
 #. Korean name for M 44, native: 적시(積尸)
 msgid "Cumulative Corpse Gas (In Ghosts Mansion)"
-msgstr ""
+msgstr "Ansamlad likgas (i Spökets månhus)"
 
 #. Pronounce entry for Korean constellation, native: 관(爟), English: Beacon
 #. Fire
 msgid "Gwan"
-msgstr ""
+msgstr "Gwan"
 
 #. Pronounce entry for Korean constellation, native: 외주(外厨), English: Outer
 #. Kitchen
 msgid "Oeju"
-msgstr ""
+msgstr "Oeju"
 
 #. Pronounce entry for Korean constellation, native: 천사(天社), English:
 #. Celestial Earth God's Temple
@@ -70558,287 +70580,455 @@ msgstr ""
 #. Pronounce entry for Korean name for HIP   4427
 #. Korean name for HIP   4427, native: 천사(天駟)
 msgid "Cheonsa"
-msgstr ""
+msgstr "Cheonsa"
 
 #. Pronounce entry for Korean constellation, native: 주기(酒旗), English: Banner
 #. of Wine Shop
 msgid "Jugi"
-msgstr ""
+msgstr "Jugi"
 
 #. Pronounce entry for Korean constellation, native: 성(星), English: Star
 msgid "Seong"
-msgstr ""
+msgstr "Seong"
 
 #. Pronounce entry for Korean constellation, native: 헌원(軒轅), English: Xuanyuan
 msgid "Heon-won"
-msgstr ""
+msgstr "Heon-won"
 
 #. Pronounce entry for Korean constellation, native: 내평(內平), English: High
 #. Judge
 msgid "Naepyeong"
-msgstr ""
+msgstr "Naepyeong"
 
 #. Korean constellation, native: 직(稷), pronounce: Jik
 msgid "Cereals"
-msgstr ""
+msgstr "Spannmål"
 
 #. Pronounce entry for Korean constellation, native: 직(稷), English: Cereals
 msgid "Jik"
-msgstr ""
+msgstr "Jik"
 
 #. Pronounce entry for Korean constellation, native: 장(張), English: Extended
 #. Net
 msgid "Jang"
-msgstr ""
+msgstr "Jang"
 
 #. Pronounce entry for Korean constellation, native: 천묘(天廟), English:
 #. Celestial Temple
 msgid "Cheonmyo"
-msgstr ""
+msgstr "Cheonmyo"
 
 #. Pronounce entry for Korean constellation, native: 익(翼), English: Wings
 msgid "Ik"
-msgstr ""
+msgstr "Ik"
 
 #. Pronounce entry for Korean constellation, native: 동구(東甌), English: Dongou
 msgid "Donggu"
-msgstr ""
+msgstr "Donggu"
 
 #. Pronounce entry for Korean constellation, native: 장사(長沙), English: Changsha
 #. (Vassal of Chariot)
 #. Pronounce entry for Korean name for HIP  60189
 #. Korean name for HIP  60189, native: 장사(長沙)
 msgid "Jangsa"
-msgstr ""
+msgstr "Jangsa"
 
 #. Pronounce entry for Korean constellation, native: 좌할(左轄), English: Left
 #. linchpin (Vassal of Chariot)
 #. Pronounce entry for Korean name for HIP  61174
 #. Korean name for HIP  61174, native: 좌할(左轄)
 msgid "Jwahal"
-msgstr ""
+msgstr "Jwahal"
 
 #. Pronounce entry for Korean constellation, native: 우할(右轄), English: Right
 #. linchpin (Vassal of Chariot)
 #. Pronounce entry for Korean name for HIP  59199
 #. Korean name for HIP  59199, native: 우할(右轄)
 msgid "Uhal"
-msgstr ""
+msgstr "Uhal"
 
 #. Pronounce entry for Korean constellation, native: 군문(軍門), English: Military
 #. Gate
 msgid "Gunmun"
-msgstr ""
+msgstr "Gunmun"
 
 #. Pronounce entry for Korean constellation, native: 토사공(土司空), English: Master
 #. of Constructions (In Chariot Mansion)
 msgid "Tosagong"
-msgstr ""
+msgstr "Tosagong"
 
 #. Pronounce entry for Korean constellation, native: 청구(青丘), English: Green
 #. Hill
 msgid "Cheonggu"
-msgstr ""
+msgstr "Cheonggu"
 
 #. Pronounce entry for Korean constellation, native: 기부(器府), English: House
 #. for Musical Instruments
 msgid "Gibu"
-msgstr ""
+msgstr "Gibu"
+
+#. Name of a zodiac sign or a lunar mansion in Korean sky culture, native:
+#. 각(角), pronounce: Gak
+msgctxt "korean lunar mansion"
+msgid "Horn"
+msgstr "Horn"
 
 #. Pronounce entry for a zodiac sign or a lunar mansion in Korean sky culture,
 #. native: 각(角), English: Horn
-msgctxt "chinese lunar mansion"
+msgctxt "korean lunar mansion"
 msgid "Gak"
-msgstr ""
+msgstr "Gak"
+
+#. Name of a zodiac sign or a lunar mansion in Korean sky culture, native:
+#. 항(亢), pronounce: Hang
+msgctxt "korean lunar mansion"
+msgid "Neck"
+msgstr "Hals"
 
 #. Pronounce entry for a zodiac sign or a lunar mansion in Korean sky culture,
 #. native: 항(亢), English: Neck
-msgctxt "chinese lunar mansion"
+msgctxt "korean lunar mansion"
 msgid "Hang"
-msgstr ""
+msgstr "Hang"
+
+#. Name of a zodiac sign or a lunar mansion in Korean sky culture, native:
+#. 저(氐), pronounce: Jeo
+msgctxt "korean lunar mansion"
+msgid "Root"
+msgstr "Rot"
 
 #. Pronounce entry for a zodiac sign or a lunar mansion in Korean sky culture,
 #. native: 저(氐), English: Root
-msgctxt "chinese lunar mansion"
+msgctxt "korean lunar mansion"
 msgid "Jeo"
-msgstr ""
+msgstr "Jeo"
+
+#. Name of a zodiac sign or a lunar mansion in Korean sky culture, native:
+#. 방(房), pronounce: Bang
+msgctxt "korean lunar mansion"
+msgid "Room"
+msgstr "Rum"
 
 #. Pronounce entry for a zodiac sign or a lunar mansion in Korean sky culture,
 #. native: 방(房), English: Room
-msgctxt "chinese lunar mansion"
+msgctxt "korean lunar mansion"
 msgid "Bang"
-msgstr ""
+msgstr "Bang"
+
+#. Name of a zodiac sign or a lunar mansion in Korean sky culture, native:
+#. 심(心), pronounce: Sim
+msgctxt "korean lunar mansion"
+msgid "Heart"
+msgstr "Hjärta"
 
 #. Pronounce entry for a zodiac sign or a lunar mansion in Korean sky culture,
 #. native: 심(心), English: Heart
-msgctxt "chinese lunar mansion"
+msgctxt "korean lunar mansion"
 msgid "Sim"
-msgstr ""
+msgstr "Sim"
+
+#. Name of a zodiac sign or a lunar mansion in Korean sky culture, native:
+#. 미(尾), pronounce: Mi
+msgctxt "korean lunar mansion"
+msgid "Tail"
+msgstr "Svans"
 
 #. Pronounce entry for a zodiac sign or a lunar mansion in Korean sky culture,
 #. native: 미(尾), English: Tail
-msgctxt "chinese lunar mansion"
+msgctxt "korean lunar mansion"
 msgid "Mi"
-msgstr ""
+msgstr "Mi"
+
+#. Name of a zodiac sign or a lunar mansion in Korean sky culture, native:
+#. 기(箕), pronounce: Gi
+msgctxt "korean lunar mansion"
+msgid "Winnowing Basket"
+msgstr "Rensningskorg"
 
 #. Pronounce entry for a zodiac sign or a lunar mansion in Korean sky culture,
 #. native: 기(箕), English: Winnowing Basket
-msgctxt "chinese lunar mansion"
+msgctxt "korean lunar mansion"
 msgid "Gi"
-msgstr ""
+msgstr "Gi"
+
+#. Name of a zodiac sign or a lunar mansion in Korean sky culture, native:
+#. 두(斗), pronounce: Du
+msgctxt "korean lunar mansion"
+msgid "Dipper"
+msgstr "Skopa"
 
 #. Pronounce entry for a zodiac sign or a lunar mansion in Korean sky culture,
 #. native: 두(斗), English: Dipper
-msgctxt "chinese lunar mansion"
+msgctxt "korean lunar mansion"
 msgid "Du"
-msgstr ""
+msgstr "Du"
+
+#. Name of a zodiac sign or a lunar mansion in Korean sky culture, native:
+#. 우(牛), pronounce: U
+msgctxt "korean lunar mansion"
+msgid "Ox"
+msgstr "Oxe"
 
 #. Pronounce entry for a zodiac sign or a lunar mansion in Korean sky culture,
 #. native: 우(牛), English: Ox
-msgctxt "chinese lunar mansion"
+msgctxt "korean lunar mansion"
 msgid "U"
-msgstr ""
+msgstr "U"
+
+#. Name of a zodiac sign or a lunar mansion in Korean sky culture, native:
+#. 여(女), pronounce: Yeo
+msgctxt "korean lunar mansion"
+msgid "Girl"
+msgstr "Flicka"
 
 #. Pronounce entry for a zodiac sign or a lunar mansion in Korean sky culture,
 #. native: 여(女), English: Girl
-msgctxt "chinese lunar mansion"
+msgctxt "korean lunar mansion"
 msgid "Yeo"
-msgstr ""
+msgstr "Yeo"
+
+#. Name of a zodiac sign or a lunar mansion in Korean sky culture, native:
+#. 허(虛), pronounce: Heo
+msgctxt "korean lunar mansion"
+msgid "Emptiness"
+msgstr "Tomhet"
 
 #. Pronounce entry for a zodiac sign or a lunar mansion in Korean sky culture,
 #. native: 허(虛), English: Emptiness
-msgctxt "chinese lunar mansion"
+msgctxt "korean lunar mansion"
 msgid "Heo"
-msgstr ""
+msgstr "Heo"
+
+#. Name of a zodiac sign or a lunar mansion in Korean sky culture, native:
+#. 위(危), pronounce: Wi
+msgctxt "korean lunar mansion"
+msgid "Rooftop"
+msgstr "Tak"
 
 #. Pronounce entry for a zodiac sign or a lunar mansion in Korean sky culture,
 #. native: 위(危), English: Rooftop
 #. Pronounce entry for a zodiac sign or a lunar mansion in Korean sky culture,
 #. native: 위(胃), English: Stomach
-msgctxt "chinese lunar mansion"
+msgctxt "korean lunar mansion"
 msgid "Wi"
-msgstr ""
+msgstr "Wi"
+
+#. Name of a zodiac sign or a lunar mansion in Korean sky culture, native:
+#. 실(室), pronounce: Sil
+msgctxt "korean lunar mansion"
+msgid "Encampment"
+msgstr "Lägerplats"
 
 #. Pronounce entry for a zodiac sign or a lunar mansion in Korean sky culture,
 #. native: 실(室), English: Encampment
-msgctxt "chinese lunar mansion"
+msgctxt "korean lunar mansion"
 msgid "Sil"
-msgstr ""
+msgstr "Sil"
+
+#. Name of a zodiac sign or a lunar mansion in Korean sky culture, native:
+#. 벽(壁), pronounce: Byeok
+msgctxt "korean lunar mansion"
+msgid "Wall"
+msgstr "Mur"
 
 #. Pronounce entry for a zodiac sign or a lunar mansion in Korean sky culture,
 #. native: 벽(壁), English: Wall
-msgctxt "chinese lunar mansion"
+msgctxt "korean lunar mansion"
 msgid "Byeok"
-msgstr ""
+msgstr "Byeok"
+
+#. Name of a zodiac sign or a lunar mansion in Korean sky culture, native:
+#. 규(奎), pronounce: Gyu
+msgctxt "korean lunar mansion"
+msgid "Legs"
+msgstr "Ben"
 
 #. Pronounce entry for a zodiac sign or a lunar mansion in Korean sky culture,
 #. native: 규(奎), English: Legs
-msgctxt "chinese lunar mansion"
+msgctxt "korean lunar mansion"
 msgid "Gyu"
-msgstr ""
+msgstr "Gyu"
+
+#. Name of a zodiac sign or a lunar mansion in Korean sky culture, native:
+#. 루(婁), pronounce: Ru
+msgctxt "korean lunar mansion"
+msgid "Bond"
+msgstr "Förbindelse"
 
 #. Pronounce entry for a zodiac sign or a lunar mansion in Korean sky culture,
 #. native: 루(婁), English: Bond
-msgctxt "chinese lunar mansion"
+msgctxt "korean lunar mansion"
 msgid "Ru"
-msgstr ""
+msgstr "Ru"
+
+#. Name of a zodiac sign or a lunar mansion in Korean sky culture, native:
+#. 위(胃), pronounce: Wi
+msgctxt "korean lunar mansion"
+msgid "Stomach"
+msgstr "Mage"
+
+#. Name of a zodiac sign or a lunar mansion in Korean sky culture, native:
+#. 묘(昴), pronounce: Myo
+msgctxt "korean lunar mansion"
+msgid "Hairy Head"
+msgstr "Hårigt huvud"
 
 #. Pronounce entry for a zodiac sign or a lunar mansion in Korean sky culture,
 #. native: 묘(昴), English: Hairy Head
-msgctxt "chinese lunar mansion"
+msgctxt "korean lunar mansion"
 msgid "Myo"
-msgstr ""
+msgstr "Myo"
+
+#. Name of a zodiac sign or a lunar mansion in Korean sky culture, native:
+#. 필(畢), pronounce: Pil
+msgctxt "korean lunar mansion"
+msgid "Net"
+msgstr "Nät"
 
 #. Pronounce entry for a zodiac sign or a lunar mansion in Korean sky culture,
 #. native: 필(畢), English: Net
-msgctxt "chinese lunar mansion"
+msgctxt "korean lunar mansion"
 msgid "Pil"
-msgstr ""
+msgstr "Pil"
+
+#. Name of a zodiac sign or a lunar mansion in Korean sky culture, native:
+#. 자(觜), pronounce: Ja
+msgctxt "korean lunar mansion"
+msgid "Turtle Beak"
+msgstr "Sköldpaddans näbb"
 
 #. Pronounce entry for a zodiac sign or a lunar mansion in Korean sky culture,
 #. native: 자(觜), English: Turtle Beak
-msgctxt "chinese lunar mansion"
+msgctxt "korean lunar mansion"
 msgid "Ja"
-msgstr ""
+msgstr "Ja"
+
+#. Name of a zodiac sign or a lunar mansion in Korean sky culture, native:
+#. 삼(參), pronounce: Sam
+msgctxt "korean lunar mansion"
+msgid "Three Stars"
+msgstr "Tre stjärnor"
 
 #. Pronounce entry for a zodiac sign or a lunar mansion in Korean sky culture,
 #. native: 삼(參), English: Three Stars
-msgctxt "chinese lunar mansion"
+msgctxt "korean lunar mansion"
 msgid "Sam"
-msgstr ""
+msgstr "Sam"
+
+#. Name of a zodiac sign or a lunar mansion in Korean sky culture, native:
+#. 정(井), pronounce: Jeong
+msgctxt "korean lunar mansion"
+msgid "Well"
+msgstr "Brunn"
 
 #. Pronounce entry for a zodiac sign or a lunar mansion in Korean sky culture,
 #. native: 정(井), English: Well
-msgctxt "chinese lunar mansion"
+msgctxt "korean lunar mansion"
 msgid "Jeong"
-msgstr ""
+msgstr "Jeong"
+
+#. Name of a zodiac sign or a lunar mansion in Korean sky culture, native:
+#. 귀(鬼), pronounce: Gwi
+msgctxt "korean lunar mansion"
+msgid "Ghost"
+msgstr "Spöke"
 
 #. Pronounce entry for a zodiac sign or a lunar mansion in Korean sky culture,
 #. native: 귀(鬼), English: Ghost
-msgctxt "chinese lunar mansion"
+msgctxt "korean lunar mansion"
 msgid "Gwi"
-msgstr ""
+msgstr "Gwi"
+
+#. Name of a zodiac sign or a lunar mansion in Korean sky culture, native:
+#. 류(柳), pronounce: Ryu
+msgctxt "korean lunar mansion"
+msgid "Willow"
+msgstr "Pilträd"
 
 #. Pronounce entry for a zodiac sign or a lunar mansion in Korean sky culture,
 #. native: 류(柳), English: Willow
-msgctxt "chinese lunar mansion"
+msgctxt "korean lunar mansion"
 msgid "Ryu"
-msgstr ""
+msgstr "Ryu"
+
+#. Name of a zodiac sign or a lunar mansion in Korean sky culture, native:
+#. 성(星), pronounce: Seong
+msgctxt "korean lunar mansion"
+msgid "Star"
+msgstr "Stjärna"
 
 #. Pronounce entry for a zodiac sign or a lunar mansion in Korean sky culture,
 #. native: 성(星), English: Star
-msgctxt "chinese lunar mansion"
+msgctxt "korean lunar mansion"
 msgid "Seong"
-msgstr ""
+msgstr "Seong"
+
+#. Name of a zodiac sign or a lunar mansion in Korean sky culture, native:
+#. 장(張), pronounce: Jang
+msgctxt "korean lunar mansion"
+msgid "Extended Net"
+msgstr "Utökat nät"
 
 #. Pronounce entry for a zodiac sign or a lunar mansion in Korean sky culture,
 #. native: 장(張), English: Extended Net
-msgctxt "chinese lunar mansion"
+msgctxt "korean lunar mansion"
 msgid "Jang"
-msgstr ""
+msgstr "Jang"
+
+#. Name of a zodiac sign or a lunar mansion in Korean sky culture, native:
+#. 익(翼), pronounce: Ik
+msgctxt "korean lunar mansion"
+msgid "Wings"
+msgstr "Vingar"
 
 #. Pronounce entry for a zodiac sign or a lunar mansion in Korean sky culture,
 #. native: 익(翼), English: Wings
-msgctxt "chinese lunar mansion"
+msgctxt "korean lunar mansion"
 msgid "Ik"
-msgstr ""
+msgstr "Ik"
+
+#. Name of a zodiac sign or a lunar mansion in Korean sky culture, native:
+#. 진(軫), pronounce: Jin
+msgctxt "korean lunar mansion"
+msgid "Chariot"
+msgstr "Stridsvagn"
 
 #. Pronounce entry for a zodiac sign or a lunar mansion in Korean sky culture,
 #. native: 진(軫), English: Chariot
-msgctxt "chinese lunar mansion"
+msgctxt "korean lunar mansion"
 msgid "Jin"
-msgstr ""
+msgstr "Jin"
 
 #. Pronounce entry for Korean name for HIP  70692
 #. Korean name for HIP  70692, native: 서자(庶子)
 #. Pronounce entry for Korean name for HIP  81266
 #. Korean name for HIP  81266, native: 서자(庶子)
 msgid "Seoja"
-msgstr ""
+msgstr "Seoja"
 
 #. Pronounce entry for Korean name for HIP  69112
 #. Korean name for HIP  69112, native: 후궁(後宮)
 #. Pronounce entry for Korean name for HIP  50335
 #. Korean name for HIP  50335, native: 후궁(後宮)
 msgid "Hugung"
-msgstr ""
+msgstr "Hugung"
 
 #. Pronounce entry for Korean name for HIP  62572
 #. Korean name for HIP  62572, native: 천추(天樞)
 #. Pronounce entry for Korean name for HIP  54061
 #. Korean name for HIP  54061, native: 천추(天樞)
 msgid "Cheonchu"
-msgstr ""
+msgstr "Cheonchu"
 
 #. Pronounce entry for Korean name for HIP  54061
 #. Korean name for HIP  54061, native: 탐랑(貪狼)
 msgid "Tamnang"
-msgstr ""
+msgstr "Tamnang"
 
 #. Pronounce entry for Korean name for HIP  53910
 #. Korean name for HIP  53910, native: 거문(巨門)
 msgid "Geomun"
-msgstr ""
+msgstr "Geomun"
 
 #. Pronounce entry for Korean name for HIP  53910
 #. Korean name for HIP  53910, native: 법(法)
@@ -70848,7 +71038,7 @@ msgstr "Beop"
 #. Pronounce entry for Korean name for HIP  58001
 #. Korean name for HIP  58001, native: 녹존(祿存)
 msgid "Nokjon"
-msgstr ""
+msgstr "Nokjon"
 
 #. Pronounce entry for Korean name for HIP  58001
 #. Korean name for HIP  58001, native: 령(令)
@@ -70858,22 +71048,22 @@ msgstr "Ryeong"
 #. Pronounce entry for Korean name for HIP  59774
 #. Korean name for HIP  59774, native: 천권(天權)
 msgid "Cheongwon"
-msgstr ""
+msgstr "Cheongwon"
 
 #. Pronounce entry for Korean name for HIP  59774
 #. Korean name for HIP  59774, native: 문곡(文曲)
 msgid "MunGok"
-msgstr ""
+msgstr "MunGok"
 
 #. Pronounce entry for Korean name for HIP  62956
 #. Korean name for HIP  62956, native: 옥형(玉衡)
 msgid "Okhyeong"
-msgstr ""
+msgstr "Okhyeong"
 
 #. Pronounce entry for Korean name for HIP  62956
 #. Korean name for HIP  62956, native: 염정(廉貞)
 msgid "Yeomjeong"
-msgstr ""
+msgstr "Yeomjeong"
 
 #. Pronounce entry for Korean name for HIP  62956
 #. Korean name for HIP  62956, native: 살(殺)
@@ -70883,22 +71073,22 @@ msgstr "Sal"
 #. Pronounce entry for Korean name for HIP  65378
 #. Korean name for HIP  65378, native: 개양(開陽)
 msgid "Gaeyang"
-msgstr ""
+msgstr "Gaeyang"
 
 #. Pronounce entry for Korean name for HIP  65378
 #. Korean name for HIP  65378, native: 무곡(武曲)
 msgid "Mugok"
-msgstr ""
+msgstr "Mugok"
 
 #. Pronounce entry for Korean name for HIP  67301
 #. Korean name for HIP  67301, native: 요광(搖光)
 msgid "Yogwang"
-msgstr ""
+msgstr "Yogwang"
 
 #. Pronounce entry for Korean name for HIP  67301
 #. Korean name for HIP  67301, native: 파군(破軍)
 msgid "Pagun"
-msgstr ""
+msgstr "Pagun"
 
 #. Pronounce entry for Korean name for HIP  41704
 #. Korean name for HIP  41704, native: 상장(上將)
@@ -70909,7 +71099,7 @@ msgstr ""
 #. Pronounce entry for Korean name for HIP  78104
 #. Korean name for HIP  78104, native: 상장(上將)
 msgid "Sangjang"
-msgstr ""
+msgstr "Sangjang"
 
 #. Pronounce entry for Korean name for HIP  45075
 #. Korean name for HIP  45075, native: 차장(次將)
@@ -70920,25 +71110,25 @@ msgstr ""
 #. Pronounce entry for Korean name for HIP  78265
 #. Korean name for HIP  78265, native: 차장(次將)
 msgid "Chajang"
-msgstr ""
+msgstr "Chajang"
 
 #. Korean name for HIP  46733, native: 태상(太上)
 msgid "Supreme Premier"
-msgstr ""
+msgstr "Högste ministern"
 
 #. Pronounce entry for Korean name for HIP  46733
 #. Korean name for HIP  46733, native: 태상(太上)
 msgid "Taesang"
-msgstr ""
+msgstr "Taesang"
 
 #. Korean name for HIP  46853, native: 사중·대리(司中·大理)
 msgid "Deified Judge of Disaster / Minister of Justice"
-msgstr ""
+msgstr "Gudomlig domare över olyckor / justitieminister"
 
 #. Pronounce entry for Korean name for HIP  46853
 #. Korean name for HIP  46853, native: 사중·대리(司中·大理)
 msgid "Sajung·Daeri"
-msgstr ""
+msgstr "Sajung·Daeri"
 
 #. Pronounce entry for Korean name for HIP  63090
 #. Korean name for HIP  63090, native: 차상(次相)
@@ -70947,7 +71137,7 @@ msgstr ""
 #. Pronounce entry for Korean name for HIP  78401
 #. Korean name for HIP  78401, native: 차상(次相)
 msgid "Chasang"
-msgstr ""
+msgstr "Chasang"
 
 #. Pronounce entry for Korean name for HIP  61941
 #. Korean name for HIP  61941, native: 상상(上相)
@@ -70956,90 +71146,90 @@ msgstr ""
 #. Pronounce entry for Korean name for HIP  78820
 #. Korean name for HIP  78820, native: 상상(上相)
 msgid "Sangsang"
-msgstr ""
+msgstr "Sangsang"
 
 #. Pronounce entry for Korean name for HIP  60129
 #. Korean name for HIP  60129, native: 좌집법(左執法)
 msgid "Jwajipbeop"
-msgstr ""
+msgstr "Jwajipbeop"
 
 #. Pronounce entry for Korean name for HIP  57757
 #. Korean name for HIP  57757, native: 우집법(右執法)
 msgid "Ujipbeop"
-msgstr ""
+msgstr "Ujipbeop"
 
 #. Korean name for HIP  57632, native: 황제(黃帝)
 msgid "Yellow Emperor"
-msgstr ""
+msgstr "Gule kejsaren"
 
 #. Pronounce entry for Korean name for HIP  57632
 #. Korean name for HIP  57632, native: 황제(黃帝)
 msgid "Hwangje"
-msgstr ""
+msgstr "Hwangje"
 
 #. Pronounce entry for Korean name for HIP  57606
 #. Korean name for HIP  57606, native: 백제(白帝)
 msgid "Baekje"
-msgstr ""
+msgstr "Baekje"
 
 #. Pronounce entry for Korean name for HIP  57646
 #. Korean name for HIP  57646, native: 흑제(黑帝)
 msgid "Heukje"
-msgstr ""
+msgstr "Heukje"
 
 #. Pronounce entry for Korean name for HIP  57779
 #. Korean name for HIP  57779, native: 적제(赤帝)
 msgid "Jeokje"
-msgstr ""
+msgstr "Jeokje"
 
 #. Pronounce entry for Korean name for HIP  58159
 #. Korean name for HIP  58159, native: 창제(蒼帝)
 msgid "Changje"
-msgstr ""
+msgstr "Changje"
 
 #. Korean name for HIP  53954, native: 처사(處士)
 msgid "Recluse Scholar"
-msgstr ""
+msgstr "Tillbakadragen lärd"
 
 #. Pronounce entry for Korean name for HIP  53954
 #. Korean name for HIP  53954, native: 처사(處士)
 msgid "Cheosa"
-msgstr ""
+msgstr "Cheosa"
 
 #. Korean name for HIP  53417, native: 의사(議士)
 msgid "Advisor"
-msgstr ""
+msgstr "Rådgivare"
 
 #. Pronounce entry for Korean name for HIP  53417
 #. Korean name for HIP  53417, native: 의사(議士)
 msgid "Uisa"
-msgstr ""
+msgstr "Uisa"
 
 #. Korean name for HIP  52098, native: 박사(博士)
 #. Korean name for HIP  36962, native: 박사(博士)
 msgid "Doctor (scholar)"
-msgstr ""
+msgstr "Doktor (lärd)"
 
 #. Pronounce entry for Korean name for HIP  52098
 #. Korean name for HIP  52098, native: 박사(博士)
 #. Pronounce entry for Korean name for HIP  36962
 #. Korean name for HIP  36962, native: 박사(博士)
 msgid "Baksa"
-msgstr ""
+msgstr "Baksa"
 
 #. Korean name for HIP  51233, native: 대부(大夫)
 msgid "Grand Master"
-msgstr ""
+msgstr "Stormästare"
 
 #. Pronounce entry for Korean name for HIP  51233
 #. Korean name for HIP  51233, native: 대부(大夫)
 msgid "Daebu"
-msgstr ""
+msgstr "Daebu"
 
 #. Pronounce entry for Korean name for HIP  65474
 #. Korean name for HIP  65474, native: 좌각(左角)
 msgid "Jwagak"
-msgstr ""
+msgstr "Jwagak"
 
 #. Pronounce entry for Korean name for HIP  82514
 #. Korean name for HIP  82514, native: 부인(夫人)
@@ -71050,7 +71240,7 @@ msgstr ""
 #. Pronounce entry for Korean name for HIP  49583
 #. Korean name for HIP  49583, native: 부인(夫人)
 msgid "Bu-in"
-msgstr ""
+msgstr "Bu-in"
 
 #. Pronounce entry for Korean name for HIP  86228
 #. Korean name for HIP  86228, native: 빈(嬪)
@@ -71064,58 +71254,58 @@ msgstr "Bin"
 #. Korean name for HIP  85927, native: 첩 (妾)
 #. Korean name for HIP  85696, native: 첩 (妾)
 msgid "Concubine"
-msgstr ""
+msgstr "Konkubin"
 
 #. Pronounce entry for Korean name for HIP  85927
 #. Korean name for HIP  85927, native: 첩 (妾)
 #. Pronounce entry for Korean name for HIP  85696
 #. Korean name for HIP  85696, native: 첩 (妾)
 msgid "Cheop"
-msgstr ""
+msgstr "Cheop"
 
 #. Pronounce entry for Korean name for HIP  97278
 #. Korean name for HIP  97278, native: 우장군(右將軍)
 #. Pronounce entry for Korean name for HIP  25336
 #. Korean name for HIP  25336, native: 우장군(右將軍)
 msgid "Ujanggun"
-msgstr ""
+msgstr "Ujanggun"
 
 #. Korean name for HIP  97649, native: 대장군(大將軍)
 #. Korean name for HIP   5447, native: 대장(大將)
 #. Korean name for HIP   9640, native: 대장(大將)
 msgid "Grand General"
-msgstr ""
+msgstr "Storgeneral"
 
 #. Pronounce entry for Korean name for HIP  97649
 #. Korean name for HIP  97649, native: 대장군(大將軍)
 msgid "Daejanggun"
-msgstr ""
+msgstr "Daejanggun"
 
 #. Pronounce entry for Korean name for HIP  98036
 #. Korean name for HIP  98036, native: 좌장군(左將軍)
 #. Pronounce entry for Korean name for HIP  27989
 #. Korean name for HIP  27989, native: 좌장군(左將軍)
 msgid "Jwajanggun"
-msgstr ""
+msgstr "Jwajanggun"
 
 #. Pronounce entry for Korean name for HIP    746
 #. Korean name for HIP    746, native: 왕랑(王良)
 msgid "Wangnang"
-msgstr ""
+msgstr "Wangnang"
 
 #. Korean name for HIP   2920, native: 천사(天駟)
 #. Korean name for HIP   3179, native: 천사(天駟)
 #. Korean name for HIP   3821, native: 천사(天駟)
 #. Korean name for HIP   4427, native: 천사(天駟)
 msgid "Heavenly Quadriga"
-msgstr ""
+msgstr "Himmelskt fyrspann"
 
 #. Pronounce entry for Korean name for HIP   5447
 #. Korean name for HIP   5447, native: 대장(大將)
 #. Pronounce entry for Korean name for HIP   9640
 #. Korean name for HIP   9640, native: 대장(大將)
 msgid "Daejang"
-msgstr ""
+msgstr "Daejang"
 
 #. Korean name for HIP  23015, native: 경(卿)
 msgid "Minister"
@@ -71129,13 +71319,13 @@ msgstr "Gyeong"
 #. Pronounce entry for Korean name for HIP  28360
 #. Korean name for HIP  28360, native: 천옥(天獄)
 msgid "Cheon-ok"
-msgstr ""
+msgstr "Cheon-ok"
 
 #. Korean name for HIP  25930, native: 삼장군(三將軍)
 #. Korean name for HIP  26311, native: 삼장군(三將軍)
 #. Korean name for HIP  26727, native: 삼장군(三將軍)
 msgid "Three Generals"
-msgstr ""
+msgstr "Tre generaler"
 
 #. Pronounce entry for Korean name for HIP  25930
 #. Korean name for HIP  25930, native: 삼장군(三將軍)
@@ -71144,108 +71334,108 @@ msgstr ""
 #. Pronounce entry for Korean name for HIP  26727
 #. Korean name for HIP  26727, native: 삼장군(三將軍)
 msgid "Samjanggun"
-msgstr ""
+msgstr "Samjanggun"
 
 #. Korean name for HIP  27366, native: 후장군(後將軍)
 msgid "Rear General"
-msgstr ""
+msgstr "Eftertruppens general"
 
 #. Pronounce entry for Korean name for HIP  27366
 #. Korean name for HIP  27366, native: 후장군(後將軍)
 msgid "Hujanggun"
-msgstr ""
+msgstr "Hujanggun"
 
 #. Korean name for HIP  24436, native: 편장군(偏將軍)
 msgid "Deputy General"
-msgstr ""
+msgstr "Ställföreträdande general"
 
 #. Pronounce entry for Korean name for HIP  24436
 #. Korean name for HIP  24436, native: 편장군(偏將軍)
 msgid "Pyeonjanggun"
-msgstr ""
+msgstr "Pyeonjanggun"
 
 #. Pronounce entry for Korean name for HIP  33018
 #. Korean name for HIP  33018, native: 제사(帝師)
 msgid "Jesa"
-msgstr ""
+msgstr "Jesa"
 
 #. Korean name for HIP  34693, native: 제우(帝友)
 msgid "Emperor Friend"
-msgstr ""
+msgstr "Kejsarens vän"
 
 #. Pronounce entry for Korean name for HIP  34693
 #. Korean name for HIP  34693, native: 제우(帝友)
 msgid "Je-u"
-msgstr ""
+msgstr "Je-u"
 
 #. Korean name for HIP  36046, native: 삼공(三公)
 msgid "Three Excellencies"
-msgstr ""
+msgstr "Tre excellenser"
 
 #. Pronounce entry for Korean name for HIP  37740
 #. Korean name for HIP  37740, native: 태사(太史)
 msgid "Taesa"
-msgstr ""
+msgstr "Taesa"
 
 #. Pronounce entry for Korean name for HIP  49669
 #. Korean name for HIP  49669, native: 여주(女主)
 msgid "Yeoju"
-msgstr ""
+msgstr "Yeoju"
 
 #. Pronounce entry for Korean name for HIP  47508
 #. Korean name for HIP  47508, native: 태민(太民)
 msgid "Taemin"
-msgstr ""
+msgstr "Taemin"
 
 #. Pronounce entry for Korean name for HIP  51624
 #. Korean name for HIP  51624, native: 소민(少民)
 msgid "Somin"
-msgstr ""
+msgstr "Somin"
 
 #. Pronounce entry for Korean name for HIP  49637
 #. Korean name for HIP  49637, native: 여어(女御)
 msgid "Yeoeo"
-msgstr ""
+msgstr "Yeoeo"
 
 #. Pronounce entry for Korean name for HIP  50583
 #. Korean name for HIP  50583, native: 왕비(王妃)
 msgid "Wangbi"
-msgstr ""
+msgstr "Wangbi"
 
 #. Pronounce entry for Korean name for NAME Sun
 #. Korean name for NAME Sun, native: 태양(太陽)
 msgid "Taeyang"
-msgstr ""
+msgstr "Taeyang"
 
 #. Pronounce entry for Korean name for NAME Moon
 #. Korean name for NAME Moon, native: 달(月)
 msgid "Dal"
-msgstr ""
+msgstr "Dal"
 
 #. Pronounce entry for Korean name for NAME Mercury
 #. Korean name for NAME Mercury, native: 수성(水星)
 msgid "Suseong"
-msgstr ""
+msgstr "Suseong"
 
 #. Pronounce entry for Korean name for NAME Venus
 #. Korean name for NAME Venus, native: 금성(金星)
 msgid "Geumseong"
-msgstr ""
+msgstr "Geumseong"
 
 #. Pronounce entry for Korean name for NAME Mars
 #. Korean name for NAME Mars, native: 화성(火星)
 msgid "Hwaseong"
-msgstr ""
+msgstr "Hwaseong"
 
 #. Pronounce entry for Korean name for NAME Jupiter
 #. Korean name for NAME Jupiter, native: 목성(木星)
 msgid "Mokseong"
-msgstr ""
+msgstr "Mokseong"
 
 #. Pronounce entry for Korean name for NAME Saturn
 #. Korean name for NAME Saturn, native: 토성(土星)
 msgid "Toseong"
-msgstr ""
+msgstr "Toseong"
 
 #. Lokono constellation, native: Hithikoya
 msgid "Spirit of the black curassow"
@@ -71290,6 +71480,10 @@ msgstr "Gröna havssköldpaddans ande"
 #. Lokono constellation, native: Ifakoya
 msgid "Spirit of the Muscovy duck"
 msgstr "Myskandens ande"
+
+#. Lokono constellation, native: Alêti
+msgid "Torch"
+msgstr "Fackla"
 
 #. Lokono name for HIP 32349
 msgid "Mali"
@@ -71640,6 +71834,7 @@ msgid "Hole-backed Caiman"
 msgstr "Kajman"
 
 #. Maya constellation, native: Aak
+#. Potawatomi constellation, native: Mshiké
 msgid "Turtle"
 msgstr "Sköldpadda"
 
@@ -74514,6 +74709,7 @@ msgstr "Kurud II"
 
 #. Modern name for HIP 30089, native: Red Rectangle
 #. Modern (Chinese) name for HIP 30089
+#. Modern (IAU) name for HIP 30089, native: Red Rectangle
 #. Modern (Sternenkarten) name for HIP 30089, native: Red Rectangle
 #. Romanian name for HIP 30089
 msgid "Red Rectangle"
@@ -75430,6 +75626,7 @@ msgid "Rigilawwa"
 msgstr "Rigilawwa"
 
 #. Modern name for HIP 72105, native: Pulcherrima
+#. Modern (IAU) name for HIP 72105 B, native: Pulcherrima
 #. Modern (Sternenkarten) name for HIP 72105, native: Pulcherrima
 msgid "Pulcherrima"
 msgstr "Pulcherrima"
@@ -75507,6 +75704,7 @@ msgid "Zuben Elschemali"
 msgstr "Zuben Elschemali"
 
 #. Modern name for HIP 74793, native: Pherkad Minor
+#. Modern (IAU) name for HIP 74793, native: Pherkad Minor
 #. Modern (Sternenkarten) name for HIP 74793, native: Pherkad Minor
 msgid "Pherkad Minor"
 msgstr "Pherkad Minor"
@@ -77282,6 +77480,34 @@ msgstr "Södra triangeln"
 msgid "Vela"
 msgstr "Seglet"
 
+#. Abbreviation of asterism in Modern (Chinese) sky culture, name: Official
+#. for the Royal Clan
+msgctxt "abbreviation"
+msgid "092"
+msgstr "092"
+
+#. Abbreviation of asterism in Modern (Chinese) sky culture, name: Official in
+#. Charge of the Forest
+msgctxt "abbreviation"
+msgid "150"
+msgstr "150"
+
+#. Abbreviation of asterism in Modern (Chinese) sky culture, name: Left Flag
+msgctxt "abbreviation"
+msgid "166"
+msgstr "166"
+
+#. Abbreviation of asterism in Modern (Chinese) sky culture, name: Left
+#. Conductor
+msgctxt "abbreviation"
+msgid "170"
+msgstr "170"
+
+#. Abbreviation of asterism in Modern (Chinese) sky culture, name: Seat Flags
+msgctxt "abbreviation"
+msgid "264"
+msgstr "264"
+
 #. Abbreviation of asterism in Modern (Chinese) sky culture
 msgctxt "abbreviation"
 msgid "RHC"
@@ -77418,6 +77644,51 @@ msgstr "Vattenormen"
 msgctxt "IAU constellation name"
 msgid "Male Water Snake"
 msgstr "Lilla vattenormen"
+
+#. Modern (IAU) name for Gaia DR3 1563586799775391104, native: Stella
+#. Ludoviciana
+msgid "Stella Ludoviciana"
+msgstr "Stella Ludoviciana"
+
+#. Modern (IAU) name for Gaia DR3 5877138831615057792, native: Sapaki
+msgid "Sapaki"
+msgstr "Sapaki"
+
+#. Modern (IAU) name for Gaia DR3 2162889493831375488, native: Bajamar Star
+msgid "Bajamar Star"
+msgstr "Bajamar Star"
+
+#. Modern (IAU) name for Gaia DR3 3449518037644343040, native: Holoea
+msgid "Holoea"
+msgstr "Holoea"
+
+#. Modern (IAU) name for Gaia DR3 195266088206848768, native: Paloma
+msgid "Paloma"
+msgstr "Paloma"
+
+#. Modern (IAU) name for Gaia DR3 1999550886837136640, native: Kronos
+msgid "Kronos"
+msgstr "Kronos"
+
+#. Modern (IAU) name for Gaia DR3 216708248573262208, native: Dust-Ball
+msgid "Dust-Ball"
+msgstr "Dust-Ball"
+
+#. Modern (IAU) name for Gaia DR3 6049103961995537664, native: Flying Saucer
+msgid "Flying Saucer"
+msgstr "Flying Saucer"
+
+#. Modern (IAU) name for Gaia DR3 1820974088126464384, native: Necklace
+msgid "Necklace"
+msgstr "Necklace"
+
+#. Modern (IAU) name for Gaia DR3 6089564718596906880, native: Southern Crab
+msgid "Southern Crab"
+msgstr "Southern Crab"
+
+#. Modern (IAU) name for HIP 80582, native: Yaqana
+msgid "Yaqana"
+msgstr "Yaqana"
 
 #. Modern (IAU) name for HIP 2599, native: Cexing
 msgid "Cexing"
@@ -77642,6 +77913,186 @@ msgstr "Samaya"
 #. Modern (IAU) name for HIP 60644, native: Tupã
 msgid "Tupa"
 msgstr "Tupa"
+
+#. Modern (IAU) name for HIP 102626, native: Speedy Mic
+msgid "Speedy Mic"
+msgstr "Speedy Mic"
+
+#. Modern (IAU) name for HIP 84380, native: Nüchuang
+msgid "Nuchuang"
+msgstr "Nuchuang"
+
+#. Modern (IAU) name for HIP 79992, native: Asuusiha
+msgid "Asuusiha"
+msgstr "Asuusiha"
+
+#. Modern (IAU) name for HIP 83207, native: Khepdenreret
+msgid "Khepdenreret"
+msgstr "Khepdenreret"
+
+#. Modern (IAU) name for HIP 78493, native: Aurwandilsta
+msgid "Aurwandilsta"
+msgstr "Aurwandilsta"
+
+#. Modern (IAU) name for HIP 76952, native: Baltesha
+msgid "Baltesha"
+msgstr "Baltesha"
+
+#. Modern (IAU) name for HIP 77512, native: Matrichakra
+msgid "Matrichakra"
+msgstr "Matrichakra"
+
+#. Modern (IAU) name for HIP 76127, native: Guansuo
+msgid "Guansuo"
+msgstr "Guansuo"
+
+#. Modern (IAU) name for HIP 18724, native: Bibing
+msgid "Bibing"
+msgstr "Bibing"
+
+#. Modern (IAU) name for HIP 22565, native: Lembu
+msgid "Lembu"
+msgstr "Lembu"
+
+#. Modern (IAU) name for HIP 20877, native: Shakata
+msgid "Shakata"
+msgstr "Shakata"
+
+#. Modern (IAU) name for HIP 72220, native: Maenalus
+msgid "Maenalus"
+msgstr "Maenalus"
+
+#. Modern (IAU) name for HIP 71995, native: Alrumh
+msgid "Alrumh"
+msgstr "Alrumh"
+
+#. Modern (IAU) name for HIP 71284, native: Genghe
+msgid "Genghe"
+msgstr "Genghe"
+
+#. Modern (IAU) name for HIP 71053, native: Kalasungsang
+msgid "Kalasungsang"
+msgstr "Kalasungsang"
+
+#. Modern (IAU) name for HIP 74666, native: Qigong
+msgid "Qigong"
+msgstr "Qigong"
+
+#. Modern (IAU) name for HIP 67275, native: Tepiamenit
+msgid "Tepiamenit"
+msgstr "Tepiamenit"
+
+#. Modern (IAU) name for HIP 27288, native: Darlugal
+msgid "Darlugal"
+msgstr "Darlugal"
+
+#. Modern (IAU) name for HIP 21881, native: Gaja
+msgid "Gaja"
+msgstr "Gaja"
+
+#. Modern (IAU) name for HIP 33694, native: Tonglingxing
+msgid "Tonglingxing"
+msgstr "Tonglingxing"
+
+#. Modern (IAU) name for HIP 29997, native: Shangwei
+msgid "Shangwei"
+msgstr "Shangwei"
+
+#. Modern (IAU) name for HIP 14862, native: Shangcheng
+msgid "Shangcheng"
+msgstr "Shangcheng"
+
+#. Modern (IAU) name for HIP 17959, native: Shaowei
+msgid "Shaowei"
+msgstr "Shaowei"
+
+#. Modern (IAU) name for HIP 31940, native: Kamelos
+msgid "Kamelos"
+msgstr "Kamelos"
+
+#. Modern (IAU) name for HIP 17884, native: Custos
+msgid "Custos"
+msgstr "Custos"
+
+#. Modern (IAU) name for HIP 11569, native: Huagai
+msgid "Huagai"
+msgstr "Huagai"
+
+#. Modern (IAU) name for HIP 9763, native: Rangifer
+msgid "Rangifer"
+msgstr "Rangifer"
+
+#. Modern (IAU) name for HIP 5372, native: Tarandus
+msgid "Tarandus"
+msgstr "Tarandus"
+
+#. Modern (IAU) name for HIP 17358, native: Sarvvis
+msgid "Sarvvis"
+msgstr "Sarvvis"
+
+#. Modern (IAU) name for HIP 18532, native: Áldu
+msgid "Aldu"
+msgstr "Aldu"
+
+#. Modern (IAU) name for HIP 36948, native: Moth
+msgid "Moth"
+msgstr "Moth"
+
+#. Modern (IAU) name for HIP 86414, native: Tianbang
+msgid "Tianbang"
+msgstr "Tianbang"
+
+#. Modern (IAU) name for HIP 91117, native: Tianbian
+msgid "Tianbian"
+msgstr "Tianbian"
+
+#. Modern (IAU) name for HIP 98337, native: Telum
+msgid "Telum"
+msgstr "Telum"
+
+#. Modern (IAU) name for HIP 96837, native: Shakh
+msgid "Shakh"
+msgstr "Shakh"
+
+#. Modern (IAU) name for HIP 97365, native: Zuoqi
+msgid "Zuoqi"
+msgstr "Zuoqi"
+
+#. Modern (IAU) name for HIP 95501, native: Guqi
+msgid "Guqi"
+msgstr "Guqi"
+
+#. Modern (IAU) name for HIP 93244, native: Arin-Majleb
+msgid "Arin-Majleb"
+msgstr "Arin-Majleb"
+
+#. Modern (IAU) name for HIP 96665, native: Hru
+msgid "Hru"
+msgstr "Hru"
+
+#. Modern (IAU) name for HIP 91919, native: Pongponga
+msgid "Pongponga"
+msgstr "Pongponga"
+
+#. Modern (IAU) name for HIP 92862, native: Niandao
+msgid "Niandao"
+msgstr "Niandao"
+
+#. Modern (IAU) name for HIP 91971, native: Kautoki
+msgid "Kautoki"
+msgstr "Kautoki"
+
+#. Modern (IAU) name for HIP 91973, native: Urquchillay
+msgid "Urquchillay"
+msgstr "Urquchillay"
+
+#. Modern (IAU) name for HIP 92791, native: Jiantai
+msgid "Jiantai"
+msgstr "Jiantai"
+
+#. Modern (IAU) name for HIP 94713, native: Ninnisig
+msgid "Ninnisig"
+msgstr "Ninnisig"
 
 #. Modern (IAU) name for B142, native: The Triple Cave Nebula
 #. Modern (IAU) name for B143, native: The Triple Cave Nebula
@@ -78122,11 +78573,15 @@ msgstr "Bāng Zi"
 
 #. Modern (Journey to the West) constellation, native: 红鳞大蟒, pronounce: Hóng
 #. Lín Dà Mǎng, byname: Hydra
+#. Added context for byname value to avoid conflict with minor planet name
+msgctxt "constellation name"
 msgid "Giant Red-Scaled Python"
-msgstr "Stor nätpyton"
+msgstr "Jättelik rödfjällig pytonorm"
 
 #. Pronounce entry for Modern (Journey to the West) constellation, native:
 #. 红鳞大蟒, English: Giant Red-Scaled Python, byname: Hydra
+#. Added context for byname value to avoid conflict with minor planet name
+msgctxt "constellation name"
 msgid "Hóng Lín Dà Mǎng"
 msgstr "Hóng Lín Dà Mǎng"
 
@@ -81076,7 +81531,7 @@ msgstr "Vergelmer"
 #. Well
 msgctxt "abbreviation"
 msgid "Well"
-msgstr "Verg"
+msgstr "Brunn"
 
 #. Norse (Edda) constellation, native: Hræsvelgr
 msgid "Eagle Giant"
@@ -81144,6 +81599,162 @@ msgstr "Antonio Quinatoa-kors"
 msgctxt "abbreviation"
 msgid "AS3"
 msgstr "AS3"
+
+#. Potawatomi constellation, native: Mshignébêk
+msgid "Big Snake"
+msgstr "Stora ormen"
+
+#. Abbreviation of constellation in Potawatomi sky culture, name: Big Snake
+msgctxt "abbreviation"
+msgid "Snake"
+msgstr "Orm"
+
+#. Potawatomi constellation, native: Nambezho
+msgid "Underwater panther"
+msgstr "Undervattenspanter"
+
+#. Abbreviation of constellation in Potawatomi sky culture, name: Underwater
+#. panther
+msgctxt "abbreviation"
+msgid "Panther"
+msgstr "Panter"
+
+#. Abbreviation of constellation in Potawatomi sky culture, name: Wolf
+msgctxt "abbreviation"
+msgid "Wolf"
+msgstr "Varg"
+
+#. Potawatomi constellation, native: Mëk
+msgid "Beaver"
+msgstr "Bäver"
+
+#. Abbreviation of constellation in Potawatomi sky culture, name: Beaver
+msgctxt "abbreviation"
+msgid "Beaver"
+msgstr "Bäver"
+
+#. Potawatomi constellation, native: Pondésé / Ktthe Sabé / Nenikboz
+msgid "Winter Maker / Bigfoot / Nanabozho"
+msgstr "Vinterskaparen / Bigfoot / Nanabozho"
+
+#. Abbreviation of constellation in Potawatomi sky culture, name: Winter Maker
+#. / Bigfoot / Nanabozho
+msgctxt "abbreviation"
+msgid "WinterMaker"
+msgstr "Vinterskaparen"
+
+#. Potawatomi constellation, native: Bzhêké
+msgid "Bison"
+msgstr "Bison"
+
+#. Abbreviation of constellation in Potawatomi sky culture, name: Bison
+msgctxt "abbreviation"
+msgid "Bison"
+msgstr "Bison"
+
+#. Potawatomi constellation, native: Mdodo Senik
+msgid "Sweat Lodge Stones"
+msgstr "Svetthyddans stenar"
+
+#. Abbreviation of constellation in Potawatomi sky culture, name: Sweat Lodge
+#. Stones
+msgctxt "abbreviation"
+msgid "Stones"
+msgstr "Stenar"
+
+#. Potawatomi constellation, native: Shkenigshêk égi-nsogmowat
+msgid "Three Brothers Floating in a Canoe"
+msgstr "Tre bröder som flyter i en kanot"
+
+#. Abbreviation of constellation in Potawatomi sky culture, name: Three
+#. Brothers Floating in a Canoe
+msgctxt "abbreviation"
+msgid "Canoe"
+msgstr "Kanot"
+
+#. Abbreviation of constellation in Potawatomi sky culture, name: Turtle
+msgctxt "abbreviation"
+msgid "Turtle"
+msgstr "Sköldpadda"
+
+#. Potawatomi constellation, native: Wthik
+msgid "Fisher"
+msgstr "Fiskmård"
+
+#. Abbreviation of constellation in Potawatomi sky culture, name: Fisher
+msgctxt "abbreviation"
+msgid "Fisher"
+msgstr "Fiskmård"
+
+#. Potawatomi constellation, native: Mang
+msgid "Loon"
+msgstr "Lom"
+
+#. Abbreviation of constellation in Potawatomi sky culture, name: Loon
+msgctxt "abbreviation"
+msgid "Loon"
+msgstr "Lom"
+
+#. Potawatomi constellation, native: Thethak / Wabzhi / Bgak
+msgid "Crane / Swan / Human skeleton-like creature with wings"
+msgstr "Trana / svan / människoskelettliknande varelse med vingar"
+
+#. Abbreviation of constellation in Potawatomi sky culture, name: Crane / Swan
+#. / Human skeleton-like creature with wings
+msgctxt "abbreviation"
+msgid "Crane"
+msgstr "Trana"
+
+#. Potawatomi constellation, native: Moz
+msgid "Moose"
+msgstr "Älg"
+
+#. Abbreviation of constellation in Potawatomi sky culture, name: Moose
+msgctxt "abbreviation"
+msgid "Moose"
+msgstr "Älg"
+
+#. Abbreviation of constellation in Potawatomi sky culture, name: Fish
+msgctxt "abbreviation"
+msgid "Fish"
+msgstr "Fisk"
+
+#. Potawatomi constellation, native: Mko Shtegwan
+msgid "Bear Head"
+msgstr "Björnhuvud"
+
+#. Abbreviation of constellation in Potawatomi sky culture, name: Bear Head
+msgctxt "abbreviation"
+msgid "Bear"
+msgstr "Björn"
+
+#. Potawatomi constellation, native: Wénondeshik
+msgid "One Who is Exhausted"
+msgstr "Den utmattade"
+
+#. Abbreviation of constellation in Potawatomi sky culture, name: One Who is
+#. Exhausted
+msgctxt "abbreviation"
+msgid "Exhausted"
+msgstr "Utmattad"
+
+#. Potawatomi constellation, native: Mdodoswen
+msgid "Sweat Lodge"
+msgstr "Svetthydda"
+
+#. Abbreviation of constellation in Potawatomi sky culture, name: Sweat Lodge
+msgctxt "abbreviation"
+msgid "SweatLodge"
+msgstr "Svetthydda"
+
+#. Potawatomi constellation, native: Nenikboz
+msgid "Nanabozho"
+msgstr "Nanabozho"
+
+#. Abbreviation of constellation in Potawatomi sky culture, name: Nanabozho
+msgctxt "abbreviation"
+msgid "Nanabozho"
+msgstr "Nanabozho"
 
 #. Romanian constellation, native: Carul Mare
 msgid "The Great Chariot"
@@ -81871,447 +82482,464 @@ msgstr "Människa"
 msgid "Polar star"
 msgstr "Polstjärna"
 
-#. Pronounce entry for Tibetan constellation, English: Libra
-msgid "Sangwa"
-msgstr "Sangwa"
+#. Pronounce entry for Tibetan constellation, native: ལུག, English: Aries
+msgid "lug"
+msgstr "lug"
 
-#. Pronounce entry for Tibetan constellation, English: Aries
-msgid "Luk"
-msgstr "Luk"
+#. Pronounce entry for Tibetan constellation, native: གླང, English: Taurus
+msgid "lang"
+msgstr "lang"
 
-#. Pronounce entry for Tibetan constellation, English: Cancer
-msgid "Karkata"
-msgstr "Karkata"
+#. Pronounce entry for Tibetan constellation, native: འཁྲིག, English: Gemini
+msgid "chig"
+msgstr "chig"
 
-#. Pronounce entry for Tibetan constellation, English: Capricornus
-msgid "Chusin"
-msgstr "Chusin"
+#. Pronounce entry for Tibetan constellation, native: ཀརྚ་ཀ, English: Cancer
+msgid "gar da ga"
+msgstr "gar da ga"
 
-#. Pronounce entry for Tibetan constellation, English: Gemini
-msgid "Trik"
-msgstr "Trik"
+#. Pronounce entry for Tibetan constellation, native: སེང་གེ, English: Leo
+msgid "sêng gê"
+msgstr "sêng gê"
 
-#. Pronounce entry for Tibetan constellation, English: Leo
-msgid "Senge"
-msgstr "Senge"
+#. Pronounce entry for Tibetan constellation, native: བུ་མོ, English: Virgo
+msgid "pu mo"
+msgstr "pu mo"
 
-#. Pronounce entry for Tibetan constellation, English: Pisces
-msgid "Nya"
-msgstr "Nya"
+#. Pronounce entry for Tibetan constellation, native: སྲང, English: Libra
+msgid "sang"
+msgstr "sang"
 
-#. Pronounce entry for Tibetan constellation, English: Sagittarius
-msgid "Zhu"
-msgstr "Zhu"
+#. Pronounce entry for Tibetan constellation, native: སྡིག་པ, English:
+#. Scorpius
+msgid "dig ba"
+msgstr "dig ba"
 
-#. Pronounce entry for Tibetan constellation, English: Scorpius
-msgid "Dikpa"
-msgstr "Dikpa"
+#. Pronounce entry for Tibetan constellation, native: གཞུ, English:
+#. Sagittarius
+msgid "xu"
+msgstr "xu"
 
-#. Pronounce entry for Tibetan constellation, English: Aquarius
-msgid "Bumpa"
-msgstr "Bumpa"
+#. Pronounce entry for Tibetan constellation, native: ཆུ་སྲིན, English:
+#. Capricornus
+msgid "qu sin"
+msgstr "qu sin"
 
-#. Pronounce entry for Tibetan constellation, English: Virgo
-msgid "Pumo"
-msgstr "Pumo"
+#. Pronounce entry for Tibetan constellation, native: བུམ་པ, English: Aquarius
+msgid "pum ba"
+msgstr "pum ba"
 
-#. Tibetan asterism, pronounce: Takar
+#. Pronounce entry for Tibetan constellation, native: ཉ, English: Pisces
+msgid "nya"
+msgstr "nya"
+
+#. Tibetan asterism, native: ཐ་སྐར།, pronounce: ta gar
 #. Tibetan Lunar Mansion Zero
 msgid "LM00"
 msgstr "LM00"
 
-#. Pronounce entry for Tibetan asterism, English: LM00
+#. Pronounce entry for Tibetan asterism, native: ཐ་སྐར།, English: LM00
 #. Tibetan Lunar Mansion Zero
-msgid "Takar"
-msgstr "Takar"
+msgid "ta gar"
+msgstr "ta gar"
 
 #. Abbreviation of asterism in Tibetan sky culture, name: LM00
 msgctxt "abbreviation"
 msgid "L00"
 msgstr "L00"
 
-#. Tibetan asterism, pronounce: Dranye
+#. Tibetan asterism, native: བྲ་ཉེ།, pronounce: cha nyê
 #. Tibetan Lunar Mansion 1
 msgid "LM01"
 msgstr "LM01"
 
-#. Pronounce entry for Tibetan asterism, English: LM01
+#. Pronounce entry for Tibetan asterism, native: བྲ་ཉེ།, English: LM01
 #. Tibetan Lunar Mansion 1
-msgid "Dranye"
-msgstr "Dranye"
+msgid "cha nyê"
+msgstr "cha nyê"
 
 #. Abbreviation of asterism in Tibetan sky culture, name: LM01
 msgctxt "abbreviation"
 msgid "L01"
 msgstr "L01"
 
-#. Tibetan asterism, pronounce: Mindruk
+#. Tibetan asterism, native: སྨིན་དྲུག, pronounce: min zhug
 #. Tibetan Lunar Mansion 2
 msgid "LM02"
 msgstr "LM02"
 
-#. Pronounce entry for Tibetan asterism, English: LM02
+#. Pronounce entry for Tibetan asterism, native: སྨིན་དྲུག, English: LM02
 #. Tibetan Lunar Mansion 2
-msgid "Mindruk"
-msgstr "Mindruk"
+msgid "min zhug"
+msgstr "min zhug"
 
 #. Abbreviation of asterism in Tibetan sky culture, name: LM02
 msgctxt "abbreviation"
 msgid "L02"
 msgstr "L02"
 
-#. Tibetan asterism, pronounce: Narma
+#. Tibetan asterism, native: སྣར་མ།, pronounce: nar ma
 #. Tibetan Lunar Mansion 3
 msgid "LM03"
 msgstr "LM03"
 
-#. Pronounce entry for Tibetan asterism, English: LM03
+#. Pronounce entry for Tibetan asterism, native: སྣར་མ།, English: LM03
 #. Tibetan Lunar Mansion 3
-msgid "Narma"
-msgstr "Narma"
+msgid "nar ma"
+msgstr "nar ma"
 
 #. Abbreviation of asterism in Tibetan sky culture, name: LM03
 msgctxt "abbreviation"
 msgid "L03"
 msgstr "L03"
 
-#. Tibetan asterism, pronounce: Go
+#. Tibetan asterism, native: མགོ, pronounce: go
 #. Tibetan Lunar Mansion 4
 msgid "LM04"
 msgstr "LM04"
+
+#. Pronounce entry for Tibetan asterism, native: མགོ, English: LM04
+#. Tibetan Lunar Mansion 4
+msgid "go"
+msgstr "go"
 
 #. Abbreviation of asterism in Tibetan sky culture, name: LM04
 msgctxt "abbreviation"
 msgid "L04"
 msgstr "L04"
 
-#. Tibetan asterism, pronounce: Lak
+#. Tibetan asterism, native: ལག, pronounce: lag
 #. Tibetan Lunar Mansion 5
 msgid "LM05"
 msgstr "LM05"
 
-#. Pronounce entry for Tibetan asterism, English: LM05
+#. Pronounce entry for Tibetan asterism, native: ལག, English: LM05
 #. Tibetan Lunar Mansion 5
-msgid "Lak"
-msgstr "Lak"
+msgid "lag"
+msgstr "lag"
 
 #. Abbreviation of asterism in Tibetan sky culture, name: LM05
 msgctxt "abbreviation"
 msgid "L05"
 msgstr "L05"
 
-#. Tibetan asterism, pronounce: Nabso
+#. Tibetan asterism, native: ནབས་སོ།, pronounce: nab so
 #. Tibetan Lunar Mansion 6
 msgid "LM06"
 msgstr "LM06"
 
-#. Pronounce entry for Tibetan asterism, English: LM06
+#. Pronounce entry for Tibetan asterism, native: ནབས་སོ།, English: LM06
 #. Tibetan Lunar Mansion 6
-msgid "Nabso"
-msgstr "Nabso"
+msgid "nab so"
+msgstr "nab so"
 
 #. Abbreviation of asterism in Tibetan sky culture, name: LM06
 msgctxt "abbreviation"
 msgid "L06"
 msgstr "L06"
 
-#. Tibetan asterism, pronounce: Gyal
+#. Tibetan asterism, native: རྒྱལ།, pronounce: gyai
 #. Tibetan Lunar Mansion 7
 msgid "LM07"
 msgstr "LM07"
 
-#. Pronounce entry for Tibetan asterism, English: LM07
+#. Pronounce entry for Tibetan asterism, native: རྒྱལ།, English: LM07
 #. Tibetan Lunar Mansion 7
-msgid "Gyal"
-msgstr "Gyal"
+msgid "gyai"
+msgstr "gyai"
 
 #. Abbreviation of asterism in Tibetan sky culture, name: LM07
 msgctxt "abbreviation"
 msgid "L07"
 msgstr "L07"
 
-#. Tibetan asterism, pronounce: Kak
+#. Tibetan asterism, native: སྐག, pronounce: gag
 #. Tibetan Lunar Mansion 8
 msgid "LM08"
 msgstr "LM08"
 
-#. Pronounce entry for Tibetan asterism, English: LM08
+#. Pronounce entry for Tibetan asterism, native: སྐག, English: LM08
 #. Tibetan Lunar Mansion 8
-msgid "Kak"
-msgstr "Kak"
+msgid "gag"
+msgstr "gag"
 
 #. Abbreviation of asterism in Tibetan sky culture, name: LM08
 msgctxt "abbreviation"
 msgid "L08"
 msgstr "L08"
 
-#. Tibetan asterism, pronounce: Chu
+#. Tibetan asterism, native: མཆུ།, pronounce: qu
 #. Tibetan Lunar Mansion 9
 msgid "LM09"
 msgstr "LM09"
+
+#. Pronounce entry for Tibetan asterism, native: མཆུ།, English: LM09
+#. Tibetan Lunar Mansion 9
+msgid "qu"
+msgstr "qu"
 
 #. Abbreviation of asterism in Tibetan sky culture, name: LM09
 msgctxt "abbreviation"
 msgid "L09"
 msgstr "L09"
 
-#. Tibetan asterism, pronounce: Dre
+#. Tibetan asterism, native: གྲེ, pronounce: chê
 #. Tibetan Lunar Mansion 10
 msgid "LM10"
 msgstr "LM10"
 
-#. Pronounce entry for Tibetan asterism, English: LM10
+#. Pronounce entry for Tibetan asterism, native: གྲེ, English: LM10
 #. Tibetan Lunar Mansion 10
-msgid "Dre"
-msgstr "Dre"
+msgid "chê"
+msgstr "chê"
 
 #. Abbreviation of asterism in Tibetan sky culture, name: LM10
 msgctxt "abbreviation"
 msgid "L10"
 msgstr "L10"
 
-#. Tibetan asterism, pronounce: Wo
+#. Tibetan asterism, native: དབོ།, pronounce: wo
 #. Tibetan Lunar Mansion 11
 msgid "LM11"
 msgstr "LM11"
 
-#. Pronounce entry for Tibetan asterism, English: LM11
+#. Pronounce entry for Tibetan asterism, native: དབོ།, English: LM11
 #. Tibetan Lunar Mansion 11
-msgid "Wo"
-msgstr "Wo"
+msgid "wo"
+msgstr "wo"
 
 #. Abbreviation of asterism in Tibetan sky culture, name: LM11
 msgctxt "abbreviation"
 msgid "L11"
 msgstr "L11"
 
-#. Tibetan asterism, pronounce: Mezhi
+#. Tibetan asterism, native: མེ་བཞི།, pronounce: mê xi
 #. Tibetan Lunar Mansion 12
 msgid "LM12"
 msgstr "LM12"
 
-#. Pronounce entry for Tibetan asterism, English: LM12
+#. Pronounce entry for Tibetan asterism, native: མེ་བཞི།, English: LM12
 #. Tibetan Lunar Mansion 12
-msgid "Mezhi"
-msgstr "Mezhi"
+msgid "mê xi"
+msgstr "mê xi"
 
 #. Abbreviation of asterism in Tibetan sky culture, name: LM12
 msgctxt "abbreviation"
 msgid "L12"
 msgstr "L12"
 
-#. Tibetan asterism, pronounce: Nakpa
+#. Tibetan asterism, native: ནག་པ།, pronounce: nag pa
 #. Tibetan Lunar Mansion 13
 msgid "LM13"
 msgstr "LM13"
 
-#. Pronounce entry for Tibetan asterism, English: LM13
+#. Pronounce entry for Tibetan asterism, native: ནག་པ།, English: LM13
 #. Tibetan Lunar Mansion 13
-msgid "Nakpa"
-msgstr "Nakpa"
+msgid "nag pa"
+msgstr "nag pa"
 
 #. Abbreviation of asterism in Tibetan sky culture, name: LM13
 msgctxt "abbreviation"
 msgid "L13"
 msgstr "L13"
 
-#. Tibetan asterism, pronounce: Sari
+#. Tibetan asterism, native: ས་རི།, pronounce: sa ri
 #. Tibetan Lunar Mansion 14
 msgid "LM14"
 msgstr "LM14"
 
-#. Pronounce entry for Tibetan asterism, English: LM14
+#. Pronounce entry for Tibetan asterism, native: ས་རི།, English: LM14
 #. Tibetan Lunar Mansion 14
-msgid "Sari"
-msgstr "Sari"
+msgid "sa ri"
+msgstr "sa ri"
 
 #. Abbreviation of asterism in Tibetan sky culture, name: LM14
 msgctxt "abbreviation"
 msgid "L14"
 msgstr "L14"
 
-#. Tibetan asterism, pronounce: Saga
+#. Tibetan asterism, native: ས་ག, pronounce: sa ga
 #. Tibetan Lunar Mansion 15
 msgid "LM15"
 msgstr "LM15"
 
-#. Pronounce entry for Tibetan asterism, English: LM15
+#. Pronounce entry for Tibetan asterism, native: ས་ག, English: LM15
 #. Tibetan Lunar Mansion 15
-msgid "Saga"
-msgstr "Saga"
+msgid "sa ga"
+msgstr "sa ga"
 
 #. Abbreviation of asterism in Tibetan sky culture, name: LM15
 msgctxt "abbreviation"
 msgid "L15"
 msgstr "L15"
 
-#. Tibetan asterism, pronounce: Lhatsam
+#. Tibetan asterism, native: ལྷ་མཚམས།, pronounce: lha cam
 #. Tibetan Lunar Mansion 16
 msgid "LM16"
 msgstr "LM16"
 
-#. Pronounce entry for Tibetan asterism, English: LM16
+#. Pronounce entry for Tibetan asterism, native: ལྷ་མཚམས།, English: LM16
 #. Tibetan Lunar Mansion 16
-msgid "Lhatsam"
-msgstr "Lhatsam"
+msgid "lha cam"
+msgstr "lha cam"
 
 #. Abbreviation of asterism in Tibetan sky culture, name: LM16
 msgctxt "abbreviation"
 msgid "L16"
 msgstr "L16"
 
-#. Tibetan asterism, pronounce: Nrön
+#. Tibetan asterism, native: སྣྲོན།, pronounce: noin
 #. Tibetan Lunar Mansion 17
 msgid "LM17"
 msgstr "LM17"
 
-#. Pronounce entry for Tibetan asterism, English: LM17
+#. Pronounce entry for Tibetan asterism, native: སྣྲོན།, English: LM17
 #. Tibetan Lunar Mansion 17
-msgid "Nrön"
-msgstr "Nrön"
+msgid "noin"
+msgstr "noin"
 
 #. Abbreviation of asterism in Tibetan sky culture, name: LM17
 msgctxt "abbreviation"
 msgid "L17"
 msgstr "L17"
 
-#. Tibetan asterism, pronounce: Nup
+#. Tibetan asterism, native: སྣྲུབས།, pronounce: nub
 #. Tibetan Lunar Mansion 18
 msgid "LM18"
 msgstr "LM18"
 
-#. Pronounce entry for Tibetan asterism, English: LM18
+#. Pronounce entry for Tibetan asterism, native: སྣྲུབས།, English: LM18
 #. Tibetan Lunar Mansion 18
-msgid "Nup"
-msgstr "Nup"
+msgid "nub"
+msgstr "nub"
 
 #. Abbreviation of asterism in Tibetan sky culture, name: LM18
 msgctxt "abbreviation"
 msgid "L18"
 msgstr "L18"
 
-#. Tibetan asterism, pronounce: Chutö
+#. Tibetan asterism, native: ཆུ་སྟོད།, pronounce: qu doi
 #. Tibetan Lunar Mansion 19
 msgid "LM19"
 msgstr "LM19"
 
-#. Pronounce entry for Tibetan asterism, English: LM19
+#. Pronounce entry for Tibetan asterism, native: ཆུ་སྟོད།, English: LM19
 #. Tibetan Lunar Mansion 19
-msgid "Chutö"
-msgstr "Chutö"
+msgid "qu doi"
+msgstr "qu doi"
 
 #. Abbreviation of asterism in Tibetan sky culture, name: LM19
 msgctxt "abbreviation"
 msgid "L19"
 msgstr "L19"
 
-#. Tibetan asterism, pronounce: Chume
+#. Tibetan asterism, native: ཆུ་སྨད།, pronounce: qu mai
 #. Tibetan Lunar Mansion 20
 msgid "LM20"
 msgstr "LM20"
 
-#. Pronounce entry for Tibetan asterism, English: LM20
+#. Pronounce entry for Tibetan asterism, native: ཆུ་སྨད།, English: LM20
 #. Tibetan Lunar Mansion 20
-msgid "Chume"
-msgstr "Chume"
+msgid "qu mai"
+msgstr "qu mai"
 
 #. Abbreviation of asterism in Tibetan sky culture, name: LM20
 msgctxt "abbreviation"
 msgid "L20"
 msgstr "L20"
 
-#. Tibetan asterism, pronounce: Drozhin
+#. Tibetan asterism, native: གྲོ་བཞིན།, pronounce: cho xin
 #. Tibetan Lunar Mansion 21
 msgid "LM21"
 msgstr "LM21"
 
-#. Pronounce entry for Tibetan asterism, English: LM21
+#. Pronounce entry for Tibetan asterism, native: གྲོ་བཞིན།, English: LM21
 #. Tibetan Lunar Mansion 21
-msgid "Drozhin"
-msgstr "Drozhin"
+msgid "cho xin"
+msgstr "cho xin"
 
 #. Abbreviation of asterism in Tibetan sky culture, name: LM21
 msgctxt "abbreviation"
 msgid "L21"
 msgstr "L21"
 
-#. Tibetan asterism, pronounce: Möndre
+#. Tibetan asterism, native: མོན་གྲེ།, pronounce: moin zhê
 #. Tibetan Lunar Mansion 22
 msgid "LM22"
 msgstr "LM22"
 
-#. Pronounce entry for Tibetan asterism, English: LM22
+#. Pronounce entry for Tibetan asterism, native: མོན་གྲེ།, English: LM22
 #. Tibetan Lunar Mansion 22
-msgid "Möndre"
-msgstr "Möndre"
+msgid "moin zhê"
+msgstr "moin zhê"
 
 #. Abbreviation of asterism in Tibetan sky culture, name: LM22
 msgctxt "abbreviation"
 msgid "L22"
 msgstr "L22"
 
-#. Tibetan asterism, pronounce: (Möndru)
+#. Tibetan asterism, native: མོན་གྲུ།, pronounce: moin zhu
 #. Tibetan Lunar Mansion 23
 msgid "LM23"
 msgstr "LM23"
 
-#. Pronounce entry for Tibetan asterism, English: LM23
+#. Pronounce entry for Tibetan asterism, native: མོན་གྲུ།, English: LM23
 #. Tibetan Lunar Mansion 23
-msgid "(Möndru)"
-msgstr "(Möndru)"
+msgid "moin zhu"
+msgstr "moin zhu"
 
 #. Abbreviation of asterism in Tibetan sky culture, name: LM23
 msgctxt "abbreviation"
 msgid "L23"
 msgstr "L23"
 
-#. Tibetan asterism, pronounce: Trumtö
+#. Tibetan asterism, native: ཁྲུམས་སྟོད།, pronounce: chum doi
 #. Tibetan Lunar Mansion 24
 msgid "LM24"
 msgstr "LM24"
 
-#. Pronounce entry for Tibetan asterism, English: LM24
+#. Pronounce entry for Tibetan asterism, native: ཁྲུམས་སྟོད།, English: LM24
 #. Tibetan Lunar Mansion 24
-msgid "Trumtö"
-msgstr "Trumtö"
+msgid "chum doi"
+msgstr "chum doi"
 
 #. Abbreviation of asterism in Tibetan sky culture, name: LM24
 msgctxt "abbreviation"
 msgid "L24"
 msgstr "L24"
 
-#. Tibetan asterism, pronounce: Trume
+#. Tibetan asterism, native: ཁྲུམས་སྨད།, pronounce: chum mai
 #. Tibetan Lunar Mansion 25
 msgid "LM25"
 msgstr "LM25"
 
-#. Pronounce entry for Tibetan asterism, English: LM25
+#. Pronounce entry for Tibetan asterism, native: ཁྲུམས་སྨད།, English: LM25
 #. Tibetan Lunar Mansion 25
-msgid "Trume"
-msgstr "Trume"
+msgid "chum mai"
+msgstr "chum mai"
 
 #. Abbreviation of asterism in Tibetan sky culture, name: LM25
 msgctxt "abbreviation"
 msgid "L25"
 msgstr "L25"
 
-#. Tibetan asterism, pronounce: Namdru
+#. Tibetan asterism, native: ནམ་གྲུ།, pronounce: nam zhu
 #. Tibetan Lunar Mansion 26
 msgid "LM26"
 msgstr "LM26"
 
-#. Pronounce entry for Tibetan asterism, English: LM26
+#. Pronounce entry for Tibetan asterism, native: ནམ་གྲུ།, English: LM26
 #. Tibetan Lunar Mansion 26
-msgid "Namdru"
-msgstr "Namdru"
+msgid "nam zhu"
+msgstr "nam zhu"
 
 #. Abbreviation of asterism in Tibetan sky culture, name: LM26
 msgctxt "abbreviation"
 msgid "L26"
 msgstr "L26"
 
-#. Name of a zodiac sign or a lunar mansion in Tibetan sky culture, pronounce:
-#. Luk
+#. Name of a zodiac sign or a lunar mansion in Tibetan sky culture, native:
+#. ལུག, pronounce: lug
 #. Shaped after the Indian zodiac. Please enhance by Tibetan names and fix if
 #. needed!
 msgctxt "tibetan zodiac sign"
@@ -82319,15 +82947,15 @@ msgid "Ram"
 msgstr "Vädur"
 
 #. Pronounce entry for a zodiac sign or a lunar mansion in Tibetan sky
-#. culture, English: Ram
+#. culture, native: ལུག, English: Ram
 #. Shaped after the Indian zodiac. Please enhance by Tibetan names and fix if
 #. needed!
 msgctxt "tibetan zodiac sign"
-msgid "Luk"
-msgstr "Luk"
+msgid "lug"
+msgstr "lug"
 
-#. Name of a zodiac sign or a lunar mansion in Tibetan sky culture, pronounce:
-#. Lang
+#. Name of a zodiac sign or a lunar mansion in Tibetan sky culture, native:
+#. གླང, pronounce: lang
 #. Shaped after the Indian zodiac. Please enhance by Tibetan names and fix if
 #. needed!
 msgctxt "tibetan zodiac sign"
@@ -82335,15 +82963,15 @@ msgid "Bull"
 msgstr "Tjur"
 
 #. Pronounce entry for a zodiac sign or a lunar mansion in Tibetan sky
-#. culture, English: Bull
+#. culture, native: གླང, English: Bull
 #. Shaped after the Indian zodiac. Please enhance by Tibetan names and fix if
 #. needed!
 msgctxt "tibetan zodiac sign"
-msgid "Lang"
-msgstr "Lang"
+msgid "lang"
+msgstr "lang"
 
-#. Name of a zodiac sign or a lunar mansion in Tibetan sky culture, pronounce:
-#. Trik
+#. Name of a zodiac sign or a lunar mansion in Tibetan sky culture, native:
+#. འཁྲིག, pronounce: chig
 #. Shaped after the Indian zodiac. Please enhance by Tibetan names and fix if
 #. needed!
 msgctxt "tibetan zodiac sign"
@@ -82351,15 +82979,15 @@ msgid "Twins"
 msgstr "Tvillingar"
 
 #. Pronounce entry for a zodiac sign or a lunar mansion in Tibetan sky
-#. culture, English: Twins
+#. culture, native: འཁྲིག, English: Twins
 #. Shaped after the Indian zodiac. Please enhance by Tibetan names and fix if
 #. needed!
 msgctxt "tibetan zodiac sign"
-msgid "Trik"
-msgstr "Trik"
+msgid "chig"
+msgstr "chig"
 
-#. Name of a zodiac sign or a lunar mansion in Tibetan sky culture, pronounce:
-#. Karkata
+#. Name of a zodiac sign or a lunar mansion in Tibetan sky culture, native:
+#. ཀརྚ་ཀ, pronounce: gar da ga
 #. Shaped after the Indian zodiac. Please enhance by Tibetan names and fix if
 #. needed!
 msgctxt "tibetan zodiac sign"
@@ -82367,15 +82995,15 @@ msgid "Crab"
 msgstr "Krabba"
 
 #. Pronounce entry for a zodiac sign or a lunar mansion in Tibetan sky
-#. culture, English: Crab
+#. culture, native: ཀརྚ་ཀ, English: Crab
 #. Shaped after the Indian zodiac. Please enhance by Tibetan names and fix if
 #. needed!
 msgctxt "tibetan zodiac sign"
-msgid "Karkata"
-msgstr "Karkata"
+msgid "gar da ga"
+msgstr "gar da ga"
 
-#. Name of a zodiac sign or a lunar mansion in Tibetan sky culture, pronounce:
-#. Senge
+#. Name of a zodiac sign or a lunar mansion in Tibetan sky culture, native:
+#. སེང་གེ, pronounce: sêng gê
 #. Shaped after the Indian zodiac. Please enhance by Tibetan names and fix if
 #. needed!
 msgctxt "tibetan zodiac sign"
@@ -82383,15 +83011,15 @@ msgid "Lion"
 msgstr "Lejon"
 
 #. Pronounce entry for a zodiac sign or a lunar mansion in Tibetan sky
-#. culture, English: Lion
+#. culture, native: སེང་གེ, English: Lion
 #. Shaped after the Indian zodiac. Please enhance by Tibetan names and fix if
 #. needed!
 msgctxt "tibetan zodiac sign"
-msgid "Senge"
-msgstr "Senge"
+msgid "sêng gê"
+msgstr "sêng gê"
 
-#. Name of a zodiac sign or a lunar mansion in Tibetan sky culture, pronounce:
-#. Pumo
+#. Name of a zodiac sign or a lunar mansion in Tibetan sky culture, native:
+#. བུ་མོ, pronounce: pu mo
 #. Shaped after the Indian zodiac. Please enhance by Tibetan names and fix if
 #. needed!
 msgctxt "tibetan zodiac sign"
@@ -82399,15 +83027,15 @@ msgid "Virgin"
 msgstr "Jungfru"
 
 #. Pronounce entry for a zodiac sign or a lunar mansion in Tibetan sky
-#. culture, English: Virgin
+#. culture, native: བུ་མོ, English: Virgin
 #. Shaped after the Indian zodiac. Please enhance by Tibetan names and fix if
 #. needed!
 msgctxt "tibetan zodiac sign"
-msgid "Pumo"
-msgstr "Pumo"
+msgid "pu mo"
+msgstr "pu mo"
 
-#. Name of a zodiac sign or a lunar mansion in Tibetan sky culture, pronounce:
-#. Sangwa
+#. Name of a zodiac sign or a lunar mansion in Tibetan sky culture, native:
+#. སྲང, pronounce: sang
 #. Shaped after the Indian zodiac. Please enhance by Tibetan names and fix if
 #. needed!
 msgctxt "tibetan zodiac sign"
@@ -82415,15 +83043,15 @@ msgid "Scales"
 msgstr "Våg"
 
 #. Pronounce entry for a zodiac sign or a lunar mansion in Tibetan sky
-#. culture, English: Scales
+#. culture, native: སྲང, English: Scales
 #. Shaped after the Indian zodiac. Please enhance by Tibetan names and fix if
 #. needed!
 msgctxt "tibetan zodiac sign"
-msgid "Sangwa"
-msgstr "Sangwa"
+msgid "sang"
+msgstr "sang"
 
-#. Name of a zodiac sign or a lunar mansion in Tibetan sky culture, pronounce:
-#. Dikpa
+#. Name of a zodiac sign or a lunar mansion in Tibetan sky culture, native:
+#. སྡིག་པ, pronounce: dig ba
 #. Shaped after the Indian zodiac. Please enhance by Tibetan names and fix if
 #. needed!
 msgctxt "tibetan zodiac sign"
@@ -82431,15 +83059,15 @@ msgid "Scorpion"
 msgstr "Skorpion"
 
 #. Pronounce entry for a zodiac sign or a lunar mansion in Tibetan sky
-#. culture, English: Scorpion
+#. culture, native: སྡིག་པ, English: Scorpion
 #. Shaped after the Indian zodiac. Please enhance by Tibetan names and fix if
 #. needed!
 msgctxt "tibetan zodiac sign"
-msgid "Dikpa"
-msgstr "Dikpa"
+msgid "dig ba"
+msgstr "dig ba"
 
-#. Name of a zodiac sign or a lunar mansion in Tibetan sky culture, pronounce:
-#. Zhu
+#. Name of a zodiac sign or a lunar mansion in Tibetan sky culture, native:
+#. གཞུ, pronounce: xu
 #. Shaped after the Indian zodiac. Please enhance by Tibetan names and fix if
 #. needed!
 msgctxt "tibetan zodiac sign"
@@ -82447,15 +83075,15 @@ msgid "Archer"
 msgstr "Bågskytt"
 
 #. Pronounce entry for a zodiac sign or a lunar mansion in Tibetan sky
-#. culture, English: Archer
+#. culture, native: གཞུ, English: Archer
 #. Shaped after the Indian zodiac. Please enhance by Tibetan names and fix if
 #. needed!
 msgctxt "tibetan zodiac sign"
-msgid "Zhu"
-msgstr "Zhu"
+msgid "xu"
+msgstr "xu"
 
-#. Name of a zodiac sign or a lunar mansion in Tibetan sky culture, pronounce:
-#. Chusin
+#. Name of a zodiac sign or a lunar mansion in Tibetan sky culture, native:
+#. ཆུ་སྲིན, pronounce: qu sin
 #. Shaped after the Indian zodiac. Please enhance by Tibetan names and fix if
 #. needed!
 msgctxt "tibetan zodiac sign"
@@ -82463,15 +83091,15 @@ msgid "Capricorn"
 msgstr "Stenbocken"
 
 #. Pronounce entry for a zodiac sign or a lunar mansion in Tibetan sky
-#. culture, English: Capricorn
+#. culture, native: ཆུ་སྲིན, English: Capricorn
 #. Shaped after the Indian zodiac. Please enhance by Tibetan names and fix if
 #. needed!
 msgctxt "tibetan zodiac sign"
-msgid "Chusin"
-msgstr "Chusin"
+msgid "qu sin"
+msgstr "qu sin"
 
-#. Name of a zodiac sign or a lunar mansion in Tibetan sky culture, pronounce:
-#. Bumpa
+#. Name of a zodiac sign or a lunar mansion in Tibetan sky culture, native:
+#. བུམ་པ, pronounce: pum ba
 #. Shaped after the Indian zodiac. Please enhance by Tibetan names and fix if
 #. needed!
 msgctxt "tibetan zodiac sign"
@@ -82479,15 +83107,15 @@ msgid "Water bearer"
 msgstr "Vattenbärare"
 
 #. Pronounce entry for a zodiac sign or a lunar mansion in Tibetan sky
-#. culture, English: Water bearer
+#. culture, native: བུམ་པ, English: Water bearer
 #. Shaped after the Indian zodiac. Please enhance by Tibetan names and fix if
 #. needed!
 msgctxt "tibetan zodiac sign"
-msgid "Bumpa"
-msgstr "Bumpa"
+msgid "pum ba"
+msgstr "pum ba"
 
-#. Name of a zodiac sign or a lunar mansion in Tibetan sky culture, pronounce:
-#. Nya
+#. Name of a zodiac sign or a lunar mansion in Tibetan sky culture, native: ཉ,
+#. pronounce: nya
 #. Shaped after the Indian zodiac. Please enhance by Tibetan names and fix if
 #. needed!
 msgctxt "tibetan zodiac sign"
@@ -82495,12 +83123,12 @@ msgid "Fishes"
 msgstr "Fiskar"
 
 #. Pronounce entry for a zodiac sign or a lunar mansion in Tibetan sky
-#. culture, English: Fishes
+#. culture, native: ཉ, English: Fishes
 #. Shaped after the Indian zodiac. Please enhance by Tibetan names and fix if
 #. needed!
 msgctxt "tibetan zodiac sign"
-msgid "Nya"
-msgstr "Nya"
+msgid "nya"
+msgstr "nya"
 
 #. Tikuna constellation, native: Baweta
 msgid "Turtle Collective"

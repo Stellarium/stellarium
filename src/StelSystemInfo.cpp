@@ -85,10 +85,10 @@ void printSystemInfo()
 	log(QString("Build ABI: %1").arg(QSysInfo::buildAbi()));
 
 	// write addressing mode
-        log(QString("Addressing mode: %1").arg(StelUtils::getAddressingMode()));
+	log(QString("Addressing mode: %1").arg(StelUtils::getAddressingMode()));
 
 	// write CPU and memory info
-        log(QString("CPU architecture: %1").arg(QSysInfo::currentCpuArchitecture()));
+	log(QString("CPU architecture: %1").arg(QSysInfo::currentCpuArchitecture()));
 
 #ifdef Q_OS_WIN
 	// Use WMI
@@ -122,13 +122,13 @@ void printSystemInfo()
 					break;
 
 				hr = obj->Get(L"Name", 0, &vt_prop, nullptr, nullptr);
-                                log(QString("CPU name: %1").arg(vt_prop.bstrVal));
+				log(QString("CPU name: %1").arg(vt_prop.bstrVal));
 
 				hr = obj->Get(L"MaxClockSpeed", 0, &vt_prop, nullptr, nullptr);
-                                log(QString("CPU maximum speed: %1 MHz").arg(vt_prop.uintVal));
+				log(QString("CPU maximum speed: %1 MHz").arg(vt_prop.uintVal));
 
 				hr = obj->Get(L"NumberOfLogicalProcessors", 0, &vt_prop, nullptr, nullptr);
-                                log(QString("CPU logical cores: %1").arg(vt_prop.intVal));
+				log(QString("CPU logical cores: %1").arg(vt_prop.intVal));
 
 				VariantClear(&vt_prop);
 				obj->Release();
@@ -162,10 +162,10 @@ void printSystemInfo()
 					break;
 
 				hr = obj->Get(L"Name", 0, &vt_prop, nullptr, nullptr);
-                                log(QString("GPU name: %1").arg(vt_prop.bstrVal));
+				log(QString("GPU name: %1").arg(vt_prop.bstrVal));
 
 				hr = obj->Get(L"AdapterRAM", 0, &vt_prop, nullptr, nullptr);
-                                log(QString("GPU RAM: %1 MB").arg(vt_prop.ullVal/(1024<<10)));
+				log(QString("GPU RAM: %1 MB").arg(vt_prop.ullVal/(1024<<10)));
 
 				hr = obj->Get(L"CurrentHorizontalResolution", 0, &vt_prop, nullptr, nullptr);
 				int currHRes = vt_prop.intVal;
@@ -190,7 +190,7 @@ void printSystemInfo()
 	sysctlbyname("machdep.cpu.brand_string", nullptr, &size, nullptr, 0);
 	std::string cpuname(size, '\0');
 	sysctlbyname("machdep.cpu.brand_string", const_cast<char *>(cpuname.data()), &size, nullptr, 0);
-        log(QString("CPU name: %1").arg(cpuname.data()));
+	log(QString("CPU name: %1").arg(cpuname.data()));
 
 	int64_t maxFreq = 0;
 	size = sizeof(maxFreq);
@@ -213,7 +213,7 @@ void printSystemInfo()
 	int ncpu = 0;
 	size = sizeof(ncpu);
 	sysctlbyname("hw.ncpu", &ncpu, &size, nullptr, 0);
-        log(QString("CPU logical cores: %1").arg(ncpu));
+	log(QString("CPU logical cores: %1").arg(ncpu));
 
 	// RAM info
 	uint64_t totalRAM = 0;
@@ -241,9 +241,9 @@ void printSystemInfo()
 	{
 		cpuOK = true;
 		bool readCpuModel = true;
-                #if defined(__powerpc__) || defined(__powerpc64__)
+		#if defined(__powerpc__) || defined(__powerpc64__)
 		bool readClock = true;
-                #endif
+		#endif
 		while(!infoFile.peek(1).isEmpty())
 		{
 			QString line = infoFile.readLine();
@@ -269,27 +269,30 @@ void printSystemInfo()
 				readClock = false;
 			}
 			#endif
-                        #if defined(__e2k__) || defined(__s390__) || defined(__s390x__)
+			#if defined(__e2k__) || defined(__s390__) || defined(__s390x__)
 			if (line.startsWith("vendor_id", Qt::CaseInsensitive) && !readVendorId)
 			{
 				vendor = line.split(":").last().trimmed();
 				readVendorId = true;
 			}
-                        #endif
-                        #if defined(__aarch64__) || defined(__arm__)
+			#endif
+			#if defined(__aarch64__) || defined(__arm__)
 			if (line.startsWith("Processor", Qt::CaseSensitive) && readCpuModel)
 			{
 				cpumodel = line.split(":").last().trimmed();
 				readCpuModel = false;
+
+				if (line.startsWith("model", Qt::CaseInsensitive))
+					model = line.split(":").last().trimmed();
 			}
-                        #endif
-                        #if defined(__mips__)
+			#endif
+			#if defined(__mips__)
 			if (line.startsWith("cpu model", Qt::CaseSensitive) && readCpuModel)
 			{
 				cpumodel = line.split(":").last().trimmed();
 				readCpuModel = false;
 			}
-                        #endif
+			#endif
 
 			// for PowerPC/MIPS computers
 			if (line.startsWith("platform", Qt::CaseInsensitive))
@@ -300,8 +303,6 @@ void printSystemInfo()
 			// for ARM-devices, such Raspberry Pi
 			if (line.startsWith("hardware", Qt::CaseInsensitive))
 				hardware = line.split(":").last().trimmed();
-			if (line.startsWith("model", Qt::CaseInsensitive))
-				model = line.split(":").last().trimmed();
 
 			// for MIPS computers
 			if (line.startsWith("system type", Qt::CaseInsensitive))
@@ -516,13 +517,13 @@ void printSystemInfo()
 	else
 		clockSpeed = QString("%1 GHz").arg(QString::number(frequency/1000.f, 'f', 2));
 
-        log(QString("CPU name: %1 %2 @ %3").arg(get_cpu_vendor_string(cpuVendor), get_cpu_model_string(platform, cpuVendor, cpuModel), clockSpeed));
-        log(QString("CPU speed: %1 MHz").arg(frequency));
+	log(QString("CPU name: %1 %2 @ %3").arg(get_cpu_vendor_string(cpuVendor), get_cpu_model_string(platform, cpuVendor, cpuModel), clockSpeed));
+	log(QString("CPU speed: %1 MHz").arg(frequency));
 
 	system_info hwinfo;
 	get_system_info(&hwinfo);
 
-        log(QString("CPU logical cores: %1").arg(hwinfo.cpu_count));
+	log(QString("CPU logical cores: %1").arg(hwinfo.cpu_count));
 
 	// memory info
 	uint64_t totalRAM = round(hwinfo.max_pages*B_PAGE_SIZE/1048576.0 + hwinfo.ignored_pages*B_PAGE_SIZE/1048576.0);

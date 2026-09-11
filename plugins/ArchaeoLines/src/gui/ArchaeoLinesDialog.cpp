@@ -131,8 +131,8 @@ void ArchaeoLinesDialog::createDialogContent()
 	ui->customDeclination2DoubleSpinBox->setWrapping(false);
 
 	// TBD: Store a decimal/DMS selection property separately?
-	setDisplayFormatForSpins(StelApp::getInstance().getFlagShowDecimalDegrees());
-	connect(&StelApp::getInstance(), SIGNAL(flagShowDecimalDegreesChanged(bool)), this, SLOT(setDisplayFormatForSpins(bool)));
+	setDisplayFormatForSpins(StelApp::getInstance().getFlagUseDecDegreesCoords());
+	connect(&StelApp::getInstance(), SIGNAL(flagUseDecDegreesCoordsChanged(bool)), this, SLOT(setDisplayFormatForSpins(bool)));
 
 	connect(ui->geographicLocation1PickPushButton, &QPushButton::clicked, this, [=](){locationsDialog->setVisible(true); locationsDialog->setModalContext(1);});
 	connect(ui->geographicLocation2PickPushButton, &QPushButton::clicked, this, [=](){locationsDialog->setVisible(true); locationsDialog->setModalContext(2);});

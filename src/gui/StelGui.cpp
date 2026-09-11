@@ -282,6 +282,8 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 	actionsMgr->addAction("actionAutoHideHorizontalButtonBar", miscGroup, N_("Auto hide horizontal button bar"), this, "autoHideHorizontalButtonBar");
 	actionsMgr->addAction("actionAutoHideVerticalButtonBar", miscGroup, N_("Auto hide vertical button bar"), this, "autoHideVerticalButtonBar");
 
+	setToolbarCorner(conf->value("gui/toolbar_corner", 0).toInt());
+
 	setGuiVisible(conf->value("gui/flag_show_gui", true).toBool());
 	actionsMgr->addAction("actionToggle_GuiHidden_Global", miscGroup, N_("Toggle visibility of GUI"), this, "visible", "Ctrl+T", "", true);
 
@@ -1401,6 +1403,26 @@ void StelGui::setAutoHideVerticalButtonBar(bool b)
 		skyGui->autoHideLeftBar=b;
 		StelApp::immediateSave("gui/auto_hide_vertical_toolbar", b);
 		emit autoHideVerticalButtonBarChanged(b);
+	}
+}
+
+int StelGui::getToolbarCorner() const
+{
+	return (skyGui->toolbarAtTop ? 2 : 0) | (skyGui->toolbarAtRight ? 1 : 0);
+}
+
+void StelGui::setToolbarCorner(int corner)
+{
+	corner = qBound(0, corner, 3);
+	bool atTop   = (corner >= 2);
+	bool atRight = (corner & 1);
+	if (skyGui->toolbarAtTop != atTop || skyGui->toolbarAtRight != atRight)
+	{
+		skyGui->toolbarAtTop   = atTop;
+		skyGui->toolbarAtRight = atRight;
+		StelApp::immediateSave("gui/toolbar_corner", corner);
+		skyGui->updateBarsPos();
+		emit toolbarCornerChanged(corner);
 	}
 }
 

@@ -597,6 +597,7 @@ void NebulaTexturesDialog::toggleDefaultTextureVisibility()
  */
 void NebulaTexturesDialog::updateBrightnessLevel(int index)
 {
+	Q_UNUSED(index)
 	if(isTempTextureVisible)
 		showTempTexturePreview();
 }
@@ -707,6 +708,7 @@ void NebulaTexturesDialog::addCustomTexture()
  */
 void NebulaTexturesDialog::addTexture(QString cfgPath, QString groupName)
 {
+	Q_UNUSED(cfgPath)
 	QString imagePath = ui->lineEditImagePath->text();
 	QString imageUrl = ensureImageCopied(imagePath, groupName);
 	if (imageUrl.isEmpty()) return;

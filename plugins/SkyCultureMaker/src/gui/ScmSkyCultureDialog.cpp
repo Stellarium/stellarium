@@ -25,15 +25,19 @@
 #include "NebulaMgr.hpp"
 #include "ScmPolygonInfoTreeItem.hpp"
 #include "StarMgr.hpp"
+#include "StelMovementMgr.hpp"
 #include "StelObjectMgr.hpp"
+#include "StelSkyCultureMgr.hpp"
 #include "ui_scmSkyCultureDialog.h"
 #include <cassert>
 #include <QCheckBox>
+#include <QDateTime>
 #include <QDebug>
 #include <QHeaderView>
 #include <QMap>
 #include <QMessageBox>
 #include <QPushButton>
+#include <QRegularExpression>
 #include <QStyledItemDelegate>
 #include <QTableWidgetItem>
 
@@ -79,7 +83,7 @@ void ScmSkyCultureDialog::setConstellations(std::vector<std::unique_ptr<scm::Scm
 		for (const auto &constellation : *constellations)
 		{
 			// Add the constellation to the list widget
-			ui->constellationsList->addItem(getDisplayNameFromConstellation(*constellation));
+			ui->constellationsList->addItem(constellation->getDisplayName());
 		}
 	}
 }
@@ -162,6 +166,9 @@ void ScmSkyCultureDialog::createDialogContent()
 	        &ScmSkyCultureDialog::removeSelectedConstellation);
 	connect(ui->constellationsList, &QListWidget::itemSelectionChanged, this,
 	        &ScmSkyCultureDialog::updateRemoveConstellationButton);
+
+	connect(ui->constellationsList, &QListWidget::itemDoubleClicked, this,
+	        &ScmSkyCultureDialog::centerViewOnConstellation);
 
 	connect(&StelApp::getInstance(), &StelApp::fontChanged, this, &ScmSkyCultureDialog::handleFontChanged);
 	connect(&StelApp::getInstance(), &StelApp::guiFontSizeChanged, this, &ScmSkyCultureDialog::handleFontChanged);
@@ -344,7 +351,7 @@ void ScmSkyCultureDialog::saveSkyCulture()
 	// check if license is set
 	if (desc.license == scm::LicenseType::NONE)
 	{
-		maker->showUserWarningMessage(dialog, ui->titleBar->title(), q_("Please select a license for the sky culture."));
+		maker->showUserWarningMessage(ui->titleBar->title(), q_("Please select a license for the sky culture."));
 		return;
 	}
 	// check if description is complete
@@ -354,7 +361,7 @@ void ScmSkyCultureDialog::saveSkyCulture()
 		auto msg = q_("The sky culture description is not complete. The following fields are not filled correctly:\n");
 		for (const auto& field : incompFieldsList)
 			msg += QString(" \u2022 ") + field + "\n";
-		maker->showUserWarningMessage(dialog, ui->titleBar->title(), msg);
+		maker->showUserWarningMessage(ui->titleBar->title(), msg);
 		return;
 	}
 
@@ -371,7 +378,7 @@ void ScmSkyCultureDialog::saveSkyCulture()
 	// check wether at least 1 polygon was digitized
 	if (ui->polygonInfoTreeWidget->topLevelItemCount() < 1)
 	{
-		maker->showUserWarningMessage(dialog, ui->titleBar->title(), q_("The sky culture territory is not complete. Please digitize at least one polygon in geographical location tab."));
+		maker->showUserWarningMessage(ui->titleBar->title(), q_("The sky culture territory is not complete. Please digitize at least one polygon in geographical location tab."));
 		return;
 	}
 
@@ -381,51 +388,39 @@ void ScmSkyCultureDialog::saveSkyCulture()
 
 void ScmSkyCultureDialog::editSelectedConstellation()
 {
-	auto selectedItems = ui->constellationsList->selectedItems();
-	if (!selectedItems.isEmpty() && constellations != nullptr)
+	auto selectedItems     = ui->constellationsList->selectedItems();
+	scm::ScmSkyCulture *sc = maker->getCurrentSkyCulture();
+	if (selectedItems.isEmpty() || sc == nullptr) return;
+
+	if (scm::ScmConstellation *constellation = sc->getConstellationByDisplayName(selectedItems.first()->text()))
 	{
-		QListWidgetItem *item     = selectedItems.first();
-		QString constellationName = item->text();
+		openConstellationDialog(constellation->getId());
+	}
+}
 
-		// Get Id by comparing to the display name
-		// This will always work, even when the constellation id
-		// or name contains special characters
-		QString selectedConstellationId = "";
-		for (const auto &constellation : *constellations)
-		{
-			if (constellationName == (getDisplayNameFromConstellation(*constellation)))
-			{
-				selectedConstellationId = constellation->getId();
-				break;
-			}
-		}
+void ScmSkyCultureDialog::centerViewOnConstellation(QListWidgetItem *item)
+{
+	scm::ScmSkyCulture *sc = maker->getCurrentSkyCulture();
+	if (item == nullptr || sc == nullptr) return;
 
-		openConstellationDialog(selectedConstellationId);
+	if (scm::ScmConstellation *constellation = sc->getConstellationByDisplayName(item->text()))
+	{
+		StelMovementMgr *mvmgr = GETSTELMODULE(StelMovementMgr);
+		mvmgr->moveToJ2000(constellation->getCenterPosition(), mvmgr->mountFrameToJ2000(Vec3d(0., 0., 1.)),
+		                   mvmgr->getAutoMoveDuration());
 	}
 }
 
 void ScmSkyCultureDialog::removeSelectedConstellation()
 {
-	auto selectedItems = ui->constellationsList->selectedItems();
-	if (!selectedItems.isEmpty() && constellations != nullptr)
-	{
-		QListWidgetItem *item     = selectedItems.first();
-		QString constellationName = item->text();
+	auto selectedItems     = ui->constellationsList->selectedItems();
+	scm::ScmSkyCulture *sc = maker->getCurrentSkyCulture();
+	if (selectedItems.isEmpty() || sc == nullptr) return;
 
-		// Get Id by comparing to the display name
-		// This will always work, even when the constellation id
-		// or name contains special characters
-		QString selectedConstellationId = "";
-		for (const auto &constellation : *constellations)
-		{
-			if (constellationName == (getDisplayNameFromConstellation(*constellation)))
-			{
-				selectedConstellationId = constellation->getId();
-				break;
-			}
-		}
+	if (scm::ScmConstellation *constellation = sc->getConstellationByDisplayName(selectedItems.first()->text()))
+	{
 		// Remove the constellation from the SC
-		maker->getCurrentSkyCulture()->removeConstellation(selectedConstellationId);
+		sc->removeConstellation(constellation->getId());
 		// Disable removal button
 		ui->RemoveConstellationBtn->setEnabled(false);
 		// The reason for not just removing the constellation in the UI here is that
@@ -455,8 +450,8 @@ void ScmSkyCultureDialog::openConstellationDialog(const QString &constellationId
 	scm::ScmConstellation *constellation = skyCulture->getConstellation(constellationId);
 	if (constellation != nullptr)
 	{
-		maker->loadDialogFromConstellation(constellation);
 		maker->setDialogVisibility(scm::DialogID::ConstellationDialog, true);
+		maker->loadDialogFromConstellation(constellation);
 		maker->setIsLineDrawEnabled(true);
 		updateAddConstellationButtons(false);
 	}
@@ -515,11 +510,6 @@ void ScmSkyCultureDialog::updateRemovePolygonButton()
 	{
 		ui->removePolygonButton->setEnabled(false);
 	}
-}
-
-QString ScmSkyCultureDialog::getDisplayNameFromConstellation(const scm::ScmConstellation &constellation) const
-{
-	return constellation.getCulturalName().translated + " (" + constellation.getId() + ")";
 }
 
 void ScmSkyCultureDialog::resetReferences()
@@ -697,6 +687,156 @@ scm::Description ScmSkyCultureDialog::getDescriptionFromTextEdit() const
 	return desc;
 }
 
+void ScmSkyCultureDialog::populateDescriptionTab(const scm::Description &desc)
+{
+	// Name
+	// block textChanged so the signal doesnt overwrite the loaded ID
+	ui->skyCultureNameLE->blockSignals(true);
+	ui->skyCultureNameLE->setText(desc.name);
+	ui->skyCultureNameLE->blockSignals(false);
+	name = desc.name;
+	ui->ExportSkyCultureBtn->setEnabled(!desc.name.isEmpty());
+
+	// Description text fields
+	ui->introTE->setPlainText(desc.introduction);
+	ui->cultureDescriptionTE->setPlainText(desc.cultureDescription);
+	ui->skyTE->setPlainText(desc.sky);
+	ui->moonSunTE->setPlainText(desc.moonAndSun);
+	ui->planetsTE->setPlainText(desc.planets);
+	ui->zodiacTE->setPlainText(desc.zodiac);
+	ui->milkyWayTE->setPlainText(desc.milkyWay);
+	ui->otherObjectsTE->setPlainText(desc.otherObjects);
+	ui->authorsTE->setPlainText(desc.authors);
+	ui->aboutTE->setPlainText(desc.about);
+	ui->acknowledgementsTE->setPlainText(desc.acknowledgements);
+
+	// License combo
+	for (int i = 0; i < ui->licenseCB->count(); ++i)
+	{
+		if (ui->licenseCB->itemData(i).value<scm::LicenseType>() == desc.license)
+		{
+			ui->licenseCB->setCurrentIndex(i);
+			break;
+		}
+	}
+
+	// Classification combo
+	for (int i = 0; i < ui->classificationCB->count(); ++i)
+	{
+		if (ui->classificationCB->itemData(i).value<scm::ClassificationType>() == desc.classification)
+		{
+			ui->classificationCB->setCurrentIndex(i);
+			break;
+		}
+	}
+
+	// Region combo
+	for (int i = 0; i < ui->regionCB->count(); ++i)
+	{
+		if (ui->regionCB->itemData(i).value<scm::RegionType>() == desc.region)
+		{
+			ui->regionCB->setCurrentIndex(i);
+			break;
+		}
+	}
+}
+
+void ScmSkyCultureDialog::populateReferences(const QString &references)
+{
+	resetReferences();
+	// matches lines like: " - [#1]: Reference text"
+	// the original reference number is preserved
+	static const QRegularExpression refRx(R"(^\s*-\s*\[(#\d+)\]:\s*(.+)$)");
+	for (const QString &line : references.split('\n'))
+	{
+		const QString trimmed = line.trimmed();
+		const auto m          = refRx.match(trimmed);
+		if (!m.hasMatch())
+		{
+			if (!trimmed.isEmpty())
+				qWarning() << "SkyCultureMaker: could not parse reference line, it will be lost:" << trimmed;
+			continue;
+		}
+		auto *item = new QTreeWidgetItem({m.captured(1).trimmed(), m.captured(2).trimmed()});
+		item->setFlags(item->flags() | Qt::ItemIsEditable);
+		ui->referencesList->addTopLevelItem(item);
+	}
+	updateReferencesButtons();
+}
+
+void ScmSkyCultureDialog::populateCommonNames(const QMap<QString, QList<scm::ScmCulturalName>> &culturalNames)
+{
+	cnEntries.clear();
+	for (auto it = culturalNames.constBegin(); it != culturalNames.constEnd(); ++it)
+	{
+		for (const auto &cn : it.value())
+			cnEntries.append({it.key(), cn});
+	}
+	cnEditingRow = -1;
+	cnRefreshTable();
+}
+
+void ScmSkyCultureDialog::populateLocationsTab(scm::ScmSkyCulture *sc)
+{
+	ui->polygonInfoTreeWidget->clear();
+	ui->scmGeoLocGraphicsView->reset();
+	for (const auto &poly : sc->getLocations())
+	{
+		ui->scmGeoLocGraphicsView->addExistingPolygon(poly);
+		QString endTimeStr = QString::number(poly.endTime);
+		if (poly.endTime >= ui->skyCultureCurrentTimeSpinBox->maximum()) endTimeStr = "∞";
+		ui->polygonInfoTreeWidget->addTopLevelItem(
+			new ScmPolygonInfoTreeItem(poly.id, poly.beginTime, endTimeStr, poly.polygon.size()));
+	}
+	ui->polygonCountValueLabel->setText(QString::number(sc->getLocations().size()));
+
+	// aggregate the culture's overall start / end time from the loaded polygons
+	const auto &locations = sc->getLocations();
+	if (!locations.isEmpty())
+	{
+		const int presentThreshold = ui->skyCultureCurrentTimeSpinBox->maximum();
+		int beginTime = locations.first().beginTime;
+		int endTime   = locations.first().endTime;
+		for (const auto &poly : locations)
+		{
+			if (poly.beginTime < beginTime) beginTime = poly.beginTime;
+			if (poly.endTime > endTime) endTime = poly.endTime;
+		}
+		ui->cultureBeginTimeValueLabel->setText(QString::number(beginTime));
+		ui->cultureEndTimeValueLabel->setText(endTime >= presentThreshold ? "∞" : QString::number(endTime));
+	}
+	else
+	{
+		ui->cultureBeginTimeValueLabel->setText("");
+		ui->cultureEndTimeValueLabel->setText("");
+	}
+}
+
+void ScmSkyCultureDialog::populateFromSkyCulture(scm::ScmSkyCulture *sc)
+{
+	if (!sc || !ui || !dialog) return;
+
+	const scm::Description &desc = sc->getDescription();
+	populateDescriptionTab(desc);
+	populateReferences(desc.references);
+
+	setConstellations(sc->getConstellations());
+	updateAddConstellationButtons(true);
+
+	populateCommonNames(sc->getCulturalNames());
+	populateLocationsTab(sc);
+
+	// Set the time slider to the latest end year across the culture's territory polygons
+	const int maxYear = QDateTime::currentDateTime().date().year();
+	int displayYear   = 0;
+	for (const auto &poly : sc->getLocations())
+	{
+		if (poly.endTime > displayYear) displayYear = poly.endTime;
+	}
+	if (displayYear <= 0 || displayYear > maxYear) displayYear = maxYear;
+	updateSkyCultureTimeValue(displayYear);
+}
+
 void ScmSkyCultureDialog::resetDialog()
 {
 	if (ui && dialog)
@@ -763,6 +903,10 @@ void ScmSkyCultureDialog::showAddPolygon()
 	ui->beginTimeSpinBox->setCustomMaximum(ui->skyCultureCurrentTimeSpinBox->maximum());
 	ui->endTimeSpinBox->setMaximum(ui->skyCultureCurrentTimeSpinBox->maximum());
 
+	// display "Unknown" at the earliest possible start
+	ui->beginTimeSpinBox->setDisplayCustomStringForValue(true);
+	ui->beginTimeSpinBox->setCustomStringForMin(qc_("Unknown", "Unknown date (year)"));
+
 	// display a fitting char for cultures that still exist
 	ui->endTimeSpinBox->setDisplayCustomStringForValue(true);
 	ui->endTimeSpinBox->setCustomStringForMax("∞");
@@ -782,7 +926,7 @@ void ScmSkyCultureDialog::hideAddPolygon()
 
 void ScmSkyCultureDialog::initSkyCultureTime()
 {
-	int minYear = -6500; // should be small enough so that new cultures can always be added (who knows what will be discovered in the future)
+	int minYear = StelSkyCulture::unknownBeginTime;
 	int maxYear = QDateTime::currentDateTime().date().year();
 	int currentYear = maxYear;
 
@@ -792,6 +936,9 @@ void ScmSkyCultureDialog::initSkyCultureTime()
 
 	ui->skyCultureCurrentTimeSpinBox->setMinimum(minYear);
 	ui->skyCultureCurrentTimeSpinBox->setMaximum(maxYear);
+
+	ui->skyCultureCurrentTimeSpinBox->setDisplayCustomStringForValue(true);
+	ui->skyCultureCurrentTimeSpinBox->setCustomStringForMin(qc_("Unknown", "Unknown date (year)"));
 
 	// reuse function to set Value of timeSlider, currentTimeSpinBox and MapGraphicsView
 	updateSkyCultureTimeValue(currentYear);
@@ -817,7 +964,7 @@ void ScmSkyCultureDialog::addLocation(scm::CulturePolygon culturePoly)
 	QString endTimeString = QString::number(culturePoly.endTime);
 	if (culturePoly.endTime >= ui->skyCultureCurrentTimeSpinBox->maximum())
 	{
-		culturePoly.endTime = 9146; // special value for existing cultures
+		culturePoly.endTime = StelSkyCulture::presentEndTime;
 		endTimeString = "∞";
 	}
 
@@ -879,10 +1026,6 @@ void ScmSkyCultureDialog::removeLocation()
 
 		ui->cultureBeginTimeValueLabel->setText(QString::number(beginTime));
 		ui->cultureEndTimeValueLabel->setText(endTime);
-
-		// update the beginTime / endTime of the skyCulture
-		maker->setSkyCultureBeginTime(ui->cultureBeginTimeValueLabel->text().toInt());
-		maker->setSkyCultureEndTime(ui->cultureEndTimeValueLabel->text() == "∞" ? 9146 : ui->cultureEndTimeValueLabel->text().toInt());
 	}
 	else
 	{
@@ -958,10 +1101,6 @@ void ScmSkyCultureDialog::confirmAddPolygon()
 			ui->cultureEndTimeValueLabel->setText(endTime);
 		}
 	}
-
-	// update the beginTime / endTime of the skyCulture
-	maker->setSkyCultureBeginTime(ui->cultureBeginTimeValueLabel->text().toInt());
-	maker->setSkyCultureEndTime(ui->cultureEndTimeValueLabel->text() == "∞" ? 9146 : ui->cultureEndTimeValueLabel->text().toInt());
 
 	// add the current polygon to the map with beginTime and endTime as time limits
 	ui->scmGeoLocGraphicsView->addCurrentPoly(beginTime, ui->endTimeSpinBox->value());
@@ -1144,7 +1283,7 @@ bool ScmSkyCultureDialog::cnValidateForm(QString &outKey, scm::ScmCulturalName &
 	if (id.isEmpty())
 	{
 		maker->showUserWarningMessage(
-			dialog, ui->titleBar->title(),
+			ui->titleBar->title(),
 			qc_("Please enter an object identifier.",
 		            "Prompt for missing celestial object identifier (e.g. HIP number, Gaia DR3 ID, or"
 		            "planet name, DSO catalog designation)"));
@@ -1164,7 +1303,7 @@ bool ScmSkyCultureDialog::cnValidateForm(QString &outKey, scm::ScmCulturalName &
 			if (!ok)
 			{
 				maker->showUserWarningMessage(
-					dialog, ui->titleBar->title(),
+					ui->titleBar->title(),
 					q_("The star identifier must be a HIP number (e.g. 1234 or HIP 1234 A) "
 				           "or a Gaia DR3 ID (e.g. Gaia DR3 1234567890)."));
 				return false;
@@ -1175,7 +1314,7 @@ bool ScmSkyCultureDialog::cnValidateForm(QString &outKey, scm::ScmCulturalName &
 	outName = cnReadForm();
 	if (outName.translated.isEmpty())
 	{
-		maker->showUserWarningMessage(dialog, ui->titleBar->title(), q_("The \"English\" field is required."));
+		maker->showUserWarningMessage(ui->titleBar->title(), q_("The \"English\" field is required."));
 		return false;
 	}
 
@@ -1234,7 +1373,7 @@ void ScmSkyCultureDialog::cnAddNew()
 
 	if (cnIsDuplicate(key, name.special))
 	{
-		maker->showUserWarningMessage(dialog, ui->titleBar->title(),
+		maker->showUserWarningMessage(ui->titleBar->title(),
 		                              q_("An entry for this object already exists."));
 		return;
 	}
@@ -1256,7 +1395,7 @@ void ScmSkyCultureDialog::cnSaveChanges()
 
 	if (cnIsDuplicate(key, name.special, cnEditingRow))
 	{
-		maker->showUserWarningMessage(dialog, ui->titleBar->title(),
+		maker->showUserWarningMessage(ui->titleBar->title(),
 		                              q_("An entry for this object already exists."));
 		return;
 	}
@@ -1296,7 +1435,7 @@ void ScmSkyCultureDialog::cnUseSelectedObject()
 	const QList<StelObjectP> &selected = objMgr->getSelectedObject();
 	if (selected.isEmpty())
 	{
-		maker->showUserWarningMessage(dialog, ui->titleBar->title(),
+		maker->showUserWarningMessage(ui->titleBar->title(),
 		                              q_("No object is currently selected in Stellarium."));
 		return;
 	}

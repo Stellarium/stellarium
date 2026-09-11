@@ -39,6 +39,7 @@ bool StelObjectModule::matchObjectName(const QString& objName, const QString& ob
 
 QList<StelObjectP> StelObjectModule::searchAround(const Vec3d& v, double limitFov, const StelCore* core) const
 {
+	Q_UNUSED(v) Q_UNUSED(limitFov) Q_UNUSED(core)
 	return QList<StelObjectP>();
 }
 

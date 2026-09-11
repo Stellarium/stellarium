@@ -52,7 +52,7 @@ class Constellation : public StelObject
 	friend class ConstellationMgr;
 public:
 	static const QString CONSTELLATION_TYPE;
-private:
+
 	Constellation();
 	~Constellation() override;
 
@@ -116,12 +116,14 @@ public:
 	QString getEnglishName() const override {return culturalName.translated;}
 	//! Get the native name for the Constellation
 	QString getNameNative() const override {return culturalName.native;}
-	//! Get (translated) pronouncement of the native name for the Constellation
+	//! Get (translated) pronunciation of the native name for the Constellation
 	QString getNamePronounce() const override {return (culturalName.pronounceI18n.isEmpty() ? culturalName.native : culturalName.pronounceI18n);}
 	//! Get the short name for the Constellation (returns the translated version of abbreviation).
 	QString getShortNameI18n() const {return abbreviationI18n;}
 	//! Get the short name for the Constellation (returns the untranslated version of abbreviation).
 	QString getShortName() const {return abbreviation;}
+	//! Get the cultural name for the Constellation.	
+	const CulturalName& getCulturalName() const { return culturalName; }
 
 	//! Combine screen label from various components, depending on settings in SkyCultureMgr
 	QString getScreenLabel() const override;
@@ -131,6 +133,14 @@ public:
 	void setNarration(const QString &narration);
 	//! retrieve narration text, i.e. the text from description.md. @param flags is ignored.
 	QString getNarration(const StelCore *core, const InfoStringGroup& flags=StelObject::AllInfo) const override;
+
+	//! Returns true if this is a dark constellation.
+	bool isDarkConstellation() const { return !dark_constellation.empty(); }
+	//! Returns the line-point array (every consecutive pair is one segment).
+	//! For dark constellations use getDarkConstellationLines().
+	const std::vector<StelObjectP>& getConstellationLines() const { return constellation; }
+	//! Returns the dark-constellation line-point array.
+	const std::vector<StelObjectP>& getDarkConstellationLines() const { return dark_constellation; }
 private:
 	//! Underlying worker
 	QString getCultureLabel(StelObject::CulturalDisplayStyle style) const;

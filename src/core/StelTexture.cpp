@@ -39,6 +39,10 @@
 # define GL_TEXTURE_MAX_ANISOTROPY 0x84FE
 #endif
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 15, 0)
+# define Http2AllowedAttribute HTTP2AllowedAttribute
+#endif
+
 Q_LOGGING_CATEGORY(Tex,"stel.Texture", QtInfoMsg)
 
 // Let's try to keep 120 FPS even if textures are loaded every frame
@@ -283,6 +287,7 @@ bool StelTexture::load()
 		QNetworkRequest req = QNetworkRequest(QUrl(fullPath));
 		// Define that preference should be given to cached files (no etag checks)
 		req.setAttribute(QNetworkRequest::CacheLoadControlAttribute, QNetworkRequest::PreferCache);
+		req.setAttribute(QNetworkRequest::Http2AllowedAttribute, loadParams.allowHttp2);
 		req.setRawHeader("User-Agent", StelUtils::getUserAgentString().toLatin1());
 		networkReply = StelApp::getInstance().getNetworkAccessManager()->get(req);
 		connect(networkReply, &QNetworkReply::finished, this, &StelTexture::onNetworkReply);

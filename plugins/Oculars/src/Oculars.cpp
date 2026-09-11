@@ -132,6 +132,7 @@ Oculars::Oculars()
 	, flagGuiPanelEnabled(false)
 	, flagDMSDegrees(false)
 	, flagHorizontalCoordinates(false)
+	, flagShowCCDCenter(true)
 	, flagSemiTransparency(false)
 	, transparencyMask(85)
 	, flagHideGridsLines(false)
@@ -648,6 +649,7 @@ void Oculars::init()
 		// For historical reasons, name of .ini entry and description of checkbox (and therefore flag name) are reversed.
 		setFlagDMSDegrees( ! settings->value("use_decimal_degrees", false).toBool());
 		setFlagHorizontalCoordinates(settings->value("use_horizontal_coordinates", false).toBool());
+		setFlagShowCCDCenter(settings->value("show_ccd_center", true).toBool());
 		setFlagAutoLimitMagnitude(settings->value("autolimit_stellar_magnitude", true).toBool());
 		flagLimitStarsOculars=settings->value("limit_stellar_magnitude_oculars", false).toBool();
 		magLimitStarsOculars=settings->value("limit_stellar_magnitude_oculars_val", 12.).toDouble();
@@ -1961,20 +1963,23 @@ void Oculars::paintCCDBounds()
 		const double textRotationAngle = 180/M_PI * std::atan2(frameRightWinDir[1], frameRightWinDir[0]);
 		QTransform transform = QTransform().translate(centerScreen[0], centerScreen[1]).rotate(textRotationAngle);
 		QPoint a, b;
-		// draw cross at center
-		const int cross = qRound(10 * params.devicePixelsPerPixel); // use permanent size of cross (10px)
-		a = transform.map(QPoint(-cross, -cross));
-		b = transform.map(QPoint(cross, cross));
-		painter.drawLine2d(a.x(), a.y(), b.x(), b.y());
-		a = transform.map(QPoint(-cross, cross));
-		b = transform.map(QPoint(cross, -cross));
-		painter.drawLine2d(a.x(), a.y(), b.x(), b.y());
+		if (getFlagShowCCDCenter())
+		{
+			// draw cross at center
+			const int cross = qRound(10 * params.devicePixelsPerPixel); // use permanent size of cross (10px)
+			a = transform.map(QPoint(-cross, -cross));
+			b = transform.map(QPoint(cross, cross));
+			painter.drawLine2d(a.x(), a.y(), b.x(), b.y());
+			a = transform.map(QPoint(-cross, cross));
+			b = transform.map(QPoint(cross, -cross));
+			painter.drawLine2d(a.x(), a.y(), b.x(), b.y());
+		}
 		// calculate coordinates of the center and show it
 		Vec3d centerPosition;
 		equatProj->unProject(centerScreen[0], centerScreen[1], centerPosition);
 		double cx, cy;
 		QString cxt, cyt, coords;
-		bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
+		bool withDecimalDegree = StelApp::getInstance().getFlagUseDecDegreesCoords();
 		if (getFlagHorizontalCoordinates())
 		{
 			bool useSouthAzimuth = StelApp::getInstance().getFlagSouthAzimuthUsage();
@@ -2874,6 +2879,19 @@ void Oculars::setFlagHorizontalCoordinates(const bool b)
 bool Oculars::getFlagHorizontalCoordinates() const
 {
 	return flagHorizontalCoordinates;
+}
+
+void Oculars::setFlagShowCCDCenter(const bool b)
+{
+	flagShowCCDCenter = b;
+	settings->setValue("show_ccd_center", b);
+	settings->sync();
+	emit flagShowCCDCenterChanged(b);
+}
+
+bool Oculars::getFlagShowCCDCenter() const
+{
+	return flagShowCCDCenter;
 }
 
 void Oculars::setFlagRequireSelection(const bool b)

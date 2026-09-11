@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-remotecontrol\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2026-06-09 22:17+0700\n"
+"POT-Creation-Date: 2026-08-24 18:46+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Georg Zotti <Georg.Zotti@univie.ac.at>, 2026\n"
 "Language-Team: German (https://app.transifex.com/stellarium/teams/80998/de/)\n"
@@ -43,8 +43,8 @@ msgid "Error performing search"
 msgstr "Fehler beim Suchen"
 
 #: plugins/RemoteControl/webroot/js/api/location.js:125
-msgid "Could not retrieve country list"
-msgstr "Konnte Länderliste nicht abfragen"
+msgid "Could not retrieve region list"
+msgstr "Regionenliste konnte nicht abgerufen werden"
 
 #: plugins/RemoteControl/webroot/js/api/location.js:138
 msgid "Could not retrieve planet list"
@@ -486,7 +486,7 @@ msgstr "Mondstationen/-häuser"
 
 #: index.html:734 tablet7in.html:800
 msgid "Notable Stars"
-msgstr ""
+msgstr "Bemerkenswerte Sterne"
 
 #: index.html:740 tablet7in.html:806
 msgid "Click on any constellation to highlight and isolate it"
@@ -643,7 +643,7 @@ msgstr "Benannte Objekte"
 
 #: index.html:1020 tablet7in.html:1085
 msgid "Notable Stars & Objects"
-msgstr ""
+msgstr "Bemerkenswerte Sterne & Objekte"
 
 #: index.html:1027 tablet7in.html:1092
 msgid ""
@@ -690,11 +690,15 @@ msgstr ""
 msgid ""
 "Zodiac signs defined in this culture. Click to center on the constellation."
 msgstr ""
+"In dieser Kultur definierte Tierkreiszeichen. Zum Zentrieren des Sternbildes"
+" klicken."
 
 #: index.html:1126 tablet7in.html:1191
 msgid ""
 "Lunar mansions (stations) defined in this culture. Click to center view."
 msgstr ""
+"In dieser Kultur definierte Mondhäuser (-stationen). Zum Zentrieren der "
+"Ansicht klicken. "
 
 #: index.html:1133 tablet7in.html:1198
 msgid ""
@@ -779,7 +783,7 @@ msgstr "Gewählte Szene laden"
 
 #: index.html:1304 tablet7in.html:1373
 msgid "Scan"
-msgstr ""
+msgstr "Suche"
 
 #: index.html:1311 tablet7in.html:1380
 msgid "Controller Settings"
@@ -939,7 +943,7 @@ msgstr ""
 
 #: index.html:1492 tablet7in.html:1561
 msgid "Live Input Monitor"
-msgstr ""
+msgstr "Echtzeiteingabeanzeige"
 
 #: index.html:1493 tablet7in.html:1562
 msgid ""
@@ -947,6 +951,9 @@ msgid ""
 "state, Axes show visual meter. Use this panel to verify button and axis "
 "mappings."
 msgstr ""
+"Echtzeitanzeige der Rohdaten der Gamepad API. Tasten zeigen Druckstatus, "
+"Achsen eine Darstellung des Ausschlags. Verwenden Sie dieses Feld zum "
+"Austesten Ihrer Tastenbelegung."
 
 #: index.html:1499 tablet7in.html:1568
 msgid "Buttons"
@@ -972,12 +979,15 @@ msgstr "Rohwerte verstehen"
 #: index.html:1520 tablet7in.html:1589
 msgid "Buttons: Range 0.0 (not pressed) to 1.0 (green = fully pressed)."
 msgstr ""
+"Tasten: Bereich 0.0 (nicht gedrückt) bis 1.0 (grün=vollständig gedrückt)."
 
 #: index.html:1521 tablet7in.html:1590
 msgid ""
 "Axes: -1.0 to 1.0 with visual meter Center position is 0.0. Triggers (L2/R2)"
 " show gradual values."
 msgstr ""
+"Achsen: -1.0 bis 1.0 mit Ausschlagsanzeige. Mittelposition ist 0.0. Auslöser"
+" (L2/R2) zeigen abgestufte Werte."
 
 #: index.html:1522 tablet7in.html:1591
 msgid ""

@@ -127,6 +127,7 @@ ENDIF()
 # Use customized cmake macros
 SET(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake/modules)
 INCLUDE(CPM)
+INCLUDE(StellariumPlatform)
 
 # Show platform info
 MESSAGE(STATUS "Platform: ${CMAKE_SYSTEM} (${CMAKE_SYSTEM_PROCESSOR})")

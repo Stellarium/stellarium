@@ -118,6 +118,7 @@ void NebulaTextures::init()
 // Draw method for the NebulaTextures module. Currently, it does nothing.
 void NebulaTextures::draw(StelCore* core)
 {
+	Q_UNUSED(core)
 }
 
 // Sets whether custom textures should be shown and refreshes the texture display.
