@@ -34,9 +34,9 @@ Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 #ifndef EPHEMWRAPPER_HPP
 #define EPHEMWRAPPER_HPP
 
-#define DE430_FILENAME  "linux_p1550p2650.430"
+#define DE430_FILENAME  "linux_p1550p2650.430t"   // (SS) 2025-11-27 use "t" version to access TT - TDB corrections (if needed)
 #define DE431_FILENAME  "lnxm13000p17000.431"
-#define DE440_FILENAME  "linux_p1550p2650.440"
+#define DE440_FILENAME  "linux_p1550p2650.440t"   // (SS) 2025-11-27 use "t" version to access TT - TDB corrections (default for Delta-T JPL Horizons)
 #define DE441_FILENAME  "linux_m13000p17000.441"
 
 class EphemWrapper{
