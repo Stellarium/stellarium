@@ -922,6 +922,13 @@ IF(ENABLE_TESTING)
      ADD_TEST(testGeomMath testGeomMath)
      SET_TARGET_PROPERTIES(testGeomMath PROPERTIES FOLDER "src/tests")
 
+     SET(tests_testGaiaSearch_SRCS
+          tests/testGaiaSearch.cpp
+     )
+     ADD_EXECUTABLE(testGaiaSearch ${tests_testGaiaSearch_SRCS})
+     TARGET_LINK_LIBRARIES(testGaiaSearch ${TESTS_LIBRARIES})
+     ADD_DEPENDENCIES(buildTests testGaiaSearch)
+
      SET(tests_testVecMath_SRCS
           tests/testVecMath.hpp
           tests/testVecMath.cpp

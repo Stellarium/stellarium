@@ -53,3 +53,4 @@ static const short ctab[] = {
 void healpix_pix2vec(int nside, int pix, double out[3]);
 void healpix_get_mat3(int nside, int pix, double out[3][3]);
 void healpix_xy2vec(const double xy[2], double out[3]);
+long long int healpix_ang2pix_nest(int nside, double theta, double phi);
