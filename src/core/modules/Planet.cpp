@@ -4548,12 +4548,17 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 			static LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
 			Q_ASSERT(lmgr);
 			const float atmLum=(lmgr->getFlagAtmosphere() ? lmgr->getAtmosphereAverageLuminance() : 0.0f);
+			const float daylightRatio = qBound(0.0f, (log10f(qMax(1.0f, atmLum))-log10f(20.0f))/(log10f(2000.0f)-log10f(20.0f)), 1.0f);
+			const float daylightDimming = daylightRatio*daylightRatio*(3.0f-2.0f*daylightRatio);
+			// Reduce rendered lunar contrast against a bright daytime sky without changing the Moon's magnitude.
+			const float moonContrastFactor = 1.0f - 0.7f*daylightDimming;
+			light.ambient *= moonContrastFactor;
 			if (atmLum<2000.0f && ( eclipseFactor<=0 || eclipseFactor==1.f))
 			{
 				float atmScaling=1.0f - (qMax(1000.0f, atmLum)-1000.0f)*0.001f; // full impact when atmLum<1000.
 				float earthshineFactor=(1.0f-getPhase(ssm->getEarth()->getHeliocentricEclipticPos())); // We really mean the Earth for this! (Try observing from Mars ;-)
 				earthshineFactor*=earthshineFactor*0.15f*atmScaling;
-				light.ambient = Vec3f(earthshineFactor, magFactorGreen*earthshineFactor, magFactorBlue*earthshineFactor);
+				light.ambient = moonContrastFactor*Vec3f(earthshineFactor, magFactorGreen*earthshineFactor, magFactorBlue*earthshineFactor);
 			}
 			const float fov=core->getProjection(transfo)->getFov();
 			float fovFactor=1.3f;
@@ -4563,7 +4568,7 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 				fovFactor -= 0.1f*(5.0f-qMax(2.0f, float(fov/sphereScale)));
 			}
 			// Special case for the Moon. Was 1.6, but this often is too bright.
-			light.diffuse.set(fovFactor,magFactorGreen*fovFactor,magFactorBlue*fovFactor);
+			light.diffuse.set(moonContrastFactor*fovFactor, magFactorGreen*moonContrastFactor*fovFactor, magFactorBlue*moonContrastFactor*fovFactor);
 		}
 
 		// possibly tint sun's color from extinction. This should deliberately cause stronger reddening than for the other objects.
