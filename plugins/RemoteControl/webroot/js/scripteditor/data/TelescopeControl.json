@@ -1,0 +1,428 @@
+[
+    {
+        "name": "flagTelescopeReticles",
+        "category": "TelescopeControl - Display",
+        "signature": "bool flagTelescopeReticles",
+        "type": "property",
+        "access": "read-write",
+        "description": "Show or hide telescope reticle markers (crosshair symbols) on the sky at each connected telescope's current position.",
+        "example": "// Show telescope reticles\ncore.setStelProperty(\"TelescopeControl.flagTelescopeReticles\", true);\n\n// Check if reticles are visible\nvar visible = core.getStelProperty(\"TelescopeControl.flagTelescopeReticles\");\ncore.debug(\"Telescope reticles visible:\", visible);"
+    },
+    {
+        "name": "flagTelescopeLabels",
+        "category": "TelescopeControl - Display",
+        "signature": "bool flagTelescopeLabels",
+        "type": "property",
+        "access": "read-write",
+        "description": "Show or hide telescope name labels next to each telescope reticle.",
+        "example": "// Show telescope name labels\ncore.setStelProperty(\"TelescopeControl.flagTelescopeLabels\", true);"
+    },
+    {
+        "name": "flagTelescopeCircles",
+        "category": "TelescopeControl - Display",
+        "signature": "bool flagTelescopeCircles",
+        "type": "property",
+        "access": "read-write",
+        "description": "Show or hide telescope field-of-view (FOV) circles. These circles represent the angular diameter visible through connected telescope eyepieces.",
+        "example": "// Show FOV circles\ncore.setStelProperty(\"TelescopeControl.flagTelescopeCircles\", true);"
+    },
+    {
+        "name": "reticleColor",
+        "category": "TelescopeControl - Colors",
+        "signature": "Vec3f reticleColor",
+        "type": "property",
+        "access": "read-write (via method)",
+        "description": "Color of telescope reticle markers. To read: use core.getStelProperty(). To set: use TelescopeControl.setReticleColor().",
+        "example": "// Read current reticle color\nvar colorStr = core.getStelProperty(\"TelescopeControl.reticleColor\");\ncore.debug(\"Reticle color:\", colorStr);\n\n// Set reticle color to red (Qt6 Stellarium)\nvar red = new Color(1.0, 0.0, 0.0);\nTelescopeControl.setReticleColor(red.toVec3f());"
+    },
+    {
+        "name": "labelColor",
+        "category": "TelescopeControl - Colors",
+        "signature": "Vec3f labelColor",
+        "type": "property",
+        "access": "read-write (via method)",
+        "description": "Color of telescope name labels.",
+        "example": "// Set label color to cyan\nvar cyan = new Color(0.0, 0.8, 1.0);\nTelescopeControl.setLabelColor(cyan.toVec3f());"
+    },
+    {
+        "name": "circleColor",
+        "category": "TelescopeControl - Colors",
+        "signature": "Vec3f circleColor",
+        "type": "property",
+        "access": "read-write (via method)",
+        "description": "Color of telescope field-of-view circles.",
+        "example": "// Set FOV circle color to orange\nvar orange = new Color(1.0, 0.6, 0.2);\nTelescopeControl.setCircleColor(orange.toVec3f());"
+    },
+    {
+        "name": "useTelescopeServerLogs",
+        "category": "TelescopeControl - Configuration",
+        "signature": "bool useTelescopeServerLogs",
+        "type": "property",
+        "access": "read-write",
+        "description": "Enable or disable logging of telescope server communication. Logs are saved to log_TelescopeServer<slot>.txt in Stellarium's user directory.",
+        "example": "// Enable telescope server logging\ncore.setStelProperty(\"TelescopeControl.useTelescopeServerLogs\", true);"
+    },
+    {
+        "name": "useTelescopeServerExecutables",
+        "category": "TelescopeControl - Configuration",
+        "signature": "bool useTelescopeServerExecutables",
+        "type": "property",
+        "access": "read-write",
+        "description": "Use external telescope server executables instead of embedded servers. Requires serverExecutablesDirectoryPath to be set correctly.",
+        "example": "// Use external server executables\ncore.setStelProperty(\"TelescopeControl.useTelescopeServerExecutables\", true);"
+    },
+    {
+        "name": "serverExecutablesDirectoryPath",
+        "category": "TelescopeControl - Configuration",
+        "signature": "QString serverExecutablesDirectoryPath",
+        "type": "property",
+        "access": "read-write",
+        "description": "Directory path where telescope server executables (TelescopeServer*) are located. Used when useTelescopeServerExecutables is true.",
+        "example": "// Set custom server executables directory\ncore.setStelProperty(\"TelescopeControl.serverExecutablesDirectoryPath\", \"/usr/local/share/stellarium/servers\");"
+    },
+    {
+        "name": "setFlagTelescopeReticles",
+        "category": "TelescopeControl - Display",
+        "signature": "void setFlagTelescopeReticles(bool b)",
+        "type": "slot",
+        "description": "Shows or hides telescope reticle markers. Equivalent to setting the flagTelescopeReticles property.",
+        "parameters": [
+            {
+                "name": "b",
+                "type": "bool",
+                "description": "true to show reticles, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "example": "// Show telescope reticles\nTelescopeControl.setFlagTelescopeReticles(true);"
+    },
+    {
+        "name": "getFlagTelescopeReticles",
+        "category": "TelescopeControl - Display",
+        "signature": "bool getFlagTelescopeReticles()",
+        "type": "slot",
+        "description": "Returns whether telescope reticle markers are currently visible.",
+        "parameters": [],
+        "returnType": "bool",
+        "example": "if (TelescopeControl.getFlagTelescopeReticles()) {\n    core.debug(\"Telescope reticles are visible\");\n}"
+    },
+    {
+        "name": "setFlagTelescopeLabels",
+        "category": "TelescopeControl - Display",
+        "signature": "void setFlagTelescopeLabels(bool b)",
+        "type": "slot",
+        "description": "Shows or hides telescope name labels.",
+        "parameters": [
+            {
+                "name": "b",
+                "type": "bool",
+                "description": "true to show labels, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "example": "// Show telescope name labels\nTelescopeControl.setFlagTelescopeLabels(true);"
+    },
+    {
+        "name": "getFlagTelescopeLabels",
+        "category": "TelescopeControl - Display",
+        "signature": "bool getFlagTelescopeLabels()",
+        "type": "slot",
+        "description": "Returns whether telescope name labels are currently visible.",
+        "parameters": [],
+        "returnType": "bool",
+        "example": "var labelsVisible = TelescopeControl.getFlagTelescopeLabels();"
+    },
+    {
+        "name": "setFlagTelescopeCircles",
+        "category": "TelescopeControl - Display",
+        "signature": "void setFlagTelescopeCircles(bool b)",
+        "type": "slot",
+        "description": "Shows or hides telescope field-of-view (FOV) circles.",
+        "parameters": [
+            {
+                "name": "b",
+                "type": "bool",
+                "description": "true to show FOV circles, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "example": "// Show FOV circles\nTelescopeControl.setFlagTelescopeCircles(true);"
+    },
+    {
+        "name": "getFlagTelescopeCircles",
+        "category": "TelescopeControl - Display",
+        "signature": "bool getFlagTelescopeCircles()",
+        "type": "slot",
+        "description": "Returns whether telescope FOV circles are currently visible.",
+        "parameters": [],
+        "returnType": "bool",
+        "example": "var circlesVisible = TelescopeControl.getFlagTelescopeCircles();"
+    },
+    {
+        "name": "setReticleColor",
+        "category": "TelescopeControl - Colors",
+        "signature": "void setReticleColor(Vec3f c)",
+        "type": "slot",
+        "description": "Sets the color of telescope reticle markers. Use new Color(r,g,b).toVec3f() to create the color vector.",
+        "parameters": [
+            {
+                "name": "c",
+                "type": "Vec3f",
+                "description": "RGB color vector with values 0.0 to 1.0",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "example": "// Set reticle color to bright green\nvar green = new Color(0.2, 0.9, 0.2);\nTelescopeControl.setReticleColor(green.toVec3f());"
+    },
+    {
+        "name": "getReticleColor",
+        "category": "TelescopeControl - Colors",
+        "signature": "Vec3f getReticleColor()",
+        "type": "slot",
+        "description": "Returns the current color of telescope reticle markers.",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "example": "// Read via property (recommended)\nvar colorStr = core.getStelProperty(\"TelescopeControl.reticleColor\");\ncore.debug(\"Reticle color:\", colorStr);"
+    },
+    {
+        "name": "getLabelColor",
+        "category": "TelescopeControl - Colors",
+        "signature": "Vec3f getLabelColor()",
+        "type": "slot",
+        "description": "Returns the current color of telescope name labels.",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "example": "var colorStr = core.getStelProperty(\"TelescopeControl.labelColor\");"
+    },
+    {
+        "name": "setLabelColor",
+        "category": "TelescopeControl - Colors",
+        "signature": "void setLabelColor(Vec3f c)",
+        "type": "slot",
+        "description": "Sets the color of telescope name labels.",
+        "parameters": [
+            {
+                "name": "c",
+                "type": "Vec3f",
+                "description": "RGB color vector with values 0.0 to 1.0",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "example": "var white = new Color(1.0, 1.0, 1.0);\nTelescopeControl.setLabelColor(white.toVec3f());"
+    },
+    {
+        "name": "setCircleColor",
+        "category": "TelescopeControl - Colors",
+        "signature": "void setCircleColor(Vec3f c)",
+        "type": "slot",
+        "description": "Sets the color of telescope field-of-view circles.",
+        "parameters": [
+            {
+                "name": "c",
+                "type": "Vec3f",
+                "description": "RGB color vector with values 0.0 to 1.0",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "example": "var blue = new Color(0.3, 0.5, 1.0);\nTelescopeControl.setCircleColor(blue.toVec3f());"
+    },
+    {
+        "name": "getCircleColor",
+        "category": "TelescopeControl - Colors",
+        "signature": "Vec3f getCircleColor()",
+        "type": "slot",
+        "description": "Returns the current color of telescope FOV circles.",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "example": "var colorStr = core.getStelProperty(\"TelescopeControl.circleColor\");"
+    },
+    {
+        "name": "setFontSize",
+        "category": "TelescopeControl - Appearance",
+        "signature": "void setFontSize(int fontSize)",
+        "type": "slot",
+        "description": "Sets the font size for telescope name labels in pixels.",
+        "parameters": [
+            {
+                "name": "fontSize",
+                "type": "int",
+                "description": "Font size in pixels (recommended: 10-24, default: 12)",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "example": "// Increase label font size for better visibility\nTelescopeControl.setFontSize(16);\n\n// Reset to default\nTelescopeControl.setFontSize(12);"
+    },
+    {
+        "name": "slewTelescopeToSelectedObject",
+        "category": "TelescopeControl - Movement",
+        "signature": "void slewTelescopeToSelectedObject(const int idx)",
+        "type": "slot",
+        "description": "Sends a GoTo command to the telescope at the specified slot to point at the currently selected celestial object. The telescope will physically move (if supported and connected).",
+        "parameters": [
+            {
+                "name": "idx",
+                "type": "int",
+                "description": "Telescope slot number (1-9, where 1 is the first telescope)",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "example": "// Select a star and point telescope #1 to it\ncore.selectObjectByName(\"Sirius\");\nTelescopeControl.slewTelescopeToSelectedObject(1);"
+    },
+    {
+        "name": "syncTelescopeWithSelectedObject",
+        "category": "TelescopeControl - Alignment",
+        "signature": "void syncTelescopeWithSelectedObject(const int idx)",
+        "type": "slot",
+        "description": "Syncs (aligns) the telescope at the specified slot with the currently selected celestial object. This updates the telescope's internal pointing model. Not all telescopes support this feature.",
+        "parameters": [
+            {
+                "name": "idx",
+                "type": "int",
+                "description": "Telescope slot number (1-9)",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "example": "// Align telescope #1 to the current view center\nTelescopeControl.syncTelescopeWithSelectedObject(1);"
+    },
+    {
+        "name": "slewTelescopeToViewDirection",
+        "category": "TelescopeControl - Movement",
+        "signature": "void slewTelescopeToViewDirection(const int idx)",
+        "type": "slot",
+        "description": "Sends a GoTo command to the telescope at the specified slot to point at the center of the current screen view.",
+        "parameters": [
+            {
+                "name": "idx",
+                "type": "int",
+                "description": "Telescope slot number (1-9)",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "example": "// Point telescope #1 to wherever the screen is currently centered\nTelescopeControl.slewTelescopeToViewDirection(1);"
+    },
+    {
+        "name": "abortTelescopeSlew",
+        "category": "TelescopeControl - Movement",
+        "signature": "void abortTelescopeSlew(const int idx)",
+        "type": "slot",
+        "description": "Aborts the current slew (movement) command for the telescope at the specified slot. ⚠️ NOT ALL TELESCOPES SUPPORT THIS! A warning dialog may appear.",
+        "parameters": [
+            {
+                "name": "idx",
+                "type": "int",
+                "description": "Telescope slot number (1-9)",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "example": "// Stop the current movement of telescope #1\nTelescopeControl.abortTelescopeSlew(1);"
+    },
+    {
+        "name": "centeringScreenByTelescope",
+        "category": "TelescopeControl - Movement",
+        "signature": "void centeringScreenByTelescope(const int idx)",
+        "type": "slot",
+        "description": "Centers the Stellarium screen view on the current position of the telescope at the specified slot. Useful for seeing what the telescope is pointing at.",
+        "parameters": [
+            {
+                "name": "idx",
+                "type": "int",
+                "description": "Telescope slot number (1-9)",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "example": "// Center screen on telescope #1's current position\nTelescopeControl.centeringScreenByTelescope(1);"
+    },
+    {
+        "name": "setFlagUseTelescopeServerLogs",
+        "category": "TelescopeControl - Configuration",
+        "signature": "void setFlagUseTelescopeServerLogs(bool b)",
+        "type": "slot",
+        "description": "Enables or disables logging of telescope server communication for debugging purposes. Equivalent to setting the useTelescopeServerLogs property.",
+        "parameters": [
+            {
+                "name": "b",
+                "type": "bool",
+                "description": "true to enable logging, false to disable",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "example": "// Enable debugging logs for telescope servers\nTelescopeControl.setFlagUseTelescopeServerLogs(true);"
+    },
+    {
+        "name": "getConnectedClientsNames",
+        "category": "TelescopeControl - Information",
+        "signature": "QHash<int, QString> getConnectedClientsNames()",
+        "type": "method",
+        "description": "⚠️ Returns a hash mapping slot numbers to telescope names for all currently connected telescopes.",
+        "parameters": [],
+        "returnType": "QHash<int, QString>",
+        "example": "var connected = TelescopeControl.getConnectedClientsNames();\ncore.debug(\"Connected telescopes:\", connected.keys());"
+    },
+    {
+        "name": "isExistingClientAtSlot",
+        "category": "TelescopeControl - Information",
+        "signature": "bool isExistingClientAtSlot(int slot)",
+        "type": "method",
+        "description": "⚠️ Checks whether a telescope client exists (defined and active) at the specified slot.",
+        "parameters": [
+            {
+                "name": "slot",
+                "type": "int",
+                "description": "Telescope slot number (1-9)",
+                "required": true
+            }
+        ],
+        "returnType": "bool",
+        "example": "if (TelescopeControl.isExistingClientAtSlot(1)) {\n    core.debug(\"Telescope #1 exists\");\n}"
+    },
+    {
+        "name": "isConnectedClientAtSlot",
+        "category": "TelescopeControl - Information",
+        "signature": "bool isConnectedClientAtSlot(int slot)",
+        "type": "method",
+        "description": "⚠️ Checks whether the telescope client at the specified slot is currently connected to a telescope or server.",
+        "parameters": [
+            {
+                "name": "slot",
+                "type": "int",
+                "description": "Telescope slot number (1-9)",
+                "required": true
+            }
+        ],
+        "returnType": "bool",
+        "example": "if (TelescopeControl.isConnectedClientAtSlot(1)) {\n    core.debug(\"Telescope #1 is connected\");\n}"
+    },
+    {
+        "name": "stopAllTelescopes",
+        "category": "TelescopeControl - Control",
+        "signature": "bool stopAllTelescopes()",
+        "type": "method",
+        "description": "⚠️ Stops all connected telescope clients and terminates any running server processes.",
+        "parameters": [],
+        "returnType": "bool",
+        "example": "// Disconnect all telescopes\nTelescopeControl.stopAllTelescopes();\ncore.debug(\"All telescopes stopped\");"
+    },
+    {
+        "name": "getDeviceModels",
+        "category": "TelescopeControl - Information",
+        "signature": "const QHash<QString, DeviceModel>& getDeviceModels()",
+        "type": "method",
+        "description": "⚠️ Returns a hash of available telescope device models (e.g., 'LX200', 'NexStar') with their properties (server name, default delay, etc.).",
+        "parameters": [],
+        "returnType": "QHash<QString, DeviceModel>",
+        "example": "var models = TelescopeControl.getDeviceModels();\ncore.debug(\"Available telescope models:\", models.keys());"
+    }
+]

@@ -1,0 +1,2949 @@
+[
+    {
+        "name": "name",
+        "category": "CCD - Properties",
+        "signature": "QString name() const",
+        "description": "Returns the name of the CCD camera sensor.",
+        "parameters": [],
+        "returnType": "QString",
+        "returnDescription": "CCD name",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin function"
+        },
+        "example": "var ccd = Oculars.getCCD(0);\ncore.debug(\"CCD name: \" + ccd.name());"
+    },
+    {
+        "name": "resolutionX",
+        "category": "CCD - Properties",
+        "signature": "int resolutionX() const",
+        "description": "Returns the horizontal resolution of the CCD in pixels.",
+        "parameters": [],
+        "returnType": "int",
+        "returnDescription": "Horizontal resolution in pixels",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin function"
+        },
+        "example": "var ccd = Oculars.getCCD(0);\ncore.debug(\"Resolution: \" + ccd.resolutionX() + \" x \" + ccd.resolutionY());"
+    },
+    {
+        "name": "resolutionY",
+        "category": "CCD - Properties",
+        "signature": "int resolutionY() const",
+        "description": "Returns the vertical resolution of the CCD in pixels.",
+        "parameters": [],
+        "returnType": "int",
+        "returnDescription": "Vertical resolution in pixels",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin function"
+        },
+        "example": "var ccd = Oculars.getCCD(0);\ncore.debug(\"Vertical resolution: \" + ccd.resolutionY());"
+    },
+    {
+        "name": "chipWidth",
+        "category": "CCD - Properties",
+        "signature": "double chipWidth() const",
+        "description": "Returns the physical width of the CCD sensor chip in millimeters.",
+        "parameters": [],
+        "returnType": "double",
+        "returnDescription": "Chip width in mm",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin function"
+        },
+        "example": "var ccd = Oculars.getCCD(0);\ncore.debug(\"Chip width: \" + ccd.chipWidth() + \" mm\");"
+    },
+    {
+        "name": "chipHeight",
+        "category": "CCD - Properties",
+        "signature": "double chipHeight() const",
+        "description": "Returns the physical height of the CCD sensor chip in millimeters.",
+        "parameters": [],
+        "returnType": "double",
+        "returnDescription": "Chip height in mm",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin function"
+        },
+        "example": "var ccd = Oculars.getCCD(0);\ncore.debug(\"Chip height: \" + ccd.chipHeight() + \" mm\");"
+    },
+    {
+        "name": "chipRotAngle",
+        "category": "CCD - Properties",
+        "signature": "double chipRotAngle() const",
+        "description": "Returns the rotation angle of the CCD sensor in degrees.",
+        "parameters": [],
+        "returnType": "double",
+        "returnDescription": "Rotation angle in degrees",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin function"
+        },
+        "example": "var ccd = Oculars.getCCD(0);\ncore.debug(\"Chip rotation: \" + ccd.chipRotAngle() + \"°\");"
+    },
+    {
+        "name": "binningX",
+        "category": "CCD - Properties",
+        "signature": "int binningX() const",
+        "description": "Returns the horizontal binning factor (pixel grouping).",
+        "parameters": [],
+        "returnType": "int",
+        "returnDescription": "Horizontal binning (1, 2, 3, etc.)",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin function"
+        },
+        "example": "var ccd = Oculars.getCCD(0);\ncore.debug(\"Binning: \" + ccd.binningX() + \"x\" + ccd.binningY());"
+    },
+    {
+        "name": "binningY",
+        "category": "CCD - Properties",
+        "signature": "int binningY() const",
+        "description": "Returns the vertical binning factor (pixel grouping).",
+        "parameters": [],
+        "returnType": "int",
+        "returnDescription": "Vertical binning (1, 2, 3, etc.)",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin function"
+        },
+        "example": "var ccd = Oculars.getCCD(0);\ncore.debug(\"Vertical binning: \" + ccd.binningY());"
+    },
+    {
+        "name": "hasOAG",
+        "category": "CCD - Properties",
+        "signature": "bool hasOAG() const",
+        "description": "Returns whether the CCD has an Off-Axis Guider (OAG) prism.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if OAG is present",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin function"
+        },
+        "example": "var ccd = Oculars.getCCD(0);\nif(ccd.hasOAG()) {\n    core.debug(\"CCD has Off-Axis Guider\");\n}"
+    },
+    {
+        "name": "prismHeight",
+        "category": "CCD - Properties",
+        "signature": "double prismHeight() const",
+        "description": "Returns the height of the OAG prism in millimeters.",
+        "parameters": [],
+        "returnType": "double",
+        "returnDescription": "Prism height in mm",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin function"
+        },
+        "example": "var ccd = Oculars.getCCD(0);\ncore.debug(\"Prism height: \" + ccd.prismHeight() + \" mm\");"
+    },
+    {
+        "name": "prismWidth",
+        "category": "CCD - Properties",
+        "signature": "double prismWidth() const",
+        "description": "Returns the width of the OAG prism in millimeters.",
+        "parameters": [],
+        "returnType": "double",
+        "returnDescription": "Prism width in mm",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin function"
+        },
+        "example": "var ccd = Oculars.getCCD(0);\ncore.debug(\"Prism width: \" + ccd.prismWidth() + \" mm\");"
+    },
+    {
+        "name": "prismDistance",
+        "category": "CCD - Properties",
+        "signature": "double prismDistance() const",
+        "description": "Returns the distance of the OAG prism from the optical axis in millimeters.",
+        "parameters": [],
+        "returnType": "double",
+        "returnDescription": "Prism distance in mm",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin function"
+        },
+        "example": "var ccd = Oculars.getCCD(0);\ncore.debug(\"Prism distance: \" + ccd.prismDistance() + \" mm\");"
+    },
+    {
+        "name": "prismPosAngle",
+        "category": "CCD - Properties",
+        "signature": "double prismPosAngle() const",
+        "description": "Returns the position angle of the OAG prism in degrees.",
+        "parameters": [],
+        "returnType": "double",
+        "returnDescription": "Prism position angle in degrees",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin function"
+        },
+        "example": "var ccd = Oculars.getCCD(0);\ncore.debug(\"Prism angle: \" + ccd.prismPosAngle() + \"°\");"
+    },
+    {
+        "name": "getActualFOVx",
+        "category": "CCD - Calculations",
+        "signature": "double getActualFOVx(const Telescope* telescope, const Lens* lens) const",
+        "description": "Calculates the actual horizontal field of view of the CCD with the given telescope and lens.",
+        "parameters": [
+            {
+                "name": "telescope",
+                "type": "Telescope*",
+                "description": "Telescope object",
+                "required": true
+            },
+            {
+                "name": "lens",
+                "type": "Lens*",
+                "description": "Lens (Barlow/reducer), can be null",
+                "required": false
+            }
+        ],
+        "returnType": "double",
+        "returnDescription": "Horizontal FOV in degrees",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin function"
+        },
+        "example": "var telescope = Oculars.getTelescope(0);\nvar ccd = Oculars.getCCD(0);\nvar fovX = ccd.getActualFOVx(telescope, null);\ncore.debug(\"CCD FOV: \" + fovX.toFixed(2) + \"°\");"
+    },
+    {
+        "name": "getActualFOVy",
+        "category": "CCD - Calculations",
+        "signature": "double getActualFOVy(const Telescope* telescope, const Lens* lens) const",
+        "description": "Calculates the actual vertical field of view of the CCD with the given telescope and lens.",
+        "parameters": [
+            {
+                "name": "telescope",
+                "type": "Telescope*",
+                "description": "Telescope object",
+                "required": true
+            },
+            {
+                "name": "lens",
+                "type": "Lens*",
+                "description": "Lens (Barlow/reducer), can be null",
+                "required": false
+            }
+        ],
+        "returnType": "double",
+        "returnDescription": "Vertical FOV in degrees",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin function"
+        },
+        "example": "var fovY = ccd.getActualFOVy(telescope, null);"
+    },
+    {
+        "name": "getCentralAngularResolutionX",
+        "category": "CCD - Calculations",
+        "signature": "double getCentralAngularResolutionX(const Telescope* telescope, const Lens* lens) const",
+        "description": "Returns the horizontal angular resolution in degrees per pixel at the center of the field of view.",
+        "parameters": [
+            {
+                "name": "telescope",
+                "type": "Telescope*",
+                "description": "Telescope object",
+                "required": true
+            },
+            {
+                "name": "lens",
+                "type": "Lens*",
+                "description": "Lens (Barlow/reducer), can be null",
+                "required": false
+            }
+        ],
+        "returnType": "double",
+        "returnDescription": "Angular resolution in degrees per pixel",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin function"
+        },
+        "example": "var resolution = ccd.getCentralAngularResolutionX(telescope, null);\ncore.debug(\"Resolution: \" + (resolution*3600).toFixed(2) + \" arcsec/pixel\");"
+    },
+    {
+        "name": "getCentralAngularResolutionY",
+        "category": "CCD - Calculations",
+        "signature": "double getCentralAngularResolutionY(const Telescope* telescope, const Lens* lens) const",
+        "description": "Returns the vertical angular resolution in degrees per pixel at the center of the field of view.",
+        "parameters": [
+            {
+                "name": "telescope",
+                "type": "Telescope*",
+                "description": "Telescope object",
+                "required": true
+            },
+            {
+                "name": "lens",
+                "type": "Lens*",
+                "description": "Lens (Barlow/reducer), can be null",
+                "required": false
+            }
+        ],
+        "returnType": "double",
+        "returnDescription": "Angular resolution in degrees per pixel",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin function"
+        },
+        "example": "var resolutionY = ccd.getCentralAngularResolutionY(telescope, null);"
+    },
+    {
+        "name": "getFocuserFOV",
+        "category": "CCD - Calculations",
+        "signature": "double getFocuserFOV(const Telescope* telescope, const Lens* lens, double focuserSize) const",
+        "description": "Calculates the field of view of a focuser with given size in inches.",
+        "parameters": [
+            {
+                "name": "telescope",
+                "type": "Telescope*",
+                "description": "Telescope object",
+                "required": true
+            },
+            {
+                "name": "lens",
+                "type": "Lens*",
+                "description": "Lens (Barlow/reducer)",
+                "required": false
+            },
+            {
+                "name": "focuserSize",
+                "type": "double",
+                "description": "Focuser diameter in inches (e.g., 1.25, 2.0, 3.3)",
+                "required": true
+            }
+        ],
+        "returnType": "double",
+        "returnDescription": "Focuser FOV in degrees",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin function"
+        },
+        "example": "var fov1_25 = ccd.getFocuserFOV(telescope, null, 1.25);\ncore.debug(\"1.25\\\" focuser FOV: \" + fov1_25.toFixed(2) + \"°\");"
+    },
+    {
+        "name": "getInnerOAGRadius",
+        "category": "CCD - OAG",
+        "signature": "double getInnerOAGRadius(const Telescope* telescope, const Lens* lens) const",
+        "description": "Returns the inner radius of the Off-Axis Guider field in degrees.",
+        "parameters": [
+            {
+                "name": "telescope",
+                "type": "Telescope*",
+                "description": "Telescope object",
+                "required": true
+            },
+            {
+                "name": "lens",
+                "type": "Lens*",
+                "description": "Lens (Barlow/reducer)",
+                "required": false
+            }
+        ],
+        "returnType": "double",
+        "returnDescription": "Inner OAG radius in degrees",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin function"
+        },
+        "example": "var innerRadius = ccd.getInnerOAGRadius(telescope, null);"
+    },
+    {
+        "name": "getOuterOAGRadius",
+        "category": "CCD - OAG",
+        "signature": "double getOuterOAGRadius(const Telescope* telescope, const Lens* lens) const",
+        "description": "Returns the outer radius of the Off-Axis Guider field in degrees.",
+        "parameters": [
+            {
+                "name": "telescope",
+                "type": "Telescope*",
+                "description": "Telescope object",
+                "required": true
+            },
+            {
+                "name": "lens",
+                "type": "Lens*",
+                "description": "Lens (Barlow/reducer)",
+                "required": false
+            }
+        ],
+        "returnType": "double",
+        "returnDescription": "Outer OAG radius in degrees",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin function"
+        },
+        "example": "var outerRadius = ccd.getOuterOAGRadius(telescope, null);"
+    },
+    {
+        "name": "getOAGActualFOVx",
+        "category": "CCD - OAG",
+        "signature": "double getOAGActualFOVx(const Telescope* telescope, const Lens* lens) const",
+        "description": "Returns the horizontal field of view of the OAG prism.",
+        "parameters": [
+            {
+                "name": "telescope",
+                "type": "Telescope*",
+                "description": "Telescope object",
+                "required": true
+            },
+            {
+                "name": "lens",
+                "type": "Lens*",
+                "description": "Lens (Barlow/reducer)",
+                "required": false
+            }
+        ],
+        "returnType": "double",
+        "returnDescription": "OAG FOV in degrees",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin function"
+        },
+        "example": "var oagFOV = ccd.getOAGActualFOVx(telescope, null);"
+    },
+    {
+        "name": "getName",
+        "category": "Lens - Properties",
+        "signature": "QString getName() const",
+        "description": "Returns the name of the lens (Barlow lens, focal reducer, etc.).",
+        "parameters": [],
+        "returnType": "QString",
+        "returnDescription": "Lens name",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin function"
+        },
+        "example": "var lens = Oculars.getLens(0);\ncore.debug(\"Lens: \" + lens.getName());"
+    },
+    {
+        "name": "getMultipler",
+        "category": "Lens - Properties",
+        "signature": "double getMultipler() const",
+        "description": "Returns the magnification factor of the lens (e.g., 2x for Barlow, 0.5x for reducer).",
+        "parameters": [],
+        "returnType": "double",
+        "returnDescription": "Lens magnification factor",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin function"
+        },
+        "example": "var lens = Oculars.getLens(0);\ncore.debug(\"Magnification: \" + lens.getMultipler() + \"x\");"
+    },
+    {
+        "name": "name",
+        "category": "Ocular - Properties",
+        "signature": "QString name() const",
+        "description": "Returns the name of the eyepiece.",
+        "parameters": [],
+        "returnType": "QString",
+        "returnDescription": "Eyepiece name",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin function"
+        },
+        "example": "var ocular = Oculars.getOcular(0);\ncore.debug(\"Eyepiece: \" + ocular.name());"
+    },
+    {
+        "name": "apparentFOV",
+        "category": "Ocular - Properties",
+        "signature": "double apparentFOV() const",
+        "description": "Returns the apparent field of view of the eyepiece in degrees.",
+        "parameters": [],
+        "returnType": "double",
+        "returnDescription": "Apparent FOV in degrees",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin function"
+        },
+        "example": "var ocular = Oculars.getOcular(0);\ncore.debug(\"aFOV: \" + ocular.apparentFOV() + \"°\");"
+    },
+    {
+        "name": "effectiveFocalLength",
+        "category": "Ocular - Properties",
+        "signature": "double effectiveFocalLength() const",
+        "description": "Returns the effective focal length of the eyepiece in millimeters.",
+        "parameters": [],
+        "returnType": "double",
+        "returnDescription": "Effective focal length in mm",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin function"
+        },
+        "example": "var ocular = Oculars.getOcular(0);\ncore.debug(\"EFL: \" + ocular.effectiveFocalLength() + \" mm\");"
+    },
+    {
+        "name": "fieldStop",
+        "category": "Ocular - Properties",
+        "signature": "double fieldStop() const",
+        "description": "Returns the field stop diameter of the eyepiece in millimeters.",
+        "parameters": [],
+        "returnType": "double",
+        "returnDescription": "Field stop diameter in mm",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin function"
+        },
+        "example": "var ocular = Oculars.getOcular(0);\ncore.debug(\"Field stop: \" + ocular.fieldStop() + \" mm\");"
+    },
+    {
+        "name": "isBinoculars",
+        "category": "Ocular - Properties",
+        "signature": "bool isBinoculars() const",
+        "description": "Returns whether the eyepiece is actually a binocular (special calculation mode).",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if binocular",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin function"
+        },
+        "example": "var ocular = Oculars.getOcular(0);\nif(ocular.isBinoculars()) {\n    core.debug(\"This is a binocular\");\n}"
+    },
+    {
+        "name": "hasPermanentCrosshair",
+        "category": "Ocular - Properties",
+        "signature": "bool hasPermanentCrosshair() const",
+        "description": "Returns whether the eyepiece has a permanent reticle/crosshair.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if permanent crosshair exists",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin function"
+        },
+        "example": "var ocular = Oculars.getOcular(0);\nif(ocular.hasPermanentCrosshair()) {\n    core.debug(\"Eyepiece has reticle\");\n}"
+    },
+    {
+        "name": "reticlePath",
+        "category": "Ocular - Properties",
+        "signature": "QString reticlePath() const",
+        "description": "Returns the file path to the reticle image for this eyepiece.",
+        "parameters": [],
+        "returnType": "QString",
+        "returnDescription": "Path to reticle image",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin function"
+        },
+        "example": "var ocular = Oculars.getOcular(0);\ncore.debug(\"Reticle: \" + ocular.reticlePath());"
+    },
+    {
+        "name": "actualFOV",
+        "category": "Ocular - Calculations",
+        "signature": "double actualFOV(const Telescope* telescope, const Lens* lens) const",
+        "description": "Calculates the actual field of view of the eyepiece with the given telescope and lens.",
+        "parameters": [
+            {
+                "name": "telescope",
+                "type": "Telescope*",
+                "description": "Telescope object",
+                "required": true
+            },
+            {
+                "name": "lens",
+                "type": "Lens*",
+                "description": "Lens (Barlow/reducer)",
+                "required": false
+            }
+        ],
+        "returnType": "double",
+        "returnDescription": "Actual FOV in degrees",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin function"
+        },
+        "example": "var telescope = Oculars.getTelescope(0);\nvar ocular = Oculars.getOcular(0);\nvar fov = ocular.actualFOV(telescope, null);\ncore.debug(\"Eyepiece FOV: \" + fov.toFixed(2) + \"°\");"
+    },
+    {
+        "name": "magnification",
+        "category": "Ocular - Calculations",
+        "signature": "double magnification(const Telescope* telescope, const Lens* lens) const",
+        "description": "Calculates the magnification of the eyepiece with the given telescope and lens.",
+        "parameters": [
+            {
+                "name": "telescope",
+                "type": "Telescope*",
+                "description": "Telescope object",
+                "required": true
+            },
+            {
+                "name": "lens",
+                "type": "Lens*",
+                "description": "Lens (Barlow/reducer)",
+                "required": false
+            }
+        ],
+        "returnType": "double",
+        "returnDescription": "Magnification (power)",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin function"
+        },
+        "example": "var telescope = Oculars.getTelescope(0);\nvar ocular = Oculars.getOcular(0);\nvar mag = ocular.magnification(telescope, null);\ncore.debug(\"Magnification: \" + mag.toFixed(1) + \"x\");"
+    },
+    {
+        "name": "name",
+        "category": "Telescope - Properties",
+        "signature": "QString name() const",
+        "description": "Returns the name of the telescope.",
+        "parameters": [],
+        "returnType": "QString",
+        "returnDescription": "Telescope name",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin function"
+        },
+        "example": "var scope = Oculars.getTelescope(0);\ncore.debug(\"Telescope: \" + scope.name());"
+    },
+    {
+        "name": "diameter",
+        "category": "Telescope - Properties",
+        "signature": "double diameter() const",
+        "description": "Returns the aperture diameter of the telescope in millimeters.",
+        "parameters": [],
+        "returnType": "double",
+        "returnDescription": "Aperture diameter in mm",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin function"
+        },
+        "example": "var scope = Oculars.getTelescope(0);\ncore.debug(\"Aperture: \" + scope.diameter() + \" mm\");"
+    },
+    {
+        "name": "focalLength",
+        "category": "Telescope - Properties",
+        "signature": "double focalLength() const",
+        "description": "Returns the focal length of the telescope in millimeters.",
+        "parameters": [],
+        "returnType": "double",
+        "returnDescription": "Focal length in mm",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin function"
+        },
+        "example": "var scope = Oculars.getTelescope(0);\ncore.debug(\"Focal length: \" + scope.focalLength() + \" mm\");"
+    },
+    {
+        "name": "isHFlipped",
+        "category": "Telescope - Properties",
+        "signature": "bool isHFlipped() const",
+        "description": "Returns whether the telescope flips the image horizontally (mirror diagonal).",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if horizontally flipped",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin function"
+        },
+        "example": "var scope = Oculars.getTelescope(0);\nif(scope.isHFlipped()) {\n    core.debug(\"Image is horizontally flipped\");\n}"
+    },
+    {
+        "name": "isVFlipped",
+        "category": "Telescope - Properties",
+        "signature": "bool isVFlipped() const",
+        "description": "Returns whether the telescope flips the image vertically (mirror diagonal).",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if vertically flipped",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin function"
+        },
+        "example": "var scope = Oculars.getTelescope(0);\nif(scope.isVFlipped()) {\n    core.debug(\"Image is vertically flipped\");\n}"
+    },
+    {
+        "name": "isEquatorial",
+        "category": "Telescope - Properties",
+        "signature": "bool isEquatorial() const",
+        "description": "Returns whether the telescope mount is equatorial (as opposed to alt-azimuth).",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if equatorial mount",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin function"
+        },
+        "example": "var scope = Oculars.getTelescope(0);\nif(scope.isEquatorial()) {\n    core.debug(\"Equatorial mount\");\n} else {\n    core.debug(\"Alt-Azimuth mount\");\n}"
+    },
+    {
+        "name": "getEnableOcular",
+        "category": "Oculars Plugin - Core",
+        "signature": "bool getEnableOcular() const",
+        "description": "Returns whether ocular view (eyepiece simulation) is currently active.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if ocular view is active",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "if(Oculars.getEnableOcular()) {\n    core.debug(\"Ocular view is active\");\n} else {\n    Oculars.enableOcular(true);\n}"
+    },
+    {
+        "name": "enableOcular",
+        "category": "Oculars Plugin - Core",
+        "signature": "void enableOcular(bool enable)",
+        "description": "Enables or disables ocular (eyepiece) view mode, simulating the view through a telescope eyepiece.",
+        "parameters": [
+            {
+                "name": "enable",
+                "type": "bool",
+                "description": "true to enable ocular view, false to disable",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "// Enable eyepiece simulation\nOculars.enableOcular(true);\n\n// Disable and return to normal view\nOculars.enableOcular(false);"
+    },
+    {
+        "name": "getEnableCrosshairs",
+        "category": "Oculars Plugin - Display",
+        "signature": "bool getEnableCrosshairs() const",
+        "description": "Returns whether crosshairs are displayed in ocular view.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if crosshairs are visible",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "if(Oculars.getEnableCrosshairs()) {\n    core.debug(\"Crosshairs are visible\");\n}"
+    },
+    {
+        "name": "toggleCrosshairs",
+        "category": "Oculars Plugin - Display",
+        "signature": "void toggleCrosshairs(bool show)",
+        "description": "Shows or hides crosshairs in the ocular view. Helps with centering objects.",
+        "parameters": [
+            {
+                "name": "show",
+                "type": "bool",
+                "description": "true to show crosshairs, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "// Show crosshairs in ocular view\nOculars.toggleCrosshairs(true);\n\n// Hide crosshairs\nOculars.toggleCrosshairs(false);"
+    },
+    {
+        "name": "getEnableCCD",
+        "category": "Oculars Plugin - CCD",
+        "signature": "bool getEnableCCD() const",
+        "description": "Returns whether CCD sensor frame overlay is displayed.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if CCD frame is visible",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "if(Oculars.getEnableCCD()) {\n    core.debug(\"CCD sensor frame is visible\");\n}"
+    },
+    {
+        "name": "toggleCCD",
+        "category": "Oculars Plugin - CCD",
+        "signature": "void toggleCCD(bool show)",
+        "description": "Shows or hides the CCD sensor frame overlay, useful for astrophotography framing.",
+        "parameters": [
+            {
+                "name": "show",
+                "type": "bool",
+                "description": "true to show CCD frame, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "// Show camera sensor frame\nOculars.toggleCCD(true);\n\n// Hide sensor frame\nOculars.toggleCCD(false);"
+    },
+    {
+        "name": "getEnableTelrad",
+        "category": "Oculars Plugin - Telrad",
+        "signature": "bool getEnableTelrad() const",
+        "description": "Returns whether the Telrad finder circles are displayed.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if Telrad circles are visible",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "if(Oculars.getEnableTelrad()) {\n    core.debug(\"Telrad circles are visible\");\n}"
+    },
+    {
+        "name": "toggleTelrad",
+        "category": "Oculars Plugin - Telrad",
+        "signature": "void toggleTelrad(bool show)",
+        "description": "Shows or hides Telrad finder circles (0.5°, 2°, 4° rings). Useful for star hopping.",
+        "parameters": [
+            {
+                "name": "show",
+                "type": "bool",
+                "description": "true to show Telrad circles, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "// Show Telrad finder\nOculars.toggleTelrad(true);\n\n// Hide Telrad\nOculars.toggleTelrad(false);"
+    },
+    {
+        "name": "getSelectedCCDIndex",
+        "category": "Oculars Plugin - Selection",
+        "signature": "int getSelectedCCDIndex() const",
+        "description": "Returns the index of the currently selected CCD sensor.",
+        "parameters": [],
+        "returnType": "int",
+        "returnDescription": "CCD index (0-based)",
+        "type": "property",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "var ccdIndex = Oculars.getSelectedCCDIndex();\ncore.debug(\"Active CCD index: \" + ccdIndex);"
+    },
+    {
+        "name": "selectCCDAtIndex",
+        "category": "Oculars Plugin - Selection",
+        "signature": "void selectCCDAtIndex(int index)",
+        "description": "Selects a CCD sensor by its index in the list.",
+        "parameters": [
+            {
+                "name": "index",
+                "type": "int",
+                "description": "CCD index (0-based)",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "// Select the first CCD\nOculars.selectCCDAtIndex(0);"
+    },
+    {
+        "name": "getSelectedOcularIndex",
+        "category": "Oculars Plugin - Selection",
+        "signature": "int getSelectedOcularIndex() const",
+        "description": "Returns the index of the currently selected eyepiece.",
+        "parameters": [],
+        "returnType": "int",
+        "returnDescription": "Eyepiece index (0-based)",
+        "type": "property",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "var occIndex = Oculars.getSelectedOcularIndex();\ncore.debug(\"Active eyepiece index: \" + occIndex);"
+    },
+    {
+        "name": "selectOcularAtIndex",
+        "category": "Oculars Plugin - Selection",
+        "signature": "void selectOcularAtIndex(int index)",
+        "description": "Selects an eyepiece by its index in the list.",
+        "parameters": [
+            {
+                "name": "index",
+                "type": "int",
+                "description": "Eyepiece index (0-based)",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "// Select the first eyepiece\nOculars.selectOcularAtIndex(0);"
+    },
+    {
+        "name": "getSelectedTelescopeIndex",
+        "category": "Oculars Plugin - Selection",
+        "signature": "int getSelectedTelescopeIndex() const",
+        "description": "Returns the index of the currently selected telescope.",
+        "parameters": [],
+        "returnType": "int",
+        "returnDescription": "Telescope index (0-based)",
+        "type": "property",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "var scopeIndex = Oculars.getSelectedTelescopeIndex();\ncore.debug(\"Active telescope index: \" + scopeIndex);"
+    },
+    {
+        "name": "selectTelescopeAtIndex",
+        "category": "Oculars Plugin - Selection",
+        "signature": "void selectTelescopeAtIndex(int index)",
+        "description": "Selects a telescope by its index in the list.",
+        "parameters": [
+            {
+                "name": "index",
+                "type": "int",
+                "description": "Telescope index (0-based)",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "// Select the first telescope\nOculars.selectTelescopeAtIndex(0);"
+    },
+    {
+        "name": "getSelectedLensIndex",
+        "category": "Oculars Plugin - Selection",
+        "signature": "int getSelectedLensIndex() const",
+        "description": "Returns the index of the currently selected auxiliary lens (Barlow/reducer). Returns -1 if none selected.",
+        "parameters": [],
+        "returnType": "int",
+        "returnDescription": "Lens index (0-based), or -1 if none",
+        "type": "property",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "var lensIndex = Oculars.getSelectedLensIndex();\nif(lensIndex >= 0) {\n    core.debug(\"Active lens index: \" + lensIndex);\n}"
+    },
+    {
+        "name": "selectLensAtIndex",
+        "category": "Oculars Plugin - Selection",
+        "signature": "void selectLensAtIndex(int index)",
+        "description": "Selects an auxiliary lens (Barlow/reducer) by its index. Use -1 to disable lens.",
+        "parameters": [
+            {
+                "name": "index",
+                "type": "int",
+                "description": "Lens index (0-based), or -1 for no lens",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "// Select the first Barlow lens\nOculars.selectLensAtIndex(0);\n\n// Disable auxiliary lens\nOculars.selectLensAtIndex(-1);"
+    },
+    {
+        "name": "getSelectedCCDRotationAngle",
+        "category": "Oculars Plugin - CCD",
+        "signature": "double getSelectedCCDRotationAngle() const",
+        "description": "Returns the rotation angle of the currently selected CCD sensor in degrees.",
+        "parameters": [],
+        "returnType": "double",
+        "returnDescription": "Rotation angle in degrees",
+        "type": "property",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "var angle = Oculars.getSelectedCCDRotationAngle();\ncore.debug(\"CCD rotation: \" + angle + \"°\");"
+    },
+    {
+        "name": "setSelectedCCDRotationAngle",
+        "category": "Oculars Plugin - CCD",
+        "signature": "void setSelectedCCDRotationAngle(double angle)",
+        "description": "Sets the rotation angle of the currently selected CCD sensor in degrees.",
+        "parameters": [
+            {
+                "name": "angle",
+                "type": "double",
+                "description": "Rotation angle in degrees",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "// Rotate CCD sensor 45 degrees\nOculars.setSelectedCCDRotationAngle(45.0);"
+    },
+    {
+        "name": "getSelectedCCDPrismPositionAngle",
+        "category": "Oculars Plugin - CCD",
+        "signature": "double getSelectedCCDPrismPositionAngle() const",
+        "description": "Returns the position angle of the OAG prism for the selected CCD in degrees.",
+        "parameters": [],
+        "returnType": "double",
+        "returnDescription": "Prism position angle in degrees",
+        "type": "property",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "var prismAngle = Oculars.getSelectedCCDPrismPositionAngle();\ncore.debug(\"Prism angle: \" + prismAngle + \"°\");"
+    },
+    {
+        "name": "setSelectedCCDPrismPositionAngle",
+        "category": "Oculars Plugin - CCD",
+        "signature": "void setSelectedCCDPrismPositionAngle(double angle)",
+        "description": "Sets the position angle of the OAG prism for the selected CCD in degrees.",
+        "parameters": [
+            {
+                "name": "angle",
+                "type": "double",
+                "description": "Prism position angle in degrees",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "Oculars.setSelectedCCDPrismPositionAngle(90.0);"
+    },
+    {
+        "name": "getFlagGuiPanelEnabled",
+        "category": "Oculars Plugin - GUI",
+        "signature": "bool getFlagGuiPanelEnabled() const",
+        "description": "Returns whether the Oculars control panel (GUI panel) is visible.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if GUI panel is visible",
+        "type": "property",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "if(Oculars.getFlagGuiPanelEnabled()) {\n    core.debug(\"Oculars control panel is visible\");\n}"
+    },
+    {
+        "name": "enableGuiPanel",
+        "category": "Oculars Plugin - GUI",
+        "signature": "void enableGuiPanel(bool enable)",
+        "description": "Shows or hides the Oculars control panel.",
+        "parameters": [
+            {
+                "name": "enable",
+                "type": "bool",
+                "description": "true to show panel, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "// Show the control panel\nOculars.enableGuiPanel(true);\n\n// Hide the control panel\nOculars.enableGuiPanel(false);"
+    },
+    {
+        "name": "getFlagInitFovUsage",
+        "category": "Oculars Plugin - Settings",
+        "signature": "bool getFlagInitFovUsage() const",
+        "description": "Returns whether initial FOV is restored when exiting ocular/CCD mode.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if initial FOV is restored",
+        "type": "property",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "if(Oculars.getFlagInitFovUsage()) {\n    core.debug(\"Initial FOV will be restored\");\n}"
+    },
+    {
+        "name": "setFlagInitFovUsage",
+        "category": "Oculars Plugin - Settings",
+        "signature": "void setFlagInitFovUsage(bool use)",
+        "description": "Sets whether to restore the initial FOV when exiting ocular/CCD mode.",
+        "parameters": [
+            {
+                "name": "use",
+                "type": "bool",
+                "description": "true to restore initial FOV",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "Oculars.setFlagInitFovUsage(true);"
+    },
+    {
+        "name": "getFlagInitDirectionUsage",
+        "category": "Oculars Plugin - Settings",
+        "signature": "bool getFlagInitDirectionUsage() const",
+        "description": "Returns whether initial view direction is restored when exiting ocular/CCD mode.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if initial direction is restored",
+        "type": "property",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "if(Oculars.getFlagInitDirectionUsage()) {\n    core.debug(\"Initial direction will be restored\");\n}"
+    },
+    {
+        "name": "setFlagInitDirectionUsage",
+        "category": "Oculars Plugin - Settings",
+        "signature": "void setFlagInitDirectionUsage(bool use)",
+        "description": "Sets whether to restore the initial view direction when exiting ocular/CCD mode.",
+        "parameters": [
+            {
+                "name": "use",
+                "type": "bool",
+                "description": "true to restore initial direction",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "Oculars.setFlagInitDirectionUsage(true);"
+    },
+    {
+        "name": "getFlagShowResolutionCriteria",
+        "category": "Oculars Plugin - Display",
+        "signature": "bool getFlagShowResolutionCriteria() const",
+        "description": "Returns whether resolution criteria (arcsec/pixel) are displayed on the CCD frame.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if resolution criteria are shown",
+        "type": "property",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "if(Oculars.getFlagShowResolutionCriteria()) {\n    core.debug(\"Resolution criteria displayed\");\n}"
+    },
+    {
+        "name": "setFlagShowResolutionCriteria",
+        "category": "Oculars Plugin - Display",
+        "signature": "void setFlagShowResolutionCriteria(bool show)",
+        "description": "Sets whether to display resolution criteria (arcseconds per pixel) on the CCD frame.",
+        "parameters": [
+            {
+                "name": "show",
+                "type": "bool",
+                "description": "true to show resolution criteria",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "Oculars.setFlagShowResolutionCriteria(true);"
+    },
+    {
+        "name": "getFlagRequireSelection",
+        "category": "Oculars Plugin - Settings",
+        "signature": "bool getFlagRequireSelection() const",
+        "description": "Returns whether an object must be selected before entering ocular view.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if selection is required",
+        "type": "property",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "if(Oculars.getFlagRequireSelection()) {\n    core.debug(\"Select an object first\");\n}"
+    },
+    {
+        "name": "setFlagRequireSelection",
+        "category": "Oculars Plugin - Settings",
+        "signature": "void setFlagRequireSelection(bool require)",
+        "description": "Sets whether an object must be selected before entering ocular view.",
+        "parameters": [
+            {
+                "name": "require",
+                "type": "bool",
+                "description": "true to require selection",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "Oculars.setFlagRequireSelection(true);"
+    },
+    {
+        "name": "getFlagAutoLimitMagnitude",
+        "category": "Oculars Plugin - Magnitude",
+        "signature": "bool getFlagAutoLimitMagnitude() const",
+        "description": "Returns whether star magnitude limiting is automatically calculated based on telescope/eyepiece.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if auto limit is active",
+        "type": "property",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "if(Oculars.getFlagAutoLimitMagnitude()) {\n    core.debug(\"Auto magnitude limiting is active\");\n}"
+    },
+    {
+        "name": "setFlagAutoLimitMagnitude",
+        "category": "Oculars Plugin - Magnitude",
+        "signature": "void setFlagAutoLimitMagnitude(bool auto)",
+        "description": "Sets whether star magnitude should be automatically limited based on telescope/eyepiece capabilities.",
+        "parameters": [
+            {
+                "name": "auto",
+                "type": "bool",
+                "description": "true to enable auto limiting",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "// Enable automatic magnitude limiting\nOculars.setFlagAutoLimitMagnitude(true);\n\n// Use manual magnitude limit\nOculars.setFlagAutoLimitMagnitude(false);"
+    },
+    {
+        "name": "getFlagHideGridsLines",
+        "category": "Oculars Plugin - Display",
+        "signature": "bool getFlagHideGridsLines() const",
+        "description": "Returns whether constellation lines, grids, and cardinal points are hidden in ocular view.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if grids/lines are hidden",
+        "type": "property",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "if(Oculars.getFlagHideGridsLines()) {\n    core.debug(\"Constellation lines are hidden in ocular view\");\n}"
+    },
+    {
+        "name": "setFlagHideGridsLines",
+        "category": "Oculars Plugin - Display",
+        "signature": "void setFlagHideGridsLines(bool hide)",
+        "description": "Sets whether to hide constellation lines, grids, and cardinal points when in ocular view for a cleaner view.",
+        "parameters": [
+            {
+                "name": "hide",
+                "type": "bool",
+                "description": "true to hide grids/lines",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "// Hide distracting lines in ocular view\nOculars.setFlagHideGridsLines(true);"
+    },
+    {
+        "name": "getFlagScaleImageCircle",
+        "category": "Oculars Plugin - Display",
+        "signature": "bool getFlagScaleImageCircle() const",
+        "description": "Returns whether the ocular circle is scaled based on the eyepiece's apparent FOV.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if circle scaling is enabled",
+        "type": "property",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "if(Oculars.getFlagScaleImageCircle()) {\n    core.debug(\"Ocular circle scales with aFOV\");\n}"
+    },
+    {
+        "name": "setFlagScaleImageCircle",
+        "category": "Oculars Plugin - Display",
+        "signature": "void setFlagScaleImageCircle(bool scale)",
+        "description": "Sets whether the ocular circle is scaled based on the eyepiece's apparent FOV.",
+        "parameters": [
+            {
+                "name": "scale",
+                "type": "bool",
+                "description": "true to enable scaling",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "Oculars.setFlagScaleImageCircle(true);"
+    },
+    {
+        "name": "getFlagUseSemiTransparency",
+        "category": "Oculars Plugin - Display",
+        "signature": "bool getFlagUseSemiTransparency() const",
+        "description": "Returns whether semi-transparency is used for the area outside the ocular circle, allowing stars to be faintly visible outside the field of view.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if semi-transparency is enabled",
+        "type": "property",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "if(Oculars.getFlagUseSemiTransparency()) {\n    core.debug(\"Semi-transparent mask enabled\");\n}"
+    },
+    {
+        "name": "setFlagUseSemiTransparency",
+        "category": "Oculars Plugin - Display",
+        "signature": "void setFlagUseSemiTransparency(bool enable)",
+        "description": "Sets whether semi-transparency is used for the area outside the ocular circle.",
+        "parameters": [
+            {
+                "name": "enable",
+                "type": "bool",
+                "description": "true to enable semi-transparency",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "// Enable semi-transparent mask\nOculars.setFlagUseSemiTransparency(true);\n\n// Use fully opaque mask\nOculars.setFlagUseSemiTransparency(false);"
+    },
+    {
+        "name": "getTransparencyMask",
+        "category": "Oculars Plugin - Display",
+        "signature": "int getTransparencyMask() const",
+        "description": "Returns the transparency level (0-100) for the semi-transparent mask outside the ocular circle.",
+        "parameters": [],
+        "returnType": "int",
+        "returnDescription": "Transparency percentage (0=opaque, 100=fully transparent)",
+        "type": "property",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "var transparency = Oculars.getTransparencyMask();\ncore.debug(\"Mask transparency: \" + transparency + \"%\");"
+    },
+    {
+        "name": "setTransparencyMask",
+        "category": "Oculars Plugin - Display",
+        "signature": "void setTransparencyMask(int percent)",
+        "description": "Sets the transparency level for the semi-transparent mask outside the ocular circle.",
+        "parameters": [
+            {
+                "name": "percent",
+                "type": "int",
+                "description": "Transparency percentage (0-100)",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "// 50% transparent mask\nOculars.setTransparencyMask(50);\n\n// Fully opaque mask\nOculars.setTransparencyMask(0);"
+    },
+    {
+        "name": "getFlagDMSDegrees",
+        "category": "Oculars Plugin - Display",
+        "signature": "bool getFlagDMSDegrees() const",
+        "description": "Returns whether coordinates are displayed in DMS (degrees/minutes/seconds) format instead of decimal degrees.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if DMS format is used",
+        "type": "property",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "if(Oculars.getFlagDMSDegrees()) {\n    core.debug(\"Coordinates in DMS format\");\n} else {\n    core.debug(\"Coordinates in decimal degrees\");\n}"
+    },
+    {
+        "name": "setFlagDMSDegrees",
+        "category": "Oculars Plugin - Display",
+        "signature": "void setFlagDMSDegrees(bool dms)",
+        "description": "Sets whether coordinates are displayed in DMS (degrees/minutes/seconds) format.",
+        "parameters": [
+            {
+                "name": "dms",
+                "type": "bool",
+                "description": "true for DMS format, false for decimal degrees",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "// Use DMS format\nOculars.setFlagDMSDegrees(true);\n\n// Use decimal degrees\nOculars.setFlagDMSDegrees(false);"
+    },
+    {
+        "name": "getFlagHorizontalCoordinates",
+        "category": "Oculars Plugin - Display",
+        "signature": "bool getFlagHorizontalCoordinates() const",
+        "description": "Returns whether horizontal coordinates (Alt/Az) are used instead of equatorial coordinates for the CCD cross display.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if horizontal coordinates are used",
+        "type": "property",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "if(Oculars.getFlagHorizontalCoordinates()) {\n    core.debug(\"Using Alt/Az coordinates\");\n} else {\n    core.debug(\"Using RA/Dec coordinates\");\n}"
+    },
+    {
+        "name": "setFlagHorizontalCoordinates",
+        "category": "Oculars Plugin - Display",
+        "signature": "void setFlagHorizontalCoordinates(bool horizontal)",
+        "description": "Sets whether horizontal coordinates (Alt/Az) are used instead of equatorial coordinates for the CCD cross display.",
+        "parameters": [
+            {
+                "name": "horizontal",
+                "type": "bool",
+                "description": "true for horizontal coordinates, false for equatorial",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "// Use Alt/Az for CCD cross\nOculars.setFlagHorizontalCoordinates(true);\n\n// Use RA/Dec\nOculars.setFlagHorizontalCoordinates(false);"
+    },
+    {
+        "name": "getFlagAutosetMountForCCD",
+        "category": "Oculars Plugin - Mount",
+        "signature": "bool getFlagAutosetMountForCCD() const",
+        "description": "Returns whether the mount type (equatorial/alt-az) is automatically set based on the selected telescope.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if auto mount setting is enabled",
+        "type": "property",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "if(Oculars.getFlagAutosetMountForCCD()) {\n    core.debug(\"Mount auto-set enabled\");\n}"
+    },
+    {
+        "name": "setFlagAutosetMountForCCD",
+        "category": "Oculars Plugin - Mount",
+        "signature": "void setFlagAutosetMountForCCD(bool autoset)",
+        "description": "Sets whether the mount type is automatically set based on the selected telescope's mount type.",
+        "parameters": [
+            {
+                "name": "autoset",
+                "type": "bool",
+                "description": "true to enable auto mount setting",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "// Auto-switch mount type\nOculars.setFlagAutosetMountForCCD(true);"
+    },
+    {
+        "name": "getFlagScalingFOVForTelrad",
+        "category": "Oculars Plugin - Telrad",
+        "signature": "bool getFlagScalingFOVForTelrad() const",
+        "description": "Returns whether the FOV is automatically scaled when Telrad is activated for better visibility.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if FOV scaling is enabled for Telrad",
+        "type": "property",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "if(Oculars.getFlagScalingFOVForTelrad()) {\n    core.debug(\"Telrad auto-zoom enabled\");\n}"
+    },
+    {
+        "name": "setFlagScalingFOVForTelrad",
+        "category": "Oculars Plugin - Telrad",
+        "signature": "void setFlagScalingFOVForTelrad(bool scale)",
+        "description": "Sets whether the FOV is automatically scaled when Telrad is activated.",
+        "parameters": [
+            {
+                "name": "scale",
+                "type": "bool",
+                "description": "true to enable auto-scaling",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "// Auto-zoom for Telrad\nOculars.setFlagScalingFOVForTelrad(true);"
+    },
+    {
+        "name": "getTelradFOV",
+        "category": "Oculars Plugin - Telrad",
+        "signature": "Vec4f getTelradFOV() const",
+        "description": "Returns the four Telrad circle radii (in degrees): ring1, ring2, ring3, optional ring4.",
+        "parameters": [],
+        "returnType": "Vec4f",
+        "returnDescription": "Vector of four Telrad circle radii in degrees",
+        "type": "property",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "var telrad = Oculars.getTelradFOV();\ncore.debug(\"Telrad rings: \" + telrad[0] + \"°, \" + telrad[1] + \"°, \" + telrad[2] + \"°\");"
+    },
+    {
+        "name": "setTelradFOV",
+        "category": "Oculars Plugin - Telrad",
+        "signature": "void setTelradFOV(Vec4f fov)",
+        "description": "Sets the four Telrad circle radii (in degrees). Typical values: 0.5°, 2.0°, 4.0°.",
+        "parameters": [
+            {
+                "name": "fov",
+                "type": "Vec4f",
+                "description": "Vector of four circle radii in degrees",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "// Set standard Telrad circles\nvar circles = core.vec4f(0.5, 2.0, 4.0, 0.0);\nOculars.setTelradFOV(circles);"
+    },
+    {
+        "name": "getFlagScalingFOVForCCD",
+        "category": "Oculars Plugin - CCD",
+        "signature": "bool getFlagScalingFOVForCCD() const",
+        "description": "Returns whether the FOV is automatically scaled when CCD frame is activated.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if FOV scaling is enabled for CCD",
+        "type": "property",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "if(Oculars.getFlagScalingFOVForCCD()) {\n    core.debug(\"CCD auto-zoom enabled\");\n}"
+    },
+    {
+        "name": "setFlagScalingFOVForCCD",
+        "category": "Oculars Plugin - CCD",
+        "signature": "void setFlagScalingFOVForCCD(bool scale)",
+        "description": "Sets whether the FOV is automatically scaled when CCD frame is activated.",
+        "parameters": [
+            {
+                "name": "scale",
+                "type": "bool",
+                "description": "true to enable auto-scaling",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "// Auto-zoom for CCD frame\nOculars.setFlagScalingFOVForCCD(true);"
+    },
+    {
+        "name": "getFlagMaxExposureTimeForCCD",
+        "category": "Oculars Plugin - CCD",
+        "signature": "bool getFlagMaxExposureTimeForCCD() const",
+        "description": "Returns whether maximum exposure time (before star trailing) is displayed for the selected CCD/telescope combination.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if max exposure time is displayed",
+        "type": "property",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "if(Oculars.getFlagMaxExposureTimeForCCD()) {\n    core.debug(\"Max exposure time displayed\");\n}"
+    },
+    {
+        "name": "setFlagMaxExposureTimeForCCD",
+        "category": "Oculars Plugin - CCD",
+        "signature": "void setFlagMaxExposureTimeForCCD(bool show)",
+        "description": "Sets whether maximum exposure time (before star trailing) is displayed for astrophotography planning.",
+        "parameters": [
+            {
+                "name": "show",
+                "type": "bool",
+                "description": "true to show max exposure time",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "// Show max exposure time for tracking\nOculars.setFlagMaxExposureTimeForCCD(true);"
+    },
+    {
+        "name": "getFlagShowOcularsButton",
+        "category": "Oculars Plugin - GUI",
+        "signature": "bool getFlagShowOcularsButton() const",
+        "description": "Returns whether the Oculars toolbar button is visible in the main Stellarium toolbar.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if toolbar button is visible",
+        "type": "property",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "if(Oculars.getFlagShowOcularsButton()) {\n    core.debug(\"Oculars button is visible\");\n}"
+    },
+    {
+        "name": "setFlagShowOcularsButton",
+        "category": "Oculars Plugin - GUI",
+        "signature": "void setFlagShowOcularsButton(bool show)",
+        "description": "Sets whether the Oculars toolbar button is visible in the main Stellarium toolbar.",
+        "parameters": [
+            {
+                "name": "show",
+                "type": "bool",
+                "description": "true to show button",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "// Show Oculars button in toolbar\nOculars.setFlagShowOcularsButton(true);\n\n// Hide Oculars button\nOculars.setFlagShowOcularsButton(false);"
+    },
+    {
+        "name": "getFlagShowContour",
+        "category": "Oculars Plugin - Display",
+        "signature": "bool getFlagShowContour() const",
+        "description": "Returns whether a contour circle is drawn around the ocular field of view.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if contour circle is drawn",
+        "type": "property",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "if(Oculars.getFlagShowContour()) {\n    core.debug(\"Ocular contour is visible\");\n}"
+    },
+    {
+        "name": "setFlagShowContour",
+        "category": "Oculars Plugin - Display",
+        "signature": "void setFlagShowContour(bool show)",
+        "description": "Sets whether a contour circle is drawn around the ocular field of view.",
+        "parameters": [
+            {
+                "name": "show",
+                "type": "bool",
+                "description": "true to draw contour circle",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "// Show ocular contour\nOculars.setFlagShowContour(true);"
+    },
+    {
+        "name": "getFlagShowCardinals",
+        "category": "Oculars Plugin - Display",
+        "signature": "bool getFlagShowCardinals() const",
+        "description": "Returns whether cardinal direction markers (N, S, E, W) are shown inside the ocular circle.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if cardinal markers are shown",
+        "type": "property",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "if(Oculars.getFlagShowCardinals()) {\n    core.debug(\"Cardinal markers displayed in ocular\");\n}"
+    },
+    {
+        "name": "setFlagShowCardinals",
+        "category": "Oculars Plugin - Display",
+        "signature": "void setFlagShowCardinals(bool show)",
+        "description": "Sets whether cardinal direction markers (N, S, E, W) are shown inside the ocular circle.",
+        "parameters": [
+            {
+                "name": "show",
+                "type": "bool",
+                "description": "true to show cardinal markers",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "// Show directions in ocular view\nOculars.setFlagShowCardinals(true);"
+    },
+    {
+        "name": "getFlagAlignCrosshair",
+        "category": "Oculars Plugin - Display",
+        "signature": "bool getFlagAlignCrosshair() const",
+        "description": "Returns whether the crosshair is aligned with the celestial pole (for equatorial mounts).",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if crosshair is pole-aligned",
+        "type": "property",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "if(Oculars.getFlagAlignCrosshair()) {\n    core.debug(\"Crosshair aligned with celestial pole\");\n}"
+    },
+    {
+        "name": "setFlagAlignCrosshair",
+        "category": "Oculars Plugin - Display",
+        "signature": "void setFlagAlignCrosshair(bool align)",
+        "description": "Sets whether the crosshair is aligned with the celestial pole (for equatorial mounts).",
+        "parameters": [
+            {
+                "name": "align",
+                "type": "bool",
+                "description": "true to align with celestial pole",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "// Align crosshair with celestial north\nOculars.setFlagAlignCrosshair(true);"
+    },
+    {
+        "name": "getArrowButtonScale",
+        "category": "Oculars Plugin - GUI",
+        "signature": "int getArrowButtonScale() const",
+        "description": "Returns the scale factor for the arrow buttons in the Oculars control panel (as percentage).",
+        "parameters": [],
+        "returnType": "int",
+        "returnDescription": "Arrow button scale percentage (default: 150)",
+        "type": "property",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "var scale = Oculars.getArrowButtonScale();\ncore.debug(\"Arrow button scale: \" + scale + \"%\");"
+    },
+    {
+        "name": "setArrowButtonScale",
+        "category": "Oculars Plugin - GUI",
+        "signature": "void setArrowButtonScale(int percent)",
+        "description": "Sets the scale factor for the arrow buttons in the Oculars control panel.",
+        "parameters": [
+            {
+                "name": "percent",
+                "type": "int",
+                "description": "Scale percentage (e.g., 100, 150, 200)",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "// Make arrow buttons larger\nOculars.setArrowButtonScale(200);\n\n// Default size\nOculars.setArrowButtonScale(150);"
+    },
+    {
+        "name": "getGuiPanelFontSize",
+        "category": "Oculars Plugin - GUI",
+        "signature": "int getGuiPanelFontSize() const",
+        "description": "Returns the font size of the Oculars control panel in pixels.",
+        "parameters": [],
+        "returnType": "int",
+        "returnDescription": "GUI panel font size in pixels",
+        "type": "property",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "var fontSize = Oculars.getGuiPanelFontSize();\ncore.debug(\"GUI panel font size: \" + fontSize);"
+    },
+    {
+        "name": "setGuiPanelFontSize",
+        "category": "Oculars Plugin - GUI",
+        "signature": "void setGuiPanelFontSize(int size)",
+        "description": "Sets the font size of the Oculars control panel in pixels.",
+        "parameters": [
+            {
+                "name": "size",
+                "type": "int",
+                "description": "Font size in pixels",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "Oculars.setGuiPanelFontSize(14);"
+    },
+    {
+        "name": "getTextColor",
+        "category": "Oculars Plugin - Colors",
+        "signature": "Vec3f getTextColor() const",
+        "description": "Returns the color of text displayed in the Oculars overlay (magnification, FOV, etc.).",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "returnDescription": "RGB color vector",
+        "type": "property",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "var textColor = Oculars.getTextColor();\ncore.debug(\"Text color: RGB(\" + textColor[0] + \", \" + textColor[1] + \", \" + textColor[2] + \")\");"
+    },
+    {
+        "name": "setTextColor",
+        "category": "Oculars Plugin - Colors",
+        "signature": "void setTextColor(Vec3f color)",
+        "description": "Sets the color of text displayed in the Oculars overlay.",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "// Set text to bright yellow\nvar yellow = core.vec3f(1.0, 0.9, 0.2);\nOculars.setTextColor(yellow);\n\n// Set text to white\nvar white = core.vec3f(1.0, 1.0, 1.0);\nOculars.setTextColor(white);"
+    },
+    {
+        "name": "getLineColor",
+        "category": "Oculars Plugin - Colors",
+        "signature": "Vec3f getLineColor() const",
+        "description": "Returns the color of lines drawn by the Oculars plugin (crosshairs, CCD frame, Telrad rings, etc.).",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "returnDescription": "RGB color vector",
+        "type": "property",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "var lineColor = Oculars.getLineColor();\ncore.debug(\"Line color: RGB(\" + lineColor[0] + \", \" + lineColor[1] + \", \" + lineColor[2] + \")\");"
+    },
+    {
+        "name": "setLineColor",
+        "category": "Oculars Plugin - Colors",
+        "signature": "void setLineColor(Vec3f color)",
+        "description": "Sets the color of lines drawn by the Oculars plugin.",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "// Set lines to bright red\nvar red = core.vec3f(1.0, 0.2, 0.2);\nOculars.setLineColor(red);\n\n// Set lines to cyan\nvar cyan = core.vec3f(0.0, 0.8, 0.9);\nOculars.setLineColor(cyan);"
+    },
+    {
+        "name": "getFocuserColor",
+        "category": "Oculars Plugin - Colors",
+        "signature": "Vec3f getFocuserColor() const",
+        "description": "Returns the color of the focuser overlay circles.",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "returnDescription": "RGB color vector",
+        "type": "property",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "var focuserColor = Oculars.getFocuserColor();\ncore.debug(\"Focuser color: RGB(\" + focuserColor[0] + \", \" + focuserColor[1] + \", \" + focuserColor[2] + \")\");"
+    },
+    {
+        "name": "setFocuserColor",
+        "category": "Oculars Plugin - Colors",
+        "signature": "void setFocuserColor(Vec3f color)",
+        "description": "Sets the color of the focuser overlay circles.",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "// Set focuser overlay to bright blue\nvar blue = core.vec3f(0.2, 0.5, 1.0);\nOculars.setFocuserColor(blue);"
+    },
+    {
+        "name": "getFlagShowCcdCropOverlay",
+        "category": "Oculars Plugin - CCD",
+        "signature": "bool getFlagShowCcdCropOverlay() const",
+        "description": "Returns whether the CCD crop overlay (subframe) is displayed.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if crop overlay is shown",
+        "type": "property",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "if(Oculars.getFlagShowCcdCropOverlay()) {\n    core.debug(\"CCD crop overlay visible\");\n}"
+    },
+    {
+        "name": "setFlagShowCcdCropOverlay",
+        "category": "Oculars Plugin - CCD",
+        "signature": "void setFlagShowCcdCropOverlay(bool show)",
+        "description": "Sets whether the CCD crop overlay (subframe) is displayed for planning mosaics or selecting ROI.",
+        "parameters": [
+            {
+                "name": "show",
+                "type": "bool",
+                "description": "true to show crop overlay",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "// Show crop overlay for framing\nOculars.setFlagShowCcdCropOverlay(true);"
+    },
+    {
+        "name": "getFlagShowCcdCropOverlayPixelGrid",
+        "category": "Oculars Plugin - CCD",
+        "signature": "bool getFlagShowCcdCropOverlayPixelGrid() const",
+        "description": "Returns whether the pixel grid is displayed within the CCD crop overlay.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if pixel grid is shown",
+        "type": "property",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "if(Oculars.getFlagShowCcdCropOverlayPixelGrid()) {\n    core.debug(\"Pixel grid visible in crop overlay\");\n}"
+    },
+    {
+        "name": "setFlagShowCcdCropOverlayPixelGrid",
+        "category": "Oculars Plugin - CCD",
+        "signature": "void setFlagShowCcdCropOverlayPixelGrid(bool show)",
+        "description": "Sets whether the pixel grid is displayed within the CCD crop overlay.",
+        "parameters": [
+            {
+                "name": "show",
+                "type": "bool",
+                "description": "true to show pixel grid",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "// Show individual pixels in crop\nOculars.setFlagShowCcdCropOverlayPixelGrid(true);"
+    },
+    {
+        "name": "getCcdCropOverlayHSize",
+        "category": "Oculars Plugin - CCD",
+        "signature": "int getCcdCropOverlayHSize() const",
+        "description": "Returns the horizontal size of the CCD crop overlay in pixels.",
+        "parameters": [],
+        "returnType": "int",
+        "returnDescription": "Crop overlay horizontal size in pixels",
+        "type": "property",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "var hSize = Oculars.getCcdCropOverlayHSize();\ncore.debug(\"Crop H size: \" + hSize + \" px\");"
+    },
+    {
+        "name": "setCcdCropOverlayHSize",
+        "category": "Oculars Plugin - CCD",
+        "signature": "void setCcdCropOverlayHSize(int size)",
+        "description": "Sets the horizontal size of the CCD crop overlay in pixels.",
+        "parameters": [
+            {
+                "name": "size",
+                "type": "int",
+                "description": "Horizontal size in pixels",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "// Set crop to 500x500 pixels\nOculars.setCcdCropOverlayHSize(500);\nOculars.setCcdCropOverlayVSize(500);"
+    },
+    {
+        "name": "getCcdCropOverlayVSize",
+        "category": "Oculars Plugin - CCD",
+        "signature": "int getCcdCropOverlayVSize() const",
+        "description": "Returns the vertical size of the CCD crop overlay in pixels.",
+        "parameters": [],
+        "returnType": "int",
+        "returnDescription": "Crop overlay vertical size in pixels",
+        "type": "property",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "var vSize = Oculars.getCcdCropOverlayVSize();\ncore.debug(\"Crop V size: \" + vSize + \" px\");"
+    },
+    {
+        "name": "setCcdCropOverlayVSize",
+        "category": "Oculars Plugin - CCD",
+        "signature": "void setCcdCropOverlayVSize(int size)",
+        "description": "Sets the vertical size of the CCD crop overlay in pixels.",
+        "parameters": [
+            {
+                "name": "size",
+                "type": "int",
+                "description": "Vertical size in pixels",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "Oculars.setCcdCropOverlayVSize(500);"
+    },
+    {
+        "name": "getFlagShowFocuserOverlay",
+        "category": "Oculars Plugin - Focuser",
+        "signature": "bool getFlagShowFocuserOverlay() const",
+        "description": "Returns whether the focuser overlay (circles representing focuser drawtube) is displayed.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if focuser overlay is shown",
+        "type": "property",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "if(Oculars.getFlagShowFocuserOverlay()) {\n    core.debug(\"Focuser overlay visible\");\n}"
+    },
+    {
+        "name": "setFlagShowFocuserOverlay",
+        "category": "Oculars Plugin - Focuser",
+        "signature": "void setFlagShowFocuserOverlay(bool show)",
+        "description": "Sets whether the focuser overlay is displayed for checking vignetting.",
+        "parameters": [
+            {
+                "name": "show",
+                "type": "bool",
+                "description": "true to show focuser overlay",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "// Show focuser drawtube circles\nOculars.setFlagShowFocuserOverlay(true);"
+    },
+    {
+        "name": "getFlagUseSmallFocuserOverlay",
+        "category": "Oculars Plugin - Focuser",
+        "signature": "bool getFlagUseSmallFocuserOverlay() const",
+        "description": "Returns whether the small focuser overlay (1.25 inch diameter) is displayed.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if small focuser overlay is shown",
+        "type": "property",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "if(Oculars.getFlagUseSmallFocuserOverlay()) {\n    core.debug(\"Small focuser (1.25\\\") overlay visible\");\n}"
+    },
+    {
+        "name": "setFlagUseSmallFocuserOverlay",
+        "category": "Oculars Plugin - Focuser",
+        "signature": "void setFlagUseSmallFocuserOverlay(bool use)",
+        "description": "Sets whether the small focuser overlay (1.25 inch diameter) is displayed.",
+        "parameters": [
+            {
+                "name": "use",
+                "type": "bool",
+                "description": "true to show small focuser",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "// Show 1.25\" focuser circle\nOculars.setFlagUseSmallFocuserOverlay(true);"
+    },
+    {
+        "name": "getFlagUseMediumFocuserOverlay",
+        "category": "Oculars Plugin - Focuser",
+        "signature": "bool getFlagUseMediumFocuserOverlay() const",
+        "description": "Returns whether the medium focuser overlay (2.0 inch diameter) is displayed.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if medium focuser overlay is shown",
+        "type": "property",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "if(Oculars.getFlagUseMediumFocuserOverlay()) {\n    core.debug(\"Medium focuser (2.0\\\") overlay visible\");\n}"
+    },
+    {
+        "name": "setFlagUseMediumFocuserOverlay",
+        "category": "Oculars Plugin - Focuser",
+        "signature": "void setFlagUseMediumFocuserOverlay(bool use)",
+        "description": "Sets whether the medium focuser overlay (2.0 inch diameter) is displayed.",
+        "parameters": [
+            {
+                "name": "use",
+                "type": "bool",
+                "description": "true to show medium focuser",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "// Show 2.0\" focuser circle\nOculars.setFlagUseMediumFocuserOverlay(true);"
+    },
+    {
+        "name": "getFlagUseLargeFocuserOverlay",
+        "category": "Oculars Plugin - Focuser",
+        "signature": "bool getFlagUseLargeFocuserOverlay() const",
+        "description": "Returns whether the large focuser overlay (3.3 inch diameter) is displayed.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if large focuser overlay is shown",
+        "type": "property",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "if(Oculars.getFlagUseLargeFocuserOverlay()) {\n    core.debug(\"Large focuser (3.3\\\") overlay visible\");\n}"
+    },
+    {
+        "name": "setFlagUseLargeFocuserOverlay",
+        "category": "Oculars Plugin - Focuser",
+        "signature": "void setFlagUseLargeFocuserOverlay(bool use)",
+        "description": "Sets whether the large focuser overlay (3.3 inch diameter) is displayed.",
+        "parameters": [
+            {
+                "name": "use",
+                "type": "bool",
+                "description": "true to show large focuser",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "// Show 3.3\" focuser circle\nOculars.setFlagUseLargeFocuserOverlay(true);"
+    },
+    {
+        "name": "getFlagShowOAGLimits",
+        "category": "Oculars Plugin - CCD",
+        "signature": "bool getFlagShowOAGLimits() const",
+        "description": "Returns whether the Off-Axis Guider limits (inner and outer circles) are displayed.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if OAG limits are shown",
+        "type": "property",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "if(Oculars.getFlagShowOAGLimits()) {\n    core.debug(\"OAG guider limits visible\");\n}"
+    },
+    {
+        "name": "setFlagShowOAGLimits",
+        "category": "Oculars Plugin - CCD",
+        "signature": "void setFlagShowOAGLimits(bool show)",
+        "description": "Sets whether the Off-Axis Guider limits (inner and outer circles) are displayed for guide star planning.",
+        "parameters": [
+            {
+                "name": "show",
+                "type": "bool",
+                "description": "true to show OAG limits",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "// Show OAG prism field for guide star selection\nOculars.setFlagShowOAGLimits(true);"
+    },
+    {
+        "name": "getSettings",
+        "category": "Oculars Plugin - Configuration",
+        "signature": "QSettings* getSettings()",
+        "description": "Returns the QSettings object for the Oculars plugin, containing all configuration data.",
+        "parameters": [],
+        "returnType": "QSettings*",
+        "returnDescription": "Pointer to the plugin's QSettings object",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "var settings = Oculars.getSettings();\n// Access settings values\nvar ocularCount = settings.value(\"ocular_count\", 0).toInt();"
+    },
+    {
+        "name": "incrementCCDIndex",
+        "category": "Oculars Plugin - Navigation",
+        "signature": "void incrementCCDIndex()",
+        "description": "Selects the next CCD sensor in the list.",
+        "parameters": [],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "// Cycle to next CCD\nOculars.incrementCCDIndex();"
+    },
+    {
+        "name": "decrementCCDIndex",
+        "category": "Oculars Plugin - Navigation",
+        "signature": "void decrementCCDIndex()",
+        "description": "Selects the previous CCD sensor in the list.",
+        "parameters": [],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "// Cycle to previous CCD\nOculars.decrementCCDIndex();"
+    },
+    {
+        "name": "incrementOcularIndex",
+        "category": "Oculars Plugin - Navigation",
+        "signature": "void incrementOcularIndex()",
+        "description": "Selects the next eyepiece in the list.",
+        "parameters": [],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "// Cycle to next eyepiece\nOculars.incrementOcularIndex();"
+    },
+    {
+        "name": "decrementOcularIndex",
+        "category": "Oculars Plugin - Navigation",
+        "signature": "void decrementOcularIndex()",
+        "description": "Selects the previous eyepiece in the list.",
+        "parameters": [],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "// Cycle to previous eyepiece\nOculars.decrementOcularIndex();"
+    },
+    {
+        "name": "incrementTelescopeIndex",
+        "category": "Oculars Plugin - Navigation",
+        "signature": "void incrementTelescopeIndex()",
+        "description": "Selects the next telescope in the list.",
+        "parameters": [],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "// Cycle to next telescope\nOculars.incrementTelescopeIndex();"
+    },
+    {
+        "name": "decrementTelescopeIndex",
+        "category": "Oculars Plugin - Navigation",
+        "signature": "void decrementTelescopeIndex()",
+        "description": "Selects the previous telescope in the list.",
+        "parameters": [],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "// Cycle to previous telescope\nOculars.decrementTelescopeIndex();"
+    },
+    {
+        "name": "incrementLensIndex",
+        "category": "Oculars Plugin - Navigation",
+        "signature": "void incrementLensIndex()",
+        "description": "Selects the next auxiliary lens (Barlow/reducer) in the list.",
+        "parameters": [],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "// Cycle to next Barlow lens\nOculars.incrementLensIndex();"
+    },
+    {
+        "name": "decrementLensIndex",
+        "category": "Oculars Plugin - Navigation",
+        "signature": "void decrementLensIndex()",
+        "description": "Selects the previous auxiliary lens (Barlow/reducer) in the list.",
+        "parameters": [],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "// Cycle to previous Barlow lens\nOculars.decrementLensIndex();"
+    },
+    {
+        "name": "disableLens",
+        "category": "Oculars Plugin - Navigation",
+        "signature": "void disableLens()",
+        "description": "Disables the currently selected auxiliary lens (removes Barlow/reducer effect).",
+        "parameters": [],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "// Remove Barlow lens effect\nOculars.disableLens();"
+    },
+    {
+        "name": "rotateReticleClockwise",
+        "category": "Oculars Plugin - Reticle",
+        "signature": "void rotateReticleClockwise()",
+        "description": "Rotates the eyepiece reticle pattern 5 degrees clockwise.",
+        "parameters": [],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "// Rotate reticle clockwise\nOculars.rotateReticleClockwise();"
+    },
+    {
+        "name": "rotateReticleCounterclockwise",
+        "category": "Oculars Plugin - Reticle",
+        "signature": "void rotateReticleCounterclockwise()",
+        "description": "Rotates the eyepiece reticle pattern 5 degrees counter-clockwise.",
+        "parameters": [],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "// Rotate reticle counter-clockwise\nOculars.rotateReticleCounterclockwise();"
+    },
+    {
+        "name": "rotateCCD",
+        "category": "Oculars Plugin - CCD",
+        "signature": "void rotateCCD(int degrees)",
+        "description": "Rotates the CCD sensor frame by the specified number of degrees.",
+        "parameters": [
+            {
+                "name": "degrees",
+                "type": "int",
+                "description": "Rotation amount in degrees (positive = clockwise, negative = counter-clockwise)",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "// Rotate CCD frame 90 degrees\nOculars.rotateCCD(90);\n\n// Rotate back 45 degrees\nOculars.rotateCCD(-45);"
+    },
+    {
+        "name": "rotatePrism",
+        "category": "Oculars Plugin - CCD",
+        "signature": "void rotatePrism(int degrees)",
+        "description": "Rotates the Off-Axis Guider prism by the specified number of degrees.",
+        "parameters": [
+            {
+                "name": "degrees",
+                "type": "int",
+                "description": "Rotation amount in degrees",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "// Rotate OAG prism\nOculars.rotatePrism(30);"
+    },
+    {
+        "name": "ccdRotationReset",
+        "category": "Oculars Plugin - CCD",
+        "signature": "void ccdRotationReset()",
+        "description": "Resets the CCD sensor rotation angle to zero.",
+        "parameters": [],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "// Reset CCD rotation\nOculars.ccdRotationReset();"
+    },
+    {
+        "name": "prismPositionAngleReset",
+        "category": "Oculars Plugin - CCD",
+        "signature": "void prismPositionAngleReset()",
+        "description": "Resets the OAG prism position angle to zero.",
+        "parameters": [],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "// Reset OAG prism angle\nOculars.prismPositionAngleReset();"
+    },
+    {
+        "name": "displayPopupMenu",
+        "category": "Oculars Plugin - GUI",
+        "signature": "void displayPopupMenu()",
+        "description": "Displays the Oculars popup menu for quick access to settings and instrument selection.",
+        "parameters": [],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "// Show popup menu (Alt+O by default)\nOculars.displayPopupMenu();"
+    },
+    {
+        "name": "getMagLimitStarsOcularsManual",
+        "category": "Oculars Plugin - Magnitude",
+        "signature": "double getMagLimitStarsOcularsManual() const",
+        "description": "Returns the manual star magnitude limit for ocular mode (used when auto-limit is disabled).",
+        "parameters": [],
+        "returnType": "double",
+        "returnDescription": "Manual star magnitude limit",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Oculars plugin"
+        },
+        "example": "var limit = Oculars.getMagLimitStarsOcularsManual();\ncore.debug(\"Manual star limit: \" + limit);"
+    }
+    ]

@@ -1,0 +1,351 @@
+[
+    {
+        "name": "⚠️ IMPORTANT NOTE",
+        "category": "StelActionMgr",
+        "signature": "NOT FOR SCRIPTS",
+        "description": "⚠️ **CRITICAL:** The StelActionMgr is designed for C++ plugins and internal Stellarium code, NOT for scripts! All action registration methods (addAction) are `public` methods, NOT `slots`, and CANNOT be called directly from scripts. The `findAction` method also will not return usable objects in scripts.\n\nThis documentation is provided for reference only, primarily for developers creating C++ plugins. For scripting, use the public slots of individual modules directly (e.g., `SolarSystem.setFlagPlanets(true)`) rather than trying to create or trigger actions via StelActionMgr.\n\nIf you need to check or change a setting from a script, use `core.getSetting()` and `core.setSetting()` instead of trying to find and toggle an action.",
+        "parameters": [],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "warning",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "This entire module is NOT scriptable. Use other modules' public slots instead."
+        },
+        "example": "// ❌ DON'T DO THIS - It WILL NOT work:\n// StelActionMgr.addAction(...);\n// var action = StelActionMgr.findAction(\"actionShow_Planets\");\n// action.trigger();\n\n// ✅ DO THIS INSTEAD:\nSolarSystem.setFlagPlanets(true);\ncore.debug(\"Planets are now visible\");"
+    },
+    {
+        "name": "addAction (slot/property version)",
+        "category": "StelActionMgr - Registration",
+        "signature": "StelAction* addAction(QString id, QString groupId, QString text, QObject target, const char* slot, QString shortcut, QString altShortcut, bool global)",
+        "description": "⚠️ **WARNING:** This is a `public` method, NOT a slot. It is designed for C++ plugins and CANNOT be called directly from scripts.\n\nCreates and registers a new StelAction connected to an object property or slot. The action appears in the hotkey configuration dialog and can be bound to buttons.",
+        "parameters": [
+            {
+                "name": "id",
+                "type": "QString",
+                "description": "Unique global identifier (e.g., 'actionShow_Planets')",
+                "required": true
+            },
+            {
+                "name": "groupId",
+                "type": "QString",
+                "description": "Group identifier for UI organization",
+                "required": true
+            },
+            {
+                "name": "text",
+                "type": "QString",
+                "description": "Human-readable description in English",
+                "required": true
+            },
+            {
+                "name": "target",
+                "type": "QObject",
+                "description": "Target QObject (e.g., SolarSystem, LandscapeMgr)",
+                "required": true
+            },
+            {
+                "name": "slot",
+                "type": "const char*",
+                "description": "Slot name (e.g., 'setFlagPlanets(bool)') or property name",
+                "required": true
+            },
+            {
+                "name": "shortcut",
+                "type": "QString",
+                "description": "Default shortcut (e.g., 'P', 'Ctrl+S')",
+                "required": false,
+                "default": "\"\""
+            },
+            {
+                "name": "altShortcut",
+                "type": "QString",
+                "description": "Alternative shortcut",
+                "required": false,
+                "default": "\"\""
+            },
+            {
+                "name": "global",
+                "type": "bool",
+                "description": "If true, action works without focus",
+                "required": false,
+                "default": "false"
+            }
+        ],
+        "returnType": "StelAction*",
+        "returnDescription": "Pointer to the created StelAction",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "This is a C++ method that CANNOT be called from scripts. For documentation only."
+        },
+        "example": "// This code is for C++ plugins only, NOT for scripts:\n/*\nStelAction* action = StelActionMgr::getInstance().addAction(\n    \"actionShow_Planets\",\n    \"Display Options\",\n    \"Planets\",\n    SolarSystem,\n    \"setFlagPlanets(bool)\",\n    \"P\"\n);\n*/"
+    },
+    {
+        "name": "addAction (lambda version)",
+        "category": "StelActionMgr - Registration",
+        "signature": "StelAction* addAction(QString id, QString groupId, QString text, QObject context, std::function<void()> lambda, QString shortcut, QString altShortcut, bool global)",
+        "description": "⚠️ **WARNING:** This is a `public` method, NOT a slot. It is designed for C++ plugins and CANNOT be called directly from scripts.\n\nCreates and registers a new StelAction with a lambda function for custom behavior.",
+        "parameters": [
+            {
+                "name": "id",
+                "type": "QString",
+                "description": "Unique global identifier",
+                "required": true
+            },
+            {
+                "name": "groupId",
+                "type": "QString",
+                "description": "Group identifier",
+                "required": true
+            },
+            {
+                "name": "text",
+                "type": "QString",
+                "description": "Human-readable description",
+                "required": true
+            },
+            {
+                "name": "context",
+                "type": "QObject",
+                "description": "Context object for the lambda",
+                "required": true
+            },
+            {
+                "name": "lambda",
+                "type": "std::function<void()>",
+                "description": "Lambda function to execute",
+                "required": true
+            },
+            {
+                "name": "shortcut",
+                "type": "QString",
+                "description": "Default shortcut",
+                "required": false,
+                "default": "\"\""
+            },
+            {
+                "name": "altShortcut",
+                "type": "QString",
+                "description": "Alternative shortcut",
+                "required": false,
+                "default": "\"\""
+            },
+            {
+                "name": "global",
+                "type": "bool",
+                "description": "If true, action works without focus",
+                "required": false,
+                "default": "false"
+            }
+        ],
+        "returnType": "StelAction*",
+        "returnDescription": "Pointer to the created StelAction",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "Requires C++11. This method CANNOT be called from scripts."
+        },
+        "example": "// This code is for C++ plugins only, NOT for scripts:\n/*\nStelActionMgr::getInstance().addAction(\n    \"actionCustom_Message\",\n    \"Tools\",\n    \"Show Message\",\n    core,\n    []() { qDebug() << \"Hello from lambda!\"; },\n    \"Ctrl+W\"\n);\n*/"
+    },
+    {
+        "name": "findAction",
+        "category": "StelActionMgr - Query",
+        "signature": "StelAction* findAction(QString id)",
+        "description": "⚠️ **WARNING:** This is a `public` method, NOT a slot. Even if called from a script, the returned `StelAction*` cannot be used to trigger or modify the action.\n\nFinds a registered StelAction by its unique identifier.",
+        "parameters": [
+            {
+                "name": "id",
+                "type": "QString",
+                "description": "Action identifier",
+                "required": true
+            }
+        ],
+        "returnType": "StelAction*",
+        "returnDescription": "Pointer to StelAction, or null if not found (unusable from scripts)",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "The returned pointer cannot be used in scripts. Use module slots directly instead."
+        },
+        "example": "// ❌ This will NOT work:\n// var action = StelActionMgr.findAction(\"actionShow_Planets\");\n// action.trigger();\n\n// ✅ Do this instead:\nSolarSystem.setFlagPlanets(true);"
+    },
+    {
+        "name": "findActionFromShortcut",
+        "category": "StelActionMgr - Query",
+        "signature": "StelAction* findActionFromShortcut(QString shortcut)",
+        "description": "⚠️ **WARNING:** This is a `public` method, NOT a slot, and returns an object unusable from scripts.\n\nFinds a StelAction associated with a specific keyboard shortcut.",
+        "parameters": [
+            {
+                "name": "shortcut",
+                "type": "QString",
+                "description": "Keyboard shortcut string (e.g., 'P', 'Ctrl+S')",
+                "required": true
+            }
+        ],
+        "returnType": "StelAction*",
+        "returnDescription": "Pointer to StelAction, or null if not found (unusable from scripts)",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Not usable from scripts."
+        },
+        "example": "// This documentation is for reference only. Not usable in scripts."
+    },
+    {
+        "name": "getGroupList",
+        "category": "StelActionMgr - Query",
+        "signature": "QStringList getGroupList()",
+        "description": "⚠️ **WARNING:** This is a `public` method, NOT a slot, and may not work reliably in scripts.\n\nReturns a list of all action group identifiers.",
+        "parameters": [],
+        "returnType": "QStringList",
+        "returnDescription": "List of group IDs",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "This is a `public` method. Its reliability in scripts is not guaranteed."
+        },
+        "example": "// May not work reliably, use with caution:\n// var groups = StelActionMgr.getGroupList();"
+    },
+    {
+        "name": "getActionList",
+        "category": "StelActionMgr - Query",
+        "signature": "QList<StelAction*> getActionList(QString group)",
+        "description": "⚠️ **WARNING:** This is a `public` method, NOT a slot, and returns objects unusable from scripts.\n\nReturns a list of all StelActions belonging to a specific group.",
+        "parameters": [
+            {
+                "name": "group",
+                "type": "QString",
+                "description": "Group identifier",
+                "required": true
+            }
+        ],
+        "returnType": "QList<StelAction*>",
+        "returnDescription": "List of StelAction pointers (unusable from scripts)",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Not usable from scripts."
+        },
+        "example": "// For documentation only. Not usable in scripts."
+    },
+    {
+        "name": "getActionList (all)",
+        "category": "StelActionMgr - Query",
+        "signature": "QList<StelAction*> getActionList()",
+        "description": "⚠️ **WARNING:** This is a `public` method, NOT a slot, and returns objects unusable from scripts.\n\nReturns a list of all registered StelActions.",
+        "parameters": [],
+        "returnType": "QList<StelAction*>",
+        "returnDescription": "List of all StelAction pointers (unusable from scripts)",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Not usable from scripts."
+        },
+        "example": "// For documentation only. Not usable in scripts."
+    },
+    {
+        "name": "saveShortcuts",
+        "category": "StelActionMgr - Configuration",
+        "signature": "saveShortcuts()",
+        "description": "⚠️ **WARNING:** This is a `public slot`, but its effects may not be intended for scripts.\n\nSaves the current keyboard shortcut assignments to the configuration file (config.ini).",
+        "parameters": [],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "This is a `public slot` and can be called, but modifying shortcuts from scripts is not recommended."
+        },
+        "example": "// Can be called, but modifying shortcuts from scripts is not recommended:\n// StelActionMgr.saveShortcuts();"
+    },
+    {
+        "name": "restoreDefaultShortcuts",
+        "category": "StelActionMgr - Configuration",
+        "signature": "restoreDefaultShortcuts()",
+        "description": "⚠️ **WARNING:** This is a `public slot`, but its effects may not be intended for scripts.\n\nRestores all keyboard shortcuts to their default values and saves the configuration.",
+        "parameters": [],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "This is a `public slot` and can be called, but resetting shortcuts from scripts is not recommended."
+        },
+        "example": "// Can be called, but resetting shortcuts from scripts is not recommended:\n// StelActionMgr.restoreDefaultShortcuts();"
+    },
+    {
+        "name": "setAllActionsEnabled",
+        "category": "StelActionMgr - Control",
+        "signature": "setAllActionsEnabled(bool enabled)",
+        "description": "⚠️ **WARNING:** This is a `public slot`, but is intended for internal use during shortcut editing.\n\nEnables or disables all actions globally.",
+        "parameters": [
+            {
+                "name": "enabled",
+                "type": "bool",
+                "description": "`true` to enable all actions, `false` to disable them",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "This is a `public slot` and can be called, but is intended for internal use."
+        },
+        "example": "// Can be called, but not recommended:\n// StelActionMgr.setAllActionsEnabled(false);"
+    },
+    {
+        "name": "actionToggled",
+        "category": "StelActionMgr - Signals",
+        "signature": "actionToggled(QString id, bool value)",
+        "description": "⚠️ **WARNING:** This is a signal emitted by StelActionMgr when any action is toggled. Connecting to it from scripts may not work reliably.\n\nEmitted when any action registered with this StelActionMgr is toggled.",
+        "parameters": [
+            {
+                "name": "id",
+                "type": "QString",
+                "description": "The id of the action that was toggled",
+                "required": true
+            },
+            {
+                "name": "value",
+                "type": "bool",
+                "description": "The new value of the action",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "signal",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Connecting to signals from scripts may not work reliably."
+        },
+        "example": "// Connecting to signals from scripts may not work reliably:\n// function onActionToggled(id, value) {\n//     core.debug(\"Action \" + id + \" toggled to \" + value);\n// }\n// StelActionMgr.actionToggled.connect(onActionToggled);"
+    }
+]
