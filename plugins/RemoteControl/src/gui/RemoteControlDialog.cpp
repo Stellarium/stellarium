@@ -76,13 +76,9 @@ void RemoteControlDialog::createDialogContent()
 	connect(ui->enabledCheckbox, SIGNAL(clicked(bool)), this, SLOT(updateIPlabel(bool)));
 	updateIPlabel(ui->enabledCheckbox->isChecked());
 
-	ui->activateOnStartCheckBox->setChecked(rc->getFlagAutoStart());
-	connect(ui->activateOnStartCheckBox, SIGNAL(toggled(bool)), rc, SLOT(setFlagAutoStart(bool)));
-	connect(rc, SIGNAL(flagAutoStartChanged(bool)), ui->activateOnStartCheckBox, SLOT(setChecked(bool)));
+	connectBoolProperty(ui->activateOnStartCheckBox, "RemoteControl.autoStart");
 
-	ui->passwordCheckBox->setChecked(rc->getFlagUsePassword());
-	connect(ui->passwordCheckBox, SIGNAL(toggled(bool)), rc, SLOT(setFlagUsePassword(bool)));
-	connect(rc, SIGNAL(flagUsePasswordChanged(bool)), ui->passwordCheckBox, SLOT(setChecked(bool)));
+	connectBoolProperty(ui->passwordCheckBox, "RemoteControl.usePassword");
 
 	ui->passwordEdit->setEnabled(rc->getFlagUsePassword());
 	ui->passwordEdit->setText(rc->getPassword());
@@ -90,12 +86,9 @@ void RemoteControlDialog::createDialogContent()
 	connect(rc,SIGNAL(flagUsePasswordChanged(bool)),ui->passwordEdit,SLOT(setEnabled(bool)));
 	connect(ui->passwordEdit, SIGNAL(textChanged(QString)), rc, SLOT(setPassword(QString)));
 
-	ui->portNumberSpinBox->setValue(rc->getPort());
-	connect(ui->portNumberSpinBox, SIGNAL(valueChanged(int)), rc, SLOT(setPort(int)));
+	connectIntProperty(ui->portNumberSpinBox, "RemoteControl.port");
 
-	ui->enableCorsCheckbox->setChecked(rc->getFlagEnableCors());
-	connect(ui->enableCorsCheckbox, SIGNAL(toggled(bool)), rc, SLOT(setFlagEnableCors(bool)));
-	connect(rc, SIGNAL(flagEnableCorsChanged(bool)), ui->enableCorsCheckbox, SLOT(setChecked(bool)));
+	connectBoolProperty(ui->enableCorsCheckbox, "RemoteControl.enableCors");
 
 	ui->corsOriginEdit->setEnabled(rc->getFlagEnableCors());
 	ui->corsOriginEdit->setText(rc->getCorsOrigin());
@@ -103,12 +96,17 @@ void RemoteControlDialog::createDialogContent()
 	connect(rc,SIGNAL(flagEnableCorsChanged(bool)),ui->corsOriginEdit,SLOT(setEnabled(bool)));
 	connect(ui->corsOriginEdit, SIGNAL(textChanged(QString)), rc, SLOT(setCorsOrigin(QString)));
 
+	connectIntProperty(ui->maximumRequestSpinBox, "RemoteControl.maxRequestSize");
+	connectIntProperty(ui->maximumMultipartSpinBox, "RemoteControl.maxMultipartSize");
+
 	ui->restartPanel->setVisible(false);
 	connect(rc, SIGNAL(flagUsePasswordChanged(bool)), this, SLOT(requiresRestart()));
 	connect(rc, SIGNAL(passwordChanged(QString)), this, SLOT(requiresRestart()));
 	connect(rc, SIGNAL(flagEnableCorsChanged(bool)), this, SLOT(requiresRestart()));
 	connect(rc, SIGNAL(corsOriginChanged(QString)), this, SLOT(requiresRestart()));
 	connect(rc, SIGNAL(portChanged(int)), this, SLOT(requiresRestart()));
+	connect(rc, SIGNAL(maxRequestSizeChanged(int)), this, SLOT(requiresRestart()));
+	connect(rc, SIGNAL(maxMultipartSizeChanged(int)), this, SLOT(requiresRestart()));
 
 	connect(ui->resetButton, SIGNAL(clicked(bool)),this,SLOT(restart()));
 

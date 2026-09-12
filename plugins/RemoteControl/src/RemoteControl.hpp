@@ -56,6 +56,10 @@ class RemoteControl : public StelModule
 		   READ getFlagUsePassword
 		   WRITE setFlagUsePassword
 		   NOTIFY flagUsePasswordChanged)
+	Q_PROPERTY(int port
+                  READ getPort
+                  WRITE setPort
+                  NOTIFY portChanged)
 	Q_PROPERTY(bool enableCors
 		   READ getFlagEnableCors
 		   WRITE setFlagEnableCors
