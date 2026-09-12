@@ -433,7 +433,8 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 				  int limitMagIndex, StelCore* core, int maxMagStarName, float names_brightness,
 				  const QVector<SphericalCap> &boundingCaps,
 				  const bool withAberration, const Vec3d vel, const double withParallax, const Vec3d diffPos,
-				  const bool withCommonNameI18n) const
+				  const bool withCommonNameI18n,
+				  const bool filterMoon, SphericalCap moonCap) const
 {
 	StelSkyDrawer* drawer = core->getSkyDrawer();
 	Vec3d v;
@@ -543,6 +544,13 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 				continue;
 		}
 
+		// If the star is covered by the Moon, don't draw (avoid displaying part of halo of occulted star!)
+		// TODO: This is a bad test. We should draw the moon into a stencil buffer and check that.
+		if (filterMoon)
+		{
+			if (moonCap.contains(v))
+				continue;
+		}
 		int extinctedMagIndex = magIndex;
 		float twinkleFactor=1.0f; // allow height-dependent twinkle.
 		if (withExtinction)
