@@ -9,8 +9,8 @@
 # J Nezbeda, 2026
 # Alexander V. Wolf <alex.v.wolf@gmail.com>, 2026
 # cardinot <mcardinot@gmail.com>, 2026
-# Pavel Sem, 2026
 # Zdeněk Moravec <moravec@hapteplice.cz>, 2026
+# Pavel Sem, 2026
 # 
 #, fuzzy
 msgid ""
@@ -19,7 +19,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
 "POT-Creation-Date: 2026-09-11 17:56+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
-"Last-Translator: Zdeněk Moravec <moravec@hapteplice.cz>, 2026\n"
+"Last-Translator: Pavel Sem, 2026\n"
 "Language-Team: Czech (https://app.transifex.com/stellarium/teams/80998/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -5158,8 +5158,8 @@ msgid ""
 "Ancient Solar Eclipses</em> (%1). See for more info %2here%3."
 msgstr ""
 "Tento historický vzorec odvodil C. Schoch v roce 1931 a byl použit G. "
-"Henrikssonem ve článku <em>Einstein's Theory of Relativity Confirmed by "
-"Ancient Solar Eclipses</em> (%1). Více informací naleznete %2 zde%3."
+"Henrikssonem v článku <em>Einstein's Theory of Relativity Confirmed by "
+"Ancient Solar Eclipses</em> (%1). Více informací naleznete %2zde%3."
 
 #: src/core/StelCore.cpp:2764
 #, qt-format
@@ -5167,8 +5167,8 @@ msgid ""
 "This empirical equation was published by G. M. Clemence in the article "
 "<em>On the system of astronomical constants</em> (%1)."
 msgstr ""
-"Tuto empirickou rovnici publikoval G. M. Clemence ve článku <em>On the "
-"system of astronomical constants</em> (%1)."
+"Tuto empirickou rovnici publikoval G. M. Clemence v článku <em>On the system"
+" of astronomical constants</em> (%1)."
 
 #: src/core/StelCore.cpp:2767
 #, qt-format
@@ -5221,7 +5221,7 @@ msgid ""
 "This equation was published by F. R. Stephenson in the article <em>Pre-"
 "Telescopic Astronomical Observations</em> (%1)."
 msgstr ""
-"Tuto rovnici publikoval F. R. Stephenson ve článku <em>Pre-Telescopic "
+"Tuto rovnici publikoval F. R. Stephenson v článku <em>Pre-Telescopic "
 "Astronomical Observations</em> (%1)."
 
 #: src/core/StelCore.cpp:2785
@@ -5233,7 +5233,7 @@ msgid ""
 "period 1800-1975</em> (%1) as fit through data published by Brouwer (1952)."
 msgstr ""
 "Tuto polynomickou rovnici 12. řádu (zastaralá, nahrazena Schmadelem & Zechem"
-" v roce 1988) publikovali L. D. Schmadel a G. Zech ve článku <em>Polynomial "
+" v roce 1988) publikovali L. D. Schmadel a G. Zech v článku <em>Polynomial "
 "approximations for the correction delta T E.T.-U.T. in the period "
 "1800-1975</em> (%1) použitím dat publikovaných Brouwerem (1952)."
 
@@ -5254,7 +5254,7 @@ msgid ""
 "article <em>Long-term changes in the rotation of the earth - 700 B.C. to "
 "A.D. 1980</em> (%1)."
 msgstr ""
-"Tuto rovnici publikovali F. R. Stephenson a L. V. Morrison ve článku "
+"Tuto rovnici publikovali F. R. Stephenson a L. V. Morrison v článku "
 "<em>Long-term changes in the rotation of the earth - 700 B.C. to A.D. "
 "1980</em> (%1)."
 
@@ -5296,7 +5296,7 @@ msgid ""
 "Period 1800-1988</em> (%1) as data fit through values given by Stephenson & "
 "Morrison (1984)."
 msgstr ""
-"Tuto polynomickou rovnici 12. řádu publikovali L. D. Schmadel a G. Zech ve "
+"Tuto polynomickou rovnici 12. řádu publikovali L. D. Schmadel a G. Zech v "
 "článku <em>Empirical Transformations from U.T. to E.T. for the Period "
 "1800-1988</em> (%1) jako úpravu dat z hodnot získaných od Stephensona & "
 "Morrisona (1984)."
@@ -5417,7 +5417,7 @@ msgid ""
 msgstr ""
 "Toto řešení od F. Espenaka a J. Meeuse, založené na výzkumu Morrisona a "
 "Stephensona (2004) a polynomické regresi tabulkových hodnot pro období "
-"1600-2000, je použito na %1Stránkách o zatměních od NASA%2, a v jejich "
+"1600–2000, je použito na %1Stránkách o zatměních od NASA%2 a v jejich "
 "knihách <em>Five Millennium Canon of Solar Eclipses: -1900 to +3000</em> "
 "(2006) a <em>Thousand Year Canon of Solar Eclipses 1501 to 2500</em> (2014)."
 " Tento vzorec je také použit v programu pro solární, lunární a planetární "
@@ -5460,7 +5460,7 @@ msgid ""
 "Babylon</em> (%1)."
 msgstr ""
 "Toto řešení od B. Banjevice, založené na publikaci Stephenson & Morrisona "
-"(1984), bylo vydáno ve článku <em>Ancient eclipses and dating the fall of "
+"(1984), bylo vydáno v článku <em>Ancient eclipses and dating the fall of "
 "Babylon</em> (%1)."
 
 #: src/core/StelCore.cpp:2848
@@ -22589,7 +22589,7 @@ msgstr "Poznámky pro uživatele"
 msgid ""
 "Satellites and their orbits are only shown when the observer is on Earth."
 msgstr ""
-"Družice a jejich dráhy se zobrazují pouze pokud je pozorovatel na Zemi."
+"Družice a jejich dráhy se zobrazují, pouze pokud je pozorovatel na Zemi."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:790
 msgid ""
@@ -24323,7 +24323,7 @@ msgstr ""
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:341
 msgid "or a third-party application <b>that can 'talk' to Stellarium</b>;"
 msgstr ""
-"nebo aplikací třetí strany <b>která dokáže komunikovat se Stellariem</b>;"
+"nebo aplikací třetí strany, <b>která dokáže komunikovat se Stellariem</b>;"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:343
 msgid ""
@@ -25675,7 +25675,7 @@ msgstr "Vypnuto"
 #: plugins/TextUserInterface/src/TuiNodeColor.cpp:109
 #, qt-format
 msgid "error, unknown color part \"%1\""
-msgstr "chyba, neznámá barva část \"%1\""
+msgstr "chyba, neznámá část barvy \"%1\""
 
 #: plugins/TextUserInterface/src/TuiNodeActivate.cpp:48
 msgid " [RETURN to activate]"
@@ -26580,7 +26580,7 @@ msgstr "Povolit zobrazení při spuštění"
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:497
 msgid "Only highlight when visible"
-msgstr "Zvýraznit pouze když jsou viditelné"
+msgstr "Zvýraznit, pouze když jsou viditelné"
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:498
 msgid "Only show extra information for marked Navigation Stars"
@@ -27173,8 +27173,8 @@ msgid ""
 msgstr ""
 "Sdílení zdrojů jiného původu (angl. Cross-Origin Resource Sharing, zkr. "
 "CORS) umožňuje vyjmenovaným webovým stránkám zpřístupnit a řídit vaše "
-"Stellarium.<br/>Uveďte \"*\" pokud chcete umožnit přístup z libovolné adresy"
-" – ovšem pouze na vaše vlastní nebezpečí."
+"Stellarium.<br/>Uveďte \"*\", pokud chcete umožnit přístup z libovolné "
+"adresy – ovšem pouze na vaše vlastní nebezpečí."
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:269
 msgid "Your changes require a restart of the server."
@@ -29094,11 +29094,11 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:498
 msgid "Nyamien refers to the supreme creator deity of Akan mythology."
-msgstr "Nyamien odkazuje na nejvyšší stvořitelské božstvo Akanské mytologie."
+msgstr "Nyamien odkazuje na nejvyšší stvořitelské božstvo akanské mytologie."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:499
 msgid "Asye refers to the Earth goddess of Akan mythology."
-msgstr "Asye odkazuje na bohyni Země z Akanské mytologie."
+msgstr "Asye odkazuje na bohyni Země z akanské mytologie."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:500
 msgid ""
@@ -33690,7 +33690,7 @@ msgid ""
 "5. The content is shared in good faith, with respect for cultural significance and sensitivities.\n"
 "6. You have provided proper attributions where required (e.g., sources of images, texts, or names)."
 msgstr ""
-"1. Plně souhlasíte s tím, že nebeská kultura bude podléhat licenci, kterou jste vybrali..\n"
+"1. Plně souhlasíte s tím, že nebeská kultura bude podléhat licenci, kterou jste vybrali.\n"
 "2. Popsali jste nebeskou kulturu tak podrobně, jak jen to bylo možné.\n"
 "3. Máte potřebná práva k používání a sdílení veškerého zahrnutého obsahu (např. kreseb, popisů).\n"
 "4. Veškeré podávané informace jsou podle vašeho nejlepšího vědomí a svědomí přesné.\n"
