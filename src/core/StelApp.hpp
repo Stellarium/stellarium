@@ -26,6 +26,7 @@
 #include <QString>
 #include <QObject>
 #include <QRandomGenerator>
+#include "StelMainExport.hpp"
 #include "StelTextureTypes.hpp"
 #include "StelModule.hpp"
 #include "StelUtils.hpp"
@@ -76,7 +77,7 @@ class SpoutSender;
 //! The StelApp class is also the one managing the StelModule in a generic manner
 //! by calling their update, drawing and other methods when needed.
 //! @author Fabien Chereau
-class StelApp : public QObject
+class STELMAIN_EXPORT StelApp : public QObject
 {
 	Q_OBJECT
 	Q_PROPERTY(bool nightMode               READ getVisionModeNight         WRITE setVisionModeNight         NOTIFY visionNightModeChanged)

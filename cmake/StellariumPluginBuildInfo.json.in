@@ -1,0 +1,30 @@
+{
+  "sdk_format_version": 1,
+  "artifact_kind": "experimental-minimal-plugin-sdk",
+  "stellarium_version": "@VERSION@",
+  "source_revision": "@STELLARIUM_PLUGIN_SDK_SOURCE_REVISION_JSON@",
+  "package_build_id": "@STELLARIUM_PLUGIN_SDK_BUILD_ID_JSON@",
+  "plugin_interface_iid": "org.stellarium.StelPluginInterface/2.0",
+  "architecture": "@STELLARIUM_PLUGIN_ABI_ARCHITECTURE@",
+  "compiler_id": "@CMAKE_CXX_COMPILER_ID@",
+  "compiler_version": "@CMAKE_CXX_COMPILER_VERSION@",
+  "msvc_toolset_version": "@MSVC_TOOLSET_VERSION@",
+  "qt_version": "@QT_VERSION@",
+  "build_configuration": "@STELLARIUM_PLUGIN_ABI_CONFIGURATION@",
+  "msvc_runtime": "@STELLARIUM_PLUGIN_ABI_MSVC_RUNTIME@",
+  "compatibility_policy": "Plug-ins must match this exact Stellarium package build, architecture, MSVC toolset, Qt version, build configuration, and MSVC runtime. Compatibility with other Stellarium releases or package builds is not guaranteed.",
+  "supported_operations": [
+    "StelPluginInterface metadata and module creation",
+    "StelModule construction, initialization, and getModuleVersion()"
+  ],
+  "required_qt_components": [
+    "Core",
+    "Gui"
+  ],
+  "required_compile_definitions": [
+@STELLARIUM_PLUGIN_SDK_COMPILE_DEFINITIONS_JSON@
+  ],
+  "installed_headers": [
+@STELLARIUM_PLUGIN_SDK_HEADERS_JSON@
+  ]
+}
