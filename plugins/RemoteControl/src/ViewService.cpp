@@ -62,9 +62,18 @@ void ViewService::get(const QByteArray &operation, const APIParameters &paramete
 	}
 	else if (operation.startsWith("landscapedescription/"))
 	{
+		// Possible syntax is either /api/view/landscapedescription/path (original) or /api/view/landscapedescription/?&path=the/Path/to/file (easier for SwaggerUI)
+
 		int startidx = operation.indexOf('/');
-		//get the path after the name and map it to the landscapes' directory
-		QByteArray path = operation.mid(startidx+1);
+
+		QString pathPar = QString::fromUtf8(parameters.value("path"));
+		QByteArray path(pathPar.replace("%2F", "/").toStdString());
+
+		if (path.length()==0) // parameter free access: older interface with path syntax
+		{
+			//get the path after the name and map it to the landscapes' directory
+			path = operation.mid(startidx+1);
+		}
 
 		if(path.isEmpty())
 		{
@@ -98,9 +107,19 @@ void ViewService::get(const QByteArray &operation, const APIParameters &paramete
 	}
 	else if (operation.startsWith("skyculturedescription/"))
 	{
+		// Possible syntax is either /api/view/skyculturedescription/path (original) or /api/view/skyculturedescription/?&path=the/Path/to/file (easier for SwaggerUI)
+
 		int startidx = operation.indexOf('/');
-		//get the path after the name and map it to the sky cultures' directory
-		QByteArray path = operation.mid(startidx+1);
+
+		QString pathPar = QString::fromUtf8(parameters.value("path"));
+		QByteArray path(pathPar.replace("%2F", "/").toStdString());
+
+
+		if (path.length()==0) // parameter free access: older interface with path syntax
+		{
+			//get the path after the name and map it to the sky cultures' directory
+			path = operation.mid(startidx+1);
+		}
 
 		if(path.isEmpty())
 		{

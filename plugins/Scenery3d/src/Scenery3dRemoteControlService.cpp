@@ -72,17 +72,28 @@ void Scenery3dRemoteControlService::get(const QByteArray &operation, const APIPa
 	}
 	else if (operation.startsWith("scenedescription/"))
 	{
+		// Possible syntax is either /api/scenery3d/scenedescription/myScene/path (original) or /api/scenery3d/scenedescription/?id=myScene&path=the/Path/to/file (easier for SwaggerUI)
+
 		//extract scene id
 		int startidx = operation.indexOf('/');
 		int endidx = operation.indexOf('/', startidx+1);
 
-		if(endidx == -1)
-		{
-			response.writeRequestError("requires /-separated scene ID");
-			return;
-		}
+		QString id = QString::fromUtf8(parameters.value("id"));
+		QString pathPar = QString::fromUtf8(parameters.value("path"));
+		QByteArray path(pathPar.replace("%2F", "/").toStdString());
 
-		QString id = operation.mid(startidx+1,(endidx - startidx - 1));
+		if (id.length()==0) // parameter free access: older interface with path syntax
+		{
+			if(endidx == -1)
+			{
+				response.writeRequestError("requires /-separated scene ID");
+				return;
+			}
+
+			id = operation.mid(startidx+1,(endidx - startidx - 1));
+			//get the path after the name and map it to the scene's directory
+			path = operation.mid(endidx+1);
+		}
 		SceneInfo si;
 		SceneInfo::loadByID(id,si);
 
@@ -95,8 +106,6 @@ void Scenery3dRemoteControlService::get(const QByteArray &operation, const APIPa
 		// allow caching of response
 		response.setCacheTime(60*60);
 
-		//get the path after the name and map it to the scene's directory
-		QByteArray path = operation.mid(endidx+1);
 		if(path.isEmpty())
 		{
 			//no path, return HTML description
