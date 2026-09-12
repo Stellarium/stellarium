@@ -80,7 +80,8 @@ void Scenery3dRemoteControlService::get(const QByteArray &operation, const APIPa
 
 		QString id = QString::fromUtf8(parameters.value("id"));
 		QString pathPar = QString::fromUtf8(parameters.value("path"));
-		QByteArray path(pathPar.replace("%2F", "/").toStdString());
+		std::string pathStdStr=pathPar.replace("%2F", "/").toStdString();
+		QByteArray path=QByteArray::fromStdString(pathStdStr);
 
 		if (id.length()==0) // parameter free access: older interface with path syntax
 		{

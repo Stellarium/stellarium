@@ -67,7 +67,8 @@ void ViewService::get(const QByteArray &operation, const APIParameters &paramete
 		int startidx = operation.indexOf('/');
 
 		QString pathPar = QString::fromUtf8(parameters.value("path"));
-		QByteArray path(pathPar.replace("%2F", "/").toStdString());
+		std::string pathStdStr=pathPar.replace("%2F", "/").toStdString();
+		QByteArray path=QByteArray::fromStdString(pathStdStr);
 
 		if (path.length()==0) // parameter free access: older interface with path syntax
 		{
@@ -112,8 +113,8 @@ void ViewService::get(const QByteArray &operation, const APIParameters &paramete
 		int startidx = operation.indexOf('/');
 
 		QString pathPar = QString::fromUtf8(parameters.value("path"));
-		QByteArray path(pathPar.replace("%2F", "/").toStdString());
-
+		std::string pathStdStr=pathPar.replace("%2F", "/").toStdString();
+		QByteArray path=QByteArray::fromStdString(pathStdStr);
 
 		if (path.length()==0) // parameter free access: older interface with path syntax
 		{
