@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>PsfStarsDialogForm</class>
+ <widget class="QWidget" name="PsfStarsDialogForm">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+          <width>320</width>
+	          <height>300</height>
+   </rect>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="spacing">
+    <number>0</number>
+   </property>
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
+   <item>
+    <widget class="TitleBar" name="titleBar">
+     <property name="title">
+      <string>Point Spread Function</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="psfStarsGroupBox">
+     <property name="title">
+      <string>PSF point source rendering</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout">
+      <item row="0" column="0">
+       <widget class="QLabel" name="pointRadiusLabel">
+        <property name="text">
+         <string>Core size:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QDoubleSpinBox" name="pointRadiusDoubleSpinBox">
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        </property>
+        <property name="decimals">
+         <number>2</number>
+        </property>
+        <property name="minimum">
+         <double>0.500000000000000</double>
+        </property>
+        <property name="maximum">
+         <double>5.000000000000000</double>
+        </property>
+        <property name="singleStep">
+         <double>0.050000000000000</double>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="flareDecayLabel">
+        <property name="text">
+         <string>Flare decay:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QDoubleSpinBox" name="flareDecayDoubleSpinBox">
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        </property>
+        <property name="decimals">
+         <number>3</number>
+        </property>
+        <property name="minimum">
+         <double>0.010000000000000</double>
+        </property>
+        <property name="maximum">
+         <double>1.000000000000000</double>
+        </property>
+        <property name="singleStep">
+         <double>0.005000000000000</double>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="flareStrengthLabel">
+        <property name="text">
+         <string>Flare strength:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QDoubleSpinBox" name="flareStrengthDoubleSpinBox">
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        </property>
+        <property name="decimals">
+         <number>2</number>
+        </property>
+        <property name="minimum">
+         <double>0.000000000000000</double>
+        </property>
+        <property name="maximum">
+         <double>20.000000000000000</double>
+        </property>
+        <property name="singleStep">
+         <double>0.250000000000000</double>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0">
+       <widget class="QLabel" name="brightSourceMagLimitLabel">
+        <property name="text">
+         <string>Bright source cap:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1">
+       <widget class="QDoubleSpinBox" name="brightSourceMagLimitDoubleSpinBox">
+        <property name="toolTip">
+         <string>Lower values allow brighter PSF halos for very bright point sources.</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        </property>
+        <property name="decimals">
+         <number>1</number>
+        </property>
+        <property name="minimum">
+         <double>-13.000000000000000</double>
+        </property>
+        <property name="maximum">
+         <double>-1.000000000000000</double>
+        </property>
+        <property name="singleStep">
+         <double>0.500000000000000</double>
+        </property>
+        <property name="suffix">
+         <string> mag</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0">
+       <widget class="QLabel" name="moonGlareReductionLabel">
+        <property name="text">
+         <string>Moon glare reduction:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="1">
+       <widget class="QDoubleSpinBox" name="moonGlareReductionDoubleSpinBox">
+        <property name="toolTip">
+         <string>Higher values preserve the lunar phase by capping lunar PSF brightness and reducing glow over the Moon's disk.</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        </property>
+        <property name="decimals">
+         <number>2</number>
+        </property>
+        <property name="minimum">
+         <double>0.000000000000000</double>
+        </property>
+        <property name="maximum">
+         <double>1.000000000000000</double>
+        </property>
+        <property name="singleStep">
+         <double>0.050000000000000</double>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="0" colspan="2">
+       <widget class="QCheckBox" name="moonHaloTextureCheckBox">
+        <property name="toolTip">
+         <string>Use Stellarium's lunar halo texture instead of PSF glow for the Moon.</string>
+        </property>
+        <property name="text">
+         <string>Textured Moon halo</string>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="0" colspan="2">
+       <widget class="QCheckBox" name="projectionCorrectionCheckBox">
+        <property name="text">
+         <string>Projection correction</string>
+        </property>
+       </widget>
+      </item>
+	      <item row="7" column="0" colspan="2">
+	       <widget class="QPushButton" name="resetDefaultsButton">
+	        <property name="text">
+	         <string>Reset to default</string>
+	        </property>
+	       </widget>
+	      </item>
+	      <item row="8" column="0" colspan="2">
+	       <spacer name="verticalSpacer">
+	        <property name="orientation">
+	         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>24</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>TitleBar</class>
+   <extends>QFrame</extends>
+   <header>Dialog.hpp</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <tabstops>
+  <tabstop>pointRadiusDoubleSpinBox</tabstop>
+  <tabstop>flareDecayDoubleSpinBox</tabstop>
+  <tabstop>flareStrengthDoubleSpinBox</tabstop>
+  <tabstop>brightSourceMagLimitDoubleSpinBox</tabstop>
+	  <tabstop>moonGlareReductionDoubleSpinBox</tabstop>
+	  <tabstop>moonHaloTextureCheckBox</tabstop>
+	  <tabstop>projectionCorrectionCheckBox</tabstop>
+	  <tabstop>resetDefaultsButton</tabstop>
+	 </tabstops>
+ <resources/>
+ <connections/>
+</ui>

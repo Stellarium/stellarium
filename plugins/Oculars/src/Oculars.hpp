@@ -47,6 +47,7 @@ QT_END_NAMESPACE
 
 class StelButton;
 class StelAction;
+class StelSkyDrawer;
 
 /*! @defgroup oculars Oculars Plug-in
 @{
@@ -398,8 +399,21 @@ private slots:
 	void updateLatestSelectedSSO();
 
 private:
+	struct PsfStarSettings
+	{
+		bool projectionCorrection = false;
+		double pointRadius = 1.5;
+		double flareDecay = 0.1;
+		double flareStrength = 1.0;
+		double brightSourceMagLimit = -8.5;
+		double moonGlareReduction = 0.85;
+		bool moonHaloTexture = true;
+	};
+
 	//! Compute the limiting magnitude for a telescope
 	static double computeLimitMagnitude(Ocular *ocular, Telescope *telescope);
+	static PsfStarSettings getPsfStarSettings(const StelSkyDrawer* skyDrawer);
+	static void applyPsfStarSettings(StelSkyDrawer* skyDrawer, const PsfStarSettings& settings);
 
 	//! Set up the Qt actions needed to activate the plugin.
 	void initializeActivationActions();
@@ -512,6 +526,9 @@ private:
 	double absoluteStarScaleOculars;		//!< Value to store the absolute star scale when switching off ocular view
 	double relativeStarScaleCCD;		//!< Value to store the relative star scale when switching off CCD view
 	double absoluteStarScaleCCD;		//!< Value to store the absolute star scale when switching off CCD view
+	PsfStarSettings psfStarSettingsMain;	//!< Values to store PSF point source settings when activating ocular or CCD view
+	PsfStarSettings psfStarSettingsOculars;	//!< Values to store PSF point source settings when switching off ocular view
+	PsfStarSettings psfStarSettingsCCD;	//!< Values to store PSF point source settings when switching off CCD view
 	bool flagMoonScaleMain;			//!< Flag to track of usage zooming of the Moon
 	bool flagMinorBodiesScaleMain;		//!< Flag to track of usage zooming of minor bodies
 	bool flagSunScaleMain;			//!< Flag to track of usage zooming of the Sun

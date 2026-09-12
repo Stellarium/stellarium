@@ -4648,7 +4648,7 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 			// EXPERIMENTAL: for sun on horizon, mag can go quite low, shrinking the halo too much.
 			if (isSun)
 				haloMag=qMin(haloMag, -18.f);
-			core->getSkyDrawer()->postDrawSky3dModel(&sPainter, tmp, surfArcMin2, haloMag, haloColorToDraw, isSun);
+			core->getSkyDrawer()->postDrawSky3dModel(&sPainter, tmp, surfArcMin2, haloMag, haloColorToDraw, isSun, isMoon ? screenRd : 0.f);
 		}
 	}
 }
@@ -5946,6 +5946,23 @@ void Planet::drawHints(const StelCore* core, StelPainter &sPainter, const QFont&
 	const float pixPerRad = sPainter.getProjector()->getPixelPerRadAtCenter();
 	const float angularRadius = getAngularRadius(core)*M_PI/180.;
 	float tmp = (hintFader.getInterstate()<=0.f ? 7.f : 10.f) * scale + angularRadius*pixPerRad/1.44f; // Shift for nameI18 printing
+	const StelSkyDrawer* skyDrawer = core->getSkyDrawer();
+	if (skyDrawer->getFlagPsfStars())
+	{
+		const float vMagnitude = getVMagnitude(core);
+		const float vMagnitudeWithExtinction = getVMagnitudeWithExtinction(core, vMagnitude);
+		static SolarSystem* ssm = GETSTELMODULE(SolarSystem);
+		const bool isMoon = this==ssm->getMoon();
+		RCMag rcm;
+		if (skyDrawer->computeRCMag(vMagnitudeWithExtinction, &rcm))
+		{
+			const float diskOffset = tmp;
+			const float psfOffset = isMoon
+				? skyDrawer->getPsfMoonHaloLabelOffset(vMagnitudeWithExtinction, haloColor, angularRadius*pixPerRad, diskOffset, 0.12f)
+				: skyDrawer->getPsfPointSourceLabelOffset(rcm, vMagnitudeWithExtinction, haloColor, diskOffset, 0.12f);
+			tmp = qMax(diskOffset, psfOffset);
+		}
+	}
 	sPainter.setColor(labelColor,labelsFader.getInterstate());
 	const QString label = sphereScale != 1. ? QString(u8"%1 (\u00d7%2)").arg(getPlanetLabel(), QString::number(sphereScale, 'f', 2))
 	                                        : getPlanetLabel();
