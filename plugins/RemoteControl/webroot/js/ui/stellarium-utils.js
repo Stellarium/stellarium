@@ -84,7 +84,7 @@ define(["jquery", "api/remotecontrol", "api/viewcontrol", "api/actions", "api/pr
      * Provides consistent i18n across all utilities.
      * @type {Function}
      */
-    var _tr = rc.tr;
+    var tr = rc.tr;
 
     /**
      * Solar system object name mapping.
@@ -110,24 +110,41 @@ define(["jquery", "api/remotecontrol", "api/viewcontrol", "api/actions", "api/pr
     // HELPER FUNCTIONS
     // =====================================================================
 
+		/**
+		 * Escape HTML special characters to prevent XSS.
+		 * 
+		 * @param {string} str - String to escape
+		 * @returns {string} Escaped string safe for HTML insertion
+		 */
+		function escapeHtml(str) {
+				if (!str) return '';
+				return String(str)
+						.replace(/&/g, '&amp;')
+						.replace(/</g, '&lt;')
+						.replace(/>/g, '&gt;')
+						.replace(/"/g, '&quot;')
+						.replace(/'/g, '&#39;');
+		}
+
     /**
      * Shows a temporary notification message that auto-dismisses after 2 seconds.
      * Used for user feedback during navigation actions.
      * 
      * @param {string} message - Message to display
      */
-    function showNotification(message) {
-        var $notification = $(
-            '<div class="notification-message" style="position:fixed;top:20px;right:20px;' +
-            'padding:10px 15px;background:linear-gradient(#6B6E70, #3A3C3E);color:#fff;' +
-            'border-radius:5px;z-index:9999;box-shadow:0 2px 10px rgba(0,0,0,0.3);">' + 
-            message + '</div>'
-        );
-        $("body").append($notification);
-        setTimeout(function() {
-            $notification.fadeOut(function() { $notification.remove(); });
-        }, 2000);
-    }
+		function showNotification(message) {
+				var escapedMessage = escapeHtml(message);
+				var $notification = $(
+						'<div class="notification-message" style="position:fixed;top:20px;right:20px;' +
+						'padding:10px 15px;background:linear-gradient(#6B6E70, #3A3C3E);color:#fff;' +
+						'border-radius:5px;z-index:9999;box-shadow:0 2px 10px rgba(0,0,0,0.3);">' + 
+						escapedMessage + '</div>'
+				);
+				$("body").append($notification);
+				setTimeout(function() {
+						$notification.fadeOut(function() {$notification.remove(); });
+				}, 2000);
+		}
 
     /**
      * Clears any currently selected object to prevent view conflicts.
@@ -494,29 +511,40 @@ define(["jquery", "api/remotecontrol", "api/viewcontrol", "api/actions", "api/pr
         });
     }
 
-    /**
-     * Navigate to a star by its HIP ID or name.
-     * Convenience wrapper around goToObject with star-specific defaults.
-     * 
-     * @param {string} starId - HIP ID or star name
-     * @param {number} zoomFov - Zoom level (default: 15°)
-     * @param {Object} cultureData - Culture data for native name lookup
-     * @param {function} callback - Optional callback after navigation
-     */
-    function goToStar(starId, zoomFov, cultureData, callback) {
-        if (typeof zoomFov === 'function') {
-            callback = zoomFov;
-            zoomFov = 15;
-            cultureData = null;
-        } else if (typeof cultureData === 'function') {
-            callback = cultureData;
-            cultureData = null;
-        }
-        goToObject(starId, zoomFov, 'star', cultureData, callback);
-    }
+		/**
+		 * Navigate to a star by its HIP ID or name.
+		 * Convenience wrapper around goToObject with star-specific defaults.
+		 * 
+		 * @param {string} starId - HIP ID or star name
+		 * @param {number} zoomFov - Zoom level (default: 15°)
+		 * @param {Object} cultureData - Culture data for native name lookup
+		 * @param {function} callback - Optional callback after navigation
+		 */
+		function goToStar(starId, zoomFov, cultureData, callback) {
+				// Handle optional parameters with flexible argument order
+				if (typeof zoomFov === 'function') {
+						callback = zoomFov;
+						zoomFov = 15;
+						cultureData = null;
+				} else if (typeof cultureData === 'function') {
+						callback = cultureData;
+						cultureData = null;
+				}
+				
+				// Ensure zoomFov has a valid value
+				zoomFov = zoomFov || 15;
+				
+				console.log("[StelUtils] goToStar called with:", {
+						starId: starId,
+						zoomFov: zoomFov,
+						hasCultureData: !!cultureData
+				});
+				
+				goToObject(starId, zoomFov, 'star', cultureData, callback);
+		}
 
 		/**
-		 * Navigates to a zodiac sign (constellation) with proper bidirectional sync support.
+		 * Navigates to a zodiac sign (constellation) with customizable FOV.
 		 * 
 		 * CRITICAL: This function now accepts an optional signId parameter
 		 * which is used for the objectSelected event. This enables proper
@@ -531,24 +559,35 @@ define(["jquery", "api/remotecontrol", "api/viewcontrol", "api/actions", "api/pr
 		 * Flow:
 		 * 1. Clear any existing selection
 		 * 2. Center view on the zodiac sign by its English name
-		 * 3. Zoom to optimal FOV (40 degrees)
+		 * 3. Zoom to optimal FOV (customizable from UI, default: 40 degrees)
 		 * 4. Emit objectSelected event with the provided signId
 		 * 5. Both button and table UIs update based on this event
 		 * 
 		 * @param {string} signName - Name of the zodiac sign (English name preferred)
 		 * @param {string} signId - Unique identifier (composite ID like "zodiac_modern_0") - OPTIONAL
+		 * @param {number} zoomFov - Zoom FOV (optional, default: 40)
 		 * @param {function} callback - Optional callback after navigation
 		 */
-		function goToZodiacSign(signName, signId, callback) {
+		function goToZodiacSign(signName, signId, zoomFov, callback) {
 				// Handle optional parameters
 				if (typeof signId === 'function') {
 						callback = signId;
 						signId = null;
+						zoomFov = 40;
+				} else if (typeof zoomFov === 'function') {
+						callback = zoomFov;
+						zoomFov = 40;
+				} else if (typeof signId === 'number') {
+						zoomFov = signId;
+						signId = null;
 				}
+				
+				zoomFov = zoomFov || 40;
 				
 				console.log("[StelUtils] goToZodiacSign called with:", {
 						signName: signName,
-						signId: signId
+						signId: signId,
+						zoomFov: zoomFov
 				});
 				
 				// Clear any existing selection to prevent view conflicts
@@ -557,32 +596,55 @@ define(["jquery", "api/remotecontrol", "api/viewcontrol", "api/actions", "api/pr
 				setTimeout(function() {
 						// Center and zoom to the zodiac sign
 						// Use signName for navigation, signId for the emitted event
-						centerAndZoom(signName, 40, 2, signId || signName, "zodiac", callback);
+						centerAndZoom(signName, zoomFov, 2, signId || signName, "zodiac", callback);
 						
 						// Show notification to user
-						showNotification(rc.tr("Center on zodiac sign: ") + signName);
+						showNotification(rc.tr("Center on zodiac sign: ") + signName + " (FOV: " + zoomFov + "°)");
 				}, 50);
 		}
 
-    /**
-     * Navigates to an asterism.
-     * Clears any existing selection first.
-     * Emits objectSelected event for bidirectional sync.
-     * 
-     * @param {string} asterismName - Name of the asterism
-     * @param {string} asterismId - Unique identifier for the asterism (optional)
-     * @param {function} callback - Optional callback
-     */
-    function goToAsterism(asterismName, asterismId, callback) {
-        clearSelection();
-        setTimeout(function() {
-            centerAndZoom(asterismName, 30, 2, asterismId || asterismName, "asterism", callback);
-            showNotification(rc.tr("Centering on asterism: ") + asterismName);
-        }, 50);
-    }
+		/**
+		 * Navigates to an asterism with customizable FOV.
+		 * 
+		 * Clears any existing selection first.
+		 * Emits objectSelected event for bidirectional sync.
+		 * 
+		 * @param {string} asterismName - Name of the asterism
+		 * @param {string} asterismId - Unique identifier for the asterism (optional)
+		 * @param {number} zoomFov - Zoom FOV (optional, default: 30)
+		 * @param {function} callback - Optional callback
+		 */
+		function goToAsterism(asterismName, asterismId, zoomFov, callback) {
+				// Handle optional parameters
+				if (typeof asterismId === 'function') {
+						callback = asterismId;
+						asterismId = null;
+						zoomFov = 30;
+				} else if (typeof zoomFov === 'function') {
+						callback = zoomFov;
+						zoomFov = 30;
+				} else if (typeof asterismId === 'number') {
+						zoomFov = asterismId;
+						asterismId = null;
+				}
+				
+				zoomFov = zoomFov || 30;
+				
+				console.log("[StelUtils] goToAsterism called with:", {
+						asterismName: asterismName,
+						asterismId: asterismId,
+						zoomFov: zoomFov
+				});
+				
+				clearSelection();
+				setTimeout(function() {
+						centerAndZoom(asterismName, zoomFov, 2, asterismId || asterismName, "asterism", callback);
+						showNotification(rc.tr("Centering on asterism: ") + asterismName + " (FOV: " + zoomFov + "°)");
+				}, 50);
+		}
 
 		/**
-		 * Navigates to a lunar mansion with proper bidirectional sync support.
+		 * Navigates to a lunar mansion with customizable FOV.
 		 * 
 		 * CRITICAL: This function now accepts an optional mansionId parameter
 		 * which is used for the objectSelected event. This enables proper
@@ -596,24 +658,35 @@ define(["jquery", "api/remotecontrol", "api/viewcontrol", "api/actions", "api/pr
 		 * Flow:
 		 * 1. Clear any existing selection
 		 * 2. Center view on the mansion by its English name
-		 * 3. Zoom to optimal FOV (30 degrees)
+		 * 3. Zoom to optimal FOV (customizable from UI, default: 30 degrees)
 		 * 4. Emit objectSelected event with the provided mansionId
 		 * 5. Both button and table UIs update based on this event
 		 * 
 		 * @param {string} mansionName - Name of the lunar mansion (English name preferred)
 		 * @param {string} mansionId - Unique identifier (composite ID like "lunar_16") - OPTIONAL
+		 * @param {number} zoomFov - Zoom FOV (optional, default: 30)
 		 * @param {function} callback - Optional callback after navigation
 		 */
-		function goToLunarMansion(mansionName, mansionId, callback) {
+		function goToLunarMansion(mansionName, mansionId, zoomFov, callback) {
 				// Handle optional parameters
 				if (typeof mansionId === 'function') {
 						callback = mansionId;
 						mansionId = null;
+						zoomFov = 30;
+				} else if (typeof zoomFov === 'function') {
+						callback = zoomFov;
+						zoomFov = 30;
+				} else if (typeof mansionId === 'number') {
+						zoomFov = mansionId;
+						mansionId = null;
 				}
+				
+				zoomFov = zoomFov || 30;
 				
 				console.log("[StelUtils] goToLunarMansion called with:", {
 						mansionName: mansionName,
-						mansionId: mansionId
+						mansionId: mansionId,
+						zoomFov: zoomFov
 				});
 				
 				// Clear any existing selection to prevent view conflicts
@@ -622,10 +695,10 @@ define(["jquery", "api/remotecontrol", "api/viewcontrol", "api/actions", "api/pr
 				setTimeout(function() {
 						// Center and zoom to the lunar mansion
 						// Use mansionName for navigation, mansionId for the emitted event
-						centerAndZoom(mansionName, 30, 2, mansionId || mansionName, "lunar", callback);
+						centerAndZoom(mansionName, zoomFov, 2, mansionId || mansionName, "lunar", callback);
 						
 						// Show notification to user
-						showNotification(rc.tr("Center on lunar mansion: ") + mansionName);
+						showNotification(rc.tr("Center on lunar mansion: ") + mansionName + " (FOV: " + zoomFov + "°)");
 				}, 50);
 		}
 
@@ -721,69 +794,91 @@ define(["jquery", "api/remotecontrol", "api/viewcontrol", "api/actions", "api/pr
     // CONSTELLATION HIGHLIGHT/ISOLATION (Core Logic)
     // =====================================================================
 
-    /**
-     * Toggles constellation highlighting/isolation.
-     * 
-     * First press: clears any existing selection, saves current state,
-     *              enables all constellation displays, isolates and centers
-     *              on the constellation with 60° FOV.
-     * Second press: restores previous state and clears isolation.
-     * Emits objectSelected event for bidirectional sync.
-     * 
-     * @param {string} constellationName - Name of the constellation
-     * @param {string} constellationId - Optional ID of the constellation (from index.json)
-     * @returns {boolean} True if constellation was highlighted, false if cleared
-     */
-    function toggleConstellationHighlight(constellationName, constellationId) {
-        var searchTerm = constellationName.replace(/_/g, ' ');
-        searchTerm = searchTerm.replace(/\b\w/g, function(l) { return l.toUpperCase(); });
-        
-        var isCurrentlyHighlighted = (currentIsolatedConstellation === searchTerm);
-        
-        if (isCurrentlyHighlighted) {
-            console.log("[StelUtils] Toggle OFF - Clearing highlight:", searchTerm);
-            
-            propApi.setStelProp("ConstellationMgr.isolateSelected", false);
-            propApi.setStelProp("ConstellationMgr.flagConstellationPick", false);
-            clearSelection();
-            restoreConstellationDisplayStates();
-            currentIsolatedConstellation = null;
-            
-            showNotification(rc.tr("Cleared highlight: ") + searchTerm);
-            emitObjectSelected("", "", "none");
-            return false;
-        } else {
-            console.log("[StelUtils] Toggle ON - Isolating constellation:", searchTerm);
-            
-            clearSelection();
-            
-            if (!hasSavedState) {
-                saveConstellationDisplayStates();
-            }
-            
-            enableAllConstellationDisplays();
-            
-            setTimeout(function() {
-                propApi.setStelProp("ConstellationMgr.flagConstellationPick", true);
-                propApi.setStelProp("ConstellationMgr.isolateSelected", true);
-                rc.postCmd("/api/main/focus", { target: searchTerm, mode: "mark" }, null, function() {});
-                currentIsolatedConstellation = searchTerm;
-                
-                setTimeout(function() {
-                    rc.postCmd("/api/scripts/direct", {
-                        code: "core.moveToObject(\"" + searchTerm + "\", 2); StelMovementMgr.zoomTo(60, 2);",
-                        useIncludes: false
-                    });
-                    // Use constellationId if provided, otherwise use searchTerm
-                    var emitId = constellationId || searchTerm;
-                    emitObjectSelected(searchTerm, emitId, "constellation");
-                    showNotification(rc.tr("Isolating constellation: ") + searchTerm);
-                }, 150);
-            }, 100);
-            
-            return true;
-        }
-    }
+		/**
+		 * Toggles constellation highlighting/isolation with customizable FOV.
+		 * 
+		 * First press: clears any existing selection, saves current state,
+		 *              enables all constellation displays, isolates and centers
+		 *              on the constellation with 60° FOV.
+		 * Second press: restores previous state and clears isolation.
+		 * 
+		 * If "Highlight without Isolation" is checked, only centers on the constellation
+		 * without changing isolation settings.
+		 *
+		 * @param {string} constellationName - Name of the constellation
+		 * @param {string} constellationId - Optional ID of the constellation (from index.json)
+		 * @param {number} zoomFov - Zoom FOV (optional, default: 60)
+		 * @returns {boolean} True if constellation was highlighted, false if cleared
+		 */
+		function toggleConstellationHighlight(constellationName, constellationId, zoomFov) {
+				var searchTerm = constellationName.replace(/_/g, ' ');
+				searchTerm = searchTerm.replace(/\b\w/g, function(l) { return l.toUpperCase(); });
+				zoomFov = zoomFov || 60;
+				var isCurrentlyHighlighted = (currentIsolatedConstellation === searchTerm);
+				
+				// ============================================================
+				// NEW: Check if user wants navigation without isolation
+				// ============================================================
+				var noIsolation = $('#highlight-no-isolation').is(':checked');
+				
+				if (isCurrentlyHighlighted) {
+						console.log("[StelUtils] Toggle OFF - Clearing highlight:", searchTerm);
+						
+						propApi.setStelProp("ConstellationMgr.isolateSelected", false);
+						propApi.setStelProp("ConstellationMgr.flagConstellationPick", false);
+						clearSelection();
+						restoreConstellationDisplayStates();
+						currentIsolatedConstellation = null;
+						
+						showNotification(rc.tr("Cleared highlight: ") + searchTerm);
+						emitObjectSelected("", "", "none");
+						return false;
+				} else {
+						console.log("[StelUtils] Toggle ON - Isolating constellation:", searchTerm);
+						console.log("[StelUtils] Zoom FOV value:", zoomFov);
+						
+						clearSelection();
+						
+						// ============================================================
+						// Only save and enable displays if we're actually isolating
+						// ============================================================
+						if (!noIsolation) {
+								if (!hasSavedState) {
+										saveConstellationDisplayStates();
+								}
+								enableAllConstellationDisplays();
+						}
+						
+						setTimeout(function() {
+								// ============================================================
+								// Only set isolation properties if not in "no isolation" mode
+								// ============================================================
+								if (!noIsolation) {
+										propApi.setStelProp("ConstellationMgr.flagConstellationPick", true);
+										propApi.setStelProp("ConstellationMgr.isolateSelected", true);
+								}
+								
+								rc.postCmd("/api/main/focus", { target: searchTerm, mode: "mark" }, null, function() {});
+								currentIsolatedConstellation = searchTerm;
+								
+								setTimeout(function() {
+										rc.postCmd("/api/scripts/direct", {
+												code: "core.moveToObject(\"" + searchTerm + "\", 2); StelMovementMgr.zoomTo(" + zoomFov + ", 2);",
+												useIncludes: false
+										});
+										var emitId = constellationId || searchTerm;
+										emitObjectSelected(searchTerm, emitId, "constellation");
+										
+										// Show appropriate notification
+										var message = noIsolation ? 
+												rc.tr("Navigating to constellation: ") + searchTerm :
+												rc.tr("Isolating constellation: ") + searchTerm + " (FOV: " + zoomFov + "°)";
+										showNotification(message);
+								}, 150);
+						}, 100);
+						return true;
+				}
+		}
 
     /**
      * Clears all constellation highlighting and restores previous state.
@@ -822,6 +917,142 @@ define(["jquery", "api/remotecontrol", "api/viewcontrol", "api/actions", "api/pr
         searchTerm = searchTerm.replace(/\b\w/g, function(l) { return l.toUpperCase(); });
         return currentIsolatedConstellation === searchTerm;
     }
+
+		// ========================================================================
+		// DESCRIPTION DIRECTION TOGGLE
+		// ========================================================================
+
+		/**
+		 * Toggle text direction of description iframes.
+		 * Simple implementation - toggles between LTR and RTL.
+		 */
+		function toggleDescriptionDirection() {
+				// Get current direction from localStorage or default to 'ltr'
+				var currentDirection = localStorage.getItem('descriptionDirection') || 'ltr';
+				var newDirection = (currentDirection === 'ltr') ? 'rtl' : 'ltr';
+				
+				// Save to localStorage
+				localStorage.setItem('descriptionDirection', newDirection);
+				
+				// Update all description iframes
+				var iframeSelectors = [
+						'#vo_skycultureinfo',
+						'#stats-vo-skycultureinfo',
+						'#scriptinfo',
+						'#vo_projectioninfo',
+						'#vo_landscapeinfo',
+						'#s3d_info'
+				];
+				
+				for (var i = 0; i < iframeSelectors.length; i++) {
+						var $iframe = $(iframeSelectors[i]);
+						if (!$iframe || !$iframe.length) continue;
+						
+						// Store direction on iframe
+						$iframe.data('direction', newDirection);
+						
+						// Apply direction to iframe content
+						applyDirectionToIframe($iframe, newDirection);
+				}
+				
+				// Update button text
+				var $btn = $('#btn-toggle-description-direction');
+				if ($btn.length) {
+						var nextText = (newDirection === 'ltr') ? 'RTL' : 'LTR';
+						$btn.html('↔ ' + rc.tr("Switch to") + ' ' + nextText);
+				}
+				
+				// Update status badge
+				var $status = $('#description-direction-status');
+				if ($status.length) {
+						$status.text(newDirection.toUpperCase());
+						$status.removeClass('ltr rtl').addClass(newDirection);
+				}
+		}
+
+		/**
+		 * Apply direction to an iframe.
+		 * 
+		 * @param {jQuery} $iframe - The iframe element
+		 * @param {string} direction - 'ltr' or 'rtl'
+		 */
+		function applyDirectionToIframe($iframe, direction) {
+				if (!$iframe || !$iframe.length) return;
+				
+				try {
+						var iframeDoc = $iframe[0].contentDocument || $iframe[0].contentWindow.document;
+						if (!iframeDoc) return;
+						
+						// Simple: just set the direction on html and body
+						var styleId = 'dir-style';
+						var styleEl = iframeDoc.getElementById(styleId);
+						
+						if (!styleEl) {
+								styleEl = iframeDoc.createElement('style');
+								styleEl.id = styleId;
+								if (iframeDoc.head) iframeDoc.head.appendChild(styleEl);
+								else iframeDoc.body.appendChild(styleEl);
+						}
+						
+						if (direction === 'rtl') {
+								styleEl.textContent = 'html, body { direction: rtl !important; text-align: right !important; }';
+						} else {
+								styleEl.textContent = 'html, body { direction: ltr !important; text-align: left !important; }';
+						}
+						
+				} catch (e) {
+						// Cross-origin: reload with parameter
+						var src = $iframe.attr('src') || '';
+						var baseUrl = src.split('?')[0] || '';
+						var newSrc = baseUrl + (direction === 'rtl' ? '?dir=rtl' : '');
+						if (newSrc !== src) $iframe.attr('src', newSrc);
+				}
+		}
+
+		/**
+		 * Initialize description direction from saved preference.
+		 */
+		function initDescriptionDirection() {
+				var savedDirection = localStorage.getItem('descriptionDirection') || 'ltr';
+				
+				// Update all iframes
+				var iframeSelectors = [
+						'#vo_skycultureinfo',
+						'#stats-vo-skycultureinfo',
+						'#scriptinfo',
+						'#vo_projectioninfo',
+						'#vo_landscapeinfo',
+						'#s3d_info'						
+				];
+				
+				for (var i = 0; i < iframeSelectors.length; i++) {
+						var $iframe = $(iframeSelectors[i]);
+						if (!$iframe || !$iframe.length) continue;
+						
+						$iframe.data('direction', savedDirection);
+						applyDirectionToIframe($iframe, savedDirection);
+						
+						// Re-apply on iframe load
+						$iframe.off('load.direction').on('load.direction', function() {
+								var dir = $(this).data('direction') || 'ltr';
+								applyDirectionToIframe($(this), dir);
+						});
+				}
+				
+				// Update button text
+				var $btn = $('#btn-toggle-description-direction');
+				if ($btn.length) {
+						var nextText = (savedDirection === 'ltr') ? 'RTL' : 'LTR';
+						$btn.html('↔ ' + rc.tr("Switch to") + ' ' + nextText);
+				}
+				
+				// Update status badge
+				var $status = $('#description-direction-status');
+				if ($status.length) {
+						$status.text(savedDirection.toUpperCase());
+						$status.removeClass('ltr rtl').addClass(savedDirection);
+				}
+		}
 
     // =====================================================================
     // INITIALIZATION
@@ -878,7 +1109,12 @@ define(["jquery", "api/remotecontrol", "api/viewcontrol", "api/actions", "api/pr
         
         // Event handling support for other modules
         on: function(event, callback) { $(publ).on(event, callback); },
-        off: function(event, callback) { $(publ).off(event, callback); }
+        off: function(event, callback) { $(publ).off(event, callback); },
+				
+				// Description Direction Toggle
+				toggleDescriptionDirection: toggleDescriptionDirection,
+				applyDirectionToIframe: applyDirectionToIframe,
+				initDescriptionDirection: initDescriptionDirection
     };
 
     return publ;
