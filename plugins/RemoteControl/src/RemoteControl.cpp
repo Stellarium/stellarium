@@ -274,12 +274,9 @@ void RemoteControl::setMaxRequestSize(const int size)
 	if (size != maxRequestSize)
 	{
 		maxRequestSize = size;
+		if (maxRequestSize>maxMultipartSize)
+			setMaxMultipartSize(maxRequestSize);
 		emit maxRequestSizeChanged(size);
-		if (httpListener)
-		{
-			stopServer();
-			startServer();
-		}
 	}
 }
 
@@ -288,12 +285,9 @@ void RemoteControl::setMaxMultipartSize(const int size)
 	if (size != maxMultipartSize)
 	{
 		maxMultipartSize = size;
+		if (maxRequestSize>maxMultipartSize)
+			setMaxRequestSize(maxMultipartSize);
 		emit maxMultipartSizeChanged(size);
-		if (httpListener)
-		{
-			stopServer();
-			startServer();
-		}
 	}
 }
 

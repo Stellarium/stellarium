@@ -56,12 +56,6 @@ public:
 	 */
 	const QString &getId() const;
 
-	/// Sets the start time of the sky culture
-	void setBeginTime(int beginTime);
-
-	/// Sets the end time of the sky culture
-	void setEndTime(int endTime);
-
 	/// Sets whether to show common names in addition to the culture-specific ones
 	void setFallbackToInternationalNames(bool fallback);
 
@@ -93,6 +87,15 @@ public:
 	 * @return Pointer to the matching constellation, or nullptr if none matches.
 	 */
 	ScmConstellation *getConstellationByEnglishName(const QString &englishName);
+
+	/**
+	 * @brief Gets a constellation from the sky culture by its display name, i.e. the
+	 *        translated name followed by the id, e.g. "The Market (tianquiztli)".
+	 *
+	 * @param displayName The display name to match.
+	 * @return Pointer to the matching constellation, or nullptr if none matches.
+	 */
+	ScmConstellation *getConstellationByDisplayName(const QString &displayName);
 
 	/// Returns a pointer to the constellations of the sky culture
 	/// Constellations are held as unique pointers, so the addresses
@@ -166,16 +169,6 @@ public:
 	const QList<CulturePolygon> &getLocations() const;
 
 	/**
-	 * @brief Returns the earliest year associated with the sky culture's territory.
-	 */
-	int getBeginTime() const;
-
-	/**
-	 * @brief Returns the latest year associated with the sky culture's territory.
-	 */
-	int getEndTime() const;
-
-	/**
 	 * @brief Returns whether to fall back to international names when culture-specific names are absent.
 	 */
 	bool getFallbackToInternationalNames() const;
@@ -199,12 +192,6 @@ private:
 
 	/// The geographical location (as polygons) of the sky culture
 	QList<CulturePolygon> locations;
-
-	/// The earliest year associated with a territory of the sky culture
-	int beginTime;
-
-	/// The latest year associated with a territory of the sky culture
-	int endTime;
 
 	/**
 	 * @brief Evaluates which action shoud be taken after a merge operation and updates the respective location.

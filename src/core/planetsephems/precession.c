@@ -259,7 +259,7 @@ void getPrecessionAnglesVondrakPQXYe(const double jde, double *vP_A, double *vQ_
 
 }
 
-//! Just return (presumably precomputed) ecliptic obliquity.
+//! Just return (often cached) ecliptic obliquity. [radians]
 double getPrecessionAngleVondrakEpsilon(const double jde)
 {
 	double epsilon_A, dummy_chi_A, dummy_omega_A, dummy_psi_A;
