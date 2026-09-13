@@ -5,39 +5,208 @@
  * This module provides a full-featured script editor with CodeMirror,
  * syntax highlighting, autocomplete, validation, and script execution.
  * 
- * Features:
- * - CodeMirror editor with Stellarium syntax highlighting
- * - Case-sensitive function validation (GREEN=valid, RED=invalid, ORANGE=case error)
- * - Real-time autocomplete with Ctrl+Space (supports namespace filtering)
+ * ========================================================================
+ * FEATURES
+ * ========================================================================
+ * 
+ * Editor Features:
+ * - CodeMirror editor loaded as an AMD dependency (via RequireJS)
+ * - Stellarium syntax highlighting with custom 'stellarium' mode
+ * - Case-sensitive function validation:
+ *   - GREEN = valid function
+ *   - RED wavy underline = invalid function (does not exist)
+ *   - ORANGE wavy underline = case error (function exists with different casing)
+ *   - LIGHT GREEN italic = pending (reference not loaded yet)
+ * - Real-time autocomplete with Ctrl+Space
+ * - Namespace-aware autocomplete (after dot detection)
+ * - Context-aware autocomplete inside parentheses (variables + literals)
+ * - Smart bracket completion with auto-indentation
+ * - Bracket error detection (unmatched or mismatched brackets)
+ * - ECMAScript keywords support in autocomplete
+ * - Code folding (Ctrl+Q to toggle, Ctrl+Shift+Q fold all, Ctrl+Alt+Q unfold all)
+ * - Line wrapping and active line highlighting
+ * - Placeholder text for empty editor
+ * - Line counter in toolbar (auto-updates on change)
+ * - Go to line dialog (Ctrl+G / Ctrl+L)
+ * - Keyboard shortcuts help dialog
+ * 
+ * Validation Features:
  * - Auto-validation toggle (OFF by default)
  * - Revalidate button with full document case-sensitive checking
- * - Parameter hint popup when typing '(' after function
- * - Function detail popup with description, parameters, and examples
- * - Quick Reference panel with categorized functions and snippets
- * - Search/filter in Quick Reference
+ * - Separate validation for namespace and function name
+ * - Independent error detection for each part of "Namespace.function"
+ * - Example: "ConstellAtionMgr.getFontSize" marks only "ConstellAtionMgr"
+ * - Example: "ConstellationMgr.getFontsize" marks only "getFontsize"
+ * - Example: "ConstellAtionMgr.getFontsize" marks both parts
+ * 
+ * Script Execution:
+ * - Run entire script (Ctrl+Enter)
+ * - Run selected code only (Ctrl+Shift+Enter)
+ * - Stop running script
+ * - Continuous status polling with exponential backoff
  * - Script execution via Remote Control API
  * - Output panel with JSON syntax highlighting
  * - Installed scripts browser with run/load buttons
  * - Execution history with reload capability (localStorage)
- * - File operations (open/save .ssc files)
- * - Metadata/header dialog for script documentation
- * - Collect Examples button to import examples from module JSON files
- * - Line counter in toolbar (auto-updates)
- * - Copy entire editor content to clipboard
- * - Keyboard shortcuts help dialog
- * - Go to line dialog (Ctrl+G / Ctrl+L)
- * - Fallback textarea editor when CodeMirror unavailable
  * 
- * Technical Implementation:
- * - Dynamic module names from modules-index.json
- * - Strict case-sensitive function validation
- * - Real-time validation with debouncing (1000ms)
- * - Autocomplete with dot (.) detection for namespace filtering
- * - Info panel positioning relative to autocomplete dropdown
- * - Example insertion at cursor or specific line number
- * - Integration with showNotification from stellarium-utils
- * - Status tracking via activeScriptChanged event
- * - Continuous polling for direct script execution status
+ * File Operations:
+ * - Open .ssc/.js files from local filesystem
+ * - Save current script to .ssc file with auto-generated name
+ * - Copy entire editor content to clipboard
+ * - Clear editor with confirmation
+ * 
+ * Quick Reference Panel:
+ * - Categorized functions from modules-index.json
+ * - Search/filter functionality
+ * - Expandable/collapsible categories
+ * - Code snippets section
+ * - Insert example at cursor or specific line number
+ * - Function detail popup with full documentation
+ * 
+ * Metadata Dialog:
+ * - Script header/metadata generator
+ * - Fields: Name, Author, License, Version, Shortcut, Description
+ * - Live preview
+ * - Insert at top or replace entire content
+ * 
+ * Collect Examples:
+ * - Import examples from module JSON files
+ * - Select modules to load examples from
+ * - Options: clear editor, include descriptions, comment out code
+ * - Inserts formatted examples into editor
+ * 
+ * ========================================================================
+ * TECHNICAL IMPLEMENTATION
+ * ========================================================================
+ * 
+ * CodeMirror Integration:
+ * - CodeMirror 5 loaded as an AMD package via RequireJS (see main.js)
+ * - All addons loaded as AMD dependencies (modes, hints, folding, etc.)
+ * - Custom 'stellarium' mode extends the JavaScript mode
+ * - Dynamic builtins map from scriptReference (modules-index.json)
+ * - Theme support with localStorage persistence
+ * - Theme selector bound to #cm-theme-select element
+ * 
+ * Validation System:
+ * - Namespace validation via scriptReference.isValidNamespace()
+ * - Case error detection via scriptReference.isCaseErrorNamespace()
+ * - Correct namespace lookup via scriptReference.findCorrectNamespace()
+ * - Function name validation via scriptReference.isValidFunctionName()
+ * - Case error detection via scriptReference.isCaseError()
+ * - Marks applied via cm.markText() with atomic: false
+ * - Independent marks for namespace and function name
+ * - Both parts colored uniformly (same error styling)
+ * - Debounced validation (1000ms) to prevent performance issues
+ * - Real-time validation on specific characters: ( ) space ; , \n
+ * - Full document revalidation via Revalidate button
+ * 
+ * Autocomplete:
+ * - Three context modes detected from line text:
+ *   1. Variable context (inside parentheses, no dot)
+ *   2. Function context (after dot, outside parentheses)
+ *   3. Manual invocation (Ctrl+Space anywhere)
+ * - User variables extracted via regex (var/let/const/function params)
+ * - Literals from hardcoded list + parameter descriptions
+ * - Case-insensitive search with prefix-first sorting
+ * - Custom render function for variables and literals
+ * - Correct insertion range (replaces whole word if cursor inside)
+ * 
+ * Parameter Hints:
+ * - Triggered on '(' input after a function name
+ * - Function name matching supports namespace.function
+ * - Popup positioned near cursor
+ * - Auto-hide after 8 seconds or on key press
+ * - Shows parameters, types, required/optional badges, descriptions
+ * 
+ * Script Execution:
+ * - Direct script execution via /api/scripts/direct endpoint
+ * - Status polling via /api/scripts/status endpoint
+ * - Exponential backoff: 2s (first 10 checks), 5s (next 20), 10s (after)
+ * - Integration with scriptApi.runDirectScript() and scriptApi.stopScript()
+ * - Status tracked via activeScriptChanged event from ui/scripts.js
+ * - Backup property listener for StelScriptMgr.runningScriptId
+ * 
+ * Example Code Cache:
+ * - Global cache for storing long example code
+ * - Avoids HTML attribute encoding issues
+ * - Auto-cleanup after 5 minutes (300000ms)
+ * - Used for "Insert Example" and "Insert at Line" buttons
+ * 
+ * ========================================================================
+ * REQUIRED MODULES (AMD DEPENDENCIES)
+ * ========================================================================
+ * 
+ * Stellarium Application Modules:
+ * - jquery: DOM manipulation and AJAX
+ * - api/scripts: Script execution API (runDirectScript, runScript, stopScript)
+ * - api/remotecontrol: Server communication and translation (rc.tr)
+ * - api/properties: StelProperty access
+ * - scripteditor/scriptReference: API reference data and validation
+ * - ui/stellarium-utils: Shared notifications and utilities
+ * 
+ * CodeMirror Core and Addons:
+ * - codemirror: Core CodeMirror module (loaded as AMD package)
+ * - cm-mode-javascript: JavaScript language mode
+ * - cm-addon-continuelist: Continue markdown lists (future use)
+ * - cm-addon-foldcode: Core code folding
+ * - cm-addon-foldgutter: Fold gutter with markers
+ * - cm-addon-brace-fold: Brace-based folding
+ * - cm-addon-indent-fold: Indent-based folding
+ * - cm-addon-active-line: Active line highlighting
+ * - cm-addon-matchbrackets: Matching bracket highlighting
+ * - cm-addon-closebrackets: Auto-close brackets
+ * - cm-addon-show-hint: Autocomplete popup framework
+ * - cm-addon-javascript-hint: JavaScript-specific hints (future use)
+ * - cm-addon-comment: Comment toggling (Ctrl+/)
+ * - cm-addon-searchcursor: Search cursor (used by search addon)
+ * - cm-addon-search: Find and replace dialog (Ctrl+F, Ctrl+H)
+ * - cm-addon-dialog: Dialog framework (used by search addon)
+ * - cm-addon-placeholder: Placeholder text for empty editor
+ * 
+ * ========================================================================
+ * PUBLIC API
+ * ========================================================================
+ * 
+ * init()                    - Initialize the module (called by mainui.js)
+ * runScript()               - Run the entire editor content
+ * runSelection()            - Run the selected text only
+ * stopScript()              - Stop the currently running script
+ * clearOutput()             - Clear the output panel
+ * insertAtCursor(text)      - Insert text at current cursor position
+ * loadInstalledScripts()    - Refresh the installed scripts list
+ * saveScriptToFile()        - Save editor content to a .ssc file
+ * openScriptFromFile()      - Open a .ssc file from local filesystem
+ * 
+ * ========================================================================
+ * GLOBAL EXPORTS
+ * ========================================================================
+ * 
+ * The following globals are exposed for other modules:
+ * 
+ * window._cm                    - Alias for CodeMirror instance (debugging)
+ * window._stelCodeMirrorInstance - The CodeMirror instance (main reference)
+ * window.revalidateStelFunctions - Full revalidation function
+ * window._validateAll           - Alias for fullRevalidateAllFunctions
+ * window._validateLine          - Validate the current line
+ * window._debugValidation       - Enable/disable validation debug logs
+ * window._stelScriptEditor      - Public API for external modules:
+ *   - insertAtCursor(text)
+ *   - getEditorContent()
+ *   - setEditorContent(content)
+ *   - copyToClipboard(text)
+ * 
+ * ========================================================================
+ * DATA SOURCES
+ * ========================================================================
+ * 
+ * - js/scripteditor/data/modules-index.json: Module index
+ * - js/scripteditor/data/{moduleId}.json: Function definitions per module
+ * - js/scripteditor/data/snippets.json: Code snippet definitions
+ * - localStorage: Editor content, execution history, theme selection
+ * 
+ * ========================================================================
+ * MODULE METADATA
+ * ========================================================================
  * 
  * @module scriptEditor
  * @requires jquery
@@ -46,16 +215,58 @@
  * @requires api/properties
  * @requires scripteditor/scriptReference
  * @requires ui/stellarium-utils
+ * @requires codemirror
+ * @requires cm-mode-javascript
+ * @requires cm-addon-*
  * 
  * @author kutaibaa akraa (GitHub: @kutaibaa-akraa)
  * @date 2026-06-06
  * @license GPLv2+
- * @version 1.0.0
+ * @version 2.0.0
+ * 
+ * ========================================================================
+ * CHANGELOG
+ * ========================================================================
+ * 
+ * Version 2.0.0 (Current):
+ * - Migrated from global CodeMirror (script tags) to AMD via RequireJS
+ * - Removed waitForCodeMirror() polling mechanism
+ * - Removed createFallbackEditor() (no longer needed)
+ * - CodeMirror now passed as AMD dependency parameter
+ * - All addons loaded as AMD side-effect modules
+ * - Theme 'default' now loaded from external default.css file
+ * - Independent namespace and function name validation
+ * - Separate error detection for "Namespace.function" pattern
+ * - Improved validation marks with clearMarksInRange helper
+ * - applyValidationMark helper for uniform error styling
+ * 
+ * Version 1.0.0:
+ * - Initial release with CodeMirror via script tags
+ * - Full validation system with case-sensitive checking
+ * - Autocomplete with namespace filtering
+ * - Parameter hint popup
+ * - Quick Reference panel
+ * - Script execution and history
  * 
  * ======================================================================== */
 
-define(["jquery", "api/scripts", "api/remotecontrol", "api/properties", "scripteditor/scriptReference", "ui/stellarium-utils"], 
-    function($, scriptApi, rc, propApi, scriptReference, stelUtils) {
+define([
+    "jquery", "api/scripts", "api/remotecontrol", "api/properties", "scripteditor/scriptReference", "ui/stellarium-utils",
+    // ================================================================
+    // CodeMirror and all addons via RequireJS
+    // ================================================================
+    // CodeMirror core is loaded as an AMD package (see main.js).
+    // All addons are loaded as side effects (they register themselves
+    // on the CodeMirror object). Only CodeMirror itself is needed as
+    // a function parameter.
+    // ----------------------------------------------------------------
+    "codemirror", "cm-mode-javascript", "cm-addon-continuelist", "cm-addon-foldcode", "cm-addon-foldgutter", "cm-addon-brace-fold",
+		"cm-addon-indent-fold", "cm-addon-active-line", "cm-addon-matchbrackets", "cm-addon-closebrackets", "cm-addon-show-hint",
+		"cm-addon-javascript-hint", "cm-addon-comment", "cm-addon-searchcursor", "cm-addon-search", "cm-addon-dialog", "cm-addon-placeholder"
+], function(
+    $, scriptApi, rc, propApi, scriptReference, stelUtils,
+    CodeMirror
+) {
     "use strict";
     
 		// Using "showNotification" function from stellarium-utils.js
@@ -94,75 +305,8 @@ define(["jquery", "api/scripts", "api/remotecontrol", "api/properties", "scripte
 		var exampleCodeCache = {};
 		var exampleCounter = 0;
 
-		var _tr = rc.tr;
-		
-		// =====================================================================
-		// CODEMIRROR LOADING CHECK
-		// =====================================================================
-
-		/**
-		 * Wait for CodeMirror to be fully loaded before initialization.
-		 * CodeMirror is loaded via script tags, not as AMD module.
-		 * 
-		 * @param {Function} callback - Function to call when CodeMirror is ready
-		 * @param {number} retries - Current retry count (internal use)
-		 */
-		function waitForCodeMirror(callback, retries) {
-				retries = retries || 0;
+		var tr = rc.tr;
 				
-				if (typeof CodeMirror !== 'undefined') {
-						console.log('[ScriptEditor] CodeMirror is ready');
-						callback();
-				} else if (retries < 30) {
-						console.log('[ScriptEditor] Waiting for CodeMirror... (' + (retries + 1) + '/30)');
-						setTimeout(function() {
-								waitForCodeMirror(callback, retries + 1);
-						}, 100);
-				} else {
-						console.error('[ScriptEditor] CodeMirror failed to load after 3 seconds');
-						// Fallback: create a basic textarea without syntax highlighting
-						createFallbackEditor();
-				}
-		}
-
-		/**
-		 * Create a fallback textarea editor when CodeMirror fails to load.
-		 */
-		function createFallbackEditor() {
-				var ta = document.getElementById('script-editor');
-				if (!ta) return;
-				
-				console.warn('[ScriptEditor] Using fallback textarea editor (no syntax highlighting)');
-				ta.style.fontFamily = 'monospace';
-				ta.style.fontSize = '13px';
-				ta.style.lineHeight = '1.5';
-				ta.style.background = '#1A1C1E';
-				ta.style.color = '#DCDBDA';
-				ta.style.border = '1px solid #3A3C3E';
-				ta.style.borderRadius = '4px';
-				ta.style.padding = '10px';
-				ta.style.width = '100%';
-				ta.style.height = '450px';
-				ta.style.resize = 'vertical';
-				
-				// Store reference
-				codeMirrorInstance = null;
-				window._cm = null;
-				
-				// Load saved content
-				try {
-						var saved = localStorage.getItem('stellarium-script-editor');
-						if (saved) ta.value = saved;
-				} catch(e) {}
-				
-				// Save on change
-				$(ta).on('input', function() {
-						try {
-								localStorage.setItem('stellarium-script-editor', ta.value);
-						} catch(e) {}
-				});
-		}
-		
 		// =====================================================================
 		// LINE COUNTER FUNCTIONS
 		// =====================================================================
@@ -225,7 +369,7 @@ define(["jquery", "api/scripts", "api/remotecontrol", "api/properties", "scripte
 				}
 				
 				if (snippets.length === 0) {
-						$container.html('<span class="loading-placeholder">' + _tr('No snippets available') + '</span>');
+						$container.html('<span class="loading-placeholder">' + tr('No snippets available') + '</span>');
 						return;
 				}
 				
@@ -394,7 +538,7 @@ define(["jquery", "api/scripts", "api/remotecontrol", "api/properties", "scripte
 								if (exampleCodeCache[exampleCacheId]) {
 										delete exampleCodeCache[exampleCacheId];
 								}
-						}, 300000);
+						}, 3000);
 				}
 				
 				// Get total lines for placeholder
@@ -675,17 +819,17 @@ define(["jquery", "api/scripts", "api/remotecontrol", "api/properties", "scripte
 				var code = getEditorContent().trim();
 				if (!code) { 
 						addOutput('error', 'No code to run.');
-						showNotification(_tr("No code to run"), "error");
+						showNotification(tr("No code to run"), "error");
 						return; 
 				}
 				if (isRunning) { 
 						addOutput('error', 'A script is already running. Stop it first.'); 
-						showNotification(_tr("Script already running"), "error");
+						showNotification(tr("Script already running"), "error");
 						return; 
 				}
 				
 				addOutput('info', '▶ Sending script for execution...');
-				showNotification(_tr("Running script..."), "info");
+				showNotification(tr("Running script..."), "info");
 				isRunning = true; 
 				currentRunningScriptId = null; 
 				refreshAllUIStates();
@@ -705,9 +849,9 @@ define(["jquery", "api/scripts", "api/remotecontrol", "api/properties", "scripte
 
     function sendCode(code) {
         if (typeof scriptApi !== 'undefined' && scriptApi.runDirectScript) {
-            scriptApi.runDirectScript(code, true);
+            scriptApi.runDirectScript(code, false);
         } else if (typeof rc !== 'undefined' && rc.postCmd) {
-            rc.postCmd('/api/scripts/direct', { code: code, useIncludes: true }, null, function(data) {
+            rc.postCmd('/api/scripts/direct', { code: code, useIncludes: false }, null, function(data) {
                 if (data && data.trim() && data.trim() !== 'ok') { 
                     addOutput('success', 'Response received:', data); 
                 }
@@ -817,11 +961,11 @@ define(["jquery", "api/scripts", "api/remotecontrol", "api/properties", "scripte
 		function stopScript() {
 				if (!isRunning) { 
 						addOutput('info', 'No script is currently running.'); 
-						showNotification(_tr("No script running"), "info");
+						showNotification(tr("No script running"), "info");
 						return; 
 				}
 				addOutput('info', 'Stopping script...');
-				showNotification(_tr("Stopping script..."), "info");
+				showNotification(tr("Stopping script..."), "info");
 				if (typeof scriptApi !== 'undefined' && scriptApi.stopScript) scriptApi.stopScript();
 				else if (typeof rc !== 'undefined' && rc.postCmd) rc.postCmd('/api/scripts/stop', {});
 				isRunning = false; 
@@ -894,7 +1038,7 @@ define(["jquery", "api/scripts", "api/remotecontrol", "api/properties", "scripte
 				
 				if (!content || content.trim() === '') {
 						addOutput('error', 'Nothing to copy - editor is empty');
-						showNotification(_tr("Editor is empty, nothing to copy"), "error");
+						showNotification(tr("Editor is empty, nothing to copy"), "error");
 						return;
 				}
 				
@@ -902,7 +1046,7 @@ define(["jquery", "api/scripts", "api/remotecontrol", "api/properties", "scripte
 				
 				var charCount = content.length;
 				var lineCount = content.split('\n').length;
-				var message = _tr("Copied") + " " + charCount + " " + _tr("characters") + " (" + lineCount + " " + _tr("lines") + ")";
+				var message = tr("Copied") + " " + charCount + " " + tr("characters") + " (" + lineCount + " " + tr("lines") + ")";
 				
 				addOutput('success', message);
 				showNotification(message, "success");
@@ -912,33 +1056,48 @@ define(["jquery", "api/scripts", "api/remotecontrol", "api/properties", "scripte
     // INSTALLED SCRIPTS
     // =====================================================================
 
-    function loadInstalledScripts() {
-        if (!dom.$scriptsList || !dom.$scriptsList.length) return;
-        if (typeof scriptApi !== 'undefined' && scriptApi.loadScriptList) {
-            scriptApi.loadScriptList(function(data) {
-                var html = '';
-                if (data && data.length) {
-                    for (var i = 0; i < data.length; i++) {
-                        var script = data[i], name = script.split('/').pop();
-                        html += '<div class="script-item"><span class="script-icon">S</span>';
-                        html += '<span class="script-name" title="' + escapeAttr(script) + '">' + escapeHtml(name) + '</span>';
-                        html += '<div class="script-item-actions">';
-                        html += '<button class="script-action-btn script-run-btn" data-script="' + escapeAttr(script) + '" title="Run Script">&#9654;</button>';
-                        html += '<button class="script-action-btn script-load-btn" data-script="' + escapeAttr(script) + '" title="Load into Editor">&#128196;</button>';
-                        html += '</div></div>';
-                    }
-                } else { html = '<div class="loading-placeholder">' + rc.tr('No scripts available') + '</div>'; }
-                dom.$scriptsList.html(html);
-                dom.$scriptsList.find('.script-run-btn').on('click', function(e) { e.stopPropagation(); runInstalledScript($(this).data('script')); });
-                dom.$scriptsList.find('.script-load-btn').on('click', function(e) { e.stopPropagation(); loadInstalledScriptContent($(this).data('script')); });
-                updateInstalledScriptButtons();
-            });
-        } else { dom.$scriptsList.html('<div class="loading-placeholder">' + rc.tr('Script API not available') + '</div>'); }
-    }
+		function loadInstalledScripts() {
+				if (!dom.$scriptsList || !dom.$scriptsList.length) return;
+				if (typeof scriptApi !== 'undefined' && scriptApi.loadScriptList) {
+						scriptApi.loadScriptList(function(data) {
+								var html = '';
+								if (data && data.length) {
+										
+										// SORT THE DATA ALPHABETICALLY BEFORE DISPLAY
+										var sortedData = data.slice().sort(function(a, b) {
+												// Extract just the filename for comparison (case-insensitive)
+												var nameA = a.split('/').pop().toLowerCase();
+												var nameB = b.split('/').pop().toLowerCase();
+												return nameA.localeCompare(nameB);
+										});
+										
+										// Display the sorted data
+										for (var i = 0; i < sortedData.length; i++) {
+												var script = sortedData[i];
+												var name = script.split('/').pop();
+												html += '<div class="script-item"><span class="script-icon">S</span>';
+												html += '<span class="script-name" title="' + escapeAttr(script) + '">' + escapeHtml(name) + '</span>';
+												html += '<div class="script-item-actions">';
+												html += '<button class="script-action-btn script-run-btn" data-script="' + escapeAttr(script) + '" title="Run Script">&#9654;</button>';
+												html += '<button class="script-action-btn script-load-btn" data-script="' + escapeAttr(script) + '" title="Load into Editor">&#128196;</button>';
+												html += '</div></div>';
+										}
+								} else {
+										html = '<div class="loading-placeholder">' + rc.tr('No scripts available') + '</div>';
+								}
+								dom.$scriptsList.html(html);
+								dom.$scriptsList.find('.script-run-btn').on('click', function(e) { e.stopPropagation(); runInstalledScript($(this).data('script')); });
+								dom.$scriptsList.find('.script-load-btn').on('click', function(e) { e.stopPropagation(); loadInstalledScriptContent($(this).data('script')); });
+								updateInstalledScriptButtons();
+						});
+				} else {
+						dom.$scriptsList.html('<div class="loading-placeholder">' + rc.tr('Script API not available') + '</div>');
+				}
+		}
 
     function loadInstalledScriptContent(scriptId) {
         $.ajax({
-            url: '/api/scripts/info', data: { id: scriptId, html: 'false' }, dataType: 'json',
+            url: '/api/scripts/info', data: { id: scriptId, html: 'false' }, dataType: 'html',
             success: function(data) {
                 addOutput('info', 'Script: ' + scriptId);
                 if (data && data.description) addOutput('info', 'Description: ' + data.description);
@@ -1002,7 +1161,7 @@ define(["jquery", "api/scripts", "api/remotecontrol", "api/properties", "scripte
 				$quickRef.empty();
 
 				if (!scriptReference.isLoaded()) {
-						$quickRef.html('<div class="loading-placeholder">' + _tr("Loading API reference...") + '</div>');
+						$quickRef.html('<div class="loading-placeholder">' + tr("Loading API reference...") + '</div>');
 						setTimeout(buildQuickReference, 500);
 						return;
 				}
@@ -1042,7 +1201,7 @@ define(["jquery", "api/scripts", "api/remotecontrol", "api/properties", "scripte
 				// Add snippets section
 				html += '<div class="ref-category ref-category-snippets" data-category-id="snippets">';
 				html += '<div class="ref-cat-header" data-cat="snippets">';
-				html += _tr('Code Snippets');
+				html += tr('Code Snippets');
 				
 				if (snippets.length > 0) {
 						html += ' <span class="ref-cat-count">(' + snippets.length + ')</span>';
@@ -1102,7 +1261,7 @@ define(["jquery", "api/scripts", "api/remotecontrol", "api/properties", "scripte
 				var $snippetsContainer = $('#ref-snippets');
 				if ($snippetsContainer.length) {
 						if (snippets.length === 0) {
-								$snippetsContainer.html('<div class="loading-placeholder">' + _tr('No snippets available') + '</div>');
+								$snippetsContainer.html('<div class="loading-placeholder">' + tr('No snippets available') + '</div>');
 						} else {
 								var snippetsHtml = '';
 								for (var s = 0; s < snippets.length; s++) {
@@ -1205,7 +1364,7 @@ define(["jquery", "api/scripts", "api/remotecontrol", "api/properties", "scripte
 				if (!hasResults) {
 						var $noResults = $quickRef.find('.no-results-message');
 						if ($noResults.length === 0) {
-								$quickRef.append('<div class="no-results-message" style="padding: 20px; text-align: center; color: #8A8C8E;">' + _tr('No matching functions found') + '</div>');
+								$quickRef.append('<div class="no-results-message" style="padding: 20px; text-align: center; color: #8A8C8E;">' + tr('No matching functions found') + '</div>');
 						} else {
 								$noResults.show();
 						}
@@ -1407,7 +1566,7 @@ define(["jquery", "api/scripts", "api/remotecontrol", "api/properties", "scripte
 						var $snippetsSection = $(
 								'<div class="ref-category">' +
 								'<div class="ref-cat-header" data-cat="snippets">' +
-								_tr('Code Snippets') +
+								tr('Code Snippets') +
 								' <span class="ref-cat-count">(' + snippets.length + ')</span>' +
 								'</div>' +
 								'<div class="ref-cat-items" id="ref-snippets"></div>' +
@@ -1497,13 +1656,13 @@ define(["jquery", "api/scripts", "api/remotecontrol", "api/properties", "scripte
 						$dialogOverlay = $(
 								'<div id="goto-line-dialog" class="goto-line-overlay" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.5);z-index:10001;align-items:center;justify-content:center;">' +
 								'<div class="goto-line-dialog" style="background:linear-gradient(#5D5F62, #3A3C3E);border:1px solid #2A2C2E;border-radius:6px;padding:15px 20px;min-width:300px;box-shadow:0 4px 12px rgba(0,0,0,0.4);">' +
-								'<div style="margin-bottom:10px;font-weight:bold;color:#DCDBDA;">' + _tr("Go to Line") + '</div>' +
+								'<div style="margin-bottom:10px;font-weight:bold;color:#DCDBDA;">' + tr("Go to Line") + '</div>' +
 								'<div style="margin-bottom:10px;">' +
-								'<input type="number" id="goto-line-input" class="goto-line-input" style="width:100%;padding:6px 10px;background:#3A3C3E;color:#DCDBDA;border:1px solid #5D5F62;border-radius:3px;font-family:monospace;font-size:12px;" placeholder="' + _tr("Line number") + ' (1 - ' + totalLines + ')">' +
+								'<input type="number" id="goto-line-input" class="goto-line-input" style="width:100%;padding:6px 10px;background:#3A3C3E;color:#DCDBDA;border:1px solid #5D5F62;border-radius:3px;font-family:monospace;font-size:12px;" placeholder="' + tr("Line number") + ' (1 - ' + totalLines + ')">' +
 								'</div>' +
 								'<div style="display:flex;gap:10px;justify-content:flex-end;">' +
-								'<button id="goto-line-cancel" class="jquerybutton" style="background:linear-gradient(#5D5F62, #3A3C3E);border:1px solid #2A2C2E;border-radius:3px;padding:4px 12px;font-size:11px;color:#000;cursor:pointer;">' + _tr("Cancel") + '</button>' +
-								'<button id="goto-line-submit" class="jquerybutton" style="background:linear-gradient(#5D5F62, #3A3C3E);border:1px solid #2A2C2E;border-radius:3px;padding:4px 12px;font-size:11px;color:#000;cursor:pointer;">' + _tr("Go") + '</button>' +
+								'<button id="goto-line-cancel" class="jquerybutton" style="background:linear-gradient(#5D5F62, #3A3C3E);border:1px solid #2A2C2E;border-radius:3px;padding:4px 12px;font-size:11px;color:#000;cursor:pointer;">' + tr("Cancel") + '</button>' +
+								'<button id="goto-line-submit" class="jquerybutton" style="background:linear-gradient(#5D5F62, #3A3C3E);border:1px solid #2A2C2E;border-radius:3px;padding:4px 12px;font-size:11px;color:#000;cursor:pointer;">' + tr("Go") + '</button>' +
 								'</div>' +
 								'</div>' +
 								'</div>'
@@ -1512,7 +1671,7 @@ define(["jquery", "api/scripts", "api/remotecontrol", "api/properties", "scripte
 				}
 				
 				// Update the placeholder with current line and total lines
-				$('#goto-line-input').attr('placeholder', _tr("Line number") + ' (1 - ' + totalLines + ')');
+				$('#goto-line-input').attr('placeholder', tr("Line number") + ' (1 - ' + totalLines + ')');
 				$('#goto-line-input').val(currentLine);
 				$('#goto-line-input').focus();
 				$('#goto-line-input').select();
@@ -1688,7 +1847,7 @@ define(["jquery", "api/scripts", "api/remotecontrol", "api/properties", "scripte
         html += '<div id="shortcuts-help-dialog" class="shortcuts-dialog-overlay">';
         html += '<div class="shortcuts-dialog">';
         html += '<div class="shortcuts-dialog-header">';
-        html += '<h3>⌨️ Keyboard Shortcuts</h3>';
+        html += '<h3>Keyboard Shortcuts</h3>';
         html += '<button class="shortcuts-dialog-close">&times;</button>';
         html += '</div>';
         html += '<div class="shortcuts-dialog-body">';
@@ -1755,8 +1914,8 @@ define(["jquery", "api/scripts", "api/remotecontrol", "api/properties", "scripte
 
 		/**
 		 * Provides autocomplete suggestions based on current cursor context.
-		 * FIXED: Reliable dot detection using line text, not tokens.
-		 * FIXED: Correct insertion for namespace functions.
+		 * Reliable dot detection using line text, not tokens.
+		 * Correct insertion for namespace functions.
 		 * 
 		 * @param {CodeMirror} cm - CodeMirror editor instance
 		 * @returns {Object|null} Hint object with list, from, to, data, render, select
@@ -2185,140 +2344,6 @@ define(["jquery", "api/scripts", "api/remotecontrol", "api/properties", "scripte
 		}
 
 		/**
-		 * Sets up parameter hint popup when user types '(' after a function name.
-		 * Shows function parameters, types, and descriptions.
-		 * 
-		 * @param {CodeMirror} cm - CodeMirror editor instance
-		 * @returns {void}
-		 */
-		function setupParameterHints(cm) {
-			
-			    if (!cm) {
-        console.warn('[ParamHints] No CodeMirror instance');
-        return;
-    }
-    console.log('[ParamHints] Initializing parameter hints...');
-
-				if (!cm) return;
-				
-				var paramPopup = null;
-				var popupTimeout = null;
-				
-				function hideParamPopup() {
-						if (paramPopup) {
-								paramPopup.remove();
-								paramPopup = null;
-						}
-						if (popupTimeout) {
-								clearTimeout(popupTimeout);
-								popupTimeout = null;
-						}
-				}
-				
-				function showParamPopup(funcData, cursorPos) {
-						hideParamPopup();
-						
-						if (!funcData || !funcData.parameters || funcData.parameters.length === 0) {
-								return;
-						}
-						
-						var html = '<div class="param-hint-popup">';
-						html += '<div class="param-hint-header">';
-						html += '<span class="param-hint-name">' + escapeHtml(funcData.fullName || funcData.name) + '</span>';
-						html += '</div>';
-						
-						html += '<div class="param-hint-signature">';
-						html += '<code>' + escapeHtml(funcData.fullSignature || funcData.signature) + '</code>';
-						html += '</div>';
-						
-						html += '<div class="param-hint-list">';
-						
-						for (var i = 0; i < funcData.parameters.length; i++) {
-								var p = funcData.parameters[i];
-								html += '<div class="param-hint-item">';
-								html += '<span class="param-hint-name">' + escapeHtml(p.name) + '</span>';
-								html += '<span class="param-hint-type">' + escapeHtml(p.type || 'any') + '</span>';
-								if (p.required) {
-										html += '<span class="param-hint-required">required</span>';
-								} else {
-										html += '<span class="param-hint-optional">optional</span>';
-								}
-								if (p.description) {
-										html += '<div class="param-hint-desc">' + escapeHtml(p.description) + '</div>';
-								}
-								html += '</div>';
-						}
-						
-						html += '</div>';
-						html += '<div class="param-hint-footer">';
-						html += '<span class="param-hint-hint">Continue typing parameters...</span>';
-						html += '</div>';
-						html += '</div>';
-						
-						paramPopup = $(html);
-						$('body').append(paramPopup);
-						
-						// Position popup near cursor
-						var coords = cm.cursorCoords(cursorPos, 'window');
-						paramPopup.css({
-								position: 'fixed',
-								left: coords.left + 20,
-								top: coords.top + 25,
-								zIndex: 10005
-						});
-						
-						// Auto-hide after 8 seconds or on next key press
-						popupTimeout = setTimeout(hideParamPopup, 8000);
-						
-						// Hide on any key press
-						$(document).one('keydown.paramHint', function() {
-								hideParamPopup();
-						});
-						
-						// Hide on cursor movement
-						cm.on('cursorActivity', function onCursorMove() {
-								hideParamPopup();
-								cm.off('cursorActivity', onCursorMove);
-						});
-				}
-				
-				// Find function by name (supports namespace like "core.setDate")
-				function findFunctionByName(fullName) {
-						if (!scriptReference.isLoaded()) return null;
-						
-						var allItems = scriptReference.getAutocompleteItems();
-						for (var i = 0; i < allItems.length; i++) {
-								var item = allItems[i];
-								if (item.fullName === fullName || item.name === fullName) {
-										return item;
-								}
-						}
-						return null;
-				}
-				
-				// Trigger when user types '('
-				cm.on('inputRead', function(cmInstance, change) {
-						if (change.text && change.text.length === 1 && change.text[0] === '(') {
-								var cursor = cmInstance.getCursor();
-								var line = cmInstance.getLine(cursor.line);
-								var beforeCursor = line.substring(0, cursor.ch - 1);
-								
-								// Match function name (supports namespace.function)
-								var funcMatch = beforeCursor.match(/([a-zA-Z_$][a-zA-Z0-9_$]*(\.[a-zA-Z_$][a-zA-Z0-9_$]*)?)\s*$/);
-								
-								if (funcMatch) {
-										var funcName = funcMatch[1];
-										var funcData = findFunctionByName(funcName);
-										
-										if (funcData) {
-												showParamPopup(funcData, cursor);
-										}
-								}
-						}
-				});
-		}
-
-		/**
 		 * Gets all user-defined variables from the current editor content.
 		 * Includes var, let, const declarations and function parameters.
 		 * FIXED: More comprehensive pattern matching
@@ -2543,19 +2568,41 @@ define(["jquery", "api/scripts", "api/remotecontrol", "api/properties", "scripte
 		};
 
 		/**
-		 * Initializes the CodeMirror editor with Stellarium syntax highlighting.
-		 * ENHANCED VERSION with proper case-sensitive validation.
-		 * 
-		 * Features:
-		 * - Dynamic module names from modules-index.json
-		 * - REAL case-sensitive validation (core.setdate vs core.setDate)
-		 * - Proper tokenization with exact case matching
-		 * - Revalidate button with full case checking
-		 * - Auto-validation toggle with instant color updates
-		 * 
-		 * @function initCodeMirror
-		 * @returns {void}
-		 */
+		* Initializes the CodeMirror editor with Stellarium syntax highlighting.
+		* ENHANCED VERSION with proper case-sensitive validation.
+		* 
+		* Features:
+		* 1. Dynamic module names from modules-index.json
+		* 2. REAL case-sensitive validation (core.setdate vs core.setDate)
+		* 3. Proper tokenization with exact case matching
+		* 4. Revalidate button with full case checking
+		* 5. Auto-validation toggle with instant color updates
+		* 6. Syntax highlighting (Stellarium + ECMAScript)
+		* 7. Code Folding (Ctrl+Q to toggle)
+		* 8. Smart Bracket Completion with auto-indentation
+		* 9. Bracket Error Detection (red underline)
+		* 10. ECMAScript Keywords Support
+		* 11. Placeholder text
+		* 12. Case-sensitive function validation
+		* 13. Auto-validation toggle
+		* 14. Parameter hints
+		* 15. Line counter
+		* 16. Keyboard shortcuts (Ctrl+K, Ctrl+G, etc.)
+		* 17. LocalStorage persistence
+		* Initialize the CodeMirror editor instance with the Stellarium mode.
+		* 
+		* This function assumes that:
+		* - CodeMirror core is loaded (via AMD dependency).
+		* - All required addons are loaded (via AMD dependencies).
+		* - The Stellarium mode has been registered (either by this function
+		*   or by a previous call).
+		* 
+		* Since CodeMirror and its addons are AMD dependencies, no runtime
+		* availability checks are needed.
+		* 
+		* @function initCodeMirror
+		* @returns {void}
+		*/
 		function initCodeMirror() {
 				var ta = document.getElementById('script-editor');
 				if (!ta) { 
@@ -2563,27 +2610,27 @@ define(["jquery", "api/scripts", "api/remotecontrol", "api/properties", "scripte
 						return; 
 				}
 				
-				// =====================================================================
-				// STEP 1: Check if CodeMirror is available
-				// =====================================================================
-				if (typeof CodeMirror === 'undefined') {
-						console.warn('[ScriptEditor] CodeMirror not available, waiting...');
-						waitForCodeMirror(initCodeMirror);
+				// ================================================================
+				// STEP 1: Verify CodeMirror is available
+				// ================================================================
+				// This check is a safety net. If it fails, it indicates a
+				// configuration error in the AMD dependency array.
+				// ================================================================
+				if (!CodeMirror) {
+						console.error('[ScriptEditor] CodeMirror is not available. Check AMD configuration.');
 						return;
 				}
+				
+				console.log('[ScriptEditor] CodeMirror version:', CodeMirror.version);
 				
 				// =====================================================================
 				// STEP 2: DATA STRUCTURES FOR DYNAMIC MODULE NAMES
 				// =====================================================================
 				var moduleNames = [];
 				var builtinsMap = {};
-				var functionsMap = {};  // Stores all valid namespace.function pairs
-				var allValidFunctions = [];  // Array of {namespace, function, fullName}
+				var functionsMap = {};
+				var allValidFunctions = [];
 				
-				/**
-				 * Build complete functions map from scriptReference
-				 * This is CRITICAL for case-sensitive validation
-				 */
 				function buildFunctionsMap() {
 						functionsMap = {};
 						allValidFunctions = [];
@@ -2608,7 +2655,6 @@ define(["jquery", "api/scripts", "api/remotecontrol", "api/properties", "scripte
 										var namespace = parts[0];
 										var funcName = parts[1];
 										
-										// Store in map for O(1) lookup with EXACT case
 										var key = namespace + '::' + funcName;
 										functionsMap[key] = true;
 										
@@ -2625,9 +2671,6 @@ define(["jquery", "api/scripts", "api/remotecontrol", "api/properties", "scripte
 						return true;
 				}
 				
-				/**
-				 * Update module names from scriptReference
-				 */
 				function updateModuleNames() {
 						moduleNames = [];
 						builtinsMap = {};
@@ -2640,40 +2683,24 @@ define(["jquery", "api/scripts", "api/remotecontrol", "api/properties", "scripte
 												var moduleId = mod.id;
 												moduleNames.push(moduleId);
 												builtinsMap[moduleId] = 'builtin';
-												
-												// Add module name without "Mgr" suffix as alias
-												if (moduleId.indexOf('Mgr') !== -1) {
-														var shortName = moduleId.replace('Mgr', '');
-														if (shortName.length > 3 && !builtinsMap[shortName]) {
-																builtinsMap[shortName] = 'builtin';
-														}
-												}
 										}
 										console.log('[CodeMirror] Loaded ' + moduleNames.length + ' module names dynamically');
 								}
 						}
 						
-						// Always include core as fallback
 						if (!builtinsMap['core']) {
 								builtinsMap['core'] = 'builtin';
 								moduleNames.push('core');
 						}
 						
-						// Build functions map after modules are loaded
 						buildFunctionsMap();
 				}
 				
-				/**
-				 * Case-sensitive validation of function name
-				 * Returns true ONLY if the function exists with EXACT case matching
-				 */
 				function isValidFunctionCaseSensitive(funcName, namespace) {
-						// If scriptReference is not loaded yet, return false
 						if (!scriptReference || !scriptReference.isLoaded()) {
 								return false;
 						}
 						
-						// Check if functionsMap is populated
 						if (Object.keys(functionsMap).length === 0) {
 								buildFunctionsMap();
 						}
@@ -2681,12 +2708,10 @@ define(["jquery", "api/scripts", "api/remotecontrol", "api/properties", "scripte
 						var key = namespace + '::' + funcName;
 						var isValid = functionsMap[key] === true;
 						
-						// Debug log for case errors (only log first few to avoid spam)
 						if (!isValid && window._debugValidation) {
-								// Check if it's a case-insensitive match (to report case errors)
 								for (var i = 0; i < allValidFunctions.length; i++) {
 										if (allValidFunctions[i].namespace.toLowerCase() === namespace.toLowerCase() &&
-												allValidFunctions[i].function.toLowerCase() === funcName.toLowerCase()) {
+														allValidFunctions[i].function.toLowerCase() === funcName.toLowerCase()) {
 												console.log('[CaseError] "' + funcName + '" should be "' + allValidFunctions[i].function + '"');
 												break;
 										}
@@ -2697,207 +2722,103 @@ define(["jquery", "api/scripts", "api/remotecontrol", "api/properties", "scripte
 				}
 				
 				// Initial attempt to load module names
-				updateModuleNames();
+				//updateModuleNames();
 				
-				// If scriptReference is not loaded yet, wait for it
 				if (scriptReference && !scriptReference.isLoaded()) {
 						scriptReference.init().then(function() {
 								updateModuleNames();
 								buildFunctionsMap();
 								if (codeMirrorInstance) {
-										codeMirrorInstance.setOption('mode', 'stellarium');
-										codeMirrorInstance.refresh();
+										// Dont use  refresh() 
 										console.log('[CodeMirror] Module names and functions map updated');
-										// Revalidate after module names are loaded
-										//setTimeout(function() {
-										//		fullRevalidateAllFunctions();
-										//}, 500);
 								}
 						});
 				}
 				
 				// =====================================================================
-				// STEP 3: ENHANCED STELLARIUM MODE WITH BETTER TOKENIZATION
+				// STEP 3: STELLARIUM MODE - EXTENDS JAVASCRIPT MODE (DYNAMIC)
 				// =====================================================================
 				if (CodeMirror.modes && !CodeMirror.modes.stellarium) {
-						console.log('[CodeMirror] Registering enhanced stellarium mode with case-sensitive tokenization...');
+						console.log('[CodeMirror] Creating Stellarium mode (extends JavaScript with dynamic builtins)...');
 						
-						CodeMirror.defineMode('stellarium', function() {
-								// JavaScript keywords (fixed)
-								var keywords = [
-										'var', 'function', 'if', 'else', 'for', 'while', 'do', 'switch',
-										'case', 'break', 'continue', 'return', 'true', 'false', 'null',
-										'new', 'this', 'typeof', 'instanceof', 'delete', 'in', 'try',
-										'catch', 'finally', 'throw', 'include'
-								];
+						CodeMirror.defineMode('stellarium', function(config) {
+								// Get the base JavaScript mode
+								var jsMode = CodeMirror.getMode(config, 'javascript');
 								
-								var keywordsMap = {};
-								for (var i = 0; i < keywords.length; i++) {
-										keywordsMap[keywords[i]] = 'keyword';
+								// Checks whether a word is a Stellarium builtin (dynamically updated)
+								function isBuiltin(word) {
+										// Check the current builtinsMap (updated from scriptReference)
+										return builtinsMap[word] === 'builtin';
 								}
 								
-								// Store reference to current builtinsMap
-								var currentBuiltinsMap = builtinsMap;
-								
 								return {
-										startState: function() {
-												return { 
-														inString: false, 
-														stringChar: null,
-														inComment: false,
-														inBlockComment: false,
-														lastToken: null,
-														currentNamespace: null
-												};
-										},
-
-										token: function(stream, state) {
-												// Update builtins reference
-												currentBuiltinsMap = builtinsMap;
-												
-												// ============================================================
-												// LINE COMMENTS (// ...)
-												// ============================================================
-												if (stream.match('//')) {
-														stream.skipToEnd();
-														return 'comment';
-												}
-												
-												// ============================================================
-												// BLOCK COMMENTS (/* ... */) - Enhanced with whitespace handling
-												// ============================================================
-												
-												// Check for start of block comment
-												if (stream.match(/\/\*/)) {
-														state.inBlockComment = true;
-														return 'comment';
-												}
-												
-												// Handle block comment content and closing tag
-												if (state.inBlockComment) {
-														// IMPORTANT: Skip whitespace before checking for closing tag
-														// This fixes the issue where `*/` with indentation wasn't being recognized
-														var spaces = stream.eatWhile(/\s/);
-														
-														// Check for closing tag `*/` (with or without preceding whitespace)
-														if (stream.match(/\*\//)) {
-																state.inBlockComment = false;
-																return 'comment';
-														}
-														
-														// If we consumed spaces but didn't find `*/`, we need to backtrack
-														// because we might have consumed spaces that are part of the comment content
-														if (spaces) {
-																// Go back to where we started eating spaces
-																stream.backUp(spaces);
-														}
-														
-														// No closing tag found, consume rest of the line as comment
-														stream.skipToEnd();
-														return 'comment';
-												}
-												
-												// ============================================================
-												// STRINGS - Single and Double Quotes
-												// ============================================================
-												if (stream.match('"') || stream.match("'")) {
-														var quote = stream.current();
-														while (!stream.eol()) {
-																var next = stream.next();
-																if (next === '\\') {
-																		stream.next(); // Skip escaped character
-																		continue;
-																}
-																if (next === quote) {
-																		break;
-																}
-														}
-														return 'string';
-												}
-												
-												// ============================================================
-												// NUMBERS
-												// ============================================================
-												if (stream.match(/^-?\d+(\.\d+)?([eE][+-]?\d+)?/)) {
-														return 'number';
-												}
-												
-												// ============================================================
-												// OPERATORS
-												// ============================================================
-												if (stream.match(/^[+\-*/%=<>!&|^~?:]+/)) {
-														return 'operator';
-												}
-												
-												// ============================================================
-												// BRACKETS AND PARENTHESES
-												// ============================================================
-												if (stream.match(/^[{}()\[\]]/)) {
-														var bracket = stream.current();
-														if (bracket === ')' || bracket === ']' || bracket === '}') {
-																return 'bracket-close';
-														}
-														return 'bracket';
-												}
-												
-												// ============================================================
-												// DOT TOKEN - Track for namespace.function pattern
-												// ============================================================
-												if (stream.peek() === '.') {
-														state.lastToken = 'dot';
-														stream.next();
-														return null;
-												}
-												
-												// ============================================================
-												// IDENTIFIERS - Core tokenization with case preservation
-												// ============================================================
-												if (stream.match(/^[a-zA-Z_$][a-zA-Z0-9_$]*/)) {
-														var word = stream.current();  // Preserves original case!
-														
-														// After dot - this is a FUNCTION name (case-sensitive!)
-														if (state.lastToken === 'dot') {
-																state.lastToken = null;
-																return 'function-pending';
-														}
-														
-														// Check if it's a built-in module (namespace) - case-sensitive
-														if (currentBuiltinsMap[word]) {
-																return 'builtin';
-														}
-														
-														// Check if it's a keyword - case-sensitive (keywords are lowercase)
-														if (keywordsMap[word]) {
-																return 'keyword';
-														}
-														
-														// Default variable
-														return 'variable';
-												}
-												
-												// ============================================================
-												// FALLBACK - Consume any other character
-												// ============================================================
-												stream.next();
-												state.lastToken = null;
-												return null;
+										startState: function(indentUnit) {
+												var state = jsMode.startState(indentUnit);
+												state._expectFunction = false;
+												state._currentBuiltin = null;
+												return state;
 										},
 										
 										copyState: function(state) {
-												return {
-														inString: state.inString,
-														stringChar: state.stringChar,
-														inComment: state.inComment,
-														inBlockComment: state.inBlockComment,
-														lastToken: state.lastToken,
-														currentNamespace: state.currentNamespace
-												};
-										}
+												// Use CodeMirror's built-in copyState
+												var newState = CodeMirror.copyState(jsMode, state);
+												newState._expectFunction = state._expectFunction;
+												newState._currentBuiltin = state._currentBuiltin;
+												return newState;
+										},
+										
+										token: function(stream, state) {
+												// Use the base JavaScript tokenizer first
+												var style = jsMode.token(stream, state);
+												
+												// If the token is an identifier and exists in builtins
+												if (style === 'variable' || style === 'keyword') {
+														var word = stream.current();
+														if (isBuiltin(word)) {
+																// Highlight core objects with a distinct (builtin) style
+																state._currentBuiltin = word;
+																state._expectFunction = true;
+																return 'builtin';
+														}
+												}
+												
+												// Handle functions after a dot (e.g., core.setDate)
+												if (style === 'builtin' && stream.peek() === '.') {
+														state._expectFunction = true;
+														state._currentBuiltin = stream.current();
+												}
+												
+												// If a previous builtin was expected and we reached end of line
+												if (state._expectFunction && stream.eol()) {
+														state._expectFunction = false;
+												}
+												
+												return style;
+										},
+										
+										indent: function(state, textAfter, line) {
+												return jsMode.indent(state, textAfter, line);
+										},
+										
+										expressionAllowed: function(stream, state) {
+												return jsMode.expressionAllowed(stream, state);
+										},
+										
+										// ============================================================
+										// Folding features inherited from JavaScript
+										// ============================================================
+										fold: 'brace',
+										electricInput: jsMode.electricInput,
+										blockCommentStart: '/*',
+										blockCommentEnd: '*/',
+										blockCommentContinue: ' * ',
+										lineComment: '//',
+										closeBrackets: "()[]{}''\"\"``",
 								};
 						});
 						
 						CodeMirror.defineMIME('text/x-stellarium', 'stellarium');
-						console.log('[CodeMirror] Enhanced stellarium mode registered');
+						console.log('[CodeMirror] Stellarium mode registered (extends JavaScript with dynamic builtins)');
 				}
 				
 				// =====================================================================
@@ -2907,6 +2828,7 @@ define(["jquery", "api/scripts", "api/remotecontrol", "api/properties", "scripte
 				
 				codeMirrorInstance = CodeMirror.fromTextArea(ta, {
 						mode: 'stellarium',
+						//mode: 'javascript',
 						lineNumbers: true,
 						lineWrapping: true,
 						indentUnit: 4,
@@ -2915,11 +2837,53 @@ define(["jquery", "api/scripts", "api/remotecontrol", "api/properties", "scripte
 						autofocus: false,
 						spellcheck: false,
 						styleActiveLine: true,
+						
+						// Code Folding Settings
+						foldGutter: true,
+						gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
+						
+						// Bracket Matching
 						matchBrackets: true,
 						autoCloseBrackets: true,
-						theme: 'default',
-				    placeholder: '// Write Stellarium script code here...\n// Example:\n// core.setDate("2026-01-01T00:00:00", "utc");\n// core.moveToObject("Mars", 2);\n// core.wait(3);',
 						
+						// ============================================================
+						// PLACEHOLDER TEXT 
+						// ============================================================
+						// CodeMirror v5.65.21 - Stellarium Script Editor
+						// MIT License - Free to use and modify
+						// ============================================================
+
+						placeholder: '// ============================================================\n' +
+												 '// Stellarium Script Editor\n' +
+												 '// CodeMirror v5.65.21 - MIT License\n' +
+												 '// ============================================================\n' +
+												 '\n' +
+												 '// Features:\n' +
+												 '// - JavaScript syntax highlighting\n' +
+												 '// - Code folding (Ctrl+Q to toggle)\n' +
+												 '// - Smart bracket completion\n' +
+												 '// - Case-sensitive function validation\n' +
+												 '// - Autocomplete (Ctrl+Space)\n' +
+												 '\n' +
+												 '// Examples:\n' +
+												 'core.setDate("2026-01-01T00:00:00", "utc");\n' +
+												 'core.moveToObject("Mars", 2);\n' +
+												 'core.wait(3);\n' +
+												 '\n' +
+												 '// TIPS & SHORTCUTS\n' +
+												 '// Ctrl+Enter     : Run entire script\n' +
+												 '// Ctrl+Shift+Enter : Run selected code\n' +
+												 '// Ctrl+Space     : Autocomplete\n' +
+												 '// Ctrl+S         : Save script\n' +
+												 '// Ctrl+O         : Open script\n' +
+												 '// Ctrl+Q         : Toggle code folding\n' +
+												 '// Ctrl+G         : Go to line\n' +
+												 '// Ctrl+/         : Toggle comment\n' +
+												 '\n' +
+												 '// Write your Stellarium script below...\n',
+						
+						//theme: 'material-darker',
+						theme: 'default',
 						extraKeys: {
 								'Ctrl-Enter': function(cm) { runScript(); },
 								'Ctrl-Shift-Enter': function(cm) { runSelection(); },
@@ -2930,10 +2894,26 @@ define(["jquery", "api/scripts", "api/remotecontrol", "api/properties", "scripte
 								'Ctrl-L': function(cm) { showGoToLineDialog(cm); },
 								'Ctrl-S': function(cm) { saveScriptToFile(); },
 								'Ctrl-O': function(cm) { openScriptFromFile(); },
-								'Tab': function(cm) { cm.replaceSelection('    ', 'end'); },
-								'Ctrl-/': function(cm) { toggleLineComment(cm); },
 								'Alt-Up': function(cm) { cm.swapLineUp(); },
-								'Alt-Down': function(cm) { cm.swapLineDown(); }
+								'Alt-Down': function(cm) { cm.swapLineDown(); },
+								'Ctrl-Q': function(cm) { cm.foldCode(cm.getCursor()); },
+								'Ctrl-Shift-Q': function(cm) { cm.foldAll(); },
+								'Ctrl-Alt-Q': function(cm) { cm.unfoldAll(); },
+								'Ctrl-K': function(cm) {
+										var cursor = cm.getCursor();
+										var line = cm.getLine(cursor.line);
+										var ch = cursor.ch;
+										var end = line.length;
+										if (ch >= end) {
+												if (cursor.line < cm.lineCount() - 1) {
+														cm.replaceRange('', {line: cursor.line, ch: end}, {line: cursor.line + 1, ch: 0});
+												}
+										} else {
+												cm.replaceRange('', {line: cursor.line, ch: ch}, {line: cursor.line, ch: end});
+										}
+								},
+								'Tab': function(cm) { cm.replaceSelection('    ', 'end'); },
+								'Ctrl-/': function(cm) { cm.execCommand('toggleComment'); },
 						},
 						
 						hintOptions: {
@@ -2944,240 +2924,455 @@ define(["jquery", "api/scripts", "api/remotecontrol", "api/properties", "scripte
 				});
 				
 				// =====================================================================
-				// LINE COUNTER - Update on changes
+				// STEP 5: Force Code Folding for Stellarium Mode
 				// =====================================================================
-
-				// Update line counter when content loads
+				/*if (typeof CodeMirror.fold !== 'undefined') {
+						var braceFold = CodeMirror.fold.brace;
+						var indentFold = CodeMirror.fold.indent;
+						
+						if (braceFold || indentFold) {
+								CodeMirror.registerHelper("fold", "stellarium", function(cm, start) {
+										if (braceFold) {
+												var result = braceFold(cm, start);
+												if (result) return result;
+										}
+										if (indentFold) {
+												return indentFold(cm, start);
+										}
+										return null;
+								});
+								console.log('[CodeMirror] Force fold helper registered for stellarium mode');
+						}
+				}*/
+				
+				// =====================================================================
+				// STEP 6: SMART BRACKET COMPLETION
+				// =====================================================================
+				codeMirrorInstance.on('inputRead', function(cm, change) {
+						var cursor = cm.getCursor();
+						var line = cm.getLine(cursor.line);
+						var indent = line.match(/^\s*/)[0];
+						
+						// Smart {} completion with auto-indentation
+						if (change.text && change.text.length === 1 && change.text[0] === '{') {
+								var prefix = line.substring(0, cursor.ch - 1).trim();
+								var isBlockStart = prefix.match(/(if|else|for|while|function|switch|try|catch|finally|class|with)\s*$/);
+								
+								if (isBlockStart) {
+										setTimeout(function() {
+												var newIndent = indent + '    ';
+												cm.replaceRange(
+														'\n' + newIndent + '\n' + indent + '}',
+														{line: cursor.line, ch: cursor.ch}
+												);
+												cm.setCursor({line: cursor.line + 1, ch: newIndent.length});
+												cm.focus();
+										}, 10);
+								} else {
+										setTimeout(function() {
+												cm.replaceRange('}', {line: cursor.line, ch: cursor.ch});
+												cm.setCursor({line: cursor.line, ch: cursor.ch});
+												cm.focus();
+										}, 10);
+								}
+						}
+						
+						// Smart () completion
+						if (change.text && change.text.length === 1 && change.text[0] === '(') {
+								var beforeCursor = line.substring(0, cursor.ch - 1).trim();
+								var isFunctionCall = /[a-zA-Z_$][a-zA-Z0-9_$]*$/.test(beforeCursor);
+								
+								if (isFunctionCall) {
+										setTimeout(function() {
+												cm.replaceRange(')', {line: cursor.line, ch: cursor.ch});
+												cm.setCursor({line: cursor.line, ch: cursor.ch});
+												cm.focus();
+										}, 10);
+								}
+						}
+						
+						// Auto-close template literals
+						if (change.text && change.text.length === 1 && change.text[0] === '`') {
+								setTimeout(function() {
+										cm.replaceRange('`', {line: cursor.line, ch: cursor.ch});
+										cm.setCursor({line: cursor.line, ch: cursor.ch});
+										cm.focus();
+								}, 10);
+						}
+				});
+				
+				// =====================================================================
+				// STEP 7: ENHANCED BRACKET VALIDATION
+				// =====================================================================
+				var bracketMarks = [];
+				
+				function clearBracketMarks() {
+						bracketMarks.forEach(function(mark) { mark.clear(); });
+						bracketMarks = [];
+				}
+				
+				function markBracketError(cm, line, ch) {
+						var mark = cm.markText(
+								{line: line, ch: ch},
+								{line: line, ch: ch + 1},
+								{
+										className: 'cm-bracket-error',
+										atomic: true,
+										clearOnEnter: true
+								}
+						);
+						bracketMarks.push(mark);
+				}
+				
+				codeMirrorInstance.on('cursorActivity', function(cm) {
+						clearBracketMarks();
+						
+						var cursor = cm.getCursor();
+						var lineText = cm.getLine(cursor.line);
+						if (!lineText) return;
+						
+						var openStack = [];
+						var bracketPairs = {
+								'(': ')',
+								'[': ']',
+								'{': '}'
+						};
+						
+						for (var i = 0; i < lineText.length; i++) {
+								var ch = lineText[i];
+								
+								if (ch === '(' || ch === '[' || ch === '{') {
+										openStack.push({char: ch, pos: i});
+								} else if (ch === ')' || ch === ']' || ch === '}') {
+										if (openStack.length === 0) {
+												markBracketError(cm, cursor.line, i);
+										} else {
+												var last = openStack.pop();
+												var expected = bracketPairs[last.char];
+												if (ch !== expected) {
+														markBracketError(cm, cursor.line, i);
+												}
+										}
+								}
+						}
+				});
+				
+				// =====================================================================
+				// STEP 8: ECMAScript Keywords Support via Autocomplete
+				// =====================================================================
+				if (CodeMirror && CodeMirror.hint) {
+						var originalHint = CodeMirror.hint.anyword;
+						
+						CodeMirror.hint.anyword = function(cm) {
+								var inner = originalHint ? originalHint(cm) : {list: []};
+								var ecmaKeywords = [
+										'var', 'let', 'const', 'function', 'if', 'else', 'for', 'while',
+										'do', 'switch', 'case', 'break', 'continue', 'return',
+										'true', 'false', 'null', 'undefined', 'NaN', 'Infinity',
+										'new', 'this', 'typeof', 'instanceof', 'delete', 'in',
+										'try', 'catch', 'finally', 'throw', 'yield', 'await',
+										'async', 'class', 'extends', 'super', 'import', 'export',
+										'default', 'from', 'of', 'with', 'debugger'
+								];
+								
+								var combined = inner.list.concat(ecmaKeywords);
+								var unique = combined.filter(function(value, index, self) {
+										return self.indexOf(value) === index;
+								});
+								inner.list = unique;
+								return inner;
+						};
+						
+						console.log('[CodeMirror] ECMAScript keywords added to autocomplete');
+				}
+				
+				// =====================================================================
+				// STEP 9: LINE COUNTER (SCRIPT EDITOR UI)
+				// =====================================================================
 				setTimeout(function() {
 						refreshLineCount();
 				}, 100);
-
-				// Update when content changes
+				
 				codeMirrorInstance.on('change', function(cm) {
 						refreshLineCount();
 				});
-
-				// Update when performing operations like swapping lines or adding/deleting
+				
 				codeMirrorInstance.on('swapLineUp', function(cm) {
 						refreshLineCount();
 				});
-
+				
 				codeMirrorInstance.on('swapLineDown', function(cm) {
 						refreshLineCount();
 				});
-
+				
 				codeMirrorInstance.on('deleteLine', function(cm) {
 						refreshLineCount();
 				});
-
-				// Update on paste or cut operations
+				
 				codeMirrorInstance.on('paste', function(cm) {
 						setTimeout(function() { refreshLineCount(); }, 10);
 				});
-
-				// Update on delete operations (Ctrl+Shift+D or Ctrl+D)
-				codeMirrorInstance.on('keydown', function(cm, event) {
-						// Ensure that operations affecting line count are updated
-						setTimeout(function() { refreshLineCount(); }, 5);
-				});
-
-				// Update on focus (to ensure after any external operations)
+				
 				codeMirrorInstance.on('focus', function() {
 						refreshLineCount();
 				});
 				
-				function toggleLineComment(cm) {
-						var cursor = cm.getCursor();
-						var line = cm.getLine(cursor.line);
-						if (line.trim().indexOf('//') === 0) {
-								cm.replaceRange(line.replace(/^\s*\/\/\s?/, ''), 
-										{line: cursor.line, ch: 0}, 
-										{line: cursor.line, ch: line.length});
-						} else { 
-								var indent = line.match(/^\s*/)[0]; 
-								cm.replaceRange(indent + '// ' + line.trim(), 
-										{line: cursor.line, ch: 0}, 
-										{line: cursor.line, ch: line.length}); 
-						}
-				}
-				
 				// =====================================================================
-				// STEP 5: CSS styles
+				// STEP 10: CSS STYLES FOR SYNTAX HIGHLIGHTING (STELLARIUM CUSTOMIZED MODE)
 				// =====================================================================
 				if (!document.getElementById('stellarium-syntax-styles')) {
 						var style = document.createElement('style');
 						style.id = 'stellarium-syntax-styles';
 						style.textContent = `
+								/* Stellarium color mode for valid Invalid pending case-error*/
 								.cm-builtin { color: #00CBFF !important; font-weight: bold; }
 								.cm-function-valid { color: #A6E22E !important; font-weight: bold; }
 								.cm-function-invalid { color: #F92672 !important; text-decoration: underline wavy #F92672; }
 								.cm-function-pending { color: #8AD500 !important; font-style: italic; }
-								.cm-keyword { color: #FF9D00 !important; font-weight: bold; }
-								.cm-string { color: #E6DB74 !important; }
-								.cm-number { color: #AE81FF !important; }
-								.cm-comment { color: #FD971F !important; font-style: italic; }
-								.cm-operator { color: #F92672 !important; }
-								.cm-variable { color: #F8F8F2 !important; }
-								.cm-bracket { color: #FD971F !important; font-weight: bold; }
-								.cm-bracket-close { color: #F92672 !important; }
-								.CodeMirror { background: #1A1C1E !important; color: #DCDBDA !important; }
-								.CodeMirror-gutters { background: #2A2C2E !important; border-right: 1px solid #3A3C3E !important; }
-								.CodeMirror-linenumber { color: #6A6C6E !important; }
-								.CodeMirror-cursor { border-left: 2px solid #FD971F !important; }
-								.CodeMirror-selected { background: rgba(253, 151, 31, 0.2) !important; }
-								.CodeMirror-activeline-background { background: rgba(253, 151, 31, 0.08) !important; }
-								.CodeMirror-matchingbracket { background: rgba(166, 226, 46, 0.2) !important; color: #A6E22E !important; border-bottom: 1px solid #A6E22E; }
+								.cm-function-case-error { color: #FF9D00 !important; text-decoration: underline wavy #FF9D00; }
 								
-								.cm-function-case-error {
-										color: #F92672 !important;
-										text-decoration: underline wavy #FF9D00 !important;
-								}
 						`;
 						document.head.appendChild(style);
 				}
 				
 				// =====================================================================
-				// STEP 6:  VALIDATION SYSTEM (CASE-SENSITIVE)
+				// STEP 11: VALIDATION SYSTEM (CASE-SENSITIVE) (STELLARIUM MODE)
 				// =====================================================================
-
-				// --- 6.1 Auto-validation Toggle (OFF by default) ---
-				let autoValidationEnabled = false;
-				let validationTimeout = null;
-
-				const $autoValidationCheckbox = $('#auto-validation-checkbox');
+				var autoValidationEnabled = false;
+				var validationTimeout = null;
+				
+				var $autoValidationCheckbox = $('#auto-validation-checkbox');
 				if ($autoValidationCheckbox.length) {
 						$autoValidationCheckbox.prop('checked', autoValidationEnabled);
 						
 						$autoValidationCheckbox.on('change', function() {
 								autoValidationEnabled = $(this).is(':checked');
-								console.log(`[AutoValidation] ${autoValidationEnabled ? 'ENABLED' : 'DISABLED'}`);
+								console.log('[AutoValidation] ' + (autoValidationEnabled ? 'ENABLED' : 'DISABLED'));
 								
 								if (typeof addOutput === 'function') {
-										addOutput('info', `Auto-validation ${autoValidationEnabled ? 'enabled' : 'disabled'}`);
+										addOutput('info', 'Auto-validation ' + (autoValidationEnabled ? 'enabled' : 'disabled'));
 								}
 								
 								if (typeof showNotification === 'function') {
 										if (autoValidationEnabled) {
-												showNotification(_tr("Auto-validation enabled - functions will be colored as you type"), "success");
+												showNotification(tr("Auto-validation enabled - functions will be colored as you type"), "success");
 										} else {
-												showNotification(_tr("Auto-validation disabled - use Revalidate button to check syntax"), "info");
+												showNotification(tr("Auto-validation disabled - use Revalidate button to check syntax"), "info");
 										}
 								}
 								
 								if (autoValidationEnabled && codeMirrorInstance) {
-										setTimeout(() => validateCurrentLine(codeMirrorInstance), 100);
+										setTimeout(function() { validateCurrentLine(codeMirrorInstance); }, 100);
 								}
 						});
 				}
-
+				
 				function shouldAutoValidate() { return autoValidationEnabled; }
-
-				// --- 6.2 Helper: Clear all validation marks ---
+				
 				function clearAllValidationMarks(cm) {
 						if (!cm) return 0;
-						const marks = cm.getAllMarks();
-						let count = 0;
-						for (const mark of marks) {
-								const className = mark.className;
+						var marks = cm.getAllMarks();
+						var count = 0;
+						for (var i = 0; i < marks.length; i++) {
+								var className = marks[i].className;
 								if (className && (
-										className.includes('function-valid') ||
-										className.includes('function-invalid') ||
-										className.includes('function-pending') ||
-										className.includes('function-case-error')
+												className.includes('function-valid') ||
+												className.includes('function-invalid') ||
+												className.includes('function-pending') ||
+												className.includes('function-case-error')
 								)) {
-										mark.clear();
+										marks[i].clear();
 										count++;
 								}
 						}
-						if (count > 0) console.log(`[Validation] Cleared ${count} marks`);
+						if (count > 0) console.log('[Validation] Cleared ' + count + ' marks');
 						return count;
 				}
 
-				// --- 6.3 Core Logic: Validate a single function using scriptReference ---
-				function validateSingleFunction(cm, namespace, funcName, lineNum, startCh, endCh) {
-						if (!funcName || funcName.trim() === '') return false;
-						
-						let isValid = false;
-						let isCaseError = false;
-						let isPending = false;
-						
-						if (scriptReference && scriptReference.isLoaded()) {
-								isValid = scriptReference.isValidFunction(funcName, namespace);
-								if (!isValid) {
-										isCaseError = scriptReference.isCaseError(funcName, namespace);
-								}
-						} else {
-								isPending = true; // API not loaded yet
+				/**
+				 * Clear all validation marks within a specific character range on a line.
+				 * Used to prevent overlapping marks when re-validating the same region.
+				 * 
+				 * @param {CodeMirror} cm - CodeMirror editor instance
+				 * @param {number} line - Line number (0-indexed)
+				 * @param {number} startCh - Start column (inclusive)
+				 * @param {number} endCh - End column (exclusive)
+				 * @returns {void}
+				 */
+				function clearMarksInRange(cm, line, startCh, endCh) {
+						if (!cm) return;
+						var marks = cm.findMarks(
+								{ line: line, ch: startCh },
+								{ line: line, ch: endCh }
+						);
+						for (var i = 0; i < marks.length; i++) {
+								marks[i].clear();
 						}
+				}
+				
+				/**
+				 * Apply a validation mark to a specific range in the editor.
+				 * Handles both namespace errors and function name errors uniformly,
+				 * using the same color scheme to avoid confusing users with
+				 * multiple visual meanings.
+				 * 
+				 * @param {CodeMirror} cm - CodeMirror editor instance
+				 * @param {number} lineNum - Line number (0-indexed)
+				 * @param {number} startCh - Start column
+				 * @param {number} endCh - End column
+				 * @param {string} className - CSS class to apply ('function-valid', 'function-invalid', 'function-case-error', 'function-pending')
+				 * @returns {void}
+				 */
+				function applyValidationMark(cm, lineNum, startCh, endCh, className) {
+						if (!cm) return;
 						
-						let className = '';
-						if (isPending) className = 'function-pending';
-						else if (isValid) className = 'function-valid';
-						else if (isCaseError) className = 'function-case-error';
-						else className = 'function-invalid';
+						var from = { line: lineNum, ch: startCh };
+						var to = { line: lineNum, ch: endCh };
 						
-						const from = { line: lineNum, ch: startCh };
-						const to = { line: lineNum, ch: endCh };
+						// Clear any previous marks in this exact range
+						clearMarksInRange(cm, lineNum, startCh, endCh);
 						
-						// Remove existing marks to avoid duplicates
-						cm.findMarks(from, to).forEach(mark => mark.clear());
-						
+						// Apply new mark
 						cm.markText(from, to, {
-								className: `cm-${className}`,
+								className: 'cm-' + className,
 								atomic: false,
 								clearOnEnter: true
 						});
-						
-						return isValid;
 				}
-
-				// --- 6.4 Validate all functions in a single line ---
+				
+				/**
+				 * Validate a single line of code and detect namespace and function
+				 * name errors independently.
+				 * 
+				 * Logic:
+				 * 1. Extract namespace and function name from the pattern "namespace.funcName".
+				 * 2. Validate the namespace alone first (case-sensitive).
+				 * 3. If the namespace is invalid, mark it with the appropriate class
+				 *    (case-error or invalid).
+				 * 4. Find the correct namespace (if it was a case error) and validate
+				 *    the function name using that correct namespace.
+				 * 5. If the function name is invalid, mark it with the appropriate class.
+				 * 6. If the function name is valid, mark it with 'function-valid' (GREEN).
+				 * 7. Both namespace and function errors use the SAME color scheme
+				 *    (red + wavy underline) to keep the visual language simple.
+				 * 
+				 * Examples:
+				 * - "ConstellAtionMgr.getFontSize"  → marks "ConstellAtionMgr" (red)
+				 *                                      marks "getFontSize" (green)
+				 * - "ConstellationMgr.getFontsize"  → marks "getFontsize" (red)
+				 * - "ConstellAtionMgr.getFontsize"  → marks both parts (red)
+				 * - "ConstellationMgr.getFontSize"  → marks "getFontSize" (green)
+				 * 
+				 * @param {CodeMirror} cm - CodeMirror editor instance
+				 * @param {number} lineNum - Line number to validate (0-indexed)
+				 * @returns {Object} Statistics: { count, valid, invalid, caseErrors }
+				 */
 				function validateLine(cm, lineNum) {
 						if (!cm) return { count: 0, valid: 0, invalid: 0, caseErrors: 0 };
-						const lineText = cm.getLine(lineNum);
+						
+						var lineText = cm.getLine(lineNum);
 						if (!lineText) return { count: 0, valid: 0, invalid: 0, caseErrors: 0 };
 						
-						const pattern = /([a-zA-Z_$][a-zA-Z0-9_$]*)\.([a-zA-Z_$][a-zA-Z0-9_$]*)/g;
-						let match;
-						const stats = { count: 0, valid: 0, invalid: 0, caseErrors: 0 };
+						var pattern = /([a-zA-Z_$][a-zA-Z0-9_$]*)\.([a-zA-Z_$][a-zA-Z0-9_$]*)/g;
+						var match;
+						var stats = { count: 0, valid: 0, invalid: 0, caseErrors: 0 };
 						
 						while ((match = pattern.exec(lineText)) !== null) {
-								const namespace = match[1];
-								const funcName = match[2];
-								const funcStart = match.index + namespace.length + 1;
-								const funcEnd = funcStart + funcName.length;
+								var namespace = match[1];
+								var funcName = match[2];
+								
+								// Character positions of each part in the line
+								var namespaceStart = match.index;
+								var namespaceEnd = namespaceStart + namespace.length;
+								var funcStart = namespaceEnd + 1; // +1 skips the dot
+								var funcEnd = funcStart + funcName.length;
 								
 								stats.count++;
-								const isValid = validateSingleFunction(cm, namespace, funcName, lineNum, funcStart, funcEnd);
 								
-								if (isValid) {
+								// ============================================================
+								// STEP 1: Validate namespace alone
+								// ============================================================
+								var nsIsValid = scriptReference.isValidNamespace(namespace);
+								var nsIsCaseError = false;
+								
+								if (!nsIsValid) {
+										nsIsCaseError = scriptReference.isCaseErrorNamespace(namespace);
+								}
+								
+								// ============================================================
+								// STEP 2: Mark namespace if invalid
+								// ============================================================
+								if (!nsIsValid) {
+										var nsClassName = nsIsCaseError ? 'function-case-error' : 'function-invalid';
+										applyValidationMark(cm, lineNum, namespaceStart, namespaceEnd, nsClassName);
+										
+										stats.invalid++;
+										if (nsIsCaseError) stats.caseErrors++;
+								}
+								
+								// ============================================================
+								// STEP 3: Resolve the correct namespace for function validation
+								// ============================================================
+								// If namespace is valid, use it as-is.
+								// If namespace has a case error, find the correct version.
+								// If namespace does not exist at all, skip function validation.
+								var namespaceForFuncCheck = null;
+								
+								if (nsIsValid) {
+										namespaceForFuncCheck = namespace;
+								} else if (nsIsCaseError) {
+										namespaceForFuncCheck = scriptReference.findCorrectNamespace(namespace);
+								}
+								
+								if (!namespaceForFuncCheck) {
+										// Namespace completely unknown — cannot validate the function name
+										continue;
+								}
+								
+								// ============================================================
+								// STEP 4: Validate function name within the resolved namespace
+								// ============================================================
+								var funcIsValid = scriptReference.isValidFunctionName(funcName, namespaceForFuncCheck);
+								var funcIsCaseError = false;
+								
+								if (!funcIsValid) {
+										funcIsCaseError = scriptReference.isCaseError(funcName, namespaceForFuncCheck);
+								}
+								
+								// ============================================================
+								// STEP 5: Apply mark — RED for errors, GREEN for valid
+								// ============================================================
+								var funcClassName;
+								
+								if (funcIsValid) {
+										funcClassName = 'function-valid';   // ✅ GREEN
 										stats.valid++;
 								} else {
+										funcClassName = funcIsCaseError ? 'function-case-error' : 'function-invalid';
 										stats.invalid++;
-										if (scriptReference && scriptReference.isLoaded() && scriptReference.isCaseError(funcName, namespace)) {
-												stats.caseErrors++;
-										}
+										if (funcIsCaseError) stats.caseErrors++;
 								}
+								
+								applyValidationMark(cm, lineNum, funcStart, funcEnd, funcClassName);
 						}
+						
 						return stats;
 				}
-
-				// --- 6.5 Validate current line only (for auto-validation) ---
+				
 				function validateCurrentLine(cm) {
 						if (!cm) return;
-						const cursor = cm.getCursor();
-						const result = validateLine(cm, cursor.line);
+						var cursor = cm.getCursor();
+						var result = validateLine(cm, cursor.line);
 						if (window._debugValidation && result.count > 0) {
-								console.log(`[AutoValidation] Line ${cursor.line + 1}: ${result.valid} valid, ${result.invalid} invalid (${result.caseErrors} case errors)`);
+								console.log('[AutoValidation] Line ' + (cursor.line + 1) + ': ' + result.valid + ' valid, ' + result.invalid + ' invalid (' + result.caseErrors + ' case errors)');
 						}
 				}
-
-				// --- 6.6 Perform full document validation (for Revalidate button) ---
+				
 				function fullRevalidateAllFunctions() {
 						if (!codeMirrorInstance) {
 								console.warn('[Revalidate] No editor instance');
 								if (typeof showNotification === 'function') {
-										showNotification(_tr("Editor not ready for revalidation"), "error");
+										showNotification(tr("Editor not ready for revalidation"), "error");
 								}
 								return;
 						}
@@ -3187,14 +3382,12 @@ define(["jquery", "api/scripts", "api/remotecontrol", "api/properties", "scripte
 								addOutput('info', '⟳ Revalidating all functions (case-sensitive)...');
 						}
 						if (typeof showNotification === 'function') {
-								showNotification(_tr("Revalidating functions..."), "info");
+								showNotification(tr("Revalidating functions..."), "info");
 						}
 						
-						// Clear all existing marks and force refresh
 						clearAllValidationMarks(codeMirrorInstance);
 						codeMirrorInstance.refresh();
 						
-						// If scriptReference is not loaded yet, wait for it
 						if (!scriptReference || !scriptReference.isLoaded()) {
 								console.log('[Revalidate] Waiting for scriptReference to load...');
 								if (typeof addOutput === 'function') {
@@ -3202,11 +3395,11 @@ define(["jquery", "api/scripts", "api/remotecontrol", "api/properties", "scripte
 								}
 								if (scriptReference && scriptReference.init) {
 										scriptReference.init()
-												.then(() => performFullRevalidation())
-												.catch(err => {
+												.then(function() { performFullRevalidation(); })
+												.catch(function(err) {
 														console.error('[Revalidate] Failed to load scriptReference:', err);
 														if (typeof showNotification === 'function') {
-																showNotification(_tr("Revalidation failed: API reference not loaded"), "error");
+																showNotification(tr("Revalidation failed: API reference not loaded"), "error");
 														}
 												});
 								}
@@ -3216,11 +3409,11 @@ define(["jquery", "api/scripts", "api/remotecontrol", "api/properties", "scripte
 						performFullRevalidation();
 						
 						function performFullRevalidation() {
-								const lineCount = codeMirrorInstance.lineCount();
-								let totalStats = { count: 0, valid: 0, invalid: 0, caseErrors: 0 };
+								var lineCount = codeMirrorInstance.lineCount();
+								var totalStats = { count: 0, valid: 0, invalid: 0, caseErrors: 0 };
 								
-								for (let i = 0; i < lineCount; i++) {
-										const lineStats = validateLine(codeMirrorInstance, i);
+								for (var i = 0; i < lineCount; i++) {
+										var lineStats = validateLine(codeMirrorInstance, i);
 										totalStats.count += lineStats.count;
 										totalStats.valid += lineStats.valid;
 										totalStats.invalid += lineStats.invalid;
@@ -3229,45 +3422,41 @@ define(["jquery", "api/scripts", "api/remotecontrol", "api/properties", "scripte
 								
 								codeMirrorInstance.refresh();
 								
-								console.log(`[Revalidate] Complete: ${totalStats.valid} valid, ${totalStats.invalid} invalid (${totalStats.caseErrors} case errors)`);
+								console.log('[Revalidate] Complete: ' + totalStats.valid + ' valid, ' + totalStats.invalid + ' invalid (' + totalStats.caseErrors + ' case errors)');
 								
-								if (typeof addOutput === 'function') {
-										if (totalStats.caseErrors > 0) {
-												addOutput('warning', `✅ Revalidation: ${totalStats.valid} valid, ${totalStats.invalid} invalid (${totalStats.caseErrors} case errors)`);
-										} else if (totalStats.invalid > 0) {
-												addOutput('warning', `✅ Revalidation: ${totalStats.valid} valid, ${totalStats.invalid} invalid`);
-										} else {
-												addOutput('success', `✅ Revalidation complete: ${totalStats.valid} valid functions found`);
-										}
-								}
+							if (typeof addOutput === 'function') {
+									if (totalStats.caseErrors > 0) {
+											addOutput('warning', '\u2713 Revalidation: ' + totalStats.valid + ' valid, ' + totalStats.invalid + ' invalid (' + totalStats.caseErrors + ' case errors)');
+									} else if (totalStats.invalid > 0) {
+											addOutput('warning', '\u2713 Revalidation: ' + totalStats.valid + ' valid, ' + totalStats.invalid + ' invalid');
+									} else {
+											addOutput('success', '\u2713 Revalidation complete: ' + totalStats.valid + ' valid functions found');
+									}
+							}								
 								
 								if (typeof showNotification === 'function') {
 										if (totalStats.caseErrors > 0) {
-												showNotification(_tr(`Revalidation: ${totalStats.valid} valid, ${totalStats.invalid} invalid (${totalStats.caseErrors} case errors)`), "warning");
+												showNotification(tr("Revalidation: " + totalStats.valid + " valid, " + totalStats.invalid + " invalid (" + totalStats.caseErrors + " case errors)"), "warning");
 										} else if (totalStats.invalid > 0) {
-												showNotification(_tr(`Revalidation: ${totalStats.valid} valid, ${totalStats.invalid} invalid`), "warning");
+												showNotification(tr("Revalidation: " + totalStats.valid + " valid, " + totalStats.invalid + " invalid"), "warning");
 										} else {
-												showNotification(_tr("Revalidation complete: All functions valid"), "success");
+												showNotification(tr("Revalidation complete: All functions valid"), "success");
 										}
 								}
 						}
 				}
-
-				// --- 6.7 Expose global functions for buttons and debugging ---
+				
 				window.revalidateStelFunctions = fullRevalidateAllFunctions;
 				window._validateAll = fullRevalidateAllFunctions;
-				window._validateLine = () => validateCurrentLine(codeMirrorInstance);
-				window._debugValidation = false;  // Set to true to enable debug logs
-
+				window._validateLine = function() { validateCurrentLine(codeMirrorInstance); };
+				window._debugValidation = true;// When true show messages in console logs
+				
 				// =====================================================================
-				// STEP 7: REAL-TIME VALIDATION & EVENT HANDLERS
+				// STEP 12: REAL-TIME VALIDATION & EVENT HANDLERS
 				// =====================================================================
-
-				// 7.1 Trigger validation on typing (only if auto-validation is enabled)
-				codeMirrorInstance.on('inputRead', (cm, change) => {
-						// Trigger autocomplete on dot
+				codeMirrorInstance.on('inputRead', function(cm, change) {
 						if (change.text && change.text.length === 1 && change.text[0] === '.') {
-								setTimeout(() => {
+								setTimeout(function() {
 										if (!cm.state.completionActive) {
 												CodeMirror.commands.autocomplete(cm);
 										}
@@ -3276,30 +3465,26 @@ define(["jquery", "api/scripts", "api/remotecontrol", "api/properties", "scripte
 						
 						if (!shouldAutoValidate()) return;
 						
-						// Validate when a function name is likely completed
 						if (change.text && change.text.length === 1) {
-								const typedChar = change.text[0];
-								const isCompletionChar = ['(', ')', ' ', ';', ',', '\n'].includes(typedChar);
+								var typedChar = change.text[0];
+								var isCompletionChar = ['(', ')', ' ', ';', ',', '\n'].includes(typedChar);
 								if (isCompletionChar) {
-										setTimeout(() => validateCurrentLine(cm), 50);
+										setTimeout(function() { validateCurrentLine(cm); }, 50);
 								}
 						}
 				});
-
-				// 7.2 Validate when cursor moves to a new line (only if auto-validation is enabled)
-				let lastValidatedLine = -1;
-				codeMirrorInstance.on('cursorActivity', (cm) => {
+				
+				var lastValidatedLine = -1;
+				codeMirrorInstance.on('cursorActivity', function(cm) {
 						if (!shouldAutoValidate()) return;
-						const cursor = cm.getCursor();
+						var cursor = cm.getCursor();
 						if (lastValidatedLine !== cursor.line) {
 								lastValidatedLine = cursor.line;
-								setTimeout(() => validateCurrentLine(cm), 100);
+								setTimeout(function() { validateCurrentLine(cm); }, 100);
 						}
 				});
-
-				// 7.3 Validate after content changes (with debouncing, only if auto-validation is enabled)
-				codeMirrorInstance.on('change', (cm) => {
-						// Save to localStorage on every change
+				
+				codeMirrorInstance.on('change', function(cm) {
 						try {
 								localStorage.setItem('stellarium-script-editor', cm.getValue());
 						} catch(e) {}
@@ -3307,47 +3492,37 @@ define(["jquery", "api/scripts", "api/remotecontrol", "api/properties", "scripte
 						if (!shouldAutoValidate()) return;
 						
 						if (validationTimeout) clearTimeout(validationTimeout);
-						validationTimeout = setTimeout(() => {
+						validationTimeout = setTimeout(function() {
 								validateCurrentLine(cm);
 								validationTimeout = null;
 						}, 1000);
 				});
-
-				// 7.4 Trigger autocomplete on dot (additional handler)
-				codeMirrorInstance.on('keyup', (cm, event) => {
+				
+				codeMirrorInstance.on('keyup', function(cm, event) {
 						if (event.key === '.' && (!cm.state.completionActive || !cm.state.completionActive.isOpen)) {
-								setTimeout(() => CodeMirror.commands.autocomplete(cm), 10);
+								setTimeout(function() { CodeMirror.commands.autocomplete(cm); }, 10);
 						}
 				});
-
+				
 				// =====================================================================
-				// STEP 8: Load saved content from localStorage
+				// STEP 13: Load saved content from localStorage
 				// =====================================================================
 				try {
-						const savedCode = localStorage.getItem('stellarium-script-editor');
+						var savedCode = localStorage.getItem('stellarium-script-editor');
 						if (savedCode && savedCode.trim()) {
 								codeMirrorInstance.setValue(savedCode);
-								setTimeout(() => {
+								setTimeout(function() {
 										refreshLineCount();
-										// Optional: auto-validate on load (disabled by default to save performance)
-										// fullRevalidateAllFunctions();
 								}, 500);
 						}
 				} catch(e) {
 						console.warn('[CodeMirror] Could not load from localStorage:', e);
 				}
-
+				
 				// =====================================================================
-				// STEP 9: Setup parameter hints (if available)
+				// STEP 14: Keyboard shortcuts (PEVENTDEFAULT SHORTCUTS OF WEB EXPLORER)
 				// =====================================================================
-				if (typeof setupParameterHints === 'function') {
-						setupParameterHints(codeMirrorInstance);
-				}
-
-				// =====================================================================
-				// STEP 10: Keyboard shortcuts
-				// =====================================================================
-				codeMirrorInstance.on('keydown', (cm, event) => {
+				codeMirrorInstance.on('keydown', function(cm, event) {
 						if (event.ctrlKey && event.key === 's') {
 								event.preventDefault();
 								saveScriptToFile();
@@ -3371,48 +3546,86 @@ define(["jquery", "api/scripts", "api/remotecontrol", "api/properties", "scripte
 								runSelection();
 						}
 				});
-
+				
 				// =====================================================================
-				// STEP 11: Focus/blur handlers for styling
+				// STEP 15: Focus/blur handlers
 				// =====================================================================
-				codeMirrorInstance.on('focus', () => {
+				codeMirrorInstance.on('focus', function() {
 						$('.script-editor-container').addClass('editor-focused');
 				});
-				codeMirrorInstance.on('blur', () => {
+				
+				codeMirrorInstance.on('blur', function() {
 						$('.script-editor-container').removeClass('editor-focused');
 				});
-
+				
 				// =====================================================================
-				// STEP 12: Expose for debugging
+				// STEP 16: Expose for debugging
 				// =====================================================================
 				window._cm = codeMirrorInstance;
 				window._stelCodeMirrorInstance = codeMirrorInstance;
-
+				
 				// =====================================================================
-				// STEP 13: Final refresh and resize handler
+				// STEP 17: Final refresh and resize handler
 				// =====================================================================
-				setTimeout(() => {
+				setTimeout(function() {
 						codeMirrorInstance.refresh();
 						codeMirrorInstance.setCursor({ line: 0, ch: 0 });
 				}, 100);
-
-				$(window).on('resize.codemirror', () => {
+				
+				$(window).on('resize.codemirror', function() {
 						if (codeMirrorInstance) {
 								codeMirrorInstance.refresh();
 						}
 				});
+				
+				// THEME SELECTOR SUPPORT
+				// Load saved theme from localStorage
+				var savedTheme = localStorage.getItem('stellarium-cm-theme') || 'default';
 
-				console.log('[CodeMirror] Initialized with UNIFIED CASE-SENSITIVE validation');
+				// Apply saved theme
+				if (savedTheme !== 'default') {
+						codeMirrorInstance.setOption('theme', savedTheme);
+				}
+
+				// Applies the saved CodeMirror theme, syncs the theme selector's value
+				// and binds a change handler that updates the editor theme, persists it to localStorage, and logs the change.
+				codeMirrorInstance.setOption('theme', savedTheme);
+				console.log('[CodeMirror] Applied theme:', savedTheme);
+
+				// Setup theme selector
+				var $themeSelect = $('#cm-theme-select');
+				if ($themeSelect.length) {
+						$themeSelect.val(savedTheme);
+						
+						$themeSelect.off('change.cmtheme').on('change.cmtheme', function() {
+								var theme = $(this).val();
+								if (codeMirrorInstance) {
+										codeMirrorInstance.setOption('theme', theme);
+										try {
+												localStorage.setItem('stellarium-cm-theme', theme);
+										} catch(e) {}
+										
+										// update output and console log message
+										addOutput('info', 'Theme changed to: ' + theme);
+										console.log('[CodeMirror] Theme changed to:', theme);
+								}
+						});
+				}		
+			
+				console.log('[CodeMirror] Initialized successfully');
 				console.log('[CodeMirror] Features:');
 				console.log('  - ✓ Case-sensitive validation (using scriptReference)');
-				console.log('  - ✓ Real-time validation (optional, disabled by default)');
+				console.log('  - ✓ Code Folding (Ctrl+Q to toggle)');
+				console.log('  - ✓ Smart Bracket Completion');
+				console.log('  - ✓ Bracket Error Detection');
+				console.log('  - ✓ ECMAScript Keywords Support');
+				console.log('  - ✓ Placeholder text');
 				console.log('  - ✓ Revalidate button with full case checking');
 				console.log('  - ✓ Auto-validation toggle');
-				console.log('  - Valid function: GREEN bold');
-				console.log('  - Invalid function: RED underline');
-				console.log('  - Case error: ORANGE underline');
-				console.log('  - Pending function: LIGHT GREEN italic');
-
+				console.log('  - ✓ Valid function: GREEN bold');
+				console.log('  - ✓ Invalid function: RED underline (only the function name)');
+				console.log('  - ✓ Case error: ORANGE underline (only the function name)');
+				console.log('  - ✓ Pending function: LIGHT GREEN italic');
 		}
 
     // =====================================================================
@@ -3699,59 +3912,78 @@ define(["jquery", "api/scripts", "api/remotecontrol", "api/properties", "scripte
 
 		/**
 		 * Initialize the Script Editor module.
-		 * FIXED: Wait for scriptReference to load before initializing CodeMirror
+		 * 
+		 * Since CodeMirror is loaded as an AMD dependency (via the `define`
+		 * dependency array), it is guaranteed to be available at this point.
+		 * No polling or fallback mechanism is required.
+		 * 
+		 * Initialization sequence:
+		 * 1. Cache DOM references.
+		 * 2. Create the CodeMirror instance.
+		 * 3. Load the scriptReference API data.
+		 * 4. Build the Quick Reference panel.
+		 * 5. Load installed scripts, history, and bind events.
+		 * 6. Setup parameter hints.
+		 * 
+		 * @function init
+		 * @returns {void}
 		 */
 		function init() {
 				console.log('[ScriptEditor] Initializing...');
 				
 				dom = {
-						$output: $('#script-output'), $btnRun: $('#btn-editor-run'), $btnRunSelection: $('#btn-editor-run-selection'),
-						$btnStop: $('#btn-editor-stop'), $btnClear: $('#btn-editor-clear'), $btnSave: $('#btn-editor-save'),
-						$btnOpen: $('#btn-editor-open'), $btnMetadata: $('#btn-editor-metadata'), $btnClearOutput: $('#btn-editor-clear-output'),
-						$scriptsList: $('#installed-scripts-list'), $history: $('#execution-history'),
-						$templatesSelect: $('#script-templates-select'), $filterInput: $('#scripts-filter-input'),
-						$refSearchInput: $('#quick-reference-search'), $btnRevalidate: $('#btn-editor-revalidate'),
-						$btnCollectExamples: $('#btn-collect-examples'), $btnCopyEditor: $('#btn-editor-copy')
+						$output: $('#script-output'),
+						$btnRun: $('#btn-editor-run'),
+						$btnRunSelection: $('#btn-editor-run-selection'),
+						$btnStop: $('#btn-editor-stop'),
+						$btnClear: $('#btn-editor-clear'),
+						$btnSave: $('#btn-editor-save'),
+						$btnOpen: $('#btn-editor-open'),
+						$btnMetadata: $('#btn-editor-metadata'),
+						$btnClearOutput: $('#btn-editor-clear-output'),
+						$scriptsList: $('#installed-scripts-list'),
+						$history: $('#execution-history'),
+						$templatesSelect: $('#script-templates-select'),
+						$filterInput: $('#scripts-filter-input'),
+						$refSearchInput: $('#quick-reference-search'),
+						$btnRevalidate: $('#btn-editor-revalidate'),
+						$btnCollectExamples: $('#btn-collect-examples'),
+						$btnCopyEditor: $('#btn-editor-copy')
 				};
 				
-				waitForCodeMirror(function() {
-						// FIRST: Create CodeMirror instance with basic mode
-						initCodeMirror();
+				// ================================================================
+				// STEP 1: Create CodeMirror instance
+				// ================================================================
+				// CodeMirror is guaranteed to be available here.
+				// All addons have already been loaded by RequireJS and have
+				// registered themselves on the CodeMirror object.
+				// ================================================================
+				initCodeMirror();
+				
+				// ================================================================
+				// STEP 2: Load scriptReference API data
+				// ================================================================
+				console.log('[ScriptEditor] Loading scriptReference data...');
+				
+				scriptReference.init().then(function(allFunctions) {
+						console.log('[ScriptEditor] Loaded ' + allFunctions.length + ' API functions from JSON');
 						
-						// SECOND: Load scriptReference data
-						console.log('[ScriptEditor] Loading scriptReference data...');
+						// Build quick reference with loaded data
+						buildQuickReference();
 						
-						scriptReference.init().then(function(allFunctions) {
-								console.log('[ScriptEditor] Loaded ' + allFunctions.length + ' API functions from JSON');
-								
-								// THIRD: Update tokenizer to recognize functions
-								if (codeMirrorInstance) {
-										codeMirrorInstance.operation(function() {
-												codeMirrorInstance.setOption('mode', 'stellarium');
-										});
-										console.log('[CodeMirror] Tokenizer updated with loaded functions');
-								}
-								
-								// FOURTH: Build quick reference with loaded data
-								buildQuickReference();
-								
-						}).catch(function(err) {
-								console.warn('[ScriptEditor] JSON data not available, using built-in reference');
-								buildQuickReferenceFromBuiltIn();
-						});
-						
-						// FIFTH: Load other components
-						loadInstalledScripts();
-						loadHistory();
-						refreshAllUIStates();
-						bindEvents();
-						
-						// SIXTH: Setup parameter hints
-						if (codeMirrorInstance) {
-								setupParameterHints(codeMirrorInstance);
-						}
+				}).catch(function(err) {
+						console.warn('[ScriptEditor] JSON data not available, using built-in reference');
+						buildQuickReferenceFromBuiltIn();
 				});
-					
+				
+				// ================================================================
+				// STEP 3: Load other components
+				// ================================================================
+				loadInstalledScripts();
+				loadHistory();
+				refreshAllUIStates();
+				bindEvents();
+				
 				console.log('[ScriptEditor] Initialized');
 		}
 
@@ -3769,6 +4001,81 @@ define(["jquery", "api/scripts", "api/remotecontrol", "api/properties", "scripte
             var f = $(this).val().toLowerCase();
             $('.script-item').each(function() { $(this).toggle(($(this).find('.script-name').text() || '').toLowerCase().indexOf(f) >= 0); });
         });
+				
+				// ================================================================
+				// EDIT OPERATIONS (Undo, Redo, Find, Replace)
+				// ================================================================
+				$('#btn-editor-undo').off('click').on('click', function(e) {
+						e.preventDefault();
+						if (codeMirrorInstance) codeMirrorInstance.undo();
+				});
+				
+				$('#btn-editor-redo').off('click').on('click', function(e) {
+						e.preventDefault();
+						if (codeMirrorInstance) codeMirrorInstance.redo();
+				});
+				
+				$('#btn-editor-find').off('click').on('click', function(e) {
+						e.preventDefault();
+						if (codeMirrorInstance) codeMirrorInstance.execCommand('find');
+				});
+				
+				$('#btn-editor-replace').off('click').on('click', function(e) {
+						e.preventDefault();
+						if (codeMirrorInstance) codeMirrorInstance.execCommand('replace');
+				});
+				
+				// ================================================================
+				// FORMAT OPERATIONS (Comment, Indent, Outdent, Auto Format)
+				// ================================================================
+				$('#btn-editor-comment').off('click').on('click', function(e) {
+						e.preventDefault();
+						if (codeMirrorInstance) codeMirrorInstance.execCommand('toggleComment');
+				});
+				
+				$('#btn-editor-indent').off('click').on('click', function(e) {
+						e.preventDefault();
+						if (codeMirrorInstance) codeMirrorInstance.execCommand('indentMore');
+				});
+				
+				$('#btn-editor-outdent').off('click').on('click', function(e) {
+						e.preventDefault();
+						if (codeMirrorInstance) codeMirrorInstance.execCommand('indentLess');
+				});
+				
+				$('#btn-editor-autoformat').off('click').on('click', function(e) {
+						e.preventDefault();
+						if (!codeMirrorInstance) return;
+						var content = codeMirrorInstance.getValue();
+						var formatted = content
+								.split('\n')
+								.map(function(line) { return line.trim(); })
+								.filter(function(line) { return line || true; })
+								.join('\n');
+						codeMirrorInstance.setValue(formatted);
+						showToast(tr("Code formatted"), "ui-icon-magic");
+				});
+				
+				// ================================================================
+				// CODE FOLDING (Fold All, Unfold All)
+				// ================================================================
+				$('#btn-editor-foldall').off('click').on('click', function(e) {
+						e.preventDefault();
+						if (codeMirrorInstance) codeMirrorInstance.execCommand('foldAll');
+				});
+				
+				$('#btn-editor-unfoldall').off('click').on('click', function(e) {
+						e.preventDefault();
+						if (codeMirrorInstance) codeMirrorInstance.execCommand('unfoldAll');
+				});
+				
+				// ================================================================
+				// SHORTCUTS HELP
+				// ================================================================
+				$('#btn-show-all-shortcuts').off('click').on('click', function(e) {
+						e.preventDefault();
+						showShortcutsHelpDialog();
+				});
         $('#btn-refresh-scripts-list').off('click').on('click', function() { loadInstalledScripts(); });
 
         // Quick Reference search input
@@ -3895,31 +4202,31 @@ define(["jquery", "api/scripts", "api/remotecontrol", "api/properties", "scripte
 						showShortcutsHelpDialog();
 				});
 				
-		// Revalidate button - using the validation system
-		if (dom.$btnRevalidate) {
-				dom.$btnRevalidate.off('click').on('click', function(e) {
-						e.preventDefault();
-						if (typeof window.revalidateStelFunctions === 'function') {
-								window.revalidateStelFunctions();
-						} else {
-								console.error('[Revalidate] window.revalidateStelFunctions not defined!');
-								// Fallback
-								if (codeMirrorInstance && typeof fullRevalidateAllFunctions === 'function') {
-										fullRevalidateAllFunctions();
-								} else {
-										console.error('[Revalidate] No validation function available!');
-								}
-						}
-				});
-		} else {
-				// Fallback if dom.$btnRevalidate is not defined
-				$('#btn-editor-revalidate').off('click').on('click', function(e) {
-						e.preventDefault();
-						if (typeof window.revalidateStelFunctions === 'function') {
-								window.revalidateStelFunctions();
-						}
-				});
-		}
+			// Revalidate button - using the validation system
+			if (dom.$btnRevalidate) {
+					dom.$btnRevalidate.off('click').on('click', function(e) {
+							e.preventDefault();
+							if (typeof window.revalidateStelFunctions === 'function') {
+									window.revalidateStelFunctions();
+							} else {
+									console.error('[Revalidate] window.revalidateStelFunctions not defined!');
+									// Fallback
+									if (codeMirrorInstance && typeof fullRevalidateAllFunctions === 'function') {
+											fullRevalidateAllFunctions();
+									} else {
+											console.error('[Revalidate] No validation function available!');
+									}
+							}
+					});
+			} else {
+					// Fallback if dom.$btnRevalidate is not defined
+					$('#btn-editor-revalidate').off('click').on('click', function(e) {
+							e.preventDefault();
+							if (typeof window.revalidateStelFunctions === 'function') {
+									window.revalidateStelFunctions();
+							}
+					});
+			}
     }
     
     // =====================================================================

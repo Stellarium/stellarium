@@ -663,35 +663,230 @@ define(["jquery"], function($) {
     // =====================================================================
 
 		/**
-		 * Check if a function exists in the loaded API data
-		 * STRICT case-sensitive validation - NO case-insensitive fallback
+		 * Check if a namespace exists in the loaded API data.
+		 * STRICT case-sensitive validation - NO case-insensitive fallback.
 		 * 
-		 * @param {string} funcName - Function name (e.g., "setDate" or "debug")
-		 * @param {string|null} namespace - Optional namespace (e.g., "core")
-		 * @returns {boolean} - True only for exact case match
+		 * A namespace is considered valid if at least one function in the loaded
+		 * API data has this exact namespace (case-sensitive match).
+		 * 
+		 * @param {string} namespace - Namespace name (e.g., "core", "ConstellationMgr")
+		 * @returns {boolean} - True only if the namespace exists with exact case match
+		 * 
+		 * @example
+		 * isValidNamespace("core")              // true  (core exists)
+		 * isValidNamespace("Core")              // false (case error)
+		 * isValidNamespace("ConstellationMgr")  // true  (exists)
+		 * isValidNamespace("ConstellAtionMgr")  // false (case error)
+		 * isValidNamespace("NonExistent")       // false (does not exist)
 		 */
-		function isValidFunction(funcName, namespace) {
+		function isValidNamespace(namespace) {
 				// If not loaded, return false (will revalidate after loading)
 				if (!isLoaded || !allFunctions || allFunctions.length === 0) {
 						return false;
 				}
 				
-				// Build the full name with exact case
-				var fullName = namespace ? namespace + '.' + funcName : funcName;
+				if (!namespace || typeof namespace !== 'string') {
+						return false;
+				}
 				
-				// Strict case-sensitive search through allFunctions (already loaded)
+				// Strict case-sensitive search through allFunctions
 				for (var i = 0; i < allFunctions.length; i++) {
 						var fn = allFunctions[i];
 						var fnNamespace = fn.namespace || fn.moduleId;
-						var fnFullName = fnNamespace + '.' + fn.name;
 						
-						// Exact case-sensitive match
-						if (fnFullName === fullName) {
+						if (fnNamespace === namespace) {
 								return true;
 						}
+				}
+				
+				return false;
+		}
+
+		/**
+		 * Check if a namespace has a case error.
+		 * Returns true if a namespace with the same letters (ignoring case)
+		 * exists in the loaded API data, but with different casing.
+		 * 
+		 * @param {string} namespace - Namespace name to check
+		 * @returns {boolean} - True if case error detected
+		 * 
+		 * @example
+		 * isCaseErrorNamespace("Core")              // true  (should be "core")
+		 * isCaseErrorNamespace("CORE")              // true  (should be "core")
+		 * isCaseErrorNamespace("ConstellAtionMgr")  // true  (should be "ConstellationMgr")
+		 * isCaseErrorNamespace("core")              // false (correct case)
+		 * isCaseErrorNamespace("NonExistent")       // false (not a case error)
+		 */
+		function isCaseErrorNamespace(namespace) {
+				// If not loaded, return false
+				if (!isLoaded || !allFunctions || allFunctions.length === 0) {
+						return false;
+				}
+				
+				if (!namespace || typeof namespace !== 'string') {
+						return false;
+				}
+				
+				var namespaceLower = namespace.toLowerCase();
+				
+				for (var i = 0; i < allFunctions.length; i++) {
+						var fn = allFunctions[i];
+						var fnNamespace = fn.namespace || fn.moduleId;
 						
-						// For standalone functions (no namespace) - like global functions
-						if (!namespace && fn.name === funcName) {
+						// Case-insensitive match but not exact match = case error
+						if (fnNamespace.toLowerCase() === namespaceLower && 
+								fnNamespace !== namespace) {
+								return true;
+						}
+				}
+				
+				return false;
+		}
+
+		/**
+		 * Find the correct namespace for a given (possibly incorrect) namespace.
+		 * Returns the correctly-cased namespace if a case-insensitive match exists,
+		 * otherwise returns null.
+		 * 
+		 * @param {string} namespace - Namespace name to correct
+		 * @returns {string|null} - Correct namespace or null if not found
+		 * 
+		 * @example
+		 * findCorrectNamespace("Core")              // "core"
+		 * findCorrectNamespace("ConstellAtionMgr")  // "ConstellationMgr"
+		 * findCorrectNamespace("core")              // "core"
+		 * findCorrectNamespace("NonExistent")       // null
+		 */
+		function findCorrectNamespace(namespace) {
+				// If not loaded, return null
+				if (!isLoaded || !allFunctions || allFunctions.length === 0) {
+						return null;
+				}
+				
+				if (!namespace || typeof namespace !== 'string') {
+						return null;
+				}
+				
+				var namespaceLower = namespace.toLowerCase();
+				
+				for (var i = 0; i < allFunctions.length; i++) {
+						var fn = allFunctions[i];
+						var fnNamespace = fn.namespace || fn.moduleId;
+						
+						if (fnNamespace.toLowerCase() === namespaceLower) {
+								return fnNamespace; // Return the correctly-cased version
+						}
+				}
+				
+				return null;
+		}
+
+		/**
+		 * Get all unique namespaces from the loaded API data.
+		 * Useful for autocomplete and validation of namespaces.
+		 * 
+		 * @returns {Array<string>} - Array of unique namespace names (case-preserved)
+		 * 
+		 * @example
+		 * getAllNamespaces() // ["core", "ConstellationMgr", "StelMovementMgr", ...]
+		 */
+		function getAllNamespaces() {
+				if (!isLoaded || !allFunctions || allFunctions.length === 0) {
+						return [];
+				}
+				
+				var namespaces = {};
+				for (var i = 0; i < allFunctions.length; i++) {
+						var fn = allFunctions[i];
+						var fnNamespace = fn.namespace || fn.moduleId;
+						if (fnNamespace) {
+								namespaces[fnNamespace] = true;
+						}
+				}
+				
+				return Object.keys(namespaces);
+		}
+
+		/**
+		 * Check if a function name is valid within a specific namespace.
+		 * Assumes the namespace is already validated (use isValidNamespace first).
+		 * STRICT case-sensitive validation.
+		 * 
+		 * @param {string} funcName - Function name (e.g., "setDate")
+		 * @param {string} namespace - Namespace name (e.g., "core")
+		 * @returns {boolean} - True only if the function exists with exact case match
+		 * 
+		 * @example
+		 * isValidFunctionName("setDate", "core")       // true
+		 * isValidFunctionName("setdate", "core")       // false (case error)
+		 * isValidFunctionName("getFontSize", "ConstellationMgr") // true
+		 * isValidFunctionName("getFontsize", "ConstellationMgr") // false
+		 */
+		function isValidFunctionName(funcName, namespace) {
+				if (!isLoaded || !allFunctions || allFunctions.length === 0) {
+						return false;
+				}
+				
+				if (!funcName || !namespace) {
+						return false;
+				}
+				
+				for (var i = 0; i < allFunctions.length; i++) {
+						var fn = allFunctions[i];
+						var fnNamespace = fn.namespace || fn.moduleId;
+						
+						if (fnNamespace === namespace && fn.name === funcName) {
+								return true;
+						}
+				}
+				
+				return false;
+		}
+
+		/**
+		 * Check if a function exists in the loaded API data.
+		 * STRICT case-sensitive validation - NO case-insensitive fallback.
+		 * 
+		 * Supports two modes:
+		 * 1. Full check: isValidFunction("setDate", "core") → checks "core.setDate"
+		 * 2. Name-only check: isValidFunction("setDate", null) → checks if any
+		 *    function named "setDate" exists in any namespace.
+		 * 
+		 * @param {string} funcName - Function name (e.g., "setDate" or "debug")
+		 * @param {string|null} namespace - Optional namespace (e.g., "core")
+		 * @returns {boolean} - True only for exact case match
+		 * 
+		 * @example
+		 * isValidFunction("setDate", "core")     // true
+		 * isValidFunction("setdate", "core")     // false (case error)
+		 * isValidFunction("debug", null)         // true (exists in core)
+		 * isValidFunction("Debug", null)         // false (case error)
+		 */
+		function isValidFunction(funcName, namespace) {
+				if (!isLoaded || !allFunctions || allFunctions.length === 0) {
+						return false;
+				}
+				
+				if (!funcName) {
+						return false;
+				}
+				
+				// If namespace provided, check full name
+				if (namespace) {
+						for (var i = 0; i < allFunctions.length; i++) {
+								var fn = allFunctions[i];
+								var fnNamespace = fn.namespace || fn.moduleId;
+								
+								if (fnNamespace === namespace && fn.name === funcName) {
+										return true;
+								}
+						}
+						return false;
+				}
+				
+				// If no namespace, check function name in any namespace
+				for (var j = 0; j < allFunctions.length; j++) {
+						if (allFunctions[j].name === funcName) {
 								return true;
 						}
 				}
@@ -793,8 +988,19 @@ define(["jquery"], function($) {
 						quickReferenceCache = null;
 						autocompleteItemsCache = null;
 				},
+				
+				// VALIDATION FUNCTIONS
 				isValidFunction: isValidFunction,
-				isCaseError: isCaseError  // safe because it checks isLoaded first
+				isCaseError: isCaseError,
+				
+				// NAMESPACE VALIDATION
+				isValidNamespace: isValidNamespace,
+				isCaseErrorNamespace: isCaseErrorNamespace,
+				findCorrectNamespace: findCorrectNamespace,
+				getAllNamespaces: getAllNamespaces,
+				
+				// FUNCTION NAME VALIDATION
+				isValidFunctionName: isValidFunctionName
 		};
 
 });
