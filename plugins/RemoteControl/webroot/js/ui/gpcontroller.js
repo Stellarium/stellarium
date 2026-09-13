@@ -60,13 +60,13 @@
  * @requires jquery-ui
  * 
  * @author kutaibaa akraa (GitHub: @kutaibaa-akraa)
- * @date 2026-04-02
+ * @date 2026-05-30
  * @license GPLv2+
- * @version 2.7.0
+ * @version 3.0.0
  */
  
-define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actions", "api/time", "api/properties", "api/search", "jquery-ui"],
-    function($, settings, rc, viewcontrol, actions, timeApi, propApi, searchApi, jqui) {
+define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actions", "api/time", "api/properties", "api/search", "jquery-ui", "ui/stellarium-utils"],
+    function($, settings, rc, viewcontrol, actions, timeApi, propApi, searchApi, jqui, stelUtils) {
         "use strict";
 
         // =====================================================================
@@ -334,7 +334,7 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
             "highlight_cetus": "Highlight Cetus (Toggle isolate)",
             "highlight_canis_major": "Highlight Canis Major (Toggle isolate)",
 
-            // Equatorial Constellations (Visible from both hemispheres)
+            // Constellations (Visible from both hemispheres)
             "highlight_equuleus": "Highlight Equuleus (Toggle isolate)",
             "highlight_delphinus": "Highlight Delphinus (Toggle isolate)",
             "highlight_sagitta": "Highlight Sagitta (Toggle isolate)",
@@ -347,19 +347,6 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
 
             // === CONSTELLATION ACTIONS ===
             "clear_constellation_highlight": "Show all constellations (clear isolation)",
-
-            // === TIME CONTROL ===
-            "time_speed_normal": "Normal time speed (1x)",
-            "time_speed_fast": "Fast forward (10x)",
-            "time_speed_very_fast": "Very fast forward (100x)",
-            "time_speed_slow": "Slow motion (0.1x)",
-            "time_speed_reverse": "Reverse time (-1x)",
-
-            // === SEASONS DEMONSTRATION ===
-            "goto_summer_solstice": "Summer Solstice (June 21)",
-            "goto_winter_solstice": "Winter Solstice (December 21)",
-            "goto_spring_equinox": "Spring Equinox (March 20)",
-            "goto_autumn_equinox": "Autumn Equinox (September 22)",
 
             // === MILKY WAY ===
             "milky_way_toggle": "Toggle Milky Way display",
@@ -381,8 +368,6 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
          * - Deep Sky Objects: Popular DSOs like M42, M45, M57, M13
          * - Solar System: Planets and Sun/Moon
          * - Constellations: All 88 IAU constellations organized by region
-         * - Time Speed: Preset time rate multipliers
-         * - Seasons: Solstice and equinox dates
          * - Milky Way: Display and brightness controls
          * 
          * @constant {Object}
@@ -414,22 +399,18 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
                 "search_mars", "search_jupiter", "search_saturn",
                 "search_uranus", "search_neptune", "search_pluto"
             ],
-            "Constellations: Zodiac (Ecliptic)": [
+            "Constellations": [
                 "highlight_aries", "highlight_taurus", "highlight_gemini", "highlight_cancer",
                 "highlight_leo", "highlight_virgo", "highlight_libra", "highlight_scorpius",
                 "highlight_ophiuchus", "highlight_sagittarius", "highlight_capricornus",
-                "highlight_aquarius", "highlight_pisces"
-            ],
-            "Constellations: Northern Sky": [
+                "highlight_aquarius", "highlight_pisces",
                 "highlight_ursa_major", "highlight_ursa_minor", "highlight_cassiopeia",
                 "highlight_cepheus", "highlight_draco", "highlight_hercules", "highlight_cygnus",
                 "highlight_lyra", "highlight_aquila", "highlight_andromeda", "highlight_pegasus",
                 "highlight_perseus", "highlight_auriga", "highlight_boötes",
                 "highlight_canes_venatici", "highlight_com_berenices", "highlight_corona_borealis",
                 "highlight_vulpecula", "highlight_lacerta", "highlight_lynx", "highlight_triangulum",
-                "highlight_camelopardalis", "highlight_monoceros", "highlight_canis_minor"
-            ],
-            "Constellations: Southern Sky": [
+                "highlight_camelopardalis", "highlight_monoceros", "highlight_canis_minor",
                 "highlight_orion", "highlight_centaurus", "highlight_crux", "highlight_carina",
                 "highlight_vela", "highlight_puppis", "highlight_phoenix", "highlight_grus",
                 "highlight_tucana", "highlight_pavo", "highlight_ara", "highlight_corona_australis",
@@ -438,23 +419,13 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
                 "highlight_dorado", "highlight_mensa", "highlight_hydrus", "highlight_reticulum",
                 "highlight_horologium", "highlight_caelum", "highlight_fornax", "highlight_sculptor",
                 "highlight_antlia", "highlight_pyxis", "highlight_columba", "highlight_lepus",
-                "highlight_eridanus", "highlight_cetus", "highlight_canis_major"
-            ],
-            "Constellations: Equatorial": [
+                "highlight_eridanus", "highlight_cetus", "highlight_canis_major",
                 "highlight_equuleus", "highlight_delphinus", "highlight_sagitta", "highlight_scutum",
                 "highlight_serpens", "highlight_sextans", "highlight_hydra", "highlight_crater",
                 "highlight_corvus"
             ],
             "Constellation Actions": [
                 "clear_constellation_highlight"
-            ],
-            "Educational: Time Speed": [
-                "time_speed_normal", "time_speed_fast", "time_speed_very_fast",
-                "time_speed_slow", "time_speed_reverse"
-            ],
-            "Educational: Seasons": [
-                "goto_summer_solstice", "goto_winter_solstice",
-                "goto_spring_equinox", "goto_autumn_equinox"
             ],
             "Educational: Milky Way": [
                 "milky_way_toggle", "milky_way_show", "milky_way_hide",
@@ -471,10 +442,9 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
         var isPolling = false;
         var isServerConnected = true;
         var activeDeviceIndex = null;
-        var loadedPlugins = {};
-				
+        				
 				// TEMPORARY FLAG - Remove after testing
-				var TRANSLATION_ENABLED = false;  // Set to false to disable translations
+				var TRANSLATION_ENABLED = true;  // Set to false to disable translations
         
         // Dynamic action data from Stellarium's native action system
         var nativeActionData = {};      // Stores all StelActions from the server
@@ -521,17 +491,18 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
         var currentFov = 60;
         var gamepadManager = null;
 				
-				// Store previous display states for constellation isolation restoration
-				var previousConstellationStates = {
-						linesDisplayed: null,
-						boundariesDisplayed: null,
-						labelsDisplayed: null,
-						artDisplayed: null,
-						fov: null
-				};
-				
-				var hasSavedState = false;
-				var currentIsolatedConstellation = null;
+				/**
+				 * Constellation display state management has been moved to stellarium-utils.js
+				 * to avoid code duplication between gpcontroller.js and skyculture.js.
+				 * All constellation-related operations now use stelUtils directly.
+				 * 
+				 * @see stelUtils.toggleConstellationHighlight()
+				 * @see stelUtils.clearConstellationHighlight()
+				 * @see stelUtils.saveConstellationDisplayStates()
+				 * @see stelUtils.restoreConstellationDisplayStates()
+				 */
+				// Removed: previousConstellationStates, hasSavedState, currentIsolatedConstellation
+				// These are now managed internally by stellarium-utils.js
 
         // =====================================================================
         // SECTION 4: DYNAMIC ACTION LOADING FROM STELLARIUM
@@ -614,16 +585,16 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
         function getActionDisplayName(actionId) {
             // Check if it's an educational custom action
             if (EDUCATIONAL_CUSTOM_ACTIONS[actionId]) {
-                return _tr(EDUCATIONAL_CUSTOM_ACTIONS[actionId]);
+                return rc.tr(EDUCATIONAL_CUSTOM_ACTIONS[actionId]);
             }
             
             // Check if it's a native StelAction
             if (nativeActionData[actionId]) {
-                return _tr(nativeActionData[actionId].text);
+                return rc.tr(nativeActionData[actionId].text);
             }
             
             // Fallback for unknown actions
-            if (actionId === "none") return _tr("No action");
+            if (actionId === "none") return rc.tr("No action");
             return actionId;
         }
 
@@ -682,45 +653,6 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
         }
 
         // =====================================================================
-        // SECTION 5: PLUGIN MANAGEMENT
-        // =====================================================================
-
-        /**
-         * Loads plugin-specific actions from Stellarium.
-         * Plugin actions are automatically included in the native action list
-         * when the plugin is loaded, so this function primarily checks which
-         * plugins are available and updates the UI accordingly.
-         */
-        function loadPluginActions() {
-            $.ajax({
-                url: '/api/main/plugins',
-                type: 'GET',
-                dataType: 'json',
-                success: function(plugins) {
-                    loadedPlugins = plugins;
-                    console.log("[Gamepad] Loaded plugin information:", Object.keys(plugins).filter(function(p) { return plugins[p].loaded; }).join(", "));
-                    
-                    // Reload button customization if a device is connected
-                    if (currentDeviceInfo) {
-                        populateButtonCustomization();
-                    }
-                },
-                error: function(xhr, status, errorThrown) {
-                    console.log("[Gamepad] Error loading plugin information: " + errorThrown);
-                }
-            });
-        }
-
-        /**
-         * Checks if a specific plugin is loaded.
-         * @param {string} pluginName - The name of the plugin
-         * @returns {boolean} True if the plugin is loaded
-         */
-        function isPluginLoaded(pluginName) {
-            return loadedPlugins[pluginName] && loadedPlugins[pluginName].loaded;
-        }
-
-        // =====================================================================
         // SECTION 6: VIBRATION FUNCTIONS
         // =====================================================================
 
@@ -775,17 +707,17 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
         function testVibrationManual() {
             var device = gamepadManager ? gamepadManager.getActiveDevice() : null;
             if (!device) {
-                showNotification(_tr("No controller connected"));
+                showNotification(rc.tr("No controller connected"));
                 return;
             }
             
             // Use full intensity for test (0.8) regardless of settings
             var success = triggerVibration(400, 0.8);
             if (success) {
-                showNotification(_tr("Vibration test sent to ") + device.getDisplayInfo().name + 
+                showNotification(rc.tr("Vibration test sent to ") + device.getDisplayInfo().name + 
                         " (Intensity: " + Math.round(controllerSettings.vibrationIntensity * 100) + "%)");
             } else {
-                showNotification(_tr("Vibration not supported on this device/browser"));
+                showNotification(rc.tr("Vibration not supported on this device/browser"));
             }
         }
 
@@ -882,47 +814,7 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
                 });
                 return true;
             }
-            
-            // Time speed
-            if (action === "time_speed_normal") {
-                if (timeApi) timeApi.setTimeRate(0.000011574);
-                return true;
-            }
-            if (action === "time_speed_fast") {
-                if (timeApi) timeApi.setTimeRate(0.00011574);
-                return true;
-            }
-            if (action === "time_speed_very_fast") {
-                if (timeApi) timeApi.setTimeRate(0.0011574);
-                return true;
-            }
-            if (action === "time_speed_slow") {
-                if (timeApi) timeApi.setTimeRate(0.0000011574);
-                return true;
-            }
-            if (action === "time_speed_reverse") {
-                if (timeApi) timeApi.setTimeRate(-0.000011574);
-                return true;
-            }
-            
-            // Seasons
-            if (action === "goto_summer_solstice") {
-                timeApi.setJDay(2451545.0 + 92.75);
-                return true;
-            }
-            if (action === "goto_winter_solstice") {
-                timeApi.setJDay(2451545.0 + 275.25);
-                return true;
-            }
-            if (action === "goto_spring_equinox") {
-                timeApi.setJDay(2451545.0 + 0.0);
-                return true;
-            }
-            if (action === "goto_autumn_equinox") {
-                timeApi.setJDay(2451545.0 + 183.0);
-                return true;
-            }
-            
+                       
             // Milky Way display controls
             if (action === "milky_way_toggle") {
                 var isDisplayed = propApi.getStelProp("MilkyWay.flagMilkyWayDisplayed");
@@ -957,226 +849,29 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
             return false;
         }
 
-        /**
-         * Handles search actions for celestial objects.
-         * @param {string} searchTerm - The search term (e.g., "sun", "moon", "polaris")
-         */
-        function handleSearchAction(searchTerm) {
-            // Special case for M13/Hercules Cluster
-            if (searchTerm === "hercules_cluster") {
-                searchTerm = "M13";
-            } else {
-                searchTerm = searchTerm.replace(/_/g, ' ');
-                searchTerm = searchTerm.replace(/\b\w/g, function(l) { return l.toUpperCase(); });
-            }
-            
-            if (searchApi && typeof searchApi.selectObjectByName === 'function') {
-                var mode = $("#select_SelectionMode").val() || "center";
-                searchApi.selectObjectByName(searchTerm, mode);
-            } else {
-                rc.postCmd("/api/main/focus", { target: searchTerm, mode: "center" });
-            }
-        }
-				
 				/**
-				 * Saves the current constellation display settings before isolation
-				 */
-				function saveConstellationDisplayStates() {
-						previousConstellationStates.linesDisplayed = propApi.getStelProp("ConstellationMgr.linesDisplayed");
-						previousConstellationStates.boundariesDisplayed = propApi.getStelProp("ConstellationMgr.boundariesDisplayed");
-						previousConstellationStates.labelsDisplayed = propApi.getStelProp("ConstellationMgr.namesDisplayed");
-						previousConstellationStates.artDisplayed = propApi.getStelProp("ConstellationMgr.artDisplayed");
-						previousConstellationStates.fov = currentFov;
-						hasSavedState = true;
-						
-						console.log("[Gamepad] Saved constellation states:", previousConstellationStates);
-				}
-
-				/**
-				 * Restores the previous constellation display settings after isolation is cleared
-				 */
-				function restoreConstellationDisplayStates() {
-						// Only restore if we have a saved state
-						if (!hasSavedState) {
-								console.log("[Gamepad] No saved state to restore");
-								return;
-						}
-						
-						// Restore lines
-						if (previousConstellationStates.linesDisplayed !== null) {
-								var currentLines = propApi.getStelProp("ConstellationMgr.linesDisplayed");
-								if (currentLines !== previousConstellationStates.linesDisplayed) {
-										actions.execute("actionShow_Constellation_Lines");
-								}
-						}
-						
-						// Restore boundaries
-						if (previousConstellationStates.boundariesDisplayed !== null) {
-								var currentBoundaries = propApi.getStelProp("ConstellationMgr.boundariesDisplayed");
-								if (currentBoundaries !== previousConstellationStates.boundariesDisplayed) {
-										actions.execute("actionShow_Constellation_Boundaries");
-								}
-						}
-						
-						// Restore labels
-						if (previousConstellationStates.labelsDisplayed !== null) {
-								var currentLabels = propApi.getStelProp("ConstellationMgr.namesDisplayed");
-								if (currentLabels !== previousConstellationStates.labelsDisplayed) {
-										actions.execute("actionShow_Constellation_Labels");
-								}
-						}
-						
-						// Restore art
-						if (previousConstellationStates.artDisplayed !== null) {
-								var currentArt = propApi.getStelProp("ConstellationMgr.artDisplayed");
-								if (currentArt !== previousConstellationStates.artDisplayed) {
-										actions.execute("actionShow_Constellation_Art");
-								}
-						}
-						
-						// Restore FOV
-						if (previousConstellationStates.fov !== null && previousConstellationStates.fov !== currentFov) {
-								rc.postCmd("/api/scripts/direct", {
-										code: "StelMovementMgr.zoomTo(" + previousConstellationStates.fov + ", 2);",
-										useIncludes: false
-								});
-						}
-						
-						hasSavedState = false;  // <-- Reset after restore
-						console.log("[Gamepad] Restored constellation states");
-				}
-
-				/**
-				 * Ensures all constellation display elements are enabled for isolation
-				 */
-				function enableAllConstellationDisplays() {
-						// Enable lines if not already enabled
-						var linesVisible = propApi.getStelProp("ConstellationMgr.linesDisplayed");
-						if (linesVisible === false) {
-								actions.execute("actionShow_Constellation_Lines");
-						}
-						
-						// Enable boundaries if not already enabled
-						var boundariesVisible = propApi.getStelProp("ConstellationMgr.boundariesDisplayed");
-						if (boundariesVisible === false) {
-								actions.execute("actionShow_Constellation_Boundaries");
-						}
-						
-						// Enable labels if not already enabled
-						var labelsVisible = propApi.getStelProp("ConstellationMgr.namesDisplayed");
-						if (labelsVisible === false) {
-								actions.execute("actionShow_Constellation_Labels");
-						}
-						
-						// Enable art if not already enabled
-						var artVisible = propApi.getStelProp("ConstellationMgr.artDisplayed");
-						if (artVisible === false) {
-								actions.execute("actionShow_Constellation_Art");
-						}
-				}
-
-				/**
-				 * Toggles constellation highlighting/isolation.
-				 * First press: saves current state, enables all constellation displays, 
-				 *              isolates and centers on the constellation.
-				 * Second press: restores previous state and clears isolation.
+				 * Search actions have been moved to stellarium-utils.js.
+				 * Use stelUtils.goToObject() for all object navigation needs.
 				 * 
-				 * @param {string} constellationName - Name of the constellation (e.g., "orion", "ursa_major")
+				 * @see stelUtils.goToObject()
 				 */
-				function handleConstellationHighlight(constellationName) {
-						// Convert to proper case (e.g., "orion" -> "Orion")
-						var searchTerm = constellationName.replace(/_/g, ' ');
-						searchTerm = searchTerm.replace(/\b\w/g, function(l) { return l.toUpperCase(); });
-						
-						// Check if THIS constellation is currently isolated using our local tracker
-						var isCurrentlyHighlighted = (currentIsolatedConstellation === searchTerm);
-						
-						console.log("[Gamepad] Toggle - Target:", searchTerm, "Currently isolated:", currentIsolatedConstellation, "Is highlighted:", isCurrentlyHighlighted);
-						
-						if (isCurrentlyHighlighted) {
-								// ===== TOGGLE OFF: Clear isolation and restore previous state =====
-								console.log("[Gamepad] Toggle OFF - Clearing highlight:", searchTerm);
-								
-								// Step 1: Disable isolation mode (Constellation selection isolated)&(Only last selected)
-								propApi.setStelProp("ConstellationMgr.isolateSelected", false);
-								
-								propApi.setStelProp("ConstellationMgr.flagConstellationPick", false);
-								
-								// Step 2: Clear selected object
-								rc.postCmd("/api/main/focus", { target: "", mode: "mark" }, null, function() {});
-								
-								// Step 3: Restore previous display states
-								restoreConstellationDisplayStates();
-								
-								// Step 4: Clear the tracker
-								currentIsolatedConstellation = null;
-								
-								showNotification(_tr("Cleared highlight: ") + searchTerm);
-								
-						} else {
-								// ===== TOGGLE ON: Isolate and highlight constellation =====
-								console.log("[Gamepad] Toggle ON - Isolating constellation:", searchTerm);
-								
-								// Step 1: Save current display states (if not already saved)
-								if (!hasSavedState) {
-										saveConstellationDisplayStates();
-								}
-								
-								// Step 2: Enable all constellation display elements
-								enableAllConstellationDisplays();
-								
-								// Step 3: Clear previous selection
-								rc.postCmd("/api/main/focus", { target: "", mode: "mark" }, null, function() {});
-								
-								// Step 4: Delay to allow Stellarium to process the clear
-								setTimeout(function() {
-									
-										// Step 5: Enable isolation mode (Only last selected)
-										propApi.setStelProp("ConstellationMgr.flagConstellationPick", true);
-										
-										// Step 6: Enable isolation mode (Constellation selection isolated)							
-										propApi.setStelProp("ConstellationMgr.isolateSelected", true);									
-										
-										
-										// Step 7: Select the constellation
-										rc.postCmd("/api/main/focus", { target: searchTerm, mode: "mark" }, null, function() {});
-										
-										// Step 8: Update tracker
-										currentIsolatedConstellation = searchTerm;
-										
-										// Step 9: Center on constellation with 60° FOV
-										setTimeout(function() {
-												rc.postCmd("/api/scripts/direct", {
-														code: "core.moveToObject(\"" + searchTerm + "\", 2); StelMovementMgr.zoomTo(60, 3);",
-														useIncludes: false
-												});
-												
-												showNotification(_tr("Isolating constellation: ") + searchTerm);
-										}, 150);
-								}, 100);
-						}
-				}
+				
 
-				/**
-				 * Clears all constellation highlighting and restores previous state.
-				 */
-				function clearConstellationHighlight() {
-						console.log("[Gamepad] Clearing all constellation highlights and restoring state");
-						
-						// Step 1: Disable isolation mode
-						propApi.setStelProp("ConstellationMgr.isolateSelected", false);
-						
-						// Step 2: Clear any selected object
-						rc.postCmd("/api/main/focus", { target: "", mode: "mark" }, null, function() {});
-						
-						// Step 3: Restore previous display states
-						restoreConstellationDisplayStates();
-						
-						// Step 4: Clear the tracker
-						currentIsolatedConstellation = null;
-						
-						showNotification(_tr("All constellations visible"));
-				}
+			/**
+			 * Constellation highlight/isolation functions have been moved to stellarium-utils.js.
+			 * 
+			 * The following functions were duplicated between gpcontroller.js and skyculture.js:
+			 * - saveConstellationDisplayStates()
+			 * - restoreConstellationDisplayStates()  
+			 * - enableAllConstellationDisplays()
+			 * - handleConstellationHighlight()  → use stelUtils.toggleConstellationHighlight()
+			 * - clearConstellationHighlight()  → use stelUtils.clearConstellationHighlight()
+			 * 
+			 * All constellation operations now go through stelUtils for consistency.
+			 * 
+			 * @see stelUtils.toggleConstellationHighlight()
+			 * @see stelUtils.clearConstellationHighlight()
+			 */
 
         // =====================================================================
         // SECTION 8: GAMEPAD DEVICE CLASS
@@ -1370,7 +1065,7 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
             try {
                 if (profile.deviceInfo && profile.deviceInfo.uniqueId !== this.uniqueId) {
                     console.warn("[Gamepad] Importing profile from different device type.");
-                    showNotification(_tr("Warning: This profile was created for a different controller type."));
+                    showNotification(rc.tr("Warning: This profile was created for a different controller type."));
                 }
                 
                 if (profile.mappings) {
@@ -1438,23 +1133,40 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
             // Educational actions (view directions, zoom, time speed, seasons, etc.)
             if (handleEducationalAction(action)) return;
             
-            // Search actions
-            if (action.indexOf("search_") === 0) {
-                handleSearchAction(action.substring(7));
-                return;
-            }
+					/**
+					 * Search actions - delegated to stellarium-utils.js.
+					 * stelUtils.goToObject() handles parsing of object IDs, special cases
+					 * for solar system objects, and smooth FOV transitions.
+					 * 
+					 * @see stelUtils.goToObject()
+					 */
+					if (action.indexOf("search_") === 0) {
+							// Convert "search_polaris" → "Polaris", "search_andromeda_galaxy" → "Andromeda Galaxy"
+							var searchTerm = action.substring(7).replace(/_/g, ' ');
+							searchTerm = searchTerm.replace(/\b\w/g, function(l) { return l.toUpperCase(); });
+							// Special case for M13/Hercules Cluster
+							if (searchTerm === "Hercules Cluster") {
+									searchTerm = "M13";
+							}
+							stelUtils.goToObject(searchTerm, 15, 'search');
+							return;
+					}
             
-            // Constellation highlights
-            if (action.indexOf("highlight_") === 0) {
-                handleConstellationHighlight(action.substring(10));
-                return;
-            }
-            
-            // Clear constellation highlight
-            if (action === "clear_constellation_highlight") {
-                clearConstellationHighlight();
-                return;
-            }
+					/**
+					 * Constellation highlights - delegated to stellarium-utils.js.
+					 * The shared utility manages state (save/restore display settings,
+					 * isolation toggling) that is also used by skyculture.js.
+					 */
+					if (action.indexOf("highlight_") === 0) {
+							stelUtils.toggleConstellationHighlight(action.substring(10));
+							return;
+					}
+
+					// Clear constellation highlight
+					if (action === "clear_constellation_highlight") {
+							stelUtils.clearConstellationHighlight();
+							return;
+					}
             
             // Time controls (using actions API for StelActions)
             if (action === "actionIncrease_Time_Speed") {
@@ -1536,7 +1248,7 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
                 if (direction) {
                     $currentDirection.text(direction);
                 } else if (this.isMoving === false) {
-                    $currentDirection.text(_tr("centered"));
+                    $currentDirection.text(rc.tr("centered"));
                 }
             }
 
@@ -1622,17 +1334,17 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
             var angle = Math.atan2(-leftY, leftX) * (180 / Math.PI);
             var direction = "";
             
-            if (angle >= -22.5 && angle < 22.5) direction = _tr("East →");
-            else if (angle >= 22.5 && angle < 67.5) direction = _tr("North-East ↗");
-            else if (angle >= 67.5 && angle < 112.5) direction = _tr("North ↑");
-            else if (angle >= 112.5 && angle < 157.5) direction = _tr("North-West ↖");
-            else if (angle >= 157.5 || angle < -157.5) direction = _tr("West ←");
-            else if (angle >= -157.5 && angle < -112.5) direction = _tr("South-West ↙");
-            else if (angle >= -112.5 && angle < -67.5) direction = _tr("South ↓");
-            else if (angle >= -67.5 && angle < -22.5) direction = _tr("South-East ↘");
+            if (angle >= -22.5 && angle < 22.5) direction = rc.tr("East →");
+            else if (angle >= 22.5 && angle < 67.5) direction = rc.tr("North-East ↗");
+            else if (angle >= 67.5 && angle < 112.5) direction = rc.tr("North ↑");
+            else if (angle >= 112.5 && angle < 157.5) direction = rc.tr("North-West ↖");
+            else if (angle >= 157.5 || angle < -157.5) direction = rc.tr("West ←");
+            else if (angle >= -157.5 && angle < -112.5) direction = rc.tr("South-West ↙");
+            else if (angle >= -112.5 && angle < -67.5) direction = rc.tr("South ↓");
+            else if (angle >= -67.5 && angle < -22.5) direction = rc.tr("South-East ↘");
             
             var intensity = Math.sqrt(leftX * leftX + leftY * leftY);
-            var speedText = intensity > 0.8 ? _tr("fast") : (intensity > 0.3 ? _tr("medium") : _tr("slow"));
+            var speedText = intensity > 0.8 ? rc.tr("fast") : (intensity > 0.3 ? rc.tr("medium") : rc.tr("slow"));
             
             return direction + " (" + speedText + ")";
         };
@@ -1647,7 +1359,7 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
 
         GamepadDevice.prototype.getButtonName = function(index) {
             var name = BUTTON_NAMES[index] || ("Button " + index);
-            return _tr(name);
+            return rc.tr(name);
         };
 
         GamepadDevice.prototype.getButtonCount = function() {
@@ -1828,8 +1540,8 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
         function updateConnectionStatus(connected, device) {
             if ($connectionStatus && $connectionStatus.length) {
                 $connectionStatus.html(connected ? 
-                        '<span style="color:#4CAF50;">● ' + _tr("Connected") + '</span>' : 
-                        '<span style="color:#f44336;">● ' + _tr("Disconnected") + '</span>');
+                        '<span style="color:#4CAF50;">● ' + rc.tr("Connected") + '</span>' : 
+                        '<span style="color:#f44336;">● ' + rc.tr("Disconnected") + '</span>');
             }
             
             if (connected && device && $deviceName && $deviceName.length) {
@@ -1864,7 +1576,7 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
             $deviceSelector.empty();
             
             if (devices.length === 0) {
-                $deviceSelector.append('<option value="">' + _tr("No devices connected") + '</option>');
+                $deviceSelector.append('<option value="">' + rc.tr("No devices connected") + '</option>');
                 $deviceSelector.prop('disabled', true);
                 return;
             }
@@ -2063,7 +1775,7 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
             $buttonCustomizationContainer.empty();
 
             if (!device) {
-                $buttonCustomizationContainer.html('<div class="no-device-message"><p>🔴 ' + _tr("Connect a controller to customize buttons") + '</p></div>');
+                $buttonCustomizationContainer.html('<div class="no-device-message"><p>🔴 ' + rc.tr("Connect a controller to customize buttons") + '</p></div>');
                 return;
             }
 
@@ -2088,7 +1800,7 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
                 for (var groupName in buttonGroups) {
                     var buttonIndices = buttonGroups[groupName];
                     var groupDiv = $("<div class='button-group'></div>");
-                    groupDiv.append("<div class='button-group-header'>" + _tr(groupName) + "</div>");
+                    groupDiv.append("<div class='button-group-header'>" + rc.tr(groupName) + "</div>");
 
                     for (var j = 0; j < buttonIndices.length; j++) {
                         var buttonId = buttonIndices[j];
@@ -2105,33 +1817,14 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
                         select.data("device-index", device.index);
 
                         // Add "No action" option
-                        select.append("<option value='none'>" + _tr("No action") + "</option>");
+                        select.append("<option value='none'>" + rc.tr("No action") + "</option>");
                         
-/*                         // Add custom actions section for educational features
-                        if (Object.keys(EDUCATIONAL_CATEGORIES).length > 0) {
-                            var eduOptgroup = $("<optgroup>").attr("label", _tr("Educational Features"));
-                            for (var eduCategory in EDUCATIONAL_CATEGORIES) {
-                                var actionsList = EDUCATIONAL_CATEGORIES[eduCategory];
-                                for (var k = 0; k < actionsList.length; k++) {
-                                    var action = actionsList[k];
-                                    var option = $("<option>").val(action).text(_tr(EDUCATIONAL_CUSTOM_ACTIONS[action]));
-                                    if (currentAction === action) {
-                                        option.attr("selected", "selected");
-                                    }
-                                    eduOptgroup.append(option);
-                                }
-                            }
-                            if (eduOptgroup.children().length > 0) {
-                                select.append(eduOptgroup);
-                            }
-                        }
-                         */
                         // Add native StelActions from Stellarium
                         for (var category in actionStructure) {
                             var actionsList = actionStructure[category];
                             if (!actionsList || actionsList.length === 0) continue;
                             
-                            var optgroup = $("<optgroup>").attr("label", _tr(category));
+                            var optgroup = $("<optgroup>").attr("label", rc.tr(category));
                             for (var k = 0; k < actionsList.length; k++) {
                                 var action = actionsList[k];
                                 var displayName = getActionDisplayName(action);
@@ -2152,7 +1845,7 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
                                 var dev = gamepadManager ? gamepadManager.getActiveDevice() : null;
                                 if (dev) {
                                     dev.setButtonAction(btnId, newAction);
-                                    showNotification(_tr("Button %1 mapped to %2", btnName, getActionDisplayName(newAction)));
+                                    showNotification(rc.tr("Button %1 mapped to %2", btnName, getActionDisplayName(newAction)));
                                 }
                             };
                         })(buttonId, buttonName));
@@ -2183,7 +1876,7 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
         function startCalibration() {
             var device = gamepadManager ? gamepadManager.getActiveDevice() : null;
             if (!device) {
-                showNotification(_tr("Please connect a controller first"));
+                showNotification(rc.tr("Please connect a controller first"));
                 return;
             }
 
@@ -2197,8 +1890,8 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
                 isCalibrated: false
             };
 
-            if ($calibrateBtn) $calibrateBtn.text(_tr("Calibrating...")).addClass("calibrating");
-            showNotification(_tr("Move both joysticks in circles, then press any button to finish"));
+            if ($calibrateBtn) $calibrateBtn.text(rc.tr("Calibrating...")).addClass("calibrating");
+            showNotification(rc.tr("Move both joysticks in circles, then press any button to finish"));
             updateCalibrationDisplayForDevice(device, true);
 
             var collecting = true;
@@ -2247,13 +1940,13 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
             var device = gamepadManager ? gamepadManager.getActiveDevice() : null;
             if (!device) {
                 calibrationData.calibrationMode = false;
-                if ($calibrateBtn) $calibrateBtn.text(_tr("Calibrate")).removeClass("calibrating");
+                if ($calibrateBtn) $calibrateBtn.text(rc.tr("Calibrate")).removeClass("calibrating");
                 return;
             }
             
             if (!calibrationData.calibrationMode || calibrationData.samples.length === 0) {
                 calibrationData.calibrationMode = false;
-                if ($calibrateBtn) $calibrateBtn.text(_tr("Calibrate")).removeClass("calibrating");
+                if ($calibrateBtn) $calibrateBtn.text(rc.tr("Calibrate")).removeClass("calibrating");
                 return;
             }
 
@@ -2279,8 +1972,8 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
             
             calibrationData.calibrationMode = false;
 
-            if ($calibrateBtn) $calibrateBtn.text(_tr("Calibrate")).removeClass("calibrating");
-            showNotification(_tr("Calibration complete! ") + calibrationData.samples.length + _tr(" samples collected."));
+            if ($calibrateBtn) $calibrateBtn.text(rc.tr("Calibrate")).removeClass("calibrating");
+            showNotification(rc.tr("Calibration complete! ") + calibrationData.samples.length + rc.tr(" samples collected."));
             updateCalibrationDisplayForDevice(device);
         }
 
@@ -2290,22 +1983,22 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
 
             if (isCalibrating) {
                 container.html("<div class='calibration-status'>" + 
-                                _tr("Calibrating... Collected %1 samples", calibrationData.sampleCount) + 
+                                rc.tr("Calibrating... Collected %1 samples", calibrationData.sampleCount) + 
                                 "<br><span style='font-size:10px;'>" + 
-                                _tr("Move joysticks in circles, press any button to finish") + 
+                                rc.tr("Move joysticks in circles, press any button to finish") + 
                                 "</span></div>");
             } else if (device && device.calibrationData && device.calibrationData.isCalibrated) {
                 var data = device.calibrationData;
                 container.html(
                     "<div class='calibration-values'>" +
-                        "<div class='calibration-value-item'><span class='calibration-value-label'>" + _tr("Left X offset:") + "</span> <span class='calibration-value-number'>" + data.leftX.toFixed(4) + "</span></div>" +
-                        "<div class='calibration-value-item'><span class='calibration-value-label'>" + _tr("Left Y offset:") + "</span> <span class='calibration-value-number'>" + data.leftY.toFixed(4) + "</span></div>" +
-                        "<div class='calibration-value-item'><span class='calibration-value-label'>" + _tr("Right X offset:") + "</span> <span class='calibration-value-number'>" + data.rightX.toFixed(4) + "</span></div>" +
-                        "<div class='calibration-value-item'><span class='calibration-value-label'>" + _tr("Right Y offset:") + "</span> <span class='calibration-value-number'>" + data.rightY.toFixed(4) + "</span></div>" +
+                        "<div class='calibration-value-item'><span class='calibration-value-label'>" + rc.tr("Left X offset:") + "</span> <span class='calibration-value-number'>" + data.leftX.toFixed(4) + "</span></div>" +
+                        "<div class='calibration-value-item'><span class='calibration-value-label'>" + rc.tr("Left Y offset:") + "</span> <span class='calibration-value-number'>" + data.leftY.toFixed(4) + "</span></div>" +
+                        "<div class='calibration-value-item'><span class='calibration-value-label'>" + rc.tr("Right X offset:") + "</span> <span class='calibration-value-number'>" + data.rightX.toFixed(4) + "</span></div>" +
+                        "<div class='calibration-value-item'><span class='calibration-value-label'>" + rc.tr("Right Y offset:") + "</span> <span class='calibration-value-number'>" + data.rightY.toFixed(4) + "</span></div>" +
                     "</div>"
                 );
             } else {
-                container.html("<div class='calibration-status'>" + _tr("Not calibrated") + "</div>");
+                container.html("<div class='calibration-status'>" + rc.tr("Not calibrated") + "</div>");
             }
         }
 
@@ -2318,7 +2011,7 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
                 };
                 device.saveCalibration();
                 updateCalibrationDisplayForDevice(device);
-                showNotification(_tr("Calibration reset for ") + device.getDisplayInfo().name);
+                showNotification(rc.tr("Calibration reset for ") + device.getDisplayInfo().name);
             }
         }
 
@@ -2367,16 +2060,16 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
                 device.buttonMappings.clear();
                 device.saveButtonMappings();
                 populateButtonCustomization();
-                showNotification(_tr("Button mappings reset to defaults for ") + device.getDisplayInfo().name);
+                showNotification(rc.tr("Button mappings reset to defaults for ") + device.getDisplayInfo().name);
             } else {
-                showNotification(_tr("No controller connected"));
+                showNotification(rc.tr("No controller connected"));
             }
         }
 
         function exportProfile() {
             var device = gamepadManager ? gamepadManager.getActiveDevice() : null;
             if (!device) {
-                showNotification(_tr("No controller connected"));
+                showNotification(rc.tr("No controller connected"));
                 return;
             }
             
@@ -2390,13 +2083,13 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
             linkElement.setAttribute('download', profileName);
             linkElement.click();
             
-            showNotification(_tr("Profile exported: ") + profileName);
+            showNotification(rc.tr("Profile exported: ") + profileName);
         }
 
         function importProfile(file) {
             var device = gamepadManager ? gamepadManager.getActiveDevice() : null;
             if (!device) {
-                showNotification(_tr("No controller connected"));
+                showNotification(rc.tr("No controller connected"));
                 return;
             }
             
@@ -2407,13 +2100,13 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
                     if (device.importProfile(profile)) {
                         populateButtonCustomization();
                         updateCalibrationDisplayForDevice(device);
-                        showNotification(_tr("Profile imported successfully for ") + device.getDisplayInfo().name);
+                        showNotification(rc.tr("Profile imported successfully for ") + device.getDisplayInfo().name);
                     } else {
-                        showNotification(_tr("Failed to import profile"));
+                        showNotification(rc.tr("Failed to import profile"));
                     }
                 } catch(err) {
                     console.error("Import error:", err);
-                    showNotification(_tr("Invalid profile file"));
+                    showNotification(rc.tr("Invalid profile file"));
                 }
             };
             reader.readAsText(file);
@@ -2487,7 +2180,7 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
                     }
                     
                     showNotification(controllerSettings.vibrationFeedback ? 
-                            _tr("Vibration feedback enabled") : _tr("Vibration feedback disabled"));
+                            rc.tr("Vibration feedback enabled") : _tr("Vibration feedback disabled"));
                 });
                 
                 // Set initial visibility
@@ -2581,7 +2274,7 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
                     controllerSettings.vibrationFeedback = $(this).is(":checked");
                     saveSettings();
                     showNotification(controllerSettings.vibrationFeedback ? 
-                        _tr("Vibration feedback enabled") : _tr("Vibration feedback disabled"));
+                        rc.tr("Vibration feedback enabled") : _tr("Vibration feedback disabled"));
                 });
             }
             
@@ -2601,9 +2294,9 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
                 var device = gamepadManager ? gamepadManager.getActiveDevice() : null;
                 if (device) {
                     device.saveButtonMappings();
-                    showNotification(_tr("Button mappings saved for ") + device.getDisplayInfo().name);
+                    showNotification(rc.tr("Button mappings saved for ") + device.getDisplayInfo().name);
                 } else {
-                    showNotification(_tr("No controller connected"));
+                    showNotification(rc.tr("No controller connected"));
                 }
             });
             
@@ -2625,7 +2318,7 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
                 var originalText = $btn.text();
                 
                 // Show scanning feedback
-                $btn.text(_tr("Scanning...")).prop("disabled", true);
+                $btn.text(rc.tr("Scanning...")).prop("disabled", true);
                 
                 // Add scanning animation class
                 $btn.addClass("scanning");
@@ -2655,14 +2348,14 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
                         }
                         updateDeviceSelector();
                         populateButtonCustomization();
-                        showNotification(_tr("Found ") + gamepadManager.devices.size + _tr(" controller(s)"));
+                        showNotification(rc.tr("Found ") + gamepadManager.devices.size + rc.tr(" controller(s)"));
                     } else {
                         gamepadManager.scanForGamepads();
                         
                         if (gamepadManager.devices.size > 0) {
-                            showNotification(_tr("Found ") + gamepadManager.devices.size + _tr(" controller(s)"));
+                            showNotification(rc.tr("Found ") + gamepadManager.devices.size + rc.tr(" controller(s)"));
                         } else {
-                            showNotification(_tr("No controllers found. Please connect a controller and try again."));
+                            showNotification(rc.tr("No controllers found. Please connect a controller and try again."));
                         }
                     }
                 }
@@ -2710,17 +2403,17 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
             
             // If no device is connected or active device is null, clear all displays
             if (!device || activeDeviceIndex === null) {
-                $('#gp-buttons-container').html('<div class="loading-placeholder">' + _tr("No controller connected") + '</div>');
-                $('#gp-axes-container').html('<div class="loading-placeholder">' + _tr("No controller connected") + '</div>');
-                $('#gp-device-info-live').html('<div class="loading-placeholder">' + _tr("No controller connected") + '</div>');
+                $('#gp-buttons-container').html('<div class="loading-placeholder">' + rc.tr("No controller connected") + '</div>');
+                $('#gp-axes-container').html('<div class="loading-placeholder">' + rc.tr("No controller connected") + '</div>');
+                $('#gp-device-info-live').html('<div class="loading-placeholder">' + rc.tr("No controller connected") + '</div>');
                 return;
             }
             
             var gp = navigator.getGamepads()[device.index];
             if (!gp) {
-                $('#gp-buttons-container').html('<div class="loading-placeholder">' + _tr("Controller data not available") + '</div>');
-                $('#gp-axes-container').html('<div class="loading-placeholder">' + _tr("Controller data not available") + '</div>');
-                $('#gp-device-info-live').html('<div class="loading-placeholder">' + _tr("Controller data not available") + '</div>');
+                $('#gp-buttons-container').html('<div class="loading-placeholder">' + rc.tr("Controller data not available") + '</div>');
+                $('#gp-axes-container').html('<div class="loading-placeholder">' + rc.tr("Controller data not available") + '</div>');
+                $('#gp-device-info-live').html('<div class="loading-placeholder">' + rc.tr("Controller data not available") + '</div>');
                 return;
             }
             
@@ -2738,7 +2431,7 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
             $container.empty();
             
             if (!gamepad || !gamepad.buttons || gamepad.buttons.length === 0) {
-                $container.html('<div class="loading-placeholder">' + _tr("No button data available") + '</div>');
+                $container.html('<div class="loading-placeholder">' + rc.tr("No button data available") + '</div>');
                 return;
             }
             
@@ -2774,18 +2467,18 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
             $container.empty();
             
             if (!gamepad || !gamepad.axes || gamepad.axes.length === 0) {
-                $container.html('<div class="loading-placeholder">' + _tr("No axis data available") + '</div>');
+                $container.html('<div class="loading-placeholder">' + rc.tr("No axis data available") + '</div>');
                 return;
             }
             
             // Axis names
             var axisNames = {
-                0: _tr('Left X'),
-                1: _tr('Left Y'),
-                2: _tr('Right X'),
-                3: _tr('Right Y'),
-                4: _tr('L2 Trigger'),
-                5: _tr('R2 Trigger')
+                0: rc.tr('Left X'),
+                1: rc.tr('Left Y'),
+                2: rc.tr('Right X'),
+                3: rc.tr('Right Y'),
+                4: rc.tr('L2 Trigger'),
+                5: rc.tr('R2 Trigger')
             };
             
             var html = '';
@@ -2824,19 +2517,19 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
             var browserInfo = getBrowserInfo();
             
             var html = '';
-            html += '<div class="device-info-live-row"><span class="label">' + _tr("Device Name") + ':</span><span class="value">' + escapeHtml(info.name) + '</span></div>';
-            html += '<div class="device-info-live-row"><span class="label">' + _tr("Vendor/Product ID") + ':</span><span class="value">' + (device.vendorId ? device.vendorId + ':' + device.productId : 'Unknown') + '</span></div>';
-            html += '<div class="device-info-live-row"><span class="label">' + _tr("Button Count") + ':</span><span class="value">' + gamepad.buttons.length + '</span></div>';
-            html += '<div class="device-info-live-row"><span class="label">' + _tr("Axis Count") + ':</span><span class="value">' + (gamepad.axes ? gamepad.axes.length : 0) + '</span></div>';
-            html += '<div class="device-info-live-row"><span class="label">' + _tr("Operating System") + ':</span><span class="value">' + osInfo + '</span></div>';
-            html += '<div class="device-info-live-row"><span class="label">' + _tr("Browser") + ':</span><span class="value">' + browserInfo + '</span></div>';
+            html += '<div class="device-info-live-row"><span class="label">' + rc.tr("Device Name") + ':</span><span class="value">' + escapeHtml(info.name) + '</span></div>';
+            html += '<div class="device-info-live-row"><span class="label">' + rc.tr("Vendor/Product ID") + ':</span><span class="value">' + (device.vendorId ? device.vendorId + ':' + device.productId : 'Unknown') + '</span></div>';
+            html += '<div class="device-info-live-row"><span class="label">' + rc.tr("Button Count") + ':</span><span class="value">' + gamepad.buttons.length + '</span></div>';
+            html += '<div class="device-info-live-row"><span class="label">' + rc.tr("Axis Count") + ':</span><span class="value">' + (gamepad.axes ? gamepad.axes.length : 0) + '</span></div>';
+            html += '<div class="device-info-live-row"><span class="label">' + rc.tr("Operating System") + ':</span><span class="value">' + osInfo + '</span></div>';
+            html += '<div class="device-info-live-row"><span class="label">' + rc.tr("Browser") + ':</span><span class="value">' + browserInfo + '</span></div>';
             
             // Add browser-specific notes
             if (browserInfo.includes('Firefox') && info.name.includes('DualSense')) {
-                html += '<div class="device-info-live-row"><span class="label">' + _tr("Note") + ':</span><span class="value">Firefox may report PS5 DualSense axes differently. Verify using the Axes panel.</span></div>';
+                html += '<div class="device-info-live-row"><span class="label">' + rc.tr("Note") + ':</span><span class="value">Firefox may report PS5 DualSense axes differently. Verify using the Axes panel.</span></div>';
             }
             if (browserInfo.includes('Chrome') && info.name.includes('DualSense')) {
-                html += '<div class="device-info-live-row"><span class="label">' + _tr("Note") + ':</span><span class="value">Chrome provides full PS5 DualSense support including vibration.</span></div>';
+                html += '<div class="device-info-live-row"><span class="label">' + rc.tr("Note") + ':</span><span class="value">Chrome provides full PS5 DualSense support including vibration.</span></div>';
             }
             
             $container.html(html);
@@ -2905,8 +2598,6 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
             gamepadManager = new GamepadManager();
             gamepadManager.startBackgroundScan(3000);
             
-            loadPluginActions();
-
             // Get initial FOV value - use the same range as viewcontrol.js
             if (viewcontrol && typeof viewcontrol.getFOV === 'function') {
                 var initialFov = viewcontrol.getFOV();
@@ -2939,34 +2630,6 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
                     }
                 });
             }
-            
-/*             // Listen for action state changes to update the UI dynamically
-            if (actions) {
-                $(actions).on("stelActionChanged", function(evt, actionId, actionData) {
-                    // Update native action data cache
-                    if (nativeActionData[actionId]) {
-                        nativeActionData[actionId].isChecked = actionData.isChecked;
-                    }
-                    
-                    // Optionally refresh button customization to show updated checkable states
-                    if (currentDeviceInfo) {
-                        // Only refresh if the button customization is visible
-                        populateButtonCustomization();
-                    }
-                });
-            } */
-						
-						// Listen for action state changes - update cached data only (no UI rebuild)
-						if (actions) {
-								$(actions).on("stelActionChanged", function(evt, actionId, actionData) {
-										// Update native action data cache only
-										if (nativeActionData[actionId]) {
-												nativeActionData[actionId].isChecked = actionData.isChecked;
-										}
-										// Do NOT call populateButtonCustomization() here - it causes severe lag
-										// The dropdown menu does not need to be rebuilt on every action change
-								});
-						}
 
             // Monitor server connection status and pause/resume polling accordingly
             setInterval(function() {
@@ -3032,10 +2695,8 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
             
             exportProfile: exportProfile,
             
-            testVibration: testVibrationManual,
-            
-            isPluginLoaded: isPluginLoaded,
-            
+            testVibration: testVibrationManual,           
+           
             getLoadedPlugins: function() {
                 return $.extend(true, {}, loadedPlugins);
             },

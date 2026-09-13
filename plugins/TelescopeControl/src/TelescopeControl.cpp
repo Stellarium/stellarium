@@ -846,9 +846,10 @@ void TelescopeControl::loadTelescopes()
 
 		if (connectionType == ConnectionInternal)
 		{
-			//Serial port and device model
+			//Device model and either a serial port or a network host
 			deviceModelName = telescope.value("device_model").toString();
 			portSerial = telescope.value("serial_port").toString();
+			hostName = telescope.value("host_name").toString();
 
 			if(deviceModelName.isEmpty())
 			{
@@ -866,9 +867,11 @@ void TelescopeControl::loadTelescopes()
 				continue;
 			}
 
-			if(portSerial.isEmpty())
+			//A directly connected telescope needs either a serial port or a
+			//network host (LX200-compatible protocol over TCP/IP).
+			if(portSerial.isEmpty() && hostName.isEmpty())
 			{
-                                qCWarning(Telescopes) << "[TelescopeControl] Unable to load telescope: No valid serial port specified at slot" << key;
+                                qCWarning(Telescopes) << "[TelescopeControl] Unable to load telescope: No valid serial port or host name specified at slot" << key;
 				map.remove(key);
 				continue;
 			}
@@ -995,7 +998,12 @@ void TelescopeControl::loadTelescopes()
 				{
 					addLogAtSlot(slot);
 					logAtSlot(slot);
-					if(!startClientAtSlot(slot, connectionType, name, equinox, QString(), 0, delay, internalCircles, deviceModelName, portSerial))
+					//Serial connections pass the serial port; network connections
+					//(LX200 over TCP) pass the host name and TCP port instead.
+					bool clientStarted = portSerial.isEmpty()
+						? startClientAtSlot(slot, connectionType, name, equinox, hostName, portTCP, delay, internalCircles, deviceModelName, QString())
+						: startClientAtSlot(slot, connectionType, name, equinox, QString(), 0, delay, internalCircles, deviceModelName, portSerial);
+					if(!clientStarted)
 					{
                                                 qCDebug(Telescopes) << "[TelescopeControl] Unable to create a telescope client at slot" << slot;
 						//Unnecessary due to if-else construction;
@@ -1084,9 +1092,20 @@ bool TelescopeControl::addTelescopeAtSlot(int slot, ConnectionType connectionTyp
 			return false;
 		telescope.insert("device_model", deviceModelName);
 
-		if (portSerial.isEmpty())
+		if (!portSerial.isEmpty())
+		{
+			// Directly connected through a serial port
+			telescope.insert("serial_port", portSerial);
+		}
+		else if (!host.isEmpty() && isValidPort(portTCP))
+		{
+			// Directly connected over TCP/IP (e.g. LX200 protocol over the network)
+			telescope.insert("host_name", host);
+		}
+		else
+		{
 			return false;
-		telescope.insert("serial_port", portSerial);
+		}
 	}
 
 	if (connectionType != ConnectionVirtual)
@@ -1234,7 +1253,12 @@ bool TelescopeControl::startTelescopeAtSlot(int slot)
 		{
 			addLogAtSlot(slot);
 			logAtSlot(slot);
-			if (startClientAtSlot(slot, connectionType, name, equinox, QString(), 0, delay, circles, deviceModelName, portSerial))
+			//Serial connections pass the serial port; network connections
+			//(LX200 over TCP) pass the host name and TCP port instead.
+			bool clientStarted = portSerial.isEmpty()
+				? startClientAtSlot(slot, connectionType, name, equinox, host, portTCP, delay, circles, deviceModelName, QString())
+				: startClientAtSlot(slot, connectionType, name, equinox, QString(), 0, delay, circles, deviceModelName, portSerial);
+			if (clientStarted)
 			{
 				emit clientConnected(slot, name);
 				return true;
@@ -1399,8 +1423,14 @@ bool TelescopeControl::startClientAtSlot(int slotNumber, ConnectionType connecti
 		break;
 
 	case ConnectionInternal:
-		if(!deviceModelName.isEmpty() && !portSerial.isEmpty())
-			initString = QString("%1:%2:%3:%4:%5").arg(name, deviceModels[deviceModelName].server, equinox, portSerial, QString::number(delay));
+		if(!deviceModelName.isEmpty())
+		{
+			if(!portSerial.isEmpty())
+				initString = QString("%1:%2:%3:%4:%5").arg(name, deviceModels[deviceModelName].server, equinox, portSerial, QString::number(delay));
+			else if(!host.isEmpty() && isValidPort(portTCP))
+				// Device protocol (e.g. LX200) spoken directly over TCP/IP
+				initString = QString("%1:%2:%3:%4:%5:%6").arg(name, deviceModels[deviceModelName].server, equinox, host, QString::number(portTCP), QString::number(delay));
+		}
 		break;
 
 	case ConnectionLocal:

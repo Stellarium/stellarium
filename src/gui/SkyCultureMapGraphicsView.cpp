@@ -135,24 +135,51 @@ void SkyCultureMapGraphicsView::loadCulturePolygons()
 		const auto data = jsonDoc.object();
 		if (data["features"].isArray())
 		{
-			const auto polygonArray = data["features"].toArray();
-			for (const auto &currentPoly : polygonArray)
+			const auto featuresArray = data["features"].toArray();
+			for (const auto &currentFeature : featuresArray)
 			{
-				auto polygonObject = currentPoly.toObject();
-				int beginTime = polygonObject["properties"].toObject().value("beginTime").toInt();
-				int endTime = polygonObject["properties"].toObject().value("endTime").toInt();
+				auto featureObject = currentFeature.toObject();
+				int beginTime = featureObject["properties"].toObject().value("beginTime").toInt();
+				int endTime = featureObject["properties"].toObject().value("endTime").toInt();
 				QPolygonF geometry;
-				const auto coordinatesArray = polygonObject["geometry"].toObject()["coordinates"].toArray()[0].toArray();
-				for (const auto &point : coordinatesArray)
-				{
-					auto pointArray = point.toArray();
-					geometry << QPointF(pointArray[0].toDouble(), pointArray[1].toDouble());
-				}
 
-				SkyCulturePolygonItem *item = new SkyCulturePolygonItem(currentCulture, beginTime, endTime);
-				item->setToolTip(cultureIdToTranslationMap.value(currentCulture));
-				item->setPolygon(convertLatLonToMeter(geometry));
-				scene()->addItem(item);
+				QString geometryType = featureObject["geometry"].toObject()["type"].toString();
+
+				if (geometryType=="Polygon")
+				{
+					const auto coordinatesArray = featureObject["geometry"].toObject()["coordinates"].toArray()[0].toArray();
+					for (const auto &point : coordinatesArray)
+					{
+						auto pointArray = point.toArray();
+						geometry << QPointF(pointArray[0].toDouble(), pointArray[1].toDouble());
+					}
+
+					SkyCulturePolygonItem *item = new SkyCulturePolygonItem(currentCulture, beginTime, endTime);
+					item->setToolTip(cultureIdToTranslationMap.value(currentCulture));
+					item->setPolygon(convertLatLonToMeter(geometry));
+					scene()->addItem(item);
+				}
+				else if (geometryType=="MultiPolygon")
+				{
+					const auto polygonArray = featureObject["geometry"].toObject()["coordinates"].toArray();
+					for (const auto &polygon: polygonArray)
+					{
+						geometry.clear();
+						const auto coordinatesArray = polygon[0].toArray();
+						for (const auto &point : coordinatesArray)
+						{
+							auto pointArray = point.toArray();
+							geometry << QPointF(pointArray[0].toDouble(), pointArray[1].toDouble());
+						}
+
+						SkyCulturePolygonItem *item = new SkyCulturePolygonItem(currentCulture, beginTime, endTime);
+						item->setToolTip(cultureIdToTranslationMap.value(currentCulture));
+						item->setPolygon(convertLatLonToMeter(geometry));
+						scene()->addItem(item);
+					}
+				}
+				else
+					qWarning() << "SkycultureMapGraphicsView: unsupported GeoJSON geometry type:" << geometryType;
 			}
 		}
 	}

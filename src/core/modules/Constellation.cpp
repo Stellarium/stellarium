@@ -354,7 +354,7 @@ void Constellation::setNarration(const QString &narration)
 
 QString Constellation::getNarration(const StelCore *core, const InfoStringGroup &flags) const
 {
-	Q_UNUSED(flags)
+	Q_UNUSED(core) Q_UNUSED(flags)
 	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyCultureDescriptionsTranslator();
 
 	QString toBeSpoken=trans.qtranslate(narration);

@@ -195,6 +195,7 @@ void StelSkyCultureSkyPartition::update(double deltaTime)
 
 void StelSkyCultureSkyPartition::draw(StelPainter& sPainter, const Vec3d &obsVelocity)
 {
+	Q_UNUSED(obsVelocity)
 	static StelSkyCultureMgr *scMgr=GETSTELMODULE(StelSkyCultureMgr);
 	static StarMgr *starMgr=GETSTELMODULE(StarMgr);
 	static StelCore *core=StelApp::getInstance().getCore();
@@ -450,6 +451,7 @@ void StelSkyCultureSkyPartition::drawCap(StelPainter &sPainter, const SphericalC
 
 void StelSkyCultureSkyPartition::drawMansionCap(StelPainter &sPainter, const SphericalCap& viewPortSphericalCap, double latDeg, double lon1, double lon2) const
 {
+	Q_UNUSED(viewPortSphericalCap)
 	const double lat=latDeg*M_PI_180;
 	SphericalCap declinationCap(Vec3d(0.,0.,1.), std::sin(lat));
 	const Vec3d rotCenter(0,0,declinationCap.d);

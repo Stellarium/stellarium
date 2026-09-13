@@ -398,7 +398,8 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 	const StelLocation currentLocation=core->getCurrentLocation();
 	const bool onTransitionToNewLocation=core->getCurrentObserver()->isTraveling();
 	const bool withAtmosphere = core->getSkyDrawer()->getFlagHasAtmosphere();
-	const bool withDecimalDegree = app.getFlagShowDecimalDegrees();
+	const bool withDecimalDegreeCoords = app.getFlagUseDecDegreesCoords();
+	const bool withDecimalDegreeOther = app.getFlagUseDecDegreesOther();
 	const bool useSouthAzimuth = app.getFlagSouthAzimuthUsage();
 	const bool usePolarDistance = app.getFlagPolarDistanceUsage();
 	const bool withTables = app.getFlagUseFormattingOutput();
@@ -436,13 +437,29 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 	QString RADec;
 	if (usePolarDistance)
 	{
-		// TRANSLATORS: Right ascension/Polar distance
-		RADec = withDesignations ? QString("&alpha;/p") : qc_("RA/PD", "celestial coordinate system");
+		if (withDesignations)
+		{
+			// TRANSLATORS: Designations for Right ascension/Polar distance
+			RADec = qc_("&alpha;/p", "celestial coordinate system");
+		}
+		else
+		{
+			// TRANSLATORS: Right ascension/Polar distance
+			RADec = qc_("RA/PD", "celestial coordinate system");
+		}
 	}
 	else
 	{
-		// TRANSLATORS: Right ascension/Declination
-		RADec = withDesignations ? QString("&alpha;/&delta;") : qc_("RA/Dec", "celestial coordinate system");
+		if (withDesignations)
+		{
+			// TRANSLATORS: Designations for Right ascension/Declination
+			RADec = qc_("&alpha;/&delta;", "celestial coordinate system");
+		}
+		else
+		{
+			// TRANSLATORS: Right ascension/Declination
+			RADec = qc_("RA/Dec", "celestial coordinate system");
+		}
 	}
 
 	if (flags&RaDecJ2000)
@@ -451,7 +468,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 		StelUtils::rectToSphe(&ra_j2000,&dec_j2000,getJ2000EquatorialPos(core));
 		if (usePolarDistance)
 			dec_j2000 = M_PI_2 - dec_j2000;
-		if (withDecimalDegree)
+		if (withDecimalDegreeCoords)
 		{
 			firstCoordinate  = StelUtils::radToDecDegStr(ra_j2000,5,false,true);
 			secondCoordinate = StelUtils::radToDecDegStr(dec_j2000);
@@ -476,7 +493,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 		StelUtils::rectToSphe(&ra_equ,&dec_equ,eqNow);
 		if (usePolarDistance)
 			dec_equ = M_PI_2 - dec_equ;
-		if (withDecimalDegree)
+		if (withDecimalDegreeCoords)
 		{
 			firstCoordinate  = StelUtils::radToDecDegStr(ra_equ,5,false,true);
 			secondCoordinate = StelUtils::radToDecDegStr(dec_equ);
@@ -510,7 +527,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 		if (usePolarDistance)
 			dec_sidereal = M_PI_2 - dec_sidereal;
 
-		if (withDecimalDegree)
+		if (withDecimalDegreeCoords)
 		{
 			//firstCoordinate  = QString("%1h").arg(ra_sidereal*12/M_PI, 0, 'f', 5); // Decimal hours
 			firstCoordinate  = QString("%1°").arg(ra_sidereal*M_180_PI, 0, 'f', 5); // Decimal degrees
@@ -525,11 +542,34 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 			secondCoordinate = StelUtils::radToDmsStr(dec_sidereal,true);
 		}
 
-		const QString HADec = usePolarDistance ?
-			// TRANSLATORS: Hour angle/Polar distance
-			( withDesignations ? QString("h/p")       : qc_("HA/PD",  "celestial coordinate system")) :
-			// TRANSLATORS: Hour angle/Declination
-			( withDesignations ? QString("h/&delta;") : qc_("HA/Dec", "celestial coordinate system"));
+		QString HADec;
+		
+		if (usePolarDistance)
+		{
+			if (withDesignations)
+			{
+				// TRANSLATORS: Designations for Hour angle/Polar distance
+				HADec = qc_("h/p", "celestial coordinate system");
+			}
+			else
+			{
+				// TRANSLATORS: Hour angle/Polar distance
+				HADec = qc_("HA/PD",  "celestial coordinate system");
+			}
+		}
+		else
+		{
+			if (withDesignations)
+			{
+				// TRANSLATORS: Designations for Hour angle/Declination
+				HADec = qc_("h/&delta;", "celestial coordinate system");
+			}
+			else
+			{
+				// TRANSLATORS: Hour angle/Declination
+				HADec = qc_("HA/Dec", "celestial coordinate system");
+			}
+		}
 
 		if (withTables)
 			res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2/</td><td style='text-align:right;'>%3</td><td>%4</td></tr>").arg(HADec, firstCoordinate, secondCoordinate, apparent);
@@ -552,7 +592,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 			az -= M_PI*2;
 		if (withAtmosphere && (alt_app>-2.0*M_PI/180.0)) // Don't show refracted altitude much below horizon where model is meaningless.
 		{
-			if (withDecimalDegree)
+			if (withDecimalDegreeCoords)
 			{
 				firstCoordinate  = StelUtils::radToDecDegStr(az);
 				secondCoordinate = StelUtils::radToDecDegStr(alt_app);
@@ -565,7 +605,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 		}
 		else
 		{
-			if (withDecimalDegree)
+			if (withDecimalDegreeCoords)
 			{
 				firstCoordinate  = StelUtils::radToDecDegStr(az);
 				secondCoordinate = StelUtils::radToDecDegStr(alt);
@@ -577,8 +617,17 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 			}
 		}
 
-		// TRANSLATORS: Azimuth/Altitude
-		const QString AzAlt = (withDesignations ? "A/a" : qc_("Az./Alt.", "celestial coordinate system"));
+		QString AzAlt;
+		if (withDesignations)
+		{
+			// TRANSLATORS: Designations for Azimuth/Altitude
+			AzAlt = qc_("A/a", "celestial coordinate system");
+		}
+		else
+		{
+			// TRANSLATORS: Azimuth/Altitude
+			AzAlt = qc_("Az./Alt.", "celestial coordinate system");
+		}
 
 		if (withTables)
 			res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2/</td><td style='text-align:right;'>%3</td><td>%4</td></tr>").arg(AzAlt, firstCoordinate, secondCoordinate, apparent);
@@ -592,7 +641,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 		double glong, glat;
 		StelUtils::rectToSphe(&glong, &glat, getGalacticPos(core));
 		if (glong<0.) glong += 2.0*M_PI;
-		if (withDecimalDegree)
+		if (withDecimalDegreeCoords)
 		{
 			firstCoordinate  = StelUtils::radToDecDegStr(glong);
 			secondCoordinate = StelUtils::radToDecDegStr(glat);
@@ -603,8 +652,18 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 			secondCoordinate = StelUtils::radToDmsStr(glat, true);
 		}
 
-		// TRANSLATORS: Galactic longitude/latitude
-		const QString GalLongLat = (withDesignations ? "l/b" : qc_("Gal. long./lat.", "celestial coordinate system"));
+		QString GalLongLat;
+		if (withDesignations)
+		{
+			// TRANSLATORS: Designations for Galactic longitude/latitude
+			GalLongLat = qc_("l/b", "celestial coordinate system");
+		}
+		else
+		{
+			// TRANSLATORS: Galactic longitude/latitude
+			GalLongLat = qc_("Gal. long./lat.", "celestial coordinate system");
+		}
+		
 		if (withTables)
 			res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2/</td><td style='text-align:right;'>%3</td><td></td></tr>").arg(GalLongLat, firstCoordinate, secondCoordinate);
 		else
@@ -617,7 +676,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 		double sglong, sglat;
 		StelUtils::rectToSphe(&sglong, &sglat, getSupergalacticPos(core));
 		if (sglong<0.) sglong += 2.0*M_PI;
-		if (withDecimalDegree)
+		if (withDecimalDegreeCoords)
 		{
 			firstCoordinate  = StelUtils::radToDecDegStr(sglong);
 			secondCoordinate = StelUtils::radToDecDegStr(sglat);
@@ -628,8 +687,17 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 			secondCoordinate = StelUtils::radToDmsStr(sglat, true);
 		}
 
-		// TRANSLATORS: Supergalactic longitude/latitude
-		const QString SGalLongLat = (withDesignations ? "SGL/SGB" : qc_("Supergal. long./lat.", "celestial coordinate system"));
+		QString SGalLongLat;
+		if (withDesignations)
+		{
+			// TRANSLATORS: Designations for Supergalactic longitude/latitude
+			SGalLongLat = qc_("SGL/SGB", "celestial coordinate system");
+		}
+		else
+		{
+			// TRANSLATORS: Supergalactic longitude/latitude
+			SGalLongLat = qc_("Supergal. long./lat.", "celestial coordinate system");
+		}
 
 		if (withTables)
 			res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2/</td><td style='text-align:right;'>%3</td><td></td></tr>").arg(SGalLongLat, firstCoordinate, secondCoordinate);
@@ -645,9 +713,17 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 	// or ever displayed the coordinates in the observer planet's equivalent to Earth's ecliptical coordinates.
 	// As quick test you can observe if in any "Ecliptic coordinate" as seen from e.g. Mars or Jupiter the Sun was ever close to beta=0 (except if crossing the node...).
 
-	// TRANSLATORS: Ecliptic longitude/latitude
-	const QString EqlLongLat = (withDesignations ? QString("&lambda;/&beta;") :
-						       qc_("Ecl. long./lat.", "celestial coordinate system") );
+	QString EqlLongLat;
+	if (withDesignations)
+	{
+		// TRANSLATORS: Designations for Ecliptic longitude/latitude
+		EqlLongLat = qc_("&lambda;/&beta;", "celestial coordinate system");
+	}
+	else
+	{
+		// TRANSLATORS: Ecliptic longitude/latitude
+		EqlLongLat = qc_("Ecl. long./lat.", "celestial coordinate system");
+	}
 
 	if (flags&EclipticCoordJ2000)
 	{
@@ -656,7 +732,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 		StelUtils::rectToSphe(&ra_equ,&dec_equ,getJ2000EquatorialPos(core));
 		StelUtils::equToEcl(ra_equ, dec_equ, eclJ2000, &lambda, &beta);
 		if (lambda<0) lambda+=2.0*M_PI;
-		if (withDecimalDegree)
+		if (withDecimalDegreeCoords)
 		{
 			firstCoordinate  = StelUtils::radToDecDegStr(lambda);
 			secondCoordinate = StelUtils::radToDecDegStr(beta);
@@ -683,7 +759,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 		StelUtils::rectToSphe(&ra_equ,&dec_equ,eqNow);
 		StelUtils::equToEcl(ra_equ, dec_equ, eclJDE, &lambdaJDE, &betaJDE);
 		if (lambdaJDE<0) lambdaJDE+=2.0*M_PI;
-		if (withDecimalDegree)
+		if (withDecimalDegreeCoords)
 		{
 			firstCoordinate  = StelUtils::radToDecDegStr(lambdaJDE);
 			secondCoordinate = StelUtils::radToDecDegStr(betaJDE);
@@ -701,7 +777,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 		res += getExtraInfoStrings(EclipticCoordOfDate).join("");
 
 		// GZ Only for now: display epsilon_A, angle between Earth's Axis and ecl. of date.
-		if (withDecimalDegree)
+		if (withDecimalDegreeOther)
 			firstCoordinate = StelUtils::radToDecDegStr(eclJDE);
 		else
 			firstCoordinate = StelUtils::radToDmsStr(eclJDE, true);
@@ -931,7 +1007,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 			if (StelApp::getInstance().getFlagSouthAzimuthUsage())
 				az+=M_PI;
 
-			if (withDecimalDegree)
+			if (withDecimalDegreeCoords)
 			{
 				firstCoordinate  = StelUtils::radToDecDegStr(az,5,false,true);
 				secondCoordinate = StelUtils::radToDecDegStr(-theta);
@@ -952,7 +1028,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 
 			// TRANSLATORS: Greatest Western Digression is the maximum western azimuth for stars with upper culmination between pole and zenith
 			event=q_("Max. W. Digression");
-			if (withDecimalDegree)
+			if (withDecimalDegreeCoords)
 			{
 				firstCoordinate  = StelUtils::radToDecDegStr(StelUtils::fmodpos(-az, 2.*M_PI),5,false,true);
 				secondCoordinate = StelUtils::radToDecDegStr(theta);
@@ -989,7 +1065,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 		{
 			QString pa;
 			const double par = static_cast<double>(getParallacticAngle(core));
-			if (withDecimalDegree)
+			if (withDecimalDegreeOther)
 				pa = StelUtils::radToDecDegStr(par);
 			else
 				pa = StelUtils::radToDmsStr(par, true);
@@ -1056,7 +1132,8 @@ QString StelObject::getCommonNarration(const StelCore *core, const InfoStringGro
 	const StelLocation currentLocation=core->getCurrentLocation();
 	const bool onTransitionToNewLocation=core->getCurrentObserver()->isTraveling();
 	const bool withAtmosphere = core->getSkyDrawer()->getFlagHasAtmosphere();
-	const bool withDecimalDegree = app.getFlagShowDecimalDegrees();
+	const bool withDecimalDegreeCoords = app.getFlagUseDecDegreesCoords();
+	const bool withDecimalDegreeOther = app.getFlagUseDecDegreesOther();
 	const bool useSouthAzimuth = app.getFlagSouthAzimuthUsage();
 	const bool usePolarDistance = app.getFlagPolarDistanceUsage();
 	//const bool withDesignations = app.getFlagUseCCSDesignation();
@@ -1091,7 +1168,7 @@ QString StelObject::getCommonNarration(const StelCore *core, const InfoStringGro
 		StelUtils::rectToSphe(&ra_j2000,&dec_j2000,getJ2000EquatorialPos(core));
 		if (usePolarDistance)
 			dec_j2000 = M_PI_2 - dec_j2000;
-		if (withDecimalDegree)
+		if (withDecimalDegreeCoords)
 		{
 			firstCoordinate  = StelUtils::narrateDecimal(ra_j2000*M_180_PI, 2);
 			secondCoordinate = StelUtils::narrateDecimal(dec_j2000*M_180_PI, 2);
@@ -1116,7 +1193,7 @@ QString StelObject::getCommonNarration(const StelCore *core, const InfoStringGro
 		StelUtils::rectToSphe(&ra_equ,&dec_equ,eqNow);
 		if (usePolarDistance)
 			dec_equ = M_PI_2 - dec_equ;
-		if (withDecimalDegree)
+		if (withDecimalDegreeCoords)
 		{
 			firstCoordinate  = StelUtils::narrateDecimal(ra_equ*M_180_PI, 2);
 			secondCoordinate = StelUtils::narrateDecimal(dec_equ*M_180_PI, 2);
@@ -1151,7 +1228,7 @@ QString StelObject::getCommonNarration(const StelCore *core, const InfoStringGro
 		if (usePolarDistance)
 			dec_sidereal = M_PI_2 - dec_sidereal;
 
-		if (withDecimalDegree)
+		if (withDecimalDegreeCoords)
 		{
 			//firstCoordinate  = QString("%1h").arg(ra_sidereal*12/M_PI, 0, 'f', 5); // Decimal hours
 			firstCoordinate  = QString("%1°").arg(StelUtils::narrateDecimal(ra_sidereal*M_180_PI, 2)); // Decimal degrees
@@ -1188,7 +1265,7 @@ QString StelObject::getCommonNarration(const StelCore *core, const InfoStringGro
 			az -= M_PI*2;
 		if (withAtmosphere && (alt_app>-2.0*M_PI/180.0)) // Don't show refracted altitude much below horizon where model is meaningless.
 		{
-			if (withDecimalDegree)
+			if (withDecimalDegreeCoords)
 			{
 				firstCoordinate  = StelUtils::narrateDecimal(az*M_180_PI, 2);
 				secondCoordinate = StelUtils::narrateDecimal(alt_app*M_180_PI, 2);
@@ -1201,7 +1278,7 @@ QString StelObject::getCommonNarration(const StelCore *core, const InfoStringGro
 		}
 		else
 		{
-			if (withDecimalDegree)
+			if (withDecimalDegreeCoords)
 			{
 				firstCoordinate  = StelUtils::narrateDecimal(az*M_180_PI, 2);
 				secondCoordinate = StelUtils::narrateDecimal(alt*M_180_PI, 2);
@@ -1223,7 +1300,7 @@ QString StelObject::getCommonNarration(const StelCore *core, const InfoStringGro
 		double glong, glat;
 		StelUtils::rectToSphe(&glong, &glat, getGalacticPos(core));
 		if (glong<0.) glong += 2.0*M_PI;
-		if (withDecimalDegree)
+		if (withDecimalDegreeCoords)
 		{
 			firstCoordinate  = StelUtils::narrateDecimal(glong*M_180_PI, 2);
 			secondCoordinate = StelUtils::narrateDecimal(glat*M_180_PI, 2);
@@ -1244,7 +1321,7 @@ QString StelObject::getCommonNarration(const StelCore *core, const InfoStringGro
 		double sglong, sglat;
 		StelUtils::rectToSphe(&sglong, &sglat, getSupergalacticPos(core));
 		if (sglong<0.) sglong += 2.0*M_PI;
-		if (withDecimalDegree)
+		if (withDecimalDegreeCoords)
 		{
 			firstCoordinate  = StelUtils::narrateDecimal(sglong*M_180_PI, 2);
 			secondCoordinate = StelUtils::narrateDecimal(sglat*M_180_PI, 2);
@@ -1273,7 +1350,7 @@ QString StelObject::getCommonNarration(const StelCore *core, const InfoStringGro
 		StelUtils::rectToSphe(&ra_equ,&dec_equ,getJ2000EquatorialPos(core));
 		StelUtils::equToEcl(ra_equ, dec_equ, eclJ2000, &lambda, &beta);
 		if (lambda<0) lambda+=2.0*M_PI;
-		if (withDecimalDegree)
+		if (withDecimalDegreeCoords)
 		{
 			firstCoordinate  = StelUtils::narrateDecimal(lambda*M_180_PI, 2);
 			secondCoordinate = StelUtils::narrateDecimal(beta*M_180_PI, 2);
@@ -1298,7 +1375,7 @@ QString StelObject::getCommonNarration(const StelCore *core, const InfoStringGro
 		StelUtils::rectToSphe(&ra_equ,&dec_equ,eqNow);
 		StelUtils::equToEcl(ra_equ, dec_equ, eclJDE, &lambdaJDE, &betaJDE);
 		if (lambdaJDE<0) lambdaJDE+=2.0*M_PI;
-		if (withDecimalDegree)
+		if (withDecimalDegreeCoords)
 		{
 			firstCoordinate  = StelUtils::narrateDecimal(lambdaJDE*M_180_PI, 2);
 			secondCoordinate = StelUtils::narrateDecimal(betaJDE*M_180_PI, 2);
@@ -1315,7 +1392,7 @@ QString StelObject::getCommonNarration(const StelCore *core, const InfoStringGro
 
 		// report epsilon_A, angle between Earth's Axis and ecl. of date.
 		res += qc_("The Ecliptic obliquity of date is", "object narration") + " ";
-		res += withDecimalDegree ? StelUtils::narrateDecimal(eclJDE*M_180_PI, 2) : StelUtils::radToDmsNarration(eclJDE, false) + ". ";
+		res += withDecimalDegreeOther ? StelUtils::narrateDecimal(eclJDE*M_180_PI, 2) : StelUtils::radToDmsNarration(eclJDE, false) + ". ";
 	}
 
 	// Specialized plugins (e.g. Astro Navigation or ethno-astronomical specialties) may want to provide additional types of coordinates here.
@@ -1478,7 +1555,7 @@ QString StelObject::getCommonNarration(const StelCore *core, const InfoStringGro
 			if (StelApp::getInstance().getFlagSouthAzimuthUsage())
 				az+=M_PI;
 
-			if (withDecimalDegree)
+			if (withDecimalDegreeCoords)
 			{
 				firstCoordinate  = StelUtils::narrateDecimal(az*M_180_PI, 2);
 				secondCoordinate = StelUtils::narrateDecimal(-theta*M_180_PI, 2);
@@ -1492,7 +1569,7 @@ QString StelObject::getCommonNarration(const StelCore *core, const InfoStringGro
 			res += QString(qc_("Greatest Eastern Digression is at Azimuth %1, Hour Angle %2", "object narration")).arg(firstCoordinate, secondCoordinate) + ". ";
 
 			// TRANSLATORS: Greatest Western Digression is the maximum western azimuth for stars with upper culmination between pole and zenith
-			if (withDecimalDegree)
+			if (withDecimalDegreeCoords)
 			{
 				firstCoordinate  = StelUtils::narrateDecimal(StelUtils::fmodpos(-az, 2.*M_PI)*M_180_PI, 2);
 				secondCoordinate = StelUtils::narrateDecimal(theta*M_180_PI, 2);
@@ -1523,7 +1600,7 @@ QString StelObject::getCommonNarration(const StelCore *core, const InfoStringGro
 		{
 			QString pa;
 			const double par = static_cast<double>(getParallacticAngle(core));
-			if (withDecimalDegree)
+			if (withDecimalDegreeOther)
 				pa = StelUtils::radToDecDegNarration(par);
 			else
 				pa = StelUtils::radToDmsNarration(par, false);
@@ -1940,7 +2017,7 @@ QString StelObject::getSolarLunarInfoString(const StelCore *core, const InfoStri
 	if ((core->getCurrentPlanet()==earth) && (flags&SolarLunarPosition))
 	{
 		const bool withTables = StelApp::getInstance().getFlagUseFormattingOutput();
-		const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
+		const bool withDecimalDegree = StelApp::getInstance().getFlagUseDecDegreesCoords();
 
 		if (withTables)
 			oss << "<table style='margin:0em 0em 0em -0.125em;border-spacing:0px;border:0px;'>";
@@ -1955,8 +2032,8 @@ QString StelObject::getSolarLunarInfoString(const StelCore *core, const InfoStri
 			az = (useSouthAzimuth? 2. : 3.)*M_PI - az;
 			if (az > M_PI*2)
 				az -= M_PI*2;
-			azStr  = (withDecimalDegree ? StelUtils::radToDecDegStr(az, 2)  : StelUtils::radToDmsStr(az,false));
-			altStr = (withDecimalDegree ? StelUtils::radToDecDegStr(alt, 2) : StelUtils::radToDmsStr(alt,false));
+			azStr  = (withDecimalDegree ? StelUtils::radToDecDegStr(az)  : StelUtils::radToDmsStr(az,false));
+			altStr = (withDecimalDegree ? StelUtils::radToDecDegStr(alt) : StelUtils::radToDmsStr(alt,false));
 
 			// TRANSLATORS: Azimuth/Altitude
 			const QString SolarAzAlt = (withDesignations ? qc_("Solar A/a", "celestial coordinate system") : qc_("Solar Az./Alt.", "celestial coordinate system"));
@@ -1973,8 +2050,8 @@ QString StelObject::getSolarLunarInfoString(const StelCore *core, const InfoStri
 			az = (useSouthAzimuth? 2. : 3.)*M_PI - az;
 			if (az > M_PI*2)
 				az -= M_PI*2;
-			azStr  = (withDecimalDegree ? StelUtils::radToDecDegStr(az, 2)  : StelUtils::radToDmsStr(az,false));
-			altStr = (withDecimalDegree ? StelUtils::radToDecDegStr(alt, 2) : StelUtils::radToDmsStr(alt,false));
+			azStr  = (withDecimalDegree ? StelUtils::radToDecDegStr(az)  : StelUtils::radToDmsStr(az,false));
+			altStr = (withDecimalDegree ? StelUtils::radToDecDegStr(alt) : StelUtils::radToDmsStr(alt,false));
 
 			// TRANSLATORS: Azimuth/Altitude
 			const QString LunarAzAlt = (withDesignations ? qc_("Lunar A/a", "celestial coordinate system") : qc_("Lunar Az./Alt.", "celestial coordinate system"));
@@ -2000,7 +2077,7 @@ QString StelObject::getSolarLunarNarration(const StelCore *core, const InfoStrin
 	PlanetP earth = ssystem->getEarth();
 	if ((core->getCurrentPlanet()==earth) && (flags&SolarLunarPosition))
 	{
-		const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
+		const bool withDecimalDegree = StelApp::getInstance().getFlagUseDecDegreesCoords();
 
 		const bool useSouthAzimuth = StelApp::getInstance().getFlagSouthAzimuthUsage();
 		double az, alt;
@@ -2034,5 +2111,6 @@ QString StelObject::getSolarLunarNarration(const StelCore *core, const InfoStrin
 
 QString StelObject::getNarration(const StelCore *core, const InfoStringGroup &flags) const
 {
+	Q_UNUSED(core) Q_UNUSED(flags)
 	return getNameI18n();
 }

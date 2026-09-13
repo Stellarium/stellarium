@@ -171,7 +171,6 @@ int htc20( const double jd, const int sat_no, double *xyz, double *vxyz)
    int i, n_terms = (sat_no == HTC2_TELESTO ? 6 : 12);
    const int8_t *iptr;
    const int16_t *rptr;
-   double arg1, arg2, arg3, arg4;
    const double t = jd - 2451545.;
 
    switch( sat_no)
@@ -196,10 +195,10 @@ int htc20( const double jd, const int sat_no, double *xyz, double *vxyz)
    if(vxyz)
         memset(vxyz, 0, 3*sizeof(double));
 
-   arg1 = rnu1[sat_no] * t + phi1[sat_no];
-   arg2 = rnu2[sat_no] * t + phi2[sat_no];
-   arg3 = rnu3[sat_no] * t + phi3[sat_no];
-   arg4 = rlamda[sat_no] * t + theta[sat_no];
+   const double arg1 = rnu1[sat_no] * t + phi1[sat_no];
+   const double arg2 = rnu2[sat_no] * t + phi2[sat_no];
+   const double arg3 = rnu3[sat_no] * t + phi3[sat_no];
+   const double arg4 = rlamda[sat_no] * t + theta[sat_no];
 
    while( n_terms--)
       {

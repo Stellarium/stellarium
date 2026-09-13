@@ -20,6 +20,7 @@
 #ifndef LANDSCAPE_HPP
 #define LANDSCAPE_HPP
 
+#include "StelUtils.hpp"
 #include "VecMath.hpp"
 
 #include "StelFader.hpp"
@@ -163,7 +164,7 @@ public:
 	//! e.g. by the LandscapeMgr. Contrary to that, the purpose of the azimuth rotation
 	//! (landscape/[decor_]angle_rotatez) in landscape.ini is to orient the pano.
 	//! @param d the rotation angle in degrees.
-	void setZRotation(float d) {angleRotateZOffset = d * static_cast<float>(M_PI)/180.0f;}
+	void setZRotation(float d) {angleRotateZOffset = M_PIf/180.0f * d;}
 
 	//! Get whether the landscape is currently fully visible (i.e. opaque).
 	bool getIsFullyVisible() const {return landFader.getInterstate() >= 0.999f;}

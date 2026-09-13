@@ -2,7 +2,7 @@
 # to generate manual page:
 # pod2man --section=1 -r ${VERSION} --center=" " stellarium.pod stellarium.1
 
-IF(UNIX AND NOT WIN32 AND NOT APPLE AND NOT ANDROID)
+IF(UNIX AND NOT WIN32 AND NOT MACOS AND NOT ANDROID)
      ADD_CUSTOM_TARGET(ManPages ALL
           DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/stellarium.1
      )

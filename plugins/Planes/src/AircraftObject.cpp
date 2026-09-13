@@ -201,6 +201,10 @@ QString AircraftObject::getInfoString(const StelCore* core, const InfoStringGrou
 		const bool withTables = StelApp::getInstance().getFlagUseFormattingOutput();
 		// TRANSLATORS: Unit of measure for distance - meters
 		QString m = qc_("m", "distance");
+		// TRANSLATORS: Unit of measure for distance - kilometers
+		QString km = qc_("km", "distance");
+		// TRANSLATORS: Unit of measure for distance - nautical miles
+		QString nmi = qc_("nmi", "distance");
 		// TRANSLATORS: Unit of measure for distance - feets
 		QString ft = qc_("ft", "distance");
 		// TRANSLATORS: Unit of measure for speed - meters per second
@@ -223,6 +227,17 @@ QString AircraftObject::getInfoString(const StelCore* core, const InfoStringGrou
 
 		const QString heading = QString("%1° (%2)").arg(QString::number(normalizeDegrees(currentRecord.trackDegrees), 'f', 0), qc_(headingToCompass(currentRecord.trackDegrees), "compass direction"));
 
+
+		const double slantRangeMeters = getSlantRange(core, currentRecord);
+		const QString slantRange = QString("%1 %2 (%3 %4)").arg(QString::number(slantRangeMeters / 1000.0, 'f', 1), km,
+			QString::number(slantRangeMeters / 1852.0, 'f', 1), nmi);
+
+
+		const double groundRangeMeters = getGroundRange(core, currentRecord);
+		const QString groundRange = QString("%1 %2 (%3 %4)").arg(QString::number(groundRangeMeters / 1000.0, 'f', 1), km,
+			QString::number(groundRangeMeters / 1852.0, 'f', 1), nmi);
+
+
 		const double dataAgeSeconds = getElapsedSeconds();
 		const QString dataAge = QString("%1 %2").arg(QString::number(dataAgeSeconds, 'f', dataAgeSeconds < 10.0 ? 1 : 0), s);
 
@@ -230,6 +245,8 @@ QString AircraftObject::getInfoString(const StelCore* core, const InfoStringGrou
 		{
 			stream << "<table style='margin:0em 0em 0em -0.125em;border-spacing:0px;border:0px;'>";
 			stream << QString("<tr><td>%1:</td><td style='text-align:right;'>%2</td></tr>").arg(q_("Altitude"), altitude);
+			stream << QString("<tr><td>%1:</td><td style='text-align:right;'>%2</td></tr>").arg(q_("Slant Range"), slantRange);
+			stream << QString("<tr><td>%1:</td><td style='text-align:right;'>%2</td></tr>").arg(q_("Ground Range"), groundRange);
 			stream << QString("<tr><td>%1:</td><td style='text-align:right;'>%2</td></tr>").arg(q_("Ground speed"), groundSpeed);
 			stream << QString("<tr><td>%1:</td><td style='text-align:right;'>%2</td></tr>").arg(q_("Vertical rate"), verticalRate);
 			stream << QString("<tr><td>%1:</td><td style='text-align:right;'>%2</td></tr>").arg(q_("Track"), heading);
@@ -239,6 +256,8 @@ QString AircraftObject::getInfoString(const StelCore* core, const InfoStringGrou
 		else
 		{
 			stream << QString("%1: %2<br/>").arg(q_("Altitude"), altitude);
+			stream << QString("%1: %2<br/>").arg(q_("Slant Range"), slantRange);
+			stream << QString("%1: %2<br/>").arg(q_("Ground Range"), groundRange);
 			stream << QString("%1: %2<br/>").arg(q_("Ground speed"), groundSpeed);
 			stream << QString("%1: %2<br/>").arg(q_("Vertical rate"), verticalRate);
 			stream << QString("%1: %2<br/>").arg(q_("Track"), heading);
@@ -328,6 +347,29 @@ float AircraftObject::getScreenRotationDegrees(StelCore* core, const StelProject
 
 	const double angleDeg = std::atan2(dy, dx) * 180.0 / M_PI;
 	return static_cast<float>(angleDeg + kSpriteHeadingOffsetDegrees);
+}
+
+double AircraftObject::getSlantRange(const StelCore* core, const AircraftRecord& record) const
+{
+	if (!core) return 0.0;
+
+	const StelLocation& location = core->getCurrentLocation();
+	const double obsLat = static_cast<double>(location.getLatitude()) * M_PI_180;
+	const double obsLon = static_cast<double>(location.getLongitude()) * M_PI_180;
+	const double tgtLat = record.latitude * M_PI_180;
+	const double tgtLon = record.longitude * M_PI_180;
+
+	const Vec3d observer = toEcef(obsLat, obsLon, static_cast<double>(location.altitude));
+	const Vec3d aircraft = toEcef(tgtLat, tgtLon, record.altitudeMeters);
+	return (aircraft - observer).norm();
+}
+
+double AircraftObject::getGroundRange(const StelCore* core, const AircraftRecord& record) const
+{
+	if (!core) return 0.0;
+
+	const StelLocation& location = core->getCurrentLocation();
+	return location.distanceKm(record.longitude, record.latitude) * 1000.0;
 }
 
 void AircraftObject::draw(StelCore* core, StelPainter* painter, bool drawLabels, int labelMode) const

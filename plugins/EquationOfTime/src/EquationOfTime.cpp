@@ -128,14 +128,25 @@ void EquationOfTime::draw(StelCore *core)
 	double eqTime = core->getSolutionEquationOfTime();
 
 	if (getFlagInvertedValue())
-		eqTime *= -1;
+		eqTime *= -1.;
 
 	if (getFlagMsFormat())
 	{
-		int seconds = qRound((eqTime - static_cast<int>(eqTime))*60);
-		QString messageSecondsValue = QString("%1").arg(qAbs(seconds), 2, 10, QLatin1Char('0'));
+		int minutes = qAbs(static_cast<int>(eqTime));
+		int seconds = qRound((qAbs(eqTime) - minutes)*60.);
 
-		timeText = QString("%1: %2%3%4%5%6").arg(messageEquation, (eqTime<0? QString(QLatin1Char('-')):QString()), QString::number(static_cast<int>(qAbs(eqTime))), messageEquationMinutes, messageSecondsValue, messageEquationSeconds);
+		if (seconds==60) // solution for rounding issue
+		{
+			seconds = 0;
+			minutes += 1;
+		}
+
+		QString messageSecondsValue = QString("%1").arg(seconds, 2, 10, QLatin1Char('0'));
+
+		if (minutes==0 && seconds==0) // 0m0s is always "positive"
+			timeText = QString("%1: %2%3%4%5").arg(messageEquation, QString::number(minutes), messageEquationMinutes, messageSecondsValue, messageEquationSeconds);
+		else
+			timeText = QString("%1: %2%3%4%5%6").arg(messageEquation, (eqTime<0.? QString(QLatin1Char('-')):QString()), QString::number(minutes), messageEquationMinutes, messageSecondsValue, messageEquationSeconds);
 	}
 	else
 		timeText = QString("%1: %2%3").arg(messageEquation, QString::number(eqTime, 'f', 2), messageEquationMinutes);

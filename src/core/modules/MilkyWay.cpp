@@ -204,6 +204,9 @@ void MilkyWay::setColor(const Vec3f& c)
 
 void MilkyWay::draw(StelCore* core)
 {
+	if (!core->getFlagClearSky())
+		return;
+
 	if (!fader->getInterstate())
 		return;
 

@@ -23,6 +23,7 @@
 #endif
 
 // Init statics variables.
+QtMessageHandler StelLogger::defaultMsgHandler;
 QFile StelLogger::logFile;
 QString StelLogger::log;
 QMutex StelLogger::fileMutex;
@@ -32,7 +33,7 @@ void StelLogger::init(const QString& logFilePath)
 	logFile.setFileName(logFilePath);
 
 	if (logFile.open(QIODevice::WriteOnly | QIODevice::Truncate | QIODevice::Text | QIODevice::Unbuffered))
-		qInstallMessageHandler(StelLogger::debugLogHandler);
+		defaultMsgHandler = qInstallMessageHandler(StelLogger::debugLogHandler);
 }
 
 void StelLogger::deinit()
@@ -56,7 +57,9 @@ void StelLogger::debugLogHandler(QtMsgType type, const QMessageLogContext& ctx, 
 	//always append newline
 	fmt.append(QLatin1Char('\n'));
 
-#ifdef Q_OS_WIN
+#if defined Q_OS_ANDROID
+	defaultMsgHandler(type, ctx, msg);
+#elif defined Q_OS_WIN
 	//Send debug messages to Debugger, if one is attached, instead of stderr
 	//This seems to avoid output delays in Qt Creator, allowing for easier debugging
 	//Seems to work fine with MSVC and MinGW

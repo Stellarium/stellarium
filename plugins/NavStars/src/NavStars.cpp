@@ -125,8 +125,8 @@ void NavStars::init()
 	addAction("actionShow_NavStars_dialog", N_("Navigational Stars"), N_("Show settings dialog"),        mainWindow, "visible");
 #endif
 	connect(StelApp::getInstance().getCore(), SIGNAL(configurationDataSaved()), this, SLOT(saveSettings()));
-	connect(&StelApp::getInstance(), SIGNAL(flagShowDecimalDegreesChanged(bool)), this, SLOT(setUseDecimalDegrees(bool)));
-	setUseDecimalDegrees(StelApp::getInstance().getFlagShowDecimalDegrees());
+	connect(&StelApp::getInstance(), SIGNAL(flagUseDecDegreesCoordsChanged(bool)), this, SLOT(setUseDecimalDegrees(bool)));
+	setUseDecimalDegrees(StelApp::getInstance().getFlagUseDecDegreesCoords());
 
 #ifndef NO_GUI
 	// Toolbar button
@@ -174,6 +174,8 @@ bool NavStars::configureGui(bool show)
 
 void NavStars::draw(StelCore* core)
 {
+	if (!core->getFlagClearSky())
+		return;
 	// Drawing is enabled?
 	if (markerFader.getInterstate() <= 0.0f)
 	{

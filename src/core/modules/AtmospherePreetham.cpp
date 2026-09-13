@@ -323,6 +323,7 @@ void AtmospherePreetham::computeColor(StelCore* core, const double JD, const Pla
 	float lumi=0.f;
 
 	// Compute the sky color for every point above the ground
+	if (core->getFlagClearSky())
 	for (unsigned int i=0; i<(1+skyResolutionX)*(1+skyResolutionY); ++i)
 	{
 		const Vec2f &v(posGrid[i]);
@@ -389,6 +390,8 @@ void AtmospherePreetham::computeColor(StelCore* core, const double JD, const Pla
 // Draw the atmosphere using the precalc values stored in tab_sky
 void AtmospherePreetham::draw(StelCore* core)
 {
+	if (!core->getFlagClearSky())
+		return;
 	if (StelApp::getInstance().getVisionModeNight())
 		return;
 

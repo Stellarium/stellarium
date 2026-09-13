@@ -19,7 +19,7 @@ ELSE()
 ENDIF()
 
 # install icon
-IF(APPLE)
+IF(MACOS)
 	IF(STELLARIUM_RELEASE_BUILD)
 		INSTALL(FILES stellarium.icns DESTINATION ${SDATALOC})
 	ELSE()
@@ -42,7 +42,7 @@ INSTALL(DIRECTORY shaders/ DESTINATION ${SDATALOC}/data/shaders FILES_MATCHING
 	PATTERN "s3d_*.frag")
 ENDIF()
 
-IF(UNIX AND NOT APPLE)
+IF(UNIX AND NOT MACOS)
 	INSTALL(FILES org.stellarium.Stellarium.desktop DESTINATION share/applications)
 	INSTALL(FILES org.stellarium.Stellarium.appdata.xml DESTINATION share/metainfo)
 	INSTALL(FILES stellarium.xml DESTINATION share/mime/packages)

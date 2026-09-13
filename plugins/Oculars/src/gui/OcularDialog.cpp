@@ -319,6 +319,7 @@ void OcularDialog::createDialogContent()
 	connectIntProperty(ui->transparencySpinBox,			"Oculars.transparencyMask");
 	connectBoolProperty(ui->checkBoxDMSDegrees,		"Oculars.flagDMSDegrees");
 	connectBoolProperty(ui->checkBoxHorizontalCoordinates,	"Oculars.flagHorizontalCoordinates");
+	connectBoolProperty(ui->checkBoxCCDCenter,			"Oculars.flagShowCCDCenter");
 	connectBoolProperty(ui->checkBoxTypeOfMount,		"Oculars.flagAutosetMountForCCD");
 	connectBoolProperty(ui->checkBoxTelradFOVScaling,		"Oculars.flagScalingFOVForTelrad");
 	connectBoolProperty(ui->checkBoxCCDFOVScaling,		"Oculars.flagScalingFOVForCCD");
@@ -339,6 +340,7 @@ void OcularDialog::createDialogContent()
 	connectBoolProperty(ui->checkBoxShowOAGLimits,		"Oculars.flagShowOAGLimits");
 	ui->textColorToolButton->setup("Oculars.textColor", "text_color", "Oculars");
 	ui->lineColorToolButton->setup("Oculars.lineColor", "line_color", "Oculars");
+	ui->reticleColorToolButton->setup("Oculars.reticleColor", "reticle_color", "Oculars");
 	ui->focuserColorToolButton->setup("Oculars.focuserColor", "focuser_color", "Oculars");
 
 	setupTelradFOVspins(plugin->getTelradFOV());

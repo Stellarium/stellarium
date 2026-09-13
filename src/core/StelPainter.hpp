@@ -26,6 +26,7 @@
 #include "StelSphereGeometry.hpp"
 #include "StelProjectorType.hpp"
 #include "StelTextureTypes.hpp"
+#include "StelUtils.hpp"
 #include <QString>
 #include <QVarLengthArray>
 #include <QFontMetrics>
@@ -206,7 +207,7 @@ public:
 	//!        bottomAngle = 95 degrees = 95*M_PI/180.0f
 	void sSphere(const double radius, const double oneMinusOblateness, const unsigned int slices, const unsigned int stacks,
 		     const bool orientInside = false, const bool flipTexture = false,
-		     const float topAngle = 0.0f, const float bottomAngle = static_cast<float>(M_PI));
+		     const float topAngle = 0.0f, const float bottomAngle = M_PIf);
 
 	//! Generate a StelVertexArray for a sphere.
 	//! @param radius
@@ -221,7 +222,7 @@ public:
 	//!        region around the bottom pole, like South Galactic Pole.
 	static StelVertexArray computeSphereNoLight(double radius, double oneMinusOblateness, unsigned int slices, unsigned int stacks,
 			    int orientInside = 0, bool flipTexture = false,
-			    float topAngle=0.0f, float bottomAngle=static_cast<float>(M_PI));
+			    float topAngle=0.0f, float bottomAngle = M_PIf);
 
 	//! Re-implementation of gluCylinder : glu is overridden for non-standard projection.
 	void sCylinder(double radius, double height, int slices, int orientInside = 0);
@@ -237,7 +238,7 @@ public:
 	static void computeFanDisk(float radius, uint innerFanSlices, uint level, QVector<Vec3d>& vertexArr, QVector<Vec2f>& texCoordArr);
 
 	//! Draw a fisheye texture in a sphere.
-	void sSphereMap(double radius, unsigned int slices, unsigned int stacks, float textureFov = 2.f*static_cast<float>(M_PI), int orientInside = 0);
+	void sSphereMap(double radius, unsigned int slices, unsigned int stacks, float textureFov = 2.f*M_PIf, int orientInside = 0);
 
 	//! Set the font to use for subsequent text drawing.
 	void setFont(const QFont& font);
@@ -285,6 +286,13 @@ public:
 	//! Sets the color saturation effect value, from 0 (grayscale) to 1 (no effect).
 	void setSaturation(float v) { saturation = v; }
 
+	//! Sets texture color adjustment for subsequent simple textured draws.
+	void setTextureDisplayAdjustment(float gamma, float saturation, float brightness,
+	                                 float contrast, int colorChannel, bool invertedColors,
+	                                 bool premultiplyAlpha, float alpha = 1.f);
+	//! Restores neutral texture color adjustment for subsequent simple textured draws.
+	void resetTextureDisplayAdjustment();
+
 	//! Create the OpenGL shaders programs used by the StelPainter.
 	//! This method needs to be called once at init.
 	static void initGLShaders();
@@ -323,6 +331,7 @@ public:
 	//! convenience method that enable and set all the given arrays.
 	//! It is equivalent to calling enableClientStates() and set the array pointer for each array.
 	void setArrays(const Vec3d* vertices, const Vec2f* texCoords=Q_NULLPTR, const Vec3f* colorArray=Q_NULLPTR, const Vec3f* normalArray=Q_NULLPTR);
+	void setArrays(const Vec3d* vertices, const Vec2f* texCoords, const Vec4f* colorArray, const Vec3f* normalArray=Q_NULLPTR);
 	void setArrays(const Vec3f* vertices, const Vec2f* texCoords=Q_NULLPTR, const Vec3f* colorArray=Q_NULLPTR, const Vec3f* normalArray=Q_NULLPTR);
 
 	//! Draws primitives using vertices from the arrays specified by setArrays() or enabled via enableClientStates().
@@ -435,6 +444,15 @@ private:
 	Vec4f currentColor;
 	//! Saturation effect adjustment.
 	float saturation = 1.f;
+	float textureGamma = 1.f;
+	float textureSaturation = 1.f;
+	float textureBrightness = 1.f;
+	float textureContrast = 1.f;
+	int textureColorChannel = 0;
+	bool textureInvertedColors = false;
+	bool texturePremultiplyAlpha = false;
+	float textureAlpha = 1.f;
+	bool hasTextureDisplayAdjustment() const;
 
 	static QOpenGLShaderProgram* basicShaderProgram;
 	struct BasicShaderVars {
@@ -464,8 +482,17 @@ private:
 		int vertex;
 		int texColor;
 		int texture;
+		int gamma;
+		int saturation;
+		int brightness;
+		int contrast;
+		int colorChannel;
+		int invertedColors;
+		int premultiplyAlpha;
 	};
 	static TexturesShaderVars texturesShaderVars;
+	static QOpenGLShaderProgram* adjustedTexturesShaderProgram;
+	static TexturesShaderVars adjustedTexturesShaderVars;
 	static QOpenGLShaderProgram* texturesColorShaderProgram;
 	struct TexturesColorShaderVars {
 		int projectionMatrix;
@@ -474,6 +501,13 @@ private:
 		int color;
 		int texture;
 		int saturation;
+		int gamma;
+		int brightness;
+		int contrast;
+		int colorChannel;
+		int invertedColors;
+		int premultiplyAlpha;
+		int alpha;
 	};
 	static TexturesColorShaderVars texturesColorShaderVars;
 
@@ -510,4 +544,3 @@ private:
 };
 
 #endif // STELPAINTER_HPP
-

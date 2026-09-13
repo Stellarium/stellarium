@@ -57,6 +57,7 @@ extern "C" {
 
 #define MARS_SAT_PHOBOS 0
 #define MARS_SAT_DEIMOS 1
+#define MARS_SAT_COUNT 2
 
 void GetMarsSatCoor(double jd, int body, double *xyz, double *xyzdot);
   /* Return the rectangular coordinates and speed of the given satellite

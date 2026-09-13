@@ -36,7 +36,7 @@ SimbadLookupReply::SimbadLookupReply(const QString& aurl, QNetworkAccessManager*
 	else
 	{
 		// First wait before starting query. This avoids sending a query for each autocompletion letter.
-		QTimer::singleShot(delayMs, this, SLOT(delayTimerCompleted()));
+		QTimer::singleShot(delayMs, this, &SimbadLookupReply::delayTimerCompleted);
 	}
 }
 
@@ -44,7 +44,7 @@ SimbadLookupReply::~SimbadLookupReply()
 {
 	if (reply)
 	{
-		disconnect(reply, SIGNAL(finished()), this, SLOT(httpQueryFinished()));
+		disconnect(reply, &QNetworkReply::finished, this, &SimbadLookupReply::httpQueryFinished);
 		reply->abort();
 		//do not use delete here
 		reply->deleteLater();
@@ -57,7 +57,7 @@ void SimbadLookupReply::deleteNetworkReply()
 {
 	if(reply)
 	{
-		disconnect(reply, SIGNAL(finished()), this, SLOT(httpQueryFinished()));
+		disconnect(reply, &QNetworkReply::finished, this, &SimbadLookupReply::httpQueryFinished);
 		reply->abort();
 		delete reply;
 		reply = Q_NULLPTR;
@@ -67,7 +67,7 @@ void SimbadLookupReply::deleteNetworkReply()
 void SimbadLookupReply::delayTimerCompleted()
 {
 	reply = netMgr->get(QNetworkRequest(url));
-	connect(reply, SIGNAL(finished()), this, SLOT(httpQueryFinished()));
+	connect(reply, &QNetworkReply::finished, this, &SimbadLookupReply::httpQueryFinished);
 }
 
 void SimbadLookupReply::httpQueryFinished()

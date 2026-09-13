@@ -174,9 +174,12 @@ void TelescopeConfigurationDialog::createDialogContent()
 
 	connect(ui->comboBoxDeviceModel, SIGNAL(currentIndexChanged(int)), this, SLOT(deviceModelSelected(int)));
 
+	connect(ui->radioButtonNetworkConnection, SIGNAL(toggled(bool)), this, SLOT(toggleDeviceConnectionMedium(bool)));
+
 	// Setting validators
 	ui->lineEditTelescopeName->setValidator(telescopeNameValidator);
 	ui->lineEditHostName->setValidator(hostNameValidator);
+	ui->lineEditDeviceHost->setValidator(hostNameValidator);
 	ui->lineEditCircleList->setValidator(circleListValidator);
 	ui->comboSerialPort->setValidator(serialPortValidator);
 
@@ -321,13 +324,27 @@ void TelescopeConfigurationDialog::initExistingTelescopeConfiguration(int slot)
 		else
 			ui->comboBoxDeviceModel->setCurrentIndex(index);
 
-		// Initialize the serial port value
+		// A directly-connected device uses either a serial port or a network
+		// (TCP/IP) connection. An empty serial port with a host name stored
+		// means the LX200 protocol is spoken over TCP.
+		if (serialPortName.isEmpty() && !host.isEmpty())
+		{
+			ui->radioButtonNetworkConnection->setChecked(true);
+			ui->lineEditDeviceHost->setText(host);
+			ui->spinBoxDevicePort->setValue(portTCP);
+		}
+		else
+		{
+			ui->radioButtonSerialConnection->setChecked(true);
+			// Initialize the serial port value
 #if (QT_VERSION>=QT_VERSION_CHECK(5,14,0))
-		emit ui->comboSerialPort->textActivated(serialPortName);
+			emit ui->comboSerialPort->textActivated(serialPortName);
 #else
-		ui->comboSerialPort->activated(serialPortName);
+			ui->comboSerialPort->activated(serialPortName);
 #endif
-		ui->comboSerialPort->setEditText(serialPortName);
+			ui->comboSerialPort->setEditText(serialPortName);
+		}
+		updateDeviceConnectionMediumState();
 	}
 	else if (connectionType == TelescopeControl::ConnectionRemote)
 	{
@@ -413,6 +430,10 @@ void TelescopeConfigurationDialog::toggleTypeLocal(bool isChecked)
 		ui->lineEditHostName->setText("localhost");
 		ui->spinBoxTCPPort->setValue(DEFAULT_TCP_PORT_FOR_SLOT(configuredSlot));
 
+		// Default a directly-connected device to the serial port medium
+		ui->radioButtonSerialConnection->setChecked(true);
+		updateDeviceConnectionMediumState();
+
 		ui->groupBoxDeviceSettings->show();
 
 		ui->scrollArea->ensureWidgetVisible(ui->groupBoxTelescopeProperties);
@@ -421,6 +442,38 @@ void TelescopeConfigurationDialog::toggleTypeLocal(bool isChecked)
 	{
 		ui->groupBoxDeviceSettings->hide();
 	}
+}
+
+bool TelescopeConfigurationDialog::currentDeviceModelSupportsNetwork() const
+{
+	const QString deviceModelName = ui->comboBoxDeviceModel->currentText();
+	// Only the LX200 (or compatible) protocol is supported over TCP/IP so far.
+	return telescopeManager->getDeviceModels().value(deviceModelName).server == QLatin1String("TelescopeServerLx200");
+}
+
+void TelescopeConfigurationDialog::updateDeviceConnectionMediumState()
+{
+	const bool networkSupported = currentDeviceModelSupportsNetwork();
+	ui->radioButtonNetworkConnection->setEnabled(networkSupported);
+	// If the selected device model cannot be reached over the network, fall
+	// back to the serial port medium.
+	if (!networkSupported && ui->radioButtonNetworkConnection->isChecked())
+		ui->radioButtonSerialConnection->setChecked(true);
+
+	const bool network = networkSupported && ui->radioButtonNetworkConnection->isChecked();
+
+	ui->labelSerialPort->setVisible(!network);
+	ui->comboSerialPort->setVisible(!network);
+	ui->labelDeviceHost->setVisible(network);
+	ui->lineEditDeviceHost->setVisible(network);
+	ui->labelDevicePort->setVisible(network);
+	ui->spinBoxDevicePort->setVisible(network);
+}
+
+void TelescopeConfigurationDialog::toggleDeviceConnectionMedium(bool networkChecked)
+{
+	Q_UNUSED(networkChecked)
+	updateDeviceConnectionMediumState();
 }
 
 void TelescopeConfigurationDialog::toggleTypeConnection(bool isChecked)
@@ -525,11 +578,26 @@ void TelescopeConfigurationDialog::buttonSavePressed()
 	TelescopeControl::ConnectionType type = TelescopeControl::ConnectionNA;
 	if (ui->radioButtonTelescopeLocal->isChecked())
 	{
-		// Read the serial port
-		QString serialPortName = ui->comboSerialPort->currentText();
 		type = TelescopeControl::ConnectionInternal;
-		telescopeManager->addTelescopeAtSlot(configuredSlot, type, name, equinox, host, portTCP, delay,
-		  connectAtStartup, circles, ui->comboBoxDeviceModel->currentText(), serialPortName);
+		if (ui->radioButtonNetworkConnection->isChecked() && currentDeviceModelSupportsNetwork())
+		{
+			// Directly connected over TCP/IP (LX200 protocol over the network)
+			QString deviceHost = ui->lineEditDeviceHost->text().trimmed();
+			if (deviceHost.isEmpty())
+				return;
+			int devicePort = ui->spinBoxDevicePort->value();
+			// Pass an empty serial port so the slot is stored/started as a
+			// network connection.
+			telescopeManager->addTelescopeAtSlot(configuredSlot, type, name, equinox, deviceHost, devicePort, delay,
+			  connectAtStartup, circles, ui->comboBoxDeviceModel->currentText(), QString());
+		}
+		else
+		{
+			// Read the serial port
+			QString serialPortName = ui->comboSerialPort->currentText();
+			telescopeManager->addTelescopeAtSlot(configuredSlot, type, name, equinox, host, portTCP, delay,
+			  connectAtStartup, circles, ui->comboBoxDeviceModel->currentText(), serialPortName);
+		}
 	}
 	else if (ui->radioButtonTelescopeConnection->isChecked())
 	{
@@ -586,4 +654,7 @@ void TelescopeConfigurationDialog::deviceModelSelected(int modelIndex)
 	  q_(telescopeManager->getDeviceModels().value(deviceModelName).description));
 	ui->doubleSpinBoxTelescopeDelay->setValue(
 	  SECONDS_FROM_MICROSECONDS(telescopeManager->getDeviceModels().value(deviceModelName).defaultDelay));
+
+	// The serial/network choice depends on the selected device model
+	updateDeviceConnectionMediumState();
 }

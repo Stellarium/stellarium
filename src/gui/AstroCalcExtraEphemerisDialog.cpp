@@ -47,14 +47,14 @@ void AstroCalcExtraEphemerisDialog::createDialogContent()
 	ui->setupUi(dialog);
 
 	//Signals and slots
-	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
+	connect(&StelApp::getInstance(), &StelApp::languageChanged, this, &AstroCalcExtraEphemerisDialog::retranslate);
 	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
-	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
-	connect(ui->skipDataCheckBox, SIGNAL(clicked()), this, SLOT(setOptionStatus()));
-	connect(ui->smartDatesRadio,  SIGNAL(toggled(bool)), this, SLOT(setOptionStatus()));
-	connect(ui->customDateRadio,  SIGNAL(toggled(bool)), this, SLOT(setOptionStatus()));
-	connect(ui->firstOfMonthOnlyCheckBox, SIGNAL(toggled(bool)), this, SLOT(setOptionStatus()));
-	connect(ui->antiClutterCheckBox, SIGNAL(toggled(bool)), this, SLOT(setOptionStatus()));
+	connect(ui->titleBar, &TitleBar::movedTo,      this, &AstroCalcExtraEphemerisDialog::handleMovedTo);
+	connect(ui->skipDataCheckBox, &QCheckBox::clicked, this, &AstroCalcExtraEphemerisDialog::setOptionStatus);
+	connect(ui->smartDatesRadio,  &QRadioButton::toggled, this, &AstroCalcExtraEphemerisDialog::setOptionStatus);
+	connect(ui->customDateRadio,  &QRadioButton::toggled, this, &AstroCalcExtraEphemerisDialog::setOptionStatus);
+	connect(ui->firstOfMonthOnlyCheckBox, &QCheckBox::toggled, this, &AstroCalcExtraEphemerisDialog::setOptionStatus);
+	connect(ui->antiClutterCheckBox, &QCheckBox::toggled, this, &AstroCalcExtraEphemerisDialog::setOptionStatus);
 
 	connectBoolProperty(ui->skipDataCheckBox,	"SolarSystem.ephemerisSkippedData");
 	connectBoolProperty(ui->skipMarkersCheckBox,	"SolarSystem.ephemerisSkippedMarkers");

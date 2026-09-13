@@ -25,6 +25,7 @@
 #define SCM_SKYCULTURE_HPP
 
 #include "ScmConstellation.hpp"
+#include "types/ScmCulturalName.hpp"
 #include "StelCore.hpp"
 #include "StelSkyCultureMgr.hpp"
 #include "types/Classification.hpp"
@@ -36,6 +37,8 @@
 #include <vector>
 #include <QFile>
 #include <QJsonObject>
+#include <QList>
+#include <QMap>
 #include <QObject>
 #include <QString>
 
@@ -52,12 +55,6 @@ public:
 	 * @brief Gets the id of the sky culture.
 	 */
 	const QString &getId() const;
-
-	/// Sets the start time of the sky culture
-	void setBeginTime(int beginTime);
-
-	/// Sets the end time of the sky culture
-	void setEndTime(int endTime);
 
 	/// Sets whether to show common names in addition to the culture-specific ones
 	void setFallbackToInternationalNames(bool fallback);
@@ -78,6 +75,27 @@ public:
 
 	/// Gets a constellation from the sky culture by its ID
 	ScmConstellation *getConstellation(const QString &id);
+
+	/**
+	 * @brief Gets a constellation from the sky culture by its English (translated) name.
+	 *
+	 * The comparison is case-insensitive and ignores non-alphanumeric symbols
+	 * (e.g. apostrophes, punctuation) so that e.g. "Orion's Belt" matches
+	 * "Orions Belt".
+	 *
+	 * @param englishName The English name to match.
+	 * @return Pointer to the matching constellation, or nullptr if none matches.
+	 */
+	ScmConstellation *getConstellationByEnglishName(const QString &englishName);
+
+	/**
+	 * @brief Gets a constellation from the sky culture by its display name, i.e. the
+	 *        translated name followed by the id, e.g. "The Market (tianquiztli)".
+	 *
+	 * @param displayName The display name to match.
+	 * @return Pointer to the matching constellation, or nullptr if none matches.
+	 */
+	ScmConstellation *getConstellationByDisplayName(const QString &displayName);
 
 	/// Returns a pointer to the constellations of the sky culture
 	/// Constellations are held as unique pointers, so the addresses
@@ -108,6 +126,13 @@ public:
 	void setDescription(const scm::Description &description);
 
 	/**
+	 * @brief Sets the cultural names of stars, planets DSOs of the sky culture.
+	 * The map key is the object identifier (e.g. "HIP 1234", "NAME Venus", "M 31").
+	 * @param culturalNames Map of cultural names to set.
+	 */
+	void setCulturalNames(const QMap<QString, QList<ScmCulturalName>> &culturalNames);
+
+	/**
 	 * @brief Saves the current sky culture description as markdown text.
 	 * @param file The file to save the description to.
 	 * @return true if the description was saved successfully, false otherwise.
@@ -128,6 +153,26 @@ public:
 	*/
 	void mergeLocations();
 
+	/**
+	 * @brief Returns the description of the sky culture.
+	 */
+	const scm::Description &getDescription() const;
+
+	/**
+	 * @brief Returns the cultural names map of the sky culture.
+	 */
+	const QMap<QString, QList<ScmCulturalName>> &getCulturalNames() const;
+
+	/**
+	 * @brief Returns the geographic locations of the sky culture.
+	 */
+	const QList<CulturePolygon> &getLocations() const;
+
+	/**
+	 * @brief Returns whether to fall back to international names when culture-specific names are absent.
+	 */
+	bool getFallbackToInternationalNames() const;
+
 private:
 	/// Sky culture identifier
 	QString id;
@@ -141,14 +186,12 @@ private:
 	/// The description of the sky culture
 	scm::Description description;
 
+	/// The cultural names of stars, planets DSOs of the sky culture.
+	/// Key: object identifier (e.g. "HIP 1234", "NAME Venus", "M 31").
+	QMap<QString, QList<ScmCulturalName>> culturalNames;
+
 	/// The geographical location (as polygons) of the sky culture
 	QList<CulturePolygon> locations;
-
-	/// The earliest year associated with a territory of the sky culture
-	int beginTime;
-
-	/// The latest year associated with a territory of the sky culture
-	int endTime;
 
 	/**
 	 * @brief Evaluates which action shoud be taken after a merge operation and updates the respective location.

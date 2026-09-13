@@ -129,45 +129,6 @@ private:
 	}
 };
 
-double sqr(double x) { return x*x; }
-
-/*
-   R1,R2 - radii of the circles
-   d - distance between centers of the circles
-   returns area of intersection of these circles
- */
-double circlesIntersectionArea(double R1, double R2, double d)
-{
-	using namespace std;
-	if(d+min(R1,R2)<max(R1,R2)) return M_PI*sqr(min(R1,R2));
-	if(d>=R1+R2) return 0;
-
-	// Return area of the lens with radii R1 and R2 and offset d
-	return sqr(R1)*acos(clamp( (sqr(d)+sqr(R1)-sqr(R2))/(2*d*R1) ,-1.,1.)) +
-	       sqr(R2)*acos(clamp( (sqr(d)+sqr(R2)-sqr(R1))/(2*d*R2) ,-1.,1.)) -
-	       0.5*sqrt(max( (-d+R1+R2)*(d+R1-R2)*(d-R1+R2)*(d+R1+R2) ,0.));
-}
-
-double visibleSolidAngleOfSun(const double sunAngularRadius, const double moonAngularRadius, const double angleBetweenSunAndMoon)
-{
-	const double Rs = sunAngularRadius;
-	const double Rm = moonAngularRadius;
-	double visibleSolidAngle = M_PI*sqr(Rs);
-
-	const double dSM = angleBetweenSunAndMoon;
-	if(dSM < Rs+Rm)
-	{
-		visibleSolidAngle -= circlesIntersectionArea(Rm,Rs,dSM);
-	}
-
-	return visibleSolidAngle;
-}
-
-double sunVisibilityDueToMoon(const double sunAngularRadius, const double moonAngularRadius, const double angleBetweenSunAndMoon)
-{
-	return visibleSolidAngleOfSun(sunAngularRadius, moonAngularRadius, angleBetweenSunAndMoon)/(M_PI*sqr(sunAngularRadius));
-}
-
 constexpr GLuint SKY_VERTEX_ATTRIB_INDEX=0;
 }
 
@@ -320,8 +281,8 @@ void AtmosphereShowMySky::resizeRenderTarget(int width, int height)
 	const int physWidth = width/atmoRes;
 	const int physHeight = height/atmoRes;
 	renderer_->resizeEvent(physWidth, physHeight);
-	textureAverager_.reset(new TextureAverageComputer(*StelOpenGL::highGraphicsFunctions(),
-	                                                  physWidth, physHeight, GL_RGBA32F));
+	textureAverager_.reset(new TextureAverageComputer(StelOpenGL::highGraphicsFunctions(),
+	                                                  physWidth, physHeight, GL_RGBA32F, true));
 
 	prevWidth_=width;
 	prevHeight_=height;
@@ -743,7 +704,7 @@ void AtmosphereShowMySky::computeColor(StelCore* core, const double JD, const Pl
 			const double moonAngularRadius = atan(moon->getEquatorialRadius()/moonPos.norm());
 			const double separationAngle = std::acos(sunDir.dot(moonDir));  // angle between them
 
-			sunVisibility_ = sunVisibilityDueToMoon(sunAngularRadius, moonAngularRadius, separationAngle);
+			sunVisibility_ = StelUtils::sunVisibilityDueToMoon(sunAngularRadius, moonAngularRadius, separationAngle);
 			const double min = 0.0025; // the sky still glows during the totality
 			eclipseFactor = static_cast<float>(min + (1-min)*sunVisibility_);
 
@@ -758,7 +719,7 @@ void AtmosphereShowMySky::computeColor(StelCore* core, const double JD, const Pl
 		// TODO: compute eclipse factor also for Lunar eclipses! (lp:#1471546)
 
 		// No need to calculate if not visible
-		if (!fader.getInterstate())
+		if (!fader.getInterstate() || !core->getFlagClearSky())
 		{
 			// GZ 20180114: Why did we add light pollution if atmosphere was not visible?????
 			// And what is the meaning of 0.001? Approximate contribution of stellar background? Then why is it 0.0001 below???
@@ -800,6 +761,8 @@ void AtmosphereShowMySky::computeColor(StelCore* core, const double JD, const Pl
 void AtmosphereShowMySky::draw(StelCore* core)
 {
 	StelOpenGL::checkGLErrors(__FILE__,__LINE__);
+	if (!core->getFlagClearSky())
+		return;
 	if (StelApp::getInstance().getVisionModeNight())
 		return;
 

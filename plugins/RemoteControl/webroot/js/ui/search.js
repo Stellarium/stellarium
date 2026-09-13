@@ -79,11 +79,11 @@ define(["jquery", "api/remotecontrol", "api/search", "./combobox"], function($, 
     // Add culture-specific object types to the dropdown
     function addCultureSpecificOptions() {
         var cultureTypes = [
-            { key: "CULTURE_CONSTELLATIONS", name: _tr("Culture Constellations") },
-            { key: "CULTURE_ASTERISMS", name: _tr("Culture Asterisms") },
-            { key: "CULTURE_ZODIAC", name: _tr("Culture Zodiac Signs") },
-            { key: "CULTURE_LUNAR", name: _tr("Culture Lunar Mansions") },
-            { key: "CULTURE_STARS", name: _tr("Culture Notable Stars") }
+            { key: "CULTURE_CONSTELLATIONS", name: rc.tr("Culture Constellations") },
+            { key: "CULTURE_ASTERISMS", name: rc.tr("Culture Asterisms") },
+            { key: "CULTURE_ZODIAC", name: rc.tr("Culture Zodiac Signs") },
+            { key: "CULTURE_LUNAR", name: rc.tr("Culture Lunar Mansions") },
+            { key: "CULTURE_STARS", name: rc.tr("Culture Notable Stars") }
         ];
 
         var useEnglish = $srch_list_english[0].checked;

@@ -230,7 +230,8 @@ public slots:
 
 	// 14.3 The Day
 	//! @return equation of time in fractions of a day
-	//! @note We use functions from Stellarium instead of the functions from CC:UE 14.20.
+	//! @note We use functions from Stellarium and Meeus, Astronomical Algorithms 2nd ed. 28.3, instead of the very similar functions from CC:UE 14.20.
+	//! @note This introduces a slight deviation from StelCore::getSolutionEquationOfTime() which is more accurate.
 	static double equationOfTime(double rd_ut);
 	//! @return moment (RD in local mean solar time) corrected by equation of time (CC:UE 14.21)
 	static double apparentFromLocal(double rd_local_mean, const StelLocation &loc=StelApp::getInstance().getCore()->getCurrentLocation());

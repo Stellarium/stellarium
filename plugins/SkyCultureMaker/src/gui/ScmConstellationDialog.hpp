@@ -113,11 +113,6 @@ private:
 	void saveConstellation();
 
 	/**
-	 * @brief Resets and closes the dialog.
-	 */
-	void cancel();
-
-	/**
 	 * @brief Updates the state of the artwork.
 	 */
 	void updateArtwork();

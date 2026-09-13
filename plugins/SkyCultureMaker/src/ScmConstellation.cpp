@@ -205,8 +205,13 @@ bool scm::ScmConstellation::saveArtwork(const QString &directory)
 		return true; // Not an error just a warning
 	}
 
-	QString filename = id.split(" ").back(); // Last part of id as usually used as the illustrations name
-	QString filepath = directory + QDir::separator() + filename + ".png"; // Write every illustrations as png
+	QString filename = artwork.getSourceImageFileName();
+	if (filename.isEmpty())
+	{
+		// Fall back to the last part of the id, as usually used as the illustrations name
+		filename = id.split(" ").back() + ".png";
+	}
+	QString filepath = directory + QDir::separator() + filename; // Keep the original file name when available
 	artworkPath      = filepath;
 	return artwork.save(filepath);
 }

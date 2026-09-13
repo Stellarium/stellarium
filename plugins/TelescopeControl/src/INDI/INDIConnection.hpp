@@ -23,6 +23,10 @@
 #include <libindi/baseclient.h>
 #include <libindi/basedevice.h>
 
+#ifdef J2000
+#undef J2000
+#endif
+
 #include <mutex>
 #include <QStringList>
 

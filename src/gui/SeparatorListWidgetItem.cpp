@@ -14,13 +14,14 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
  */
 
 #include "SeparatorListWidgetItem.hpp"
 
-SeparatorListWidgetItem::SeparatorListWidgetItem(const QString &text, QListWidget *parent)
+SeparatorListWidgetItem::SeparatorListWidgetItem(const QString &text, const QString &regionKey, QListWidget *parent)
 	: QListWidgetItem(parent, 1318)
+	, m_regionKey(regionKey)
 {
 	setFlags(Qt::NoItemFlags);
 	setTextAlignment(Qt::AlignCenter);

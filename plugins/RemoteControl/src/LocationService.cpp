@@ -58,7 +58,9 @@ void LocationService::get(const QByteArray& operation, const APIParameters &para
 	{
 		const StelTranslator& trans = *StelTranslator::globalTranslator;
 
-		QStringList allRegions = StelApp::getInstance().getLocationMgr().getRegionNames();
+		// Read and use the planet parameter
+		QString planet = parameters.value("planet",  "");
+		QStringList allRegions = StelApp::getInstance().getLocationMgr().getRegionNames(planet);
 		QJsonArray list;
 		for (const auto &str : std::as_const(allRegions))
 		{
@@ -116,7 +118,7 @@ void LocationService::get(const QByteArray& operation, const APIParameters &para
 	else
 	{
 		//TODO some sort of service description?
-		response.writeRequestError("unsupported operation. GET: list, countrylist, planetlist, planetimage");
+		response.writeRequestError("unsupported operation. GET: list, regionlist, planetlist, planetimage");
 	}
 }
 

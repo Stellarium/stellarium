@@ -58,6 +58,13 @@
 #include <QFileOpenEvent>
 #endif
 
+#ifdef Q_OS_ANDROID
+#include <QJniObject>
+#include <QJniEnvironment>
+#include <QtCore/private/qjnihelpers_p.h>
+#include <QtCore/private/qandroidextras_p.h>
+#endif
+
 #include <clocale>
 
 #ifdef Q_OS_WIN
@@ -181,6 +188,7 @@ int main(int argc, char **argv)
 	QCoreApplication::setApplicationVersion(StelUtils::getApplicationPublicVersion());
 	QCoreApplication::setOrganizationDomain("stellarium.org");
 	QCoreApplication::setOrganizationName("stellarium");
+	QGuiApplication::setDesktopFileName("org.stellarium.Stellarium");
 
 	QCoreApplication::setAttribute(Qt::AA_CompressHighFrequencyEvents);
 	// Support high DPI pixmaps and fonts
@@ -223,6 +231,21 @@ int main(int argc, char **argv)
 	// we need scanf()/printf() and friends to always work in the C locale,
 	// otherwise configuration/INI file parsing will be erroneous.
 	setlocale(LC_NUMERIC, "C");
+
+#ifdef Q_OS_ANDROID
+	if (!QJniObject::callStaticMethod<jboolean>("android/os/Environment", "isExternalStorageManager"))
+	{
+		QJniEnvironment env;
+		QJniObject activity = QtAndroidPrivate::activity();
+		jclass android_content_Context =env->GetObjectClass(activity.object());
+		jmethodID midGetPackageName = env->GetMethodID(android_content_Context,"getPackageName", "()Ljava/lang/String;");
+		QJniObject packageName= env->CallObjectMethod(activity.object(), midGetPackageName);
+		QJniObject filepermit = QJniObject::getStaticObjectField( "android/provider/Settings", "ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION","Ljava/lang/String;" );
+		QJniObject parsedUri  = QJniObject::callStaticObjectMethod("android/net/Uri", "parse", "(Ljava/lang/String;)Landroid/net/Uri;", QJniObject::fromString("package:"+packageName.toString()).object());
+		QJniObject intent("android/content/Intent", "(Ljava/lang/String;Landroid/net/Uri;)V", filepermit.object<jstring>(), parsedUri.object());
+		QtAndroidPrivate::startActivity(intent, 0);
+	}
+#endif
 
 	// Init the file manager
 	StelFileMgr::init();
@@ -289,7 +312,7 @@ int main(int argc, char **argv)
 	int n=0;
 	for (const auto& i : StelFileMgr::getSearchPaths())
 	{
-		qInfo().noquote().nospace() << " [" << n << "]: " << QDir::toNativeSeparators(i);
+		qInfo().noquote().nospace() << "- [" << n << "]: " << QDir::toNativeSeparators(i);
 		++n;
 	}
 
@@ -455,14 +478,9 @@ int main(int argc, char **argv)
 
 	const auto virtSize = QSize(confSettings->value("video/screen_w", screenGeom.width()).toInt(),
 								confSettings->value("video/screen_h", screenGeom.height()).toInt());
-#ifdef Q_OS_WIN
-	const auto size = QSize(std::lround(virtSize.width()),
-				    std::lround(virtSize.height()));
-#else
 	const auto pixelRatio = qscreen->devicePixelRatio();
 	const auto size = QSize(std::lround(virtSize.width()/pixelRatio),
 				    std::lround(virtSize.height()/pixelRatio));
-#endif
 	mainWin.resize(size);
 
 	const bool fullscreen = confSettings->value("video/fullscreen", true).toBool();
@@ -480,13 +498,8 @@ int main(int argc, char **argv)
 	{
 		const int x = confSettings->value("video/screen_x", 0).toInt();
 		const int y = confSettings->value("video/screen_y", 0).toInt();
-#ifdef Q_OS_WIN
-		mainWin.move(screenGeom.x() + x,
-			     screenGeom.y() + y);
-#else
 		mainWin.move(screenGeom.x() + x/pixelRatio,
 			     screenGeom.y() + y/pixelRatio);
-#endif
 	}
 
 	mainWin.show();

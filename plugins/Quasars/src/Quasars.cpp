@@ -234,6 +234,9 @@ void Quasars::init()
 */
 void Quasars::draw(StelCore* core)
 {
+	if (!core->getFlagClearSky())
+		return;
+
 	if (!flagShowQuasars)
 		return;
 

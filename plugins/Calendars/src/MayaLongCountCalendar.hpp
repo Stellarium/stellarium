@@ -55,7 +55,11 @@ public slots:
 	static QVector<int>mayaLongCountFromFixed(int rd);
 
 public:
-	static const long int mayanEpoch;
+	//! This number used to be fixed at 584283 in the RD book.
+	//! It is the correlation between JD and Maya Long Count 0.0.0.0.0 (or 13.0.0.0.0) 4 Ahau 8 Cumku.
+	//! However, since the 20th century many correlation figures have been discussed,
+	//! so it's now user configurable.
+	static long int mayanEpoch;
 };
 
 #endif

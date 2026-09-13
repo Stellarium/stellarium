@@ -81,34 +81,33 @@ StelMainScriptAPI::StelMainScriptAPI(QObject *parent) : QObject(parent)
 {
 	if(StelSkyLayerMgr* smgr = GETSTELMODULE(StelSkyLayerMgr))
 	{
-		connect(this, SIGNAL(requestLoadSkyImage(const QString&, const QString&, double, double, double, double, double, double, double, double, double, double, bool, StelCore::FrameType, bool)),
-			smgr, SLOT(         loadSkyImage(const QString&, const QString&, double, double, double, double, double, double, double, double, double, double, bool, StelCore::FrameType, bool)));
-		connect(this, SIGNAL(requestRemoveSkyImage(const QString&)), smgr, SLOT(removeSkyLayer(const QString&)));
+		connect(this, &StelMainScriptAPI::requestLoadSkyImage, smgr, [smgr](const auto&... args) { smgr->loadSkyImage(args...); });
+		connect(this, &StelMainScriptAPI::requestRemoveSkyImage, smgr, qOverload<const QString&>(&StelSkyLayerMgr::removeSkyLayer));
 	}
 
-	connect(this, SIGNAL(requestLoadSound(const QString&, const QString&)), StelApp::getInstance().getStelAudioMgr(), SLOT(loadSound(const QString&, const QString&)));
-	connect(this, SIGNAL(requestPlaySound(const QString&)), StelApp::getInstance().getStelAudioMgr(), SLOT(playSound(const QString&)));
-	connect(this, SIGNAL(requestPauseSound(const QString&)), StelApp::getInstance().getStelAudioMgr(), SLOT(pauseSound(const QString&)));
-	connect(this, SIGNAL(requestStopSound(const QString&)), StelApp::getInstance().getStelAudioMgr(), SLOT(stopSound(const QString&)));
-	connect(this, SIGNAL(requestDropSound(const QString&)), StelApp::getInstance().getStelAudioMgr(), SLOT(dropSound(const QString&)));
+	connect(this, &StelMainScriptAPI::requestLoadSound, StelApp::getInstance().getStelAudioMgr(), &StelAudioMgr::loadSound);
+	connect(this, &StelMainScriptAPI::requestPlaySound, StelApp::getInstance().getStelAudioMgr(), &StelAudioMgr::playSound);
+	connect(this, &StelMainScriptAPI::requestPauseSound, StelApp::getInstance().getStelAudioMgr(), &StelAudioMgr::pauseSound);
+	connect(this, &StelMainScriptAPI::requestStopSound, StelApp::getInstance().getStelAudioMgr(), &StelAudioMgr::stopSound);
+	connect(this, &StelMainScriptAPI::requestDropSound, StelApp::getInstance().getStelAudioMgr(), &StelAudioMgr::dropSound);
 
-	connect(this, SIGNAL(requestLoadVideo(const QString&, const QString&, float, float, bool, float)), StelApp::getInstance().getStelVideoMgr(), SLOT(loadVideo(const QString&, const QString&, float, float, bool, float)));
-	connect(this, SIGNAL(requestPlayVideo(const QString&, const bool)), StelApp::getInstance().getStelVideoMgr(), SLOT(playVideo(const QString&, const bool)));
-	connect(this, SIGNAL(requestPlayVideoPopout(QString,float,float,float,float,float,float,float,bool)), StelApp::getInstance().getStelVideoMgr(), SLOT(playVideoPopout(QString,float,float,float,float,float,float,float,bool)));
-	connect(this, SIGNAL(requestPauseVideo(const QString&)), StelApp::getInstance().getStelVideoMgr(), SLOT(pauseVideo(const QString&)));
-	connect(this, SIGNAL(requestStopVideo(const QString&)), StelApp::getInstance().getStelVideoMgr(), SLOT(stopVideo(const QString&)));
-	connect(this, SIGNAL(requestDropVideo(const QString&)), StelApp::getInstance().getStelVideoMgr(), SLOT(dropVideo(const QString&)));
-	connect(this, SIGNAL(requestSeekVideo(const QString&, qint64, bool)), StelApp::getInstance().getStelVideoMgr(), SLOT(seekVideo(const QString&, qint64, bool)));
-	connect(this, SIGNAL(requestSetVideoXY(const QString&, float, float, bool)), StelApp::getInstance().getStelVideoMgr(), SLOT(setVideoXY(const QString&, float, float, bool)));
-	connect(this, SIGNAL(requestSetVideoAlpha(const QString&, float)), StelApp::getInstance().getStelVideoMgr(), SLOT(setVideoAlpha(const QString&, float)));
-	connect(this, SIGNAL(requestResizeVideo(const QString&, float, float)), StelApp::getInstance().getStelVideoMgr(), SLOT(resizeVideo(const QString&, float, float)));
-	connect(this, SIGNAL(requestShowVideo(const QString&, bool)), StelApp::getInstance().getStelVideoMgr(), SLOT(showVideo(const QString&, bool)));
+	connect(this, &StelMainScriptAPI::requestLoadVideo, StelApp::getInstance().getStelVideoMgr(), &StelVideoMgr::loadVideo);
+	connect(this, &StelMainScriptAPI::requestPlayVideo, StelApp::getInstance().getStelVideoMgr(), &StelVideoMgr::playVideo);
+	connect(this, &StelMainScriptAPI::requestPlayVideoPopout, StelApp::getInstance().getStelVideoMgr(), &StelVideoMgr::playVideoPopout);
+	connect(this, &StelMainScriptAPI::requestPauseVideo, StelApp::getInstance().getStelVideoMgr(), &StelVideoMgr::pauseVideo);
+	connect(this, &StelMainScriptAPI::requestStopVideo, StelApp::getInstance().getStelVideoMgr(), &StelVideoMgr::stopVideo);
+	connect(this, &StelMainScriptAPI::requestDropVideo, StelApp::getInstance().getStelVideoMgr(), &StelVideoMgr::dropVideo);
+	connect(this, &StelMainScriptAPI::requestSeekVideo, StelApp::getInstance().getStelVideoMgr(), &StelVideoMgr::seekVideo);
+	connect(this, &StelMainScriptAPI::requestSetVideoXY, StelApp::getInstance().getStelVideoMgr(), &StelVideoMgr::setVideoXY);
+	connect(this, &StelMainScriptAPI::requestSetVideoAlpha, StelApp::getInstance().getStelVideoMgr(), &StelVideoMgr::setVideoAlpha);
+	connect(this, &StelMainScriptAPI::requestResizeVideo, StelApp::getInstance().getStelVideoMgr(), &StelVideoMgr::resizeVideo);
+	connect(this, &StelMainScriptAPI::requestShowVideo, StelApp::getInstance().getStelVideoMgr(), &StelVideoMgr::showVideo);
 
-	connect(this, SIGNAL(requestExit()), this->parent(), SLOT(stopScript()));
-	connect(this, SIGNAL(requestSetProjectionMode(QString)), StelApp::getInstance().getCore(), SLOT(setCurrentProjectionTypeKey(QString)));
-	connect(this, SIGNAL(requestSetSkyCulture(QString)), &StelApp::getInstance().getSkyCultureMgr(), SLOT(setCurrentSkyCultureID(QString)));
-	connect(this, SIGNAL(requestSetDiskViewport(bool)), StelApp::getInstance().getMainScriptAPIProxy(), SLOT(setDiskViewport(bool)));	
-	connect(this, SIGNAL(requestSetHomePosition()), StelApp::getInstance().getCore(), SLOT(returnToHome()));
+	connect(this, &StelMainScriptAPI::requestExit, static_cast<StelScriptMgr*>(this->parent()), &StelScriptMgr::stopScript);
+	connect(this, &StelMainScriptAPI::requestSetProjectionMode, StelApp::getInstance().getCore(), &StelCore::setCurrentProjectionTypeKey);
+	connect(this, &StelMainScriptAPI::requestSetSkyCulture, &StelApp::getInstance().getSkyCultureMgr(), &StelSkyCultureMgr::setCurrentSkyCultureID);
+	connect(this, &StelMainScriptAPI::requestSetDiskViewport, StelApp::getInstance().getMainScriptAPIProxy(), &StelMainScriptAPIProxy::setDiskViewport);
+	connect(this, &StelMainScriptAPI::requestSetHomePosition, StelApp::getInstance().getCore(), &StelCore::returnToHome);
 
 	//QMetaType::registerConverter<V3d,QString>(&V3d::toString);
 	//QMetaType::registerConverter<V3f,QString>(&V3f::toString);
@@ -986,7 +985,7 @@ void StelMainScriptAPI::wait(double t)
 	StelScriptMgr* scriptMgr = &StelApp::getInstance().getScriptMgr();
 	QCoreApplication::processEvents();
 	QEventLoop* loop = scriptMgr->getWaitEventLoop();
-	QTimer::singleShot(qRound(1000*t), loop, SLOT(quit()));
+	QTimer::singleShot(qRound(1000*t), loop, &QEventLoop::quit);
 	if( loop->exec() != 0 )
 	{
 		emit requestExit(); // causes a call of stopScript
@@ -1010,7 +1009,7 @@ void StelMainScriptAPI::waitFor(const QString& dt, const QString& spec)
 	}
 	StelScriptMgr* scriptMgr = &StelApp::getInstance().getScriptMgr();
 	QEventLoop* loop = scriptMgr->getWaitEventLoop();
-	QTimer::singleShot(interval, loop, SLOT(quit()));
+	QTimer::singleShot(interval, loop, &QEventLoop::quit);
 	if( loop->exec() != 0 )
 	{
 		emit requestExit(); // causes a call of stopScript
@@ -1189,6 +1188,12 @@ QVariantMap StelMainScriptAPI::getRTS(const QString &objectName, const double al
 	}
 	return map;
 }
+
+double StelMainScriptAPI::getEquationOfTime()
+{
+	return StelApp::getInstance().getCore()->getSolutionEquationOfTime()*60.0;
+}
+
 
 void StelMainScriptAPI::setStelProperty(const QString& propertyName, QVariant propertyValue)
 {
@@ -1374,7 +1379,7 @@ double StelMainScriptAPI::getViewDecJ2000Angle()
 	return dec*180/M_PI; // convert to degrees from radians
 }
 
-void StelMainScriptAPI::moveToObject(const QString& name, float duration)
+void StelMainScriptAPI::moveToObject(const QString& name, float duration, float shift)
 {
 	if (name.isEmpty())
 		return;
@@ -1384,17 +1389,91 @@ void StelMainScriptAPI::moveToObject(const QString& name, float duration)
 	StelObjectP obj = omgr->searchByName(name);
 
 	if (!obj.isNull())
-		mvmgr->moveToObject(obj, duration);
+	{
+		if (qFuzzyCompare(shift, 0.f))
+			mvmgr->moveToObject(obj, duration);
+		else
+		{
+			// The dome mode:
+			// The center of FOV in the dome is located in zenith and this is not very good for viewers, so, let's shift object from "zenith".
+			StelCore* core = StelApp::getInstance().getCore();
+
+			double sLat, sLon;
+			StelMovementMgr::MountMode mountMode=mvmgr->getMountMode();
+			if (mountMode==StelMovementMgr::MountEquinoxEquatorial)
+			{
+				StelUtils::rectToSphe(&sLon,&sLat,obj->getEquinoxEquatorialPosAuto(core));
+				sLat += shift*M_PI_180;
+
+				moveToRaDec(StelUtils::radToDecDegStr(sLon, 6), StelUtils::radToDecDegStr(sLat, 6), duration);
+			}
+			else
+			{
+				StelUtils::rectToSphe(&sLon,&sLat,obj->getAltAzPosAuto(core));
+				const double direction = StelApp::getInstance().getFlagSouthAzimuthUsage() ? 2. : 3.; // N is zero, E is 90 degrees
+				sLon = direction*M_PI - sLon;
+				if (sLon > M_PI*2)
+					sLon -= M_PI*2;
+				sLat += shift*M_PI_180;
+
+				moveToAltAzi(StelUtils::radToDecDegStr(sLat, 6), StelUtils::radToDecDegStr(sLon, 6), duration);
+			}
+		}
+	}
 }
 
-void StelMainScriptAPI::moveToSelectedObject(float duration)
+void StelMainScriptAPI::moveToSelectedObject(float duration, float shift)
 {
 	StelObjectMgr* omgr = GETSTELMODULE(StelObjectMgr);
 	if (omgr->getSelectedObject().isEmpty())
 		return;
 
 	StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
-	mvmgr->moveToObject(omgr->getSelectedObject()[0], duration); // Object may be without English name
+	StelObjectP obj = omgr->getSelectedObject()[0]; // Object may be without English name
+
+	if (qFuzzyCompare(shift, 0.f))
+		mvmgr->moveToObject(obj, duration);
+	else
+	{
+		// The dome mode:
+		// The center of FOV in the dome is located in zenith and this is not very good for viewers, so, let's shift object from "zenith".
+		StelCore* core = StelApp::getInstance().getCore();
+
+		double sLat, sLon;
+		StelMovementMgr::MountMode mountMode=mvmgr->getMountMode();
+		if (mountMode==StelMovementMgr::MountEquinoxEquatorial)
+		{
+			Vec3d aim = obj->getEquinoxEquatorialPosAuto(core);
+			StelUtils::rectToSphe(&sLon,&sLat,aim);
+			sLat += shift*M_PI_180;
+			StelUtils::spheToRect(sLon,sLat,aim);
+
+			// make up vector more stable:
+			Vec3d aimUp;
+			if (fabs(sLat)>(0.9*M_PI/2.0))
+				aimUp=Vec3d(-cos(sLon), -sin(sLon), 0.) * (sLat>0. ? 1. : -1. );
+			else
+				aimUp=core->equinoxEquToJ2000(Vec3d(0., 0., 1.), StelCore::RefractionOff);
+
+			mvmgr->moveToJ2000(core->equinoxEquToJ2000(aim, StelCore::RefractionOff), aimUp, duration);
+		}
+		else
+		{
+			Vec3d aim = obj->getAltAzPosAuto(core);
+			StelUtils::rectToSphe(&sLon,&sLat,aim);
+			sLat += shift*M_PI_180;
+			StelUtils::spheToRect(sLon,sLat,aim);
+
+			// make up vector more stable:
+			Vec3d aimUp;
+			if (fabs(sLat)>(0.9*M_PI/2.0))
+				aimUp=Vec3d(-cos(sLon), -sin(sLon), 0.) * (sLat>0. ? 1. : -1.);
+			else
+				aimUp=Vec3d(0., 0., 1.);
+
+			mvmgr->moveToAltAzi(aim, aimUp, duration);
+		}
+	}
 }
 
 void StelMainScriptAPI::moveToAltAzi(const QString& alt, const QString& azi, float duration)

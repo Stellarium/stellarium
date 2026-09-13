@@ -87,7 +87,7 @@ StelProperty* StelPropertyMgr::registerProperty(const QString &id, QObject *targ
 	stelProp->setParent(this);
 
 	//react to the property changed event
-	connect(stelProp,SIGNAL(changed(QVariant)),this,SLOT(onStelPropChanged(QVariant)));
+	connect(stelProp, &StelProperty::changed, this, &StelPropertyMgr::onStelPropChanged);
 
 	//check if the property is valid, crash otherwise
 	//this may reveal if a qRegisterMetaType or similar is needed

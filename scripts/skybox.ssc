@@ -7,6 +7,7 @@
 // Description: Creates 6 tiles (North/East/South/West/Up/Down) for a skybox. These can be further used e.g. in Unity3D or other 3D environments.
 // Output directory and filenames can be set with environment variables STEL_SKYBOX_DIR and STEL_SKYBOX_BASENAME.
 // A data file is also written, you can set its name with environment variable OUTPUT_DATA.
+// Orientation of top and bottom tiles can be controlled by STEL_SKYBOX_TOPROT, STEL_SKYBOX_BOTROT environment variables.
 // Please read the script to understand how to apply it to your projects.
 
 
@@ -30,6 +31,7 @@
 // V2.11 2020-04-06 Viewport now set by StelViewportMgr (Fix deprecated/obsolete API use.)
 // V2.12 2020-09-20 Suppress current vertical line.
 // V2.13 2021-01-16 Fixes for running on Linux
+// V2.14 2026-07-01 Configure rotation of top/bottom via envvars STEL_SKYBOX_TOPROT, STEL_SKYBOX_BOTROT
 
 // Not finding this environment variable sets DIR to empty string to make storage into default image dir, i.e., "C:/Users/YOU/Pictures/Stellarium"
 // For technical reasons, on Linux you MUST set this variable before running the script.
@@ -42,6 +44,16 @@ if (BASENAME.length == 0)
 DATANAME=core.getEnv("STEL_SKYBOX_DATA");
 if (DATANAME.length == 0)
 	DATANAME="unityData.txt"
+
+// Orientation of top/bottom panels: 
+// - Stellarium/Unity needs to look into azimuth 270 (default, to keep previous behaviour), 
+// - a skybox for QGIS4.1+ in "Unity convention" needs to view into the South (180).
+TOP_ROT=core.getEnv("STEL_SKYBOX_TOPROT");
+if (TOP_ROT.length == 0)
+	TOP_ROT=270;
+BOT_ROT=core.getEnv("STEL_SKYBOX_BOTROT");
+if (BOT_ROT.length == 0)
+	BOT_ROT=TOP_ROT;
 
 OUTPUT_DATA=DIR + "/" + DATANAME;
 
@@ -80,6 +92,8 @@ core.setGuiVisible(false);
 // resetOutput() available since V0.15:
 core.resetOutput();
 core.output("Current Landscape Name:" + LandscapeMgr.getCurrentLandscapeName());
+core.output("STEL_SKYBOX_TOPROT="+TOP_ROT)
+core.output("STEL_SKYBOX_BOTROT="+BOT_ROT)
 
 
 // Dump location info (since v0.18):
@@ -126,15 +140,13 @@ core.wait(MOVE_WAIT);
 core.screenshot(BASENAME + "4-west", false, DIR, true);
 core.wait(SHOT_WAIT);
 // Top panel.
-StelMovementMgr.lookZenith();
-StelMovementMgr.lookWest(false); // we need this orientation with west down.
+StelMovementMgr.lookZenith(TOP_ROT); // orient tile to have TOP_ROT on top edge center
 core.output("Top panel luminance: " + LandscapeMgr.getLuminance());
 core.wait(MOVE_WAIT);
 core.screenshot(BASENAME + "5-top", false, DIR, true);
 core.wait(SHOT_WAIT);
 // Bottom panel.
-StelMovementMgr.lookNadir();
-StelMovementMgr.lookWest(false); // we need this orientation with west up.
+StelMovementMgr.lookNadir(BOT_ROT);  // orient tile to have BOT_ROT on lower edge center
 core.output("Bottom panel luminance: " + LandscapeMgr.getLuminance());
 core.wait(MOVE_WAIT);
 core.screenshot(BASENAME + "6-bottom", false, DIR, true);

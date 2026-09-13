@@ -67,8 +67,8 @@ StelAction::StelAction(const QString& actionId,
 	qAction = new QAction(this);
 	onChanged();
 	mainView->addAction(qAction);
-	connect(qAction, SIGNAL(triggered()), this, SLOT(trigger()));
-	connect(this, SIGNAL(changed()), this, SLOT(onChanged()));	
+	connect(qAction, &QAction::triggered, this, &StelAction::trigger);
+	connect(this, &StelAction::changed, this, &StelAction::onChanged);
 }
 
 void StelAction::onChanged()
@@ -146,7 +146,7 @@ void StelAction::connectToObject(QObject* obj, const char* slot)
 		//can use a StelProperty for the connection, property name is action name
 		boolProperty = StelApp::getInstance().getStelPropertyManager()->registerProperty(objectName(),obj,slot);
 		StelPropertyBoolProxy* prox = new StelPropertyBoolProxy(boolProperty,this);
-		connect(prox,SIGNAL(propertyChanged(bool)),this,SLOT(propertyChanged(bool)));
+		connect(prox, &StelPropertyBoolProxy::propertyChanged, this, &StelAction::propertyChanged);
 
 		if(!metaProp.hasNotifySignal())
 		{
@@ -201,7 +201,7 @@ StelAction* StelActionMgr::addAction(const QString& id, const QString& groupId, 
 				     bool global)
 {
 	StelAction* action = new StelAction(id, groupId, text, shortcut, altShortcut, global);
-	connect(action,SIGNAL(toggled(bool)),this,SLOT(onStelActionToggled(bool)));
+	connect(action, &StelAction::toggled, this, &StelActionMgr::onStelActionToggled);
 	action->connectToObject(target, slot);
 	return action;
 }

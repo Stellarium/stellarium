@@ -21,6 +21,7 @@
 #define VIEWDIALOG_HPP
 
 #include "StelDialog.hpp"
+#include "StelHips.hpp"
 
 #include <QObject>
 #include <QTimer>
@@ -114,8 +115,12 @@ private slots:
 	void clearHips();
 	void updateHips();
 	void updateHipsText();
+	void updateHipsControls();
 	void filterSurveys();
 	void hipsListItemChanged(QTreeWidgetItem* item);
+	void hipsDisplaySettingsChanged();
+	void resetSelectedHipsDisplaySettings();
+	void resetAllHipsDisplaySettings();
 	void populateHipsGroups();
 	void toggleHipsDialog();
 
@@ -126,10 +131,12 @@ private slots:
 	void setDisplayFormatForSpins(bool flagDecimalDegrees);
 
 private:
+	HipsSurveyP currentSkyHips() const;
 	void updateSurveyFilteredState(QTreeWidgetItem& item, const QString& filterPattern) const;
 	void connectGroupBox(class QGroupBox* groupBox, const QString& actionId);
 	void updateSkyCultureText();
 	void initSkyCultureTime();
+	void handleVisibleChanged(bool visible);
 	//! Make sure that no tabs icons are outside of the viewport.
 	//! @todo Limit the width to the width of the screen *available to the window*.
 	void updateTabBarListWidgetWidth();
@@ -143,6 +150,8 @@ private:
 	ConfigureOrbitColorsDialog * configureOrbitColorsDialog;
 
 	QTimer hipsUpdateTimer;
+	// Tracks the year that the sky-culture time limits were built for.
+	int lastKnownYear = 0;
 	struct PlanetSurveyPack
 	{
 		QTreeWidgetItem* planetItem = nullptr;

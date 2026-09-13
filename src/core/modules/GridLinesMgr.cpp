@@ -194,7 +194,7 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 	ViewportEdgeIntersectCallbackData* d = static_cast<ViewportEdgeIntersectCallbackData*>(userData);
 	const Vec4f tmpColor = d->sPainter->getColor();
 	d->sPainter->setColor(d->textColor);
-	const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
+	const bool withDecimalDegree = StelApp::getInstance().getFlagUseDecDegreesCoords();
 	const bool useSouthAzimuth = StelApp::getInstance().getFlagSouthAzimuthUsage();
 	const float ppx = static_cast<float>(d->sPainter->getProjector()->getDevicePixelsPerPixel());
 
@@ -328,7 +328,7 @@ void SkyGrid::draw(const StelCore* core) const
 		return;
 
 	const StelProjectorP prj = core->getProjection(frameType, (frameType!=StelCore::FrameAltAz && frameType!=StelCore::FrameFixedEquatorial) ? StelCore::RefractionAuto : StelCore::RefractionOff);
-	const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
+	const bool withDecimalDegree = StelApp::getInstance().getFlagUseDecDegreesCoords();
 	const bool usePolarDistance = StelApp::getInstance().getFlagPolarDistanceUsage();
 
 	// Look for all meridians and parallels intersecting with the disk bounding the viewport
@@ -860,7 +860,7 @@ void SkyLine::draw(StelPainter &sPainter, const float oldLineWidth) const
 			// resizing the shadow together with the Moon would require considerable trickery.
 			// It seems better to just switch it off.
 			static SolarSystem *sSystem=GETSTELMODULE(SolarSystem);
-			if (sSystem->getFlagMoonScale()) return;
+			if (sSystem->getFlagMoonScale() && (sSystem->getMoon()->getSphereScale()!=1.0)) return;
 
 			// We compute the shadow circle attached to the geocenter, but must point it in the opposite direction of the sun's aberrated position.
 			const Vec3d pos=earth->getEclipticPos();
@@ -1276,7 +1276,7 @@ void SkyLine::draw(StelPainter &sPainter, const float oldLineWidth) const
 									if (StelApp::getInstance().getFlagUseNegativeHourAngles() && (value > 180.) )
 										value -= 360.;
 								}
-								if (!StelApp::getInstance().getFlagShowDecimalDegrees())
+								if (!StelApp::getInstance().getFlagUseDecDegreesCoords())
 								{
 									value /= 15;
 									unit="h";
@@ -1826,7 +1826,7 @@ GridLinesMgr::GridLinesMgr()
 	apexPoints = new SkyPoint(SkyPoint::APEX);	
 
 	earth = GETSTELMODULE(SolarSystem)->getEarth();
-	connect(GETSTELMODULE(SolarSystem), SIGNAL(solarSystemDataReloaded()), this, SLOT(connectSolarSystem()));
+	connect(GETSTELMODULE(SolarSystem), &SolarSystem::solarSystemDataReloaded, this, &GridLinesMgr::connectSolarSystem);
 
 	// Whenever year changes we must recompute the labels for the ecliptic when dates are shown.
 	connect(StelApp::getInstance().getCore(), &StelCore::dateChangedByYear, this, [=](const int year){ SkyLine::computeEclipticDatePartitions(year);});
@@ -2155,6 +2155,8 @@ void GridLinesMgr::update(double deltaTime)
 
 void GridLinesMgr::draw(StelCore* core)
 {
+	if (!core->getFlagClearSky())
+		return;
 	if (!gridlinesDisplayed)
 		return;
 

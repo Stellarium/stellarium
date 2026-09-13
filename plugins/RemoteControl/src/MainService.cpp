@@ -498,7 +498,7 @@ void MainService::post(const QByteArray& operation, const APIParameters &paramet
 			response.setData("ok");
 		}
 		else
-			response.writeRequestError("requires at least one of az,alt,j2000,jNow parameters");
+			response.writeRequestError("requires at least one of az,alt,j2000,jNow,altAz parameters");
 	}
 
 	else if (operation == "fov")

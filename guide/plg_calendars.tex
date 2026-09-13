@@ -337,13 +337,16 @@ and Minor (\emph{jiéqì}) Solar Terms.
   September 6, 3114 B.C. (Julian), but in many sources dates in the
   proleptic Gregorian calendar are listed, where this date is given as
   August 11, -3113. This plugin finally allows the use of both
-  systems, and of Long Count dates directly.
+  systems, and of Long Count dates directly. Other scientists have\newFeature{26.3} 
+  proposed different correlations. In the GUI tab \emph{Mesoamerica} 
+  you can set your preferred correlation date.  
 
-  In December of 2012 some people were afraid that the switchover from
-  \emph{baktun} 12 to 13 (something which occurs about every 400
-  years) would cause Armageddon, just as other people prefer to be
-  afraid of turns of centuries or millennia of the Christian year
-  count.
+  %% Temporarily suppressed for space reasons. 
+  %In December of 2012 some people were afraid that the switchover from
+  %\emph{baktun} 12 to 13 (something which occurs about every 400
+  %years) would cause Armageddon, just as other people prefer to be
+  %afraid of turns of centuries or millennia of the Christian year
+  %count.
 \item[Maya Haab] is a calendar of 18 ``months'' of 20 days each
   (counted 1 to 20), plus 5 days (\emph{Uayeb}) at the end, providing
   ``years'' of 365 days. Years are not counted, but you can use
@@ -452,7 +455,8 @@ show\_chinese                &bool & false&
 show\_japanese               &bool & false\\
 show\_korean                 &bool & false&
 show\_vietnamese             &bool & false\\\midrule
-show\_maya\_long\_count      &bool & true\\
+show\_maya\_long\_count      &bool & true&
+maya\_correlation\_jd        &int  & 584283\\
 show\_maya\_haab             &bool & false&
 show\_maya\_tzolkin          &bool & false\\
 show\_aztec\_tonalpohualli   &bool & false&

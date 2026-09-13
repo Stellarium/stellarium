@@ -481,6 +481,7 @@ void StelSpeechMgr::reportStateChanged(QTextToSpeech::State state) const
 
 void StelSpeechMgr::reportError(QTextToSpeech::ErrorReason reason, const QString &errorString) const
 {
+	Q_UNUSED(errorString)
 	qCWarning(Speech) << "Speech error:" << reason << "=" <<  m_speech->errorString();
 }
 #endif

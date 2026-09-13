@@ -93,7 +93,7 @@
          <string>A telescope connected to this computer via a serial port and controlled directly by Stellarium.</string>
         </property>
         <property name="text">
-         <string>Stellarium, directly through a serial port</string>
+         <string>Stellarium, directly (serial port or network)</string>
         </property>
         <property name="checked">
          <bool>true</bool>
@@ -435,6 +435,62 @@
            <number>0</number>
           </property>
           <item>
+           <layout class="QHBoxLayout" name="horizontalLayoutConnectionMedium">
+            <item>
+             <widget class="QLabel" name="labelConnectionMedium">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>24</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>Connection:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QRadioButton" name="radioButtonSerialConnection">
+              <property name="text">
+               <string>Serial port</string>
+              </property>
+              <property name="checked">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QRadioButton" name="radioButtonNetworkConnection">
+              <property name="toolTip">
+               <string>Communicate with the telescope using the LX200 protocol over a TCP/IP network connection</string>
+              </property>
+              <property name="text">
+               <string>Network (TCP)</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacerConnectionMedium">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </item>
+          <item>
            <layout class="QHBoxLayout" name="horizontalLayoutSerialPort">
             <item>
              <widget class="QLabel" name="labelSerialPort">
@@ -459,6 +515,59 @@
              <widget class="QComboBox" name="comboSerialPort">
               <property name="editable">
                <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayoutDeviceNetwork">
+            <item>
+             <widget class="QLabel" name="labelDeviceHost">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>24</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>Host:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="lineEditDeviceHost">
+              <property name="toolTip">
+               <string>Host name or IP address of the telescope</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="labelDevicePort">
+              <property name="text">
+               <string>Port:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QSpinBox" name="spinBoxDevicePort">
+              <property name="toolTip">
+               <string>TCP port the telescope is listening on</string>
+              </property>
+              <property name="minimum">
+               <number>1</number>
+              </property>
+              <property name="maximum">
+               <number>65535</number>
+              </property>
+              <property name="value">
+               <number>4030</number>
               </property>
              </widget>
             </item>

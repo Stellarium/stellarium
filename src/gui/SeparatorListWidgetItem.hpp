@@ -14,7 +14,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
  */
 
 #ifndef SEPARATORLISTWIDGETITEM_HPP
@@ -27,7 +27,14 @@
 class SeparatorListWidgetItem : public QListWidgetItem
 {
 public:
-	SeparatorListWidgetItem(const QString &text, QListWidget *parent=nullptr);
+	//! Constructor with region key for reliable matching
+	SeparatorListWidgetItem(const QString &text, const QString &regionKey, QListWidget *parent=nullptr);
+	
+	//! Get the original (untranslated) region key for matching
+	QString regionKey() const { return m_regionKey; }
+
+private:
+	QString m_regionKey;
 };
 
 #endif // SEPARATORLISTWIDGETITEM_HPP

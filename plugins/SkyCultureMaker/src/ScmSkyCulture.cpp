@@ -25,6 +25,7 @@
 #include "types/Classification.hpp"
 #include <utility>
 #include <QFile>
+#include <QRegularExpression>
 #include <QTextStream>
 
 void scm::ScmSkyCulture::setId(const QString &id)
@@ -35,16 +36,6 @@ void scm::ScmSkyCulture::setId(const QString &id)
 void scm::ScmSkyCulture::setFallbackToInternationalNames(bool fallback)
 {
 	ScmSkyCulture::fallbackToInternationalNames = fallback;
-}
-
-void scm::ScmSkyCulture::setBeginTime(int beginTime)
-{
-	ScmSkyCulture::beginTime = beginTime;
-}
-
-void scm::ScmSkyCulture::setEndTime(int endTime)
-{
-	ScmSkyCulture::endTime = endTime;
 }
 
 scm::ScmConstellation &scm::ScmSkyCulture::addConstellation(const QString &id,
@@ -81,6 +72,30 @@ scm::ScmConstellation *scm::ScmSkyCulture::getConstellation(const QString &id)
 	return it != constellations.end() ? it->get() : nullptr;
 }
 
+scm::ScmConstellation *scm::ScmSkyCulture::getConstellationByEnglishName(const QString &englishName)
+{
+	// Removes every character that is not a letter or a digit so that symbols
+	// like apostrophes or punctuation are ignored during comparison.
+	static const QRegularExpression nonAlnum("[^\\p{L}\\p{N}]+");
+	auto normalize = [](const QString &s) { return s.toLower().remove(nonAlnum); };
+
+	const QString target = normalize(englishName);
+	if (target.isEmpty()) return nullptr;
+
+	auto it = std::find_if(constellations.begin(), constellations.end(),
+	                       [&](const std::unique_ptr<ScmConstellation> &c)
+	                       { return normalize(c->getCulturalName().translated) == target; });
+	return it != constellations.end() ? it->get() : nullptr;
+}
+
+scm::ScmConstellation *scm::ScmSkyCulture::getConstellationByDisplayName(const QString &displayName)
+{
+	auto it = std::find_if(constellations.begin(), constellations.end(),
+	                       [&displayName](const std::unique_ptr<ScmConstellation> &c)
+	                       { return c->getDisplayName() == displayName; });
+	return it != constellations.end() ? it->get() : nullptr;
+}
+
 std::vector<std::unique_ptr<scm::ScmConstellation>> *scm::ScmSkyCulture::getConstellations()
 {
 	return &constellations;
@@ -103,9 +118,6 @@ QJsonObject scm::ScmSkyCulture::toJson(const bool mergeLines) const
 	}
 	scJsonObj["region"] = regionArray;*/
 
-	scJsonObj["beginTime"] = beginTime;
-	scJsonObj["endTime"] = endTime;
-
 	// for some reason, the classification is inside an array, eg. ["historical"]
 	QJsonArray classificationArray = QJsonArray::fromStringList(
 		QStringList() << classificationTypeToString(description.classification));
@@ -118,6 +130,21 @@ QJsonObject scm::ScmSkyCulture::toJson(const bool mergeLines) const
 		constellationsArray.append(constellation->toJson(id, mergeLines));
 	}
 	scJsonObj["constellations"] = constellationsArray;
+
+	if (!culturalNames.isEmpty())
+	{
+		QJsonObject commonNamesObj;
+		for (auto it = culturalNames.constBegin(); it != culturalNames.constEnd(); ++it)
+		{
+			QJsonArray namesArray;
+			for (const auto &name : it.value())
+			{
+				namesArray.append(name.toJson());
+			}
+			commonNamesObj[it.key()] = namesArray;
+		}
+		scJsonObj["common_names"] = commonNamesObj;
+	}
 
 	return scJsonObj;
 }
@@ -154,6 +181,11 @@ void scm::ScmSkyCulture::draw(StelCore *core) const
 void scm::ScmSkyCulture::setDescription(const scm::Description &description)
 {
 	ScmSkyCulture::description = description;
+}
+
+void scm::ScmSkyCulture::setCulturalNames(const QMap<QString, QList<ScmCulturalName>> &names)
+{
+	ScmSkyCulture::culturalNames = names;
 }
 
 bool scm::ScmSkyCulture::saveDescriptionAsMarkdown(QFile &file)
@@ -217,7 +249,7 @@ bool scm::ScmSkyCulture::saveDescriptionAsMarkdown(QFile &file)
 		out << "### About\n\n" << desc.about << "\n\n";
 		if (!desc.acknowledgements.trimmed().isEmpty())
 		{
-			out << "### Acknowledgements\n" << desc.acknowledgements << "\n\n";
+			out << "### Acknowledgements\n\n" << desc.acknowledgements << "\n\n";
 		}
 
 		out << "## License\n\n" << license.name << "\n\n";
@@ -254,6 +286,26 @@ bool scm::ScmSkyCulture::saveIllustrations(const QString &directory)
 const QString &scm::ScmSkyCulture::getId() const
 {
 	return id;
+}
+
+const scm::Description &scm::ScmSkyCulture::getDescription() const
+{
+	return description;
+}
+
+const QMap<QString, QList<scm::ScmCulturalName>> &scm::ScmSkyCulture::getCulturalNames() const
+{
+	return culturalNames;
+}
+
+const QList<scm::CulturePolygon> &scm::ScmSkyCulture::getLocations() const
+{
+	return locations;
+}
+
+bool scm::ScmSkyCulture::getFallbackToInternationalNames() const
+{
+	return fallbackToInternationalNames;
 }
 
 void scm::ScmSkyCulture::mergeLocations()

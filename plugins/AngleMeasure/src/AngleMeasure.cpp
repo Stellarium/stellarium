@@ -190,7 +190,7 @@ void AngleMeasure::update(double deltaTime)
 	lineVisible.update(static_cast<int>(deltaTime*1000));
 	static StelCore *core=StelApp::getInstance().getCore();
 
-	withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
+	withDecimalDegree = StelApp::getInstance().getFlagUseDecDegreesOther();
 
 	// if altAz endpoint linked to the rotating sky, move respective point(s)
 	if (flagShowHorizontalStartSkylinked)
@@ -289,6 +289,8 @@ void AngleMeasure::drawOne(StelCore *core, const StelCore::FrameType frameType, 
 //! Draw any parts on the screen which are for our module
 void AngleMeasure::draw(StelCore* core)
 {
+	if(!core->getFlagClearSky())
+		return;
 	if (startPoint.normSquared()==0.0) // avoid crash on switch-on, lp:#1455839
 		return;
 	if (lineVisible.getInterstate() < 0.000001f && messageFader.getInterstate() < 0.000001f)

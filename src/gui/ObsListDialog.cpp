@@ -33,12 +33,9 @@
 #include "StelPropertyMgr.hpp"
 #include "StelMovementMgr.hpp"
 #include "CustomObjectMgr.hpp"
-#include "LandscapeMgr.hpp"
 #include "HighlightMgr.hpp"
 #include "StarMgr.hpp"
 #include "NebulaMgr.hpp"
-#include "StelCore.hpp"
-#include "StelFileMgr.hpp"
 #include "StelJsonParser.hpp"
 #include "StelUtils.hpp"
 #include "ObsListDialog.hpp"
@@ -67,10 +64,10 @@ ObsListDialog::ObsListDialog(QObject *parent) :
 	setObservingListHeaderNames();
 
 	QSettings* conf  = StelApp::getInstance().getSettings();
-	flagUseJD        = conf->value("bookmarks/useJD", false).toBool();
-	flagUseLandscape = conf->value("bookmarks/useLandscape", false).toBool();
-	flagUseLocation  = conf->value("bookmarks/useLocation", false).toBool();
-	flagUseFov       = conf->value("bookmarks/useFOV", false).toBool();
+	flagUseJD        = conf->value("bookmarks/useJD", flagUseJD).toBool();
+	flagUseLandscape = conf->value("bookmarks/useLandscape", flagUseLandscape).toBool();
+	flagUseLocation  = conf->value("bookmarks/useLocation", flagUseLocation).toBool();
+	flagUseFov       = conf->value("bookmarks/useFOV", flagUseFov).toBool();
 
 	observingListJsonPath = StelFileMgr::findFile(conf->value("main/observinglists_dir", "data").toString(), static_cast<StelFileMgr::Flags>(StelFileMgr::Directory | StelFileMgr::Writable)) + "/" + JSON_FILE_NAME;
 }
@@ -109,28 +106,28 @@ void ObsListDialog::createDialogContent()
 	ui->setupUi(dialog);
 
 	//Signals and slots
-	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
+	connect(&StelApp::getInstance(), &StelApp::languageChanged, this, &ObsListDialog::retranslate);
 	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
 
 	// Standard mode buttons: NewList/EditList/DeleteList
-	connect(ui->newListButton,        SIGNAL(clicked()), this, SLOT(   newListButtonPressed()));
-	connect(ui->editListButton,       SIGNAL(clicked()), this, SLOT(  editListButtonPressed()));
-	connect(ui->deleteListButton,     SIGNAL(clicked()), this, SLOT(deleteListButtonPressed()));
-	connect(ui->importListButton,     SIGNAL(clicked()), this, SLOT(importListButtonPressed()));
-	connect(ui->exportListButton,     SIGNAL(clicked()), this, SLOT(exportListButtonPressed()));
+	connect(ui->newListButton,        &QPushButton::clicked, this, &ObsListDialog::   newListButtonPressed);
+	connect(ui->editListButton,       &QPushButton::clicked, this, &ObsListDialog::  editListButtonPressed);
+	connect(ui->deleteListButton,     &QPushButton::clicked, this, &ObsListDialog::deleteListButtonPressed);
+	connect(ui->importListButton,     &QPushButton::clicked, this, &ObsListDialog::importListButtonPressed);
+	connect(ui->exportListButton,     &QPushButton::clicked, this, &ObsListDialog::exportListButtonPressed);
 	// Mark all objects of currentList in the sky
-	connect(ui->highlightAllButton,   SIGNAL(clicked()), this, SLOT(highlightAll()));
-	connect(ui->clearHighlightButton, SIGNAL(clicked()), this, SLOT(clearHighlights()));
+	connect(ui->highlightAllButton,   &QPushButton::clicked, this, &ObsListDialog::highlightAll);
+	connect(ui->clearHighlightButton, &QPushButton::clicked, this, &ObsListDialog::clearHighlights);
 	// Edits
-	connect(ui->addObjectButton,      SIGNAL(clicked()), this, SLOT(   addObjectButtonPressed()));
-	connect(ui->removeObjectButton,   SIGNAL(clicked()), this, SLOT(removeObjectButtonPressed()));
-	connect(ui->saveButton,           SIGNAL(clicked()), this, SLOT(  saveButtonPressed()));
-	connect(ui->cancelButton,         SIGNAL(clicked()), this, SLOT(cancelButtonPressed()));
+	connect(ui->addObjectButton,      &QPushButton::clicked, this, &ObsListDialog::   addObjectButtonPressed);
+	connect(ui->removeObjectButton,   &QPushButton::clicked, this, &ObsListDialog::removeObjectButtonPressed);
+	connect(ui->saveButton,           &QPushButton::clicked, this, &ObsListDialog::  saveButtonPressed);
+	connect(ui->cancelButton,         &QPushButton::clicked, this, &ObsListDialog::cancelButtonPressed);
 
-	connect(ui->defaultListCheckBox, SIGNAL(clicked(bool)), this, SLOT(defaultClicked(bool)));
+	connect(ui->defaultListCheckBox, &QCheckBox::clicked, this, &ObsListDialog::defaultClicked);
 
 	// Allow loading one list entry
-	connect(ui->treeView,           SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectAndGoToObject(QModelIndex)));
+	connect(ui->treeView,           &QTreeView::doubleClicked, this, &ObsListDialog::selectAndGoToObject);
 
 	switchEditMode(false, false); // start with view mode
 
@@ -140,14 +137,16 @@ void ObsListDialog::createDialogContent()
 	connectBoolProperty(ui->fovCheckBox,       "ObsListDialog.flagUseFov");
 
 	ui->obsListDirEdit->setText(StelFileMgr::getObsListDir());
-	connect(ui->obsListDirEdit, SIGNAL(editingFinished()), this, SLOT(selectObsListDir()));
-	connect(ui->obsListBrowseButton, SIGNAL(clicked()), this, SLOT(browseForObsListDir()));
+	connect(ui->obsListDirEdit, &QLineEdit::editingFinished, this, &ObsListDialog::selectObsListDir);
+	connect(ui->obsListBrowseButton, &QPushButton::clicked, this, &ObsListDialog::browseForObsListDir);
 
 
 	//obsListCombo settings: A change in the combobox loads the list.
-	connect(ui->obsListComboBox, SIGNAL(activated(int)), this, SLOT(loadSelectedObservingList(int)));
+	connect(ui->obsListComboBox, qOverload<int>(&QComboBox::activated), this, &ObsListDialog::loadSelectedObservingList);
 
-	ui->treeView->setModel(itemModel);
+	auto *proxy = new ObsListDialogSortFilterProxyModel;
+	proxy->setSourceModel(itemModel);
+	ui->treeView->setModel(proxy);
 	ui->treeView->header()->setSectionsMovable(false);
 	ui->treeView->hideColumn(ColumnUUID);
 	for (int c=ColumnDesignation; c<=ColumnLandscapeID; c++)
@@ -155,7 +154,7 @@ void ObsListDialog::createDialogContent()
 	ui->treeView->header()->setStretchLastSection(true);
 	//Enable the sort for columns
 	ui->treeView->setSortingEnabled(true);
-	connect(ui->treeView->header(), SIGNAL(sectionClicked(int)), this, SLOT(headerClicked(int)));
+	connect(ui->treeView->header(), &QHeaderView::sectionClicked, this, &ObsListDialog::headerClicked);
 
 	// Load all observing lists from JSON.
 	// We need to load the global list only once!
@@ -603,10 +602,13 @@ void ObsListDialog::loadSelectedList()
 		return;
 	}
 
-	// Sorting for the objects list.
-	QString sortingBy = observingListMap.value(KEY_SORTING).toString();
+	// Apply saved sort order, or clear any sort retained from a previous list.
+	const QString sortingBy = observingListMap.value(KEY_SORTING).toString();
+	sorting = sortingBy;
 	if (!sortingBy.isEmpty())
 		sortObsListTreeViewByColumnName(sortingBy);
+	else
+		ui->treeView->sortByColumn(-1, Qt::AscendingOrder);
 
 	// Restore selection that was active before calling this
 	if (existingSelectionToRestore.length()>0)
@@ -1472,10 +1474,8 @@ void ObsListDialog::sortObsListTreeViewByColumnName(const QString &columnName)
 		{SORTING_BY_LOCATION,      ColumnLocation},
 		{SORTING_BY_LANDSCAPE_ID,  ColumnLandscapeID}
 	};
-    ObsListDialogSortFilterProxyModel *proxyModel = new ObsListDialogSortFilterProxyModel;
-    proxyModel->setSourceModel(itemModel);
-    ui->treeView->setModel(proxyModel);
-    proxyModel->sort(map.value(columnName), Qt::AscendingOrder);
+	// Use sortByColumn so the header sort indicator is updated along with the data.
+	ui->treeView->sortByColumn(map.value(columnName), Qt::AscendingOrder);
 }
 
 void ObsListDialog::setFlagUseJD(bool b)
@@ -1555,9 +1555,10 @@ void ObsListDialog::headerClicked(int index)
 		{ColumnDate,          SORTING_BY_DATE},
 		{ColumnLocation,      SORTING_BY_LOCATION},
 		{ColumnLandscapeID,   SORTING_BY_LANDSCAPE_ID}};
-	sorting=map.value(index, "");
-	//qCDebug(ObsLists) << "Sorting = " << sorting;
-	sortObsListTreeViewByColumnName(sorting);
+	sorting = map.value(index, "");
+	// Qt's setSortingEnabled(true) handles sort direction toggling via
+	// sortIndicatorChanged -> sortByColumn. Avoid recreating the proxy here
+	// as that resets QHeaderView::sortIndicatorTrackedSection and breaks toggling.
 }
 
 // Get the magnitude from selected object (or a dash if unavailable)
@@ -1642,23 +1643,18 @@ const QString ObsListDialog::DASH = QString(QChar(0x2014));
 
 bool ObsListDialogSortFilterProxyModel::lessThan(const QModelIndex &left, const QModelIndex &right) const
 {
-    if (sortColumn() == ObsListDialog::ColumnRa)
-    {
-        QString raLeft = sourceModel()->data(left).toString();
-        QString raRight = sourceModel()->data(right).toString();
-        return StelUtils::getDecAngle(raLeft) < StelUtils::getDecAngle(raRight);
-    }
-    if (sortColumn() == ObsListDialog::ColumnDec)
-    {
-        QString decLeft = sourceModel()->data(left).toString();
-        QString decRight = sourceModel()->data(right).toString();
-        return StelUtils::getDecAngle(decLeft) < StelUtils::getDecAngle(decRight);
-    }
-    if (sortColumn() == ObsListDialog::ColumnMagnitude)
-    {
-        QString magLeft = sourceModel()->data(left).toString();
-        QString magRight = sourceModel()->data(right).toString();
-        return magLeft.toDouble() < magRight.toDouble();
-    }
-    return QSortFilterProxyModel::lessThan(left, right);
+	const QString l = sourceModel()->data(left).toString();
+	const QString r = sourceModel()->data(right).toString();
+	switch (sortColumn())
+	{
+	case ObsListDialog::ColumnRa:
+	case ObsListDialog::ColumnDec:
+		return StelUtils::getDecAngle(l) < StelUtils::getDecAngle(r);
+	case ObsListDialog::ColumnMagnitude:
+		return l.toDouble() < r.toDouble();
+	case ObsListDialog::ColumnDesignation:
+		return StelUtils::naturalLessThan(l, r);
+	default:
+		return QSortFilterProxyModel::lessThan(left, right);
+	}
 }

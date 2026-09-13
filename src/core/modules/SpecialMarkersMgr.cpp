@@ -329,6 +329,8 @@ void SpecialMarkersMgr::update(double deltaTime)
 
 void SpecialMarkersMgr::draw(StelCore* core)
 {
+	if (!core->getFlagClearSky())
+		return;
 	fovCenterMarker->draw(core);
 	fovCircularMarker->draw(core);
 	fovRectangularMarker->draw(core);

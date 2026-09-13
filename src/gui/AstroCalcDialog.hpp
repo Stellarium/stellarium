@@ -196,7 +196,8 @@ public:
 	//! Defines the number and the order of the columns in the lunar eclipse contact table
 	//! @enum LunarEclipseContactColumns
 	enum LunarEclipseContactColumns {
-		LunarEclipseContact,		//! circumstance of lunar eclipse
+		LunarEclipseContactPhase,	//! timing or eclipse phase
+		LunarEclipseContactInfo,	//! circumstance of lunar eclipse
 		LunarEclipseContactDate,	//! date and time of circumstance
 		LunarEclipseContactAltitude,	//! altitude of the Moon
 		LunarEclipseContactAzimuth,	//! azimuth of the Moon
@@ -216,9 +217,9 @@ public:
 		SolarEclipseGamma,		//! gamma of solar eclipse
 		SolarEclipseMag,		//! greatest magnitude of solar eclipse
 		SolarEclipseLatitude,		//! latitude at greatest eclipse
-		SolarEclipseLongitude,	//! longitude at greatest eclipse
+		SolarEclipseLongitude,		//! longitude at greatest eclipse
 		SolarEclipseAltitude,		//! altitude of the Sun at greatest eclipse
-		SolarEclipsePathwidth,	//! pathwidth of total or annular solar eclipse
+		SolarEclipsePathwidth,		//! pathwidth of total or annular solar eclipse
 		SolarEclipseDuration,		//! central duration of total or annular solar eclipse
 		SolarEclipseCount		//! total number of columns
 	};
@@ -226,7 +227,8 @@ public:
 	//! Defines the number and the order of the columns in the global solar eclipse contact table
 	//! @enum SolarEclipseContactColumns
 	enum SolarEclipseContactColumns {
-		SolarEclipseContact,		//! circumstance of solar eclipse
+		SolarEclipseContactPhase,	//! timing or eclipse phase
+		SolarEclipseContactInfo,	//! circumstance of solar eclipse
 		SolarEclipseContactDate,	//! date and time of circumstance
 		SolarEclipseContactLatitude,	//! latitude at contact time
 		SolarEclipseContactLongitude,	//! longitude at contact time
@@ -243,18 +245,17 @@ public:
 		SolarEclipseLocalType,		//! type of solar eclipse
 		SolarEclipseLocalFirstContact,	//! time of the beginning of partial solar eclipse
 		SolarEclipseLocal2ndContact,	//! time of the beginning of total/annular solar eclipse
-		SolarEclipseLocalMaximum,		//! time of maximum solar eclipse
+		SolarEclipseLocalMaximum,	//! time of maximum solar eclipse
 		SolarEclipseLocalMagnitude,	//! maximum magnitude of solar eclipse
 		SolarEclipseLocal3rdContact,	//! time of the end of total/annular solar eclipse
 		SolarEclipseLocalLastContact,	//! time of the end of partial solar eclipse
-		SolarEclipseLocalDuration,		//! duration of total/annular solar eclipse
+		SolarEclipseLocalDuration,	//! duration of total/annular solar eclipse
 		SolarEclipseLocalCount		//! total number of columns
 	};
 
 	//! Defines the number and the order of the columns in transit table
 	//! @enum TransitColumns
 	enum TransitColumns {
-		TransitDate,			//! date of mid-transit
 		TransitPlanet,			//! transit planet
 		TransitContact1,		//! time of exterior ingress
 		TransitContact2,		//! time of interior ingress
@@ -296,9 +297,9 @@ signals:
 	void graphDayChanged();
 
 protected:
-        //! Initialize the dialog widgets and connect the signals/slots.
+	//! Initialize the dialog widgets and connect the signals/slots.
 	void createDialogContent() override;
-        Ui_astroCalcDialogForm *ui;
+	Ui_astroCalcDialogForm *ui;
 
 private slots:
 	void currentCelestialPositions();
@@ -361,17 +362,21 @@ private slots:
 	//! Algorithm taken from calculating the rises, transits and sets.
 	void generateSolarEclipsesLocal();
 	void cleanupSolarEclipsesLocal();
-	void selectCurrentSolarEclipseLocal(const QModelIndex &modelIndex);
+	void selectCurrentSolarEclipseLocal(QTreeWidgetItem* item, int idx);
 	void saveSolarEclipsesLocal();
 
 	//! Calculating transits to fill the list.
 	//! Algorithm taken from calculating the rises, transits and sets.
 	void generateTransits();
 	void cleanupTransits();
-	void selectCurrentTransit(const QModelIndex &modelIndex);
+	void selectCurrentTransit(QTreeWidgetItem* item, int idx);
 	void saveTransits();
 
 	void saveEclipseFiltersState();
+	void showLocalCoordinates();
+	void cleanupLocalCoordinates();
+	void goToLocalCoordinates();
+	void enableLocalCoordinatesButton();
 
 	void saveEphemerisCelestialBody(int index);
 	void saveEphemerisSecondaryCelestialBody(int index);
@@ -484,6 +489,7 @@ private:
 	class StelLocaleMgr* localeMgr = nullptr;
 	class StelMovementMgr* mvMgr = nullptr;
 	class StelPropertyMgr* propMgr = nullptr;
+	StelLocation location;
 	//QStringListModel* wutModel = nulpltr;
 	//QSortFilterProxyModel *proxyModel = nullptr;
 	AstroCalcChart *altVsTimeChart = nullptr;
@@ -569,7 +575,7 @@ private:
 	//! The displayed names are localized in the current interface language.
 	//! The original names are kept in the user data field of each QComboBox
 	//! item.
-	void populateCelestialBodyList();	
+	void populateCelestialBodyList();
 	//! Populates the drop-down list of time steps.
 	void populateEphemerisTimeStepsList();
 	//! Populates the drop-down list of time units for Ephemeris tool.
@@ -587,6 +593,9 @@ private:
 	//! Populates the drop-down list of time intervals for WUT tool.
 	void populateTimeIntervalsList();	
 	double computeGraphValue(const PlanetP &ssObj, const AstroCalcChart::Series graphType);
+
+	//! Find selected SSO in first celestial bodies list
+	void findSelectedSSO();
 
 	void populateFunctionsList();	
 	double computeMaxElevation(StelObjectP obj);
@@ -690,6 +699,13 @@ private:
 
 	bool flagPolarDistance = false;
 
+	// Flags for follow states of AstroCalc/Eclipses tools
+	bool isSolarEclipsesComputed = false;
+	bool isLunarEclipsesComputed = false;
+	bool isTransitsComputed = false;
+	bool isReturned = false;
+	bool isLocationChanged = false;
+	
 	// Signal that a plot has to be redone
 	bool plotAltVsTime = false;
 	bool plotAltVsTimeSun = false;
@@ -703,7 +719,7 @@ private:
 	bool plotAziVsTime = false;
 	bool followLatestSelectedObject = true;
 	bool computeRTS = false;
-	bool computeEphemeris = false;
+	bool computeEphemeris = false;	
 	int altVsTimePositiveLimit = 0, monthlyElevationPositiveLimit = 0, graphsDuration = 1, graphsStep = 24;
 	QStringList ephemerisHeader, phenomenaHeader, positionsHeader, hecPositionsHeader, wutHeader, rtsHeader, lunareclipseHeader, lunareclipsecontactsHeader, solareclipseHeader, solareclipsecontactsHeader, solareclipselocalHeader, transitHeader;
 	static double brightLimit;
@@ -720,6 +736,9 @@ private:
 
 	//! Memorize day for detecting rollover to next/prev one
 	int oldGraphJD = 0;
+
+	// Special date (-25000-01-01) outside valid range of eclipses
+	const double invalidJD = -7410192.;
 
 	//! Remember to redraw active plot when dialog becomes visible
 	bool graphPlotNeedsRefresh = false;
@@ -1092,7 +1111,7 @@ private:
 	{
 		int column = treeWidget()->sortColumn();
 
-		if (column == AstroCalcDialog::TransitDate || column == AstroCalcDialog::TransitContact1 || column == AstroCalcDialog::TransitContact2 || column == AstroCalcDialog::TransitContact3 || column == AstroCalcDialog::TransitContact4 || column == AstroCalcDialog::TransitMid || column == AstroCalcDialog::TransitSeparation || column == AstroCalcDialog::TransitDuration || column == AstroCalcDialog::TransitObservableDuration)
+		if (column == AstroCalcDialog::TransitContact1 || column == AstroCalcDialog::TransitContact2 || column == AstroCalcDialog::TransitContact3 || column == AstroCalcDialog::TransitContact4 || column == AstroCalcDialog::TransitMid || column == AstroCalcDialog::TransitSeparation || column == AstroCalcDialog::TransitDuration || column == AstroCalcDialog::TransitObservableDuration)
 		{
 			return data(column, Qt::UserRole).toFloat() < other.data(column, Qt::UserRole).toFloat();
 		}		
@@ -1169,25 +1188,67 @@ private:
 
 		if (column == AstroCalcDialog::WUTObjectName)
 		{
-			static const QRegularExpression dso("^(\\w+)\\s*(\\d+)\\s*(.*)$");
+			int a, b;
+			QString an, ax, bn, bx;
+
+			// minor planets
 			static const QRegularExpression mp("^[(](\\d+)[)]\\s(.+)$");
-			QRegularExpressionMatch dsoMatch=dso.match(text(column));
 			QRegularExpressionMatch mpMatch=mp.match(text(column));
-			QRegularExpressionMatch dsoOtherMatch=dso.match(other.text(column));
 			QRegularExpressionMatch mpOtherMatch=mp.match(other.text(column));
-			int a = 0, b = 0;
-			if (dsoMatch.hasMatch())
-				a = dsoMatch.captured(2).toInt();
-			if (a==0 && mpMatch.hasMatch())
+			if (mpMatch.hasMatch() && mpOtherMatch.hasMatch())
+			{
 				a = mpMatch.captured(1).toInt();
-			if (dsoOtherMatch.hasMatch())
-				b = dsoOtherMatch.captured(2).toInt();
-			if (b==0 && mpOtherMatch.hasMatch())
 				b = mpOtherMatch.captured(1).toInt();
-			if (a>0 && b>0)
 				return a < b;
-			else
-				return text(column).toLower() < other.text(column).toLower();
+			}
+
+			// periodic comets
+			static const QRegularExpression periodic("^(\\d+)P/([\\w\\-]+)\\s[(](\\d+)[)]$");
+			QRegularExpressionMatch periodicMatch=periodic.match(text(column));
+			QRegularExpressionMatch periodicOtherMatch=periodic.match(other.text(column));
+			if (periodicMatch.hasMatch() && periodicOtherMatch.hasMatch())
+			{
+				a = periodicMatch.captured(1).toInt();
+				b = periodicOtherMatch.captured(1).toInt();
+				return a < b;
+			}
+
+			// deep-sky objects
+			static const QRegularExpression dso("^(\\w+)\\s*([\\d\\-\\+\\.]+)\\s*(.*)$");
+			static const QRegularExpression rx("[\\-\\+\\.]+");
+			QRegularExpressionMatch dsoMatch=dso.match(text(column));
+			QRegularExpressionMatch dsoOtherMatch=dso.match(other.text(column));
+			if (dsoMatch.hasMatch() && dsoOtherMatch.hasMatch())
+			{
+				ax = dsoMatch.captured(1).toLower();
+				an = dsoMatch.captured(2);
+				an.replace(rx, "0");
+				an = an.rightJustified(10, '0');
+
+				bx = dsoOtherMatch.captured(1).toLower();
+				bn = dsoOtherMatch.captured(2);
+				bn.replace(rx, "0");
+				bn = bn.rightJustified(10, '0');
+
+				return QString("%1 %2").arg(ax, an) < QString("%1 %2").arg(bx, bn);
+			}
+
+			// HIP-like stars (standard modern designation: CAT XXXXX)
+			static const QRegularExpression hip("^(\\w+)\\s(\\d+)\\s*\\w*$");
+			QRegularExpressionMatch hipMatch=hip.match(text(column));
+			QRegularExpressionMatch hipOtherMatch=hip.match(other.text(column));
+			if (hipMatch.hasMatch() && hipOtherMatch.hasMatch())
+			{
+				ax = hipMatch.captured(1);
+				an = hipMatch.captured(2).rightJustified(7, '0');
+
+				bx = hipOtherMatch.captured(1);
+				bn = hipOtherMatch.captured(2).rightJustified(7, '0');
+
+				return QString("%1 %2").arg(ax, an) < QString("%1 %2").arg(bx, bn);
+			}
+
+			return StelUtils::naturalLessThan(text(column).toLower(), other.text(column).toLower());
 		}
 		else if (column == AstroCalcDialog::WUTMagnitude)
 		{

@@ -83,6 +83,19 @@ public:
 	const QImage &getArtwork() const;
 
 	/**
+	 * @brief Sets the original file name (with extension) the artwork was loaded from.
+	 *
+	 * When set, this name is reused on export so an existing illustration keeps its
+	 * original file name instead of being renamed after the constellation id.
+	 */
+	void setSourceImageFileName(const QString &fileName);
+
+	/**
+	 * @brief Gets the original file name the artwork was loaded from, or an empty string.
+	 */
+	const QString &getSourceImageFileName() const;
+
+	/**
 	 * @brief Get the indicator if the artwork contains art.
 	 * 
 	 * @return true Contains art.
@@ -146,6 +159,9 @@ private:
 
 	/// Holds the the artwork.
 	QImage artwork;
+
+	/// Original illustration file name (with extension) if loaded from disk; empty otherwise.
+	QString sourceImageFileName;
 
 	/// Holds the artwork as texture to draw.
 	StelTextureSP artTexture;

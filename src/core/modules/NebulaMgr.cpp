@@ -232,7 +232,7 @@ void NebulaMgr::init()
 	Q_ASSERT(conf);
 
 	fontSize = StelApp::getInstance().getScreenFontSize();
-	connect(&StelApp::getInstance(), SIGNAL(screenFontSizeChanged(int)), this, SLOT(setFontSizeFromApp(int)));
+	connect(&StelApp::getInstance(), &StelApp::screenFontSizeChanged, this, &NebulaMgr::setFontSizeFromApp);
 	auto& texMan = StelApp::getInstance().getTextureManager();
 	// Load dashed shape texture
 	Nebula::texRegion		= texMan.createTexture(StelFileMgr::getInstallationDir()+"/textures/neb_reg.png");
@@ -462,7 +462,7 @@ void NebulaMgr::init()
 	updateI18n();
 
 	StelApp *app = &StelApp::getInstance();
-	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
+	connect(app, &StelApp::languageChanged, this, &NebulaMgr::updateI18n);
 	connect(&app->getSkyCultureMgr(), &StelSkyCultureMgr::currentSkyCultureChanged, this, &NebulaMgr::updateSkyCulture);
 	GETSTELMODULE(StelObjectMgr)->registerStelObjectMgr(this);
 
@@ -845,6 +845,9 @@ float NebulaMgr::computeMaxMagHint(const StelSkyDrawer* skyDrawer) const
 // Draw all the Nebulae and call drawing the pointer if needed
 void NebulaMgr::draw(StelCore* core)
 {
+	if (!core->getFlagClearSky())
+		return;
+
 	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 	StelPainter sPainter(prj);
 	QFont font=QGuiApplication::font();

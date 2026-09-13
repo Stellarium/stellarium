@@ -40,6 +40,7 @@
 
 class Ui_scmSkyCultureDialog;
 class ScmAddPolygonDialog;
+class QListWidgetItem;
 
 class ScmSkyCultureDialog : public StelDialogSeparate
 {
@@ -68,7 +69,15 @@ public:
 	 */
 	void resetDialog();
 
-	/**
+	/**	
+	 * @brief Populates all UI fields from a loaded sky culture.
+	 *        Call this after setSkyCulture() when entering edit mode.
+	 *
+	 * @param sc The sky culture to populate from (must not be nullptr).
+	 */
+	void populateFromSkyCulture(scm::ScmSkyCulture *sc);
+
+	/**	
 	 * @brief Updates the add constellation button state.
 	 *
 	 * @param enabled Whether the button should be enabled or disabled.
@@ -82,6 +91,9 @@ public slots:
 protected slots:
 	void handleFontChanged();
 
+private:
+	enum class CnObjectType { Star = 0, Planet = 1, DSO = 2 };
+
 private slots:
 	void saveSkyCulture();
 	void openConstellationDialog(bool isDarkConstellation);
@@ -89,6 +101,7 @@ private slots:
 	void removeSelectedConstellation();
 	void updateEditConstellationButton();
 	void updateRemoveConstellationButton();
+	void centerViewOnConstellation(QListWidgetItem *item);
 	void updateRemovePolygonButton();
 	void saveLicense();
 	void updateSkyCultureTimeValue(int year);
@@ -101,6 +114,12 @@ private slots:
 	void cancelAddPolygon();
 	// (uncomment when multiple regions are used)
 	//void checkMutExRegions(const QStringList checkedItems);
+	void cnUpdateVisibleField(CnObjectType type);
+	void cnAddNew();
+	void cnSaveChanges();
+	void cnRemoveEntry();
+	void cnUseSelectedObject();
+	void cnOnTableSelectionChanged();
 
 private:
 	Ui_scmSkyCultureDialog *ui = nullptr;
@@ -123,14 +142,6 @@ private:
 		"Scroll UP / DOWN: Zoom in / out of the map\n"
 		"CTRL + Scroll: Fine grained zoom"
 		);
-
-	/**
-	 * @brief Gets the display name from a constellation.
-	 *
-	 * @param constellation The constellation to get the display name from.
-	 * @return The display name of the constellation.
-	 */
-	QString getDisplayNameFromConstellation(const scm::ScmConstellation &constellation) const;
 
 	/**
 	 * @brief Sets the id of the sky culture from the name.
@@ -187,6 +198,34 @@ private:
 	scm::Description getDescriptionFromTextEdit() const;
 
 	/**
+	 * @brief Populates the overview/description tab fields from a Description.
+	 * 
+	 * @param desc The Description to populate from.
+	 */
+	void populateDescriptionTab(const scm::Description &desc);
+
+	/**
+	 * @brief Populates the references list from a serialised references string.
+	 * 
+	 * @param references The references string to populate from.
+	 */
+	void populateReferences(const QString &references);
+
+	/**
+	 * @brief Populates the common names table from the sky culture.
+	 * 
+	 * @param sc The sky culture to populate from.
+	 */
+	void populateCommonNames(const QMap<QString, QList<scm::ScmCulturalName>> &culturalNames);
+
+	/**
+	 * @brief Populates the geographical locations tab from the sky culture.
+	 * 
+	 * @param sc The sky culture to populate from.
+	 */
+	void populateLocationsTab(scm::ScmSkyCulture *sc);
+
+	/**
 	 * @brief Compiles the References section from all the references in the list.
 	 */
 	QString makeReferencesSection() const;
@@ -202,6 +241,63 @@ private:
 	 *
 	 */
 	void initSkyCultureTime();
+
+	/**
+	 * @brief Clears the common names form.
+	 */
+	void cnClearForm();
+
+	/**
+	 * @brief Refreshes the common names table.
+	 */
+	void cnRefreshTable();
+
+	/**
+	 * @brief Reads the common name data from the form and returns it as a ScmCulturalName object.
+	 */
+	scm::ScmCulturalName cnReadForm() const;
+
+	/**
+	 * @brief Populates the common names form with data from a given ScmCulturalName object.
+	 */
+	void cnPopulateForm(const QString &key, const scm::ScmCulturalName &name);
+
+	/**
+	 * @brief Builds the normalized object key from the type combo box and the identifier line edit.
+	 *        Stars: "HIP <id>", Planets: "NAME <id>", DSOs: "<id>".
+	 */
+	QString cnBuildKey() const;
+
+	/// Common names entries stored as (object key, name data) pairs.
+	QList<QPair<QString, scm::ScmCulturalName>> cnEntries;
+
+	/// Index of the entry currently loaded in the form (-1 = new entry).
+	int cnEditingRow = -1;
+
+	/**
+	 * @brief Validates the common names form and builds the key and name if valid.
+	 *        Shows a warning message and returns false on the first validation failure.
+	 * @param outKey   Receives the normalized object key on success.
+	 * @param outName  Receives the cultural name data on success.
+	 * @return true if all validation checks pass, false otherwise.
+	 */
+	bool cnValidateForm(QString &outKey, scm::ScmCulturalName &outName);
+
+	/**
+	 * @brief Returns true if cnEntries already contains an entry with the given key and special value.
+	 * @param excludeRow Row index to skip during the search (-1 to check all rows).
+	 */
+	bool cnIsDuplicate(const QString &key, StelObject::CulturalNameSpecial special, int excludeRow = -1) const;
+
+	/**
+	 * @brief Checks whether the object identified by the key exists in the current Stellarium database.
+	 *        If not found, a warning dialog is shown to the user, allowing them to either proceed with 
+	 * 		  saving the entry or cancel and fix the key.
+	 */
+	bool cnCheckObjectExists(const QString &key);
+
+	/// When true, the warning for objects that don't exist is suppressed for the rest of the session.
+	bool cnSkipObjectExistCheck = false;
 };
 
 #endif // SCM_SKY_CULTURE_DIALOG_HPP

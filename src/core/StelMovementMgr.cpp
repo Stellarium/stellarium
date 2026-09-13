@@ -152,9 +152,8 @@ void StelMovementMgr::init()
 	objectMgr = GETSTELMODULE(StelObjectMgr);
 	Q_ASSERT(conf);
 	Q_ASSERT(objectMgr);
-	connect(objectMgr, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)),
-		this, SLOT(selectedObjectChange(StelModule::StelModuleSelectAction)));
-	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(bindingFOVActions()));
+	connect(objectMgr, &StelObjectMgr::selectedObjectChanged,   this, &StelMovementMgr::selectedObjectChange);
+	connect(&StelApp::getInstance(), &StelApp::languageChanged, this, &StelMovementMgr::bindingFOVActions);
 
 	flagEnableMoveAtScreenEdge = conf->value("navigation/flag_enable_move_at_screen_edge",false).toBool();
 	mouseZoomSpeed = conf->value("navigation/mouse_zoom",30).toInt();
@@ -214,7 +213,7 @@ void StelMovementMgr::init()
 
 	viewportOffsetTimeline=new QTimeLine(1000, this);
 	viewportOffsetTimeline->setFrameRange(0, 100);
-	connect(viewportOffsetTimeline, SIGNAL(valueChanged(qreal)), this, SLOT(handleViewportOffsetMovement(qreal)));
+	connect(viewportOffsetTimeline, &QTimeLine::valueChanged, this, &StelMovementMgr::handleViewportOffsetMovement);
 	targetViewportOffset.set(core->getViewportHorizontalOffset(), core->getViewportVerticalOffset());
 }
 
@@ -256,6 +255,7 @@ void StelMovementMgr::resetInitViewPos()
 
 		//qDebug() << "   upVectorMountFrame becomes " << upVectorMountFrame[0] << "/" << upVectorMountFrame[1] << "/" << upVectorMountFrame[2];
 	}
+	core->setClearSkyOnce();
 }
 
 void StelMovementMgr::bindingFOVActions()
@@ -303,6 +303,7 @@ void StelMovementMgr::setEquatorialMount(bool b)
 		int yPosition = qRound(projectorParams.viewportCenter[1] - yPositionOffset - painter.getFontMetrics().height()/2);
 		lastMessageID = GETSTELMODULE(LabelMgr)->labelScreen(mode, xPosition, yPosition, true, StelApp::getInstance().getScreenFontSize() + 3, "#99FF99", true, 2000);
 	}
+	core->setClearSkyOnce();
 }
 
 void StelMovementMgr::setMountMode(MountMode m)
@@ -390,6 +391,7 @@ bool StelMovementMgr::handleMouseMoves(int x, int y, Qt::MouseButtons)
 			// We can hardly use the mouse exactly enough to go to the zenith/pole. Any mouse motion can safely reset the simplified up vector.
 			//qDebug() << "handleMouseMoves: resetting Up vector.";
 			setViewUpVector(Vec3d(0., 0., 1.));
+			core->setClearSkyOnce();
 			return true;
 		}
 	}
@@ -428,6 +430,7 @@ void StelMovementMgr::handleKeys(QKeyEvent* event)
 			case Qt::Key_Left:
 				if (gimbal && event->modifiers().testFlag(Qt::AltModifier)){
 					gimbal->addToLongitude(-5.);
+					updateMotion(0.0);
 				} else {
 					turnLeft(true);
 				}
@@ -435,12 +438,14 @@ void StelMovementMgr::handleKeys(QKeyEvent* event)
 			case Qt::Key_Right:
 				if (gimbal && event->modifiers().testFlag(Qt::AltModifier)){
 					gimbal->addToLongitude(5.);
+					updateMotion(0.0);
 				} else
 				turnRight(true);
 				break;
 			case Qt::Key_Up:
 				if (gimbal && event->modifiers().testFlag(Qt::AltModifier)){
 					gimbal->addToLatitude(5.);
+					updateMotion(0.0);
 				}
 				else if (event->modifiers().testFlag(Qt::ControlModifier)){
 					zoomIn(true);
@@ -451,6 +456,7 @@ void StelMovementMgr::handleKeys(QKeyEvent* event)
 			case Qt::Key_Down:
 				if (gimbal && event->modifiers().testFlag(Qt::AltModifier)){
 					gimbal->addToLatitude(-5.);
+					updateMotion(0.0);
 				}
 				else if (event->modifiers().testFlag(Qt::ControlModifier)) {
 					zoomOut(true);
@@ -470,12 +476,14 @@ void StelMovementMgr::handleKeys(QKeyEvent* event)
 				if (gimbal && event->modifiers().testFlag(Qt::AltModifier))
 				{
 					gimbal->addToDistance(gimbal->getDistance()*0.05);
+					updateMotion(0.0);
 				}
 				break;
 			case Qt::Key_Home:
 				if (gimbal && event->modifiers().testFlag(Qt::AltModifier))
 				{
 					gimbal->addToDistance(-gimbal->getDistance()*0.05);
+					updateMotion(0.0);
 				}
 				break;
 			case Qt::Key_Shift:
@@ -772,6 +780,7 @@ void StelMovementMgr::turnRight(bool s)
 	}
 	else
 		deltaAz = 0;
+	core->setClearSkyOnce();
 }
 
 void StelMovementMgr::turnLeft(bool s)
@@ -784,6 +793,7 @@ void StelMovementMgr::turnLeft(bool s)
 	}
 	else
 		deltaAz = 0;
+	core->setClearSkyOnce();
 }
 
 void StelMovementMgr::turnUp(bool s)
@@ -796,6 +806,7 @@ void StelMovementMgr::turnUp(bool s)
 	}
 	else
 		deltaAlt = 0;
+	core->setClearSkyOnce();
 }
 
 void StelMovementMgr::turnDown(bool s)
@@ -808,19 +819,26 @@ void StelMovementMgr::turnDown(bool s)
 	}
 	else
 		deltaAlt = 0;
+	core->setClearSkyOnce();
 }
 
 
 void StelMovementMgr::zoomIn(bool s)
 {
 	if (flagEnableZoomKeys)
+	{
 		deltaFov = -1*(s!=0);
+		core->setClearSkyOnce();
+	}
 }
 
 void StelMovementMgr::zoomOut(bool s)
 {
 	if (flagEnableZoomKeys)
+	{
 		deltaFov = (s!=0);
+		core->setClearSkyOnce();
+	}
 }
 
 void StelMovementMgr::lookEast(bool zero)
@@ -898,7 +916,7 @@ void StelMovementMgr::lookNorth(bool zero)
 	}
 
 	StelUtils::rectToSphe(&cy,&alt,core->j2000ToAltAz(getViewDirectionJ2000(), StelCore::RefractionOff));
-	cy = static_cast<float>(M_PI);
+	cy = M_PIf;
 	StelUtils::spheToRect(cy, alt, dir);
 	setViewDirectionJ2000(core->altAzToJ2000(dir.toVec3d(), StelCore::RefractionOff));
 
@@ -941,32 +959,42 @@ void StelMovementMgr::lookSouth(bool zero)
 	}
 }
 
-void StelMovementMgr::lookZenith(void)
+// Look immediately towards Zenith, turning selected azimuth horizon to screen bottom.
+// @param azi bottom azimuth. (default 180=South, 90=East, etc.)
+void StelMovementMgr::lookZenith(double azi)
 {
-	Vec3f dir;
-	StelUtils::spheToRect(M_PIf, M_PI_2f, dir);
+	Vec3d dir;
+	StelUtils::spheToRect(-azi*M_PI_180, M_PI_2, dir);
 	//qDebug() << "lookZenith: Up is " << upVectorMountFrame[0] << "/" << upVectorMountFrame[1] << "/" << upVectorMountFrame[2];
-	setViewDirectionJ2000(core->altAzToJ2000(dir.toVec3d(), StelCore::RefractionOff));
+	setViewDirectionJ2000(core->altAzToJ2000(dir, StelCore::RefractionOff));
 	//qDebug() << "lookZenith: View is " << viewDirectionMountFrame[0] << "/" << viewDirectionMountFrame[1] << "/" << viewDirectionMountFrame[2];
 	if (mountMode==MountAltAzimuthal)
 	{	// ensure a stable up vector that makes the bottom of the screen point south.
-		upVectorMountFrame.set(-1., 0., 0.);
+		upVectorMountFrame.set(cos(-azi*M_PI_180), sin(-azi*M_PI_180), 0.);
 		//qDebug() << "lookZenith: better Up is " << upVectorMountFrame[0] << "/" << upVectorMountFrame[1] << "/" << upVectorMountFrame[2];
 	}
+	else
+		if (azi != 180.0)
+			qWarning() << "StelMovementMgr::lookZenith() in Equatorial mount mode cannot set custom azimuth" << azi;
 }
 
-void StelMovementMgr::lookNadir(void)
+// Look immediately towards Nadir, turning selected horizon azimuth to screen top.
+// @param azi top azimuth. (default 180=South, 90=East, etc.)
+void StelMovementMgr::lookNadir(double azi)
 {
-	Vec3f dir;
-	StelUtils::spheToRect(M_PIf, -M_PI_2f, dir);
+	Vec3d dir;
+	StelUtils::spheToRect(M_PI-azi*M_PI_180, -M_PI_2, dir);
 	//qDebug() << "lookNadir: Up is " << upVectorMountFrame[0] << "/" << upVectorMountFrame[1] << "/" << upVectorMountFrame[2];
-	setViewDirectionJ2000(core->altAzToJ2000(dir.toVec3d(), StelCore::RefractionOff));
+	setViewDirectionJ2000(core->altAzToJ2000(dir, StelCore::RefractionOff));
 	//qDebug() << "lookNadir: View is " << viewDirectionMountFrame[0] << "/" << viewDirectionMountFrame[1] << "/" << viewDirectionMountFrame[2];
 	if (mountMode==MountAltAzimuthal)
 	{	// ensure a stable up vector that makes the top of the screen point south.
-		upVectorMountFrame.set(-1., 0., 0.);
+		upVectorMountFrame.set(cos(M_PI-azi*M_PI_180), sin(M_PI-azi*M_PI_180), 0.);
 		//qDebug() << "lookNadir: better Up is " << upVectorMountFrame[0] << "/" << upVectorMountFrame[1] << "/" << upVectorMountFrame[2];
 	}
+	else
+		if (azi != 180.0)
+			qWarning() << "StelMovementMgr::lookNadir() in Equatorial mount mode cannot set custom azimuth" << azi;
 }
 
 void StelMovementMgr::lookTowardsNCP(void)

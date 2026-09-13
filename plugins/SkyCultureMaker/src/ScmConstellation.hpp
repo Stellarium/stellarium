@@ -74,6 +74,14 @@ public:
 	const ScmCulturalName &getCulturalName() const;
 
 	/**
+	 * @brief Gets a human-readable display name combining the translated name and
+	 *        id, e.g. "The Market (tianquiztli)".
+	 *
+	 * @return The display name.
+	 */
+	QString getDisplayName() const { return culturalName.translated + " (" + id + ")"; }
+
+	/**
 	* @brief Sets the description of the constellation.
 	* 
 	* @param description The description.
@@ -114,6 +122,14 @@ public:
 	 * @return The lines of the constellation.
 	 */
 	const std::vector<ConstellationLine> &getLines() const;
+
+	/**
+	 * @brief Gets the J2000 direction to the constellation's center, i.e. the
+	 *        averaged position of all line endpoints used for the name label.
+	 *
+	 * @return Normalized J2000 direction vector.
+	 */
+	const Vec3d &getCenterPosition() const { return XYZname; }
 
 	/**
 	 * @brief Draws the constellation lines, name and artwork using default colors.

@@ -80,7 +80,8 @@ class StelApp : public QObject
 {
 	Q_OBJECT
 	Q_PROPERTY(bool nightMode               READ getVisionModeNight         WRITE setVisionModeNight         NOTIFY visionNightModeChanged)
-	Q_PROPERTY(bool flagShowDecimalDegrees  READ getFlagShowDecimalDegrees  WRITE setFlagShowDecimalDegrees  NOTIFY flagShowDecimalDegreesChanged)
+	Q_PROPERTY(bool flagUseDecDegreesCoords READ getFlagUseDecDegreesCoords WRITE setFlagUseDecDegreesCoords NOTIFY flagUseDecDegreesCoordsChanged)
+	Q_PROPERTY(bool flagUseDecDegreesOther  READ getFlagUseDecDegreesOther  WRITE setFlagUseDecDegreesOther  NOTIFY flagUseDecDegreesOtherChanged)
 	Q_PROPERTY(bool flagUseAzimuthFromSouth READ getFlagSouthAzimuthUsage   WRITE setFlagSouthAzimuthUsage   NOTIFY flagUseAzimuthFromSouthChanged)
 	Q_PROPERTY(bool flagUseNegativeHourAngles READ getFlagUseNegativeHourAngles WRITE setFlagUseNegativeHourAngles NOTIFY flagUseNegativeHourAnglesChanged)
 	Q_PROPERTY(bool flagUsePolarDistance    READ getFlagPolarDistanceUsage  WRITE setFlagPolarDistanceUsage  NOTIFY flagUsePolarDistanceChanged)
@@ -313,10 +314,15 @@ public slots:
 	//! Get flag for activating overwrite mode for text color in info panel.
 	bool getFlagOverwriteInfoColor() const {return flagOverwriteInfoColor; }
 
-	//! Set flag for showing decimal degree in various places.
-	void setFlagShowDecimalDegrees(bool b);
-	//! Get flag for showing decimal degree in various places.
-	bool getFlagShowDecimalDegrees() const {return flagShowDecimalDegrees;}
+	//! Set flag for using decimal degrees for coordinates.
+	void setFlagUseDecDegreesCoords(bool b);
+	//! Get flag for using decimal degrees for coordinates.
+	bool getFlagUseDecDegreesCoords() const {return flagUseDecDegreesCoords;}
+
+	//! Set flag for using decimal degrees in various places, except the coordinates.
+	void setFlagUseDecDegreesOther(bool b);
+	//! Get flag for using decimal degrees in various places, except the coordinates.
+	bool getFlagUseDecDegreesOther() const {return flagUseDecDegreesOther;}
 
 	//! Set flag for using calculation of azimuth from south towards west (instead north towards east)
 	void setFlagSouthAzimuthUsage(bool use);
@@ -394,7 +400,8 @@ public slots:
 	void quit();
 signals:
 	void visionNightModeChanged(bool);
-	void flagShowDecimalDegreesChanged(bool);
+	void flagUseDecDegreesCoordsChanged(bool);
+	void flagUseDecDegreesOtherChanged(bool);
 	void flagUseAzimuthFromSouthChanged(bool);
 	void flagUseNegativeHourAnglesChanged(bool);
 	void flagUsePolarDistanceChanged(bool);
@@ -571,7 +578,8 @@ private:
 	StelViewportEffect* viewportEffect;
 	QOpenGLFunctions* gl;
 	
-	bool flagShowDecimalDegrees;    //!< Format infotext with decimal degrees, not minutes/seconds
+	bool flagUseDecDegreesCoords;   //!< Formatting infotext with decimal degrees for coordinates (not degrees/minutes/seconds)
+	bool flagUseDecDegreesOther;    //!< Formatting infotext with decimal degrees for non coordinates data (not degrees/minutes/seconds)
 	bool flagUseAzimuthFromSouth;   //!< Display calculate azimuth from south towards west (as in some astronomical literature)
 	bool flagUseNegativeHourAngles; //!< Count hour angles -12h...12h, not 0h...24h
 	bool flagUsePolarDistance;      //!< Display calculate polar distance for equatorial coordinates

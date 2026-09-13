@@ -297,6 +297,18 @@ void Calendars::init()
 	calendars.insert("Vietnamese", new VietnameseCalendar(jd));
 	// TODO: Add your Calendar subclasses here.
 
+	// Wire up Maya calendars for alternative epochs.
+	connect(this, &Calendars::mayaCorrelationJDChanged, this, [=](){
+		MayaLongCountCalendar *mlc=static_cast<MayaLongCountCalendar*>(getCal("MayaLongCount"));
+		mlc->setJD(StelApp::getInstance().getCore()->getJD());
+		MayaTzolkinCalendar *mtc=static_cast<MayaTzolkinCalendar*>(getCal("MayaTzolkin"));
+		mtc->updateFromMayaEpoch();
+		mtc->setJD(StelApp::getInstance().getCore()->getJD());
+		MayaHaabCalendar *mhc=static_cast<MayaHaabCalendar*>(getCal("MayaHaab"));
+		mhc->updateFromMayaEpoch();
+		mhc->setJD(StelApp::getInstance().getCore()->getJD());
+	});
+
 	foreach (Calendar* cal, calendars)
 	{
 #ifndef NDEBUG
@@ -365,6 +377,8 @@ void Calendars::loadSettings()
 	showBahaiArithmetic(    conf->value("Calendars/show_bahai_arithmetic", false).toBool());
 	showBahaiAstronomical(  conf->value("Calendars/show_bahai_astronomical", false).toBool());
 	showTibetan(            conf->value("Calendars/show_tibetan", false).toBool());
+
+	setMayaCorrelationJD(conf->value("Calendars/maya_correlation_jd", 584283).toInt());
 }
 
 void Calendars::restoreDefaultSettings()
@@ -797,6 +811,20 @@ void Calendars::showAstroHinduLunar(bool b)
 		conf->setValue("Calendars/show_astro_hindu_lunar", b);
 		emit showAstroHinduLunarChanged(b);
 	}
+}
+
+int Calendars::getMayaCorrelationJD()
+{
+	return mayaCorrelationJD;
+}
+
+// Set correlation constant. RD's default is 584283, but there are others.
+void Calendars::setMayaCorrelationJD(const int jd)
+{
+	mayaCorrelationJD=jd;
+	MayaLongCountCalendar::mayanEpoch=Calendar::fixedFromJD(jd,false);
+	conf->setValue("Calendars/maya_correlation_jd", jd);
+	emit mayaCorrelationJDChanged(jd);
 }
 
 bool Calendars::isMayaLongCountDisplayed() const { return flagShowMayaLongCount;}

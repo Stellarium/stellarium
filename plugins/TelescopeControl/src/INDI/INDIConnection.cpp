@@ -166,8 +166,11 @@ void INDIConnection::unParkTelescope()
 		return;
 	}
 
+	// Some drivers (e.g. INDIGO's LX200/RainbowAstro emulation) expose the
+	// TELESCOPE_PARK property with only a single "PARK" item and no "UNPARK"
+	// item - must be null-checked before dereferencing.
 	auto park = switchVector.findWidgetByName("PARK");
-	if (park->s == ISS_ON)
+	if (park && park->s == ISS_ON)
 	{
 		park->setState(ISS_OFF);
 		sendNewSwitch(switchVector);
@@ -175,7 +178,7 @@ void INDIConnection::unParkTelescope()
 
 	// The telescope will work without running command below, but I use it to avoid undefined state for parking property.
 	auto unpark = switchVector.findWidgetByName("UNPARK");
-	if (unpark->s == ISS_OFF)
+	if (unpark && unpark->s == ISS_OFF)
 	{
 		unpark->setState(ISS_ON);
 		sendNewSwitch(switchVector);
@@ -199,14 +202,14 @@ void INDIConnection::parkTelescope()
 	}
 
 	auto park = switchVector.findWidgetByName("PARK");
-	if (park->s == ISS_OFF)
+	if (park && park->s == ISS_OFF)
 	{
 		park->setState(ISS_ON);
 		sendNewSwitch(switchVector);
 	}
 
 	auto unpark = switchVector.findWidgetByName("UNPARK");
-	if (unpark->s == ISS_ON)
+	if (unpark && unpark->s == ISS_ON)
 	{
 		unpark->setState(ISS_OFF);
 		sendNewSwitch(switchVector);

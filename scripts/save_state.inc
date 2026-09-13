@@ -1,11 +1,12 @@
 //
 // Name:        Save and restore display state
-// Version:     0.22.3
+// Version:     0.22.4
 // License:     Public Domain
 // Authors:     Matthew Gates (matthewg42) (Original author)
 //              Alexander Wolf (alex-w)
 //              Georg Zotti (gzotti)
 //              Brian W. Mulligan (astrobit)
+//              Nicolas Martignoni (martignoni)
 // Description: Provide functions for saving and restoring state (view settings etc.)
 //              for use in other scripts via the include feature.  A state is 
 //              associated with some string identifier.  This is arbitrary.  You can 
@@ -29,6 +30,8 @@
 // 2019-08-14   Brian W. Mulligan (astrobit)
 //    * Fix to work under stellarium 0.19
 //    * Add change log, version, and author list to header
+// 2026-06-29   Nicolas Martignoni (martignoni)
+//    * Remove reference to core.getSkyLanguage and core.setSkyLanguage (removed in Stellarium 25.3)
 
 // declare a global variable to store saved state
 var savedStates = new Array();
@@ -103,7 +106,6 @@ function saveState(stateName)
 	savedStates[stateName]["DecAngle"] = core.getViewDecAngle();
 
 	savedStates[stateName]["AppLanguage"] = core.getAppLanguage();
-	savedStates[stateName]["SkyLanguage"] = core.getSkyLanguage();
 
 	core.debug("saveState() - state saved with ID: " + stateName);
 }
@@ -196,7 +198,6 @@ function restoreState(stateName, options)
 	core.setDiskViewport(savedStates[stateName]["DiskViewport"]);
 	core.setObserverLocation(savedStates[stateName]["ObserverLocation"]);
 	core.setAppLanguage(savedStates[stateName]["AppLanguage"]);
-	core.setSkyLanguage(savedStates[stateName]["SkyLanguage"]);
 
 	// optional restoration options...
 	if (!options["time"])

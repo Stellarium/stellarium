@@ -61,6 +61,7 @@ QMutex* StelPainter::globalMutex = new QMutex();
 
 QCache<QByteArray, StringTexture> StelPainter::texCache(TEX_CACHE_LIMIT);
 QOpenGLShaderProgram* StelPainter::texturesShaderProgram=Q_NULLPTR;
+QOpenGLShaderProgram* StelPainter::adjustedTexturesShaderProgram=Q_NULLPTR;
 QOpenGLShaderProgram* StelPainter::textShaderProgram=Q_NULLPTR;
 QOpenGLShaderProgram* StelPainter::basicShaderProgram=Q_NULLPTR;
 QOpenGLShaderProgram* StelPainter::colorShaderProgram=Q_NULLPTR;
@@ -69,6 +70,7 @@ QOpenGLShaderProgram* StelPainter::wideLineShaderProgram=Q_NULLPTR;
 QOpenGLShaderProgram* StelPainter::colorfulWideLineShaderProgram=Q_NULLPTR;
 StelPainter::BasicShaderVars StelPainter::basicShaderVars;
 StelPainter::TexturesShaderVars StelPainter::texturesShaderVars;
+StelPainter::TexturesShaderVars StelPainter::adjustedTexturesShaderVars;
 StelPainter::TextShaderVars StelPainter::textShaderVars;
 StelPainter::BasicShaderVars StelPainter::colorShaderVars;
 StelPainter::TexturesColorShaderVars StelPainter::texturesColorShaderVars;
@@ -120,6 +122,36 @@ void StelPainter::GLState::reset()
 {
 	*this = GLState(gl);
 	apply();
+}
+
+void StelPainter::setTextureDisplayAdjustment(float gamma, float saturation, float brightness,
+                                              float contrast, int colorChannel, bool invertedColors,
+                                              bool premultiplyAlpha, float alpha)
+{
+	textureGamma = qBound(0.1f, gamma, 5.f);
+	textureSaturation = qBound(0.f, saturation, 3.f);
+	textureBrightness = qBound(0.f, brightness, 5.f);
+	textureContrast = qBound(0.f, contrast, 5.f);
+	textureColorChannel = qBound(0, colorChannel, 3);
+	textureInvertedColors = invertedColors;
+	texturePremultiplyAlpha = premultiplyAlpha;
+	textureAlpha = qBound(0.f, alpha, 1.f);
+}
+
+void StelPainter::resetTextureDisplayAdjustment()
+{
+	setTextureDisplayAdjustment(1.f, 1.f, 1.f, 1.f, 0, false, false);
+}
+
+bool StelPainter::hasTextureDisplayAdjustment() const
+{
+	return !qFuzzyCompare(textureGamma, 1.f) ||
+	       !qFuzzyCompare(textureSaturation, 1.f) ||
+	       !qFuzzyCompare(textureBrightness, 1.f) ||
+	       !qFuzzyCompare(textureContrast, 1.f) ||
+	       textureColorChannel != 0 ||
+	       textureInvertedColors ||
+	       texturePremultiplyAlpha;
 }
 
 bool StelPainter::linkProg(QOpenGLShaderProgram* prog, const QString& name)
@@ -2327,6 +2359,70 @@ void main()
 	texturesShaderVars.texColor = texturesShaderProgram->uniformLocation("texColor");
 	texturesShaderVars.texture = texturesShaderProgram->uniformLocation("tex");
 
+	QOpenGLShader adjustedFshader2(QOpenGLShader::Fragment);
+	const auto adjustedFsrc2 =
+		StelOpenGL::globalShaderPrefix(StelOpenGL::FRAGMENT_SHADER) +
+		makeSaturationShader()+
+		"VARYING mediump vec2 texc;\n"
+		"uniform sampler2D tex;\n"
+		"uniform mediump vec4 texColor;\n"
+		"uniform mediump float gamma;\n"
+		"uniform mediump float saturation;\n"
+		"uniform mediump float brightness;\n"
+		"uniform mediump float contrast;\n"
+		"uniform int colorChannel;\n"
+		"uniform int invertedColors;\n"
+		"uniform int premultiplyAlpha;\n"
+		"void main(void)\n"
+		"{\n"
+		"    mediump vec4 color = texture2D(tex, texc)*texColor;\n"
+		"    color.rgb = max(color.rgb * brightness, vec3(0.0));\n"
+		"    if (contrast != 1.0)\n"
+		"        color.rgb = clamp((color.rgb - vec3(0.5)) * contrast + vec3(0.5), vec3(0.0), vec3(1.0));\n"
+		"    if (saturation != 1.0)\n"
+		"        color.rgb = saturate(color.rgb, saturation);\n"
+		"    if (gamma != 1.0)\n"
+		"        color.rgb = pow(color.rgb, vec3(1.0 / max(gamma, 0.001)));\n"
+		"    if (invertedColors != 0)\n"
+		"        color.rgb = vec3(1.0) - clamp(color.rgb, vec3(0.0), vec3(1.0));\n"
+		"    if (colorChannel != 0)\n"
+		"    {\n"
+		"        mediump float luma = dot(color.rgb, vec3(0.2126, 0.7152, 0.0722));\n"
+		"        if (colorChannel == 1)\n"
+		"            color.rgb = vec3(luma, 0.0, 0.0);\n"
+		"        else if (colorChannel == 2)\n"
+		"            color.rgb = vec3(0.0, luma, 0.0);\n"
+		"        else\n"
+		"            color.rgb = vec3(0.0, 0.0, luma);\n"
+		"    }\n"
+		"    if (premultiplyAlpha != 0)\n"
+		"    {\n"
+		"        color.rgb *= color.a;\n"
+		"        color.a = 1.0;\n"
+		"    }\n"
+		"    FRAG_COLOR = color;\n"
+		"}\n";
+	adjustedFshader2.compileSourceCode(adjustedFsrc2);
+	if (!adjustedFshader2.log().isEmpty())
+		qWarning().noquote() << "StelPainter: Warnings while compiling adjustedFshader2: " << adjustedFshader2.log();
+
+	adjustedTexturesShaderProgram = new QOpenGLShaderProgram(QOpenGLContext::currentContext());
+	adjustedTexturesShaderProgram->addShader(&vshader2);
+	adjustedTexturesShaderProgram->addShader(&adjustedFshader2);
+	linkProg(adjustedTexturesShaderProgram, "adjustedTexturesShaderProgram");
+	adjustedTexturesShaderVars.projectionMatrix = adjustedTexturesShaderProgram->uniformLocation("projectionMatrix");
+	adjustedTexturesShaderVars.texCoord = adjustedTexturesShaderProgram->attributeLocation("texCoord");
+	adjustedTexturesShaderVars.vertex = adjustedTexturesShaderProgram->attributeLocation("vertex");
+	adjustedTexturesShaderVars.texColor = adjustedTexturesShaderProgram->uniformLocation("texColor");
+	adjustedTexturesShaderVars.texture = adjustedTexturesShaderProgram->uniformLocation("tex");
+	adjustedTexturesShaderVars.gamma = adjustedTexturesShaderProgram->uniformLocation("gamma");
+	adjustedTexturesShaderVars.saturation = adjustedTexturesShaderProgram->uniformLocation("saturation");
+	adjustedTexturesShaderVars.brightness = adjustedTexturesShaderProgram->uniformLocation("brightness");
+	adjustedTexturesShaderVars.contrast = adjustedTexturesShaderProgram->uniformLocation("contrast");
+	adjustedTexturesShaderVars.colorChannel = adjustedTexturesShaderProgram->uniformLocation("colorChannel");
+	adjustedTexturesShaderVars.invertedColors = adjustedTexturesShaderProgram->uniformLocation("invertedColors");
+	adjustedTexturesShaderVars.premultiplyAlpha = adjustedTexturesShaderProgram->uniformLocation("premultiplyAlpha");
+
 	// Texture shader program + interpolated color per vertex
 	QOpenGLShader vshader4(QOpenGLShader::Vertex);
 	const auto vsrc4 =
@@ -2354,12 +2450,43 @@ void main()
 		"VARYING mediump vec2 texc;\n"
 		"VARYING mediump vec4 outColor;\n"
 		"uniform sampler2D tex;\n"
-		"uniform lowp float saturation;\n"
+	"uniform lowp float saturation;\n"
+	"uniform mediump float gamma;\n"
+	"uniform mediump float brightness;\n"
+	"uniform mediump float contrast;\n"
+	"uniform int colorChannel;\n"
+		"uniform int invertedColors;\n"
+		"uniform int premultiplyAlpha;\n"
+		"uniform mediump float alpha;\n"
 		"void main(void)\n"
 		"{\n"
-		"    FRAG_COLOR = texture2D(tex, texc)*outColor;\n"
-		"    if (saturation != 1.0)\n"
-		"        FRAG_COLOR.rgb = saturate(FRAG_COLOR.rgb, saturation);\n"
+		"    mediump vec4 color = texture2D(tex, texc)*outColor;\n"
+	"    color.a *= alpha;\n"
+	"    color.rgb = max(color.rgb * brightness, vec3(0.0));\n"
+	"    if (contrast != 1.0)\n"
+	"        color.rgb = clamp((color.rgb - vec3(0.5)) * contrast + vec3(0.5), vec3(0.0), vec3(1.0));\n"
+	"    if (saturation != 1.0)\n"
+		"        color.rgb = saturate(color.rgb, saturation);\n"
+		"    if (gamma != 1.0)\n"
+		"        color.rgb = pow(color.rgb, vec3(1.0 / max(gamma, 0.001)));\n"
+		"    if (invertedColors != 0)\n"
+		"        color.rgb = vec3(1.0) - clamp(color.rgb, vec3(0.0), vec3(1.0));\n"
+		"    if (colorChannel != 0)\n"
+		"    {\n"
+		"        mediump float luma = dot(color.rgb, vec3(0.2126, 0.7152, 0.0722));\n"
+		"        if (colorChannel == 1)\n"
+		"            color.rgb = vec3(luma, 0.0, 0.0);\n"
+		"        else if (colorChannel == 2)\n"
+		"            color.rgb = vec3(0.0, luma, 0.0);\n"
+		"        else\n"
+		"            color.rgb = vec3(0.0, 0.0, luma);\n"
+		"    }\n"
+		"    if (premultiplyAlpha != 0)\n"
+		"    {\n"
+		"        color.rgb *= color.a;\n"
+		"        color.a = 1.0;\n"
+		"    }\n"
+		"    FRAG_COLOR = color;\n"
 		"}\n";
 	fshader4.compileSourceCode(fsrc4);
 	if (!fshader4.log().isEmpty())
@@ -2375,6 +2502,13 @@ void main()
 	texturesColorShaderVars.color = texturesColorShaderProgram->attributeLocation("color");
 	texturesColorShaderVars.texture = texturesColorShaderProgram->uniformLocation("tex");
 	texturesColorShaderVars.saturation = texturesColorShaderProgram->uniformLocation("saturation");
+	texturesColorShaderVars.gamma = texturesColorShaderProgram->uniformLocation("gamma");
+	texturesColorShaderVars.brightness = texturesColorShaderProgram->uniformLocation("brightness");
+	texturesColorShaderVars.contrast = texturesColorShaderProgram->uniformLocation("contrast");
+	texturesColorShaderVars.colorChannel = texturesColorShaderProgram->uniformLocation("colorChannel");
+	texturesColorShaderVars.invertedColors = texturesColorShaderProgram->uniformLocation("invertedColors");
+	texturesColorShaderVars.premultiplyAlpha = texturesColorShaderProgram->uniformLocation("premultiplyAlpha");
+	texturesColorShaderVars.alpha = texturesColorShaderProgram->uniformLocation("alpha");
 
 	const auto& glInfo = StelMainView::getInstance().getGLInformation();
 	if(glInfo.isCoreProfile && glInfo.isHighGraphicsMode && !glInfo.isGLES)
@@ -2527,6 +2661,8 @@ void StelPainter::deinitGLShaders()
 	colorShaderProgram = Q_NULLPTR;
 	delete texturesShaderProgram;
 	texturesShaderProgram = Q_NULLPTR;
+	delete adjustedTexturesShaderProgram;
+	adjustedTexturesShaderProgram = Q_NULLPTR;
 	delete texturesColorShaderProgram;
 	texturesColorShaderProgram = Q_NULLPTR;
 	delete wideLineShaderProgram;
@@ -2543,6 +2679,15 @@ void StelPainter::setArrays(const Vec3d* vertices, const Vec2f* texCoords, const
 	setVertexPointer(3, GL_DOUBLE, vertices);
 	setTexCoordPointer(2, GL_FLOAT, texCoords);
 	setColorPointer(3, GL_FLOAT, colorArray);
+	setNormalPointer(GL_FLOAT, normalArray);
+}
+
+void StelPainter::setArrays(const Vec3d* vertices, const Vec2f* texCoords, const Vec4f* colorArray, const Vec3f* normalArray)
+{
+	enableClientStates(vertices, texCoords, colorArray, normalArray);
+	setVertexPointer(3, GL_DOUBLE, vertices);
+	setTexCoordPointer(2, GL_FLOAT, texCoords);
+	setColorPointer(4, GL_FLOAT, colorArray);
 	setNormalPointer(GL_FLOAT, normalArray);
 }
 
@@ -2821,7 +2966,9 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool do
 	}
 	else if (texCoordArray.enabled && !colorArray.enabled && !normalArray.enabled && !wideLineMode)
 	{
-		pr = texturesShaderProgram;
+		const bool useAdjustedTextureShader = hasTextureDisplayAdjustment();
+		pr = useAdjustedTextureShader ? adjustedTexturesShaderProgram : texturesShaderProgram;
+		const TexturesShaderVars& shaderVars = useAdjustedTextureShader ? adjustedTexturesShaderVars : texturesShaderVars;
 		pr->bind();
 
 		const auto bufferSize = projectedVertexArray.vertexSizeInBytes()*numberOfVerticesToCopy +
@@ -2833,12 +2980,22 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool do
 		const auto texCoordDataSize = texCoordArray.vertexSizeInBytes()*numberOfVerticesToCopy;
 		verticesVBO->write(texCoordDataOffset, texCoordArray.pointer, texCoordDataSize);
 
-		pr->setAttributeBuffer(texturesShaderVars.vertex, projectedVertexArray.type, 0, projectedVertexArray.size);
-		pr->enableAttributeArray(texturesShaderVars.vertex);
-		pr->setUniformValue(texturesShaderVars.projectionMatrix, qMat);
-		pr->setUniformValue(texturesShaderVars.texColor, currentColor.toQVector());
-		pr->setAttributeBuffer(texturesShaderVars.texCoord, texCoordArray.type, texCoordDataOffset, texCoordArray.size);
-		pr->enableAttributeArray(texturesShaderVars.texCoord);
+		pr->setAttributeBuffer(shaderVars.vertex, projectedVertexArray.type, 0, projectedVertexArray.size);
+		pr->enableAttributeArray(shaderVars.vertex);
+		pr->setUniformValue(shaderVars.projectionMatrix, qMat);
+		pr->setUniformValue(shaderVars.texColor, currentColor.toQVector());
+		if (useAdjustedTextureShader)
+		{
+			pr->setUniformValue(shaderVars.gamma, textureGamma);
+			pr->setUniformValue(shaderVars.saturation, textureSaturation);
+			pr->setUniformValue(shaderVars.brightness, textureBrightness);
+			pr->setUniformValue(shaderVars.contrast, textureContrast);
+			pr->setUniformValue(shaderVars.colorChannel, textureColorChannel);
+			pr->setUniformValue(shaderVars.invertedColors, textureInvertedColors ? 1 : 0);
+			pr->setUniformValue(shaderVars.premultiplyAlpha, texturePremultiplyAlpha ? 1 : 0);
+		}
+		pr->setAttributeBuffer(shaderVars.texCoord, texCoordArray.type, texCoordDataOffset, texCoordArray.size);
+		pr->enableAttributeArray(shaderVars.texCoord);
 		//pr->setUniformValue(texturesShaderVars.texture, 0);    // use texture unit 0
 	}
 	else if (texCoordArray.enabled && colorArray.enabled && !normalArray.enabled && !wideLineMode)
@@ -2867,7 +3024,14 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool do
 		pr->setAttributeBuffer(texturesColorShaderVars.color, colorArray.type, colorDataOffset, colorArray.size);
 		pr->enableAttributeArray(texturesColorShaderVars.color);
 		//pr->setUniformValue(texturesShaderVars.texture, 0);    // use texture unit 0
-		pr->setUniformValue(texturesColorShaderVars.saturation, saturation);
+		pr->setUniformValue(texturesColorShaderVars.saturation, saturation * textureSaturation);
+		pr->setUniformValue(texturesColorShaderVars.gamma, textureGamma);
+		pr->setUniformValue(texturesColorShaderVars.brightness, textureBrightness);
+		pr->setUniformValue(texturesColorShaderVars.contrast, textureContrast);
+		pr->setUniformValue(texturesColorShaderVars.colorChannel, textureColorChannel);
+		pr->setUniformValue(texturesColorShaderVars.invertedColors, textureInvertedColors ? 1 : 0);
+		pr->setUniformValue(texturesColorShaderVars.premultiplyAlpha, texturePremultiplyAlpha ? 1 : 0);
+		pr->setUniformValue(texturesColorShaderVars.alpha, textureAlpha);
 	}
 	else if (!texCoordArray.enabled && colorArray.enabled && !normalArray.enabled)
 	{
@@ -2997,4 +3161,3 @@ StelPainter::ArrayDesc StelPainter::projectArray(const StelPainter::ArrayDesc& a
 	ret.enabled = array.enabled;
 	return ret;
 }
-

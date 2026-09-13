@@ -120,6 +120,8 @@ class Calendars : public StelModule
 	Q_PROPERTY(bool flagShowBahaiAstronomical   READ isBahaiAstronomicalDisplayed WRITE showBahaiAstronomical NOTIFY showBahaiAstronomicalChanged)
 	Q_PROPERTY(bool flagShowTibetan      READ isTibetanDisplayed        WRITE showTibetan       NOTIFY showTibetanChanged)
 
+	Q_PROPERTY(int mayaCorrelationJD READ getMayaCorrelationJD WRITE setMayaCorrelationJD NOTIFY mayaCorrelationJDChanged)
+
 public:
 	Calendars();
 	~Calendars() override;
@@ -148,12 +150,12 @@ public:
 	void loadSettings();
 
 	//! Get a pointer to the respective Calendar. Returns nullptr if not found.
-	//! Valid names: Julian, RevisedJulian, Gregorian, ISO, Icelandic, Roman, Olympic, Egyptian,
-	//! Armenian, Zoroastrian, Coptic, Ethiopic, Islamic, Hebrew,
-	//! OldHinduSolar, OldHinduLunar, NewHinduSolar, NewHinduLunar, Balinese, Tibetan,
-	//! BahaiArithmetic, BahaiAstronomical,
+	//! Valid names: Julian, RevisedJulian, Gregorian, ISO, Icelandic, Roman, Byzantine, Olympic, Egyptian,
+	//! Armenian, Zoroastrian, Coptic, Ethiopic, Chinese, Japanese, Korean, Vietnamese, Islamic, Hebrew,
+	//! OldHinduSolar, OldHinduLunar, NewHinduSolar, NewHinduLunar, AstroHinduSolar, AstroHinduLunar,
 	//! MayaLongCount, MayaHaab, MayaTzolkin, AztecXihuitl, AztecTonalpohualli
-	//! TODO: ADD HERE: Chinese,  ...
+	//! Balinese, FrenchAstronomical, FrenchArithmetic, PersianArithmetic, PersianAstronomical,
+	//! BahaiArithmetic, BahaiAstronomical, Tibetan.
 	Calendar* getCal(const QString &name);
 
 	#ifdef ENABLE_SCRIPTING
@@ -205,6 +207,7 @@ signals:
 	void showBahaiArithmeticChanged(bool b);
 	void showBahaiAstronomicalChanged(bool b);
 	void showTibetanChanged(bool b);
+	void mayaCorrelationJDChanged(int jd);
 
 public slots:
 	// Setters/getters
@@ -297,6 +300,9 @@ public slots:
 	bool isTibetanDisplayed() const;        //!< display Tibetan?
 	void showTibetan(bool b);	        //!< activate display of Tibetan
 
+	int getMayaCorrelationJD();                     //!< Get correlation constant. RD's default is 584283, but there are others.
+	void setMayaCorrelationJD(const int jd);        //!< Set correlation constant. RD's default is 584283, but there are others.
+
 private:
 	//! Create an HTML table which can be displayed or exported
 	QString createTableToDraw();
@@ -357,6 +363,7 @@ private:
 	bool flagShowBahaiArithmetic;
 	bool flagShowBahaiAstronomical;
 	bool flagShowTibetan;
+	int mayaCorrelationJD;
 };
 
 

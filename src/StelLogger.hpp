@@ -54,6 +54,7 @@ public:
 	static void writeLog(QString msg);
 
 private:
+	static QtMessageHandler defaultMsgHandler;
 	static QFile logFile;
 	static QString log;
 	static QMutex fileMutex;

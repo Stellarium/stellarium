@@ -34,25 +34,6 @@ AstroCalcAlmanacWidget::AstroCalcAlmanacWidget(QWidget* parent)
         , core(nullptr)
         , specMgr(nullptr)
         , localeMgr(nullptr)
-        , sunriseJD(0.)
-        , sunsetJD(0.)
-        , moonriseJD(0.)
-        , moonsetJD(0.)
-        , civilDawnJD(0.)
-        , civilDuskJD(0.)
-        , nauticalDawnJD(0.)
-        , nauticalDuskJD(0.)
-        , astronomicalDawnJD(0.)
-        , astronomicalDuskJD(0.)
-        , beforeSunriseJD(0.)
-        , afterSunsetJD(0.)
-        , minutesJD(0.)
-        , customSunriseJD(0.)
-        , customSunsetJD(0.)
-        , customSunAltitude(-7.) // obvious defaults
-        , customMoonriseJD(0.)
-        , customMoonsetJD(0.)
-        , customMoonAltitude(18.) // obvious defaults
         , ui(new Ui_astroCalcAlmanacWidget)
 {
 }
@@ -70,15 +51,15 @@ void AstroCalcAlmanacWidget::setup()
 	int customMinutes = conf->value("astro/custom_minutes", 60).toInt();
 	minutesJD = customMinutes / (24.*60.);
 	ui->spinBoxMinutes->setValue(customMinutes);
-	connect(ui->spinBoxMinutes, SIGNAL(valueChanged(int)), this, SLOT(saveMinutes(int)));
+	connect(ui->spinBoxMinutes, qOverload<int>(&QSpinBox::valueChanged), this, &AstroCalcAlmanacWidget::saveMinutes);
 
 	customSunAltitude = conf->value("astro/custom_sun_altitude", -7.0).toDouble();
 	ui->spinBoxCustomSunAltitude->setValue(customSunAltitude);
-	connect(ui->spinBoxCustomSunAltitude, SIGNAL(valueChanged(double)), this, SLOT(saveCustomSunAltitue(double)));
+	connect(ui->spinBoxCustomSunAltitude, qOverload<double>(&QDoubleSpinBox::valueChanged), this, &AstroCalcAlmanacWidget::saveCustomSunAltitue);
 
 	customMoonAltitude = conf->value("astro/custom_moon_altitude", 18.0).toDouble();
 	ui->spinBoxCustomMoonAltitude->setValue(customMoonAltitude);
-	connect(ui->spinBoxCustomMoonAltitude, SIGNAL(valueChanged(double)), this, SLOT(saveCustomMoonAltitue(double)));
+	connect(ui->spinBoxCustomMoonAltitude, qOverload<double>(&QDoubleSpinBox::valueChanged), this, &AstroCalcAlmanacWidget::saveCustomMoonAltitue);
 
 	populateData();
 
@@ -88,8 +69,8 @@ void AstroCalcAlmanacWidget::setup()
 	connect(core, &StelCore::dateChanged, this, [=](){ setSeasonTimes(); setTodayTimes(); });
 	// update the data when time rate is changed - it's hook for GH: #4906
 	connect(core, &StelCore::timeRateChanged, this, [=](){ setSeasonTimes(); setTodayTimes(); });
-	connect(specMgr, SIGNAL(eventYearChanged()), this, SLOT(setSeasonTimes()));
-	connect(specMgr, SIGNAL(eventYearChanged()), this, SLOT(setTodayTimes()));
+	connect(specMgr, &SpecificTimeMgr::eventYearChanged, this, &AstroCalcAlmanacWidget::setSeasonTimes);
+	connect(specMgr, &SpecificTimeMgr::eventYearChanged, this, &AstroCalcAlmanacWidget::setTodayTimes);
 
 	connect(ui->buttonMarchEquinoxCurrent, &QPushButton::clicked, this, [=](){specMgr->currentMarchEquinox();});
 	connect(ui->buttonMarchEquinoxNext, &QPushButton::clicked, this, [=](){specMgr->nextMarchEquinox();});

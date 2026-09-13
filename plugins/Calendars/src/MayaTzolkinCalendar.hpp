@@ -58,8 +58,11 @@ public slots:
 	inline static int mayanTzolkinOrdinal(const QVector<int> &tzolkin) {return StelUtils::imod((tzolkin.at(0) - 1 + 39*(tzolkin.at(0)-tzolkin.at(1))), 260);}
 
 	static int mayanTzolkinOnOrBefore(const QVector<int> &tzolkin, int rd);
+
+	//! Handle a change of Maya Epoch. Connect this in Calendars init.
+	void updateFromMayaEpoch();
 public:
-	static const int mayanTzolkinEpoch;
+	static int mayanTzolkinEpoch;
 private:
 	static QMap<int, QString> tzolkinNames;
 };

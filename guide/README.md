@@ -49,9 +49,9 @@ texlive-latex-extra texlive-pictures texlive-fonts-recommended texlive-fonts-ext
 ```
 
 
-### Mac OS X
+### macOS
 
-It is assumed that some system similar to TeXlive is available for Mac OS X. See https://www.tug.org/texlive/quickinstall.html
+It is assumed that some system similar to TeXlive is available for macOS. See https://www.tug.org/mactex/
 
 
 

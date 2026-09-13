@@ -47,6 +47,11 @@
 #include <sys/utsname.h>
 #endif
 
+namespace
+{
+double sqr(double x) { return x*x; }
+}
+
 namespace StelUtils
 {
 //! Return the full name of stellarium, e.g. "Stellarium 23.1"
@@ -764,6 +769,38 @@ double getDecAngle(const QString& str)
 
 	qDebug() << "getDecAngle failed to parse angle string: " << str;
 	return -0.0;
+}
+
+bool naturalLessThan(const QString& a, const QString& b)
+{
+	// Indices are int (not qsizetype) so QString::operator[] resolves
+	// unambiguously on Qt 5.12 + MSVC x64 — where qsizetype is long long but
+	// operator[] is only overloaded for int/uint, causing C2593 'operator ['
+	// is ambiguous. Catalog designations are short, so int range is enough.
+	int ia = 0, ib = 0;
+	while (ia < a.size() && ib < b.size())
+	{
+		if (a[ia].isDigit() && b[ib].isDigit())
+		{
+			int ja = ia, jb = ib;
+			while (ja < a.size() && a[ja].isDigit()) ++ja;
+			while (jb < b.size() && b[jb].isDigit()) ++jb;
+			const qlonglong numA = a.mid(ia, ja - ia).toLongLong();
+			const qlonglong numB = b.mid(ib, jb - ib).toLongLong();
+			if (numA != numB)
+				return numA < numB;
+			ia = ja;
+			ib = jb;
+		}
+		else
+		{
+			const QChar ca = a[ia].toLower(), cb = b[ib].toLower();
+			if (ca != cb)
+				return ca < cb;
+			++ia; ++ib;
+		}
+	}
+	return a.size() < b.size();
 }
 
 int getBiggerPowerOfTwo(int value)
@@ -1544,6 +1581,7 @@ QString hoursToHmsStr(const double hours, const bool minutesOnly, const bool col
 
 QString hoursToHmsNarration(const double hours, const bool minutesOnly, const bool colonFormat)
 {
+	Q_UNUSED(colonFormat)
 	const QString sHours=qc_("hours", "object narration");
 	const QString sMinutes=qc_("minutes", "object narration");
 	const QString sAndStr=qc_("and", "object narration");
@@ -3062,7 +3100,7 @@ float* ComputeCosSinTheta(const unsigned int slices)
 	Q_ASSERT(slices<=MAX_SLICES);
 	
 	// Difference angle between the stops. Always use 2*M_PI/slices!
-	const float dTheta = 2.f * static_cast<float>(M_PI) / static_cast<float>(slices);
+	const float dTheta = 2.f * M_PIf / static_cast<float>(slices);
 	float *cos_sin = cos_sin_theta;
 	float *cos_sin_rev = cos_sin + 2*(slices+1);
 	const float c = std::cos(dTheta);
@@ -3096,7 +3134,7 @@ float* ComputeCosSinRho(const unsigned int segments)
 	Q_ASSERT(segments<=MAX_STACKS);
 	
 	// Difference angle between the stops. Always use M_PI/segments!
-	const float dRho = static_cast<float>(M_PI) / static_cast<float>(segments);
+	const float dRho = M_PIf / static_cast<float>(segments);
 	float *cos_sin = cos_sin_rho;
 	float *cos_sin_rev = cos_sin + 2*(segments+1);
 	const float c = cosf(dRho);
@@ -3419,6 +3457,38 @@ QString getGreekLetterByName(const QString& potentialGreekLetterName)
 	}
 
 	return potentialGreekLetterName;
+}
+
+double circlesIntersectionArea(double R1, double R2, double d)
+{
+	using namespace std;
+	if(d+min(R1,R2)<max(R1,R2)) return M_PI*sqr(min(R1,R2));
+	if(d>=R1+R2) return 0;
+
+	// Return area of the lens with radii R1 and R2 and offset d
+	return sqr(R1)*acos(clamp( (sqr(d)+sqr(R1)-sqr(R2))/(2*d*R1) ,-1.,1.)) +
+	       sqr(R2)*acos(clamp( (sqr(d)+sqr(R2)-sqr(R1))/(2*d*R2) ,-1.,1.)) -
+	       0.5*sqrt(max( (-d+R1+R2)*(d+R1-R2)*(d-R1+R2)*(d+R1+R2) ,0.));
+}
+
+double visibleSolidAngleOfSun(const double sunAngularRadius, const double moonAngularRadius, const double angleBetweenSunAndMoon)
+{
+	const double Rs = sunAngularRadius;
+	const double Rm = moonAngularRadius;
+	double visibleSolidAngle = M_PI*sqr(Rs);
+
+	const double dSM = angleBetweenSunAndMoon;
+	if(dSM < Rs+Rm)
+	{
+		visibleSolidAngle -= circlesIntersectionArea(Rm,Rs,dSM);
+	}
+
+	return visibleSolidAngle;
+}
+
+double sunVisibilityDueToMoon(const double sunAngularRadius, const double moonAngularRadius, const double angleBetweenSunAndMoon)
+{
+	return visibleSolidAngleOfSun(sunAngularRadius, moonAngularRadius, angleBetweenSunAndMoon)/(M_PI*sqr(sunAngularRadius));
 }
 
 } // end of the StelUtils namespace
