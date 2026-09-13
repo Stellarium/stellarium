@@ -103,7 +103,7 @@
 .skyculture-buttons-grid {
     display: flex;
     flex-wrap: wrap;
-    gap: clamp(4px, 1vw, 8px);
+    gap: clamp(1px, 1vw, 2px);
     padding: clamp(6px, 1.5vw, 10px);
     background: rgba(0, 0, 0, 0.1);
     border-radius: 6px;
@@ -162,7 +162,7 @@
     max-height: 60vh;
     border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 6px;
-    background: rgba(0, 0, 0, 0.05);
+    background: rgba(250, 255, 255, 0.05);
     margin-top: 10px;
     box-sizing: border-box;
 }
@@ -202,7 +202,7 @@
 .constellations-buttons-grid {
     display: flex;
     flex-wrap: wrap;
-    gap: clamp(4px, 0.8vw, 8px);
+    gap: clamp(1px, 0.1vw, 2px);
     padding: clamp(6px, 1.2vw, 10px);
     background: rgba(0, 0, 0, 0.1);
     border-radius: 6px;
@@ -328,7 +328,7 @@
 
 .options-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 100%), 1fr));
+    /*grid-template-columns: repeat(auto-fit, minmax(min(100%, 100%), 1fr));*/
     gap: clamp(8px, 1.5vw, 15px);
     padding: 5px;
     width: 100%;
@@ -349,7 +349,12 @@
     gap: clamp(8px, 1.2vw, 12px);
     flex-wrap: wrap;
     box-sizing: border-box;
-    width: 100%;
+		/*display: inline-flex;*/
+    gap: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    color: #000000;
+    font-weight: bold;
 }
 
 .option-label {
@@ -457,19 +462,14 @@
     flex-wrap: wrap;
     padding: 6px 12px;
     min-height: 50px;
-    background: rgba(0, 0, 0, 0.06);
+    background: rgba(190, 200, 200, 0.08);
     border-radius: clamp(4px, 0.6vw, 6px);
     border: 1px solid rgba(0, 0, 0, 0.04);
     transition: all 0.15s ease;
 }
 
-.option-item.option-group:hover {
-    background: rgba(0, 0, 0, 0.08);
-    border-color: rgba(0, 0, 0, 0.08);
-}
-
 .option-item.option-group .option-label {
-    min-width: 130px;
+    min-width: 100px;
     max-width: 180px;
     flex: 0 1 auto;
     font-size: clamp(10px, 1.2vw, 12px);
@@ -488,7 +488,7 @@
     gap: 6px 14px;
     flex: 1 1 280px;
     min-width: 180px;
-    flex-wrap: wrap;
+    /*flex-wrap: wrap;*/
 }
 
 .option-group-controls.single-control {
@@ -502,32 +502,24 @@
     gap: 4px 8px;
     flex: 1 1 100px;
     min-width: 80px;
-    padding: 2px 4px;
+    text-align: center;
+    font-family: monospace;
+    border-radius: 5px;
+    background: rgba(0, 0, 0, 0.15);
+    padding: 1px 4px;
 }
 
 .option-sub-control .slider {
     flex: 1;
     min-width: 50px;
     max-width: 130px;
-    height: 6px;
-    margin: 0 2px;
+   /* height: 6px;
+    margin: 0 2px;*/
 }
 
-.option-sub-control .slider .ui-slider-handle {
-    width: 14px;
-    height: 14px;
-    top: -5px;
-}
-
-.option-sub-control .stelproperty {
-    min-width: 28px;
-    text-align: center;
-    font-size: 10px;
-    font-family: monospace;
-    /*color: #DCDBDA;*/
-    background: rgba(0, 0, 0, 0.15);
-    padding: 1px 4px;
-    border-radius: 3px;
+.option-sub-control .ui-spinner {
+	max-width: 50px;
+	display: flex;
 }
 
 /* ========================================================================
@@ -542,22 +534,21 @@
 }
 
 .option-item.option-group .color-picker-wrapper {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    padding: 1px 6px;
-    background: rgba(0, 0, 0, 0.08);
-    border-radius: 3px;
-    border: 1px solid rgba(0, 0, 0, 0.08);
-    flex-wrap: nowrap;
-    width: 100%;
-    height: 28px;
-    min-height: auto;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 2px 4px !important;
+    min-width: auto !important;
+    width: auto !important;
+    background: rgba(0, 0, 0, 0.05) !important;
+    border: 1px solid rgba(0, 0, 0, 0.08) !important;
+    border-radius: 3px !important;
+    height: 28px !important;
 }
 
 .option-item.option-group .color-swatch {
-    width: 20px;
-    height: 20px;
+    width: 20px !important;
+    height: 20px !important;
     border-radius: 3px;
     border: 2px solid #2A2C2E;
     cursor: pointer;
@@ -566,7 +557,8 @@
 }
 
 .option-item.option-group .color-swatch:hover {
-    transform: scale(1.08);
+    transform: scale(1.1) !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2) !important;
 }
 
 .option-item.option-group .color-inputs {
@@ -575,10 +567,11 @@
     gap: 2px;
     flex: 1;
     min-width: 60px;
+		display: none !important;/*Hide R G B input value boxes keep color-swatch*/
 }
 
 .option-item.option-group .color-input {
-    width: 60px;
+    width: 40px;
     padding: 1px 2px;
     background: #2A2C2E;
     color: #DCDBDA;
@@ -588,7 +581,7 @@
     text-align: center;
     font-family: monospace;
     height: 20px;
-    min-width: 50px;
+    display: none ! important;/* Hide color input panel*/
 }
 
 .option-item.option-group .color-input:focus {
@@ -596,24 +589,16 @@
     border-color: #B4B7B0;
 }
 
-.option-item.option-group .color-input-label {
-    font-size: 7px;
-    font-weight: bold;
-    color: #8A8C8E;
-    user-select: none;
+/* Hide any additional spaces */
+.option-item.option-group .color-picker-wrapper .color-inputs {
+    margin: 0 !important;
+    padding: 0 !important;
 }
 
 .option-item.option-group .color-r { color: #F92672; }
 .option-item.option-group .color-g { color: #A6E22E; }
 .option-item.option-group .color-b { color: #66D9EF; }
 
-/* 
- * HIGHLIGHT GROUP WHEN CHECKBOX IS CHECKED
-*/
-/*.option-group:has(input[type="checkbox"]:checked) {
-    border-left: 3px solid #B4B7B0;
-    padding-left: 9px;
-}*/
 
 /* ============================================================
  * RESPONSIVE BREAKPOINTS
@@ -693,7 +678,7 @@
     }
     
     .option-label {
-        min-width: 130px;
+        min-width: 100px;
     }
     
     .option-item.option-group {
@@ -703,8 +688,8 @@
     }
     
     .option-item.option-group .option-label {
-        min-width: 120px;
-        max-width: 160px;
+        min-width: 100px;
+        max-width: 180px;
     }
     
     .option-group-controls {
@@ -713,13 +698,12 @@
     }
     
     .option-sub-control {
-        flex: 1 1 90px;
         min-width: 70px;
     }
     
     .option-sub-control .slider {
         min-width: 50px;
-        max-width: 120px;
+        max-width: 260px;
     }
     
     .option-item.option-group .color-picker-wrapper {
@@ -776,7 +760,7 @@
     .option-item.option-group .option-label {
         min-width: 110px;
         max-width: 140px;
-        font-size: 10px;
+        font-size: 14px;
     }
     
     .option-group-controls {
@@ -785,13 +769,12 @@
     }
     
     .option-sub-control {
-        flex: 1 1 80px;
         min-width: 60px;
     }
     
     .option-sub-control .slider {
-        min-width: 40px;
-        max-width: 100px;
+        min-width: 100px;
+        max-width: 280px;
     }
     
     .option-item.option-group .color-picker-wrapper {
@@ -840,7 +823,8 @@
     .patterns-buttons-grid,
     .constellations-buttons-grid {
         justify-content: center;
-        max-height: 200px;
+        max-height: 230px;
+				gap: clamp(1px, 1vw, 2px);
     }
     
     .skyculture-info-frame {
@@ -853,6 +837,7 @@
         flex-wrap: wrap;
         gap: 8px;
         padding: 8px 10px;
+				font-size:90%;
     }
     
     .option-label {
@@ -881,17 +866,13 @@
     
     /* Grouped options in tablet portrait */
     .option-item.option-group {
-        /*flex-direction: column;*/
-        align-items: stretch;
-        min-height: auto;
-        padding: 8px 12px;
-        gap: 6px;
+		flex: -webkit-fill-available;
     }
     
     .option-item.option-group .option-label {
         min-width: auto;
         max-width: none;
-        font-size: 10px;
+        font-size: 14px;
         white-space: normal;
     }
     
@@ -913,7 +894,7 @@
     .option-sub-control {
         flex: 1 1 130px;
         min-width: 100px;
-        padding: 2px 0;
+        padding: 2px;
     }
     
     .option-sub-control .slider {
@@ -1014,7 +995,7 @@
     .patterns-buttons-grid,
     .constellations-buttons-grid {
         max-height: 180px;
-        gap: 4px;
+        gap: 1px;
         padding: 6px;
     }
     
@@ -1025,7 +1006,7 @@
     
     /* Grouped options in mobile */
     .option-item.option-group {
-        flex-direction: column;
+        flex-direction: row;
         align-items: stretch;
         min-height: auto;
         padding: 6px 10px;
@@ -1035,7 +1016,7 @@
     .option-item.option-group .option-label {
         min-width: auto;
         max-width: none;
-        font-size: 10px;
+        font-size: 12px;
         white-space: normal;
     }
     
@@ -1089,10 +1070,6 @@
         min-width: 40px;
         gap: 1px;
     }
-    
-    .option-item.option-group .color-input-label {
-        font-size: 6px;
-    }
 }
 
 /* Extra Small Devices (≤360px) */
@@ -1125,17 +1102,8 @@
         gap: 3px;
     }
     
-    .option-item.option-group .option-label {
-        font-size: 9px;
-    }
-    
     .option-sub-control .slider {
         min-width: 40px;
-    }
-    
-    .option-sub-control .stelproperty {
-        font-size: 8px;
-        min-width: 22px;
     }
 }
 
@@ -1194,7 +1162,6 @@
 
 /* 
  * Ensure parent flex containers don't restrict children.
- * These classes are used in index.html for the tab layout.
  */
 #tab_skyculture .flex.flex-wrap {
     display: flex;
@@ -1204,58 +1171,6 @@
     box-sizing: border-box;
     align-items: stretch;
 }
-
-/* Ensure panels inside the flex container can grow properly */
-#tab_skyculture .flex.flex-wrap > * {
-    flex: 1 1 300px;
-    min-width: 280px;
-}
-
-/* ========================================================================
- * ANIMATIONS
- * ======================================================================== */
-
-/*@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(5px); }
-    to { opacity: 1; transform: translateY(0); }
-}*/
-
-/*.skyculture-panel,
-.skyculture-options-panel {
-    animation: fadeIn 0.3s ease-out;
-}*/
-
-/* ========================================================================
- * PRINT STYLES
- * ======================================================================== */
-
-@media print {
-    .skyculture-panel,
-    .skyculture-options-panel {
-        break-inside: avoid;
-        page-break-inside: avoid;
-        border: 1px solid #000;
-        background: #fff;
-    }
-    
-    .skyculture-btn,
-    .pattern-btn,
-    .constellation-btn {
-        border: 1px solid #000;
-        background: #f0f0f0;
-        color: #000;
-    }
-    
-    .skyculture-buttons-grid,
-    .patterns-buttons-grid {
-        max-height: none;
-        overflow: visible;
-    }
-}
-
-/* ========================================================================
- * SKY CULTURE PATTERNS TABS - Horizontal tabs for pattern types
- * ======================================================================== */
 
 .skyculture-patterns-tabs {
     margin-top: 20px;
@@ -1282,13 +1197,13 @@
 }
 
 .skyculture-patterns-tabs ul li a {
-    display: block;
+    display: flex;
     padding: 8px 16px;
-    font-size: clamp(10px, 1.3vw, 12px);
+    /*font-size: clamp(10px, 1.3vw, 12px);*/
     font-weight: bold;
     color: #3A3C3E;
     text-decoration: none;
-    background: rgba(0, 0, 0, 0.05);
+    background: rgba(0, 0, 0, 0.1);
     border-right: 1px solid rgba(0, 0, 0, 0.1);
     transition: all 0.2s ease;
     white-space: nowrap;
@@ -1299,12 +1214,12 @@
 }
 
 .skyculture-patterns-tabs ul li a:hover {
-    background: rgba(180, 183, 176, 0.15);
+    background: rgba(100, 100, 100, 0.15);
     color: #000000;
 }
 
 .skyculture-patterns-tabs ul li.ui-tabs-active a {
-    background: linear-gradient(#6B6E70, #4A4C4E);
+    /*background: linear-gradient(#6B6E70, #4A4C4E);*/
     color: #000000;
     border-bottom: 2px solid #B4B7B0;
 }
@@ -1335,9 +1250,8 @@
 /* Responsive adjustments for tabs */
 @media (max-width: 768px) {
     .skyculture-patterns-tabs ul {
-        flex-wrap: nowrap;
+        flex-wrap: wrap;
         overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
     }
     
     .skyculture-patterns-tabs ul li a {
@@ -1518,7 +1432,7 @@
     align-items: center;
     justify-content: center;
     animation: artworkModalFadeIn 0.25s ease;
-    backdrop-filter: blur(4px);
+    /*backdrop-filter: blur(4px);*/
 }
 
 @keyframes artworkModalFadeIn {
@@ -1697,151 +1611,19 @@
 }
 
 /* ========================================================================
- * SCRIPT PANEL VISUAL INDICATORS & BUTTON STYLES
- * ======================================================================== */
-
-/**
- * Pulsing border effect for the script info iframe when a script is running.
- * Uses Stellarium's silver/gray color palette for consistency.
- * The animation creates a subtle breathing effect to draw attention.
- */
-#scriptinfo.script-running {
-    border: 2px solid #B4B7B0 !important;
-    box-shadow: 0 0 8px rgba(180, 183, 176, 0.4);
-    animation: script-pulse 2.5s ease-in-out infinite;
-    transition: border 0.3s ease, box-shadow 0.3s ease;
-}
-
-@keyframes script-pulse {
-    0% {
-        border-color: #FFE0C6;
-        box-shadow: 0 0 5px rgba(138, 140, 142, 0.2);
-    }
-    50% {
-        border-color: #DCDBDA;
-        box-shadow: 0 0 12px rgba(220, 219, 218, 0.5);
-    }
-    100% {
-        border-color: #FFE0C6;
-        box-shadow: 0 0 5px rgba(138, 140, 142, 0.2);
-    }
-}
-
-/**
- * Highlight style for the active script in the selection list.
- * Uses a subtle gradient background matching Stellarium's theme.
- */
-#scriptlist option.active-script {
-    background: linear-gradient(#6B6E70, #4A4C4E);
-    color: #DCDBDA;
-    font-weight: bold;
-}
-
-/**
- * Script controls container - horizontal button layout.
- */
-.script-controls {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-top: 10px;
-}
-
-/**
- * Script control buttons - base styles for icon buttons.
- */
-.script-controls .script-control-btn {
-    width: 32px;
-    height: 32px;
-    padding: 0;
-    margin: 0;
-    background-color: transparent;
-    background-image: url("../images/icons.png");
-    background-repeat: no-repeat;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    flex-shrink: 0;
-}
-
-.script-controls .script-control-btn:hover {
-    background-image: url("../images/icons-active.png");
-    transform: translateY(-1px);
-}
-
-.script-controls .script-control-btn:active {
-    transform: translateY(1px);
-}
-
-.script-controls .script-control-btn:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-    transform: none;
-    background-image: url("../images/icons.png");
-}
-
-/* Individual button icon positions */
-.script-controls #bt_runscript {
-    background-position: -629px 0; /* btScriptRun */
-}
-
-.script-controls #bt_stopscript {
-    background-position: -703px 0; /* btScriptStop */
-}
-
-.script-controls #bt_script_resetview {
-    background-position: -922px 0; /* btGotoHome - repurposed for Reset View */
-}
-
-/**
- * Active script display area.
- */
-.active-script-display {
-    margin: 8px 0;
-    padding: 6px 10px;
-    background: rgba(0, 0, 0, 0.1);
-    border-radius: 4px;
-    font-size: 11px;
-    text-align: center;
-    color: #000000;
-}
-
-.active-script-display span {
-    font-weight: bold;
-    color: #DCDBDA;
-}
-
-/**
- * Responsive adjustments for script controls.
- */
-@media (max-width: 768px) {
-    .script-controls {
-        gap: 6px;
-    }
-}
-
-@media (max-width: 480px) {
-    .script-controls {
-        gap: 4px;
-    }
-}
-
-/* ========================================================================
  * Sky Culture Statistics Tables - Additional Styles
  * ======================================================================== */
 
 .stats-bar {
-    display: flex;
-    gap: 10px;
+    display: inline-flex;
+    gap: 5px;
     flex-wrap: wrap;
     padding: 15px;
     background: rgba(149, 150, 152, 0.2);
     border: 1px solid rgba(0, 0, 0, 0.1);
     border-style: inset;
     border-radius: 10px;
-    margin-bottom: 20px;
+		width: -webkit-fill-available;
 }
 
 .stat-item {
@@ -1910,7 +1692,7 @@
 
 .stats-table td {
     padding: 8px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
     vertical-align: top;
     color: #1a1a1a;
 }
@@ -2156,22 +1938,13 @@
 }
 
 /* Sky culture info frame inside patterns tab */
-#vo_skycultureinfo {
-    width: 100%;
-    min-height: 400px;
-    max-height: 600px;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    border-radius: 6px;
-    background: rgba(0, 0, 0, 0.05);
-}
-
+#vo_skycultureinfo, 
 #stats-vo-skycultureinfo {
     width: 100%;
     min-height: 400px;
     max-height: 600px;
     border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 6px;
-    background: rgba(0, 0, 0, 0.05);
 }
 
 /* ========================================================================
@@ -2245,7 +2018,7 @@
     display: flex;
     align-items: center;
     gap: 6px;
-    font-size: 11px;
+    font-size: clamp(10px, 1.4vw, 12px);
     color: #000000;
 }
 
@@ -2381,6 +2154,10 @@
         font-size: 8px;
         padding: 2px 5px;
     }
+		
+		.stats-bar {
+			display: grid;
+		}
 }
 
 /* ========================================================================
@@ -2407,17 +2184,19 @@
 }
 
 /* ========================================================================
- * CONSTELLATION CONTROLS
+ * CONSTELLATION ASTERISMS LUNAR CONTROLS
  * ======================================================================== */
 
-.skyculture-constellation-controls {
+.skyculture-constellation-controls,
+.asterisms-controls,
+.lunar-controls {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     gap: 16px;
     padding: 10px 12px;
     margin-bottom: 12px;
-    background: rgba(0, 0, 0, 0.05);
+    background: rgba(0, 0, 0, 0.08);
     border-radius: 6px;
     border: 1px solid rgba(0, 0, 0, 0.08);
 }
@@ -2428,12 +2207,14 @@
     display: flex;
     align-items: center;
     gap: 6px;
-    font-size: 11px;
+    font-size: clamp(10px, 1.4vw, 12px);
     color: #000000;
 }
 
 .constellation-filter-group input[type="checkbox"],
-.constellation-navigation-group input[type="checkbox"] {
+.constellation-navigation-group input[type="checkbox"],
+.asterisms-filter-group input[type="checkbox"],
+.lunar-filter-group input[type="checkbox"] {
     margin: 0;
     cursor: pointer;
     width: 14px;
@@ -2441,9 +2222,12 @@
 }
 
 .constellation-filter-group input[type="checkbox"]:checked,
-.constellation-navigation-group input[type="checkbox"]:checked {
+.constellation-navigation-group input[type="checkbox"]:checked,
+.asterisms-filter-group input[type="checkbox"]:checked,
+.lunar-filter-group input[type="checkbox"]:checked {
     accent-color: #B4B7B0;
 }
+
 
 .constellation-name-display-group select {
     background: #3A3C3E;
@@ -2495,34 +2279,118 @@
 }
 
 #btn-toggle-description-direction {
-    background: linear-gradient(#5D5F62, #3A3C3E);
-    border: 1px solid #2A2C2E;
-    border-radius: 4px;
-    padding: 4px 12px;
-    font-size: 11px;
-    cursor: pointer;
+    background: linear-gradient(#8C8C8C, #505050);
     color: #000;
-    font-weight: bold;
+    border: 1.5px solid #2A2C2E;
+    border-radius: clamp(3px, 0.5vw, 4px);
+		font-style: italic;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    touch-action: manipulation;  /* Improve touch response */
+    user-select: none;
 }
 
 #btn-toggle-description-direction:hover {
     background: linear-gradient(#C4C4C7, #6D6F72);
+    border-color: #B4B7B0;
+    transform: translateY(-1px);
 }
 
-.direction-status {
-    font-size: 12px;
+/* ========================================================================
+ * FOV CONTROLS - Navigation Field of View
+ * ======================================================================== */
+
+.constellation-fov-group label,
+.asterisms-fov-group label,
+.lunar-fov-group label {
     font-weight: bold;
-    padding: 2px 10px;
-    border-radius: 12px;
-    font-family: monospace;
+    white-space: nowrap;
 }
 
-.direction-status.ltr {
-    color: #66D9EF;
-    background: rgba(102, 217, 239, 0.15);
+.constellation-fov-group,
+ .asterisms-filter-group,
+.asterisms-fov-group {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: clamp(10px, 1.4vw, 12px);
+    color: #000000;
 }
 
-.direction-status.rtl {
-    color: #E6DB74;
-    background: rgba(230, 219, 116, 0.12);
+.lunar-filter-group,
+.lunar-fov-group {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: clamp(10px, 1.4vw, 12px);
+    color: #000000;
+}
+
+/* Stars FOV Group */
+.stars-fov-group {
+    margin-left: 4px;
+}
+
+.stars-fov-group label {
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+/* FOV Input Number */
+.fov-input-number {
+    width: 55px;
+    border: 1px solid #5D5F62;
+    border-radius: 3px;
+    padding: 3px 4px;
+    font-size: clamp(10px, 1.4vw, 12px);
+    text-align: center;
+}
+
+.fov-input-number:focus {
+    outline: none;
+    border-color: #B4B7B0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .constellation-fov-group,
+    .asterisms-fov-group,
+    .lunar-fov-group,
+    .stars-fov-group {
+        justify-content: space-between;
+        width: 100%;
+    }
+    
+    .constellation-fov-group label,
+    .asterisms-fov-group label,
+    .lunar-fov-group label,
+    .stars-fov-group label {
+        min-width: 80px;
+    }
+    
+    .fov-input-number {
+        width: 50px;
+    }
+    
+    .asterisms-controls,
+    .lunar-controls {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+    }
+    
+    .asterisms-filter-group,
+    .asterisms-fov-group,
+    .lunar-filter-group,
+    .lunar-fov-group {
+        justify-content: space-between;
+    }
+}
+
+@media (max-width: 480px) {
+    .fov-input-number {
+        width: 45px;
+        font-size: 9px;
+    }
 }

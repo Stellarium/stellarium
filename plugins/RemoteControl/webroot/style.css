@@ -302,6 +302,12 @@ h2 {
 	display: inline-block;
 }
 
+.block header h3 {
+  font-size: 12px;
+  margin: 0;
+  display: inline-block;
+}
+
 .innerblock {
 	position: relative;
 	padding: 5px;
@@ -372,6 +378,10 @@ h2 {
 	flex-grow: 1;
 }
 
+.slider .stelproperty .flex-expand {
+	flex-grow: unset;
+}
+
 .flex-noshrink {
 	flex-shrink: 0;
 }
@@ -386,6 +396,7 @@ h2 {
 
 .slider {
 	min-width: 150px;
+	max-width: inherit;
 	margin-left: 10px;
 	margin-right: 10px;
 }
@@ -441,11 +452,15 @@ header img {
 	background: linear-gradient(rgb(235, 239, 249),rgb(210, 214, 224));
 }
 
+#time {
+	min-width:auto;	
+}
+
 .timedisplay {
 	font-family: DejaVuSansMono,"Courier New",monospace;
 	text-align: center;
 	font-weight: bold;
-	font-size: 20px;
+	font-size: 14px;
 }
 
 #time_jday .timedisplay {
@@ -456,16 +471,13 @@ header img {
 	display: inline-block;
 }
 
-#date_year {
-	width: 4em;
-}
-
+#date_year,
 #date_month,
 #date_day,
 #time_hour,
 #time_minute,
 #time_second {
-	width: 2em;
+	width: 5em;	
 }
 
 #input_jd,
@@ -623,13 +635,14 @@ button.button32:active {
 }
 
 #loc_map {
-	display: inline-block;
-	position: relative;
-	width: 400px;
-	height: 240px;
-	overflow: hidden;
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+    /* Add min-width make sure not to shrink too much */
+    min-width: 200px;
+    min-height: 120px;
+    max-width: 100%;
 }
-
 #loc_mapimg {
 	width: 100%;
 	height: 100%;
@@ -643,7 +656,7 @@ button.button32:active {
 
 #loc_searchlist{
 	vertical-align: top;
-	height: 240px;
+	height: 250px;
 	width: 150px;
 	float: right;
 }
@@ -722,12 +735,12 @@ button.button32:active {
 
 #srch_results {
 	/* text-align: left; */
-	max-width: 367px;
+	max-width: 450px;
 	height: 180px;
 	font-size: 14px;
 	padding-left: 10px;
 	padding-right: 5px;
-	background: none;
+	background: rgb(249, 251, 255);
 	margin: 5px 0;
 	border: 1px solid black;
 }
@@ -738,6 +751,10 @@ button.button32:active {
 
 #srch_results span.state-selected {
 	font-weight: bold;
+	font-size: medium;
+	color: #6c4d3b;
+	animation: script-pulse 2s ease-in-out infinite;
+  transition: text 0.3s ease, box-shadow 0.3s ease;
 }
 
 #srch_greek div {
@@ -782,17 +799,6 @@ button.button32:active {
 	position: relative;
 }
 
-#sel_infostring {
-	text-align: left;
-	/* white-space: nowrap; */
-	/* overflow-x: hidden; */
-	/* overflow-y: auto; */
-	/* width: 20em; */
-	/* max-height: 340px; */
-	/* max-width: 100%; */
-	display: inline-block;
-}
-
 #view_controls {
 	display: inline-flex;
 	flex-wrap: wrap;
@@ -832,6 +838,18 @@ button.button32:active {
 
 #view_wrapper {
 	margin-top: 10px;
+}
+
+#view_wrapper .ui-slider,
+#offset_wrapper .ui-slider {
+    margin-bottom: 12px;
+}
+#view_fovbuttons, #view_offsetbuttons {
+  display: contents;
+}
+#tab_main > .flex > section {
+    flex: 1;
+    
 }
 
 .blocklabel > label {
@@ -889,6 +907,11 @@ button.button32:active {
 #srch_simbad_text{
 	font-weight: bold;
 }
+
+/*#vo_markers_boxes flex.smallblock,
+#vo_stars flex.smallblock {
+	
+}*/
 
 .selectmenu + span.ui-selectmenu-button {
 	display: block;
@@ -967,6 +990,287 @@ button.button32:active {
 }
 
 /* ========================================================================
+ * SCRIPT PANEL VISUAL INDICATORS & BUTTON STYLES
+ * ======================================================================== */
+/**
+ * Pulsing border effect for the script info iframe when a script is running.
+ * Uses Stellarium's silver/gray color palette for consistency.
+ * The animation creates a subtle breathing effect to draw attention.
+ */
+#scriptinfo.script-running {
+    border: 2px solid #B4B7B0 !important;
+    box-shadow: 0 0 8px rgba(180, 183, 176, 0.4);
+    animation: script-pulse 2s ease-in-out infinite;
+    transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+@keyframes script-pulse {
+    0% {
+        border-color: #FFE0C6;
+        box-shadow: 0 0 5px rgba(138, 140, 142, 0.2);
+    }
+    50% {
+        border-color: #DCDBDA;
+        box-shadow: 0 0 12px rgba(220, 219, 218, 0.5);
+    }
+    100% {
+        border-color: #FFE0C6;
+        box-shadow: 0 0 5px rgba(138, 140, 142, 0.2);
+    }
+}
+
+/**
+ * Highlight style for the active script in the selection list.
+ * Uses a subtle gradient background matching Stellarium's theme.
+ */
+#scriptlist option.active-script {
+    background: linear-gradient(#6B6E70, #4A4C4E);
+    color: #DCDBDA;
+    font-weight: bold;
+}
+
+/**
+ * Script controls container - horizontal button layout.
+ */
+.script-controls {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+/**
+ * Script control buttons - base styles for icon buttons.
+ */
+.script-controls .script-control-btn {
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    margin: 0;
+    background-color: transparent;
+    background-image: url("images/icons.png");
+    background-repeat: no-repeat;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+}
+
+.script-controls .script-control-btn:hover {
+    background-image: url("images/icons-active.png");
+    transform: translateY(-1px);
+}
+
+.script-controls .script-control-btn:active {
+    transform: translateY(1px);
+}
+
+.script-controls .script-control-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+    background-image: url("images/icons.png");
+}
+
+/* Individual button icon positions */
+.script-controls #bt_runscript {
+    background-position: -629px 0; /* btScriptRun */
+}
+
+.script-controls #bt_stopscript {
+    background-position: -703px 0; /* btScriptStop */
+}
+
+.script-controls #bt_script_resetview {
+    background-position: -922px 0; /* btGotoHome - repurposed for Reset View */
+}
+
+/**
+ * Active script display area.
+ */
+.active-script-display {
+    margin: 8px 0;
+    padding: 6px 10px;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    font-size: 11px;
+    text-align: center;
+    color: #000000;
+}
+
+.active-script-display span {
+    font-weight: bold;
+    color: #DCDBDA;
+}
+
+@media (max-width: 900px) {
+		header h1, #timejumplist, #timewidget, .ui-tabs .ui-tabs-nav {
+			font-size: 100%;
+		}
+		
+		.timedisplay {
+			font-size: 90%;
+		}
+		
+		#time_local {
+			min-width: max-content;
+		}
+		
+		header img {
+			height: 50px;
+			width: 50px;
+		}		
+}
+
+/**
+ * Responsive adjustments for script controls.
+ */
+@media (max-width: 768px) {
+    .script-controls {
+      gap: 6px;
+    }
+		
+		#timewidget, .timedisplay {
+				font-size: 12px;
+				min-width:200px !important;
+		}
+		
+		#scriptinfo,
+		#vo_landscapeinfo,
+		#vo_projectioninfo {
+			width: 2em;
+		}
+		
+		#landscape_polyLineThickness {
+			width: 60px;
+			height: 16px;
+		}
+
+		#landscape_defaultMinimalBrightness,
+		#landscape_polyLineThickness {
+			width: 50px;
+			height: 16px;
+			padding-bottom: 0.3px;
+			padding-top: 0.3px;
+			margin-right: 0px;
+		}
+		#vo_stars {
+			width:500px;
+		}
+		
+		#time_jday .timedisplay {
+			display: inherit;
+		}
+		
+		#srch_button {
+			font-size: 0.8em;
+		}
+	/*	.ui-tabs .ui-tabs-panel {
+			padding: 1em 1em;
+			margin: 2%;
+		}		*/
+		header img {
+			height: 44px;
+			width: 44px;
+		}
+		
+		header h1, #timejumplist, #timewidget, .timedisplay, .ui-tabs .ui-tabs-nav {
+			font-size: 85%;
+		}
+		
+		#date_year,
+		#date_month,
+		#date_day,
+		#time_hour,
+		#time_minute,
+		#time_second {
+			width: 5em;
+			font-size: 11px;
+		}
+
+}
+
+@media (max-width: 600px) {
+		#tab_view .table label {
+			min-width: 200px;
+		}
+
+		#loc_inputs > div {
+			/*! display: inline-block; */
+		}
+
+		#actionlist.scrollselect {
+			min-width: inherit;
+		}
+		
+}
+
+@media (max-width: 480px) {
+    .script-controls {
+        gap: 4px;
+    }
+		#timewidget, .timedisplay {
+				font-size: 12px;
+				min-width:unset;
+		}
+		
+		#scriptinfo {
+				width: 150px !important;
+		}
+		
+		.block header {
+			display: block;
+			text-align: left;
+			position: absolute;
+			left: 17px;
+			top: 10px;
+			color: rgb(0,0,0);
+		}
+
+		.block header h2 {
+			font-size: 10px;
+			display: inline-block;
+		}
+		
+		#srch_button {
+			font-size: 0.5em;
+		}
+		
+		header h1, #timejumplist, .timedisplay, #timewidget, .ui-tabs .ui-tabs-nav {
+			font-size: 75%;
+		}
+		
+		#date_year,
+		#date_month,
+		#date_day,
+		#time_hour,
+		#time_minute,
+		#time_second {
+			width: 4em;
+			font-size: 9px;
+		}		
+
+		#vo_stars {
+			
+			display: table-caption;
+		}
+		
+		#loc_inputs > div {
+			display: contents;
+		}		
+		.scrollselect {
+			min-width: fit-content;
+		}		
+		
+		#loc_searchlist {
+			width: 100% !important;
+			height: 100% !important;
+		}
+}
+
+/* ========================================================================
  * Action Search Input Styles
  * ======================================================================== */
 
@@ -1002,3 +1306,390 @@ button.button32:active {
         padding: 5px 8px;
     }
 }
+
+/* ============================================================
+ * UNIFIED COLOR PICKER SYSTEM
+ * ============================================================ */
+
+.option-sub-control.color-control {
+    flex: 0 1 180px;
+    min-width: 140px;
+    max-width: 220px;
+    padding: 0;
+}
+
+.color-picker-wrapper {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 2px 4px !important;
+    min-width: auto !important;
+    width: auto !important;
+    background: rgba(0, 0, 0, 0.05) !important;
+    border: 1px solid rgba(0, 0, 0, 0.08) !important;
+    border-radius: 3px !important;
+    height: 28px !important;
+    gap: 4px;
+}
+
+.color-swatch {
+    width: 24px !important;
+    height: 24px !important;
+    border-radius: 3px;
+    border: 2px solid #2A2C2E;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: transform 0.15s ease;
+}
+
+.color-swatch:hover {
+    transform: scale(1.1) !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2) !important;
+}
+
+.color-inputs {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    flex: 1;
+    min-width: 60px;
+}
+
+.color-input {
+    width: 50px;
+    padding: 1px 2px;
+    background: #2A2C2E;
+    color: #DCDBDA;
+    border: 1px solid #5D5F62;
+    border-radius: 2px;
+    font-size: 9px;
+    text-align: center;
+    font-family: monospace;
+    height: 24px;
+}
+
+.color-input:focus {
+    outline: none;
+    border-color: #B4B7B0;
+}
+
+.color-r { color: #F92672; }
+.color-g { color: #A6E22E; }
+.color-b { color: #66D9EF; }
+
+/* ========================================================================
+ * UNIFIED BUTTON SYSTEM - Base Styles
+ * ======================================================================== */
+
+/* BASE BUTTON STYLES */
+.stelaction.button,
+.stelproperty-toggle {
+    background: linear-gradient(#8C8C8C, #505050);
+    color: #000000;
+    border: 1px solid #2A2C2E;
+    border-radius: 4px;
+    padding: 6px 16px;
+    font-size: 11px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    /*user-select: none;*/
+    touch-action: manipulation;
+    white-space: nowrap;
+    font-family: Arial,Helvetica,sans-serif;
+    position: relative;
+}
+
+.stelaction.button:hover,
+.stelproperty-toggle:hover {
+    background: linear-gradient(#C4C4C7, #6D6F72);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.stelaction.button:active,
+.stelproperty-toggle:active {
+    transform: translateY(1px);
+    box-shadow: none;
+}
+
+/* ACTIVE STATE (Toggled ON) */
+.stelaction.button.active,
+.stelproperty-toggle.active {
+    background: linear-gradient(#DCDBDA, #8A8C8E);
+    border-color: #000000;
+    color: #000000;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+/* TRIGGER ACTIONS */
+.stelaction.action-trigger {
+    /*border-left: 3px solid #FD971F;*/
+    padding-left: calc(16px - 3px);
+}
+
+/* ACTION STATE ICONS (jQuery UI) */
+.stelaction .action-state-icon,
+.stelproperty-toggle .action-state-icon {
+    font-size: 14px;
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    vertical-align: middle;
+    flex-shrink: 0;
+    transition: all 0.2s ease;
+    background: none !important;
+    border: none !important;
+}
+
+/* ============================================================
+ * UNIFIED BUTTON ICONS - Text (\u2713, \u2717) icons with colors
+ * ============================================================ */
+
+.action-state-icon {
+    font-size: 14px;
+    width: 16px;
+    text-align: center;
+    display: inline-block;
+    flex-shrink: 0;
+    font-weight: bold;
+}
+
+/* Checked (ON) - Green */
+.action-state-icon.icon-checked {
+    color: #4CAF50;
+}
+
+/* Unchecked (OFF) - Red */
+.action-state-icon.icon-unchecked {
+    color: #F44336;
+}
+
+/* Trigger - Orange */
+.action-state-icon.icon-trigger {
+    color: #E6DB74;
+}
+
+/* Indeterminate - Gray */
+.action-state-icon.icon-indeterminate {
+    color: #8A8C8E;
+}
+
+/* Active state - brighter colors */
+.stelaction.active .action-state-icon.icon-checked,
+.stelproperty-toggle.active .action-state-icon.icon-checked {
+    color: #2E7D32;
+}
+
+/* Hover effects */
+.stelaction:hover .action-state-icon.icon-checked {
+    color: #66BB6A;
+}
+
+.stelaction:hover .action-state-icon.icon-unchecked {
+    color: #EF5350;
+}
+
+.stelaction:hover .action-state-icon.icon-trigger {
+    color: #FFB300;
+}
+
+/* State changing animation */
+.stelaction.state-changing .action-state-icon,
+.stelproperty-toggle.state-changing .action-state-icon {
+    animation: iconPulse 0.2s ease-in-out;
+}
+
+@keyframes iconPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.3); }
+}
+
+/* ============================================================
+ * TEXT PROPERTY INPUTS
+ * ============================================================ */
+
+.stelproperty-text {
+    flex: 1;
+    min-width: 120px;
+    padding: 4px 8px;
+    background: #2A2C2E;
+    color: #DCDBDA;
+    border: 1px solid #5D5F62;
+    border-radius: 3px;
+    font-size: 11px;
+    font-family: 'DejaVuSans', Verdana, Helvetica, Arial, sans-serif;
+    transition: border-color 0.2s ease;
+}
+
+.stelproperty-text:focus {
+    outline: none;
+    border-color: #FD971F;
+    box-shadow: 0 0 0 2px rgba(253, 151, 31, 0.2);
+}
+
+/* ============================================================
+ * TEXT PROPERTY WRAPPER
+ * ============================================================ */
+
+.stelproperty-text-wrap {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    width: 100%;
+    padding: 4px 0;
+}
+
+.stelproperty-text-wrap label {
+    font-size: 11px;
+    color: #DCDBDA;
+    font-weight: bold;
+    min-width: 80px;
+}
+
+.stelproperty-text-wrap .text-input-row {
+    display: flex;
+    gap: 6px;
+    flex: 1;
+    flex-wrap: wrap;
+}
+
+.stelproperty-text-apply {
+    padding: 4px 12px;
+    background: linear-gradient(#8C8C8C, #505050);
+    border: 1px solid #2A2C2E;
+    border-radius: 3px;
+    color: #000;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 11px;
+    transition: all 0.15s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.stelproperty-text-apply:hover {
+    background: linear-gradient(#bec2c7, #706E75E5);
+    transform: translateY(-1px);
+}
+
+.stelproperty-text-apply:active {
+    transform: translateY(1px);
+}
+
+.stelproperty-text-reset {
+    padding: 4px 12px;
+    background: #2A2C2E;
+    border: 1px solid #5D5F62;
+    border-radius: 3px;
+    color: #DCDBDA;
+    cursor: pointer;
+    font-size: 11px;
+    transition: all 0.15s ease;
+}
+
+.stelproperty-text-reset:hover {
+    background: #3A3C3E;
+    border-color: #FD971F;
+    color: #FD971F;
+}
+
+/* ============================================================
+ * RESPONSIVE
+ * ============================================================ */
+
+@media (max-width: 768px) {
+    /*.stelaction,
+    .stelproperty,*/
+    .stelproperty-toggle {
+        padding: 5px 12px;
+        font-size: 10px;
+    }
+
+    .stelaction .action-state-icon,
+    .stelproperty-toggle .action-state-icon {
+        font-size: 12px;
+        width: 14px;
+        height: 14px;
+    }
+
+    .stelproperty-text {
+        min-width: 80px;
+        font-size: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    /*.stelaction,
+    .stelproperty,*/
+    .stelproperty-toggle {
+        padding: 4px 8px;
+        font-size: 9px;
+        gap: 4px;
+    }
+
+    .stelaction .action-state-icon,
+    .stelproperty-toggle .action-state-icon {
+        font-size: 10px;
+        width: 12px;
+        height: 12px;
+    }
+
+    .stelproperty-text {
+        min-width: 60px;
+        font-size: 9px;
+        padding: 3px 6px;
+    }
+
+    .stelproperty-text-wrap {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 6px;
+    }
+
+    .stelproperty-text-wrap label {
+        min-width: auto;
+    }
+
+    .stelproperty-text-apply,
+    .stelproperty-text-reset {
+        padding: 3px 8px;
+        font-size: 9px;
+    }
+}
+
+@media (max-width: 900px) {
+		#tab_main h2{
+			font-size: 90%;
+		}
+		
+	  #date_year, #date_month, #date_day, #time_hour, #time_minute, #time_second {
+			width: 5em;
+  }
+}
+
+
+#tab_main > .flex > section > #View {
+	padding:0;
+} 
+
+@media (max-width: 1024px) {
+		#tab_main h2{
+			font-size: 90%;
+		}
+		
+		.timedisplay {
+			font-size: 16px;
+		}
+
+}
+
+#tab_main {
+  display: table-header-group;
+}
+

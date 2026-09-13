@@ -235,6 +235,30 @@
 }
 
 /* ============================================================
+ * SEARCH HIGHLIGHT
+ * ============================================================ */
+
+.stelaction.search-highlight,
+.stelproperty.search-highlight,
+.stelproperty-toggle.search-highlight {
+    background: linear-gradient(#8A8C6E, #5A5C4E) !important;
+    border-color: #FD971F !important;
+    box-shadow: 0 0 8px rgba(253, 151, 31, 0.3);
+    animation: searchPulse 0.8s ease-in-out;
+}
+
+@keyframes searchPulse {
+    0%, 100% { box-shadow: 0 0 8px rgba(253, 151, 31, 0.3); }
+    50% { box-shadow: 0 0 16px rgba(253, 151, 31, 0.6); }
+}
+
+.stelaction.filtered-hidden,
+.stelproperty.filtered-hidden,
+.stelproperty-toggle.filtered-hidden {
+    display: none !important;
+}
+
+/* ============================================================
  * TOGGLE BUTTONS 
  * ============================================================ */
 
@@ -386,74 +410,6 @@
     background: #FD971F;
     height: 6px;
     border-radius: 3px;
-}
-
-/* ============================================================
- * COLOR PICKER
- * ============================================================ */
-
-.btn-gen-color-wrap {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    width: 100%;
-}
-
-.btn-gen-color-picker {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    flex-wrap: wrap;
-}
-
-.btn-gen-color-swatch {
-    width: 36px;
-    height: 36px;
-    border-radius: 4px;
-    border: 2px solid #5D5F62;
-    flex-shrink: 0;
-    cursor: pointer;
-    transition: transform 0.15s ease;
-}
-
-.btn-gen-color-swatch:hover {
-    transform: scale(1.05);
-}
-
-.btn-gen-color-inputs {
-    display: flex;
-    gap: 6px;
-    flex-wrap: wrap;
-}
-
-.btn-gen-color-inputs label {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    font-size: 10px;
-    font-weight: bold;
-    color: #DCDBDA;
-}
-
-.btn-gen-color-inputs input[type="number"] {
-    width: 55px;
-    padding: 3px 5px;
-    background: #2A2C2E;
-    color: #DCDBDA;
-    border: 1px solid #5D5F62;
-    border-radius: 3px;
-    font-size: 10px;
-}
-
-.btn-gen-color-inputs input[type="number"]:focus {
-    outline: none;
-    border-color: #FD971F;
-}
-
-.btn-gen-prop-name {
-    font-size: 10px;
-    color: #AAB4B4;
-    font-family: 'DejaVuSansMono', monospace;
 }
 
 /* ============================================================
@@ -722,10 +678,9 @@
 .btn-gen-custom-section {
     margin-top: 20px;
     padding: 15px;
-    background: rgba(0, 0, 0, 0.12);
+    background: rgba(149, 155, 155, 0.2);
     border-radius: 6px;
     border: 1px solid rgba(255, 255, 255, 0.06);
-    width: 100%;
 }
 
 .btn-gen-custom-section header {
@@ -1006,73 +961,6 @@
 }
 
 /* ============================================================
- * CUSTOM COLOR PICKER (for custom buttons section)
- * ============================================================ */
-
-.btn-gen-custom-color {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    width: 100%;
-}
-
-.btn-gen-custom-color .btn-gen-color-swatch {
-    width: 30px;
-    height: 30px;
-    border-radius: 4px;
-    border: 2px solid #5D5F62;
-    flex-shrink: 0;
-    cursor: pointer;
-    transition: transform 0.15s ease;
-}
-
-.btn-gen-custom-color .btn-gen-color-swatch:hover {
-    transform: scale(1.05);
-}
-
-.btn-gen-custom-color .btn-gen-color-picker {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    flex-wrap: wrap;
-}
-
-.btn-gen-custom-color .btn-gen-color-inputs {
-    display: flex;
-    gap: 6px;
-    flex-wrap: wrap;
-}
-
-.btn-gen-custom-color .btn-gen-color-inputs label {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    font-size: 10px;
-    font-weight: bold;
-    color: #DCDBDA;
-}
-
-.btn-gen-custom-color .btn-gen-color-inputs input[type="number"] {
-    width: 55px;
-    padding: 3px 5px;
-    background: #2A2C2E;
-    color: #DCDBDA;
-    border: 1px solid #5D5F62;
-    border-radius: 3px;
-    font-size: 10px;
-}
-
-.btn-gen-custom-color .btn-gen-color-inputs input[type="number"]:focus {
-    outline: none;
-    border-color: #FD971F;
-}
-
-.btn-gen-custom-color span {
-    font-size: 11px;
-    color: #DCDBDA;
-}
-
-/* ============================================================
  * CUSTOM TEXT INPUT
  * ============================================================ */
 
@@ -1196,11 +1084,6 @@
         max-height: 180px;
     }
     
-    .btn-gen-color-inputs {
-        flex-direction: row;
-        flex-wrap: wrap;
-    }
-    
     .btn-gen-code {
         font-size: 10px;
         padding: 10px;
@@ -1252,11 +1135,6 @@
     .btn-gen-custom-footer button {
         width: 100%;
         text-align: center;
-    }
-    
-    .btn-gen-color-picker {
-        flex-direction: column;
-        align-items: flex-start;
     }
 
     .btn-gen-text-wrap .text-input-row {
@@ -1439,4 +1317,318 @@
 .btn-gen-control-group input[type="number"]:focus {
     outline: none;
     border-color: #FD971F;
+}
+
+/* ============================================================
+ * BTN-GEN-PROP-NAME - Label for property controls
+ * ============================================================ */
+
+.btn-gen-prop-name {
+    font-size: 11px;
+    color: #DCDBDA;
+    font-weight: bold;
+    display: inline-block;
+    padding: 2px 4px;
+    margin-left: 4px;
+    vertical-align: middle;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 150px;
+    background: rgba(0, 0, 0, 0.15);
+    border-radius: 3px;
+    font-family: 'DejaVuSans', sans-serif;
+}
+
+/* Color-specific alignment */
+.btn-gen-preview-content .btn-gen-prop-name {
+    margin-left: 8px;
+    padding: 4px 8px;
+    font-size: 12px;
+    vertical-align: middle;
+}
+
+/* For color controls, ensure proper alignment */
+.btn-gen-preview-content .color-control + .btn-gen-prop-name {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 10px;
+    padding: 4px 8px;
+    background: rgba(0, 0, 0, 0.12);
+    border-radius: 3px;
+    border-left: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .btn-gen-prop-name {
+        font-size: 10px;
+        max-width: 120px;
+        padding: 2px 6px;
+    }
+    
+    .btn-gen-preview-content .color-control + .btn-gen-prop-name {
+        margin-left: 6px;
+        padding: 3px 6px;
+        font-size: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .btn-gen-prop-name {
+        font-size: 9px;
+        max-width: 100px;
+        padding: 2px 4px;
+    }
+    
+    .btn-gen-preview-content .color-control + .btn-gen-prop-name {
+        margin-left: 4px;
+        padding: 2px 4px;
+        font-size: 9px;
+    }
+}
+
+/* ============================================================
+ * BTN GENERATOR - DIALOG STYLES
+ * ============================================================ */
+
+/* Dialog container */
+#btn-gen-edit-dialog {
+    background: linear-gradient(#3A3C3E, #2A2C2E);
+    color: #DCDBDA;
+    border: 1px solid #5D5F62;
+    border-radius: 6px;
+    padding: 0;
+}
+
+#btn-gen-edit-dialog .ui-dialog-titlebar {
+    background: linear-gradient(#4A4C4E, #3A3C3E);
+    border-bottom: 1px solid #5D5F62;
+    border-radius: 6px 6px 0 0;
+    padding: 10px 16px;
+}
+
+#btn-gen-edit-dialog .ui-dialog-title {
+    color: #DCDBDA;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+#btn-gen-edit-dialog .ui-dialog-titlebar-close {
+    background: transparent;
+    border: none;
+    color: #8A8C8E;
+}
+
+#btn-gen-edit-dialog .ui-dialog-titlebar-close:hover {
+    color: #F92672;
+}
+
+#btn-gen-edit-dialog .ui-dialog-content {
+    padding: 0;
+    background: transparent;
+}
+
+#btn-gen-edit-dialog .ui-dialog-buttonpane {
+    background: rgba(0, 0, 0, 0.2);
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    padding: 10px 16px;
+}
+
+/* Dialog content */
+.btn-gen-dialog-content {
+    padding: 16px 20px;
+}
+
+.btn-gen-dialog-field {
+    margin-bottom: 14px;
+}
+
+.btn-gen-dialog-label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 4px;
+    color: #DCDBDA;
+    font-size: 12px;
+}
+
+.btn-gen-dialog-input {
+    width: 100%;
+    padding: 8px 12px;
+    background: #B7B8B0FA;
+    border: 1px solid #3A3C3E;
+    border-radius: 4px;
+    font-size: 12px;
+    box-sizing: border-box;
+}
+
+.btn-gen-dialog-input:focus {
+    outline: none;
+    border-color: #FD971F;
+    box-shadow: 0 0 0 2px rgba(253, 151, 31, 0.15);
+}
+
+/* Dialog section */
+.btn-gen-dialog-section {
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding-top: 14px;
+    margin-top: 6px;
+}
+
+.btn-gen-dialog-section-title {
+    font-size: 11px;
+    color: #8A8C8E;
+    margin-bottom: 10px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.btn-gen-dialog-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 6px;
+}
+
+.btn-gen-dialog-row:last-child {
+    margin-bottom: 0;
+}
+
+.btn-gen-dialog-row-label {
+    min-width: 40px;
+    font-weight: bold;
+    color: #DCDBDA;
+    font-size: 11px;
+}
+
+.btn-gen-dialog-number {
+    flex: 1;
+    padding: 5px 10px;
+    background: #1A1C1E;
+    color: #DCDBDA;
+    border: 1px solid #3A3C3E;
+    border-radius: 4px;
+    font-size: 11px;
+    min-width: 0;
+}
+
+.btn-gen-dialog-number:focus {
+    outline: none;
+    border-color: #FD971F;
+    box-shadow: 0 0 0 2px rgba(253, 151, 31, 0.15);
+}
+
+/* Dialog info (non-numeric) */
+.btn-gen-dialog-info {
+    font-size: 11px;
+    color: #8A8C8E;
+    padding: 4px 0;
+}
+
+.btn-gen-dialog-info-label {
+    color: #A6E22E;
+    font-weight: bold;
+}
+
+.btn-gen-dialog-info-value {
+    color: #DCDBDA;
+}
+
+/* Dialog buttons */
+
+.btn-gen-dialog-cancel, .btn-gen-dialog-save {
+    background: linear-gradient(#5D5F62, #3A3C3E) !important;
+    border: 1px solid #2A2C2E !important;
+    color: #DCDBDA !important;
+    padding: 6px 20px !important;
+    border-radius: 4px !important;
+}
+
+.btn-gen-dialog-cancel, .btn-gen-dialog-save:hover {
+    background: linear-gradient(#6E7073, #4A4C4E) !important;
+    transform: translateY(-1px);
+}
+
+.btn-gen-dialog-cancel, .btn-gen-dialog-save:active {
+    transform: translateY(1px);
+}
+
+/* ============================================================
+ * CUSTOM BUTTONS - EDIT BUTTON
+ * ============================================================ */
+
+.btn-gen-custom-edit {
+    background: transparent;
+    border: none;
+    font-size: 11px;
+    cursor: pointer;
+    padding: 2px 8px;
+    border-radius: 3px;
+    transition: background 0.15s ease, color 0.15s ease;
+    color: #66D9EF;
+    font-weight: bold;
+}
+
+.btn-gen-custom-edit:hover {
+    background: rgba(102, 217, 239, 0.15);
+    color: #66D9EF;
+}
+
+.btn-gen-custom-edit:active {
+    transform: scale(0.95);
+}
+
+/* ============================================================
+ * CUSTOM BUTTONS - NUMERIC BADGE
+ * ============================================================ */
+
+.btn-gen-custom-numeric-badge {
+    display: inline-block;
+    background: rgba(166, 226, 46, 0.12);
+    color: #A6E22E;
+    font-size: 8px;
+    padding: 1px 8px;
+    border-radius: 10px;
+    margin-left: 6px;
+    font-family: 'DejaVuSansMono', monospace;
+    border: 1px solid rgba(166, 226, 46, 0.15);
+    letter-spacing: 0.3px;
+}
+/* .pattern-count  same from skyculture.css */
+
+/* ============================================================
+ * RESPONSIVE DIALOG
+ * ============================================================ */
+
+@media (max-width: 480px) {
+    #btn-gen-edit-dialog {
+        width: 95% !important;
+        max-width: 400px !important;
+        margin: 0 auto !important;
+    }
+    
+    .btn-gen-dialog-content {
+        padding: 12px 16px;
+    }
+    
+    .btn-gen-dialog-row {
+        flex-wrap: wrap;
+        gap: 4px;
+    }
+    
+    .btn-gen-dialog-row-label {
+        min-width: 100%;
+        font-size: 10px;
+    }
+    
+    .btn-gen-dialog-number {
+        width: 100%;
+        font-size: 10px;
+    }
+    
+    .btn-gen-dialog-input {
+        font-size: 11px;
+        padding: 6px 10px;
+    }
 }

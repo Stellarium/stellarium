@@ -247,7 +247,7 @@
     padding: 8px;
     background: rgba(0, 0, 0, 0.05);
     border-radius: 4px;
-    border-left: 3px solid #F92672;
+    border-left: 3px solid #CC4D4D;
 }
 
 /**
@@ -275,7 +275,7 @@
     padding: 8px;
     background: rgba(0, 0, 0, 0.05);
     border-radius: 4px;
-    border-left: 3px solid #81C784;
+    border-left: 3px solid #82C882;
 }
 
 /* ========================================================================
@@ -614,6 +614,12 @@
     margin-left: 4px;
     flex-shrink: 0;
 }
+
+#aster-lines-color-preview {background: #FF0033;}
+
+#aster-labels-color-preview {background: #00FFFF;}
+
+#aster-rayhelpers-color-preview {background: #7DFF7D;}
 
 /**
  * Color value display (RGB text).
