@@ -96,8 +96,8 @@ requirejs.config({
 			// CodeMirror internal relative path fixes
 			"../../lib/codemirror": "codemirror",
 			"../dialog/dialog":     "cm-addon-dialog",
-			"../foldcode":             "cm-addon-foldcode",
-			"../searchcursor":         "cm-addon-searchcursor",
+			"foldcode":             "cm-addon-foldcode",
+			"searchcursor":         "cm-addon-searchcursor",
 			"lib/codemirror":       "codemirror"
 		},
 		
