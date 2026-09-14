@@ -77,8 +77,9 @@ InfoPanel::InfoPanel(QGraphicsItem* parent) : QGraphicsTextItem("", parent)
 	{
 		// Add a drop shadow for better visibility
 		QGraphicsDropShadowEffect *effect = new QGraphicsDropShadowEffect(this);
-		effect->setBlurRadius(6);
-		effect->setColor(QColor(0, 0, 0));
+		effect->setBlurRadius(qBound(0, conf->value("gui/info_shadow_radius", 6).toInt(), 64));
+		effect->setColor(QColor(0, 0, 0, qBound(0, conf->value("gui/info_shadow_opacity", 127).toInt(), 255)));
+		//setOpacity (qBound(0.0, conf->value("gui/info_panel_opacity", 0.5).toDouble(), 1.0)); // Only reduces visibility!
 		effect->setOffset(0,0);
 		setGraphicsEffect(effect);
 	}
@@ -100,8 +101,12 @@ void InfoPanel::setTextFromObjects(const QList<StelObjectP>& selected)
 		// just print details of the first item for now
 		// Must set lastRTS for currently selected object here...
 		StelCore *core=StelApp::getInstance().getCore();
-		infoHTML = selected[0]->getInfoString(core, infoTextFilters);
+		infoHTML =     "<div style='background-color: rgba(0, 0, 0, 25%); padding: 10px;'>" +
+				selected[0]->getInfoString(core, infoTextFilters) +
+				"</div>";
+
 		selected[0]->removeExtraInfoStrings(StelObject::AllInfo);
+		//qDebug() << "infoHTML:" << infoHTML;
 		setHtml(infoHTML);
 	}
 }
