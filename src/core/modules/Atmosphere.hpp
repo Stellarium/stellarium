@@ -88,6 +88,32 @@ public:
 	//! @return the last computed average luminance of the atmosphere in cd/m2.
 	float getAverageLuminance() const {return averageLuminance;}
 
+	//! Whether the current model has a local luminance field. No GPU access.
+	bool isLocalLuminanceAvailable() const
+	{
+		return localLuminanceValid && getFadeIntensity() > 0.f && isReadyToRender() && !isLoading();
+	}
+
+	//! Sample the current atmosphere's photopic luminance in cd/m² before tone mapping.
+	//! @param screenPos physical pixels in StelProjector coordinates (origin at bottom left).
+	//! Call on the render thread with its OpenGL context current, after computeColor().
+	//! Returns false if unavailable; luminance is then unspecified. No previous sample is returned.
+	//! This is the model's input Y, including only contributions already present there:
+	//! eclipse scaling and any model-specific moon, pollution and background terms.
+	//! The display fade applied AFTER tone mapping is deliberately not applied to physical Y;
+	//! any fade already baked into the model's input (e.g. pollution) is retained.
+	//! No average-luminance override or synthetic atmosphere-off background is used.
+	//! This describes the atmosphere field, without landscape/object occlusion. Some models
+	//! mirror the field below the horizon. It is not a measurement of the final screen RGB.
+	//! GPU implementations may synchronously read a few texels: callers should sample on
+	//! demand only, at an information-display rate (e.g. 5 Hz), not once per rendered frame.
+	virtual bool getLocalLuminance(const Vec2f& screenPos, float& luminance)
+	{
+		Q_UNUSED(screenPos)
+		Q_UNUSED(luminance)
+		return false;
+	}
+
 	//! override computable luminance. This is for special operations only, e.g. for scripting of brightness-balanced image export.
 	//! To return to auto-computed values, set any negative value at the end of the script.
 	void setAverageLuminance(float overrideLum)
@@ -110,6 +136,7 @@ public:
 	float getLightPollutionLuminance() const { return lightPollutionLuminance; }
 
 protected:
+	bool localLuminanceValid = false;
 	//! The average luminance of the atmosphere in cd/m2
 	float averageLuminance = 0;
 	bool overrideAverageLuminance = false; // if true, don't compute but keep value set via setAverageLuminance(float)
