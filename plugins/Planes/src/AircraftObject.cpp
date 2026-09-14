@@ -204,7 +204,7 @@ QString AircraftObject::getInfoString(const StelCore* core, const InfoStringGrou
 		// TRANSLATORS: Unit of measure for distance - kilometers
 		QString km = qc_("km", "distance");
 		// TRANSLATORS: Unit of measure for distance - nautical miles
-		QString nmi = qc_("nmi", "distance");
+		QString nmi = qc_("NM", "distance");
 		// TRANSLATORS: Unit of measure for distance - feets
 		QString ft = qc_("ft", "distance");
 		// TRANSLATORS: Unit of measure for speed - meters per second
