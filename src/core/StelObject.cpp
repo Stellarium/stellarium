@@ -430,7 +430,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 	Q_UNUSED(az_app)
 
 	if (withTables && (flags&(RaDecJ2000|RaDecOfDate|HourAngle|AltAzi|GalacticCoord|SupergalacticCoord|EclipticCoordJ2000) || ((flags&EclipticCoordOfDate) && (currentPlanet==L1S("Earth")))))
-		res += "<table style='margin:0em 0em 0em -0.125em;border-spacing:0px;border:0px;color:inherit;'>";
+		res += QString("<table style='margin:0em 0em 0em -0.125em;border-spacing:0px;border:0px;color:%1;'>").arg(getInfoColor().toHtmlColor());
 	else
 		res+="<br/>";
 
@@ -785,7 +785,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 		QString eqlObl = q_("Ecliptic obliquity");
 		if (withTables)
 		{
-			res += "<table style='margin:0em 0em 0em -0.125em;border-spacing:0px;border:0px;color:inherit;'>";
+			res += QString("<table style='margin:0em 0em 0em -0.125em;border-spacing:0px;border:0px;color:%1;'>").arg(getInfoColor().toHtmlColor());
 			res += QString("<tr><td>%1 (%3):</td><td>%2</td></tr>").arg(eqlObl, firstCoordinate, cepoch);
 		}
 		else
@@ -799,7 +799,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 	if (flags&OtherCoord)
 	{
 		if (withTables)
-			res += "<table style='margin:0em 0em 0em -0.125em;border-spacing:0px;border:0px;color:inherit;'>";
+			res += QString("<table style='margin:0em 0em 0em -0.125em;border-spacing:0px;border:0px;color:%1;'>").arg(getInfoColor().toHtmlColor());
 		res += getExtraInfoStrings(OtherCoord).join("");
 		res += omgr->getExtraInfoStrings(OtherCoord).join("");
 		if (withTables)
@@ -816,7 +816,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 
 		if (withTables)
 		{
-			res += "<table style='margin:0em 0em 0em -0.125em;border-spacing:0px;border:0px;color:inherit;'>";
+			res += QString("<table style='margin:0em 0em 0em -0.125em;border-spacing:0px;border:0px;color:%1;'>").arg(getInfoColor().toHtmlColor());
 			res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2</td></tr>").arg(STc, STd);
 		}
 		else
@@ -873,7 +873,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 		int year, month, day;
 
 		if (withTables && !(flags&SiderealTime && currentPlanet==L1S("Earth")))
-			res += "<table style='margin:0em 0em 0em -0.125em;border-spacing:0px;border:0px;color:inherit;'>";
+			res += QString("<table style='margin:0em 0em 0em -0.125em;border-spacing:0px;border:0px;color:%1;'>").arg(getInfoColor().toHtmlColor());
 
 		// Rise
 		StelUtils::getDateFromJulianDay(rts[0]+utcShift, &year, &month, &day);
@@ -1020,7 +1020,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 
 			if (withTables)
 			{
-				res += "<table style='margin:0em 0em 0em -0.125em;border-spacing:0px;border:0px;color:inherit;'>";
+				res += QString("<table style='margin:0em 0em 0em -0.125em;border-spacing:0px;border:0px;color:%1;'>").arg(getInfoColor().toHtmlColor());
 				res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2:</td><td style='text-align:right;'>%3</td><td style='text-align:right;'>/%4:</td><td style='text-align:right;'>%5</td></tr>").arg(event,  azStr,  firstCoordinate, haStr, secondCoordinate);
 			}
 			else
@@ -2020,7 +2020,7 @@ QString StelObject::getSolarLunarInfoString(const StelCore *core, const InfoStri
 		const bool withDecimalDegree = StelApp::getInstance().getFlagUseDecDegreesCoords();
 
 		if (withTables)
-			oss << "<table style='margin:0em 0em 0em -0.125em;border-spacing:0px;border:0px;color:inherit;'>";
+			oss << QString("<table style='margin:0em 0em 0em -0.125em;border-spacing:0px;border:0px;color:%1;'>").arg(getInfoColor().toHtmlColor());
 		const bool useSouthAzimuth = StelApp::getInstance().getFlagSouthAzimuthUsage();
 		const bool withDesignations = StelApp::getInstance().getFlagUseCCSDesignation();
 		double az, alt;

@@ -101,7 +101,7 @@ void InfoPanel::setTextFromObjects(const QList<StelObjectP>& selected)
 		// just print details of the first item for now
 		// Must set lastRTS for currently selected object here...
 		StelCore *core=StelApp::getInstance().getCore();
-		infoHTML =     "<div style='background-color: rgba(0, 0, 0, 25%); padding: 10px;'>" +
+		infoHTML =     QString("<div style='color:%1;background-color: rgba(0, 0, 0, 25%); padding: 10px;'>").arg(selected[0]->getInfoColor().toHtmlColor()) +
 				selected[0]->getInfoString(core, infoTextFilters) +
 				"</div>";
 
