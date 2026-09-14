@@ -1,0 +1,75 @@
+# Experimental Stellarium @VERSION@ Windows plug-in SDK
+
+This SDK builds a minimal standalone C++ dynamic plug-in for the matching
+official Stellarium Windows package. It is intentionally small and does not
+define a stable, general-purpose Stellarium API.
+
+It supports implementing `StelModule` and `StelPluginInterface`. The installed
+headers are `core/StelModule.hpp`, `core/StelPluginInterface.hpp`, and their
+`StelMainExport.hpp` dependency. Other declarations exported by
+`stelMain.dll` are internal and are not implicitly supported.
+
+## Compatibility
+
+A plug-in built with this SDK is compatible only with this exact combination:
+
+- Stellarium @VERSION@ from the same package build
+- Windows @STELLARIUM_PLUGIN_ABI_ARCHITECTURE@
+- @CMAKE_CXX_COMPILER_ID@ toolset v@MSVC_TOOLSET_VERSION@
+- Qt @QT_VERSION@
+- @STELLARIUM_PLUGIN_ABI_CONFIGURATION@ configuration
+- dynamic MSVC runtime (`/MD`)
+- `StelPluginInterface` IID `org.stellarium.StelPluginInterface/2.0`
+
+There is no ABI guarantee across Stellarium releases or separately rebuilt
+packages. Rebuild the plug-in for every Stellarium package it supports. Do not
+mix this SDK's DLL, import library, headers, or CMake files with another
+Stellarium installation.
+
+The source revision is `@STELLARIUM_PLUGIN_SDK_SOURCE_REVISION@` and the
+package build ID is `@STELLARIUM_PLUGIN_SDK_BUILD_ID@`. Machine-readable build
+information is in
+`share/stellarium/plugin-sdk/StellariumPluginBuildInfo.json`.
+
+## Build
+
+Install the exact Qt version listed above and use the matching MSVC toolset.
+A minimal `CMakeLists.txt` is:
+
+```cmake
+cmake_minimum_required(VERSION 3.18)
+if (POLICY CMP0091)
+    cmake_policy(SET CMP0091 NEW)
+endif()
+project(MyPlugin LANGUAGES CXX)
+
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_MSVC_RUNTIME_LIBRARY MultiThreadedDLL)
+
+find_package(Stellarium @VERSION@ EXACT CONFIG REQUIRED)
+
+add_library(MyPlugin MODULE MyPlugin.cpp MyPlugin.hpp)
+target_link_libraries(MyPlugin PRIVATE Stellarium::stelMain)
+set_target_properties(MyPlugin PROPERTIES PREFIX "lib")
+```
+
+Configure a Release-only build and point `Stellarium_DIR` to this SDK's
+`lib/cmake/Stellarium` directory. Link through `Stellarium::stelMain`; do not
+manually define `STELMAIN_BUILD` or `STELMAIN_USE_DLL`.
+
+## Install
+
+For a plug-in ID `MyPlugin`, install the DLL as:
+
+```text
+%APPDATA%\Stellarium\modules\MyPlugin\libMyPlugin.dll
+```
+
+Run it only with the matching Stellarium package. The SDK copy of
+`stelMain.dll` is for isolated link/load tests; do not put it in the plug-in
+directory or overwrite a different Stellarium installation with it.
+
+This SDK and `stelMain` are distributed under GNU GPL version 2 or later; see
+`COPYING`. Qt and other dependencies remain subject to their own licenses.
