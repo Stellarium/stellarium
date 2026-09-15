@@ -169,10 +169,10 @@ QVariantMap Quasar::getInfoMap(const StelCore *core) const
 	return map;
 }
 
-Vec3f Quasar::getInfoColor(void) const
-{
-	return Vec3f(1.f, 1.f, 1.f);
-}
+//Vec3f Quasar::getInfoColor(void) const
+//{
+//	return Vec3f(1.f, 1.f, 1.f);
+//}
 
 float Quasar::getVMagnitude(const StelCore* core) const
 {

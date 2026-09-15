@@ -77,8 +77,9 @@ InfoPanel::InfoPanel(QGraphicsItem* parent) : QGraphicsTextItem("", parent)
 	{
 		// Add a drop shadow for better visibility
 		QGraphicsDropShadowEffect *effect = new QGraphicsDropShadowEffect(this);
-		effect->setBlurRadius(6);
-		effect->setColor(QColor(0, 0, 0));
+		effect->setBlurRadius(qBound(0, conf->value("gui/info_shadow_radius", 6).toInt(), 64));
+		effect->setColor(QColor(0, 0, 0, qBound(0, conf->value("gui/info_shadow_opacity", 127).toInt(), 255)));
+		//setOpacity (qBound(0.0, conf->value("gui/info_panel_opacity", 0.5).toDouble(), 1.0)); // Only reduces visibility!
 		effect->setOffset(0,0);
 		setGraphicsEffect(effect);
 	}
@@ -97,11 +98,70 @@ void InfoPanel::setTextFromObjects(const QList<StelObjectP>& selected)
 	}
 	else
 	{
+		QString css(
+			//    "html {"
+			//	      "color: %1;"
+			//	      "background-color: rgba(0,0,0,%2%);"
+			//	"} "
+			//    "body {"
+			//	      "color: %1;"
+			//	      "background-color: rgba(0,0,0,%2%);"
+			//	"} "
+			//    "h1 {"
+			//	      "color: %1;"
+			//	      "background-color: rgba(0,0,0,%2%);"
+			//	"} "
+			    "h2 {"
+				      "color: %1;"
+				      "background-color: rgba(0,0,0,%2%);"
+				"} "
+			//    "h3 {"
+			//	      "color: %1;"
+			//	      "background-color: rgba(0,0,0,%2%);"
+			//	"} "
+			//    "h4 {"
+			//	      "color: %1;"
+			//	      "background-color: rgba(0,0,0,%2%);"
+			//	"} "
+			    ".info-string {"
+				"color: %1;"
+				"background-color: rgba(0,0,0,%2%);"
+				" } "
+			    "table.info-string {"
+			    "margin: 0em 0em 0em -0.125em;"
+			    "border-spacing: 0px;"
+			    "border: 0px;"
+			    "color: %1;"
+			    "background-color: rgba(0,0,0,%2%);"
+			    "} ");
+
 		// just print details of the first item for now
 		// Must set lastRTS for currently selected object here...
 		StelCore *core=StelApp::getInstance().getCore();
-		infoHTML = selected[0]->getInfoString(core, infoTextFilters);
+
+		Vec3f color = selected[0]->getInfoColor();
+		QString opacity="25";
+		if (StelApp::getInstance().getFlagOverwriteInfoColor())
+		{
+			// make info text more readable...
+			color = StelApp::getInstance().getOverwriteInfoColor();
+		}
+		if (core->isBrightDaylight() && !StelApp::getInstance().getVisionModeNight())
+		{
+			// make info text more readable when atmosphere enabled at daylight.
+			color = StelApp::getInstance().getDaylightInfoColor();
+			opacity="0";
+		}
+
+		document()->setDefaultStyleSheet(css.arg(color.toHtmlColor(), opacity));
+
+		infoHTML =	"<div class='info-string'>" +
+				selected[0]->getInfoString(core, infoTextFilters)
+				+ "</div>"
+				;
+
 		selected[0]->removeExtraInfoStrings(StelObject::AllInfo);
+		//qDebug() << "style" << document()->defaultStyleSheet()  << " --- infoHTML:" << infoHTML;
 		setHtml(infoHTML);
 	}
 }
