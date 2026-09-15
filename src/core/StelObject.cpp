@@ -1733,7 +1733,7 @@ void StelObject::postProcessInfoString(QString& str, const InfoStringGroup& flag
 	}
 	else if((flags&NoFont))
 	{
-		qDebug() << "StelObject::postProcessInfoString() given with NoFont. Remove this arg!";
+		//qDebug() << "StelObject::postProcessInfoString() given with NoFont. Remove font css!";
 	}
 
 }

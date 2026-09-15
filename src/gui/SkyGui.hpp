@@ -49,6 +49,7 @@ class InfoPanel : public QGraphicsTextItem
 	private:
 		QString infoHTML;
 		StelObject::InfoStringGroup infoTextFilters;
+		int opacity; // allows dimming text background.
 };
 
 //! The class managing the layout for button bars, selected object info and loading bars.

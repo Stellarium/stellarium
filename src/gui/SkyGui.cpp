@@ -35,7 +35,7 @@
 #include <QRegularExpression>
 #include <QGraphicsDropShadowEffect>
 
-InfoPanel::InfoPanel(QGraphicsItem* parent) : QGraphicsTextItem("", parent)
+InfoPanel::InfoPanel(QGraphicsItem* parent) : QGraphicsTextItem("", parent), opacity(0)
 {
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
@@ -83,6 +83,7 @@ InfoPanel::InfoPanel(QGraphicsItem* parent) : QGraphicsTextItem("", parent)
 		effect->setOffset(0,0);
 		setGraphicsEffect(effect);
 	}
+	opacity=qBound(0, conf->value("gui/info_panel_opacity", 0).toInt(), 100);
 }
 
 InfoPanel::~InfoPanel()
@@ -126,6 +127,7 @@ void InfoPanel::setTextFromObjects(const QList<StelObjectP>& selected)
 			    ".info-string {"
 				"color: %1;"
 				"background-color: rgba(0,0,0,%2%);"
+			        //"background: rgba(0,0,0,%2%);"
 				" } "
 			    "table.info-string {"
 			    "margin: 0em 0em 0em -0.125em;"
@@ -140,7 +142,7 @@ void InfoPanel::setTextFromObjects(const QList<StelObjectP>& selected)
 		StelCore *core=StelApp::getInstance().getCore();
 
 		Vec3f color = selected[0]->getInfoColor();
-		QString opacity="25";
+		QString opacity=QString::number(this->opacity);
 		if (StelApp::getInstance().getFlagOverwriteInfoColor())
 		{
 			// make info text more readable...
@@ -155,9 +157,12 @@ void InfoPanel::setTextFromObjects(const QList<StelObjectP>& selected)
 
 		document()->setDefaultStyleSheet(css.arg(color.toHtmlColor(), opacity));
 
-		infoHTML =	"<div class='info-string'>" +
+		// We need the span to set the background opacity.
+		infoHTML =	"<div class='info-string'>"
+				+QString("<span style='background:rgba(0, 0, 0, %1%);'>").arg(opacity) +
 				selected[0]->getInfoString(core, infoTextFilters)
-				+ "</div>"
+				+ "</span>"
+				  "</div>"
 				;
 
 		selected[0]->removeExtraInfoStrings(StelObject::AllInfo);
