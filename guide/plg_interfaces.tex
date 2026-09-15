@@ -549,10 +549,32 @@ Tabs at the top allow access to different settings and controls.
 
 \begin{description}
 \item[Main] Contains the time controls and most of the buttons of the 
-main bottom toolbar. An additional control allows moving the view like when 
-dragging the mouse or using the arrow keys in Stellarium, and a slider enables 
-the changing of the field of view. There are also buttons to quickly execute 
-time jumps using the commonly used astronomical time intervals.
+main bottom toolbar. The time panel provides two tabs for entering the date
+and time---either as a calendar date and clock time, or as Julian Day (JD)
+and Modified Julian Day (MJD) values---along with a display of the current
+$\Delta$T value. Below the time fields, a row of buttons allows decreasing
+the time speed, pausing or resuming real-time motion, setting the time to
+now, and increasing the time speed. To the right, a list of time-jump
+buttons lets the user add or subtract one unit of various astronomical
+intervals (solar hour, solar day, calendar year, sidereal year, synodic
+month, draconic year, and many others). An additional control allows moving
+the view like when dragging the mouse or using the arrow keys in Stellarium,
+and a slider enables the changing of the field of view.
+
+The View section provides:
+\begin{itemize}
+\item A joystick control for panning the view in any direction.
+\item A mouse-wheel zoom speed selector (1x, 3x, 6x, or 12x) that controls
+  the zoom rate when scrolling over the joystick area.
+\item Quick-view buttons to look towards the horizon at specific azimuths
+  (0\degree, 30\degree, 60\degree, \ldots, 330\degree).
+\item A vertical view offset slider with preset buttons (-50\% to +20\%),
+  useful for adjusting the horizon position in presentations. The slider
+  value can also be adjusted with the mouse wheel while hovering over it.
+\item A field-of-view (FOV) slider with preset buttons ranging from
+  0.1\degree\ to 230\degree. The slider value can also be adjusted with the
+  mouse wheel while hovering over it.
+\end{itemize}
 \item[Selection] Allows searching and selecting objects like in \autoref{sec:gui:search}. 
 SIMBAD search is also supported. Quick select buttons are available for the 
 primary solar system objects. It also displays the information text for current 
@@ -572,6 +594,124 @@ configured as a keyboard shortcut (\autoref{sec:gui:configuration}) here.
 supported.
 \item[Projection] Switch the projection method used, like \autoref{sec:gui:view:markings}.
 \end{description}
+
+% Gamepad Controller
+\subsection{Gamepad Controller}
+\label{sec:plugins:RemoteControl:gamepad}
+
+The Gamepad Controller tab\newFeature{3.0.0} provides comprehensive support for
+gamepad/joystick devices using the W3C Gamepad API.\footnote{The W3C Gamepad
+API has been widely available since March 2017 and is supported by all modern
+browsers including Chrome 21+, Firefox 29+, Edge 12+, and Safari 10.1+.}
+This feature enables hands-free control of Stellarium, making it particularly
+useful for planetarium presentations, educational demonstrations, and
+accessibility applications.
+
+\subsubsection{Connection and Device Management}
+
+To use a gamepad, simply connect it via USB or Bluetooth and click the
+\button{Scan} button in the Gamepad Controller tab. The interface will detect
+connected devices, but for security reasons, the browser only exposes the
+gamepad after the user performs an intentional input action---pressing a
+button or moving a joystick axis. Once this gesture is detected, the device
+information (name, model, vendor, and unique identifier) will be displayed.
+
+Multiple controllers can be connected simultaneously. Use the \emph{Active
+Device} dropdown to switch between connected devices. Each device maintains
+its own independent profile, including button mappings, calibration data, and
+settings, all stored locally in the browser's \texttt{localStorage}.
+
+\subsubsection{Button Customization}
+
+The button customization system is dynamically populated from Stellarium's
+native action system via the \texttt{/api/stelaction/list} endpoint. This
+means that:
+
+\begin{itemize}
+\item All available StelActions (including those from enabled plugins) appear
+  in the dropdown menus.
+\item When a plugin is activated, its actions automatically appear in the
+  customization lists, categorized under the plugin's name.
+\item The action list is consistent with the \emph{Actions and Scripts} tab
+  --- any action available there can be mapped to a gamepad button.
+\item In addition to native StelActions, a set of educational custom actions
+  (\emph{View Directions}, \emph{Zoom Levels}, \emph{Search Objects}, etc.)
+  is also available for quick access.
+\end{itemize}
+
+To customize a button, simply select it from the dropdown menu next to the
+desired button. Changes are saved per-device and persist across browser
+sessions.
+
+\subsubsection{Joystick Controls}
+
+The two analog sticks provide intuitive control:
+
+\begin{description}
+\item[Left Stick] Controls view panning. The sensitivity, deadzone, and axis
+  inversion (X/Y) can be adjusted via sliders and checkboxes.
+\item[Right Stick] Controls continuous zoom. The zoom speed can be adjusted,
+  and the Y-axis can be inverted to match user preference (pull up to zoom in
+  or out).
+\end{description}
+
+\subsubsection{Calibration}
+
+The calibration feature compensates for hardware drift on joystick axes.
+To calibrate:
+
+\begin{enumerate}
+\item Click the \button{Calibrate} button.
+\item Move both joysticks in circular motions.
+\item Press any button on the controller to finish.
+\end{enumerate}
+
+The calibration offsets are saved per-device and can be reset at any time.
+
+\subsubsection{Vibration Feedback}
+
+If the connected gamepad supports vibration (works in Chrome and Edge
+browsers), vibration feedback can be enabled. The intensity can be adjusted
+with a slider, and a \button{Test Vibration} button allows manual
+verification.
+
+\subsubsection{Live Input Monitor}
+
+The Live Input Monitor displays real-time raw values from the browser's
+Gamepad API, showing:
+
+\begin{itemize}
+\item Button states with numerical values (0.0 to 1.0) and visual indicators.
+\item Axis positions with visual meters (-1.0 to 1.0).
+\item Device information including button and axis counts.
+\end{itemize}
+
+This panel is invaluable for debugging button mappings and understanding how
+different browsers report gamepad inputs.
+
+\subsubsection{Profiles (Export/Import)}
+
+Each device profile (including button mappings and calibration data) can be
+exported as a JSON file for backup or sharing. Profiles can also be imported,
+allowing users to quickly switch between different controller configurations
+or share setups across multiple Stellarium installations.
+
+\subsubsection{Technical Notes}
+
+The Gamepad Controller module is built on the W3C Gamepad API and integrates
+seamlessly with Stellarium's Remote Control plugin architecture:
+
+\begin{itemize}
+\item All button actions are executed via the same API endpoints used by other
+  interface components (\texttt{/api/stelaction/do}, \texttt{/api/main/fov},
+  \texttt{/api/main/move}, etc.).
+\item The module respects Stellarium's plugin system --- actions from enabled
+  plugins (ArchaeoLines, Scenery3d, ExoPlanets, etc.) are automatically
+  available for button mapping.
+\item The module uses \texttt{requestAnimationFrame} for smooth 60fps polling
+  and adapts to server connection status by pausing/resuming polling
+  automatically.
+\end{itemize}
 
 \subsection{Remote Control API}
 \label{sec:plugins:RemoteControl:API}
