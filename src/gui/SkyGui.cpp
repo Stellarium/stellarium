@@ -122,13 +122,13 @@ void InfoPanel::setTextFromObjects(const QList<StelObjectP>& selected)
 				      "color: %1;"
 				      "background-color: rgba(0,0,0,%2%);"
 				"} "
-				//".info-string {"
-				//"margin: 0em 0em 0em -0.125em;"
-				//"border-spacing: 0px;"
-				//"border: 0px;"
-				//"color: %1;"
-				//"background-color: rgba(0,0,0,%2%);"
-				//" } "
+			    ".info-string {"
+				"margin: 0em 0em 0em -0.125em;"
+				"border-spacing: 0px;"
+				"border: 0px;"
+				"color: %1;"
+				"background-color: rgba(0,0,0,%2%);"
+				" } "
 			    "table {"
 			    "margin: 0em 0em 0em -0.125em;"
 			    "border-spacing: 0px;"
@@ -157,9 +157,9 @@ void InfoPanel::setTextFromObjects(const QList<StelObjectP>& selected)
 
 		document()->setDefaultStyleSheet(css.arg(color.toHtmlColor(), opacity));
 
-		infoHTML =	//"<div class='info-string'>" +
+		infoHTML =	"<div class='info-string'>" +
 				selected[0]->getInfoString(core, infoTextFilters)
-				//+ "</div>"
+				+ "</div>"
 				;
 
 		selected[0]->removeExtraInfoStrings(StelObject::AllInfo);
