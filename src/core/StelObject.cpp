@@ -2024,7 +2024,7 @@ QString StelObject::getSolarLunarInfoString(const StelCore *core, const InfoStri
 		const bool withDecimalDegree = StelApp::getInstance().getFlagUseDecDegreesCoords();
 
 		if (withTables)
-			oss << QString("<table style='margin:0em 0em 0em -0.125em;border-spacing:0px;border:0px;color:%1;'>").arg(getInfoColor().toHtmlColor());
+			oss << QString("<table class='info-string'>");
 		const bool useSouthAzimuth = StelApp::getInstance().getFlagSouthAzimuthUsage();
 		const bool withDesignations = StelApp::getInstance().getFlagUseCCSDesignation();
 		double az, alt;
