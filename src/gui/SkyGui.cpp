@@ -79,11 +79,10 @@ InfoPanel::InfoPanel(QGraphicsItem* parent) : QGraphicsTextItem("", parent), opa
 		QGraphicsDropShadowEffect *effect = new QGraphicsDropShadowEffect(this);
 		effect->setBlurRadius(qBound(0, conf->value("gui/info_shadow_radius", 6).toInt(), 64));
 		effect->setColor(QColor(0, 0, 0, qBound(0, conf->value("gui/info_shadow_opacity", 127).toInt(), 255)));
-		//setOpacity (qBound(0.0, conf->value("gui/info_panel_opacity", 0.5).toDouble(), 1.0)); // Only reduces visibility!
 		effect->setOffset(0,0);
 		setGraphicsEffect(effect);
 	}
-	opacity=qBound(0, conf->value("gui/info_panel_opacity", 0).toInt(), 100);
+	opacity=qBound(-100, conf->value("gui/info_panel_opacity", 0).toInt(), 100);
 }
 
 InfoPanel::~InfoPanel()
@@ -99,35 +98,14 @@ void InfoPanel::setTextFromObjects(const QList<StelObjectP>& selected)
 	}
 	else
 	{
-		QString css(
-			//    "html {"
-			//	      "color: %1;"
-			//	      "background-color: rgba(0,0,0,%2%);"
-			//	"} "
-			//    "body {"
-			//	      "color: %1;"
-			//	      "background-color: rgba(0,0,0,%2%);"
-			//	"} "
-			//    "h1 {"
-			//	      "color: %1;"
-			//	      "background-color: rgba(0,0,0,%2%);"
-			//	"} "
+		static const QString css(
 			    "h2 {"
 				      "color: %1;"
 				      "background-color: rgba(0,0,0,%2%);"
 				"} "
-			//    "h3 {"
-			//	      "color: %1;"
-			//	      "background-color: rgba(0,0,0,%2%);"
-			//	"} "
-			//    "h4 {"
-			//	      "color: %1;"
-			//	      "background-color: rgba(0,0,0,%2%);"
-			//	"} "
 			    ".info-string {"
 				"color: %1;"
 				"background-color: rgba(0,0,0,%2%);"
-			        //"background: rgba(0,0,0,%2%);"
 				" } "
 			    "table.info-string {"
 			    "margin: 0em 0em 0em -0.125em;"
@@ -154,6 +132,9 @@ void InfoPanel::setTextFromObjects(const QList<StelObjectP>& selected)
 			color = StelApp::getInstance().getDaylightInfoColor();
 			opacity="0";
 		}
+		// A negative opacity forces dark background even for daylight scenes.
+		if (this->opacity<0)
+			opacity=QString::number(qAbs(this->opacity));
 
 		document()->setDefaultStyleSheet(css.arg(color.toHtmlColor(), opacity));
 
