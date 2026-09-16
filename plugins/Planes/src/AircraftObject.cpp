@@ -243,7 +243,7 @@ QString AircraftObject::getInfoString(const StelCore* core, const InfoStringGrou
 
 		if (withTables)
 		{
-			stream << QString("<table style='margin:0em 0em 0em -0.125em;border-spacing:0px;border:0px;color:%1;'>").arg(getInfoColor().toHtmlColor());
+			stream << QString("<table class='info-string'>");
 			stream << QString("<tr><td>%1:</td><td style='text-align:right;'>%2</td></tr>").arg(q_("Altitude"), altitude);
 			stream << QString("<tr><td>%1:</td><td style='text-align:right;'>%2</td></tr>").arg(q_("Slant Range"), slantRange);
 			stream << QString("<tr><td>%1:</td><td style='text-align:right;'>%2</td></tr>").arg(q_("Ground Range"), groundRange);
