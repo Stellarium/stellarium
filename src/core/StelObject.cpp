@@ -430,7 +430,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 	Q_UNUSED(az_app)
 
 	if (withTables && (flags&(RaDecJ2000|RaDecOfDate|HourAngle|AltAzi|GalacticCoord|SupergalacticCoord|EclipticCoordJ2000) || ((flags&EclipticCoordOfDate) && (currentPlanet==L1S("Earth")))))
-		res += QString("<table class='info-string'>");
+		res += "<table class='info-string'>";
 	else
 		res+="<br/>";
 
@@ -785,7 +785,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 		QString eqlObl = q_("Ecliptic obliquity");
 		if (withTables)
 		{
-			res += QString("<table class='info-string'>");
+			res += "<table class='info-string'>";
 			res += QString("<tr><td>%1 (%3):</td><td>%2</td></tr>").arg(eqlObl, firstCoordinate, cepoch);
 		}
 		else
@@ -799,7 +799,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 	if (flags&OtherCoord)
 	{
 		if (withTables)
-			res += QString("<table class='info-string'>");
+			res += "<table class='info-string'>";
 		res += getExtraInfoStrings(OtherCoord).join("");
 		res += omgr->getExtraInfoStrings(OtherCoord).join("");
 		if (withTables)
@@ -816,7 +816,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 
 		if (withTables)
 		{
-			res += QString("<table class='info-string'>");
+			res += "<table class='info-string'>";
 			res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2</td></tr>").arg(STc, STd);
 		}
 		else
@@ -873,7 +873,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 		int year, month, day;
 
 		if (withTables && !(flags&SiderealTime && currentPlanet==L1S("Earth")))
-			res += QString("<table class='info-string'>");
+			res += "<table class='info-string'>";
 
 		// Rise
 		StelUtils::getDateFromJulianDay(rts[0]+utcShift, &year, &month, &day);
@@ -1020,7 +1020,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 
 			if (withTables)
 			{
-				res += QString("<table class='info-string'>");
+				res += "<table class='info-string'>";
 				res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2:</td><td style='text-align:right;'>%3</td><td style='text-align:right;'>/%4:</td><td style='text-align:right;'>%5</td></tr>").arg(event,  azStr,  firstCoordinate, haStr, secondCoordinate);
 			}
 			else
@@ -2024,7 +2024,7 @@ QString StelObject::getSolarLunarInfoString(const StelCore *core, const InfoStri
 		const bool withDecimalDegree = StelApp::getInstance().getFlagUseDecDegreesCoords();
 
 		if (withTables)
-			oss << QString("<table class='info-string'>");
+			oss << "<table class='info-string'>";
 		const bool useSouthAzimuth = StelApp::getInstance().getFlagSouthAzimuthUsage();
 		const bool withDesignations = StelApp::getInstance().getFlagUseCCSDesignation();
 		double az, alt;
