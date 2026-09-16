@@ -1697,7 +1697,7 @@ void StelObject::postProcessInfoString(QString& str, const InfoStringGroup& flag
 		static const QRegularExpression tdRe3("<td \\w+=\"[^\"]*\">");
 		static const QRegularExpression tableRe2("<table\\s*>");
 		static const QRegularExpression tableRe3("<table style='[^']*'>");
-		static const QRegularExpression tableRe4("<table style=\"[^\"]*\">");
+		static const QRegularExpression tableRe5("<table class='[^']*'>");
 		str.replace("<b>", "");
 		str.replace("</b>", "");
 		str.replace(h2Re, "");
@@ -1711,31 +1711,9 @@ void StelObject::postProcessInfoString(QString& str, const InfoStringGroup& flag
 		str.replace("</tr>", "\n");
 		str.replace(tableRe2, "");
 		str.replace(tableRe3, "");
-		str.replace(tableRe4, "");
+		str.replace(tableRe5, "");
 		str.replace("</table>", "");
 	}
-	else if(!(flags&NoFont))
-	{
-		//Vec3f color = getInfoColor();
-		//StelCore* core = StelApp::getInstance().getCore();
-		//if (StelApp::getInstance().getFlagOverwriteInfoColor())
-		//{
-		//	// make info text more readable...
-		//	color = StelApp::getInstance().getOverwriteInfoColor();
-		//}
-		//if (core->isBrightDaylight() && !StelApp::getInstance().getVisionModeNight())
-		//{
-		//	// make info text more readable when atmosphere enabled at daylight.
-		//	color = StelApp::getInstance().getDaylightInfoColor();
-		//}
-		//str.prepend(QString("<span style='color: %1; background-color: rgba(0, 0, 0, 25%); display: block;'>").arg(color.toHtmlColor()));
-		//str.append(QString("</span>"));
-	}
-	else if((flags&NoFont))
-	{
-		//qDebug() << "StelObject::postProcessInfoString() given with NoFont. Remove font css!";
-	}
-
 }
 
 QVariantMap StelObject::getInfoMap(const StelCore *core) const
