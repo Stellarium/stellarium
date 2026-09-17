@@ -118,14 +118,61 @@ define([
     function logError(msg) {
         console.error("[BtnGen] " + msg);
     }
+    
+		// ============================================================
+    // SAFE SLIDER HELPER
+    // ============================================================
 
+    function safeSliderCall($slider, method, arg1, arg2) {
+        if (!$slider || !$slider.length) return false;
+        if (!$slider.hasClass('ui-slider')) return false;
+        try {
+            if (arg2 !== undefined) {
+                $slider.slider(method, arg1, arg2);
+            } else if (arg1 !== undefined) {
+                $slider.slider(method, arg1);
+            } else {
+                $slider.slider(method);
+            }
+            return true;
+        } catch(e) {
+            console.warn('[BtnGen] safeSliderCall failed:', method, e.message);
+            return false;
+        }
+    }
+		
+    // ============================================================
+    // MOUSE WHEEL SUPPORT FOR SLIDERS
+    // ============================================================
+
+    function bindSliderWheel($slider) {
+        if (!$slider || !$slider.length) return;
+        if ($slider.data('wheel-bound')) return;
+        $slider.data('wheel-bound', true);
+        $slider.on('wheel', function(e) {
+            e.preventDefault();
+            var $s = $(this);
+            if (!$s.hasClass('ui-slider')) return;
+            var currentValue = $s.slider('value');
+            var min = $s.slider('option', 'min') || 0;
+            var max = $s.slider('option', 'max') || 100;
+            var step = $s.slider('option', 'step') || 1;
+            var delta = e.originalEvent.deltaY;
+            var direction = delta < 0 ? 1 : -1;
+            var newValue = Math.min(max, Math.max(min, currentValue + (direction * step)));
+            $s.slider('value', newValue);
+            $s.trigger('slide', { value: newValue });
+            return false;
+        });
+    }		
+		
     // ============================================================
     // HTML ESCAPE HELPERS
     // ============================================================
 
     function escapeHtml(str) {
         if (!str) return '';
-        return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+        return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;') .replace(/'/g, '&#39;');
     }
 
     function escapeAttr(str) {
@@ -195,30 +242,34 @@ define([
     // UPDATE PROPERTY - Send value to server
     // ============================================================
 
-    function updateProperty(propName, value) {
-        var info = propertyDataCache[propName];
-        if (!info) {
-            logError("Property not found: " + propName);
-            return false;
-        }
+		function updateProperty(propName, value, useQueue) {
+				var info = propertyDataCache[propName];
+				if (!info) {
+						logError("Property not found: " + propName);
+						return false;
+				}
 
-        if (info.isWritable === false) {
-            logError("Property is read-only: " + propName);
-            alert(tr("This property is read-only and cannot be modified."));
-            return false;
-        }
+				if (info.isWritable === false) {
+						logError("Property is read-only: " + propName);
+						alert(tr("This property is read-only and cannot be modified."));
+						return false;
+				}
 
-        var serverValue = convertValueForServer(propName, value);
-        log("Updating property: " + propName + " = " + serverValue);
+				var serverValue = convertValueForServer(propName, value);
+				log("Updating property: " + propName + " = " + serverValue);
 
-        try {
-            propApi.setStelProp(propName, serverValue);
-            return true;
-        } catch (error) {
-            logError("Failed to send property update: " + error.message);
-            return false;
-        }
-    }
+				try {
+						if (useQueue) {
+								propApi.setStelPropQueued(propName, serverValue);
+						} else {
+								propApi.setStelProp(propName, serverValue);
+						}
+						return true;
+				} catch (error) {
+						logError("Failed to send property update: " + error.message);
+						return false;
+				}
+		}
 
     // ============================================================
     // UPDATE PROPERTY UI
@@ -237,43 +288,51 @@ define([
             var boolVal = (value === true || value === 'true' || value === 1 || value === '1');
 
             // Preview toggle buttons (using unified system)
-            $('.btn-gen-preview-content .' + unifiedButtons.CLASSES.PROPERTY_TOGGLE + '[name="' + propName + '"]').each(function() {
+            $('.btn-gen-preview-content .' + unifiedButtons.CLASSES.PROPERTY_TOGGLE + '[name="' + $.escapeSelector(propName) + '"]').each(function() {
                 unifiedButtons.updateState($(this), boolVal);
             });
 
             // Custom section toggle buttons
-            $('.btn-gen-custom-item .' + unifiedButtons.CLASSES.PROPERTY_TOGGLE + '[name="' + propName + '"]').each(function() {
+            $('.btn-gen-custom-item .' + unifiedButtons.CLASSES.PROPERTY_TOGGLE + '[name="' + $.escapeSelector(propName) + '"]').each(function() {
                 unifiedButtons.updateState($(this), boolVal);
             });
 
             // Regular checkbox controls
-            $('input[type="checkbox"].stelproperty[name="' + propName + '"]').each(function() {
+            $('input[type="checkbox"].stelproperty[name="' + $.escapeSelector(propName) + '"]').each(function() {
                 $(this).prop('checked', boolVal);
             });
+
         }
 
         // Numeric sliders and displays
         if (isNum) {
             var numVal = parseFloat(value);
             if (!isNaN(numVal)) {
+
                 // Preview sliders
-                $('.btn-gen-preview-content .slider.stelproperty[data-prop="' + propName + '"]').each(function() {
+                $('.btn-gen-preview-content .slider.stelproperty[data-prop="' + $.escapeSelector(propName) + '"]').each(function() {
                     var $slider = $(this);
-                    if ($slider.hasClass('ui-slider')) {
-                        $slider.slider('value', numVal);
-                    }
+                    safeSliderCall($slider, 'value', numVal);
                     var $display = $slider.closest('.btn-gen-slider-wrap').find('.btn-gen-value-display');
                     if ($display.length) {
                         $display.text(numVal);
                     }
                 });
-
+                
+								// Update preview info value display
+                $('.btn-gen-preview-content').closest('.btn-gen-preview-box').find('.btn-gen-preview-value').each(function() {
+                    $(this).text(tr("Value") + ': ' + formatValue(numVal));
+                });
+								
+								// Update preview info value display
+                $('.btn-gen-preview-value[data-prop="' + $.escapeSelector(propName) + '"]').each(function() {
+                    $(this).text(tr("Value") + ': ' + formatValue(numVal));
+                });
+								
                 // Custom section sliders
-                $('.btn-gen-custom-item .slider.stelproperty[data-prop="' + propName + '"]').each(function() {
+                $('.btn-gen-custom-item .slider.stelproperty[data-prop="' + $.escapeSelector(propName) + '"]').each(function() {
                     var $slider = $(this);
-                    if ($slider.hasClass('ui-slider')) {
-                        $slider.slider('value', numVal);
-                    }
+                    safeSliderCall($slider, 'value', numVal);
                     var $display = $slider.closest('.btn-gen-custom-slider-wrap').find('.btn-gen-custom-value');
                     if ($display.length) {
                         $display.text(numVal);
@@ -281,19 +340,19 @@ define([
                 });
 
                 // Regular slider controls
-                $('div.slider.stelproperty[data-prop="' + propName + '"]').each(function() {
-                    if ($(this).hasClass('ui-slider')) {
-                        $(this).slider('value', numVal);
-                    }
+                $('div.slider.stelproperty[data-prop="' + $.escapeSelector(propName) + '"]').each(function() {
+                    safeSliderCall($(this), 'value', numVal);
                 });
 
                 // Spinner controls
-                $('input.spinner.stelproperty[name="' + propName + '"]').each(function() {
-                    $(this).spinner('value', numVal);
+                $('input.spinner.stelproperty[name="' + $.escapeSelector(propName) + '"]').each(function() {
+                    if ($(this).hasClass('ui-spinner')) {
+                        $(this).spinner('value', numVal);
+                    }
                 });
 
                 // Update value display
-                $('.btn-gen-slider-wrap[data-prop="' + propName + '"] .btn-gen-value-display').each(function() {
+                $('.btn-gen-slider-wrap[data-prop="' + $.escapeSelector(propName) + '"] .btn-gen-value-display').each(function() {
                     $(this).text(numVal);
                 });
             }
@@ -306,7 +365,7 @@ define([
             var g = parseFloat(colorArray[1]) || 0;
             var b = parseFloat(colorArray[2]) || 0;
 
-            $('.color-picker-wrapper[data-prop="' + propName + '"]').each(function() {
+            $('.color-picker-wrapper[data-prop="' + $.escapeSelector(propName) + '"]').each(function() {
                 var $wrap = $(this);
                 var color = 'rgb(' + Math.round(r * 255) + ',' + Math.round(g * 255) + ',' + Math.round(b * 255) + ')';
                 $wrap.find('.color-swatch').css('background-color', color);
@@ -321,17 +380,17 @@ define([
             var textVal = value !== undefined && value !== null ? String(value) : '';
 
             // Preview text inputs
-            $('.btn-gen-preview-content input[type="text"].' + unifiedButtons.CLASSES.PROPERTY_TEXT + '[name="' + propName + '"]').each(function() {
+            $('.btn-gen-preview-content input[type="text"].' + unifiedButtons.CLASSES.PROPERTY_TEXT + '[name="' + $.escapeSelector(propName) + '"]').each(function() {
                 $(this).val(textVal);
             });
 
             // Custom section text inputs
-            $('.btn-gen-custom-text input[type="text"].' + unifiedButtons.CLASSES.PROPERTY_TEXT + '[name="' + propName + '"]').each(function() {
+            $('.btn-gen-custom-text input[type="text"].' + unifiedButtons.CLASSES.PROPERTY_TEXT + '[name="' + $.escapeSelector(propName) + '"]').each(function() {
                 $(this).val(textVal);
             });
 
             // Regular text inputs
-            $('input[type="text"].' + unifiedButtons.CLASSES.PROPERTY_TEXT + '[name="' + propName + '"]').each(function() {
+            $('input[type="text"].' + unifiedButtons.CLASSES.PROPERTY_TEXT + '[name="' + $.escapeSelector(propName) + '"]').each(function() {
                 $(this).val(textVal);
             });
         }
@@ -386,6 +445,12 @@ define([
                 }
             }
         }
+
+        // 4. UPDATE PREVIEW INFO VALUE
+        $('.btn-gen-preview-value[data-prop="' + $.escapeSelector(propName) + '"]').each(function() {
+            $(this).text(tr("Value") + ': ' + formatValue(value));
+        });
+
     }
 
     // ============================================================
@@ -663,11 +728,14 @@ define([
             // Update all UI components that display this property
             updatePropertyUI(propName, value);
 
+            // If this property is currently selected in preview, re-generate code only
+            // (do NOT call renderPropertyPreview here - it would destroy and rebuild
+            //  the slider on every server update, causing "cannot call methods on
+            //  slider prior to initialization" errors in jQuery UI 4)
             // If this property is currently selected in preview, re-render
             if (selectedType === 'property' && selectedPropertyName === propName) {
                 var info = propertyDataCache[propName];
                 if (info) {
-                    renderPropertyPreview(propName, info);
                     generateHtmlCode(propName, info);
                 }
             }
@@ -770,7 +838,7 @@ define([
         }
     }
 
-       // ============================================================
+    // ============================================================
     // DATA LOADING
     // ============================================================
 
@@ -1072,6 +1140,10 @@ define([
             selectedType = val;
             log("Category selected: " + val);
 
+            // Clear custom label when switching between action and property
+            customLabel = '';
+            $customLabelInput.val('').attr('placeholder', tr("Enter display name"));
+
             $searchInput.val('');
 
             if (val === 'action') {
@@ -1124,6 +1196,11 @@ define([
         // Property list selection
         $propertyList.on('change', function() {
             var val = $(this).val();
+
+            // Clear custom label when navigating between properties
+            customLabel = '';
+            $customLabelInput.val('').attr('placeholder', tr("Enter display name"));
+
             if (val) {
                 selectedPropertyName = val;
                 var info = propertyDataCache[val];
@@ -1152,6 +1229,22 @@ define([
                 if (info && info.isWritable !== false) {
                     renderPropertyPreview(selectedPropertyName, info);
                     generateHtmlCode(selectedPropertyName, info);
+                }
+            }
+        });
+
+        // Custom label - ESC to clear
+        $customLabelInput.on('keydown', function(e) {
+            if (e.key === 'Escape') {
+                e.preventDefault();
+                $(this).val('').attr('placeholder', tr("Enter display name")).blur();
+                customLabel = '';
+                if (selectedType === 'property' && selectedPropertyName) {
+                    var info = propertyDataCache[selectedPropertyName];
+                    if (info && info.isWritable !== false) {
+                        renderPropertyPreview(selectedPropertyName, info);
+                        generateHtmlCode(selectedPropertyName, info);
+                    }
                 }
             }
         });
@@ -1521,11 +1614,11 @@ define([
 						html += '<div class="btn-gen-slider-wrap" data-prop="' + escapeAttr(propName) + '">';
 						html += '    <div class="btn-gen-slider-header">';
 						html += '        <label>' + escapeHtml(label) + '</label>';
-						html += '        <span class="stelproperty" data-prop="' + escapeAttr(propName) + '" data-numberformat="' + numberFormat + '">' + currentVal + '</span>';
-						html += '        <span class="stelproperty" data-prop="' + escapeAttr(propName) + '" data-numberformat="' + numberFormat + '"></span>';
+						html += '        <span class="stelproperty" data-prop="' + escapeAttr(propName) + '" data-numberformat="' + escapeAttr(numberFormat) + '">' + escapeHtml(String(currentVal)) + '</span>';
+						html += '        <span class="stelproperty" data-prop="' + escapeAttr(propName) + '" data-numberformat="' + escapeAttr(numberFormat) + '"></span>';
 						html += '    </div>';
 						html += '    <div class="slider stelproperty" data-prop="' + escapeAttr(propName) + '" ';
-						html += '         data-min="' + min + '" data-max="' + max + '" data-step="' + step + '"></div>';
+						html += '         data-min="' + Number(min) + '" data-max="' + Number(max) + '" data-step="' + Number(step) + '"></div>';
 						html += '</div>';
 
 						// MIN/MAX/STEP controls
@@ -1533,21 +1626,21 @@ define([
 						html += '    <div class="btn-gen-control-group" style="display:flex; align-items:center; gap:4px;">';
 						html += '        <label style="font-size:9px; color:#8A8C8E;">' + tr("Min") + ':</label>';
 						html += '        <input type="number" class="btn-gen-numeric-min" data-prop="' + escapeAttr(propName) + '" ';
-						html += '               value="' + min + '" step="any" style="width:55px; padding:3px 5px; ';
+						html += '               value="' + Number(min) + '" step="any" style="width:55px; padding:3px 5px; ';
 						html += '               background:#2A2C2E; color:#DCDBDA; border:1px solid #5D5F62; ';
 						html += '               border-radius:3px; font-size:10px;">';
 						html += '    </div>';
 						html += '    <div class="btn-gen-control-group" style="display:flex; align-items:center; gap:4px;">';
 						html += '        <label style="font-size:9px; color:#8A8C8E;">' + tr("Max") + ':</label>';
 						html += '        <input type="number" class="btn-gen-numeric-max" data-prop="' + escapeAttr(propName) + '" ';
-						html += '               value="' + max + '" step="any" style="width:55px; padding:3px 5px; ';
+						html += '               value="' + Number(max) + '" step="any" style="width:55px; padding:3px 5px; ';
 						html += '               background:#2A2C2E; color:#DCDBDA; border:1px solid #5D5F62; ';
 						html += '               border-radius:3px; font-size:10px;">';
 						html += '    </div>';
 						html += '    <div class="btn-gen-control-group" style="display:flex; align-items:center; gap:4px;">';
 						html += '        <label style="font-size:9px; color:#8A8C8E;">' + tr("Step") + ':</label>';
 						html += '        <input type="number" class="btn-gen-numeric-step" data-prop="' + escapeAttr(propName) + '" ';
-						html += '               value="' + step + '" step="any" style="width:55px; padding:3px 5px; ';
+						html += '               value="' + Number(step) + '" step="any" style="width:55px; padding:3px 5px; ';
 						html += '               background:#2A2C2E; color:#DCDBDA; border:1px solid #5D5F62; ';
 						html += '               border-radius:3px; font-size:10px;">';
 						html += '    </div>';
@@ -1603,7 +1696,7 @@ define([
         html += '<span class="btn-gen-preview-type">' + escapeHtml(type) + '</span>';
         html += '<span class="btn-gen-preview-id">' + escapeHtml(propName) + '</span>';
         if (currentValue !== undefined) {
-            html += '<span class="btn-gen-preview-value">' + tr("Value") + ': ' + escapeHtml(formatValue(currentValue)) + '</span>';
+            html += '<span class="btn-gen-preview-value" data-prop="' + escapeAttr(propName) + '">' + tr("Value") + ': ' + escapeHtml(formatValue(currentValue)) + '</span>';
         }
         html += '</div>';
         html += '</div>'; // End preview-box
@@ -1632,7 +1725,8 @@ define([
                 max: max,
                 step: step
             });
-
+						
+            bindSliderWheel(self);   // support mouse wheel for slider
             self.data('slider-initialized', true);
 
             // Listen for server changes
@@ -1655,14 +1749,18 @@ define([
             }
 
             // Handle user slide - send to server
-            self.off('slide.btnGenPreview').on('slide.btnGenPreview', function(evt, ui) {
-                var propName2 = $(this).data('prop');
-                propApi.setStelPropQueued(propName2, ui.value);
-                var $display = $(this).closest('.btn-gen-slider-wrap').find('.btn-gen-value-display');
-                if ($display.length) {
-                    $display.text(ui.value);
-                }
-            });
+						self.off('slide.btnGenPreview').on('slide.btnGenPreview', function(evt, ui) {
+								var propName2 = $(this).data('prop');
+								propApi.setStelPropQueued(propName2, ui.value);
+								var $display = $(this).closest('.btn-gen-slider-wrap').find('.btn-gen-value-display');
+								if ($display.length) {
+										$display.text(ui.value);
+								}
+								// Update preview info value display immediately (optimistic)
+								$('.btn-gen-preview-value[data-prop="' + $.escapeSelector(propName2) + '"]').each(function() {
+										$(this).text(tr("Value") + ': ' + formatValue(ui.value));
+								});
+						});
         });
 
         // MIN/MAX/STEP input events (for customization)
@@ -1705,20 +1803,20 @@ define([
                 // Update the slider
                 var $slider = $wrap.find('.slider.stelproperty');
                 if ($slider.length && $slider.hasClass('ui-slider')) {
-                    $slider.slider('option', 'min', minVal);
-                    $slider.slider('option', 'max', maxVal);
-                    $slider.slider('option', 'step', stepVal);
+                    safeSliderCall($slider, 'option', 'min', minVal);
+                    safeSliderCall($slider, 'option', 'max', maxVal);
+                    safeSliderCall($slider, 'option', 'step', stepVal);
 
                     var currentValue = $slider.slider('value');
                     if (currentValue < minVal) {
-                        $slider.slider('value', minVal);
+                        safeSliderCall($slider, 'value', minVal);
                         var $display = $wrap.find('.btn-gen-value-display');
                         if ($display.length) {
                             $display.text(minVal);
                         }
                         updateProperty(propName2, minVal);
                     } else if (currentValue > maxVal) {
-                        $slider.slider('value', maxVal);
+                        safeSliderCall($slider, 'value', maxVal);
                         var $display = $wrap.find('.btn-gen-value-display');
                         if ($display.length) {
                             $display.text(maxVal);
@@ -1894,11 +1992,11 @@ define([
 								// ============================================================
 								
 								// VERSION 1: CHECKBOX (for toggleable actions)
-								var htmlCheckbox = '<!-- Checkbox for StelAction: ' + action.id + ' -->\n';
+								var htmlCheckbox = '<!-- Checkbox for StelAction: ' + escapeHtml(action.id) + ' -->\n';
 								htmlCheckbox += '<label class="btn-gen-preview-toggle">\n';
-								htmlCheckbox += '    <input type="checkbox" class="stelaction" name="' + action.id + '" ' +
+								htmlCheckbox += '    <input type="checkbox" class="stelaction" name="' + escapeAttr(action.id) + '" ' +
 																 (isChecked ? 'checked' : '') + ' />\n';
-								htmlCheckbox += '    ' + action.text + '\n';
+								htmlCheckbox += '    ' + escapeHtml(action.text) + '\n';
 								htmlCheckbox += '</label>';
 
 								// VERSION 2: TOGGLE BUTTON (using stelaction)
@@ -1929,7 +2027,7 @@ define([
 								// ============================================================
 								
 								// VERSION 3: TRIGGER BUTTON (for all actions)
-								var htmlTrigger = '<!-- Trigger Button for StelAction: ' + action.id + ' -->\n';
+								var htmlTrigger = '<!-- Trigger Button for StelAction: ' + escapeHtml(action.id) + ' -->\n';
 								htmlTrigger += unifiedButtons.createButton({
 										type: 'action',
 										name: action.id,
@@ -1986,13 +2084,13 @@ define([
             if (isBool) {
                 var isChecked = (currentVal === true || currentVal === 'true' || currentVal === 1 || currentVal === '1');
 
-                // VERSION 1: Checkbox
-                htmlCheckbox = '<!-- Checkbox for StelProperty: ' + propName + ' -->\n';
-                htmlCheckbox += '<label class="btn-gen-preview-toggle">\n';
-                htmlCheckbox += '    <input type="checkbox" class="stelproperty" name="' + propName + '" ' +
-                                 (isChecked ? 'checked' : '') + ' />\n';
-                htmlCheckbox += '    ' + label + '\n';
-                htmlCheckbox += '</label>';
+						// VERSION 1: Checkbox
+						htmlCheckbox = '<!-- Checkbox for StelProperty: ' + escapeHtml(propName) + ' -->\n';
+						htmlCheckbox += '<label class="btn-gen-preview-toggle">\n';
+						htmlCheckbox += '    <input type="checkbox" class="stelproperty" name="' + escapeAttr(propName) + '" ' +
+														 (isChecked ? 'checked' : '') + ' />\n';
+						htmlCheckbox += '    ' + escapeHtml(label) + '\n';
+						htmlCheckbox += '</label>';
 
                 // VERSION 2: Toggle Button (using stelproperty-toggle)
                 htmlToggle = '<!-- Toggle Button for StelProperty: ' + propName + ' -->\n';
@@ -2033,22 +2131,22 @@ define([
 								var numberFormat = getNumberFormat(step);
 
 								// VERSION 1: Slider
-								htmlCheckbox = '<!-- Slider for StelProperty: ' + propName + ' -->\n';
+								htmlCheckbox = '<!-- Slider for StelProperty: ' + escapeHtml(propName) + ' -->\n';
 								htmlCheckbox += '<div class="btn-gen-slider-wrap">\n';
 								htmlCheckbox += '    <div class="btn-gen-slider-header">\n';
-								htmlCheckbox += '        <label>' + label + '</label>\n';
-								htmlCheckbox += '        <span class="stelproperty" data-prop="' + propName + '" data-numberformat="' + numberFormat + '"></span>\n';
+								htmlCheckbox += '        <label>' + escapeHtml(label) + '</label>\n';
+								htmlCheckbox += '        <span class="stelproperty" data-prop="' + escapeAttr(propName) + '" data-numberformat="' + escapeAttr(numberFormat) + '"></span>\n';
 								htmlCheckbox += '    </div>\n';
-								htmlCheckbox += '    <div class="slider stelproperty" data-prop="' + propName + '" ';
-								htmlCheckbox += 'data-min="' + min + '" data-max="' + max + '" data-step="' + step + '"></div>\n';
+								htmlCheckbox += '    <div class="slider stelproperty" data-prop="' + escapeAttr(propName) + '" ';
+								htmlCheckbox += 'data-min="' + Number(min) + '" data-max="' + Number(max) + '" data-step="' + Number(step) + '"></div>\n';
 								htmlCheckbox += '</div>';
 
 								// VERSION 2: Spinner
-								htmlButton = '<!-- Spinner for StelProperty: ' + propName + ' -->\n';
+								htmlButton = '<!-- Spinner for StelProperty: ' + escapeHtml(propName) + ' -->\n';
 								htmlButton += '<div class="btn-gen-slider-wrap">\n';
-								htmlButton += '    <label>' + label + '</label>\n';
-								htmlButton += '    <input class="spinner stelproperty" name="' + propName + '" ';
-								htmlButton += 'data-min="' + min + '" data-max="' + max + '" data-step="' + step + '" data-numberformat="' + numberFormat + '" />\n';
+								htmlButton += '    <label>' + escapeHtml(label) + '</label>\n';
+								htmlButton += '    <input class="spinner stelproperty" name="' + escapeAttr(propName) + '" ';
+								htmlButton += 'data-min="' + Number(min) + '" data-max="' + Number(max) + '" data-step="' + Number(step) + '" data-numberformat="' + escapeAttr(numberFormat) + '" />\n';
 								htmlButton += '</div>';
 
 								html = '<!-- Two versions available -->\n\n' +
@@ -2066,32 +2164,66 @@ define([
                 var gVal = parseFloat(colorArray[1]) || 0;
                 var bVal = parseFloat(colorArray[2]) || 0;
 
-                html = '<!-- ============================================================ -->\n';
-                html += '<!-- COLOR PICKER for StelProperty: ' + propName + ' -->\n';
-                html += '<!-- ============================================================ -->\n';
-                html += '<div class="option-sub-control color-control">\n';
-                html += '    <div class="color-picker-wrapper" data-prop="' + escapeAttr(propName) + '">\n';
-                html += '        <div class="color-swatch" style="background-color: rgb(' +
+                // ============================================================
+                // VERSION 1: Plain number inputs (default HTML5 number)
+                // ============================================================
+                var htmlColorPlain = '<!-- ============================================================ -->\n';
+                htmlColorPlain += '<!-- COLOR PICKER (Plain number inputs) for StelProperty: ' + escapeHtml(propName) + ' -->\n';
+                htmlColorPlain += '<!-- ============================================================ -->\n';
+                htmlColorPlain += '<div class="option-sub-control color-control">\n';
+                htmlColorPlain += '    <div class="color-picker-wrapper" data-prop="' + escapeAttr(propName) + '">\n';
+                htmlColorPlain += '        <div class="color-swatch" style="background-color: rgb(' +
                                 Math.round(rVal * 255) + ',' +
                                 Math.round(gVal * 255) + ',' +
                                 Math.round(bVal * 255) + ');"></div>\n';
-                html += '        <div class="color-inputs">\n';
-                html += '            <input type="number" class="color-input color-r" min="0" max="1" step="0.01" value="' + rVal.toFixed(2) + '" />\n';
-                html += '            <input type="number" class="color-input color-g" min="0" max="1" step="0.01" value="' + gVal.toFixed(2) + '" />\n';
-                html += '            <input type="number" class="color-input color-b" min="0" max="1" step="0.01" value="' + bVal.toFixed(2) + '" />\n';
-                html += '        </div>\n';
-                html += '    </div>\n';
-                html += '</div>\n';
-                html += '\n';
-                html += '<!-- For the color picker to work, ensure connectColorPickers() is called -->\n';
-                html += '<!-- This is handled by mainui.js -->\n';
+                htmlColorPlain += '        <div class="color-inputs">\n';
+                htmlColorPlain += '            <input type="number" class="color-input color-r" min="0" max="1" step="0.01" value="' + rVal.toFixed(2) + '" />\n';
+                htmlColorPlain += '            <input type="number" class="color-input color-g" min="0" max="1" step="0.01" value="' + gVal.toFixed(2) + '" />\n';
+                htmlColorPlain += '            <input type="number" class="color-input color-b" min="0" max="1" step="0.01" value="' + bVal.toFixed(2) + '" />\n';
+                htmlColorPlain += '        </div>\n';
+                htmlColorPlain += '    </div>\n';
+                htmlColorPlain += '</div>\n';
+
+                // ============================================================
+                // VERSION 2: jQuery UI spinners (with +/- buttons)
+                // ============================================================
+                var htmlColorSpinner = '<!-- ============================================================ -->\n';
+                htmlColorSpinner += '<!-- COLOR PICKER (jQuery UI spinners) for StelProperty: ' + escapeHtml(propName) + ' -->\n';
+                htmlColorSpinner += '<!-- ============================================================ -->\n';
+                htmlColorSpinner += '<div class="option-sub-control color-control">\n';
+                htmlColorSpinner += '    <div class="color-picker-wrapper" data-prop="' + escapeAttr(propName) + '">\n';
+                htmlColorSpinner += '        <div class="color-swatch" style="background-color: rgb(' +
+                                Math.round(rVal * 255) + ',' +
+                                Math.round(gVal * 255) + ',' +
+                                Math.round(bVal * 255) + ');"></div>\n';
+                htmlColorSpinner += '        <div class="color-inputs">\n';
+                htmlColorSpinner += '            <input class="spinner color-r" data-prop="' + escapeAttr(propName) + '" data-min="0" data-max="1" data-step="0.01" data-numberformat="n2" value="' + rVal.toFixed(2) + '" />\n';
+                htmlColorSpinner += '            <input class="spinner color-g" data-prop="' + escapeAttr(propName) + '" data-min="0" data-max="1" data-step="0.01" data-numberformat="n2" value="' + gVal.toFixed(2) + '" />\n';
+                htmlColorSpinner += '            <input class="spinner color-b" data-prop="' + escapeAttr(propName) + '" data-min="0" data-max="1" data-step="0.01" data-numberformat="n2" value="' + bVal.toFixed(2) + '" />\n';
+                htmlColorSpinner += '        </div>\n';
+                htmlColorSpinner += '    </div>\n';
+                htmlColorSpinner += '</div>\n';
+
+                // Combine both versions
+                html = '<!-- Two versions available -->\n\n' +
+                       '<!-- VERSION 1: Plain number inputs (lighter, no jQuery UI dependency) -->\n' +
+                       htmlColorPlain + '\n\n' +
+                       '<!-- VERSION 2: jQuery UI spinners - Recommende (with +/- buttons) -->\n' +
+                       htmlColorSpinner + '\n\n' +
+                       '<!-- For the color picker to work, ensure connectColorSpinners() is called -->\n' +
+                       '<!-- This is handled by mainui.js -->\n';
 
                 explanation = '<p><strong>' + escapeHtml(label) + '</strong></p>';
                 explanation += '<p><strong>ID:</strong> <code>' + escapeHtml(propName) + '</code></p>';
                 explanation += '<p><strong>Type:</strong> ' + escapeHtml(infoData.typeString || 'unknown') + '</p>';
                 explanation += '<p><strong>Current Value:</strong> <code>[' + rVal.toFixed(2) + ', ' + gVal.toFixed(2) + ', ' + bVal.toFixed(2) + ']</code></p>';
                 explanation += '<p><strong>Writable:</strong> ' + (infoData.isWritable !== false ? 'Yes' : 'No (read-only)') + '</p>';
-                explanation += '<p><strong>Note:</strong> This uses the unified color picker system.</p>';
+                explanation += '<p><strong>Available Versions:</strong></p>';
+                explanation += '<ul style="margin:5px 0; padding-left:20px;">';
+                explanation += '<li><strong>Version 1 (Plain):</strong> Standard HTML5 number inputs</li>';
+                explanation += '<li><strong>Version 2 (Spinner):</strong> jQuery UI spinner with +/- buttons and number formatting</li>';
+                explanation += '</ul>';
+                explanation += '<p><strong>Note:</strong> Both use the unified color picker system (connectColorSpinners). This is handled by mainui.js</p>';
             }
 
             // TEXT PROPERTY
@@ -2126,7 +2258,6 @@ define([
                 explanation += '<p><strong>Writable:</strong> ' + (infoData.isWritable !== false ? 'Yes' : 'No (read-only)') + '</p>';
             }
         }
-
 
         // Update the code display
         var $codeElement = $codeContainer.find('.btn-gen-code');
@@ -2464,57 +2595,64 @@ define([
     // INITIALIZE CUSTOM SLIDERS
     // ============================================================
 
-    function initCustomSliders() {
-        $customContainer.find('.slider.stelproperty').each(function() {
-            var self = $(this);
-            var prop = self.data('prop');
+		function initCustomSliders() {
+				$customContainer.find('.slider.stelproperty').each(function() {
+						var self = $(this);
+						var prop = self.data('prop');
 
-            if (self.data('slider-initialized')) {
-                return;
-            }
+						if (self.data('slider-initialized')) {
+								return;
+						}
 
-            var min = parseFloat(self.data('min')) || 0;
-            var max = parseFloat(self.data('max')) || 100;
-            var step = parseFloat(self.data('step')) || 1;
+						var min = parseFloat(self.data('min')) || 0;
+						var max = parseFloat(self.data('max')) || 100;
+						var step = parseFloat(self.data('step')) || 1;
 
-            self.slider({
-                min: min,
-                max: max,
-                step: step,
-                slide: function(evt, ui) {
-                    var propName = $(this).data('prop');
-                    if (!propName) return;
-                    updateProperty(propName, ui.value);
-                    var $display = $(this).closest('.btn-gen-custom-slider-wrap').find('.btn-gen-custom-value');
-                    if ($display.length) {
-                        $display.text(ui.value);
-                    }
-                }
-            });
+						self.slider({
+								min: min,
+								max: max,
+								step: step
+						});
 
-            self.data('slider-initialized', true);
+						self.data('slider-initialized', true);
 
-            $(propApi).on('stelPropertyChanged:' + prop, function(evt, propData) {
-                self.slider('value', propData.value);
-                var $display = self.closest('.btn-gen-custom-slider-wrap').find('.btn-gen-custom-value');
-                if ($display.length) {
-                    $display.text(propData.value);
-                }
-            });
+						// Bind wheel support
+						bindSliderWheel(self);
 
-            var initialValue = propApi.getStelProp(prop);
-            if (initialValue !== undefined) {
-                var val = parseFloat(initialValue);
-                if (!isNaN(val)) {
-                    self.slider('value', val);
-                    var $display = self.closest('.btn-gen-custom-slider-wrap').find('.btn-gen-custom-value');
-                    if ($display.length) {
-                        $display.text(val);
-                    }
-                }
-            }
-        });
-    }
+						// Handle user slide - send to server
+						self.off('slide.btnGenCustom').on('slide.btnGenCustom', function(evt, ui) {
+								var propName = $(this).data('prop');
+								if (!propName) return;
+								propApi.setStelPropQueued(propName, ui.value);
+								var $display = $(this).closest('.btn-gen-custom-slider-wrap').find('.btn-gen-custom-value');
+								if ($display.length) {
+										$display.text(ui.value);
+								}
+						});
+
+						// Listen for server changes
+						$(propApi).off('stelPropertyChanged:' + prop + '.btnGenCustom');
+						$(propApi).on('stelPropertyChanged:' + prop + '.btnGenCustom', function(evt, propData) {
+								safeSliderCall(self, 'value', propData.value);
+								var $display = self.closest('.btn-gen-custom-slider-wrap').find('.btn-gen-custom-value');
+								if ($display.length) {
+										$display.text(propData.value);
+								}
+						});
+
+						var initialValue = propApi.getStelProp(prop);
+						if (initialValue !== undefined) {
+								var val = parseFloat(initialValue);
+								if (!isNaN(val)) {
+										safeSliderCall(self, 'value', val);
+										var $display = self.closest('.btn-gen-custom-slider-wrap').find('.btn-gen-custom-value');
+										if ($display.length) {
+												$display.text(val);
+										}
+								}
+						}
+				});
+		}
 
     // ============================================================
     // RENDER CUSTOM BUTTONS
@@ -2540,16 +2678,23 @@ define([
             var html = '<div class="btn-gen-custom-grid">';
 
             customButtons.forEach(function(btn, index) {
-                html += '<div class="btn-gen-custom-item" data-index="' + index + '" data-prop="' + (btn.type === 'property' ? escapeAttr(btn.id) : '') + '">';
-                html += '<div class="btn-gen-custom-header">';
-                html += '<span class="btn-gen-custom-type">' + (btn.type === 'action' ? '[A]' : '[P]') + '</span>';
-                html += '<span class="btn-gen-custom-label">' + escapeHtml(btn.label) + '</span>';
-                if (btn.type === 'property' && btn.isNumeric) {
-                    html += '<span class="btn-gen-custom-numeric-badge">' + (btn.min || 0) + '..' + (btn.max || 100) + ' Δ' + (btn.step || 1) + '</span>';
-                }
-                html += '<button class="btn-gen-custom-edit" data-index="' + index + '" title="' + tr("Edit label") + '">Edit</button>';
-                html += '<button class="btn-gen-custom-remove" data-index="' + index + '" title="' + tr("Remove") + '">✕</button>';
-                html += '</div>';
+						var safeLabel = escapeHtml(btn.label);
+						var safeIndex = Number(index);
+						var safePropId = (btn.type === 'property') ? escapeAttr(btn.id) : '';
+						var minVal = Number(btn.min) || 0;
+						var maxVal = Number(btn.max) || 100;
+						var stepVal = Number(btn.step) || 1;
+
+						html += '<div class="btn-gen-custom-item" data-index="' + safeIndex + '" data-prop="' + safePropId + '">';
+						html += '<div class="btn-gen-custom-header">';
+						html += '<span class="btn-gen-custom-type">' + (btn.type === 'action' ? '[A]' : '[P]') + '</span>';
+						html += '<span class="btn-gen-custom-label">' + safeLabel + '</span>';
+						if (btn.type === 'property' && btn.isNumeric) {
+								html += '<span class="btn-gen-custom-numeric-badge">' + minVal + '..' + maxVal + ' Δ' + stepVal + '</span>';
+						}
+						html += '<button class="btn-gen-custom-edit" data-index="' + safeIndex + '" title="' + escapeAttr(tr("Edit label")) + '">Edit</button>';
+						html += '<button class="btn-gen-custom-remove" data-index="' + safeIndex + '" title="' + escapeAttr(tr("Remove")) + '">✕</button>';
+						html += '</div>';
                 html += '<div class="btn-gen-custom-control">';
 
                 if (btn.type === 'action') {
@@ -2612,20 +2757,20 @@ define([
 
                 var $slider = $wrap.find('.slider.stelproperty');
                 if ($slider.length && $slider.hasClass('ui-slider')) {
-                    $slider.slider('option', 'min', minVal);
-                    $slider.slider('option', 'max', maxVal);
-                    $slider.slider('option', 'step', stepVal);
+                    safeSliderCall($slider, 'option', 'min', minVal);
+                    safeSliderCall($slider, 'option', 'max', maxVal);
+                    safeSliderCall($slider, 'option', 'step', stepVal);
 
                     var currentValue = $slider.slider('value');
                     if (currentValue < minVal) {
-                        $slider.slider('value', minVal);
+                        safeSliderCall($slider, 'value', minVal);
                         var $display = $wrap.find('.btn-gen-custom-value');
                         if ($display.length) {
                             $display.text(minVal);
                         }
                         updateProperty(propName2, minVal);
                     } else if (currentValue > maxVal) {
-                        $slider.slider('value', maxVal);
+                        safeSliderCall($slider, 'value', maxVal);
                         var $display = $wrap.find('.btn-gen-custom-value');
                         if ($display.length) {
                             $display.text(maxVal);
