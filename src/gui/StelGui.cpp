@@ -1554,7 +1554,7 @@ void StelGui::copySelectedObjectInfo(void)
 	const auto cb = QGuiApplication::clipboard();
 	const auto md = new QMimeData;
 	md->setHtml(skyGui->infoPanel->getSelectedHTML());
-	md->setText(skyGui->infoPanel->toPlainText());
+	md->setText(skyGui->infoPanel->getSelectedText());
 	cb->setMimeData(md);
 }
 
