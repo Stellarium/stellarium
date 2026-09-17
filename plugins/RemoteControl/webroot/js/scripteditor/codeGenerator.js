@@ -849,7 +849,7 @@ define(["jquery", "api/remotecontrol"],
 										 * @returns {string} SSC script
 										 */
 										_generateSSC: function(params) {
-												var target = (params.target || '').replace(/"/g, '\\"');
+												var target = escapeSSCString(params.target || '');
 												var mode = params.mode || 'center';
 												
 												if (!target) {
@@ -983,7 +983,7 @@ define(["jquery", "api/remotecontrol"],
 										 * @returns {string} SSC script
 										 */
 										_generateSSC: function(params) {
-												var objectName = (params.name || 'Sun').replace(/"/g, '\\"');
+												var objectName = escapeSSCString(params.name || 'Sun');
 												var format = params.format || 'html';
 												
 												if (format === 'json') {
