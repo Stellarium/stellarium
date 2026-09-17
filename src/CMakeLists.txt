@@ -179,6 +179,8 @@ SET(stellarium_lib_SRCS
      core/planetsephems/htc20b.c
      core/planetsephems/htc20b.h
      core/modules/AtmosphereLightweight.cpp
+     core/modules/AtmosphereTransmission.hpp
+     core/modules/AtmosphereTransmission.cpp
      core/modules/AtmosphereLightweight.hpp
      core/modules/AtmospherePreetham.cpp
      core/modules/AtmospherePreetham.hpp
@@ -871,6 +873,15 @@ IF(ENABLE_TESTING)
      ADD_DEPENDENCIES(buildTests testComparisons)
      ADD_TEST(testComparisons testComparisons)
      SET_TARGET_PROPERTIES(testComparisons PROPERTIES FOLDER "src/tests")
+
+     ADD_EXECUTABLE(testAtmosphereTransmission
+          tests/testAtmosphereTransmission.cpp
+          core/modules/AtmosphereTransmission.cpp)
+     TARGET_LINK_LIBRARIES(testAtmosphereTransmission Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Test)
+     TARGET_COMPILE_DEFINITIONS(testAtmosphereTransmission PRIVATE TRANSMISSION_TEST_DATA="${PROJECT_SOURCE_DIR}/atmosphere")
+     ADD_DEPENDENCIES(buildTests testAtmosphereTransmission)
+     ADD_TEST(testAtmosphereTransmission testAtmosphereTransmission)
+     SET_TARGET_PROPERTIES(testAtmosphereTransmission PROPERTIES FOLDER "src/tests")
 
      SET(tests_testExtinction_SRCS
           tests/testExtinction.hpp

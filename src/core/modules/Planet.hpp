@@ -755,6 +755,9 @@ protected:
 		Vec3d position;
 		Vec3f diffuse;
 		Vec3f ambient;
+		bool spectralExtinction = false;
+		bool spectralExtinctionPerPixel = false;
+		Vec3f spectralTransmission = Vec3f(1.f);
 	};
 
 	//! Used in drawSphere() to compute shadows, and inside a function to derive eclipse sizes.
@@ -954,6 +957,12 @@ private:
 		int orenNayarParameters;
 		int outgasParameters;
 		int sphereScale;
+		int spectralExtinctionEnabled;
+		int spectralExtinctionPerPixel;
+		int spectralExtinctionCenter;
+		int spectralExtinctionAltitudeRange;
+		int spectralExtinctionSamples;
+		int apparentAltAzPosIn;
 
 		// For Mars poles
 		int poleLat; // latitudes of edges of northern (x) and southern (y) polar cap [texture y, moving from 0 (S) to 1 (N)]. Only used for Mars, use [1, 0] for other objects.

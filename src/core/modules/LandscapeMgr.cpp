@@ -1902,6 +1902,18 @@ float LandscapeMgr::getLuminance() const
 	return atmosphere->getRealDisplayIntensityFactor();
 }
 
+bool LandscapeMgr::getAtmosphereTransmission(double apparentElevation, Vec3f& rgb) const
+{
+	const auto core=StelApp::getInstance().getCore();
+	if (!atmosphere || !getFlagAtmosphere() || core->getCurrentLocation().planetName!=QLatin1String("Earth"))
+		return false;
+	if (!atmosphere->getDirectTransmission(core->getCurrentLocation().altitude, apparentElevation, rgb))
+		return false;
+	const float fade=atmosphere->getFadeIntensity();
+	rgb=Vec3f(1.f)*(1.f-fade)+rgb*fade;
+	return true;
+}
+
 float LandscapeMgr::getAtmosphereAverageLuminance() const
 {
 	return atmosphere->getAverageLuminance();

@@ -21,6 +21,7 @@
 #define ATMOSPHERE_LIGHTWEIGHT_HPP
 
 #include "Atmosphere.hpp"
+#include "AtmosphereTransmission.hpp"
 #include <memory>
 #include <QVector3D>
 #include <QOpenGLBuffer>
@@ -42,7 +43,10 @@ public:
 	bool isReadyToRender() const override { return true; }
 	LoadingStatus stepDataLoading() override { return {1,1}; }
 
+	bool getDirectTransmission(double altitude, double elevation, Vec3f& rgb) const override;
+
 private:
+	AtmosphereTransmission transmission_;
 	std::vector<std::unique_ptr<QOpenGLVertexArrayObject>> vaos_;
 	QOpenGLVertexArrayObject renderVAO_;
 	QOpenGLBuffer preparationVBO_, renderVBO_;

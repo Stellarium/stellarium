@@ -21,6 +21,7 @@
 #define ATMOSPHERE_SHOWMYSKY_HPP
 
 #include "Atmosphere.hpp"
+#include "AtmosphereTransmission.hpp"
 #include "VecMath.hpp"
 
 #include "Skybright.hpp"
@@ -54,10 +55,12 @@ public:
 					  float extinctionCoefficient, bool noScatter) override;
 	void draw(StelCore* core) override;
 	bool isLoading() const override;
+	bool getDirectTransmission(double altitude, double elevation, Vec3f& rgb) const override;
 	bool isReadyToRender() const override;
 	LoadingStatus stepDataLoading() override;
 
 private:
+	AtmosphereTransmission transmission_;
 #ifdef ENABLE_SHOWMYSKY
 	QLibrary showMySkyLib;
 	Vec4i viewport;

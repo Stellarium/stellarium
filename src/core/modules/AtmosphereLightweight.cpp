@@ -31,6 +31,7 @@
 #include <limits>
 #include <cstring>
 #include <stdexcept>
+#include <QSettings>
 #include <QDir>
 #include <QFile>
 #include <QDebug>
@@ -164,6 +165,19 @@ AtmosphereLightweight::AtmosphereLightweight()
 	indexBuffer_.create();
 	loadMesh();
 
+	const auto& conf = *StelApp::getInstance().getSettings();
+	if (conf.value("landscape/flag_showmysky_extinction", true).toBool())
+	{
+		const auto defaultPath = StelFileMgr::getInstallationDir() + "/atmosphere/lightweight-extinction.dat";
+		QFile file(conf.value("landscape/lightweight_transmission_path", defaultPath).toString());
+		const bool opened = file.open(QFile::ReadOnly);
+		const auto bytes = opened ? file.readAll() : QByteArray();
+		if (transmission_.load(bytes.constData(), bytes.size()))
+			qCInfo(Atmo) << "Lightweight object extinction: CPU spectral transmission from" << file.fileName();
+		else
+			qCWarning(Atmo) << "Cannot load Lightweight transmission data; using legacy extinction:" << file.fileName();
+	}
+
 	renderVBO_.setUsagePattern(QOpenGLBuffer::StaticDraw);
 	renderVBO_.create();
 	const GLfloat vertices[]=
@@ -177,6 +191,14 @@ AtmosphereLightweight::AtmosphereLightweight()
 	renderVBO_.bind();
 	renderVBO_.allocate(vertices, sizeof vertices);
 	renderVAO_.create();
+}
+
+bool AtmosphereLightweight::getDirectTransmission(double altitude, double elevation, Vec3f& rgb) const
+{
+	std::array<float,3> value;
+	if (!transmission_.sample(altitude, elevation, value)) return false;
+	rgb.set(value[0],value[1],value[2]);
+	return true;
 }
 
 void AtmosphereLightweight::loadMesh()

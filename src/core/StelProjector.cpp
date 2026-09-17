@@ -30,6 +30,7 @@
 StelProjector::Mat4dTransform::Mat4dTransform(const Mat4d& altAzToWorld, const Mat4d& vertexToAltAzPos)
     : transfoMat(altAzToWorld*vertexToAltAzPos)
     , transfoMatf(toMat4f(transfoMat))
+	, vertexToAltAzPosMat(vertexToAltAzPos)
 	, vertexToAltAzPos(toMat4f(vertexToAltAzPos))
 	, worldPosToAltAzPos(toMat4f(altAzToWorld.inverse()))
 {
@@ -70,10 +71,17 @@ void StelProjector::Mat4dTransform::backward(Vec3f& v) const
 	v[2] = transfoMatf.r[8]*x + transfoMatf.r[9]*y + transfoMatf.r[10]*z;
 }
 
+void StelProjector::Mat4dTransform::forwardToAltAz(Vec3f& v) const
+{
+	v.transfo4d(vertexToAltAzPos);
+}
+
 void StelProjector::Mat4dTransform::combine(const Mat4d& m)
 {
 	transfoMat=transfoMat*m;
 	transfoMatf=toMat4f(transfoMat);
+	vertexToAltAzPosMat=vertexToAltAzPosMat*m;
+	vertexToAltAzPos=toMat4f(vertexToAltAzPosMat);
 }
 
 Mat4d StelProjector::Mat4dTransform::getApproximateLinearTransfo() const

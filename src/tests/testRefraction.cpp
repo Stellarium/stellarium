@@ -258,3 +258,37 @@ void TestRefraction::testComplexRefraction()
 							.toUtf8());
 	}
 }
+
+// The per-fragment extinction coordinates must match both projection paths,
+// including combined rotations/scales and near-horizon refraction.
+void TestRefraction::testApparentAltAzTransform()
+{
+    const Mat4d before=Mat4d::translation(Vec3d(4.,1.,0.01));
+    const Mat4d combined=Mat4d::zrotation(0.4)*Mat4d::scaling(0.03);
+    const Mat4d after=Mat4d::xrotation(0.7);
+    StelProjector::Mat4dTransform linear(after,before);
+    linear.combine(combined);
+    Refraction refracted;
+    refracted.setPreTransfoMat(before);
+    refracted.setPostTransfoMat(after);
+    refracted.combine(combined);
+    for (Vec3f input : {Vec3f(0.f),Vec3f(1.f,2.f,3.f),Vec3f(-1.f,1.f,-2.f)})
+    {
+        Vec3f actual=input;
+        linear.forwardToAltAz(actual);
+        Vec3d expected=input.toVec3d();
+        expected.transfo4d(before*combined);
+        QVERIFY((actual.toVec3d()-expected).norm()<1.e-5);
+        Vec3f projected=input;
+        refracted.forward(projected);
+        actual=input;
+        refracted.forwardToAltAz(actual);
+        Vec3d withPost=actual.toVec3d();
+        withPost.transfo4d(after);
+        QVERIFY((projected.toVec3d()-withPost).norm()<1.e-5);
+        auto clone=refracted.clone();
+        Vec3f cloned=input;
+        clone->forwardToAltAz(cloned);
+        QVERIFY((actual-cloned).norm()<1.e-6f);
+    }
+}

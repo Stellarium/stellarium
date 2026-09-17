@@ -361,6 +361,8 @@ public slots:
 	float getLuminance() const;
 	//! return average luminance [cd/m^2] of atmosphere. Expect 10 at sunset, 6400 in daylight, >0 in dark night.
 	float getAtmosphereAverageLuminance() const;
+	//! Direct object transmission for the active Earth atmosphere, including fading.
+	bool getAtmosphereTransmission(double apparentElevation, Vec3f& rgb) const;
 
 	//! Override autocomputed value and set average luminance [cd/m^2] of atmosphere.  This is around 10 at sunset, 6400 in daylight, >0 in dark night.
 	//! Usually there is no need to call this, the luminance is properly computed. This is a function which can be

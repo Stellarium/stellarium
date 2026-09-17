@@ -181,6 +181,29 @@ vec4 sampleTexDxDy(sampler2D sampler, vec2 texCoord, vec2 texDx, vec2 texDy)
     return texture2D(sampler, texCoord);
 }
 
+VARYING highp vec3 apparentAltAzPos;
+uniform bool spectralExtinctionEnabled;
+uniform bool spectralExtinctionPerPixel;
+uniform highp vec3 spectralExtinctionCenter;
+uniform highp vec2 spectralExtinctionAltitudeRange;
+uniform highp vec3 spectralExtinctionSamples[64];
+
+highp vec3 directTransmission()
+{
+    if(!spectralExtinctionEnabled) return vec3(1.);
+    highp vec3 transmission=spectralExtinctionCenter;
+    if(spectralExtinctionPerPixel)
+    {
+        highp float altitude=asin(clamp(normalize(apparentAltAzPos).z,-1.,1.));
+        highp float index=63.*clamp((altitude-spectralExtinctionAltitudeRange.x)/
+            (spectralExtinctionAltitudeRange.y-spectralExtinctionAltitudeRange.x),0.,1.);
+        int lo=int(min(index,62.));
+        transmission=mix(spectralExtinctionSamples[lo],spectralExtinctionSamples[lo+1],index-float(lo));
+    }
+    // Only replace the tint; retain the established object display brightness.
+    return transmission/max(1.e-12,max(transmission.r,max(transmission.g,transmission.b)));
+}
+
 void main()
 {
 #ifndef IS_MOON
@@ -203,7 +226,7 @@ void main()
         cosTheta = max(0., cosTheta); // Rounding errors sometimes lead to negative value
         float cosTheta2 = cosTheta*cosTheta;
         vec3 limbDarkeningCoef = a0 + a1*cosTheta + a2*cosTheta2;
-        vec3 color = texColor.rgb * limbDarkeningCoef;
+        vec3 color = texColor.rgb * limbDarkeningCoef * directTransmission();
         FRAG_COLOR = vec4(linearToSRGB(color), texColor.a);
         return;
     }
@@ -480,6 +503,8 @@ void main()
         finalColor.rgb = srgbToLinear(finalColor.rgb);
     }
 #endif
+
+    finalColor.rgb *= directTransmission();
 
     //apply white rimlight
     finalColor.xyz = clamp( finalColor.xyz + vec3(outgas), 0.0, 1.0);

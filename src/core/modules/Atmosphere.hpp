@@ -53,6 +53,9 @@ public:
 
 public:
 	virtual ~Atmosphere() = default;
+	//! Linear RGB direct transmission; apparent elevation in radians, altitude in metres.
+	//! False selects the legacy extinction colors.
+	virtual bool getDirectTransmission(double, double, Vec3f&) const { return false; }
 	//! Compute sky brightness values and average luminance.
 	//! @param noScatter true to suppress the actual sky brightness modelling. This will keep refraction/extinction working for didactic reasons.
 	virtual void computeColor(StelCore* core, double JD, const Planet& currentPlanet, const Planet& sun, const Planet* moon,

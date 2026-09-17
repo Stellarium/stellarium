@@ -57,6 +57,8 @@ public:
 		virtual void backward(Vec3d&) const =0;
 		virtual void forward(Vec3f&) const =0;
 		virtual void backward(Vec3f&) const =0;
+		//! Transform a model vertex to apparent horizontal coordinates before view rotation.
+		virtual void forwardToAltAz(Vec3f&) const =0;
 
 		virtual void combine(const Mat4d&)=0;
 		virtual ModelViewTranformP clone() const=0;
@@ -77,6 +79,7 @@ public:
 		void backward(Vec3d& v) const override;
 		void forward(Vec3f& v) const override;
 		void backward(Vec3f& v) const override;
+		void forwardToAltAz(Vec3f& v) const override;
 		void combine(const Mat4d& m) override;
 		Mat4d getApproximateLinearTransfo() const override;
 		ModelViewTranformP clone() const override;
@@ -92,6 +95,7 @@ public:
 		//! transfo matrix and invert
 		Mat4d transfoMat;
 		Mat4f transfoMatf;
+		Mat4d vertexToAltAzPosMat;
 		//! Transforms a vertex from model space to coordinates where Z is zenith, so zenith angle can easily be computed.
 		Mat4f vertexToAltAzPos;
 		//! Transforms view direction from the projector's frame to coordinates where Z is zenith, so zenith angle can easily be computed.

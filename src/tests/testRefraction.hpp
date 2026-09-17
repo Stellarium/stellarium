@@ -32,6 +32,7 @@ private slots:
 	void testSaemundssonEquation();
 	void testBennettEquation();
 	void testComplexRefraction();
+	void testApparentAltAzTransform();
 private:
 	float pressure, temperature;
 };

@@ -36,6 +36,10 @@ uniform highp mat4 shadowMatrix;
 VARYING highp vec4 shadowCoord;
 #endif
 
+VARYING highp vec3 apparentAltAzPos;
+#ifndef PROJECTOR_PRESENT
+ATTRIBUTE highp vec3 apparentAltAzPosIn;
+#endif
 VARYING mediump vec2 texc; //texture coord
 VARYING highp vec3 P; //original unprojected position (in AU)
 
@@ -60,8 +64,10 @@ void main()
 #ifdef PROJECTOR_PRESENT
 	highp vec4 unprojectedVertex = vertex;
 	gl_Position = projectionMatrix*vec4(project(sphereScale*vertex.xyz), 1);
+	apparentAltAzPos=vertexToAltAzPos(sphereScale*vertex.xyz);
 #else
     gl_Position = projectionMatrix * vertex;
+    apparentAltAzPos=apparentAltAzPosIn;
 #endif
     texc = texCoord;
 

@@ -278,6 +278,14 @@ void Refraction::backward(Vec3f& altAzPos) const
 	altAzPos.transfo4d(invertPreTransfoMatf);
 }
 
+void Refraction::forwardToAltAz(Vec3f& altAzPos) const
+{
+	Vec3d v=altAzPos.toVec3d();
+	v.transfo4d(preTransfoMat);
+	innerRefractionForward(v);
+	altAzPos=v.toVec3f();
+}
+
 QByteArray Refraction::getForwardTransformShader() const
 {
 	return QByteArray(1+R"(

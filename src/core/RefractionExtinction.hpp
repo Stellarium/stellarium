@@ -147,6 +147,7 @@ public:
 	//! @param altAzPos is the apparent star position vector, to be transformed into geometrical position.
 	//! Note that forward/backward are no absolute reverse operations!
 	void backward(Vec3f& altAzPos) const override;
+	void forwardToAltAz(Vec3f& altAzPos) const override;
 
 	void combine(const Mat4d& m) override
 	{

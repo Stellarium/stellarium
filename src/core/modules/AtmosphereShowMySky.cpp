@@ -382,6 +382,13 @@ AtmosphereShowMySky::AtmosphereShowMySky(const double initialAltitude)
 	{
 		const auto defaultPath = QDir::homePath() + "/cms";
 		const auto pathToData = conf.value("landscape/atmosphere_model_path", defaultPath).toString();
+		if (conf.value("landscape/flag_showmysky_extinction", true).toBool())
+		{
+			if (transmission_.loadModel(pathToData))
+				qCInfo(Atmo) << "ShowMySky object extinction: CPU spectral transmission";
+			else
+				qCWarning(Atmo) << "Cannot load model transmission; using legacy extinction:" << pathToData;
+		}
 		const auto gl = StelOpenGL::highGraphicsFunctions();
 		if(!gl)
 			throw InitFailure(q_("Failed to get OpenGL 3.3 support functions"));
@@ -824,6 +831,15 @@ auto AtmosphereShowMySky::stepDataLoading() -> LoadingStatus
 	{
 		throw InitFailure(error.what());
 	}
+}
+
+// Independent of ShowMySky's renderer API.
+bool AtmosphereShowMySky::getDirectTransmission(double altitude, double elevation, Vec3f& rgb) const
+{
+	std::array<float,3> value;
+	if (!transmission_.sample(altitude, elevation, value)) return false;
+	rgb.set(value[0], value[1], value[2]);
+	return true;
 }
 
 #endif // !QT_CONFIG(opengles2)
