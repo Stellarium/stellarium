@@ -35,7 +35,7 @@
 #include <QRegularExpression>
 #include <QGraphicsDropShadowEffect>
 
-InfoPanel::InfoPanel(QGraphicsItem* parent) : QGraphicsTextItem("", parent), opacity(0)
+InfoPanel::InfoPanel(QGraphicsItem* parent) : QGraphicsTextItem("", parent)
 {
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
@@ -136,19 +136,15 @@ void InfoPanel::setTextFromObjects(const QList<StelObjectP>& selected)
 		if (this->opacity<0)
 			opacity=QString::number(qAbs(this->opacity));
 
+		infoHTML = selected[0]->getInfoString(core, infoTextFilters);
+		selected[0]->removeExtraInfoStrings(StelObject::AllInfo);
+
 		document()->setDefaultStyleSheet(css.arg(color.toHtmlColor(), opacity));
 
 		// We need the span to set the background opacity.
-		infoHTML =	"<div class='info-string'>"
-				+QString("<span style='background:rgba(0, 0, 0, %1%);'>").arg(opacity) +
-				selected[0]->getInfoString(core, infoTextFilters)
-				+ "</span>"
-				  "</div>"
-				;
-
-		selected[0]->removeExtraInfoStrings(StelObject::AllInfo);
-		//qDebug() << "style" << document()->defaultStyleSheet()  << " --- infoHTML:" << infoHTML;
-		setHtml(infoHTML);
+		setHtml(QString("<div class='info-string'><span style='background:rgba(0, 0, 0, %1%);'>").arg(opacity)
+			+ infoHTML
+			+ "</span></div>");
 	}
 }
 
