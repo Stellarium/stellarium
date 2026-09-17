@@ -99,20 +99,20 @@ void InfoPanel::setTextFromObjects(const QList<StelObjectP>& selected)
 	else
 	{
 		static const QString css(
-			    "h2 {"
-				      "color: %1;"
-				      "background-color: rgba(0,0,0,%2%);"
-				"} "
-			    ".info-string {"
-				"color: %1;"
-				"background-color: rgba(0,0,0,%2%);"
-				" } "
-			    "table.info-string {"
-			    "margin: 0em 0em 0em -0.125em;"
-			    "border-spacing: 0px;"
-			    "border: 0px;"
-			    "color: %1;"
-			    "background-color: rgba(0,0,0,%2%);"
+			"h2 {"
+			      "color: %1;"
+			      "background-color: rgba(0,0,0,%2%);"
+			    "} "
+			".info-string {"
+			      "color: %1;"
+			      "background-color: rgba(0,0,0,%2%);"
+			    "} "
+			"table.info-string {"
+			      "margin: 0em 0em 0em -0.125em;"
+			      "border-spacing: 0px;"
+			      "border: 0px;"
+			      "color: %1;"
+			      "background-color: rgba(0,0,0,%2%);"
 			    "} ");
 
 		// just print details of the first item for now
