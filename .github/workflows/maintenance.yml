@@ -46,6 +46,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v6
+        with:
+          persist-credentials: false
 
       - name: Check CRLF line endings
         uses: erclu/check-crlf@c77fda0a97ea8944aba5f72796b9e937e7d1611c # master
@@ -63,6 +65,8 @@ jobs:
 
       - name: Checkout repository
         uses: actions/checkout@v6
+        with:
+          persist-credentials: false
 
       - name: Linting JSON/GeoJSON
         run: find ${{github.workspace}}/{src,plugins,nebulae,skycultures} -iname '*.*json' -exec jsonlint -S {} +
