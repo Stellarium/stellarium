@@ -135,7 +135,7 @@ void InfoPanel::setTextFromObjects(const QList<StelObjectP>& selected)
 		// A negative opacity forces dark background even for daylight scenes.
 		if (this->opacity<0)
 		{
-			color   = StelApp::getInstance().getDaylightInfoColor();
+			color   = StelApp::getInstance().getOverwriteInfoColor();
 			opacity = QString::number(qAbs(this->opacity));
 		}
 
