@@ -123,7 +123,6 @@ public:
 	QString getNameI18n(void) const override	{ return q_(m_designation.trimmed()); }
 	Vec3d getJ2000EquatorialPos(const StelCore*) const override { return m_position; }
 	float getSelectPriority(const StelCore*) const override { return -4.0; }
-	Vec3f getInfoColor(void) const override;
 
 	//! @return approximate Julian day calculated from solar longitude (J2000)
 	static double JDfromSolarLongitude(double solarLong, int year);

@@ -1553,8 +1553,7 @@ void StelGui::copySelectedObjectInfo(void)
 {
 	const auto cb = QGuiApplication::clipboard();
 	const auto md = new QMimeData;
-	const auto colorRE = QRegularExpression(" color=\"?#[0-9a-f]+\"?");
-	md->setHtml(skyGui->infoPanel->getSelectedHTML().replace(colorRE, ""));
+	md->setHtml(skyGui->infoPanel->getSelectedHTML());
 	md->setText(skyGui->infoPanel->getSelectedText());
 	cb->setMimeData(md);
 }
