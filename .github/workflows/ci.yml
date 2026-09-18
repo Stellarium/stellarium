@@ -10,6 +10,9 @@ on:
     # The branches below must be a subset of the branches above
     branches: [master]
 
+permissions:
+  contents: read
+
 env:
   parallel_processes: 4 # A good default counts is: available Threads
 

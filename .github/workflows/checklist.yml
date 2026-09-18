@@ -7,9 +7,15 @@ on:
   pull_request_target:
     types: [opened, reopened, ready_for_review]
 
+permissions:
+  contents: read
+
 jobs:
   checklist_job:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
     if: "!contains(github.actor, 'transifex')"
     name: Checklist job
     steps:

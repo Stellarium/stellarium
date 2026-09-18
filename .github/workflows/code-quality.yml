@@ -5,6 +5,9 @@
 name: "Code Quality"
 on: [push]
 
+permissions:
+  contents: read
+
 jobs:
   #
   # Coveralls

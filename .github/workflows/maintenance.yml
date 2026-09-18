@@ -13,6 +13,9 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   #
   # See https://github.com/marketplace/actions/label-conflicting-pull-requests
@@ -20,6 +23,9 @@ jobs:
   check-conflicts:
     name: "Check conflicts"
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
     if: "!contains(github.actor, 'transifex')"
     steps:
       - name: Check if PRs are dirty

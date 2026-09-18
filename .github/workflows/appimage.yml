@@ -6,6 +6,9 @@ name: "AppImage"
 
 on: [push]
 
+permissions:
+  contents: read
+
 jobs:
   # AppImage x86_64/Qt5
   appimage-amd64-qt5:
