@@ -23,7 +23,7 @@ jobs:
     if: "!contains(github.actor, 'transifex')"
     steps:
       - name: Check if PRs are dirty
-        uses: eps1lon/actions-label-merge-conflict@v3
+        uses: eps1lon/actions-label-merge-conflict@0273be72a0bbd58fcd71d0d6c02c209b50d1e5e1 # v3.1.0
         with:
           dirtyLabel: "has conflicts"
           repoToken: "${{ secrets.GITHUB_TOKEN }}"
@@ -42,7 +42,7 @@ jobs:
         uses: actions/checkout@v6
 
       - name: Check CRLF line endings
-        uses: erclu/check-crlf@master
+        uses: erclu/check-crlf@c77fda0a97ea8944aba5f72796b9e937e7d1611c # master
 
   check-json:
     name: "Linting JSON"

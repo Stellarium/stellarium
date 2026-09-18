@@ -23,7 +23,7 @@ jobs:
         uses: actions/checkout@v6
 
       - name: Label Commenter
-        uses: peaceiris/actions-label-commenter@v1
+        uses: peaceiris/actions-label-commenter@f0dbbef043eb1b150b566db36b0bdc8b7f505579 # v1.10.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           config_file: .github/label-commenter-config.yml

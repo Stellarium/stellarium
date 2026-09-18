@@ -16,6 +16,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
       - name: Checklist
-        uses: wyozi/contextual-qa-checklist-action@master
+        uses: wyozi/contextual-qa-checklist-action@dd4b6b51d85a59f537b7ca9e2f162164627ec811 # master
         with:
           gh-token: ${{ secrets.GITHUB_TOKEN }}

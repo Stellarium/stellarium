@@ -41,21 +41,21 @@ jobs:
       run: make -j3
 
     - name: Download JPL DE430 ephemeris
-      uses: carlosperate/download-file-action@v2
+      uses: carlosperate/download-file-action@7021d227a45dcf2f828612344b03f6f09a4f7cad # v2.0.3
       with:
         file-url: 'https://github.com/Stellarium/stellarium-data/releases/download/qt-5.6/linux_p1550p2650.430'
         file-name: 'linux_p1550p2650.430'
         location: '../../../.stellarium/ephem'
 
     - name: Download JPL DE440 ephemeris
-      uses: carlosperate/download-file-action@v2
+      uses: carlosperate/download-file-action@7021d227a45dcf2f828612344b03f6f09a4f7cad # v2.0.3
       with:
         file-url: 'https://github.com/Stellarium/stellarium-data/releases/download/qt-5.6/linux_p1550p2650.440'
         file-name: 'linux_p1550p2650.440'
         location: '../../../.stellarium/ephem'
 
     - name: Make coverage
-      uses: coactions/setup-xvfb@v1
+      uses: coactions/setup-xvfb@b6b4fcfb9f5a895edadc3bc76318fae0ac17c8b3 # v1.0.1
       with:
         working-directory: build
         run: make coverage
@@ -66,7 +66,7 @@ jobs:
       run: lcov --gcov-tool "/usr/bin/gcov" --ignore-errors unused --remove coverage.info '*_autogen/*' '*/ui_*.h' '*/qrc_*.cpp' '*/build/*' '*/qt5/*' '*/qt6/*' '/usr/*' '*gmock*' --output-file coverage.info
 
     - name: Coveralls
-      uses: coverallsapp/github-action@v2.3.6
+      uses: coverallsapp/github-action@648a8eb78e6d50909eff900e4ec85cab4524a45b # v2.3.6
       with:
         format: lcov
         file: ${{ github.workspace }}/build/coverage.info

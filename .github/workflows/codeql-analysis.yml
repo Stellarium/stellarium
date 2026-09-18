@@ -76,7 +76,7 @@ jobs:
         output: sarif-results
 
     - name: Filter Dependencies
-      uses: advanced-security/filter-sarif@main
+      uses: advanced-security/filter-sarif@2da736ff05ef065cb2894ac6892e47b5eac2c3c0 # v1.1
       with:
         input: sarif-results/${{ matrix.language }}.sarif
         output: sarif-results/${{ matrix.language }}.sarif
