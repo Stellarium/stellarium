@@ -129,12 +129,15 @@ void InfoPanel::setTextFromObjects(const QList<StelObjectP>& selected)
 		if (core->isBrightDaylight() && !StelApp::getInstance().getVisionModeNight())
 		{
 			// make info text more readable when atmosphere enabled at daylight.
-			color = StelApp::getInstance().getDaylightInfoColor();
-			opacity="0";
+			color   = StelApp::getInstance().getDaylightInfoColor();
+			opacity = "0";
 		}
 		// A negative opacity forces dark background even for daylight scenes.
 		if (this->opacity<0)
-			opacity=QString::number(qAbs(this->opacity));
+		{
+			color   = StelApp::getInstance().getDaylightInfoColor();
+			opacity = QString::number(qAbs(this->opacity));
+		}
 
 		infoHTML = selected[0]->getInfoString(core, infoTextFilters);
 		selected[0]->removeExtraInfoStrings(StelObject::AllInfo);
