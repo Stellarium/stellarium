@@ -413,7 +413,7 @@ define(["jquery", "api/remotecontrol", "api/search", "./combobox"], function($, 
     }
 
     // Translation helper
-    function _tr(text) {
+    function tr(text) {
         if (typeof window.tr === 'function') {
             return window.tr.apply(window, arguments);
         }
