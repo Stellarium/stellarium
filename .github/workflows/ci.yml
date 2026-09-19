@@ -10,6 +10,9 @@ on:
     # The branches below must be a subset of the branches above
     branches: [master]
 
+permissions:
+  contents: read
+
 env:
   parallel_processes: 4 # A good default counts is: available Threads
 
@@ -35,6 +38,8 @@ jobs:
 
     - name: Checkout repository
       uses: actions/checkout@v7
+      with:
+        persist-credentials: false
 
     - name: Configure CMake
       shell: bash
@@ -51,7 +56,7 @@ jobs:
       run: make -j ${{env.parallel_processes}}
 
     - name: Run unit tests
-      uses: coactions/setup-xvfb@v1
+      uses: coactions/setup-xvfb@b6b4fcfb9f5a895edadc3bc76318fae0ac17c8b3 # v1.0.1
       with:
         working-directory: build
         run: ctest --output-on-failure
@@ -80,6 +85,8 @@ jobs:
 
     - name: Checkout repository
       uses: actions/checkout@v7
+      with:
+        persist-credentials: false
 
     - name: Configure CMake
       shell: bash
@@ -97,7 +104,7 @@ jobs:
       run: make -j ${{env.parallel_processes}}
 
     - name: Run unit tests
-      uses: coactions/setup-xvfb@v1
+      uses: coactions/setup-xvfb@b6b4fcfb9f5a895edadc3bc76318fae0ac17c8b3 # v1.0.1
       with:
         working-directory: build
         run: ctest --output-on-failure
@@ -125,6 +132,8 @@ jobs:
 
     - name: Checkout repository
       uses: actions/checkout@v7
+      with:
+        persist-credentials: false
 
     - name: Configure CMake
       shell: bash
@@ -145,7 +154,7 @@ jobs:
       run: make -j ${{env.parallel_processes}}
 
     - name: Run unit tests
-      uses: coactions/setup-xvfb@v1
+      uses: coactions/setup-xvfb@b6b4fcfb9f5a895edadc3bc76318fae0ac17c8b3 # v1.0.1
       with:
         working-directory: build
         run: ctest --output-on-failure
@@ -173,6 +182,8 @@ jobs:
 
     - name: Checkout repository
       uses: actions/checkout@v7
+      with:
+        persist-credentials: false
 
     - name: Configure CMake
       shell: bash
@@ -186,7 +197,7 @@ jobs:
       run: make -j ${{env.parallel_processes}}
 
     - name: Run unit tests
-      uses: coactions/setup-xvfb@v1
+      uses: coactions/setup-xvfb@b6b4fcfb9f5a895edadc3bc76318fae0ac17c8b3 # v1.0.1
       with:
         working-directory: build
         run: ctest --output-on-failure
@@ -214,6 +225,8 @@ jobs:
 
     - name: Checkout repository
       uses: actions/checkout@v7
+      with:
+        persist-credentials: false
 
     - name: Configure CMake
       shell: bash
@@ -233,7 +246,7 @@ jobs:
       run: make -j ${{env.parallel_processes}}
 
     - name: Run unit tests
-      uses: coactions/setup-xvfb@v1
+      uses: coactions/setup-xvfb@b6b4fcfb9f5a895edadc3bc76318fae0ac17c8b3 # v1.0.1
       with:
         working-directory: build
         run: ctest --output-on-failure
@@ -247,9 +260,11 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v7
+      with:
+        persist-credentials: false
 
     - name: Install Qt
-      uses: jurplel/install-qt-action@v4
+      uses: jurplel/install-qt-action@bcb88e3bed2e992f5f9e24c0f9e364a231d278eb # v4.4.0
       with:
         aqtversion: '==3.3.*'
         version: '6.8.3'
@@ -288,9 +303,11 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v7
+      with:
+        persist-credentials: false
 
     - name: Build and run unit tests in Haiku
-      uses: vmactions/haiku-vm@v1
+      uses: vmactions/haiku-vm@6a07e023ed05895c09aa73843b58cfa671f34594 # v1.1.5
       id: haiku-qt6
       with:
         # Use sh shell
@@ -318,9 +335,11 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v7
+      with:
+        persist-credentials: false
 
     - name: Build and run unit tests in OpenBSD
-      uses: vmactions/openbsd-vm@v1
+      uses: vmactions/openbsd-vm@86cdc08415d9d0865267e686561e276c52d62530 # v1.4.7
       id: openbsd-amd64-qt6
       with:
         # Use sh shell
@@ -353,9 +372,11 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v7
+      with:
+        persist-credentials: false
 
     - name: Build and run unit tests in FreeBSD
-      uses: vmactions/freebsd-vm@v1
+      uses: vmactions/freebsd-vm@4469451fe39bee80be4066836c5170362e9349f3 # v1.5.7
       id: freebsd-amd64-qt6
       with:
         # Use sh shell

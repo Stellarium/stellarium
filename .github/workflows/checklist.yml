@@ -7,15 +7,23 @@ on:
   pull_request_target:
     types: [opened, reopened, ready_for_review]
 
+permissions:
+  contents: read
+
 jobs:
   checklist_job:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
     if: "!contains(github.actor, 'transifex')"
     name: Checklist job
     steps:
       - name: Checkout
         uses: actions/checkout@v6
+        with:
+          persist-credentials: false
       - name: Checklist
-        uses: wyozi/contextual-qa-checklist-action@master
+        uses: wyozi/contextual-qa-checklist-action@dd4b6b51d85a59f537b7ca9e2f162164627ec811 # master
         with:
           gh-token: ${{ secrets.GITHUB_TOKEN }}

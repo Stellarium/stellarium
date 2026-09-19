@@ -22,10 +22,17 @@ on:
   schedule:
     - cron: '31 0 * * 1'
 
+permissions:
+  contents: read
+
 jobs:
   analyze:
     name: Analyze
     runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
     if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.actor, 'transifex')"
 
     strategy:
@@ -49,6 +56,8 @@ jobs:
 
     - name: Checkout repository
       uses: actions/checkout@v6
+      with:
+        persist-credentials: false
 
     # Initializes the CodeQL tools for scanning.
     - name: Initialize CodeQL
@@ -76,7 +85,7 @@ jobs:
         output: sarif-results
 
     - name: Filter Dependencies
-      uses: advanced-security/filter-sarif@main
+      uses: advanced-security/filter-sarif@2da736ff05ef065cb2894ac6892e47b5eac2c3c0 # v1.1
       with:
         input: sarif-results/${{ matrix.language }}.sarif
         output: sarif-results/${{ matrix.language }}.sarif

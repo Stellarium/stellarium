@@ -13,17 +13,26 @@ on:
       - labeled
       - unlabeled
 
+permissions:
+  contents: read
+
 jobs:
   comment:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
+      pull-requests: write
     if: "!contains(github.actor, 'transifex')"
     name: Comment
     steps:
       - name: Checkout repository
         uses: actions/checkout@v6
+        with:
+          persist-credentials: false
 
       - name: Label Commenter
-        uses: peaceiris/actions-label-commenter@v1
+        uses: peaceiris/actions-label-commenter@f0dbbef043eb1b150b566db36b0bdc8b7f505579 # v1.10.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           config_file: .github/label-commenter-config.yml
