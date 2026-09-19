@@ -293,7 +293,7 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 		{
 			// use separation and position angle from the binary orbit if available
 			oss << QString("%1 (%3): %2°").arg(q_("Position angle"),
-							QString::number((binary_sep>0.f) ? binary_pa: wdsPA, 'f', 1),
+							QString::number((binary_sep>0.f) ? binary_pa: wdsPA, 'f', 2),
 							(binary_sep>0.f) ? qc_("on date", "coordinates for current epoch"): QString::number(wdsObs)) << "<br />";
 			if (wdsSep>0.f && wdsSep<999.f) // A spectroscopic binary or not?
 			{
