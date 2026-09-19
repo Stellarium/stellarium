@@ -278,6 +278,7 @@ void main()
 
 void AtmosphereShowMySky::resizeRenderTarget(int width, int height)
 {
+	localLuminanceValid = false;
 	const int physWidth = width/atmoRes;
 	const int physHeight = height/atmoRes;
 	renderer_->resizeEvent(physWidth, physHeight);
@@ -439,6 +440,7 @@ AtmosphereShowMySky::~AtmosphereShowMySky()
 	if(auto*const ctx=QOpenGLContext::currentContext())
 	{
 		auto& gl = *StelOpenGL::highGraphicsFunctions();
+		GL(gl.glDeleteFramebuffers(1, &luminanceReadFBO_));
 		GL(gl.glDeleteBuffers(1, &vbo_));
 		GL(gl.glDeleteVertexArrays(1, &mainVAO_));
 		GL(gl.glDeleteVertexArrays(1, &zenithProbeVAO_));
@@ -674,6 +676,7 @@ void AtmosphereShowMySky::computeColor(StelCore* core, const double JD, const Pl
 		if(location.altitude != lastUsedAltitude_)
 		{
 			lastUsedAltitude_ = location.altitude;
+			localLuminanceValid = false;
 			probeZenithLuminances(location.altitude);
 			dynResTimer=0;
 		}
@@ -686,6 +689,7 @@ void AtmosphereShowMySky::computeColor(StelCore* core, const double JD, const Pl
 		if (dynamicResolution(prj, sunPos, width, height))
 			return;
 
+		localLuminanceValid = false;
 		const auto sunDir = sunPos / sunPos.norm();
 		const double sunAngularRadius = atan(sun.getEquatorialRadius()/sunPos.norm());
 
@@ -743,6 +747,8 @@ void AtmosphereShowMySky::computeColor(StelCore* core, const double JD, const Pl
 		drawAtmosphere(prj->getProjectionMatrix(), moonAzimuth, moonZenithAngle, 0, 0, M_PI, 0, location.altitude,
 					   moonRelativeBrightness, 0, 0, false, false);
 
+		localLuminanceValid = true;
+
 		if (!overrideAverageLuminance)
 		{
 			const auto meanPixelValue=getMeanPixelValue();
@@ -756,6 +762,72 @@ void AtmosphereShowMySky::computeColor(StelCore* core, const double JD, const Pl
 	{
 		throw InitFailure(error.what());
 	}
+}
+
+bool AtmosphereShowMySky::getLocalLuminance(const Vec2f& screenPos, float& luminance)
+{
+	if (!std::isfinite(screenPos[0]) || !std::isfinite(screenPos[1]) || !isLocalLuminanceAvailable() ||
+	    screenPos[0] < viewport[0] || screenPos[0] >= viewport[0]+viewport[2] ||
+	    screenPos[1] < viewport[1] || screenPos[1] >= viewport[1]+viewport[3])
+		return false;
+
+	// Match the screen shader's GL_LINEAR sampling, including reduced resolution.
+	// getPixelLuminance() reads only one texel: using it four times would introduce
+	// four synchronization points. Read the neighbouring texels in one small block
+	// instead, by temporarily attaching the EXISTING texture. No pixel storage or
+	// atmosphere rendering is allocated for the probe.
+	const int width = viewport[2]/atmoRes, height = viewport[3]/atmoRes;
+	if (width <= 0 || height <= 0) return false;
+	const double tx = std::clamp(double(screenPos[0]-viewport[0])*width/viewport[2]-0.5, 0., double(width-1));
+	const double ty = std::clamp(double(screenPos[1]-viewport[1])*height/viewport[3]-0.5, 0., double(height-1));
+	const int x = static_cast<int>(tx), y = static_cast<int>(ty);
+	const int readWidth = std::min(2, width-x), readHeight = std::min(2, height-y);
+	auto& gl = *StelOpenGL::highGraphicsFunctions();
+	if (!luminanceReadFBO_)
+	{
+		gl.glGenFramebuffers(1, &luminanceReadFBO_);
+		if (!luminanceReadFBO_) return false;
+	}
+	GLint oldReadFBO;
+	gl.glGetIntegerv(GL_READ_FRAMEBUFFER_BINDING, &oldReadFBO);
+	const GLenum packParams[] = {GL_PACK_ALIGNMENT, GL_PACK_ROW_LENGTH, GL_PACK_SKIP_ROWS,
+	                             GL_PACK_SKIP_PIXELS, GL_PACK_SWAP_BYTES};
+	GLint oldPack[5], oldPackBuffer;
+	for (int i=0; i<5; ++i)
+	{
+		gl.glGetIntegerv(packParams[i], &oldPack[i]);
+		gl.glPixelStorei(packParams[i], i == 0 ? 1 : 0);
+	}
+	gl.glGetIntegerv(GL_PIXEL_PACK_BUFFER_BINDING, &oldPackBuffer);
+	gl.glBindBuffer(GL_PIXEL_PACK_BUFFER, 0);
+	bool valid = false;
+	gl.glBindFramebuffer(GL_READ_FRAMEBUFFER, luminanceReadFBO_);
+	try
+	{
+		gl.glFramebufferTexture2D(GL_READ_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, renderer_->getLuminanceTexture(), 0);
+		if (gl.glCheckFramebufferStatus(GL_READ_FRAMEBUFFER) == GL_FRAMEBUFFER_COMPLETE)
+		{
+			gl.glReadBuffer(GL_COLOR_ATTACHMENT0);
+			float pixels[16] = {};
+			gl.glReadPixels(x, y, readWidth, readHeight, GL_RGBA, GL_FLOAT, pixels);
+			const float fx = tx-x, fy = ty-y;
+			const float lower = pixels[1]*(1.f-fx) + pixels[4*(readWidth-1)+1]*fx;
+			const float upper = pixels[4*readWidth*(readHeight-1)+1]*(1.f-fx) + pixels[4*(readWidth*readHeight-1)+1]*fx;
+			luminance = lower*(1.f-fy) + upper*fy;
+			// The 0.0001 background added to averageLuminance is NOT in this texture.
+			valid = gl.glGetError() == GL_NO_ERROR && std::isfinite(luminance) && luminance >= 0.f;
+		}
+	}
+	catch (ShowMySky::Error const&)
+	{
+		valid = false;
+	}
+	// Do not keep a resized/replaced renderer texture alive while sampling is off.
+	gl.glFramebufferTexture2D(GL_READ_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, 0, 0);
+	gl.glBindFramebuffer(GL_READ_FRAMEBUFFER, oldReadFBO);
+	gl.glBindBuffer(GL_PIXEL_PACK_BUFFER, oldPackBuffer);
+	for (int i=0; i<5; ++i) gl.glPixelStorei(packParams[i], oldPack[i]);
+	return valid;
 }
 
 void AtmosphereShowMySky::draw(StelCore* core)
