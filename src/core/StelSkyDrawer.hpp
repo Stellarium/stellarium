@@ -22,14 +22,17 @@
 
 #include "StelApp.hpp"
 #include "RefractionExtinction.hpp"
+#include "StelProjectorType.hpp"
 #include "StelTextureTypes.hpp"
 #include "VecMath.hpp"
 
+#include <limits>
 #include <memory>
 #include <QObject>
 #include <QImage>
 #include <QSettings>
 #include <QOpenGLFunctions>
+#include <QVector>
 
 class QOpenGLVertexArrayObject;
 class StelToneReproducer;
@@ -62,6 +65,14 @@ class StelSkyDrawer : public QObject, protected QOpenGLFunctions
 	Q_PROPERTY(double lightPollutionLuminance READ getLightPollutionLuminance WRITE setLightPollutionLuminance NOTIFY lightPollutionLuminanceChanged)
 	Q_PROPERTY(bool flagDrawBigStarHalo READ getFlagDrawBigStarHalo WRITE setFlagDrawBigStarHalo NOTIFY flagDrawBigStarHaloChanged)
 	Q_PROPERTY(bool flagStarSpiky READ getFlagStarSpiky WRITE setFlagStarSpiky NOTIFY flagStarSpikyChanged)
+	Q_PROPERTY(bool flagPsfStars READ getFlagPsfStars WRITE setFlagPsfStars NOTIFY flagPsfStarsChanged)
+	Q_PROPERTY(bool flagPsfStarProjectionCorrection READ getFlagPsfStarProjectionCorrection WRITE setFlagPsfStarProjectionCorrection NOTIFY flagPsfStarProjectionCorrectionChanged)
+	Q_PROPERTY(double psfStarPointRadius READ getPsfStarPointRadius WRITE setPsfStarPointRadius NOTIFY psfStarPointRadiusChanged)
+	Q_PROPERTY(double psfStarFlareDecay READ getPsfStarFlareDecay WRITE setPsfStarFlareDecay NOTIFY psfStarFlareDecayChanged)
+	Q_PROPERTY(double psfStarFlareStrength READ getPsfStarFlareStrength WRITE setPsfStarFlareStrength NOTIFY psfStarFlareStrengthChanged)
+	Q_PROPERTY(double psfStarBrightSourceMagLimit READ getPsfStarBrightSourceMagLimit WRITE setPsfStarBrightSourceMagLimit NOTIFY psfStarBrightSourceMagLimitChanged)
+	Q_PROPERTY(double psfMoonGlareReduction READ getPsfMoonGlareReduction WRITE setPsfMoonGlareReduction NOTIFY psfMoonGlareReductionChanged)
+	Q_PROPERTY(bool flagPsfMoonHaloTexture READ getFlagPsfMoonHaloTexture WRITE setFlagPsfMoonHaloTexture NOTIFY flagPsfMoonHaloTextureChanged)
 
 	Q_PROPERTY(bool flagStarMagnitudeLimit READ getFlagStarMagnitudeLimit WRITE setFlagStarMagnitudeLimit NOTIFY flagStarMagnitudeLimitChanged)
 	Q_PROPERTY(bool flagNebulaMagnitudeLimit READ getFlagNebulaMagnitudeLimit WRITE setFlagNebulaMagnitudeLimit NOTIFY flagNebulaMagnitudeLimitChanged)
@@ -112,9 +123,9 @@ public:
 	//! @param checkInScreen whether source in screen should be checked to avoid unnecessary drawing.
 	//! @param twinkleFactor allows height-dependent twinkling. Recommended value: min(1,1-0.9*sin(altitude)). Allowed values [0..1]
 	//! @return true if the source was actually visible and drawn
-	bool drawPointSource(StelPainter* sPainter, const Vec3d& v, const RCMag &rcMag, int bVindex, bool checkInScreen=false, float twinkleFactor=1.0f)
+	bool drawPointSource(StelPainter* sPainter, const Vec3d& v, const RCMag &rcMag, int bVindex, bool checkInScreen=false, float twinkleFactor=1.0f, float appMag=std::numeric_limits<float>::quiet_NaN())
 	{
-		return drawPointSource(sPainter, v, rcMag, colorTable[bVindex], checkInScreen, twinkleFactor);
+		return drawPointSource(sPainter, v, rcMag, colorTable[bVindex], checkInScreen, twinkleFactor, appMag);
 	}
 
 	//! Draw a point source halo.
@@ -125,7 +136,7 @@ public:
 	//! @param checkInScreen whether source in screen should be checked to avoid unnecessary drawing.
 	//! @param twinkleFactor allows height-dependent twinkling. Recommended value: min(1,1-0.9*sin(altitude)). Allowed values [0..1]
 	//! @return true if the source was actually visible and drawn
-	bool drawPointSource(StelPainter* sPainter, const Vec3d& v, const RCMag &rcMag, const Vec3f& bcolor, bool checkInScreen=false, float twinkleFactor=1.0f);
+	bool drawPointSource(StelPainter* sPainter, const Vec3d& v, const RCMag &rcMag, const Vec3f& bcolor, bool checkInScreen=false, float twinkleFactor=1.0f, float appMag=std::numeric_limits<float>::quiet_NaN());
 
 	//! Draw an image of the solar corona onto the screen at position v.
 	//! @param radius of current disk size of the sun [radians].
@@ -140,13 +151,17 @@ public:
 	//! @param mag the source integrated magnitude
 	//! @param color the object halo RGB color
 	//! @param isSun the object is the sun (will be drawn with different texture)
-	void postDrawSky3dModel(StelPainter* p, const Vec3d& v, float illuminatedArea, float mag, const Vec3f& color = Vec3f(1.f,1.f,1.f), const bool isSun=false);
+	//! @param sourceRadius radius of the source disk in screen pixels, or 0 for point sources
+	void postDrawSky3dModel(StelPainter* p, const Vec3d& v, float illuminatedArea, float mag, const Vec3f& color = Vec3f(1.f,1.f,1.f), const bool isSun=false, float sourceRadius=0.f);
 
 	//! Compute RMag and CMag from magnitude.
 	//! @param mag the object integrated V magnitude
 	//! @param rcMag array of 2 floats containing the radius and luminance
 	//! @return false if the object is too faint to be displayed
-	bool computeRCMag(float mag, RCMag*) const;
+		bool computeRCMag(float mag, RCMag*) const;
+		bool computePsfRCMag(float mag, RCMag*) const;
+		float getPsfPointSourceLabelOffset(const RCMag& rcMag, float appMag, const Vec3f& color, float baseOffset, float psfOffsetScale=1.f) const;
+		float getPsfMoonHaloLabelOffset(float appMag, const Vec3f& color, float sourceRadius, float baseOffset, float psfOffsetScale=1.f) const;
 
 	//! Report that an object of luminance lum with an on-screen area of area pixels is currently displayed
 	//! This information is used to determine the world adaptation luminance
@@ -225,6 +240,26 @@ public slots:
 	void setFlagStarSpiky(bool b);
 	//! Get whether to draw stars with rays
 	bool getFlagStarSpiky() const {return flagStarSpiky;}
+
+	//! Set flag to draw catalogue stars with the PSF renderer.
+	void setFlagPsfStars(bool b);
+	//! Get whether catalogue stars use the PSF renderer.
+	bool getFlagPsfStars() const {return flagPsfStars;}
+	void setFlagPsfStarProjectionCorrection(bool b);
+	bool getFlagPsfStarProjectionCorrection() const {return flagPsfStarProjectionCorrection;}
+	void setPsfStarPointRadius(double r);
+	double getPsfStarPointRadius() const {return psfStarPointRadius;}
+	void setPsfStarFlareDecay(double decay);
+	double getPsfStarFlareDecay() const {return psfStarFlareDecay;}
+	void setPsfStarFlareStrength(double strength);
+	double getPsfStarFlareStrength() const {return psfStarFlareStrength;}
+	void setPsfStarBrightSourceMagLimit(double magLimit);
+	double getPsfStarBrightSourceMagLimit() const {return psfStarBrightSourceMagLimit;}
+	void setPsfMoonGlareReduction(double reduction);
+	double getPsfMoonGlareReduction() const {return psfMoonGlareReduction;}
+	void setFlagPsfMoonHaloTexture(bool b);
+	bool getFlagPsfMoonHaloTexture() const {return flagPsfMoonHaloTexture;}
+	void resetPsfStarSettingsToDefaults();
 
 	//! Get the magnitude of the currently faintest visible point source
 	//! It depends on the zoom level, on the eye adaptation and on the point source rendering parameters
@@ -344,6 +379,14 @@ signals:
 	void flagDrawBigStarHaloChanged(bool b);
 	//! Emitted on change of star texture
 	void flagStarSpikyChanged(bool b);
+	void flagPsfStarsChanged(bool b);
+	void flagPsfStarProjectionCorrectionChanged(bool b);
+	void psfStarPointRadiusChanged(double r);
+	void psfStarFlareDecayChanged(double decay);
+	void psfStarFlareStrengthChanged(double strength);
+	void psfStarBrightSourceMagLimitChanged(double magLimit);
+	void psfMoonGlareReductionChanged(double reduction);
+	void flagPsfMoonHaloTextureChanged(bool b);
 
 	//! Emitted whenever the star magnitude limit flag is toggled
 	void flagStarMagnitudeLimitChanged(bool b);
@@ -374,6 +417,26 @@ signals:
 	void turbidityChanged(double t);
 
 private:
+	// Variables used for GL optimization when displaying point sources
+	//! Vertex format for a point source.
+	//! Texture pos is stored in another separately.
+	struct StarVertex {
+		Vec2f pos;
+		unsigned char color[4];
+	};
+	static_assert(sizeof(StarVertex) == 12, "Size of StarVertex must be 12 bytes");
+
+	struct PsfStarVertex {
+		Vec2f center;
+		Vec2f corner;
+		Vec3f direction;
+		float angularMode;
+		float peakRadiance;
+		float psfRadius;
+		float sourceRadius;
+		unsigned char color[4];
+	};
+
 	// Debug
 	float reverseComputeRCMag(float rmag) const;
 
@@ -414,6 +477,13 @@ private:
 	//! @return V magnitude of the point source
 	float pointSourceLuminanceToMag(float lum) const;
 
+	bool computePsfPeakRadiance(float mag, float* peakRadiance) const;
+	float computePsfGlowRadius(float peakRadiance, float alpha) const;
+	Vec3f psfGreenNormalization(const Vec3f& c, float saturationLimit, float& greenScale) const;
+	void addPsfStarVertices(QVector<PsfStarVertex>& vertices, StelPainter* sPainter, const Vec3d& direction, const Vec3f& center, const Vec3f& color, float peakRadiance, float radius, float sourceRadius=0.f);
+	void drawPsfPointSource(StelPainter* sPainter, const Vec3d& direction, const Vec3f& win, float appMag, const Vec3f& color, float twinkleFactor, float luminanceScale, float sourceRadius=0.f);
+	void flushPsfPointSources(StelPainter* sPainter);
+
 	//! Compute the log of the luminance for a point source with the given mag for the current FOV
 	//! @param mag V magnitude of the point source
 	//! @return the luminance in cd/m^2
@@ -434,6 +504,7 @@ private:
 	StelToneReproducer* eye;
 
 	std::unique_ptr<QOpenGLVertexArrayObject> vao;
+	std::unique_ptr<QOpenGLVertexArrayObject> psfVao;
 	std::unique_ptr<QOpenGLBuffer> vbo;
 
 	Extinction extinction;
@@ -445,6 +516,14 @@ private:
 	double twinkleAmount;      //! magnitude range of atmospheric flicker at horizon
 	bool flagDrawBigStarHalo;
 	bool flagStarSpiky;
+	bool flagPsfStars;
+	bool flagPsfStarProjectionCorrection;
+	float psfStarPointRadius;
+	float psfStarFlareDecay;
+	float psfStarFlareStrength;
+	float psfStarBrightSourceMagLimit;
+	float psfMoonGlareReduction;
+	bool flagPsfMoonHaloTexture;
 
 	//! Informing the drawer whether atmosphere is displayed.
 	//! This is used to avoid twinkling/simulate extinction/refraction.
@@ -502,15 +581,6 @@ private:
 	//! The scaling applied to input luminance before they are converted by the StelToneReproducer
 	float inScale;
 
-	// Variables used for GL optimization when displaying point sources
-	//! Vertex format for a point source.
-	//! Texture pos is stored in another separately.
-	struct StarVertex {
-		Vec2f pos;
-		unsigned char color[4];
-	};
-	static_assert(sizeof(StarVertex) == 12, "Size of StarVertex must be 12 bytes");
-	
 	//! Buffer for storing the vertex array data
 	StarVertex* vertexArray;
 
@@ -518,6 +588,8 @@ private:
 	unsigned char* textureCoordArray;
 	
 	class QOpenGLShaderProgram* starShaderProgram;
+	class QOpenGLShaderProgram* psfPointShaderProgram;
+	class QOpenGLShaderProgram* psfGlowShaderProgram;
 	struct StarShaderVars {
 		int projectionMatrix;
 		int texCoord;
@@ -526,9 +598,32 @@ private:
 		int texture;
 	};
 	StarShaderVars starShaderVars;
+	struct PsfStarShaderVars {
+		int projectionMatrix;
+		int center;
+		int corner;
+		int direction;
+		int angularMode;
+		int color;
+		int peakRadiance;
+		int psfRadius;
+		int sourceRadius;
+		int pointRadius;
+		int pointScale;
+		int pixelPerRad;
+		int psfA;
+		int psfB;
+		int flareStrength;
+		int moonGlareReduction;
+	};
+	PsfStarShaderVars psfPointShaderVars;
+	PsfStarShaderVars psfGlowShaderVars;
+	StelProjectorP psfShaderProjector;
 	
 	//! Current number of sources stored in the buffers (still to display)
 	unsigned int nbPointSources;
+	QVector<PsfStarVertex> psfPointVertices;
+	QVector<PsfStarVertex> psfGlowVertices;
 	//! Maximum number of sources which can be stored in the buffers
 	constexpr static unsigned int maxPointSources=1000;
 

@@ -1329,7 +1329,10 @@ int StarMgr::getMaxSearchLevel() const
 	{
 		const float mag_min = 0.001f*z->mag_min;
 		RCMag rcmag;
-		if (StelApp::getInstance().getCore()->getSkyDrawer()->computeRCMag(mag_min, &rcmag)==false)
+		StelSkyDrawer* drawer = StelApp::getInstance().getCore()->getSkyDrawer();
+		const bool visible = drawer->getFlagPsfStars() ? drawer->computePsfRCMag(mag_min, &rcmag)
+		                                               : drawer->computeRCMag(mag_min, &rcmag);
+		if (visible==false)
 			break;
 		rval = z->level;
 	}
@@ -1395,7 +1398,9 @@ void StarMgr::draw(StelCore* core)
 		for (int i=0;i<RCMAG_TABLE_SIZE;++i)
 		{
 			const float mag = mag_min+0.05*i;  // 0.05 mag MagStepIncrement
-			if (skyDrawer->computeRCMag(mag, &rcmag_table[i])==false)
+			const bool visible = skyDrawer->getFlagPsfStars() ? skyDrawer->computePsfRCMag(mag, &rcmag_table[i])
+			                                                  : skyDrawer->computeRCMag(mag, &rcmag_table[i]);
+			if (visible==false)
 			{
 				if (i==0)
 					goto exit_loop;
@@ -2681,5 +2686,4 @@ QStringList StarMgr::getCultureLabels(StarId hip, StelObject::CulturalDisplaySty
 	labels.removeAll(QString());
 	return labels;
 }
-
 
