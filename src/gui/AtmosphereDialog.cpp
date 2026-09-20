@@ -122,6 +122,19 @@ void AtmosphereDialog::createDialogContent()
 		}
 	}
 
+#ifndef	ENABLE_SHOWMYSKY
+	{
+		for (int row = 0; row < ui->atmosphereModel->count(); ++row)
+		{
+			if (ui->atmosphereModel->itemText(row).toLower() == "showmysky")
+			{
+				ui->atmosphereModel->removeItem(row);
+				break;
+			}
+		}
+	}
+#endif
+
 	setCurrentValues();
 }
 
