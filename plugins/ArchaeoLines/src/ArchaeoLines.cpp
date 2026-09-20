@@ -989,17 +989,31 @@ void ArchaeoLines::updateObserverLocation(const StelLocation &loc)
 void ArchaeoLines::updateGeographicLocation1Label()
 {
 	const StelLocation loc=StelApp::getInstance().getCore()->getCurrentLocation();
-	double geoDist1=loc.distanceDegrees(geographicLocation1Longitude, geographicLocation1Latitude);
-	double geoDist1km=loc.distanceKm(geographicLocation1Longitude, geographicLocation1Latitude);
-	geographicLocation1Line->setLabel(QString("%1 (%2°/%3 %4)").arg(geographicLocation1Name, QString::number(geoDist1, 'g', 5), QString::number(geoDist1km,'g', 5),  qc_("km", "distance")));
+	if (loc.getLongitude()==geographicLocation1Longitude && loc.getLatitude()==geographicLocation1Latitude)
+	{
+		geographicLocation1Line->setLabel(geographicLocation1Name);
+	}
+	else
+	{
+		double geoDist1=loc.distanceDegrees(geographicLocation1Longitude, geographicLocation1Latitude);
+		double geoDist1km=loc.distanceKm(geographicLocation1Longitude, geographicLocation1Latitude);
+		geographicLocation1Line->setLabel(QString("%1 (%2°/%3 %4)").arg(geographicLocation1Name, QString::number(geoDist1, 'g', 5), QString::number(geoDist1km,'g', 5),  qc_("km", "distance")));
+	}
 }
 
 void ArchaeoLines::updateGeographicLocation2Label()
 {
 	const StelLocation loc=StelApp::getInstance().getCore()->getCurrentLocation();
-	double geoDist2=loc.distanceDegrees(geographicLocation2Longitude, geographicLocation2Latitude);
-	double geoDist2km=loc.distanceKm(geographicLocation2Longitude, geographicLocation2Latitude);
-	geographicLocation2Line->setLabel(QString("%1 (%2°/%3 %4)").arg(geographicLocation2Name, QString::number(geoDist2, 'g', 5), QString::number(geoDist2km, 'g', 5),  qc_("km", "distance")));
+	if (loc.getLongitude()==geographicLocation2Longitude && loc.getLatitude()==geographicLocation2Latitude)
+	{
+		geographicLocation2Line->setLabel(geographicLocation2Name);
+	}
+	else
+	{
+		double geoDist2=loc.distanceDegrees(geographicLocation2Longitude, geographicLocation2Latitude);
+		double geoDist2km=loc.distanceKm(geographicLocation2Longitude, geographicLocation2Latitude);
+		geographicLocation2Line->setLabel(QString("%1 (%2°/%3 %4)").arg(geographicLocation2Name, QString::number(geoDist2, 'g', 5), QString::number(geoDist2km, 'g', 5),  qc_("km", "distance")));
+	}
 }
 
 void ArchaeoLines::setCustomAzimuth1(double az)
