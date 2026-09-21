@@ -142,7 +142,7 @@ msgstr "La entrada no encontró ningún elemento"
 #: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:597
 #: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1820
 msgid "No action"
-msgstr ""
+msgstr "Sin acción"
 
 #: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:710
 #: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2065
@@ -153,19 +153,20 @@ msgstr ""
 #: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2407
 #: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2408
 msgid "No controller connected"
-msgstr ""
+msgstr "No hay ningún controlador conectado"
 
 #: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:717
 msgid "Vibration test sent to "
-msgstr ""
+msgstr "Prueba de vibración enviada a"
 
 #: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:720
 msgid "Vibration not supported on this device/browser"
-msgstr ""
+msgstr "La vibración no es compatible con este dispositivo o navegador."
 
 #: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1068
 msgid "Warning: This profile was created for a different controller type."
 msgstr ""
+"Advertencia: Este perfil se creó para un tipo de controlador diferente."
 
 #: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1251 index.html:1355
 #: tablet7in.html:1424
@@ -174,47 +175,47 @@ msgstr "centrado"
 
 #: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1337
 msgid "East →"
-msgstr ""
+msgstr "Este →"
 
 #: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1338
 msgid "North-East ↗"
-msgstr ""
+msgstr "Noreste ↗"
 
 #: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1339
 msgid "North ↑"
-msgstr ""
+msgstr "Norte ↑"
 
 #: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1340
 msgid "North-West ↖"
-msgstr ""
+msgstr "Noroeste ↖"
 
 #: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1341
 msgid "West ←"
-msgstr ""
+msgstr "Oeste ←"
 
 #: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1342
 msgid "South-West ↙"
-msgstr ""
+msgstr "Suroeste ↙"
 
 #: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1343
 msgid "South ↓"
-msgstr ""
+msgstr "Sur ↓"
 
 #: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1344
 msgid "South-East ↘"
-msgstr ""
+msgstr "Sureste ↘"
 
 #: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1347
 msgid "fast"
-msgstr ""
+msgstr "rápido"
 
 #: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1347
 msgid "medium"
-msgstr ""
+msgstr "medio"
 
 #: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1347
 msgid "slow"
-msgstr ""
+msgstr "lento"
 
 #: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1579 index.html:1316
 #: tablet7in.html:1385
@@ -223,23 +224,25 @@ msgstr "No hay dispositivos conectados"
 
 #: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1778
 msgid "Connect a controller to customize buttons"
-msgstr ""
+msgstr "Conecte un controlador para personalizar los botones."
 
 #: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1848
 msgid "Button %1 mapped to %2"
-msgstr ""
+msgstr "Botón %1 asignado a %2"
 
 #: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1879
 msgid "Please connect a controller first"
-msgstr ""
+msgstr "Por favor, conecte un mando primero."
 
 #: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1893
 msgid "Calibrating..."
-msgstr ""
+msgstr "Calibrando..."
 
 #: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1894
 msgid "Move both joysticks in circles, then press any button to finish"
 msgstr ""
+"Mueva ambos joysticks en círculos, luego pulse cualquier botón para "
+"finalizar"
 
 #: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1943
 #: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1949
@@ -250,19 +253,20 @@ msgstr "Calibrar"
 
 #: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1976
 msgid "Calibration complete! "
-msgstr ""
+msgstr "¡Calibración completada!"
 
 #: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1976
 msgid " samples collected."
-msgstr ""
+msgstr " muestras recolectadas."
 
 #: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1986
 msgid "Calibrating... Collected %1 samples"
-msgstr ""
+msgstr "Calibrando... Se han recopilado %1 muestras."
 
 #: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1988
 msgid "Move joysticks in circles, press any button to finish"
 msgstr ""
+"Mueva  los joysticks en círculos, pulse cualquier botón para finalizar"
 
 #: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:1994
 msgid "Left X offset:"
@@ -282,72 +286,75 @@ msgstr ""
 
 #: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2001
 msgid "Not calibrated"
-msgstr ""
+msgstr "Sin calibrar"
 
 #: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2014
 msgid "Calibration reset for "
-msgstr ""
+msgstr "Calibración restablecida para "
 
 #: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2063
 msgid "Button mappings reset to defaults for "
 msgstr ""
+"Asignaciones de botones restablecidas a los valores predeterminados para"
 
 #: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2086
 msgid "Profile exported: "
-msgstr ""
+msgstr "Perfil exportado: "
 
 #: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2103
 msgid "Profile imported successfully for "
-msgstr ""
+msgstr "Perfil importado correctamente para "
 
 #: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2105
 msgid "Failed to import profile"
-msgstr ""
+msgstr "Error al importar el perfil"
 
 #: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2109
 msgid "Invalid profile file"
-msgstr ""
+msgstr "Archivo de perfil no válido"
 
 #: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2183
 #: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2277
 msgid "Vibration feedback enabled"
-msgstr ""
+msgstr "Retroalimentación por vibración activada"
 
 #: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2297
 msgid "Button mappings saved for "
-msgstr ""
+msgstr "Asignaciones de botones guardadas para "
 
 #: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2321
 msgid "Scanning..."
-msgstr ""
+msgstr "Escaneando..."
 
 #: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2351
 #: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2356
 msgid "Found "
-msgstr ""
+msgstr "Encontrado"
 
 #: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2351
 #: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2356
 msgid " controller(s)"
-msgstr ""
+msgstr " controlador(es)"
 
 #: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2358
 msgid "No controllers found. Please connect a controller and try again."
 msgstr ""
+"No se encontraron controladores. Por favor, conecte un controlador e "
+"inténtelo de nuevo."
 
 #: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2414
 #: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2415
 #: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2416
 msgid "Controller data not available"
-msgstr ""
+msgstr "Datos del controlador no disponibles"
 
 #: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2434
 msgid "No button data available"
-msgstr ""
+msgstr "No hay datos de botón disponibles"
 
 #: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2470
 msgid "No axis data available"
-msgstr ""
+msgstr "No hay datos de eje disponibles"
 
 #: plugins/RemoteControl/webroot/js/ui/gpcontroller.js:2476
 msgid "Left X"
