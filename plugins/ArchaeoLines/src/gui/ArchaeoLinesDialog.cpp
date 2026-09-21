@@ -35,7 +35,7 @@
 
 ArchaeoLinesDialog::ArchaeoLinesDialog()
 	: StelDialog("ArchaeoLines")
-	, al(Q_NULLPTR)
+	, al(nullptr)
 {
 	ui = new Ui_archaeoLinesDialog();
 	locationsDialog = new ArchaeoLinesDialogLocations();
@@ -43,8 +43,8 @@ ArchaeoLinesDialog::ArchaeoLinesDialog()
 
 ArchaeoLinesDialog::~ArchaeoLinesDialog()
 {
-	delete locationsDialog; locationsDialog=Q_NULLPTR;
-	delete ui;              ui=Q_NULLPTR;
+	delete locationsDialog; locationsDialog=nullptr;
+	delete ui;              ui=nullptr;
 }
 
 void ArchaeoLinesDialog::retranslate()
@@ -65,11 +65,11 @@ void ArchaeoLinesDialog::createDialogContent()
 	kineticScrollingList << ui->aboutTextBrowser;
 	StelGui* gui= static_cast<StelGui*>(StelApp::getInstance().getGui());
 	enableKineticScrolling(gui->getFlagUseKineticScrolling());
-	connect(gui, SIGNAL(flagUseKineticScrollingChanged(bool)), this, SLOT(enableKineticScrolling(bool)));
+	connect(gui, &StelGui::flagUseKineticScrollingChanged, this, &ArchaeoLinesDialog::enableKineticScrolling);
 
-	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
+	connect(&StelApp::getInstance(), &StelApp::languageChanged, this, &ArchaeoLinesDialog::retranslate);
 	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
-	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
+	connect(ui->titleBar, &TitleBar::movedTo, this, &ArchaeoLinesDialog::handleMovedTo);
 
 	connectIntProperty(ui->lineWidthSpinBox, "ArchaeoLines.lineWidth");
 
@@ -132,7 +132,7 @@ void ArchaeoLinesDialog::createDialogContent()
 
 	// TBD: Store a decimal/DMS selection property separately?
 	setDisplayFormatForSpins(StelApp::getInstance().getFlagUseDecDegreesCoords());
-	connect(&StelApp::getInstance(), SIGNAL(flagUseDecDegreesCoordsChanged(bool)), this, SLOT(setDisplayFormatForSpins(bool)));
+	connect(&StelApp::getInstance(), &StelApp::flagUseDecDegreesCoordsChanged, this, &ArchaeoLinesDialog::setDisplayFormatForSpins);
 
 	connect(ui->geographicLocation1PickPushButton, &QPushButton::clicked, this, [=](){locationsDialog->setVisible(true); locationsDialog->setModalContext(1);});
 	connect(ui->geographicLocation2PickPushButton, &QPushButton::clicked, this, [=](){locationsDialog->setVisible(true); locationsDialog->setModalContext(2);});
@@ -143,8 +143,8 @@ void ArchaeoLinesDialog::createDialogContent()
 	connectDoubleProperty(ui->geographicLocation1LatitudeDoubleSpinBox,  "ArchaeoLines.geographicLocation1Latitude");
 	connectDoubleProperty(ui->geographicLocation2LongitudeDoubleSpinBox, "ArchaeoLines.geographicLocation2Longitude");
 	connectDoubleProperty(ui->geographicLocation2LatitudeDoubleSpinBox,  "ArchaeoLines.geographicLocation2Latitude");
-	connectStringProperty(ui->geographicLocation1LineEdit,               "ArchaeoLines.geographicLocation1Label");
-	connectStringProperty(ui->geographicLocation2LineEdit,               "ArchaeoLines.geographicLocation2Label");
+	connectStringProperty(ui->geographicLocation1LineEdit,               "ArchaeoLines.geographicLocation1Name");
+	connectStringProperty(ui->geographicLocation2LineEdit,               "ArchaeoLines.geographicLocation2Name");
 
 	connectBoolProperty(ui->customAzimuth1CheckBox,        "ArchaeoLines.flagShowCustomAzimuth1");
 	connectBoolProperty(ui->customAzimuth2CheckBox,        "ArchaeoLines.flagShowCustomAzimuth2");
@@ -190,15 +190,15 @@ void ArchaeoLinesDialog::createDialogContent()
 	ui->customDeclination1ColorToolButton     ->setup("ArchaeoLines.customDeclination1Color",      "ArchaeoLines/color_custom_declination_1");
 	ui->customDeclination2ColorToolButton     ->setup("ArchaeoLines.customDeclination2Color",      "ArchaeoLines/color_custom_declination_2");
 
-	connect(ui->customAzimuth1PushButton,     SIGNAL(clicked()), this, SLOT(assignCustomAzimuth1FromSelection()));
-	connect(ui->customAzimuth2PushButton,     SIGNAL(clicked()), this, SLOT(assignCustomAzimuth2FromSelection()));
-	connect(ui->customAltitude1PushButton,    SIGNAL(clicked()), this, SLOT(assignCustomAltitude1FromSelection()));
-	connect(ui->customAltitude2PushButton,    SIGNAL(clicked()), this, SLOT(assignCustomAltitude2FromSelection()));
-	connect(ui->customDeclination1PushButton, SIGNAL(clicked()), this, SLOT(assignCustomDeclination1FromSelection()));
-	connect(ui->customDeclination2PushButton, SIGNAL(clicked()), this, SLOT(assignCustomDeclination2FromSelection()));
+	connect(ui->customAzimuth1PushButton,     &QPushButton::clicked, this, &ArchaeoLinesDialog::assignCustomAzimuth1FromSelection);
+	connect(ui->customAzimuth2PushButton,     &QPushButton::clicked, this, &ArchaeoLinesDialog::assignCustomAzimuth2FromSelection);
+	connect(ui->customAltitude1PushButton,    &QPushButton::clicked, this, &ArchaeoLinesDialog::assignCustomAltitude1FromSelection);
+	connect(ui->customAltitude2PushButton,    &QPushButton::clicked, this, &ArchaeoLinesDialog::assignCustomAltitude2FromSelection);
+	connect(ui->customDeclination1PushButton, &QPushButton::clicked, this, &ArchaeoLinesDialog::assignCustomDeclination1FromSelection);
+	connect(ui->customDeclination2PushButton, &QPushButton::clicked, this, &ArchaeoLinesDialog::assignCustomDeclination2FromSelection);
 
-	connect(ui->restoreDefaultsButton,   SIGNAL(clicked()), this, SLOT(resetArchaeoLinesSettings()));
-	connect(ui->restoreDefaultsButtonCL, SIGNAL(clicked()), this, SLOT(resetArchaeoLinesSettings()));
+	connect(ui->restoreDefaultsButton,   &QPushButton::clicked, this, &ArchaeoLinesDialog::resetArchaeoLinesSettings);
+	connect(ui->restoreDefaultsButtonCL, &QPushButton::clicked, this, &ArchaeoLinesDialog::resetArchaeoLinesSettings);
 
 	setAboutHtml();
 }
@@ -254,7 +254,7 @@ void ArchaeoLinesDialog::setAboutHtml(void)
 	html += "</body></html>";
 
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-	if(gui!=Q_NULLPTR)
+	if(gui!=nullptr)
 	{
 		QString htmlStyleSheet(gui->getStelStyle().htmlStyleSheet);
 		ui->aboutTextBrowser->document()->setDefaultStyleSheet(htmlStyleSheet);
