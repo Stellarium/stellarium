@@ -24,7 +24,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2026-09-11 17:56+0700\n"
+"POT-Creation-Date: 2026-09-14 20:34+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Georg Zotti <Georg.Zotti@univie.ac.at>, 2026\n"
 "Language-Team: German (https://app.transifex.com/stellarium/teams/80998/de/)\n"
@@ -793,7 +793,7 @@ msgstr "ASP"
 
 #. TRANSLATORS: Center of the umbra
 #: src/core/modules/GridLinesMgr.cpp:1615
-#: plugins/Satellites/src/Satellites.cpp:3440
+#: plugins/Satellites/src/Satellites.cpp:3467
 msgid "C.U."
 msgstr "SM"
 
@@ -1415,7 +1415,7 @@ msgstr "Durchmesser"
 #: src/core/modules/Planet.cpp:1565 src/core/modules/Comet.cpp:229
 #: src/core/modules/Comet.cpp:239 src/gui/StelGuiItems.cpp:1008
 #: src/gui/AstroCalcDialog.cpp:3532 src/gui/AstroCalcDialog.cpp:4101
-#: src/gui/AstroCalcDialog.cpp:8938 plugins/Satellites/src/Satellites.cpp:3440
+#: src/gui/AstroCalcDialog.cpp:8938 plugins/Satellites/src/Satellites.cpp:3467
 #: plugins/Satellites/src/Satellite.cpp:359
 #: plugins/Satellites/src/Satellite.cpp:403
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1198
@@ -3144,7 +3144,7 @@ msgstr "Englisch"
 #. TRANSLATORS: Satellite group: Satellites belonging to the Planet satellites
 #. TRANSLATORS: CelesTrak source [Planet]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=planet&FORMAT=csv
-#: src/core/modules/Planet.cpp:140 plugins/Satellites/src/Satellites.cpp:3848
+#: src/core/modules/Planet.cpp:140 plugins/Satellites/src/Satellites.cpp:3871
 msgid "planet"
 msgstr "Planet"
 
@@ -6505,7 +6505,7 @@ msgstr ""
 #: plugins/Novae/src/gui/NovaeDialog.cpp:115
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:119
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:132
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:137
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:135
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:209
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:289
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:149
@@ -7376,7 +7376,7 @@ msgstr "Danksagungen"
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:778
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:276
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:299
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:138
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:136
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:210
 #: plugins/Planes/src/gui/PlanesDialog.cpp:248
 #: plugins/TimeNavigator/src/gui/TimeNavigatorDialog.cpp:271
@@ -7399,7 +7399,7 @@ msgstr "Ansprechpartner"
 #: plugins/Novae/src/gui/NovaeDialog.cpp:114
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:118
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:131
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:136
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:134
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:208
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:288
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:148
@@ -8088,7 +8088,7 @@ msgstr "Fortlaufende Integration: %1"
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:780
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:281
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:258
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:140
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:138
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:212
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:291
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:197
@@ -18792,7 +18792,7 @@ msgstr "Erster Himmelskörper"
 #: src/ui_astroCalcDialog.h:2495
 msgid ""
 "Finding the selected solar system object in the list of celestial bodies."
-msgstr ""
+msgstr "Suche Sonnensystem-Objekt in der Liste der Himmelskörper."
 
 #: src/ui_astroCalcDialog.h:2499
 msgid "Second celestial body"
@@ -21855,38 +21855,38 @@ msgid "Loading TLE"
 msgstr "Lade TLE"
 
 #. TRANSLATORS: Satellite group: Communication satellites
-#: plugins/Satellites/src/Satellites.cpp:3778
+#: plugins/Satellites/src/Satellites.cpp:3801
 msgid "communications"
 msgstr "Kommunikation"
 
 #. TRANSLATORS: Satellite group: Navigation satellites
-#: plugins/Satellites/src/Satellites.cpp:3780
+#: plugins/Satellites/src/Satellites.cpp:3803
 msgid "navigation"
 msgstr "Navigation"
 
 #. TRANSLATORS: Satellite group: Scientific satellites
-#: plugins/Satellites/src/Satellites.cpp:3782
+#: plugins/Satellites/src/Satellites.cpp:3805
 msgid "scientific"
 msgstr "Forschung"
 
 #. TRANSLATORS: Satellite group: Earth Resources satellites
-#: plugins/Satellites/src/Satellites.cpp:3784
+#: plugins/Satellites/src/Satellites.cpp:3807
 msgid "earth resources"
 msgstr "Erdbeobachtung"
 
 #. TRANSLATORS: Satellite group: Satellites in geostationary orbit
-#: plugins/Satellites/src/Satellites.cpp:3786
+#: plugins/Satellites/src/Satellites.cpp:3809
 msgid "geostationary"
 msgstr "geostationär"
 
 #. TRANSLATORS: Satellite group: Satellites that are no longer functioning
-#: plugins/Satellites/src/Satellites.cpp:3788
+#: plugins/Satellites/src/Satellites.cpp:3811
 msgid "non-operational"
 msgstr "funktionsuntüchtig"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the space
 #. observatories
-#: plugins/Satellites/src/Satellites.cpp:3790
+#: plugins/Satellites/src/Satellites.cpp:3813
 msgid "observatory"
 msgstr "Beobachtungssatellit"
 
@@ -21894,7 +21894,7 @@ msgstr "Beobachtungssatellit"
 #. System (IRNSS) is an autonomous regional satellite navigation system being
 #. developed by the Indian Space Research Organisation (ISRO) which would be
 #. under complete control of the Indian government.
-#: plugins/Satellites/src/Satellites.cpp:3792
+#: plugins/Satellites/src/Satellites.cpp:3815
 msgid "irnss"
 msgstr "irnss"
 
@@ -21902,100 +21902,100 @@ msgstr "irnss"
 #. a proposed three-satellite regional time transfer system and Satellite
 #. Based Augmentation System for the Global Positioning System, that would be
 #. receivable within Japan.
-#: plugins/Satellites/src/Satellites.cpp:3794
+#: plugins/Satellites/src/Satellites.cpp:3817
 msgid "qzss"
 msgstr "qzss"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the COSMOS satellites
-#: plugins/Satellites/src/Satellites.cpp:3796
+#: plugins/Satellites/src/Satellites.cpp:3819
 msgid "cosmos"
 msgstr "Kosmos"
 
 #. TRANSLATORS: Satellite group: Debris of satellites
-#: plugins/Satellites/src/Satellites.cpp:3798
+#: plugins/Satellites/src/Satellites.cpp:3821
 msgid "debris"
 msgstr "Trümmer"
 
 #. TRANSLATORS: Satellite group: Crewed satellites
-#: plugins/Satellites/src/Satellites.cpp:3800
+#: plugins/Satellites/src/Satellites.cpp:3823
 msgid "crewed"
 msgstr "bemannt"
 
 #. TRANSLATORS: Satellite group: Satellites of ISS resupply missions
-#: plugins/Satellites/src/Satellites.cpp:3802
+#: plugins/Satellites/src/Satellites.cpp:3825
 msgid "resupply"
 msgstr "Nachschub"
 
 #. TRANSLATORS: Satellite group: are known to broadcast TV signals
-#: plugins/Satellites/src/Satellites.cpp:3804
+#: plugins/Satellites/src/Satellites.cpp:3827
 msgid "tv"
 msgstr "TV"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GONETS satellites
-#: plugins/Satellites/src/Satellites.cpp:3806
+#: plugins/Satellites/src/Satellites.cpp:3829
 msgid "gonets"
 msgstr "gonets"
 
 #. TRANSLATORS: Satellite group: Last 30 Days' Launches
 #. TRANSLATORS: CelesTrak source [Last 30 Days' Launches]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=last-30-days&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3812
+#: plugins/Satellites/src/Satellites.cpp:3835
 msgid "last-30-days"
 msgstr "Letzte 30 Tage"
 
 #. TRANSLATORS: Satellite group: Space stations
 #. TRANSLATORS: CelesTrak source [Space Stations]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=stations&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3815
+#: plugins/Satellites/src/Satellites.cpp:3838
 msgid "stations"
 msgstr "Raumstationen"
 
 #. TRANSLATORS: Satellite group: Bright/naked-eye-visible satellites
 #. TRANSLATORS: CelesTrak source [100 (or so) Brightest]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=visual&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3818
+#: plugins/Satellites/src/Satellites.cpp:3841
 msgid "visual"
 msgstr "freisichtig"
 
 #. TRANSLATORS: Satellite group: Active Satellites
 #. TRANSLATORS: CelesTrak source [Active Satellites]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=active&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3821
+#: plugins/Satellites/src/Satellites.cpp:3844
 msgid "active"
 msgstr "active"
 
 #. TRANSLATORS: Satellite group: Analyst Satellites
 #. TRANSLATORS: CelesTrak source [Analyst Satellites]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=analyst&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3824
+#: plugins/Satellites/src/Satellites.cpp:3847
 msgid "analyst"
 msgstr "analyst"
 
 #. TRANSLATORS: Satellite group: Weather (meteorological) satellites
 #. TRANSLATORS: CelesTrak source [Weather]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=weather&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3830
+#: plugins/Satellites/src/Satellites.cpp:3853
 msgid "weather"
 msgstr "Wetter"
 
 #. TRANSLATORS: Satellite group: Earth Resources satellites
 #. TRANSLATORS: CelesTrak source [Earth Resources]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=resource&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3833
+#: plugins/Satellites/src/Satellites.cpp:3856
 msgid "resource"
 msgstr "resource"
 
 #. TRANSLATORS: Satellite group: Search & Rescue (SARSAT) satellites
 #. TRANSLATORS: CelesTrak source [Search & Rescue (SARSAT)]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=sarsat&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3836
+#: plugins/Satellites/src/Satellites.cpp:3859
 msgid "sarsat"
 msgstr "sarsat"
 
 #. TRANSLATORS: Satellite group: Disaster Monitoring satellites
 #. TRANSLATORS: CelesTrak source [Disaster Monitoring]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=dmc&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3839
+#: plugins/Satellites/src/Satellites.cpp:3862
 msgid "dmc"
 msgstr "dmc"
 
@@ -22005,14 +22005,14 @@ msgstr "dmc"
 #. TRANSLATORS: CelesTrak source [Tracking and Data Relay Satellite System
 #. (TDRSS)]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=tdrss&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3842
+#: plugins/Satellites/src/Satellites.cpp:3865
 msgid "tdrss"
 msgstr "tdrss"
 
 #. TRANSLATORS: Satellite group: ARGOS Data Collection System satellites
 #. TRANSLATORS: CelesTrak source [ARGOS Data Collection System]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=argos&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3845
+#: plugins/Satellites/src/Satellites.cpp:3868
 msgid "argos"
 msgstr "argos"
 
@@ -22020,36 +22020,22 @@ msgstr "argos"
 #. constellation (LEMUR satellites)
 #. TRANSLATORS: CelesTrak source [Spire]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=spire&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3851
+#: plugins/Satellites/src/Satellites.cpp:3874
 msgid "spire"
 msgstr "Spire"
 
 #. TRANSLATORS: Satellite group: Active Geosynchronous Satellites
 #. TRANSLATORS: CelesTrak source [Active Geosynchronous]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=geo&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3857
+#: plugins/Satellites/src/Satellites.cpp:3880
 msgid "geo"
 msgstr "geo"
-
-#. TRANSLATORS: Satellite group: GEO Protected Zone
-#. TRANSLATORS: CelesTrak source [GEO Protected Zone]:
-#. https://celestrak.org/NORAD/elements/gp.php?SPECIAL=gpz&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3860
-msgid "gpz"
-msgstr "gpz"
-
-#. TRANSLATORS: Satellite group: GEO Protected Zone Plus
-#. TRANSLATORS: CelesTrak source [GEO Protected Zone Plus]:
-#. https://celestrak.org/NORAD/elements/gp.php?SPECIAL=gpz-plus&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3863
-msgid "gpz-plus"
-msgstr "gpz-plus"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the INTELSAT
 #. satellites
 #. TRANSLATORS: CelesTrak source [Intelsat]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=intelsat&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3866
+#: plugins/Satellites/src/Satellites.cpp:3883
 msgid "intelsat"
 msgstr "Intelsat"
 
@@ -22057,14 +22043,14 @@ msgstr "Intelsat"
 #. satellites
 #. TRANSLATORS: CelesTrak source [Intelsat]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=eutelsat&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3869
+#: plugins/Satellites/src/Satellites.cpp:3886
 msgid "eutelsat"
 msgstr "eutelsat"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the SES satellites
 #. TRANSLATORS: CelesTrak source [SES]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=ses&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3872
+#: plugins/Satellites/src/Satellites.cpp:3889
 msgid "ses"
 msgstr "ses"
 
@@ -22072,7 +22058,7 @@ msgstr "ses"
 #. constellation (Iridium is a proper name)
 #. TRANSLATORS: CelesTrak source [Iridium NEXT]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=iridium-NEXT&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3875
+#: plugins/Satellites/src/Satellites.cpp:3892
 msgid "iridium-NEXT"
 msgstr "iridium-NEXT"
 
@@ -22080,7 +22066,7 @@ msgstr "iridium-NEXT"
 #. constellation (Starlink is a proper name)
 #. TRANSLATORS: CelesTrak source [Starlink]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=starlink&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3878
+#: plugins/Satellites/src/Satellites.cpp:3895
 msgid "starlink"
 msgstr "StarLink"
 
@@ -22088,7 +22074,7 @@ msgstr "StarLink"
 #. constellation (OneWeb is a proper name)
 #. TRANSLATORS: CelesTrak source [OneWeb]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=oneweb&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3881
+#: plugins/Satellites/src/Satellites.cpp:3898
 msgid "oneweb"
 msgstr "OneWeb"
 
@@ -22096,7 +22082,7 @@ msgstr "OneWeb"
 #. satellites
 #. TRANSLATORS: CelesTrak source [Orbcomm]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=orbcomm&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3884
+#: plugins/Satellites/src/Satellites.cpp:3901
 msgid "orbcomm"
 msgstr "OrbComm"
 
@@ -22104,28 +22090,28 @@ msgstr "OrbComm"
 #. satellites
 #. TRANSLATORS: CelesTrak source [Globalstar]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=globalstar&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3887
+#: plugins/Satellites/src/Satellites.cpp:3904
 msgid "globalstar"
 msgstr "GlobalStar"
 
 #. TRANSLATORS: Satellite group: Amateur radio (ham) satellites
 #. TRANSLATORS: CelesTrak source [Amateur Radio]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=amateur&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3890
+#: plugins/Satellites/src/Satellites.cpp:3907
 msgid "amateur"
 msgstr "Amateurfunker"
 
 #. TRANSLATORS: Satellite group: Experimental communication satellites
 #. TRANSLATORS: CelesTrak source [Experimental]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=x-comm&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3893
+#: plugins/Satellites/src/Satellites.cpp:3910
 msgid "x-comm"
 msgstr "x-comm"
 
 #. TRANSLATORS: Satellite group: Other communication satellites
 #. TRANSLATORS: CelesTrak source [Other Comm]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=other-comm&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3896
+#: plugins/Satellites/src/Satellites.cpp:3913
 msgid "other-comm"
 msgstr "other-comm"
 
@@ -22133,7 +22119,7 @@ msgstr "other-comm"
 #. satellites
 #. TRANSLATORS: CelesTrak source [SatNOGS]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=satnogs&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3899
+#: plugins/Satellites/src/Satellites.cpp:3916
 msgid "satnogs"
 msgstr "satnogs"
 
@@ -22141,7 +22127,7 @@ msgstr "satnogs"
 #. constellation (Qianfan is a proper name)
 #. TRANSLATORS: CelesTrak source [Qianfan]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=qianfan&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3902
+#: plugins/Satellites/src/Satellites.cpp:3919
 msgid "qianfan"
 msgstr "qianfan"
 
@@ -22149,35 +22135,35 @@ msgstr "qianfan"
 #. constellation (Hulianwang is a proper name)
 #. TRANSLATORS: CelesTrak source [Hulianwang Digui]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=hulianwang&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3905
+#: plugins/Satellites/src/Satellites.cpp:3922
 msgid "hulianwang"
 msgstr "hulianwang"
 
 #. TRANSLATORS: CelesTrak source [Kuiper]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=kuiper&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3907
+#: plugins/Satellites/src/Satellites.cpp:3924
 msgid "kuiper"
 msgstr "kuiper"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Yamal satellites
-#: plugins/Satellites/src/Satellites.cpp:3909
+#: plugins/Satellites/src/Satellites.cpp:3926
 msgid "yamal"
 msgstr "yamal"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Gorizont
 #. satellites
-#: plugins/Satellites/src/Satellites.cpp:3911
+#: plugins/Satellites/src/Satellites.cpp:3928
 msgid "gorizont"
 msgstr "Gorizont"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Raduga satellites
-#: plugins/Satellites/src/Satellites.cpp:3913
+#: plugins/Satellites/src/Satellites.cpp:3930
 msgid "raduga"
 msgstr "Raduga"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Molniya
 #. satellites
-#: plugins/Satellites/src/Satellites.cpp:3915
+#: plugins/Satellites/src/Satellites.cpp:3932
 msgid "molniya"
 msgstr "Molniya"
 
@@ -22186,13 +22172,13 @@ msgstr "Molniya"
 #. https://celestrak.org/NORAD/elements/gnss.txt
 #. TRANSLATORS: CelesTrak source [GNSS]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=gnss&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3922
+#: plugins/Satellites/src/Satellites.cpp:3939
 msgid "gnss"
 msgstr "gnss"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GPS constellation
 #. (the Global Positioning System)
-#: plugins/Satellites/src/Satellites.cpp:3924
+#: plugins/Satellites/src/Satellites.cpp:3941
 msgid "gps"
 msgstr "GPS"
 
@@ -22200,13 +22186,13 @@ msgstr "GPS"
 #. (the Global Positioning System)
 #. TRANSLATORS: CelesTrak source [GPS Operational]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=gps-ops&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3927
+#: plugins/Satellites/src/Satellites.cpp:3944
 msgid "gps-ops"
 msgstr "gps-ops"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GLONASS
 #. constellation (GLObal NAvigation Satellite System)
-#: plugins/Satellites/src/Satellites.cpp:3929
+#: plugins/Satellites/src/Satellites.cpp:3946
 msgid "glonass"
 msgstr "GLONASS"
 
@@ -22214,7 +22200,7 @@ msgstr "GLONASS"
 #. constellation (GLObal NAvigation Satellite System)
 #. TRANSLATORS: CelesTrak supplemental source [GLONASS Operational]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=glo-ops&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3932
+#: plugins/Satellites/src/Satellites.cpp:3949
 msgid "glo-ops"
 msgstr "glo-ops"
 
@@ -22222,7 +22208,7 @@ msgstr "glo-ops"
 #. constellation (global navigation satellite system by the European Union)
 #. TRANSLATORS: CelesTrak source [Galileo]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=galileo&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3935
+#: plugins/Satellites/src/Satellites.cpp:3952
 msgid "galileo"
 msgstr "Galileo"
 
@@ -22230,7 +22216,7 @@ msgstr "Galileo"
 #. constellation (BeiDou Navigation Satellite System)
 #. TRANSLATORS: CelesTrak source [Beidou]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=beidou&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3938
+#: plugins/Satellites/src/Satellites.cpp:3955
 msgid "beidou"
 msgstr "Beidou"
 
@@ -22239,154 +22225,154 @@ msgstr "Beidou"
 #. TRANSLATORS: CelesTrak source [Satellite-Based Augmentation System
 #. (WAAS/EGNOS/MSAS)]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=sbas&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3941
+#: plugins/Satellites/src/Satellites.cpp:3958
 msgid "sbas"
 msgstr "sbas"
 
 #. TRANSLATORS: Satellite group: Navy Navigation Satellite System (NNSS)
-#: plugins/Satellites/src/Satellites.cpp:3943
+#: plugins/Satellites/src/Satellites.cpp:3960
 msgid "nnss"
 msgstr "nnss"
 
 #. TRANSLATORS: Satellite group: Russian LEO Navigation Satellites
-#: plugins/Satellites/src/Satellites.cpp:3945
+#: plugins/Satellites/src/Satellites.cpp:3962
 msgid "musson"
 msgstr "musson"
 
 #. TRANSLATORS: Satellite group: Space & Earth Science satellites
 #. TRANSLATORS: CelesTrak source [Space & Earth Science]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=science&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3951
+#: plugins/Satellites/src/Satellites.cpp:3968
 msgid "science"
 msgstr "science"
 
 #. TRANSLATORS: Satellite group: Geodetic satellites
-#: plugins/Satellites/src/Satellites.cpp:3953
+#: plugins/Satellites/src/Satellites.cpp:3970
 msgid "geodetic"
 msgstr "geodätisch"
 
 #. TRANSLATORS: Satellite group: Engineering satellites
 #. TRANSLATORS: CelesTrak source [Engineering]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=engineering&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3956
+#: plugins/Satellites/src/Satellites.cpp:3973
 msgid "engineering"
 msgstr "engineering"
 
 #. TRANSLATORS: Satellite group: Education satellites
 #. TRANSLATORS: CelesTrak source [Education]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=education&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3959
+#: plugins/Satellites/src/Satellites.cpp:3976
 msgid "education"
 msgstr "Bildung"
 
 #. TRANSLATORS: Satellite group: Military satellites
 #. TRANSLATORS: CelesTrak source [Miscellaneous Military]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=military&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3965
+#: plugins/Satellites/src/Satellites.cpp:3982
 msgid "military"
 msgstr "militärisch"
 
 #. TRANSLATORS: Satellite group: Radar Calibration satellites
 #. TRANSLATORS: CelesTrak source [Radar Calibration]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=radar&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3968
+#: plugins/Satellites/src/Satellites.cpp:3985
 msgid "radar"
 msgstr "radar"
 
 #. TRANSLATORS: Satellite group: CubeSats (Cube Satellites)
 #. TRANSLATORS: CelesTrak source [CubeSats]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=cubesat&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3971
+#: plugins/Satellites/src/Satellites.cpp:3988
 msgid "cubesat"
 msgstr "cubesat"
 
 #. TRANSLATORS: Satellite group: Other satellites
-#: plugins/Satellites/src/Satellites.cpp:3973
+#: plugins/Satellites/src/Satellites.cpp:3990
 msgid "other"
 msgstr "other"
 
 #. TRANSLATORS: Satellite group: Meteosat
-#: plugins/Satellites/src/Satellites.cpp:3979
+#: plugins/Satellites/src/Satellites.cpp:3996
 msgid "meteosat"
 msgstr "meteosat"
 
 #. TRANSLATORS: Satellite group: Telesat
-#: plugins/Satellites/src/Satellites.cpp:3982
+#: plugins/Satellites/src/Satellites.cpp:3999
 msgid "telesat"
 msgstr "telesat"
 
 #. TRANSLATORS: Satellite group: ISS Segments
-#: plugins/Satellites/src/Satellites.cpp:3984
+#: plugins/Satellites/src/Satellites.cpp:4001
 msgid "iss"
 msgstr "iss"
 
 #. TRANSLATORS: Satellite group: CPF
-#: plugins/Satellites/src/Satellites.cpp:3986
+#: plugins/Satellites/src/Satellites.cpp:4003
 msgid "cpf"
 msgstr "cpf"
 
 #. TRANSLATORS: Satellite name: International Space Station
-#: plugins/Satellites/src/Satellites.cpp:3990
+#: plugins/Satellites/src/Satellites.cpp:4007
 msgid "ISS (ZARYA)"
 msgstr "ISS (ZARYA)"
 
 #. TRANSLATORS: Satellite name: International Space Station
-#: plugins/Satellites/src/Satellites.cpp:3992
+#: plugins/Satellites/src/Satellites.cpp:4009
 msgid "ISS (NAUKA)"
 msgstr "ISS (NAUKA)"
 
 #. TRANSLATORS: Satellite name: International Space Station
-#: plugins/Satellites/src/Satellites.cpp:3994
+#: plugins/Satellites/src/Satellites.cpp:4011
 msgid "ISS"
 msgstr "ISS"
 
 #. TRANSLATORS: Satellite name: Hubble Space Telescope
-#: plugins/Satellites/src/Satellites.cpp:3996
+#: plugins/Satellites/src/Satellites.cpp:4013
 msgid "HST"
 msgstr "HST"
 
 #. TRANSLATORS: Satellite name: Spektr-R Space Observatory (or RadioAstron)
-#: plugins/Satellites/src/Satellites.cpp:3998
+#: plugins/Satellites/src/Satellites.cpp:4015
 msgid "SPEKTR-R"
 msgstr "SPEKTR-R"
 
 #. TRANSLATORS: Satellite name: Spektr-RG Space Observatory
-#: plugins/Satellites/src/Satellites.cpp:4000
+#: plugins/Satellites/src/Satellites.cpp:4017
 msgid "SPEKTR-RG"
 msgstr "SPEKTR-RG"
 
 #. TRANSLATORS: Satellite name: International Gamma-Ray Astrophysics
 #. Laboratory (INTEGRAL)
-#: plugins/Satellites/src/Satellites.cpp:4002
+#: plugins/Satellites/src/Satellites.cpp:4019
 msgid "INTEGRAL"
 msgstr "INTEGRAL"
 
 #. TRANSLATORS: Satellite name: China's first space station name
-#: plugins/Satellites/src/Satellites.cpp:4004
+#: plugins/Satellites/src/Satellites.cpp:4021
 msgid "TIANGONG 1"
 msgstr "TIANGONG 1"
 
 #. TRANSLATORS: Satellite name: name of China's space station module
-#: plugins/Satellites/src/Satellites.cpp:4006
+#: plugins/Satellites/src/Satellites.cpp:4023
 msgid "TIANHE"
 msgstr "TIANHE"
 
 #. TRANSLATORS: Satellite name: China's space station name (with name of base
 #. module)
-#: plugins/Satellites/src/Satellites.cpp:4008
+#: plugins/Satellites/src/Satellites.cpp:4025
 msgid "TIANGONG (TIANHE)"
 msgstr "TIANGONG (TIANHE)"
 
 #. TRANSLATORS: An uplink (UL or U/L) is the link from a ground station to a
 #. satellite
-#: plugins/Satellites/src/Satellites.cpp:4013
+#: plugins/Satellites/src/Satellites.cpp:4030
 msgctxt "comms"
 msgid "uplink"
 msgstr "Uplink"
 
 #. TRANSLATORS: A downlink (DL) is the link from a satellite to a ground
 #. station
-#: plugins/Satellites/src/Satellites.cpp:4015
+#: plugins/Satellites/src/Satellites.cpp:4032
 msgctxt "comms"
 msgid "downlink"
 msgstr "Downlink"
@@ -22395,7 +22381,7 @@ msgstr "Downlink"
 #. which emit one or more signals (normally on a fixed frequency) whose
 #. purpose is twofold: station-keeping information (telemetry) and locates the
 #. satellite (determines its azimuth and elevation) in the sky
-#: plugins/Satellites/src/Satellites.cpp:4017
+#: plugins/Satellites/src/Satellites.cpp:4034
 msgctxt "comms"
 msgid "beacon"
 msgstr "Funkbake"
@@ -22403,65 +22389,65 @@ msgstr "Funkbake"
 #. TRANSLATORS: Telemetry is the collection of measurements or other data at
 #. satellites and their automatic transmission to receiving equipment
 #. (telecommunication) for monitoring
-#: plugins/Satellites/src/Satellites.cpp:4019
+#: plugins/Satellites/src/Satellites.cpp:4036
 msgctxt "comms"
 msgid "telemetry"
 msgstr "Telemetrie"
 
 #. TRANSLATORS: The channel for transmission of video data
-#: plugins/Satellites/src/Satellites.cpp:4021
+#: plugins/Satellites/src/Satellites.cpp:4038
 msgctxt "comms"
 msgid "video"
 msgstr "Video"
 
 #. TRANSLATORS: The broadband is wide bandwidth data transmission which
 #. transports multiple signals at a wide range of frequencies
-#: plugins/Satellites/src/Satellites.cpp:4023
+#: plugins/Satellites/src/Satellites.cpp:4040
 msgctxt "comms"
 msgid "broadband"
 msgstr "Breitband"
 
 #. TRANSLATORS: The channel for transmission of commands
-#: plugins/Satellites/src/Satellites.cpp:4025
+#: plugins/Satellites/src/Satellites.cpp:4042
 msgctxt "comms"
 msgid "command"
 msgstr "Befehl"
 
 #. TRANSLATORS: Meteorological is a service on the satellite for transmitting
 #. meteorological data to a ground station
-#: plugins/Satellites/src/Satellites.cpp:4027
+#: plugins/Satellites/src/Satellites.cpp:4044
 msgctxt "comms"
 msgid "meteorological"
 msgstr "meteorologisch"
 
 #. TRANSLATORS: Maritime is a service on the satellite
-#: plugins/Satellites/src/Satellites.cpp:4029
+#: plugins/Satellites/src/Satellites.cpp:4046
 msgctxt "comms"
 msgid "maritime"
 msgstr "maritim"
 
 #. TRANSLATORS: Mobile is a service on the satellite
-#: plugins/Satellites/src/Satellites.cpp:4031
+#: plugins/Satellites/src/Satellites.cpp:4048
 msgctxt "comms"
 msgid "mobile"
 msgstr "mobil"
 
 #. TRANSLATORS: Mobile telephony is a service on the satellite
-#: plugins/Satellites/src/Satellites.cpp:4033
+#: plugins/Satellites/src/Satellites.cpp:4050
 msgctxt "comms"
 msgid "mobile telephony"
 msgstr "Mobiltelefonie"
 
 #. TRANSLATORS: A repeater is an electronic device that receives a signal and
 #. retransmits it.
-#: plugins/Satellites/src/Satellites.cpp:4035
+#: plugins/Satellites/src/Satellites.cpp:4052
 msgctxt "comms"
 msgid "repeater"
 msgstr "Verstärker"
 
 #. TRANSLATORS: The digital repeater (or digipiter) is used in channels that
 #. transmit data by binary digital signals
-#: plugins/Satellites/src/Satellites.cpp:4037
+#: plugins/Satellites/src/Satellites.cpp:4054
 msgctxt "comms"
 msgid "digipeater"
 msgstr "Digipeater"
@@ -22469,23 +22455,23 @@ msgstr "Digipeater"
 #. TRANSLATORS: A radio band is a small frequency band (a contiguous section
 #. of the range of the radio spectrum) in which channels are usually used or
 #. set aside for the same purpose. S-band for example.
-#: plugins/Satellites/src/Satellites.cpp:4039
+#: plugins/Satellites/src/Satellites.cpp:4056
 msgctxt "comms"
 msgid "-band"
 msgstr "-Band"
 
-#: plugins/Satellites/src/Satellites.cpp:4040
+#: plugins/Satellites/src/Satellites.cpp:4057
 msgctxt "comms"
 msgid "crew voice"
 msgstr "Besatzungsstimme"
 
-#: plugins/Satellites/src/Satellites.cpp:4041
+#: plugins/Satellites/src/Satellites.cpp:4058
 msgctxt "comms"
 msgid "imaging"
 msgstr "Bildgebung"
 
 #. TRANSLATORS: Some mode of communication via radio channel
-#: plugins/Satellites/src/Satellites.cpp:4043
+#: plugins/Satellites/src/Satellites.cpp:4060
 msgctxt "comms"
 msgid "mode"
 msgstr "Modus"
@@ -25427,6 +25413,8 @@ msgid ""
 "Communicate with the telescope using the LX200 protocol over a TCP/IP "
 "network connection"
 msgstr ""
+"Kommuniziere mit dem Teleskop mit dem LX200-Protokoll über eine TCP/IP-"
+"Netzwerkverbindung"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:647
 msgid "Network (TCP)"
@@ -27178,11 +27166,11 @@ msgstr "Fernbedienung"
 msgid "Remote control config"
 msgstr "Fernbedienungs-Konfiguration"
 
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:135
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:133
 msgid "Remote Control Plug-in"
 msgstr "Fernbedienungs-Plugin"
 
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:143
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:141
 msgid ""
 "The Remote Control plugin provides a web interface to allow state changes "
 "and triggering scripts using a connected webbrowser."
@@ -27190,33 +27178,33 @@ msgstr ""
 "Das Fernbedienungs-Plugin bietet eine Web-Schnittstelle und ermöglicht "
 "Schaltvorgänge und das Auslösen von Skripten mit einem Webbrowser."
 
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:149
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:147
 msgid "It is also possible to send commands via command line, e.g.."
 msgstr "Man kann auch Befehle über die Kommandozeile senden, z.B."
 
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:155
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:153
 msgid "This allows triggering automatic show setups for museums etc."
 msgstr ""
 "Das erlaubt das automatische Auslösen von Skripten für Museen, "
 "Ausstellungen, etc."
 
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:156
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:154
 msgid "This plugin was developed during ESA SoCiS 2015."
 msgstr "Dieses Plugin wurde im Rahmen des Programms ESA SoCiS2015 entwickelt."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:158
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:156
 msgid "This plugin uses the {QtWebApp HTTP server} by Stefan Frings."
 msgstr "Das Plugin nutzt den {QtWebApp HTTP Server} von Stefan Frings."
 
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:160
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:158
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:243
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:239
 #: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:197
 msgid "Publications"
 msgstr "Veröffentlichungen"
 
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:161
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:159
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:244
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:240
 #: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:198
@@ -27225,12 +27213,12 @@ msgstr ""
 "Wenn Sie dieses Plugin in Ihren Veröffentlichungen verwenden, zitieren Sie "
 "bitte: "
 
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:206
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:204
 #, qt-format
 msgid "Listening on %1, IP: "
 msgstr "Server läuft auf %1, IP: "
 
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:211
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:209
 msgid "Not active."
 msgstr "Inaktiv."
 
@@ -40398,9 +40386,10 @@ msgstr "Model"
 
 #. TRANSLATORS: Unit of measure for distance - nautical miles
 #: plugins/Planes/src/AircraftObject.cpp:207
+#: plugins/Planes/src/gui/PlanesDialog.cpp:71
 msgctxt "distance"
-msgid "nmi"
-msgstr "nmi"
+msgid "NM"
+msgstr "NM"
 
 #. TRANSLATORS: Unit of measure for distance - feets
 #: plugins/Planes/src/AircraftObject.cpp:209
@@ -40474,12 +40463,6 @@ msgstr "Flugnummer"
 #: plugins/Planes/src/gui/PlanesDialog.cpp:62
 msgid "Aircraft model"
 msgstr "Flugzeugmodell"
-
-#. TRANSLATORS: Unit of measure for distance - nautical miles
-#: plugins/Planes/src/gui/PlanesDialog.cpp:71
-msgctxt "distance"
-msgid "NM"
-msgstr "NM"
 
 #: plugins/Planes/src/gui/PlanesDialog.cpp:245
 msgid "Planes Plug-in"
@@ -42021,10 +42004,12 @@ msgid ""
 "Automatically calculate visibility for the selected star or deep-sky object "
 "and keep it updated while this tab is open."
 msgstr ""
+"Berechne automatisch die Sichtbarkeit des gewählten Sterns oder Deepsky-"
+"Objekts und aktualisiere sie solange der Reiter sichtbar ist."
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:955
 msgid "Calculate automatically"
-msgstr ""
+msgstr "Automatisch berechnen"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:956
 msgid "Good visibility:"
@@ -42038,7 +42023,7 @@ msgstr "°"
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:987
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:1013
 msgid "Set location by map click"
-msgstr ""
+msgstr "Standort aus Klick auf die Karte"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:961
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:985
@@ -42049,30 +42034,33 @@ msgid ""
 "Enable to move the observer by clicking on the map. Stays active until you "
 "uncheck it."
 msgstr ""
+"Erlaubt Standortwechsel durch Klicken auf die Karte, solange Häkchen aktiv "
+"ist."
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:963
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:991
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:1017
 msgid "Sync maps"
-msgstr ""
+msgstr "Synchronisiere Karten"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:965
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:989
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:1015
 msgid "Keep pan and zoom synchronized between the map tabs."
 msgstr ""
+"Halte Verschiebung und Vergrößerung zwischen den Karten-Reitern synchron."
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:967
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:996
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:1018
 msgid "Places, min. population:"
-msgstr ""
+msgstr "Orte, min. Bevölkerung:"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:968
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:997
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:1019
 msgid "Near lines"
-msgstr ""
+msgstr "Nahe den Linien"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:969
 msgid "Visibility"
@@ -42080,12 +42068,12 @@ msgstr "Sichtbarkeit"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:970
 msgid "Solstice twilight limits on Earth"
-msgstr ""
+msgstr "Sonnwend-Dämmerungsgrenzen auf der Erde"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:971
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:789
 msgid "Solstice twilight limits"
-msgstr ""
+msgstr "Sonnwend-Dämmerungsgrenzen"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:972
 msgid "Reference lines"
@@ -42093,15 +42081,15 @@ msgstr "Referenzlinien"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:973
 msgid "Lowest Sun"
-msgstr ""
+msgstr "Niedrigste Sonne"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:974
 msgid "Highest Sun"
-msgstr ""
+msgstr "Höchste Sonne"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:976
 msgid "Tropics"
-msgstr ""
+msgstr "Tropen"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:977
 msgid "Polar circles"
@@ -42112,64 +42100,66 @@ msgstr "Polarkreise"
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:1003
 msgctxt "twilight"
 msgid "civil"
-msgstr ""
+msgstr "bürgerlich"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:980
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:981
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:1004
 msgctxt "twilight"
 msgid "nautical"
-msgstr ""
+msgstr "nautisch"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:982
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:983
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:1005
 msgctxt "twilight"
 msgid "astronomical"
-msgstr ""
+msgstr "astronomisch"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:993
 msgid ""
 "Compute twilight limits from the Sun's current position instead of the "
 "solstice extrema."
 msgstr ""
+"Berechne Dämmerungsgrenzen aus aktueller Sonnenposition statt Sonnwend-"
+"Extrema."
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:995
 msgid "Compute daily"
-msgstr ""
+msgstr "Berechne täglich"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:998
 msgid "Twilight limits"
-msgstr ""
+msgstr "Dämmerungsgrenzen"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:999
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:902
 msgid "Twilight Map on Earth"
-msgstr ""
+msgstr "Dämmerungskarte auf der Erde"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:1000
 msgid "Legend"
-msgstr ""
+msgstr "Legende"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:1001
 msgid "Sun altitude"
-msgstr ""
+msgstr "Sonnenhöhe"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:1002
 msgid "rise/set"
-msgstr ""
+msgstr "auf/unter"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:1006
 msgid "night"
-msgstr ""
+msgstr "Nacht"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:1007
 msgid "Zenith point"
-msgstr ""
+msgstr "Zenitpunkt"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:1020
 msgid "Twilight Map"
-msgstr ""
+msgstr "Dämmerungskarte"
 
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:294
 msgid "Only stars and DSOs may be used in this plugin!"
@@ -42182,16 +42172,21 @@ msgid ""
 "Pluto and the four Galilean moons.  The current observing body (%1) is not "
 "supported."
 msgstr ""
+"Das Plugin ermöglicht Beobachtung von der Erde, dem Mond, den acht Planeten,"
+" Pluto und den vier Galileischen Jupitermonden. Der gegenwärtige Standort "
+"(%1) wird nicht unterstützt."
 
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:301
 msgid "Turn off Calculate automatically to use this button."
-msgstr ""
+msgstr "Deaktiviere automatische Berechnung um diesen Schalter zu benutzen."
 
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:720
 msgid ""
 "Setting the observer location from the twilight map is available on Earth "
 "only."
 msgstr ""
+"Auswahl des Beobachtungsorts aus der Dämmerungskarte ist nur auf der Erde "
+"verfügbar."
 
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:727
 #, qt-format
@@ -42199,34 +42194,38 @@ msgid ""
 "Solstice twilight limits are available for Earth only. Current observing "
 "body: %1"
 msgstr ""
+"Sonnwend-Dämmerungsgrenzen sind nur für die Erde verfügbar. Gegenwärtiger "
+"Standort: %1."
 
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:746
 msgid "Twilight limits on Earth are unavailable."
-msgstr ""
+msgstr "Dämmerungsgrenzen auf der Erde nicht verfügbar."
 
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:778
 msgid "Daily twilight limits"
-msgstr ""
+msgstr "Tägliche Dämmerungsgrenzen"
 
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:780
 #, qt-format
 msgid ""
 "Daily twilight limits on Earth in %1 (solar declination %2°, obliquity %3°)"
 msgstr ""
+"Tägliche Dämmerungsgrenzen auf der Erde in %1 (Sonnendeklination %2°, "
+"Schiefe %3°)"
 
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:791
 #, qt-format
 msgid "Solstice twilight limits on Earth in %1 (obliquity %2°)"
-msgstr ""
+msgstr "Sonnwend-Dämmerungsgrenzen auf der Erde in %1 (Schiefe %2°)"
 
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:891
 msgid "Twilight Map is unavailable."
-msgstr ""
+msgstr "Dämmerungskarte nicht verfügbar."
 
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:905
 #, qt-format
 msgid "Solar terminator on %1"
-msgstr ""
+msgstr "Terminator auf %1"
 
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:941
 msgid "100,000"
@@ -42406,7 +42405,7 @@ msgstr ""
 
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:1339
 msgid "Read the original article"
-msgstr ""
+msgstr "Original-Artikel lesen"
 
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:1342
 msgid "Astro-Geo-GIS website"
