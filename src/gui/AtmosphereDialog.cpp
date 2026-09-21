@@ -110,7 +110,13 @@ void AtmosphereDialog::createDialogContent()
 	connectBoolProperty(ui->showMySky_pseudoMirrorEnabled, "LandscapeMgr.flagAtmospherePseudoMirror");
 	connectIntProperty(ui->showMySky_eclipseSimulationQualitySpinBox, ECLIPSE_SIM_QUALITY_PROPERTY);
 
-	if (StelMainView::getInstance().getGLInformation().isGLES)
+	#ifdef ENABLE_SHOWMYSKY
+	const bool showMySkyDisabled = false;
+	#else
+	const bool showMySkyDisabled = true;
+	#endif
+
+	if ((StelMainView::getInstance().getGLInformation().isGLES) || showMySkyDisabled)
 	{
 		for (int row = 0; row < ui->atmosphereModel->count(); ++row)
 		{
@@ -121,7 +127,6 @@ void AtmosphereDialog::createDialogContent()
 			}
 		}
 	}
-
 	setCurrentValues();
 }
 
