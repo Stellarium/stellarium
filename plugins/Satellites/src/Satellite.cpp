@@ -896,11 +896,11 @@ Vec4d Satellite::getUmbraData(const double rhoE)
 	// geocentric distance of shadow circle towards antisun
 	const double umbraDistance=rhoE*cos(mu);
 	// radius of shadow circle
-	const double umbraRadius=qMax(rhoE*sin(mu), 0.0);
+	const double umbraRadius=qMax(0.0, rhoE*sin(mu));
 	// Repeat for penumbra
 	const double thetaP=thetaE+thetaS; // angle so that satellite touches penumbra
 	// angle at Sun:
-	const double sigmaP=asin(sin(thetaP)*rhoE/rS);
+	const double sigmaP=asin(qBound(0.0, sin(thetaP)*rhoE, 1.0));
 	// angle in geocenter
 	const double etaP=M_PI-sigmaP-thetaP;
 	// complement
@@ -908,7 +908,7 @@ Vec4d Satellite::getUmbraData(const double rhoE)
 	// geocentric distance of shadow circle towards antisun
 	const double penumbraDistance=rhoE*cos(muP);
 	// radius of shadow circle
-	const double penumbraRadius=qMax(rhoE*sin(muP), 0.0);
+	const double penumbraRadius=qMax(0.0, rhoE*sin(muP));
 	//// DBG OUT
 	//StelObjectMgr *om=GETSTELMODULE(StelObjectMgr);
 	//om->setExtraInfoString(StelObject::DebugAid, QString("&rho;<sub>E</sub> %1, r<sub>S</sub> %2, &theta;<sub>E</sub> %3°, &theta;<sub>S</sub> %4° <br/>")
