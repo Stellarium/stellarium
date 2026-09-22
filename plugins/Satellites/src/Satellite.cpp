@@ -888,7 +888,7 @@ Vec4d Satellite::getUmbraData(const double rhoE)
 	Q_ASSERT(thetaE>thetaS);
 	const double theta=thetaE-thetaS; // angle so that satellite dives into umbra
 	// angle at Sun:
-	const double sigma=asin(sin(theta)*rhoE/rS);
+	const double sigma=asin(qBound(0.0, sin(theta)*rhoE/rS, 1.0));
 	// angle in geocenter
 	const double eta=M_PI-sigma-theta;
 	// complement
@@ -900,7 +900,7 @@ Vec4d Satellite::getUmbraData(const double rhoE)
 	// Repeat for penumbra
 	const double thetaP=thetaE+thetaS; // angle so that satellite touches penumbra
 	// angle at Sun:
-	const double sigmaP=asin(qBound(0.0, sin(thetaP)*rhoE, 1.0));
+	const double sigmaP=asin(qBound(0.0, sin(thetaP)*rhoE/rS, 1.0));
 	// angle in geocenter
 	const double etaP=M_PI-sigmaP-thetaP;
 	// complement
