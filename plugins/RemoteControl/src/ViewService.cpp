@@ -62,9 +62,19 @@ void ViewService::get(const QByteArray &operation, const APIParameters &paramete
 	}
 	else if (operation.startsWith("landscapedescription/"))
 	{
+		// Possible syntax is either /api/view/landscapedescription/path (original) or /api/view/landscapedescription/?&path=the/Path/to/file (easier for SwaggerUI)
+
 		int startidx = operation.indexOf('/');
-		//get the path after the name and map it to the landscapes' directory
-		QByteArray path = operation.mid(startidx+1);
+
+		QString pathPar = QString::fromUtf8(parameters.value("path"));
+		std::string pathStdStr=pathPar.replace("%2F", "/").toStdString();
+		QByteArray path=QByteArray::fromStdString(pathStdStr);
+
+		if (path.length()==0) // parameter free access: older interface with path syntax
+		{
+			//get the path after the name and map it to the landscapes' directory
+			path = operation.mid(startidx+1);
+		}
 
 		if(path.isEmpty())
 		{
@@ -84,23 +94,33 @@ void ViewService::get(const QByteArray &operation, const APIParameters &paramete
 	else if (operation=="listskyculture")
 	{
 		//list installed skycultures
-		QMap<QString, StelSkyCulture> map = skyCulMgr->getDirToNameMap();
+		QMap<QString, QString> map = skyCulMgr->getDirToI18Map();
 
 		QJsonObject obj;
-		QMapIterator<QString,StelSkyCulture> it(map);
+		QMapIterator<QString, QString> it(map);
 		while(it.hasNext())
 		{
 			it.next();
-			obj.insert(it.key(),StelTranslator::globalTranslator->qtranslate(it.value().englishName));
+			obj.insert(it.key(), it.value());
 		}
 
 		response.writeJSON(QJsonDocument(obj));
 	}
 	else if (operation.startsWith("skyculturedescription/"))
 	{
+		// Possible syntax is either /api/view/skyculturedescription/path (original) or /api/view/skyculturedescription/?&path=the/Path/to/file (easier for SwaggerUI)
+
 		int startidx = operation.indexOf('/');
-		//get the path after the name and map it to the sky cultures' directory
-		QByteArray path = operation.mid(startidx+1);
+
+		QString pathPar = QString::fromUtf8(parameters.value("path"));
+		std::string pathStdStr=pathPar.replace("%2F", "/").toStdString();
+		QByteArray path=QByteArray::fromStdString(pathStdStr);
+
+		if (path.length()==0) // parameter free access: older interface with path syntax
+		{
+			//get the path after the name and map it to the sky cultures' directory
+			path = operation.mid(startidx+1);
+		}
 
 		if(path.isEmpty())
 		{

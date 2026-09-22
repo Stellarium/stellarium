@@ -950,10 +950,10 @@ void Satellites::restoreDefaultTleSources()
 	        { "weather", false }, { "resource", false }, { "sarsat", false }, { "dmc", false }, { "tdrss", false },
 	        { "argos", false }, { "planet", false }, { "spire", false },
 	        // Communications Satellites
-	        { "geo", false }, { "gpz", false }, { "gpz-plus", false }, { "intelsat", false }, { "eutelsat", false }, { "starlink", true  }, 
-	        { "qianfan", false }, { "kuiper", false }, { "orbcomm", false }, { "amateur", true  }, { "x-comm", false }, 
-	        { "ses", false }, { "telesat", false }, { "oneweb", true  }, { "hulianwang", false }, { "iridium-NEXT", false }, 
-	        { "globalstar", false }, { "satnogs", false }, { "other-comm", false },
+	        { "geo", false }, { "intelsat", false }, { "eutelsat", false }, { "starlink", true  },  { "qianfan", false }, 
+	        { "kuiper", false }, { "orbcomm", false }, { "amateur", true  }, { "x-comm", false }, { "ses", false }, 
+	        { "telesat", false }, { "oneweb", true  }, { "hulianwang", false }, { "iridium-NEXT", false }, { "globalstar", false }, 
+	        { "satnogs", false }, { "other-comm", false },
 	        // Navigation Satellites
 	        { "gnss", true  }, { "gps-ops", true  }, { "galileo", true  }, { "glo-ops", true  }, { "beidou", true  }, { "sbas", false },
 	        // Scientific Satellites
@@ -1501,14 +1501,25 @@ void Satellites::setDataMap(const QVariantMap& map)
 		if (!satData.contains("infoColor"))
 			satData["infoColor"] = satData["hintColor"];
 
-		int sid = smit.key().toInt();
+		QString satID = smit.key();
+		int sid = satID.toInt();
+		if (sid==0) // the ID contains Alpha-5 propagator
+		{
+			// Decoding Alpha-5 propagator
+			sid = decodeSatIDFromAlpha5(satID).toInt();
+			satID = QString("%1").arg(sid);
+			// Let's use hook for TLE data with Alpha-5 propagator as for CSV data
+			satData["tle1"] = satData["tle1"].toString().replace(2, 5, "00000");
+			satData["tle2"] = satData["tle2"].toString().replace(2, 5, "00000");
+		}
+
 		if (!satData.contains("stdMag") && qsMagList.contains(sid))
 			satData["stdMag"] = qsMagList[sid];
 
 		if (!satData.contains("rcs") && rcsList.contains(sid))
 			satData["rcs"] = rcsList[sid];
 
-		SatelliteP sat(new Satellite(smit.key(), satData));
+		SatelliteP sat(new Satellite(satID, satData));
 		if (sat->initialized)
 		{
 			satellites.append(sat);
@@ -1845,12 +1856,12 @@ QList<CommLink> Satellites::getCommunicationData(const TleData& tleData)
 
 	// Communication data for groups of satellites
 	const QMap<QString, QString> startsWith = {
-		{ "GPS",	"gps" },
+		{ "GPS",		"gps" },
 		{ "BEIDOU",	"beidou" },
 		{ "IRNSS",	"irnss" },
 		{ "ORBCOMM",	"orbcomm" },
 		{ "TEVEL",	"tevel" },
-		{ "QZS",	"qzss" },
+		{ "QZS",		"qzss" },
 		{ "FORMOSAT",	"formosat" },
 		{ "FOSSASAT",	"fossasat"},
 		{ "NETSAT",	"netsat" },
@@ -1877,11 +1888,11 @@ QList<CommLink> Satellites::getCommunicationData(const TleData& tleData)
 		{ "PICO-1A",	"pico-1a" },
 		{ "GLOBALSTAR",	"globalstar" },
 		{ "STRATOSAT",	"stratosat" },
-	        { "COSMO-SKYMED", "cosmo-skymed" },
-	        { "QIANFAN",	"qianfan" },
-	        { "HULIANWANG",	"hulianwang" },
-	        { "KUIPER",	"kuiper" },
-	        { "YAMAL",	"yamal" }
+		{ "COSMO-SKYMED", "cosmo-skymed" },
+		{ "QIANFAN",	"qianfan" },
+		{ "HULIANWANG",	"hulianwang" },
+		{ "KUIPER",	"kuiper" },
+		{ "YAMAL",	"yamal" }
 	};
 
 	QStringList groups;
@@ -2955,19 +2966,24 @@ void Satellites::updateSatellites(TleDataHash& newTleSets)
 void Satellites::parseDataFile(QFile& openFile, TleDataHash& tleList, bool addFlagValue, const QString &tleURL)
 {
 	const QString line = openFile.readLine();
-	const auto firstLineEntries = line.trimmed().split(QLatin1Char(','));
-	if (firstLineEntries.contains(L1S("ARG_OF_PERICENTER")) &&
-	    firstLineEntries.contains(L1S("MEAN_MOTION_DDOT")))
-	{
-		// Two rather long names from the CSV header are present,
-		// we must be handling a CSV file rather than TLE.
-		parseCsvFile(openFile, firstLineEntries, tleList, addFlagValue, tleURL);
-	}
+	if (line.contains("invalid query", Qt::CaseInsensitive) || line.contains("error", Qt::CaseInsensitive))
+		qWarning() << "[Satellites] Skipping parsing file" << openFile.fileName() << "due error:" << line;
 	else
 	{
-		openFile.seek(0);
-		parseTleFile(openFile, tleList, addFlagValue, tleURL);
-	}
+		const auto firstLineEntries = line.trimmed().split(QLatin1Char(','));
+		if (firstLineEntries.contains(L1S("ARG_OF_PERICENTER")) &&
+		    firstLineEntries.contains(L1S("MEAN_MOTION_DDOT")))
+		{
+			// Two rather long names from the CSV header are present,
+			// we must be handling a CSV file rather than TLE.
+			parseCsvFile(openFile, firstLineEntries, tleList, addFlagValue, tleURL);
+		}
+		else
+		{
+			openFile.seek(0);
+			parseTleFile(openFile, tleList, addFlagValue, tleURL);
+		}	
+	}	
 }
 
 void Satellites::parseTleFile(QFile& openFile, TleDataHash& tleList, bool addFlagValue, const QString &tleURL)
@@ -3012,7 +3028,9 @@ void Satellites::parseTleFile(QFile& openFile, TleDataHash& tleList, bool addFla
 			//characters in the JSON parser. --BM
 			static const QRegularExpression statusCodeRx("\\s*\\[([^\\]])*\\]\\s*$");
 			line.replace(statusCodeRx,"");  // remove "status code" from name
-			lastData.name = line;
+			static const QRegularExpression reL0("^[0] ");
+			line.replace(reL0,"");  // remove "leading zero" from name (example: TLE from )
+			lastData.name = line.trimmed(); // remove "extra spaces" from name
 		}
 		else
 		{
@@ -3033,6 +3051,13 @@ void Satellites::parseTleFile(QFile& openFile, TleDataHash& tleList, bool addFla
 					continue;
 				}
 				lastData.id = id;
+				
+				if (id.toInt()>=100000)
+				{
+					// Let's use hook for TLE data with Alpha-5 propagator as for CSV data
+					lastData.first.replace(2, 5, "00000");
+					lastData.second.replace(2, 5, "00000");
+				}
 				
 				// This is the second line and there will be no more,
 				// so if everything is OK, save the elements.
@@ -3188,19 +3213,39 @@ void Satellites::parseCsvFile(QFile& openFile, const QStringList& headerEntries,
 	}
 }
 
+QString Satellites::decodeSatIDFromAlpha5(QString& satId)
+{
+	const QMap<QString, QString> alpha5 = {
+	        { "A", "10" }, { "B", "11" }, { "C", "12" }, { "D", "13" }, { "E", "14" }, { "F", "15" }, { "G", "16" }, { "H", "17" },
+	        { "J", "18" }, { "K", "19" }, { "L", "20" }, { "M", "21" }, { "N", "22" }, { "P", "23" }, { "Q", "24" }, { "R", "25" },
+	        { "S", "26" }, { "T", "27" }, { "U", "28" }, { "V", "29" }, { "W", "30" }, { "X", "31" }, { "Y", "32" }, { "Z", "33" }
+	};
+
+	// Decoding Alpha-5 Propagator (compatible with CSV)
+	static const QRegularExpression a5Rx("^[A-Z]\\B");
+	QRegularExpressionMatch alpha5Match=a5Rx.match(satId);
+	if (alpha5Match.hasMatch())
+	{
+		QString chr = alpha5Match.captured(0);
+		satId.replace(chr, alpha5.value(chr));
+	}
+	
+	return satId;
+}
+
 QString Satellites::getSatIdFromLine2(const QString& line)
 {
-	#if (QT_VERSION>=QT_VERSION_CHECK(5, 14, 0))
-	QString id = line.split(' ',  Qt::SkipEmptyParts).at(1).trimmed();
-	#else
-	QString id = line.split(' ',  QString::SkipEmptyParts).at(1).trimmed();
-	#endif
-	if (!id.isEmpty())
-	{
-		// Strip any leading zeros as they should be unique ints as strings.
-		static const QRegularExpression re("^[0]*\\B");
-		id.remove(re);
-	}
+	if (line.isEmpty() || line.size()<10)
+		return QString();
+	
+	QString id = line.mid(2, 5).trimmed();
+
+	// Strip any leading zeros as they should be unique ints as strings.
+	static const QRegularExpression re("^[0]*\\B");
+	id.remove(re);
+	// Decoding Alpha-5 Propagator (compatible with CSV)
+	id = decodeSatIDFromAlpha5(id);
+	
 	return id;
 }
 
@@ -3712,10 +3757,6 @@ void Satellites::createSuperGroupsList()
 	satSuperGroupsMap = {
 	        { "geo", communications },
 	        { "geo", geostationary },
-	        { "gpz", communications },
-	        { "gpz", geostationary },
-	        { "gpz-plus", communications },
-	        { "gpz-plus", geostationary },
 	        { "intelsat", communications },
 	        { "eutelsat", communications },
 	        { "telesat", communications },	        
@@ -3855,12 +3896,6 @@ void Satellites::translations()
 	// TRANSLATORS: Satellite group: Active Geosynchronous Satellites
 	// TRANSLATORS: CelesTrak source [Active Geosynchronous]: https://celestrak.org/NORAD/elements/gp.php?GROUP=geo&FORMAT=csv
 	N_("geo");
-	// TRANSLATORS: Satellite group: GEO Protected Zone
-	// TRANSLATORS: CelesTrak source [GEO Protected Zone]: https://celestrak.org/NORAD/elements/gp.php?SPECIAL=gpz&FORMAT=csv
-	N_("gpz");
-	// TRANSLATORS: Satellite group: GEO Protected Zone Plus
-	// TRANSLATORS: CelesTrak source [GEO Protected Zone Plus]: https://celestrak.org/NORAD/elements/gp.php?SPECIAL=gpz-plus&FORMAT=csv
-	N_("gpz-plus");
 	// TRANSLATORS: Satellite group: Satellites belonging to the INTELSAT satellites
 	// TRANSLATORS: CelesTrak source [Intelsat]: https://celestrak.org/NORAD/elements/gp.php?GROUP=intelsat&FORMAT=csv
 	N_("intelsat");

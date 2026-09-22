@@ -433,7 +433,7 @@ define(["jquery", "api/remotecontrol", "api/viewcontrol", "api/actions", "api/pr
                 setTimeout(function() {
                     setFov(zoomFov, 2);
                     var displayName = parsed.nativeName || directName;
-                    showNotification(_tr("Centering on: ") + displayName);
+                    showNotification(rc.tr("Centering on: ") + displayName);
                     emitObjectSelected(directName, objectId, objectType);
                     if (callback) callback(true, directName);
                 }, 300);
@@ -457,7 +457,7 @@ define(["jquery", "api/remotecontrol", "api/viewcontrol", "api/actions", "api/pr
                         setTimeout(function() {
                             setFov(zoomFov, 2);
                             var displayName = parsed.nativeName || correctName;
-                            showNotification(_tr("Centering on: ") + displayName);
+                            showNotification(rc.tr("Centering on: ") + displayName);
                             emitObjectSelected(correctName, objectId, objectType);
                             if (callback) callback(true, correctName);
                         }, 300);
@@ -470,7 +470,7 @@ define(["jquery", "api/remotecontrol", "api/viewcontrol", "api/actions", "api/pr
                         setTimeout(function() {
                             setFov(zoomFov, 2);
                             var displayName = parsed.nativeName || searchTerm;
-                            showNotification(_tr("Centering on: ") + displayName);
+                            showNotification(rc.tr("Centering on: ") + displayName);
                             emitObjectSelected(searchTerm, objectId, objectType);
                             if (callback) callback(true, searchTerm);
                         }, 300);
@@ -485,7 +485,7 @@ define(["jquery", "api/remotecontrol", "api/viewcontrol", "api/actions", "api/pr
                     setTimeout(function() {
                         setFov(zoomFov, 2);
                         var displayName = parsed.nativeName || searchTerm;
-                        showNotification(_tr("Centering on: ") + displayName);
+                        showNotification(rc.tr("Centering on: ") + displayName);
                         emitObjectSelected(searchTerm, objectId, objectType);
                         if (callback) callback(true, searchTerm);
                     }, 300);
@@ -560,7 +560,7 @@ define(["jquery", "api/remotecontrol", "api/viewcontrol", "api/actions", "api/pr
 						centerAndZoom(signName, 40, 2, signId || signName, "zodiac", callback);
 						
 						// Show notification to user
-						showNotification(_tr("Center on zodiac sign: ") + signName);
+						showNotification(rc.tr("Center on zodiac sign: ") + signName);
 				}, 50);
 		}
 
@@ -577,7 +577,7 @@ define(["jquery", "api/remotecontrol", "api/viewcontrol", "api/actions", "api/pr
         clearSelection();
         setTimeout(function() {
             centerAndZoom(asterismName, 30, 2, asterismId || asterismName, "asterism", callback);
-            showNotification(_tr("Centering on asterism: ") + asterismName);
+            showNotification(rc.tr("Centering on asterism: ") + asterismName);
         }, 50);
     }
 
@@ -625,7 +625,7 @@ define(["jquery", "api/remotecontrol", "api/viewcontrol", "api/actions", "api/pr
 						centerAndZoom(mansionName, 30, 2, mansionId || mansionName, "lunar", callback);
 						
 						// Show notification to user
-						showNotification(_tr("Center on lunar mansion: ") + mansionName);
+						showNotification(rc.tr("Center on lunar mansion: ") + mansionName);
 				}, 50);
 		}
 
@@ -749,7 +749,7 @@ define(["jquery", "api/remotecontrol", "api/viewcontrol", "api/actions", "api/pr
             restoreConstellationDisplayStates();
             currentIsolatedConstellation = null;
             
-            showNotification(_tr("Cleared highlight: ") + searchTerm);
+            showNotification(rc.tr("Cleared highlight: ") + searchTerm);
             emitObjectSelected("", "", "none");
             return false;
         } else {
@@ -777,7 +777,7 @@ define(["jquery", "api/remotecontrol", "api/viewcontrol", "api/actions", "api/pr
                     // Use constellationId if provided, otherwise use searchTerm
                     var emitId = constellationId || searchTerm;
                     emitObjectSelected(searchTerm, emitId, "constellation");
-                    showNotification(_tr("Isolating constellation: ") + searchTerm);
+                    showNotification(rc.tr("Isolating constellation: ") + searchTerm);
                 }, 150);
             }, 100);
             
@@ -799,7 +799,7 @@ define(["jquery", "api/remotecontrol", "api/viewcontrol", "api/actions", "api/pr
         currentIsolatedConstellation = null;
         
         emitObjectSelected("", "", "none");
-        showNotification(_tr("All constellations visible"));
+        showNotification(rc.tr("All constellations visible"));
     }
 
     /**

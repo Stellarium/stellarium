@@ -59,7 +59,7 @@ Patrem is keris (indigenous dagger). A royal spy code or women use this kind of 
 
 ##### A Plough
 
-Těnggala is a plough. Betelgeuse is the red plain of the farmer. Bellatrix is the farmer's eye. Orion's belt is the plough. Rigel and other stars to the west are the animals (cow).
+Těnggala is a plough. Betelgeuse is the farmer's red wound. Bellatrix is the farmer's eye. Orion's belt is the plough. Rigel and other stars to the west are the animals (cow).
 
 <img width="255" src="illustrations/descr_pics/Ra_Wa.jpg"/>
 

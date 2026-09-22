@@ -190,11 +190,6 @@ QVariantMap Nova::getInfoMap(const StelCore *core) const
 	return map;
 }
 
-Vec3f Nova::getInfoColor(void) const
-{
-	return Vec3f(1.f, 1.f, 1.f);
-}
-
 float Nova::getVMagnitude(const StelCore* core) const
 {
 	// OK, start from minimal brightness

@@ -185,6 +185,16 @@ const QImage &scm::ScmConstellationArtwork::getArtwork() const
 	return artwork;
 }
 
+void scm::ScmConstellationArtwork::setSourceImageFileName(const QString &fileName)
+{
+	sourceImageFileName = fileName;
+}
+
+const QString &scm::ScmConstellationArtwork::getSourceImageFileName() const
+{
+	return sourceImageFileName;
+}
+
 bool scm::ScmConstellationArtwork::getHasArt() const
 {
 	return hasArt;

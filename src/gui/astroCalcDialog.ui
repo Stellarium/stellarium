@@ -3229,6 +3229,16 @@
                 <number>0</number>
                </property>
                <item>
+                <widget class="QPushButton" name="localCoordinates">
+                 <property name="enabled">
+                  <bool>false</bool>
+                 </property>
+                 <property name="text">
+                  <string/>
+                 </property>
+                </widget>
+               </item>
+               <item>
                 <spacer name="eclipseFilterSpacer">
                  <property name="orientation">
                   <enum>Qt::Horizontal</enum>

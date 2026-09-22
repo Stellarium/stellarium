@@ -74,6 +74,14 @@ public:
 	const ScmCulturalName &getCulturalName() const;
 
 	/**
+	 * @brief Gets a human-readable display name combining the translated name and
+	 *        id, e.g. "The Market (tianquiztli)".
+	 *
+	 * @return The display name.
+	 */
+	QString getDisplayName() const { return culturalName.translated + " (" + id + ")"; }
+
+	/**
 	* @brief Sets the description of the constellation.
 	* 
 	* @param description The description.

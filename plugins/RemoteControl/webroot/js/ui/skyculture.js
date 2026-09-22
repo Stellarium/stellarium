@@ -512,17 +512,17 @@ define(["jquery", "api/properties", "api/remotecontrol", "ui/stellarium-utils"],
         
         // Handle empty state
         if (!patterns || patterns.length === 0) {
-            var placeholderText = _tr("No data available");
+            var placeholderText = rc.tr("No data available");
             if (containerName === "constellations") {
-                placeholderText = _tr("No constellations available for this culture");
+                placeholderText = rc.tr("No constellations available for this culture");
             } else if (containerName === "asterisms") {
-                placeholderText = _tr("No asterisms available for this culture");
+                placeholderText = rc.tr("No asterisms available for this culture");
             } else if (containerName === "zodiac") {
-                placeholderText = _tr("No zodiac data available for this culture");
+                placeholderText = rc.tr("No zodiac data available for this culture");
             } else if (containerName === "lunar") {
-                placeholderText = _tr("No lunar mansions data available for this culture");
+                placeholderText = rc.tr("No lunar mansions data available for this culture");
             } else if (containerName === "stars") {
-                placeholderText = _tr("No star name data available for this culture");
+                placeholderText = rc.tr("No star name data available for this culture");
             }
             
             $container.html('<div class="loading-placeholder">' + placeholderText + '</div>');
@@ -961,7 +961,7 @@ define(["jquery", "api/properties", "api/remotecontrol", "ui/stellarium-utils"],
         if (!patterns || !patterns.length) {
             if ($constellationsContainer) {
                 $constellationsContainer.html('<div class="loading-placeholder">' + 
-                    _tr("No constellations available for this culture") + '</div>');
+                    rc.tr("No constellations available for this culture") + '</div>');
             }
             updatePatternCount("constellations", 0);
             currentPatternsData.constellations = [];
@@ -990,7 +990,7 @@ define(["jquery", "api/properties", "api/remotecontrol", "ui/stellarium-utils"],
         if (!patterns || !patterns.length) {
             if ($asterismsContainer) {
                 $asterismsContainer.html('<div class="loading-placeholder">' + 
-                    _tr("No asterisms available for this culture") + '</div>');
+                    rc.tr("No asterisms available for this culture") + '</div>');
             }
             updatePatternCount("asterisms", 0);
             currentPatternsData.asterisms = [];
@@ -1019,7 +1019,7 @@ define(["jquery", "api/properties", "api/remotecontrol", "ui/stellarium-utils"],
 				if (!patterns || !patterns.length) {
 						if ($zodiacContainer) {
 								$zodiacContainer.html('<div class="loading-placeholder">' + 
-										_tr("No zodiac signs available for this culture") + '</div>');
+										rc.tr("No zodiac signs available for this culture") + '</div>');
 						}
 						updatePatternCount("zodiac", 0);
 						currentPatternsData.zodiac = [];
@@ -1046,7 +1046,7 @@ define(["jquery", "api/properties", "api/remotecontrol", "ui/stellarium-utils"],
         if (!patterns || !patterns.length) {
             if ($lunarContainer) {
                 $lunarContainer.html('<div class="loading-placeholder">' + 
-                    _tr("No lunar mansions available for this culture") + '</div>');
+                    rc.tr("No lunar mansions available for this culture") + '</div>');
             }
             updatePatternCount("lunar", 0);
             currentPatternsData.lunar = [];
@@ -1072,7 +1072,7 @@ define(["jquery", "api/properties", "api/remotecontrol", "ui/stellarium-utils"],
         if (!patterns || !patterns.length) {
             if ($starsContainer) {
                 $starsContainer.html('<div class="loading-placeholder">' + 
-                    _tr("No star names available for this culture") + '</div>');
+                    rc.tr("No star names available for this culture") + '</div>');
             }
             updatePatternCount("stars", 0);
             currentPatternsData.stars = [];
@@ -1116,23 +1116,23 @@ define(["jquery", "api/properties", "api/remotecontrol", "ui/stellarium-utils"],
         // Show loading states in all panels
         if ($constellationsContainer) {
             $constellationsContainer.html('<div class="loading-placeholder">' + 
-                _tr("Loading constellations...") + '</div>');
+                rc.tr("Loading constellations...") + '</div>');
         }
         if ($asterismsContainer) {
             $asterismsContainer.html('<div class="loading-placeholder">' + 
-                _tr("Loading asterisms...") + '</div>');
+                rc.tr("Loading asterisms...") + '</div>');
         }
         if ($zodiacContainer) {
             $zodiacContainer.html('<div class="loading-placeholder">' + 
-                _tr("Loading zodiac signs...") + '</div>');
+                rc.tr("Loading zodiac signs...") + '</div>');
         }
         if ($lunarContainer) {
             $lunarContainer.html('<div class="loading-placeholder">' + 
-                _tr("Loading lunar mansions...") + '</div>');
+                rc.tr("Loading lunar mansions...") + '</div>');
         }
         if ($starsContainer) {
             $starsContainer.html('<div class="loading-placeholder">' + 
-                _tr("Loading star names...") + '</div>');
+                rc.tr("Loading star names...") + '</div>');
         }
         
         // Reset counters and clear active selections
@@ -1224,7 +1224,7 @@ define(["jquery", "api/properties", "api/remotecontrol", "ui/stellarium-utils"],
         
         if (!cultures || !cultures.length) {
             $cultureContainer.html('<div class="loading-placeholder">' + 
-                _tr("No sky cultures available") + '</div>');
+                rc.tr("No sky cultures available") + '</div>');
             return;
         }
         
@@ -1299,7 +1299,7 @@ define(["jquery", "api/properties", "api/remotecontrol", "ui/stellarium-utils"],
                 console.error("[SkyCulture] Failed to load sky cultures:", errorThrown);
                 if ($cultureContainer) {
                     $cultureContainer.html('<div class="loading-placeholder">' + 
-                        _tr("Error loading sky cultures") + '</div>');
+                        rc.tr("Error loading sky cultures") + '</div>');
                 }
                 if (callback) callback(false);
             }

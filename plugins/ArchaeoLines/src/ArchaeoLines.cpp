@@ -96,7 +96,7 @@ ArchaeoLines::ArchaeoLines()
 	, flagShowCustomDeclination2(false)
 	, lastJDE(0.0)
 	#ifndef NO_GUI
-	, toolbarButton(Q_NULLPTR)
+	, toolbarButton(nullptr)
 	#endif
 {
 	setObjectName("ArchaeoLines");
@@ -147,45 +147,45 @@ ArchaeoLines::ArchaeoLines()
 #endif
 	conf = StelApp::getInstance().getSettings();
 
-	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(updateObserverLocation(StelLocation)));
+	connect(core, &StelCore::locationChanged, this, &ArchaeoLines::updateObserverLocation);
 }
 
 ArchaeoLines::~ArchaeoLines()
 {
-	delete equinoxLine; equinoxLine=Q_NULLPTR;
-	delete northernSolsticeLine; northernSolsticeLine=Q_NULLPTR;
-	delete southernSolsticeLine; southernSolsticeLine=Q_NULLPTR;
-	delete northernCrossquarterLine; northernCrossquarterLine=Q_NULLPTR;
-	delete southernCrossquarterLine; southernCrossquarterLine=Q_NULLPTR;
-	delete northernMajorStandstillLine0; northernMajorStandstillLine0=Q_NULLPTR;
-	delete northernMajorStandstillLine1; northernMajorStandstillLine1=Q_NULLPTR;
-	delete northernMinorStandstillLine2; northernMinorStandstillLine2=Q_NULLPTR;
-	delete northernMinorStandstillLine3; northernMinorStandstillLine3=Q_NULLPTR;
-	delete southernMinorStandstillLine4; southernMinorStandstillLine4=Q_NULLPTR;
-	delete southernMinorStandstillLine5; southernMinorStandstillLine5=Q_NULLPTR;
-	delete southernMajorStandstillLine6; southernMajorStandstillLine6=Q_NULLPTR;
-	delete southernMajorStandstillLine7; southernMajorStandstillLine7=Q_NULLPTR;
-	delete northernPolarCircleLine; northernPolarCircleLine=Q_NULLPTR;
-	delete southernPolarCircleLine; southernPolarCircleLine=Q_NULLPTR;
-	delete zenithPassageLine;  zenithPassageLine=Q_NULLPTR;
-	delete nadirPassageLine;   nadirPassageLine=Q_NULLPTR;
-	delete selectedObjectLine; selectedObjectLine=Q_NULLPTR;
-	delete selectedObjectAzimuthLine; selectedObjectAzimuthLine=Q_NULLPTR;
-	delete selectedObjectHourAngleLine; selectedObjectHourAngleLine=Q_NULLPTR;
-	delete currentSunLine;     currentSunLine=Q_NULLPTR;
-	delete currentMoonLine;    currentMoonLine=Q_NULLPTR;
-	delete currentPlanetLine;  currentPlanetLine=Q_NULLPTR;
-	delete geographicLocation1Line; geographicLocation1Line=Q_NULLPTR;
-	delete geographicLocation2Line; geographicLocation2Line=Q_NULLPTR;
-	delete customAzimuth1Line; customAzimuth1Line=Q_NULLPTR;
-	delete customAzimuth2Line; customAzimuth2Line=Q_NULLPTR;
-	delete customAltitude1Line; customAltitude1Line=Q_NULLPTR;
-	delete customAltitude2Line; customAltitude2Line=Q_NULLPTR;
-	delete customDeclination1Line; customDeclination1Line=Q_NULLPTR;
-	delete customDeclination2Line; customDeclination2Line=Q_NULLPTR;
+	delete equinoxLine; equinoxLine=nullptr;
+	delete northernSolsticeLine; northernSolsticeLine=nullptr;
+	delete southernSolsticeLine; southernSolsticeLine=nullptr;
+	delete northernCrossquarterLine; northernCrossquarterLine=nullptr;
+	delete southernCrossquarterLine; southernCrossquarterLine=nullptr;
+	delete northernMajorStandstillLine0; northernMajorStandstillLine0=nullptr;
+	delete northernMajorStandstillLine1; northernMajorStandstillLine1=nullptr;
+	delete northernMinorStandstillLine2; northernMinorStandstillLine2=nullptr;
+	delete northernMinorStandstillLine3; northernMinorStandstillLine3=nullptr;
+	delete southernMinorStandstillLine4; southernMinorStandstillLine4=nullptr;
+	delete southernMinorStandstillLine5; southernMinorStandstillLine5=nullptr;
+	delete southernMajorStandstillLine6; southernMajorStandstillLine6=nullptr;
+	delete southernMajorStandstillLine7; southernMajorStandstillLine7=nullptr;
+	delete northernPolarCircleLine; northernPolarCircleLine=nullptr;
+	delete southernPolarCircleLine; southernPolarCircleLine=nullptr;
+	delete zenithPassageLine;  zenithPassageLine=nullptr;
+	delete nadirPassageLine;   nadirPassageLine=nullptr;
+	delete selectedObjectLine; selectedObjectLine=nullptr;
+	delete selectedObjectAzimuthLine; selectedObjectAzimuthLine=nullptr;
+	delete selectedObjectHourAngleLine; selectedObjectHourAngleLine=nullptr;
+	delete currentSunLine;     currentSunLine=nullptr;
+	delete currentMoonLine;    currentMoonLine=nullptr;
+	delete currentPlanetLine;  currentPlanetLine=nullptr;
+	delete geographicLocation1Line; geographicLocation1Line=nullptr;
+	delete geographicLocation2Line; geographicLocation2Line=nullptr;
+	delete customAzimuth1Line; customAzimuth1Line=nullptr;
+	delete customAzimuth2Line; customAzimuth2Line=nullptr;
+	delete customAltitude1Line; customAltitude1Line=nullptr;
+	delete customAltitude2Line; customAltitude2Line=nullptr;
+	delete customDeclination1Line; customDeclination1Line=nullptr;
+	delete customDeclination2Line; customDeclination2Line=nullptr;
 
 #ifndef NO_GUI
-	delete configDialog; configDialog=Q_NULLPTR;
+	delete configDialog; configDialog=nullptr;
 #endif
 }
 
@@ -242,37 +242,37 @@ void ArchaeoLines::init()
 	Q_ASSERT(customDeclination1Line);
 	Q_ASSERT(customDeclination2Line);
 
-	connect(this, SIGNAL(equinoxColorChanged(Vec3f)),                equinoxLine                 , SLOT(setColor(Vec3f)));
-	connect(this, SIGNAL(solsticesColorChanged(Vec3f)),              northernSolsticeLine        , SLOT(setColor(Vec3f)));
-	connect(this, SIGNAL(solsticesColorChanged(Vec3f)),              southernSolsticeLine        , SLOT(setColor(Vec3f)));
-	connect(this, SIGNAL(crossquartersColorChanged(Vec3f)),          northernCrossquarterLine    , SLOT(setColor(Vec3f)));
-	connect(this, SIGNAL(crossquartersColorChanged(Vec3f)),          southernCrossquarterLine    , SLOT(setColor(Vec3f)));
-	connect(this, SIGNAL(majorStandstillColorChanged(Vec3f)),        northernMajorStandstillLine0, SLOT(setColor(Vec3f)));
-	connect(this, SIGNAL(majorStandstillColorChanged(Vec3f)),        northernMajorStandstillLine1, SLOT(setColor(Vec3f)));
-	connect(this, SIGNAL(majorStandstillColorChanged(Vec3f)),        southernMajorStandstillLine6, SLOT(setColor(Vec3f)));
-	connect(this, SIGNAL(majorStandstillColorChanged(Vec3f)),        southernMajorStandstillLine7, SLOT(setColor(Vec3f)));
-	connect(this, SIGNAL(minorStandstillColorChanged(Vec3f)),        northernMinorStandstillLine2, SLOT(setColor(Vec3f)));
-	connect(this, SIGNAL(minorStandstillColorChanged(Vec3f)),        northernMinorStandstillLine3, SLOT(setColor(Vec3f)));
-	connect(this, SIGNAL(minorStandstillColorChanged(Vec3f)),        southernMinorStandstillLine4, SLOT(setColor(Vec3f)));
-	connect(this, SIGNAL(minorStandstillColorChanged(Vec3f)),        southernMinorStandstillLine5, SLOT(setColor(Vec3f)));
-	connect(this, SIGNAL(polarCirclesColorChanged(Vec3f)),           northernPolarCircleLine     , SLOT(setColor(Vec3f)));
-	connect(this, SIGNAL(polarCirclesColorChanged(Vec3f)),           southernPolarCircleLine     , SLOT(setColor(Vec3f)));
-	connect(this, SIGNAL(zenithPassageColorChanged(Vec3f)),          zenithPassageLine           , SLOT(setColor(Vec3f)));
-	connect(this, SIGNAL(nadirPassageColorChanged(Vec3f)),           nadirPassageLine            , SLOT(setColor(Vec3f)));
-	connect(this, SIGNAL(selectedObjectColorChanged(Vec3f)),         selectedObjectLine          , SLOT(setColor(Vec3f)));
-	connect(this, SIGNAL(selectedObjectAzimuthColorChanged(Vec3f)),  selectedObjectAzimuthLine   , SLOT(setColor(Vec3f)));
-	connect(this, SIGNAL(selectedObjectHourAngleColorChanged(Vec3f)),selectedObjectHourAngleLine , SLOT(setColor(Vec3f)));
-	connect(this, SIGNAL(currentSunColorChanged(Vec3f)),             currentSunLine              , SLOT(setColor(Vec3f)));
-	connect(this, SIGNAL(currentMoonColorChanged(Vec3f)),            currentMoonLine             , SLOT(setColor(Vec3f)));
-	connect(this, SIGNAL(currentPlanetColorChanged(Vec3f)),          currentPlanetLine           , SLOT(setColor(Vec3f)));
-	connect(this, SIGNAL(geographicLocation1ColorChanged(Vec3f)),    geographicLocation1Line     , SLOT(setColor(Vec3f)));
-	connect(this, SIGNAL(geographicLocation2ColorChanged(Vec3f)),    geographicLocation2Line     , SLOT(setColor(Vec3f)));
-	connect(this, SIGNAL(customAzimuth1ColorChanged(Vec3f)),         customAzimuth1Line          , SLOT(setColor(Vec3f)));
-	connect(this, SIGNAL(customAzimuth2ColorChanged(Vec3f)),         customAzimuth2Line          , SLOT(setColor(Vec3f)));
-	connect(this, SIGNAL(customAltitude1ColorChanged(Vec3f)),        customAltitude1Line         , SLOT(setColor(Vec3f)));
-	connect(this, SIGNAL(customAltitude2ColorChanged(Vec3f)),        customAltitude2Line         , SLOT(setColor(Vec3f)));
-	connect(this, SIGNAL(customDeclination1ColorChanged(Vec3f)),     customDeclination1Line      , SLOT(setColor(Vec3f)));
-	connect(this, SIGNAL(customDeclination2ColorChanged(Vec3f)),     customDeclination2Line      , SLOT(setColor(Vec3f)));
+	connect(this, &ArchaeoLines::equinoxColorChanged,                equinoxLine                 , &ArchaeoLine::setColor);
+	connect(this, &ArchaeoLines::solsticesColorChanged,              northernSolsticeLine        , &ArchaeoLine::setColor);
+	connect(this, &ArchaeoLines::solsticesColorChanged,              southernSolsticeLine        , &ArchaeoLine::setColor);
+	connect(this, &ArchaeoLines::crossquartersColorChanged,          northernCrossquarterLine    , &ArchaeoLine::setColor);
+	connect(this, &ArchaeoLines::crossquartersColorChanged,          southernCrossquarterLine    , &ArchaeoLine::setColor);
+	connect(this, &ArchaeoLines::majorStandstillColorChanged,        northernMajorStandstillLine0, &ArchaeoLine::setColor);
+	connect(this, &ArchaeoLines::majorStandstillColorChanged,        northernMajorStandstillLine1, &ArchaeoLine::setColor);
+	connect(this, &ArchaeoLines::majorStandstillColorChanged,        southernMajorStandstillLine6, &ArchaeoLine::setColor);
+	connect(this, &ArchaeoLines::majorStandstillColorChanged,        southernMajorStandstillLine7, &ArchaeoLine::setColor);
+	connect(this, &ArchaeoLines::minorStandstillColorChanged,        northernMinorStandstillLine2, &ArchaeoLine::setColor);
+	connect(this, &ArchaeoLines::minorStandstillColorChanged,        northernMinorStandstillLine3, &ArchaeoLine::setColor);
+	connect(this, &ArchaeoLines::minorStandstillColorChanged,        southernMinorStandstillLine4, &ArchaeoLine::setColor);
+	connect(this, &ArchaeoLines::minorStandstillColorChanged,        southernMinorStandstillLine5, &ArchaeoLine::setColor);
+	connect(this, &ArchaeoLines::polarCirclesColorChanged,           northernPolarCircleLine     , &ArchaeoLine::setColor);
+	connect(this, &ArchaeoLines::polarCirclesColorChanged,           southernPolarCircleLine     , &ArchaeoLine::setColor);
+	connect(this, &ArchaeoLines::zenithPassageColorChanged,          zenithPassageLine           , &ArchaeoLine::setColor);
+	connect(this, &ArchaeoLines::nadirPassageColorChanged,           nadirPassageLine            , &ArchaeoLine::setColor);
+	connect(this, &ArchaeoLines::selectedObjectColorChanged,         selectedObjectLine          , &ArchaeoLine::setColor);
+	connect(this, &ArchaeoLines::selectedObjectAzimuthColorChanged,  selectedObjectAzimuthLine   , &ArchaeoLine::setColor);
+	connect(this, &ArchaeoLines::selectedObjectHourAngleColorChanged,selectedObjectHourAngleLine , &ArchaeoLine::setColor);
+	connect(this, &ArchaeoLines::currentSunColorChanged,             currentSunLine              , &ArchaeoLine::setColor);
+	connect(this, &ArchaeoLines::currentMoonColorChanged,            currentMoonLine             , &ArchaeoLine::setColor);
+	connect(this, &ArchaeoLines::currentPlanetColorChanged,          currentPlanetLine           , &ArchaeoLine::setColor);
+	connect(this, &ArchaeoLines::geographicLocation1ColorChanged,    geographicLocation1Line     , &ArchaeoLine::setColor);
+	connect(this, &ArchaeoLines::geographicLocation2ColorChanged,    geographicLocation2Line     , &ArchaeoLine::setColor);
+	connect(this, &ArchaeoLines::customAzimuth1ColorChanged,         customAzimuth1Line          , &ArchaeoLine::setColor);
+	connect(this, &ArchaeoLines::customAzimuth2ColorChanged,         customAzimuth2Line          , &ArchaeoLine::setColor);
+	connect(this, &ArchaeoLines::customAltitude1ColorChanged,        customAltitude1Line         , &ArchaeoLine::setColor);
+	connect(this, &ArchaeoLines::customAltitude2ColorChanged,        customAltitude2Line         , &ArchaeoLine::setColor);
+	connect(this, &ArchaeoLines::customDeclination1ColorChanged,     customDeclination1Line      , &ArchaeoLine::setColor);
+	connect(this, &ArchaeoLines::customDeclination2ColorChanged,     customDeclination2Line      , &ArchaeoLine::setColor);
 
 	loadSettings();
 
@@ -286,9 +286,9 @@ void ArchaeoLines::init()
 	try
 	{
 		StelGui* gui = dynamic_cast<StelGui*>(app.getGui());
-		if (gui!=Q_NULLPTR)
+		if (gui!=nullptr)
 		{
-			toolbarButton = new StelButton(Q_NULLPTR,
+			toolbarButton = new StelButton(nullptr,
 						       QPixmap(":/archaeoLines/bt_archaeolines_on.png"),
 						       QPixmap(":/archaeoLines/bt_archaeolines_off.png"),
 						       QPixmap(":/graphicGui/miscGlow32x32.png"),
@@ -324,6 +324,11 @@ void ArchaeoLines::init()
 	addAction("actionAL_showCustomAltitude2Line",    section, N_("Show Line for Custom Altitude 2"),   "flagShowCustomAltitude2"  ); // No Shortcuts configured.
 	addAction("actionAL_showCustomDeclination1Line", section, N_("Show Line for Custom Declination 1"),   "flagShowCustomDeclination1"  ); // No Shortcuts configured.
 	addAction("actionAL_showCustomDeclination2Line", section, N_("Show Line for Custom Declination 2"),   "flagShowCustomDeclination2"  ); // No Shortcuts configured.
+
+	connect(this, &ArchaeoLines::geographicLocation1Changed, this, &ArchaeoLines::updateGeographicLocation1Label);
+	connect(this, &ArchaeoLines::geographicLocation2Changed, this, &ArchaeoLines::updateGeographicLocation2Label);
+	connect(this, &ArchaeoLines::geographicLocation1NameChanged, this, &ArchaeoLines::updateGeographicLocation1Label);
+	connect(this, &ArchaeoLines::geographicLocation2NameChanged, this, &ArchaeoLines::updateGeographicLocation2Label);
 }
 
 void ArchaeoLines::update(double deltaTime)
@@ -586,8 +591,8 @@ void ArchaeoLines::loadSettings()
 	azi = loc.getAzimuthForLocation(geographicLocation2Longitude, geographicLocation2Latitude);
 	if (azFromSouth) azi+=180.0;
 	geographicLocation2Line->setDefiningAngle(azi);
-	geographicLocation1Line->setLabel(conf->value("ArchaeoLines/geographic_location_1_label", "Mecca (Qibla)").toString());
-	geographicLocation2Line->setLabel(conf->value("ArchaeoLines/geographic_location_2_label", "Jerusalem").toString());
+	setGeographicLocation1Name(conf->value("ArchaeoLines/geographic_location_1_name", "Makkah (Qibla)").toString());
+	setGeographicLocation2Name(conf->value("ArchaeoLines/geographic_location_2_name", "Jerusalem").toString());
 
 	customAzimuth1Line->setDefiningAngle(conf->value("ArchaeoLines/custom_azimuth_1_angle", 0.0).toDouble());
 	customAzimuth2Line->setDefiningAngle(conf->value("ArchaeoLines/custom_azimuth_2_angle", 0.0).toDouble());
@@ -928,10 +933,15 @@ void ArchaeoLines::setGeographicLocation1Latitude(double lat)
 	geographicLocation1Line->setDefiningAngle(az);
 	emit geographicLocation1Changed();
 }
+void ArchaeoLines::setGeographicLocation1Name(const QString &name)
+{
+	geographicLocation1Name=name;
+	conf->setValue("ArchaeoLines/geographic_location_1_name", name);
+	emit geographicLocation1NameChanged(name);
+}
 void ArchaeoLines::setGeographicLocation1Label(const QString &label)
 {
 	geographicLocation1Line->setLabel(label);
-	conf->setValue("ArchaeoLines/geographic_location_1_label", label);
 	emit geographicLocation1LabelChanged(label);
 }
 void ArchaeoLines::setGeographicLocation2Longitude(double lng)
@@ -956,10 +966,15 @@ void ArchaeoLines::setGeographicLocation2Latitude(double lat)
 	geographicLocation2Line->setDefiningAngle(az);
 	emit geographicLocation2Changed();
 }
+void ArchaeoLines::setGeographicLocation2Name(const QString &name)
+{
+	geographicLocation2Name=name;
+	conf->setValue("ArchaeoLines/geographic_location_2_name", name);
+	emit geographicLocation2NameChanged(name);
+}
 void ArchaeoLines::setGeographicLocation2Label(const QString &label)
 {
 	geographicLocation2Line->setLabel(label);
-	conf->setValue("ArchaeoLines/geographic_location_2_label", label);
 	emit geographicLocation2LabelChanged(label);
 }
 
@@ -967,8 +982,39 @@ void ArchaeoLines::updateObserverLocation(const StelLocation &loc)
 {
 	geographicLocation1Line->setDefiningAngle(loc.getAzimuthForLocation(geographicLocation1Longitude, geographicLocation1Latitude));
 	geographicLocation2Line->setDefiningAngle(loc.getAzimuthForLocation(geographicLocation2Longitude, geographicLocation2Latitude));
+	updateGeographicLocation1Label();
+	updateGeographicLocation2Label();
 }
 
+void ArchaeoLines::updateGeographicLocation1Label()
+{
+	const StelLocation loc=StelApp::getInstance().getCore()->getCurrentLocation();
+	if (loc.getLongitude()==geographicLocation1Longitude && loc.getLatitude()==geographicLocation1Latitude)
+	{
+		geographicLocation1Line->setLabel(geographicLocation1Name);
+	}
+	else
+	{
+		double geoDist1=loc.distanceDegrees(geographicLocation1Longitude, geographicLocation1Latitude);
+		double geoDist1km=loc.distanceKm(geographicLocation1Longitude, geographicLocation1Latitude);
+		geographicLocation1Line->setLabel(QString("%1 (%2°/%3 %4)").arg(geographicLocation1Name, QString::number(geoDist1, 'g', 5), QString::number(geoDist1km,'g', 5),  qc_("km", "distance")));
+	}
+}
+
+void ArchaeoLines::updateGeographicLocation2Label()
+{
+	const StelLocation loc=StelApp::getInstance().getCore()->getCurrentLocation();
+	if (loc.getLongitude()==geographicLocation2Longitude && loc.getLatitude()==geographicLocation2Latitude)
+	{
+		geographicLocation2Line->setLabel(geographicLocation2Name);
+	}
+	else
+	{
+		double geoDist2=loc.distanceDegrees(geographicLocation2Longitude, geographicLocation2Latitude);
+		double geoDist2km=loc.distanceKm(geographicLocation2Longitude, geographicLocation2Latitude);
+		geographicLocation2Line->setLabel(QString("%1 (%2°/%3 %4)").arg(geographicLocation2Name, QString::number(geoDist2, 'g', 5), QString::number(geoDist2km, 'g', 5),  qc_("km", "distance")));
+	}
+}
 
 void ArchaeoLines::setCustomAzimuth1(double az)
 {
@@ -1430,8 +1476,8 @@ ArchaeoLine::ArchaeoLine(ArchaeoLine::Line lineType, double definingAngle) :
 	fader.setDuration(1000);
 	// Initialize the message strings and make sure they are translated when the language changes.
 	StelApp& app = StelApp::getInstance();
-	connect(&app, SIGNAL(languageChanged()), this, SLOT(updateLabel()));
-	connect(&app, SIGNAL(screenFontSizeChanged(int)), this, SLOT(setFontSizeFromApp(const int)));
+	connect(&app, &StelApp::languageChanged, this, &ArchaeoLine::updateLabel);
+	connect(&app, &StelApp::screenFontSizeChanged, this, &ArchaeoLine::setFontSizeFromApp);
 }
 
 void ArchaeoLine::updateLabel()
@@ -1557,9 +1603,9 @@ void ArchaeoLine::draw(StelCore *core, float intensity) const
 				rotFpt.transfo4d(rotLonP90);
 				Vec3d rotFpt2=fpt;
 				rotFpt2.transfo4d(rotLonM90);
-				sPainter.drawGreatCircleArc(fpt, rotFpt, Q_NULLPTR, alViewportEdgeIntersectCallback, &userData);
-				sPainter.drawGreatCircleArc(rotFpt2, fpt, Q_NULLPTR, alViewportEdgeIntersectCallback, &userData);
-				//sPainter.drawGreatCircleArc(rotFpt2, fpt, Q_NULLPTR, alViewportEdgeIntersectCallback, &userData);
+				sPainter.drawGreatCircleArc(fpt, rotFpt, nullptr, alViewportEdgeIntersectCallback, &userData);
+				sPainter.drawGreatCircleArc(rotFpt2, fpt, nullptr, alViewportEdgeIntersectCallback, &userData);
+				//sPainter.drawGreatCircleArc(rotFpt2, fpt, nullptr, alViewportEdgeIntersectCallback, &userData);
 				//return;
 //			}
 //			//else
@@ -1572,8 +1618,8 @@ void ArchaeoLine::draw(StelCore *core, float intensity) const
 //			middlePoint*=-1.;
 
 //		// Draw the arc in 2 sub-arcs to avoid lengths > 180 deg
-//		sPainter.drawGreatCircleArc(p1, middlePoint, Q_NULLPTR, alViewportEdgeIntersectCallback, &userData);
-//		sPainter.drawGreatCircleArc(p2, middlePoint, Q_NULLPTR, alViewportEdgeIntersectCallback, &userData);
+//		sPainter.drawGreatCircleArc(p1, middlePoint, nullptr, alViewportEdgeIntersectCallback, &userData);
+//		sPainter.drawGreatCircleArc(p2, middlePoint, nullptr, alViewportEdgeIntersectCallback, &userData);
 
 //		// OpenGL ES 2.0 doesn't have GL_LINE_SMOOTH
 //		#ifdef GL_LINE_SMOOTH

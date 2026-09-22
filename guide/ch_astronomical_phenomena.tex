@@ -114,12 +114,9 @@ constellations. In many cultures, the various constellations have been
 associated with mythological entities. As such people have often
 projected pictures into the skies as can be seen in figure~\ref{fig:ursamajor} which shows the constellation of Ursa Major. On the
 left is a picture with the image of the mythical Great Bear, on the
-right only a line-art version (or \emph{stick figure}) is shown. The seven bright stars of Ursa
-Major are widely recognised, known variously as ``the plough'', the
-``pan-handle'', and the ``big dipper''. This sub-grouping is known as an
-\emph{asterism} --- a distinct grouping of stars. On the right, the
-picture of the bear has been removed and only a constellation diagram
-remains.
+right only a line-art version (or \emph{stick figure}) is shown. 
+
+
 
 \begin{figure}[tbp]
 \centering\includegraphics[scale=0.8]{uma.png}
@@ -208,34 +205,68 @@ Ind & Indus                & Indi                  & Vul & Vulpecula            
 
 Stellarium can draw both constellation diagrams and artistic
 representations of the constellations. Multiple sky cultures are
-supported: Western, Polynesian, Egyptian, Chinese, and several other sky cultures are
-available, although at time of writing the non-Western constellations
-are not complete, and as yet there are no artistic representations of
-these sky-cultures.
+supported: Stellarium's default 'Modern' skyculture is an amalgamate of European scientific traditions 
+that are rooted in Ptolemy's Almagest, with constellation figures mostly from ancient Greek mythology. 
+In the upcoming era of Islam, the Almagest was translated to Arab, including
+star names that often just described the location of a star within the constellation. 
+Around the year 1000 the Almagest was re-introduced to Western Europe, but some star names were misspelled 
+and transferred without re-tranalation, introducing a large number of star names of Arab origin now in use for many centuries.
 
-Aside from historical and mythological value, to the modern astronomer
+Aside from historical and mythological value still valued by storytellers around the campfires, 
+to the modern astronomer
 the constellations provide a way to segment the sky for the purposes
-of describing locations of objects, indeed one of the first tasks for
-an amateur observer is \emph{learning the constellations} --- the
+of describing locations of objects. Indeed, one of the first tasks for
+an amateur observer is \emph{astrognosis} (learning the constellations) --- the
 process of becoming familiar with the relative positions of the
 constellations, at what time of year a constellation is visible, and
 in which constellations observationally interesting objects reside.
-The International Astronomical Union\index{IAU} has adopted 88 ``Western''
-constellations as a common system for segmenting the sky (Table~\ref{tab:IAUConstellations}). They are
-based on Greek/Roman mythology, but with several additions from
-Renaissance and later centuries.  As such some formalisation has been
-adopted, each constellation having a \emph{proper name}, which is in
-Latin, and a three letter abbreviation of that name.  For example,
-Ursa Major has the abbreviation UMa. Also, the ``Western''
-constellation have clearly defined boundaries \citep{Delporte:1930}, which you can draw in
+
+As scientific astronomy evolved in the Renaissance and later, star atlases were produced, 
+each introducing more constellations to fill gaps left between the classic 48 Ptolemaic constellations, 
+with artistic figures often overwhelming the actual star map.
+The telescope age and needs to assign each fixed celestial object coordinates and a 'host constellation' 
+finally had to bring an end to the uncontrolled growth of officially recognized constellations. 
+In 1930, the International Astronomical Union \index{IAU} has adopted 88 
+constellations as a common system for segmenting the sky (Table~\ref{tab:IAUConstellations}). 
+Some formalisation has been adopted, each constellation having a \emph{proper name} in Latin, 
+and a three letter abbreviation of that name.  
+For example, Ursa Major has the abbreviation UMa. Also, the IAU
+constellations have clearly defined \emph{boundaries}\citep{Delporte:1930}, which you can draw in
 Stellarium when you press the \key{B} key\footnote{These boundaries or
-  borders have been drawn using star maps from 1875. Due to the effect
+  borders have been defined using coordinates from 1875. Due to the effect
   of \emph{precession}, these borders are no longer parallel to
-  today's coordinates.}. The IAU constellation a selected object is placed in 
+  today's coordinate grid.}. The IAU constellation a selected object is placed in 
 is also available in the object information data \citep{1987PASP...99..695R}, 
-regardless of the currently active sky culture.  On the other hand, the shapes 
-of mythological figures, and also stick figures, have not been canonized, so 
-you will find deviations between Stellarium and printed atlases.
+regardless of the currently active sky culture.  
+
+On the other hand, the shapes of mythological figures, and also stick figures, have not been canonized, so 
+you will likely find deviations between Stellarium's default skyculture and your favourite printed atlas. 
+In this sense, do also not assume Stellarium's default stick figures to be in any way authoritative. 
+As any other, they are an artistic interpretation that should help memorizing and discerning the constellations.
+
+\subsubsection{Asterisms}
+\label{sec:Phenomena:Asterisms}
+
+As nonscientific observing of the sky became a pastime for non-scientists (amateur astronomers) in the late 19th century, 
+some easy to recognize star groups were described and labeled in sky observing guides. 
+These are internationally not standardized and may show even regionally differing names for (almost) the same figure. 
+For example, the seven bright stars of Ursa Major are widely recognised, known variously as ``the plough'', the
+``pan-handle'', ``greater wagon'' or the ``big dipper''. 
+
+After the canonisation of the IAU constellations, these figures became commonly known as \emph{asterisms}%
+\footnote{Note that in other scientific contexts, `asterism' may also be the general designation of a star figure (often of other cultures). 
+However, in Stellarium an `asterism' can be understood as `informal second-class figure' that may be used for culture-dependent purposes.}. 
+In Stellarium, you can display them as stick figures with name labels in colors different from the ``main'' constellations. 
+
+\subsubsection{Non-European Constellations}
+\label{sec:Phenomena:OtherSkycultures}
+
+Many other sky cultures are available in Stellarium which show constellations and other elements of ethnoastronomy 
+of other traditions, contributed by users and scientists from all over the world, and showing the diversity 
+and ubiquity of human interest in the sky all around the globe.
+ 
+We welcome well-made contributions, but as time evolves these skyculture contributions may be further extended by the original authors, 
+other contributors (if allowed by respective licenses), or removed if found problematic. See chapter~\ref{ch:SkyCultures} for full details.
 
 
 \subsection{Star Names}
@@ -243,7 +274,7 @@ you will find deviations between Stellarium and printed atlases.
 
 The brighter stars often have one or more \emph{common
 names} relating to mythical characters from the various traditions. For
-example the brightest star in the sky, Sirius is also known as The Dog
+example the brightest star in the sky, Sirius, is also known as The Dog
 Star (the name Canis Major --- the constellation Sirius is found in ---
 is Latin for ``The Great Dog''). 
 
@@ -260,7 +291,14 @@ names added by court astronomers into their maps. There are also 3
 stars named after the victims of the Apollo~1 disaster in 1967.
 Today, the International Astronomical Union (IAU)\index{IAU} is the only
 scientifically accepted authority which can give proper names to
-stars. Some companies offer a paid name service for commemoration or
+stars, and a `Working Group on Star Names' (WGSN) has been established. 
+Apart from canonizing one spelling for the well-known stars and avoiding using the same name for multiple stars, 
+recently WGSN has started to assign star names from non-European cultures to hitherto unnamed 
+(usually dimmer, but still naked-eye) stars in order to diversify star names. 
+(Constellation names and IAU borders are not affected.) 
+Stellarium closely follows this development in the default `Modern' and `IAU' Skycultures.
+
+Some companies offer a paid name service for commemoration or
 dedication of a star for deceased relatives or such, but all you get
 here is a piece of paper with coordinates of (usually) an unremarkably
 dim star only visible in a telescope, and a name to remember, stored

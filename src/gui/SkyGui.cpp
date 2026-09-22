@@ -77,11 +77,12 @@ InfoPanel::InfoPanel(QGraphicsItem* parent) : QGraphicsTextItem("", parent)
 	{
 		// Add a drop shadow for better visibility
 		QGraphicsDropShadowEffect *effect = new QGraphicsDropShadowEffect(this);
-		effect->setBlurRadius(6);
-		effect->setColor(QColor(0, 0, 0));
+		effect->setBlurRadius(qBound(0, conf->value("gui/info_shadow_radius", 6).toInt(), 64));
+		effect->setColor(QColor(0, 0, 0, qBound(0, conf->value("gui/info_shadow_opacity", 127).toInt(), 255)));
 		effect->setOffset(0,0);
 		setGraphicsEffect(effect);
 	}
+	opacity=qBound(-100, conf->value("gui/info_panel_opacity", 0).toInt(), 100);
 }
 
 InfoPanel::~InfoPanel()
@@ -97,12 +98,56 @@ void InfoPanel::setTextFromObjects(const QList<StelObjectP>& selected)
 	}
 	else
 	{
+		static const QString css(
+			"h2 {"
+			      "color: %1;"
+			      "background-color: rgba(0,0,0,%2%);"
+			    "} "
+			".info-string {"
+			      "color: %1;"
+			      "background-color: rgba(0,0,0,%2%);"
+			    "} "
+			"table.info-string {"
+			      "margin: 0em 0em 0em -0.125em;"
+			      "border-spacing: 0px;"
+			      "border: 0px;"
+			      "color: %1;"
+			      "background-color: rgba(0,0,0,%2%);"
+			    "} ");
+
 		// just print details of the first item for now
 		// Must set lastRTS for currently selected object here...
 		StelCore *core=StelApp::getInstance().getCore();
+
+		Vec3f color = selected[0]->getInfoColor();
+		QString opacity=QString::number(this->opacity);
+		if (StelApp::getInstance().getFlagOverwriteInfoColor())
+		{
+			// make info text more readable...
+			color = StelApp::getInstance().getOverwriteInfoColor();
+		}
+		if (core->isBrightDaylight() && !StelApp::getInstance().getVisionModeNight())
+		{
+			// make info text more readable when atmosphere enabled at daylight.
+			color   = StelApp::getInstance().getDaylightInfoColor();
+			opacity = "0";
+		}
+		// A negative opacity forces dark background even for daylight scenes.
+		if (this->opacity<0)
+		{
+			color   = StelApp::getInstance().getOverwriteInfoColor();
+			opacity = QString::number(qAbs(this->opacity));
+		}
+
 		infoHTML = selected[0]->getInfoString(core, infoTextFilters);
 		selected[0]->removeExtraInfoStrings(StelObject::AllInfo);
-		setHtml(infoHTML);
+
+		document()->setDefaultStyleSheet(css.arg(color.toHtmlColor(), opacity));
+
+		// We need the span to set the background opacity.
+		setHtml(QString("<div class='info-string'><span style='background:rgba(0, 0, 0, %1%);'>").arg(opacity)
+			+ infoHTML
+			+ "</span></div>");
 	}
 }
 

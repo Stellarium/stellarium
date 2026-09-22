@@ -556,7 +556,7 @@ QString MainService::getInfoString()
 	StelObjectP selectedObject = getSelectedObject();
 	if(selectedObject.isNull())
 		return QString();
-	return selectedObject->getInfoString(core,StelObject::AllInfo | StelObject::NoFont);
+	return selectedObject->getInfoString(core,StelObject::AllInfo);
 }
 
 bool MainService::focusObject(const QString &name, MainService::SelectionMode mode)

@@ -393,6 +393,9 @@ void AstroCalcDialog::createDialogContent()
 	connect(ui->eclipseFilterAnnular,   &QCheckBox::clicked, this, &AstroCalcDialog::saveEclipseFiltersState);
 	connect(ui->eclipseFilterPartial,   &QCheckBox::clicked, this, &AstroCalcDialog::saveEclipseFiltersState);
 	connect(ui->eclipseFilterPenumbral, &QCheckBox::clicked, this, &AstroCalcDialog::saveEclipseFiltersState);
+	
+	connect(core, &StelCore::locationChanged, this, &AstroCalcDialog::enableLocalCoordinatesButton);
+	connect(ui->localCoordinates, &QPushButton::clicked, this, &AstroCalcDialog::goToLocalCoordinates);
 
 	// Let's use DMS and decimal degrees as acceptable values for "Maximum allowed separation" input box
 	ui->allowedSeparationSpinBox->setDisplayFormat(AngleSpinBox::DMSSymbols);
@@ -3064,9 +3067,16 @@ void AstroCalcDialog::generateLunarEclipses()
 
 		// sort-by-date
 		ui->lunareclipseTreeWidget->sortItems(LunarEclipseDate, Qt::AscendingOrder);
+		isLunarEclipsesComputed = true;
 		enableLunarEclipsesButtons(true);
-		enableLunarEclipsesCircumstancesButtons(false);
-		StelApp::getInstance().enableBottomStelBarUpdates(true);
+		enableLunarEclipsesCircumstancesButtons(false);		
+		if (isLocationChanged)
+		{
+			cleanupSolarEclipsesLocal();
+			cleanupTransits();
+		}
+		showLocalCoordinates();
+		StelApp::getInstance().enableBottomStelBarUpdates(true);		
 	}
 	else
 		cleanupLunarEclipses();
@@ -3076,6 +3086,8 @@ void AstroCalcDialog::cleanupLunarEclipses()
 {
 	ui->lunareclipseTreeWidget->clear();
 	ui->lunareclipsecontactsTreeWidget->clear();
+	isLunarEclipsesComputed = false;
+	cleanupLocalCoordinates();
 	enableLunarEclipsesButtons(false);
 	enableLunarEclipsesCircumstancesButtons(false);
 }
@@ -3435,6 +3447,69 @@ LocalSEparams localSolarEclipse(double JD,int contact,bool central) {
 	result.ce = ce;
 
 	return result;
+}
+
+void AstroCalcDialog::cleanupLocalCoordinates()
+{
+	if (!isSolarEclipsesComputed && !isLunarEclipsesComputed && !isTransitsComputed)
+	{
+		ui->localCoordinates->setText("");
+		ui->localCoordinates->setToolTip("");
+		ui->localCoordinates->setVisible(false);
+	}
+}
+
+void AstroCalcDialog::goToLocalCoordinates()
+{
+	ui->localCoordinates->setEnabled(false);
+	ui->localCoordinates->setToolTip(location.name);
+	ui->localCoordinates->setStyleSheet("");
+	isReturned = true;
+	core->moveObserverTo(location, 1.);
+}
+
+void AstroCalcDialog::enableLocalCoordinatesButton()
+{
+	if ((isSolarEclipsesComputed || isLunarEclipsesComputed || isTransitsComputed) && !isReturned)
+	{
+		ui->localCoordinates->setEnabled(true);
+		ui->localCoordinates->setToolTip(q_("Location is changed! Go to back..."));
+		ui->localCoordinates->setStyleSheet(QString("QPushButton{ background: red; }"));
+		isLocationChanged = true;
+	}
+}
+
+void AstroCalcDialog::showLocalCoordinates()
+{
+	location = core->getCurrentLocation();	
+	float lat  = location.getLatitude();
+	float lon = location.getLongitude();
+	const QString degree = QChar(0x00B0);
+	QString pmc;
+	if (lat < 0.f)
+	{
+		pmc = qc_("S", "latitude");
+		lat *= -1.f;
+	}
+	else
+		pmc = qc_("N", "latitude");
+	QString latStr = QString("%1%2%3").arg(pmc, QString::number(lat, 'f', 5), degree);
+	if (lon < 0.f)
+	{
+		pmc = qc_("W", "longitude");
+		lon *= -1.f;
+	}
+	else
+		pmc = qc_("E", "longitude");
+	QString lonStr = QString("%1%2%3").arg(pmc, QString::number(lon, 'f', 5), degree);
+
+	ui->localCoordinates->setText(QString("%1 %2").arg(latStr, lonStr));
+	ui->localCoordinates->setToolTip(location.name);
+	ui->localCoordinates->setVisible(true);
+	ui->localCoordinates->setEnabled(false);
+	ui->localCoordinates->setStyleSheet("");
+	isReturned = false;
+	isLocationChanged = false;
 }
 
 void AstroCalcDialog::generateSolarEclipses()
@@ -3981,8 +4056,15 @@ void AstroCalcDialog::generateSolarEclipsesLocal()
 
 		// sort-by-date
 		ui->solareclipselocalTreeWidget->sortItems(SolarEclipseLocalDate, Qt::AscendingOrder);
+		isSolarEclipsesComputed = true;
 		enableSolarEclipsesLocalButtons(true);
-		enableSolarEclipsesLocalSingleEclipseButtons(false);
+		enableSolarEclipsesLocalSingleEclipseButtons(false);		
+		if (isLocationChanged)
+		{
+			cleanupLunarEclipses();
+			cleanupTransits();
+		}
+		showLocalCoordinates();
 	}
 	else
 		cleanupSolarEclipsesLocal();
@@ -3991,7 +4073,7 @@ void AstroCalcDialog::generateSolarEclipsesLocal()
 void AstroCalcDialog::cleanupSolarEclipses()
 {
 	ui->solareclipseTreeWidget->clear();
-	ui->solareclipsecontactsTreeWidget->clear();
+	ui->solareclipsecontactsTreeWidget->clear();	
 	enableSolarEclipsesButtons(false);
 	enableSolarEclipsesCircumstancesButtons(false);
 }
@@ -4353,6 +4435,8 @@ void AstroCalcDialog::saveSolarEclipseMap(const bool local)
 void AstroCalcDialog::cleanupSolarEclipsesLocal()
 {
 	ui->solareclipselocalTreeWidget->clear();
+	isSolarEclipsesComputed = false;
+	cleanupLocalCoordinates();
 	enableSolarEclipsesLocalButtons(false);
 	enableSolarEclipsesLocalSingleEclipseButtons(false);
 }
@@ -5016,8 +5100,14 @@ void AstroCalcDialog::generateTransits()
 
 		// sort-by-date
 		ui->transitTreeWidget->sortItems(TransitMid, Qt::AscendingOrder);
-		enableTransitsButtons(true);
-
+		isTransitsComputed = true;
+		enableTransitsButtons(true);		
+		if (isLocationChanged)
+		{
+			cleanupSolarEclipsesLocal();
+			cleanupLunarEclipses();
+		}
+		showLocalCoordinates();
 		StelApp::getInstance().enableBottomStelBarUpdates(true);
 	}
 	else
@@ -5033,7 +5123,9 @@ void AstroCalcDialog::enableRTSButtons(bool enable)
 void AstroCalcDialog::cleanupTransits()
 {
 	ui->transitTreeWidget->clear();
-	enableTransitsButtons(false);
+	isTransitsComputed = false;
+	cleanupLocalCoordinates();
+	enableTransitsButtons(false);	
 }
 
 void AstroCalcDialog::enableTransitsButtons(bool enable)
@@ -7703,13 +7795,18 @@ void AstroCalcDialog::changeEclipsesTab(int index)
 		{3,	q_("Transits of Mercury and Venus across the Sun")}
 		};
 	ui->eclipseHeaderLabel->setText(headermap.value(index, q_("Table of solar eclipses")));
+	bool flag = (isSolarEclipsesComputed || isLunarEclipsesComputed || isTransitsComputed);
 	switch(index)
 	{
 	case 0: // Solar eclipses
-		ui->eclipseFilterWidget->setVisible(true);
+		//ui->eclipseFilterWidget->setVisible(true);
 		ui->eclipseFilterHybrid->setVisible(true);
 		ui->eclipseFilterAnnular->setVisible(true);
 		ui->eclipseFilterPenumbral->setVisible(false);
+		ui->eclipseFilterPartial->setVisible(true);
+		ui->eclipseFilterTotal->setVisible(true);
+		
+		ui->localCoordinates->setVisible(false);
 
 		ui->eclipseFilterTotal->setChecked(conf->value("astrocalc/eclipse_filter/global_solar/total_enabled", true).toBool());
 		ui->eclipseFilterHybrid->setChecked(conf->value("astrocalc/eclipse_filter/global_solar/hybrid_enabled", true).toBool());
@@ -7717,27 +7814,44 @@ void AstroCalcDialog::changeEclipsesTab(int index)
 		ui->eclipseFilterPartial->setChecked(conf->value("astrocalc/eclipse_filter/global_solar/partial_enabled", true).toBool());
 		break;
 	case 1: // Local solar eclipses
-		ui->eclipseFilterWidget->setVisible(true);
+		//ui->eclipseFilterWidget->setVisible(true);
 		ui->eclipseFilterHybrid->setVisible(false);
 		ui->eclipseFilterAnnular->setVisible(true);
 		ui->eclipseFilterPenumbral->setVisible(false);
+		ui->eclipseFilterPartial->setVisible(true);
+		ui->eclipseFilterTotal->setVisible(true);
+		
+		ui->localCoordinates->setVisible(flag);
 
 		ui->eclipseFilterTotal->setChecked(conf->value("astrocalc/eclipse_filter/local_solar/total_enabled", true).toBool());
 		ui->eclipseFilterAnnular->setChecked(conf->value("astrocalc/eclipse_filter/local_solar/annular_enabled", true).toBool());
 		ui->eclipseFilterPartial->setChecked(conf->value("astrocalc/eclipse_filter/local_solar/partial_enabled", true).toBool());
 		break;
 	case 2: // Lunar eclipses
-		ui->eclipseFilterWidget->setVisible(true);
+		//ui->eclipseFilterWidget->setVisible(true);
 		ui->eclipseFilterHybrid->setVisible(false);
 		ui->eclipseFilterAnnular->setVisible(false);
 		ui->eclipseFilterPenumbral->setVisible(true);
+		ui->eclipseFilterPartial->setVisible(true);
+		ui->eclipseFilterTotal->setVisible(true);
+		
+		ui->localCoordinates->setVisible(flag);
 
 		ui->eclipseFilterTotal->setChecked(conf->value("astrocalc/eclipse_filter/lunar/total_enabled", true).toBool());
 		ui->eclipseFilterPartial->setChecked(conf->value("astrocalc/eclipse_filter/lunar/partial_enabled", true).toBool());
 		ui->eclipseFilterPenumbral->setChecked(conf->value("astrocalc/eclipse_filter/lunar/penumbral_enabled", true).toBool());
 		break;
+	case 3: // Transits
+		ui->eclipseFilterHybrid->setVisible(false);
+		ui->eclipseFilterAnnular->setVisible(false);
+		ui->eclipseFilterPenumbral->setVisible(false);
+		ui->eclipseFilterTotal->setVisible(false);
+		ui->eclipseFilterPartial->setVisible(false);
+		
+		ui->localCoordinates->setVisible(flag);
+		break;
 	default:
-		ui->eclipseFilterWidget->setVisible(false);
+		//ui->eclipseFilterWidget->setVisible(false);
 		break;
 	}
 }
@@ -7818,44 +7932,45 @@ void AstroCalcDialog::populateWutGroups()
 	category->blockSignals(true);
 
 	wutCategories = {
-		{ q_("Planets"),                              EWPlanets},
-		{ q_("Bright stars"),                         EWBrightStars},
-		{ q_("Bright nebulae"),                       EWBrightNebulae},
-		{ q_("Dark nebulae"),                         EWDarkNebulae},
-		{ q_("Galaxies"),                             EWGalaxies},
-		{ q_("Open star clusters"),                   EWOpenStarClusters},
-		{ q_("Asteroids"),                            EWAsteroids},
-		{ q_("Comets"),                               EWComets},
-		{ q_("Plutinos"),                             EWPlutinos},
-		{ q_("Dwarf planets"),                        EWDwarfPlanets},
-		{ q_("Cubewanos"),                            EWCubewanos},
-		{ q_("Scattered disc objects"),               EWScatteredDiscObjects},
-		{ q_("Oort cloud objects"),                   EWOortCloudObjects},
-		{ q_("Sednoids"),                             EWSednoids},
-		{ q_("Planetary nebulae"),                    EWPlanetaryNebulae},
-		{ q_("Bright double stars"),                  EWBrightDoubleStars},
-		{ q_("Bright variable stars"),                EWBrightVariableStars},
-		{ q_("Bright stars with high proper motion"), EWBrightStarsWithHighProperMotion},
-		{ q_("Symbiotic stars"),                      EWSymbioticStars},
-		{ q_("Emission-line stars"),                  EWEmissionLineStars},
-		{ q_("Supernova candidates"),                 EWSupernovaeCandidates},
-		{ q_("Supernova remnant candidates"),         EWSupernovaeRemnantCandidates},
-		{ q_("Supernova remnants"),                   EWSupernovaeRemnants},
-		{ q_("Clusters of galaxies"),                 EWClustersOfGalaxies},
-		{ q_("Interstellar objects"),                 EWInterstellarObjects},
-		{ q_("Globular star clusters"),               EWGlobularStarClusters},
-		{ q_("Regions of the sky"),                   EWRegionsOfTheSky},
-		{ q_("Active galaxies"),                      EWActiveGalaxies},
-		{ q_("Interacting galaxies"),                 EWInteractingGalaxies},
-		{ q_("Deep-sky objects"),                     EWDeepSkyObjects},
-		{ q_("Messier objects"),                      EWMessierObjects},
-		{ q_("NGC/IC objects"),                       EWNGCICObjects},
-		{ q_("Caldwell objects"),                     EWCaldwellObjects},
-		{ q_("Herschel 400 objects"),                 EWHerschel400Objects},
-		{ q_("Algol-type eclipsing systems"),         EWAlgolTypeVariableStars},
-		{ q_("The classical cepheids"),               EWClassicalCepheidsTypeVariableStars},
-		{ q_("Bright carbon stars"),                  EWCarbonStars},
-		{ q_("Bright barium stars"),                  EWBariumStars}};
+		{ q_("Planets"),                              EWPlanets },
+		{ q_("Bright stars"),                         EWBrightStars },
+		{ q_("Bright nebulae"),                       EWBrightNebulae },
+		{ q_("Dark nebulae"),                         EWDarkNebulae },
+		{ q_("Galaxies"),                             EWGalaxies },
+		{ q_("Open star clusters"),                   EWOpenStarClusters },
+		{ q_("Asteroids"),                            EWAsteroids },
+		{ q_("Comets"),                               EWComets },
+		{ q_("Plutinos"),                             EWPlutinos },
+		{ q_("Dwarf planets"),                        EWDwarfPlanets },
+		{ q_("Cubewanos"),                            EWCubewanos },
+		{ q_("Scattered disc objects"),               EWScatteredDiscObjects },
+		{ q_("Oort cloud objects"),                   EWOortCloudObjects },
+		{ q_("Sednoids"),                             EWSednoids },
+		{ q_("Planetary nebulae"),                    EWPlanetaryNebulae },
+		{ q_("Bright double stars"),                  EWBrightDoubleStars },
+		{ q_("Bright variable stars"),                EWBrightVariableStars },
+		{ q_("Bright stars with high proper motion"), EWBrightStarsWithHighProperMotion },
+		{ q_("Symbiotic stars"),                      EWSymbioticStars },
+		{ q_("Emission-line stars"),                  EWEmissionLineStars },
+		{ q_("Supernova candidates"),                 EWSupernovaeCandidates },
+		{ q_("Supernova remnant candidates"),         EWSupernovaeRemnantCandidates },
+		{ q_("Supernova remnants"),                   EWSupernovaeRemnants },
+		{ q_("Clusters of galaxies"),                 EWClustersOfGalaxies },
+		{ q_("Interstellar objects"),                 EWInterstellarObjects },
+		{ q_("Globular star clusters"),               EWGlobularStarClusters },
+		{ q_("Regions of the sky"),                   EWRegionsOfTheSky },
+		{ q_("Active galaxies"),                      EWActiveGalaxies },
+		{ q_("Interacting galaxies"),                 EWInteractingGalaxies },
+		{ q_("Deep-sky objects"),                     EWDeepSkyObjects },
+		{ q_("Messier objects"),                      EWMessierObjects },
+		{ q_("NGC/IC objects"),                       EWNGCICObjects },
+		{ q_("Caldwell objects"),                     EWCaldwellObjects },
+		{ q_("Herschel 400 objects"),                 EWHerschel400Objects },
+		{ q_("Algol-type eclipsing systems"),         EWAlgolTypeVariableStars },
+		{ q_("The classical cepheids"),               EWClassicalCepheidsTypeVariableStars },
+		{ q_("Bright carbon stars"),                  EWCarbonStars },
+		{ q_("Bright barium stars"),                  EWBariumStars }
+	};
 	if (moduleMgr.isPluginLoaded("Novae"))
 		wutCategories.insert(q_("Bright nova stars"), EWBrightNovaStars);
 	if (moduleMgr.isPluginLoaded("Supernovae"))
@@ -7877,49 +7992,49 @@ void AstroCalcDialog::populateWutGroups()
 QString AstroCalcDialog::getWUTObjectType()
 {
 	static const QMap<int, QString> wutObjectTypes = {
-		{ EWPlanets,							"Planet" },
-		{ EWBrightStars,						"Star" },
-		{ EWBrightNebulae,					"Nebula" },
-		{ EWDarkNebulae,						"Nebula" },
-		{ EWGalaxies,						"Nebula" },
-		{ EWOpenStarClusters,				 	"Nebula" },
-		{ EWAsteroids,						"Planet" },
-		{ EWComets,							"Planet" },
-		{ EWPlutinos,							"Planet" },
-		{ EWDwarfPlanets,					"Planet" },
-		{ EWCubewanos,						"Planet" },
-		{ EWScatteredDiscObjects,				"Planet" },
-		{ EWOortCloudObjects,					"Planet" },
-		{ EWSednoids,						"Planet" },
-		{ EWPlanetaryNebulae,					"Nebula" },
-		{ EWBrightDoubleStars,				"Star" },
-		{ EWBrightVariableStars,				"Star" },
-		{ EWBrightStarsWithHighProperMotion,	"Star" },
-		{ EWSymbioticStars,					"Nebula" },
-		{ EWEmissionLineStars,				"Nebula" },
-		{ EWSupernovaeCandidates,			"Nebula" },
-		{ EWSupernovaeRemnantCandidates,	"Nebula" },
-		{ EWSupernovaeRemnants,				"Nebula" },
-		{ EWClustersOfGalaxies,				"Nebula" },
-		{ EWInterstellarObjects,				"Planet" },
-		{ EWGlobularStarClusters,				"Nebula" },
-		{ EWRegionsOfTheSky,					"Nebula" },
-		{ EWActiveGalaxies,					"Nebula" },
-		{ EWInteractingGalaxies,				"Nebula" },
-		{ EWDeepSkyObjects,					"Nebula" },
-		{ EWMessierObjects,					"Nebula" },
-		{ EWNGCICObjects,					"Nebula" },
-		{ EWCaldwellObjects,					"Nebula" },
-		{ EWHerschel400Objects,				"Nebula" },
-		{ EWAlgolTypeVariableStars,			"Star" },
-		{ EWClassicalCepheidsTypeVariableStars,	"Star" },
-		{ EWCarbonStars,						"Star" },
-		{ EWBariumStars,						"Star" },
+		{ EWPlanets,                            "Planet" },
+		{ EWBrightStars,                        "Star" },
+		{ EWBrightNebulae,                      "Nebula" },
+		{ EWDarkNebulae,                        "Nebula" },
+		{ EWGalaxies,                           "Nebula" },
+		{ EWOpenStarClusters,                   "Nebula" },
+		{ EWAsteroids,                          "Planet" },
+		{ EWComets,                             "Planet" },
+		{ EWPlutinos,                           "Planet" },
+		{ EWDwarfPlanets,                       "Planet" },
+		{ EWCubewanos,                          "Planet" },
+		{ EWScatteredDiscObjects,               "Planet" },
+		{ EWOortCloudObjects,                   "Planet" },
+		{ EWSednoids,                           "Planet" },
+		{ EWPlanetaryNebulae,                   "Nebula" },
+		{ EWBrightDoubleStars,                  "Star" },
+		{ EWBrightVariableStars,                "Star" },
+		{ EWBrightStarsWithHighProperMotion,    "Star" },
+		{ EWSymbioticStars,                     "Nebula" },
+		{ EWEmissionLineStars,                  "Nebula" },
+		{ EWSupernovaeCandidates,               "Nebula" },
+		{ EWSupernovaeRemnantCandidates,        "Nebula" },
+		{ EWSupernovaeRemnants,	                "Nebula" },
+		{ EWClustersOfGalaxies,                 "Nebula" },
+		{ EWInterstellarObjects,                "Planet" },
+		{ EWGlobularStarClusters,               "Nebula" },
+		{ EWRegionsOfTheSky,                    "Nebula" },
+		{ EWActiveGalaxies,                     "Nebula" },
+		{ EWInteractingGalaxies,                "Nebula" },
+		{ EWDeepSkyObjects,                     "Nebula" },
+		{ EWMessierObjects,                     "Nebula" },
+		{ EWNGCICObjects,                       "Nebula" },
+		{ EWCaldwellObjects,                    "Nebula" },
+		{ EWHerschel400Objects,                 "Nebula" },
+		{ EWAlgolTypeVariableStars,             "Star" },
+		{ EWClassicalCepheidsTypeVariableStars, "Star" },
+		{ EWCarbonStars,                        "Star" },
+		{ EWBariumStars,                        "Star" },
 		// plug-ins
-		{ EWBrightNovaStars,					"Nova" },
-		{ EWBrightSupernovaStars,				"Supernova" },
-		{ EWPulsars,							"Pulsar" },
-		{ EWExoplanetarySystems,				"Exoplanet" }
+		{ EWBrightNovaStars,                    "Nova" },
+		{ EWBrightSupernovaStars,               "Supernova" },
+		{ EWPulsars,                            "Pulsar" },
+		{ EWExoplanetarySystems,                "Exoplanet" }
 	};
 
 	return wutObjectTypes.value(wutCategories.value(ui->wutCategoryListWidget->currentItem()->text()), QString());
@@ -8143,6 +8258,7 @@ void AstroCalcDialog::calculateWutObjects()
 		}
 
 		initListWUT();
+		ui->wutMatchingObjectsTreeWidget->setSortingEnabled(false);
 		ui->wutMatchingObjectsTreeWidget->showColumn(WUTMagnitude);
 		ui->wutMatchingObjectsTreeWidget->showColumn(WUTAngularSize);		
 		objectsList.clear();
@@ -8731,6 +8847,8 @@ void AstroCalcDialog::calculateWutObjects()
 		enableAngularLimits(enableAngular);
 		core->setJD(JD);
 		adjustWUTColumns();
+		ui->wutMatchingObjectsTreeWidget->setSortingEnabled(true);
+		ui->wutMatchingObjectsTreeWidget->sortByColumn(WUTObjectName, Qt::AscendingOrder);
 		if (!objectsList.isEmpty())
 			ui->saveObjectsButton->setEnabled(true);
 		else

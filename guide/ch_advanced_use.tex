@@ -735,9 +735,16 @@ The value is clamped to [1\ldots1.8] to avoid making active and inactive buttons
 \subsection{Text shadow}
 \label{sec:CommandLineOptions:Special:TextShadow}
 Some users complain the infotext is badly visible when there are trees or the Milky Way in the background.\newFeature{24.4} This can also be mitigated in \file{config.ini}.
+The shadow (defaults shown) can be made slightly darker, but not completely black.\newFeature{26.3}
+For additional darkness in screenshots at night, you can set a background opacity for the info panel text.
+If you set this number negative, the dark background will be permanent, even in daylight, 
+using the color configured as ``Overwrite text color'' (s.~\ref{fig:gui:configuration:tools}).
 \begin{configfile}
 [gui]
 flag_info_shadow=true
+info_shadow_radius=6      | [0...64]
+info_shadow_opacity=127   | [0...255]
+info_panel_opacity=0      | [-100...100]
 \end{configfile}
 
 

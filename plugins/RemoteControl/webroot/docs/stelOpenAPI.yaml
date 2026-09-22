@@ -13,7 +13,7 @@ info:
     * **Manipulate all internal settings (StelProperties) and trigger StelActions**.
     * **Command embedded script playback**.
 servers:
-  - url: http://localhost:8090/api
+  - url: /api
     description: Local Stellarium Instance
 paths:
   /main/status:
@@ -243,12 +243,19 @@ paths:
                   description: altitude above mathematical horizon, degrees.
       responses:
         '200':
-          description: Camera matrix adjusted safely
+          description: View direction adjusted. 
           content:
             text/plain:
               schema:
                 type: string
                 example: ok
+        '400':
+          description: argument mismatch. 
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: invalid j2000|jNow|altAz format, use JSON array of 3 doubles; requires at least one of az,alt,j2000,jNow,altAz parameters
 
   /main/fov:
     post:
@@ -418,6 +425,8 @@ paths:
       responses:
         '200':
           description: Focus/selection changed
+        '400':
+          description: invalid position format (list contains other than 3 elements)
 
 
 
@@ -612,8 +621,22 @@ paths:
         (as per LandscapeMgr::getCurrentLandscapeHtmlDescription) is returned. 
         An example: landscapedescription/image.png returns image.png from the current landscape directory.
 
+        Alternative syntax: use 'path' parameter to specify the file. Leave empty for default behaviour.
+
         This operation allows to set up an HTML iframe or similar for the landscape description, 
         including all images, etc. embedded in the HTML description.
+      parameters:
+        - name: path
+          in: query
+          required: false
+          description: file inside landscape directory
+          schema:
+            type: string
+      responses:
+        '200':
+          description: landscape description
+        '404':
+          description: file not found
 
 
   /view/listskyculture:
@@ -646,8 +669,22 @@ paths:
         (as per StelSkyCultureMgr::getCurrentSkyCultureHtmlDescription) is returned. 
         An example: skyculturedescription/image.png returns image.png from the current skyculture directory.
 
+        Alternative syntax: use 'path' parameter to specify the file. Leave empty for default behaviour.
+
         This operation allows to set up an HTML iframe or similar for the skyculture description, 
         including all images, etc. embedded in the HTML description.
+      parameters:
+        - name: path
+          in: query
+          required: false
+          description: file inside skyculture directory
+          schema:
+            type: string
+      responses:
+        '200':
+          description: skyculture description
+        '404':
+          description: file not found
 
   /view/listprojection:
     get:
@@ -700,6 +737,8 @@ paths:
               name,     // the english region name
               name_i18n // the localized region name (current language)
           }
+          
+        If the optional 'planet' parameter is provided, only regions belonging to that planet are returned. 
       parameters:
         - name: planet
           in: query
@@ -983,8 +1022,8 @@ paths:
         required: false
       responses:
         '200':
-          description: Script pipeline initialization successful
-
+          description: Script stopped
+          
 
   /stelaction/list:
     get:
@@ -1033,6 +1072,7 @@ paths:
         '200':
           description: |
             Shortcut method fired (ok, or true/false results for toggle actions).
+            or 'error: invalid id parameter' when id not available in the actions list.
             
             When actions 'actionQuit_Global' or 'actionShow_Remote_Control' are given, 
             these trigger asynchronously and the response body becomes "error: Stellarium or remote control closing!" instead 
@@ -1088,3 +1128,103 @@ paths:
       responses:
         '200':
           description: Property set, or see error message in case of problems. 
+
+
+  /scenery3d/listscene:
+    get:
+      tags:
+        - Scenery3D Service (Requires Scenery3D plugin activated)
+      summary: Retrieve list of available 3D sceneries.
+      description: |
+        Lists the installed sceneries as a JSON object of format
+        
+            {
+                <sceneryId> : <sceneryName>, //maps the scenery id to the translated scenery name
+                ...
+            }
+      responses:
+        '200':
+          description: Dictionary of sceneries
+
+  /scenery3d/scenedescription/:
+    get:
+      tags:
+        - Scenery3D Service (Requires Scenery3D plugin activated)
+      summary: Retrieve 3D scenery description. 
+      description: |
+        Retrieve scenery description or other file from scenery directory 'id'.
+        The syntax can involve parameters 'id' and optional 'path', 
+        or look like a file path as in '/scenery3d/scenedescription/<id>/[<path/to/file>]
+      parameters:
+        - name: id
+          in: query
+          required: true
+          description: Scene ID
+          schema:
+            type: string
+        - name: path
+          in: query
+          required: false
+          description: path to file inside scenery directory
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Scenery description
+        '400':
+          description: invalid id
+        '404':
+          description: file not found
+
+
+  /scenery3d/loadscene:
+    post:
+      tags:
+        - Scenery3D Service (Requires Scenery3D plugin activated)
+      summary: Load a 3D scenery.
+      description: |
+        Load the scenery identified by 'id'. 
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string
+                  description: Scenery name. 
+      responses:
+        '200':
+          description: Loaded.
+        '400':
+          description: scene already loaded or being loaded, or missing or invalid id. 
+
+  /scenery3d/move:
+    post:
+      tags:
+        - Scenery3D Service (Requires Scenery3D plugin activated)
+      summary: Move in a 3D scenery.
+      description: |
+        Move viewpoint in the 3D scenery. 
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                x:
+                  type: string
+                  description: distance towards right. 
+                y:
+                  type: string
+                  description: distance in forward direction. 
+                z:
+                  type: string
+                  description: distance in z coordinate (vertical). 
+      responses:
+        '200':
+          description: Loaded.
+        '400':
+          description: x, y, or z are required.
