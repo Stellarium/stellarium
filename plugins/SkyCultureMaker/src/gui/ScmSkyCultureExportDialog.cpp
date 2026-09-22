@@ -291,8 +291,8 @@ bool ScmSkyCultureExportDialog::exportSkyCulture()
 			return false;
 		}
 
-		// The new sky culture is in place; remove the backup.
-		//QDir(backupPath).removeRecursively();
+		// The new sky culture is in place, so remove the backup.
+		QDir(backupPath).removeRecursively();
 	}
 
 	maker->showUserInfoMessage(ui->titleBar->title(),
