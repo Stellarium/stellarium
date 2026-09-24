@@ -131,14 +131,7 @@ bool ScmSkyCultureExportDialog::exportSkyCulture()
 
 	// Let the user choose the export directory with skyCulturesPath as default
 	QDir finalDirectory;
-	bool exportDirectoryChosen = chooseExportDirectory(skyCultureId, finalDirectory);
-	if (!exportDirectoryChosen)
-	{
-		// no need to show an error to the user when they cancelled the selection.
-		// an invalid directory was already reported by chooseExportDirectory()
-		qDebug() << "SkyCultureMaker: No export directory chosen.";
-		return false;
-	}
+	if (!chooseExportDirectory(skyCultureId, finalDirectory)) return false;
 
 	const bool isOverwrite = finalDirectory.exists();
 	QDir skyCultureDirectory;
@@ -333,7 +326,7 @@ bool ScmSkyCultureExportDialog::chooseExportDirectory(const QString& skyCultureI
 	                                                              skyCulturesPath);
 	if (selectedDirectory.isEmpty())
 	{
-		// User cancelled the dialog
+		qDebug() << "SkyCultureMaker: Export directory selection cancelled";
 		return false;
 	}
 
