@@ -72,7 +72,9 @@ flag_psf_projection_correction      = false
 psf_star_point_radius               = 1.5
 psf_star_flare_decay                = 0.1
 psf_star_flare_strength             = 1.0
-psf_star_bright_source_mag_limit    = -6.0
+psf_star_bright_source_mag_limit    = -8.5
+psf_moon_glare_reduction            = 0.85
+flag_psf_moon_halo_texture          = true
 
 #Johannes:
 #I recommend setting mag_converter_max_fov to 180, so that the sky gets not so

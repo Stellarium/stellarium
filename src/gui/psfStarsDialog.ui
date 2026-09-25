@@ -74,6 +74,9 @@
       </item>
       <item row="1" column="1">
        <widget class="QDoubleSpinBox" name="flareDecayDoubleSpinBox">
+        <property name="toolTip">
+         <string>Zero disables the flare. Positive values are limited to 0.05–1.</string>
+        </property>
         <property name="alignment">
          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
         </property>
@@ -81,13 +84,13 @@
          <number>3</number>
         </property>
         <property name="minimum">
-         <double>0.010000000000000</double>
+         <double>0.000000000000000</double>
         </property>
         <property name="maximum">
          <double>1.000000000000000</double>
         </property>
         <property name="singleStep">
-         <double>0.005000000000000</double>
+         <double>0.050000000000000</double>
         </property>
        </widget>
       </item>

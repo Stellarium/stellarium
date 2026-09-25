@@ -414,6 +414,10 @@ private:
 	static double computeLimitMagnitude(Ocular *ocular, Telescope *telescope);
 	static PsfStarSettings getPsfStarSettings(const StelSkyDrawer* skyDrawer);
 	static void applyPsfStarSettings(StelSkyDrawer* skyDrawer, const PsfStarSettings& settings);
+	//! Save star profiles after the main configuration is saved, preserving the active view.
+	void saveStarSettings();
+	//! Write the stored ocular and CCD star profiles to the plugin configuration.
+	void saveStarProfiles();
 
 	//! Set up the Qt actions needed to activate the plugin.
 	void initializeActivationActions();

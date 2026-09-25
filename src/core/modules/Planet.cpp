@@ -4648,7 +4648,7 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 			// EXPERIMENTAL: for sun on horizon, mag can go quite low, shrinking the halo too much.
 			if (isSun)
 				haloMag=qMin(haloMag, -18.f);
-			core->getSkyDrawer()->postDrawSky3dModel(&sPainter, tmp, surfArcMin2, haloMag, haloColorToDraw, isSun, isMoon ? screenRd : 0.f);
+			core->getSkyDrawer()->postDrawSky3dModel(&sPainter, tmp, surfArcMin2, haloMag, haloColorToDraw, isSun, screenRd, isMoon);
 		}
 	}
 }
@@ -5954,12 +5954,12 @@ void Planet::drawHints(const StelCore* core, StelPainter &sPainter, const QFont&
 		static SolarSystem* ssm = GETSTELMODULE(SolarSystem);
 		const bool isMoon = this==ssm->getMoon();
 		RCMag rcm;
-		if (skyDrawer->computeRCMag(vMagnitudeWithExtinction, &rcm))
+		if (skyDrawer->computePsfRCMag(vMagnitudeWithExtinction, &rcm))
 		{
 			const float diskOffset = tmp;
 			const float psfOffset = isMoon
 				? skyDrawer->getPsfMoonHaloLabelOffset(vMagnitudeWithExtinction, haloColor, angularRadius*pixPerRad, diskOffset, 0.12f)
-				: skyDrawer->getPsfPointSourceLabelOffset(rcm, vMagnitudeWithExtinction, haloColor, diskOffset, 0.12f);
+				: skyDrawer->getPsfPointSourceLabelOffset(rcm, vMagnitudeWithExtinction, haloColor, diskOffset, 0.12f, angularRadius*pixPerRad);
 			tmp = qMax(diskOffset, psfOffset);
 		}
 	}

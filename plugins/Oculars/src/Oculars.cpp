@@ -300,6 +300,7 @@ void Oculars::deinit()
 	settings->setValue("lens_index", selectedLensIndex);
 
 	StelCore *core = StelApp::getInstance().getCore();
+	disconnect(core, &StelCore::configurationDataSaved, this, &Oculars::saveStarSettings);
 	StelSkyDrawer *skyDrawer = core->getSkyDrawer();
 	disconnect(skyDrawer, SIGNAL(customStarMagLimitChanged(double)), this, SLOT(setMagLimitStarsOcularsManual(double)));
 	disconnect(skyDrawer, SIGNAL(flagStarMagnitudeLimitChanged(bool)), this, SLOT(handleStarMagLimitToggle(bool)));
@@ -333,6 +334,66 @@ void Oculars::deinit()
 		applyPsfStarSettings(skyDrawer, psfStarSettingsMain);
 	}
 
+	saveStarProfiles();
+	settings->setValue("limit_stellar_magnitude_oculars_val", QString::number(magLimitStarsOculars, 'f', 2));
+	settings->setValue("limit_stellar_magnitude_oculars", flagLimitStarsOculars);
+	settings->setValue("text_color", textColor.toStr());
+	settings->setValue("line_color", lineColor.toStr());
+	settings->setValue("reticle_color", reticleColor.toStr());
+	settings->setValue("focuser_color", focuserColor.toStr());
+	settings->sync();
+
+	disconnect(this, SIGNAL(selectedOcularChanged(int)), this, SLOT(updateOcularReticle()));
+	//disconnect(&StelApp::getInstance(), SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setStelStyle(const QString&)));
+	disconnect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslateGui()));
+
+	protractorTexture.clear();
+	protractorFlipVTexture.clear();
+	protractorFlipHTexture.clear();
+	protractorFlipHVTexture.clear();
+}
+
+void Oculars::saveStarSettings()
+{
+	if (!ready)
+		return;
+
+	if (flagShowOculars || flagShowCCD)
+	{
+		const StelSkyDrawer* skyDrawer = StelApp::getInstance().getCore()->getSkyDrawer();
+		if (flagShowCCD)
+		{
+			relativeStarScaleCCD = skyDrawer->getRelativeStarScale();
+			absoluteStarScaleCCD = skyDrawer->getAbsoluteStarScale();
+			psfStarSettingsCCD = getPsfStarSettings(skyDrawer);
+		}
+		else
+		{
+			relativeStarScaleOculars = skyDrawer->getRelativeStarScale();
+			absoluteStarScaleOculars = skyDrawer->getAbsoluteStarScale();
+			psfStarSettingsOculars = getPsfStarSettings(skyDrawer);
+		}
+
+		// ConfigurationDialog has just saved the active view. Keep the main
+		// profile in config.ini without changing the view or emitting signals.
+		QSettings* conf = StelApp::getInstance().getSettings();
+		conf->setValue("stars/relative_scale", QString::number(relativeStarScaleMain, 'f', 2));
+		conf->setValue("stars/absolute_scale", QString::number(absoluteStarScaleMain, 'f', 2));
+		conf->setValue("stars/flag_psf_projection_correction", psfStarSettingsMain.projectionCorrection);
+		conf->setValue("stars/psf_star_point_radius", QString::number(psfStarSettingsMain.pointRadius, 'f', 2));
+		conf->setValue("stars/psf_star_flare_decay", QString::number(psfStarSettingsMain.flareDecay, 'f', 3));
+		conf->setValue("stars/psf_star_flare_strength", QString::number(psfStarSettingsMain.flareStrength, 'f', 2));
+		conf->setValue("stars/psf_star_bright_source_mag_limit", QString::number(psfStarSettingsMain.brightSourceMagLimit, 'f', 1));
+		conf->setValue("stars/psf_moon_glare_reduction", QString::number(psfStarSettingsMain.moonGlareReduction, 'f', 2));
+		conf->setValue("stars/flag_psf_moon_halo_texture", psfStarSettingsMain.moonHaloTexture);
+	}
+
+	saveStarProfiles();
+	settings->sync();
+}
+
+void Oculars::saveStarProfiles()
+{
 	settings->setValue("stars_scale_relative", QString::number(relativeStarScaleOculars, 'f', 2));
 	settings->setValue("stars_scale_absolute", QString::number(absoluteStarScaleOculars, 'f', 2));
 	settings->setValue("stars_scale_relative_ccd", QString::number(relativeStarScaleCCD, 'f', 2));
@@ -351,22 +412,6 @@ void Oculars::deinit()
 	settings->setValue("psf_star_bright_source_mag_limit_ccd", QString::number(psfStarSettingsCCD.brightSourceMagLimit, 'f', 1));
 	settings->setValue("psf_moon_glare_reduction_ccd", QString::number(psfStarSettingsCCD.moonGlareReduction, 'f', 2));
 	settings->setValue("flag_psf_moon_halo_texture_ccd", psfStarSettingsCCD.moonHaloTexture);
-	settings->setValue("limit_stellar_magnitude_oculars_val", QString::number(magLimitStarsOculars, 'f', 2));
-	settings->setValue("limit_stellar_magnitude_oculars", flagLimitStarsOculars);
-	settings->setValue("text_color", textColor.toStr());
-	settings->setValue("line_color", lineColor.toStr());
-	settings->setValue("reticle_color", reticleColor.toStr());
-	settings->setValue("focuser_color", focuserColor.toStr());
-	settings->sync();
-
-	disconnect(this, SIGNAL(selectedOcularChanged(int)), this, SLOT(updateOcularReticle()));
-	//disconnect(&StelApp::getInstance(), SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setStelStyle(const QString&)));
-	disconnect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslateGui()));
-
-	protractorTexture.clear();
-	protractorFlipVTexture.clear();
-	protractorFlipHTexture.clear();
-	protractorFlipHVTexture.clear();
 }
 
 void Oculars::setFontSize(const int fontSize, const int guiPanelFontSize)
@@ -733,6 +778,7 @@ void Oculars::init()
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslateGui()));
 	connect(this, SIGNAL(selectedOcularChanged(int)), this, SLOT(updateOcularReticle()));
 	StelCore *core = StelApp::getInstance().getCore();
+	connect(core, &StelCore::configurationDataSaved, this, &Oculars::saveStarSettings);
 	StelSkyDrawer *skyDrawer = core->getSkyDrawer();
 	connect(skyDrawer, SIGNAL(flagStarMagnitudeLimitChanged(bool)), this, SLOT(handleStarMagLimitToggle(bool)));
 	StelObjectMgr* objectMgr = GETSTELMODULE(StelObjectMgr);

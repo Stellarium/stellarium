@@ -1130,6 +1130,8 @@ void ConfigurationDialog::saveAllSettings()
         conf->setValue("stars/psf_star_flare_decay",                     QString::number(propMgr->getStelPropertyValue("StelSkyDrawer.psfStarFlareDecay").toDouble(), 'f', 3));
         conf->setValue("stars/psf_star_flare_strength",                  QString::number(propMgr->getStelPropertyValue("StelSkyDrawer.psfStarFlareStrength").toDouble(), 'f', 2));
         conf->setValue("stars/psf_star_bright_source_mag_limit",         QString::number(propMgr->getStelPropertyValue("StelSkyDrawer.psfStarBrightSourceMagLimit").toDouble(), 'f', 1));
+        conf->setValue("stars/psf_moon_glare_reduction",                QString::number(propMgr->getStelPropertyValue("StelSkyDrawer.psfMoonGlareReduction").toDouble(), 'f', 2));
+        conf->setValue("stars/flag_psf_moon_halo_texture",               propMgr->getStelPropertyValue("StelSkyDrawer.flagPsfMoonHaloTexture").toBool());
         conf->setValue("astro/twilight_altitude",                       propMgr->getStelPropertyValue("SpecificTimeMgr.twilightAltitude").toDouble());
         conf->setValue("astro/flag_star_magnitude_limit",               propMgr->getStelPropertyValue("StelSkyDrawer.flagStarMagnitudeLimit").toBool());
         conf->setValue("astro/star_magnitude_limit",                    QString::number(propMgr->getStelPropertyValue("StelSkyDrawer.customStarMagLimit").toDouble(), 'f', 2));

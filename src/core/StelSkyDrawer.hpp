@@ -151,8 +151,9 @@ public:
 	//! @param mag the source integrated magnitude
 	//! @param color the object halo RGB color
 	//! @param isSun the object is the sun (will be drawn with different texture)
-	//! @param sourceRadius radius of the source disk in screen pixels, or 0 for point sources
-	void postDrawSky3dModel(StelPainter* p, const Vec3d& v, float illuminatedArea, float mag, const Vec3f& color = Vec3f(1.f,1.f,1.f), const bool isSun=false, float sourceRadius=0.f);
+	//! @param sourceRadius radius of the source disk in physical screen pixels, or 0 for point sources
+	//! @param isMoon apply the lunar glare and texture settings
+	void postDrawSky3dModel(StelPainter* p, const Vec3d& v, float illuminatedArea, float mag, const Vec3f& color = Vec3f(1.f,1.f,1.f), const bool isSun=false, float sourceRadius=0.f, bool isMoon=false);
 
 	//! Compute RMag and CMag from magnitude.
 	//! @param mag the object integrated V magnitude
@@ -160,7 +161,7 @@ public:
 	//! @return false if the object is too faint to be displayed
 		bool computeRCMag(float mag, RCMag*) const;
 		bool computePsfRCMag(float mag, RCMag*) const;
-		float getPsfPointSourceLabelOffset(const RCMag& rcMag, float appMag, const Vec3f& color, float baseOffset, float psfOffsetScale=1.f) const;
+		float getPsfPointSourceLabelOffset(const RCMag& rcMag, float appMag, const Vec3f& color, float baseOffset, float psfOffsetScale=1.f, float discRadius=0.f) const;
 		float getPsfMoonHaloLabelOffset(float appMag, const Vec3f& color, float sourceRadius, float baseOffset, float psfOffsetScale=1.f) const;
 
 	//! Report that an object of luminance lum with an on-screen area of area pixels is currently displayed
@@ -249,6 +250,7 @@ public slots:
 	bool getFlagPsfStarProjectionCorrection() const {return flagPsfStarProjectionCorrection;}
 	void setPsfStarPointRadius(double r);
 	double getPsfStarPointRadius() const {return psfStarPointRadius;}
+	//! Zero disables glow; positive values are clamped to [0.05, 1]. NaN is ignored.
 	void setPsfStarFlareDecay(double decay);
 	double getPsfStarFlareDecay() const {return psfStarFlareDecay;}
 	void setPsfStarFlareStrength(double strength);
@@ -434,7 +436,7 @@ private:
 		float peakRadiance;
 		float psfRadius;
 		float sourceRadius;
-		unsigned char color[4];
+		Vec4f color; // Linear RGB and an independent, unquantized fade.
 	};
 
 	// Debug
@@ -480,8 +482,10 @@ private:
 	bool computePsfPeakRadiance(float mag, float* peakRadiance) const;
 	float computePsfGlowRadius(float peakRadiance, float alpha) const;
 	Vec3f psfGreenNormalization(const Vec3f& c, float saturationLimit, float& greenScale) const;
-	void addPsfStarVertices(QVector<PsfStarVertex>& vertices, StelPainter* sPainter, const Vec3d& direction, const Vec3f& center, const Vec3f& color, float peakRadiance, float radius, float sourceRadius=0.f);
-	void drawPsfPointSource(StelPainter* sPainter, const Vec3d& direction, const Vec3f& win, float appMag, const Vec3f& color, float twinkleFactor, float luminanceScale, float sourceRadius=0.f);
+	void addPsfStarVertices(QVector<PsfStarVertex>& vertices, StelPainter* sPainter, const Vec3d& direction, const Vec3f& center, const Vec3f& color, float peakRadiance, float radius, float sourceRadius=0.f, float alpha=1.f);
+	// sourceRadius: lunar glare mask radius in logical pixels (zero for other sources).
+	// discRadius: actual body radius in physical pixels, for the point/glow transitions.
+	void drawPsfPointSource(StelPainter* sPainter, const Vec3d& direction, const Vec3f& win, float appMag, const Vec3f& color, float twinkleFactor, float luminanceScale, float sourceRadius=0.f, float discRadius=0.f);
 	void flushPsfPointSources(StelPainter* sPainter);
 
 	//! Compute the log of the luminance for a point source with the given mag for the current FOV
