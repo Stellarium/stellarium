@@ -394,9 +394,13 @@ public:
 	//! forwarding the arguments to the callee.
 	static void parseDataFile(QFile& openFile, TleDataHash& tleList, bool addFlagValue = false, const QString& tleURL = "");
 
-	//! Insert a three line TLE into the hash array.
+	//! Get a satellite (NORAD) identifier from second line from TLE
 	//! @param[in] line The second line from the TLE
 	static QString getSatIdFromLine2(const QString& line);
+	
+	//! Decoding Alpha-5 Propagator
+	//! @param[in] satId The identifier of satellite
+	static QString decodeSatIDFromAlpha5(QString &satId);
 
 	//! Reads qs.mag and rcs files and its parsing for getting id,  standard magnitude and RCS values
 	//! for satellites.

@@ -93,7 +93,6 @@ public:
 	//! - f20: radio flux density around 1.4GHz (21cm) [Jy = Jansky (10^-26W/m2/Hz)]
 	//! - sclass: spectral class
 	QVariantMap getInfoMap(const StelCore *core) const override;
-	Vec3f getInfoColor(void) const override;
 	Vec3d getJ2000EquatorialPos(const StelCore* core) const override;
 	float getVMagnitude(const StelCore* core) const override;
 	QString getNameI18n(void) const override

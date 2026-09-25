@@ -86,7 +86,6 @@ public:
 	//! - m9
 	//! - distance
 	QVariantMap getInfoMap(const StelCore *core) const override;
-	Vec3f getInfoColor(void) const override;
 	Vec3d getJ2000EquatorialPos(const StelCore *core) const override;
 	float getVMagnitude(const StelCore* core) const override;
 	QString getNameI18n(void) const override;

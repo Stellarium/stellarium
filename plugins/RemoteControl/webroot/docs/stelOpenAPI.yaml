@@ -737,6 +737,8 @@ paths:
               name,     // the english region name
               name_i18n // the localized region name (current language)
           }
+          
+        If the optional 'planet' parameter is provided, only regions belonging to that planet are returned. 
       parameters:
         - name: planet
           in: query

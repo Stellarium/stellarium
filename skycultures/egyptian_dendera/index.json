@@ -1,6 +1,8 @@
 {
   "id": "egyptian_dendera",
   "region": "Northern Africa",
+  "beginTime": -320,
+  "endTime": -30,
   "classification": ["historical"],
   "fallback_to_international_names": false,
   "constellations": [
@@ -8,12 +10,12 @@
       "id": "CON egyptian_dendera 001",
       "lines": [[67301, 59774, 58001, 53910, 54061, 59774]],
       "image": {
-        "file": "illustrations/uma_wagon+fox+ewe+yoke.png",
-        "size": [2048, 1745],
+        "file": "illustrations/bull's_thigh.png",
+        "size": [512, 619],
         "anchors": [
-          {"pos": [201, 544], "hip": 67301},
-          {"pos": [1871, 1184], "hip": 54061},
-          {"pos": [1095, 1294], "hip": 58001}
+          {"pos": [338, 44], "hip": 54061},
+          {"pos": [438, 76], "hip": 53910},
+          {"pos": [195, 561], "hip": 67301}
         ]
       },
       "common_name": {"english": "Thigh of Bull", "native": "", "pronounce": "Seth's Thigh (Egypt.)"}
@@ -22,96 +24,82 @@
       "id": "CON egyptian_dendera Lup",
       "lines": [[68933, 70306, 76297]],
       "image": {
-        "file": "illustrations/lup+cen.png",
-        "size": [1024, 1024],
+        "file": "illustrations/eg._lion.png",
+        "size": [587, 549],
         "anchors": [
-          {"pos": [859, 827], "hip": 67457},
-          {"pos": [118, 547], "hip": 76829},
-          {"pos": [631, 123], "hip": 72929}
+          {"pos": [145, 328], "hip": 85258},
+          {"pos": [498, 471], "hip": 77952},
+          {"pos": [402, 100], "hip": 78639}
         ]
       },
-      "common_name": {"english": "Beast", "native": "", "pronounce": "Beast"}
+      "common_name": {"english": "Mia (Lion)", "native": "", "pronounce": "Mia"}
     },
     {
       "id": "CON egyptian_dendera 003",
       "lines": [[37279, 36188]],
       "image": {
-        "file": "illustrations/himmelskuh_sirius.png",
-        "size": [1024, 567],
+        "file": "illustrations/sathis.png",
+        "size": [762, 687],
         "anchors": [
-          {"pos": [865, 147], "hip": 37279},
-          {"pos": [797, 484], "hip": 34769},
-          {"pos": [170, 333], "hip": 39863}
+          {"pos": [54, 459], "hip": 36795},
+          {"pos": [196, 675], "hip": 33579},
+          {"pos": [546, 234], "hip": 32349}
         ]
       },
-      "common_name": {"english": "Hathor Cow (Egypt.)", "native": "", "pronounce": "Hathor Cow (Egypt.)"}
+      "common_name": {"english": "Goddess Satet & Hathor Cow", "native": "", "pronounce": "Satet & Hathor Cow (Egypt.)"}
     },
     {
       "id": "CON egyptian_dendera 004",
       "lines": [[30438, 26634]],
       "image": {
-        "file": "illustrations/horusfalke_canopus.png",
-        "size": [512, 1536],
+        "file": "illustrations/canopus.png",
+        "size": [322, 681],
         "anchors": [
-          {"pos": [310, 1485], "hip": 30438},
-          {"pos": [67, 640], "hip": 29807},
-          {"pos": [276, 493], "hip": 26634}
+          {"pos": [59, 284], "hip": 36377},
+          {"pos": [178, 576], "hip": 30438},
+          {"pos": [181, 125], "hip": 35264}
         ]
       },
       "common_name": {"english": "Canopus (Egypt.)", "native": "", "pronounce": "Falcon on Canopic Jar (Egypt.)"}
     },
     {
-      "id": "CON egyptian_dendera 005",
-      "lines": [[34045, 32349, 30324], [34444, 33160], [34444, 35904], [34444, 33579]],
-      "image": {
-        "file": "illustrations/sirius_bow+arrow.png",
-        "size": [512, 699],
-        "anchors": [
-          {"pos": [468, 163], "hip": 30324},
-          {"pos": [124, 301], "hip": 34045},
-          {"pos": [117, 657], "hip": 35904}
-        ]
-      },
-      "common_name": {"english": "Goddess Satis", "native": "", "pronounce": "Sothis/ Satis"}
-    },
-    {
       "id": "CON egyptian_dendera 006",
       "lines": [[86263, 84012, 81377, 76276, 77233], [77070, 80816, 91262, 86032, 81377]],
       "image": {
-        "file": "illustrations/lyr_gula.png",
-        "size": [1024, 1246],
+        "file": "illustrations/nekhet.png",
+        "size": [512, 525],
         "anchors": [
-          {"pos": [181, 222], "hip": 91262},
-          {"pos": [668, 1084], "hip": 79593},
-          {"pos": [221, 1162], "hip": 84012}
+          {"pos": [97, 83], "hip": 91262},
+          {"pos": [136, 424], "hip": 86263},
+          {"pos": [454, 278], "hip": 76276}
         ]
       },
-      "common_name": {"english": " ? ", "native": "", "pronounce": "Deity ?"}
+      "common_name": {"english": "Sokar", "native": "", "pronounce": "Sokar"}
     },
     {
       "id": "CON egyptian_dendera 007",
       "lines": [[85670, 69673]],
       "image": {
-        "file": "illustrations/nilpferd.png",
-        "size": [1024, 2061],
+        "file": "illustrations/reret_and_menit.png",
+        "size": [555, 890],
         "anchors": [
-          {"pos": [373, 1920], "hip": 71795},
-          {"pos": [650, 1914], "hip": 67927},
-          {"pos": [388, 150], "hip": 85670}
+          {"pos": [218, 803], "hip": 71795},
+          {"pos": [197, 173], "hip": 85670},
+          {"pos": [436, 814], "hip": 64241}
         ]
       },
-      "common_name": {"english": "Guard (Arkturos)", "native": "", "pronounce": "Hippo Goddess (Egypt.)"}
+      "common_name": {"english": "Guard (Arkturos)", "native": "rrt & mnt", "pronounce": "Reret & Menit (Egypt.)"}
     },
     {
       "id": "CON egyptian_dendera 008",
       "lines": [[28360, 24608], [28360, 28380], [24608, 23015]],
       "image": {
         "file": "illustrations/goat.png",
-        "size": [442, 161],
+        "size": [240, 578],
         "anchors": [
-          {"pos": [256, 9], "hip": 24608},
-          {"pos": [224, 152], "hip": 28380},
-          {"pos": [421, 105], "hip": 23015}
+          {"pos": [54, 263], "hip": 27673},
+          {"pos": [136, 119], "hip": 28358},
+          {"pos": [129, 516], "hip": 23015}
         ]
       },
       "common_name": {"english": "Goat (Capella)", "native": "", "pronounce": "Goat"}
@@ -120,12 +108,12 @@
       "id": "CON egyptian_dendera 009",
       "lines": [[18246, 19812, 17358, 15863, 13268, 12777], [19812, 23522, 22783, 14328]],
       "image": {
-        "file": "illustrations/affe.jpg",
-        "size": [196, 512],
+        "file": "illustrations/baboon.png",
+        "size": [332, 796],
         "anchors": [
-          {"pos": [78, 482], "hip": 18246},
-          {"pos": [160, 280], "hip": 12777},
-          {"pos": [53, 42], "hip": 22783}
+          {"pos": [140, 741], "hip": 18246},
+          {"pos": [46, 159], "hip": 23522},
+          {"pos": [224, 297], "hip": 13268}
         ]
       },
       "common_name": {"english": "Baboon", "native": "", "pronounce": "Baboon"}
@@ -133,97 +121,97 @@
     {
       "id": "CON egyptian_dendera 010",
       "lines": [[11767, 82080, 77055, 62572, 47193], [62572, 36547], [77055, 72607, 75097, 77055]],
-      "image": {
-        "file": "illustrations/vogel.jpg",
-        "size": [354, 512],
-        "anchors": [
-          {"pos": [166, 333], "hip": 11767},
-          {"pos": [222, 83], "hip": 75097},
-          {"pos": [58, 289], "hip": 47193}
-        ]
-      },
+          "image": {
+                "anchors": [
+                    { "hip": 39538,  "pos": [ 158,  367 ] },
+                    { "hip": 72607, "pos": [ 244,  202 ]  },
+                    { "hip": 113116, "pos": [ 278, 390 ] }
+                ],
+                "file": "illustrations/falcon.png",
+                "size": [ 512,  518 ]
+            },
       "common_name": {"english": "Falcon", "native": "", "pronounce": "Falcon"}
     },
     {
       "id": "CON egyptian_dendera 011",
       "lines": [[113726, 105199], [102098, 100453], [102098, 109492]],
       "image": {
-        "file": "illustrations/cyg_gegend.png",
-        "size": [370, 512],
+        "file": "illustrations/nekhet2.png",
+        "size": [512, 701],
         "anchors": [
-          {"pos": [170, 83], "hip": 105199},
-          {"pos": [263, 241], "hip": 102098},
-          {"pos": [99, 458], "hip": 113726}
+          {"pos": [227, 601], "hip": 109937},
+          {"pos": [257, 147], "hip": 102422},
+          {"pos": [386, 331], "hip": 102098}
         ]
       },
-      "common_name": {"english": "Cyg/ Cep", "native": "", "pronounce": "Deity"}
+      "common_name": {"english": "Giant", "native": "nḫt", "pronounce": "Nekhet"}
     },
     {
       "id": "CON egyptian_dendera 013",
       "lines": [[8886, 6686, 4427, 3179, 746]],
       "image": {
-        "file": "illustrations/cas_grp.png",
-        "size": [687, 512],
+        "file": "illustrations/taming.png",
+        "size": [627, 512],
         "anchors": [
-          {"pos": [285, 157], "hip": 4427},
-          {"pos": [420, 278], "hip": 5434},
-          {"pos": [327, 418], "hip": 9640}
+          {"pos": [89, 126], "hip": 9480},
+          {"pos": [277, 421], "hip": 8068},
+          {"pos": [466, 202], "hip": 746}
         ]
       },
-      "common_name": {"english": "Cas", "native": "", "pronounce": "Deity with Animal"}
+      "common_name": {"english": "Taming Scene", "native": "", "pronounce": "Deity with Animal"}
     },
     {
       "id": "CON egyptian_dendera 014",
       "lines": [[98036, 97649, 97278]],
       "image": {
-        "file": "illustrations/aql_gegend.png",
-        "size": [412, 266],
+        "file": "illustrations/eagle.png",
+        "size": [332, 326],
         "anchors": [
-          {"pos": [190, 258], "hip": 99473},
-          {"pos": [280, 247], "hip": 97804},
-          {"pos": [320, 111], "hip": 97649}
+          {"pos": [278, 279], "hip": 95501},
+          {"pos": [160, 215], "hip": 97649},
+          {"pos": [285, 72], "hip": 93747}
         ]
       },
-      "common_name": {"english": "Aquila", "native": "", "pronounce": "Duck"}
+      "common_name": {"english": "Bird", "native": "apd", "pronounce": "Apdu"}
     },
     {
       "id": "CON egyptian_dendera 015",
       "lines": [[104987, 101769, 102388, 107448]],
       "image": {
         "file": "illustrations/corpse.png",
-        "size": [367, 512],
+        "size": [625, 512],
         "anchors": [
-          {"pos": [211, 488], "hip": 104987},
-          {"pos": [69, 396], "hip": 107348},
-          {"pos": [149, 120], "hip": 103004}
+          {"pos": [410, 191], "hip": 102532},
+          {"pos": [289, 447], "hip": 107348},
+          {"pos": [539, 416], "hip": 104987}
         ]
       },
-      "common_name": {"english": "Sum. Corpse Egyptized", "native": "", "pronounce": "Corpse (Sum.)"}
+      "common_name": {"english": "Corpse Egyptized", "native": "", "pronounce": "Corpse (Sum.)"}
     },
     {
       "id": "CON egyptian_dendera 016",
       "lines": [[62434, 59196, 65373, 68702], [65373, 65109]],
       "image": {
-        "file": "illustrations/Leo_below_3.png",
-        "size": [512, 731],
+        "file": "illustrations/god.png",
+        "size": [476, 573],
         "anchors": [
-          {"pos": [472, 404], "hip": 59196},
-          {"pos": [216, 68], "hip": 65109},
-          {"pos": [112, 611], "hip": 68702}
+          {"pos": [144, 503], "hip": 68702},
+          {"pos": [212, 38], "hip": 67786},
+          {"pos": [294, 486], "hip": 62434}
         ]
       },
-      "common_name": {"english": "Min-Pan", "native": "", "pronounce": "God of Fertility"}
+      "common_name": {"english": "God of Fertility", "native": "", "pronounce": "Min-Pan"}
     },
     {
       "id": "CON egyptian_dendera 017",
       "lines": [[52419, 52727, 53773], [52727, 50191]],
       "image": {
-        "file": "illustrations/Leo_below_2.png",
-        "size": [512, 737],
+        "file": "illustrations/mother_goddess.png",
+        "size": [432, 584],
         "anchors": [
-          {"pos": [128, 689], "hip": 52419},
-          {"pos": [330, 675], "hip": 45941},
-          {"pos": [180, 121], "hip": 56343}
+          {"pos": [48, 562], "hip": 54463},
+          {"pos": [44, 93], "hip": 56343},
+          {"pos": [270, 550], "hip": 45941}
         ]
       },
       "common_name": {"english": "Mother Goddess Isis", "native": "", "pronounce": "Mother Goddess"}
@@ -232,54 +220,40 @@
       "id": "CON egyptian_dendera 018",
       "lines": [[38170, 39757, 43409, 44816], [43409, 45902]],
       "image": {
-        "file": "illustrations/Leo_below.png",
-        "size": [462, 533],
+        "file": "illustrations/anuket.png",
+        "size": [429, 630],
         "anchors": [
-          {"pos": [66, 157], "hip": 47592},
-          {"pos": [373, 179], "hip": 41992},
-          {"pos": [119, 427], "hip": 43107}
+          {"pos": [70, 532], "hip": 44816},
+          {"pos": [379, 258], "hip": 39757},
+          {"pos": [345, 587], "hip": 37819}
         ]
       },
-      "common_name": {"english": "Goddess Anuket", "native": "", "pronounce": "Anuket"}
+      "common_name": {"english": "Goddess Anuket", "native": "ˁny", "pronounce": "Anuket"}
     },
     {
       "id": "CON egyptian_dendera 019",
       "lines": [[77952, 71683, 71908], [71683, 71860]],
-      "image": {
-        "file": "illustrations/alfCen_512.jpg",
-        "size": [387, 512],
-        "anchors": [
-          {"pos": [237, 484], "hip": 71908},
-          {"pos": [55, 391], "hip": 77952},
-          {"pos": [149, 24], "hip": 73273}
-        ]
-      },
+	  "image": {
+                "anchors": [
+                    {"hip": 74395, "pos": [ 105,  128  ]},
+                    {"hip": 71908, "pos": [ 334, 353 ]},
+                    {"hip": 71683, "pos": [  321,  275 ]}
+                ],
+                "file": "illustrations/chenti_irti.png",
+                "size": [ 631, 512 ]
+            },
       "common_name": {"english": "Chenti Irti", "native": "", "pronounce": "Chenti Irti"}
-    },
-    {
-      "id": "CON egyptian_dendera 020",
-      "lines": [[9307, 8903]],
-      "image": {
-        "file": "illustrations/udjat.jpg",
-        "size": [551, 512],
-        "anchors": [
-          {"pos": [268, 226], "hip": 8903},
-          {"pos": [120, 270], "hip": 9307},
-          {"pos": [404, 346], "hip": 8832}
-        ]
-      },
-      "common_name": {"english": ""}
     },
     {
       "id": "CON egyptian_dendera Iku",
       "lines": [[113963, 113881, 677, 1067, 113963]],
       "image": {
-        "file": "illustrations/peg.png",
-        "size": [1007, 1024],
+        "file": "illustrations/iku.png",
+        "size": [512, 496],
         "anchors": [
-          {"pos": [532, 480], "hip": 677},
-          {"pos": [669, 613], "hip": 1067},
-          {"pos": [858, 387], "hip": 113963}
+          {"pos": [241, 457], "hip": 1067},
+          {"pos": [268, 69], "hip": 113881},
+          {"pos": [451, 216], "hip": 113963}
         ]
       },
       "common_name": {"english": "Field (Sum.)", "native": "", "pronounce": "Iku (Bab.)"}
@@ -288,12 +262,12 @@
       "id": "CON egyptian_dendera Lep",
       "lines": [[28910, 28103, 27288, 25985, 25606, 23685, 24305, 25985], [24305, 24327, 24244], [24327, 24845, 25202], [24845, 24873], [23430, 23685, 25045], [24305, 24845], [28816, 25985], [27654, 25606, 27072]],
       "image": {
-        "file": "illustrations/lep.png",
-        "size": [433, 512],
+        "file": "illustrations/hare.png",
+        "size": [490, 512],
         "anchors": [
-          {"pos": [311, 122], "hip": 24845},
-          {"pos": [332, 432], "hip": 23474},
-          {"pos": [93, 221], "hip": 28201}
+          {"pos": [87, 296], "hip": 27654},
+          {"pos": [340, 149], "hip": 24327},
+          {"pos": [386, 378], "hip": 23685}
         ]
       },
       "common_name": {"english": "Babylonian Rooster", "native": "", "pronounce": "Bird (Bab.)"}
@@ -302,12 +276,12 @@
       "id": "CON egyptian_dendera Ari",
       "lines": [[13209, 13061, 12719, 12489], [12828, 12832, 13327, 13702, 13914, 12332, 10050, 9110, 10328, 11843, 13165, 12832], [13914, 14838, 15737, 15627, 15110, 13914], [9110, 10732, 10306, 8832, 9110], [8832, 8903, 9492, 9815, 9248]],
       "image": {
-        "file": "illustrations/ari.png",
-        "size": [1078, 1024],
+        "file": "illustrations/ram.png",
+        "size": [570, 555],
         "anchors": [
-          {"pos": [595, 242], "hip": 9884},
-          {"pos": [1035, 936], "hip": 10324},
-          {"pos": [40, 607], "hip": 15870}
+          {"pos": [55, 262], "hip": 15737},
+          {"pos": [205, 64], "hip": 10670},
+          {"pos": [411, 191], "hip": 8903}
         ]
       },
       "common_name": {"english": "Aries", "native": "", "pronounce": "Ram"}
@@ -316,12 +290,12 @@
       "id": "CON egyptian_dendera Tau",
       "lines": [[25428, 21881], [26451, 23871, 22565], [21881, 22565], [20205, 20255, 20635, 20711], [19205, 17608], [18724, 20455], [19960, 18724, 17771, 15900, 16083, 16322, 16369], [26451, 23835, 21273, 20732, 20205], [25428, 20711, 20430, 20250, 19205, 19513, 20430], [19205, 19038, 19990]],
       "image": {
-        "file": "illustrations/tau.png",
-        "size": [759, 512],
+        "file": "illustrations/bull.png",
+        "size": [735, 555],
         "anchors": [
-          {"pos": [704, 435], "hip": 15900},
-          {"pos": [633, 156], "hip": 17702},
-          {"pos": [49, 369], "hip": 26451}
+          {"pos": [352, 353], "hip": 21273},
+          {"pos": [651, 165], "hip": 17608},
+          {"pos": [650, 499], "hip": 15900}
         ]
       },
       "common_name": {"english": "Taurus", "native": "", "pronounce": "Bull"}
@@ -330,26 +304,26 @@
       "id": "CON egyptian_dendera Gem",
       "lines": [[38363, 38228, 37826, 37629, 38363], [37826, 36962, 37740], [36962, 36046], [36962, 35550, 35350, 32362], [35550, 34088, 31681], [37339, 37179, 36850], [37339, 36896, 36850, 34693, 33018], [34693, 36046], [34693, 32246, 30883], [32246, 30343, 29655]],
       "image": {
-        "file": "illustrations/gem.png",
-        "size": [512, 561],
+        "file": "illustrations/twins.png",
+        "size": [498, 555],
         "anchors": [
-          {"pos": [100, 86], "hip": 37826},
-          {"pos": [266, 66], "hip": 36850},
-          {"pos": [408, 462], "hip": 29655}
+          {"pos": [184, 85], "hip": 37826},
+          {"pos": [331, 90], "hip": 36850},
+          {"pos": [168, 457], "hip": 31681}
         ]
       },
-      "common_name": {"english": "Gemini", "native": "", "pronounce": "Shu and Tefnut"}
+      "common_name": {"english": "Gemini", "native": "Šw & Tfnt", "pronounce": "Shu and Tefnut"}
     },
     {
       "id": "CON egyptian_dendera Cnc",
       "lines": [[43103, 42806, 41909, 39780], [41909, 41822, 40526], [41822, 42911, 44066], [42911, 42806]],
       "image": {
-        "file": "illustrations/cnc.png",
-        "size": [512, 486],
+        "file": "illustrations/crab.png",
+        "size": [513, 555],
         "anchors": [
-          {"pos": [65, 268], "hip": 44066},
-          {"pos": [282, 451], "hip": 40526},
-          {"pos": [205, 150], "hip": 42516}
+          {"pos": [202, 319], "hip": 42911},
+          {"pos": [318, 262], "hip": 41909},
+          {"pos": [314, 320], "hip": 41822}
         ]
       },
       "common_name": {"english": "Cancer", "native": "", "pronounce": "Crab"}
@@ -358,40 +332,40 @@
       "id": "CON egyptian_dendera Leo",
       "lines": [[57632, 54872, 54879, 55642, 55434], [54879, 49669, 49029, 47508], [49669, 49583, 50583, 50335, 54872], [50335, 48455, 46146], [48455, 47908, 49583], [47908, 46750]],
       "image": {
-        "file": "illustrations/leo+erua.png",
-        "size": [1024, 948],
+        "file": "illustrations/lion.png",
+        "size": [664, 555],
         "anchors": [
-          {"pos": [159, 345], "hip": 60742},
-          {"pos": [217, 812], "hip": 56633},
-          {"pos": [633, 381], "hip": 49669}
+          {"pos": [102, 238], "hip": 60904},
+          {"pos": [484, 30], "hip": 46146},
+          {"pos": [488, 211], "hip": 49669}
         ]
       },
-      "common_name": {"english": "Leo + Berenike(?)", "native": "", "pronounce": "Lion with Lady"}
+      "common_name": {"english": "Lion with Lady", "native": "", "pronounce": "Leo + Berenike(?)"}
     },
     {
       "id": "CON egyptian_dendera Hya",
       "lines": [[43813, 43109, 42313, 42402, 42799, 43813, 44659, 45336, 46776, 46509, 46390, 47452, 48356, 49402, 51069, 52085, 52943, 57936, 64962, 68895]],
       "image": {
-        "file": "illustrations/hya+crv.png",
-        "size": [1024, 948],
+        "file": "illustrations/serpent.png",
+        "size": [664, 555],
         "anchors": [
-          {"pos": [830, 113], "hip": 43109},
-          {"pos": [840, 455], "hip": 46390},
-          {"pos": [85, 775], "hip": 59803}
+          {"pos": [56, 419], "hip": 60965},
+          {"pos": [422, 366], "hip": 48615},
+          {"pos": [575, 40], "hip": 43109}
         ]
       },
-      "common_name": {"english": "Hydra and Corvus", "native": "", "pronounce": "Snake with Raven"}
+      "common_name": {"english": "Serpent with Raven", "native": "", "pronounce": "Mush & UGA"}
     },
     {
       "id": "CON egyptian_dendera Lib",
       "lines": [[77853, 74785, 73473, 76333], [74392, 72622, 72489, 73945]],
       "image": {
-        "file": "illustrations/lib.png",
-        "size": [512, 611],
+        "file": "illustrations/balance.png",
+        "size": [545, 555],
         "anchors": [
-          {"pos": [82, 296], "hip": 74785},
-          {"pos": [18, 482], "hip": 74392},
-          {"pos": [492, 373], "hip": 69701}
+          {"pos": [110, 274], "hip": 72622},
+          {"pos": [473, 503], "hip": 73165},
+          {"pos": [475, 310], "hip": 74785}
         ]
       },
       "common_name": {"english": "Libra", "native": "", "pronounce": "Balance"}
@@ -400,12 +374,12 @@
       "id": "CON egyptian_dendera Sco",
       "lines": [[80112, 78265, 78401, 78820, 80112, 80763, 79374], [80763, 78104], [80763, 81266, 82396, 82545, 82729, 84143, 86228, 87073, 85927, 85696]],
       "image": {
-        "file": "illustrations/sco.png",
-        "size": [1024, 656],
+        "file": "illustrations/scorpion.png",
+        "size": [691, 555],
         "anchors": [
-          {"pos": [97, 636], "hip": 86228},
-          {"pos": [846, 394], "hip": 76600},
-          {"pos": [879, 65], "hip": 76333}
+          {"pos": [49, 171], "hip": 86228},
+          {"pos": [551, 549], "hip": 73714},
+          {"pos": [565, 338], "hip": 77853}
         ]
       },
       "common_name": {"english": "Scorpius", "native": "", "pronounce": "Scorpion"}
@@ -414,12 +388,12 @@
       "id": "CON egyptian_dendera Vir",
       "lines": [[57380, 57328, 58948, 58590, 57380], [62267, 61960, 63608, 68520, 62267], [63090, 62267, 58590, 60129], [63090, 66249, 70755, 71957], [66249, 66098, 69427, 69974], [66098, 61941, 63090], [61941, 60129], [57757, 60129, 62985, 57757], [65474, 60129]],
       "image": {
-        "file": "illustrations/vir.png",
-        "size": [512, 1005],
+        "file": "illustrations/maiden.png",
+        "size": [421, 555],
         "anchors": [
-          {"pos": [432, 80], "hip": 63608},
-          {"pos": [33, 574], "hip": 65474},
-          {"pos": [219, 119], "hip": 66200}
+          {"pos": [99, 402], "hip": 65474},
+          {"pos": [117, 68], "hip": 65721},
+          {"pos": [258, 127], "hip": 63608}
         ]
       },
       "common_name": {"english": "Virgo", "native": "", "pronounce": "Maiden with Ear of Grain"}
@@ -428,85 +402,85 @@
       "id": "CON egyptian_dendera Sgr",
       "lines": [[92855, 92041, 89931], [92855, 93498, 92761, 93057, 94141, 94643, 95477, 96465, 95865, 93506, 93667], [93506, 93134], [94643, 93864, 93506], [93667, 98066, 98162, 98688, 98353, 98066], [98688, 98842, 98412, 100591], [98412, 98761, 98032], [98412, 96932, 94124, 92329, 92855], [95294, 95347, 94986], [93149, 91918, 89642], [88635, 93506, 95456], [89178, 88060, 89020], [90185, 89931, 89341], [95619, 93506, 88635], [90496, 89341], [94820, 95168, 95176, 96950, 98258, 97783]],
       "image": {
-        "file": "illustrations/sgr.png",
-        "size": [1270, 1024],
+        "file": "illustrations/archer.png",
+        "size": [512, 419],
         "anchors": [
-          {"pos": [1169, 459], "hip": 88635},
-          {"pos": [156, 398], "hip": 98045},
-          {"pos": [776, 962], "hip": 95347}
+          {"pos": [123, 295], "hip": 98032},
+          {"pos": [219, 134], "hip": 93085},
+          {"pos": [291, 175], "hip": 88635}
         ]
       },
-      "common_name": {"english": "Sagittarius", "native": "", "pronounce": "Archer"}
+      "common_name": {"english": "Archer", "native": "", "pronounce": "Pabilsang"}
     },
     {
       "id": "CON egyptian_dendera Cap",
       "lines": [[106723, 107188, 107556, 106985, 105515, 105881, 104234, 102978], [104234, 101123, 102485], [101123, 100195, 100345, 99572], [100345, 100064, 100310], [100345, 104139, 105515]],
       "image": {
-        "file": "illustrations/cap.png",
-        "size": [1024, 933],
+        "file": "illustrations/goat-fish.png",
+        "size": [1265, 1009],
         "anchors": [
-          {"pos": [44, 412], "hip": 108036},
-          {"pos": [826, 855], "hip": 103738},
-          {"pos": [855, 103], "hip": 100027}
+          {"pos": [163, 496], "hip": 107556},
+          {"pos": [758, 448], "hip": 100345},
+          {"pos": [678, 779], "hip": 102978}
         ]
       },
-      "common_name": {"english": "Capricornus", "native": "", "pronounce": "Goat-Fish"}
+      "common_name": {"english": "Goat-Fish", "native": "", "pronounce": "Sukhurmashu"}
     },
     {
       "id": "CON egyptian_dendera Aqr",
       "lines": [[106944, 106278, 104459, 102618], [106278, 109139, 110778, 112211], [106944, 109074, 106278], [109074, 110003, 111123, 109139], [111123, 112716, 113136], [109074, 110395, 112961, 114341], [110395, 110672, 111497, 114855], [115438, 114855]],
       "image": {
-        "file": "illustrations/aqr+psa.png",
+        "file": "illustrations/nile_god.png",
         "size": [758, 1582],
         "anchors": [
-          {"pos": [665, 1390], "hip": 113368},
-          {"pos": [167, 130], "hip": 107315},
-          {"pos": [281, 1473], "hip": 116971}
+          {"pos": [151, 1473], "hip": 116971},
+          {"pos": [272, 440], "hip": 109427},
+          {"pos": [617, 1404], "hip": 113368}
         ]
       },
-      "common_name": {"english": "Aquarius", "native": "", "pronounce": "Watery Man"}
+      "common_name": {"english": "Hapi (Nile-God)", "native": "ḥꜥpj", "pronounce": "Hapi (Nile-God)"}
     },
     {
       "id": "CON egyptian_dendera Psc",
       "lines": [[113889, 115227], [114971, 115738, 116928, 118268], [115227, 115830, 116771, 118268, 1645, 2548, 3786, 4906, 5737, 5346, 6061, 7007, 7884, 8833, 9487, 8198, 7535, 7097, 6706, 5742, 6193, 5544, 5586, 4889, 4510, 3885, 4366, 5131, 5310, 5454], [5310, 5742], [5310, 5571, 6706]],
       "image": {
-        "file": "illustrations/psc.png",
-        "size": [1007, 1024],
+        "file": "illustrations/stockfish.png",
+        "size": [535, 555],
         "anchors": [
-          {"pos": [33, 962], "hip": 9487},
-          {"pos": [460, 210], "hip": 5447},
-          {"pos": [927, 546], "hip": 112029}
+          {"pos": [384, 52], "hip": 4889},
+          {"pos": [34, 534], "hip": 9487},
+          {"pos": [361, 487], "hip": 118268}
         ]
       },
-      "common_name": {"english": "Pisces", "native": "", "pronounce": "two Fish"}
+      "common_name": {"english": "Two Fish", "native": "", "pronounce": "stock fish"}
     },
     {
       "id": "CON egyptian_dendera Cet",
       "lines": [[10324, 11484, 13954, 14135, 12706, 12093, 11484], [12706, 12387, 12390, 11345, 8645, 6537, 5364, 3909, 3455, 1562, 3419, 3455, 9347, 11783, 12770, 12390]],
       "image": {
-        "file": "illustrations/cet_unterAri.png",
-        "size": [1024, 937],
+        "file": "illustrations/deities.png",
+        "size": [477, 543],
         "anchors": [
-          {"pos": [794, 133], "hip": 12706},
-          {"pos": [329, 59], "hip": 16852},
-          {"pos": [778, 920], "hip": 9347}
+          {"pos": [140, 83], "hip": 19483},
+          {"pos": [139, 483], "hip": 13147},
+          {"pos": [417, 102], "hip": 14135}
         ]
       },
-      "common_name": {"english": "? (Egypt.)", "native": "", "pronounce": "Deity ?"}
+      "common_name": {"english": "Planet Deities ?", "native": "", "pronounce": "? (Egypt.)"}
     },
     {
       "id": "CON egyptian_dendera Ori",
       "lines": [[27366, 26727, 26311, 25930, 24674, 24436], [26727, 27989, 28614, 29038, 27913, 28716, 29434, 29704, 29426, 28614], [29426, 29038, 29434], [27989, 26487, 25336], [26487, 26366, 26176, 26207, 26215, 26366], [25336, 25930], [25336, 22845, 22509, 22449, 22549, 22797, 23123], [22845, 22957, 23607, 24010]],
       "image": {
-        "file": "illustrations/ori.png",
-        "size": [512, 664],
+        "file": "illustrations/sah.png",
+        "size": [559, 726],
         "anchors": [
-          {"pos": [388, 534], "hip": 23231},
-          {"pos": [77, 102], "hip": 29038},
-          {"pos": [162, 629], "hip": 28103}
+          {"pos": [242, 579], "hip": 27366},
+          {"pos": [75, 115], "hip": 29426},
+          {"pos": [452, 532], "hip": 23972}
         ]
       },
-      "common_name": {"english": "King Osiris", "native": "", "pronounce": "Osiris"}
+      "common_name": {"english": "King Osiris", "native": "", "pronounce": "Sah"}
     }
   ],
   "common_names": {

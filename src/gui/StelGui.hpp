@@ -344,7 +344,7 @@ private slots:
 	void setStelStyle(const QString& style) override final;
 	void quit();	
 	void updateI18n();
-	void copySelectedObjectInfo(void);
+	void copySelectedObjectInfo(void); //! Copy object infoString to system clipboard in both plaintext and HTML versions
 
 private:
 	void updateStelStyle();

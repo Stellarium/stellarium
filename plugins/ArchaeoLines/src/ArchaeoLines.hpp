@@ -207,6 +207,8 @@ class ArchaeoLines : public StelModule
 
 
 	// More "forwarding properties" for geo locations and custom azimuths/declination labels.
+	Q_PROPERTY(QString geographicLocation1Name    READ getGeographicLocation1Name      WRITE setGeographicLocation1Name      NOTIFY geographicLocation1NameChanged)
+	Q_PROPERTY(QString geographicLocation2Name    READ getGeographicLocation2Name      WRITE setGeographicLocation2Name      NOTIFY geographicLocation2NameChanged)
 	Q_PROPERTY(QString geographicLocation1Label   READ getGeographicLocation1Label     WRITE setGeographicLocation1Label     NOTIFY geographicLocation1LabelChanged)
 	Q_PROPERTY(QString geographicLocation2Label   READ getGeographicLocation2Label     WRITE setGeographicLocation2Label     NOTIFY geographicLocation2LabelChanged)
 	Q_PROPERTY(QString customAzimuth1Label        READ getCustomAzimuth1Label          WRITE setCustomAzimuth1Label          NOTIFY customAzimuth1LabelChanged)
@@ -301,6 +303,8 @@ signals:
 	void customDeclination1Changed(double dec);
 	void customDeclination2Changed(double dec);
 	void currentPlanetChanged(ArchaeoLine::Line l); // meaningful only CurrentPlanetNone...CurrentPlanetSaturn.
+	void geographicLocation1NameChanged(const QString &name);
+	void geographicLocation2NameChanged(const QString &name);
 	void geographicLocation1LabelChanged(const QString &label);
 	void geographicLocation2LabelChanged(const QString &label);
 	void customAzimuth1LabelChanged(const QString &label);
@@ -381,8 +385,12 @@ public slots:
 	void setGeographicLocation1Latitude(double lat);
 	void setGeographicLocation2Longitude(double lng);
 	void setGeographicLocation2Latitude(double lat);
+	void setGeographicLocation1Name(const QString &name);
+	void setGeographicLocation2Name(const QString &name);
 	void setGeographicLocation1Label(const QString &label);
 	void setGeographicLocation2Label(const QString &label);
+	QString getGeographicLocation1Name() const {return geographicLocation1Name;}
+	QString getGeographicLocation2Name() const {return geographicLocation2Name;}
 	QString getGeographicLocation1Label() const {return geographicLocation1Line->getLabel();}
 	QString getGeographicLocation2Label() const {return geographicLocation2Line->getLabel();}
 	double getGeographicLocation1Longitude() const {return geographicLocation1Longitude; }
@@ -480,6 +488,9 @@ public slots:
 private slots:
 	//! a slot connected to core which cares for location changes, updating the geographicLocation lines.
 	void updateObserverLocation(const StelLocation &loc);
+	//! Recompute distance and set label after target location changed.
+	void updateGeographicLocation1Label();
+	void updateGeographicLocation2Label();
 
 private:
 	bool flagShowArchaeoLines;
@@ -524,9 +535,11 @@ private:
 	bool flagShowCurrentMoon;
 	ArchaeoLine::Line enumShowCurrentPlanet;
 	bool flagShowGeographicLocation1;
+	QString geographicLocation1Name;
 	double geographicLocation1Longitude;
 	double geographicLocation1Latitude;
 	bool flagShowGeographicLocation2;
+	QString geographicLocation2Name;
 	double geographicLocation2Longitude;
 	double geographicLocation2Latitude;
 	bool flagShowCustomAzimuth1;

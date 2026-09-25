@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2026-09-07 22:47+0700\n"
+"POT-Creation-Date: 2026-09-14 20:34+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>, 2026\n"
 "Language-Team: Ukrainian (https://app.transifex.com/stellarium/teams/80998/uk/)\n"
@@ -43,7 +43,7 @@ msgstr "нетиповий об’єкт"
 #: src/core/modules/StarWrapper.cpp:738 src/core/modules/StarWrapper.cpp:740
 #: src/gui/AstroCalcDialog.cpp:963 src/gui/AstroCalcDialog.cpp:2702
 #: src/gui/AstroCalcDialog.cpp:3316 src/gui/AstroCalcDialog.cpp:3350
-#: src/gui/AstroCalcDialog.cpp:3736 src/gui/AstroCalcDialog.cpp:8116
+#: src/gui/AstroCalcDialog.cpp:3737 src/gui/AstroCalcDialog.cpp:8117
 #: src/gui/ObsListDialog.cpp:296 src/ui_configurationDialog.h:2542
 #: plugins/Satellites/src/Satellite.cpp:341
 #: plugins/TelescopeControl/src/TelescopeClient.cpp:145
@@ -676,8 +676,8 @@ msgstr "Головна вертикаль"
 #: src/gui/AstroCalcChart.cpp:83 src/gui/AstroCalcChart.cpp:421
 #: src/ui_viewDialog.h:5165 plugins/Satellites/src/Satellite.cpp:365
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1543
-#: plugins/Planes/src/AircraftObject.cpp:232
-#: plugins/Planes/src/AircraftObject.cpp:241
+#: plugins/Planes/src/AircraftObject.cpp:247
+#: plugins/Planes/src/AircraftObject.cpp:258
 msgid "Altitude"
 msgstr "Висота"
 
@@ -782,7 +782,7 @@ msgstr "АСТ"
 
 #. TRANSLATORS: Center of the umbra
 #: src/core/modules/GridLinesMgr.cpp:1615
-#: plugins/Satellites/src/Satellites.cpp:3440
+#: plugins/Satellites/src/Satellites.cpp:3467
 msgid "C.U."
 msgstr "Ц.Т."
 
@@ -799,7 +799,7 @@ msgstr "Антапекс"
 #. TRANSLATORS: Unit of measure for speed - kilometers per second
 #: src/core/modules/GridLinesMgr.cpp:1634 src/core/modules/Planet.cpp:813
 #: src/core/modules/Planet.cpp:1232 src/core/modules/StarWrapper.cpp:282
-#: src/gui/AstroCalcDialog.cpp:9002 plugins/Satellites/src/Satellite.cpp:363
+#: src/gui/AstroCalcDialog.cpp:9003 plugins/Satellites/src/Satellite.cpp:363
 #: plugins/Satellites/src/Satellite.cpp:407
 #: plugins/MeteorShowers/src/MeteorShower.cpp:584
 msgctxt "speed"
@@ -1198,7 +1198,7 @@ msgid "NbW"
 msgstr "NbW"
 
 #: src/core/modules/LandscapeMgr.cpp:446 src/core/modules/LandscapeMgr.cpp:773
-#: src/gui/ViewDialog.cpp:1042
+#: src/gui/ViewDialog.cpp:1045
 msgid "Loading..."
 msgstr "Завантаження…"
 
@@ -1315,7 +1315,7 @@ msgstr "м"
 #: src/ui_locationDialogGui.h:414 src/ui_obsListDialog.h:416
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:146
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:444
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1124
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1123
 msgid "Location"
 msgstr "Розташування"
 
@@ -1403,12 +1403,13 @@ msgstr "Діаметр"
 #: src/core/modules/Planet.cpp:785 src/core/modules/Planet.cpp:909
 #: src/core/modules/Planet.cpp:1565 src/core/modules/Comet.cpp:229
 #: src/core/modules/Comet.cpp:239 src/gui/StelGuiItems.cpp:1008
-#: src/gui/AstroCalcDialog.cpp:3531 src/gui/AstroCalcDialog.cpp:4100
-#: src/gui/AstroCalcDialog.cpp:8937 plugins/Satellites/src/Satellites.cpp:3440
+#: src/gui/AstroCalcDialog.cpp:3532 src/gui/AstroCalcDialog.cpp:4101
+#: src/gui/AstroCalcDialog.cpp:8938 plugins/Satellites/src/Satellites.cpp:3467
 #: plugins/Satellites/src/Satellite.cpp:359
 #: plugins/Satellites/src/Satellite.cpp:403
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1198
 #: plugins/Satellites/src/gui/SatellitesFilterDialog.cpp:133
+#: plugins/Planes/src/AircraftObject.cpp:205
 msgctxt "distance"
 msgid "km"
 msgstr "км"
@@ -3088,7 +3089,7 @@ msgid "a region of the sky"
 msgstr "область на небі"
 
 #: src/core/modules/NebulaMgr.cpp:469 src/gui/AstroCalcDialog.cpp:1065
-#: src/gui/AstroCalcDialog.cpp:7963
+#: src/gui/AstroCalcDialog.cpp:7964
 msgid "Deep-sky objects"
 msgstr "Віддалені об’єкти"
 
@@ -3133,7 +3134,7 @@ msgstr "англійською"
 #. TRANSLATORS: Satellite group: Satellites belonging to the Planet satellites
 #. TRANSLATORS: CelesTrak source [Planet]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=planet&FORMAT=csv
-#: src/core/modules/Planet.cpp:140 plugins/Satellites/src/Satellites.cpp:3848
+#: src/core/modules/Planet.cpp:140 plugins/Satellites/src/Satellites.cpp:3871
 msgid "planet"
 msgstr "планета"
 
@@ -3256,7 +3257,7 @@ msgstr "до"
 #: src/core/modules/Planet.cpp:753 src/gui/AstroCalcDialog.cpp:944
 #: src/gui/AstroCalcDialog.cpp:1258 src/gui/AstroCalcDialog.cpp:1556
 #: src/gui/AstroCalcDialog.cpp:1832 src/gui/AstroCalcDialog.cpp:1997
-#: src/gui/AstroCalcDialog.cpp:8962 src/gui/AstroCalcChart.cpp:431
+#: src/gui/AstroCalcDialog.cpp:8963 src/gui/AstroCalcChart.cpp:431
 #: src/gui/AstroCalcChart.cpp:435 src/gui/AstroCalcChart.cpp:450
 #: src/gui/AstroCalcChart.cpp:457 src/gui/AstroCalcChart.cpp:461
 #: plugins/Exoplanets/src/Exoplanet.cpp:364
@@ -3274,7 +3275,7 @@ msgstr "Світла пора доби"
 #. TRANSLATORS: Unit of measure for distance - milliones kilometers
 #. TRANSLATORS: Unit of measure for distance - millions kilometers
 #: src/core/modules/Planet.cpp:771 src/core/modules/Planet.cpp:792
-#: src/core/modules/Comet.cpp:231 src/gui/AstroCalcDialog.cpp:8939
+#: src/core/modules/Comet.cpp:231 src/gui/AstroCalcDialog.cpp:8940
 msgctxt "distance"
 msgid "M km"
 msgstr "млн. км"
@@ -3356,7 +3357,7 @@ msgstr "Освітлено"
 msgid "Elong. in Ecl.Long."
 msgstr "Елонг. у екл. довг."
 
-#: src/core/modules/Planet.cpp:1038 src/gui/AstroCalcDialog.cpp:9172
+#: src/core/modules/Planet.cpp:1038 src/gui/AstroCalcDialog.cpp:9173
 #: src/gui/AstroCalcChart.cpp:476
 msgid "Angular distance"
 msgstr "Кутова відстань"
@@ -3387,7 +3388,7 @@ msgstr "Кутова відстань від %1 — %2"
 
 #. TRANSLATORS: Unit of measure for period - days
 #: src/core/modules/Planet.cpp:1105 src/core/modules/StarWrapper.hpp:212
-#: src/core/StelUtils.cpp:169 src/gui/AstroCalcDialog.cpp:8973
+#: src/core/StelUtils.cpp:169 src/gui/AstroCalcDialog.cpp:8974
 #: src/gui/AstroCalcAlmanacWidget.cpp:237
 msgctxt "duration"
 msgid "days"
@@ -3414,7 +3415,7 @@ msgid "The synodic period is %1 days or %2 years"
 msgstr "Синодичний період — %1 днів або %2 років"
 
 #. TRANSLATORS: Unit of measure for speed - meters per second
-#: src/core/modules/Planet.cpp:1234 plugins/Planes/src/AircraftObject.cpp:207
+#: src/core/modules/Planet.cpp:1234 plugins/Planes/src/AircraftObject.cpp:211
 msgctxt "speed"
 msgid "m/s"
 msgstr "м/с"
@@ -3520,7 +3521,7 @@ msgstr "Співдовгота"
 msgid "Center point"
 msgstr "Центральна точка"
 
-#: src/core/modules/Planet.cpp:1491 src/gui/AstroCalcDialog.cpp:4010
+#: src/core/modules/Planet.cpp:1491 src/gui/AstroCalcDialog.cpp:4011
 #: src/ui_astroCalcDialog.h:2724
 msgid "Eclipse magnitude"
 msgstr "Величина затемнення"
@@ -3592,7 +3593,7 @@ msgid "Umbral eclipse magnitude"
 msgstr "Величина повного затемнення"
 
 #: src/core/modules/Planet.cpp:1590 src/core/modules/Planet.cpp:1934
-#: src/gui/ViewDialog.cpp:1102
+#: src/gui/ViewDialog.cpp:1105
 msgid "Albedo"
 msgstr "Альбедо"
 
@@ -4185,8 +4186,8 @@ msgid "Orthographic"
 msgstr "Ортографічна проєкція"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/core/modules/SolarSystem.cpp:320 src/gui/AstroCalcDialog.cpp:5548
-#: src/gui/AstroCalcDialog.cpp:7934 src/translations.h:37
+#: src/core/modules/SolarSystem.cpp:320 src/gui/AstroCalcDialog.cpp:5549
+#: src/gui/AstroCalcDialog.cpp:7935 src/translations.h:37
 msgid "Planets"
 msgstr "Планети"
 
@@ -4646,7 +4647,7 @@ msgstr "Грудневе сонцестояння наступного року"
 msgid "December solstice at previous year"
 msgstr "Грудневе сонцестояння попереднього року"
 
-#: src/core/SolarEclipseComputer.cpp:2032 src/gui/AstroCalcDialog.cpp:4396
+#: src/core/SolarEclipseComputer.cpp:2032 src/gui/AstroCalcDialog.cpp:4397
 msgid "Solar Eclipse"
 msgstr "Сонячне затемнення"
 
@@ -4655,7 +4656,7 @@ msgid "Created by Stellarium"
 msgstr "Створено у Stellarium"
 
 #: src/core/SolarEclipseComputer.cpp:2044 src/gui/AstroCalcDialog.cpp:3185
-#: src/gui/AstroCalcDialog.cpp:4008 src/gui/AstroCalcDialog.cpp:4204
+#: src/gui/AstroCalcDialog.cpp:4009 src/gui/AstroCalcDialog.cpp:4205
 #: src/ui_astroCalcDialog.h:2722
 msgid "Greatest eclipse"
 msgstr "Найбільше затемнення"
@@ -4823,7 +4824,7 @@ msgstr "Завантажуємо додаток"
 #: src/core/StelCore.cpp:310 src/gui/AstroCalcDialog.cpp:1804
 #: src/gui/AstroCalcDialog.cpp:2700 src/gui/AstroCalcDialog.cpp:2726
 #: src/gui/AstroCalcDialog.cpp:3314 src/gui/AstroCalcDialog.cpp:3345
-#: src/gui/AstroCalcDialog.cpp:6228 src/ui_dateTimeDialogGui.h:321
+#: src/gui/AstroCalcDialog.cpp:6229 src/ui_dateTimeDialogGui.h:321
 #: src/ui_dateTimeDialogGui.h:323
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:174
 msgid "Date and Time"
@@ -5881,19 +5882,19 @@ msgstr "Видимий сидеричний час"
 
 #. TRANSLATORS: time of transit
 #: src/core/StelObject.cpp:867 src/gui/AstroCalcDialog.cpp:957
-#: src/gui/AstroCalcDialog.cpp:2450 src/gui/AstroCalcDialog.cpp:8100
+#: src/gui/AstroCalcDialog.cpp:2450 src/gui/AstroCalcDialog.cpp:8101
 msgctxt "celestial event; passage across a meridian"
 msgid "Transit"
 msgstr "Проходження"
 
 #: src/core/StelObject.cpp:868 src/gui/AstroCalcDialog.cpp:2449
-#: src/gui/AstroCalcDialog.cpp:8099
+#: src/gui/AstroCalcDialog.cpp:8100
 msgctxt "celestial event"
 msgid "Rise"
 msgstr "Схід"
 
 #: src/core/StelObject.cpp:869 src/gui/AstroCalcDialog.cpp:2451
-#: src/gui/AstroCalcDialog.cpp:8103
+#: src/gui/AstroCalcDialog.cpp:8104
 msgctxt "celestial event"
 msgid "Set"
 msgstr "Захід"
@@ -5966,13 +5967,13 @@ msgid "Parallactic Angle"
 msgstr "Паралактичний кут"
 
 #: src/core/StelObject.cpp:1082 src/core/StelObject.cpp:1619
-#: src/gui/AstroCalcDialog.cpp:8198
+#: src/gui/AstroCalcDialog.cpp:8199
 msgid "IAU Constellation"
 msgstr "Сузір’я МАО"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/core/StelObject.cpp:1104 src/translations.h:59
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1016
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1015
 msgid "Constellations"
 msgstr "Сузір'я"
 
@@ -6255,23 +6256,23 @@ msgctxt "object narration"
 msgid "End of"
 msgstr "Кінець"
 
-#: src/core/StelSkyCultureMgr.cpp:385
+#: src/core/StelSkyCultureMgr.cpp:430
 msgctxt "sky culture classification"
 msgid "ethnographic"
 msgstr "етнографічні"
 
-#: src/core/StelSkyCultureMgr.cpp:386
+#: src/core/StelSkyCultureMgr.cpp:431
 msgid ""
 "Provided by ethnographic researchers based on interviews of indigenous "
 "people."
 msgstr "Надані дослідниками-етнографами на основі опитування тубільців."
 
-#: src/core/StelSkyCultureMgr.cpp:390
+#: src/core/StelSkyCultureMgr.cpp:435
 msgctxt "sky culture classification"
 msgid "historical"
 msgstr "історичні"
 
-#: src/core/StelSkyCultureMgr.cpp:391
+#: src/core/StelSkyCultureMgr.cpp:436
 msgid ""
 "Provided by historians based on historical written sources from a (usually "
 "short) period of the past."
@@ -6279,12 +6280,12 @@ msgstr ""
 "Надані дослідниками-істориками на основі письмових джерел (зазвичай "
 "короткого) періоду давнини."
 
-#: src/core/StelSkyCultureMgr.cpp:395
+#: src/core/StelSkyCultureMgr.cpp:440
 msgctxt "sky culture classification"
 msgid "single"
 msgstr "оригінальні"
 
-#: src/core/StelSkyCultureMgr.cpp:396
+#: src/core/StelSkyCultureMgr.cpp:441
 msgid ""
 "Represents a single source like a historical atlas, or publications of a "
 "single author."
@@ -6292,23 +6293,23 @@ msgstr ""
 "Отримані із одного джерела даних: давнього атласу або публікації одного "
 "автора."
 
-#: src/core/StelSkyCultureMgr.cpp:400
+#: src/core/StelSkyCultureMgr.cpp:445
 msgctxt "sky culture classification"
 msgid "comparative"
 msgstr "порівняльна"
 
-#: src/core/StelSkyCultureMgr.cpp:401
+#: src/core/StelSkyCultureMgr.cpp:446
 msgid ""
 "Compares and confronts elements from at least two sky cultures with each "
 "other."
 msgstr "Порівнює і зіставляє елементи з картин зоряного неба один з одним."
 
-#: src/core/StelSkyCultureMgr.cpp:405
+#: src/core/StelSkyCultureMgr.cpp:450
 msgctxt "sky culture classification"
 msgid "traditional"
 msgstr "традиційні"
 
-#: src/core/StelSkyCultureMgr.cpp:406
+#: src/core/StelSkyCultureMgr.cpp:451
 msgid ""
 "Content represents 'common' knowledge by several members of an ethnic "
 "community, and the sky culture has been developed by members of such "
@@ -6317,12 +6318,12 @@ msgstr ""
 "Дані відповідають «загальним» знанням декількох членів етнічної спільноти, а"
 " картину неба розроблено членами такої спільноти."
 
-#: src/core/StelSkyCultureMgr.cpp:410
+#: src/core/StelSkyCultureMgr.cpp:455
 msgctxt "sky culture classification"
 msgid "personal"
 msgstr "особисті"
 
-#: src/core/StelSkyCultureMgr.cpp:411
+#: src/core/StelSkyCultureMgr.cpp:456
 msgid ""
 "This is a personally developed sky culture which is not founded in published"
 " historical or ethnological research. Stellarium may include it when it is "
@@ -6332,12 +6333,12 @@ msgstr ""
 "оприлюднених історичних чи етнологічних даних. Stellarium може включити таку"
 " картину, якщо вона «достатньо цікава», ніяким чином не схвалюючи її вміст."
 
-#: src/core/StelSkyCultureMgr.cpp:415
+#: src/core/StelSkyCultureMgr.cpp:460
 msgctxt "sky culture classification"
 msgid "incomplete"
 msgstr "неповні"
 
-#: src/core/StelSkyCultureMgr.cpp:416
+#: src/core/StelSkyCultureMgr.cpp:461
 msgid ""
 "The accuracy of the sky culture description cannot be given, although it "
 "looks like it is built on a solid background. More work would be needed."
@@ -6346,16 +6347,16 @@ msgstr ""
 "засновано на надійних джерелах. Картина зоряного неба потребує допрацювання."
 " "
 
-#: src/core/StelSkyCultureMgr.cpp:420
+#: src/core/StelSkyCultureMgr.cpp:465
 msgctxt "sky culture classification"
 msgid "undefined"
 msgstr "не визначено"
 
-#: src/core/StelSkyCultureMgr.cpp:427
+#: src/core/StelSkyCultureMgr.cpp:472
 msgid "Classification"
 msgstr "Класифікація"
 
-#: src/core/StelSkyCultureMgr.cpp:440
+#: src/core/StelSkyCultureMgr.cpp:485
 msgid ""
 "This sky culture is provided under unknown license. Please ask authors for "
 "details about license for this sky culture."
@@ -6364,7 +6365,7 @@ msgstr ""
 "ласка, зверніться до авторів, щоб дізнатися більше про умови ліцензування "
 "цієї картини зоряного неба."
 
-#: src/core/StelSkyCultureMgr.cpp:446
+#: src/core/StelSkyCultureMgr.cpp:491
 msgid ""
 "This sky culture is provided under GNU General Public License. You can use "
 "it for commercial and non-commercial purposes, freely adapt it and share "
@@ -6375,7 +6376,7 @@ msgstr ""
 "некомерційних потреб, вільно адаптувати її і поширювати адаптовані "
 "результати."
 
-#: src/core/StelSkyCultureMgr.cpp:449 src/core/StelSkyCultureMgr.cpp:458
+#: src/core/StelSkyCultureMgr.cpp:494 src/core/StelSkyCultureMgr.cpp:503
 msgid ""
 "You can use it for commercial and non-commercial purposes, freely adapt it "
 "and share adapted work."
@@ -6383,7 +6384,7 @@ msgstr ""
 "Можливе використання для комерційних і некомерційних цілей, вільна адаптація"
 " і поширення адаптованих результатів роботи."
 
-#: src/core/StelSkyCultureMgr.cpp:455
+#: src/core/StelSkyCultureMgr.cpp:500
 msgid ""
 "This sky culture is provided under MIT License. You can use it for "
 "commercial and non-commercial purposes, freely adapt it and share adapted "
@@ -6393,22 +6394,22 @@ msgstr ""
 "користуватися нею для комерційних і некомерційних потреб, вільно адаптувати "
 "її і поширювати адаптовані результати."
 
-#: src/core/StelSkyCultureMgr.cpp:464 src/core/StelSkyCultureMgr.cpp:501
+#: src/core/StelSkyCultureMgr.cpp:509 src/core/StelSkyCultureMgr.cpp:546
 msgid "This sky culture is distributed as public domain."
 msgstr ""
 "Поширення цієї картини зоряного неба відбувається, як поширення громадського"
 " надбання."
 
-#: src/core/StelSkyCultureMgr.cpp:466
+#: src/core/StelSkyCultureMgr.cpp:511
 msgid "This is distributed as public domain."
 msgstr "Поширюється як громадське надбання."
 
-#: src/core/StelSkyCultureMgr.cpp:471
+#: src/core/StelSkyCultureMgr.cpp:516
 msgid "This sky culture is provided under Creative Commons License."
 msgstr ""
 "Цю картину зоряного неба надано за умов дотримання Creative Commons License."
 
-#: src/core/StelSkyCultureMgr.cpp:476
+#: src/core/StelSkyCultureMgr.cpp:521
 msgid ""
 "You may distribute, remix, adapt, and build upon this sky culture, even "
 "commercially, as long as you credit authors for the original creation."
@@ -6417,7 +6418,7 @@ msgstr ""
 "зоряного неба, навіть із комерційною метою, але результати мають містити "
 "подяку авторам початкової версії."
 
-#: src/core/StelSkyCultureMgr.cpp:478
+#: src/core/StelSkyCultureMgr.cpp:523
 msgid ""
 "You may remix, adapt, and build upon this sky culture even for commercial "
 "purposes, as long as you credit authors and license the new creations under "
@@ -6430,7 +6431,7 @@ msgstr ""
 "ліцензування часто вважають тотожними до вільних умов ліцензування з "
 "відкритим кодом для програмного забезпечення."
 
-#: src/core/StelSkyCultureMgr.cpp:481
+#: src/core/StelSkyCultureMgr.cpp:526
 msgid ""
 "You may reuse this sky culture for any purpose, including commercially; "
 "however, adapted work cannot be shared with others, and credit must be "
@@ -6440,7 +6441,7 @@ msgstr ""
 "зокрема комерційною; втім, змінами не можна ні з ким ділитися. Також "
 "результати мають містити подяку авторам."
 
-#: src/core/StelSkyCultureMgr.cpp:483
+#: src/core/StelSkyCultureMgr.cpp:528
 msgid ""
 "You may remix, adapt, and build upon this sky culture non-commercially, and "
 "although your new works must also acknowledge authors and be non-commercial,"
@@ -6451,7 +6452,7 @@ msgstr ""
 " використовуватися із некомерційною метою, вас не зобов'язують поширювати їх"
 " із тими самими умовами ліцензування."
 
-#: src/core/StelSkyCultureMgr.cpp:486
+#: src/core/StelSkyCultureMgr.cpp:531
 msgid ""
 "You may remix, adapt, and build upon this sky culture non-commercially, as "
 "long as you credit authors and license your new creations under the "
@@ -6461,7 +6462,7 @@ msgstr ""
 "некомерційною метою, але результати мають містити подяку авторам та бути "
 "ліцензованими за тотожними до початкових умовами."
 
-#: src/core/StelSkyCultureMgr.cpp:488
+#: src/core/StelSkyCultureMgr.cpp:533
 msgid ""
 "You may use this sky culture and share them with others as long as you "
 "credit authors, but you can’t change it in any way or use it commercially."
@@ -6471,15 +6472,15 @@ msgstr ""
 "лишатися незмінними. Також результати не можна використовувати із "
 "комерційною метою."
 
-#: src/core/StelSkyCultureMgr.cpp:506
+#: src/core/StelSkyCultureMgr.cpp:551
 msgid ""
 "Free Art License grants the right to freely copy, distribute, and transform."
 msgstr ""
 "Free Art License, яка надає вам право вільно копіювати, поширювати і "
 "перетворювати дані."
 
-#: src/core/StelSkyCultureMgr.cpp:526 src/core/StelSkyCultureMgr.cpp:533
-#: src/core/StelSkyCultureMgr.cpp:540 src/gui/ConfigurationDialog.cpp:1643
+#: src/core/StelSkyCultureMgr.cpp:571 src/core/StelSkyCultureMgr.cpp:578
+#: src/core/StelSkyCultureMgr.cpp:585 src/gui/ConfigurationDialog.cpp:1643
 #: src/scripting/StelScriptMgr.cpp:652
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:100
 #: plugins/Oculars/src/gui/OcularDialog.cpp:630
@@ -6491,7 +6492,7 @@ msgstr ""
 #: plugins/Novae/src/gui/NovaeDialog.cpp:115
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:119
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:132
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:137
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:135
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:209
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:289
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:149
@@ -6510,22 +6511,22 @@ msgstr ""
 msgid "License"
 msgstr "Ліцензування"
 
-#: src/core/StelSkyCultureMgr.cpp:527 src/core/StelSkyCultureMgr.cpp:534
+#: src/core/StelSkyCultureMgr.cpp:572 src/core/StelSkyCultureMgr.cpp:579
 msgid "unknown"
 msgstr "невідомий"
 
-#: src/core/StelSkyCultureMgr.cpp:578
+#: src/core/StelSkyCultureMgr.cpp:623
 msgid ""
 "The region indicates the geographical area of origin of a given sky culture."
 msgstr ""
 "Під регіоном визначає географічну область походження відповідної картини "
 "зоряного неба."
 
-#: src/core/StelSkyCultureMgr.cpp:584
+#: src/core/StelSkyCultureMgr.cpp:629
 msgid "World"
 msgstr "Світ"
 
-#: src/core/StelSkyCultureMgr.cpp:585
+#: src/core/StelSkyCultureMgr.cpp:630
 msgid ""
 "All 'modern' sky cultures are based on the IAU-approved 88 constellations "
 "with standardized boundaries and are used worldwide. The origins of these "
@@ -6535,26 +6536,26 @@ msgstr ""
 "зі стандартизованими межами. Ці дані застосовують у всьому світі. Походження"
 " сузір'їв цієї картини є загальноєвропейським."
 
-#: src/core/StelSkyCultureMgr.cpp:589 src/ui_locationDialogGui.h:450
+#: src/core/StelSkyCultureMgr.cpp:634 src/ui_locationDialogGui.h:450
 msgid "Region:"
 msgstr "Регіон:"
 
-#: src/core/StelSkyCultureMgr.cpp:807
+#: src/core/StelSkyCultureMgr.cpp:852
 msgctxt "Name of a section in sky culture description"
 msgid "Extras"
 msgstr "Додатки"
 
-#: src/core/StelSkyCultureMgr.cpp:808
+#: src/core/StelSkyCultureMgr.cpp:853
 msgctxt "Name of a section in sky culture description"
 msgid "References"
 msgstr "Посилання"
 
-#: src/core/StelSkyCultureMgr.cpp:809
+#: src/core/StelSkyCultureMgr.cpp:854
 msgctxt "Name of a section in sky culture description"
 msgid "Authors"
 msgstr "Автори"
 
-#: src/core/StelSkyCultureMgr.cpp:941 src/core/StelSkyCultureMgr.cpp:976
+#: src/core/StelSkyCultureMgr.cpp:986 src/core/StelSkyCultureMgr.cpp:1021
 msgid "No description"
 msgstr "Немає опису"
 
@@ -7254,25 +7255,25 @@ msgid "omega"
 msgstr "омега"
 
 #: src/gui/AngleSpinBox.cpp:52 src/gui/AngleSpinBox.cpp:88
-#: src/gui/StelGuiItems.cpp:999 src/gui/AstroCalcDialog.cpp:3497
+#: src/gui/StelGuiItems.cpp:999 src/gui/AstroCalcDialog.cpp:3503
 msgctxt "longitude"
 msgid "E"
 msgstr "Сх"
 
 #: src/gui/AngleSpinBox.cpp:54 src/gui/AngleSpinBox.cpp:88
-#: src/gui/StelGuiItems.cpp:991 src/gui/AstroCalcDialog.cpp:3489
+#: src/gui/StelGuiItems.cpp:991 src/gui/AstroCalcDialog.cpp:3495
 msgctxt "latitude"
 msgid "N"
 msgstr "Пн"
 
 #: src/gui/AngleSpinBox.cpp:68 src/gui/AngleSpinBox.cpp:88
-#: src/gui/StelGuiItems.cpp:1002 src/gui/AstroCalcDialog.cpp:3500
+#: src/gui/StelGuiItems.cpp:1002 src/gui/AstroCalcDialog.cpp:3499
 msgctxt "longitude"
 msgid "W"
 msgstr "Зх"
 
 #: src/gui/AngleSpinBox.cpp:70 src/gui/AngleSpinBox.cpp:88
-#: src/gui/StelGuiItems.cpp:994 src/gui/AstroCalcDialog.cpp:3492
+#: src/gui/StelGuiItems.cpp:994 src/gui/AstroCalcDialog.cpp:3491
 msgctxt "latitude"
 msgid "S"
 msgstr "Пд"
@@ -7361,7 +7362,7 @@ msgstr "Подяки"
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:778
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:276
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:299
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:138
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:136
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:210
 #: plugins/Planes/src/gui/PlanesDialog.cpp:248
 #: plugins/TimeNavigator/src/gui/TimeNavigatorDialog.cpp:271
@@ -7384,7 +7385,7 @@ msgstr "Контакти"
 #: plugins/Novae/src/gui/NovaeDialog.cpp:114
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:118
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:131
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:136
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:134
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:208
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:288
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:148
@@ -8072,7 +8073,7 @@ msgstr "Неперервна інтеграція: %1"
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:780
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:281
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:258
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:140
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:138
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:212
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:291
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:197
@@ -8345,36 +8346,36 @@ msgstr "Кадрів в секунду"
 msgid "Are you sure? This will delete your customized data."
 msgstr "Ви певні? У результаті виконання дії буде вилучено усі нетипові дані."
 
-#: src/gui/ViewDialog.cpp:905
+#: src/gui/ViewDialog.cpp:908
 msgid "properties"
 msgstr "властивості"
 
-#: src/gui/ViewDialog.cpp:1103
+#: src/gui/ViewDialog.cpp:1106
 msgid "Normal map"
 msgstr "Звичайна карта"
 
-#: src/gui/ViewDialog.cpp:1104
+#: src/gui/ViewDialog.cpp:1107
 msgid "Horizon map"
 msgstr "Горизонтальна карта"
 
-#: src/gui/ViewDialog.cpp:1184
+#: src/gui/ViewDialog.cpp:1187
 msgid "Deep Sky"
 msgstr "Віддалені об'єкти"
 
-#: src/gui/ViewDialog.cpp:1185
+#: src/gui/ViewDialog.cpp:1188
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:239
 msgid "Solar System"
 msgstr "Сонячна система"
 
-#: src/gui/ViewDialog.cpp:1357
+#: src/gui/ViewDialog.cpp:1360
 msgid "No albedo map"
 msgstr "Карта без альбедо"
 
-#: src/gui/ViewDialog.cpp:1358
+#: src/gui/ViewDialog.cpp:1361
 msgid "This group of surveys doesn't have an albedo map. Can't display it."
 msgstr "У цій групі оглядів немає карти альбедо. Її показ неможливий."
 
-#: src/gui/ViewDialog.cpp:1588
+#: src/gui/ViewDialog.cpp:1591
 msgid ""
 "Uses a polygonal 3D model for some selected subplanetary objects (small "
 "moons, asteroids, comets) instead of a spherical approximation"
@@ -8383,7 +8384,7 @@ msgstr ""
 "субпланетарних об’єктів (малих супутників, астероїдів, комет) замість "
 "сферичної апроксимації"
 
-#: src/gui/ViewDialog.cpp:1589
+#: src/gui/ViewDialog.cpp:1592
 msgid ""
 "Use a &quot;shadow map&quot; to simulate self-shadows of non-convex solar "
 "system objects. May reduce shadow penumbra quality on some objects."
@@ -8392,12 +8393,12 @@ msgstr ""
 "Сонячної системи. Може знизити якість показу напівтіней для деяких об’єктів."
 
 #. TRANSLATORS: duration in seconds
-#: src/gui/ViewDialog.cpp:1598
+#: src/gui/ViewDialog.cpp:1601
 msgctxt "duration, suffix"
 msgid "s"
 msgstr "с"
 
-#: src/gui/ViewDialog.cpp:1610 src/ui_astroCalcExtraEphemerisDialog.h:258
+#: src/gui/ViewDialog.cpp:1613 src/ui_astroCalcExtraEphemerisDialog.h:258
 #: src/ui_astroCalcExtraEphemerisDialog.h:263
 #: plugins/Oculars/src/Oculars.cpp:2069
 #: plugins/Oculars/src/gui/OcularDialog.cpp:602
@@ -8407,105 +8408,112 @@ msgctxt "pixels"
 msgid "px"
 msgstr "пк"
 
-#: src/gui/ViewDialog.cpp:1649 src/ui_viewDialog.h:4730
+#: src/gui/ViewDialog.cpp:1652 src/ui_viewDialog.h:4730
 msgid "Other"
 msgstr "Інше"
 
-#: src/gui/ViewDialog.cpp:1850
+#: src/gui/ViewDialog.cpp:1861
 msgctxt "cultural style"
 msgid "native"
 msgstr "природний"
 
-#: src/gui/ViewDialog.cpp:1851
+#: src/gui/ViewDialog.cpp:1862
 msgctxt "cultural style"
 msgid "transliteration"
 msgstr "транслітерація"
 
-#: src/gui/ViewDialog.cpp:1852
+#: src/gui/ViewDialog.cpp:1863
 msgctxt "cultural style"
 msgid "sci. translit."
 msgstr "наук. трансліт."
 
-#: src/gui/ViewDialog.cpp:1853
+#: src/gui/ViewDialog.cpp:1864
 msgctxt "cultural style"
 msgid "translated"
 msgstr "переклад"
 
-#: src/gui/ViewDialog.cpp:2008
+#: src/gui/ViewDialog.cpp:2019
 msgid "No shooting stars"
 msgstr "Без метеорів"
 
-#: src/gui/ViewDialog.cpp:2010
+#: src/gui/ViewDialog.cpp:2021
 msgid "Normal rate"
 msgstr "Нормальна частота"
 
-#: src/gui/ViewDialog.cpp:2012
+#: src/gui/ViewDialog.cpp:2023
 msgid "Standard Orionids rate"
 msgstr "Стандартна частота оріонідів"
 
-#: src/gui/ViewDialog.cpp:2014
+#: src/gui/ViewDialog.cpp:2025
 msgid "Standard Perseids rate"
 msgstr "Стандартна частота (Персеїди)"
 
-#: src/gui/ViewDialog.cpp:2016
+#: src/gui/ViewDialog.cpp:2027
 msgid "Standard Geminids rate"
 msgstr "Стандартна частота гемінідів"
 
-#: src/gui/ViewDialog.cpp:2018
+#: src/gui/ViewDialog.cpp:2029
 msgid "Exceptional Perseid rate"
 msgstr "Виняткова частота персеїдів"
 
-#: src/gui/ViewDialog.cpp:2020
+#: src/gui/ViewDialog.cpp:2031
 msgid "Meteor storm rate"
 msgstr "Годинне число метеорного дощу"
 
-#: src/gui/ViewDialog.cpp:2022
+#: src/gui/ViewDialog.cpp:2033
 msgid "Exceptional Draconid rate"
 msgstr "Виняткова частота драконідів"
 
-#: src/gui/ViewDialog.cpp:2024
+#: src/gui/ViewDialog.cpp:2035
 msgid "Exceptional Leonid rate"
 msgstr "Незвичайна частота (Леоніди)"
 
-#: src/gui/ViewDialog.cpp:2026
+#: src/gui/ViewDialog.cpp:2037
 msgid "Very high rate (1966 Leonids)"
 msgstr "Дуже велика частота (леоніди у 1966 році)"
 
-#: src/gui/ViewDialog.cpp:2028
+#: src/gui/ViewDialog.cpp:2039
 msgid "Highest rate ever (1833 Leonids)"
 msgstr "Найвища частота (леоніди у 1833 році)"
 
-#: src/gui/ViewDialog.cpp:2287
+#: src/gui/ViewDialog.cpp:2062
+#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp:908
+#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp:941
+msgctxt "Unknown date (year)"
+msgid "Unknown"
+msgstr "Невідома"
+
+#: src/gui/ViewDialog.cpp:2319
 msgctxt "magnitude algorithm"
 msgid "G. Müller (1893)"
 msgstr "Ґ. Мюллер (1893)"
 
-#: src/gui/ViewDialog.cpp:2288
+#: src/gui/ViewDialog.cpp:2320
 msgctxt "magnitude algorithm"
 msgid "Astronomical Almanac (1984)"
 msgstr "Астрономічний календар (1984)"
 
-#: src/gui/ViewDialog.cpp:2289
+#: src/gui/ViewDialog.cpp:2321
 msgctxt "magnitude algorithm"
 msgid "Explanatory Supplement (1992)"
 msgstr "Пояснювальний додаток (1992)"
 
-#: src/gui/ViewDialog.cpp:2290
+#: src/gui/ViewDialog.cpp:2322
 msgctxt "magnitude algorithm"
 msgid "Explanatory Supplement (2013)"
 msgstr "Пояснювальний додаток (2013)"
 
-#: src/gui/ViewDialog.cpp:2291
+#: src/gui/ViewDialog.cpp:2323
 msgctxt "magnitude algorithm"
 msgid "Mallama & Hilton (2018)"
 msgstr "Маллама і Гілтон (2018)"
 
-#: src/gui/ViewDialog.cpp:2292
+#: src/gui/ViewDialog.cpp:2324
 msgctxt "magnitude algorithm"
 msgid "Generic"
 msgstr "Загальний"
 
-#: src/gui/ViewDialog.cpp:2315
+#: src/gui/ViewDialog.cpp:2347
 msgid ""
 "The algorithm was used in the <em>Astronomical Almanac</em> (1984 and later)"
 " and gives V (instrumental) magnitudes (allegedly from D.L. Harris)."
@@ -8514,7 +8522,7 @@ msgstr ""
 "року і пізніше) і який дає V-величини (інструментальні) (стверджують, що "
 "алгоритм розроблено Д. Л. Гаррісом (D.L. Harris))."
 
-#: src/gui/ViewDialog.cpp:2316
+#: src/gui/ViewDialog.cpp:2348
 msgid ""
 "The algorithm is based on visual observations 1877-1891 by G. Müller and was"
 " still republished in the <em>Explanatory Supplement to the Astronomical "
@@ -8524,7 +8532,7 @@ msgstr ""
 " Ґ. Мюллером (G. Mueller); алгоритм повторно опубліковано у "
 "<em>Пояснювальному додатку до «Астрономічного календаря»</em> (1961)."
 
-#: src/gui/ViewDialog.cpp:2317
+#: src/gui/ViewDialog.cpp:2349
 msgid ""
 "The algorithm was published in the 2nd edition of the <em>Explanatory "
 "Supplement to the Astronomical Almanac</em> (1992)."
@@ -8532,7 +8540,7 @@ msgstr ""
 "Алгоритм опубліковано у другому виданні <em>Пояснювального додатка до "
 "«Астрономічного календаря»</em> (1992)."
 
-#: src/gui/ViewDialog.cpp:2318
+#: src/gui/ViewDialog.cpp:2350
 msgid ""
 "The algorithm was published in the 3rd edition of the <em>Explanatory "
 "Supplement to the Astronomical Almanac</em> (2013)."
@@ -8540,7 +8548,7 @@ msgstr ""
 "Алгоритм опубліковано у третьому виданні <em>Пояснювального додатка до "
 "«Астрономічного календаря»</em> (2013)."
 
-#: src/gui/ViewDialog.cpp:2319
+#: src/gui/ViewDialog.cpp:2351
 msgid ""
 "The algorithm was published by A. Mallama & J. L. Hilton: <em>Computing "
 "apparent planetary magnitudes for the Astronomical Almanac.</em> "
@@ -8550,7 +8558,7 @@ msgstr ""
 "Hilton): <em>Computing apparent planetary magnitudes for the Astronomical "
 "Almanac.</em> Astronomy&Computing 25 (2018) 10-24."
 
-#: src/gui/ViewDialog.cpp:2322
+#: src/gui/ViewDialog.cpp:2354
 msgid "Visual magnitude based on phase angle and albedo."
 msgstr "Видима величина на основі фазового кута та альбедо"
 
@@ -8984,7 +8992,7 @@ msgstr "Будь ласка, виберіть об’єкт для кресле�
 #. TRANSLATORS: name of object
 #: src/gui/AstroCalcDialog.cpp:887 src/gui/AstroCalcDialog.cpp:991
 #: src/gui/AstroCalcDialog.cpp:1803 src/gui/AstroCalcDialog.cpp:2448
-#: src/gui/AstroCalcDialog.cpp:8088 src/ui_configurationDialog.h:2466
+#: src/gui/AstroCalcDialog.cpp:8089 src/ui_configurationDialog.h:2466
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:539
 #: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:103
 #: plugins/Exoplanets/src/Exoplanet.cpp:360
@@ -9008,13 +9016,13 @@ msgid "Dec (J2000)"
 msgstr "Схил (J2000)"
 
 #. TRANSLATORS: opacity
-#: src/gui/AstroCalcDialog.cpp:913 src/gui/AstroCalcDialog.cpp:8097
+#: src/gui/AstroCalcDialog.cpp:913 src/gui/AstroCalcDialog.cpp:8098
 msgid "Opac."
 msgstr "Непр."
 
 #. TRANSLATORS: magnitude
 #: src/gui/AstroCalcDialog.cpp:918 src/gui/AstroCalcDialog.cpp:1828
-#: src/gui/AstroCalcDialog.cpp:2455 src/gui/AstroCalcDialog.cpp:8092
+#: src/gui/AstroCalcDialog.cpp:2455 src/gui/AstroCalcDialog.cpp:8093
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:185
 msgid "Mag."
 msgstr "Вел."
@@ -9027,7 +9035,7 @@ msgstr "К.Р."
 
 #. TRANSLATORS: separation, arc-seconds
 #. TRANSLATORS: separation
-#: src/gui/AstroCalcDialog.cpp:934 src/gui/AstroCalcDialog.cpp:8107
+#: src/gui/AstroCalcDialog.cpp:934 src/gui/AstroCalcDialog.cpp:8108
 msgid "Sep."
 msgstr "Розд."
 
@@ -9062,7 +9070,7 @@ msgid "S.B."
 msgstr "Я.П."
 
 #. TRANSLATORS: elevation
-#: src/gui/AstroCalcDialog.cpp:959 src/gui/AstroCalcDialog.cpp:8102
+#: src/gui/AstroCalcDialog.cpp:959 src/gui/AstroCalcDialog.cpp:8103
 msgid "Elev."
 msgstr "Вис."
 
@@ -9083,7 +9091,7 @@ msgstr "Об’єкти Сонячної системи"
 msgid "Solar system objects: comets"
 msgstr "Об'єкти Сонячної системи: комети"
 
-#: src/gui/AstroCalcDialog.cpp:1068 src/gui/AstroCalcDialog.cpp:5560
+#: src/gui/AstroCalcDialog.cpp:1068 src/gui/AstroCalcDialog.cpp:5561
 msgid "Solar system objects: minor bodies"
 msgstr "Об'єкти Сонячної системи: малі тіла"
 
@@ -9189,11 +9197,11 @@ msgstr "Зберегти обчислені ефемериди як…"
 msgid "Ephemeris"
 msgstr "Ефемериди"
 
-#: src/gui/AstroCalcDialog.cpp:2456 src/gui/AstroCalcDialog.cpp:6237
+#: src/gui/AstroCalcDialog.cpp:2456 src/gui/AstroCalcDialog.cpp:6238
 msgid "Solar Elongation"
 msgstr "Сонячне видовження"
 
-#: src/gui/AstroCalcDialog.cpp:2457 src/gui/AstroCalcDialog.cpp:6238
+#: src/gui/AstroCalcDialog.cpp:2457 src/gui/AstroCalcDialog.cpp:6239
 #: src/gui/AstroCalcChart.cpp:113 src/ui_astroCalcDialog.h:2674
 msgid "Lunar Elongation"
 msgstr "Місячне видовження"
@@ -9265,16 +9273,16 @@ msgctxt "column name"
 msgid "Axis Distance"
 msgstr "Осьова відстань"
 
-#: src/gui/AstroCalcDialog.cpp:2948 src/gui/AstroCalcDialog.cpp:3576
-#: src/gui/AstroCalcDialog.cpp:3598 src/gui/AstroCalcDialog.cpp:3944
-#: src/gui/AstroCalcDialog.cpp:4246 src/gui/AstroCalcDialog.cpp:4275
+#: src/gui/AstroCalcDialog.cpp:2948 src/gui/AstroCalcDialog.cpp:3577
+#: src/gui/AstroCalcDialog.cpp:3599 src/gui/AstroCalcDialog.cpp:3945
+#: src/gui/AstroCalcDialog.cpp:4247 src/gui/AstroCalcDialog.cpp:4276
 msgctxt "eclipse type"
 msgid "Total"
 msgstr "Повне"
 
-#: src/gui/AstroCalcDialog.cpp:2954 src/gui/AstroCalcDialog.cpp:3588
-#: src/gui/AstroCalcDialog.cpp:3958 src/gui/AstroCalcDialog.cpp:4235
-#: src/gui/AstroCalcDialog.cpp:4254
+#: src/gui/AstroCalcDialog.cpp:2954 src/gui/AstroCalcDialog.cpp:3589
+#: src/gui/AstroCalcDialog.cpp:3959 src/gui/AstroCalcDialog.cpp:4236
+#: src/gui/AstroCalcDialog.cpp:4255
 msgctxt "eclipse type"
 msgid "Partial"
 msgstr "Часткове"
@@ -9330,7 +9338,7 @@ msgstr "Невидиме"
 msgid "The greatest eclipse is invisible in current location"
 msgstr "Найвища фаза затемнення є невидимою з поточного місця"
 
-#: src/gui/AstroCalcDialog.cpp:3037 src/gui/AstroCalcDialog.cpp:3687
+#: src/gui/AstroCalcDialog.cpp:3037 src/gui/AstroCalcDialog.cpp:3688
 msgid ""
 "Saros series number of eclipse (each eclipse in a Saros is separated by an "
 "interval of 18 years 11.3 days)"
@@ -9378,7 +9386,7 @@ msgstr "Місяць виходить із тіні"
 msgid "Moon leaves penumbra"
 msgstr "Місяць виходиь із напівтіні"
 
-#: src/gui/AstroCalcDialog.cpp:3216 src/gui/AstroCalcDialog.cpp:4219
+#: src/gui/AstroCalcDialog.cpp:3216 src/gui/AstroCalcDialog.cpp:4220
 msgid "Timing or eclipse phase"
 msgstr "Часові параметри або фаза затемнення"
 
@@ -9414,7 +9422,7 @@ msgid "Lunar Eclipses"
 msgstr "Місячні затемнення"
 
 #: src/gui/AstroCalcDialog.cpp:3299 src/gui/AstroCalcDialog.cpp:3308
-#: src/gui/AstroCalcDialog.cpp:4470 src/ui_astroCalcDialog.h:2727
+#: src/gui/AstroCalcDialog.cpp:4471 src/ui_astroCalcDialog.h:2727
 msgid ""
 "Note: Local circumstances for eclipses during thousands of years in the past"
 " and future are not reliable due to uncertainty in ΔT which is caused by "
@@ -9473,103 +9481,103 @@ msgstr "Тривалість центрального"
 msgid "Location is changed! Go to back..."
 msgstr "Місце змінено! Переходимо назад…"
 
-#: src/gui/AstroCalcDialog.cpp:3582 src/gui/AstroCalcDialog.cpp:3604
-#: src/gui/AstroCalcDialog.cpp:3618 src/gui/AstroCalcDialog.cpp:3951
-#: src/gui/AstroCalcDialog.cpp:4250 src/gui/AstroCalcDialog.cpp:4277
+#: src/gui/AstroCalcDialog.cpp:3583 src/gui/AstroCalcDialog.cpp:3605
+#: src/gui/AstroCalcDialog.cpp:3619 src/gui/AstroCalcDialog.cpp:3952
+#: src/gui/AstroCalcDialog.cpp:4251 src/gui/AstroCalcDialog.cpp:4278
 msgctxt "eclipse type"
 msgid "Annular"
 msgstr "Кільцеподібне"
 
-#: src/gui/AstroCalcDialog.cpp:3612
+#: src/gui/AstroCalcDialog.cpp:3613
 msgctxt "eclipse type"
 msgid "Hybrid"
 msgstr "Гібридне"
 
-#: src/gui/AstroCalcDialog.cpp:3691
+#: src/gui/AstroCalcDialog.cpp:3692
 msgid ""
 "Eclipse magnitude is the fraction of the Sun's diameter obscured by the Moon"
 msgstr "Величина затемнення є часткою діаметра Сонця, яку затінено Місяцем"
 
-#: src/gui/AstroCalcDialog.cpp:3698
+#: src/gui/AstroCalcDialog.cpp:3699
 msgid "Sun's altitude at greatest eclipse"
 msgstr "Висота Сонця за найбільшого затемнення"
 
-#: src/gui/AstroCalcDialog.cpp:3701
+#: src/gui/AstroCalcDialog.cpp:3702
 msgid "Width of the path of totality or annularity at greatest eclipse"
 msgstr "Ширина шляху повного або кільцеподібного затемнення у найвищій фазі"
 
-#: src/gui/AstroCalcDialog.cpp:3704
+#: src/gui/AstroCalcDialog.cpp:3705
 msgid "Duration of total or annular phase at greatest eclipse"
 msgstr "Тривалість повного або кільцеподібного затемнення у найвищій фазі"
 
-#: src/gui/AstroCalcDialog.cpp:3735 src/gui/AstroCalcChart.cpp:381
+#: src/gui/AstroCalcDialog.cpp:3736 src/gui/AstroCalcChart.cpp:381
 #: src/gui/ObsListDialog.cpp:301 src/ui_obsListDialog.h:412
 msgid "Date"
 msgstr "Дата"
 
 #. TRANSLATORS: The name of column in AstroCalc/Eclipses/Transits tool
-#: src/gui/AstroCalcDialog.cpp:3743 src/gui/AstroCalcDialog.cpp:4491
+#: src/gui/AstroCalcDialog.cpp:3744 src/gui/AstroCalcDialog.cpp:4492
 msgctxt "column name"
 msgid "Duration"
 msgstr "Тривалість"
 
-#: src/gui/AstroCalcDialog.cpp:3994 src/gui/AstroCalcDialog.cpp:4194
+#: src/gui/AstroCalcDialog.cpp:3995 src/gui/AstroCalcDialog.cpp:4195
 #: src/ui_astroCalcDialog.h:2725
 msgid "Partial eclipse begins"
 msgstr "Починається часткове затемнення"
 
-#: src/gui/AstroCalcDialog.cpp:4006 src/gui/AstroCalcDialog.cpp:4199
+#: src/gui/AstroCalcDialog.cpp:4007 src/gui/AstroCalcDialog.cpp:4200
 #: src/ui_astroCalcDialog.h:2721
 msgid "Umbral total or annular eclipse begins"
 msgstr "Починається повне або кільцеве затемнення"
 
-#: src/gui/AstroCalcDialog.cpp:4021 src/gui/AstroCalcDialog.cpp:4209
+#: src/gui/AstroCalcDialog.cpp:4022 src/gui/AstroCalcDialog.cpp:4210
 #: src/ui_astroCalcDialog.h:2726
 msgid "Umbral total or annular eclipse ends"
 msgstr "Завершується повне або кільцеве затемнення"
 
-#: src/gui/AstroCalcDialog.cpp:4030 src/gui/AstroCalcDialog.cpp:4214
+#: src/gui/AstroCalcDialog.cpp:4031 src/gui/AstroCalcDialog.cpp:4215
 #: src/ui_astroCalcDialog.h:2723
 msgid "Partial eclipse ends"
 msgstr "Завершується часткове затемнення"
 
-#: src/gui/AstroCalcDialog.cpp:4035
+#: src/gui/AstroCalcDialog.cpp:4036
 msgid "Duration of total or annular eclipse"
 msgstr "Тривалість повного або кільцеподібного затемнення"
 
-#: src/gui/AstroCalcDialog.cpp:4224
+#: src/gui/AstroCalcDialog.cpp:4225
 msgid "Geographic latitude of contact point"
 msgstr "Географічна широта точки контакту"
 
-#: src/gui/AstroCalcDialog.cpp:4227
+#: src/gui/AstroCalcDialog.cpp:4228
 msgid "Geographic longitude of contact point"
 msgstr "Географічна довгота точки контакту"
 
-#: src/gui/AstroCalcDialog.cpp:4284
+#: src/gui/AstroCalcDialog.cpp:4285
 msgid "Width of the path of totality or annularity"
 msgstr "Ширина шляху повноти або кільцеподібності"
 
-#: src/gui/AstroCalcDialog.cpp:4286
+#: src/gui/AstroCalcDialog.cpp:4287
 msgid "Duration of total or annular phase"
 msgstr "Тривалість повної або кільцевої фази"
 
-#: src/gui/AstroCalcDialog.cpp:4321 src/gui/AstroCalcDialog.cpp:4353
+#: src/gui/AstroCalcDialog.cpp:4322 src/gui/AstroCalcDialog.cpp:4354
 msgid "Greatest eclipse’s point"
 msgstr "Найвища точка затемнення"
 
-#: src/gui/AstroCalcDialog.cpp:4321
+#: src/gui/AstroCalcDialog.cpp:4322
 msgid "Eclipse’s contact point"
 msgstr "Точка контакту затемнення"
 
-#: src/gui/AstroCalcDialog.cpp:4331 src/gui/AstroCalcDialog.cpp:4466
+#: src/gui/AstroCalcDialog.cpp:4332 src/gui/AstroCalcDialog.cpp:4467
 msgid "Save calculated solar eclipses as..."
 msgstr "Зберегти обчислені сонячні затемнення як…"
 
-#: src/gui/AstroCalcDialog.cpp:4335 src/gui/AstroCalcDialog.cpp:4470
+#: src/gui/AstroCalcDialog.cpp:4336 src/gui/AstroCalcDialog.cpp:4471
 msgid "Solar Eclipses"
 msgstr "Сонячні затемнення"
 
-#: src/gui/AstroCalcDialog.cpp:4335 src/gui/AstroCalcDialog.cpp:4344
+#: src/gui/AstroCalcDialog.cpp:4336 src/gui/AstroCalcDialog.cpp:4345
 msgid ""
 "Note: Path of eclipses during thousands of years in the past and future are "
 "not reliable due to uncertainty in ΔT which is caused by fluctuations in "
@@ -9579,100 +9587,100 @@ msgstr ""
 "затемнення на тисячі років у минулому або на тисячі років у майбутньому, "
 "через неточності у ΔT, які спричинено збуреннями у обертанні Землі."
 
-#: src/gui/AstroCalcDialog.cpp:4340
+#: src/gui/AstroCalcDialog.cpp:4341
 msgid "Save solar eclipse circumstances as..."
 msgstr "Зберегти умови сонячного затемнення як…"
 
-#: src/gui/AstroCalcDialog.cpp:4344
+#: src/gui/AstroCalcDialog.cpp:4345
 msgid "Circumstances of Solar Eclipse"
 msgstr "Умови сонячного затемнення"
 
-#: src/gui/AstroCalcDialog.cpp:4399
+#: src/gui/AstroCalcDialog.cpp:4400
 msgid "Save map as..."
 msgstr "Зберегти карту як…"
 
-#: src/gui/AstroCalcDialog.cpp:4401
+#: src/gui/AstroCalcDialog.cpp:4402
 msgid "KML map (*.kml);;PNG equirectangular map (*.png)"
 msgstr "карта KML (*.kml);;еквідистантна карта PNG (*.png)"
 
-#: src/gui/AstroCalcDialog.cpp:4410
+#: src/gui/AstroCalcDialog.cpp:4411
 msgid "Failed to open output file"
 msgstr "Не вдалося відкрити файл результатів"
 
-#: src/gui/AstroCalcDialog.cpp:4411
+#: src/gui/AstroCalcDialog.cpp:4412
 #, qt-format
 msgid "Failed to open output KML file: %1"
 msgstr "Не вдалося відкрити файл результатів у форматі KML: %1"
 
-#: src/gui/AstroCalcDialog.cpp:4427
+#: src/gui/AstroCalcDialog.cpp:4428
 msgid "Failed to save image"
 msgstr "Не вдалося зберегти зображення"
 
-#: src/gui/AstroCalcDialog.cpp:4428
+#: src/gui/AstroCalcDialog.cpp:4429
 msgid "Failed to save PNG map image"
 msgstr "Не вдалося зберегти зображення карти у форматі PNG"
 
 #. TRANSLATORS: The name of column in AstroCalc/Eclipses/Transits tool
-#: src/gui/AstroCalcDialog.cpp:4477
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1071
+#: src/gui/AstroCalcDialog.cpp:4478
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1070
 msgid "Planet"
 msgstr "Планета"
 
 #. TRANSLATORS: The name of column in AstroCalc/Eclipses/Transits tool
-#: src/gui/AstroCalcDialog.cpp:4479
+#: src/gui/AstroCalcDialog.cpp:4480
 msgctxt "column name"
 msgid "Exterior Ingress"
 msgstr "Зовнішнє занурення"
 
 #. TRANSLATORS: The name of column in AstroCalc/Eclipses/Transits tool
-#: src/gui/AstroCalcDialog.cpp:4481
+#: src/gui/AstroCalcDialog.cpp:4482
 msgctxt "column name"
 msgid "Interior Ingress"
 msgstr "Внутрішнє занурення"
 
 #. TRANSLATORS: The name of column in AstroCalc/Eclipses/Transits tool
-#: src/gui/AstroCalcDialog.cpp:4483
+#: src/gui/AstroCalcDialog.cpp:4484
 msgctxt "column name"
 msgid "Mid-transit"
 msgstr "Середнє проходження"
 
 #. TRANSLATORS: The name of column in AstroCalc/Eclipses/Transits tool
-#: src/gui/AstroCalcDialog.cpp:4485
+#: src/gui/AstroCalcDialog.cpp:4486
 msgctxt "column name"
 msgid "Angular Distance"
 msgstr "Кутова відстань"
 
 #. TRANSLATORS: The name of column in AstroCalc/Eclipses/Transits tool
-#: src/gui/AstroCalcDialog.cpp:4487
+#: src/gui/AstroCalcDialog.cpp:4488
 msgctxt "column name"
 msgid "Interior Egress"
 msgstr "Внутрішній вихід"
 
 #. TRANSLATORS: The name of column in AstroCalc/Eclipses/Transits tool
-#: src/gui/AstroCalcDialog.cpp:4489
+#: src/gui/AstroCalcDialog.cpp:4490
 msgctxt "column name"
 msgid "Exterior Egress"
 msgstr "Зовнішній вихід"
 
 #. TRANSLATORS: The name of column in AstroCalc/Eclipses/Transits tool
-#: src/gui/AstroCalcDialog.cpp:4493
+#: src/gui/AstroCalcDialog.cpp:4494
 msgctxt "column name"
 msgid "Observable Duration"
 msgstr "Тривалість спостереження"
 
-#: src/gui/AstroCalcDialog.cpp:4707
+#: src/gui/AstroCalcDialog.cpp:4708
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1482
 #: plugins/TimeNavigator/src/gui/TimeNavigatorDialog.cpp:355
 msgid "Mercury"
 msgstr "Меркурій"
 
-#: src/gui/AstroCalcDialog.cpp:4712
+#: src/gui/AstroCalcDialog.cpp:4713
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1485
 #: plugins/TimeNavigator/src/gui/TimeNavigatorDialog.cpp:361
 msgid "Venus"
 msgstr "Венера"
 
-#: src/gui/AstroCalcDialog.cpp:4931
+#: src/gui/AstroCalcDialog.cpp:4932
 msgid ""
 "The time of first contact, the instant when the planet's disk is externally "
 "tangent to the Sun (transit begins)"
@@ -9680,23 +9688,23 @@ msgstr ""
 "Момент першого контакту, коли диск планети дотикається до диска Сонця "
 "(починається проходження)"
 
-#: src/gui/AstroCalcDialog.cpp:4946
+#: src/gui/AstroCalcDialog.cpp:4947
 msgid ""
 "The time of second contact, the entire disk of the planet is internally "
 "tangent to the Sun"
 msgstr ""
 "Момент другого контакту, коли диск планети повністю занурюється у диск Сонця"
 
-#: src/gui/AstroCalcDialog.cpp:4964
+#: src/gui/AstroCalcDialog.cpp:4965
 msgid ""
 "The date and time of minimum angular distance of planet to Sun's center"
 msgstr "Дата і час мінімальної кутової відстані планети від центра Сонця"
 
-#: src/gui/AstroCalcDialog.cpp:4981
+#: src/gui/AstroCalcDialog.cpp:4982
 msgid "Minimum angular distance of planet to Sun's center"
 msgstr "Мінімальна кутова відстань планети від центра сонячного диска"
 
-#: src/gui/AstroCalcDialog.cpp:4996
+#: src/gui/AstroCalcDialog.cpp:4997
 msgid ""
 "The time of third contact, the planet reaches the opposite limb and is once "
 "again internally tangent to the Sun"
@@ -9704,7 +9712,7 @@ msgstr ""
 "Момент третього контакту, диск планети досягає протилежної дуги сонячного "
 "диска і ще раз зсередини дотикається до нього"
 
-#: src/gui/AstroCalcDialog.cpp:5014
+#: src/gui/AstroCalcDialog.cpp:5015
 msgid ""
 "The time of fourth contact, the planet's disk is externally tangent to the "
 "Sun (transit ends)"
@@ -9712,23 +9720,23 @@ msgstr ""
 "Момент четвертого контакту, диск планети дотикається ззовні до диска Сонця "
 "(завершення проходження)"
 
-#: src/gui/AstroCalcDialog.cpp:5025
+#: src/gui/AstroCalcDialog.cpp:5026
 msgid "Total duration of transit"
 msgstr "Загальна тривалість проходження"
 
-#: src/gui/AstroCalcDialog.cpp:5076
+#: src/gui/AstroCalcDialog.cpp:5077
 msgid "Observable duration of transit"
 msgstr "Спостережна тривалість проходження"
 
-#: src/gui/AstroCalcDialog.cpp:5148
+#: src/gui/AstroCalcDialog.cpp:5149
 msgid "Save calculated transits as..."
 msgstr "Зберегти обчислені проходження як…"
 
-#: src/gui/AstroCalcDialog.cpp:5152
+#: src/gui/AstroCalcDialog.cpp:5153
 msgid "Transits across the Sun"
 msgstr "Проходження диском Сонця"
 
-#: src/gui/AstroCalcDialog.cpp:5152 src/ui_astroCalcDialog.h:2742
+#: src/gui/AstroCalcDialog.cpp:5153 src/ui_astroCalcDialog.h:2742
 msgid ""
 "Notes: Time in parentheses means the contact is invisible at current "
 "location. Transit times during thousands of years in the past and future are"
@@ -9740,425 +9748,425 @@ msgstr ""
 "або на тисячі років у майбутньому не можна вважати надійними через "
 "неточності у ΔT, які спричинено збуреннями у обертанні Землі."
 
-#: src/gui/AstroCalcDialog.cpp:5354
+#: src/gui/AstroCalcDialog.cpp:5355
 msgid "1 minute"
 msgstr "1 хвилина"
 
-#: src/gui/AstroCalcDialog.cpp:5354
+#: src/gui/AstroCalcDialog.cpp:5355
 msgid "10 minutes"
 msgstr "10 хвилин"
 
-#: src/gui/AstroCalcDialog.cpp:5354
+#: src/gui/AstroCalcDialog.cpp:5355
 msgid "30 minutes"
 msgstr "30 хвилин"
 
-#: src/gui/AstroCalcDialog.cpp:5354
+#: src/gui/AstroCalcDialog.cpp:5355
 msgid "1 hour"
 msgstr "1 година"
 
-#: src/gui/AstroCalcDialog.cpp:5354
+#: src/gui/AstroCalcDialog.cpp:5355
 msgid "6 hours"
 msgstr "6 годин"
 
-#: src/gui/AstroCalcDialog.cpp:5354
+#: src/gui/AstroCalcDialog.cpp:5355
 msgid "12 hours"
 msgstr "12 годин"
 
-#: src/gui/AstroCalcDialog.cpp:5355
+#: src/gui/AstroCalcDialog.cpp:5356
 msgid "1 solar day"
 msgstr "1 сонячний день"
 
-#: src/gui/AstroCalcDialog.cpp:5355
+#: src/gui/AstroCalcDialog.cpp:5356
 msgid "3 solar days"
 msgstr "3 сонячні дні"
 
-#: src/gui/AstroCalcDialog.cpp:5355
+#: src/gui/AstroCalcDialog.cpp:5356
 msgid "5 solar days"
 msgstr "5 сонячних днів"
 
-#: src/gui/AstroCalcDialog.cpp:5355
+#: src/gui/AstroCalcDialog.cpp:5356
 msgid "10 solar days"
 msgstr "10 сонячних днів"
 
-#: src/gui/AstroCalcDialog.cpp:5355
+#: src/gui/AstroCalcDialog.cpp:5356
 msgid "15 solar days"
 msgstr "15 сонячних днів"
 
-#: src/gui/AstroCalcDialog.cpp:5356
+#: src/gui/AstroCalcDialog.cpp:5357
 msgid "30 solar days"
 msgstr "30 сонячних днів"
 
-#: src/gui/AstroCalcDialog.cpp:5356
+#: src/gui/AstroCalcDialog.cpp:5357
 msgid "60 solar days"
 msgstr "60 сонячних днів"
 
-#: src/gui/AstroCalcDialog.cpp:5356
+#: src/gui/AstroCalcDialog.cpp:5357
 msgid "100 solar days"
 msgstr "100 солярних днів"
 
-#: src/gui/AstroCalcDialog.cpp:5356
+#: src/gui/AstroCalcDialog.cpp:5357
 msgid "500 solar days"
 msgstr "500 солярних днів"
 
-#: src/gui/AstroCalcDialog.cpp:5356
+#: src/gui/AstroCalcDialog.cpp:5357
 msgid "1 sidereal day"
 msgstr "1 сидеричний день"
 
-#: src/gui/AstroCalcDialog.cpp:5357
+#: src/gui/AstroCalcDialog.cpp:5358
 msgid "3 sidereal days"
 msgstr "3 сидеричні дні"
 
-#: src/gui/AstroCalcDialog.cpp:5357
+#: src/gui/AstroCalcDialog.cpp:5358
 msgid "5 sidereal days"
 msgstr "5 сидеричних днів"
 
-#: src/gui/AstroCalcDialog.cpp:5357
+#: src/gui/AstroCalcDialog.cpp:5358
 msgid "10 sidereal days"
 msgstr "10 сидеричних днів"
 
-#: src/gui/AstroCalcDialog.cpp:5357
+#: src/gui/AstroCalcDialog.cpp:5358
 msgid "15 sidereal days"
 msgstr "15 сидеричних днів"
 
-#: src/gui/AstroCalcDialog.cpp:5358
+#: src/gui/AstroCalcDialog.cpp:5359
 msgid "30 sidereal days"
 msgstr "30 сидеричних днів"
 
-#: src/gui/AstroCalcDialog.cpp:5358
+#: src/gui/AstroCalcDialog.cpp:5359
 msgid "60 sidereal days"
 msgstr "60 сидеричних днів"
 
-#: src/gui/AstroCalcDialog.cpp:5358
+#: src/gui/AstroCalcDialog.cpp:5359
 msgid "100 sidereal days"
 msgstr "100 сидеричних днів"
 
-#: src/gui/AstroCalcDialog.cpp:5358
+#: src/gui/AstroCalcDialog.cpp:5359
 msgid "500 sidereal days"
 msgstr "500 сидеричних днів"
 
-#: src/gui/AstroCalcDialog.cpp:5359
+#: src/gui/AstroCalcDialog.cpp:5360
 msgid "1 sidereal year"
 msgstr "1 сидеричний рік"
 
-#: src/gui/AstroCalcDialog.cpp:5359
+#: src/gui/AstroCalcDialog.cpp:5360
 msgid "1 Julian day"
 msgstr "1 юліанський день"
 
-#: src/gui/AstroCalcDialog.cpp:5359
+#: src/gui/AstroCalcDialog.cpp:5360
 msgid "5 Julian days"
 msgstr "5 юліанських днів"
 
-#: src/gui/AstroCalcDialog.cpp:5359
+#: src/gui/AstroCalcDialog.cpp:5360
 msgid "10 Julian days"
 msgstr "10 юліанських днів"
 
-#: src/gui/AstroCalcDialog.cpp:5359
+#: src/gui/AstroCalcDialog.cpp:5360
 msgid "15 Julian days"
 msgstr "15 юліанських днів"
 
-#: src/gui/AstroCalcDialog.cpp:5360
+#: src/gui/AstroCalcDialog.cpp:5361
 msgid "30 Julian days"
 msgstr "30 юліанських днів"
 
-#: src/gui/AstroCalcDialog.cpp:5360
+#: src/gui/AstroCalcDialog.cpp:5361
 msgid "60 Julian days"
 msgstr "60 юліанських днів"
 
-#: src/gui/AstroCalcDialog.cpp:5360
+#: src/gui/AstroCalcDialog.cpp:5361
 msgid "100 Julian days"
 msgstr "100 юліанських днів"
 
-#: src/gui/AstroCalcDialog.cpp:5360
+#: src/gui/AstroCalcDialog.cpp:5361
 msgid "1 Julian year"
 msgstr "1 юліанський рік"
 
-#: src/gui/AstroCalcDialog.cpp:5361
+#: src/gui/AstroCalcDialog.cpp:5362
 msgid "1 Gaussian year"
 msgstr "1 гаусів рік"
 
-#: src/gui/AstroCalcDialog.cpp:5361
+#: src/gui/AstroCalcDialog.cpp:5362
 msgid "1 synodic month"
 msgstr "1 синодичний рік"
 
-#: src/gui/AstroCalcDialog.cpp:5361
+#: src/gui/AstroCalcDialog.cpp:5362
 msgid "1 draconic month"
 msgstr "1 драконічний рік"
 
-#: src/gui/AstroCalcDialog.cpp:5361
+#: src/gui/AstroCalcDialog.cpp:5362
 msgid "1 mean tropical month"
 msgstr "1 середній тропічний місяць"
 
-#: src/gui/AstroCalcDialog.cpp:5362
+#: src/gui/AstroCalcDialog.cpp:5363
 msgid "1 anomalistic month"
 msgstr "1 аномалістичний місяць"
 
-#: src/gui/AstroCalcDialog.cpp:5362
+#: src/gui/AstroCalcDialog.cpp:5363
 msgid "1 anomalistic year"
 msgstr "1 аномалістичний рік"
 
-#: src/gui/AstroCalcDialog.cpp:5362
+#: src/gui/AstroCalcDialog.cpp:5363
 msgid "1 tritos"
 msgstr "1 трітос"
 
-#: src/gui/AstroCalcDialog.cpp:5362
+#: src/gui/AstroCalcDialog.cpp:5363
 msgid "1 saros"
 msgstr "1 сарос"
 
-#: src/gui/AstroCalcDialog.cpp:5362
+#: src/gui/AstroCalcDialog.cpp:5363
 msgid "1 Metonic cycle"
 msgstr "1 метонічний цикл"
 
-#: src/gui/AstroCalcDialog.cpp:5363
+#: src/gui/AstroCalcDialog.cpp:5364
 msgid "1  inex"
 msgstr "1 інекс"
 
-#: src/gui/AstroCalcDialog.cpp:5363
+#: src/gui/AstroCalcDialog.cpp:5364
 msgid "custom interval"
 msgstr "нетиповий інтервал"
 
-#: src/gui/AstroCalcDialog.cpp:5363 src/ui_astroCalcCustomStepsDialog.h:212
+#: src/gui/AstroCalcDialog.cpp:5364 src/ui_astroCalcCustomStepsDialog.h:212
 msgid "Sun at preset altitude"
 msgstr "Сонце на попередньо встановленій висоті"
 
-#: src/gui/AstroCalcDialog.cpp:5363 src/ui_astroCalcCustomStepsDialog.h:215
+#: src/gui/AstroCalcDialog.cpp:5364 src/ui_astroCalcCustomStepsDialog.h:215
 msgid "Opposition of planet"
 msgstr "Протистояння планети"
 
-#: src/gui/AstroCalcDialog.cpp:5399
+#: src/gui/AstroCalcDialog.cpp:5400
 msgctxt "time unit measurement"
 msgid "minutes"
 msgstr "хвилини"
 
-#: src/gui/AstroCalcDialog.cpp:5399
+#: src/gui/AstroCalcDialog.cpp:5400
 msgctxt "time unit measurement"
 msgid "hours"
 msgstr "години"
 
-#: src/gui/AstroCalcDialog.cpp:5400
+#: src/gui/AstroCalcDialog.cpp:5401
 msgctxt "time unit measurement"
 msgid "days"
 msgstr "дні"
 
-#: src/gui/AstroCalcDialog.cpp:5400
+#: src/gui/AstroCalcDialog.cpp:5401
 msgctxt "time unit measurement"
 msgid "weeks"
 msgstr "тижні"
 
-#: src/gui/AstroCalcDialog.cpp:5401
+#: src/gui/AstroCalcDialog.cpp:5402
 msgctxt "time unit measurement"
 msgid "months"
 msgstr "місяці"
 
-#: src/gui/AstroCalcDialog.cpp:5401
+#: src/gui/AstroCalcDialog.cpp:5402
 msgctxt "time unit measurement"
 msgid "years"
 msgstr "роки"
 
-#: src/gui/AstroCalcDialog.cpp:5548
+#: src/gui/AstroCalcDialog.cpp:5549
 msgid "Latest selected object"
 msgstr "Останній позначений об'єкт"
 
-#: src/gui/AstroCalcDialog.cpp:5548
+#: src/gui/AstroCalcDialog.cpp:5549
 msgid "Solar system"
 msgstr "Сонячна система"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5549 src/gui/AstroCalcDialog.cpp:7940
+#: src/gui/AstroCalcDialog.cpp:5550 src/gui/AstroCalcDialog.cpp:7941
 #: src/translations.h:41
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:480
 msgid "Asteroids"
 msgstr "Астероїди"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5549 src/gui/AstroCalcDialog.cpp:7942
+#: src/gui/AstroCalcDialog.cpp:5550 src/gui/AstroCalcDialog.cpp:7943
 #: src/translations.h:45
 msgid "Plutinos"
 msgstr "Плутино"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5549 src/gui/AstroCalcDialog.cpp:7941
+#: src/gui/AstroCalcDialog.cpp:5550 src/gui/AstroCalcDialog.cpp:7942
 #: src/translations.h:39
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:481
 msgid "Comets"
 msgstr "Комети"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5549 src/gui/AstroCalcDialog.cpp:7943
+#: src/gui/AstroCalcDialog.cpp:5550 src/gui/AstroCalcDialog.cpp:7944
 #: src/translations.h:47
 msgid "Dwarf planets"
 msgstr "Карликові планети"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5550 src/gui/AstroCalcDialog.cpp:7944
+#: src/gui/AstroCalcDialog.cpp:5551 src/gui/AstroCalcDialog.cpp:7945
 #: src/translations.h:49
 msgid "Cubewanos"
 msgstr "К’юбівано"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5550 src/gui/AstroCalcDialog.cpp:7945
+#: src/gui/AstroCalcDialog.cpp:5551 src/gui/AstroCalcDialog.cpp:7946
 #: src/translations.h:51
 msgid "Scattered disc objects"
 msgstr "Об’єкти розсіяного диска"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5550 src/gui/AstroCalcDialog.cpp:7946
+#: src/gui/AstroCalcDialog.cpp:5551 src/gui/AstroCalcDialog.cpp:7947
 #: src/translations.h:53
 msgid "Oort cloud objects"
 msgstr "Об’єкти поясу Оорта"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5551 src/gui/AstroCalcDialog.cpp:7947
+#: src/gui/AstroCalcDialog.cpp:5552 src/gui/AstroCalcDialog.cpp:7948
 #: src/translations.h:55
 msgid "Sednoids"
 msgstr "Седноїди"
 
-#: src/gui/AstroCalcDialog.cpp:5551
+#: src/gui/AstroCalcDialog.cpp:5552
 #, qt-format
 msgid "Bright stars (<%1 mag)"
 msgstr "Яскраві зірки (<%1ᵐ)"
 
-#: src/gui/AstroCalcDialog.cpp:5552
+#: src/gui/AstroCalcDialog.cpp:5553
 #, qt-format
 msgid "Bright double stars (<%1 mag)"
 msgstr "Яскраві подвійні зірки (<%1ᵐ)"
 
-#: src/gui/AstroCalcDialog.cpp:5553
+#: src/gui/AstroCalcDialog.cpp:5554
 #, qt-format
 msgid "Bright variable stars (<%1 mag)"
 msgstr "Яскраві змінні зірки (<%1ᵐ)"
 
-#: src/gui/AstroCalcDialog.cpp:5554
+#: src/gui/AstroCalcDialog.cpp:5555
 #, qt-format
 msgid "Bright star clusters (<%1 mag)"
 msgstr "Яскраві зоряні скупчення (<%1ᵐ)"
 
-#: src/gui/AstroCalcDialog.cpp:5554
+#: src/gui/AstroCalcDialog.cpp:5555
 #, qt-format
 msgid "Planetary nebulae (<%1 mag)"
 msgstr "Планетарні туманності (<%1ᵐ)"
 
-#: src/gui/AstroCalcDialog.cpp:5555
+#: src/gui/AstroCalcDialog.cpp:5556
 #, qt-format
 msgid "Bright nebulae (<%1 mag)"
 msgstr "Яскраві туманності (<%1ᵐ)"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5555 src/gui/AstroCalcDialog.cpp:7937
+#: src/gui/AstroCalcDialog.cpp:5556 src/gui/AstroCalcDialog.cpp:7938
 #: src/translations.h:292 src/ui_viewDialog.h:4723
 #: src/ui_dsoColorsDialog.h:603
 msgid "Dark nebulae"
 msgstr "Темні туманності"
 
-#: src/gui/AstroCalcDialog.cpp:5556
+#: src/gui/AstroCalcDialog.cpp:5557
 #, qt-format
 msgid "Bright galaxies (<%1 mag)"
 msgstr "Яскраві галактики (<%1ᵐ)"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5556 src/gui/AstroCalcDialog.cpp:7952
+#: src/gui/AstroCalcDialog.cpp:5557 src/gui/AstroCalcDialog.cpp:7953
 #: src/translations.h:342 src/ui_dsoColorsDialog.h:636
 msgid "Symbiotic stars"
 msgstr "Симбіотичні зірки"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5557 src/gui/AstroCalcDialog.cpp:7953
+#: src/gui/AstroCalcDialog.cpp:5558 src/gui/AstroCalcDialog.cpp:7954
 #: src/translations.h:344 src/ui_dsoColorsDialog.h:615
 msgid "Emission-line stars"
 msgstr "Зірки із емісійними смугами"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5557 src/gui/AstroCalcDialog.cpp:7958
+#: src/gui/AstroCalcDialog.cpp:5558 src/gui/AstroCalcDialog.cpp:7959
 #: src/translations.h:57
 msgid "Interstellar objects"
 msgstr "Міжзоряні об'єкти"
 
-#: src/gui/AstroCalcDialog.cpp:5558
+#: src/gui/AstroCalcDialog.cpp:5559
 msgid "Planets and Sun"
 msgstr "Планети і Сонце"
 
-#: src/gui/AstroCalcDialog.cpp:5558
+#: src/gui/AstroCalcDialog.cpp:5559
 msgid "Sun, planets and moons of observer's planet"
 msgstr "Сонце, планети та супутники з планети спостерігача"
 
-#: src/gui/AstroCalcDialog.cpp:5559
+#: src/gui/AstroCalcDialog.cpp:5560
 #, qt-format
 msgid "Bright Solar system objects (<%1 mag)"
 msgstr "Яскраві об'єкти Сонячної системи (<%1ᵐ)"
 
-#: src/gui/AstroCalcDialog.cpp:5560
+#: src/gui/AstroCalcDialog.cpp:5561
 msgid "Moons of first body"
 msgstr "Супутники першого тіла"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5561 src/gui/AstroCalcDialog.cpp:7970
+#: src/gui/AstroCalcDialog.cpp:5562 src/gui/AstroCalcDialog.cpp:7971
 #: src/translations.h:429
 msgid "Bright carbon stars"
 msgstr "Яскраві карбонові зірки"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:5561 src/gui/AstroCalcDialog.cpp:7971
+#: src/gui/AstroCalcDialog.cpp:5562 src/gui/AstroCalcDialog.cpp:7972
 #: src/translations.h:431
 msgid "Bright barium stars"
 msgstr "Яскраві барієві зірки"
 
-#: src/gui/AstroCalcDialog.cpp:5562
+#: src/gui/AstroCalcDialog.cpp:5563
 msgid "Sun, planets and moons of first body and observer's planet"
 msgstr "Сонце, планети та супутники основного тіла та планети спостерігача"
 
-#: src/gui/AstroCalcDialog.cpp:5793
+#: src/gui/AstroCalcDialog.cpp:5794
 msgid "Please select object to plot its graph 'Altitude vs. Time'."
 msgstr "Будь ласка, виберіть об’єкт для креслення діаграми «Висота-час»."
 
-#: src/gui/AstroCalcDialog.cpp:6024 src/gui/AstroCalcDialog.cpp:6038
+#: src/gui/AstroCalcDialog.cpp:6025 src/gui/AstroCalcDialog.cpp:6039
 msgid "Magnitude vs. Time"
 msgstr "Величина-час"
 
-#: src/gui/AstroCalcDialog.cpp:6025 src/gui/AstroCalcDialog.cpp:6039
+#: src/gui/AstroCalcDialog.cpp:6026 src/gui/AstroCalcDialog.cpp:6040
 msgid "Phase vs. Time"
 msgstr "Фаза-час"
 
-#: src/gui/AstroCalcDialog.cpp:6026 src/gui/AstroCalcDialog.cpp:6040
+#: src/gui/AstroCalcDialog.cpp:6027 src/gui/AstroCalcDialog.cpp:6041
 msgid "Distance vs. Time"
 msgstr "Відстань-час"
 
-#: src/gui/AstroCalcDialog.cpp:6027 src/gui/AstroCalcDialog.cpp:6041
+#: src/gui/AstroCalcDialog.cpp:6028 src/gui/AstroCalcDialog.cpp:6042
 msgid "Elongation vs. Time"
 msgstr "Видовження-час"
 
-#: src/gui/AstroCalcDialog.cpp:6028 src/gui/AstroCalcDialog.cpp:6042
+#: src/gui/AstroCalcDialog.cpp:6029 src/gui/AstroCalcDialog.cpp:6043
 msgid "Angular size vs. Time"
 msgstr "Кутовий розмір-час"
 
-#: src/gui/AstroCalcDialog.cpp:6029 src/gui/AstroCalcDialog.cpp:6043
+#: src/gui/AstroCalcDialog.cpp:6030 src/gui/AstroCalcDialog.cpp:6044
 msgid "Phase angle vs. Time"
 msgstr "Фазовий кут-час"
 
 #. TRANSLATORS: The phrase "Heliocentric distance" may be long in some
 #. languages and you can short it to use in the drop-down list.
-#: src/gui/AstroCalcDialog.cpp:6031 src/gui/AstroCalcDialog.cpp:6045
+#: src/gui/AstroCalcDialog.cpp:6032 src/gui/AstroCalcDialog.cpp:6046
 msgid "Heliocentric distance vs. Time"
 msgstr "Залежність геліоцентричної відстані від часу"
 
 #. TRANSLATORS: The phrase "Transit altitude" may be long in some languages
 #. and you can short it to use in the drop-down list.
-#: src/gui/AstroCalcDialog.cpp:6033 src/gui/AstroCalcDialog.cpp:6047
+#: src/gui/AstroCalcDialog.cpp:6034 src/gui/AstroCalcDialog.cpp:6048
 msgid "Transit altitude vs. Time"
 msgstr "Висота проходження-час"
 
 #. TRANSLATORS: The phrase "Right ascension" may be long in some languages and
 #. you can short it to use in the drop-down list.
-#: src/gui/AstroCalcDialog.cpp:6035 src/gui/AstroCalcDialog.cpp:6049
+#: src/gui/AstroCalcDialog.cpp:6036 src/gui/AstroCalcDialog.cpp:6050
 msgid "Right ascension vs. Time"
 msgstr "Пряме сходження-Час"
 
-#: src/gui/AstroCalcDialog.cpp:6036 src/gui/AstroCalcDialog.cpp:6050
+#: src/gui/AstroCalcDialog.cpp:6037 src/gui/AstroCalcDialog.cpp:6051
 msgid "Declination vs. Time"
 msgstr "Схилення-Час"
 
 #. TRANSLATORS: hours.
 #. TRANSLATORS: duration in hours
 #. TRANSLATORS: hours.
-#: src/gui/AstroCalcDialog.cpp:6092 src/gui/AstroCalcChart.cpp:446
+#: src/gui/AstroCalcDialog.cpp:6093 src/gui/AstroCalcChart.cpp:446
 #: src/gui/AstroCalcChart.cpp:472
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:903
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1196
@@ -10171,7 +10179,7 @@ msgctxt "time"
 msgid "h"
 msgstr "г"
 
-#: src/gui/AstroCalcDialog.cpp:6188
+#: src/gui/AstroCalcDialog.cpp:6189
 msgid ""
 "Please select object to plot its 'Monthly Elevation' graph for the current "
 "year at selected time."
@@ -10179,81 +10187,81 @@ msgstr ""
 "Будь ласка, виберіть об’єкт для креслення діаграми «Щомісячна висота» для "
 "поточного року у вказаний час."
 
-#: src/gui/AstroCalcDialog.cpp:6227
+#: src/gui/AstroCalcDialog.cpp:6228
 msgid "Phenomenon"
 msgstr "Подія"
 
-#: src/gui/AstroCalcDialog.cpp:6229
+#: src/gui/AstroCalcDialog.cpp:6230
 msgid "Object 1"
 msgstr "Об'єкт 1"
 
 #. TRANSLATORS: Magnitude of object 1
-#: src/gui/AstroCalcDialog.cpp:6231
+#: src/gui/AstroCalcDialog.cpp:6232
 msgid "Mag. 1"
 msgstr "Вел. 1"
 
-#: src/gui/AstroCalcDialog.cpp:6232
+#: src/gui/AstroCalcDialog.cpp:6233
 msgid "Object 2"
 msgstr "Об'єкт 2"
 
 #. TRANSLATORS: Magnitude of object 2
-#: src/gui/AstroCalcDialog.cpp:6234
+#: src/gui/AstroCalcDialog.cpp:6235
 msgid "Mag. 2"
 msgstr "Вел. 2"
 
-#: src/gui/AstroCalcDialog.cpp:6235
+#: src/gui/AstroCalcDialog.cpp:6236
 msgid "Separation"
 msgstr "Роз’єднання"
 
-#: src/gui/AstroCalcDialog.cpp:6236
+#: src/gui/AstroCalcDialog.cpp:6237
 msgid "Elevation"
 msgstr "Висота"
 
-#: src/gui/AstroCalcDialog.cpp:6596
+#: src/gui/AstroCalcDialog.cpp:6597
 msgid "Save calculated phenomena as..."
 msgstr "Зберегти обчислені події як…"
 
-#: src/gui/AstroCalcDialog.cpp:6600 src/ui_astroCalcDialog.h:2433
+#: src/gui/AstroCalcDialog.cpp:6601 src/ui_astroCalcDialog.h:2433
 msgid "Phenomena"
 msgstr "Події"
 
-#: src/gui/AstroCalcDialog.cpp:6617
+#: src/gui/AstroCalcDialog.cpp:6618
 msgid "Magnitude of first object"
 msgstr "Величина першого об'єкта"
 
-#: src/gui/AstroCalcDialog.cpp:6620
+#: src/gui/AstroCalcDialog.cpp:6621
 msgid "Magnitude of second object"
 msgstr "Величина другого об'єкта"
 
-#: src/gui/AstroCalcDialog.cpp:6626
+#: src/gui/AstroCalcDialog.cpp:6627
 msgid "Elevation of first object at moment of phenomena"
 msgstr "Висота першого об'єкта у момент явища"
 
-#: src/gui/AstroCalcDialog.cpp:6628 src/gui/AstroCalcDialog.cpp:6775
+#: src/gui/AstroCalcDialog.cpp:6629 src/gui/AstroCalcDialog.cpp:6776
 msgid "Angular distance from the Sun"
 msgstr "Кутова відстань від Сонця"
 
-#: src/gui/AstroCalcDialog.cpp:6631 src/gui/AstroCalcDialog.cpp:6776
+#: src/gui/AstroCalcDialog.cpp:6632 src/gui/AstroCalcDialog.cpp:6777
 msgid "Angular distance from the Moon"
 msgstr "Кутова відстань від Місяця"
 
-#: src/gui/AstroCalcDialog.cpp:6649 src/gui/AstroCalcDialog.cpp:6828
-#: src/gui/AstroCalcDialog.cpp:6903
+#: src/gui/AstroCalcDialog.cpp:6650 src/gui/AstroCalcDialog.cpp:6829
+#: src/gui/AstroCalcDialog.cpp:6904
 msgid "Conjunction"
 msgstr "Сполучення"
 
-#: src/gui/AstroCalcDialog.cpp:6658
+#: src/gui/AstroCalcDialog.cpp:6659
 msgid "Shadow transit"
 msgstr "Проходження тіні"
 
-#: src/gui/AstroCalcDialog.cpp:6661 src/gui/AstroCalcDialog.cpp:6668
-#: src/gui/AstroCalcDialog.cpp:6724 src/gui/AstroCalcDialog.cpp:6730
-#: src/gui/AstroCalcDialog.cpp:6915 src/gui/AstroCalcDialog.cpp:6931
-#: src/gui/AstroCalcDialog.cpp:6937
+#: src/gui/AstroCalcDialog.cpp:6662 src/gui/AstroCalcDialog.cpp:6669
+#: src/gui/AstroCalcDialog.cpp:6725 src/gui/AstroCalcDialog.cpp:6731
+#: src/gui/AstroCalcDialog.cpp:6916 src/gui/AstroCalcDialog.cpp:6932
+#: src/gui/AstroCalcDialog.cpp:6938
 msgid "Eclipse"
 msgstr "Затьмарення"
 
-#: src/gui/AstroCalcDialog.cpp:6665 src/gui/AstroCalcDialog.cpp:6912
+#: src/gui/AstroCalcDialog.cpp:6666 src/gui/AstroCalcDialog.cpp:6913
 #: plugins/TimeNavigator/src/gui/TimeNavigatorDialog.cpp:368
 #: plugins/TimeNavigator/src/gui/TimeNavigatorDialog.cpp:372
 #: plugins/TimeNavigator/src/gui/TimeNavigatorDialog.cpp:376
@@ -10262,58 +10270,58 @@ msgstr "Затьмарення"
 msgid "Opposition"
 msgstr "Протистояння"
 
-#: src/gui/AstroCalcDialog.cpp:6677
+#: src/gui/AstroCalcDialog.cpp:6678
 #: plugins/TimeNavigator/src/gui/TimeNavigatorDialog.cpp:358
 #: plugins/TimeNavigator/src/gui/TimeNavigatorDialog.cpp:364
 msgid "Greatest eastern elongation"
 msgstr "Найбільша східна елонгація"
 
-#: src/gui/AstroCalcDialog.cpp:6680
+#: src/gui/AstroCalcDialog.cpp:6681
 #: plugins/TimeNavigator/src/gui/TimeNavigatorDialog.cpp:359
 #: plugins/TimeNavigator/src/gui/TimeNavigatorDialog.cpp:365
 msgid "Greatest western elongation"
 msgstr "Найбільша західна елонгація"
 
-#: src/gui/AstroCalcDialog.cpp:6687
+#: src/gui/AstroCalcDialog.cpp:6688
 msgid "Eastern quadrature"
 msgstr "Східна квадратура"
 
-#: src/gui/AstroCalcDialog.cpp:6690
+#: src/gui/AstroCalcDialog.cpp:6691
 msgid "Western quadrature"
 msgstr "Західна квадратура"
 
 #. TRANSLATORS: The planet are stand still in the equatorial coordinates
-#: src/gui/AstroCalcDialog.cpp:6697
+#: src/gui/AstroCalcDialog.cpp:6698
 msgid "Stationary (begin retrograde motion)"
 msgstr "Стаціонарна (початок зворотного руху)"
 
 #. TRANSLATORS: The planet are stand still in the equatorial coordinates
-#: src/gui/AstroCalcDialog.cpp:6702
+#: src/gui/AstroCalcDialog.cpp:6703
 msgid "Stationary (begin prograde motion)"
 msgstr "Стаціонарна (початок прямого руху)"
 
-#: src/gui/AstroCalcDialog.cpp:6708
+#: src/gui/AstroCalcDialog.cpp:6709
 #: plugins/TimeNavigator/src/gui/TimeNavigatorDialog.cpp:396
 msgid "Perihelion"
 msgstr "Перигелій"
 
-#: src/gui/AstroCalcDialog.cpp:6710
+#: src/gui/AstroCalcDialog.cpp:6711
 #: plugins/TimeNavigator/src/gui/TimeNavigatorDialog.cpp:397
 msgid "Aphelion"
 msgstr "Афелій"
 
-#: src/gui/AstroCalcDialog.cpp:6717 src/gui/AstroCalcDialog.cpp:6924
+#: src/gui/AstroCalcDialog.cpp:6718 src/gui/AstroCalcDialog.cpp:6925
 msgctxt "passage of a celestial body in front of another"
 msgid "Transit"
 msgstr "Проходження"
 
-#: src/gui/AstroCalcDialog.cpp:6720 src/gui/AstroCalcDialog.cpp:6833
-#: src/gui/AstroCalcDialog.cpp:6927
+#: src/gui/AstroCalcDialog.cpp:6721 src/gui/AstroCalcDialog.cpp:6834
+#: src/gui/AstroCalcDialog.cpp:6928
 msgid "Occultation"
 msgstr "Затінення"
 
-#: src/gui/AstroCalcDialog.cpp:6740 src/gui/AstroCalcDialog.cpp:6742
-#: src/gui/AstroCalcDialog.cpp:6950 src/gui/AstroCalcDialog.cpp:6952
+#: src/gui/AstroCalcDialog.cpp:6741 src/gui/AstroCalcDialog.cpp:6743
+#: src/gui/AstroCalcDialog.cpp:6951 src/gui/AstroCalcDialog.cpp:6953
 #: plugins/TimeNavigator/src/gui/TimeNavigatorDialog.cpp:357
 #: plugins/TimeNavigator/src/gui/TimeNavigatorDialog.cpp:363
 #: plugins/TimeNavigator/src/gui/TimeNavigatorDialog.cpp:369
@@ -10324,265 +10332,265 @@ msgstr "Затінення"
 msgid "Superior conjunction"
 msgstr "Верхнє сполучення"
 
-#: src/gui/AstroCalcDialog.cpp:6740 src/gui/AstroCalcDialog.cpp:6742
-#: src/gui/AstroCalcDialog.cpp:6950 src/gui/AstroCalcDialog.cpp:6952
+#: src/gui/AstroCalcDialog.cpp:6741 src/gui/AstroCalcDialog.cpp:6743
+#: src/gui/AstroCalcDialog.cpp:6951 src/gui/AstroCalcDialog.cpp:6953
 #: plugins/TimeNavigator/src/gui/TimeNavigatorDialog.cpp:356
 #: plugins/TimeNavigator/src/gui/TimeNavigatorDialog.cpp:362
 msgid "Inferior conjunction"
 msgstr "Нижнє сполучення"
 
-#: src/gui/AstroCalcDialog.cpp:6779
+#: src/gui/AstroCalcDialog.cpp:6780
 msgid "Angular distance from the Sun for second object"
 msgstr "Кутова відстань від Сонця для другого об'єкта"
 
-#: src/gui/AstroCalcDialog.cpp:6780
+#: src/gui/AstroCalcDialog.cpp:6781
 msgid "Angular distance from the Moon for second object"
 msgstr "Кутова відстань від Місяця для другого об'єкта"
 
-#: src/gui/AstroCalcDialog.cpp:7791 src/gui/AstroCalcDialog.cpp:7796
+#: src/gui/AstroCalcDialog.cpp:7792 src/gui/AstroCalcDialog.cpp:7797
 #: src/ui_astroCalcDialog.h:2752
 msgid "Table of solar eclipses"
 msgstr "Таблиця сонячних затемнень"
 
-#: src/gui/AstroCalcDialog.cpp:7792
+#: src/gui/AstroCalcDialog.cpp:7793
 msgid "Table of solar eclipses visible in current location"
 msgstr ""
 "Таблиця сонячних затемнень, які можна спостерігати у поточній місцевості"
 
-#: src/gui/AstroCalcDialog.cpp:7793
+#: src/gui/AstroCalcDialog.cpp:7794
 msgid "Table of lunar eclipses"
 msgstr "Таблиця місячних затемнень"
 
-#: src/gui/AstroCalcDialog.cpp:7794
+#: src/gui/AstroCalcDialog.cpp:7795
 msgid "Transits of Mercury and Venus across the Sun"
 msgstr "Проходження Меркурія та Венери диском Сонця"
 
-#: src/gui/AstroCalcDialog.cpp:7912
+#: src/gui/AstroCalcDialog.cpp:7913
 msgctxt "Celestial object is observed..."
 msgid "In the Evening"
 msgstr "Ввечері"
 
-#: src/gui/AstroCalcDialog.cpp:7913
+#: src/gui/AstroCalcDialog.cpp:7914
 msgctxt "Celestial object is observed..."
 msgid "In the Morning"
 msgstr "На світанку"
 
-#: src/gui/AstroCalcDialog.cpp:7914
+#: src/gui/AstroCalcDialog.cpp:7915
 msgctxt "Celestial object is observed..."
 msgid "Around Midnight"
 msgstr "Близько опівночі"
 
-#: src/gui/AstroCalcDialog.cpp:7915
+#: src/gui/AstroCalcDialog.cpp:7916
 msgctxt "Celestial object is observed..."
 msgid "In Any Time of the Night"
 msgstr "Будь-коли протягом ночі"
 
-#: src/gui/AstroCalcDialog.cpp:7935
+#: src/gui/AstroCalcDialog.cpp:7936
 msgid "Bright stars"
 msgstr "Яскраві зірки"
 
-#: src/gui/AstroCalcDialog.cpp:7936 src/ui_viewDialog.h:4722
+#: src/gui/AstroCalcDialog.cpp:7937 src/ui_viewDialog.h:4722
 msgid "Bright nebulae"
 msgstr "Яскраві туманності"
 
-#: src/gui/AstroCalcDialog.cpp:7938 src/ui_viewDialog.h:4726
+#: src/gui/AstroCalcDialog.cpp:7939 src/ui_viewDialog.h:4726
 #: src/ui_dsoColorsDialog.h:543
 msgid "Galaxies"
 msgstr "Галактики"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:7939 src/translations.h:284
+#: src/gui/AstroCalcDialog.cpp:7940 src/translations.h:284
 #: src/ui_viewDialog.h:4729 src/ui_dsoColorsDialog.h:547
 msgid "Open star clusters"
 msgstr "Розсіяні скупчення"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:7948 src/translations.h:290
+#: src/gui/AstroCalcDialog.cpp:7949 src/translations.h:290
 #: src/ui_viewDialog.h:4721 src/ui_dsoColorsDialog.h:536
 msgid "Planetary nebulae"
 msgstr "Планетарні туманності"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:7949 src/translations.h:419
+#: src/gui/AstroCalcDialog.cpp:7950 src/translations.h:419
 msgid "Bright double stars"
 msgstr "Яскраві подвійні зірки"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:7950 src/translations.h:421
+#: src/gui/AstroCalcDialog.cpp:7951 src/translations.h:421
 msgid "Bright variable stars"
 msgstr "Яскраві змінні зірки"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:7951 src/translations.h:423
+#: src/gui/AstroCalcDialog.cpp:7952 src/translations.h:423
 msgid "Bright stars with high proper motion"
 msgstr "Яскраві зірки із швидким власним рухом"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:7954 src/translations.h:320
+#: src/gui/AstroCalcDialog.cpp:7955 src/translations.h:320
 #: src/ui_dsoColorsDialog.h:584
 msgid "Supernova candidates"
 msgstr "Кандидати у наднові"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:7955 src/translations.h:322
+#: src/gui/AstroCalcDialog.cpp:7956 src/translations.h:322
 #: src/ui_dsoColorsDialog.h:622
 msgid "Supernova remnant candidates"
 msgstr "Кандидати у залишки наднових"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:7956 src/translations.h:318
+#: src/gui/AstroCalcDialog.cpp:7957 src/translations.h:318
 #: src/ui_viewDialog.h:4728 src/ui_dsoColorsDialog.h:529
 msgid "Supernova remnants"
 msgstr "Залишки наднових"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:7957 src/translations.h:346
+#: src/gui/AstroCalcDialog.cpp:7958 src/translations.h:346
 #: src/ui_viewDialog.h:4725 src/ui_dsoColorsDialog.h:635
 msgid "Clusters of galaxies"
 msgstr "Скупчення галактик"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:7959 src/translations.h:286
+#: src/gui/AstroCalcDialog.cpp:7960 src/translations.h:286
 #: src/ui_viewDialog.h:4731 src/ui_dsoColorsDialog.h:522
 msgid "Globular star clusters"
 msgstr "Кулясті скупчення"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:7960 src/translations.h:348
+#: src/gui/AstroCalcDialog.cpp:7961 src/translations.h:348
 #: src/ui_dsoColorsDialog.h:648
 msgid "Regions of the sky"
 msgstr "Області неба"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:7961 src/translations.h:300
+#: src/gui/AstroCalcDialog.cpp:7962 src/translations.h:300
 #: src/ui_viewDialog.h:4720 src/ui_dsoColorsDialog.h:513
 msgid "Active galaxies"
 msgstr "Активні галактики"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:7962 src/translations.h:304
+#: src/gui/AstroCalcDialog.cpp:7963 src/translations.h:304
 #: src/ui_viewDialog.h:4727 src/ui_dsoColorsDialog.h:594
 msgid "Interacting galaxies"
 msgstr "Взаємодія галактик"
 
-#: src/gui/AstroCalcDialog.cpp:7964
+#: src/gui/AstroCalcDialog.cpp:7965
 msgid "Messier objects"
 msgstr "Об'єкти Месьє"
 
-#: src/gui/AstroCalcDialog.cpp:7965
+#: src/gui/AstroCalcDialog.cpp:7966
 msgid "NGC/IC objects"
 msgstr "Об'єкти NGC/IC"
 
-#: src/gui/AstroCalcDialog.cpp:7966
+#: src/gui/AstroCalcDialog.cpp:7967
 msgid "Caldwell objects"
 msgstr "Об'єкти Колдвела"
 
-#: src/gui/AstroCalcDialog.cpp:7967
+#: src/gui/AstroCalcDialog.cpp:7968
 msgid "Herschel 400 objects"
 msgstr "400 об'єктів Гершеля"
 
-#: src/gui/AstroCalcDialog.cpp:7968
+#: src/gui/AstroCalcDialog.cpp:7969
 msgid "Algol-type eclipsing systems"
 msgstr "Системи із затемненнями типу Алголя"
 
-#: src/gui/AstroCalcDialog.cpp:7969
+#: src/gui/AstroCalcDialog.cpp:7970
 msgid "The classical cepheids"
 msgstr "Класичні цефеїди"
 
-#: src/gui/AstroCalcDialog.cpp:7974
+#: src/gui/AstroCalcDialog.cpp:7975
 msgid "Bright nova stars"
 msgstr "Яскраві нові зірки"
 
-#: src/gui/AstroCalcDialog.cpp:7976
+#: src/gui/AstroCalcDialog.cpp:7977
 msgid "Bright supernova stars"
 msgstr "Яскраві наднові зірки"
 
-#: src/gui/AstroCalcDialog.cpp:7979 plugins/Pulsars/src/Pulsars.cpp:73
+#: src/gui/AstroCalcDialog.cpp:7980 plugins/Pulsars/src/Pulsars.cpp:73
 #: plugins/Pulsars/src/Pulsars.cpp:175
 msgid "Pulsars"
 msgstr "Пульсари"
 
-#: src/gui/AstroCalcDialog.cpp:7982
+#: src/gui/AstroCalcDialog.cpp:7983
 msgid "Exoplanetary systems"
 msgstr "Екзопланетні системи"
 
 #. TRANSLATORS: angular size
-#: src/gui/AstroCalcDialog.cpp:8112
+#: src/gui/AstroCalcDialog.cpp:8113
 msgid "Ang. Size"
 msgstr "Кут. розмір"
 
 #. TRANSLATORS: IAU Constellation
-#: src/gui/AstroCalcDialog.cpp:8115
+#: src/gui/AstroCalcDialog.cpp:8116
 msgctxt "IAU Constellation"
 msgid "Const."
 msgstr "Сузір."
 
-#: src/gui/AstroCalcDialog.cpp:8232 src/ui_viewDialog.h:4760
+#: src/gui/AstroCalcDialog.cpp:8233 src/ui_viewDialog.h:4760
 #: src/ui_astroCalcDialog.h:2686
 msgid "Limit angular size:"
 msgstr "Обмеження на кутовий розмір:"
 
-#: src/gui/AstroCalcDialog.cpp:8233 src/ui_astroCalcDialog.h:2684
+#: src/gui/AstroCalcDialog.cpp:8234 src/ui_astroCalcDialog.h:2684
 msgid "Set limits for angular size for visible celestial objects"
 msgstr "Встановити обмеження для кутового розміру видимих небесних об'єктів"
 
-#: src/gui/AstroCalcDialog.cpp:8234 src/ui_astroCalcDialog.h:2678
+#: src/gui/AstroCalcDialog.cpp:8235 src/ui_astroCalcDialog.h:2678
 msgid "Minimal angular size for visible celestial objects"
 msgstr "Мінімальний кутовий розмір видимих небесних об'єктів"
 
-#: src/gui/AstroCalcDialog.cpp:8235 src/ui_astroCalcDialog.h:2681
+#: src/gui/AstroCalcDialog.cpp:8236 src/ui_astroCalcDialog.h:2681
 msgid "Maximum angular size for visible celestial objects"
 msgstr "Максимальний кутовий розмір видимих небесних об'єктів"
 
-#: src/gui/AstroCalcDialog.cpp:8508
+#: src/gui/AstroCalcDialog.cpp:8509
 msgid "Limit angular separation:"
 msgstr "Обмеження кутової роздільності:"
 
-#: src/gui/AstroCalcDialog.cpp:8509
+#: src/gui/AstroCalcDialog.cpp:8510
 msgid "Set limits for angular separation for visible double stars"
 msgstr ""
 "Встановити обмеження для кутової роздільності для видимих подвійних зірок"
 
-#: src/gui/AstroCalcDialog.cpp:8510
+#: src/gui/AstroCalcDialog.cpp:8511
 msgid "Minimal angular separation for visible double stars"
 msgstr "Мінімальна кутова роздільність для видимих подвійних зірок"
 
-#: src/gui/AstroCalcDialog.cpp:8511
+#: src/gui/AstroCalcDialog.cpp:8512
 msgid "Maximum angular separation for visible double stars"
 msgstr "Максимальна кутова роздільність для видимих подвійних зірок"
 
-#: src/gui/AstroCalcDialog.cpp:8887
+#: src/gui/AstroCalcDialog.cpp:8888
 msgid "Save list of objects as..."
 msgstr "Зберегти список об'єктів як…"
 
-#: src/gui/AstroCalcDialog.cpp:8893 src/ui_astroCalcDialog.h:2439
+#: src/gui/AstroCalcDialog.cpp:8894 src/ui_astroCalcDialog.h:2439
 msgid "What's Up Tonight"
 msgstr "Сьогодні ввечері"
 
 #. TRANSLATORS: Part of unit of measure for mean motion - degrees per day
-#: src/gui/AstroCalcDialog.cpp:8971
+#: src/gui/AstroCalcDialog.cpp:8972
 msgctxt "mean motion"
 msgid "day"
 msgstr "день"
 
-#: src/gui/AstroCalcDialog.cpp:9035
+#: src/gui/AstroCalcDialog.cpp:9036
 msgid "Linear and angular distances between selected objects"
 msgstr "Лінійна і кутова відстані між позначеними об'єктами"
 
-#: src/gui/AstroCalcDialog.cpp:9105
+#: src/gui/AstroCalcDialog.cpp:9106
 msgid "Angular distance between the Moon and selected object"
 msgstr "Кутова відстань між Місяцем і позначеним об'єктом"
 
-#: src/gui/AstroCalcDialog.cpp:9171
+#: src/gui/AstroCalcDialog.cpp:9172
 msgid "Angular distance between the Moon and celestial object"
 msgstr "Кутова відстань між Місяцем і небесним об'єктом"
 
-#: src/gui/AstroCalcDialog.cpp:9322
+#: src/gui/AstroCalcDialog.cpp:9323
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1619
 msgid "CSV (Comma delimited)"
 msgstr "CSV (із відокремленням комами)"
 
-#: src/gui/AstroCalcDialog.cpp:9325
+#: src/gui/AstroCalcDialog.cpp:9326
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1620
 msgid "Microsoft Excel Open XML Spreadsheet"
 msgstr "Електронна таблиця Microsoft Excel Open XML"
@@ -15437,7 +15445,7 @@ msgid "Use tab key for select of found items"
 msgstr "Використовувати клавішу Tab для позначення знайдених об’єктів"
 
 #: src/ui_searchDialogGui.h:843
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1061
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1060
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:759
 msgid "Object"
 msgstr "Об’єкт"
@@ -15570,7 +15578,7 @@ msgstr "Вилучає усі дані щодо нещодавніх об'єкт
 #: src/ui_configurationDialog.h:2885 src/ui_configurationDialog.h:2896
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:304
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:418
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1111
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1110
 msgid "Options"
 msgstr "Параметри"
 
@@ -15579,7 +15587,7 @@ msgid "View"
 msgstr "Перегляд"
 
 #: src/ui_viewDialog.h:4366 src/ui_viewDialog.h:4387
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1034
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1033
 msgid "Sky"
 msgstr "Небо"
 
@@ -17104,7 +17112,7 @@ msgid "native"
 msgstr "рідною"
 
 #: src/ui_viewDialog.h:5387 src/ui_viewDialog.h:5393
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1089
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1088
 msgid "International Phonetic Alphabet"
 msgstr "Міжнародний фонетичний алфавіт"
 
@@ -17251,7 +17259,7 @@ msgid "Details and Appearance"
 msgstr "Подробиці і вигляд"
 
 #: src/ui_viewDialog.h:5522
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1112
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1111
 msgid "Current time"
 msgstr "Поточний час"
 
@@ -18377,8 +18385,8 @@ msgstr "Перемкнутися на новий ландшафт після в�
 
 #: src/ui_addRemoveLandscapesDialog.h:234
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:236
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1020
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1051
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1019
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1050
 msgid "Remove"
 msgstr "Вилучити"
 
@@ -20670,7 +20678,7 @@ msgstr "Макс. експонування"
 #: plugins/Oculars/src/Oculars.cpp:2087
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1193
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:245
-#: plugins/Planes/src/AircraftObject.cpp:213
+#: plugins/Planes/src/AircraftObject.cpp:217
 #: plugins/Planes/src/gui/PlanesDialog.cpp:66
 msgctxt "time"
 msgid "s"
@@ -21113,7 +21121,7 @@ msgid "Pixel grid feature"
 msgstr "Можливість піксельної ґратки"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:642
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1023
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1022
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1755
 msgid "Overview"
 msgstr "Перегляд"
@@ -21533,7 +21541,7 @@ msgstr "Загальне"
 #: plugins/Oculars/src/ui_ocularDialog.h:1576
 #: plugins/Oculars/src/ui_ocularDialog.h:1595
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:174
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1048
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1047
 msgid "Add"
 msgstr "Додати"
 
@@ -21855,38 +21863,38 @@ msgid "Loading TLE"
 msgstr "Завантажуємо TLE"
 
 #. TRANSLATORS: Satellite group: Communication satellites
-#: plugins/Satellites/src/Satellites.cpp:3778
+#: plugins/Satellites/src/Satellites.cpp:3801
 msgid "communications"
 msgstr "комунікаційні"
 
 #. TRANSLATORS: Satellite group: Navigation satellites
-#: plugins/Satellites/src/Satellites.cpp:3780
+#: plugins/Satellites/src/Satellites.cpp:3803
 msgid "navigation"
 msgstr "навігаційні"
 
 #. TRANSLATORS: Satellite group: Scientific satellites
-#: plugins/Satellites/src/Satellites.cpp:3782
+#: plugins/Satellites/src/Satellites.cpp:3805
 msgid "scientific"
 msgstr "наукові"
 
 #. TRANSLATORS: Satellite group: Earth Resources satellites
-#: plugins/Satellites/src/Satellites.cpp:3784
+#: plugins/Satellites/src/Satellites.cpp:3807
 msgid "earth resources"
 msgstr "природно-ресурсні"
 
 #. TRANSLATORS: Satellite group: Satellites in geostationary orbit
-#: plugins/Satellites/src/Satellites.cpp:3786
+#: plugins/Satellites/src/Satellites.cpp:3809
 msgid "geostationary"
 msgstr "геостаціонарні"
 
 #. TRANSLATORS: Satellite group: Satellites that are no longer functioning
-#: plugins/Satellites/src/Satellites.cpp:3788
+#: plugins/Satellites/src/Satellites.cpp:3811
 msgid "non-operational"
 msgstr "недієздатні"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the space
 #. observatories
-#: plugins/Satellites/src/Satellites.cpp:3790
+#: plugins/Satellites/src/Satellites.cpp:3813
 msgid "observatory"
 msgstr "обсерваторії"
 
@@ -21894,7 +21902,7 @@ msgstr "обсерваторії"
 #. System (IRNSS) is an autonomous regional satellite navigation system being
 #. developed by the Indian Space Research Organisation (ISRO) which would be
 #. under complete control of the Indian government.
-#: plugins/Satellites/src/Satellites.cpp:3792
+#: plugins/Satellites/src/Satellites.cpp:3815
 msgid "irnss"
 msgstr "irnss"
 
@@ -21902,100 +21910,100 @@ msgstr "irnss"
 #. a proposed three-satellite regional time transfer system and Satellite
 #. Based Augmentation System for the Global Positioning System, that would be
 #. receivable within Japan.
-#: plugins/Satellites/src/Satellites.cpp:3794
+#: plugins/Satellites/src/Satellites.cpp:3817
 msgid "qzss"
 msgstr "qzss"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the COSMOS satellites
-#: plugins/Satellites/src/Satellites.cpp:3796
+#: plugins/Satellites/src/Satellites.cpp:3819
 msgid "cosmos"
 msgstr "космос"
 
 #. TRANSLATORS: Satellite group: Debris of satellites
-#: plugins/Satellites/src/Satellites.cpp:3798
+#: plugins/Satellites/src/Satellites.cpp:3821
 msgid "debris"
 msgstr "уламки"
 
 #. TRANSLATORS: Satellite group: Crewed satellites
-#: plugins/Satellites/src/Satellites.cpp:3800
+#: plugins/Satellites/src/Satellites.cpp:3823
 msgid "crewed"
 msgstr "пілотовані"
 
 #. TRANSLATORS: Satellite group: Satellites of ISS resupply missions
-#: plugins/Satellites/src/Satellites.cpp:3802
+#: plugins/Satellites/src/Satellites.cpp:3825
 msgid "resupply"
 msgstr "транспортні"
 
 #. TRANSLATORS: Satellite group: are known to broadcast TV signals
-#: plugins/Satellites/src/Satellites.cpp:3804
+#: plugins/Satellites/src/Satellites.cpp:3827
 msgid "tv"
 msgstr "телекомунікаційні"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GONETS satellites
-#: plugins/Satellites/src/Satellites.cpp:3806
+#: plugins/Satellites/src/Satellites.cpp:3829
 msgid "gonets"
 msgstr "гонец"
 
 #. TRANSLATORS: Satellite group: Last 30 Days' Launches
 #. TRANSLATORS: CelesTrak source [Last 30 Days' Launches]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=last-30-days&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3812
+#: plugins/Satellites/src/Satellites.cpp:3835
 msgid "last-30-days"
 msgstr "останні 30 днів"
 
 #. TRANSLATORS: Satellite group: Space stations
 #. TRANSLATORS: CelesTrak source [Space Stations]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=stations&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3815
+#: plugins/Satellites/src/Satellites.cpp:3838
 msgid "stations"
 msgstr "станції"
 
 #. TRANSLATORS: Satellite group: Bright/naked-eye-visible satellites
 #. TRANSLATORS: CelesTrak source [100 (or so) Brightest]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=visual&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3818
+#: plugins/Satellites/src/Satellites.cpp:3841
 msgid "visual"
 msgstr "видимі"
 
 #. TRANSLATORS: Satellite group: Active Satellites
 #. TRANSLATORS: CelesTrak source [Active Satellites]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=active&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3821
+#: plugins/Satellites/src/Satellites.cpp:3844
 msgid "active"
 msgstr "активні"
 
 #. TRANSLATORS: Satellite group: Analyst Satellites
 #. TRANSLATORS: CelesTrak source [Analyst Satellites]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=analyst&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3824
+#: plugins/Satellites/src/Satellites.cpp:3847
 msgid "analyst"
 msgstr "аналітика"
 
 #. TRANSLATORS: Satellite group: Weather (meteorological) satellites
 #. TRANSLATORS: CelesTrak source [Weather]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=weather&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3830
+#: plugins/Satellites/src/Satellites.cpp:3853
 msgid "weather"
 msgstr "метеорологічні"
 
 #. TRANSLATORS: Satellite group: Earth Resources satellites
 #. TRANSLATORS: CelesTrak source [Earth Resources]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=resource&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3833
+#: plugins/Satellites/src/Satellites.cpp:3856
 msgid "resource"
 msgstr "ресурсні"
 
 #. TRANSLATORS: Satellite group: Search & Rescue (SARSAT) satellites
 #. TRANSLATORS: CelesTrak source [Search & Rescue (SARSAT)]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=sarsat&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3836
+#: plugins/Satellites/src/Satellites.cpp:3859
 msgid "sarsat"
 msgstr "sarsat"
 
 #. TRANSLATORS: Satellite group: Disaster Monitoring satellites
 #. TRANSLATORS: CelesTrak source [Disaster Monitoring]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=dmc&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3839
+#: plugins/Satellites/src/Satellites.cpp:3862
 msgid "dmc"
 msgstr "dmc"
 
@@ -22005,14 +22013,14 @@ msgstr "dmc"
 #. TRANSLATORS: CelesTrak source [Tracking and Data Relay Satellite System
 #. (TDRSS)]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=tdrss&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3842
+#: plugins/Satellites/src/Satellites.cpp:3865
 msgid "tdrss"
 msgstr "tdrss"
 
 #. TRANSLATORS: Satellite group: ARGOS Data Collection System satellites
 #. TRANSLATORS: CelesTrak source [ARGOS Data Collection System]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=argos&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3845
+#: plugins/Satellites/src/Satellites.cpp:3868
 msgid "argos"
 msgstr "argos"
 
@@ -22020,36 +22028,22 @@ msgstr "argos"
 #. constellation (LEMUR satellites)
 #. TRANSLATORS: CelesTrak source [Spire]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=spire&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3851
+#: plugins/Satellites/src/Satellites.cpp:3874
 msgid "spire"
 msgstr "spire"
 
 #. TRANSLATORS: Satellite group: Active Geosynchronous Satellites
 #. TRANSLATORS: CelesTrak source [Active Geosynchronous]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=geo&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3857
+#: plugins/Satellites/src/Satellites.cpp:3880
 msgid "geo"
 msgstr "гео"
-
-#. TRANSLATORS: Satellite group: GEO Protected Zone
-#. TRANSLATORS: CelesTrak source [GEO Protected Zone]:
-#. https://celestrak.org/NORAD/elements/gp.php?SPECIAL=gpz&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3860
-msgid "gpz"
-msgstr "gpz"
-
-#. TRANSLATORS: Satellite group: GEO Protected Zone Plus
-#. TRANSLATORS: CelesTrak source [GEO Protected Zone Plus]:
-#. https://celestrak.org/NORAD/elements/gp.php?SPECIAL=gpz-plus&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3863
-msgid "gpz-plus"
-msgstr "gpz-плюс"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the INTELSAT
 #. satellites
 #. TRANSLATORS: CelesTrak source [Intelsat]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=intelsat&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3866
+#: plugins/Satellites/src/Satellites.cpp:3883
 msgid "intelsat"
 msgstr "intelsat"
 
@@ -22057,14 +22051,14 @@ msgstr "intelsat"
 #. satellites
 #. TRANSLATORS: CelesTrak source [Intelsat]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=eutelsat&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3869
+#: plugins/Satellites/src/Satellites.cpp:3886
 msgid "eutelsat"
 msgstr "eutelsat"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the SES satellites
 #. TRANSLATORS: CelesTrak source [SES]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=ses&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3872
+#: plugins/Satellites/src/Satellites.cpp:3889
 msgid "ses"
 msgstr "ses"
 
@@ -22072,7 +22066,7 @@ msgstr "ses"
 #. constellation (Iridium is a proper name)
 #. TRANSLATORS: CelesTrak source [Iridium NEXT]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=iridium-NEXT&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3875
+#: plugins/Satellites/src/Satellites.cpp:3892
 msgid "iridium-NEXT"
 msgstr "iridium-NEXT"
 
@@ -22080,7 +22074,7 @@ msgstr "iridium-NEXT"
 #. constellation (Starlink is a proper name)
 #. TRANSLATORS: CelesTrak source [Starlink]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=starlink&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3878
+#: plugins/Satellites/src/Satellites.cpp:3895
 msgid "starlink"
 msgstr "starlink"
 
@@ -22088,7 +22082,7 @@ msgstr "starlink"
 #. constellation (OneWeb is a proper name)
 #. TRANSLATORS: CelesTrak source [OneWeb]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=oneweb&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3881
+#: plugins/Satellites/src/Satellites.cpp:3898
 msgid "oneweb"
 msgstr "oneweb"
 
@@ -22096,7 +22090,7 @@ msgstr "oneweb"
 #. satellites
 #. TRANSLATORS: CelesTrak source [Orbcomm]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=orbcomm&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3884
+#: plugins/Satellites/src/Satellites.cpp:3901
 msgid "orbcomm"
 msgstr "orbcomm"
 
@@ -22104,28 +22098,28 @@ msgstr "orbcomm"
 #. satellites
 #. TRANSLATORS: CelesTrak source [Globalstar]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=globalstar&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3887
+#: plugins/Satellites/src/Satellites.cpp:3904
 msgid "globalstar"
 msgstr "globalstar"
 
 #. TRANSLATORS: Satellite group: Amateur radio (ham) satellites
 #. TRANSLATORS: CelesTrak source [Amateur Radio]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=amateur&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3890
+#: plugins/Satellites/src/Satellites.cpp:3907
 msgid "amateur"
 msgstr "аматорське радіомовлення"
 
 #. TRANSLATORS: Satellite group: Experimental communication satellites
 #. TRANSLATORS: CelesTrak source [Experimental]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=x-comm&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3893
+#: plugins/Satellites/src/Satellites.cpp:3910
 msgid "x-comm"
 msgstr "x-ком"
 
 #. TRANSLATORS: Satellite group: Other communication satellites
 #. TRANSLATORS: CelesTrak source [Other Comm]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=other-comm&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3896
+#: plugins/Satellites/src/Satellites.cpp:3913
 msgid "other-comm"
 msgstr "інші-ком"
 
@@ -22133,7 +22127,7 @@ msgstr "інші-ком"
 #. satellites
 #. TRANSLATORS: CelesTrak source [SatNOGS]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=satnogs&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3899
+#: plugins/Satellites/src/Satellites.cpp:3916
 msgid "satnogs"
 msgstr "satnogs"
 
@@ -22141,7 +22135,7 @@ msgstr "satnogs"
 #. constellation (Qianfan is a proper name)
 #. TRANSLATORS: CelesTrak source [Qianfan]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=qianfan&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3902
+#: plugins/Satellites/src/Satellites.cpp:3919
 msgid "qianfan"
 msgstr "цяньфань"
 
@@ -22149,35 +22143,35 @@ msgstr "цяньфань"
 #. constellation (Hulianwang is a proper name)
 #. TRANSLATORS: CelesTrak source [Hulianwang Digui]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=hulianwang&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3905
+#: plugins/Satellites/src/Satellites.cpp:3922
 msgid "hulianwang"
 msgstr "гуованг"
 
 #. TRANSLATORS: CelesTrak source [Kuiper]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=kuiper&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3907
+#: plugins/Satellites/src/Satellites.cpp:3924
 msgid "kuiper"
 msgstr "койпер"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Yamal satellites
-#: plugins/Satellites/src/Satellites.cpp:3909
+#: plugins/Satellites/src/Satellites.cpp:3926
 msgid "yamal"
 msgstr "ямал"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Gorizont
 #. satellites
-#: plugins/Satellites/src/Satellites.cpp:3911
+#: plugins/Satellites/src/Satellites.cpp:3928
 msgid "gorizont"
 msgstr "горизонт"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Raduga satellites
-#: plugins/Satellites/src/Satellites.cpp:3913
+#: plugins/Satellites/src/Satellites.cpp:3930
 msgid "raduga"
 msgstr "радуга"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Molniya
 #. satellites
-#: plugins/Satellites/src/Satellites.cpp:3915
+#: plugins/Satellites/src/Satellites.cpp:3932
 msgid "molniya"
 msgstr "молнія"
 
@@ -22186,13 +22180,13 @@ msgstr "молнія"
 #. https://celestrak.org/NORAD/elements/gnss.txt
 #. TRANSLATORS: CelesTrak source [GNSS]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=gnss&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3922
+#: plugins/Satellites/src/Satellites.cpp:3939
 msgid "gnss"
 msgstr "gnss"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GPS constellation
 #. (the Global Positioning System)
-#: plugins/Satellites/src/Satellites.cpp:3924
+#: plugins/Satellites/src/Satellites.cpp:3941
 msgid "gps"
 msgstr "gps"
 
@@ -22200,13 +22194,13 @@ msgstr "gps"
 #. (the Global Positioning System)
 #. TRANSLATORS: CelesTrak source [GPS Operational]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=gps-ops&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3927
+#: plugins/Satellites/src/Satellites.cpp:3944
 msgid "gps-ops"
 msgstr "gps-ops"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GLONASS
 #. constellation (GLObal NAvigation Satellite System)
-#: plugins/Satellites/src/Satellites.cpp:3929
+#: plugins/Satellites/src/Satellites.cpp:3946
 msgid "glonass"
 msgstr "глонасс"
 
@@ -22214,7 +22208,7 @@ msgstr "глонасс"
 #. constellation (GLObal NAvigation Satellite System)
 #. TRANSLATORS: CelesTrak supplemental source [GLONASS Operational]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=glo-ops&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3932
+#: plugins/Satellites/src/Satellites.cpp:3949
 msgid "glo-ops"
 msgstr "glo-ops"
 
@@ -22222,7 +22216,7 @@ msgstr "glo-ops"
 #. constellation (global navigation satellite system by the European Union)
 #. TRANSLATORS: CelesTrak source [Galileo]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=galileo&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3935
+#: plugins/Satellites/src/Satellites.cpp:3952
 msgid "galileo"
 msgstr "галілео"
 
@@ -22230,7 +22224,7 @@ msgstr "галілео"
 #. constellation (BeiDou Navigation Satellite System)
 #. TRANSLATORS: CelesTrak source [Beidou]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=beidou&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3938
+#: plugins/Satellites/src/Satellites.cpp:3955
 msgid "beidou"
 msgstr "бейдоу"
 
@@ -22239,154 +22233,154 @@ msgstr "бейдоу"
 #. TRANSLATORS: CelesTrak source [Satellite-Based Augmentation System
 #. (WAAS/EGNOS/MSAS)]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=sbas&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3941
+#: plugins/Satellites/src/Satellites.cpp:3958
 msgid "sbas"
 msgstr "sbas"
 
 #. TRANSLATORS: Satellite group: Navy Navigation Satellite System (NNSS)
-#: plugins/Satellites/src/Satellites.cpp:3943
+#: plugins/Satellites/src/Satellites.cpp:3960
 msgid "nnss"
 msgstr "nnss"
 
 #. TRANSLATORS: Satellite group: Russian LEO Navigation Satellites
-#: plugins/Satellites/src/Satellites.cpp:3945
+#: plugins/Satellites/src/Satellites.cpp:3962
 msgid "musson"
 msgstr "муссон"
 
 #. TRANSLATORS: Satellite group: Space & Earth Science satellites
 #. TRANSLATORS: CelesTrak source [Space & Earth Science]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=science&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3951
+#: plugins/Satellites/src/Satellites.cpp:3968
 msgid "science"
 msgstr "наукові"
 
 #. TRANSLATORS: Satellite group: Geodetic satellites
-#: plugins/Satellites/src/Satellites.cpp:3953
+#: plugins/Satellites/src/Satellites.cpp:3970
 msgid "geodetic"
 msgstr "геодезичні"
 
 #. TRANSLATORS: Satellite group: Engineering satellites
 #. TRANSLATORS: CelesTrak source [Engineering]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=engineering&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3956
+#: plugins/Satellites/src/Satellites.cpp:3973
 msgid "engineering"
 msgstr "інженерні"
 
 #. TRANSLATORS: Satellite group: Education satellites
 #. TRANSLATORS: CelesTrak source [Education]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=education&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3959
+#: plugins/Satellites/src/Satellites.cpp:3976
 msgid "education"
 msgstr "освітні"
 
 #. TRANSLATORS: Satellite group: Military satellites
 #. TRANSLATORS: CelesTrak source [Miscellaneous Military]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=military&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3965
+#: plugins/Satellites/src/Satellites.cpp:3982
 msgid "military"
 msgstr "військові"
 
 #. TRANSLATORS: Satellite group: Radar Calibration satellites
 #. TRANSLATORS: CelesTrak source [Radar Calibration]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=radar&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3968
+#: plugins/Satellites/src/Satellites.cpp:3985
 msgid "radar"
 msgstr "радарні"
 
 #. TRANSLATORS: Satellite group: CubeSats (Cube Satellites)
 #. TRANSLATORS: CelesTrak source [CubeSats]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=cubesat&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3971
+#: plugins/Satellites/src/Satellites.cpp:3988
 msgid "cubesat"
 msgstr "кубсат"
 
 #. TRANSLATORS: Satellite group: Other satellites
-#: plugins/Satellites/src/Satellites.cpp:3973
+#: plugins/Satellites/src/Satellites.cpp:3990
 msgid "other"
 msgstr "інші"
 
 #. TRANSLATORS: Satellite group: Meteosat
-#: plugins/Satellites/src/Satellites.cpp:3979
+#: plugins/Satellites/src/Satellites.cpp:3996
 msgid "meteosat"
 msgstr "метеосупутник"
 
 #. TRANSLATORS: Satellite group: Telesat
-#: plugins/Satellites/src/Satellites.cpp:3982
+#: plugins/Satellites/src/Satellites.cpp:3999
 msgid "telesat"
 msgstr "телесупутник"
 
 #. TRANSLATORS: Satellite group: ISS Segments
-#: plugins/Satellites/src/Satellites.cpp:3984
+#: plugins/Satellites/src/Satellites.cpp:4001
 msgid "iss"
 msgstr "iss"
 
 #. TRANSLATORS: Satellite group: CPF
-#: plugins/Satellites/src/Satellites.cpp:3986
+#: plugins/Satellites/src/Satellites.cpp:4003
 msgid "cpf"
 msgstr "cpf"
 
 #. TRANSLATORS: Satellite name: International Space Station
-#: plugins/Satellites/src/Satellites.cpp:3990
+#: plugins/Satellites/src/Satellites.cpp:4007
 msgid "ISS (ZARYA)"
 msgstr "МКС (Заря)"
 
 #. TRANSLATORS: Satellite name: International Space Station
-#: plugins/Satellites/src/Satellites.cpp:3992
+#: plugins/Satellites/src/Satellites.cpp:4009
 msgid "ISS (NAUKA)"
 msgstr "МКС (Наука)"
 
 #. TRANSLATORS: Satellite name: International Space Station
-#: plugins/Satellites/src/Satellites.cpp:3994
+#: plugins/Satellites/src/Satellites.cpp:4011
 msgid "ISS"
 msgstr "МКС"
 
 #. TRANSLATORS: Satellite name: Hubble Space Telescope
-#: plugins/Satellites/src/Satellites.cpp:3996
+#: plugins/Satellites/src/Satellites.cpp:4013
 msgid "HST"
 msgstr "Космічний телескоп «Хаббл»"
 
 #. TRANSLATORS: Satellite name: Spektr-R Space Observatory (or RadioAstron)
-#: plugins/Satellites/src/Satellites.cpp:3998
+#: plugins/Satellites/src/Satellites.cpp:4015
 msgid "SPEKTR-R"
 msgstr "Спектр-Р"
 
 #. TRANSLATORS: Satellite name: Spektr-RG Space Observatory
-#: plugins/Satellites/src/Satellites.cpp:4000
+#: plugins/Satellites/src/Satellites.cpp:4017
 msgid "SPEKTR-RG"
 msgstr "СПЕКТР-РГ"
 
 #. TRANSLATORS: Satellite name: International Gamma-Ray Astrophysics
 #. Laboratory (INTEGRAL)
-#: plugins/Satellites/src/Satellites.cpp:4002
+#: plugins/Satellites/src/Satellites.cpp:4019
 msgid "INTEGRAL"
 msgstr "INTEGRAL"
 
 #. TRANSLATORS: Satellite name: China's first space station name
-#: plugins/Satellites/src/Satellites.cpp:4004
+#: plugins/Satellites/src/Satellites.cpp:4021
 msgid "TIANGONG 1"
 msgstr "Тянгунь 1"
 
 #. TRANSLATORS: Satellite name: name of China's space station module
-#: plugins/Satellites/src/Satellites.cpp:4006
+#: plugins/Satellites/src/Satellites.cpp:4023
 msgid "TIANHE"
 msgstr "ТЯНЬХЕ"
 
 #. TRANSLATORS: Satellite name: China's space station name (with name of base
 #. module)
-#: plugins/Satellites/src/Satellites.cpp:4008
+#: plugins/Satellites/src/Satellites.cpp:4025
 msgid "TIANGONG (TIANHE)"
 msgstr "ТЯНЬГУН (ТЯНЬХЕ)"
 
 #. TRANSLATORS: An uplink (UL or U/L) is the link from a ground station to a
 #. satellite
-#: plugins/Satellites/src/Satellites.cpp:4013
+#: plugins/Satellites/src/Satellites.cpp:4030
 msgctxt "comms"
 msgid "uplink"
 msgstr "зв'язок Земля-ЛА"
 
 #. TRANSLATORS: A downlink (DL) is the link from a satellite to a ground
 #. station
-#: plugins/Satellites/src/Satellites.cpp:4015
+#: plugins/Satellites/src/Satellites.cpp:4032
 msgctxt "comms"
 msgid "downlink"
 msgstr "зв'язок ЛА-Земля"
@@ -22395,7 +22389,7 @@ msgstr "зв'язок ЛА-Земля"
 #. which emit one or more signals (normally on a fixed frequency) whose
 #. purpose is twofold: station-keeping information (telemetry) and locates the
 #. satellite (determines its azimuth and elevation) in the sky
-#: plugins/Satellites/src/Satellites.cpp:4017
+#: plugins/Satellites/src/Satellites.cpp:4034
 msgctxt "comms"
 msgid "beacon"
 msgstr "маяк"
@@ -22403,65 +22397,65 @@ msgstr "маяк"
 #. TRANSLATORS: Telemetry is the collection of measurements or other data at
 #. satellites and their automatic transmission to receiving equipment
 #. (telecommunication) for monitoring
-#: plugins/Satellites/src/Satellites.cpp:4019
+#: plugins/Satellites/src/Satellites.cpp:4036
 msgctxt "comms"
 msgid "telemetry"
 msgstr "телеметрія"
 
 #. TRANSLATORS: The channel for transmission of video data
-#: plugins/Satellites/src/Satellites.cpp:4021
+#: plugins/Satellites/src/Satellites.cpp:4038
 msgctxt "comms"
 msgid "video"
 msgstr "відео"
 
 #. TRANSLATORS: The broadband is wide bandwidth data transmission which
 #. transports multiple signals at a wide range of frequencies
-#: plugins/Satellites/src/Satellites.cpp:4023
+#: plugins/Satellites/src/Satellites.cpp:4040
 msgctxt "comms"
 msgid "broadband"
 msgstr "широкосмуговий"
 
 #. TRANSLATORS: The channel for transmission of commands
-#: plugins/Satellites/src/Satellites.cpp:4025
+#: plugins/Satellites/src/Satellites.cpp:4042
 msgctxt "comms"
 msgid "command"
 msgstr "командний"
 
 #. TRANSLATORS: Meteorological is a service on the satellite for transmitting
 #. meteorological data to a ground station
-#: plugins/Satellites/src/Satellites.cpp:4027
+#: plugins/Satellites/src/Satellites.cpp:4044
 msgctxt "comms"
 msgid "meteorological"
 msgstr "метеорологічний"
 
 #. TRANSLATORS: Maritime is a service on the satellite
-#: plugins/Satellites/src/Satellites.cpp:4029
+#: plugins/Satellites/src/Satellites.cpp:4046
 msgctxt "comms"
 msgid "maritime"
 msgstr "морський"
 
 #. TRANSLATORS: Mobile is a service on the satellite
-#: plugins/Satellites/src/Satellites.cpp:4031
+#: plugins/Satellites/src/Satellites.cpp:4048
 msgctxt "comms"
 msgid "mobile"
 msgstr "мобільний зв'язок"
 
 #. TRANSLATORS: Mobile telephony is a service on the satellite
-#: plugins/Satellites/src/Satellites.cpp:4033
+#: plugins/Satellites/src/Satellites.cpp:4050
 msgctxt "comms"
 msgid "mobile telephony"
 msgstr "мобільна телефонія"
 
 #. TRANSLATORS: A repeater is an electronic device that receives a signal and
 #. retransmits it.
-#: plugins/Satellites/src/Satellites.cpp:4035
+#: plugins/Satellites/src/Satellites.cpp:4052
 msgctxt "comms"
 msgid "repeater"
 msgstr "ретранслятор"
 
 #. TRANSLATORS: The digital repeater (or digipiter) is used in channels that
 #. transmit data by binary digital signals
-#: plugins/Satellites/src/Satellites.cpp:4037
+#: plugins/Satellites/src/Satellites.cpp:4054
 msgctxt "comms"
 msgid "digipeater"
 msgstr "цифровий ретранслятор"
@@ -22469,23 +22463,23 @@ msgstr "цифровий ретранслятор"
 #. TRANSLATORS: A radio band is a small frequency band (a contiguous section
 #. of the range of the radio spectrum) in which channels are usually used or
 #. set aside for the same purpose. S-band for example.
-#: plugins/Satellites/src/Satellites.cpp:4039
+#: plugins/Satellites/src/Satellites.cpp:4056
 msgctxt "comms"
 msgid "-band"
 msgstr "-смуговий"
 
-#: plugins/Satellites/src/Satellites.cpp:4040
+#: plugins/Satellites/src/Satellites.cpp:4057
 msgctxt "comms"
 msgid "crew voice"
 msgstr "голос команди"
 
-#: plugins/Satellites/src/Satellites.cpp:4041
+#: plugins/Satellites/src/Satellites.cpp:4058
 msgctxt "comms"
 msgid "imaging"
 msgstr "створення знімків"
 
 #. TRANSLATORS: Some mode of communication via radio channel
-#: plugins/Satellites/src/Satellites.cpp:4043
+#: plugins/Satellites/src/Satellites.cpp:4060
 msgctxt "comms"
 msgid "mode"
 msgstr "режим"
@@ -23463,7 +23457,7 @@ msgid "Add communication data"
 msgstr "Додати дані обміну даними"
 
 #: plugins/Satellites/src/gui/SatellitesCommDialog.cpp:126
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1058
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1057
 msgid "Description"
 msgstr "Опис"
 
@@ -27220,11 +27214,11 @@ msgstr "Диестанційне керування"
 msgid "Remote control config"
 msgstr "Налаштування дистанційного керування"
 
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:135
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:133
 msgid "Remote Control Plug-in"
 msgstr "Додаток дистанційного керування"
 
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:143
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:141
 msgid ""
 "The Remote Control plugin provides a web interface to allow state changes "
 "and triggering scripts using a connected webbrowser."
@@ -27233,34 +27227,34 @@ msgstr ""
 "уможливлює зміну стану або запуск скриптів за допомогою з’єднаної програми "
 "для перегляду інтернету."
 
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:149
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:147
 msgid "It is also possible to send commands via command line, e.g.."
 msgstr ""
 "Крім того, можна надсилати команди за допомогою командного рядка. Приклад:"
 
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:155
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:153
 msgid "This allows triggering automatic show setups for museums etc."
 msgstr "Це уможливлює створення автоматичних показів, наприклад для музеїв"
 
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:156
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:154
 msgid "This plugin was developed during ESA SoCiS 2015."
 msgstr "Цей додаток було розроблено під час ESA SoCiS 2015."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:158
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:156
 msgid "This plugin uses the {QtWebApp HTTP server} by Stefan Frings."
 msgstr ""
 "У цьому додатку використано {HTTP-сервер QtWebApp}, розроблений Стефаном "
 "Фрінґсом (Stefan Frings)."
 
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:160
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:158
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:243
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:239
 #: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:197
 msgid "Publications"
 msgstr "Публікації"
 
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:161
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:159
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:244
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:240
 #: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:198
@@ -27269,12 +27263,12 @@ msgstr ""
 "Якщо ви користуєтеся цим додатком у ваших друкованих роботах, будь ласка, "
 "використовуйте таке посилання на джерело:"
 
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:206
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:204
 #, qt-format
 msgid "Listening on %1, IP: "
 msgstr "Очікуємо на %1, IP: "
 
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:211
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:209
 msgid "Not active."
 msgstr "Неактивний."
 
@@ -32937,9 +32931,9 @@ msgstr "Назва:"
 
 #: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:64
 #: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:201
-#: plugins/SkyCultureMaker/src/SkyCultureMaker.hpp:286
+#: plugins/SkyCultureMaker/src/SkyCultureMaker.hpp:274
 #: plugins/SkyCultureMaker/src/ui_scmStartDialog.h:136
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1014
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1013
 #: plugins/SkyCultureMaker/src/ui_scmHideOrAbortMakerDialog.h:127
 msgid "Sky Culture Maker"
 msgstr "Засіб створення картини зоряного неба"
@@ -32957,21 +32951,21 @@ msgid "Plugin to draw and export sky cultures in Stellarium."
 msgstr ""
 "Додаток для малювання та експортування картин зоряного неба у Stellarium."
 
-#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:569
+#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:553
 msgid "INFO"
 msgstr "ВІДОМОСТІ"
 
-#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:576
+#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:560
 msgid "WARNING"
 msgstr "ПОПЕРЕДЖЕННЯ"
 
-#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:583
+#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:567
 #: plugins/OnlineQueries/src/OnlineQueries.cpp:362
 #: plugins/OnlineQueries/src/OnlineQueries.cpp:372
 msgid "ERROR"
 msgstr "ПОМИЛКА"
 
-#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:590
+#: plugins/SkyCultureMaker/src/SkyCultureMaker.cpp:574
 msgid "CONFIRM"
 msgstr "ПІДТВЕРДЖЕННЯ"
 
@@ -33026,18 +33020,18 @@ msgstr ""
 "\n"
 "%1"
 
-#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp:353
+#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp:354
 msgid "Please select a license for the sky culture."
 msgstr "Будь ласка, виберіть умови ліцензування для картини зоряного неба."
 
-#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp:360
+#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp:361
 msgid ""
 "The sky culture description is not complete. The following fields are not "
 "filled correctly:\n"
 msgstr ""
 "Опис картини зоряного неба є неповним. Неправильно заповнено такі поля:\n"
 
-#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp:380
+#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp:381
 msgid ""
 "The sky culture territory is not complete. Please digitize at least one "
 "polygon in geographical location tab."
@@ -33045,37 +33039,37 @@ msgstr ""
 "Територія картини неба неповна. Будь ласка, оцифруйте принаймні один "
 "багатокутник на вкладці географічного місця."
 
-#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp:1139
+#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp:1127
 msgid "HIP or Gaia DR3 ID (e.g. HIP 1234 or Gaia DR3 1234567890)"
 msgstr ""
 "Ідентифікатор HIP або Gaia DR3 (приклади: HIP 1234 або Gaia DR3 1234567890)"
 
-#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp:1141
+#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp:1129
 msgid "Planet name (e.g. Venus)"
 msgstr "Назва планети (приклад: Венера)"
 
-#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp:1142
+#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp:1130
 msgid "Catalog designation (e.g. M31)"
 msgstr "Позначення у каталозі (приклад: M31)"
 
-#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp:1264
+#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp:1252
 msgctxt "celestial object visibility period"
 msgid "morning"
 msgstr "ранок"
 
-#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp:1268
+#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp:1256
 msgctxt "celestial object visibility period"
 msgid "evening"
 msgstr "вечір"
 
-#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp:1299
+#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp:1287
 msgctxt ""
 "Prompt for missing celestial object identifier (e.g. HIP number, Gaia DR3 "
 "ID, orplanet name, DSO catalog designation)"
 msgid "Please enter an object identifier."
 msgstr "Будь ласка, введіть ідентифікатор об'єкта."
 
-#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp:1319
+#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp:1307
 msgid ""
 "The star identifier must be a HIP number (e.g. 1234 or HIP 1234 A) or a Gaia"
 " DR3 ID (e.g. Gaia DR3 1234567890)."
@@ -33083,37 +33077,37 @@ msgstr ""
 "Ідентифікатор зірки має бути номером HIP (приклад: 1234 або HIP 1234 A) або "
 "ідентифікатор Gaia DR3 (приклад: Gaia DR3 1234567890)."
 
-#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp:1329
+#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp:1317
 msgid "The \"English\" field is required."
 msgstr "Поле «Англійською» слід обов'язково заповнювати."
 
-#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp:1362
+#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp:1350
 #, qt-format
 msgid "The object \"%1\" could not be found in the current Stellarium database."
 msgstr "Об'єкт «%1» не вдалося знайти у поточній базі даних Stellarium."
 
-#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp:1363
+#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp:1351
 msgid "Do you still want to save this entry?"
 msgstr "Усе ще хочете зберегти цей запис?"
 
-#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp:1365
+#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp:1353
 msgid "Don't show this warning again"
 msgstr "Більше не показувати це попередження"
 
-#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp:1368
+#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp:1356
 msgid "Save Anyway"
 msgstr "Зберегти попри це"
 
-#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp:1369
+#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp:1357
 msgid "Don't Save"
 msgstr "Не зберігати"
 
-#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp:1389
-#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp:1411
+#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp:1377
+#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp:1399
 msgid "An entry for this object already exists."
 msgstr "Запис для цього об'єкта вже існує."
 
-#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp:1451
+#: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp:1439
 msgid "No object is currently selected in Stellarium."
 msgstr "У Stellarium зараз не позначено жодного об'єкта."
 
@@ -33348,7 +33342,7 @@ msgid "Not implemented yet."
 msgstr "Ще не реалізовано."
 
 #: plugins/SkyCultureMaker/src/ui_scmStartDialog.h:145
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1019
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1018
 msgid "Edit"
 msgstr "Змінити"
 
@@ -33377,7 +33371,7 @@ msgid "Drawing"
 msgstr "Рисунок"
 
 #: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:373
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1025
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1024
 msgid "Mandatory fields are marked with an asterisk (*)."
 msgstr "Обов'язкові поля позначено зірочкою (*)."
 
@@ -33402,7 +33396,7 @@ msgstr ""
 "Ідентифікатор сузір'я. Не додавайте «CON» і назви картини зоряного неба."
 
 #: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:378
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1090
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1089
 msgid "Byname:"
 msgstr "Альтернатива:"
 
@@ -33435,7 +33429,7 @@ msgstr ""
 "китайської мови."
 
 #: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:384
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1086
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1085
 msgid "Transliteration:"
 msgstr "Транслітерація:"
 
@@ -33450,7 +33444,7 @@ msgstr ""
 "знаки."
 
 #: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:386
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1088
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1087
 msgid "IPA:"
 msgstr "IPA:"
 
@@ -33485,59 +33479,59 @@ msgstr "Вилучити зображення"
 msgid "Artwork"
 msgstr "Графіка"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1015
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1014
 msgid "Name of the Sky Culture"
 msgstr "Назва картини зоряного неба"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1017
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1016
 msgid "Add Constellation"
 msgstr "Додати сузір'я"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1018
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1017
 msgid "Add Dark Constellation"
 msgstr "Додати темне сузір'я"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1021
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1020
 msgid "License of the Sky Culture"
 msgstr "Умови ліцензування картини зоряного неба"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1022
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1021
 msgid "Export Sky Culture"
 msgstr "Експортувати картину зоряного неба"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1024
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1023
 msgid "Please describe the Sky Culture"
 msgstr "Будь ласка, опишіть картину зоряного неба"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1026
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1025
 msgid "General Information"
 msgstr "Загальні відомості"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1027
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1026
 msgid "Classification of the Sky Culture*"
 msgstr "Класифікація картини зоряного неба*"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1028
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1027
 msgid "Introduction:*"
 msgstr "Вступ:*"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1029
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1028
 msgid " A summary that could ideally be shown on a small screen entirely."
 msgstr " Резюме, яке можна було б показати на малому екрані."
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1030
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1029
 msgid "Region of the Sky Culture*"
 msgstr "Регіон картини неба*"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1031
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1030
 msgid "Description (What can the user see here?)"
 msgstr "Опис (що тут побачить користувач?)"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1032
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1031
 msgid "Culture Description:*"
 msgstr "Опис картини:*"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1033
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1032
 msgid ""
 "Give a short introduction about the culture: time, location, circumstances "
 "of life. Please describe specifics of the source (book/clay "
@@ -33557,7 +33551,7 @@ msgstr ""
 "прогнозуванням погоди...)? Чи є зв'язки з іншими культурами? Чи є ця версія "
 "дидактичною редукцією, чи вона походить з конкретного іншого джерела?"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1035
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1034
 msgid ""
 "What special features did/does this culture use, what shall the user watch "
 "out for? Is it worthwhile to click a specific button rather than others - "
@@ -33577,30 +33571,30 @@ msgstr ""
 " (чи просто використовували назви зірок)? Чи використовували вони зірки "
 "взагалі, чи надавали перевагу темним/яскравим хмарам Чумацького Шляху?"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1036
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1035
 msgid "Moon & Sun:"
 msgstr "Місяць і сонце:"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1037
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1036
 msgid "How did they determine their calendar? Did they observe phases?"
 msgstr "Як визначався календар? Чи велося спостереження за фазами?"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1038
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1037
 msgid "Planets:"
 msgstr "Планети:"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1039
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1038
 msgid ""
 "Were the planets deified? What deities connect, what meaning do they have?"
 msgstr ""
 "Чи обожествлялися планети? З якими богами їх було пов'язано, яким було їхнє "
 "значення?"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1040
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1039
 msgid "Zodiac / Lunar System:"
 msgstr "Зодіакальна/Місячна система:"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1041
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1040
 msgid ""
 "Did they have the (Bab.) zodiac system or any other division of the \"path "
 "of the Moon\"? If so, was it a (equal or unequal) division of the ecliptic "
@@ -33610,19 +33604,19 @@ msgstr ""
 "Місяця»? Якщо так, то чи був це (рівномірний чи нерівномірний) поділ "
 "екліптики чи якогось іншого типу?"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1042
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1041
 msgid "Milky Way:"
 msgstr "Чумацький Шлях:"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1043
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1042
 msgid "Was the Milky Way deified? What meaning did it have?"
 msgstr "Чи обожествлявся Чумацький Шлях? Яким було його значення?"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1044
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1043
 msgid "Other Celestial Objects:"
 msgstr "Інші небесні об'єкти:"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1045
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1044
 msgid ""
 "What other celestial objects were significant? E.g what about shooting "
 "stars, aurorae? Did they observe stellar transients, e.g. supernovae, that "
@@ -33632,19 +33626,19 @@ msgstr ""
 "полярних сяйв? Чи спостерігали вони перехідні зоряні явища, наприклад, "
 "наднові, які були видимі лише в певний рік?"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1046
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1045
 msgid "Credits and References"
 msgstr "Подяки і посилання"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1047
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1046
 msgid "References:*"
 msgstr "Посилання:*"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1052
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1051
 msgid "Authors:*"
 msgstr "Автори:*"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1053
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1052
 msgid ""
 "Who are you and what is your background (native person, researcher, ...)? "
 "Ideally, please provide an email-address as well."
@@ -33652,11 +33646,11 @@ msgstr ""
 "Хто ви і який у вас досвід (носій мови, дослідник тощо)? В ідеалі, будь "
 "ласка, також надайте адресу електронної пошти."
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1054
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1053
 msgid "About the sky culture:*"
 msgstr "Про картину зоряного неба:*"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1055
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1054
 msgid ""
 "How do you know about this Sky Culture? Is this contribution based on your "
 "own or other people's research? Is it based on interviews with Elders or "
@@ -33666,11 +33660,11 @@ msgstr ""
 " власних дослідженнях чи дослідженнях інших людей? Його засновано на "
 "інтерв'ю зі старійшинами, читанні стародавніх текстів тощо?"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1056
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1055
 msgid "Acknowledgements:"
 msgstr "Подяки:"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1057
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1056
 msgid ""
 "What acknowledgements would you like to make? E.g. to interviewed people, "
 "organizations, or resources that helped you?"
@@ -33678,174 +33672,174 @@ msgstr ""
 "Яку подяку ви хотіли б висловити? Наприклад, подякувати людям, організаціям "
 "чи ресурсам, у яких ви брали інтерв'ю, які вам допомогли?"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1059
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1058
 msgid "Name Entries:"
 msgstr "Записи назв:"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1063
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1062
 msgid "English"
 msgstr "Англійською"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1065
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1064
 msgid "Native"
 msgstr "Рідною мовою"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1067
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1066
 msgid "Pronounce"
 msgstr "Вимова"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1068
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1067
 msgid "Entry Fields"
 msgstr "Поля запису"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1069
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1068
 msgid "Type:*"
 msgstr "Тип:*"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1070
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1069
 msgid "Star"
 msgstr "Зірка"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1072
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1071
 msgid "Deep-Sky Object"
 msgstr "Віддалений об’єкт"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1074
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1073
 msgid "Identifier:*"
 msgstr "Ідентифікатор:*"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1075
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1074
 msgid "HIP number (e.g. 1234)"
 msgstr "Номер у HIP (приклад: 1234)"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1076
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1075
 msgid "Copy Data From Selected Object"
 msgstr "Копіювати дані з позначеного об'єкта"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1078
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1077
 msgid ""
 "Fill Type, Identifier and English name from the currently selected object"
 msgstr ""
 "Заповнити поля типу, ідентифікатора та назви англійською на основі "
 "позначеного об'єкта"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1080
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1079
 msgid "English:*"
 msgstr "Англійською:*"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1081
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1080
 msgid "Name translated to English"
 msgstr "Назва, перекладена англійською"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1082
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1081
 msgid "Native:"
 msgstr "Рідною мовою:"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1083
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1082
 msgid "Name in the original language"
 msgstr "Назва початковою мовою"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1084
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1083
 msgid "Pronounce:"
 msgstr "Вимова:"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1085
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1084
 msgid "Latin-character pronunciation guide (e.g. Pinyin)"
 msgstr "Підказка щодо вимови символами латинки (наприклад, піньїн)"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1087
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1086
 msgid "Scientific transliteration (e.g. Wylie for Tibetan)"
 msgstr "Наукова транслітерація (наприклад, Вайлі для тибетської)"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1091
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1090
 msgid "Explanatory addition to the name (e.g. mythological role)"
 msgstr "Пояснювальний додаток назви (наприклад, роль у міфології)"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1092
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1091
 msgid "References:"
 msgstr "Посилання:"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1093
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1092
 msgid "Comma-separated reference numbers (e.g. 1, 3, 5)"
 msgstr "Список номерів посилань, відокремлених комами (наприклад, 1, 3, 5)"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1094
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1093
 msgid "Visible (planets only):"
 msgstr "Видимість (лише планети):"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1095
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1094
 msgid "Always visible"
 msgstr "Завжди видимий"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1096
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1095
 msgid "Morning only"
 msgstr "Лише вранці"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1097
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1096
 msgid "Evening only"
 msgstr "Лише увечері"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1099
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1098
 msgid "Save As New Entry"
 msgstr "Зберегти як новий запис"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1101
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1100
 msgid "Add the current form as a new entry"
 msgstr "Додати поточну форму як новий запис"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1103
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1102
 msgid "Update Selected Entry"
 msgstr "Оновити позначений запис"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1105
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1104
 msgid "Save the edited fields back to the selected entry"
 msgstr "Зберегти вміст редагованих полів до позначеного запису"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1107
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1106
 msgid "Remove Selected Entry"
 msgstr "Вилучити позначений запис"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1108
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1107
 msgid "Common Names"
 msgstr "Загальні назви"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1109
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1108
 msgid "Start Time"
 msgstr "Час початку"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1110
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1109
 msgid "End Time"
 msgstr "Час завершення"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1113
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1112
 msgid "Number of digitized polygons:"
 msgstr "Кількість оцифрованих багатокутників:"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1114
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1113
 msgid "0"
 msgstr "0"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1115
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1114
 msgid "Start time of the culture:"
 msgstr "Початковий час картини:"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1117
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1116
 msgid "End time of the culture:"
 msgstr "Кінцевий час картини:"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1119
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1118
 msgid "Delete selected polygon"
 msgstr "Вилучити позначений багатокутник"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1121
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1120
 msgid "Vertex count"
 msgstr "Кількість вершин"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1122
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1121
 msgid "End time"
 msgstr "Кінцевий час"
 
-#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1123
+#: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1122
 msgid "Start time"
 msgstr "Початковий час"
 
@@ -40342,41 +40336,58 @@ msgstr "Політ"
 msgid "Model"
 msgstr "Модель"
 
+#. TRANSLATORS: Unit of measure for distance - nautical miles
+#: plugins/Planes/src/AircraftObject.cpp:207
+#: plugins/Planes/src/gui/PlanesDialog.cpp:71
+msgctxt "distance"
+msgid "NM"
+msgstr "ММ"
+
 #. TRANSLATORS: Unit of measure for distance - feets
-#: plugins/Planes/src/AircraftObject.cpp:205
+#: plugins/Planes/src/AircraftObject.cpp:209
 msgctxt "distance"
 msgid "ft"
 msgstr "фт"
 
 #. TRANSLATORS: Unit of measure for speed - knots
-#: plugins/Planes/src/AircraftObject.cpp:209
+#: plugins/Planes/src/AircraftObject.cpp:213
 msgctxt "speed"
 msgid "kt"
 msgstr "в"
 
 #. TRANSLATORS: Unit of measure for speed - feets per minute
-#: plugins/Planes/src/AircraftObject.cpp:211
+#: plugins/Planes/src/AircraftObject.cpp:215
 msgctxt "speed"
 msgid "ft/min"
 msgstr "фт/хв"
 
-#: plugins/Planes/src/AircraftObject.cpp:233
-#: plugins/Planes/src/AircraftObject.cpp:242
+#: plugins/Planes/src/AircraftObject.cpp:248
+#: plugins/Planes/src/AircraftObject.cpp:259
+msgid "Slant Range"
+msgstr "Похила віддаль"
+
+#: plugins/Planes/src/AircraftObject.cpp:249
+#: plugins/Planes/src/AircraftObject.cpp:260
+msgid "Ground Range"
+msgstr "Віддаль на землі"
+
+#: plugins/Planes/src/AircraftObject.cpp:250
+#: plugins/Planes/src/AircraftObject.cpp:261
 msgid "Ground speed"
 msgstr "Швидкість на землі"
 
-#: plugins/Planes/src/AircraftObject.cpp:234
-#: plugins/Planes/src/AircraftObject.cpp:243
+#: plugins/Planes/src/AircraftObject.cpp:251
+#: plugins/Planes/src/AircraftObject.cpp:262
 msgid "Vertical rate"
 msgstr "Вертикальна швидкість"
 
-#: plugins/Planes/src/AircraftObject.cpp:235
-#: plugins/Planes/src/AircraftObject.cpp:244
+#: plugins/Planes/src/AircraftObject.cpp:252
+#: plugins/Planes/src/AircraftObject.cpp:263
 msgid "Track"
 msgstr "Маршрут"
 
-#: plugins/Planes/src/AircraftObject.cpp:236
-#: plugins/Planes/src/AircraftObject.cpp:245
+#: plugins/Planes/src/AircraftObject.cpp:253
+#: plugins/Planes/src/AircraftObject.cpp:264
 msgid "Data age"
 msgstr "Вік даних"
 
@@ -40404,12 +40415,6 @@ msgstr "Номер польоту"
 #: plugins/Planes/src/gui/PlanesDialog.cpp:62
 msgid "Aircraft model"
 msgstr "Модель літального апарата"
-
-#. TRANSLATORS: Unit of measure for distance - nautical miles
-#: plugins/Planes/src/gui/PlanesDialog.cpp:71
-msgctxt "distance"
-msgid "NM"
-msgstr "ММ"
 
 #: plugins/Planes/src/gui/PlanesDialog.cpp:245
 msgid "Planes Plug-in"
