@@ -1,0 +1,2146 @@
+[
+    {
+        "name": "getFlagPlanets",
+        "category": "Solar System - Core",
+        "signature": "bool getFlagPlanets()",
+        "description": "Returns whether planets and other solar system bodies are currently displayed.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "`true` if planets are visible, `false` if hidden.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions."
+        },
+        "example": "if (SolarSystem.getFlagPlanets()) {\n    core.debug(\"Planets are visible\");\n} else {\n    SolarSystem.setFlagPlanets(true);\n}"
+    },
+    {
+        "name": "setFlagPlanets",
+        "category": "Solar System - Core",
+        "signature": "setFlagPlanets(bool visible)",
+        "description": "Shows or hides all planets and solar system bodies (Sun, Moon, planets, asteroids, comets).",
+        "parameters": [
+            {
+                "name": "visible",
+                "type": "bool",
+                "description": "`true` to show planets, `false` to hide them.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions."
+        },
+        "example": "// Hide all planets\nSolarSystem.setFlagPlanets(false);\n\n// Show all planets\nSolarSystem.setFlagPlanets(true);"
+    },
+    {
+        "name": "getFlagHints",
+        "category": "Solar System - Core",
+        "signature": "bool getFlagHints()",
+        "description": "Returns whether planet hints (symbol markers around planets) are displayed.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "`true` if hints are visible.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions."
+        },
+        "example": "if (SolarSystem.getFlagHints()) {\n    core.debug(\"Planet hints are visible\");\n}"
+    },
+    {
+        "name": "setFlagHints",
+        "category": "Solar System - Core",
+        "signature": "setFlagHints(bool visible)",
+        "description": "Shows or hides planet hints (circle markers around planets). Useful for locating planets when they are small.",
+        "parameters": [
+            {
+                "name": "visible",
+                "type": "bool",
+                "description": "`true` to show hints, `false` to hide.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions."
+        },
+        "example": "// Show planet hints\nSolarSystem.setFlagHints(true);"
+    },
+    {
+        "name": "getFlagLabels",
+        "category": "Solar System - Core",
+        "signature": "bool getFlagLabels()",
+        "description": "Returns whether planet labels (names) are displayed.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "`true` if labels are visible.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions."
+        },
+        "example": "if (SolarSystem.getFlagLabels()) {\n    core.debug(\"Planet labels are visible\");\n}"
+    },
+    {
+        "name": "setFlagLabels",
+        "category": "Solar System - Core",
+        "signature": "setFlagLabels(bool visible)",
+        "description": "Shows or hides planet labels (names).",
+        "parameters": [
+            {
+                "name": "visible",
+                "type": "bool",
+                "description": "`true` to show labels, `false` to hide.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions."
+        },
+        "example": "// Show planet names\nSolarSystem.setFlagLabels(true);"
+    },
+    {
+        "name": "getLabelsAmount",
+        "category": "Solar System - Core",
+        "signature": "double getLabelsAmount()",
+        "description": "Returns the amount of planet labels displayed. Higher values show labels for fainter planets.",
+        "parameters": [],
+        "returnType": "double",
+        "returnDescription": "Labels amount (0.0 to 10.0).",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions."
+        },
+        "example": "var labelsAmount = SolarSystem.getLabelsAmount();\ncore.debug(\"Planet labels amount: \" + labelsAmount);"
+    },
+    {
+        "name": "setLabelsAmount",
+        "category": "Solar System - Core",
+        "signature": "setLabelsAmount(double amount)",
+        "description": "Sets the amount of planet labels displayed. `0` = no labels, `10` = maximum labels (shows labels for faintest planets).",
+        "parameters": [
+            {
+                "name": "amount",
+                "type": "double",
+                "description": "Labels amount (0.0 to 10.0). The default value is 3.0.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions."
+        },
+        "example": "// Show labels for bright planets only\nSolarSystem.setLabelsAmount(2.0);\n\n// Show labels for all planets\nSolarSystem.setLabelsAmount(8.0);"
+    },
+    {
+        "name": "getFlagOrbits",
+        "category": "Solar System - Core",
+        "signature": "bool getFlagOrbits()",
+        "description": "Returns whether planet orbits are displayed.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "`true` if orbits are visible.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions."
+        },
+        "example": "if (SolarSystem.getFlagOrbits()) {\n    core.debug(\"Planet orbits are visible\");\n}"
+    },
+    {
+        "name": "setFlagOrbits",
+        "category": "Solar System - Core",
+        "signature": "setFlagOrbits(bool visible)",
+        "description": "Shows or hides planet orbits.",
+        "parameters": [
+            {
+                "name": "visible",
+                "type": "bool",
+                "description": "`true` to show orbits, `false` to hide.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions."
+        },
+        "example": "// Show planet orbits\nSolarSystem.setFlagOrbits(true);"
+    },
+    {
+        "name": "getFlagTrails",
+        "category": "Solar System - Core",
+        "signature": "bool getFlagTrails()",
+        "description": "Returns whether planet trails (paths traced over time) are displayed.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "`true` if trails are visible.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions."
+        },
+        "example": "if (SolarSystem.getFlagTrails()) {\n    core.debug(\"Planet trails are visible\");\n}"
+    },
+    {
+        "name": "setFlagTrails",
+        "category": "Solar System - Core",
+        "signature": "setFlagTrails(bool visible)",
+        "description": "Shows or hides planet trails (the path planets have traveled over time). Useful for visualizing planetary motion.",
+        "parameters": [
+            {
+                "name": "visible",
+                "type": "bool",
+                "description": "`true` to show trails, `false` to hide.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions."
+        },
+        "example": "// Show planet motion trails\nSolarSystem.setFlagTrails(true);"
+    },
+    {
+        "name": "getFlagPointer",
+        "category": "Solar System - Core",
+        "signature": "bool getFlagPointer()",
+        "description": "Returns whether the selection pointer (animated ring) is displayed around selected planets.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "`true` if pointer is visible.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions."
+        },
+        "example": "if (SolarSystem.getFlagPointer()) {\n    core.debug(\"Selection pointer is visible\");\n}"
+    },
+    {
+        "name": "setFlagPointer",
+        "category": "Solar System - Core",
+        "signature": "setFlagPointer(bool visible)",
+        "description": "Shows or hides the selection pointer (animated ring) around selected planets.",
+        "parameters": [
+            {
+                "name": "visible",
+                "type": "bool",
+                "description": "`true` to show pointer, `false` to hide.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions."
+        },
+        "example": "// Enable selection pointer\nSolarSystem.setFlagPointer(true);"
+    },
+    {
+        "name": "getFlagMarkers",
+        "category": "Solar System - Core",
+        "signature": "bool getFlagMarkers()",
+        "description": "Returns whether markers for minor bodies (asteroids, comets) are displayed as small dots.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "`true` if minor body markers are visible.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Works on all Stellarium versions."
+        },
+        "example": "if (SolarSystem.getFlagMarkers()) {\n    core.debug(\"Minor body markers are visible\");\n}"
+    },
+    {
+        "name": "setFlagMarkers",
+        "category": "Solar System - Core",
+        "signature": "setFlagMarkers(bool visible)",
+        "description": "Shows or hides markers for minor bodies (asteroids, comets, Kuiper belt objects) as small dots.",
+        "parameters": [
+            {
+                "name": "visible",
+                "type": "bool",
+                "description": "`true` to show markers, `false` to hide.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Works on all Stellarium versions."
+        },
+        "example": "// Show asteroid and comet markers\nSolarSystem.setFlagMarkers(true);"
+    },
+    {
+        "name": "getFlagLightTravelTime",
+        "category": "Solar System - Core",
+        "signature": "bool getFlagLightTravelTime()",
+        "description": "Returns whether light travel time correction is applied to planet positions (showing where planets actually are vs where they appear due to light speed).",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "`true` if light travel time is applied.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions."
+        },
+        "example": "if (SolarSystem.getFlagLightTravelTime()) {\n    core.debug(\"Light travel time correction is active\");\n}"
+    },
+    {
+        "name": "setFlagLightTravelTime",
+        "category": "Solar System - Core",
+        "signature": "setFlagLightTravelTime(bool enabled)",
+        "description": "Enables or disables light travel time correction for planet positions. When enabled, planets are shown at their light-travel-time corrected positions.",
+        "parameters": [
+            {
+                "name": "enabled",
+                "type": "bool",
+                "description": "`true` to enable light travel time correction.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions."
+        },
+        "example": "// Enable realistic light travel time\nSolarSystem.setFlagLightTravelTime(true);"
+    },
+    {
+        "name": "recreateTrails",
+        "category": "Solar System - Utilities",
+        "signature": "recreateTrails()",
+        "description": "Resets and recreates all planet trails. Useful after changing trail settings or clearing accumulated trail data.",
+        "parameters": [],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions."
+        },
+        "example": "// Reset trails to start fresh\nSolarSystem.recreateTrails();\ncore.debug(\"Trails recreated\");"
+    },
+    {
+        "name": "reloadPlanets",
+        "category": "Solar System - Utilities",
+        "signature": "reloadPlanets()",
+        "description": "Reloads all solar system data from configuration files. Useful after editing planet data or adding new minor bodies.",
+        "parameters": [],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "Works on all Stellarium versions."
+        },
+        "example": "// After editing ssystem_minor.ini\nSolarSystem.reloadPlanets();\ncore.debug(\"Solar system data reloaded\");"
+    },
+    {
+        "name": "resetTextures",
+        "category": "Solar System - Utilities",
+        "signature": "resetTextures(QString planetName)",
+        "description": "Resets textures for a specific planet, or all planets if the name is empty. Useful after texture updates.",
+        "parameters": [
+            {
+                "name": "planetName",
+                "type": "QString",
+                "description": "English name of the planet, or an empty string for all.",
+                "required": false,
+                "default": "\"\""
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "Works on all Stellarium versions."
+        },
+        "example": "// Reset Mars texture\nSolarSystem.resetTextures(\"Mars\");\n\n// Reset all planet textures\nSolarSystem.resetTextures();"
+    },
+    {
+        "name": "setTextureForPlanet",
+        "category": "Solar System - Utilities",
+        "signature": "setTextureForPlanet(QString planetName, QString texturePath)",
+        "description": "Replaces the texture of a planet with a custom image. The texture path is relative to the `scripts/` directory.",
+        "parameters": [
+            {
+                "name": "planetName",
+                "type": "QString",
+                "description": "English name of the planet.",
+                "required": true
+            },
+            {
+                "name": "texturePath",
+                "type": "QString",
+                "description": "Path to the texture file (placed in the `scripts/` folder).",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "Works on all Stellarium versions."
+        },
+        "example": "// Replace Mars texture with custom image\nSolarSystem.setTextureForPlanet(\"Mars\", \"mars_custom.png\");"
+    },
+    {
+        "name": "getFlagMoonScale",
+        "category": "Solar System - Scaling",
+        "signature": "bool getFlagMoonScale()",
+        "description": "Returns whether the Moon is displayed with an enlarged scale.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "`true` if Moon scaling is enabled.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions."
+        },
+        "example": "if (SolarSystem.getFlagMoonScale()) {\n    core.debug(\"Moon is enlarged\");\n}"
+    },
+    {
+        "name": "setFlagMoonScale",
+        "category": "Solar System - Scaling",
+        "signature": "setFlagMoonScale(bool enable)",
+        "description": "Enables or disables scaling of the Moon.",
+        "parameters": [
+            {
+                "name": "enable",
+                "type": "bool",
+                "description": "`true` to enable Moon scaling, `false` to use real size.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions."
+        },
+        "example": "// Enlarge the Moon for better visibility\nSolarSystem.setFlagMoonScale(true);\nSolarSystem.setMoonScale(4.0);"
+    },
+    {
+        "name": "getMoonScale",
+        "category": "Solar System - Scaling",
+        "signature": "double getMoonScale()",
+        "description": "Returns the current scaling factor for the Moon. `1.0` = real size, higher values make the Moon appear larger.",
+        "parameters": [],
+        "returnType": "double",
+        "returnDescription": "Moon scale factor.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions."
+        },
+        "example": "var moonScale = SolarSystem.getMoonScale();\ncore.debug(\"Moon scale: \" + moonScale);"
+    },
+    {
+        "name": "setMoonScale",
+        "category": "Solar System - Scaling",
+        "signature": "setMoonScale(double scale)",
+        "description": "Sets the scaling factor for the Moon. Only effective when `flagMoonScale` is `true`.",
+        "parameters": [
+            {
+                "name": "scale",
+                "type": "double",
+                "description": "Scale factor (e.g., 4.0 to make it 4 times larger).",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions."
+        },
+        "example": "// Make Moon 4 times larger\nSolarSystem.setMoonScale(4.0);\nSolarSystem.setFlagMoonScale(true);"
+    },
+    {
+        "name": "getFlagMinorBodyScale",
+        "category": "Solar System - Scaling",
+        "signature": "bool getFlagMinorBodyScale()",
+        "description": "Returns whether minor bodies (asteroids, comets, Kuiper belt objects) are displayed with an enlarged scale.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "`true` if minor body scaling is enabled.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Works on all Stellarium versions."
+        },
+        "example": "if (SolarSystem.getFlagMinorBodyScale()) {\n    core.debug(\"Minor bodies are enlarged\");\n}"
+    },
+    {
+        "name": "setFlagMinorBodyScale",
+        "category": "Solar System - Scaling",
+        "signature": "setFlagMinorBodyScale(bool enable)",
+        "description": "Enables or disables scaling of minor bodies (asteroids, comets, etc.).",
+        "parameters": [
+            {
+                "name": "enable",
+                "type": "bool",
+                "description": "`true` to enable minor body scaling.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Works on all Stellarium versions."
+        },
+        "example": "// Enlarge minor bodies for visibility\nSolarSystem.setFlagMinorBodyScale(true);\nSolarSystem.setMinorBodyScale(10.0);"
+    },
+    {
+        "name": "getMinorBodyScale",
+        "category": "Solar System - Scaling",
+        "signature": "double getMinorBodyScale()",
+        "description": "Returns the current scaling factor for minor bodies (asteroids, comets, etc.).",
+        "parameters": [],
+        "returnType": "double",
+        "returnDescription": "Minor body scale factor.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Works on all Stellarium versions."
+        },
+        "example": "var minorScale = SolarSystem.getMinorBodyScale();\ncore.debug(\"Minor body scale: \" + minorScale);"
+    },
+    {
+        "name": "setMinorBodyScale",
+        "category": "Solar System - Scaling",
+        "signature": "setMinorBodyScale(double scale)",
+        "description": "Sets the scaling factor for minor bodies. Only effective when `flagMinorBodyScale` is `true`.",
+        "parameters": [
+            {
+                "name": "scale",
+                "type": "double",
+                "description": "Scale factor (e.g., 10.0 to make them 10 times larger).",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Works on all Stellarium versions."
+        },
+        "example": "// Make asteroids 10 times larger\nSolarSystem.setMinorBodyScale(10.0);\nSolarSystem.setFlagMinorBodyScale(true);"
+    },
+    {
+        "name": "getFlagPlanetScale",
+        "category": "Solar System - Scaling",
+        "signature": "bool getFlagPlanetScale()",
+        "description": "Returns whether planets (excluding the Sun and Moon) are displayed with an enlarged scale.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "`true` if planet scaling is enabled.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Works on all Stellarium versions."
+        },
+        "example": "if (SolarSystem.getFlagPlanetScale()) {\n    core.debug(\"Planets are enlarged\");\n}"
+    },
+    {
+        "name": "setFlagPlanetScale",
+        "category": "Solar System - Scaling",
+        "signature": "setFlagPlanetScale(bool enable)",
+        "description": "Enables or disables scaling of planets (Mercury through Neptune).",
+        "parameters": [
+            {
+                "name": "enable",
+                "type": "bool",
+                "description": "`true` to enable planet scaling.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Works on all Stellarium versions."
+        },
+        "example": "// Enlarge planets for visibility\nSolarSystem.setFlagPlanetScale(true);\nSolarSystem.setPlanetScale(150.0);"
+    },
+    {
+        "name": "getPlanetScale",
+        "category": "Solar System - Scaling",
+        "signature": "double getPlanetScale()",
+        "description": "Returns the current scaling factor for planets.",
+        "parameters": [],
+        "returnType": "double",
+        "returnDescription": "Planet scale factor.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Works on all Stellarium versions."
+        },
+        "example": "var planetScale = SolarSystem.getPlanetScale();\ncore.debug(\"Planet scale: \" + planetScale);"
+    },
+    {
+        "name": "setPlanetScale",
+        "category": "Solar System - Scaling",
+        "signature": "setPlanetScale(double scale)",
+        "description": "Sets the scaling factor for planets. Only effective when `flagPlanetScale` is `true`.",
+        "parameters": [
+            {
+                "name": "scale",
+                "type": "double",
+                "description": "Scale factor (e.g., 150.0).",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Works on all Stellarium versions."
+        },
+        "example": "SolarSystem.setPlanetScale(200.0);\nSolarSystem.setFlagPlanetScale(true);"
+    },
+    {
+        "name": "getFlagSunScale",
+        "category": "Solar System - Scaling",
+        "signature": "bool getFlagSunScale()",
+        "description": "Returns whether the Sun is displayed with an enlarged scale.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "`true` if Sun scaling is enabled.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Works on all Stellarium versions."
+        },
+        "example": "if (SolarSystem.getFlagSunScale()) {\n    core.debug(\"Sun is enlarged\");\n}"
+    },
+    {
+        "name": "setFlagSunScale",
+        "category": "Solar System - Scaling",
+        "signature": "setFlagSunScale(bool enable)",
+        "description": "Enables or disables scaling of the Sun.",
+        "parameters": [
+            {
+                "name": "enable",
+                "type": "bool",
+                "description": "`true` to enable Sun scaling.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Works on all Stellarium versions."
+        },
+        "example": "// Enlarge the Sun\nSolarSystem.setFlagSunScale(true);\nSolarSystem.setSunScale(4.0);"
+    },
+    {
+        "name": "getSunScale",
+        "category": "Solar System - Scaling",
+        "signature": "double getSunScale()",
+        "description": "Returns the current scaling factor for the Sun.",
+        "parameters": [],
+        "returnType": "double",
+        "returnDescription": "Sun scale factor.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Works on all Stellarium versions."
+        },
+        "example": "var sunScale = SolarSystem.getSunScale();\ncore.debug(\"Sun scale: \" + sunScale);"
+    },
+    {
+        "name": "setSunScale",
+        "category": "Solar System - Scaling",
+        "signature": "setSunScale(double scale)",
+        "description": "Sets the scaling factor for the Sun. Only effective when `flagSunScale` is `true`.",
+        "parameters": [
+            {
+                "name": "scale",
+                "type": "double",
+                "description": "Scale factor (e.g., 5.0).",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "Works on all Stellarium versions."
+        },
+        "example": "SolarSystem.setSunScale(5.0);"
+    },
+    {
+        "name": "getFlagDrawMoonHalo",
+        "category": "Solar System - Core",
+        "signature": "bool getFlagDrawMoonHalo()",
+        "description": "Returns whether the Moon's halo (glow around the Moon) is drawn when the Moon is near the Sun.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "`true` if Moon halo is drawn.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions."
+        },
+        "example": "if (SolarSystem.getFlagDrawMoonHalo()) {\n    core.debug(\"Moon halo is visible\");\n}"
+    },
+    {
+        "name": "setFlagDrawMoonHalo",
+        "category": "Solar System - Core",
+        "signature": "setFlagDrawMoonHalo(bool draw)",
+        "description": "Shows or hides the Moon's halo effect. The halo helps locate the Moon when it is close to the Sun.",
+        "parameters": [
+            {
+                "name": "draw",
+                "type": "bool",
+                "description": "`true` to draw Moon halo, `false` to hide.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions."
+        },
+        "example": "// Enable Moon halo\nSolarSystem.setFlagDrawMoonHalo(true);"
+    },
+    {
+        "name": "getFlagDrawSunHalo",
+        "category": "Solar System - Core",
+        "signature": "bool getFlagDrawSunHalo()",
+        "description": "Returns whether the Sun's halo (glow around the Sun) is drawn.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "`true` if Sun halo is drawn.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions."
+        },
+        "example": "if (SolarSystem.getFlagDrawSunHalo()) {\n    core.debug(\"Sun halo is visible\");\n}"
+    },
+    {
+        "name": "setFlagDrawSunHalo",
+        "category": "Solar System - Core",
+        "signature": "setFlagDrawSunHalo(bool draw)",
+        "description": "Shows or hides the Sun's halo effect.",
+        "parameters": [
+            {
+                "name": "draw",
+                "type": "bool",
+                "description": "`true` to draw Sun halo, `false` to hide.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions."
+        },
+        "example": "SolarSystem.setFlagDrawSunHalo(true);"
+    },
+    {
+        "name": "getFlagIsolatedTrails",
+        "category": "Solar System - Core",
+        "signature": "bool getFlagIsolatedTrails()",
+        "description": "Returns whether trails are shown only for selected objects rather than all planets.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "`true` if only selected objects show trails.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "Works on all Stellarium versions."
+        },
+        "example": "if (SolarSystem.getFlagIsolatedTrails()) {\n    core.debug(\"Only selected objects show trails\");\n}"
+    },
+    {
+        "name": "setFlagIsolatedTrails",
+        "category": "Solar System - Core",
+        "signature": "setFlagIsolatedTrails(bool isolated)",
+        "description": "Sets whether trails should be shown only for selected objects (isolated) or for all planets.",
+        "parameters": [
+            {
+                "name": "isolated",
+                "type": "bool",
+                "description": "`true` to show trails only for selected objects.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "Works on all Stellarium versions."
+        },
+        "example": "// Show trails only for selected planets\nSolarSystem.setFlagIsolatedTrails(true);"
+    },
+    {
+        "name": "getNumberIsolatedTrails",
+        "category": "Solar System - Core",
+        "signature": "int getNumberIsolatedTrails()",
+        "description": "Returns the number of recently selected objects for which isolated trails are shown.",
+        "parameters": [],
+        "returnType": "int",
+        "returnDescription": "Number of isolated trails (1 to 5).",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "Works on all Stellarium versions."
+        },
+        "example": "var numTrails = SolarSystem.getNumberIsolatedTrails();\ncore.debug(\"Number of isolated trails: \" + numTrails);"
+    },
+    {
+        "name": "setNumberIsolatedTrails",
+        "category": "Solar System - Core",
+        "signature": "setNumberIsolatedTrails(int count)",
+        "description": "Sets the number of recently selected objects for which isolated trails are shown (1 to 5).",
+        "parameters": [
+            {
+                "name": "count",
+                "type": "int",
+                "description": "Number of trails (1 to 5).",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "Works on all Stellarium versions."
+        },
+        "example": "// Show trails for last 3 selected objects\nSolarSystem.setNumberIsolatedTrails(3);"
+    },
+    {
+        "name": "getFlagIsolatedOrbits",
+        "category": "Solar System - Core",
+        "signature": "bool getFlagIsolatedOrbits()",
+        "description": "Returns whether orbits are shown only for selected objects rather than all planets.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "`true` if only selected objects show orbits.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "Works on all Stellarium versions."
+        },
+        "example": "if (SolarSystem.getFlagIsolatedOrbits()) {\n    core.debug(\"Only selected objects show orbits\");\n}"
+    },
+    {
+        "name": "setFlagIsolatedOrbits",
+        "category": "Solar System - Core",
+        "signature": "setFlagIsolatedOrbits(bool isolated)",
+        "description": "Sets whether orbits should be shown only for selected objects (isolated) or for all planets.",
+        "parameters": [
+            {
+                "name": "isolated",
+                "type": "bool",
+                "description": "`true` to show orbits only for selected objects.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "Works on all Stellarium versions."
+        },
+        "example": "// Show orbit only for selected planet\nSolarSystem.setFlagIsolatedOrbits(true);"
+    },
+    {
+        "name": "getFlagPlanetsOrbits",
+        "category": "Solar System - Core",
+        "signature": "bool getFlagPlanetsOrbits()",
+        "description": "Returns whether orbits of the major planets are displayed, regardless of other orbit settings.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "`true` if major planet orbits are visible.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "Works on all Stellarium versions."
+        },
+        "example": "if (SolarSystem.getFlagPlanetsOrbits()) {\n    core.debug(\"Major planet orbits are visible\");\n}"
+    },
+    {
+        "name": "setFlagPlanetsOrbits",
+        "category": "Solar System - Core",
+        "signature": "setFlagPlanetsOrbits(bool visible)",
+        "description": "Sets whether orbits of the major planets should be displayed, even when isolated orbits mode is active.",
+        "parameters": [
+            {
+                "name": "visible",
+                "type": "bool",
+                "description": "`true` to show major planet orbits.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "Works on all Stellarium versions."
+        },
+        "example": "// Show all major planet orbits\nSolarSystem.setFlagPlanetsOrbits(true);"
+    },
+    {
+        "name": "getFlagPlanetsOrbitsOnly",
+        "category": "Solar System - Core",
+        "signature": "bool getFlagPlanetsOrbitsOnly()",
+        "description": "Returns whether only major planets show orbits (excluding minor bodies).",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "`true` if only major planets show orbits.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "Works on all Stellarium versions."
+        },
+        "example": "if (SolarSystem.getFlagPlanetsOrbitsOnly()) {\n    core.debug(\"Only major planets show orbits\");\n}"
+    },
+    {
+        "name": "setFlagPlanetsOrbitsOnly",
+        "category": "Solar System - Core",
+        "signature": "setFlagPlanetsOrbitsOnly(bool onlyMajor)",
+        "description": "Sets whether only major planets should show orbits (excluding asteroids, comets, etc.).",
+        "parameters": [
+            {
+                "name": "onlyMajor",
+                "type": "bool",
+                "description": "`true` to show orbits only for major planets.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "Works on all Stellarium versions."
+        },
+        "example": "// Show orbits only for major planets\nSolarSystem.setFlagPlanetsOrbitsOnly(true);"
+    },
+    {
+        "name": "getFlagOrbitsWithMoons",
+        "category": "Solar System - Core",
+        "signature": "bool getFlagOrbitsWithMoons()",
+        "description": "Returns whether moon orbits are displayed alongside planet orbits.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "`true` if moon orbits are visible.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "Works on all Stellarium versions."
+        },
+        "example": "if (SolarSystem.getFlagOrbitsWithMoons()) {\n    core.debug(\"Moon orbits are visible\");\n}"
+    },
+    {
+        "name": "setFlagOrbitsWithMoons",
+        "category": "Solar System - Core",
+        "signature": "setFlagOrbitsWithMoons(bool showMoons)",
+        "description": "Sets whether moon orbits should be displayed when planet orbits are shown.",
+        "parameters": [
+            {
+                "name": "showMoons",
+                "type": "bool",
+                "description": "`true` to show moon orbits.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "Works on all Stellarium versions."
+        },
+        "example": "// Show planet and moon orbits\nSolarSystem.setFlagOrbitsWithMoons(true);\nSolarSystem.setFlagOrbits(true);"
+    },
+    {
+        "name": "getFlagEphemerisMarkers",
+        "category": "Solar System - Ephemeris",
+        "signature": "bool getFlagEphemerisMarkers()",
+        "description": "Returns whether ephemeris markers are displayed. Ephemeris markers show predicted positions of planets at future dates.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "`true` if ephemeris markers are visible.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "Works on all Stellarium versions."
+        },
+        "example": "if (SolarSystem.getFlagEphemerisMarkers()) {\n    core.debug(\"Ephemeris markers are visible\");\n}"
+    },
+    {
+        "name": "setFlagEphemerisMarkers",
+        "category": "Solar System - Ephemeris",
+        "signature": "setFlagEphemerisMarkers(bool show)",
+        "description": "Shows or hides ephemeris markers (predicted future positions of planets).",
+        "parameters": [
+            {
+                "name": "show",
+                "type": "bool",
+                "description": "`true` to show ephemeris markers.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "Works on all Stellarium versions."
+        },
+        "example": "// Show planet position predictions\nSolarSystem.setFlagEphemerisMarkers(true);\nSolarSystem.setFlagEphemerisLine(true);"
+    },
+    {
+        "name": "getFlagEphemerisLine",
+        "category": "Solar System - Ephemeris",
+        "signature": "bool getFlagEphemerisLine()",
+        "description": "Returns whether a line connecting ephemeris markers is displayed.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "`true` if ephemeris line is visible.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "Works on all Stellarium versions."
+        },
+        "example": "if (SolarSystem.getFlagEphemerisLine()) {\n    core.debug(\"Ephemeris path line is visible\");\n}"
+    },
+    {
+        "name": "setFlagEphemerisLine",
+        "category": "Solar System - Ephemeris",
+        "signature": "setFlagEphemerisLine(bool show)",
+        "description": "Shows or hides the line connecting ephemeris markers.",
+        "parameters": [
+            {
+                "name": "show",
+                "type": "bool",
+                "description": "`true` to show the ephemeris line.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "Works on all Stellarium versions."
+        },
+        "example": "SolarSystem.setFlagEphemerisLine(true);"
+    },
+    {
+        "name": "getFlagEphemerisDates",
+        "category": "Solar System - Ephemeris",
+        "signature": "bool getFlagEphemerisDates()",
+        "description": "Returns whether date labels are shown next to ephemeris markers.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "`true` if date labels are visible.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "Works on all Stellarium versions."
+        },
+        "example": "if (SolarSystem.getFlagEphemerisDates()) {\n    core.debug(\"Ephemeris dates are displayed\");\n}"
+    },
+    {
+        "name": "setFlagEphemerisDates",
+        "category": "Solar System - Ephemeris",
+        "signature": "setFlagEphemerisDates(bool show)",
+        "description": "Shows or hides date labels next to ephemeris markers.",
+        "parameters": [
+            {
+                "name": "show",
+                "type": "bool",
+                "description": "`true` to show dates.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "Works on all Stellarium versions."
+        },
+        "example": "SolarSystem.setFlagEphemerisDates(true);"
+    },
+    {
+        "name": "getFlagEphemerisMagnitudes",
+        "category": "Solar System - Ephemeris",
+        "signature": "bool getFlagEphemerisMagnitudes()",
+        "description": "Returns whether magnitude values are shown next to ephemeris markers.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "`true` if magnitude labels are visible.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.16.0",
+            "notes": "Works on all Stellarium versions."
+        },
+        "example": "if (SolarSystem.getFlagEphemerisMagnitudes()) {\n    core.debug(\"Ephemeris magnitudes are displayed\");\n}"
+    },
+    {
+        "name": "setFlagEphemerisMagnitudes",
+        "category": "Solar System - Ephemeris",
+        "signature": "setFlagEphemerisMagnitudes(bool show)",
+        "description": "Shows or hides magnitude values next to ephemeris markers.",
+        "parameters": [
+            {
+                "name": "show",
+                "type": "bool",
+                "description": "`true` to show magnitudes.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.16.0",
+            "notes": "Works on all Stellarium versions."
+        },
+        "example": "SolarSystem.setFlagEphemerisMagnitudes(true);"
+    },
+    {
+        "name": "getFlagEphemerisAlwaysOn",
+        "category": "Solar System - Ephemeris",
+        "signature": "bool getFlagEphemerisAlwaysOn()",
+        "description": "Returns whether ephemeris lines and markers are always displayed, even when planets are hidden.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "`true` if ephemeris are always visible.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "Works on all Stellarium versions."
+        },
+        "example": "if (SolarSystem.getFlagEphemerisAlwaysOn()) {\n    core.debug(\"Ephemeris markers always visible\");\n}"
+    },
+    {
+        "name": "setFlagEphemerisAlwaysOn",
+        "category": "Solar System - Ephemeris",
+        "signature": "setFlagEphemerisAlwaysOn(bool always)",
+        "description": "Sets whether ephemeris markers and lines are always displayed, regardless of planet visibility.",
+        "parameters": [
+            {
+                "name": "always",
+                "type": "bool",
+                "description": "`true` to always show ephemeris.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "Works on all Stellarium versions."
+        },
+        "example": "SolarSystem.setFlagEphemerisAlwaysOn(true);"
+    },
+    {
+        "name": "getFlagEphemerisNow",
+        "category": "Solar System - Ephemeris",
+        "signature": "bool getFlagEphemerisNow()",
+        "description": "Returns whether a special marker is shown at the current date position on the ephemeris path.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "`true` if 'now' marker is visible.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.16.0",
+            "notes": "Works on all Stellarium versions."
+        },
+        "example": "if (SolarSystem.getFlagEphemerisNow()) {\n    core.debug(\"Current position marker is visible\");\n}"
+    },
+    {
+        "name": "setFlagEphemerisNow",
+        "category": "Solar System - Ephemeris",
+        "signature": "setFlagEphemerisNow(bool show)",
+        "description": "Shows or hides a special marker at the current date position on the ephemeris path.",
+        "parameters": [
+            {
+                "name": "show",
+                "type": "bool",
+                "description": "`true` to show the 'now' marker.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.16.0",
+            "notes": "Works on all Stellarium versions."
+        },
+        "example": "SolarSystem.setFlagEphemerisNow(true);"
+    },
+    {
+        "name": "getFlagEphemerisHorizontalCoordinates",
+        "category": "Solar System - Ephemeris",
+        "signature": "bool getFlagEphemerisHorizontalCoordinates()",
+        "description": "Returns whether ephemeris markers are shown in horizontal coordinates (Alt/Az) instead of equatorial coordinates.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "`true` if using horizontal coordinates.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.16.0",
+            "notes": "Works on all Stellarium versions."
+        },
+        "example": "if (SolarSystem.getFlagEphemerisHorizontalCoordinates()) {\n    core.debug(\"Ephemeris in Alt/Az coordinates\");\n}"
+    },
+    {
+        "name": "setFlagEphemerisHorizontalCoordinates",
+        "category": "Solar System - Ephemeris",
+        "signature": "setFlagEphemerisHorizontalCoordinates(bool useHorizontal)",
+        "description": "Sets whether ephemeris markers are shown in horizontal coordinates (Alt/Az) or equatorial coordinates.",
+        "parameters": [
+            {
+                "name": "useHorizontal",
+                "type": "bool",
+                "description": "`true` for Alt/Az, `false` for equatorial.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.16.0",
+            "notes": "Works on all Stellarium versions."
+        },
+        "example": "// Show ephemeris in altitude/azimuth\nSolarSystem.setFlagEphemerisHorizontalCoordinates(true);"
+    },
+    {
+        "name": "getEphemerisLineThickness",
+        "category": "Solar System - Ephemeris",
+        "signature": "int getEphemerisLineThickness()",
+        "description": "Returns the thickness of the ephemeris line in pixels.",
+        "parameters": [],
+        "returnType": "int",
+        "returnDescription": "Line thickness in pixels.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "Works on all Stellarium versions."
+        },
+        "example": "var thickness = SolarSystem.getEphemerisLineThickness();\ncore.debug(\"Ephemeris line thickness: \" + thickness);"
+    },
+    {
+        "name": "setEphemerisLineThickness",
+        "category": "Solar System - Ephemeris",
+        "signature": "setEphemerisLineThickness(int thickness)",
+        "description": "Sets the thickness of the ephemeris line in pixels.",
+        "parameters": [
+            {
+                "name": "thickness",
+                "type": "int",
+                "description": "Line thickness in pixels (1 to 5).",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "Works on all Stellarium versions."
+        },
+        "example": "SolarSystem.setEphemerisLineThickness(2);"
+    },
+    {
+        "name": "getEphemerisDataStep",
+        "category": "Solar System - Ephemeris",
+        "signature": "int getEphemerisDataStep()",
+        "description": "Returns the step size for skipping ephemeris markers. Higher values show fewer markers.",
+        "parameters": [],
+        "returnType": "int",
+        "returnDescription": "Data step (1 = show all, 2 = show every other, etc.).",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "Works on all Stellarium versions."
+        },
+        "example": "var step = SolarSystem.getEphemerisDataStep();\ncore.debug(\"Ephemeris step: \" + step);"
+    },
+    {
+        "name": "setEphemerisDataStep",
+        "category": "Solar System - Ephemeris",
+        "signature": "setEphemerisDataStep(int step)",
+        "description": "Sets the step size for skipping ephemeris markers.",
+        "parameters": [
+            {
+                "name": "step",
+                "type": "int",
+                "description": "Step size (e.g., 5 to show every 5th marker).",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "Works on all Stellarium versions."
+        },
+        "example": "// Show every 5th ephemeris marker\nSolarSystem.setEphemerisDataStep(5);"
+    },
+    {
+        "name": "getFlagEphemerisSmartDates",
+        "category": "Solar System - Ephemeris",
+        "signature": "bool getFlagEphemerisSmartDates()",
+        "description": "Returns whether smart date formatting is used for ephemeris labels (showing only changed components).",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "`true` if smart dates are enabled.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "Works on all Stellarium versions."
+        },
+        "example": "if (SolarSystem.getFlagEphemerisSmartDates()) {\n    core.debug(\"Smart date formatting is active\");\n}"
+    },
+    {
+        "name": "setFlagEphemerisSmartDates",
+        "category": "Solar System - Ephemeris",
+        "signature": "setFlagEphemerisSmartDates(bool smart)",
+        "description": "Enables or disables smart date formatting for ephemeris labels.",
+        "parameters": [
+            {
+                "name": "smart",
+                "type": "bool",
+                "description": "`true` for smart formatting.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "Works on all Stellarium versions."
+        },
+        "example": "SolarSystem.setFlagEphemerisSmartDates(true);"
+    },
+    {
+        "name": "getFlagEphemerisFirstOfMonthOnly",
+        "category": "Solar System - Ephemeris",
+        "signature": "bool getFlagEphemerisFirstOfMonthOnly()",
+        "description": "Returns whether ephemeris labels are shown only for the first day of each month.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "`true` if only first-of-month labels are shown.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.20.0",
+            "notes": "Works on all Stellarium versions."
+        },
+        "example": "if (SolarSystem.getFlagEphemerisFirstOfMonthOnly()) {\n    core.debug(\"Only month boundaries are labeled\");\n}"
+    },
+    {
+        "name": "setFlagEphemerisFirstOfMonthOnly",
+        "category": "Solar System - Ephemeris",
+        "signature": "setFlagEphemerisFirstOfMonthOnly(bool onlyFirst)",
+        "description": "Sets whether ephemeris labels should be shown only for the first day of each month.",
+        "parameters": [
+            {
+                "name": "onlyFirst",
+                "type": "bool",
+                "description": "`true` to label only month boundaries.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.20.0",
+            "notes": "Works on all Stellarium versions."
+        },
+        "example": "SolarSystem.setFlagEphemerisFirstOfMonthOnly(true);"
+    },
+    {
+        "name": "getLabelsColor",
+        "category": "Solar System - Colors",
+        "signature": "Vec3f getLabelsColor()",
+        "description": "Returns the current color of planet labels.",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "returnDescription": "RGB color vector. Use `core.getStelProperty()` to read it.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions."
+        },
+        "example": "// Read the color (returns a string like '1.0,0.0,0.0')\nvar labelColorStr = core.getStelProperty('SolarSystem.labelsColor');\nvar parts = labelColorStr.split(',');\nvar r = parseFloat(parts[0]);\nvar g = parseFloat(parts[1]);\nvar b = parseFloat(parts[2]);\ncore.debug(\"Labels color RGB: \" + r.toFixed(2) + \", \" + g.toFixed(2) + \", \" + b.toFixed(2));"
+    },
+    {
+        "name": "setLabelsColor",
+        "category": "Solar System - Colors",
+        "signature": "setLabelsColor(Vec3f color)",
+        "description": "Sets the color of planet labels.",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector with values between 0.0 and 1.0.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions."
+        },
+        "example": "// Set labels to white\nvar white = core.vec3f(1.0, 1.0, 1.0);\nSolarSystem.setLabelsColor(white);\n\n// Set labels to light blue\nvar lightBlue = core.vec3f(0.5, 0.7, 1.0);\nSolarSystem.setLabelsColor(lightBlue);"
+    },
+    {
+        "name": "getPointerColor",
+        "category": "Solar System - Colors",
+        "signature": "Vec3f getPointerColor()",
+        "description": "Returns the color of the selection pointer (animated ring around selected planets).",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "returnDescription": "RGB color vector. Use `core.getStelProperty()` to read it.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions."
+        },
+        "example": "// Read the pointer color\nvar pointerColorStr = core.getStelProperty('SolarSystem.pointerColor');\nvar parts = pointerColorStr.split(',');\nvar r = parseFloat(parts[0]);\nvar g = parseFloat(parts[1]);\nvar b = parseFloat(parts[2]);\ncore.debug(\"Pointer color RGB: \" + r.toFixed(2) + \", \" + g.toFixed(2) + \", \" + b.toFixed(2));"
+    },
+    {
+        "name": "setPointerColor",
+        "category": "Solar System - Colors",
+        "signature": "setPointerColor(Vec3f color)",
+        "description": "Sets the color of the selection pointer.",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions."
+        },
+        "example": "SolarSystem.setPointerColor(core.vec3f(1.0, 0.3, 0.3));"
+    },
+    {
+        "name": "getTrailsColor",
+        "category": "Solar System - Colors",
+        "signature": "Vec3f getTrailsColor()",
+        "description": "Returns the color used for planet trails.",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "returnDescription": "RGB color vector. Use `core.getStelProperty()` to read it.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions."
+        },
+        "example": "var trailsColorStr = core.getStelProperty('SolarSystem.trailsColor');\nvar parts = trailsColorStr.split(',');\nvar r = parseFloat(parts[0]);\nvar g = parseFloat(parts[1]);\nvar b = parseFloat(parts[2]);"
+    },
+    {
+        "name": "setTrailsColor",
+        "category": "Solar System - Colors",
+        "signature": "setTrailsColor(Vec3f color)",
+        "description": "Sets the color used for planet trails.",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions."
+        },
+        "example": "SolarSystem.setTrailsColor(core.vec3f(0.5, 0.5, 0.5));"
+    },
+    {
+        "name": "getOrbitsColor",
+        "category": "Solar System - Colors",
+        "signature": "Vec3f getOrbitsColor()",
+        "description": "Returns the default color of solar system object orbit lines.",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "returnDescription": "RGB color vector. Use `core.getStelProperty()` to read it.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions."
+        },
+        "example": "var orbitColorStr = core.getStelProperty('SolarSystem.orbitsColor');"
+    },
+    {
+        "name": "setOrbitsColor",
+        "category": "Solar System - Colors",
+        "signature": "setOrbitsColor(Vec3f color)",
+        "description": "Sets the default color of solar system object orbit lines.",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Works on all Stellarium versions."
+        },
+        "example": "// Set orbits to cyan\nvar cyan = core.vec3f(0.0, 0.8, 0.9);\nSolarSystem.setOrbitsColor(cyan);"
+    },
+    {
+        "name": "setMajorPlanetsOrbitsColor",
+        "category": "Solar System - Colors",
+        "signature": "setMajorPlanetsOrbitsColor(Vec3f color)",
+        "description": "Sets the color used for orbits of the major planets.",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "Works on all Stellarium versions."
+        },
+        "example": "SolarSystem.setMajorPlanetsOrbitsColor(core.vec3f(0.7, 0.2, 0.2));"
+    },
+    {
+        "name": "setCometsOrbitsColor",
+        "category": "Solar System - Colors",
+        "signature": "setCometsOrbitsColor(Vec3f color)",
+        "description": "Sets the color used for comet orbit lines.",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "Works on all Stellarium versions."
+        },
+        "example": "SolarSystem.setCometsOrbitsColor(core.vec3f(0.7, 0.8, 0.8));"
+    },
+    {
+        "name": "getObjectList",
+        "category": "Solar System - Search",
+        "signature": "QStringList getObjectsList(QString objType)",
+        "description": "Returns a list of object names filtered by type.",
+        "parameters": [
+            {
+                "name": "objType",
+                "type": "QString",
+                "description": "Object type filter ('all', 'planet', 'asteroid', 'comet', etc.).",
+                "required": false,
+                "default": "\"all\""
+            }
+        ],
+        "returnType": "QStringList",
+        "returnDescription": "List of matching object names.",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "This is a `public` method, but should work safely."
+        },
+        "example": "// Get all solar system objects\nvar allObjects = SolarSystem.getObjectsList(\"all\");\n\n// Get only asteroids\nvar asteroids = SolarSystem.getObjectsList(\"asteroid\");\n\ncore.debug(\"Asteroids count: \" + asteroids.length);"
+    },
+    {
+        "name": "getSun",
+        "category": "Solar System - Search",
+        "signature": "PlanetP getSun()",
+        "description": "Returns the Planet object for the Sun.",
+        "parameters": [],
+        "returnType": "PlanetP",
+        "returnDescription": "Sun planet object.",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "This is a `public` method, but is safe to use."
+        },
+        "example": "var sun = SolarSystem.getSun();\nvar sunRadiusKm = sun.getEquatorialRadius() * 149597870.7;\ncore.debug(\"Sun radius: \" + sunRadiusKm.toFixed(0) + \" km\");"
+    },
+    {
+        "name": "getEarth",
+        "category": "Solar System - Search",
+        "signature": "PlanetP getEarth()",
+        "description": "Returns the Planet object for Earth.",
+        "parameters": [],
+        "returnType": "PlanetP",
+        "returnDescription": "Earth planet object.",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "This is a `public` method, but is safe to use."
+        },
+        "example": "var earth = SolarSystem.getEarth();"
+    },
+    {
+        "name": "getMoon",
+        "category": "Solar System - Search",
+        "signature": "PlanetP getMoon()",
+        "description": "Returns the Planet object for Earth's Moon.",
+        "parameters": [],
+        "returnType": "PlanetP",
+        "returnDescription": "Moon planet object.",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "This is a `public` method, but is safe to use."
+        },
+        "example": "var moon = SolarSystem.getMoon();"
+    },
+    {
+        "name": "getPlanetVMagnitude",
+        "category": "Solar System - Search",
+        "signature": "float getPlanetVMagnitude(QString planetName, bool withExtinction)",
+        "description": "Returns the visual magnitude of a planet or solar system body. Optionally includes atmospheric extinction.",
+        "parameters": [
+            {
+                "name": "planetName",
+                "type": "QString",
+                "description": "English name of the planet.",
+                "required": true
+            },
+            {
+                "name": "withExtinction",
+                "type": "bool",
+                "description": "If `true`, includes atmospheric extinction.",
+                "required": false,
+                "default": "false"
+            }
+        ],
+        "returnType": "float",
+        "returnDescription": "Visual magnitude (e.g., -2.5 for Venus).",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "This is a `public` method, but is safe to use."
+        },
+        "example": "var marsMag = SolarSystem.getPlanetVMagnitude(\"Mars\");\ncore.debug(\"Mars magnitude: \" + marsMag.toFixed(2));"
+    },
+    {
+        "name": "getPlanetType",
+        "category": "Solar System - Search",
+        "signature": "QString getPlanetType(QString planetName)",
+        "description": "Returns the type of a solar system body (e.g., 'planet', 'asteroid', 'comet').",
+        "parameters": [
+            {
+                "name": "planetName",
+                "type": "QString",
+                "description": "English name of the body.",
+                "required": true
+            }
+        ],
+        "returnType": "QString",
+        "returnDescription": "Object type string (e.g., 'dwarf planet').",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "This is a `public` method, but is safe to use."
+        },
+        "example": "var type = SolarSystem.getPlanetType(\"Ceres\");\ncore.debug(\"Ceres type: \" + type);"
+    },
+    {
+        "name": "getDistanceToPlanet",
+        "category": "Solar System - Search",
+        "signature": "double getDistanceToPlanet(QString planetName)",
+        "description": "Returns the distance from the observer to a planet in Astronomical Units (AU).",
+        "parameters": [
+            {
+                "name": "planetName",
+                "type": "QString",
+                "description": "English name of the planet.",
+                "required": true
+            }
+        ],
+        "returnType": "double",
+        "returnDescription": "Distance in AU.",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "This is a `public` method, but is safe to use."
+        },
+        "example": "var marsDist = SolarSystem.getDistanceToPlanet(\"Mars\");\ncore.debug(\"Mars distance: \" + marsDist.toFixed(2) + \" AU\");"
+    },
+    {
+        "name": "getPhaseForPlanet",
+        "category": "Solar System - Search",
+        "signature": "float getPhaseForPlanet(QString planetName)",
+        "description": "Returns the illuminated fraction (phase) of a planet or the Moon (0.0 = new, 1.0 = full).",
+        "parameters": [
+            {
+                "name": "planetName",
+                "type": "QString",
+                "description": "English name of the planet.",
+                "required": true
+            }
+        ],
+        "returnType": "float",
+        "returnDescription": "Illuminated fraction (0.0 to 1.0).",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "This is a `public` method, but is safe to use."
+        },
+        "example": "var moonPhase = SolarSystem.getPhaseForPlanet(\"Moon\");\ncore.debug(\"Moon phase: \" + (moonPhase * 100).toFixed(1) + \"%\");"
+    },
+    {
+        "name": "removeMinorPlanet",
+        "category": "Solar System - Utilities",
+        "signature": "bool removeMinorPlanet(QString name)",
+        "description": "Removes a minor planet (asteroid, comet, etc.) from the solar system simulation.",
+        "parameters": [
+            {
+                "name": "name",
+                "type": "QString",
+                "description": "English name of the minor planet to remove.",
+                "required": true
+            }
+        ],
+        "returnType": "bool",
+        "returnDescription": "`true` if successfully removed.",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.16.0",
+            "notes": "This is a `public` method, but is safe to use."
+        },
+        "example": "// Remove a test asteroid\nif (SolarSystem.removeMinorPlanet(\"99942 Apophis\")) {\n    core.debug(\"Apophis removed.\");\n}"
+    },
+    {
+        "name": "getExtraThreads",
+        "category": "Solar System - Advanced",
+        "signature": "int getExtraThreads()",
+        "description": "Returns the number of additional threads used for computing planet positions (beyond the main thread).",
+        "parameters": [],
+        "returnType": "int",
+        "returnDescription": "Number of extra threads.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.19.0",
+            "notes": "Works on all Stellarium versions."
+        },
+        "example": "var threads = SolarSystem.getExtraThreads();\ncore.debug(\"Additional computation threads: \" + threads);"
+    },
+    {
+        "name": "setExtraThreads",
+        "category": "Solar System - Advanced",
+        "signature": "setExtraThreads(int threads)",
+        "description": "Sets the number of additional threads for computing planet positions. Higher values may improve performance on multi-core systems.",
+        "parameters": [
+            {
+                "name": "threads",
+                "type": "int",
+                "description": "Number of extra threads (0 to max).",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.19.0",
+            "notes": "Works on all Stellarium versions."
+        },
+        "example": "// Use 3 additional threads for planet calculations\nSolarSystem.setExtraThreads(3);"
+    },
+    {
+        "name": "getMarkerMagThreshold",
+        "category": "Solar System - Advanced",
+        "signature": "double getMarkerMagThreshold()",
+        "description": "Returns the limiting absolute magnitude for plotting minor body markers.",
+        "parameters": [],
+        "returnType": "double",
+        "returnDescription": "Magnitude threshold.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.19.0",
+            "notes": "Works on all Stellarium versions."
+        },
+        "example": "var threshold = SolarSystem.getMarkerMagThreshold();\ncore.debug(\"Marker magnitude threshold: \" + threshold);"
+    },
+    {
+        "name": "setMarkerMagThreshold",
+        "category": "Solar System - Advanced",
+        "signature": "setMarkerMagThreshold(double magnitude)",
+        "description": "Sets the limiting absolute magnitude for plotting minor body markers.",
+        "parameters": [
+            {
+                "name": "magnitude",
+                "type": "double",
+                "description": "Magnitude threshold (range: -5 to 37).",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.19.0",
+            "notes": "Works on all Stellarium versions."
+        },
+        "example": "// Show only brighter minor bodies\nSolarSystem.setMarkerMagThreshold(12.0);"
+    },
+    {
+        "name": "getOrbitColorStyle",
+        "category": "Solar System - Advanced",
+        "signature": "QString getOrbitColorStyle()",
+        "description": "Returns the style used for orbit line colors.",
+        "parameters": [],
+        "returnType": "QString",
+        "returnDescription": "Color style name ('one_color', 'groups', 'major_planets', 'major_planets_minor_types').",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "Works on all Stellarium versions."
+        },
+        "example": "var style = SolarSystem.getOrbitColorStyle();\ncore.debug(\"Orbit color style: \" + style);"
+    },
+    {
+        "name": "setOrbitColorStyle",
+        "category": "Solar System - Advanced",
+        "signature": "setOrbitColorStyle(QString style)",
+        "description": "Sets the style for orbit line colors.",
+        "parameters": [
+            {
+                "name": "style",
+                "type": "QString",
+                "description": "Color style ('one_color', 'groups', 'major_planets', 'major_planets_minor_types').",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "Works on all Stellarium versions."
+        },
+        "example": "// Color orbits by object groups\nSolarSystem.setOrbitColorStyle(\"groups\");"
+    },
+    {
+        "name": "getApparentMagnitudeAlgorithmOnEarth",
+        "category": "Solar System - Advanced",
+        "signature": "QString getApparentMagnitudeAlgorithmOnEarth()",
+        "description": "Returns the algorithm used for computing apparent magnitudes of planets when observed from Earth.",
+        "parameters": [],
+        "returnType": "QString",
+        "returnDescription": "Algorithm name (Mallama2018, ExpSup2013, etc.).",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.19.0",
+            "notes": "Works on all Stellarium versions."
+        },
+        "example": "var algorithm = SolarSystem.getApparentMagnitudeAlgorithmOnEarth();\ncore.debug(\"Magnitude algorithm: \" + algorithm);"
+    },
+    {
+        "name": "setApparentMagnitudeAlgorithmOnEarth",
+        "category": "Solar System - Advanced",
+        "signature": "setApparentMagnitudeAlgorithmOnEarth(QString algorithm)",
+        "description": "Sets the algorithm for computing apparent magnitudes of planets.",
+        "parameters": [
+            {
+                "name": "algorithm",
+                "type": "QString",
+                "description": "Algorithm: 'Mallama2018', 'ExpSup2013', 'ExpSup1992', 'Mueller1893', 'AstrAlm1984'.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.19.0",
+            "notes": "Works on all Stellarium versions."
+        },
+        "example": "// Use modern Mallama 2018 algorithm\nSolarSystem.setApparentMagnitudeAlgorithmOnEarth(\"Mallama2018\");"
+    }
+]

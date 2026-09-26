@@ -1,0 +1,280 @@
+{
+    "version": "2.0.0",
+    "description": "Stellarium Script Snippets Library - Complete collection of ready-to-use code snippets for various astronomical tasks",
+    "lastUpdated": "2026-06-02",
+    "categories": {
+        "loops": {
+            "name": "Loops",
+            "icon": "🔄",
+            "description": "Various loop structures for repetitive tasks",
+            "items": [
+                {
+                    "id": "for-basic",
+                    "name": "Basic For Loop",
+                    "code": "for (var i = 0; i < 10; i++) {\n    core.debug(\"Iteration: \" + i);\n    core.wait(0.5);\n}",
+                    "desc": "Repeat code block a specific number of times",
+                    "tags": ["loop", "basic", "iteration"]
+                },
+                {
+                    "id": "for-array",
+                    "name": "Loop Through Array",
+                    "code": "// Define list of objects to visit\nvar objects = [\"Moon\", \"Mars\", \"Jupiter\", \"Saturn\", \"M31\"];\n\nfor (var i = 0; i < objects.length; i++) {\n    core.debug(\"Moving to: \" + objects[i]);\n    core.moveToObject(objects[i], 2);\n    core.wait(3);\n    \n    // Get and display object info\n    var info = core.getObjectInfo(objects[i]);\n    if (info[\"above-horizon\"]) {\n        core.debug(objects[i] + \" is above horizon at alt=\" + info[\"altitude\"]);\n    }\n}",
+                    "desc": "Iterate through array of celestial objects",
+                    "tags": ["loop", "array", "objects", "tour"]
+                },
+                {
+                    "id": "for-fov-zoom",
+                    "name": "Smooth Zoom Loop",
+                    "code": "// Smooth zoom in using StelMovementMgr.setFov()\n// Note: FOV decreases for zoom in, increases for zoom out\nvar startFov = StelMovementMgr.getCurrentFov();\nvar endFov = 10;\nvar steps = 20;\n\nfor (var fov = startFov; fov > endFov; fov -= (startFov - endFov) / steps) {\n    StelMovementMgr.setFov(fov);\n    core.wait(0.1);\n}\n\ncore.wait(2);\n\n// Zoom back out\nfor (var fov = endFov; fov < startFov; fov += (startFov - endFov) / steps) {\n    StelMovementMgr.setFov(fov);\n    core.wait(0.1);\n}",
+                    "desc": "Gradual smooth zoom in/out animation",
+                    "tags": ["loop", "zoom", "smooth", "animation"]
+                },
+                {
+                    "id": "for-azimuth-rotation",
+                    "name": "Full 360° Rotation",
+                    "code": "// Rotate view 360 degrees around horizon\nfor (var az = 0; az < 360; az += 15) {\n    core.moveToAltAzi(30, az, 1);\n    core.wait(0.5);\n    core.debug(\"Looking at azimuth: \" + az + \"°\");\n}",
+                    "desc": "Complete circle rotation for panorama effect",
+                    "tags": ["loop", "rotation", "panorama", "azimuth"]
+                },
+                {
+                    "id": "for-altitude-scan",
+                    "name": "Altitude Scan",
+                    "code": "// Scan from horizon to zenith\nfor (var alt = 0; alt <= 90; alt += 10) {\n    core.moveToAltAzi(alt, 180, 1); // South direction\n    core.wait(0.8);\n    core.debug(\"Altitude: \" + alt + \"°\");\n}",
+                    "desc": "Scan from horizon to zenith at fixed azimuth",
+                    "tags": ["loop", "scan", "altitude", "horizon"]
+                },
+                {
+                    "id": "for-time-lapse",
+                    "name": "Time Lapse Loop",
+                    "code": "// Create a time-lapse effect\nvar originalRate = core.getTimeRate();\ncore.setTimeRate(3600); // 1 hour per second\n\nfor (var hour = 0; hour < 24; hour++) {\n    core.wait(1); // Wait 1 real second = 1 hour simulated\n    var sunInfo = core.getObjectInfo(\"Sun\");\n    core.debug(\"Hour \" + hour + \": Sun altitude=\" + sunInfo[\"altitude\"]);\n}\n\ncore.setTimeRate(originalRate); // Restore original rate",
+                    "desc": "Loop that advances time and records data",
+                    "tags": ["loop", "time", "timelapse", "simulation"]
+                }
+            ]
+        },
+        "conditionals": {
+            "name": "Conditionals",
+            "icon": "⚖️",
+            "description": "Conditional statements for decision making in scripts",
+            "items": [
+                {
+                    "id": "if-check-above-horizon",
+                    "name": "Check Object Visibility",
+                    "code": "var objectName = \"Mars\";\nvar objInfo = core.getObjectInfo(objectName);\n\nif (objInfo[\"above-horizon\"]) {\n    core.debug(objectName + \" is visible!\");\n    core.debug(\"Altitude: \" + objInfo[\"altitude\"] + \"°\");\n    core.debug(\"Azimuth: \" + objInfo[\"azimuth\"] + \"°\");\n    core.moveToObject(objectName, 2);\n} else {\n    core.debug(objectName + \" is below horizon. Waiting...\");\n}",
+                    "desc": "Check if celestial object is above horizon",
+                    "tags": ["conditional", "visibility", "horizon", "object"]
+                },
+                {
+                    "id": "if-module-check",
+                    "name": "Check Plugin Availability",
+                    "code": "// Safely use plugin features\nif (core.isModuleLoaded(\"Satellites\")) {\n    core.debug(\"Satellites plugin loaded - displaying orbits\");\n    core.setStelProperty(\"Satellites.flagOrbitLines\", true);\n    core.setStelProperty(\"Satellites.flagLabelsVisible\", true);\n} else {\n    core.debug(\"Satellites plugin not available\");\n    LabelMgr.labelScreen(\"Install Satellites plugin for satellite tracking\", 50, 50, false, 14, \"#ffaa00\");\n}",
+                    "desc": "Check if a plugin is loaded before using it",
+                    "tags": ["conditional", "plugin", "safety", "module"]
+                },
+                {
+                    "id": "if-daytime-detection",
+                    "name": "Detect Day/Night",
+                    "code": "var sunInfo = core.getObjectInfo(\"Sun\");\nvar sunAlt = sunInfo[\"altitude\"];\n\nif (sunAlt > -6) {\n    core.debug(\"Daytime or twilight - sky is bright\");\n    if (sunAlt > 0) {\n        core.debug(\"Sun is above horizon - daytime\");\n    } else {\n        core.debug(\"Civil twilight - sun below horizon but sky bright\");\n    }\n} else if (sunAlt > -12) {\n    core.debug(\"Nautical twilight - horizon visible\");\n} else if (sunAlt > -18) {\n    core.debug(\"Astronomical twilight - dark enough for astronomy\");\n} else {\n    core.debug(\"Nighttime - fully dark\");\n}",
+                    "desc": "Determine day/night based on Sun altitude",
+                    "tags": ["conditional", "daynight", "twilight", "sun"]
+                },
+                {
+                    "id": "if-compare-magnitude",
+                    "name": "Compare Object Brightness",
+                    "code": "var object1 = \"Mars\";\nvar object2 = \"Jupiter\";\n\nvar mag1 = core.getObjectInfo(object1)[\"vmag\"];\nvar mag2 = core.getObjectInfo(object2)[\"vmag\"];\n\ncore.debug(object1 + \" magnitude: \" + mag1);\ncore.debug(object2 + \" magnitude: \" + mag2);\n\nif (mag1 < mag2) {\n    core.debug(object1 + \" is brighter than \" + object2);\n} else if (mag2 < mag1) {\n    core.debug(object2 + \" is brighter than \" + object1);\n} else {\n    core.debug(object1 + \" and \" + object2 + \" have same magnitude\");\n}",
+                    "desc": "Compare brightness of two celestial objects",
+                    "tags": ["conditional", "magnitude", "brightness", "comparison"]
+                }
+            ]
+        },
+        "variables": {
+            "name": "Variables & Save/Restore",
+            "icon": "💾",
+            "description": "Variable management and state preservation techniques",
+            "items": [
+                {
+                    "id": "var-save-restore",
+                    "name": "Save & Restore Settings",
+                    "code": "// Save current state\nvar originalRate = core.getTimeRate();\nvar originalFov = StelMovementMgr.getCurrentFov();\nvar originalMount = StelMovementMgr.getMountMode();\nvar originalLocation = core.getObserverLocation();\nvar originalCulture = core.getSkyCulture();\n\n// Make temporary changes\ncore.setTimeRate(0);\nStelMovementMgr.setFov(10);\nStelMovementMgr.setEquatorialMount(true);\ncore.setSkyCulture(\"western\");\n\n// ... perform script operations ...\ncore.wait(5);\n\n// Restore original settings\ncore.setTimeRate(originalRate);\nStelMovementMgr.setFov(originalFov);\nStelMovementMgr.setMountMode(originalMount);\ncore.setSkyCulture(originalCulture);\ncore.debug(\"Original settings restored\");",
+                    "desc": "Save settings, change temporarily, then restore",
+                    "tags": ["variables", "save", "restore", "state"]
+                },
+                {
+                    "id": "var-store-object-info",
+                    "name": "Store Object Information",
+                    "code": "// Store information about multiple objects\nvar objects = [\"Sun\", \"Moon\", \"Mars\", \"Jupiter\"];\nvar objectData = {};\n\nfor (var i = 0; i < objects.length; i++) {\n    var info = core.getObjectInfo(objects[i]);\n    objectData[objects[i]] = {\n        altitude: info[\"altitude\"],\n        azimuth: info[\"azimuth\"],\n        magnitude: info[\"vmag\"],\n        aboveHorizon: info[\"above-horizon\"]\n    };\n    core.debug(objects[i] + \": alt=\" + info[\"altitude\"] + \"°\");\n}\n\n// Later access stored data\nif (objectData[\"Mars\"].aboveHorizon) {\n    core.debug(\"Mars was above horizon when recorded\");\n}",
+                    "desc": "Store object data in variables for later use",
+                    "tags": ["variables", "object", "data", "storage"]
+                }
+            ]
+        },
+        "functions": {
+            "name": "Functions",
+            "icon": "⚙️",
+            "description": "Custom function definitions for reusable code",
+            "items": [
+                {
+                    "id": "function-wait-until",
+                    "name": "Wait Until Function",
+                    "code": "// Function to wait until a condition becomes true\nfunction waitUntil(conditionFunction, timeoutSeconds, checkInterval) {\n    timeoutSeconds = timeoutSeconds || 60;\n    checkInterval = checkInterval || 0.5;\n    var startTime = core.getJDay();\n    var timeoutJD = startTime + timeoutSeconds / 86400;\n    \n    while (!conditionFunction() && core.getJDay() < timeoutJD) {\n        core.wait(checkInterval);\n    }\n    return conditionFunction();\n}\n\n// Usage: Wait until Sun sets\nvar sunSet = waitUntil(function() {\n    var sunAlt = core.getObjectInfo(\"Sun\")[\"altitude\"];\n    return sunAlt < 0;\n}, 3600, 1);\n\nif (sunSet) {\n    core.debug(\"Sun has set!\");\n} else {\n    core.debug(\"Timeout waiting for sunset\");\n}",
+                    "desc": "Generic function to wait for any condition",
+                    "tags": ["function", "wait", "condition", "utility"]
+                },
+								{
+										"id": "function-get-moon-phase-string",
+										"name": "Get Moon Phase String (Accurate)",
+										"code": "// Function to get moon phase as string (Simple version)\nfunction getMoonPhaseString() {\n    var moonInfo = core.getObjectInfo(\"Moon\");\n    \n    // Use built-in phase name if available (Stellarium 0.18.0+)\n    if (moonInfo[\"phase-name\"] !== undefined) {\n        return moonInfo[\"phase-name\"];\n    }\n    \n    // Fallback for older versions\n    var phase = moonInfo[\"phase\"]; // 0-1 illumination\n    var age = parseFloat(moonInfo[\"age\"]); // Age in days\n    \n    if (isNaN(age) || age === undefined) {\n        // Ultra fallback: illumination only\n        if (phase < 0.02) return \"New Moon\";\n        if (phase < 0.48) return \"Waxing Crescent\";\n        if (phase < 0.52) return \"First Quarter\";\n        if (phase < 0.98) return \"Waxing Gibbous\";\n        if (phase <= 1.0) return \"Full Moon\";\n        return \"Unknown\";\n    }\n    \n    // Accurate method using both illumination and age\n    if (phase < 0.02) {\n        return \"New Moon\";\n    }\n    else if (phase < 0.48) {\n        return (age < 14.8) ? \"Waxing Crescent\" : \"Waning Crescent\";\n    }\n    else if (phase < 0.52) {\n        return (age < 14.8) ? \"First Quarter\" : \"Third Quarter\";\n    }\n    else if (phase < 0.98) {\n        return (age < 14.8) ? \"Waxing Gibbous\" : \"Waning Gibbous\";\n    }\n    else {\n        return \"Full Moon\";\n    }\n}\n\nvar phase = getMoonPhaseString();\ncore.debug(\"Current Moon phase: \" + phase);",
+										"desc": "Convert moon illumination to phase name accurately using age or built-in phase-name property",
+										"tags": ["function", "moon", "phase", "astronomy", "accurate"]
+								},
+								{
+										"id": "function-get-moon-phase-detailed",
+										"name": "Get Moon Phase with Detailed Debug Output",
+										"code": "// Function to get moon phase with detailed debug output\nfunction getMoonPhaseDetailed() {\n    var moonInfo = core.getObjectInfo(\"Moon\");\n    \n    // Extract all available moon data\n    var illumination = moonInfo[\"phase\"]; // 0-1\n    var age = parseFloat(moonInfo[\"age\"]); // days since new moon\n    var isWaning = moonInfo[\"is-waning\"]; // boolean\n    var phaseName = moonInfo[\"phase-name\"]; // built-in name\n    var distanceKm = moonInfo[\"distance-km\"];\n    var magnitude = moonInfo[\"vmag\"];\n    var altitude = moonInfo[\"altitude\"];\n    var azimuth = moonInfo[\"azimuth\"];\n    var aboveHorizon = moonInfo[\"above-horizon\"];\n    \n    // Determine phase name\n    var determinedPhase = \"\";\n    \n    if (phaseName !== undefined) {\n        determinedPhase = phaseName;\n    } else {\n        // Fallback calculation\n        if (illumination < 0.02) {\n            determinedPhase = \"New Moon\";\n        }\n        else if (illumination < 0.48) {\n            determinedPhase = (age < 14.8) ? \"Waxing Crescent\" : \"Waning Crescent\";\n        }\n        else if (illumination < 0.52) {\n            determinedPhase = (age < 14.8) ? \"First Quarter\" : \"Third Quarter\";\n        }\n        else if (illumination < 0.98) {\n            determinedPhase = (age < 14.8) ? \"Waxing Gibbous\" : \"Waning Gibbous\";\n        }\n        else {\n            determinedPhase = \"Full Moon\";\n        }\n    }\n    \n    // Debug output with all information\n    core.debug(\"============================================\");\n    core.debug(\"MOON PHASE INFORMATION\");\n    core.debug(\"============================================\");\n    core.debug(\"Phase Name: \" + determinedPhase);\n    core.debug(\"Illumination: \" + (illumination * 100).toFixed(1) + \"%\");\n    core.debug(\"Age: \" + (isNaN(age) ? \"N/A\" : age.toFixed(2) + \" days\"));\n    core.debug(\"Waning: \" + (isWaning ? \"Yes\" : \"No\"));\n    core.debug(\"Distance: \" + (distanceKm ? distanceKm.toFixed(0) + \" km\" : \"N/A\"));\n    core.debug(\"Magnitude: \" + (magnitude !== undefined ? magnitude.toFixed(2) : \"N/A\"));\n    core.debug(\"Altitude: \" + (altitude !== undefined ? altitude.toFixed(2) + \"°\" : \"N/A\"));\n    core.debug(\"Azimuth: \" + (azimuth !== undefined ? azimuth.toFixed(2) + \"°\" : \"N/A\"));\n    core.debug(\"Above Horizon: \" + (aboveHorizon ? \"Yes\" : \"No\"));\n    core.debug(\"============================================\");\n    \n    return determinedPhase;\n}\n\n// Execute the function\nvar phase = getMoonPhaseDetailed();\ncore.debug(\"Current Moon phase: \" + phase);",
+										"desc": "Display detailed moon information including phase, illumination, age, waning status, distance, magnitude, altitude, azimuth, and horizon visibility",
+										"tags": ["function", "moon", "phase", "detailed", "debug", "astronomy"]
+								},
+                {
+                    "id": "function-format-coordinates",
+                    "name": "Format Coordinates Display",
+                    "code": "// Function to format coordinates nicely\nfunction formatAltAz(altitude, azimuth) {\n    return \"Altitude: \" + altitude.toFixed(2) + \"°, Azimuth: \" + azimuth.toFixed(2) + \"°\";\n}\n\nfunction formatRaDec(ra, dec) {\n    var raHours = ra / 15;\n    var raH = Math.floor(raHours);\n    var raM = Math.floor((raHours - raH) * 60);\n    var raS = ((raHours - raH) * 60 - raM) * 60;\n    return \"RA: \" + raH + \"h \" + raM + \"m \" + raS.toFixed(1) + \"s, Dec: \" + dec.toFixed(2) + \"°\";\n}\n\n// Usage\nvar sun = core.getObjectInfo(\"Sun\");\ncore.debug(formatAltAz(sun[\"altitude\"], sun[\"azimuth\"]));\ncore.debug(formatRaDec(sun[\"ra\"], sun[\"dec\"]));",
+                    "desc": "Utility functions for coordinate formatting",
+                    "tags": ["function", "coordinates", "formatting", "utility"]
+                },
+                {
+                    "id": "function-display-message-sequence",
+                    "name": "Display Message Sequence",
+                    "code": "// Display messages sequentially on screen\nfunction displayMessageSequence(messages, durationEach) {\n    durationEach = durationEach || 2;\n    var labels = [];\n    \n    // Create labels (initially hidden)\n    for (var i = 0; i < messages.length; i++) {\n        var x = core.getScreenWidth() / 2 - 100;\n        var y = core.getScreenHeight() / 2 + i * 30;\n        var id = LabelMgr.labelScreen(messages[i], x, y, false, 18, \"#ffffaa\");\n        LabelMgr.setLabelShow(id, false);\n        labels.push(id);\n    }\n    \n    // Show each message in sequence\n    for (var i = 0; i < labels.length; i++) {\n        LabelMgr.setLabelShow(labels[i], true);\n        core.wait(durationEach);\n        LabelMgr.setLabelShow(labels[i], false);\n    }\n    \n    // Clean up\n    for (var i = 0; i < labels.length; i++) {\n        LabelMgr.deleteLabel(labels[i]);\n    }\n}\n\n// Usage\ndisplayMessageSequence([\n    \"Welcome to Stellarium!\",\n    \"Starting tour of the solar system...\",\n    \"First stop: Mars\" \n], 2.5);",
+                    "desc": "Display multiple messages sequentially on screen",
+                    "tags": ["function", "display", "message", "label"]
+                }
+            ]
+        },
+        "tours": {
+            "name": "Tours & Navigation",
+            "icon": "🌍",
+            "description": "Pre-built tours for exploring celestial objects",
+            "items": [
+                {
+                    "id": "tour-solar-system",
+                    "name": "Solar System Tour",
+                    "code": "// Tour of planets in solar system\nvar planets = [\"Mercury\", \"Venus\", \"Mars\", \"Jupiter\", \"Saturn\", \"Uranus\", \"Neptune\"];\n\n// Save original settings\nvar oldRate = core.getTimeRate();\nvar oldFov = StelMovementMgr.currentFov();\n\ncore.setTimeRate(0); // Pause time during tour\n\nfor (var i = 0; i < planets.length; i++) {\n    var planet = planets[i];\n    core.debug(\"Visiting: \" + planet);\n    \n    // Move to planet\n    var success = core.moveToObject(planet, 2);\n    if (!success) {\n        core.debug(\"Cannot find: \" + planet);\n        continue;\n    }\n    \n    core.wait(2);\n    \n    // Zoom in for better view\n    StelMovementMgr.setFov(15);\n    core.wait(3);\n    \n    // Get and display planet info\n    var info = core.getObjectInfo(planet);\n    core.debug(planet + \" - Magnitude: \" + info[\"vmag\"]);\n    core.debug(\"Distance: \" + info[\"distance\"] + \" AU\");\n    \n    // Zoom out before next\n    StelMovementMgr.setFov(60);\n    core.wait(2);\n}\n\n// Restore settings\ncore.setTimeRate(oldRate);\nStelMovementMgr.setFov(oldFov);\ncore.debug(\"Tour complete!\");",
+                    "desc": "Complete tour of planets in solar system",
+                    "tags": ["tour", "planets", "solarsystem", "navigation"]
+                },
+                {
+                    "id": "tour-constellations",
+                    "name": "Constellation Tour (Enhanced)",
+                    "code": "//\n// ============================================================\n// Name: Enhanced Constellation Tour\n// ============================================================\n// Version: 1.0\n// Author: Stellarium Remote Control\n// License: Public Domain\n// Description: An enhanced cinematic tour of major constellations\n//              with smooth transitions, art visualization, and\n//              automatic restoration of original settings.\n// ============================================================\n//\n\n// ============================================================\n// TRANSLATION SUPPORT\n// ============================================================\n// Load translation functions for i18n support\ninclude(\"i18n.inc\");\n\n// ============================================================\n// INITIAL SETUP\n// ============================================================\n// Clear the view to starchart mode\ncore.clear(\"starchart\");\n\n// Hide ground and atmosphere for better constellation visibility\nLandscapeMgr.setFlagLandscape(false);\nLandscapeMgr.setFlagAtmosphere(false);\n\n// Disable additional visual elements for cleaner view\nGridLinesMgr.setFlagEquatorGrid(false);\nNebulaMgr.setFlagHints(false);\n\n// Hide GUI for immersive experience\ncore.setGuiVisible(false);\n\n// ============================================================\n// SAVE ORIGINAL SETTINGS\n// ============================================================\n// Save current sky culture and label style for later restoration\nvar oldCultureId = core.getSkyCulture();\nvar oldScreenLabelStyle = StelSkyCultureMgr.getScreenLabelStyle();\n// Force label style to show all name variants\nStelSkyCultureMgr.setScreenLabelStyle(\"Native,Translated,Modern\");\n\n// Save constellation display states\nvar oldLinesState = ConstellationMgr.getFlagLines();\nvar oldLabelsState = ConstellationMgr.getFlagLabels();\nvar oldArtState = ConstellationMgr.getFlagArt();\nvar oldBoundariesState = ConstellationMgr.getFlagBoundaries();\nvar oldIsolateState = ConstellationMgr.getFlagIsolateSelected();\n\n// ============================================================\n// SET SKY CULTURE\n// ============================================================\n// Set to modern western astronomy\ncore.setSkyCulture(\"modern\");\ncore.wait(1);\n\n// ============================================================\n// ENABLE CONSTELLATION DISPLAYS\n// ============================================================\nConstellationMgr.deselectConstellations();\nConstellationMgr.setFlagArt(false);\nConstellationMgr.setFlagBoundaries(true);\nConstellationMgr.setFlagLines(true);\nConstellationMgr.setFlagLabels(true);\n\n// ============================================================\n// CONSTELLATION LIST\n// ============================================================\nvar constellations = [\n    \"Orion\",       // The Hunter\n    \"Taurus\",      // The Bull\n    \"Gemini\",      // The Twins\n    \"Scorpius\",    // The Scorpion\n    \"Cygnus\",      // The Swan\n    \"Ursa Major\"   // The Great Bear\n];\n\n// ============================================================\n// TOUR CONFIGURATION\n// ============================================================\nvar ZOOM_IN_FOV = 30;   // Field of view when zoomed in (degrees)\nvar ZOOM_OUT_FOV = 60;  // Field of view for overview (degrees)\nvar ART_DISPLAY_TIME = 3; // Seconds to show constellation art\n\n// ============================================================\n// WELCOME MESSAGE\n// ============================================================\nvar welcomeMsg = tr(\"Welcome to the Enhanced Constellation Tour!\\n\" +\n                  \"Exploring \") + constellations.length + tr(\" constellations.\\n\" +\n                  \"Press Ctrl+T to show the toolbar at any time.\");\nvar labelId = LabelMgr.labelScreen(welcomeMsg, 100, 100, false, 16, \"#ffaa66\");\nLabelMgr.setLabelShow(labelId, true);\ncore.wait(5);\nLabelMgr.setLabelShow(labelId, false);\nLabelMgr.deleteLabel(labelId);\n\n// ============================================================\n// TOUR EXECUTION\n// ============================================================\ncore.debug(tr(\"Starting enhanced constellation tour...\"));\ncore.debug(tr(\"Total constellations: \") + constellations.length);\n\nfor (var i = 0; i < constellations.length; i++) {\n    var constName = constellations[i];\n    var currentNum = i + 1;\n    \n    core.debug(tr(\"Exploring constellation\") + \" \" + currentNum + \"/\" + constellations.length + \": \" + constName);\n    \n    // Select and isolate the constellation\n    core.selectConstellationByName(constName);\n    ConstellationMgr.setFlagIsolateSelected(true);\n    \n    // Smoothly move to the constellation center\n    core.moveToObject(constName, 2);\n    core.wait(2);\n    \n    // Zoom in for detailed view\n    StelMovementMgr.zoomTo(ZOOM_IN_FOV, 2);\n    core.wait(1);\n    \n    // Show constellation art for visual enhancement\n    ConstellationMgr.setFlagArt(true);\n    core.wait(ART_DISPLAY_TIME);\n    \n    // Display constellation name on screen\n    var nameLabel = LabelMgr.labelScreen(constName, 50, 50, false, 24, \"#ffaa66\");\n    LabelMgr.setLabelShow(nameLabel, true);\n    core.wait(3);\n    LabelMgr.deleteLabel(nameLabel);\n    \n    // Hide art before moving to next constellation\n    ConstellationMgr.setFlagArt(false);\n    \n    // Zoom out for overview\n    StelMovementMgr.zoomTo(ZOOM_OUT_FOV, 2);\n    core.wait(1);\n}\n\n// ============================================================\n// CLEANUP AND RESTORATION\n// ============================================================\ncore.debug(tr(\"Tour completed! Restoring original settings...\"));\n\n// Restore constellation display states\nConstellationMgr.setFlagIsolateSelected(oldIsolateState);\nConstellationMgr.setFlagLines(oldLinesState);\nConstellationMgr.setFlagLabels(oldLabelsState);\nConstellationMgr.setFlagArt(oldArtState);\nConstellationMgr.setFlagBoundaries(oldBoundariesState);\n\n// Restore original sky culture\ncore.setSkyCulture(oldCultureId);\ncore.wait(1);\n\n// Restore original label style\nStelSkyCultureMgr.setScreenLabelStyle(oldScreenLabelStyle);\n\n// Show GUI again\ncore.setGuiVisible(true);\n\n// Reset to natural sky view\ncore.clear(\"natural\");\n\n// Restore ground and atmosphere\nLandscapeMgr.setFlagLandscape(true);\nLandscapeMgr.setFlagAtmosphere(true);\n\n// Reset view to default position\nStelMovementMgr.zoomTo(100, 3);\ncore.moveToAltAzi(40.0, 180.0, 3.0);\n\ncore.debug(tr(\"Constellation tour completed successfully!\"));",
+                    "desc": "Enhanced cinematic tour of major constellations with smooth transitions, art visualization, i18n support, and automatic restoration of original settings",
+                    "tags": ["tour", "constellations", "cinematic", "art", "i18n"]
+                },
+                {
+                    "id": "tour-messier-marathon",
+                    "name": "Messier Marathon",
+                    "code": "// Tour of brightest Messier objects\nvar messierObjects = [\"M31\", \"M42\", \"M45\", \"M13\", \"M57\", \"M27\", \"M1\", \"M8\"];\n\ncore.setTimeRate(0);\n\nfor (var i = 0; i < messierObjects.length; i++) {\n    var obj = messierObjects[i];\n    core.debug(\"Observing: \" + obj);\n    \n    var objInfo = core.getObjectInfo(obj);\n    if (!objInfo || !objInfo[\"above-horizon\"]) {\n        core.debug(obj + \" is not visible now\");\n        continue;\n    }\n    \n    core.moveToObject(obj, 2);\n    core.wait(2);\n    \n    // Zoom in gradually\n    StelMovementMgr.setFov(20);\n    core.wait(2);\n    StelMovementMgr.setFov(10);\n    core.wait(3);\n    \n    // Display object name\n    var labelId = LabelMgr.labelScreen(obj + \" - \" + objInfo[\"vmag\"] + \" mag\", 50, 50, false, 20, \"#ffaa00\");\n    LabelMgr.setLabelShow(labelId, true);\n    core.wait(4);\n    LabelMgr.deleteLabel(labelId);\n    \n    StelMovementMgr.setFov(60);\n    core.wait(1);\n}\n\ncore.debug(\"Messier tour complete!\");",
+                    "desc": "Tour of popular Messier deep-sky objects",
+                    "tags": ["tour", "messier", "dso", "deepsky"]
+                }
+            ]
+        },
+        "events": {
+            "name": "Event Simulations",
+            "icon": "🌙",
+            "description": "Simulate astronomical events like eclipses and conjunctions",
+            "items": [
+                {
+                    "id": "eclipse-simulator",
+                    "name": "Eclipse Simulator",
+                    "code": "// Simple eclipse simulation\nfunction simulateEclipse(eclipseJD, durationSeconds) {\n    var originalRate = core.getTimeRate();\n    core.setTimeRate(0);\n    core.setJDay(eclipseJD);\n    \n    core.debug(\"Eclipse simulation started\");\n    core.moveToObject(\"Sun\", 2);\n    core.wait(2);\n    StelMovementMgr.setFov(1.5);\n    \n    var startJD = core.getJDay();\n    var endJD = startJD + durationSeconds / 86400;\n    var totalSteps = 100;\n    \n    for (var step = 0; step <= totalSteps; step++) {\n        var t = step / totalSteps;\n        var currentJD = startJD + t * (endJD - startJD);\n        core.setJDay(currentJD);\n        \n        var sunInfo = core.getObjectInfo(\"Sun\");\n        var eclipseMag = sunInfo[\"eclipse-magnitude\"];\n        if (eclipseMag) {\n            core.debug(\"Eclipse magnitude: \" + (eclipseMag * 100).toFixed(1) + \"%\");\n        }\n        \n        core.wait(0.05);\n    }\n    \n    core.setTimeRate(originalRate);\n    core.debug(\"Eclipse simulation complete\");\n}\n\n// Simulate eclipse at specific JD (example: 2024-04-08 eclipse)\n// core.setJDay(2460409.25); // April 8, 2024 eclipse\n// simulateEclipse(core.getJDay(), 60);",
+                    "desc": "Simulate a solar eclipse over time",
+                    "tags": ["eclipse", "simulation", "sun", "event"]
+                },
+                {
+                    "id": "planet-conjunction",
+                    "name": "Planet Conjunction Finder",
+                    "code": "// Find when two planets are closest in the sky\nfunction findConjunction(planet1, planet2, startJD, endJD, steps) {\n    var originalJD = core.getJDay();\n    steps = steps || 1000;\n    \n    var bestJD = startJD;\n    var bestDistance = Infinity;\n    \n    for (var i = 0; i <= steps; i++) {\n        var t = i / steps;\n        var currentJD = startJD + t * (endJD - startJD);\n        core.setJDay(currentJD);\n        \n        var pos1 = core.getObjectInfo(planet1);\n        var pos2 = core.getObjectInfo(planet2);\n        \n        // Calculate angular separation using spherical law of cosines\n        var ra1 = pos1[\"ra\"] * Math.PI / 180;\n        var dec1 = pos1[\"dec\"] * Math.PI / 180;\n        var ra2 = pos2[\"ra\"] * Math.PI / 180;\n        var dec2 = pos2[\"dec\"] * Math.PI / 180;\n        \n        var separation = Math.acos(\n            Math.sin(dec1) * Math.sin(dec2) +\n            Math.cos(dec1) * Math.cos(dec2) * Math.cos(ra1 - ra2)\n        ) * 180 / Math.PI;\n        \n        if (separation < bestDistance) {\n            bestDistance = separation;\n            bestJD = currentJD;\n        }\n    }\n    \n    core.setJDay(bestJD);\n    core.debug(\"Closest approach: \" + bestDistance.toFixed(2) + \"°\");\n    core.debug(\"Date: \" + core.getDate(\"utc\"));\n    \n    core.setJDay(originalJD);\n    return bestJD;\n}\n\n// Example: Find when Mars and Jupiter are close\n// var start = core.jdFromDateString(\"2025-01-01T00:00:00\", \"utc\");\n// var end = core.jdFromDateString(\"2025-12-31T00:00:00\", \"utc\");\n// findConjunction(\"Mars\", \"Jupiter\", start, end, 500);",
+                    "desc": "Find when two planets are closest in the sky",
+                    "tags": ["conjunction", "planets", "calculation", "event"]
+                }
+            ]
+        },
+        "data-collection": {
+            "name": "Data Collection & Export",
+            "icon": "📊",
+            "description": "Collect astronomical data and export to files",
+            "items": [
+                {
+                    "id": "solar-altitude-tracking",
+                    "name": "Solar Altitude Tracker",
+                    "code": "// Track sun altitude throughout the day\nvar startJD = core.jdFromDateString(core.getDate(\"utc\").split(\"T\")[0] + \"T00:00:00\", \"utc\");\nvar endJD = startJD + 1; // 24 hours\nvar steps = 48; // Every 30 minutes\n\ncore.resetOutput();\ncore.output(\"Time (UTC), Sun Altitude, Sun Azimuth\");\n\nfor (var i = 0; i <= steps; i++) {\n    var t = i / steps;\n    var currentJD = startJD + t * (endJD - startJD);\n    core.setJDay(currentJD);\n    \n    var sunInfo = core.getObjectInfo(\"Sun\");\n    var timeStr = core.getDate(\"utc\").split(\"T\")[1].substring(0, 5);\n    \n    core.output(timeStr + \", \" + sunInfo[\"altitude\"].toFixed(2) + \", \" + sunInfo[\"azimuth\"].toFixed(2));\n}\n\ncore.saveOutputAs(\"sun_tracking.csv\");\ncore.debug(\"Solar tracking data saved to sun_tracking.csv\");",
+                    "desc": "Track sun altitude and export to CSV",
+                    "tags": ["data", "tracking", "sun", "csv", "export"]
+                },
+                {
+                    "id": "night-sky-report",
+                    "name": "Night Sky Report",
+                    "code": "// Generate night sky observation report\nfunction generateNightSkyReport() {\n    core.resetOutput();\n    \n    core.output(\"=== NIGHT SKY OBSERVATION REPORT ===\");\n    core.output(\"Date: \" + core.getDate(\"local\"));\n    core.output(\"Location: \" + core.getObserverLocation());\n    \n    var sunInfo = core.getObjectInfo(\"Sun\");\n    var sunAlt = sunInfo[\"altitude\"];\n    core.output(\"Sun altitude: \" + sunAlt.toFixed(2) + \"°\");\n    \n    if (sunAlt > -6) {\n        core.output(\"WARNING: Sky is not dark enough for deep-sky observing\");\n    }\n    \n    core.output(\"\\n--- VISIBLE PLANETS ---\");\n    var planets = [\"Mercury\", \"Venus\", \"Mars\", \"Jupiter\", \"Saturn\"];\n    for (var i = 0; i < planets.length; i++) {\n        var info = core.getObjectInfo(planets[i]);\n        if (info[\"above-horizon\"]) {\n            core.output(planets[i] + \": Alt=\" + info[\"altitude\"].toFixed(2) + \"°, Mag=\" + info[\"vmag\"]);\n        }\n    }\n    \n    core.output(\"\\n--- MOON INFO ---\");\n    var moonInfo = core.getObjectInfo(\"Moon\");\n    core.output(\"Phase: \" + (moonInfo[\"phase\"] * 100).toFixed(1) + \"% illuminated\");\n    if (moonInfo[\"phase-name\"]) {\n        core.output(\"Phase name: \" + moonInfo[\"phase-name\"]);\n    }\n    \n    core.saveOutputAs(\"observation_report.txt\");\n    core.debug(\"Report saved to observation_report.txt\");\n}\n\ngenerateNightSkyReport();",
+                    "desc": "Generate complete observation report",
+                    "tags": ["report", "observation", "planets", "moon", "export"]
+                }
+            ]
+        },
+        "visual-effects": {
+            "name": "Visual Effects & Display",
+            "icon": "🎨",
+            "description": "Visual effects for screen labels and displays",
+            "items": [
+                {
+                    "id": "transition-effect-fade",
+                    "name": "Fade Effect",
+                    "code": "// Fade effect for screen labels\nfunction fadeIn(labelId, duration) {\n    var steps = 20;\n    for (var i = 0; i <= steps; i++) {\n        // Note: Label opacity control may vary\n        LabelMgr.setLabelShow(labelId, true);\n        core.wait(duration / steps);\n    }\n}\n\nfunction fadeOut(labelId, duration) {\n    var steps = 20;\n    for (var i = steps; i >= 0; i--) {\n        core.wait(duration / steps);\n    }\n    LabelMgr.setLabelShow(labelId, false);\n}\n\n// Usage:\nvar welcomeId = LabelMgr.labelScreen(\"Welcome to Stellarium!\", 100, 100, false, 24, \"#ffffff\");\n// fadeIn(welcomeId, 1);\ncore.wait(3);\n// fadeOut(welcomeId, 1);\nLabelMgr.deleteLabel(welcomeId);",
+                    "desc": "Fade in/out effects for screen labels",
+                    "tags": ["fade", "effect", "label", "animation"]
+                },
+                {
+                    "id": "screenshot-sequence",
+                    "name": "Screenshot Sequence",
+                    "code": "// Create a sequence of screenshots\nvar objects = [\"Moon\", \"Mars\", \"Jupiter\", \"Saturn\", \"M31\"];\n\n// Create directory for screenshots (needs to exist)\nvar screenshotDir = \"./tour_screenshots/\";\n\ncore.setGuiVisible(false);\n\nfor (var i = 0; i < objects.length; i++) {\n    var obj = objects[i];\n    core.debug(\"Capturing: \" + obj);\n    \n    core.moveToObject(obj, 2);\n    core.wait(2);\n    StelMovementMgr.setFov(20);\n    core.wait(1);\n    \n    var filename = \"screenshot_\" + obj + \"_\" + i;\n    core.screenshot(filename, false, screenshotDir, true, \"png\");\n    core.debug(\"Saved: \" + filename);\n    \n    StelMovementMgr.setFov(60);\n    core.wait(1);\n}\n\ncore.setGuiVisible(true);\ncore.debug(\"Screenshot sequence complete!\");",
+                    "desc": "Capture screenshots of multiple objects",
+                    "tags": ["screenshot", "capture", "image", "export"]
+                }
+            ]
+        },
+        "advanced": {
+            "name": "Advanced Examples",
+            "icon": "🚀",
+            "description": "Complex examples for advanced script development",
+            "items": [
+                {
+                    "id": "observing-plan",
+                    "name": "Observing Plan Generator",
+                    "code": "// Generate an observing plan based on current visibility\nfunction generateObservingPlan() {\n    var objects = [\n        { name: \"Sun\", type: \"star\", minAlt: -6 },\n        { name: \"Moon\", type: \"moon\", minAlt: 0 },\n        { name: \"Mercury\", type: \"planet\", minAlt: 5 },\n        { name: \"Venus\", type: \"planet\", minAlt: 5 },\n        { name: \"Mars\", type: \"planet\", minAlt: 10 },\n        { name: \"Jupiter\", type: \"planet\", minAlt: 10 },\n        { name: \"Saturn\", type: \"planet\", minAlt: 10 },\n        { name: \"M31\", type: \"galaxy\", minAlt: 15 },\n        { name: \"M42\", type: \"nebula\", minAlt: 15 }\n    ];\n    \n    core.resetOutput();\n    core.output(\"=== OBSERVING PLAN ===\");\n    core.output(\"Generated: \" + core.getDate(\"local\"));\n    core.output(\"Location: \" + core.getObserverLocation());\n    core.output(\"\\n--- OBJECTS VISIBLE NOW ---\\n\");\n    \n    var visibleCount = 0;\n    \n    for (var i = 0; i < objects.length; i++) {\n        var obj = objects[i];\n        var info = core.getObjectInfo(obj.name);\n        \n        if (info && info[\"above-horizon\"] && info[\"altitude\"] > obj.minAlt) {\n            visibleCount++;\n            core.output(obj.name + \":\");\n            core.output(\"  Altitude: \" + info[\"altitude\"].toFixed(1) + \"°\");\n            core.output(\"  Azimuth: \" + info[\"azimuth\"].toFixed(1) + \"°\");\n            core.output(\"  Magnitude: \" + info[\"vmag\"]);\n            core.output(\"\");\n        }\n    }\n    \n    if (visibleCount === 0) {\n        core.output(\"No objects visible at this time.\");\n        core.output(\"Try again when sky is darker.\");\n    }\n    \n    core.saveOutputAs(\"observing_plan.txt\");\n    core.debug(\"Observing plan saved to observing_plan.txt\");\n}\n\ngenerateObservingPlan();",
+                    "desc": "Generate custom observing plan based on visibility",
+                    "tags": ["advanced", "observing", "planning", "automation"]
+                },			
+								{
+								"id": "object-info-comprehensive",
+								"name": "Display Comprehensive Object Information",
+								"code": "// Get detailed information about OBJECT_NAME\nvar info = core.getObjectInfo(\"OBJECT_NAME\");\n\nif (!info) {\n    core.debug(\"Object not found: OBJECT_NAME\");\n} else {\n    core.debug(\"╔══════════════════════════════════════════════════════════════╗\");\n    core.debug(\"║                    \" + \"OBJECT_NAME\".toUpperCase() + \" INFORMATION                    ║\");\n    core.debug(\"╚══════════════════════════════════════════════════════════════╝\");\n    core.debug(\"\");\n    \n    // === BASIC IDENTIFICATION ===\n    core.debug(\"┌────────────── BASIC IDENTIFICATION ──────────────┐\");\n    core.debug(\"│ Name:          \" + (info[\"name\"] || \"N/A\"));\n    core.debug(\"│ Localized Name:\" + (info[\"localized-name\"] || \"N/A\"));\n    core.debug(\"│ Object Type:   \" + (info[\"object-type\"] || info[\"type\"] || \"N/A\"));\n    core.debug(\"│ IAU Const.:    \" + (info[\"iauConstellation\"] || \"N/A\"));\n    core.debug(\"│ Spectral Class:\" + (info[\"spectral-class\"] || \"N/A\"));\n    core.debug(\"└────────────────────────────────────────────────────┘\");\n    core.debug(\"\");\n    \n    // === MAGNITUDE AND DISTANCE ===\n    core.debug(\"┌────────────── MAGNITUDE & DISTANCE ──────────────┐\");\n    core.debug(\"│ Visual Mag:    \" + (info[\"vmag\"] !== undefined ? info[\"vmag\"].toFixed(2) : \"N/A\"));\n    core.debug(\"│ Absolute Mag:  \" + (info[\"absolute-mag\"] !== undefined ? info[\"absolute-mag\"].toFixed(2) : \"N/A\"));\n    core.debug(\"│ Distance (ly): \" + (info[\"distance-ly\"] !== undefined ? info[\"distance-ly\"].toFixed(2) : \"N/A\"));\n    core.debug(\"│ Distance (AU): \" + (info[\"distance\"] !== undefined ? info[\"distance\"].toFixed(2) : \"N/A\"));\n    core.debug(\"│ Parallax:      \" + (info[\"parallax\"] !== undefined ? info[\"parallax\"] + \" mas\" : \"N/A\"));\n    core.debug(\"└────────────────────────────────────────────────────┘\");\n    core.debug(\"\");\n    \n    // === COORDINATES ===\n    core.debug(\"┌────────────────── COORDINATES ──────────────────┐\");\n    core.debug(\"│ RA (J2000):     \" + (info[\"raJ2000\"] !== undefined ? info[\"raJ2000\"].toFixed(4) + \"°\" : \"N/A\"));\n    core.debug(\"│ Dec (J2000):    \" + (info[\"decJ2000\"] !== undefined ? info[\"decJ2000\"].toFixed(4) + \"°\" : \"N/A\"));\n    core.debug(\"│ RA (JNow):      \" + (info[\"ra\"] !== undefined ? info[\"ra\"].toFixed(4) + \"°\" : \"N/A\"));\n    core.debug(\"│ Dec (JNow):     \" + (info[\"dec\"] !== undefined ? info[\"dec\"].toFixed(4) + \"°\" : \"N/A\"));\n    core.debug(\"│ Galactic L:     \" + (info[\"glong\"] !== undefined ? info[\"glong\"].toFixed(4) + \"°\" : \"N/A\"));\n    core.debug(\"│ Galactic B:     \" + (info[\"glat\"] !== undefined ? info[\"glat\"].toFixed(4) + \"°\" : \"N/A\"));\n    core.debug(\"│ Ecliptic Lon:   \" + (info[\"elong\"] !== undefined ? info[\"elong\"].toFixed(4) + \"°\" : \"N/A\"));\n    core.debug(\"│ Ecliptic Lat:   \" + (info[\"elat\"] !== undefined ? info[\"elat\"].toFixed(4) + \"°\" : \"N/A\"));\n    core.debug(\"└────────────────────────────────────────────────────┘\");\n    core.debug(\"\");\n    \n    // === CURRENT POSITION (Alt/Az) ===\n    core.debug(\"┌────────────── CURRENT POSITION (Alt/Az) ──────────┐\");\n    core.debug(\"│ Altitude:      \" + (info[\"altitude\"] !== undefined ? info[\"altitude\"].toFixed(2) + \"°\" : \"N/A\"));\n    core.debug(\"│ Azimuth:       \" + (info[\"azimuth\"] !== undefined ? info[\"azimuth\"].toFixed(2) + \"°\" : \"N/A\"));\n    core.debug(\"│ Above Horizon: \" + (info[\"above-horizon\"] ? \"YES ✓\" : \"NO ✗\"));\n    core.debug(\"│ Air Mass:      \" + (info[\"airmass\"] !== undefined ? info[\"airmass\"].toFixed(2) : \"N/A\"));\n    core.debug(\"│ Hour Angle:    \" + (info[\"hourAngle-hms\"] || info[\"hourAngle-dd\"] || \"N/A\"));\n    core.debug(\"│ App Sidereal:  \" + (info[\"appSidTm\"] || \"N/A\"));\n    core.debug(\"└────────────────────────────────────────────────────┘\");\n    core.debug(\"\");\n    \n    // === RISE/SET/TRANSIT ===\n    core.debug(\"┌────────────── RISE / SET / TRANSIT ──────────────┐\");\n    core.debug(\"│ Rise Time:     \" + (info[\"rise\"] || \"Circumpolar\"));\n    core.debug(\"│ Transit Time:  \" + (info[\"transit\"] || \"N/A\"));\n    core.debug(\"│ Set Time:      \" + (info[\"set\"] || \"Circumpolar\"));\n    core.debug(\"└────────────────────────────────────────────────────┘\");\n    core.debug(\"\");\n    \n    // === STAR-SPECIFIC PROPERTIES ===\n    if (info[\"star-type\"] || info[\"spectral-class\"] || info[\"period\"] || info[\"bV\"]) {\n        core.debug(\"┌─────────────── STAR PROPERTIES ───────────────┐\");\n        core.debug(\"│ Star Type:     \" + (info[\"star-type\"] || \"N/A\"));\n        core.debug(\"│ Spectral:      \" + (info[\"spectral-class\"] || \"N/A\"));\n        core.debug(\"│ B-V Index:     \" + (info[\"bV\"] !== undefined ? info[\"bV\"].toFixed(3) : \"N/A\"));\n        core.debug(\"│ Period:        \" + (info[\"period\"] !== undefined ? info[\"period\"] + \" days\" : \"N/A\"));\n        core.debug(\"│ Variable Type: \" + (info[\"variable-star\"] || \"N/A\"));\n        core.debug(\"└────────────────────────────────────────────────────┘\");\n        core.debug(\"\");\n    }\n    \n    // === DOUBLE STAR PROPERTIES ===\n    if (info[\"wds-separation\"] !== undefined || info[\"wds-position-angle\"] !== undefined) {\n        core.debug(\"┌────────────── DOUBLE STAR DATA ───────────────┐\");\n        core.debug(\"│ Separation:    \" + (info[\"wds-separation\"] !== undefined ? info[\"wds-separation\"] + \" arcsec\" : \"N/A\"));\n        core.debug(\"│ Position Angle:\" + (info[\"wds-position-angle\"] !== undefined ? info[\"wds-position-angle\"] + \"°\" : \"N/A\"));\n        core.debug(\"│ WDS Year:      \" + (info[\"wds-year\"] || \"N/A\"));\n        core.debug(\"└────────────────────────────────────────────────────┘\");\n        core.debug(\"\");\n    }\n    \n    // === SOLAR SYSTEM PROPERTIES ===\n    if (info[\"illumination\"] !== undefined || info[\"phase\"] !== undefined || info[\"age\"] !== undefined) {\n        core.debug(\"┌──────────── SOLAR SYSTEM DATA ───────────────┐\");\n        if (info[\"illumination\"] !== undefined) core.debug(\"│ Illumination:  \" + info[\"illumination\"] + \"%\");\n        if (info[\"phase\"] !== undefined) core.debug(\"│ Phase:         \" + (info[\"phase\"] * 100).toFixed(1) + \"%\");\n        if (info[\"age\"] !== undefined) core.debug(\"│ Age:           \" + info[\"age\"] + \" days\");\n        if (info[\"velocity-kms\"] !== undefined) core.debug(\"│ Velocity:      \" + info[\"velocity-kms\"] + \" km/s\");\n        if (info[\"radial-velocity\"] !== undefined) core.debug(\"│ Radial Vel:    \" + info[\"radial-velocity\"] + \" km/s\");\n        if (info[\"moons\"] !== undefined) core.debug(\"│ Moons:         \" + info[\"moons\"]);\n        core.debug(\"└────────────────────────────────────────────────────┘\");\n        core.debug(\"\");\n    }\n    \n    // === OBJECT SIZE ===\n    if (info[\"size-deg\"] !== undefined && info[\"size-deg\"] !== \"0.00000°\") {\n        core.debug(\"┌──────────────── OBJECT SIZE ─────────────────┐\");\n        core.debug(\"│ Angular Size:  \" + (info[\"size-deg\"] || \"N/A\"));\n        core.debug(\"│ Angular Size:  \" + (info[\"size-dms\"] || \"N/A\"));\n        core.debug(\"└────────────────────────────────────────────────────┘\");\n        core.debug(\"\");\n    }\n    \n    core.debug(\"╔══════════════════════════════════════════════════════════════╗\");\n    core.debug(\"║  Tip: Use format=\\\"json\\\" to get complete raw JSON data      ║\");\n    core.debug(\"╚══════════════════════════════════════════════════════════════╝\");\n}\n\n// To get all available property names (for scripting):\n// var props = Object.keys(info);\n// core.debug(\"Properties: \" + props.join(\", \"));",
+								"desc": "Display comprehensive information about any celestial object with formatted tables including coordinates, magnitude, distance, visibility, rise/set times, and object-specific properties (stars, double stars, solar system)",
+								"tags": ["object", "information", "debug", "coordinates", "magnitude", "visibility", "star", "planet"]
+								},
+								{
+								"id": "reset-to-natural-sky-direct",
+								"name": "Natural Sky Reset (Direct/Native Method)",
+								"code": "//\n// ============================================================\n// Name: Natural Sky Reset - Direct Native Method\n// ============================================================\n// Version: 1.0\n// Author: Stellarium Scripting\n// License: Public Domain\n// Description: Resets Stellarium to natural sky using direct script engine execution\n// This method executes commands\n//natively like Stellarium's built-in script engine, using eval()\n//with small delays between commands for reliable execution.\n// ============================================================\n//\n\nfunction resetToNaturalSky() {\n    core.debug(\"[Scripts] Resetting to natural sky...\");\n    \n    // Sequential commands to reset all settings\n    var commands = [\n        \"core.setDate('now')\",\n        \"core.clear('natural')\",\n        \"LabelMgr.deleteAllLabels()\",\n        \"MarkerMgr.deleteAllMarkers()\",\n        \"StelMovementMgr.setFlagTracking(false)\",\n        \"StelMovementMgr.setEquatorialMount(false)\",\n        \"core.goHome()\",\n        \"LandscapeMgr.setFlagLandscape(true)\",\n        \"LandscapeMgr.setFlagAtmosphere(true)\",\n        \"StarMgr.setFlagStars(true)\",\n        \"SolarSystem.setFlagPlanets(true)\",\n        \"SolarSystem.setFlagLabels(true)\",\n        \"NebulaMgr.setFlagShow(true)\",\n        \"MilkyWay.setFlagShow(true)\",\n        \"ConstellationMgr.setFlagLines(false)\",\n        \"ConstellationMgr.setFlagLabels(false)\",\n        \"ConstellationMgr.setFlagBoundaries(false)\",\n        \"ConstellationMgr.setFlagArt(false)\",\n        \"ConstellationMgr.setFlagIsolateSelected(false)\",\n        \"ConstellationMgr.setFlagConstellationPick(false)\",\n        \"GridLinesMgr.setFlagEquatorGrid(false)\",\n        \"GridLinesMgr.setFlagAzimuthalGrid(false)\",\n        \"LandscapeMgr.setFlagCardinalPoints(false)\",\n        \"core.setNightMode(false)\",\n        \"core.setGuiVisible(true)\",\n        \"core.setDiskViewport(false)\",\n        \"core.setProjectionMode('stereographic')\",\n        \"core.moveToAltAzi(40.0, 180.0, 3.0)\",\n        \"StelMovementMgr.zoomTo(90.0, 2.0)\",\n        \"core.setTimeRate(1)\"\n    ];\n    \n    // Execute each command directly with small delay between them\n    for (var i = 0; i < commands.length; i++) {\n        core.debug(\"Executing command \" + (i+1) + \"/\" + commands.length + \": \" + commands[i]);\n        try {\n            eval(commands[i]);  // Execute natively like Stellarium's script engine\n        } catch(e) {\n            core.debug(\"Error executing command: \" + commands[i] + \" - \" + e);\n        }\n        core.wait(0.1);  // Small delay to ensure each command completes\n    }\n    \n    core.debug(\"[Scripts] ✓ Full reset completed successfully.\");\n}\n\n// Execute the function\nresetToNaturalSky();",
+								"desc": "Reset Stellarium to natural sky using eval() with sequential command execution and error handling. Restores time, view, landscape, atmosphere, planets, stars, nebulae, grids, GUI, and projection mode to default settings.",
+								"tags": ["reset", "natural", "sky", "native", "direct", "eval", "restore", "cleanup", "utility"]
+								},
+								{
+								"id": "reset-to-natural-sky-function",
+								"name": "Natural Sky Reset (Function Constructor Method)",
+								"code": "//\n// ============================================================\n// Name: Natural Sky Reset - Function Constructor Method\n// ============================================================\n// Version: 1.0\n// Author: Stellarium Scripting\n// License: Public Domain\n// Description: Alternative method using Function() constructor instead of eval()\n//for slightly better security. Recommended for production scripts.\n// ============================================================\n//\n\nfunction resetToNaturalSky() {\n    core.debug(\"[Scripts] Resetting to natural sky (Function constructor method)...\");\n    \n    var commands = [\n        \"core.setDate('now')\",\n        \"core.clear('natural')\",\n        \"LabelMgr.deleteAllLabels()\",\n        \"MarkerMgr.deleteAllMarkers()\",\n        \"StelMovementMgr.setFlagTracking(false)\",\n        \"StelMovementMgr.setEquatorialMount(false)\",\n        \"core.goHome()\",\n        \"LandscapeMgr.setFlagLandscape(true)\",\n        \"LandscapeMgr.setFlagAtmosphere(true)\",\n        \"StarMgr.setFlagStars(true)\",\n        \"SolarSystem.setFlagPlanets(true)\",\n        \"SolarSystem.setFlagLabels(true)\",\n        \"NebulaMgr.setFlagShow(true)\",\n        \"MilkyWay.setFlagShow(true)\",\n        \"ConstellationMgr.setFlagLines(false)\",\n        \"ConstellationMgr.setFlagLabels(false)\",\n        \"ConstellationMgr.setFlagBoundaries(false)\",\n        \"ConstellationMgr.setFlagArt(false)\",\n        \"ConstellationMgr.setFlagIsolateSelected(false)\",\n        \"ConstellationMgr.setFlagConstellationPick(false)\",\n        \"GridLinesMgr.setFlagEquatorGrid(false)\",\n        \"GridLinesMgr.setFlagAzimuthalGrid(false)\",\n        \"LandscapeMgr.setFlagCardinalPoints(false)\",\n        \"core.setNightMode(false)\",\n        \"core.setGuiVisible(true)\",\n        \"core.setDiskViewport(false)\",\n        \"core.setProjectionMode('stereographic')\",\n        \"core.moveToAltAzi(40.0, 180.0, 3.0)\",\n        \"StelMovementMgr.zoomTo(90.0, 2.0)\",\n        \"core.setTimeRate(1)\"\n    ];\n    \n    // Safer execution using Function constructor\n    for (var i = 0; i < commands.length; i++) {\n        core.debug(\"Executing: \" + commands[i]);\n        try {\n            var cmdFunc = new Function(commands[i]);\n            cmdFunc();\n        } catch(e) {\n            core.debug(\"Error: \" + commands[i] + \" - \" + e);\n        }\n        core.wait(0.1);\n    }\n    \n    core.debug(\"[Scripts] ✓ Full reset completed successfully.\");\n}\n\nresetToNaturalSky();",
+								"desc": "Alternative method using Function() constructor for safer execution. Same functionality as the direct method but with better security. Useful for production scripts where eval() might be restricted.",
+								"tags": ["reset", "natural", "sky", "function", "constructor", "safer", "utility"]
+								}
+					]
+				}
+    }
+}

@@ -1,0 +1,597 @@
+[
+    {
+        "name": "enablePlugin",
+        "category": "Meteor Showers - Core",
+        "signature": "bool enablePlugin",
+        "description": "Property that controls whether the Meteor Showers plugin is enabled. Reading via core.getStelProperty() returns 'true' or 'false'.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if the plugin is enabled, false otherwise",
+        "type": "property",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0"
+        },
+        "example": "var enabled = core.getStelProperty('MeteorShowers.enablePlugin');\ncore.debug('Plugin enabled: ' + enabled);\n\n// Toggle the plugin on/off\ncore.setStelProperty('MeteorShowers.enablePlugin', true);"
+    },
+    {
+        "name": "getEnableLabels",
+        "category": "Meteor Showers - Display",
+        "signature": "bool getEnableLabels()",
+        "description": "Returns whether radiant labels (names of meteor showers) are displayed next to the radiant markers.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if labels are visible, false if hidden",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0"
+        },
+        "example": "if (MeteorShowers.getEnableLabels()) {\n    core.debug(\"Radiant labels are visible\");\n} else {\n    MeteorShowers.setEnableLabels(true);\n}"
+    },
+    {
+        "name": "setEnableLabels",
+        "category": "Meteor Showers - Display",
+        "signature": "void setEnableLabels(bool visible)",
+        "description": "Shows or hides radiant labels (names of meteor showers) next to the radiant markers.",
+        "parameters": [
+            {
+                "name": "visible",
+                "type": "bool",
+                "description": "true to show labels, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0"
+        },
+        "example": "MeteorShowers.setEnableLabels(true);"
+    },
+    {
+        "name": "enableLabels",
+        "category": "Meteor Showers - Properties",
+        "signature": "bool enableLabels",
+        "description": "Property that controls whether radiant labels are displayed. Reading via core.getStelProperty() returns 'true' or 'false'.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if labels are visible, false otherwise",
+        "type": "property",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0"
+        },
+        "example": "core.setStelProperty('MeteorShowers.enableLabels', true);\nvar visible = core.getStelProperty('MeteorShowers.enableLabels');\ncore.debug(\"now :\" + visible);\n"
+    },
+    {
+        "name": "getEnableMarker",
+        "category": "Meteor Showers - Display",
+        "signature": "bool getEnableMarker()",
+        "description": "Returns whether radiant markers (visual indicators) are displayed for meteor showers.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if markers are visible, false if hidden",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0"
+        },
+        "example": "if (MeteorShowers.getEnableMarker()) {\n    core.debug(\"Radiant markers are visible\");\n}"
+    },
+    {
+        "name": "setEnableMarker",
+        "category": "Meteor Showers - Display",
+        "signature": "void setEnableMarker(bool visible)",
+        "description": "Shows or hides radiant markers (visual indicators) for meteor showers.",
+        "parameters": [
+            {
+                "name": "visible",
+                "type": "bool",
+                "description": "true to show markers, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0"
+        },
+        "example": "MeteorShowers.setEnableMarker(true);"
+    },
+    {
+        "name": "getActiveRadiantOnly",
+        "category": "Meteor Showers - Filtering",
+        "signature": "bool getActiveRadiantOnly()",
+        "description": "Returns whether only currently active meteor showers are displayed (based on their activity dates).",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if only active radiants are shown, false if all radiants shown",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0"
+        },
+        "example": "if (MeteorShowers.getActiveRadiantOnly()) {\n    core.debug(\"Only active meteor showers are shown\");\n}"
+    },
+    {
+        "name": "setActiveRadiantOnly",
+        "category": "Meteor Showers - Filtering",
+        "signature": "void setActiveRadiantOnly(bool activeOnly)",
+        "description": "Sets whether only currently active meteor showers should be displayed based on their activity dates.",
+        "parameters": [
+            {
+                "name": "activeOnly",
+                "type": "bool",
+                "description": "true to show only active radiants, false to show all",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0"
+        },
+        "example": "MeteorShowers.setActiveRadiantOnly(true);"
+    },
+    {
+        "name": "getFontSize",
+        "category": "Meteor Showers - Appearance",
+        "signature": "int getFontSize()",
+        "description": "Returns the current font size for radiant labels in pixels.",
+        "parameters": [],
+        "returnType": "int",
+        "returnDescription": "Font size in pixels (default: 13)",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0"
+        },
+        "example": "var size = MeteorShowers.getFontSize();\ncore.debug(\"Label font size: \" + size + \"px\");"
+    },
+    {
+        "name": "setFontSize",
+        "category": "Meteor Showers - Appearance",
+        "signature": "void setFontSize(int pixelSize)",
+        "description": "Sets the font size for radiant labels in pixels.",
+        "parameters": [
+            {
+                "name": "pixelSize",
+                "type": "int",
+                "description": "Font size in pixels (minimum: 1)",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0"
+        },
+        "example": "MeteorShowers.setFontSize(15);"
+    },
+    {
+        "name": "getColorARG",
+        "category": "Meteor Showers - Colors",
+        "signature": "Vec3f getColorARG()",
+        "description": "Returns the color for active radiants based on generic (unconfirmed) data. Returns a Vec3f object which prints as [r, g, b] with values from 0.0 to 1.0.",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "returnDescription": "RGB color as Vec3f - default: [0.0, 1.0, 0.94] (cyan-green)",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0"
+        },
+        "example": "var color = MeteorShowers.getColorARG();\ncore.debug(\"Generic active color: RGB\" + color);\n// Output example: Generic active color: RGB[0, 1, 0.94]\n\n// Using property system - returns a comma-separated string\nvar colorStr = core.getStelProperty('MeteorShowers.colorARG');\ncore.debug(\"Color as string: \" + colorStr);\n// Output example: Color as string: 0,1,0.94"
+    },
+    {
+        "name": "setColorARG",
+        "category": "Meteor Showers - Colors",
+        "signature": "void setColorARG(Vec3f rgb)",
+        "description": "Sets the color for active radiants based on generic (unconfirmed) data.",
+        "parameters": [
+            {
+                "name": "rgb",
+                "type": "Vec3f",
+                "description": "RGB color vector created via core.vec3f(r, g, b)",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0"
+        },
+        "example": "var orange = core.vec3f(1.0, 0.5, 0.0);\nMeteorShowers.setColorARG(orange);\n\n// Alternative using property system\ncore.setStelProperty('MeteorShowers.colorARG', orange);"
+    },
+    {
+        "name": "colorARG",
+        "category": "Meteor Showers - Properties",
+        "signature": "Vec3f colorARG",
+        "description": "Property that gets/sets the color for active radiants based on generic data. Reading via core.getStelProperty() returns a comma-separated string. Writing expects a Vec3f created with core.vec3f().",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "returnDescription": "RGB color - as Vec3f when written, as string (r,g,b) when read via core.getStelProperty()",
+        "type": "property",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0"
+        },
+        "example": "var colorStr = core.getStelProperty('MeteorShowers.colorARG');\ncore.debug(\"Color string: \" + colorStr);\n\nvar newColor = core.vec3f(1.0, 0.5, 0.0);\ncore.setStelProperty('MeteorShowers.colorARG', newColor);"
+    },
+    {
+        "name": "getColorARC",
+        "category": "Meteor Showers - Colors",
+        "signature": "Vec3f getColorARC()",
+        "description": "Returns the color for active radiants based on confirmed data. Returns a Vec3f object which prints as [r, g, b] with values from 0.0 to 1.0.",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "returnDescription": "RGB color as Vec3f - default: [1.0, 0.941176, 0.0] (yellow)",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0"
+        },
+        "example": "var color = MeteorShowers.getColorARC();\ncore.debug(\"Active confirmed color: RGB\" + color);\n// Output example: Active confirmed color: RGB[1, 0.941176, 0]\n\n// Using property system - returns a comma-separated string\nvar colorStr = core.getStelProperty('MeteorShowers.colorARC');\ncore.debug(\"Color as string: \" + colorStr);\n// Output example: Color as string: 1,0.941176,0"
+    },
+    {
+        "name": "setColorARC",
+        "category": "Meteor Showers - Colors",
+        "signature": "void setColorARC(Vec3f rgb)",
+        "description": "Sets the color for active radiants based on confirmed data.",
+        "parameters": [
+            {
+                "name": "rgb",
+                "type": "Vec3f",
+                "description": "RGB color vector created via core.vec3f(r, g, b)",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0"
+        },
+        "example": "var green = core.vec3f(0.2, 0.9, 0.2);\nMeteorShowers.setColorARC(green);\n\n// Alternative using property system\ncore.setStelProperty('MeteorShowers.colorARC', green);"
+    },
+    {
+        "name": "colorARC",
+        "category": "Meteor Showers - Properties",
+        "signature": "Vec3f colorARC",
+        "description": "Property that gets/sets the color for active radiants based on confirmed data. Reading via core.getStelProperty() returns a comma-separated string. Writing expects a Vec3f created with core.vec3f().",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "returnDescription": "RGB color - as Vec3f when written, as string (r,g,b) when read via core.getStelProperty()",
+        "type": "property",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0"
+        },
+        "example": "var colorStr = core.getStelProperty('MeteorShowers.colorARC');\nvar newColor = core.vec3f(0.0, 1.0, 0.0);\ncore.setStelProperty('MeteorShowers.colorARC', newColor);"
+    },
+    {
+        "name": "getColorIR",
+        "category": "Meteor Showers - Colors",
+        "signature": "Vec3f getColorIR()",
+        "description": "Returns the color for inactive radiants. Returns a Vec3f object which prints as [r, g, b] with values from 0.0 to 1.0.",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "returnDescription": "RGB color as Vec3f - default: [1.0, 1.0, 1.0] (white)",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0"
+        },
+        "example": "var color = MeteorShowers.getColorIR();\ncore.debug(\"Inactive color: RGB\" + color);\n// Output example: Inactive color: RGB[1, 1, 1]\n\n// Using property system - returns a comma-separated string\nvar colorStr = core.getStelProperty('MeteorShowers.colorIR');\ncore.debug(\"Color as string: \" + colorStr);\n// Output example: Color as string: 1,1,1"
+    },
+    {
+        "name": "setColorIR",
+        "category": "Meteor Showers - Colors",
+        "signature": "void setColorIR(Vec3f rgb)",
+        "description": "Sets the color for inactive radiants.",
+        "parameters": [
+            {
+                "name": "rgb",
+                "type": "Vec3f",
+                "description": "RGB color vector created via core.vec3f(r, g, b)",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0"
+        },
+        "example": "var gray = core.vec3f(0.5, 0.5, 0.5);\nMeteorShowers.setColorIR(gray);\n\n// Alternative using property system\ncore.setStelProperty('MeteorShowers.colorIR', gray);"
+    },
+    {
+        "name": "colorIR",
+        "category": "Meteor Showers - Properties",
+        "signature": "Vec3f colorIR",
+        "description": "Property that gets/sets the color for inactive radiants. Reading via core.getStelProperty() returns a comma-separated string. Writing expects a Vec3f created with core.vec3f().",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "returnDescription": "RGB color - as Vec3f when written, as string (r,g,b) when read via core.getStelProperty()",
+        "type": "property",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0"
+        },
+        "example": "var colorStr = core.getStelProperty('MeteorShowers.colorIR');\nvar newColor = core.vec3f(0.8, 0.8, 0.8);\ncore.setStelProperty('MeteorShowers.colorIR', newColor);"
+    },
+    {
+        "name": "getEnableAtStartup",
+        "category": "Meteor Showers - Configuration",
+        "signature": "bool getEnableAtStartup()",
+        "description": "Returns whether the Meteor Showers plugin will be automatically enabled when Stellarium starts.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if enabled at startup, false otherwise",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0"
+        },
+        "example": "if (MeteorShowers.getEnableAtStartup()) {\n    core.debug(\"Meteor showers will appear on next startup\");\n}"
+    },
+    {
+        "name": "setEnableAtStartup",
+        "category": "Meteor Showers - Configuration",
+        "signature": "void setEnableAtStartup(bool enable)",
+        "description": "Sets whether the Meteor Showers plugin should be automatically enabled when Stellarium starts.",
+        "parameters": [
+            {
+                "name": "enable",
+                "type": "bool",
+                "description": "true to enable at startup, false to disable",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0"
+        },
+        "example": "MeteorShowers.setEnableAtStartup(true);"
+    },
+    {
+        "name": "getShowEnableButton",
+        "category": "Meteor Showers - GUI",
+        "signature": "bool getShowEnableButton()",
+        "description": "Returns whether the Meteor Showers plugin enable/disable button is visible on the toolbar.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if button is visible, false if hidden",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0"
+        },
+        "example": "if (MeteorShowers.getShowEnableButton()) {\n    core.debug(\"Enable button is visible on toolbar\");\n}"
+    },
+    {
+        "name": "setShowEnableButton",
+        "category": "Meteor Showers - GUI",
+        "signature": "void setShowEnableButton(bool show)",
+        "description": "Shows or hides the Meteor Showers plugin enable/disable button on the toolbar.",
+        "parameters": [
+            {
+                "name": "show",
+                "type": "bool",
+                "description": "true to show button, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0"
+        },
+        "example": "MeteorShowers.setShowEnableButton(true);"
+    },
+    {
+        "name": "getShowSearchButton",
+        "category": "Meteor Showers - GUI",
+        "signature": "bool getShowSearchButton()",
+        "description": "Returns whether the Meteor Showers search dialog button is visible on the toolbar.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if button is visible, false if hidden",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0"
+        },
+        "example": "if (MeteorShowers.getShowSearchButton()) {\n    core.debug(\"Search button is visible\");\n}"
+    },
+    {
+        "name": "setShowSearchButton",
+        "category": "Meteor Showers - GUI",
+        "signature": "void setShowSearchButton(bool show)",
+        "description": "Shows or hides the Meteor Showers search dialog button on the toolbar.",
+        "parameters": [
+            {
+                "name": "show",
+                "type": "bool",
+                "description": "true to show button, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0"
+        },
+        "example": "MeteorShowers.setShowSearchButton(true);"
+    },
+    {
+        "name": "getUpdateFrequencyHours",
+        "category": "Meteor Showers - Updates",
+        "signature": "int getUpdateFrequencyHours()",
+        "description": "Returns the frequency of automatic catalog updates in hours. Default is 720 hours (30 days).",
+        "parameters": [],
+        "returnType": "int",
+        "returnDescription": "Update frequency in hours",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0"
+        },
+        "example": "var freq = MeteorShowers.getUpdateFrequencyHours();\ncore.debug(\"Update frequency: \" + freq + \" hours\");"
+    },
+    {
+        "name": "setUpdateFrequencyHours",
+        "category": "Meteor Showers - Updates",
+        "signature": "void setUpdateFrequencyHours(int hours)",
+        "description": "Sets the frequency of automatic catalog updates in hours.",
+        "parameters": [
+            {
+                "name": "hours",
+                "type": "int",
+                "description": "Update frequency in hours",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0"
+        },
+        "example": "MeteorShowers.setUpdateFrequencyHours(168);"
+    },
+    {
+        "name": "getEnableAutoUpdates",
+        "category": "Meteor Showers - Updates",
+        "signature": "bool getEnableAutoUpdates()",
+        "description": "Returns whether automatic catalog updates from the internet are enabled.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if auto updates are enabled, false if disabled",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0"
+        },
+        "example": "if (MeteorShowers.getEnableAutoUpdates()) {\n    core.debug(\"Auto updates enabled\");\n}"
+    },
+    {
+        "name": "setEnableAutoUpdates",
+        "category": "Meteor Showers - Updates",
+        "signature": "void setEnableAutoUpdates(bool enable)",
+        "description": "Enables or disables automatic catalog updates from the internet.",
+        "parameters": [
+            {
+                "name": "enable",
+                "type": "bool",
+                "description": "true to enable auto updates, false to disable",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0"
+        },
+        "example": "MeteorShowers.setEnableAutoUpdates(true);"
+    },
+    {
+        "name": "updateCatalog",
+        "category": "Meteor Showers - Updates",
+        "signature": "void updateCatalog()",
+        "description": "Manually triggers an immediate update of the meteor showers catalog from the internet.",
+        "parameters": [],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0"
+        },
+        "example": "MeteorShowers.updateCatalog();\ncore.debug(\"Catalog update started...\");"
+    },
+    {
+        "name": "restoreDefaultSettings",
+        "category": "Meteor Showers - Configuration",
+        "signature": "void restoreDefaultSettings()",
+        "description": "Restores all Meteor Showers plugin settings to their default values (colors, font size, update frequency, etc.) and resets the catalog.",
+        "parameters": [],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0"
+        },
+        "example": "MeteorShowers.restoreDefaultSettings();\ncore.debug(\"Meteor showers settings restored to defaults\");"
+    },
+    {
+        "name": "displayMessage",
+        "category": "Meteor Showers - Utility",
+        "signature": "void displayMessage(QString message, QString hexColor)",
+        "description": "Displays a temporary message on the screen for plugin warnings and notifications.",
+        "parameters": [
+            {
+                "name": "message",
+                "type": "QString",
+                "description": "Message text to display",
+                "required": true
+            },
+            {
+                "name": "hexColor",
+                "type": "QString",
+                "description": "Color in hex format (e.g., '#999999' for gray)",
+                "required": false,
+                "default": "#999999"
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0"
+        },
+        "example": "MeteorShowers.displayMessage(\"Perseids peak tonight!\", \"#ffaa00\");"
+    }
+]

@@ -1,0 +1,226 @@
+[
+    {
+        "name": "enableEquationOfTime",
+        "category": "Equation of Time - Core",
+        "signature": "void enableEquationOfTime(bool enabled)",
+        "description": "Enables or disables the Equation of Time display on screen.",
+        "parameters": [
+            {
+                "name": "enabled",
+                "type": "bool",
+                "description": "true to show the equation, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0"
+        },
+        "example": "EquationOfTime.enableEquationOfTime(true);"
+    },
+    {
+        "name": "getTextColor",
+        "category": "Equation of Time - Colors",
+        "signature": "Vec3f getTextColor()",
+        "description": "Returns the current text color as a Vec3f object (prints as [r, g, b] with values 0.0-1.0).",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "returnDescription": "RGB color as Vec3f (e.g., [0, 0.5, 1] for blue)",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0"
+        },
+        "example": "var color = EquationOfTime.getTextColor();\ncore.debug(\"Text color: RGB\" + color);\n// Output example: Text color: RGB[0, 0.5, 1]"
+    },
+    {
+        "name": "showEOT",
+        "category": "Equation of Time - Properties",
+        "signature": "bool showEOT",
+        "description": "Property that controls whether the Equation of Time is displayed. Read via core.getStelProperty(), write via core.setStelProperty().",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if the equation is visible",
+        "type": "property",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0"
+        },
+        "example": "var enabled = core.getStelProperty('EquationOfTime.showEOT');\ncore.debug(\"EOT visible: \" + enabled);\ncore.setStelProperty('EquationOfTime.showEOT', true);"
+    },
+    {
+        "name": "textColor",
+        "category": "Equation of Time - Properties",
+        "signature": "Vec3f textColor",
+        "description": "Property that gets/sets the text color. Read via core.getStelProperty() returns a Vec3f array. Write via core.setStelProperty() expects a Vec3f.",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "returnDescription": "RGB color (e.g., [0, 0.5, 1])",
+        "type": "property",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0"
+        },
+        "example": "var color = core.getStelProperty('EquationOfTime.textColor');\ncore.debug(\"Text color: RGB\" + color);\nvar newColor = core.vec3f(1.0, 1.0, 1.0);\ncore.setStelProperty('EquationOfTime.textColor', newColor);"
+    },
+    {
+        "name": "setTextColor",
+        "category": "Equation of Time - Colors",
+        "signature": "void setTextColor(Vec3f color)",
+        "description": "Sets the text color for the Equation of Time display.",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector created via core.vec3f(r, g, b)",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0"
+        },
+        "example": "var green = core.vec3f(0.2, 0.9, 0.2);\nEquationOfTime.setTextColor(green);"
+    },
+    {
+        "name": "setFlagInvertedValue",
+        "category": "Equation of Time - Sign Convention",
+        "signature": "void setFlagInvertedValue(bool invert)",
+        "description": "Sets whether the sign of the Equation of Time should be inverted.",
+        "parameters": [
+            {
+                "name": "invert",
+                "type": "bool",
+                "description": "true to invert the sign, false to use standard sign",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0"
+        },
+        "example": "EquationOfTime.setFlagInvertedValue(true);"
+    },
+    {
+        "name": "setFlagMsFormat",
+        "category": "Equation of Time - Format",
+        "signature": "void setFlagMsFormat(bool useMsFormat)",
+        "description": "Sets whether the Equation of Time should be displayed in minutes:seconds format.",
+        "parameters": [
+            {
+                "name": "useMsFormat",
+                "type": "bool",
+                "description": "true to use minutes:seconds format, false to use decimal minutes",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0"
+        },
+        "example": "EquationOfTime.setFlagMsFormat(true);"
+    },
+    {
+        "name": "setFlagEnableAtStartup",
+        "category": "Equation of Time - Configuration",
+        "signature": "void setFlagEnableAtStartup(bool enable)",
+        "description": "Sets whether the plugin should be automatically enabled when Stellarium starts.",
+        "parameters": [
+            {
+                "name": "enable",
+                "type": "bool",
+                "description": "true to enable at startup, false to disable",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0"
+        },
+        "example": "EquationOfTime.setFlagEnableAtStartup(true);"
+    },
+    {
+        "name": "setFlagShowEOTButton",
+        "category": "Equation of Time - GUI",
+        "signature": "void setFlagShowEOTButton(bool visible)",
+        "description": "Shows or hides the toolbar button.",
+        "parameters": [
+            {
+                "name": "visible",
+                "type": "bool",
+                "description": "true to show button, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0"
+        },
+        "example": "EquationOfTime.setFlagShowEOTButton(true);"
+    },
+    {
+        "name": "setFontSize",
+        "category": "Equation of Time - Appearance",
+        "signature": "void setFontSize(int size)",
+        "description": "Sets the font size for the display in pixels.",
+        "parameters": [
+            {
+                "name": "size",
+                "type": "int",
+                "description": "Font size in pixels",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0"
+        },
+        "example": "EquationOfTime.setFontSize(24);"
+    },
+    {
+        "name": "equationOfTimeStateChanged",
+        "category": "Equation of Time - Signals",
+        "signature": "void equationOfTimeStateChanged(bool enabled)",
+        "description": "Signal emitted when the enabled state changes.",
+        "parameters": [
+            {
+                "name": "enabled",
+                "type": "bool",
+                "description": "true if plugin was enabled, false if disabled",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "signal",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0"
+        },
+        "example": "function onStateChanged(enabled) {\n    core.debug(\"State changed to: \" + enabled);\n}\nEquationOfTime.equationOfTimeStateChanged.connect(onStateChanged);"
+    }
+]

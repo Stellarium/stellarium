@@ -43,7 +43,7 @@ define(["jquery", "settings", "translationdata"], function($, settings, Translat
             },
             dataType: "json",
             success: function(data) {
-                lastDataTime = $.now();
+                lastDataTime = Date.now();
 
                 //allow interested modules to react to the event
                 $(rc).trigger('serverDataReceived', data);
@@ -136,7 +136,7 @@ define(["jquery", "settings", "translationdata"], function($, settings, Translat
             //we somehow should make sure this always finishes before the UI starts loading
             //or we may have a race condition
             //probably make the mainui wait on an event from this, and all the other UIs on the mainui
-            async: false, //TODO fix so this can be removed
+            //async: false, //TODO fix so this can be removed
             url: '/api/main/plugins',
             type: 'GET',
             dataType: 'json',

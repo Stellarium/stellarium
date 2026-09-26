@@ -1,0 +1,677 @@
+[
+    {
+        "name": "getNavStarsMarks",
+        "category": "Navigational Stars - Core",
+        "signature": "bool getNavStarsMarks()",
+        "description": "Returns whether markers for navigational stars are displayed on the sky. Navigational stars are the 58 stars used in celestial navigation from The Nautical Almanac.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if navigational star markers are visible, false if hidden",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.20.0",
+            "notes": "Introduced in Stellarium 0.20.0"
+        },
+        "example": "if (NavStars.getNavStarsMarks()) {\n    core.debug(\"Navigational stars are visible\");\n} else {\n    NavStars.setNavStarsMarks(true);\n}"
+    },
+    {
+        "name": "setNavStarsMarks",
+        "category": "Navigational Stars - Core",
+        "signature": "void setNavStarsMarks(bool visible)",
+        "description": "Shows or hides markers for navigational stars on the sky.",
+        "parameters": [
+            {
+                "name": "visible",
+                "type": "bool",
+                "description": "true to show navigational star markers, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.20.0",
+            "notes": "Introduced in Stellarium 0.20.0"
+        },
+        "example": "// Show navigational stars\nNavStars.setNavStarsMarks(true);\n\n// Hide navigational stars\nNavStars.setNavStarsMarks(false);"
+    },
+    {
+        "name": "navStarsVisible",
+        "category": "Navigational Stars - Properties",
+        "signature": "bool navStarsVisible",
+        "description": "Property that controls whether navigational star markers are displayed.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if markers are visible",
+        "type": "property",
+        "alternative": "NavStars.getNavStarsMarks() / NavStars.setNavStarsMarks()",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.20.0",
+            "notes": "Q_PROPERTY exposed to scripting"
+        },
+        "example": "var visible = core.getStelProperty('NavStars.navStarsVisible');\ncore.setStelProperty('NavStars.navStarsVisible', true);"
+    },
+    {
+        "name": "getCurrentNavigationalStarsSet",
+        "category": "Navigational Stars - Star Sets",
+        "signature": "NavigationalStarsSet getCurrentNavigationalStarsSet()",
+        "description": "Returns the currently selected set of navigational stars. Values: 0=AngloAmerican, 1=French, 2=British, 3=Wrinkles, 4=Russian, 5=USSRAvia, 6=USSRSpace, 7=German, 8=GeminiAPS, 9=MeadeLX200, 10=MeadeETX, 11=MeadeAS494, 12=MeadeAS497, 13=CelestronNS, 14=Apollo, 15=SkywatcherSS, 16=VixenSB, 17=ArgoNavis, 18=OrionIS, 19=SkyCommander.",
+        "parameters": [],
+        "returnType": "NavigationalStarsSet",
+        "returnDescription": "Selected star set (0-19)",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.20.0",
+            "notes": "Introduced in Stellarium 0.20.0"
+        },
+        "example": "var set = NavStars.getCurrentNavigationalStarsSet();\nif (set === 0) core.debug(\"Anglo-American set (The Nautical Almanac)\");\nelse if (set === 7) core.debug(\"German set (Nautisches Jahrbuch)\");\nelse if (set === 14) core.debug(\"Apollo Alignment Star List\");"
+    },
+    {
+        "name": "setCurrentNavigationalStarsSet",
+        "category": "Navigational Stars - Star Sets",
+        "signature": "void setCurrentNavigationalStarsSet(int set)",
+        "description": "Sets the current set of navigational stars. Use values 0-19 corresponding to different star lists.",
+        "parameters": [
+            {
+                "name": "set",
+                "type": "int",
+                "description": "Star set: 0=AngloAmerican, 1=French, 2=British, 3=Wrinkles, 4=Russian, 5=USSRAvia, 6=USSRSpace, 7=German, 8=GeminiAPS, 9=MeadeLX200, 10=MeadeETX, 11=MeadeAS494, 12=MeadeAS497, 13=CelestronNS, 14=Apollo, 15=SkywatcherSS, 16=VixenSB, 17=ArgoNavis, 18=OrionIS, 19=SkyCommander",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.20.0",
+            "notes": "Introduced in Stellarium 0.20.0"
+        },
+        "example": "// Use Anglo-American set (The Nautical Almanac)\nNavStars.setCurrentNavigationalStarsSet(0);\n\n// Use Apollo set\nNavStars.setCurrentNavigationalStarsSet(14);\n\n// Use Meade LX200 set\nNavStars.setCurrentNavigationalStarsSet(9);"
+    },
+    {
+        "name": "getCurrentNavigationalStarsSetKey",
+        "category": "Navigational Stars - Star Sets",
+        "signature": "QString getCurrentNavigationalStarsSetKey()",
+        "description": "Returns the key name of the current navigational stars set.",
+        "parameters": [],
+        "returnType": "QString",
+        "returnDescription": "Star set key (e.g., 'AngloAmerican', 'German', 'Apollo')",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.20.0",
+            "notes": "Introduced in Stellarium 0.20.0"
+        },
+        "example": "var key = NavStars.getCurrentNavigationalStarsSetKey();\ncore.debug(\"Current star set: \" + key);"
+    },
+    {
+        "name": "setCurrentNavigationalStarsSetKey",
+        "category": "Navigational Stars - Star Sets",
+        "signature": "void setCurrentNavigationalStarsSetKey(QString key)",
+        "description": "Sets the current navigational stars set by its key name.",
+        "parameters": [
+            {
+                "name": "key",
+                "type": "QString",
+                "description": "Star set key (e.g., 'AngloAmerican', 'French', 'German', 'Apollo')",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.20.0",
+            "notes": "Introduced in Stellarium 0.20.0"
+        },
+        "example": "NavStars.setCurrentNavigationalStarsSetKey(\"Apollo\");"
+    },
+    {
+        "name": "getCurrentNavigationalStarsSetDescription",
+        "category": "Navigational Stars - Star Sets",
+        "signature": "QString getCurrentNavigationalStarsSetDescription()",
+        "description": "Returns a human-readable description of the current navigational stars set.",
+        "parameters": [],
+        "returnType": "QString",
+        "returnDescription": "Description of the current star set",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.20.0",
+            "notes": "Introduced in Stellarium 0.20.0"
+        },
+        "example": "var desc = NavStars.getCurrentNavigationalStarsSetDescription();\ncore.debug(\"Star set: \" + desc);"
+    },
+    {
+        "name": "getEnableAtStartup",
+        "category": "Navigational Stars - Configuration",
+        "signature": "bool getEnableAtStartup()",
+        "description": "Returns whether the Navigational Stars plugin will be automatically enabled when Stellarium starts.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if enabled at startup, false otherwise",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.20.0",
+            "notes": "Introduced in Stellarium 0.20.0"
+        },
+        "example": "if (NavStars.getEnableAtStartup()) {\n    core.debug(\"Navigational stars will appear on next startup\");\n}"
+    },
+    {
+        "name": "setEnableAtStartup",
+        "category": "Navigational Stars - Configuration",
+        "signature": "void setEnableAtStartup(bool enable)",
+        "description": "Sets whether the Navigational Stars plugin should be automatically enabled when Stellarium starts.",
+        "parameters": [
+            {
+                "name": "enable",
+                "type": "bool",
+                "description": "true to enable at startup, false to disable",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.20.0",
+            "notes": "Introduced in Stellarium 0.20.0"
+        },
+        "example": "// Enable on next startup\nNavStars.setEnableAtStartup(true);\n\n// Disable on next startup\nNavStars.setEnableAtStartup(false);"
+    },
+    {
+        "name": "displayAtStartup",
+        "category": "Navigational Stars - Properties",
+        "signature": "bool displayAtStartup",
+        "description": "Property that controls whether the plugin is enabled at startup.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if enabled at startup",
+        "type": "property",
+        "alternative": "NavStars.getEnableAtStartup() / NavStars.setEnableAtStartup()",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.20.0",
+            "notes": "Q_PROPERTY exposed to scripting"
+        },
+        "example": "core.setStelProperty('NavStars.displayAtStartup', true);"
+    },
+    {
+        "name": "getHighlightWhenVisible",
+        "category": "Navigational Stars - Display",
+        "signature": "bool getHighlightWhenVisible()",
+        "description": "Returns whether navigational stars are highlighted when they are visible above the horizon.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if highlighting is enabled, false otherwise",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.20.0",
+            "notes": "Introduced in Stellarium 0.20.0"
+        },
+        "example": "if (NavStars.getHighlightWhenVisible()) {\n    core.debug(\"Navigational stars are highlighted when visible\");\n}"
+    },
+    {
+        "name": "setHighlightWhenVisible",
+        "category": "Navigational Stars - Display",
+        "signature": "void setHighlightWhenVisible(bool highlight)",
+        "description": "Sets whether navigational stars should be highlighted when they are above the horizon.",
+        "parameters": [
+            {
+                "name": "highlight",
+                "type": "bool",
+                "description": "true to highlight visible stars, false to use normal appearance",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.20.0",
+            "notes": "Introduced in Stellarium 0.20.0"
+        },
+        "example": "// Highlight navigational stars when visible\nNavStars.setHighlightWhenVisible(true);\n\n// Use normal appearance for all stars\nNavStars.setHighlightWhenVisible(false);"
+    },
+    {
+        "name": "highlightWhenVisible",
+        "category": "Navigational Stars - Properties",
+        "signature": "bool highlightWhenVisible",
+        "description": "Property that controls whether visible navigational stars are highlighted.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if highlighting is enabled",
+        "type": "property",
+        "alternative": "NavStars.getHighlightWhenVisible() / NavStars.setHighlightWhenVisible()",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.20.0",
+            "notes": "Q_PROPERTY exposed to scripting"
+        },
+        "example": "core.setStelProperty('NavStars.highlightWhenVisible', true);"
+    },
+    {
+        "name": "getLimitInfoToNavStars",
+        "category": "Navigational Stars - Information",
+        "signature": "bool getLimitInfoToNavStars()",
+        "description": "Returns whether extra information (altitude, azimuth, GHA, etc.) is displayed only for navigational stars and specific celestial bodies.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if info is limited to navigational stars, false for all objects",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.20.0",
+            "notes": "Introduced in Stellarium 0.20.0"
+        },
+        "example": "if (NavStars.getLimitInfoToNavStars()) {\n    core.debug(\"Navigational info shown only for navigational stars\");\n}"
+    },
+    {
+        "name": "setLimitInfoToNavStars",
+        "category": "Navigational Stars - Information",
+        "signature": "void setLimitInfoToNavStars(bool limit)",
+        "description": "Sets whether extra information (altitude, azimuth, GHA, SHA, etc.) should be displayed only for navigational stars and specific celestial bodies (Sun, Moon, planets except Mercury).",
+        "parameters": [
+            {
+                "name": "limit",
+                "type": "bool",
+                "description": "true to limit info to navigational stars, false for all objects",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.20.0",
+            "notes": "Introduced in Stellarium 0.20.0"
+        },
+        "example": "// Show navigational data only for navigational stars\nNavStars.setLimitInfoToNavStars(true);\n\n// Show navigational data for all objects\nNavStars.setLimitInfoToNavStars(false);"
+    },
+    {
+        "name": "limitInfoToNavStars",
+        "category": "Navigational Stars - Properties",
+        "signature": "bool limitInfoToNavStars",
+        "description": "Property that controls whether extra info is limited to navigational stars.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if info is limited",
+        "type": "property",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.20.0",
+            "notes": "Q_PROPERTY exposed to scripting"
+        },
+        "example": "core.setStelProperty('NavStars.limitInfoToNavStars', true);"
+    },
+    {
+        "name": "getUpperLimb",
+        "category": "Navigational Stars - Calculations",
+        "signature": "bool getUpperLimb()",
+        "description": "Returns whether calculations for the Moon use the upper limb instead of the center.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if using upper limb, false if using center",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.20.0",
+            "notes": "Introduced in Stellarium 0.20.0"
+        },
+        "example": "if (NavStars.getUpperLimb()) {\n    core.debug(\"Moon calculations use upper limb\");\n}"
+    },
+    {
+        "name": "setUpperLimb",
+        "category": "Navigational Stars - Calculations",
+        "signature": "void setUpperLimb(bool upperLimb)",
+        "description": "Sets whether calculations for the Moon should use the upper limb instead of the center.",
+        "parameters": [
+            {
+                "name": "upperLimb",
+                "type": "bool",
+                "description": "true to use upper limb, false to use center",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.20.0",
+            "notes": "Introduced in Stellarium 0.20.0"
+        },
+        "example": "// Use upper limb for Moon calculations\nNavStars.setUpperLimb(true);\n\n// Use center for Moon calculations\nNavStars.setUpperLimb(false);"
+    },
+    {
+        "name": "upperLimb",
+        "category": "Navigational Stars - Properties",
+        "signature": "bool upperLimb",
+        "description": "Property that controls whether Moon calculations use the upper limb.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if using upper limb",
+        "type": "property",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.20.0",
+            "notes": "Q_PROPERTY exposed to scripting"
+        },
+        "example": "core.setStelProperty('NavStars.upperLimb', true);"
+    },
+    {
+        "name": "getTabulatedDisplay",
+        "category": "Navigational Stars - Information Display",
+        "signature": "bool getTabulatedDisplay()",
+        "description": "Returns whether extra information is displayed in tabulated format (like Nautical Almanac) rather than paired lines.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if using tabulated format, false if using paired lines",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.20.0",
+            "notes": "Introduced in Stellarium 0.20.0"
+        },
+        "example": "if (NavStars.getTabulatedDisplay()) {\n    core.debug(\"Using Nautical Almanac tabulated format\");\n}"
+    },
+    {
+        "name": "setTabulatedDisplay",
+        "category": "Navigational Stars - Information Display",
+        "signature": "void setTabulatedDisplay(bool tabulated)",
+        "description": "Sets whether extra information should be displayed in tabulated format (like Nautical Almanac) or as paired lines.",
+        "parameters": [
+            {
+                "name": "tabulated",
+                "type": "bool",
+                "description": "true for tabulated format, false for paired lines",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.20.0",
+            "notes": "Introduced in Stellarium 0.20.0"
+        },
+        "example": "// Use Nautical Almanac tabulated format\nNavStars.setTabulatedDisplay(true);\n\n// Use standard paired lines format\nNavStars.setTabulatedDisplay(false);"
+    },
+    {
+        "name": "tabulatedDisplay",
+        "category": "Navigational Stars - Properties",
+        "signature": "bool tabulatedDisplay",
+        "description": "Property that controls whether information is displayed in tabulated format.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if using tabulated format",
+        "type": "property",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.20.0",
+            "notes": "Q_PROPERTY exposed to scripting"
+        },
+        "example": "core.setStelProperty('NavStars.tabulatedDisplay', true);"
+    },
+    {
+        "name": "getShowExtraDecimals",
+        "category": "Navigational Stars - Calculations",
+        "signature": "bool getShowExtraDecimals()",
+        "description": "Returns whether extra decimal places are shown in navigational calculations (more precision).",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if extra decimals are shown, false for standard precision",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.20.0",
+            "notes": "Introduced in Stellarium 0.20.0"
+        },
+        "example": "if (NavStars.getShowExtraDecimals()) {\n    core.debug(\"Extra precision mode enabled\");\n}"
+    },
+    {
+        "name": "setShowExtraDecimals",
+        "category": "Navigational Stars - Calculations",
+        "signature": "void setShowExtraDecimals(bool extra)",
+        "description": "Sets whether extra decimal places should be shown in navigational calculations for higher precision.",
+        "parameters": [
+            {
+                "name": "extra",
+                "type": "bool",
+                "description": "true to show extra decimals, false for standard precision",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.20.0",
+            "notes": "Introduced in Stellarium 0.20.0"
+        },
+        "example": "// Enable high precision mode\nNavStars.setShowExtraDecimals(true);\n\n// Use standard precision\nNavStars.setShowExtraDecimals(false);"
+    },
+    {
+        "name": "showExtraDecimals",
+        "category": "Navigational Stars - Properties",
+        "signature": "bool showExtraDecimals",
+        "description": "Property that controls whether extra decimals are shown in calculations.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if extra decimals are shown",
+        "type": "property",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.20.0",
+            "notes": "Q_PROPERTY exposed to scripting"
+        },
+        "example": "core.setStelProperty('NavStars.showExtraDecimals', true);"
+    },
+    {
+        "name": "getFlagUseUTCTime",
+        "category": "Navigational Stars - Calculations",
+        "signature": "bool getFlagUseUTCTime()",
+        "description": "Returns whether UTC time is used for navigational calculations instead of local time.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if using UTC time, false if using local time",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.20.0",
+            "notes": "Introduced in Stellarium 0.20.0"
+        },
+        "example": "if (NavStars.getFlagUseUTCTime()) {\n    core.debug(\"UTC time used for calculations\");\n}"
+    },
+    {
+        "name": "setFlagUseUTCTime",
+        "category": "Navigational Stars - Calculations",
+        "signature": "void setFlagUseUTCTime(bool useUTC)",
+        "description": "Sets whether UTC time should be used for navigational calculations.",
+        "parameters": [
+            {
+                "name": "useUTC",
+                "type": "bool",
+                "description": "true to use UTC time, false to use local time",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.20.0",
+            "notes": "Introduced in Stellarium 0.20.0"
+        },
+        "example": "// Use UTC for Nautical Almanac style calculations\nNavStars.setFlagUseUTCTime(true);\n\n// Use local time\nNavStars.setFlagUseUTCTime(false);"
+    },
+    {
+        "name": "useUTCTime",
+        "category": "Navigational Stars - Properties",
+        "signature": "bool useUTCTime",
+        "description": "Property that controls whether UTC time is used for calculations.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if UTC time is used",
+        "type": "property",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.20.0",
+            "notes": "Q_PROPERTY exposed to scripting"
+        },
+        "example": "core.setStelProperty('NavStars.useUTCTime', true);"
+    },
+    {
+        "name": "getStarsNumbers",
+        "category": "Navigational Stars - Information",
+        "signature": "QList<int> getStarsNumbers()",
+        "description": "Returns a list of Hipparcos catalog numbers for all stars in the current navigational stars set.",
+        "parameters": [],
+        "returnType": "QList<int>",
+        "returnDescription": "List of Hipparcos star numbers",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.20.0",
+            "notes": "Introduced in Stellarium 0.20.0"
+        },
+        "example": "var stars = NavStars.getStarsNumbers();\ncore.debug(\"Navigational stars count: \" + stars.length);\nfor (var i = 0; i < Math.min(5, stars.length); i++) {\n    core.debug(\"Hip: \" + stars[i]);\n}"
+    },
+    {
+        "name": "restoreDefaultConfiguration",
+        "category": "Navigational Stars - Configuration",
+        "signature": "void restoreDefaultConfiguration()",
+        "description": "Restores all Navigational Stars plugin settings to their default values.",
+        "parameters": [],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.20.0",
+            "notes": "Introduced in Stellarium 0.20.0"
+        },
+        "example": "// Reset all navigational stars settings to defaults\nNavStars.restoreDefaultConfiguration();\ncore.debug(\"Navigational Stars settings restored\");"
+    },
+    {
+        "name": "loadConfiguration",
+        "category": "Navigational Stars - Configuration",
+        "signature": "void loadConfiguration()",
+        "description": "Loads Navigational Stars plugin settings from the main configuration file.",
+        "parameters": [],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.20.0",
+            "notes": "Introduced in Stellarium 0.20.0"
+        },
+        "example": "// Reload settings from config file\nNavStars.loadConfiguration();"
+    },
+    {
+        "name": "saveConfiguration",
+        "category": "Navigational Stars - Configuration",
+        "signature": "void saveConfiguration()",
+        "description": "Saves the current Navigational Stars plugin settings to the main configuration file.",
+        "parameters": [],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.20.0",
+            "notes": "Introduced in Stellarium 0.20.0"
+        },
+        "example": "// Save current settings\nNavStars.saveConfiguration();\ncore.debug(\"Navigational Stars settings saved\");"
+    },
+    {
+        "name": "populateNavigationalStarsSet",
+        "category": "Navigational Stars - Star Sets",
+        "signature": "void populateNavigationalStarsSet()",
+        "description": "Populates the navigational stars set with the stars from the currently selected set.",
+        "parameters": [],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.20.0",
+            "notes": "Introduced in Stellarium 0.20.0"
+        },
+        "example": "NavStars.setCurrentNavigationalStarsSetKey(\"Apollo\");\nNavStars.populateNavigationalStarsSet();\ncore.debug(\"Apollo navigational stars populated\");"
+    },
+    {
+        "name": "isPermittedObject",
+        "category": "Navigational Stars - Information",
+        "signature": "bool isPermittedObject(QString name)",
+        "description": "Checks if an object name is permitted for navigational information display (Sun, Moon, planets except Mercury, and navigational stars).",
+        "parameters": [
+            {
+                "name": "name",
+                "type": "QString",
+                "description": "Object English name",
+                "required": true
+            }
+        ],
+        "returnType": "bool",
+        "returnDescription": "true if the object is permitted for navigational info",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.20.0",
+            "notes": "Introduced in Stellarium 0.20.0"
+        },
+        "example": "if (NavStars.isPermittedObject(\"Sirius\")) {\n    core.debug(\"Sirius is a navigational star\");\n}\nif (NavStars.isPermittedObject(\"Sun\")) {\n    core.debug(\"Sun is permitted for navigational info\");\n}"
+    }
+]
