@@ -1498,3 +1498,48 @@ void SphericalRegionP::serializeToJson(const QVariant& jsonObject, QIODevice* ou
 	const SphericalRegionP& reg = jsonObject.value<SphericalRegionP>();
 	StelJsonParser::write(reg->toQVariant(), output, indentLevel);
 }
+
+SphericalConvexPolygon getSphericalSearchSquare(const Vec3d& vv, double radiusDeg)
+{
+	Vec3d v(vv);
+	v.normalize();
+
+	// Pick the coordinate axis least aligned with v to build a stable tangent frame.
+	int i;
+	{
+		const double a0 = fabs(v[0]);
+		const double a1 = fabs(v[1]);
+		const double a2 = fabs(v[2]);
+		if (a0 <= a1)
+		{
+			if (a0 <= a2) i = 0;
+			else i = 2;
+		} else
+		{
+			if (a1 <= a2) i = 1;
+			else i = 2;
+		}
+	}
+	Vec3d h0(0.0,0.0,0.0);
+	h0[i] = 1.0;
+	Vec3d h1 = h0 ^ v;
+	h1.normalize();
+	h0 = h1 ^ v;
+	h0.normalize();
+
+	// Now we have h0*v=h1*v=h0*h1=0.
+	// Construct a region with 4 corners e0,e1,e2,e3 inside which all desired stars must be:
+	double f = 1.4142136 * tan(radiusDeg * M_PI_180);
+	h0 *= f;
+	h1 *= f;
+	Vec3d e0 = v + h0;
+	Vec3d e1 = v + h1;
+	Vec3d e2 = v - h0;
+	Vec3d e3 = v - h1;
+	f = 1.0/e0.norm();
+	e0 *= f;
+	e1 *= f;
+	e2 *= f;
+	e3 *= f;
+	return {e3, e2, e1, e0};
+}
