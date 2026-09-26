@@ -39,6 +39,7 @@ SET(stellarium_lib_SRCS
      core/StelProjectorClasses.hpp
      core/StelProjectorType.hpp
      core/StelSkyDrawer.cpp
+     core/StelPsf.hpp
      core/StelSkyDrawer.hpp
      core/StelPainter.hpp
      core/StelPainter.cpp
@@ -387,6 +388,8 @@ IF(STELLARIUM_GUI_MODE STREQUAL "Standard")
           gui/StelDialogSeparate.cpp
           gui/TonemappingDialog.hpp
           gui/TonemappingDialog.cpp
+          gui/PsfStarsDialog.hpp
+          gui/PsfStarsDialog.cpp
           gui/SkylightDialog.hpp
           gui/SkylightDialog.cpp
           gui/ContributorsList.hpp
@@ -420,6 +423,7 @@ IF(STELLARIUM_GUI_MODE STREQUAL "Standard")
           gui/dsoColorsDialog.ui
           gui/orbitColorsDialog.ui
           gui/tonemappingDialog.ui
+          gui/psfStarsDialog.ui
           gui/skylightDialog.ui
      )
 
@@ -761,6 +765,12 @@ IF(ENABLE_TESTING)
      # Custom target used to build all tests at once
      ADD_CUSTOM_TARGET(buildTests)
      SET_TARGET_PROPERTIES(buildTests PROPERTIES FOLDER "src/tests")
+
+     ADD_EXECUTABLE(testStelPsf tests/testStelPsf.cpp)
+     TARGET_LINK_LIBRARIES(testStelPsf Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Test)
+     ADD_DEPENDENCIES(buildTests testStelPsf)
+     ADD_TEST(testStelPsf testStelPsf)
+     SET_TARGET_PROPERTIES(testStelPsf PROPERTIES FOLDER "src/tests")
 
      SET(tests_testDates_SRCS
           tests/testDates.hpp
