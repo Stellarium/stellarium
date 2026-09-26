@@ -5959,7 +5959,7 @@ void Planet::drawHints(const StelCore* core, StelPainter &sPainter, const QFont&
 			const float diskOffset = tmp;
 			const float psfOffset = isMoon
 				? skyDrawer->getPsfMoonHaloLabelOffset(vMagnitudeWithExtinction, haloColor, angularRadius*pixPerRad, diskOffset, 0.12f)
-				: skyDrawer->getPsfPointSourceLabelOffset(rcm, vMagnitudeWithExtinction, haloColor, diskOffset, 0.12f, angularRadius*pixPerRad);
+				: skyDrawer->getPsfPointSourceLabelOffset(rcm, haloColor, diskOffset, 0.12f, angularRadius*pixPerRad);
 			tmp = qMax(diskOffset, psfOffset);
 		}
 	}

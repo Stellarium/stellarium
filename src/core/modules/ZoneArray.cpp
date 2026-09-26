@@ -501,7 +501,7 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 		if ((magIndex > cutoffMagStep) || (starMag > cutoffMag)) {  // check again with the new magIndex
 				continue;  // allow continue for other star that might became bright enough in the future
 		}
-		// Array of 2 numbers containing radius and magnitude
+		// Precomputed halo parameters for this magnitude bin
 		const RCMag* tmpRcmag = &rcmag_table[magIndex];
 		
 		// Get the star position from the array, only do it if not already computed
@@ -561,10 +561,14 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 			twinkleFactor=qMin(1.0, 1.0-0.9*altAz[2]); // suppress twinkling in higher altitudes. Keep 0.1 twinkle amount in zenith.
 		}
 
+		// Preserve the exact distance-adjusted, extincted magnitude for the PSF;
+		// the shared radius/luminance table only samples steps of 0.05 mag.
+		RCMag rcMag = *tmpRcmag;
+		rcMag.magnitude = appMag;
 		const Vec3f starColor = StelSkyDrawer::indexToColor(s->getBVIndex());
-		if (drawer->drawPointSource(sPainter, v, *tmpRcmag, starColor, !isInsideViewport, twinkleFactor, appMag) && core->getFlagClearSky() && s->hasName() && extinctedMagIndex < maxMagStarName && s->hasComponentID()<=1)
+		if (drawer->drawPointSource(sPainter, v, rcMag, starColor, !isInsideViewport, twinkleFactor) && core->getFlagClearSky() && s->hasName() && extinctedMagIndex < maxMagStarName && s->hasComponentID()<=1)
 		{
-			const float offset = drawer->getPsfPointSourceLabelOffset(*tmpRcmag, appMag, starColor, tmpRcmag->radius*0.7f, 0.33f);
+			const float offset = drawer->getPsfPointSourceLabelOffset(rcMag, starColor, rcMag.radius*0.7f, 0.33f);
 			const Vec3f color = starColor*0.75f;
 			sPainter->setColor(color, names_brightness);
 			sPainter->drawText(v, s->getScreenNameI18n(withCommonNameI18n), 0, offset, offset, false);

@@ -35,17 +35,28 @@
 #include <QVector>
 
 class QOpenGLVertexArrayObject;
+class QOpenGLShaderProgram;
 class StelToneReproducer;
 class QOpenGLBuffer;
 class StelCore;
 class StelPainter;
 
-//! Contains the 2 parameters necessary to draw a star on screen.
-//! the radius and luminance of the star halo texture.
+//! Parameters for drawing a point source, prepared by StelSkyDrawer::computeRCMag()
+//! or StelSkyDrawer::computePsfRCMag().
 struct RCMag
 {
+	//! Halo radius in physical screen pixels.
 	float radius;
+	//! Texture brightness, or an additional intensity multiplier in PSF mode.
+	//! Visibility fades multiply this value without changing magnitude.
 	float luminance;
+	//! Input magnitude for the brightness calculation, before tone reproduction.
+	//! Normally the integrated apparent V magnitude, including atmospheric extinction
+	//! when applicable. Callers can supply an artificial rendering magnitude instead
+	//! (e.g. the Moon's glare-limited magnitude), so this is not always a physical value.
+	//! Star scales, twinkling and visibility fades are applied separately.
+	//! NaN means no magnitude is available; drawPointSource() then uses a textured halo.
+	float magnitude = std::numeric_limits<float>::quiet_NaN();
 };
 
 //! @class StelSkyDrawer
@@ -118,25 +129,25 @@ public:
 	//! Draw a point source halo.
 	//! @param sPainter the StelPainter to use for drawing.
 	//! @param v the 3d position of the source in J2000 reference frame
-	//! @param rcMag the radius and luminance of the source as computed by computeRCMag()
+	//! @param rcMag source parameters from computePsfRCMag() in PSF mode, otherwise computeRCMag()
 	//! @param bVindex the source B-V index (into the private colorTable. This is not the astronomical B-V value.)
 	//! @param checkInScreen whether source in screen should be checked to avoid unnecessary drawing.
 	//! @param twinkleFactor allows height-dependent twinkling. Recommended value: min(1,1-0.9*sin(altitude)). Allowed values [0..1]
 	//! @return true if the source was actually visible and drawn
-	bool drawPointSource(StelPainter* sPainter, const Vec3d& v, const RCMag &rcMag, int bVindex, bool checkInScreen=false, float twinkleFactor=1.0f, float appMag=std::numeric_limits<float>::quiet_NaN())
+	bool drawPointSource(StelPainter* sPainter, const Vec3d& v, const RCMag &rcMag, int bVindex, bool checkInScreen=false, float twinkleFactor=1.0f)
 	{
-		return drawPointSource(sPainter, v, rcMag, colorTable[bVindex], checkInScreen, twinkleFactor, appMag);
+		return drawPointSource(sPainter, v, rcMag, colorTable[bVindex], checkInScreen, twinkleFactor);
 	}
 
 	//! Draw a point source halo.
 	//! @param sPainter the StelPainter to use for drawing.
 	//! @param v the 3d position of the source in J2000 reference frame
-	//! @param rcMag the radius and luminance of the source as computed by computeRCMag()
+	//! @param rcMag source parameters from computePsfRCMag() in PSF mode, otherwise computeRCMag()
 	//! @param color the RGB color value (0...1, 0...1, 0...1)
 	//! @param checkInScreen whether source in screen should be checked to avoid unnecessary drawing.
 	//! @param twinkleFactor allows height-dependent twinkling. Recommended value: min(1,1-0.9*sin(altitude)). Allowed values [0..1]
 	//! @return true if the source was actually visible and drawn
-	bool drawPointSource(StelPainter* sPainter, const Vec3d& v, const RCMag &rcMag, const Vec3f& bcolor, bool checkInScreen=false, float twinkleFactor=1.0f, float appMag=std::numeric_limits<float>::quiet_NaN());
+	bool drawPointSource(StelPainter* sPainter, const Vec3d& v, const RCMag &rcMag, const Vec3f& color, bool checkInScreen=false, float twinkleFactor=1.0f);
 
 	//! Draw an image of the solar corona onto the screen at position v.
 	//! @param radius of current disk size of the sun [radians].
@@ -155,14 +166,25 @@ public:
 	//! @param isMoon apply the lunar glare and texture settings
 	void postDrawSky3dModel(StelPainter* p, const Vec3d& v, float illuminatedArea, float mag, const Vec3f& color = Vec3f(1.f,1.f,1.f), const bool isSun=false, float sourceRadius=0.f, bool isMoon=false);
 
-	//! Compute RMag and CMag from magnitude.
-	//! @param mag the object integrated V magnitude
-	//! @param rcMag array of 2 floats containing the radius and luminance
+	//! Compute textured-halo parameters from magnitude.
+	//! @param mag integrated apparent V magnitude, with any extinction or artificial
+	//! halo magnitude adjustment already applied by the caller (see RCMag::magnitude).
+	//! @param rcMag receives radius, luminance and the unchanged input magnitude,
+	//! including when the object is too faint (radius and luminance are then zero).
 	//! @return false if the object is too faint to be displayed
-		bool computeRCMag(float mag, RCMag*) const;
-		bool computePsfRCMag(float mag, RCMag*) const;
-		float getPsfPointSourceLabelOffset(const RCMag& rcMag, float appMag, const Vec3f& color, float baseOffset, float psfOffsetScale=1.f, float discRadius=0.f) const;
-		float getPsfMoonHaloLabelOffset(float appMag, const Vec3f& color, float sourceRadius, float baseOffset, float psfOffsetScale=1.f) const;
+	bool computeRCMag(float mag, RCMag* rcMag) const;
+	//! Compute PSF parameters. The magnitude has the same meaning as in computeRCMag().
+	//! @param mag input magnitude, stored unchanged in rcMag->magnitude
+	//! @param rcMag receives the point radius and unit intensity multiplier for visible
+	//! sources, or zero radius and luminance for invisible sources. PSF intensity is
+	//! calculated from magnitude during drawing; callers may multiply luminance for fades.
+	//! @return false if the object is too faint or its magnitude is not finite
+	bool computePsfRCMag(float mag, RCMag* rcMag) const;
+	//! Compute label spacing from the same magnitude and intensity multiplier used to draw the PSF.
+	float getPsfPointSourceLabelOffset(const RCMag& rcMag, const Vec3f& color, float baseOffset, float psfOffsetScale=1.f, float discRadius=0.f) const;
+	//! Compute lunar label spacing; appMag is the apparent V magnitude including extinction,
+	//! before applying the lunar glare limit here.
+	float getPsfMoonHaloLabelOffset(float appMag, const Vec3f& color, float sourceRadius, float baseOffset, float psfOffsetScale=1.f) const;
 
 	//! Report that an object of luminance lum with an on-screen area of area pixels is currently displayed
 	//! This information is used to determine the world adaptation luminance
@@ -483,6 +505,7 @@ private:
 	float computePsfGlowRadius(float peakRadiance, float alpha) const;
 	Vec3f psfGreenNormalization(const Vec3f& c, float saturationLimit, float& greenScale) const;
 	void addPsfStarVertices(QVector<PsfStarVertex>& vertices, StelPainter* sPainter, const Vec3d& direction, const Vec3f& center, const Vec3f& color, float peakRadiance, float radius, float sourceRadius=0.f, float alpha=1.f);
+	// appMag: rendering magnitude as described by RCMag::magnitude, including any lunar glare limit.
 	// sourceRadius: lunar glare mask radius in logical pixels (zero for other sources).
 	// discRadius: actual body radius in physical pixels, for the point/glow transitions.
 	void drawPsfPointSource(StelPainter* sPainter, const Vec3d& direction, const Vec3f& win, float appMag, const Vec3f& color, float twinkleFactor, float luminanceScale, float sourceRadius=0.f, float discRadius=0.f);
@@ -591,9 +614,9 @@ private:
 	//! Buffer for storing the texture coordinate array data.
 	unsigned char* textureCoordArray;
 	
-	class QOpenGLShaderProgram* starShaderProgram;
-	class QOpenGLShaderProgram* psfPointShaderProgram;
-	class QOpenGLShaderProgram* psfGlowShaderProgram;
+	QOpenGLShaderProgram* starShaderProgram;
+	std::unique_ptr<QOpenGLShaderProgram> psfPointShaderProgram;
+	std::unique_ptr<QOpenGLShaderProgram> psfGlowShaderProgram;
 	struct StarShaderVars {
 		int projectionMatrix;
 		int texCoord;

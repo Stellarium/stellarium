@@ -1182,7 +1182,7 @@ void Satellite::draw(StelCore* core, StelPainter& painter)
 					else
 						sd->computeRCMag(magSat, &rcMag);
 					// allow height-dependent twinkle and suppress twinkling in higher altitudes. Keep 0.1 twinkle amount in zenith.
-					sd->drawPointSource(&painter, vf.toVec3d(), rcMag, sd->getFlagPsfStars() ? color : color*hintBrightness, true, qMin(1.0f, 1.0f-0.9f*altAz[2]), magSat);
+					sd->drawPointSource(&painter, vf.toVec3d(), rcMag, sd->getFlagPsfStars() ? color : color*hintBrightness, true, qMin(1.0f, 1.0f-0.9f*altAz[2]));
 					sd->postDrawPointSource(&painter);
 				}
 
