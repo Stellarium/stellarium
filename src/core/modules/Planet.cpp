@@ -1318,7 +1318,7 @@ QString Planet::getInfoStringExtra(const StelCore *core, const InfoStringGroup& 
 			}
 
 			const double age = deltaLong*29.530588853/360.;
-			oss << QString("%1: %2 %3").arg(q_("Moon age"), QString::number(age, 'f', 1), q_("days old"));
+			oss << QString("%1: %2 %3").arg(q_("Moon age"), QString::number(age, 'f', 2), q_("days old"));
 			if (!moonPhase.isEmpty())
 				oss << QString(" (%1)").arg(moonPhase);
 			oss << "<br />";
@@ -2138,7 +2138,7 @@ QVariantMap Planet::getInfoMap(const StelCore *core) const
 				map.insert("phase-name", moonPhase);
 
 				const double age = deltaLong*29.530588853/360.;
-				map.insert("age", QString::number(age, 'f', 2));
+				map.insert("age", QString::number(age, 'f', 3));
 			}
 		}
 	}
