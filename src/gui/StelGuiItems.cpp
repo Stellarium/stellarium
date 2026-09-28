@@ -949,10 +949,17 @@ void BottomStelBar::updateText(bool updatePos, bool updateTopocentric)
 			sigmaInfo = QString("; %1(%2T) = %3s").arg(QChar(0x03c3)).arg(QChar(0x0394)).arg(sigma, 3, 'f', 1);
 
 		QString deltaTInfo;
-		if (qAbs(deltaT)>60.)
-			deltaTInfo = QString("%1 (%2s)%3").arg(StelUtils::hoursToHmsStr(deltaT/3600.)).arg(deltaT, 5, 'f', 2).arg(validRangeMarker);
+		if (qAbs(deltaT) > 60.)
+			deltaTInfo =
+				QString("%1 (%2s)%3")
+					.arg(StelUtils::hoursToHmsStr(deltaT / 3600.))
+					.arg(deltaT, 5, 'f', (StelApp::getInstance().getFlagExtraPrecision() ? 6 : 2))
+					.arg(validRangeMarker); // (SS) 2026-09-13 increase # of digit for %2 from 2 to 6
 		else
-			deltaTInfo = QString("%1s%2").arg(deltaT, 3, 'f', 3).arg(validRangeMarker);
+			deltaTInfo =
+				QString("%1s%2")
+					.arg(deltaT, 3, 'f', (StelApp::getInstance().getFlagExtraPrecision() ? 6 : 3))
+					.arg(validRangeMarker); // (SS) 2026-09-13 increase # of digit for %2 from 3 to 6
 
 		// (SS) 2025-11-27: update ndot values according to DE430/431 and DE440/441 values provided by JPL:
 		double ndot;

@@ -182,6 +182,26 @@ public:
 	// Currently ensured by SolarSystem::init()
 	static void init();
 
+	//! (SS) 2026-07-14 Set and Return the sunShift in AU unit
+	void setSunShift(const Vec3d& v) { sunShift = v; }
+	const Vec3d& getSunShift() const { return sunShift; }
+
+	//! (SS) 2026-09-11 Set and Return the gravitational light deflection push (by the Sun) in AU unit.
+	//! This is an additive correction to the light-time-corrected (and sunShift-corrected) astrometric
+	//! direction vector, analogous in spirit to aberrationPush and sunShift.
+	void setLightDeflection(const Vec3d& v) { lightDeflection = v; }
+	const Vec3d& getLightDeflection() const { return lightDeflection; }
+
+	//! (SS) 2026-09-14 Set and Return the Earth barycentric-epoch-mismatch correction, in AU. Only
+	//! meaningful for the Moon observed from Earth: Planet::getHeliocentricEclipticPos() combines the
+	//! Moon's eclipticPos(te) with Earth's *cached* eclipticPos (evaluated at the observer's epoch to,
+	//! not at te), which silently drops the Eb(te)-Eb(to) term from the astrometric geocentric vector.
+	//! earthShift = Eb(to) - Eb(te), same "observer epoch minus target epoch" sign convention as
+	//! sunShift, and is SUBTRACTED in the P = Qh - Eh - sunShift - earthShift construction. Zero for
+	//! every body other than the Moon.
+	void setEarthShift(const Vec3d& v) { earthShift = v; }
+	const Vec3d& getEarthShift() const { return earthShift; }
+
 	///////////////////////////////////////////////////////////////////////////
 	// Methods inherited from StelObject
 	//! Get a string with data about the Planet.
@@ -259,12 +279,19 @@ public:
 	QString getObjectTypeI18n(void) const override { return q_(pTypeMap.value(pType)); }
 	//! @return English name of planet
 	QString getID(void) const override { return englishName; }
+	
 	//! A Planet's own eclipticPos is in VSOP87 ref. frame (practically equal to ecliptic of J2000 for us) coordinates relative to the parent body (sun, planet).
 	//! To get J2000 equatorial coordinates, we require heliocentric ecliptical positions (adding up parent positions) of observer and Planet.
 	//! Then we use the matrix rotation multiplication with an existing matrix in StelCore to orient from eclipticalJ2000 to equatorialJ2000.
 	//! The end result is a non-normalized 3D vector which allows retrieving distances etc.
 	//! The positional computation is called by SolarSystem. If the core's aberration setting is active, the J2000 position will then include it.
 	Vec3d getJ2000EquatorialPos(const StelCore *core) const override;
+
+	//! (SS) 2026-09-15 Return the Moon's visible-disk-center position (center of figure), offset from
+	//! the center-of-mass position by the standard USNO/HMNAO correction. Provisional - see .cpp comment.
+	//! Identical to getJ2000EquatorialPos() for every body other than the Moon.
+	Vec3d getApparentLimbCenterPos(const StelCore* core) const;
+
 	QString getEnglishName(void) const override {return englishName;}
 	QString getNameI18n(void) const override {return nameI18;}
 
@@ -819,6 +846,9 @@ protected:
 					 //!< to get velocity, preferably read getEclipticVelocity() and getHeliocentricEclipticVelocity()
 					 //!< The "State Vector" [Heafner 1999] can be formed from (JDE, eclipticPos, eclipticVelocity)
 	Vec3d aberrationPush;            //!< 0.21.2+: a small displacement to be applied if aberred positions are requested.
+	Vec3d sunShift; //!< (SS) 2026-07-14 Added a correction of Sun shifting position to achieve sub-mas precision
+	Vec3d lightDeflection; //!< (SS) 2026-09-11 Gravitational light deflection by the Sun, additive push in AU, applied to major planets and Pluto
+	Vec3d earthShift; //!< (SS) 2026-09-14 Earth barycentric-epoch-mismatch correction (Moon only); see setEarthShift()
 	Vec3d screenPos;                 //!< Used to store temporarily the 2D position on screen. We need double for moons. Observe Styx from Pluto w/o atmosphere to see that.
 	Vec3f haloColor;                 //!< used for drawing the planet halo. Also, when non-spherical (OBJ) model without texture is used, its color is derived from haloColour*albedo.
 

@@ -243,6 +243,19 @@ Planet::Planet(const QString& englishName,
 	  eclipticPos(0.,0.,0.),
 	  eclipticVelocity(0.,0.,0.),
 	  aberrationPush(0.,0.,0.),
+
+	  // (SS) 2026-07-14 Added a correction of Sun shifting position to achieve sub-mas precision
+	  // Barycentric displacement of the Sun between JDE and (JDE-lightTimeDays).
+	  // This compensates for the use of heliocentric vectors evaluated at different epochs.
+	  sunShift(0., 0., 0.),
+
+	  // (SS) 2026-09-11 Gravitational light deflection by the Sun (major planets and Pluto only).
+	  lightDeflection(0., 0., 0.),
+
+	  // (SS) 2026-09-14 Earth barycentric-epoch-mismatch correction, meaningful only for the Moon
+	  // observed from Earth (see Planet::setEarthShift()).
+	  earthShift(0., 0., 0.),
+
 	  haloColor(halocolor),
 	  absoluteMagnitude(-99.0f),
 	  massKg(0.),
@@ -2522,12 +2535,51 @@ void Planet::setSiderealPeriod(const double siderealPeriod)
 // The end result is a non-normalized 3D vector which allows retrieving distances etc.
 // To apply aberration correction, we need the velocity vector of the observer's planet and apply a little correction in SolarSystem::computePositions()
 // prepare for aberration: Explan. Suppl. 2013, (7.38)
-Vec3d Planet::getJ2000EquatorialPos(const StelCore *core) const
+// (SS) 2026-07-14 Added a correction of Sun shifting position to achieve sub-mas precision
+// (SS) 2026-09-11 Added gravitational light deflection by the Sun (major planets and Pluto; see
+// SolarSystem::computePositions(), case 2, where lightDeflection is set). Applied unconditionally
+// for now, like sunShift; gate behind a StelCore property (e.g. getUseLightDeflection()) if a
+// user-facing toggle is desired later.
+Vec3d Planet::getJ2000EquatorialPos(const StelCore* core) const
 {
-	const bool withAberration=core->getUseAberration();
+	const bool withAberration = core->getUseAberration();
 	return StelCore::matVsop87ToJ2000.multiplyWithoutTranslation(getHeliocentricEclipticPos()
-	                                                             - core->getObserverHeliocentricEclipticPos()
-	                                                             + (withAberration ? aberrationPush : Vec3d(0.)));
+																 - core->getObserverHeliocentricEclipticPos()
+																 - sunShift
+																 - earthShift
+																 + lightDeflection
+																 + (withAberration ? aberrationPush : Vec3d(0.)));
+}
+
+//! (SS) 2026-09-15 Provisional implementation of the Moon's visible-disk center position, offset from
+//! the center-of-mass position (getJ2000EquatorialPos(), our validated p2) by the standard USNO/HMNAO
+//! correction: +0.5" ecliptic longitude, -0.25" ecliptic latitude (see "Astronomical Phenomena",
+//! USNO/HMNAO, 2020 ed. p.69, and earlier editions). That correction is properly defined in geocentric
+//! apparent ECLIPTIC-OF-DATE coordinates (i.e. after precession/nutation - the planned p3 stage), which
+//! does not exist yet in this pipeline. Until p3 lands, this applies the shift directly to the
+//! J2000-ecliptic p2 vector as a placeholder approximation. The error this introduces (roughly:
+//! precession's ~50 mas/yr drift, times however long since J2000, plus nutation's few-arcsec periodic
+//! terms, projected through a small-angle shift) is very likely larger than the ~0.5" correction's own
+//! precision - this method should be revisited once p3 exists, evaluating the shift in ecliptic-of-date
+//! rather than J2000-ecliptic.
+//! Only meaningful for the Moon; returns getJ2000EquatorialPos(core) unchanged for every other body,
+//! or when the gating flag is off.
+Vec3d Planet::getApparentLimbCenterPos(const StelCore* core) const
+{
+	const Vec3d posJ2000 = getJ2000EquatorialPos(core);
+
+	if (englishName != "Moon" || !core->getUseLunarFigureCorrection()) return posJ2000;
+
+	// Undo the final ecliptic->equatorial rotation to work in the same VSOP87 ecliptic frame the USNO
+	// correction is defined in, apply the shift, then redo the rotation.
+	Vec3d eclPos = StelCore::matJ2000ToVsop87.multiplyWithoutTranslation(posJ2000);
+	double lng, lat, r;
+	StelUtils::rectToSphe(&lng, &lat, &r, eclPos);
+	lng += 0.50 / 3600. * M_PI_180;
+	lat += -0.25 / 3600. * M_PI_180;
+	StelUtils::spheToRect(lng, lat, r, eclPos);
+
+	return StelCore::matVsop87ToJ2000.multiplyWithoutTranslation(eclPos);
 }
 
 // return value in radians!

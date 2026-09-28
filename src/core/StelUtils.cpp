@@ -35,9 +35,10 @@
 #include <cmath> // std::fmod
 #include <limits>
 #include <zlib.h>
-#include <erfa.h>    // (SS) 2025-11-27 Needed to allow call to eraDat() function
-#include <erfam.h>   // (SS) 2025-11-27 Needed to allow call to eraDat() function
-#include <de440.hpp> // (SS) 2025-11-27 Needed to allow call to getDe440Coor() function in StelUtils::getDeltaTJPLHorizons()
+#include <erfa.h>		// (SS) 2025-11-27 Needed to allow call to eraDat() function
+#include <erfam.h>		// (SS) 2025-11-27 Needed to allow call to eraDat() function
+#include <de440.hpp>	// (SS) 2025-11-27 Needed to allow call to getDe440Coor() function in StelUtils::getDeltaTJPLHorizons()
+#include "StelApp.hpp"	// (SS) 2026-09-13 Needed to allow call to StelApp::getInstance().getFlagExtraPrecision()
 
 #ifdef CYGWIN
 #include <malloc.h>
@@ -54,6 +55,13 @@ double sqr(double x) { return x*x; }
 
 namespace StelUtils
 {
+
+// (SS) 2026-09-13 Small helper to avoid repeating StelApp::getInstance().getFlagExtraPrecision() at every call site.
+inline bool extraPrecision()
+{
+	return StelApp::getInstance().getFlagExtraPrecision();
+}
+
 //! Return the full name of stellarium, e.g. "Stellarium 23.1"
 QString getApplicationName()
 {
@@ -157,6 +165,7 @@ QString daysFloatToDHMS(float days)
 
 	return r;
 }
+
 QString daysFloatToDHMSnarration(float days)
 {
 	float remain = days;
@@ -227,7 +236,8 @@ QString radToDecDegStr(const double angle, const int precision, const bool useD,
 	const QChar degsign = (useD ? 'd' : QChar(0x00B0));
 	double deg = (positive ? fmodpos(angle, 2.0*M_PI) : std::fmod(angle, 2.0*M_PI)) * M_180_PI;
 
-	return QString("%1%2").arg(QString::number(deg, 'f', precision), degsign);
+	const bool extra = extraPrecision();
+	return QString("%1%2").arg(QString::number(deg, 'f', extra ? 7 : precision), degsign); // (SS) 2026-09-13 Increase precision from 4 to 7
 }
 
 QString radToDecDegNarration(const double angle, const int precision, const bool useD, const bool positive)
@@ -288,8 +298,9 @@ QString radToHmsStr(const double angle, const bool decimal)
 	QString carry;
 	if (decimal)
 	{
+		const bool extra = extraPrecision();
 		width=5;
-		precision=2;
+		precision = extra ? 6 : 2; // (SS) 2026-09-13 Increase precision from 2 to 6
 		carry="60.00";
 	}
 	else
@@ -315,6 +326,7 @@ QString radToHmsStr(const double angle, const bool decimal)
 
 	return QString("%1h%2m%3s").arg(h, width).arg(m, 2, 10, QChar('0')).arg(s, 3+precision, 'f', precision, QChar('0'));
 }
+
 QString radToHmsNarration(const double angle, const bool decimal)
 {
 	unsigned int h,m;
@@ -390,15 +402,16 @@ QString radToDmsStrAdapt(const double angle, const bool useD)
 	return str;
 }
 
-
 /*************************************************************************
  Convert an angle in radian to a dms formatted string
 *************************************************************************/
 QString radToDmsStr(const double angle, const bool decimal, const bool useD)
 {
-	const int precision = decimal ? 1 : 0;
+	const bool extra    = extraPrecision();
+	const int precision = decimal ? extra ? 5 : 1 : 0; // (SS) 2026-09-13 increase precision from 1 : 0 to 5 : 0
 	return StelUtils::radToDmsPStr(angle, precision, useD);
 }
+
 QString radToDmsNarration(const double angle, const bool decimal, const bool useD)
 {
 	const int precision = decimal ? 1 : 0;
@@ -1574,8 +1587,14 @@ QString hoursToHmsStr(const double hours, const bool minutesOnly, const bool col
 			h += 1;
 			m = 0;
 		}
-		QString format=colonFormat ? "%1:%2:%3" : "%1h%2m%3s";
-		return QString(format).arg(h).arg(m, 2, 10, QChar('0')).arg(s, 4, 'f', 1, QChar('0'));
+		
+		// (SS) 2026-09-13 increase # of digit for %3 from (s, 4, 'f', 1, QChart('0') to (s, 11, 'f', 8, QChar('0')
+		const bool extra = extraPrecision();
+		QString format   = colonFormat ? "%1:%2:%3" : "%1h%2m%3s";
+		return QString(format)
+		        .arg(h)
+		        .arg(m, 2, 10, QChar('0'))
+		        .arg(s, extra ? 11 : 4, 'f', extra ? 8 : 1, QChar('0'));
 	}
 }
 
@@ -2213,6 +2232,7 @@ static const double StephensonMorrisonHohenkerkZawilski2020DeltaTtableS15[40][6]
 	/*	39 */ {1959.0, 1962.0, 32.652,    1.577,     -1.115,   0.507   },
 	/*	40 */ {1962.0, 1965.0, 33.621,    0.868,     0.406,    0.199   }
 };
+
 double getDeltaTByJPLHorizons(const double jDay)
 { 
 	int year, month, day;
@@ -2225,6 +2245,13 @@ double getDeltaTByJPLHorizons(const double jDay)
 	double fractionDay     = jDay + 0.5 - std::floor(jDay + 0.5);
 	double dayWithFraction = day - 1 + fractionDay;
 	double y               = yearFraction(year, month, dayWithFraction);
+
+	// (SS) 2026-09-18 Special case for yearFraction: Gregorian reform year 1582.
+	// This is required to avoid a discontinuity in the year fraction for year 1582.
+	constexpr double JD_1582_START = 2298883.5; // 1582-01-01 00:00:00.000 Julian
+	constexpr double JD_1583_START = 2299238.5; // 1583-01-01 00:00:00.000 Gregorian
+	if (jDay >= JD_1582_START && jDay < JD_1583_START)
+		y = 1582.0 + (jDay - JD_1582_START) / (JD_1583_START - JD_1582_START);
 
 	// Limited years!
 	year = qBound(-9998, year, 9999);

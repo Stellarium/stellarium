@@ -206,6 +206,17 @@ void ConfigurationDialog::createDialogContent()
 	connectDoubleProperty(ui->aberrationSpinBox, "StelCore.aberrationFactor");
 	connectBoolProperty(ui->parallaxCheckBox,    "StelCore.flagUseParallax");
 	connectDoubleProperty(ui->parallaxSpinBox,   "StelCore.parallaxFactor");
+
+	// (SS) 2026-09-13 Gravitational light deflection toggle/factor. setUseDeflection()/setDeflectionFactor()
+	// already call StelApp::immediateSave() themselves (like aberration/parallax), so no extra manual
+	// connect() is needed here, unlike topocentricCheckBox below (see GH #4112).
+	connectBoolProperty(ui->deflectionCheckBox, "StelCore.flagUseDeflection");
+	connectDoubleProperty(ui->deflectionSpinBox, "StelCore.deflectionFactor");
+	
+	// (SS) 2026-09-15 Lunar figure-center correction toggle. setUseLunarFigureCorrection() already
+	// calls StelApp::immediateSave() itself, same as deflection/aberration/parallax above.
+	connectBoolProperty(ui->lunarFigureCorrectionCheckBox, "StelCore.flagUseLunarFigureCorrection");
+
 	connectBoolProperty(ui->topocentricCheckBox, "StelCore.flagUseTopocentricCoordinates");
 	// We cannot link flag setting to immediate storing. (GH #4112)
 	// The immediate-store is now triggered by this click
@@ -219,6 +230,12 @@ void ConfigurationDialog::createDialogContent()
 	connectBoolProperty(ui->checkBoxUMShortNotationSurfaceBrightness, "NebulaMgr.flagSurfaceBrightnessShortNotationUsage");
 	connectBoolProperty(ui->checkBoxUseFormattingOutput, "StelApp.flagUseFormattingOutput");
 	connectBoolProperty(ui->checkBoxUseCCSDesignations,  "StelApp.flagUseCCSDesignation");
+
+	// (SS) 2026-09-13 Extra decimal-digit precision for RA/Dec and other coordinates in the object
+	// info panel (e.g. 6 digits RA / 5 digits Dec, matching JPL Horizons' Extra Precision mode).
+	// GUI toggle only for now - the digit-count logic itself is wired in separately.
+	connectBoolProperty(ui->checkBoxExtraPrecision, "StelApp.flagExtraPrecision");
+
 	connectBoolProperty(ui->overwriteTextColorCheckBox,  "StelApp.flagOverwriteInfoColor");
 
 	// Selected object info
@@ -1354,6 +1371,12 @@ void ConfigurationDialog::saveAllSettings()
         conf->setValue("astro/aberration_factor",                       core->getAberrationFactor());
         conf->setValue("astro/flag_parallax",                           core->getUseParallax());
         conf->setValue("astro/parallax_factor",                         core->getParallaxFactor());
+		
+		// (SS) 2026-09-13 Added deflection and lunar figure correction settings to the configuration file
+		conf->setValue("astro/flag_deflection",							core->getUseDeflection());
+		conf->setValue("astro/deflection_factor",						core->getDeflectionFactor());
+		conf->setValue("astro/flag_lunar_figure_correction",			core->getUseLunarFigureCorrection());
+
         conf->setValue("astro/flag_topocentric_coordinates",            core->getUseTopocentricCoordinates());
         conf->setValue("astro/solar_system_threads",                    propMgr->getStelPropertyValue("SolarSystem.extraThreads").toInt());
 
@@ -1454,6 +1477,10 @@ void ConfigurationDialog::saveAllSettings()
         conf->setValue("gui/flag_use_polar_distance",                   propMgr->getStelPropertyValue("StelApp.flagUsePolarDistance").toBool());
         conf->setValue("gui/flag_use_formatting_output",                propMgr->getStelPropertyValue("StelApp.flagUseFormattingOutput").toBool());
         conf->setValue("gui/flag_use_ccs_designations",                 propMgr->getStelPropertyValue("StelApp.flagUseCCSDesignation").toBool());
+
+		// (SS) 2026-09-13 Added new settings for extra precision
+		conf->setValue("gui/flag_extra_precision",						propMgr->getStelPropertyValue("StelApp.flagExtraPrecision").toBool());
+
         conf->setValue("gui/flag_overwrite_info_color",                 propMgr->getStelPropertyValue("StelApp.flagOverwriteInfoColor").toBool());
         conf->setValue("gui/flag_time_jd",                              gui->getButtonBar()->getFlagTimeJd());
         conf->setValue("gui/flag_show_buttons_background",              propMgr->getStelPropertyValue("StelGui.flagUseButtonsBackground").toBool());
