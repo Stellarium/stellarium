@@ -205,8 +205,8 @@
 									</div>
 								</section>
 								<!-- part of ui/viecontrol.js -->
-								<section id="view" class="block textcenter flex-expand">
-									<header><h2>View</h2></header>
+								<section id="view" class="block textcenter">
+								<header><h2><?= tr("View")?></h2></header>
 									<div class="joystickcontainer inline-block" data-zoom-speed="3">
 											<div class="joystickbutton joystickbutton-up"></div><div class="joystickbutton joystickbutton-left"></div><div class="joystickbutton joystickbutton-right"></div><div class="joystickbutton joystickbutton-down"></div><div class="joystick ui-draggable ui-draggable-handle" data-joyurl="/api/main/move" data-joymax="5" style="position: relative;"></div>
 									</div>
@@ -222,29 +222,27 @@
 										</div>
 									</div>
 									<div class="block">									 
-										<header><h2>View towards horizon at Azimuth</h2></header>
+										<header><h2><?= tr("View towards horizon at Azimuth")?></h2></header>
 										 <div>							 
-											 <button type="button" class="stelssc" value="core.moveToAltAzi(0., 0., 3.)">0°</button>
-											 <button type="button" class="stelssc" value="core.moveToAltAzi(0., 30., 3.)">30°</button>
-											 <button type="button" class="stelssc" value="core.moveToAltAzi(0., 60., 3.)">60°</button>
-											 <button type="button" class="stelssc" value="core.moveToAltAzi(0., 90., 3.)">90°</button>
-											 <button type="button" class="stelssc" value="core.moveToAltAzi(0., 120., 3.)">120°</button>
-											 <button type="button" class="stelssc" value="core.moveToAltAzi(0., 150., 3.)">150°</button>
-											 <button type="button" class="stelssc" value="core.moveToAltAzi(0., 180., 3.)">180°</button>
-											 <button type="button" class="stelssc" value="core.moveToAltAzi(0., 210., 3.)">210°</button>
-											 <button type="button" class="stelssc" value="core.moveToAltAzi(0., 240., 3.)">240°</button>
-											 <button type="button" class="stelssc" value="core.moveToAltAzi(0., 270., 3.)">270°</button>
-											 <button type="button" class="stelssc" value="core.moveToAltAzi(0., 300., 3.)">300°</button>
-											 <button type="button" class="stelssc" value="core.moveToAltAzi(0., 330., 3.)">330°</button>
+											 <button type="button" class="stelssc" value="core.moveToAltAzi(0., 0., 3.)">0&deg;</button>
+											 <button type="button" class="stelssc" value="core.moveToAltAzi(0., 30., 3.)">30&deg;</button>
+											 <button type="button" class="stelssc" value="core.moveToAltAzi(0., 60., 3.)">60&deg;</button>
+											 <button type="button" class="stelssc" value="core.moveToAltAzi(0., 90., 3.)">90&deg;</button>
+											 <button type="button" class="stelssc" value="core.moveToAltAzi(0., 120., 3.)">120&deg;</button>
+											 <button type="button" class="stelssc" value="core.moveToAltAzi(0., 150., 3.)">150&deg;</button>
+											 <button type="button" class="stelssc" value="core.moveToAltAzi(0., 180., 3.)">180&deg;</button>
+											 <button type="button" class="stelssc" value="core.moveToAltAzi(0., 210., 3.)">210&deg;</button>
+											 <button type="button" class="stelssc" value="core.moveToAltAzi(0., 240., 3.)">240&deg;</button>
+											 <button type="button" class="stelssc" value="core.moveToAltAzi(0., 270., 3.)">270&deg;</button>
+											 <button type="button" class="stelssc" value="core.moveToAltAzi(0., 300., 3.)">300&deg;</button>
+											 <button type="button" class="stelssc" value="core.moveToAltAzi(0., 330., 3.)">330&deg;</button>
 										 </div>
 									 
 									</div>
 								 <div id="offset_wrapper" class="block">
-				<!-- It would be more intuitive to have this slider in vertical orientation.  -->
-				<header><h2>
-			 Vertical View offset: <span class="stelproperty" data-prop="StelMovementMgr.viewportVerticalOffsetTarget" data-numberformat="n0">0</span>    
-				</h2></header>
-									 <div id="view_offset" class="slider stelproperty flex-expand ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content" data-prop="StelMovementMgr.viewportVerticalOffsetTarget" data-min="-50" data-max="50" data-step="1"><span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 50%;"></span></div>
+									<!-- It would be more intuitive to have this slider in vertical orientation.  -->
+									<header><h2> <?= tr("Vertical View offset")?>: <span class="stelproperty" data-prop="StelMovementMgr.viewportVerticalOffsetTarget" data-numberformat="n0"></span></h2></header>
+									 <div id="view_offset" class="slider stelproperty flex-expand" data-prop="StelMovementMgr.viewportVerticalOffsetTarget" data-min="-50" data-max="50" data-step="1"></div>
 									 <!-- GZ Add a few buttons with defined values to set here -->
 									 <div id="view_offsetbuttons" class="ui-corner-all ui-widget-content">
 									 <button type="button" class="stelssc" value="StelMovementMgr.moveViewport(0.,-50., 3.)">-50%</button>
@@ -259,10 +257,8 @@
 								 </div>
 
 									<div id="view_wrapper" class="block">
-				<header><h2>
-					 FOV: <span id="view_fov_text">159</span>
-				</h2></header>
-										<div id="view_fov" class="ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"><span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 18.5%;"></span></div>
+									<header><h2><?= tr("FOV")?>:<span id="view_fov_text" title='<?= tr("Field of view")?>'></span></h2></header>
+										<div id="view_fov"></div>
 										 <div id="view_fovbuttons" class="ui-corner-all ui-widget-content">
 										
 										 <!-- as a matter of taste: fovbutton is faster, but required special operation. stelssc can be configured more elegantly, but may be blocked during script execution!
@@ -280,23 +276,23 @@
 											<button type="button" class="fovbutton" value="150">150&deg;</button>
 											<button type="button" class="fovbutton" value="180">180&deg;</button>
 											<button type="button" class="fovbutton" value="230">230&deg;</button> -->
-											<button type="button" class="stelssc" value="StelMovementMgr.zoomTo(0.1,3)">0.1°</button>
-											<button type="button" class="stelssc" value="StelMovementMgr.zoomTo(1,3)">1°</button>
-											<button type="button" class="stelssc" value="StelMovementMgr.zoomTo(5,3)">5°</button>
-											<button type="button" class="stelssc" value="StelMovementMgr.zoomTo(10,3)">10°</button>
-											<button type="button" class="stelssc" value="StelMovementMgr.zoomTo(20,3)">20°</button>
-											<button type="button" class="stelssc" value="StelMovementMgr.zoomTo(30,3)">30°</button>
-											<button type="button" class="stelssc" value="StelMovementMgr.zoomTo(40,3)">40°</button>
-											<button type="button" class="stelssc" value="StelMovementMgr.zoomTo(50,3)">50°</button>
-											<button type="button" class="stelssc" value="StelMovementMgr.zoomTo(60,3)">60°</button>
-											<button type="button" class="stelssc" value="StelMovementMgr.zoomTo(90,3)">90°</button>
-											<button type="button" class="stelssc" value="StelMovementMgr.zoomTo(120,3)">120°</button>
-											<button type="button" class="stelssc" value="StelMovementMgr.zoomTo(150,3)">150°</button>
-											<button type="button" class="stelssc" value="StelMovementMgr.zoomTo(180,3)">180°</button>
-											<button type="button" class="stelssc" value="StelMovementMgr.zoomTo(230,4)">230°</button>
+											<button type="button" class="stelssc" value="StelMovementMgr.zoomTo(0.1,3)">0.1&deg;</button>
+											<button type="button" class="stelssc" value="StelMovementMgr.zoomTo(1,3)">1&deg;</button>
+											<button type="button" class="stelssc" value="StelMovementMgr.zoomTo(5,3)">5&deg;</button>
+											<button type="button" class="stelssc" value="StelMovementMgr.zoomTo(10,3)">10&deg;</button>
+											<button type="button" class="stelssc" value="StelMovementMgr.zoomTo(20,3)">20&deg;</button>
+											<button type="button" class="stelssc" value="StelMovementMgr.zoomTo(30,3)">30&deg;</button>
+											<button type="button" class="stelssc" value="StelMovementMgr.zoomTo(40,3)">40&deg;</button>
+											<button type="button" class="stelssc" value="StelMovementMgr.zoomTo(50,3)">50&deg;</button>
+											<button type="button" class="stelssc" value="StelMovementMgr.zoomTo(60,3)">60&deg;</button>
+											<button type="button" class="stelssc" value="StelMovementMgr.zoomTo(90,3)">90&deg;</button>
+											<button type="button" class="stelssc" value="StelMovementMgr.zoomTo(120,3)">120&deg;</button>
+											<button type="button" class="stelssc" value="StelMovementMgr.zoomTo(150,3)">150&deg;</button>
+											<button type="button" class="stelssc" value="StelMovementMgr.zoomTo(180,3)">180&deg;</button>
+											<button type="button" class="stelssc" value="StelMovementMgr.zoomTo(230,4)">230&deg;</button>
 										</div>
 									</div>
-										<p>Projection: <span class="stelproperty" data-prop="StelCore.currentProjectionNameI18n">Stereographic</span></p>									
+              <p><?= tr("Projection")?>: <span class="stelproperty" data-prop="StelCore.currentProjectionNameI18n"></span></p>
 								</section>
 							</div>
 						</div>
@@ -779,20 +775,21 @@
         <div class="block">
           <header><h3><?= tr("Options")?></h3></header>
           <div class="inline-block blocklabel">
-            <label><input type="checkbox" class="stelaction" name="actionShow_Ground" /><?= tr("Show ground")?></label>
-            <label><input type="checkbox" class="stelproperty" name="LandscapeMgr.flagLandscapeSetsLocation"/><?= tr("Use associated planet and position")?></label>
-            <label><input type="checkbox" class="stelaction" name="actionShow_Fog" /><?= tr("Show fog")?></label>
+            <p><label><input type="checkbox" class="stelaction" name="actionShow_Ground" /><?= tr("Show ground")?></label></p>
+            <p><label><input type="checkbox" class="stelproperty" name="LandscapeMgr.flagLandscapeSetsLocation"/><?= tr("Use associated planet and position")?></label></p>
+            <p><label><input type="checkbox" class="stelaction" name="actionShow_Fog" /><?= tr("Show fog")?></label></p>
             <div class="flex flex-baseline">
-              <label><input type="checkbox" class="stelproperty" name="LandscapeMgr.flagLandscapeUseMinimalBrightness"/><?= tr("Minimal brightness:")?></label>
-              <input id="landscape_defaultMinimalBrightness" class="flex-expand spinner stelproperty" name="LandscapeMgr.defaultMinimalBrightness" data-min="0" data-max="1" data-step="0.01" data-numberformat="n2"/>
+              <p><label><input type="checkbox" class="stelproperty" name="LandscapeMgr.flagLandscapeUseMinimalBrightness"/><?= tr("Minimal brightness:")?></label></p>
+              <input id="landscape_defaultMinimalBrightness" class="flex-expand spinner stelproperty" name="LandscapeMgr.defaultMinimalBrightness" data-min="0" data-max="1" data-step="0.01" data-numberformat="n2"/></p>
             </div>
-          </div>
-          <div class="inline-block blocklabel">
-            <label><input type="checkbox" class="stelproperty" name="LandscapeMgr.flagPolyLineDisplayedOnly" /><?= tr("Draw only polygon")?> 
-			       <input id="landscape_polyLineThickness" class="flex-expand spinner stelproperty" name="LandscapeMgr.polyLineThickness" data-min="1" data-max="5" data-step="1" data-numberformat="n0"/></label>
-            <label><input type="checkbox" class="stelaction" name="actionShow_LandscapeLabels" /><?= tr("Show landscape labels")?></label>
-            <label><input type="checkbox" class="stelaction" name="actionShow_LandscapeIllumination" /><?= tr("Show illumination")?></label>
-            <label><input id="landscape_flagLandscapeSetsMinimalBrightness" type="checkbox" class="stelproperty" name="LandscapeMgr.flagLandscapeSetsMinimalBrightness"/><?= tr("from landscape, if given")?></label>
+            
+            <p><label><input type="checkbox" class="stelaction" name="actionShow_LandscapeLabels" /><?= tr("Show landscape labels")?></label></p>
+            <p><label><input type="checkbox" class="stelaction" name="actionShow_LandscapeIllumination" /><?= tr("Show illumination")?></label></p>
+            <p><label><input id="landscape_flagLandscapeSetsMinimalBrightness" type="checkbox" class="stelproperty" name="LandscapeMgr.flagLandscapeSetsMinimalBrightness"/><?= tr("from landscape, if given")?></label></p>
+            <div class="flex flex-baseline">
+							<p><label><input type="checkbox" class="stelproperty" name="LandscapeMgr.flagPolyLineDisplayedOnly" /><?= tr("Draw only polygon")?>
+							<input id="landscape_polyLineThickness" class="flex-expand spinner stelproperty" name="LandscapeMgr.polyLineThickness" data-min="1" data-max="5" data-step="1" data-numberformat="n0"/></label></p>
+						</div>
           </div>
         </div>			
         <!-- div class="smallblock flex landscapeblock" -->
@@ -2134,17 +2131,18 @@
 																<h3>2. <?= tr("Select a Property")?></h3>
 																<select id="btn-gen-property-list" class="btn-gen-list" size="10"></select>
 																
-																<div class="btn-gen-label-wrap">
-																		<label for="btn-gen-custom-label"><?= tr("Custom Label")?>:</label>
-																		<input id="btn-gen-custom-label" class="btn-gen-label-input" type="text" placeholder="Enter display name" />
-																</div>
-																
 																<div id="btn-gen-property-info" class="btn-gen-property-info" style="display:none;"></div>
 														</div>
 												</div>
 
 												<!-- RIGHT COLUMN -->
 												<div class="btn-gen-right-column">
+														<!-- Custom Label (only visible for properties) -->
+														<div id="btn-gen-label-step" class="btn-gen-step" style="display:none;">
+																<h3><?= tr("Custom Label")?></h3>
+																<input id="btn-gen-custom-label" class="btn-gen-label-input" type="text" placeholder="<?= tr("Enter display name... Esc to clear")?>" />
+														</div>
+														
 														<!-- Preview -->
 														<div class="btn-gen-step">
 																<h3><?= tr("Preview")?></h3>
@@ -2379,35 +2377,142 @@
 				</div><!-- End #actions-sub-tabs -->
 			</div><!-- End #tab_actions -->
 			
-      <!-- handled by ui/location.js -->
-      <div id="tab_location">
-        <section id="location" class="inline-block smallblock">
-          <h3><?= tr("Location")?></h3>
-          <div>
-            <div id="loc_map">
-              <img id="loc_mapimg" src="images/world.png" alt='<?= tr("Planet map")?>'/>
-              <img id="loc_mappointer" src="images/map-pointeur.png" alt='<?= tr("Planet map pointer")?>'/>
-            </div>
-            <div id="loc_searchlist" class="flex flex-column" >
-              <select id="loc_list" size="10"></select>
-              <input id="loc_search" placeholder='<?= tr("Type to search location")?>' autocomplete="off"/>
-            </div>
-          </div>
-          <div id="loc_inputs">
-            <div>
-              <p><label for="loc_latitude"><?= tr("Latitude:")?></label><input id="loc_latitude"/></p>
-              <p><label for="loc_longitude"><?= tr("Longitude:")?></label><input id="loc_longitude"/></p>
-              <p><label for="loc_altitude"><?= tr("Elevation:")?></label><input id="loc_altitude"/></p>
-            </div>
-            <div>
-              <p><label for="loc_name"><?= tr("Name/City:")?></label><input id="loc_name" type="text"/></p>
-              <p><label for="loc_region"><?= tr("Region:")?></label><select id="loc_region"></select></p>
-              <p><label for="loc_planet"><?= tr("Planet:")?></label><select id="loc_planet"></select></p>
-            </div>
-          </div>
-        </section>
-      </div>
-			
+			<!-- handled by ui/location.js -->
+			<div id="tab_location">
+				<section id="location" class="smallblock">
+					<h3><?= tr("Location")?></h3>
+
+					<!-- ============================================================ -->
+					<!-- Map + search list (unchanged)                                -->
+					<!-- ============================================================ -->
+					<div id="loc_map_container">
+						<!-- Left: interactive map with zoom controls -->
+						<div id="loc_map_wrapper">
+							<div id="loc_map_viewport">
+								<canvas id="loc_map_canvas"></canvas>
+								<img id="loc_mappointer" src="images/map-pointeur.png"
+										 alt='<?= tr("Planet map pointer")?>'/>
+							</div>
+							<div id="loc_map_controls">
+								<button id="loc_zoom_in"    type="button" title='<?= tr("Zoom in")?>'>+</button>
+								<button id="loc_zoom_out"   type="button" title='<?= tr("Zoom out")?>'>−</button>
+								<button id="loc_zoom_reset" type="button" title='<?= tr("Reset zoom")?>'>⟲</button>
+								<span id="loc_zoom_level">100%</span>
+							</div>
+						</div>
+						<!-- Right: search list + radius -->
+						<div id="loc_searchlist" class="flex flex-column">
+							<select id="loc_list" size="10"></select>
+							<input id="loc_search" placeholder='<?= tr("Type to search location")?>' autocomplete="off"/>
+							<div id="loc_radius_row">
+								<label for="loc_radius_deg"><?= tr("Radius:")?></label>
+								<input id="loc_radius_deg" type="text"/>
+								<span class="loc_radius_unit">&deg;</span>
+								<label for="loc_radius_km" class="loc_radius_approx">≈</label>
+								<input id="loc_radius_km" type="text"/>
+								<span class="loc_radius_unit">km</span>
+							</div>
+						</div>
+					</div>
+
+					<!-- ============================================================ -->
+					<!-- Location details + time zone (grid layout)                   -->
+					<!-- ============================================================ -->
+					<div id="loc_details_grid">
+
+						<!-- Group 1: Coordinates - Current location information -->
+						<fieldset class="loc_group">
+							<legend><?= tr("Current location information")?></legend>
+
+							<div class="loc_row">
+								<label for="loc_latitude"><?= tr("Latitude:")?></label>
+								<input id="loc_latitude"/>
+								<span id="loc_latitude_dms" class="coord-dms"></span>
+							</div>
+
+							<div class="loc_row">
+								<label for="loc_longitude"><?= tr("Longitude:")?></label>
+								<input id="loc_longitude"/>
+								<span id="loc_longitude_dms" class="coord-dms"></span>
+							</div>
+
+							<div class="loc_row">
+								<label for="loc_altitude"><?= tr("Elevation:")?></label>
+								<input id="loc_altitude"/>
+								<span id="loc_altitude_display" class="coord-dms"></span>
+							</div>
+
+							<div class="loc_row loc_row_checkbox">
+								<label class="loc_checkbox_label" for="loc_use_decimal_degrees">
+									<input type="checkbox"
+												 id="loc_use_decimal_degrees"
+												 class="stelproperty"
+												 name="StelApp.flagUseDecDegreesCoords"/>
+									<?= tr("Use decimal degrees (coordinates)")?>
+								</label>
+							</div>
+						</fieldset>
+
+						<!-- Group 2: Place -->
+						<fieldset class="loc_group">
+							<legend><?= tr("Place")?></legend>
+							<div class="loc_row">
+								<label for="loc_name"><?= tr("Name/City:")?></label>
+								<input id="loc_name" type="text"/>
+							</div>
+							<div class="loc_row">
+								<label for="loc_region"><?= tr("Region:")?></label>
+								<select id="loc_region"></select>
+							</div>
+							<div class="loc_row">
+								<label for="loc_planet"><?= tr("Planet:")?></label>
+								<select id="loc_planet"></select>
+							</div>
+							<div class="loc_row loc_row_checkbox">
+								<label class="loc_checkbox_label" for="loc_auto_land">
+									<input type="checkbox"
+												 id="loc_auto_land"
+												 class="stelproperty"
+												 name="LandscapeMgr.flagLandscapeAutoSelection"
+												 title="<?= tr("Automatic change of landscpe when planet or location is changed")?>"/>
+									<?= tr("Auto-select landscapes")?>
+								</label>
+							</div>							
+						</fieldset>
+
+						<!-- Group 3: Time zone -->
+						<fieldset class="loc_group loc_group_time">
+							<legend><?= tr("Time zone")?></legend>
+							<div class="loc_row">
+								<label for="loc_timezone"><?= tr("Time zone")?>:</label>
+								<select id="loc_timezone"
+												class="stelproperty"
+												name="StelCore.currentTimeZone"></select>
+							</div>
+							<div class="loc_row loc_row_checkbox">
+								<label class="loc_checkbox_label" for="loc_use_custom_tz">
+									<input type="checkbox"
+												 id="loc_use_custom_tz"
+												 class="stelproperty"
+												 name="StelCore.flagUseCTZ"/>
+									<?= tr("Use custom time zone")?>
+								</label>
+							</div>
+							<div class="loc_row loc_row_checkbox">
+								<label class="loc_checkbox_label" for="loc_use_dst">
+									<input type="checkbox"
+												 id="loc_use_dst"
+												 class="stelproperty"
+												 name="StelCore.flagUseDST"/>
+									<?= tr("Enable daylight saving time")?>
+								</label>
+							</div>
+						</fieldset>
+
+					</div>
+				</section>
+			</div>				
+
 			<!-- also handled by ui/viewoptions.js -->
       <div id="tab_projection">
         <div class="smallblock flex landscapeblock">
@@ -2442,7 +2547,7 @@
                       </div>
                   </div>
               </div>
-              <div class="smallblock flex-expand">
+              <div class="smallblock">
                   <h3><?= tr("Options")?></h3>
                   <div class="inline-block blocklabel">
                       <label><input type="checkbox" class="stelproperty" name="Scenery3d.enableScene" /><?= tr("Toggle 3D landscape")?></label>
@@ -2544,7 +2649,7 @@
 															</div>
 															<div class="joystick-info">
 																	<span class="info-label"><?= tr("Current FOV:")?></span>
-																	<span class="info-value" id="gp-current-fov">60°</span>
+																	<span class="info-value" id="gp-current-fov">60&deg;</span>
 															</div>
 															<div class="stick-options">
 																	<label class="stiick-item">

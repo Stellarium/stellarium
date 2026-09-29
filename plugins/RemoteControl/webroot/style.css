@@ -634,31 +634,167 @@ button.button32:active {
 	font-style: italic;
 }
 
-#loc_map {
-    display: inline-block;
-    position: relative;
-    overflow: hidden;
-    /* Add min-width make sure not to shrink too much */
-    min-width: 200px;
-    min-height: 120px;
-    max-width: 100%;
+#tab_main > .flex > section > #View {
+	padding:0;
 }
-#loc_mapimg {
+
+#tab_main {
+  display: table-header-group;
+}
+
+/* ========================================================================
+ * Location panel: interactive map with zoom and geodetic radius overlay
+ * ======================================================================== */
+
+/* Outer container: map on the left, search list on the right */
+#loc_map_container {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	align-items: flex-start;
+	margin-bottom: 8px;
+}
+
+/* ---------------------------------------------------------------------
+ * Map wrapper: holds the viewport and the zoom controls
+ * --------------------------------------------------------------------- */
+#loc_map_wrapper {
+	position: relative;
+	flex: 1 1 400px;
+	min-width: 200px;
+	max-width: 100%;
+}
+
+/*
+ * Viewport: its aspect-ratio is set dynamically by JS from the natural
+ * dimensions of the current planet map, so the planet image always fills
+ * the viewport without distortion. A small default (2:1, matching the
+ * Earth map) is provided so the element has a size before the first
+ * image loads.
+ */
+#loc_map_viewport {
+	position: relative;
+	width: 100%;
+	aspect-ratio: 2 / 1;
+	overflow: hidden;
+	background: #000;
+	border: 1px solid #333;
+	border-radius: 4px;
+	cursor: grab;
+	user-select: none;
+	-webkit-user-select: none;
+	/*
+	 * touch-action: none disables the browser's default touch
+	 * gestures on the map:
+	 *   - page scrolling
+	 *   - pinch-to-zoom (browser-level)
+	 *   - double-tap-to-zoom
+	 *
+	 * We implement our own pan and pinch-zoom handlers in JS, so
+	 * the browser must not interfere. Without this, the browser
+	 * would eat the pinch gesture and no zoom would occur.
+	 */
+	touch-action: none;
+	-webkit-touch-callout: none;
+}
+
+#loc_map_viewport.dragging {
+	cursor: grabbing;
+}
+
+/* Canvas fills the viewport. Its backing store is sized in JS to
+   match the CSS size multiplied by devicePixelRatio. */
+#loc_map_canvas {
+	display: block;
 	width: 100%;
 	height: 100%;
+	pointer-events: none;
 }
 
+/*
+ * Pointer marker: a separate <img> that sits above the canvas.
+ *
+ * It is deliberately NOT drawn on the canvas, because we want its
+ * on-screen size to remain constant regardless of the zoom level.
+ *
+ * IMPORTANT: the source image (map-pointeur.png) is 32×32, but the
+ * visible arrow only occupies the TOP HALF of the image; the bottom
+ * half is transparent. We therefore anchor the image at its vertical
+ * MIDPOINT (translate -50%, -50%), so the arrow tip lands exactly on
+ * the marker coordinate. Using -100% would place the bottom of the
+ * transparent half at the coordinate, shifting the arrow up by 16
+ * pixels — clearly visible at low zoom levels with small radii.
+ * Position is updated from JS via left/top in viewport pixels.
+ */
 #loc_mappointer {
 	position: absolute;
-	top: 10px;
-	left: 10px;
+	width: 32px;
+	height: 32px;
+	left: 0;
+	top: 0;
+	transform: translate(-50%, -50%);  /* anchor at vertical MIDPOINT */
+	pointer-events: none;
+	user-select: none;
+	-webkit-user-drag: none;
+	z-index: 10;
 }
 
-#loc_searchlist{
-	vertical-align: top;
-	height: 250px;
-	width: 150px;
-	float: right;
+/* ---------------------------------------------------------------------
+ * Zoom controls (floating on top of the viewport)
+ * --------------------------------------------------------------------- */
+#loc_map_controls {
+	position: absolute;
+	top: 6px;
+	left: 6px;
+	display: flex;
+	align-items: center;
+	gap: 4px;
+	padding: 3px 6px;
+	background: rgba(0, 0, 0, 0.55);
+	border-radius: 4px;
+	font-size: 11px;
+	color: #DCDBDA;
+	z-index: 20;
+}
+
+#loc_map_controls button {
+	width: 22px;
+	height: 22px;
+	padding: 0;
+	margin: 0;
+	border: 1px solid #555;
+	background: #2A2C2E;
+	color: #DCDBDA;
+	font-size: 14px;
+	line-height: 1;
+	cursor: pointer;
+	border-radius: 3px;
+}
+
+#loc_map_controls button:hover {
+	background: #3A3C3E;
+	border-color: #777;
+}
+
+#loc_map_controls button:active {
+	background: #1A1C1E;
+}
+
+#loc_zoom_level {
+	min-width: 38px;
+	text-align: center;
+	font-family: monospace;
+	font-size: 10px;
+}
+
+/* ---------------------------------------------------------------------
+ * Search list column (right side)
+ * --------------------------------------------------------------------- */
+#loc_searchlist {
+	flex: 0 0 500px;
+	min-width: 350px;
+	max-width: 100%;
+	min-height: 400px;
 }
 
 #loc_searchlist > *{
@@ -674,37 +810,227 @@ button.button32:active {
 	overflow-x: hidden;
 }
 
+/* ---------------------------------------------------------------------
+ * Radius spinners row
+ * --------------------------------------------------------------------- */
+#loc_radius_row {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	margin-top: 6px;
+	padding: 2px 0;
+}
+
+#loc_radius_row label {
+	font-size: 11px;
+	font-weight: bold;
+	white-space: nowrap;
+}
+
+#loc_radius_deg,
+#loc_radius_km {
+	width: 62px;
+	min-height: 20px;
+}
+
+.loc_radius_approx {
+	min-width: 12px;
+	text-align: center;
+	color: #B4B7B0;
+}
+
+.loc_radius_unit {
+	font-size: 10px;
+	color: #DCDBDA;
+	min-width: 14px;
+}
+
+#loc_list #loc_search {
+	min-width: 250px;
+	max-width: max-content;
+}
+
 #loc_list li {
 	white-space: nowrap;
 	text-align: left;
 }
 
-#loc_inputs {
+/* ========================================================================
+ * Location panel: details grid (coordinates, place, time zone)
+ * ======================================================================== */
+
+/*
+ * The details grid holds three <fieldset> groups side by side on wide
+ * screens, and stacks them vertically on narrow ones.
+ *
+ *   - Coordinates: latitude, longitude, elevation
+ *   - Place:       name/city, region, planet
+ *   - Time zone:   zone selector + custom-timezone/DST checkboxes
+ *
+ * Each group uses the same internal layout (label + control on one row)
+ * via the .loc_row class, so the three columns align visually.
+ */
+#loc_details_grid {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: 10px;
+	margin-top: 8px;
+}
+
+/* Individual group (fieldset with legend) */
+.loc_group {
+	position: relative;
+	min-width: 0;             /* allow grid items to shrink */
+	padding: 18px 10px 10px 10px;
+	margin: 0;
+	border: 1px solid rgba(0, 0, 0, 0.15);
+	border-radius: 5px;
+	background: rgba(149, 150, 152, 0.12);
+}
+
+.loc_group legend {
+	padding: 0 6px;
+	font-size: 11px;
+	font-weight: bold;
+	color: #000;
+	background: transparent;
+}
+
+/* Time-zone group may need more room for the long <select> */
+.loc_group_time {
+	/* no special width, but we allow the select to wrap below on narrow screens */
+}
+
+/* A single row inside a group: label + control */
+.loc_row {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	margin: 4px 0;
+	min-width: 0;
+}
+
+.loc_row > label {
+	flex: 0 0 90px;           /* fixed label column */
+	text-align: right;
+	color: #000;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.loc_row > input,
+.loc_row > select {
+	flex: 1 1 auto;
+	min-width: 0;             /* allow shrinking inside flex */
+	box-sizing: border-box;
+}
+
+/* Checkbox rows: no label column, the checkbox carries its own label */
+.loc_row_checkbox {
+	display: block;
+	margin: 6px 0 2px 0;
+}
+
+.loc_checkbox_label {
+	display: inline-flex;
+	align-items: center;
+	gap: 5px;
+	font-size: 11px;
+	cursor: pointer;
+	user-select: none;
+	-webkit-user-select: none;
+	color: #000;
 	text-align: left;
 }
 
-#loc_inputs > div {
-	display: inline-block;
+.loc_checkbox_label input[type="checkbox"] {
+	margin: 0;
+	flex-shrink: 0;
 }
 
-#loc_inputs > div label {
+/* The time-zone <select> should be wide enough to show long names */
+#loc_timezone {
+	width: 100%;
+	min-width: 140px;
+	max-width: 100%;
+	height: 30px;
+  border: 1px solid #c5c5c5;
+	background: linear-gradient(#B4B4B7, #5D5F62);
+}
+
+#loc_timezone:disabled {
+	opacity: 0.9;
+	cursor: not-allowed;
+	color: #474545;
+}
+
+/* Spinner width: match the other text inputs */
+#loc_latitude,
+#loc_longitude {
 	width: 100px;
-	display: inline-block;
+	box-sizing: border-box;
 }
 
+#loc_altitude {
+	width: 70px;
+	box-sizing: border-box;
+}
+
+/* Name/city should stretch */
 #loc_name {
-	width: 240px;
+	width: 100%;
+	box-sizing: border-box;
+	min-height: 30px;
+}
+
+/* Region and planet comboboxes */
+#loc_region,
+#loc_planet {
+	width: 100%;
 	box-sizing: border-box;
 }
 
-#loc_inputs input.custom-combobox-input {
-	width: 212px;
+/* Custom combobox used by region and planet: make it fill the row */
+.loc_row .custom-combobox {
+	flex: 1 1 auto;
+	min-width: 0;
+}
+
+.loc_row .custom-combobox-input {
+	width: 100%;
 	box-sizing: border-box;
 }
 
-#loc_inputs input.ui-spinner-input {
-	width: 77px;
-	box-sizing: border-box;
+#loc_altitude.ui-spinner-input {
+  min-width: 100px;
+}
+
+/* ========================================================================
+ * Coordinate DMS display
+ * ======================================================================== */
+
+/*
+ * The DMS <span> shows the coordinate in degrees/minutes/seconds (or
+ * decimal degrees when StelApp.flagUseDecDegreesCoords is enabled)
+ * next to each spinner. It is a read-only display; editing still
+ * happens through the spinner.
+ *
+ * The monospace font keeps the digits aligned as the value changes,
+ * which is important when the pointer is dragged across the map.
+ */
+.coord-dms {
+	flex: 0 0 auto;
+	font-family: 'DejaVuSansMono', monospace;
+	min-height: 30px;
+	padding-left: .4em;
+  padding-right: .4em;
+	text-align: right;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	align-content: center;
+	background: linear-gradient(rgb(180, 180, 183),rgb(93, 95, 98));
 }
 
 .custom-combobox {
@@ -715,7 +1041,10 @@ button.button32:active {
 	padding: 0;
 	vertical-align: middle;
 	display: inline-block;
+	align-content: center;
+	min-height: 30px;
 }
+
 .custom-combobox-toggle {
 	position: absolute;
 	margin: 0;
@@ -908,11 +1237,6 @@ button.button32:active {
 	font-weight: bold;
 }
 
-/*#vo_markers_boxes flex.smallblock,
-#vo_stars flex.smallblock {
-	
-}*/
-
 .selectmenu + span.ui-selectmenu-button {
 	display: block;
 }
@@ -983,10 +1307,6 @@ button.button32:active {
     width: 32px;
     height: 32px;
     cursor: move;
-}
-
-.smallblock128 {
-    max-width: 143px;
 }
 
 /* ========================================================================
@@ -1103,171 +1423,6 @@ button.button32:active {
 .active-script-display span {
     font-weight: bold;
     color: #DCDBDA;
-}
-
-@media (max-width: 900px) {
-		header h1, #timejumplist, #timewidget, .ui-tabs .ui-tabs-nav {
-			font-size: 100%;
-		}
-		
-		.timedisplay {
-			font-size: 90%;
-		}
-		
-		#time_local {
-			min-width: max-content;
-		}
-		
-		header img {
-			height: 50px;
-			width: 50px;
-		}		
-}
-
-/**
- * Responsive adjustments for script controls.
- */
-@media (max-width: 768px) {
-    .script-controls {
-      gap: 6px;
-    }
-		
-		#timewidget, .timedisplay {
-				font-size: 12px;
-				min-width:200px !important;
-		}
-		
-		#scriptinfo,
-		#vo_landscapeinfo,
-		#vo_projectioninfo {
-			width: 2em;
-		}
-		
-		#landscape_polyLineThickness {
-			width: 60px;
-			height: 16px;
-		}
-
-		#landscape_defaultMinimalBrightness,
-		#landscape_polyLineThickness {
-			width: 50px;
-			height: 16px;
-			padding-bottom: 0.3px;
-			padding-top: 0.3px;
-			margin-right: 0px;
-		}
-		#vo_stars {
-			width:500px;
-		}
-		
-		#time_jday .timedisplay {
-			display: inherit;
-		}
-		
-		#srch_button {
-			font-size: 0.8em;
-		}
-	/*	.ui-tabs .ui-tabs-panel {
-			padding: 1em 1em;
-			margin: 2%;
-		}		*/
-		header img {
-			height: 44px;
-			width: 44px;
-		}
-		
-		header h1, #timejumplist, #timewidget, .timedisplay, .ui-tabs .ui-tabs-nav {
-			font-size: 85%;
-		}
-		
-		#date_year,
-		#date_month,
-		#date_day,
-		#time_hour,
-		#time_minute,
-		#time_second {
-			width: 5em;
-			font-size: 11px;
-		}
-
-}
-
-@media (max-width: 600px) {
-		#tab_view .table label {
-			min-width: 200px;
-		}
-
-		#loc_inputs > div {
-			/*! display: inline-block; */
-		}
-
-		#actionlist.scrollselect {
-			min-width: inherit;
-		}
-		
-}
-
-@media (max-width: 480px) {
-    .script-controls {
-        gap: 4px;
-    }
-		#timewidget, .timedisplay {
-				font-size: 12px;
-				min-width:unset;
-		}
-		
-		#scriptinfo {
-				width: 150px !important;
-		}
-		
-		.block header {
-			display: block;
-			text-align: left;
-			position: absolute;
-			left: 17px;
-			top: 10px;
-			color: rgb(0,0,0);
-		}
-
-		.block header h2 {
-			font-size: 10px;
-			display: inline-block;
-		}
-		
-		#srch_button {
-			font-size: 0.5em;
-		}
-		
-		header h1, #timejumplist, .timedisplay, #timewidget, .ui-tabs .ui-tabs-nav {
-			font-size: 75%;
-		}
-		
-		#date_year,
-		#date_month,
-		#date_day,
-		#time_hour,
-		#time_minute,
-		#time_second {
-			width: 4em;
-			font-size: 9px;
-		}		
-
-		#vo_stars {
-			
-			display: table-caption;
-		}
-		
-		#loc_inputs > div {
-			display: contents;
-		}		
-		.scrollselect {
-			min-width: fit-content;
-		}		
-		
-		#loc_searchlist {
-			width: 100% !important;
-			height: 100% !important;
-		}
 }
 
 /* ========================================================================
@@ -1600,10 +1755,125 @@ button.button32:active {
 }
 
 /* ============================================================
- * RESPONSIVE
+ * RESPONSIVE ADJUSTMENTS
  * ============================================================ */
 
+@media (max-width: 1024px) {
+		#tab_main h2{
+			font-size: 90%;
+		}
+		
+		.timedisplay {
+			font-size: 16px;
+		}
+		
+		#loc_searchlist {
+		min-height: 250px;
+		}
+
+		/* Two columns on medium screens */
+		#loc_details_grid {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+		/* Time zone spans both columns on medium screens */
+		.loc_group_time {
+			grid-column: 1 / -1;
+		}	
+}
+
+@media (max-width: 900px) {
+		#tab_main h2{
+			font-size: 90%;
+		}
+		
+	  #date_year, #date_month, #date_day, #time_hour, #time_minute, #time_second {
+			width: 5em;
+  }
+	
+		header h1, #timejumplist, #timewidget, .ui-tabs .ui-tabs-nav {
+			font-size: 100%;
+		}
+		
+		.timedisplay {
+			font-size: 90%;
+		}
+		
+		#time_local {
+			min-width: max-content;
+		}
+		
+		header img {
+			height: 50px;
+			width: 50px;
+		}
+		
+		#loc_searchlist {
+		flex: 1 1 auto;
+		min-height: 280px;
+	}
+}
+
 @media (max-width: 768px) {
+    .script-controls {
+      gap: 6px;
+    }
+		
+		#timewidget, .timedisplay {
+				font-size: 12px;
+				min-width:200px !important;
+		}
+		
+		#scriptinfo,
+		#vo_landscapeinfo,
+		#s3d_info,
+		#vo_projectioninfo {
+			width: 2em;
+		}
+		
+		#landscape_polyLineThickness {
+			width: 60px;
+			height: 16px;
+		}
+
+		#landscape_defaultMinimalBrightness,
+		#landscape_polyLineThickness {
+			width: 50px;
+			height: 16px;
+			padding-bottom: 0.3px;
+			padding-top: 0.3px;
+			margin-right: 0px;
+		}
+		#vo_stars {
+			width:500px;
+		}
+		
+		#time_jday .timedisplay {
+			display: inherit;
+		}
+		
+		#srch_button {
+			font-size: 0.8em;
+		}
+
+		header img {
+			height: 44px;
+			width: 44px;
+		}
+		
+		header h1, #timejumplist, #timewidget, .timedisplay, .ui-tabs .ui-tabs-nav {
+			font-size: 85%;
+		}
+		
+		#date_year,
+		#date_month,
+		#date_day,
+		#time_hour,
+		#time_minute,
+		#time_second {
+			width: 5em;
+			font-size: 11px;
+		}
+	
     /*.stelaction,
     .stelproperty,*/
     .stelproperty-toggle {
@@ -1622,9 +1892,117 @@ button.button32:active {
         min-width: 80px;
         font-size: 10px;
     }
+		
+	 #loc_details_grid {
+			grid-template-columns: repeat(1, minmax(0, 1fr));
+		}		
+}
+
+@media (max-width: 600px) {
+	
+		#tab_view .table label {
+			min-width: 200px;
+		}
+
+		#actionlist.scrollselect {
+			min-width: inherit;
+		}
+		/* Make the DMS span take the full row on narrow screens */
+		.coord-dms {
+			min-width: 0;
+			text-align: left;
+			padding-left: 0;
+		}		
 }
 
 @media (max-width: 480px) {
+    .script-controls {
+        gap: 4px;
+    }
+		#timewidget, .timedisplay {
+				font-size: 12px;
+				min-width:unset;
+		}
+		
+		#scriptinfo {
+				width: 150px !important;
+		}
+		
+		.block header {
+			display: block;
+			text-align: left;
+			position: absolute;
+			left: 17px;
+			top: 10px;
+			color: rgb(0,0,0);
+		}
+
+		.block header h2 {
+			font-size: 10px;
+			display: inline-block;
+		}
+		
+		#srch_button {
+			font-size: 0.5em;
+		}
+		
+		header h1, #timejumplist, .timedisplay, #timewidget, .ui-tabs .ui-tabs-nav {
+			font-size: 75%;
+		}
+		
+		#date_year,
+		#date_month,
+		#date_day,
+		#time_hour,
+		#time_minute,
+		#time_second {
+			width: 4em;
+			font-size: 9px;
+		}		
+
+		#vo_stars {
+			
+			display: table-caption;
+		}
+		
+		#loc_inputs > div {
+			display: contents;
+		}		
+	
+		#loc_searchlist {
+			min-width: 0%;
+		}
+	
+		.loc_row > label {
+			flex: 0 0 20px;
+		}		
+
+		#loc_details_grid {
+			grid-template-columns: 1fr;
+		}
+		.loc_group_time {
+			grid-column: auto;
+		}
+
+		/* Stack label above control on very narrow screens */
+		.loc_row {
+			flex-direction: column;
+			align-items: stretch;
+			gap: 2px;
+		}
+		.loc_row > label {
+			flex: 0 0 auto;
+			text-align: left;
+			width: auto;
+		}
+		.loc_row > input,
+		.loc_row > select {
+			width: 100%;
+		}
+		.scrollselect {
+			min-width: fit-content;
+		}
+		
     /*.stelaction,
     .stelproperty,*/
     .stelproperty-toggle {
@@ -1662,34 +2040,3 @@ button.button32:active {
         font-size: 9px;
     }
 }
-
-@media (max-width: 900px) {
-		#tab_main h2{
-			font-size: 90%;
-		}
-		
-	  #date_year, #date_month, #date_day, #time_hour, #time_minute, #time_second {
-			width: 5em;
-  }
-}
-
-
-#tab_main > .flex > section > #View {
-	padding:0;
-} 
-
-@media (max-width: 1024px) {
-		#tab_main h2{
-			font-size: 90%;
-		}
-		
-		.timedisplay {
-			font-size: 16px;
-		}
-
-}
-
-#tab_main {
-  display: table-header-group;
-}
-
