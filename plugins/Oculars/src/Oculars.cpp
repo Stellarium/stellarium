@@ -845,7 +845,7 @@ void Oculars::updateOcularReticle(void)
 	{
 		StelTextureMgr& manager = StelApp::getInstance().getTextureManager();
 		//Load OpenGL textures
-		StelTexture::StelTextureParams params;
+		StelTexture::Params params;
 		params.generateMipmaps = true;
 		reticleTexture = manager.createTexture(reticleTexturePath, params);
 	}

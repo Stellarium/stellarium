@@ -47,16 +47,16 @@ class StelTexture: public QObject, public QEnableSharedFromThis<StelTexture>
 
 public:
 	//! Contains the parameters defining how a texture is created.
-	struct StelTextureParams
+	struct Params
 	{
-		constexpr StelTextureParams() {} // disable aggregate initialization
+		constexpr Params() {} // disable aggregate initialization
 
-		constexpr StelTextureParams& enableMipmapGen() { generateMipmaps = true; return *this; }
-		constexpr StelTextureParams& enableMipmapFilter() { filterMipmaps = true; return *this; }
-		constexpr StelTextureParams& setFiltering(GLint newFiltering) { filtering = newFiltering; return *this; }
-		constexpr StelTextureParams& setWrapMode(GLint newWrapMode) { wrapMode = newWrapMode; return *this; }
-		constexpr StelTextureParams& setDecimation(int newDecim) { decimation = newDecim; return *this; }
-		constexpr StelTextureParams& disallowHttp2() { allowHttp2 = false; return *this; }
+		constexpr Params& enableMipmapGen() { generateMipmaps = true; return *this; }
+		constexpr Params& enableMipmapFilter() { filterMipmaps = true; return *this; }
+		constexpr Params& setFiltering(GLint newFiltering) { filtering = newFiltering; return *this; }
+		constexpr Params& setWrapMode(GLint newWrapMode) { wrapMode = newWrapMode; return *this; }
+		constexpr Params& setDecimation(int newDecim) { decimation = newDecim; return *this; }
+		constexpr Params& disallowHttp2() { allowHttp2 = false; return *this; }
 
 		//! Define if mipmaps must be created.
 		bool generateMipmaps = false;
@@ -179,14 +179,14 @@ private:
 	//! Returns true if the data was loaded, false if not yet ready.
 	bool load();
 
-	template <typename T, typename...Params, typename...Args>
-	void startAsyncLoader(T (*functionPointer)(Params...), Args&&...args);
+	template <typename T, typename...FuncParams, typename...Args>
+	void startAsyncLoader(T (*functionPointer)(FuncParams...), Args&&...args);
 
 	//! The parent texture manager
 	static QPointer<StelTextureMgr> textureMgr;
 
 	QOpenGLFunctions* gl = nullptr;
-	StelTextureParams loadParams;
+	Params loadParams;
 
 	//! Used to handle the connection for remote textures.
 	QNetworkReply *networkReply = nullptr;

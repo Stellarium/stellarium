@@ -44,10 +44,10 @@ public:
 	//! @note If filename is invalid, this creates a fuchsia-colored (magenta) replacement texture to signify "great error".
 	//!       Create an empty StelTextureSP yourself if you have no valid filename.
 	//! @note If image is larger than maximum allowed texture size, it will be automatically rescaled to fit and a warning printed to the logfile.
-	StelTextureSP createTexture(const QString& filename, const StelTexture::StelTextureParams& params=StelTexture::StelTextureParams());
+	StelTextureSP createTexture(const QString& filename, const StelTexture::Params& params=StelTexture::Params());
 
 	//! Create a texture from a QImage.
-	StelTextureSP createTexture(const QImage &image, const StelTexture::StelTextureParams& params=StelTexture::StelTextureParams());
+	StelTextureSP createTexture(const QImage &image, const StelTexture::Params& params=StelTexture::Params());
 
 	//! Load an image from a file and create a new texture from it in a new thread.
 	//! @note This method is safe to be called from threads other than the main thread.
@@ -55,7 +55,7 @@ public:
 	//!    the file will be looked for in Stellarium's standard textures directories.
 	//! @param params the texture creation parameters.
 	//! @param lazyLoading define whether the texture should be actually loaded only when needed, i.e. when bind() is called the first time.
-	StelTextureSP createTextureThread(const QString& url, const StelTexture::StelTextureParams& params=StelTexture::StelTextureParams(), bool lazyLoading=true);
+	StelTextureSP createTextureThread(const QString& url, const StelTexture::Params& params=StelTexture::Params(), bool lazyLoading=true);
 
 	//! Creates or finds a StelTexture wrapper for the specified OpenGL texture object.
 	//! The wrapper takes ownership of the texture and will delete it if it is destroyed.

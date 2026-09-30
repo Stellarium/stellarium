@@ -33,7 +33,7 @@ Q_LOGGING_CATEGORY(s3dscene, "stel.plugin.scenery3d.s3dscene")
 void S3DScene::Material::loadTexturesAsync()
 {
 	StelTextureMgr& mgr = StelApp::getInstance().getTextureManager();
-	const auto texParams = StelTexture::StelTextureParams().enableMipmapGen().enableMipmapFilter().setWrapMode(GL_REPEAT);
+	const auto texParams = StelTexture::Params().enableMipmapGen().enableMipmapFilter().setWrapMode(GL_REPEAT);
 	/*if(!map_Ka.isEmpty())
 		tex_Ka = mgr.createTextureThread(map_Ka, texParams, false);*/
 	if(!map_Kd.isEmpty())

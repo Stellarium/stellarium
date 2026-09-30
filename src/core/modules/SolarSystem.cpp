@@ -1530,11 +1530,11 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 	// Also comets just have static textures.
 	if (!Comet::comaTexture)
 		Comet::comaTexture = StelApp::getInstance().getTextureManager().createTextureThread(StelFileMgr::getInstallationDir()+"/textures/cometComa.png",
-		                                                                                    StelTexture::StelTextureParams().enableMipmapGen());
+		                                                                                    StelTexture::Params().enableMipmapGen());
 	//tail textures. We use paraboloid tail bodies, textured like a fisheye sphere, i.e. center=head. The texture should be something like a mottled star to give some structure.
 	if (!Comet::tailTexture)
 		Comet::tailTexture = StelApp::getInstance().getTextureManager().createTextureThread(StelFileMgr::getInstallationDir()+"/textures/cometTail.png",
-		                                                                                    StelTexture::StelTextureParams().enableMipmapGen());
+		                                                                                    StelTexture::Params().enableMipmapGen());
 
 	if (readOk==0)
 		qWarning().noquote() << "No Solar System objects loaded from" << QDir::toNativeSeparators(filePath);

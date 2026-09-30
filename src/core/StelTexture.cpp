@@ -267,8 +267,8 @@ void StelTexture::waitForLoaded()
 	}
 }
 
-template <typename T, typename...Params, typename...Args>
-void StelTexture::startAsyncLoader(T (*functionPointer)(Params...), Args&&...args)
+template <typename T, typename...FuncParams, typename...Args>
+void StelTexture::startAsyncLoader(T (*functionPointer)(FuncParams...), Args&&...args)
 {
 	Q_ASSERT(loader==Q_NULLPTR);
 	if (!textureMgr) return;
