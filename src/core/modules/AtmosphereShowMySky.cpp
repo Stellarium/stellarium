@@ -25,6 +25,7 @@
 #include "StelUtils.hpp"
 #include "Planet.hpp"
 #include "StelApp.hpp"
+#include "StelSRGB.hpp"
 #include "StelProjector.hpp"
 #include "StelToneReproducer.hpp"
 #include "StelTextureMgr.hpp"
@@ -257,7 +258,7 @@ void main()
 			throw InitFailure("Failed to open atmosphere tone reproducer fragment shader file");
 		const auto xyYToRGBShader = xyYToRGBFile.readAll();
 		const auto fPrefix = StelOpenGL::globalShaderPrefix(StelOpenGL::FRAGMENT_SHADER);
-		handleCompileStatus(toneReproducerShader.compileSourceCode(fPrefix + xyYToRGBShader),
+		handleCompileStatus(toneReproducerShader.compileSourceCode(fPrefix + makeSRGBUtilsShader() + xyYToRGBShader),
 		                    toneReproducerShader, "ShowMySky atmosphere tone reproducer fragment shader");
 		luminanceToScreenProgram_->addShader(&toneReproducerShader);
 
