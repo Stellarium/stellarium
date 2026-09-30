@@ -21,6 +21,7 @@
 #include "StelUtils.hpp"
 #include "Planet.hpp"
 #include "StelApp.hpp"
+#include "StelSRGB.hpp"
 #include "StelProjector.hpp"
 #include "StelToneReproducer.hpp"
 #include "StelCore.hpp"
@@ -54,7 +55,7 @@ AtmospherePreetham::AtmospherePreetham(Skylight& sky)
 		if(!toneRepro.open(QFile::ReadOnly))
 			qFatal("Failed to open ToneReproducer shader source");
 		if (!vShader.compileSourceCode(StelOpenGL::globalShaderPrefix(StelOpenGL::VERTEX_SHADER) +
-									   vert.readAll()+toneRepro.readAll()))
+		                               vert.readAll()+makeSRGBUtilsShader()+toneRepro.readAll()))
 			qFatal("Error while compiling atmosphere vertex shader: %s", vShader.log().toLatin1().constData());
 	}
 	if (!vShader.log().isEmpty())

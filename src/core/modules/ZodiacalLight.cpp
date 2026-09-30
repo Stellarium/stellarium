@@ -21,6 +21,7 @@
 #include "ZodiacalLight.hpp"
 #include "SolarSystem.hpp"
 #include "StelFader.hpp"
+#include "StelSRGB.hpp"
 // For debugging draw() only:
 //#include "StelObjectMgr.hpp"
 #include "StelTexture.hpp"
@@ -405,7 +406,7 @@ void main(void)
 	renderProgram->setUniformValue(shaderVars.mainTex, mainTexSampler);
 
 	renderProgram->setUniformValue(shaderVars.projectionMatrixInverse, projector->getProjectionMatrix().toQMatrix().inverted());
-	renderProgram->setUniformValue(shaderVars.brightness, c.toQVector());
+	renderProgram->setUniformValue(shaderVars.brightness, colorToShader(c));
 	renderProgram->setUniformValue(shaderVars.lambdaSun, GLfloat(lambdaSun));
 
 	projector->setUnProjectUniforms(*renderProgram);

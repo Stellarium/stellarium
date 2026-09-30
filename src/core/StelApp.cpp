@@ -18,7 +18,7 @@
  */
 
 #include "StelApp.hpp"
-
+#include "StelSRGB.hpp"
 #include "Dithering.hpp"
 #include "StelCore.hpp"
 #include "StelMainView.hpp"
@@ -928,6 +928,7 @@ void main()
 )");
 	postProcessorProgram->addShaderFromSourceCode(QOpenGLShader::Fragment,
 		StelOpenGL::globalShaderPrefix(StelOpenGL::FRAGMENT_SHADER) +
+		makeSRGBUtilsShader() +
 		makeDitheringShader() + R"(
 VARYING vec2 texcoord;
 uniform sampler2D tex;
@@ -935,7 +936,7 @@ uniform sampler2D tex;
 void main()
 {
 	vec4 rgba = texture2D(tex, texcoord);
-	FRAG_COLOR = vec4(dither(rgba.rgb), rgba.a);
+	FRAG_COLOR = vec4(dither(linearToSRGB(rgba.rgb)), rgba.a);
 }
 )");
 	StelPainter::linkProg(postProcessorProgram.get(), "Post-processing program");
@@ -959,6 +960,7 @@ void main()
 )");
 		postProcessorProgramMS->addShaderFromSourceCode(QOpenGLShader::Fragment,
 			StelOpenGL::globalShaderPrefix(StelOpenGL::FRAGMENT_SHADER) +
+			makeSRGBUtilsShader() +
 			makeDitheringShader() + R"(
 uniform sampler2DMS tex;
 uniform int numMultiSamples;
@@ -969,7 +971,7 @@ void main()
 	for(int n = 0; n < numMultiSamples; ++n)
 		rgba += texelFetch(tex, ivec2(gl_FragCoord.xy), n);
 	rgba /= float(numMultiSamples);
-	FRAG_COLOR = vec4(dither(rgba.rgb), rgba.a);
+	FRAG_COLOR = vec4(dither(linearToSRGB(rgba.rgb)), rgba.a);
 }
 )");
 		StelPainter::linkProg(postProcessorProgramMS.get(), "Multisampled post-processing program");
