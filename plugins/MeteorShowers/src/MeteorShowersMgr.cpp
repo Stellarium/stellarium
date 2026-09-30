@@ -206,7 +206,7 @@ void MeteorShowersMgr::loadTextures()
 {
 	m_bolideTexture = StelApp::getInstance().getTextureManager().createTextureThread(
 				StelFileMgr::getInstallationDir() + "/textures/cometComa.png",
-				StelTexture::StelTextureParams(true, GL_LINEAR, GL_CLAMP_TO_EDGE));
+				StelTexture::StelTextureParams().enableMipmapGen());
 
 	m_pointerTexture = StelApp::getInstance().getTextureManager().createTexture(
 				StelFileMgr::getInstallationDir() + "/textures/pointeur5.png");

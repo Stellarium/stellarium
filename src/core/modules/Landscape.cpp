@@ -551,7 +551,7 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 	// Load sides textures
 	nbSideTexs = static_cast<unsigned short>(landscapeIni.value("landscape/nbsidetex", 0).toUInt());
 	sideTexs = new StelTextureSP[static_cast<size_t>(nbSideTexs)*2]; // 0.14: allow upper half for light textures!
-	const auto texParams = StelTexture::StelTextureParams(true, GL_LINEAR, GL_CLAMP_TO_EDGE, true);
+	const auto texParams = StelTexture::StelTextureParams().enableMipmapGen().enableMipmapFilter();
 	for (unsigned int i=0; i<nbSideTexs; ++i)
 	{
 		QString textureKey = QString("landscape/tex%1").arg(i);
@@ -621,7 +621,7 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 
 	const QString fogTexName = landscapeIni.value("landscape/fogtex").toString();
 	const QString fogTexPath = getTexturePath(fogTexName, landscapeId);
-	fogTex = texMan.createTexture(fogTexPath, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
+	fogTex = texMan.createTexture(fogTexPath, StelTexture::StelTextureParams().enableMipmapGen().setWrapMode(GL_REPEAT));
 	if (fogTex)
 		memorySize+=fogTex->getGlSize();
 
@@ -1618,18 +1618,18 @@ void LandscapeFisheye::create(const QString _name, float _texturefov, const QStr
 		if (mapImage->isNull())
 			qWarning() << "Null image in Landscape" << _name << "- cannot load" << _maptex;
 	}
-	mapTex = texMan.createTexture(_maptex, StelTexture::StelTextureParams(true));
+	mapTex = texMan.createTexture(_maptex, StelTexture::StelTextureParams().enableMipmapGen());
 	memorySize+=mapTex->getGlSize();
 
 	if (_maptexIllum.length() && (!_maptexIllum.endsWith("/")))
 	{
-		mapTexIllum = texMan.createTexture(_maptexIllum, StelTexture::StelTextureParams(true));
+		mapTexIllum = texMan.createTexture(_maptexIllum, StelTexture::StelTextureParams().enableMipmapGen());
 		if (mapTexIllum)
 			memorySize+=mapTexIllum->getGlSize();
 	}
 	if (_maptexFog.length() && (!_maptexFog.endsWith("/")))
 	{
-		mapTexFog = texMan.createTexture(_maptexFog, StelTexture::StelTextureParams(true));
+		mapTexFog = texMan.createTexture(_maptexFog, StelTexture::StelTextureParams().enableMipmapGen());
 		if (mapTexFog)
 			memorySize+=mapTexFog->getGlSize();
 	}
@@ -1919,7 +1919,7 @@ void LandscapeSpherical::create(const QString _name, const QString& _maptex, con
 	auto& gl = *QOpenGLContext::currentContext()->functions();
 	auto& texMan = StelApp::getInstance().getTextureManager();
 
-	mapTex = texMan.createTexture(_maptex, StelTexture::StelTextureParams(true));
+	mapTex = texMan.createTexture(_maptex, StelTexture::StelTextureParams().enableMipmapGen());
 	memorySize+=mapTex->getGlSize();
 	mapTex->bind(0);
 	gl.glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
@@ -1935,7 +1935,7 @@ void LandscapeSpherical::create(const QString _name, const QString& _maptex, con
 
 	if (_maptexIllum.length() && (!_maptexIllum.endsWith("/")))
 	{
-		mapTexIllum = texMan.createTexture(_maptexIllum, StelTexture::StelTextureParams(true));
+		mapTexIllum = texMan.createTexture(_maptexIllum, StelTexture::StelTextureParams().enableMipmapGen());
 		if (mapTexIllum)
 		{
 			memorySize+=mapTexIllum->getGlSize();
@@ -1946,7 +1946,7 @@ void LandscapeSpherical::create(const QString _name, const QString& _maptex, con
 	}
 	if (_maptexFog.length() && (!_maptexFog.endsWith("/")))
 	{
-		mapTexFog = texMan.createTexture(_maptexFog, StelTexture::StelTextureParams(true));
+		mapTexFog = texMan.createTexture(_maptexFog, StelTexture::StelTextureParams().enableMipmapGen());
 		if (mapTexFog)
 		{
 			memorySize+=mapTexFog->getGlSize();

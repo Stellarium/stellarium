@@ -119,7 +119,7 @@ void ToastTile::prepareDraw(Vec3f color)
 	{
 		//qDebug() << "load texture" << imagePath;
 		StelTextureMgr& texMgr=StelApp::getInstance().getTextureManager();
-		texture = texMgr.createTextureThread(imagePath, StelTexture::StelTextureParams(true));
+		texture = texMgr.createTextureThread(imagePath, StelTexture::StelTextureParams().enableMipmapGen());
 	}
 	if (texture.isNull() || (!texture->isLoading() && !texture->canBind() && !texture->getErrorMessage().isEmpty()))
 	{
