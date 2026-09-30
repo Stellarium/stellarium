@@ -49,35 +49,33 @@ public:
 	//! Contains the parameters defining how a texture is created.
 	struct StelTextureParams
 	{
-		StelTextureParams(bool qgenerateMipmaps=false, GLint afiltering=GL_LINEAR,
-				  GLint awrapMode=GL_CLAMP_TO_EDGE, bool qfilterMipmaps=false, int decimateBy=1,
-				  bool allowHttp2=true)
-			: generateMipmaps(qgenerateMipmaps)
-			, filterMipmaps(qfilterMipmaps)
-			, filtering(afiltering)
-			, wrapMode(awrapMode)
-			, decimation(decimateBy)
-			, allowHttp2(allowHttp2)
-		{
-		}
+		constexpr StelTextureParams() {} // disable aggregate initialization
+
+		constexpr StelTextureParams& enableMipmapGen() { generateMipmaps = true; return *this; }
+		constexpr StelTextureParams& enableMipmapFilter() { filterMipmaps = true; return *this; }
+		constexpr StelTextureParams& setFiltering(GLint newFiltering) { filtering = newFiltering; return *this; }
+		constexpr StelTextureParams& setWrapMode(GLint newWrapMode) { wrapMode = newWrapMode; return *this; }
+		constexpr StelTextureParams& setDecimation(int newDecim) { decimation = newDecim; return *this; }
+		constexpr StelTextureParams& disallowHttp2() { allowHttp2 = false; return *this; }
+
 		//! Define if mipmaps must be created.
-		bool generateMipmaps;
+		bool generateMipmaps = false;
 		//! If true, mipmapped textures are filtered with GL_LINEAR_MIPMAP_LINEAR instead
 		//! of GL_LINEAR_MIPMAP_NEAREST (i.e. enabling "trilinear" filtering)
-		bool filterMipmaps;
+		bool filterMipmaps = false;
 		//! Define the scaling filter to use. Must be one of GL_NEAREST or GL_LINEAR
-		GLint filtering;
+		GLint filtering = GL_LINEAR;
 		//! Define the wrapping mode to use. Must be one of GL_CLAMP_TO_EDGE, or GL_REPEAT.
-		GLint wrapMode;
+		GLint wrapMode = GL_CLAMP_TO_EDGE;
 		//! Allow a reduction of the size of the texture image (useful for very limited hardware)
 		//! The image size will be divided by this factor (e.g. 2, 3, 4, ...)
-		int decimation;
+		int decimation = 1;
 		//! Allow the use of HTTP/2 when loading this texture. If set to \p false, HTTP/1.1 will
 		//! be used by Qt, limiting maximum concurrency of downloads to 6 and avoiding HTTP 420
 		//! error when we abort many downloads at once. The error is due to CVE-2023-44487, but
 		//! our use case is when a HiPS is downloading many tiles that then go out of the
 		//! viewport before the download is completed.
-		bool allowHttp2;
+		bool allowHttp2 = true;
 	};
 
 	//! Destructor

@@ -603,7 +603,7 @@ void ConstellationMgr::loadLinesNamesAndArt(const StelSkyCulture &culture)
 			texturePath.clear();
 		}
 
-		cons->artTexture = StelApp::getInstance().getTextureManager().createTextureThread(texturePath, StelTexture::StelTextureParams(true));
+		cons->artTexture = StelApp::getInstance().getTextureManager().createTextureThread(texturePath, StelTexture::StelTextureParams().enableMipmapGen());
 
 		const auto sizeData = imgData["size"].toArray();
 		if (sizeData.size() != 2)
