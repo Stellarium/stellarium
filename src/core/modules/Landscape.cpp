@@ -21,6 +21,7 @@
 
 #include "Landscape.hpp"
 #include "StelApp.hpp"
+#include "StelSRGB.hpp"
 #include "StelTextureMgr.hpp"
 #include "StelFileMgr.hpp"
 #include "StelLocation.hpp"
@@ -1093,7 +1094,8 @@ void LandscapeOldStyle::drawFog(StelCore*const core, const int firstFreeTexSampl
 	renderProgram->setUniformValue(shaderVars.fogCylinderHeight, height);
 	renderProgram->setUniformValue(shaderVars.vshift, vpos);
 
-	const float brightness = landFader.getInterstate()*fogFader.getInterstate()*(0.1f+0.1f*landscapeBrightness);
+	const float brightness =
+		colorToShader(landFader.getInterstate()*fogFader.getInterstate()*(0.1f+0.1f*landscapeBrightness));
 	renderProgram->setUniformValue(shaderVars.brightness, brightness, brightness, brightness,
 				       (1.f-landscapeTransparency)*landFader.getInterstate());
 	renderProgram->setUniformValue(shaderVars.projectionMatrixInverse, prj->getProjectionMatrix().toQMatrix().inverted());
@@ -1116,7 +1118,7 @@ void LandscapeOldStyle::drawDecor(StelCore*const core, const int firstFreeTexSam
 
 	if (drawLight)
 	{
-		const auto brightness = illumFader.getInterstate()*lightScapeBrightness;
+		const auto brightness = colorToShader(illumFader.getInterstate()*lightScapeBrightness);
 		renderProgram->setUniformValue(shaderVars.brightness,
 					       brightness, brightness, brightness,
 					       (1.f-landscapeTransparency)*landFader.getInterstate());
@@ -1126,9 +1128,9 @@ void LandscapeOldStyle::drawDecor(StelCore*const core, const int firstFreeTexSam
 		if (core->getFlagClearSky())
 		{
 			renderProgram->setUniformValue(shaderVars.brightness,
-			                               landscapeBrightness*landscapeTint[0],
-			                               landscapeBrightness*landscapeTint[1],
-			                               landscapeBrightness*landscapeTint[2],
+			                               colorToShader(landscapeBrightness*landscapeTint[0]),
+			                               colorToShader(landscapeBrightness*landscapeTint[1]),
+			                               colorToShader(landscapeBrightness*landscapeTint[2]),
 			                               (1.f-landscapeTransparency)*landFader.getInterstate());
 		}
 		else
@@ -1232,9 +1234,9 @@ void LandscapeOldStyle::drawGround(StelCore*const core, const int firstFreeTexSa
 	if (core->getFlagClearSky())
 	{
 		renderProgram->setUniformValue(shaderVars.brightness,
-		                               landscapeBrightness*landscapeTint[0],
-		                               landscapeBrightness*landscapeTint[1],
-		                               landscapeBrightness*landscapeTint[2],
+		                               colorToShader(landscapeBrightness*landscapeTint[0]),
+		                               colorToShader(landscapeBrightness*landscapeTint[1]),
+		                               colorToShader(landscapeBrightness*landscapeTint[2]),
 		                               (1.f-landscapeTransparency)*landFader.getInterstate());
 	}
 	else
@@ -1733,9 +1735,9 @@ void main(void)
 		if (core->getFlagClearSky())
 		{
 			renderProgram->setUniformValue(shaderVars.brightness,
-			                               landscapeBrightness*landscapeTint[0],
-			                               landscapeBrightness*landscapeTint[1],
-			                               landscapeBrightness*landscapeTint[2],
+			                               colorToShader(landscapeBrightness*landscapeTint[0]),
+			                               colorToShader(landscapeBrightness*landscapeTint[1]),
+			                               colorToShader(landscapeBrightness*landscapeTint[2]),
 			                               landFader.getInterstate());
 		}
 		else
@@ -1761,7 +1763,8 @@ void main(void)
 		if ((mapTexFog) && (core->getSkyDrawer()->getFlagHasAtmosphere()) && core->getFlagClearSky())
 		{
 			gl.glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_COLOR);
-			const float brightness = landFader.getInterstate()*fogFader.getInterstate()*(0.1f+0.1f*landscapeBrightness);
+			const float brightness =
+				colorToShader(landFader.getInterstate()*fogFader.getInterstate()*(0.1f+0.1f*landscapeBrightness));
 
 			renderProgram->setUniformValue(shaderVars.brightness, brightness, brightness, brightness,
 						       landFader.getInterstate());
@@ -1772,7 +1775,7 @@ void main(void)
 		if (mapTexIllum && lightScapeBrightness>0.0f && (illumFader.getInterstate()>0.f) && core->getFlagClearSky())
 		{
 			gl.glBlendFunc(GL_SRC_ALPHA, GL_ONE);
-			const float brightness = lightScapeBrightness*illumFader.getInterstate();
+			const float brightness = colorToShader(lightScapeBrightness*illumFader.getInterstate());
 			renderProgram->setUniformValue(shaderVars.brightness, brightness, brightness, brightness,
 						       landFader.getInterstate());
 			mapTexIllum->bind();
@@ -2095,15 +2098,15 @@ void main(void)
 		renderProgram->bind();
 		const float brightness=core->getFlagClearSky() ? landscapeBrightness : 0.0f;
 		renderProgram->setUniformValue(shaderVars.bottomCapColor,
-		                               brightness*bottomCapColor[0],
-		                               brightness*bottomCapColor[1],
-		                               brightness*bottomCapColor[2],
+		                               colorToShader(brightness*bottomCapColor[0]),
+		                               colorToShader(brightness*bottomCapColor[1]),
+		                               colorToShader(brightness*bottomCapColor[2]),
 		                               bottomCapColor[0] < 0 ? 0 : landFader.getInterstate());
 
                 renderProgram->setUniformValue(shaderVars.brightness,
-                                               brightness*landscapeTint[0],
-                                               brightness*landscapeTint[1],
-                                               brightness*landscapeTint[2],
+                                               colorToShader(brightness*landscapeTint[0]),
+                                               colorToShader(brightness*landscapeTint[1]),
+                                               colorToShader(brightness*landscapeTint[2]),
                                                (1.f-landscapeTransparency)*landFader.getInterstate());
 		const int mainTexSampler = 0;
 		mapTex->bind(mainTexSampler);
@@ -2126,7 +2129,7 @@ void main(void)
 		{
 			gl.glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_COLOR);
 			const float brightness =
-				landFader.getInterstate()*fogFader.getInterstate()*(0.1f+0.1f*landscapeBrightness);
+				colorToShader(landFader.getInterstate()*fogFader.getInterstate()*(0.1f+0.1f*landscapeBrightness));
 
 			renderProgram->setUniformValue(shaderVars.bottomCapColor, 0.f, 0.f, 0.f, 0.f);
 			renderProgram->setUniformValue(shaderVars.brightness,
@@ -2142,7 +2145,7 @@ void main(void)
 		if (mapTexIllum && (lightScapeBrightness>0.0f) && (illumFader.getInterstate()>0.0f) && core->getFlagClearSky())
 		{
 			gl.glBlendFunc(GL_SRC_ALPHA, GL_ONE);
-			const float brightness = lightScapeBrightness*illumFader.getInterstate();
+			const float brightness = colorToShader(lightScapeBrightness*illumFader.getInterstate());
 			renderProgram->setUniformValue(shaderVars.bottomCapColor, 0.f, 0.f, 0.f, 0.f);
 			renderProgram->setUniformValue(shaderVars.brightness,
 						       brightness, brightness, brightness,

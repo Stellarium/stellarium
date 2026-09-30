@@ -20,6 +20,7 @@
 #include "StelPainter.hpp"
 
 #include "StelApp.hpp"
+#include "StelSRGB.hpp"
 #include "StelMainView.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelProjector.hpp"
@@ -780,8 +781,16 @@ StringTexture* StelPainter::getTextTexture(const QString& str, int pixelSize) co
 	painter.setFont(tmpFont);
 	painter.setPen(Qt::white);
 	painter.drawText(-strRect.x(), -strRect.y(), str);
-	StringTexture* newTex = new StringTexture(new QOpenGLTexture(strImage), QSize(w, h), QPoint(strRect.x(), -(strRect.y()+h)));
-	newTex->texture->setMinMagFilters(QOpenGLTexture::Linear, QOpenGLTexture::Linear);
+	const auto tex = new QOpenGLTexture(QOpenGLTexture::Target2D);
+	tex->create();
+	tex->bind(0);
+	tex->setSize(strImage.width(), strImage.height());
+	const_cast<StelPainter*>(this)->glTexImage2D(GL_TEXTURE_2D, 0, GL_SRGB8_ALPHA8,
+	                                             strImage.width(), strImage.height(), 0,
+	                                             GL_RGBA, GL_UNSIGNED_BYTE, strImage.bits());
+	tex->setMinMagFilters(QOpenGLTexture::Linear, QOpenGLTexture::Linear);
+	tex->release();
+	StringTexture* newTex = new StringTexture(tex, QSize(w, h), QPoint(strRect.x(), -(strRect.y()+h)));
 	texCache.insert(hash, newTex, static_cast<long>(w)*h*3);
 	// simply returning newTex is dangerous as the object is owned by the cache now. (Coverity Scan barks.)
 	return texCache.object(hash);
@@ -868,7 +877,7 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 		pr.setAttributeBuffer(textShaderVars.vertex, vertexArray.type, 0, vertexArray.size);
 		pr.enableAttributeArray(textShaderVars.vertex);
 		pr.setUniformValue(textShaderVars.projectionMatrix, qMat);
-		pr.setUniformValue(textShaderVars.textColor, currentColor.toQVector());
+		pr.setUniformValue(textShaderVars.textColor, colorToShader(currentColor));
 		pr.setAttributeBuffer(textShaderVars.texCoord, texCoordArray.type,
 		                      texCoordDataOffset, texCoordArray.size);
 		pr.enableAttributeArray(textShaderVars.texCoord);
@@ -2295,7 +2304,8 @@ void main()
 
 	QOpenGLShader textFShader(QOpenGLShader::Fragment);
 	const auto textFSrc =
-		StelOpenGL::globalShaderPrefix(StelOpenGL::FRAGMENT_SHADER) + R"(
+		StelOpenGL::globalShaderPrefix(StelOpenGL::FRAGMENT_SHADER) +
+		makeSRGBUtilsShader() + R"(
 VARYING mediump vec2 texc;
 uniform sampler2D tex;
 uniform mediump vec4 textColor;
@@ -2861,7 +2871,7 @@ void StelPainter::drawFixedColorWideLinesAsQuads(const ArrayDesc& vertexArray, i
 	pr->setAttributeBuffer(basicShaderVars.vertex, vertexArray.type, 0, 4);
 	pr->enableAttributeArray(basicShaderVars.vertex);
 	pr->setUniformValue(basicShaderVars.projectionMatrix, QMatrix4x4{});
-	pr->setUniformValue(basicShaderVars.color, currentColor.toQVector());
+	pr->setUniformValue(basicShaderVars.color, colorToShader(currentColor));
 
 #ifdef GL_MULTISAMPLE
 	const bool multisampleWasOn = multisamplingEnabled && glIsEnabled(GL_MULTISAMPLE);
@@ -2950,7 +2960,7 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool do
 			pr->setAttributeBuffer(wideLineShaderVars.vertex, projectedVertexArray.type, 0, projectedVertexArray.size);
 			pr->enableAttributeArray(wideLineShaderVars.vertex);
 			pr->setUniformValue(wideLineShaderVars.projectionMatrix, qMat);
-			pr->setUniformValue(wideLineShaderVars.color, currentColor.toQVector());
+			pr->setUniformValue(wideLineShaderVars.color, colorToShader(currentColor));
 			pr->setUniformValue(wideLineShaderVars.lineWidth, glState.lineWidth);
 			GLint viewport[4] = {};
 			glGetIntegerv(GL_VIEWPORT, viewport);
@@ -2961,7 +2971,7 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool do
 			pr->setAttributeBuffer(basicShaderVars.vertex, projectedVertexArray.type, 0, projectedVertexArray.size);
 			pr->enableAttributeArray(basicShaderVars.vertex);
 			pr->setUniformValue(basicShaderVars.projectionMatrix, qMat);
-			pr->setUniformValue(basicShaderVars.color, currentColor.toQVector());
+			pr->setUniformValue(basicShaderVars.color, colorToShader(currentColor));
 		}
 	}
 	else if (texCoordArray.enabled && !colorArray.enabled && !normalArray.enabled && !wideLineMode)
@@ -2983,7 +2993,7 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool do
 		pr->setAttributeBuffer(shaderVars.vertex, projectedVertexArray.type, 0, projectedVertexArray.size);
 		pr->enableAttributeArray(shaderVars.vertex);
 		pr->setUniformValue(shaderVars.projectionMatrix, qMat);
-		pr->setUniformValue(shaderVars.texColor, currentColor.toQVector());
+		pr->setUniformValue(shaderVars.texColor, colorToShader(currentColor));
 		if (useAdjustedTextureShader)
 		{
 			pr->setUniformValue(shaderVars.gamma, textureGamma);

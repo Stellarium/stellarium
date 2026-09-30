@@ -309,7 +309,8 @@ Planet::Planet(const QString& englishName,
 		QString normalMapFile = StelFileMgr::findFile("textures/"+normalMapName, StelFileMgr::File);
 		if (!normalMapFile.isEmpty())
 		{
-			normalMap = texMan.createTextureThread(normalMapFile, StelTexture::Params().enableMipmapGen().setWrapMode(GL_REPEAT), false);
+			const auto params = StelTexture::Params().enableMipmapGen().setWrapMode(GL_REPEAT).useLinearSRGB();
+			normalMap = texMan.createTextureThread(normalMapFile, params, false);
 			normalMapFileOrig = normalMapFile;
 		}
 	}
