@@ -49,7 +49,7 @@ void SporadicMeteorMgr::init()
 {
 	m_bolideTexture = StelApp::getInstance().getTextureManager().createTextureThread(
 				StelFileMgr::getInstallationDir() + "/textures/cometComa.png",
-				StelTexture::StelTextureParams().enableMipmapGen());
+				StelTexture::Params().enableMipmapGen());
 
 	QSettings* conf = StelApp::getInstance().getSettings();
 	setZHR(conf->value("astro/meteor_zhr", 10).toInt());

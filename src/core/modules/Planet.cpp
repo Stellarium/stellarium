@@ -295,7 +295,7 @@ Planet::Planet(const QString& englishName,
 		QString texMapFile = StelFileMgr::findFile("textures/"+texMapName, StelFileMgr::File);
 		if (!texMapFile.isEmpty())
 		{
-			texMap = texMan.createTextureThread(texMapFile, StelTexture::StelTextureParams().enableMipmapGen().setWrapMode(GL_REPEAT), false);
+			texMap = texMan.createTextureThread(texMapFile, StelTexture::Params().enableMipmapGen().setWrapMode(GL_REPEAT), false);
 			texMapFileOrig = texMapFile;
 		}
 		else
@@ -309,7 +309,7 @@ Planet::Planet(const QString& englishName,
 		QString normalMapFile = StelFileMgr::findFile("textures/"+normalMapName, StelFileMgr::File);
 		if (!normalMapFile.isEmpty())
 		{
-			normalMap = texMan.createTextureThread(normalMapFile, StelTexture::StelTextureParams().enableMipmapGen().setWrapMode(GL_REPEAT), false);
+			normalMap = texMan.createTextureThread(normalMapFile, StelTexture::Params().enableMipmapGen().setWrapMode(GL_REPEAT), false);
 			normalMapFileOrig = normalMapFile;
 		}
 	}
@@ -319,7 +319,7 @@ Planet::Planet(const QString& englishName,
 		QString horizonMapFile = StelFileMgr::findFile("textures/"+horizonMapName, StelFileMgr::File);
 		if (!horizonMapFile.isEmpty())
 		{
-			horizonMap = texMan.createTextureThread(horizonMapFile, StelTexture::StelTextureParams().enableMipmapGen().setWrapMode(GL_REPEAT), false);
+			horizonMap = texMan.createTextureThread(horizonMapFile, StelTexture::Params().enableMipmapGen().setWrapMode(GL_REPEAT), false);
 			horizonMapFileOrig = horizonMapFile;
 		}
 	}
@@ -385,14 +385,14 @@ void Planet::resetTextures()
 	auto& texMan = StelApp::getInstance().getTextureManager();
 	// restore texture
 	if (!texMapFileOrig.isEmpty())
-		texMap = texMan.createTextureThread(texMapFileOrig, StelTexture::StelTextureParams().enableMipmapGen().setWrapMode(GL_REPEAT));
+		texMap = texMan.createTextureThread(texMapFileOrig, StelTexture::Params().enableMipmapGen().setWrapMode(GL_REPEAT));
 
 	// restore normal map
 	if (!normalMapFileOrig.isEmpty())
-		normalMap = texMan.createTextureThread(normalMapFileOrig, StelTexture::StelTextureParams().enableMipmapGen().setWrapMode(GL_REPEAT));
+		normalMap = texMan.createTextureThread(normalMapFileOrig, StelTexture::Params().enableMipmapGen().setWrapMode(GL_REPEAT));
 
 	if (!horizonMapFileOrig.isEmpty())
-		horizonMap = texMan.createTextureThread(horizonMapFileOrig, StelTexture::StelTextureParams().enableMipmapGen().setWrapMode(GL_REPEAT));
+		horizonMap = texMan.createTextureThread(horizonMapFileOrig, StelTexture::Params().enableMipmapGen().setWrapMode(GL_REPEAT));
 }
 
 void Planet::replaceTexture(const QString &texName)
@@ -402,7 +402,7 @@ void Planet::replaceTexture(const QString &texName)
 		auto& texMan = StelApp::getInstance().getTextureManager();
 		QString texMapFile = StelFileMgr::findFile("scripts/" + texName, StelFileMgr::File);
 		if (!texMapFile.isEmpty())
-			texMap = texMan.createTextureThread(texMapFile, StelTexture::StelTextureParams().enableMipmapGen().setWrapMode(GL_REPEAT));
+			texMap = texMan.createTextureThread(texMapFile, StelTexture::Params().enableMipmapGen().setWrapMode(GL_REPEAT));
 		else
 			qWarning()<<"Cannot resolve path to texture file"<<texName<<"of object"<<englishName;
 	}
@@ -5600,7 +5600,7 @@ Planet::PlanetOBJModel* Planet::loadObjModel() const
 	{
 		auto& texMan = StelApp::getInstance().getTextureManager();
 		//this call starts loading the tex in background
-		mdl->texture = texMan.createTextureThread(mat.map_Kd,StelTexture::StelTextureParams().enableMipmapGen().enableMipmapFilter().setWrapMode(GL_REPEAT),false);
+		mdl->texture = texMan.createTextureThread(mat.map_Kd,StelTexture::Params().enableMipmapGen().enableMipmapFilter().setWrapMode(GL_REPEAT),false);
 	}
 
 	//extract the pos array into separate vector, it is the only one we need on CPU side for drawing
@@ -5968,7 +5968,7 @@ Ring::Ring(float radiusMin, float radiusMax, const QString &texname)
 {
 	auto& texMan = StelApp::getInstance().getTextureManager();
 	tex = texMan.createTexture(StelFileMgr::getInstallationDir()+"/textures/"+texname,
-	                           StelTexture::StelTextureParams().enableMipmapGen().enableMipmapFilter());
+	                           StelTexture::Params().enableMipmapGen().enableMipmapFilter());
 }
 
 Vec3f Planet::getCurrentOrbitColor() const

@@ -71,7 +71,7 @@ void scm::ScmConstellationArtwork::setupArt()
 		return;
 	}
 
-	artTexture = app.getTextureManager().createTexture(artwork, StelTexture::StelTextureParams().enableMipmapGen());
+	artTexture = app.getTextureManager().createTexture(artwork, StelTexture::Params().enableMipmapGen());
 
 	// Coded is copied from src/modules/ConstellationMgr.cpp from loadlinesNamesAndArt
 	// This is done because the functions are public and not separable to only showing the Art

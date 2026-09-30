@@ -620,7 +620,7 @@ HipsTile* HipsSurvey::getTile(int order, int pix)
 		const bool isShifted = planetarySurvey && properties["type"].toString().isEmpty();
 		const int texturePix = isShifted ? shiftPix180deg(order, pix) : pix;
 		QUrl path = getUrlFor(QString("Norder%1/Dir%2/Npix%3.%4").arg(order).arg((texturePix / 10000) * 10000).arg(texturePix).arg(ext));
-		const auto texParams = StelTexture::StelTextureParams().enableMipmapGen().enableMipmapFilter().disallowHttp2();
+		const auto texParams = StelTexture::Params().enableMipmapGen().enableMipmapFilter().disallowHttp2();
 		tile->texture = texMgr.createTextureThread(path.url(), texParams, false);
 
 		// Use the allsky image until we load the full texture.
