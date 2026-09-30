@@ -201,7 +201,7 @@ bool NexStarCommandAbort::writeCommandToBuffer(char *&p,char *end)
 	if (end-p < 1)
 		return false;
 	// Only one char:
-	*p = 'M';
+	*p++ = 'M';
 
 	has_been_written_to_buffer = true;
 	#ifdef DEBUG5
