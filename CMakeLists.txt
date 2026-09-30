@@ -445,7 +445,7 @@ SET(ENABLE_SHOWMYSKY 1 CACHE BOOL "Define whether to support ShowMySky atmospher
 # Activate support for XLSX (Excel) files
 SET(ENABLE_XLSX 1 CACHE BOOL "Define whether to support XLSX (Excel) files")
 IF(ENABLE_XLSX)
-     ADD_DEFINITIONS(-DENABLE_XLSX)     
+     ADD_DEFINITIONS(-DENABLE_XLSX)
 ENDIF()
 
 # Activate support for INDI client in Telescope Control plugin
