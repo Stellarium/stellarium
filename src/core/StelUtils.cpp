@@ -39,6 +39,7 @@
 #include <erfam.h>		// (SS) 2025-11-27 Needed to allow call to eraDat() function
 #include <de440.hpp>	// (SS) 2025-11-27 Needed to allow call to getDe440Coor() function in StelUtils::getDeltaTJPLHorizons()
 #include "StelApp.hpp"	// (SS) 2026-09-13 Needed to allow call to StelApp::getInstance().getFlagExtraPrecision()
+#include <atomic>		// (SS) 2026-09-30 Needed to fix somme errors related to flagExtraPrecsion during unit tests
 
 #ifdef CYGWIN
 #include <malloc.h>
@@ -51,15 +52,36 @@
 namespace
 {
 double sqr(double x) { return x*x; }
+
+// (SS) 2026-09-30 Needed to fix somme errors related to flagExtraPrecsion during unit tests
+std::atomic<bool> flagExtraPrecisionUtils{false};
 }
 
 namespace StelUtils
 {
 
+// (SS) 2026-09-30 Needed to fix somme errors related to flagExtraPrecsion during unit tests
+void setExtraPrecision(bool b)
+{
+	flagExtraPrecisionUtils = b;
+}
+bool getExtraPrecision()
+{
+	return flagExtraPrecisionUtils;
+}
+
+/*
 // (SS) 2026-09-13 Small helper to avoid repeating StelApp::getInstance().getFlagExtraPrecision() at every call site.
 inline bool extraPrecision()
 {
 	return StelApp::getInstance().getFlagExtraPrecision();
+}
+*/
+
+// (SS) 2026-09-30 No longer calls StelApp::getInstance(), which asserts in unit tests.
+inline bool extraPrecision()
+{
+	return getExtraPrecision();
 }
 
 //! Return the full name of stellarium, e.g. "Stellarium 23.1"

@@ -1392,6 +1392,7 @@ void StelApp::setFlagExtraPrecision(bool b)
 	if (flagExtraPrecision != b)
 	{
 		flagExtraPrecision = b;
+		StelUtils::setExtraPrecision(b); // (SS) 2026-09-30 keep StelUtils in sync
 		StelApp::immediateSave("gui/flag_extra_precision", flagExtraPrecision);
 		emit flagExtraPrecisionChanged(b);
 	}

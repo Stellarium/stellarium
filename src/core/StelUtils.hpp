@@ -104,6 +104,11 @@ constexpr double DEFAULT_FONT_SIZE = 13;
 //! @namespace StelUtils contains general purpose utility functions.
 namespace StelUtils
 {
+	//! (SS) 2026-09-30 Extra-precision flag held in StelUtils so that the formatting functions
+	//! do not need the StelApp singleton (which does not exist in unit tests).
+	void setExtraPrecision(bool b);
+	bool getExtraPrecision();
+		
 	static inline constexpr double J2000 = 2451545.0;
 
 	//! Return the full name of stellarium, i.e. "Stellarium 23.1"
