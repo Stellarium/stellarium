@@ -221,7 +221,7 @@ int NexStarCommandAbort::readAnswerFromBuffer(const char *&buff, const char *end
 	if (*buff=='#')
 		*log_file << Now() << "NexStarCommandAbort::readAnswerFromBuffer: answer ok" << StelUtils::getEndLineChar();
 	else
-		*log_file << Now() << "NexStarCommandSync::readAnswerFromBuffer: abort failed." << StelUtils::getEndLineChar();
+		*log_file << Now() << "NexStarCommandAbort::readAnswerFromBuffer: abort failed." << StelUtils::getEndLineChar();
 #endif
 	buff++;
 	return 1;
