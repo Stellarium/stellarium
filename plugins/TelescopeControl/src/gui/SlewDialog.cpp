@@ -64,27 +64,27 @@ void SlewDialog::createDialogContent()
 	ui->setupUi(dialog);
 	
 	//Inherited connect
-	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
+	connect(&StelApp::getInstance(), &StelApp::languageChanged, this, &SlewDialog::retranslate);
 	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
-	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
+	connect(ui->titleBar, &TitleBar::movedTo, this, &StelDialog::handleMovedTo);
 
-	connect(ui->radioButtonHMS, SIGNAL(toggled(bool)), this, SLOT(setFormatHMS(bool)));
-	connect(ui->radioButtonDMS, SIGNAL(toggled(bool)), this, SLOT(setFormatDMS(bool)));
-	connect(ui->radioButtonDecimal, SIGNAL(toggled(bool)), this, SLOT(setFormatDecimal(bool)));
+	connect(ui->radioButtonHMS, &QRadioButton::toggled, this, &SlewDialog::setFormatHMS);
+	connect(ui->radioButtonDMS, &QRadioButton::toggled, this, &SlewDialog::setFormatDMS);
+	connect(ui->radioButtonDecimal, &QRadioButton::toggled, this, &SlewDialog::setFormatDecimal);
 
-	connect(ui->pushButtonSlew, SIGNAL(clicked()), this, SLOT(slew()));
-	connect(ui->pushButtonSync, SIGNAL(clicked()), this, SLOT(sync()));
-	connect(ui->pushButtonAbort, SIGNAL(clicked()), this, SLOT(abort()));
-	connect(ui->pushButtonConfigure, SIGNAL(clicked()), this, SLOT(showConfiguration()));
+	connect(ui->pushButtonSlew,      &QPushButton::clicked, this, &SlewDialog::slew);
+	connect(ui->pushButtonSync,      &QPushButton::clicked, this, &SlewDialog::sync);
+	connect(ui->pushButtonAbort,     &QPushButton::clicked, this, &SlewDialog::abort);
+	connect(ui->pushButtonConfigure, &QPushButton::clicked, this, &SlewDialog::showConfiguration);
 
-	connect(telescopeManager, SIGNAL(clientConnected(int, QString)), this, SLOT(addTelescope(int, QString)));
-	connect(telescopeManager, SIGNAL(clientDisconnected(int)), this, SLOT(removeTelescope(int)));
+	connect(telescopeManager, &TelescopeControl::clientConnected, this, &SlewDialog::addTelescope);
+	connect(telescopeManager, &TelescopeControl::clientDisconnected, this, &SlewDialog::removeTelescope);
 
-	connect(ui->comboBoxStoredPoints, SIGNAL(currentIndexChanged(int)), this, SLOT(getStoredPointInfo()));
-	connect(ui->toolButtonStoredPoints, SIGNAL(clicked()), this, SLOT(editStoredPoints()));
+	connect(ui->comboBoxStoredPoints, qOverload<int>(&QComboBox::currentIndexChanged), this, &SlewDialog::getStoredPointInfo);
+	connect(ui->toolButtonStoredPoints, &QToolButton::clicked, this, &SlewDialog::editStoredPoints);
 
-	connect(ui->pushButtonCurrent, SIGNAL(clicked()), this, SLOT(getCurrentObjectInfo()));
-	connect(ui->pushButtonCenter, SIGNAL(clicked()), this, SLOT(getCenterInfo()));
+	connect(ui->pushButtonCurrent, &QPushButton::clicked, this, &SlewDialog::getCurrentObjectInfo);
+	connect(ui->pushButtonCenter,  &QPushButton::clicked, this, &SlewDialog::getCenterInfo);
 
 	QObject::connect(ui->comboBoxTelescope, static_cast<void(QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &SlewDialog::onCurrentTelescopeChanged);
 
@@ -93,11 +93,11 @@ void SlewDialog::createDialogContent()
 
 	storedPointsDialog = new StoredPointsDialog();
 	// add point and remove
-	connect(storedPointsDialog, SIGNAL(addStoredPoint(int, QString, double, double)), this, SLOT(addStoredPointToComboBox(int, QString, double, double)));
+	connect(storedPointsDialog, &StoredPointsDialog::addStoredPoint, this, &SlewDialog::addStoredPointToComboBox);
 	// remove point
-	connect(storedPointsDialog, SIGNAL(removeStoredPoint(int)), this, SLOT(removeStoredPointFromComboBox(int)));
+	connect(storedPointsDialog, &StoredPointsDialog::removeStoredPoint, this, &SlewDialog::removeStoredPointFromComboBox);
 	// clean points
-	connect(storedPointsDialog, SIGNAL(clearStoredPoints()), this, SLOT(clearStoredPointsFromComboBox()));
+	connect(storedPointsDialog, &StoredPointsDialog::clearStoredPoints, this, &SlewDialog::clearStoredPointsFromComboBox);
 
 
 	updateTelescopeList();

@@ -56,9 +56,9 @@ void ScmHideOrAbortMakerDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
 
-	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
+	connect(&StelApp::getInstance(), &StelApp::languageChanged, this, &ScmHideOrAbortMakerDialog::retranslate);
 	connect(ui->titleBar, &TitleBar::closeClicked, this, &ScmHideOrAbortMakerDialog::close);
-	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
+	connect(ui->titleBar, &TitleBar::movedTo, this, &ScmHideOrAbortMakerDialog::handleMovedTo);
 
 	connect(&StelApp::getInstance(), &StelApp::fontChanged, this, &ScmHideOrAbortMakerDialog::handleFontChanged);
 	connect(&StelApp::getInstance(), &StelApp::guiFontSizeChanged, this,

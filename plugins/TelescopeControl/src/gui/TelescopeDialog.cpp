@@ -109,7 +109,7 @@ void TelescopeDialog::createDialogContent()
 	if (gui)
 	{
 		enableKineticScrolling(gui->getFlagUseKineticScrolling());
-		connect(gui, SIGNAL(flagUseKineticScrollingChanged(bool)), this, SLOT(enableKineticScrolling(bool)));
+		connect(gui, &StelGui::flagUseKineticScrollingChanged, this, &TelescopeDialog::enableKineticScrolling);
 	}
 
 #ifdef Q_OS_WIN
@@ -118,19 +118,19 @@ void TelescopeDialog::createDialogContent()
 #endif
 
 	//Inherited connect
-	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
+	connect(&StelApp::getInstance(), &StelApp::languageChanged, this, &TelescopeDialog::retranslate);
 	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
-	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
+	connect(ui->titleBar, &TitleBar::movedTo, this, &StelDialog::handleMovedTo);
 
 	//Connect: sender, signal, receiver, method
 	//Page: Telescopes
-	connect(ui->pushButtonChangeStatus, SIGNAL(clicked()), this, SLOT(buttonChangeStatusPressed()));
-	connect(ui->pushButtonConfigure, SIGNAL(clicked()), this, SLOT(buttonConfigurePressed()));
-	connect(ui->pushButtonAdd, SIGNAL(clicked()), this, SLOT(buttonAddPressed()));
-	connect(ui->pushButtonRemove, SIGNAL(clicked()), this, SLOT(buttonRemovePressed()));
+	connect(ui->pushButtonChangeStatus, &QPushButton::clicked, this, &TelescopeDialog::buttonChangeStatusPressed);
+	connect(ui->pushButtonConfigure, &QPushButton::clicked, this, &TelescopeDialog::buttonConfigurePressed);
+	connect(ui->pushButtonAdd, &QPushButton::clicked, this, &TelescopeDialog::buttonAddPressed);
+	connect(ui->pushButtonRemove, &QPushButton::clicked, this, &TelescopeDialog::buttonRemovePressed);
 	
-	connect(ui->telescopeTreeView, SIGNAL(clicked (const QModelIndex &)), this, SLOT(selectTelescope(const QModelIndex &)));
-	//connect(ui->telescopeTreeView, SIGNAL(activated (const QModelIndex &)), this, SLOT(configureTelescope(const QModelIndex &)));
+	connect(ui->telescopeTreeView, &QTreeView::clicked, this, &TelescopeDialog::selectTelescope);
+	//connect(ui->telescopeTreeView, &QTreeView::activated, this, &TelescopeDialog::configureTelescope);
 	
 	//Page: Options:
 	connectBoolProperty(ui->checkBoxReticles,   "TelescopeControl.flagTelescopeReticles");
@@ -141,11 +141,11 @@ void TelescopeDialog::createDialogContent()
 	ui->circleColorButton ->setup("TelescopeControl.circleColor",  "TelescopeControl/color_telescope_circles");
 	connectBoolProperty(ui->checkBoxEnableLogs, "TelescopeControl.useTelescopeServerLogs");
 
-	connect(ui->checkBoxUseExecutables, SIGNAL(toggled(bool)), ui->labelExecutablesDirectory, SLOT(setEnabled(bool)));
-	connect(ui->checkBoxUseExecutables, SIGNAL(toggled(bool)), ui->lineEditExecutablesDirectory, SLOT(setEnabled(bool)));
-	connect(ui->checkBoxUseExecutables, SIGNAL(toggled(bool)), ui->pushButtonPickExecutablesDirectory, SLOT(setEnabled(bool)));
+	connect(ui->checkBoxUseExecutables, &QCheckBox::toggled, ui->labelExecutablesDirectory, &QLabel::setEnabled);
+	connect(ui->checkBoxUseExecutables, &QCheckBox::toggled, ui->lineEditExecutablesDirectory, &QLineEdit::setEnabled);
+	connect(ui->checkBoxUseExecutables, &QCheckBox::toggled, ui->pushButtonPickExecutablesDirectory, &QPushButton::setEnabled);
 
-	connect(ui->pushButtonPickExecutablesDirectory, SIGNAL(clicked()), this, SLOT(buttonBrowseServerDirectoryPressed()));
+	connect(ui->pushButtonPickExecutablesDirectory, &QPushButton::clicked, this, &TelescopeDialog::buttonBrowseServerDirectoryPressed);
 	//Telescope server directory
 	connectBoolProperty(ui->checkBoxUseExecutables, "TelescopeControl.useTelescopeServerExecutables");
 	ui->lineEditExecutablesDirectory->setText(telescopeManager->getServerExecutablesDirectoryPath());
@@ -153,8 +153,8 @@ void TelescopeDialog::createDialogContent()
 	connectStringProperty(ui->lineEditExecutablesDirectory, "TelescopeControl.serverExecutablesDirectoryPath");
 
 	//In other dialogs:
-	connect(&configurationDialog, SIGNAL(changesDiscarded()), this, SLOT(discardChanges()));
-	connect(&configurationDialog, SIGNAL(changesSaved(QString, TelescopeControl::ConnectionType)), this, SLOT(saveChanges(QString, TelescopeControl::ConnectionType)));
+	connect(&configurationDialog, &TelescopeConfigurationDialog::changesDiscarded, this, &TelescopeDialog::discardChanges);
+	connect(&configurationDialog, &TelescopeConfigurationDialog::changesSaved, this, &TelescopeDialog::saveChanges);
 	
 	//Initialize the style
 	updateStyle();
@@ -251,7 +251,7 @@ void TelescopeDialog::createDialogContent()
 	//Everything must be initialized by now, start the updateTimer
 	//TODO: Find if it's possible to run it only when the dialog is visible
 	QTimer* updateTimer = new QTimer(this);
-	connect(updateTimer, SIGNAL(timeout()), this, SLOT(updateTelescopeStates()));
+	connect(updateTimer, &QTimer::timeout, this, &TelescopeDialog::updateTelescopeStates);
 	updateTimer->start(200);
 }
 

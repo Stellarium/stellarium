@@ -589,7 +589,7 @@ void TextUserInterface::loadConfiguration(void)
 	setTuiGravityUi(conf->value("tui/flag_show_gravity_ui", false).toBool());
 	color = Vec3f(conf->value("tui/tui_font_color", "0.3,1,0.3").toString());
 	StelCore *core=StelApp::getInstance().getCore();
-	connect(core, SIGNAL(flagGravityLabelsChanged(bool)), this, SLOT(setTuiGravityUi(bool)));
+	connect(core, &StelCore::flagGravityLabelsChanged, this, &TextUserInterface::setTuiGravityUi);
 }
 
 /*************************************************************************

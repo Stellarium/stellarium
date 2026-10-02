@@ -35,8 +35,8 @@ SyncServer::SyncServer(QObject* parent, bool allowVersionMismatch)
 	: QObject(parent), stopping(false), timeoutTimerId(-1)
 {
 	qserver = new QTcpServer(this);
-	connect(qserver,SIGNAL(newConnection()), this, SLOT(handleNewConnection()));
-	connect(qserver,SIGNAL(acceptError(QAbstractSocket::SocketError)),this,SLOT(connectionError(QAbstractSocket::SocketError)));
+	connect(qserver, &QTcpServer::newConnection, this, &SyncServer::handleNewConnection);
+	connect(qserver, &QTcpServer::acceptError, this, &SyncServer::connectionError);
 
 	//create message handlers
 	handlerHash.clear();
@@ -201,7 +201,7 @@ void SyncServer::handleNewConnection()
 	qCDebug(syncServer)<<clients.size()<<"current connections";
 
 	//hook up disconnect signal
-	connect(newClient, SIGNAL(disconnected(bool)), this, SLOT(clientDisconnected(bool)));
+	connect(newClient, &SyncRemotePeer::disconnected, this, &SyncServer::clientDisconnected);
 
 	//write challenge
 	ServerChallenge msg;

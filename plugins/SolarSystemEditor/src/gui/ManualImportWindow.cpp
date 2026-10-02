@@ -51,16 +51,15 @@ void ManualImportWindow::createDialogContent()
 	ui->setupUi(dialog);
 
 	//Signals
-	connect(&StelApp::getInstance(), SIGNAL(languageChanged()),
-	        this, SLOT(retranslate()));
+	connect(&StelApp::getInstance(), &StelApp::languageChanged, this, &ManualImportWindow::retranslate);
 	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
-	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
+	connect(ui->titleBar, &TitleBar::movedTo, this, &StelDialog::handleMovedTo);
 
-	connect(ui->lineEditColor, SIGNAL(textChanged(QString)), this, SLOT(parseColorString(QString)));
-	connect(ui->pushButtonSelectColor, SIGNAL(clicked()), this, SLOT(selectColor()));
+	connect(ui->lineEditColor, &QLineEdit::textChanged, this, &ManualImportWindow::parseColorString);
+	connect(ui->pushButtonSelectColor, &QPushButton::clicked, this, &ManualImportWindow::selectColor);
 
-	connect(ui->pushButtonSelectTexture, SIGNAL(clicked()), this, SLOT(selectPlanetTextureFile()));
-	connect(ui->pushButtonSelectRingTexture, SIGNAL(clicked()), this, SLOT(selectRingTextureFile()));
+	connect(ui->pushButtonSelectTexture, &QPushButton::clicked, this, &ManualImportWindow::selectPlanetTextureFile);
+	connect(ui->pushButtonSelectRingTexture, &QPushButton::clicked, this, &ManualImportWindow::selectRingTextureFile);
 
         ui->labelLongitudeOfTheAscendingNode->setText(QString("Longitude of the ascending node %1:").arg(QChar(0x03A9)));//Capital omega
         ui->radioButtonArgumentOfPeriapsis->setText(QString("Argument of periapsis %1:").arg(QChar(0x3C9)));//Lowercase omega

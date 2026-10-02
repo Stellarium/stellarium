@@ -46,7 +46,7 @@ CalendarsInfoPanel::CalendarsInfoPanel(Calendars* plugin,
 	StelApp& stelApp = StelApp::getInstance();
 
 	updatePosition();
-	connect (parentWidget, SIGNAL(geometryChanged()), this, SLOT(updatePosition()));
+	connect (parentWidget, &QGraphicsWidget::geometryChanged, this, [this]{updatePosition();});
 	// when user switches a calendar on or off, we must force a recalculation of a minimal bounding box before we can rebuild the calendar list.
 	connect (this->plugin, &Calendars::showJulianChanged             , this, [=](bool){setHtml("a"); updatePosition();});
 	connect (this->plugin, &Calendars::showGregorianChanged          , this, [=](bool){setHtml("a"); updatePosition();});
@@ -87,7 +87,7 @@ CalendarsInfoPanel::CalendarsInfoPanel(Calendars* plugin,
 	connect (this->plugin, &Calendars::showVietnameseChanged         , this, [=](bool){setHtml("a"); updatePosition();});
 
 	//Night mode
-	connect(&stelApp, SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setColorScheme(const QString&)));
+	connect(&stelApp, &StelApp::colorSchemeChanged, this, &CalendarsInfoPanel::setColorScheme);
 	setColorScheme(stelApp.getCurrentStelStyle());
 
 	QSettings* conf = StelApp::getInstance().getSettings();

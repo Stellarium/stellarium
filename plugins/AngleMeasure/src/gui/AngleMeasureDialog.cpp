@@ -55,11 +55,11 @@ void AngleMeasureDialog::createDialogContent()
 	kineticScrollingList << ui->aboutTextBrowser;
 	StelGui* gui= static_cast<StelGui*>(StelApp::getInstance().getGui());
 	enableKineticScrolling(gui->getFlagUseKineticScrolling());
-	connect(gui, SIGNAL(flagUseKineticScrollingChanged(bool)), this, SLOT(enableKineticScrolling(bool)));
+	connect(gui, &StelGui::flagUseKineticScrollingChanged, this, &AngleMeasureDialog::enableKineticScrolling);
 
-	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
+	connect(&StelApp::getInstance(), &StelApp::languageChanged, this, &AngleMeasureDialog::retranslate);
 	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
-	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
+	connect(ui->titleBar, &TitleBar::movedTo, this, &StelDialog::handleMovedTo);
 
 	connectBoolProperty(ui->panAndSelectCheckBox,			"AngleMeasure.flagPanAndSelect");
 	connectBoolProperty(ui->followCursorCheckBox, 			"AngleMeasure.flagFollowCursor");
@@ -76,7 +76,7 @@ void AngleMeasureDialog::createDialogContent()
 	ui->horizontalLineColorToolButton->setup("AngleMeasure.horizontalLineColor", "AngleMeasure/line_color_horizontal");
 	ui->horizontalTextColorToolButton->setup("AngleMeasure.horizontalTextColor", "AngleMeasure/text_color_horizontal");
 
-	connect(ui->restoreDefaultsButton, SIGNAL(clicked()), this, SLOT(restoreDefaults()));
+	connect(ui->restoreDefaultsButton, &QPushButton::clicked, this, &AngleMeasureDialog::restoreDefaults);
 
 	setAboutHtml();
 }

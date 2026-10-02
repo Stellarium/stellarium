@@ -104,8 +104,8 @@ void EquationOfTime::init()
 	// Initialize the message strings and make sure they are translated when
 	// the language changes.
 	updateMessageText();
-	connect(&app, SIGNAL(languageChanged()), this, SLOT(updateMessageText()));
-	connect(StelApp::getInstance().getCore(), SIGNAL(configurationDataSaved()), this, SLOT(saveSettings()));
+	connect(&app, &StelApp::languageChanged, this, &EquationOfTime::updateMessageText);
+	connect(StelApp::getInstance().getCore(), &StelCore::configurationDataSaved, this, &EquationOfTime::saveSettings);
 }
 
 void EquationOfTime::draw(StelCore *core)

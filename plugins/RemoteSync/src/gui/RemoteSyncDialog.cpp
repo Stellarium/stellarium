@@ -61,35 +61,35 @@ void RemoteSyncDialog::createDialogContent()
 	if (gui)
 	{
 		enableKineticScrolling(gui->getFlagUseKineticScrolling());
-		connect(gui, SIGNAL(flagUseKineticScrollingChanged(bool)), this, SLOT(enableKineticScrolling(bool)));
+		connect(gui, &StelGui::flagUseKineticScrollingChanged, this, &RemoteSyncDialog::enableKineticScrolling);
 	}
 
 	ui->pushButtonSelectProperties->setText(QChar(0x2192));
 	ui->pushButtonDeselectProperties->setText(QChar(0x2190));
 
-	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
+	connect(&StelApp::getInstance(), &StelApp::languageChanged, this, &RemoteSyncDialog::retranslate);
 	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
-	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
+	connect(ui->titleBar, &TitleBar::movedTo, this, &StelDialog::handleMovedTo);
 
-	connect(rs, SIGNAL(stateChanged(RemoteSync::SyncState)), this, SLOT(updateState()));
+	connect(rs, &RemoteSync::stateChanged, this, &RemoteSyncDialog::updateState);
 	updateState();
 
-	connect(rs, SIGNAL(errorOccurred(QString)), this, SLOT(printErrorMessage(QString)));
+	connect(rs, &RemoteSync::errorOccurred, this, &RemoteSyncDialog::printErrorMessage);
 
 	ui->clientServerHostEdit->setText(rs->getClientServerHost());
-	connect(ui->clientServerHostEdit, SIGNAL(textChanged(QString)), rs, SLOT(setClientServerHost(QString)));
+	connect(ui->clientServerHostEdit, &QLineEdit::textChanged, rs, &RemoteSync::setClientServerHost);
 	ui->clientServerPortSpinBox->setValue(rs->getClientServerPort());
-	connect(ui->clientServerPortSpinBox, SIGNAL(valueChanged(int)), rs, SLOT(setClientServerPort(int)));
+	connect(ui->clientServerPortSpinBox, qOverload<int>(&QSpinBox::valueChanged), rs, &RemoteSync::setClientServerPort);
 
 	ui->serverPortSpinBox->setValue(rs->getServerPort());
-	connect(ui->serverPortSpinBox, SIGNAL(valueChanged(int)), rs, SLOT(setServerPort(int)));
+	connect(ui->serverPortSpinBox, qOverload<int>(&QSpinBox::valueChanged), rs, &RemoteSync::setServerPort);
 
 	ui->comboBoxClientServerQuits->setModel(ui->comboBoxClientConnectionLost->model());
 	ui->comboBoxClientConnectionLost->setCurrentIndex(rs->getConnectionLostBehavior());
 	ui->comboBoxClientServerQuits->setCurrentIndex(rs->getQuitBehavior());
-	connect(ui->comboBoxClientConnectionLost, SIGNAL(activated(int)), this, SLOT(setConnectionLostBehavior(int)));
+	connect(ui->comboBoxClientConnectionLost, qOverload<int>(&QComboBox::activated), this, &RemoteSyncDialog::setConnectionLostBehavior);
 	connect(rs, &RemoteSync::connectionLostBehaviorChanged, ui->comboBoxClientConnectionLost, &QComboBox::setCurrentIndex);
-	connect(ui->comboBoxClientServerQuits, SIGNAL(activated(int)), this, SLOT(setQuitBehavior(int)));
+	connect(ui->comboBoxClientServerQuits, qOverload<int>(&QComboBox::activated), this, &RemoteSyncDialog::setQuitBehavior);
 	connect(rs, &RemoteSync::quitBehaviorChanged, ui->comboBoxClientServerQuits, &QComboBox::setCurrentIndex);
 
 	ui->buttonGroupSyncOptions->setId(ui->checkBoxOptionTime, SyncClient::SyncTime);
@@ -99,19 +99,19 @@ void RemoteSyncDialog::createDialogContent()
 	ui->buttonGroupSyncOptions->setId(ui->checkBoxOptionView, SyncClient::SyncView);
 	ui->buttonGroupSyncOptions->setId(ui->checkBoxExcludeGUIProps, SyncClient::SkipGUIProps);
 	updateCheckboxesFromSyncOptions();
-	connect(rs, SIGNAL(clientSyncOptionsChanged(SyncClient::SyncOptions)), this, SLOT(updateCheckboxesFromSyncOptions()));
+	connect(rs, &RemoteSync::clientSyncOptionsChanged, this, &RemoteSyncDialog::updateCheckboxesFromSyncOptions);
 #if (QT_VERSION>=QT_VERSION_CHECK(5,15,0))
-	connect(ui->buttonGroupSyncOptions, SIGNAL(idToggled(int,bool)), this, SLOT(checkboxToggled(int,bool)));
+	connect(ui->buttonGroupSyncOptions, &QButtonGroup::idToggled, this, &RemoteSyncDialog::checkboxToggled);
 #else
-	connect(ui->buttonGroupSyncOptions, SIGNAL(buttonToggled(int,bool)), this, SLOT(checkboxToggled(int,bool)));
+	connect(ui->buttonGroupSyncOptions, qOverload<int,bool>(&QButtonGroup::buttonToggled), this, &RemoteSyncDialog::checkboxToggled);
 #endif
 
-	connect(ui->saveSettingsButton, SIGNAL(clicked()), rs, SLOT(saveSettings()));	
-	connect(ui->restoreDefaultsButton, SIGNAL(clicked()), this, SLOT(restoreDefaults()));
+	connect(ui->saveSettingsButton, &QPushButton::clicked, rs, &RemoteSync::saveSettings);
+	connect(ui->restoreDefaultsButton, &QPushButton::clicked, this, &RemoteSyncDialog::restoreDefaults);
 
 	populateExclusionLists();
-	connect(ui->pushButtonSelectProperties, SIGNAL(clicked()), this, SLOT(addPropertiesForExclusion()));
-	connect(ui->pushButtonDeselectProperties, SIGNAL(clicked()), this, SLOT(removePropertiesForExclusion()));
+	connect(ui->pushButtonSelectProperties, &QPushButton::clicked, this, &RemoteSyncDialog::addPropertiesForExclusion);
+	connect(ui->pushButtonDeselectProperties, &QPushButton::clicked, this, &RemoteSyncDialog::removePropertiesForExclusion);
 
 	setAboutHtml();
 }
@@ -138,8 +138,8 @@ void RemoteSyncDialog::updateState()
 	RemoteSync::SyncState state = rs->getState();
 
 	//disconnect the click signals from whatever is connected
-	disconnect(ui->serverButton, SIGNAL(clicked(bool)), nullptr, nullptr);
-	disconnect(ui->clientButton, SIGNAL(clicked(bool)), nullptr, nullptr);
+	disconnect(ui->serverButton, &QPushButton::clicked, nullptr, nullptr);
+	disconnect(ui->clientButton, &QPushButton::clicked, nullptr, nullptr);
 	ui->statusLabel->setStyleSheet("");
 
 	if(state == RemoteSync::IDLE)
@@ -147,12 +147,12 @@ void RemoteSyncDialog::updateState()
 		ui->serverGroupBox->setEnabled(true);
 		ui->serverControls->setEnabled(true);
 		ui->serverButton->setText(q_("Start server"));
-		connect(ui->serverButton, SIGNAL(clicked(bool)), rs, SLOT(startServer()));
+		connect(ui->serverButton, &QPushButton::clicked, rs, &RemoteSync::startServer);
 
 		ui->clientGroupBox->setEnabled(true);
 		ui->clientControls->setEnabled(true);
 		ui->clientButton->setText(q_("Connect to server"));
-		connect(ui->clientButton, SIGNAL(clicked(bool)), rs, SLOT(connectToServer()));
+		connect(ui->clientButton, &QPushButton::clicked, rs, &RemoteSync::connectToServer);
 
 		ui->statusLabel->setText(q_("Not running"));
 		updateIPlabel(false);
@@ -161,7 +161,7 @@ void RemoteSyncDialog::updateState()
 	{
 		ui->serverButton->setText(q_("Stop server"));
 		ui->serverControls->setEnabled(false);
-		connect(ui->serverButton, SIGNAL(clicked(bool)), rs, SLOT(stopServer()));
+		connect(ui->serverButton, &QPushButton::clicked, rs, &RemoteSync::stopServer);
 		ui->clientGroupBox->setEnabled(false);
 
 		ui->statusLabel->setText(QString(q_("Running as server on port %1")).arg(rs->getServerPort()));
@@ -169,7 +169,7 @@ void RemoteSyncDialog::updateState()
 	}
 	else
 	{
-		connect(ui->clientButton, SIGNAL(clicked(bool)), rs, SLOT(disconnectFromServer()));
+		connect(ui->clientButton, &QPushButton::clicked, rs, &RemoteSync::disconnectFromServer);
 
 		ui->serverGroupBox->setEnabled(false);
 		ui->clientGroupBox->setEnabled(true);

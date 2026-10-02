@@ -89,9 +89,9 @@ void SyncClient::connectToServer(const QString &host, const int port)
 	}
 
 	QTcpSocket* sock = new QTcpSocket();
-	connect(sock, SIGNAL(connected()), this, SLOT(socketConnected()));
+	connect(sock, &QTcpSocket::connected, this, &SyncClient::socketConnected);
 	server = new SyncRemotePeer(sock, true, handlerHash );
-	connect(server, SIGNAL(disconnected(bool)), this, SLOT(serverDisconnected(bool)));
+	connect(server, &SyncRemotePeer::disconnected, this, &SyncClient::serverDisconnected);
 
 	isConnecting = true;
 	qCDebug(syncClient)<<"Connecting to"<<(host + ":" + QString::number(port))<<", with options"<<options;

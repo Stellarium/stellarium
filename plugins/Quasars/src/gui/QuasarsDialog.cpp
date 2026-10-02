@@ -69,23 +69,22 @@ void QuasarsDialog::createDialogContent()
 	qsr = GETSTELMODULE(Quasars);
 	ui->setupUi(dialog);
 	ui->tabs->setCurrentIndex(0);	
-	connect(&StelApp::getInstance(), SIGNAL(languageChanged()),
-		this, SLOT(retranslate()));
+	connect(&StelApp::getInstance(), &StelApp::languageChanged, this, &QuasarsDialog::retranslate);
 
 	// Settings tab / updates group
 	ui->displayModeCheckBox->setChecked(qsr->getDisplayMode());
-	connect(ui->displayModeCheckBox, SIGNAL(stateChanged(int)), this, SLOT(setDistributionEnabled(int)));
+	connect(ui->displayModeCheckBox, &QCheckBox::stateChanged, this, &QuasarsDialog::setDistributionEnabled);
 	ui->displayAtStartupCheckBox->setChecked(qsr->getEnableAtStartup());
-	connect(ui->displayAtStartupCheckBox, SIGNAL(stateChanged(int)), this, SLOT(setDisplayAtStartupEnabled(int)));
+	connect(ui->displayAtStartupCheckBox, &QCheckBox::stateChanged, this, &QuasarsDialog::setDisplayAtStartupEnabled);
 	ui->displayShowQuasarsButton->setChecked(qsr->getFlagShowQuasarsButton());
-	connect(ui->displayShowQuasarsButton, SIGNAL(stateChanged(int)), this, SLOT(setDisplayShowQuasarsButton(int)));
+	connect(ui->displayShowQuasarsButton, &QCheckBox::stateChanged, this, &QuasarsDialog::setDisplayShowQuasarsButton);
 	ui->displayUseQuasarMarkersButton->setChecked(qsr->getFlagUseQuasarMarkers());
-	connect(ui->displayUseQuasarMarkersButton, SIGNAL(stateChanged(int)), this, SLOT(setDisplayUseQuasarMarkersButton(int)));
-	connect(ui->internetUpdatesCheckbox, SIGNAL(stateChanged(int)), this, SLOT(setUpdatesEnabled(int)));
-	connect(ui->updateButton, SIGNAL(clicked()), this, SLOT(updateJSON()));
-	connect(qsr, SIGNAL(updateStateChanged(Quasars::UpdateState)), this, SLOT(updateStateReceiver(Quasars::UpdateState)));
-	connect(qsr, SIGNAL(jsonUpdateComplete(void)), this, SLOT(updateCompleteReceiver(void)));	
-	connect(ui->updateFrequencySpinBox, SIGNAL(valueChanged(int)), this, SLOT(setUpdateValues(int)));
+	connect(ui->displayUseQuasarMarkersButton, &QCheckBox::stateChanged, this, &QuasarsDialog::setDisplayUseQuasarMarkersButton);
+	connect(ui->internetUpdatesCheckbox, &QCheckBox::stateChanged, this, &QuasarsDialog::setUpdatesEnabled);
+	connect(ui->updateButton, &QPushButton::clicked, this, &QuasarsDialog::updateJSON);
+	connect(qsr, &Quasars::updateStateChanged, this, &QuasarsDialog::updateStateReceiver);
+	connect(qsr, &Quasars::jsonUpdateComplete, this, &QuasarsDialog::updateCompleteReceiver);
+	connect(ui->updateFrequencySpinBox, qOverload<int>(&QSpinBox::valueChanged), this, &QuasarsDialog::setUpdateValues);
 	refreshUpdateValues(); // fetch values for last updated and so on
 	// if the state didn't change, setUpdatesEnabled will not be called, so we force it
 	setUpdatesEnabled(ui->internetUpdatesCheckbox->checkState());
@@ -93,14 +92,14 @@ void QuasarsDialog::createDialogContent()
 	ui->quasarMarkerColor->setup("Quasars.quasarsColor", "Quasars/marker_color");
 
 	updateTimer = new QTimer(this);
-	connect(updateTimer, SIGNAL(timeout()), this, SLOT(refreshUpdateValues()));
+	connect(updateTimer, &QTimer::timeout, this, &QuasarsDialog::refreshUpdateValues);
 	updateTimer->start(7000);
 
 	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
-	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
+	connect(ui->titleBar, &TitleBar::movedTo, this, &StelDialog::handleMovedTo);
 
-	connect(ui->restoreDefaultsButton, SIGNAL(clicked()), this, SLOT(restoreDefaults()));
-	connect(ui->saveSettingsButton, SIGNAL(clicked()), this, SLOT(saveSettings()));
+	connect(ui->restoreDefaultsButton, &QPushButton::clicked, this, &QuasarsDialog::restoreDefaults);
+	connect(ui->saveSettingsButton, &QPushButton::clicked, this, &QuasarsDialog::saveSettings);
 
 	// About tab
 	setAboutHtml();
@@ -234,7 +233,7 @@ void QuasarsDialog::updateCompleteReceiver(void)
 	updateTimer->start();
 	ui->lastUpdateDateTimeEdit->setDateTime(qsr->getLastUpdate());
 	QTimer *timer = new QTimer(this);
-	connect(timer, SIGNAL(timeout()), this, SLOT(refreshUpdateValues()));
+	connect(timer, &QTimer::timeout, this, &QuasarsDialog::refreshUpdateValues);
 	setAboutHtml();
 }
 

@@ -153,7 +153,7 @@ void RemoteControl::init()
 	requestHandler = new RequestHandler(settings, this);
 
 	StelApp& app = StelApp::getInstance();
-	connect(StelApp::getInstance().getCore(), SIGNAL(configurationDataSaved()), this, SLOT(saveSettings()));
+	connect(StelApp::getInstance().getCore(), &StelCore::configurationDataSaved, this, &RemoteControl::saveSettings);
 
 	// Create action for enable/disable & hook up signals	
 	addAction("actionShow_Remote_Control",        N_("Remote Control"), N_("Remote control"), "enabled");

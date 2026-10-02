@@ -218,7 +218,7 @@ void Observability::init()
 #endif
     updateMessageText();
     connect(&StelApp::getInstance(), &StelApp::languageChanged, this, &Observability::onLanguageChanged);
-    connect(StelApp::getInstance().getCore(), SIGNAL(configurationDataSaved()), this, SLOT(saveConfiguration()));
+    connect(StelApp::getInstance().getCore(), &StelCore::configurationDataSaved, this, &Observability::saveConfiguration);
 
     connect(this, &Observability::flagEnabledChanged, this, [&](bool enabled) {
         if (enabled) {
