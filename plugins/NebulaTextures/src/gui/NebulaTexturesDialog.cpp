@@ -126,27 +126,27 @@ void NebulaTexturesDialog::createDialogContent()
 	kineticScrollingList << ui->aboutTextBrowser;
 	StelGui* gui= static_cast<StelGui*>(StelApp::getInstance().getGui());
 	enableKineticScrolling(gui->getFlagUseKineticScrolling());
-	connect(gui, SIGNAL(flagUseKineticScrollingChanged(bool)), this, SLOT(enableKineticScrolling(bool)));
+	connect(gui, &StelGui::flagUseKineticScrollingChanged, this, &NebulaTexturesDialog::enableKineticScrolling);
 
-	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
+	connect(&StelApp::getInstance(), &StelApp::languageChanged, this, &NebulaTexturesDialog::retranslate);
 	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
-	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
+	connect(ui->titleBar, &TitleBar::movedTo, this, &StelDialog::handleMovedTo);
 
-	connect(ui->openFileButton, SIGNAL(clicked()), this, SLOT(openImageFile()));
-	connect(ui->solveButton, SIGNAL(clicked()), this, SLOT(solveImage()));
-	connect(ui->cancelButton, SIGNAL(clicked()), this, SLOT(cancelSolve()));
-	connect(ui->recoverCoordsButton, SIGNAL(clicked()), this, SLOT(recoverSolvedCorners()));
-	connect(ui->goPushButton, SIGNAL(clicked()), this, SLOT(moveToCenterCoord()));
-	connect(ui->renderButton, SIGNAL(clicked()), this, SLOT(toggleTempTexturePreview()));
-	connect(ui->disableDefault, SIGNAL(clicked()), this, SLOT(toggleDefaultTextureVisibility()));
-	connect(ui->brightComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(refreshTempTexturePreview()));
-	connect(ui->addCustomTextureButton, SIGNAL(clicked()), this, SLOT(addCustomTexture()));
+	connect(ui->openFileButton,         &QPushButton::clicked, this, &NebulaTexturesDialog::openImageFile);
+	connect(ui->solveButton,            &QPushButton::clicked, this, &NebulaTexturesDialog::solveImage);
+	connect(ui->cancelButton,           &QPushButton::clicked, this, &NebulaTexturesDialog::cancelSolve);
+	connect(ui->recoverCoordsButton,    &QPushButton::clicked, this, &NebulaTexturesDialog::recoverSolvedCorners);
+	connect(ui->goPushButton,           &QPushButton::clicked, this, &NebulaTexturesDialog::moveToCenterCoord);
+	connect(ui->renderButton,           &QPushButton::clicked, this, &NebulaTexturesDialog::toggleTempTexturePreview);
+	connect(ui->disableDefault,         &QPushButton::clicked, this, &NebulaTexturesDialog::toggleDefaultTextureVisibility);
+	connect(ui->brightComboBox, qOverload<int>(&QComboBox::currentIndexChanged), this, &NebulaTexturesDialog::refreshTempTexturePreview);
+	connect(ui->addCustomTextureButton, &QPushButton::clicked, this, &NebulaTexturesDialog::addCustomTexture);
 
-	connect(ui->reloadButton, SIGNAL(clicked()), this, SLOT(reloadData()));
+	connect(ui->reloadButton, &QPushButton::clicked, this, &NebulaTexturesDialog::reloadData);
 	connectCheckBox(ui->checkBoxShow,"actionShow_NebulaTextures");
-	connect(ui->checkBoxAvoid, SIGNAL(clicked(bool)), this, SLOT(setAvoidAreaConflict(bool)));
-	connect(ui->listWidget, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(gotoSelectedItem(QListWidgetItem*)));
-	connect(ui->removeTextureButton, SIGNAL(clicked()), this, SLOT(removeTexture()));
+	connect(ui->checkBoxAvoid, &QCheckBox::clicked, this, &NebulaTexturesDialog::setAvoidAreaConflict);
+	connect(ui->listWidget, &QListWidget::itemDoubleClicked, this, &NebulaTexturesDialog::gotoSelectedItem);
+	connect(ui->removeTextureButton, &QPushButton::clicked, this, &NebulaTexturesDialog::removeTexture);
 
 	QList<QPair<AngleSpinBox*, bool>> allCornerSpins = {
 		qMakePair(ui->topLeftX, true), qMakePair(ui->topLeftY, false),
@@ -175,8 +175,8 @@ void NebulaTexturesDialog::createDialogContent()
 			spin->setMaximum(90.0, true);
 		}
 		spin->setWrapping(isRA);
-		connect(spin, SIGNAL(valueChanged()), this, SLOT(refreshTempTexturePreview()));
-		connect(spin, SIGNAL(valueChanged()), this, SLOT(showRecoverCoordsButton()));
+		connect(spin, &AngleSpinBox::valueChanged, this, &NebulaTexturesDialog::refreshTempTexturePreview);
+		connect(spin, &AngleSpinBox::valueChanged, this, &NebulaTexturesDialog::showRecoverCoordsButton);
 	}
 	// Center RA
 	ui->referX->setDisplayFormat(AngleSpinBox::HMSLetters);
@@ -219,7 +219,7 @@ void NebulaTexturesDialog::createDialogContent()
 		freezeUiState(false);
 	});
 
-	connect(ui->restoreDefaultsButton, SIGNAL(clicked()), this, SLOT(restoreDefaults()));
+	connect(ui->restoreDefaultsButton, &QPushButton::clicked, this, &NebulaTexturesDialog::restoreDefaults);
 	setAboutHtml();
 	reloadData();
 	ui->lineEditApiKey->setText(conf->value(NT_CONFIG_PREFIX + "/AstroMetry_Apikey", "").toString());

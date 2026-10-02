@@ -106,11 +106,11 @@ RequestHandler::RequestHandler(const StaticFileControllerSettings& settings, QOb
 	apiController->registerService(new LocationSearchService(apiController));
 	apiController->registerService(new ViewService(apiController));
 
-	connect(&StelApp::getInstance().getModuleMgr(), SIGNAL(extensionsAdded(QObjectList)), this, SLOT(addExtensionServices(QObjectList)));
+	connect(&StelApp::getInstance().getModuleMgr(), &StelModuleMgr::extensionsAdded, this, &RequestHandler::addExtensionServices);
 	addExtensionServices(StelApp::getInstance().getModuleMgr().getExtensionList());
 
 	staticFiles = new StaticFileController(settings,this);
-	connect(&StelApp::getInstance(),SIGNAL(languageChanged()),this,SLOT(refreshTemplates()));
+	connect(&StelApp::getInstance(), &StelApp::languageChanged, this, &RequestHandler::refreshTemplates);
 	refreshTemplates();
 }
 

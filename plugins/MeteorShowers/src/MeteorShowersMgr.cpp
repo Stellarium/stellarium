@@ -107,14 +107,14 @@ void MeteorShowersMgr::init()
 	m_updateTimer = new QTimer(this);
 	m_updateTimer->setSingleShot(false);   // recurring check for update
 	m_updateTimer->setInterval(300000);    // every 5 min, check if it's time to update
-	connect(m_updateTimer, SIGNAL(timeout()), this, SLOT(checkForUpdates()));
+	connect(m_updateTimer, &QTimer::timeout, this, &MeteorShowersMgr::checkForUpdates);
 	m_updateTimer->start();
 
 	// always check if we are on Earth
 	StelCore* core = StelApp::getInstance().getCore();
 	m_onEarth = core->getCurrentPlanet()->getEnglishName() == "Earth";
-	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(locationChanged(StelLocation)));
-	connect(core, SIGNAL(configurationDataSaved()), this, SLOT(saveSettings()));
+	connect(core, &StelCore::locationChanged, this, &MeteorShowersMgr::locationChanged);
+	connect(core, &StelCore::configurationDataSaved, this, &MeteorShowersMgr::saveSettings);
 
 	// enable at startup?
 	setEnablePlugin(getEnableAtStartup());
@@ -365,7 +365,7 @@ void MeteorShowersMgr::startDownload(const QString &urlString)
 	m_progressBar->setValue(0);
 	m_progressBar->setRange(0, 0);
 
-	connect(m_networkManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(downloadComplete(QNetworkReply*)));
+	connect(m_networkManager, &QNetworkAccessManager::finished, this, &MeteorShowersMgr::downloadComplete);
 	QNetworkRequest request;
 	request.setUrl(QUrl(m_url));
 	request.setRawHeader("User-Agent", StelUtils::getUserAgentString().toUtf8());
@@ -407,7 +407,7 @@ void MeteorShowersMgr::downloadComplete(QNetworkReply *reply)
 	if (reply == Q_NULLPTR)
 		return;
 
-	disconnect(m_networkManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(downloadComplete(QNetworkReply*)));
+	disconnect(m_networkManager, &QNetworkAccessManager::finished, this, &MeteorShowersMgr::downloadComplete);
 	deleteDownloadProgressBar();
 
 	if (reply->error() || reply->bytesAvailable()==0)

@@ -523,7 +523,7 @@ void Satellites::init()
 	StelCore* core = StelApp::getInstance().getCore();
 	connect(core, &StelCore::locationChanged, this, &Satellites::updateObserverLocation);
 	connect(core, &StelCore::configurationDataSaved, this, &Satellites::saveSettings);
-	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(translateData()));
+	connect(&StelApp::getInstance(), &StelApp::languageChanged, this, &Satellites::translateData);
 
 	connect(this, &Satellites::satSelectionChanged, this, &Satellites::changeSelectedSatellite);
 

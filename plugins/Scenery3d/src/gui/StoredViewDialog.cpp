@@ -48,7 +48,7 @@ void StoredViewDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
 	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
-	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
+	connect(ui->titleBar, &TitleBar::movedTo, this, &StelDialog::handleMovedTo);
 
 	mgr = GETSTELMODULE(Scenery3d);
 	Q_ASSERT(mgr);

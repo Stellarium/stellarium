@@ -198,7 +198,7 @@ Oculars::Oculars()
 {
 	setObjectName("Oculars");
 	setFontSizeFromApp(StelApp::getInstance().getScreenFontSize());
-	connect(&StelApp::getInstance(), SIGNAL(screenFontSizeChanged(int)), this, SLOT(setFontSizeFromApp(int)));
+	connect(&StelApp::getInstance(), &StelApp::screenFontSizeChanged, this, &Oculars::setFontSizeFromApp);
 	connect(&StelApp::getInstance(), &StelApp::screenButtonScaleChanged, this,
 	        [this]{const int size = StelApp::getInstance().getScreenFontSize();
 	               setFontSizeFromApp(size); /* and repeat to apply all the geometry changes */
@@ -300,8 +300,8 @@ void Oculars::deinit()
 
 	StelCore *core = StelApp::getInstance().getCore();
 	StelSkyDrawer *skyDrawer = core->getSkyDrawer();
-	disconnect(skyDrawer, SIGNAL(customStarMagLimitChanged(double)), this, SLOT(setMagLimitStarsOcularsManual(double)));
-	disconnect(skyDrawer, SIGNAL(flagStarMagnitudeLimitChanged(bool)), this, SLOT(handleStarMagLimitToggle(bool)));
+	disconnect(skyDrawer, &StelSkyDrawer::customStarMagLimitChanged, this, &Oculars::setMagLimitStarsOcularsManual);
+	disconnect(skyDrawer, &StelSkyDrawer::flagStarMagnitudeLimitChanged, this, &Oculars::handleStarMagLimitToggle);
 	if (flagShowCCD)
 	{
 		// Retrieve and restore star scales
@@ -340,9 +340,9 @@ void Oculars::deinit()
 	settings->setValue("focuser_color", focuserColor.toStr());
 	settings->sync();
 
-	disconnect(this, SIGNAL(selectedOcularChanged(int)), this, SLOT(updateOcularReticle()));
-	//disconnect(&StelApp::getInstance(), SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setStelStyle(const QString&)));
-	disconnect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslateGui()));
+	disconnect(this, &Oculars::selectedOcularChanged, this, &Oculars::updateOcularReticle);
+	//disconnect(&StelApp::getInstance(), &StelApp::colorSchemeChanged, this, &Oculars::setStelStyle);
+	disconnect(&StelApp::getInstance(), &StelApp::languageChanged, this, &Oculars::retranslateGui);
 
 	protractorTexture.clear();
 	protractorFlipVTexture.clear();
@@ -653,7 +653,7 @@ void Oculars::init()
 		setFlagAutoLimitMagnitude(settings->value("autolimit_stellar_magnitude", true).toBool());
 		flagLimitStarsOculars=settings->value("limit_stellar_magnitude_oculars", false).toBool();
 		magLimitStarsOculars=settings->value("limit_stellar_magnitude_oculars_val", 12.).toDouble();
-		connect(this, SIGNAL(flagAutoLimitMagnitudeChanged(bool)), this, SLOT(handleAutoLimitToggle(bool))); // only after first initialisation!
+		connect(this, &Oculars::flagAutoLimitMagnitudeChanged, this, &Oculars::handleAutoLimitToggle); // only after first initialisation!
 		setFlagInitFovUsage(settings->value("use_initial_fov", false).toBool());
 		setFlagInitDirectionUsage(settings->value("use_initial_direction", false).toBool());
 		setFlagUseSemiTransparency(settings->value("use_semi_transparency", false).toBool());
@@ -697,13 +697,13 @@ void Oculars::init()
 	// enforce check existence of reticle for the current eyepiece
 	updateOcularReticle();
 
-	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslateGui()));
-	connect(this, SIGNAL(selectedOcularChanged(int)), this, SLOT(updateOcularReticle()));
+	connect(&StelApp::getInstance(), &StelApp::languageChanged, this, &Oculars::retranslateGui);
+	connect(this, &Oculars::selectedOcularChanged, this, &Oculars::updateOcularReticle);
 	StelCore *core = StelApp::getInstance().getCore();
 	StelSkyDrawer *skyDrawer = core->getSkyDrawer();
-	connect(skyDrawer, SIGNAL(flagStarMagnitudeLimitChanged(bool)), this, SLOT(handleStarMagLimitToggle(bool)));
+	connect(skyDrawer, &StelSkyDrawer::flagStarMagnitudeLimitChanged, this, &Oculars::handleStarMagLimitToggle);
 	StelObjectMgr* objectMgr = GETSTELMODULE(StelObjectMgr);
-	connect(objectMgr, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)), this, SLOT(updateLatestSelectedSSO()));
+	connect(objectMgr, &StelObjectMgr::selectedObjectChanged, this, &Oculars::updateLatestSelectedSSO);
 }
 
 void Oculars::determineMaxEyepieceAngle()
@@ -1187,7 +1187,7 @@ void Oculars::displayPopupMenu()
 		QAction* action = popup->addAction(q_("Toggle &crosshair"));
 		action->setCheckable(true);
 		action->setChecked(flagShowCrosshairs);
-		connect(action, SIGNAL(toggled(bool)), actionShowCrosshairs, SLOT(setChecked(bool)));
+		connect(action, &QAction::toggled, actionShowCrosshairs, &StelAction::setChecked);
 #endif
 	}
 	else
@@ -1199,7 +1199,7 @@ void Oculars::displayPopupMenu()
 		QAction* action = new QAction(q_("Configure &Oculars"), popup);
 		action->setCheckable(true);
 		action->setChecked(ocularDialog->visible());
-		connect(action, SIGNAL(triggered(bool)), ocularDialog, SLOT(setVisible(bool)));
+		connect(action, &QAction::triggered, ocularDialog, &OcularDialog::setVisible);
 		popup->addAction(action);
 		popup->addSeparator();
 
@@ -1208,7 +1208,7 @@ void Oculars::displayPopupMenu()
 			QAction* action = popup->addAction(q_("Toggle &CCD"));
 			action->setCheckable(true);
 			action->setChecked(flagShowCCD);
-			connect(action, SIGNAL(toggled(bool)), actionShowSensor, SLOT(setChecked(bool)));
+			connect(action, &QAction::toggled, actionShowSensor, &StelAction::setChecked);
 		}
 		
 		if (!flagShowCCD)
@@ -1216,7 +1216,7 @@ void Oculars::displayPopupMenu()
 			QAction* action = popup->addAction(q_("Toggle &Telrad"));
 			action->setCheckable(true);
 			action->setChecked(flagShowTelrad);
-			connect(action, SIGNAL(toggled(bool)), actionShowTelrad, SLOT(setChecked(bool)));
+			connect(action, &QAction::toggled, actionShowTelrad, &StelAction::setChecked);
 		}
 #endif
 
@@ -1611,10 +1611,10 @@ void Oculars::initializeActivationActions()
 		addAction(actionClockwisePrismName, ocularsGroup, actionClockwisePrismDescription, this, [=](){rotatePrism(angles.at(i));}, "");
 	}
 
-	connect(this, SIGNAL(selectedCCDChanged(int)),       this, SLOT(instrumentChanged()));	
-	connect(this, SIGNAL(selectedOcularChanged(int)),    this, SLOT(instrumentChanged()));
-	connect(this, SIGNAL(selectedTelescopeChanged(int)), this, SLOT(instrumentChanged()));	
-	connect(this, SIGNAL(selectedLensChanged(int)),      this, SLOT(instrumentChanged()));
+	connect(this, &Oculars::selectedCCDChanged,       this, &Oculars::instrumentChanged);
+	connect(this, &Oculars::selectedOcularChanged,    this, &Oculars::instrumentChanged);
+	connect(this, &Oculars::selectedTelescopeChanged, this, &Oculars::instrumentChanged);
+	connect(this, &Oculars::selectedLensChanged,      this, &Oculars::instrumentChanged);
 }
 
 bool Oculars::isBinocularDefined()
@@ -2549,7 +2549,7 @@ void Oculars::unzoomOcular()
 		toggleLines(true);
 
 	StelApp::getInstance().getStelPropertyManager()->setStelPropertyValue("MilkyWay.saturation", milkyWaySaturation);
-	disconnect(skyDrawer, SIGNAL(customStarMagLimitChanged(double)), this, SLOT(setMagLimitStarsOcularsManual(double)));
+	disconnect(skyDrawer, &StelSkyDrawer::customStarMagLimitChanged, this, &Oculars::setMagLimitStarsOcularsManual);
 	// restore values, but keep current to enable toggling.
 	if (!getFlagAutoLimitMagnitude())
 	{
@@ -2748,7 +2748,8 @@ void Oculars::zoomOcular()
 	{
 		if (getFlagAutoLimitMagnitude())
 		{
-			disconnect(skyDrawer, SIGNAL(customStarMagLimitChanged(double)), this, SLOT(setMagLimitStarsOcularsManual(double))); // we want to keep the old manual value.
+			disconnect(skyDrawer, &StelSkyDrawer::customStarMagLimitChanged,
+			           this, &Oculars::setMagLimitStarsOcularsManual); // we want to keep the old manual value.
 			limitMag = computeLimitMagnitude(ocular, telescope);
 			// TODO: Is it really good to apply the star formula to DSO?
 			skyDrawer->setFlagNebulaMagnitudeLimit(true);
@@ -2759,7 +2760,8 @@ void Oculars::zoomOcular()
 		else
 		{	// It's possible that the user changes the custom magnitude while viewing, and then changes the ocular.
 			// Therefore we need a temporary connection.
-			connect(skyDrawer, SIGNAL(customStarMagLimitChanged(double)), this, SLOT(setMagLimitStarsOcularsManual(double)));
+			connect(skyDrawer, &StelSkyDrawer::customStarMagLimitChanged,
+			        this, &Oculars::setMagLimitStarsOcularsManual);
 		}
 		skyDrawer->setFlagStarMagnitudeLimit(true);
 	}
@@ -3404,7 +3406,8 @@ void Oculars::handleAutoLimitToggle(bool on)
 		{
 			telescope = telescopes[selectedTelescopeIndex];
 		}
-		disconnect(skyDrawer, SIGNAL(customStarMagLimitChanged(double)), this, SLOT(setMagLimitStarsOcularsManual(double))); // keep the old manual value in config.
+		disconnect(skyDrawer, &StelSkyDrawer::customStarMagLimitChanged,
+		           this, &Oculars::setMagLimitStarsOcularsManual); // keep the old manual value in config.
 		double limitMag = computeLimitMagnitude(ocular, telescope);
 		// TODO: Is it really good to apply the star formula to DSO?
 		skyDrawer->setFlagNebulaMagnitudeLimit(true);
@@ -3414,7 +3417,8 @@ void Oculars::handleAutoLimitToggle(bool on)
 	}
 	else
 	{
-		connect(skyDrawer, SIGNAL(customStarMagLimitChanged(double)), this, SLOT(setMagLimitStarsOcularsManual(double)));
+		connect(skyDrawer, &StelSkyDrawer::customStarMagLimitChanged,
+		        this, &Oculars::setMagLimitStarsOcularsManual);
 		skyDrawer->setCustomStarMagnitudeLimit(magLimitStarsOculars);
 		skyDrawer->setFlagStarMagnitudeLimit(flagLimitStarsOculars);
 	}

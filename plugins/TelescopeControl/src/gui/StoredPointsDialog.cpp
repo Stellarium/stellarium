@@ -51,16 +51,16 @@ void StoredPointsDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
 	//Inherited connect
-	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
+	connect(&StelApp::getInstance(), &StelApp::languageChanged, this, &StoredPointsDialog::retranslate);
 	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
-	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
+	connect(ui->titleBar, &TitleBar::movedTo, this, &StelDialog::handleMovedTo);
 
-	connect(ui->pushButtonAddPoint,   SIGNAL(clicked()), this, SLOT(buttonAddPressed()));
-	connect(ui->pushButtonRemovePoint,SIGNAL(clicked()), this, SLOT(buttonRemovePressed()));
-	connect(ui->pushButtonClearList,  SIGNAL(clicked()), this, SLOT(buttonClearPressed()));
+	connect(ui->pushButtonAddPoint,    &QPushButton::clicked, this, &StoredPointsDialog::buttonAddPressed);
+	connect(ui->pushButtonRemovePoint, &QPushButton::clicked, this, &StoredPointsDialog::buttonRemovePressed);
+	connect(ui->pushButtonClearList,   &QPushButton::clicked, this, &StoredPointsDialog::buttonClearPressed);
 
-	connect(ui->pushButtonCurrent, SIGNAL(clicked()), this, SLOT(getCurrentObjectInfo()));
-	connect(ui->pushButtonCenter, SIGNAL(clicked()), this, SLOT(getCenterInfo()));
+	connect(ui->pushButtonCurrent, &QPushButton::clicked, this, &StoredPointsDialog::getCurrentObjectInfo);
+	connect(ui->pushButtonCenter, &QPushButton::clicked, this, &StoredPointsDialog::getCenterInfo);
 
 	//Initializing the list of telescopes
 	storedPointsListModel->setColumnCount(ColumnCount);

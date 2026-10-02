@@ -111,7 +111,7 @@ void OnlineQueries::init()
 
 	hipQuery=new HipOnlineQuery("");
 
-	connect(StelApp::getInstance().getCore(), SIGNAL(configurationDataSaved()), this, SLOT(saveConfiguration()));
+	connect(StelApp::getInstance().getCore(), &StelCore::configurationDataSaved, this, &OnlineQueries::saveConfiguration);
 	addAction("actionShow_OnlineQueries",       N_("Online Queries"), N_("Show window for Online Queries"),           this, "enabled", "");
 	addAction("actionShow_OnlineQueries_ASE",   N_("Online Queries"), N_("Call All Skies Encyclopaedia on current selection"),  this, "queryASE()", "Ctrl+Alt+O");
 	addAction("actionShow_OnlineQueries_AAVSO", N_("Online Queries"), N_("Call AAVSO database on current selection"), this, "queryAAVSO()", "");
@@ -258,7 +258,7 @@ void OnlineQueries::queryAAVSO()
 
 	// This only delivers the OID for the second AAVSO query
 	onAavsoHipQueryStatusChanged();
-	connect(hipOnlineReply, SIGNAL(statusChanged()), this, SLOT(onAavsoHipQueryStatusChanged()));
+	connect(hipOnlineReply, &HipOnlineReply::statusChanged, this, &OnlineQueries::onAavsoHipQueryStatusChanged);
 }
 
 void OnlineQueries::queryGCVS()
@@ -393,7 +393,7 @@ void OnlineQueries::onHipQueryStatusChanged()
 
 	else if (hipOnlineReply->getCurrentStatus()!=HipOnlineReply::HipQueryQuerying)
 	{
-		disconnect(hipOnlineReply, SIGNAL(statusChanged()), this, SLOT(onHipQueryStatusChanged()));
+		disconnect(hipOnlineReply, &HipOnlineReply::statusChanged, this, &OnlineQueries::onHipQueryStatusChanged);
 		delete hipOnlineReply;
 		hipOnlineReply=nullptr;
 	}
@@ -427,7 +427,7 @@ void OnlineQueries::onAavsoHipQueryStatusChanged()
 		  }
 		//qDebug() << "We have found OID=" << oid;
 
-		//disconnect(hipOnlineReply, SIGNAL(statusChanged()), this, SLOT(onAavsoHipQueryStatusChanged()));
+		//disconnect(hipOnlineReply, &HipOnlineReply::statusChanged, this, &OnlineQueries::onAavsoHipQueryStatusChanged);
 		//delete hipOnlineReply;
 
 		// Trigger second AAVSO query. Note that we mangle the name a bit.
@@ -441,7 +441,7 @@ void OnlineQueries::onAavsoHipQueryStatusChanged()
 
 	else if (hipOnlineReply->getCurrentStatus()!=HipOnlineReply::HipQueryQuerying)
 	{
-		disconnect(hipOnlineReply, SIGNAL(statusChanged()), this, SLOT(onAavsoHipQueryStatusChanged()));
+		disconnect(hipOnlineReply, &HipOnlineReply::statusChanged, this, &OnlineQueries::onAavsoHipQueryStatusChanged);
 		delete hipOnlineReply;
 		hipOnlineReply=nullptr;
 	}

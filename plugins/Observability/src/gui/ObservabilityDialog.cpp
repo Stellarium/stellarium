@@ -60,8 +60,7 @@ void ObservabilityDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
 	ui->tabs->setCurrentIndex(0);
-	connect(&StelApp::getInstance(),
-	        SIGNAL(languageChanged()), this, SLOT(retranslate()));
+	connect(&StelApp::getInstance(), &StelApp::languageChanged, this, &ObservabilityDialog::retranslate);
 
 	Observability* plugin = GETSTELMODULE(Observability);
 
@@ -71,54 +70,38 @@ void ObservabilityDialog::createDialogContent()
 	if (gui)
 	{
 		enableKineticScrolling(gui->getFlagUseKineticScrolling());
-		connect(gui, SIGNAL(flagUseKineticScrollingChanged(bool)), this, SLOT(enableKineticScrolling(bool)));
+		connect(gui, &StelGui::flagUseKineticScrollingChanged, this, &ObservabilityDialog::enableKineticScrolling);
 	}
 
 	// Settings:
 	
 	// clicked() is called only when the user makes an input,
 	// so we avoid an endless loop when setting the value in updateControls().
-	connect(ui->todayCheckBox, SIGNAL(clicked(bool)),
-	        plugin, SLOT(enableTodayField(bool)));
-	connect(ui->acroCosCheckBox, SIGNAL(clicked(bool)),
-	        plugin, SLOT(enableAcroCosField(bool)));
-	connect(ui->oppositionCheckBox, SIGNAL(clicked(bool)),
-	        plugin, SLOT(enableOppositionField(bool)));
-	connect(ui->goodNightsCheckBox, SIGNAL(clicked(bool)),
-	        plugin, SLOT(enableGoodNightsField(bool)));
-	connect(ui->fullMoonCheckBox, SIGNAL(clicked(bool)),
-	        plugin, SLOT(enableFullMoonField(bool)));
+	connect(ui->todayCheckBox,      &QCheckBox::clicked, plugin, &Observability::enableTodayField);
+	connect(ui->acroCosCheckBox,    &QCheckBox::clicked, plugin, &Observability::enableAcroCosField);
+	connect(ui->oppositionCheckBox, &QCheckBox::clicked, plugin, &Observability::enableOppositionField);
+	connect(ui->goodNightsCheckBox, &QCheckBox::clicked, plugin, &Observability::enableGoodNightsField);
+	connect(ui->fullMoonCheckBox,   &QCheckBox::clicked, plugin, &Observability::enableFullMoonField);
 
-	connect(ui->redSlider, SIGNAL(sliderMoved(int)),
-	        this, SLOT(setColor()));
-	connect(ui->greenSlider, SIGNAL(sliderMoved(int)),
-	        this, SLOT(setColor()));
-	connect(ui->blueSlider, SIGNAL(sliderMoved(int)),
-	        this, SLOT(setColor()));
+	connect(ui->redSlider,   &QSlider::sliderMoved, this, &ObservabilityDialog::setColor);
+	connect(ui->greenSlider, &QSlider::sliderMoved, this, &ObservabilityDialog::setColor);
+	connect(ui->blueSlider,  &QSlider::sliderMoved, this, &ObservabilityDialog::setColor);
 	
 	// Isn't valueChanged() better? But then we'll have to block
 	// signals when setting the slider values.
-	connect(ui->fontSize, SIGNAL(sliderMoved(int)),
-	        plugin, SLOT(setFontSize(int)));
-	connect(ui->sunAltitudeSlider, SIGNAL(sliderMoved(int)),
-	        plugin, SLOT(setTwilightAltitude(int)));
-	connect(ui->sunAltitudeSlider, SIGNAL(sliderMoved(int)),
-	        this, SLOT(updateAltitudeLabel(int)));
-	connect(ui->horizonAltitudeSlider, SIGNAL(sliderMoved(int)),
-	        plugin, SLOT(setHorizonAltitude(int)));
-	connect(ui->horizonAltitudeSlider, SIGNAL(sliderMoved(int)),
-	        this, SLOT(updateHorizonLabel(int)));
+	connect(ui->fontSize, &QSlider::sliderMoved, plugin, &Observability::setFontSize);
+	connect(ui->sunAltitudeSlider, &QSlider::sliderMoved, plugin, &Observability::setTwilightAltitude);
+	connect(ui->sunAltitudeSlider, &QSlider::sliderMoved, this, &ObservabilityDialog::updateAltitudeLabel);
+	connect(ui->horizonAltitudeSlider, &QSlider::sliderMoved, plugin, &Observability::setHorizonAltitude);
+	connect(ui->horizonAltitudeSlider, &QSlider::sliderMoved, this, &ObservabilityDialog::updateHorizonLabel);
 
 	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
-	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
-	connect(ui->restoreDefaultsButton, SIGNAL(clicked()),
-		this, SLOT(restoreDefaults()));
+	connect(ui->titleBar, &TitleBar::movedTo, this, &StelDialog::handleMovedTo);
+	connect(ui->restoreDefaultsButton, &QPushButton::clicked, this, &ObservabilityDialog::restoreDefaults);
 	// TODO: The plug-in should emit a signal when settings are changed.
 	// This works, because slots are called in the order they were connected.
-	connect(ui->restoreDefaultsButton, SIGNAL(clicked()),
-	        this, SLOT(updateControls()));
-	connect(ui->saveSettingsButton, SIGNAL(clicked()),
-	        plugin, SLOT(saveConfiguration()));
+	connect(ui->restoreDefaultsButton, &QPushButton::clicked, this, &ObservabilityDialog::updateControls);
+	connect(ui->saveSettingsButton, &QPushButton::clicked, plugin, &Observability::saveConfiguration);
 
 	// About tab
 	setAboutHtml();

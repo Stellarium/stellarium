@@ -86,9 +86,8 @@ void TimeNavigator::init()
 
 	setFlagShowButton(flagShowButton);
 
-	connect(StelApp::getInstance().getCore(),
-	        SIGNAL(configurationDataSaved()),
-	        this, SLOT(saveSettings()));
+	connect(StelApp::getInstance().getCore(), &StelCore::configurationDataSaved,
+	        this, &TimeNavigator::saveSettings);
 }
 
 void TimeNavigator::deinit()

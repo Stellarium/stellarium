@@ -183,7 +183,7 @@ void MosaicCameraDialog::createDialogContent()
 
 	setCameraNames(mc->getCameraNames());
 
-	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
+	connect(&StelApp::getInstance(), &StelApp::languageChanged, this, &MosaicCameraDialog::retranslate);
 
 	// Kinetic scrolling
 	kineticScrollingList << ui->aboutTextBrowser;
@@ -191,11 +191,11 @@ void MosaicCameraDialog::createDialogContent()
 	if (gui)
 	{
 		enableKineticScrolling(gui->getFlagUseKineticScrolling());
-		connect(gui, SIGNAL(flagUseKineticScrollingChanged(bool)), this, SLOT(enableKineticScrolling(bool)));
+		connect(gui, &StelGui::flagUseKineticScrollingChanged, this, &MosaicCameraDialog::enableKineticScrolling);
 	}
 
 	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
-	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
+	connect(ui->titleBar, &TitleBar::movedTo, this, &StelDialog::handleMovedTo);
 
 	// About tab
 	setAboutHtml();
@@ -209,19 +209,19 @@ void MosaicCameraDialog::createDialogContent()
 	ui->DecSpinBox->setPrefixType(AngleSpinBox::NormalPlus);
 	ui->DecSpinBox->setMinimum(-90.0, true);
 	ui->DecSpinBox->setMaximum(90.0, true);
-	connect(ui->cameraListWidget, SIGNAL(currentTextChanged(const QString&)), this, SLOT(onCameraSelectionChanged(const QString&)));
-	connect(ui->RASpinBox, SIGNAL(valueChanged()), this, SLOT(updateRA()));
-	connect(ui->DecSpinBox, SIGNAL(valueChanged()), this, SLOT(updateDec()));
-	connect(ui->RotationSpinBox, SIGNAL(valueChanged()), this, SLOT(updateRotation()));
-	connect(ui->visibleCheckBox, SIGNAL(toggled(bool)), this, SLOT(updateVisibility(bool)));
-	connect(ui->setMosaicToObjectButton, SIGNAL(clicked()), mc, SLOT(setRADecToObject()));
-	connect(ui->setViewToCameraButton, SIGNAL(clicked()), mc, SLOT(setViewToCamera()));
-	connect(ui->setMosaicToViewButton, SIGNAL(clicked()), mc, SLOT(setRADecToView()));
+	connect(ui->cameraListWidget, &QListWidget::currentTextChanged, this, &MosaicCameraDialog::onCameraSelectionChanged);
+	connect(ui->RASpinBox, &AngleSpinBox::valueChanged, this, &MosaicCameraDialog::updateRA);
+	connect(ui->DecSpinBox, &AngleSpinBox::valueChanged, this, &MosaicCameraDialog::updateDec);
+	connect(ui->RotationSpinBox, &AngleSpinBox::valueChanged, this, &MosaicCameraDialog::updateRotation);
+	connect(ui->visibleCheckBox, &QCheckBox::toggled, this, &MosaicCameraDialog::updateVisibility);
+	connect(ui->setMosaicToObjectButton, &QPushButton::clicked, mc, &MosaicCamera::setRADecToObject);
+	connect(ui->setViewToCameraButton, &QPushButton::clicked, mc, &MosaicCamera::setViewToCamera);
+	connect(ui->setMosaicToViewButton, &QPushButton::clicked, mc, &MosaicCamera::setRADecToView);
 
 	// General tab
 	connectBoolProperty(ui->checkBoxShowButton, "MosaicCamera.showButton");
-	connect(ui->pushButtonSaveSettings, SIGNAL(clicked()), mc, SLOT(saveSettings()));
-	connect(ui->pushButtonRestoreDefaults, SIGNAL(clicked()), this, SLOT(restoreDefaults()));
+	connect(ui->pushButtonSaveSettings, &QPushButton::clicked, mc, &MosaicCamera::saveSettings);
+	connect(ui->pushButtonRestoreDefaults, &QPushButton::clicked, this, &MosaicCameraDialog::restoreDefaults);
 }
 
 void MosaicCameraDialog::setAboutHtml(void)

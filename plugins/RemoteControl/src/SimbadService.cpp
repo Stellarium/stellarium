@@ -63,7 +63,7 @@ public:
 		SimbadLookupReply* reply = searcher->lookup(url,searchTerm,3,0); //last parameter is zero to start lookup immediately
 		//statusChanged is only called at the very end of the lookup as far as I can tell
 		//so we use it to exit the event queue
-		QObject::connect(reply,SIGNAL(statusChanged()),&loop,SLOT(quit()));
+		QObject::connect(reply, &SimbadLookupReply::statusChanged, &loop, &QEventLoop::quit);
 
 		loop.exec();
 		//at this point, the reply is finished

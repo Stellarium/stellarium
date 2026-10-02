@@ -69,7 +69,7 @@ void ScmStartDialog::createDialogContent()
 	ui->setupUi(dialog);
 	ui->welcomeLabel->setText(q_("Welcome to the Sky Culture Maker!"));
 
-	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
+	connect(&StelApp::getInstance(), &StelApp::languageChanged, this, &ScmStartDialog::retranslate);
 	connect(&StelApp::getInstance(), &StelApp::fontChanged, this, &ScmStartDialog::handleFontChanged);
 	connect(&StelApp::getInstance(), &StelApp::guiFontSizeChanged, this, &ScmStartDialog::handleFontChanged);
 
@@ -81,7 +81,7 @@ void ScmStartDialog::createDialogContent()
 	        &ScmStartDialog::startScmEditingProcess); // Edit
 
 	connect(ui->titleBar, &TitleBar::closeClicked, this, &ScmStartDialog::close);
-	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
+	connect(ui->titleBar, &TitleBar::movedTo, this, &ScmStartDialog::handleMovedTo);
 	// Init the correct font
 	handleFontChanged();
 

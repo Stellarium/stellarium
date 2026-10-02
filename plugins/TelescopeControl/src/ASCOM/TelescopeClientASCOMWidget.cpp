@@ -27,7 +27,7 @@ TelescopeClientASCOMWidget::TelescopeClientASCOMWidget(QWidget* parent)
 	ui->setupUi(this);
 	ui->eqCoordTypeSourceASCOMRadio->setChecked(true);
 	connect(ui->chooseButton, &QPushButton::clicked, this, &TelescopeClientASCOMWidget::onChooseButtonClicked);
-	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
+	connect(&StelApp::getInstance(), &StelApp::languageChanged, this, &TelescopeClientASCOMWidget::retranslate);
 }
 
 TelescopeClientASCOMWidget::~TelescopeClientASCOMWidget()

@@ -68,8 +68,7 @@ void SupernovaeDialog::createDialogContent()
 	sn = GETSTELMODULE(Supernovae);
 	ui->setupUi(dialog);
 	ui->tabs->setCurrentIndex(0);	
-	connect(&StelApp::getInstance(), SIGNAL(languageChanged()),
-		this, SLOT(retranslate()));
+	connect(&StelApp::getInstance(), &StelApp::languageChanged, this, &SupernovaeDialog::retranslate);
 
 	// Kinetic scrolling
 	kineticScrollingList << ui->aboutTextBrowser;
@@ -77,28 +76,28 @@ void SupernovaeDialog::createDialogContent()
 	if (gui)
 	{
 		enableKineticScrolling(gui->getFlagUseKineticScrolling());
-		connect(gui, SIGNAL(flagUseKineticScrollingChanged(bool)), this, SLOT(enableKineticScrolling(bool)));
+		connect(gui, &StelGui::flagUseKineticScrollingChanged, this, &SupernovaeDialog::enableKineticScrolling);
 	}
 
 	// Settings tab / updates group
-	connect(ui->internetUpdatesCheckbox, SIGNAL(stateChanged(int)), this, SLOT(setUpdatesEnabled(int)));
-	connect(ui->updateButton, SIGNAL(clicked()), this, SLOT(updateJSON()));
-	connect(sn, SIGNAL(updateStateChanged(Supernovae::UpdateState)), this, SLOT(updateStateReceiver(Supernovae::UpdateState)));
-	connect(sn, SIGNAL(jsonUpdateComplete(void)), this, SLOT(updateCompleteReceiver(void)));	
-	connect(ui->updateFrequencySpinBox, SIGNAL(valueChanged(int)), this, SLOT(setUpdateValues(int)));
+	connect(ui->internetUpdatesCheckbox, &QCheckBox::stateChanged, this, &SupernovaeDialog::setUpdatesEnabled);
+	connect(ui->updateButton, &QPushButton::clicked, this, &SupernovaeDialog::updateJSON);
+	connect(sn, &Supernovae::updateStateChanged, this, &SupernovaeDialog::updateStateReceiver);
+	connect(sn, &Supernovae::jsonUpdateComplete, this, &SupernovaeDialog::updateCompleteReceiver);
+	connect(ui->updateFrequencySpinBox, qOverload<int>(&QSpinBox::valueChanged), this, &SupernovaeDialog::setUpdateValues);
 	refreshUpdateValues(); // fetch values for last updated and so on
 	// if the state didn't change, setUpdatesEnabled will not be called, so we force it
 	setUpdatesEnabled(ui->internetUpdatesCheckbox->checkState());
 
 	updateTimer = new QTimer(this);
-	connect(updateTimer, SIGNAL(timeout()), this, SLOT(refreshUpdateValues()));
+	connect(updateTimer, &QTimer::timeout, this, &SupernovaeDialog::refreshUpdateValues);
 	updateTimer->start(7000);
 
 	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
-	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
+	connect(ui->titleBar, &TitleBar::movedTo, this, &StelDialog::handleMovedTo);
 
-	connect(ui->restoreDefaultsButton, SIGNAL(clicked()), this, SLOT(restoreDefaults()));
-	connect(ui->saveSettingsButton, SIGNAL(clicked()), this, SLOT(saveSettings()));
+	connect(ui->restoreDefaultsButton, &QPushButton::clicked, this, &SupernovaeDialog::restoreDefaults);
+	connect(ui->saveSettingsButton, &QPushButton::clicked, this, &SupernovaeDialog::saveSettings);
 
 	// About tab
 	setAboutHtml();
@@ -218,7 +217,7 @@ void SupernovaeDialog::updateCompleteReceiver(void)
 	updateTimer->start();
 	ui->lastUpdateDateTimeEdit->setDateTime(sn->getLastUpdate());
 	QTimer *timer = new QTimer(this);
-	connect(timer, SIGNAL(timeout()), this, SLOT(refreshUpdateValues()));
+	connect(timer, &QTimer::timeout, this, &SupernovaeDialog::refreshUpdateValues);
 	setAboutHtml();
 }
 

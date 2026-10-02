@@ -66,8 +66,8 @@ void ScmSkyCultureExportDialog::createDialogContent()
 	        &ScmSkyCultureExportDialog::handleFontChanged);
 	handleFontChanged();
 
-	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
-	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
+	connect(&StelApp::getInstance(), &StelApp::languageChanged, this, &ScmSkyCultureExportDialog::retranslate);
+	connect(ui->titleBar, &TitleBar::movedTo, this, &ScmSkyCultureExportDialog::handleMovedTo);
 	connect(ui->titleBar, &TitleBar::closeClicked, this, &ScmSkyCultureExportDialog::close);
 
 	ui->mergeLinesCB->setChecked(

@@ -30,14 +30,14 @@ HipOnlineReply::HipOnlineReply(const QString& aurl, QNetworkAccessManager* anetM
 	, currentStatus(HipQueryQuerying)
 {
 	reply = netMgr->get(QNetworkRequest(url));
-	connect(reply, SIGNAL(finished()), this, SLOT(httpQueryFinished()));
+	connect(reply, &QNetworkReply::finished, this, &HipOnlineReply::httpQueryFinished);
 }
 
 HipOnlineReply::~HipOnlineReply()
 {
 	if (reply)
 	{
-		disconnect(reply, SIGNAL(finished()), this, SLOT(httpQueryFinished()));
+		disconnect(reply, &QNetworkReply::finished, this, &HipOnlineReply::httpQueryFinished);
 		reply->abort();
 		//do not use delete here
 		reply->deleteLater();
@@ -50,7 +50,7 @@ void HipOnlineReply::deleteNetworkReply()
 {
 	if(reply)
 	{
-		disconnect(reply, SIGNAL(finished()), this, SLOT(httpQueryFinished()));
+		disconnect(reply, &QNetworkReply::finished, this, &HipOnlineReply::httpQueryFinished);
 		reply->abort();
 		delete reply;
 		reply = nullptr;

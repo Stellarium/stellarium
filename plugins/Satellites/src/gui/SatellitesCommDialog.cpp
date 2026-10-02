@@ -64,15 +64,15 @@ void SatellitesCommDialog::createDialogContent()
 	ui->setupUi(dialog);
 
 	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
-	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
-	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
+	connect(ui->titleBar, &TitleBar::movedTo, this, &StelDialog::handleMovedTo);
+	connect(&StelApp::getInstance(), &StelApp::languageChanged, this, &SatellitesCommDialog::retranslate);
 
 	initListCommunications();
 
-	connect(SatellitesMgr, SIGNAL(satSelectionChanged(QString)), this, SLOT(updateSatID(QString)));
-	connect(ui->communicationsTreeWidget, SIGNAL(itemSelectionChanged()), this, SLOT(selectCurrentCommLink()));
-	connect(ui->addCommLinkButton, SIGNAL(clicked()), this, SLOT(addCommData()));
-	connect(ui->removeCommLinkButton, SIGNAL(clicked()), this, SLOT(removeCommData()));
+	connect(SatellitesMgr, &Satellites::satSelectionChanged, this, &SatellitesCommDialog::updateSatID);
+	connect(ui->communicationsTreeWidget, &QTreeWidget::itemSelectionChanged, this, &SatellitesCommDialog::selectCurrentCommLink);
+	connect(ui->addCommLinkButton, &QToolButton::clicked, this, &SatellitesCommDialog::addCommData);
+	connect(ui->removeCommLinkButton, &QToolButton::clicked, this, &SatellitesCommDialog::removeCommData);
 
 	populateTexts();
 }

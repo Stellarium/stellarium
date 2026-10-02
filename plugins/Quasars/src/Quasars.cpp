@@ -107,7 +107,7 @@ Quasars::Quasars()
 #endif
 	conf = StelApp::getInstance().getSettings();
 	setFontSize(StelApp::getInstance().getScreenFontSize());
-	connect(&StelApp::getInstance(), SIGNAL(screenFontSizeChanged(int)), this, SLOT(setFontSize(int)));
+	connect(&StelApp::getInstance(), &StelApp::screenFontSizeChanged, this, &Quasars::setFontSize);
 }
 
 /*
@@ -220,11 +220,11 @@ void Quasars::init()
 	updateTimer = new QTimer(this);
 	updateTimer->setSingleShot(false);   // recurring check for update
 	updateTimer->setInterval(13000);     // check once every 13 seconds to see if it is time for an update
-	connect(updateTimer, SIGNAL(timeout()), this, SLOT(checkForUpdate()));
+	connect(updateTimer, &QTimer::timeout, this, &Quasars::checkForUpdate);
 	updateTimer->start();
 
-	connect(this, SIGNAL(jsonUpdateComplete(void)), this, SLOT(reloadCatalog()));
-	connect(StelApp::getInstance().getCore(), SIGNAL(configurationDataSaved()), this, SLOT(saveSettings()));
+	connect(this, &Quasars::jsonUpdateComplete, this, &Quasars::reloadCatalog);
+	connect(StelApp::getInstance().getCore(), &StelCore::configurationDataSaved, this, &Quasars::saveSettings);
 
 	GETSTELMODULE(StelObjectMgr)->registerStelObjectMgr(this);
 }
@@ -673,7 +673,7 @@ void Quasars::startDownload(const QString &urlString)
 	progressBar->setValue(0);
 	progressBar->setRange(0, 0);
 
-	connect(networkManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(downloadComplete(QNetworkReply*)));
+	connect(networkManager, &QNetworkAccessManager::finished, this, &Quasars::downloadComplete);
 	QNetworkRequest request;
 	request.setUrl(QUrl(updateUrl));
 	request.setRawHeader("User-Agent", StelUtils::getUserAgentString().toUtf8());
@@ -716,7 +716,7 @@ void Quasars::downloadComplete(QNetworkReply *reply)
 	if (reply == Q_NULLPTR)
 		return;
 
-	disconnect(networkManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(downloadComplete(QNetworkReply*)));
+	disconnect(networkManager, &QNetworkAccessManager::finished, this, &Quasars::downloadComplete);
 	deleteDownloadProgressBar();
 
 	if (reply->error() || reply->bytesAvailable()==0)

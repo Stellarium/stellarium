@@ -53,8 +53,8 @@ void SatellitesFilterDialog::createDialogContent()
 	ui->setupUi(dialog);
 
 	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
-	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
-	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
+	connect(ui->titleBar, &TitleBar::movedTo, this, &StelDialog::handleMovedTo);
+	connect(&StelApp::getInstance(), &StelApp::languageChanged, this, &SatellitesFilterDialog::retranslate);
 
 	connectBoolProperty(ui->inclinationCheckBox,  "Satellites.flagCFInclination");
 	connectDoubleProperty(ui->minInclination,     "Satellites.minCFInclination");
@@ -77,17 +77,17 @@ void SatellitesFilterDialog::createDialogContent()
 	connectBoolProperty(ui->stdMagnitudeCheckBox, "Satellites.flagCFKnownStdMagnitude");
 
 	updateMinMaxInclination(ui->inclinationCheckBox->isChecked());
-	connect(ui->inclinationCheckBox, SIGNAL(clicked(bool)), this, SLOT(updateMinMaxInclination(bool)));
+	connect(ui->inclinationCheckBox, &QCheckBox::clicked, this, &SatellitesFilterDialog::updateMinMaxInclination);
 	updateMinMaxApogee(ui->apogeeCheckBox->isChecked());
-	connect(ui->apogeeCheckBox, SIGNAL(clicked(bool)), this, SLOT(updateMinMaxApogee(bool)));
+	connect(ui->apogeeCheckBox, &QCheckBox::clicked, this, &SatellitesFilterDialog::updateMinMaxApogee);
 	updateMinMaxPerigee(ui->perigeeCheckBox->isChecked());
-	connect(ui->perigeeCheckBox, SIGNAL(clicked(bool)), this, SLOT(updateMinMaxPerigee(bool)));
+	connect(ui->perigeeCheckBox, &QCheckBox::clicked, this, &SatellitesFilterDialog::updateMinMaxPerigee);
 	updateMinMaxPeriod(ui->periodCheckBox->isChecked());
-	connect(ui->periodCheckBox, SIGNAL(clicked(bool)), this, SLOT(updateMinMaxPeriod(bool)));
+	connect(ui->periodCheckBox, &QCheckBox::clicked, this, &SatellitesFilterDialog::updateMinMaxPeriod);
 	updateMinMaxEccentricity(ui->eccentricityCheckBox->isChecked());
-	connect(ui->eccentricityCheckBox, SIGNAL(clicked(bool)), this, SLOT(updateMinMaxEccentricity(bool)));
+	connect(ui->eccentricityCheckBox, &QCheckBox::clicked, this, &SatellitesFilterDialog::updateMinMaxEccentricity);
 	updateMinMaxRCS(ui->rcsCheckBox->isChecked());
-	connect(ui->rcsCheckBox, SIGNAL(clicked(bool)), this, SLOT(updateMinMaxRCS(bool)));
+	connect(ui->rcsCheckBox, &QCheckBox::clicked, this, &SatellitesFilterDialog::updateMinMaxRCS);
 
 	populateTexts();
 }

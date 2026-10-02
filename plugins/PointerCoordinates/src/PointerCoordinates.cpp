@@ -110,7 +110,7 @@ void PointerCoordinates::init()
 #ifndef NO_GUI
 	addAction("actionShow_MousePointer_Coordinates_dialog", N_("Pointer Coordinates"), N_("Show settings dialog"), mainWindow, "visible");
 #endif
-	connect(StelApp::getInstance().getCore(), SIGNAL(configurationDataSaved()), this, SLOT(saveSettings()));
+	connect(StelApp::getInstance().getCore(), &StelCore::configurationDataSaved, this, &PointerCoordinates::saveSettings);
 
 	enableCoordinates(getFlagEnableAtStartup());
 	setFlagShowCoordinatesButton(flagShowCoordinatesButton);

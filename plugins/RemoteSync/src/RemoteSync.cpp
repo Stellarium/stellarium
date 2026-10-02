@@ -84,7 +84,7 @@ RemoteSync::RemoteSync()
 	conf = StelApp::getInstance().getSettings();
 
 	reconnectTimer.setSingleShot(true);
-	connect(&reconnectTimer, SIGNAL(timeout()), this, SLOT(connectToServer()));
+	connect(&reconnectTimer, &QTimer::timeout, this, &RemoteSync::connectToServer);
 
 	// There are a few unsynchronizable properties. They must be listed here!
 	propertyBlacklist.push_back("HipsMgr.surveys");
@@ -195,7 +195,7 @@ void RemoteSync::init()
 		connectToServer();
 	}
 
-	connect(StelApp::getInstance().getCore(), SIGNAL(configurationDataSaved()), this, SLOT(saveSettings()));
+	connect(StelApp::getInstance().getCore(), &StelCore::configurationDataSaved, this, &RemoteSync::saveSettings);
 }
 
 void RemoteSync::update(double deltaTime)
@@ -303,7 +303,7 @@ void RemoteSync::stopServer()
 {
 	if(state == SERVER)
 	{
-		connect(server, SIGNAL(serverStopped()), server, SLOT(deleteLater()));
+		connect(server, &SyncServer::serverStopped, server, &SyncServer::deleteLater);
 		server->stop();
 		server = nullptr;
 		setState(IDLE);
@@ -317,8 +317,8 @@ void RemoteSync::connectToServer()
 	if(state == IDLE || state == CLIENT_WAIT_RECONNECT)
 	{
 		client = new SyncClient(syncOptions, stelPropFilter, this);
-		connect(client, SIGNAL(connected()), this, SLOT(clientConnected()));
-		connect(client, SIGNAL(disconnected(bool)), this, SLOT(clientDisconnected(bool)));
+		connect(client, &SyncClient::connected, this, &RemoteSync::clientConnected);
+		connect(client, &SyncClient::disconnected, this, &RemoteSync::clientDisconnected);
 		setState(CLIENT_CONNECTING);
 		client->connectToServer(clientServerHost,clientServerPort);
 	}

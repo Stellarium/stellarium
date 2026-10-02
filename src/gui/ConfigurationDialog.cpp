@@ -429,7 +429,7 @@ void ConfigurationDialog::createDialogContent()
 
 	// Toolbar corner combobox (0=BL, 1=BR, 2=TL, 3=TR)
 	populateToolbarCornerComboBox();
-	connect(ui->toolbarCornerComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(setToolbarCorner(int)));
+	connect(ui->toolbarCornerComboBox, qOverload<int>(&QComboBox::currentIndexChanged), this, &ConfigurationDialog::setToolbarCorner);
 
 	// script tab controls
 	#ifdef ENABLE_SCRIPTING

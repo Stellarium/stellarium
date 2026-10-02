@@ -144,7 +144,7 @@ void SolarSystemEditor::init()
 	initMinorPlanetData();
 	initCometCrossref();
 
-	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(updateI18n()));
+	connect(&StelApp::getInstance(), &StelApp::languageChanged, this, &SolarSystemEditor::updateI18n);
 	isInitialized = true;
 
 	// key bindings and other actions
