@@ -2661,6 +2661,12 @@ void Satellites::updateFromOnlineSources()
 	// TRANSLATORS: The full phrase is 'Loading TLE %VALUE%/%MAX%' in progress bar
 	progressBar->setFormat(QString("%1 %v/%m").arg(q_("Loading TLE")));
 
+	QNetworkRequest request;
+	request.setRawHeader("User-Agent", StelUtils::getUserAgentString().toUtf8());
+	#if (QT_VERSION<QT_VERSION_CHECK(6,0,0))
+	request.setAttribute(QNetworkRequest::RedirectPolicyAttribute, true);
+	#endif
+
 	for (auto url : std::as_const(updateUrls))
 	{
 		TleSource source;
@@ -2680,7 +2686,8 @@ void Satellites::updateFromOnlineSources()
 		if (source.url.isValid())
 		{
 			updateSources.append(source);
-			downloadMgr->get(QNetworkRequest(source.url));
+			request.setUrl(source.url);
+			downloadMgr->get(request);
 		}
 	}
 }
