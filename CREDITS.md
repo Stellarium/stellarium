@@ -155,6 +155,8 @@
 	    taken from Project Pluto (GPL license).
 	2.7 The SpoutLibrary.dll and header from the SpoutSDK version 2.005 
 	    available at http://spout.zeal.co (BSD license).
+	2.8 The PSF point source rendering is based on ideas and a Python
+	    prototype by Askaniy Anpilogov.
 
 3. Data
 	3.1 The Hipparcos star catalog

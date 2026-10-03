@@ -32,6 +32,7 @@
 #include "StelObjectMgr.hpp"
 #include "StelPainter.hpp"
 #include "StelProjector.hpp"
+#include "StelSkyDrawer.hpp"
 #include "StelTextureMgr.hpp"
 #include "StelTranslator.hpp"
 #include "SolarSystem.hpp"
@@ -299,6 +300,7 @@ void Oculars::deinit()
 	settings->setValue("lens_index", selectedLensIndex);
 
 	StelCore *core = StelApp::getInstance().getCore();
+	disconnect(core, &StelCore::configurationDataSaved, this, &Oculars::saveStarSettings);
 	StelSkyDrawer *skyDrawer = core->getSkyDrawer();
 	disconnect(skyDrawer, SIGNAL(customStarMagLimitChanged(double)), this, SLOT(setMagLimitStarsOcularsManual(double)));
 	disconnect(skyDrawer, SIGNAL(flagStarMagnitudeLimitChanged(bool)), this, SLOT(handleStarMagLimitToggle(bool)));
@@ -307,8 +309,10 @@ void Oculars::deinit()
 		// Retrieve and restore star scales
 		relativeStarScaleCCD=skyDrawer->getRelativeStarScale();
 		absoluteStarScaleCCD=skyDrawer->getAbsoluteStarScale();
+		psfStarSettingsCCD=getPsfStarSettings(skyDrawer);
 		skyDrawer->setRelativeStarScale(relativeStarScaleMain);
 		skyDrawer->setAbsoluteStarScale(absoluteStarScaleMain);
+		applyPsfStarSettings(skyDrawer, psfStarSettingsMain);
 	}
 	else if (flagShowOculars)
 	{
@@ -324,14 +328,13 @@ void Oculars::deinit()
 		// Retrieve and restore star scales
 		relativeStarScaleOculars=skyDrawer->getRelativeStarScale();
 		absoluteStarScaleOculars=skyDrawer->getAbsoluteStarScale();
+		psfStarSettingsOculars=getPsfStarSettings(skyDrawer);
 		skyDrawer->setRelativeStarScale(relativeStarScaleMain);
 		skyDrawer->setAbsoluteStarScale(absoluteStarScaleMain);
+		applyPsfStarSettings(skyDrawer, psfStarSettingsMain);
 	}
 
-	settings->setValue("stars_scale_relative", QString::number(relativeStarScaleOculars, 'f', 2));
-	settings->setValue("stars_scale_absolute", QString::number(absoluteStarScaleOculars, 'f', 2));
-	settings->setValue("stars_scale_relative_ccd", QString::number(relativeStarScaleCCD, 'f', 2));
-	settings->setValue("stars_scale_absolute_ccd", QString::number(absoluteStarScaleCCD, 'f', 2));
+	saveStarProfiles();
 	settings->setValue("limit_stellar_magnitude_oculars_val", QString::number(magLimitStarsOculars, 'f', 2));
 	settings->setValue("limit_stellar_magnitude_oculars", flagLimitStarsOculars);
 	settings->setValue("text_color", textColor.toStr());
@@ -348,6 +351,67 @@ void Oculars::deinit()
 	protractorFlipVTexture.clear();
 	protractorFlipHTexture.clear();
 	protractorFlipHVTexture.clear();
+}
+
+void Oculars::saveStarSettings()
+{
+	if (!ready)
+		return;
+
+	if (flagShowOculars || flagShowCCD)
+	{
+		const StelSkyDrawer* skyDrawer = StelApp::getInstance().getCore()->getSkyDrawer();
+		if (flagShowCCD)
+		{
+			relativeStarScaleCCD = skyDrawer->getRelativeStarScale();
+			absoluteStarScaleCCD = skyDrawer->getAbsoluteStarScale();
+			psfStarSettingsCCD = getPsfStarSettings(skyDrawer);
+		}
+		else
+		{
+			relativeStarScaleOculars = skyDrawer->getRelativeStarScale();
+			absoluteStarScaleOculars = skyDrawer->getAbsoluteStarScale();
+			psfStarSettingsOculars = getPsfStarSettings(skyDrawer);
+		}
+
+		// ConfigurationDialog has just saved the active view. Keep the main
+		// profile in config.ini without changing the view or emitting signals.
+		QSettings* conf = StelApp::getInstance().getSettings();
+		conf->setValue("stars/relative_scale", QString::number(relativeStarScaleMain, 'f', 2));
+		conf->setValue("stars/absolute_scale", QString::number(absoluteStarScaleMain, 'f', 2));
+		conf->setValue("stars/flag_psf_projection_correction", psfStarSettingsMain.projectionCorrection);
+		conf->setValue("stars/psf_star_point_radius", QString::number(psfStarSettingsMain.pointRadius, 'f', 2));
+		conf->setValue("stars/psf_star_flare_decay", QString::number(psfStarSettingsMain.flareDecay, 'f', 3));
+		conf->setValue("stars/psf_star_flare_strength", QString::number(psfStarSettingsMain.flareStrength, 'f', 2));
+		conf->setValue("stars/psf_star_bright_source_mag_limit", QString::number(psfStarSettingsMain.brightSourceMagLimit, 'f', 1));
+		conf->setValue("stars/psf_moon_glare_reduction", QString::number(psfStarSettingsMain.moonGlareReduction, 'f', 2));
+		conf->setValue("stars/flag_psf_moon_halo_texture", psfStarSettingsMain.moonHaloTexture);
+	}
+
+	saveStarProfiles();
+	settings->sync();
+}
+
+void Oculars::saveStarProfiles()
+{
+	settings->setValue("stars_scale_relative", QString::number(relativeStarScaleOculars, 'f', 2));
+	settings->setValue("stars_scale_absolute", QString::number(absoluteStarScaleOculars, 'f', 2));
+	settings->setValue("stars_scale_relative_ccd", QString::number(relativeStarScaleCCD, 'f', 2));
+	settings->setValue("stars_scale_absolute_ccd", QString::number(absoluteStarScaleCCD, 'f', 2));
+	settings->setValue("psf_star_projection_correction", psfStarSettingsOculars.projectionCorrection);
+	settings->setValue("psf_star_point_radius", QString::number(psfStarSettingsOculars.pointRadius, 'f', 2));
+	settings->setValue("psf_star_flare_decay", QString::number(psfStarSettingsOculars.flareDecay, 'f', 3));
+	settings->setValue("psf_star_flare_strength", QString::number(psfStarSettingsOculars.flareStrength, 'f', 2));
+	settings->setValue("psf_star_bright_source_mag_limit", QString::number(psfStarSettingsOculars.brightSourceMagLimit, 'f', 1));
+	settings->setValue("psf_moon_glare_reduction", QString::number(psfStarSettingsOculars.moonGlareReduction, 'f', 2));
+	settings->setValue("flag_psf_moon_halo_texture", psfStarSettingsOculars.moonHaloTexture);
+	settings->setValue("psf_star_projection_correction_ccd", psfStarSettingsCCD.projectionCorrection);
+	settings->setValue("psf_star_point_radius_ccd", QString::number(psfStarSettingsCCD.pointRadius, 'f', 2));
+	settings->setValue("psf_star_flare_decay_ccd", QString::number(psfStarSettingsCCD.flareDecay, 'f', 3));
+	settings->setValue("psf_star_flare_strength_ccd", QString::number(psfStarSettingsCCD.flareStrength, 'f', 2));
+	settings->setValue("psf_star_bright_source_mag_limit_ccd", QString::number(psfStarSettingsCCD.brightSourceMagLimit, 'f', 1));
+	settings->setValue("psf_moon_glare_reduction_ccd", QString::number(psfStarSettingsCCD.moonGlareReduction, 'f', 2));
+	settings->setValue("flag_psf_moon_halo_texture_ccd", psfStarSettingsCCD.moonHaloTexture);
 }
 
 void Oculars::setFontSize(const int fontSize, const int guiPanelFontSize)
@@ -670,6 +734,20 @@ void Oculars::init()
 		absoluteStarScaleOculars=settings->value("stars_scale_absolute", 1.0).toDouble();
 		relativeStarScaleCCD=settings->value("stars_scale_relative_ccd", 1.0).toDouble();
 		absoluteStarScaleCCD=settings->value("stars_scale_absolute_ccd", 1.0).toDouble();
+		psfStarSettingsOculars.projectionCorrection=settings->value("psf_star_projection_correction", false).toBool();
+		psfStarSettingsOculars.pointRadius=settings->value("psf_star_point_radius", 1.5).toDouble();
+		psfStarSettingsOculars.flareDecay=settings->value("psf_star_flare_decay", 0.1).toDouble();
+		psfStarSettingsOculars.flareStrength=settings->value("psf_star_flare_strength", 1.0).toDouble();
+		psfStarSettingsOculars.brightSourceMagLimit=settings->value("psf_star_bright_source_mag_limit", -8.5).toDouble();
+		psfStarSettingsOculars.moonGlareReduction=settings->value("psf_moon_glare_reduction", 0.85).toDouble();
+		psfStarSettingsOculars.moonHaloTexture=settings->value("flag_psf_moon_halo_texture", true).toBool();
+		psfStarSettingsCCD.projectionCorrection=settings->value("psf_star_projection_correction_ccd", false).toBool();
+		psfStarSettingsCCD.pointRadius=settings->value("psf_star_point_radius_ccd", 1.5).toDouble();
+		psfStarSettingsCCD.flareDecay=settings->value("psf_star_flare_decay_ccd", 0.1).toDouble();
+		psfStarSettingsCCD.flareStrength=settings->value("psf_star_flare_strength_ccd", 1.0).toDouble();
+		psfStarSettingsCCD.brightSourceMagLimit=settings->value("psf_star_bright_source_mag_limit_ccd", -8.5).toDouble();
+		psfStarSettingsCCD.moonGlareReduction=settings->value("psf_moon_glare_reduction_ccd", 0.85).toDouble();
+		psfStarSettingsCCD.moonHaloTexture=settings->value("flag_psf_moon_halo_texture_ccd", true).toBool();
 		setFlagShowCcdCropOverlay(settings->value("show_ccd_crop_overlay", false).toBool());
 		setFlagShowCcdCropOverlayPixelGrid(settings-> value("ccd_crop_overlay_pixel_grid",false).toBool());
 		setCcdCropOverlayHSize(settings->value("ccd_crop_overlay_hsize", DEFAULT_CCD_CROP_OVERLAY_SIZE).toInt());
@@ -700,6 +778,7 @@ void Oculars::init()
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslateGui()));
 	connect(this, SIGNAL(selectedOcularChanged(int)), this, SLOT(updateOcularReticle()));
 	StelCore *core = StelApp::getInstance().getCore();
+	connect(core, &StelCore::configurationDataSaved, this, &Oculars::saveStarSettings);
 	StelSkyDrawer *skyDrawer = core->getSkyDrawer();
 	connect(skyDrawer, SIGNAL(flagStarMagnitudeLimitChanged(bool)), this, SLOT(handleStarMagLimitToggle(bool)));
 	StelObjectMgr* objectMgr = GETSTELMODULE(StelObjectMgr);
@@ -1458,8 +1537,10 @@ void Oculars::toggleCCD(bool show)
 		// Change scales for stars. (Even restoring from ocular view has restored main program's values at this point.)
 		relativeStarScaleMain=skyDrawer->getRelativeStarScale();
 		absoluteStarScaleMain=skyDrawer->getAbsoluteStarScale();
+		psfStarSettingsMain=getPsfStarSettings(skyDrawer);
 		skyDrawer->setRelativeStarScale(relativeStarScaleCCD);
 		skyDrawer->setAbsoluteStarScale(absoluteStarScaleCCD);
+		applyPsfStarSettings(skyDrawer, psfStarSettingsCCD);
 
 #ifndef NO_GUI
 		if (guiPanel)
@@ -1475,8 +1556,10 @@ void Oculars::toggleCCD(bool show)
 		// Restore star scales
 		relativeStarScaleCCD=skyDrawer->getRelativeStarScale();
 		absoluteStarScaleCCD=skyDrawer->getAbsoluteStarScale();
+		psfStarSettingsCCD=getPsfStarSettings(skyDrawer);
 		skyDrawer->setRelativeStarScale(relativeStarScaleMain);
 		skyDrawer->setAbsoluteStarScale(absoluteStarScaleMain);
+		applyPsfStarSettings(skyDrawer, psfStarSettingsMain);
 		//Zoom out
 		if (getFlagInitFovUsage())
 			movementManager->zoomTo(movementManager->getInitFov());
@@ -2560,8 +2643,10 @@ void Oculars::unzoomOcular()
 	skyDrawer->setFlagStarMagnitudeLimit(flagLimitStarsMain);
 	relativeStarScaleOculars=skyDrawer->getRelativeStarScale();
 	absoluteStarScaleOculars=skyDrawer->getAbsoluteStarScale();
+	psfStarSettingsOculars=getPsfStarSettings(skyDrawer);
 	skyDrawer->setRelativeStarScale(relativeStarScaleMain);
 	skyDrawer->setAbsoluteStarScale(absoluteStarScaleMain);
+	applyPsfStarSettings(skyDrawer, psfStarSettingsMain);
 	skyDrawer->setFlagLuminanceAdaptation(flagAdaptationMain);
 	skyDrawer->setFlagPlanetMagnitudeLimit(flagLimitPlanetsMain);
 	skyDrawer->setFlagNebulaMagnitudeLimit(flagLimitDSOsMain);
@@ -2627,6 +2712,7 @@ void Oculars::zoom(bool zoomedIn)
 			magLimitDSOsMain	= skyDrawer->getCustomNebulaMagnitudeLimit();
 			relativeStarScaleMain	= skyDrawer->getRelativeStarScale();
 			absoluteStarScaleMain	= skyDrawer->getAbsoluteStarScale();
+			psfStarSettingsMain	= getPsfStarSettings(skyDrawer);
 
 			flagMoonScaleMain        = propMgr->getStelPropertyValue("SolarSystem.flagMoonScale").toBool();
 			flagMinorBodiesScaleMain = propMgr->getStelPropertyValue("SolarSystem.flagMinorBodyScale").toBool();
@@ -2734,9 +2820,11 @@ void Oculars::zoomOcular()
 
 	// Change relative and absolute scales for stars
 	relativeStarScaleMain=skyDrawer->getRelativeStarScale();
-	skyDrawer->setRelativeStarScale(relativeStarScaleOculars);
 	absoluteStarScaleMain=skyDrawer->getAbsoluteStarScale();
+	psfStarSettingsMain=getPsfStarSettings(skyDrawer);
+	skyDrawer->setRelativeStarScale(relativeStarScaleOculars);
 	skyDrawer->setAbsoluteStarScale(absoluteStarScaleOculars);
+	applyPsfStarSettings(skyDrawer, psfStarSettingsOculars);
 
 	// Limit stars and DSOs	magnitude. Either compute limiting magnitude for the telescope/ocular,
 	// or just use the custom oculars mode value.
@@ -3361,6 +3449,30 @@ void Oculars::togglePixelGrid()
 void Oculars::toggleFocuserOverlay()
 {
 	setFlagShowFocuserOverlay(!getFlagShowFocuserOverlay());
+}
+
+Oculars::PsfStarSettings Oculars::getPsfStarSettings(const StelSkyDrawer* skyDrawer)
+{
+	PsfStarSettings settings;
+	settings.projectionCorrection = skyDrawer->getFlagPsfStarProjectionCorrection();
+	settings.pointRadius = skyDrawer->getPsfStarPointRadius();
+	settings.flareDecay = skyDrawer->getPsfStarFlareDecay();
+	settings.flareStrength = skyDrawer->getPsfStarFlareStrength();
+	settings.brightSourceMagLimit = skyDrawer->getPsfStarBrightSourceMagLimit();
+	settings.moonGlareReduction = skyDrawer->getPsfMoonGlareReduction();
+	settings.moonHaloTexture = skyDrawer->getFlagPsfMoonHaloTexture();
+	return settings;
+}
+
+void Oculars::applyPsfStarSettings(StelSkyDrawer* skyDrawer, const PsfStarSettings& settings)
+{
+	skyDrawer->setFlagPsfStarProjectionCorrection(settings.projectionCorrection);
+	skyDrawer->setPsfStarPointRadius(settings.pointRadius);
+	skyDrawer->setPsfStarFlareDecay(settings.flareDecay);
+	skyDrawer->setPsfStarFlareStrength(settings.flareStrength);
+	skyDrawer->setPsfStarBrightSourceMagLimit(settings.brightSourceMagLimit);
+	skyDrawer->setPsfMoonGlareReduction(settings.moonGlareReduction);
+	skyDrawer->setFlagPsfMoonHaloTexture(settings.moonHaloTexture);
 }
 
 double Oculars::computeLimitMagnitude(Ocular *ocular, Telescope *telescope)
