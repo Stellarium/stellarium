@@ -1902,6 +1902,29 @@ float LandscapeMgr::getLuminance() const
 	return atmosphere->getRealDisplayIntensityFactor();
 }
 
+bool LandscapeMgr::isAtmosphereLocalLuminanceAvailable() const
+{
+	const auto core = StelApp::getInstance().getCore();
+	return atmosphere && !loadingAtmosphere && !needToRecreateAtmosphere &&
+	       !atmosphereNoScatter && core->getFlagClearSky() &&
+	       core->getCurrentPlanet()->getPlanetType() != Planet::isObserver &&
+	       atmosphere->isLocalLuminanceAvailable();
+}
+
+bool LandscapeMgr::getAtmosphereLocalLuminance(const Vec2f& screenPos, float& luminance) const
+{
+	if (!isAtmosphereLocalLuminanceAvailable() || !std::isfinite(screenPos[0]) || !std::isfinite(screenPos[1]))
+		return false;
+	const auto prj = StelApp::getInstance().getCore()->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
+	const auto vp = prj->getViewport();
+	Vec3d direction;
+	if (screenPos[0] < vp[0] || screenPos[0] >= vp[0]+vp[2] ||
+	    screenPos[1] < vp[1] || screenPos[1] >= vp[1]+vp[3] ||
+	    !prj->unProject(screenPos[0], screenPos[1], direction))
+		return false;
+	return atmosphere->getLocalLuminance(screenPos, luminance);
+}
+
 float LandscapeMgr::getAtmosphereAverageLuminance() const
 {
 	return atmosphere->getAverageLuminance();

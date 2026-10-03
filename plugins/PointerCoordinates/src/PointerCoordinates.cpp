@@ -31,10 +31,12 @@
 #endif
 #include "StelUtils.hpp"
 #include "SolarSystem.hpp"
+#include "LandscapeMgr.hpp"
 #include "PointerCoordinates.hpp"
 #include "PointerCoordinatesWindow.hpp"
 #include "planetsephems/precession.h"
 
+#include <QLocale>
 #include <QFont>
 #include <QFontMetrics>
 #include <QSettings>
@@ -112,6 +114,12 @@ void PointerCoordinates::init()
 #endif
 	connect(StelApp::getInstance().getCore(), SIGNAL(configurationDataSaved()), this, SLOT(saveSettings()));
 
+	connect(GETSTELMODULE(LandscapeMgr), &LandscapeMgr::atmosphereModelChanged, this, [this]()
+	{
+		skyLuminanceAvailable = false;
+		luminanceSampleTimer.invalidate();
+	});
+
 	enableCoordinates(getFlagEnableAtStartup());
 	setFlagShowCoordinatesButton(flagShowCoordinatesButton);
 	setFlagShowConstellation(flagShowConstellation);
@@ -144,7 +152,6 @@ void PointerCoordinates::draw(StelCore *core)
 	QString coordsSystem, cxt, cyt;
 	double cx, cy;
 	float ppx = static_cast<float>(params.devicePixelsPerPixel);
-	int x, y;
 	switch (getCurrentCoordinateSystem())
 	{
 		case RaDecJ2000:
@@ -316,15 +323,7 @@ void PointerCoordinates::draw(StelCore *core)
 		constel=QString(" (%1)").arg(core->getIAUConstellation(core->j2000ToEquinoxEqu(mousePosition)));
 	}
 	QString coordsText = QString("%1: %2/%3%4").arg(coordsSystem, cxt, cyt, constel);
-	QPair<int, int>coordPlace=getCoordinatesPlace(coordsText);
-	x = coordPlace.first;
-	y = coordPlace.second;
-	if (getCurrentCoordinatesPlace()!=Custom)
-	{
-		x *= ppx;
-		y *= ppx;
-	}
-	sPainter.drawText(x, y, coordsText);
+	QStringList lines{coordsText};
 
 	if (flagShowElongation)
 	{
@@ -352,11 +351,40 @@ void PointerCoordinates::draw(StelCore *core)
 		else
 			dLam = StelUtils::decDegToLongitudeStr(elongationDecDeg);
 
-		coordsText = QString("%1: %2").arg(q_("Elong. in Ecl.Long."), dLam);
-		y = getCoordinatesPlace(coordsText, 2).second;
-		if (getCurrentCoordinatesPlace()!=Custom)
-			y *= ppx;
-		sPainter.drawText(x, y, coordsText);
+		lines << QString("%1: %2").arg(q_("Elong. in Ecl.Long."), dLam);
+	}
+
+	if (flagShowSkyLuminance)
+	{
+		const auto landscape = GETSTELMODULE(LandscapeMgr);
+		if (!landscape->isAtmosphereLocalLuminanceAvailable())
+		{
+			skyLuminanceAvailable = false;
+			luminanceSampleTimer.invalidate();
+		}
+		else if (!luminanceSampleTimer.isValid() || luminanceSampleTimer.elapsed() >= 200)
+		{
+			// An information display: hold each sample for at most 200 ms, even when
+			// the pointer moves. No sampling while this option or the plugin is off.
+			// Use the physical mouse pixel directly, avoiding refraction/reprojection.
+			const auto& view = StelMainView::getInstance();
+			const QPoint mouse = view.getMousePos();
+			// Sample the physical pixel centre, as the atmosphere fragment shaders do.
+			const Vec2f screenPos(std::floor(mouse.x()*ppx)+0.5f,
+			                      std::round(view.viewport()->height()*ppx)-std::floor(mouse.y()*ppx)-0.5f);
+			skyLuminanceAvailable = landscape->getAtmosphereLocalLuminance(screenPos, skyLuminance);
+			luminanceSampleTimer.start();
+		}
+		const QString value = skyLuminanceAvailable
+		        ? QString("%1 cd/m²").arg(QLocale().toString(skyLuminance, 'g', 5)) : q_("n/a");
+		lines << QString("%1: %2").arg(q_("Sky luminance"), value);
+	}
+
+	for (int i=0; i<lines.size(); ++i)
+	{
+		const auto place = getCoordinatesPlace(lines[i], i+1);
+		const float scale = getCurrentCoordinatesPlace() == Custom ? 1.f : ppx;
+		sPainter.drawText(place.first*scale, place.second*scale, lines[i]);
 	}
 
 	if (flagShowCrossedLines)
@@ -367,11 +395,24 @@ void PointerCoordinates::draw(StelCore *core)
 	}
 }
 
+void PointerCoordinates::setFlagShowSkyLuminance(bool b)
+{
+	if (flagShowSkyLuminance != b)
+	{
+		flagShowSkyLuminance = b;
+		skyLuminanceAvailable = false;
+		luminanceSampleTimer.invalidate();
+		emit flagShowSkyLuminanceChanged(b);
+	}
+}
+
 void PointerCoordinates::enableCoordinates(bool b)
 {
 	if (b!=flagShowCoordinates)
 	{
 		flagShowCoordinates = b;
+		skyLuminanceAvailable = false;
+		luminanceSampleTimer.invalidate();
 		emit flagCoordinatesVisibilityChanged(b);
 	}
 }
@@ -426,6 +467,7 @@ void PointerCoordinates::loadConfiguration(void)
 	flagShowConstellation = conf->value("flag_show_constellation", false).toBool();
 	flagShowCrossedLines = conf->value("flag_show_crossed_lines", false).toBool();
 	flagShowElongation = conf->value("flag_show_elongation", false).toBool();
+	setFlagShowSkyLuminance(conf->value("flag_show_sky_luminance", false).toBool());
 
 	conf->endGroup();
 }
@@ -445,6 +487,7 @@ void PointerCoordinates::saveConfiguration(void)
 	conf->setValue("flag_show_constellation", getFlagShowConstellation());
 	conf->setValue("flag_show_crossed_lines", getFlagShowCrossedLines());
 	conf->setValue("flag_show_elongation", getFlagShowElongation());
+	conf->setValue("flag_show_sky_luminance", getFlagShowSkyLuminance());
 
 	conf->endGroup();
 }
@@ -513,13 +556,15 @@ QString PointerCoordinates::getCurrentCoordinateSystemKey() const
 
 QPair<int, int> PointerCoordinates::getCoordinatesPlace(const QString &text, int line)
 {
-	int height, x = 0, y = 0, shift = 0;
+	int x = 0, y = 0;
 	static const float coeff = 1.5;
 	QFont font=QGuiApplication::font();
 	font.setPixelSize(fontSize);
 	QFontMetrics fm(font);
 	const QSize fs = fm.size(Qt::TextSingleLine, text);
-	height = (line>1) ? static_cast<int>((line-1)*fs.height() + fs.height()*coeff) : static_cast<int>(fs.height()*coeff);
+	const int spacing = fm.lineSpacing();
+	const int offset = (line-1)*spacing;
+	const int height = static_cast<int>(fm.height()*coeff)+offset;
 	StelProjector::StelProjectorParams params = StelApp::getInstance().getCore()->getCurrentStelProjectorParams();
 
 	switch(getCurrentCoordinatesPlace())
@@ -539,22 +584,21 @@ QPair<int, int> PointerCoordinates::getCoordinatesPlace(const QString &text, int
 		case RightBottomCorner:
 		{
 			x = params.viewportXywh[2] - static_cast<int>(fs.width() + 10*coeff);
-			y = line*fs.height();
+			y = fm.height()+offset;
 			break;
 		}
 		case NearMouseCursor:
 		{
 			QPoint m = StelMainView::getInstance().getMousePos();
 			x = m.x() + 3;
-			if (line>1) { shift = line*fs.height() - fs.height(); }
-			y = params.viewportXywh[3] - m.y() + 5 - shift;
+			y = params.viewportXywh[3] - m.y() + 5 - offset;
 			break;
 		}
 		case Custom:
 		{
 			QPair<int, int> xy = getCustomCoordinatesPlace();
 			x = xy.first;
-			y = params.viewportXywh[3] - xy.second - line*fs.height();
+			y = params.viewportXywh[3] - xy.second - fm.height() - offset;
 			break;
 		}
 	}

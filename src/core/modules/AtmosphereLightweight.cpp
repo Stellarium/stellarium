@@ -36,6 +36,8 @@
 #include <QDebug>
 #include <QOpenGLShaderProgram>
 #include <QOpenGLFramebufferObject>
+#include <QOpenGLExtraFunctions>
+#include <qfloat16.h>
 
 namespace
 {
@@ -634,6 +636,7 @@ void AtmosphereLightweight::computeColor(StelCore* core, const double JD, const 
                                          const Planet*const moon, const StelLocation& location, const float temperature,
                                          const float relativeHumidity, const float extinctionCoefficient, const bool noScatter)
 {
+	localLuminanceValid = false;
 	Q_UNUSED(JD)
 	Q_UNUSED(currentPlanet)
 	Q_UNUSED(location)
@@ -715,6 +718,127 @@ void AtmosphereLightweight::computeColor(StelCore* core, const double JD, const 
 
 	GL(gl.glBindFramebuffer(GL_FRAMEBUFFER, origFBO));
 	GL(gl.glViewport(origViewport[0], origViewport[1], origViewport[2], origViewport[3]));
+	localLuminanceValid = core->getFlagClearSky();
+}
+
+bool AtmosphereLightweight::getLocalLuminance(const Vec2f& screenPos, float& luminance)
+{
+	if (!isLocalLuminanceAvailable()) return false;
+	const auto core = StelApp::getInstance().getCore();
+	const auto prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
+	const auto vp = prj->getViewport();
+	Vec3d direction;
+	if (!std::isfinite(screenPos[0]) || !std::isfinite(screenPos[1]) ||
+	    screenPos[0] < vp[0] || screenPos[0] >= vp[0]+vp[2] ||
+	    screenPos[1] < vp[1] || screenPos[1] >= vp[1]+vp[3] ||
+	    !prj->unProject(screenPos[0], screenPos[1], direction))
+		return false;
+	direction.normalize();
+	const double elevation = std::asin(std::clamp(direction[2], -1., 1.));
+	const double ty = std::clamp(std::sqrt(std::abs(elevation/M_PI_2))*PREP_FBO_HEIGHT-0.5, 0., double(PREP_FBO_HEIGHT-1));
+	const int y = static_cast<int>(ty), height = std::min(2, PREP_FBO_HEIGHT-y);
+	const float fy = ty-y;
+
+	// The existing 128x128 RGBA8 luminanceProbeFBO_ is intended for averaging:
+	// its coarse screen grid and quantization can erase faint directional contributions.
+	// Instead read at most 2x2 texels from each existing preparation FBO and reproduce
+	// the render shader's GL_LINEAR sampling, sqrt decoding and physical scale. No
+	// atmosphere is rendered for this query, and no framebuffer is allocated.
+	auto& gl = *QOpenGLContext::currentContext()->extraFunctions();
+	const auto& info = StelMainView::getInstance().getGLInformation();
+	const bool es2 = info.isGLES && info.majorVersion == 2;
+	const GLenum target = es2 ? GL_FRAMEBUFFER : GL_READ_FRAMEBUFFER;
+	GLint oldFBO, oldAlignment;
+	gl.glGetIntegerv(es2 ? GL_FRAMEBUFFER_BINDING : GL_READ_FRAMEBUFFER_BINDING, &oldFBO);
+	gl.glGetIntegerv(GL_PACK_ALIGNMENT, &oldAlignment);
+	GLint oldPackBuffer = 0, oldRowLength = 0, oldSkipRows = 0, oldSkipPixels = 0;
+	if (!es2)
+	{
+		gl.glGetIntegerv(GL_PIXEL_PACK_BUFFER_BINDING, &oldPackBuffer);
+		gl.glGetIntegerv(GL_PACK_ROW_LENGTH, &oldRowLength);
+		gl.glGetIntegerv(GL_PACK_SKIP_ROWS, &oldSkipRows);
+		gl.glGetIntegerv(GL_PACK_SKIP_PIXELS, &oldSkipPixels);
+		gl.glBindBuffer(GL_PIXEL_PACK_BUFFER, 0);
+		gl.glPixelStorei(GL_PACK_ROW_LENGTH, 0);
+		gl.glPixelStorei(GL_PACK_SKIP_ROWS, 0);
+		gl.glPixelStorei(GL_PACK_SKIP_PIXELS, 0);
+	}
+#if !QT_CONFIG(opengles2)
+	GLint oldSwapBytes = GL_FALSE;
+	if (!info.isGLES)
+	{
+		gl.glGetIntegerv(GL_PACK_SWAP_BYTES, &oldSwapBytes);
+		gl.glPixelStorei(GL_PACK_SWAP_BYTES, GL_FALSE);
+	}
+#endif
+	gl.glPixelStorei(GL_PACK_ALIGNMENT, 1);
+
+	const bool ok = [&]()
+	{
+		luminance = 0.f;
+		for (const auto& p : drawParams)
+		{
+			if (p.relativeBrightness == 0.f) continue;
+			const double normXY = std::sqrt((direction[0]*direction[0]+direction[1]*direction[1]) *
+			                               (p.dir.x()*p.dir.x()+p.dir.y()*p.dir.y()));
+			if (!(normXY > 0.)) return false;
+			const double azimuth = std::acos(std::clamp((direction[0]*p.dir.x()+direction[1]*p.dir.y())/normXY, -1., 1.));
+			const double tx = std::clamp(azimuth/M_PI*PREP_FBO_WIDTH-0.5, 0., double(PREP_FBO_WIDTH-1));
+			const int x = static_cast<int>(tx);
+			const int width = std::min(2, PREP_FBO_WIDTH-x);
+			gl.glBindFramebuffer(target, p.fbo->handle());
+			if (!es2) gl.glReadBuffer(GL_COLOR_ATTACHMENT0);
+			GLint type = es2 ? GL_UNSIGNED_BYTE : GL_FLOAT;
+			if (info.isGLES && !es2)
+			{
+				// ES floating-point read formats are implementation-dependent.
+				GLint format;
+				gl.glGetIntegerv(GL_IMPLEMENTATION_COLOR_READ_FORMAT, &format);
+				gl.glGetIntegerv(GL_IMPLEMENTATION_COLOR_READ_TYPE, &type);
+				if (format != GL_RGBA) return false;
+			}
+			float pixels[16] = {};
+			if (type == GL_FLOAT)
+				gl.glReadPixels(x, y, width, height, GL_RGBA, GL_FLOAT, pixels);
+			else if (type == GL_UNSIGNED_BYTE)
+			{
+				GLubyte bytes[16] = {};
+				gl.glReadPixels(x, y, width, height, GL_RGBA, GL_UNSIGNED_BYTE, bytes);
+				for (int i=0; i<16; ++i) pixels[i] = bytes[i]/255.f;
+			}
+			else if (type == GL_HALF_FLOAT)
+			{
+				qfloat16 halves[16] = {};
+				gl.glReadPixels(x, y, width, height, GL_RGBA, GL_HALF_FLOAT, halves);
+				for (int i=0; i<16; ++i) pixels[i] = static_cast<float>(halves[i]);
+			}
+			else return false;
+			if (gl.glGetError() != GL_NO_ERROR) return false;
+			const float fx = tx-x;
+			const float lower = pixels[2]*(1.f-fx) + pixels[4*(width-1)+2]*fx;
+			const float upper = pixels[4*width*(height-1)+2]*(1.f-fx) + pixels[4*(width*height-1)+2]*fx;
+			const float encodedY = lower*(1.f-fy) + upper*fy;
+			const float maxValue = std::max(layerValueMaxima_[p.layerToDrawA], layerValueMaxima_[p.layerToDrawB]);
+			luminance += encodedY*encodedY * p.fboColorScale * p.relativeBrightness * p.eclipseFactor * maxValue;
+		}
+		// Pollution and 0.0001 cd/m² background currently enter only this model's
+		// average luminance, not its render shader. Do not invent those terms here.
+		return std::isfinite(luminance) && luminance >= 0.f;
+	}();
+
+	gl.glBindFramebuffer(target, oldFBO);
+	gl.glPixelStorei(GL_PACK_ALIGNMENT, oldAlignment);
+#if !QT_CONFIG(opengles2)
+	if (!info.isGLES) gl.glPixelStorei(GL_PACK_SWAP_BYTES, oldSwapBytes);
+#endif
+	if (!es2)
+	{
+		gl.glBindBuffer(GL_PIXEL_PACK_BUFFER, oldPackBuffer);
+		gl.glPixelStorei(GL_PACK_ROW_LENGTH, oldRowLength);
+		gl.glPixelStorei(GL_PACK_SKIP_ROWS, oldSkipRows);
+		gl.glPixelStorei(GL_PACK_SKIP_PIXELS, oldSkipPixels);
+	}
+	return ok;
 }
 
 void AtmosphereLightweight::applyToneReproducerParams(StelCore* core, const float atmosphereIntensity)
