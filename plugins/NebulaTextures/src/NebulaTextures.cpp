@@ -59,8 +59,8 @@ NebulaTextures::NebulaTextures()
 {
 	setObjectName("NebulaTextures");
 	configDialog = new NebulaTexturesDialog();
-	connect(StelApp::getInstance().getModule("StelSkyLayerMgr"),
-			SIGNAL(collectionLoaded()),configDialog,SLOT(initializeRefreshIfNeeded()));
+	const auto skyLayerMgr = GETSTELMODULE(StelSkyLayerMgr);
+	connect(skyLayerMgr, &StelSkyLayerMgr::collectionLoaded, configDialog, &NebulaTexturesDialog::initializeRefreshIfNeeded);
 }
 
 // Destructor for NebulaTextures, cleaning up resources if necessary.
