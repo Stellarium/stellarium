@@ -1,0 +1,379 @@
+[
+    {
+        "name": "getPropertyList",
+        "category": "Property Registry - Query",
+        "signature": "QStringList getPropertyList()",
+        "description": "Returns a list of all registered StelProperty IDs. Each ID follows the format 'ModuleName.propertyName' for properties automatically registered from StelModule objects, or a custom ID for manually registered properties. This is the primary function for discovering what properties are available in the current Stellarium session.",
+        "parameters": [],
+        "returnType": "QStringList",
+        "returnDescription": "List of all registered property ID strings",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "Works on all Stellarium versions with StelProperty system (introduced in 0.15)"
+        },
+        "example": "// Get reference to the Property Manager\nvar StelPropertyMgr = StelApp.getStelPropertyManager();\n\n// Get all available property IDs\nvar props = StelPropertyMgr.getPropertyList();\ncore.debug(\"Total registered properties: \" + props.length);\n\n// Print the first 20 properties\nfor(var i = 0; i < Math.min(20, props.length); i++) {\n    core.debug(props[i]);\n}\n\n// Find all properties related to stars\nvar starProps = [];\nfor(var i = 0; i < props.length; i++) {\n    if(props[i].indexOf(\"Star\") >= 0 || props[i].indexOf(\"star\") >= 0) {\n        starProps.push(props[i]);\n    }\n}\ncore.debug(\"Star-related properties: \" + starProps.length);"
+    },
+    {
+        "name": "getAllProperties",
+        "category": "Property Registry - Query",
+        "signature": "QList<StelProperty*> getAllProperties()",
+        "description": "Returns a list of pointers to all registered StelProperty objects. This provides direct access to each property's methods (getId, getValue, setValue, isReadOnly, etc.) for more detailed property manipulation.",
+        "parameters": [],
+        "returnType": "QList<StelProperty*>",
+        "returnDescription": "List of all registered StelProperty object pointers",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "Works on all Stellarium versions with StelProperty system"
+        },
+        "example": "// Get reference to the Property Manager\nvar StelPropertyMgr = StelApp.getStelPropertyManager();\n\n// Enumerate all properties with their values and types\nvar allProps = StelPropertyMgr.getAllProperties();\ncore.debug(\"All properties count: \" + allProps.length);\n\n// Analyze each property\nfor(var i = 0; i < Math.min(10, allProps.length); i++) {\n    var prop = allProps[i];\n    core.debug(\"Property: \" + prop.getId() + \", Value: \" + prop.getValue() + \", ReadOnly: \" + prop.isReadOnly());\n}\n\n// Find all writable properties\nvar writableProps = [];\nfor(var i = 0; i < allProps.length; i++) {\n    if(!allProps[i].isReadOnly()) {\n        writableProps.push(allProps[i].getId());\n    }\n}\ncore.debug(\"Writable properties: \" + writableProps.length);"
+    },
+    {
+        "name": "getProperty",
+        "category": "Property Registry - Query",
+        "signature": "StelProperty* getProperty(QString id, bool noWarning=false)",
+        "description": "Returns a pointer to the StelProperty object with the specified ID. If the property is not found, a warning is logged unless noWarning is set to true. Use this to get direct access to a specific property's methods for reading, writing, or monitoring changes.",
+        "parameters": [
+            {
+                "name": "id",
+                "type": "QString",
+                "description": "The unique property ID (e.g., 'MilkyWay.intensity', 'ConstellationMgr.flagLines')",
+                "required": true
+            },
+            {
+                "name": "noWarning",
+                "type": "bool",
+                "description": "If true, suppresses the warning message when property is not found (useful for plugins that may not be loaded)",
+                "required": false,
+                "default": "false"
+            }
+        ],
+        "returnType": "StelProperty*",
+        "returnDescription": "Pointer to the StelProperty object, or null if not found",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "Works on all Stellarium versions with StelProperty system"
+        },
+        "example": "// Get reference to the Property Manager\nvar StelPropertyMgr = StelApp.getStelPropertyManager();\n\n// Get a specific property and examine it\nvar prop = StelPropertyMgr.getProperty(\"MilkyWay.intensity\");\nif(prop) {\n    core.debug(\"MilkyWay.intensity found\");\n    core.debug(\"Current value: \" + prop.getValue());\n    core.debug(\"Is read-only: \" + prop.isReadOnly());\n    core.debug(\"Can notify changes: \" + prop.canNotify());\n} else {\n    core.debug(\"Property not found\");\n}\n\n// Suppress warnings for optional plugin properties\nvar pluginProp = StelPropertyMgr.getProperty(\"Oculars.enabled\", true);\nif(pluginProp) {\n    core.debug(\"Oculars plugin property is available\");\n}"
+    },
+    {
+        "name": "getStelPropertyValue",
+        "category": "Property Registry - Query",
+        "signature": "QVariant getStelPropertyValue(QString id, bool noWarning=false)",
+        "description": "Convenience method that directly returns the current value of a StelProperty without needing to first retrieve the StelProperty object. This is the most commonly used method for reading property values in scripts. Returns an invalid QVariant if the property is not found.",
+        "parameters": [
+            {
+                "name": "id",
+                "type": "QString",
+                "description": "The unique property ID (e.g., 'StelSkyDrawer.absoluteStarScale')",
+                "required": true
+            },
+            {
+                "name": "noWarning",
+                "type": "bool",
+                "description": "If true, suppresses warning when property not found",
+                "required": false,
+                "default": "false"
+            }
+        ],
+        "returnType": "QVariant",
+        "returnDescription": "The current value of the property as a QVariant, or invalid QVariant if not found",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "Works on all Stellarium versions with StelProperty system"
+        },
+        "example": "// Get reference to the Property Manager\nvar StelPropertyMgr = StelApp.getStelPropertyManager();\n\n// Read various property values\nvar starScale = StelPropertyMgr.getStelPropertyValue(\"StelSkyDrawer.absoluteStarScale\");\ncore.debug(\"Absolute star scale: \" + starScale);\n\nvar milkyWayIntensity = StelPropertyMgr.getStelPropertyValue(\"MilkyWay.intensity\");\ncore.debug(\"Milky Way intensity: \" + milkyWayIntensity);\n\nvar flagLines = StelPropertyMgr.getStelPropertyValue(\"ConstellationMgr.flagLines\");\ncore.debug(\"Constellation lines visible: \" + flagLines);\n\n// Use noWarning for potentially missing properties\nvar ocularsEnabled = StelPropertyMgr.getStelPropertyValue(\"Oculars.enabled\", true);\nif(ocularsEnabled !== undefined) {\n    core.debug(\"Oculars enabled: \" + ocularsEnabled);\n}\n\n// Note: The C++ macro GETSTELPROPERTYVALUE is also available in C++ code:\n// GETSTELPROPERTYVALUE(\"LandscapeMgr.atmosphereVisible\")"
+    },
+    {
+        "name": "setStelPropertyValue",
+        "category": "Property Registry - Modification",
+        "signature": "bool setStelPropertyValue(QString id, QVariant value, bool noWarning=false)",
+        "description": "Convenience method that directly sets the value of a StelProperty without needing to first retrieve the StelProperty object. This is the most commonly used method for modifying property values in scripts. Returns false if the property is read-only, the value type is incompatible, or the property is not found. Data type conversion is performed automatically using QVariant logic when possible.",
+        "parameters": [
+            {
+                "name": "id",
+                "type": "QString",
+                "description": "The unique property ID (e.g., 'MilkyWay.intensity', 'StelSkyDrawer.flagTwinkle')",
+                "required": true
+            },
+            {
+                "name": "value",
+                "type": "QVariant",
+                "description": "The new value to set (automatically converted to the property's type if compatible)",
+                "required": true
+            },
+            {
+                "name": "noWarning",
+                "type": "bool",
+                "description": "If true, suppresses warning when property not found or write fails",
+                "required": false,
+                "default": "false"
+            }
+        ],
+        "returnType": "bool",
+        "returnDescription": "true if the value was successfully changed, false if the property was not found, is read-only, or value is incompatible",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "Works on all Stellarium versions with StelProperty system"
+        },
+        "example": "// Get reference to the Property Manager\nvar StelPropertyMgr = StelApp.getStelPropertyManager();\n\n// Enable constellation lines\nvar result = StelPropertyMgr.setStelPropertyValue(\"ConstellationMgr.flagLines\", true);\ncore.debug(\"Constellation lines enabled: \" + result);\n\n// Set Milky Way intensity to 75%\nStelPropertyMgr.setStelPropertyValue(\"MilkyWay.intensity\", 0.75);\n\n// Set absolute star scale\nStelPropertyMgr.setStelPropertyValue(\"StelSkyDrawer.absoluteStarScale\", 1.2);\n\n// Enable star twinkling\nStelPropertyMgr.setStelPropertyValue(\"StelSkyDrawer.flagTwinkle\", true);\n\n// Set landscape atmosphere visibility\nStelPropertyMgr.setStelPropertyValue(\"LandscapeMgr.atmosphereVisible\", false);\n\n// Attempt to set a read-only property (will fail silently)\nvar setResult = StelPropertyMgr.setStelPropertyValue(\"StelApp.version\", \"test\");\nif(!setResult) {\n    core.debug(\"Could not set property (may be read-only or not found)\");\n}\n\n// Toggle a boolean property\nvar current = StelPropertyMgr.getStelPropertyValue(\"ConstellationMgr.flagBoundaries\");\nStelPropertyMgr.setStelPropertyValue(\"ConstellationMgr.flagBoundaries\", !current);"
+    },
+    {
+        "name": "getMetaProperty",
+        "category": "Property Registry - Query",
+        "signature": "QMetaProperty getMetaProperty(QString id)",
+        "description": "Returns the QMetaProperty metadata for a given property ID. This contains compile-time information about the property including its type, read/write methods, notify signal, and other Qt property system attributes. Primarily useful for advanced introspection and debugging.",
+        "parameters": [
+            {
+                "name": "id",
+                "type": "QString",
+                "description": "The unique property ID to get metadata for",
+                "required": true
+            }
+        ],
+        "returnType": "QMetaProperty",
+        "returnDescription": "QMetaProperty object containing property metadata, or invalid QMetaProperty if not found",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "Returns compile-time property information"
+        },
+        "example": "// Get reference to the Property Manager\nvar StelPropertyMgr = StelApp.getStelPropertyManager();\n\n// Get metadata for a property\nvar metaProp = StelPropertyMgr.getMetaProperty(\"MilkyWay.intensity\");\nif(metaProp.isValid()) {\n    core.debug(\"Property name: \" + metaProp.name());\n    core.debug(\"Property type: \" + metaProp.typeName());\n    core.debug(\"Is writable: \" + metaProp.isWritable());\n    core.debug(\"Has notify signal: \" + metaProp.hasNotifySignal());\n    core.debug(\"Is stored: \" + metaProp.isStored());\n    core.debug(\"Is designable: \" + metaProp.isDesignable());\n}"
+    },
+    {
+        "name": "registerProperty",
+        "category": "Property Registry - Registration",
+        "signature": "StelProperty* registerProperty(QString id, QObject* target, char* propertyName)",
+        "description": "Manually registers a single Q_PROPERTY as a StelProperty. The property ID must be unique (the application will exit if a duplicate is registered). The target object must have a Q_PROPERTY with the specified name. This is rarely needed for StelModules (they are auto-registered), but useful for custom objects or non-module properties that need to be exposed to the scripting system.",
+        "parameters": [
+            {
+                "name": "id",
+                "type": "QString",
+                "description": "Unique identifier for the property (must follow naming conventions, e.g., 'MyModule.myProperty')",
+                "required": true
+            },
+            {
+                "name": "target",
+                "type": "QObject*",
+                "description": "The QObject instance that contains the property",
+                "required": true
+            },
+            {
+                "name": "propertyName",
+                "type": "char*",
+                "description": "The name of the Q_PROPERTY on the target object to register",
+                "required": true
+            }
+        ],
+        "returnType": "StelProperty*",
+        "returnDescription": "Pointer to the newly created StelProperty object",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "Application exits if duplicate ID is registered. StelModules auto-register all Q_PROPERTY definitions - manual registration is typically done in C++ code."
+        },
+        "example": "// Note: In practice, StelModules auto-register all Q_PROPERTY definitions.\n// Manual registration is for special cases, typically done in C++ code.\n// This example demonstrates the concept only.\n\n// Get reference to the Property Manager\nvar StelPropertyMgr = StelApp.getStelPropertyManager();\n\ncore.debug(\"Manual property registration is typically done in C++ code.\");\ncore.debug(\"StelModules auto-register all their Q_PROPERTY definitions.\");\ncore.debug(\"Use getPropertyList() to see all available properties.\");"
+    },
+    {
+        "name": "registerObject",
+        "category": "Property Registry - Registration",
+        "signature": "void registerObject(QObject* obj)",
+        "description": "Automatically registers all Q_PROPERTY definitions of a QObject as StelProperty instances. Each property is registered with an ID in the format '<objectName>.<propertyName>'. The object must have a non-empty QObject::objectName without dots. All StelModules are automatically registered by the StelModuleMgr when they are loaded, so manual registration is typically not needed.",
+        "parameters": [
+            {
+                "name": "obj",
+                "type": "QObject*",
+                "description": "The QObject whose Q_PROPERTY definitions should be registered",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "Object must have a valid, non-empty objectName without dots. Application exits if duplicate IDs are found."
+        },
+        "example": "// Get reference to the Property Manager\nvar StelPropertyMgr = StelApp.getStelPropertyManager();\n\n// Note: All StelModules are automatically registered by StelModuleMgr.\n// This function is rarely needed in scripts.\n// StelProperty IDs follow the format: <ModuleName>.<propertyName>\n\ncore.debug(\"StelModule properties are auto-registered on load.\");\ncore.debug(\"Use getPropertyList() to see all available properties.\");\ncore.debug(\"Example property IDs: MilkyWay.intensity, ConstellationMgr.flagLines\");"
+    },
+    {
+        "name": "getId",
+        "category": "Individual Property - Info",
+        "signature": "QString getId()",
+        "description": "Returns the unique string identifier of this StelProperty. The ID follows the format '<objectName>.<propertyName>' for auto-registered StelModule properties, or a custom ID for manually registered properties. Use this to identify which property you are working with.",
+        "parameters": [],
+        "returnType": "QString",
+        "returnDescription": "The unique property ID string",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "Called on a StelProperty instance, not on StelPropertyMgr"
+        },
+        "example": "// Get reference to the Property Manager\nvar StelPropertyMgr = StelApp.getStelPropertyManager();\n\n// Get a property and examine its ID\nvar prop = StelPropertyMgr.getProperty(\"MilkyWay.intensity\");\nif(prop) {\n    core.debug(\"Property ID: \" + prop.getId());\n}\n\n// Enumerate all properties and print their IDs\nvar allProps = StelPropertyMgr.getAllProperties();\nfor(var i = 0; i < Math.min(5, allProps.length); i++) {\n    var propId = allProps[i].getId();\n    core.debug(\"Property #\" + i + \": \" + propId);\n}"
+    },
+    {
+        "name": "getValue",
+        "category": "Individual Property - Info",
+        "signature": "QVariant getValue()",
+        "description": "Returns the current value of this StelProperty as a QVariant. The actual data type depends on the Q_PROPERTY definition (e.g., bool, int, double, QString, or custom types). QVariant provides automatic type conversion for most standard data types.",
+        "parameters": [],
+        "returnType": "QVariant",
+        "returnDescription": "The current property value as a QVariant",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "Called on a StelProperty instance. Must have a valid READ accessor or MEMBER defined."
+        },
+        "example": "// Get reference to the Property Manager\nvar StelPropertyMgr = StelApp.getStelPropertyManager();\n\n// Get value via StelProperty object\nvar prop = StelPropertyMgr.getProperty(\"MilkyWay.intensity\");\nif(prop) {\n    var val = prop.getValue();\n    core.debug(\"Milky Way intensity: \" + val);\n}\n\n// Compare two properties\nvar prop1 = StelPropertyMgr.getProperty(\"LandscapeMgr.atmosphereVisible\");\nvar prop2 = StelPropertyMgr.getProperty(\"LandscapeMgr.fogVisible\");\nif(prop1 && prop2) {\n    core.debug(\"Atmosphere: \" + prop1.getValue());\n    core.debug(\"Fog: \" + prop2.getValue());\n}\n\n// Note: getStelPropertyValue() is more convenient for simple reads:\n// StelPropertyMgr.getStelPropertyValue(\"MilkyWay.intensity\")"
+    },
+    {
+        "name": "setValue",
+        "category": "Individual Property - Modification",
+        "signature": "bool setValue(QVariant& value)",
+        "description": "Sets a new value for this StelProperty. Returns false if the property is read-only (no WRITE accessor or non-writable MEMBER) or if the value type is incompatible. Data type conversion is attempted automatically using QVariant::canConvert logic. The value will not be written if it is identical to the current value (optimization to prevent unnecessary events).",
+        "parameters": [
+            {
+                "name": "value",
+                "type": "QVariant",
+                "description": "The new value to set (will be automatically type-converted if compatible)",
+                "required": true
+            }
+        ],
+        "returnType": "bool",
+        "returnDescription": "true if the value was successfully set, false if read-only or incompatible type",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "Called on a StelProperty instance. Requires WRITE accessor or writable MEMBER."
+        },
+        "example": "// Get reference to the Property Manager\nvar StelPropertyMgr = StelApp.getStelPropertyManager();\n\n// Set value via StelProperty object\nvar prop = StelPropertyMgr.getProperty(\"MilkyWay.intensity\");\nif(prop && !prop.isReadOnly()) {\n    var result = prop.setValue(0.5);\n    core.debug(\"Milky Way intensity set to 0.5, success: \" + result);\n}\n\n// Check if write succeeded\nvar atmosphereProp = StelPropertyMgr.getProperty(\"LandscapeMgr.atmosphereVisible\");\nif(atmosphereProp) {\n    var result = atmosphereProp.setValue(true);\n    core.debug(\"Atmosphere visibility set result: \" + result);\n}\n\n// Attempting to set a read-only property\nvar readOnlyProp = StelPropertyMgr.getProperty(\"StelApp.version\");\nif(readOnlyProp && readOnlyProp.isReadOnly()) {\n    core.debug(\"This property is read-only, cannot modify\");\n}\n\n// Note: setStelPropertyValue() is more convenient for simple writes:\n// StelPropertyMgr.setStelPropertyValue(\"MilkyWay.intensity\", 0.5)"
+    },
+    {
+        "name": "isReadOnly",
+        "category": "Individual Property - Info",
+        "signature": "bool isReadOnly()",
+        "description": "Returns whether this property is read-only. A property is read-only when it has no WRITE accessor and is not a writable MEMBER. Read-only properties cannot be modified through setValue() or setStelPropertyValue(). Examples of read-only properties include the application version string and computed values.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if the property is read-only (cannot be modified), false if writable",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "Reflects the Qt property system's isWritable() status"
+        },
+        "example": "// Get reference to the Property Manager\nvar StelPropertyMgr = StelApp.getStelPropertyManager();\n\n// Check if properties are writable before attempting to modify\nvar prop = StelPropertyMgr.getProperty(\"MilkyWay.intensity\");\nif(prop) {\n    if(prop.isReadOnly()) {\n        core.debug(\"Cannot modify - property is read-only\");\n    } else {\n        prop.setValue(0.7);\n        core.debug(\"Value modified successfully\");\n    }\n}\n\n// Filter for writable properties only\nvar allProps = StelPropertyMgr.getAllProperties();\nvar writableCount = 0;\nvar readOnlyCount = 0;\nfor(var i = 0; i < allProps.length; i++) {\n    if(allProps[i].isReadOnly()) {\n        readOnlyCount++;\n    } else {\n        writableCount++;\n    }\n}\ncore.debug(\"Writable: \" + writableCount + \", Read-only: \" + readOnlyCount + \", Total: \" + allProps.length);"
+    },
+    {
+        "name": "isSynchronizable",
+        "category": "Individual Property - Info",
+        "signature": "bool isSynchronizable()",
+        "description": "Returns whether this property can be synchronized with external sources (such as the RemoteControl plugin). A property is synchronizable when it is both writable AND marked as STORED (which is the default for Q_PROPERTY). Non-stored properties are typically computed or transient values that should not be persisted or synchronized.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if the property can be synchronized externally",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "Used by RemoteControl and similar plugins for state synchronization"
+        },
+        "example": "// Get reference to the Property Manager\nvar StelPropertyMgr = StelApp.getStelPropertyManager();\n\n// Find synchronizable properties (useful for RemoteControl plugin)\nvar allProps = StelPropertyMgr.getAllProperties();\nvar syncCount = 0;\nfor(var i = 0; i < allProps.length; i++) {\n    if(allProps[i].isSynchronizable()) {\n        syncCount++;\n    }\n}\ncore.debug(\"Synchronizable properties: \" + syncCount + \" out of \" + allProps.length);\n\n// Check a specific property\nvar prop = StelPropertyMgr.getProperty(\"MilkyWay.intensity\");\nif(prop) {\n    core.debug(\"MilkyWay.intensity is synchronizable: \" + prop.isSynchronizable());\n}"
+    },
+    {
+        "name": "canNotify",
+        "category": "Individual Property - Info",
+        "signature": "bool canNotify()",
+        "description": "Returns whether this property has a NOTIFY signal defined. Properties with NOTIFY signals emit the 'changed' signal whenever their value changes, allowing other components to react to changes in real-time. If false, you must poll the property to detect changes.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if the property has a NOTIFY signal and can emit change notifications",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "Reflects whether hasNotifySignal() is true for the Q_PROPERTY"
+        },
+        "example": "// Get reference to the Property Manager\nvar StelPropertyMgr = StelApp.getStelPropertyManager();\n\n// Check which properties support change notifications\nvar allProps = StelPropertyMgr.getAllProperties();\nvar notifyCount = 0;\nvar noNotifyCount = 0;\nfor(var i = 0; i < allProps.length; i++) {\n    if(allProps[i].canNotify()) {\n        notifyCount++;\n    } else {\n        noNotifyCount++;\n    }\n}\ncore.debug(\"With notification: \" + notifyCount + \", Without: \" + noNotifyCount);\n\n// Examine a specific property\nvar prop = StelPropertyMgr.getProperty(\"MilkyWay.intensity\");\nif(prop) {\n    core.debug(\"MilkyWay.intensity can notify changes: \" + prop.canNotify());\n}"
+    },
+    {
+        "name": "getType",
+        "category": "Individual Property - Info",
+        "signature": "QMetaType::Type getType()",
+        "description": "Returns the data type of this property as a QMetaType::Type enum value. This tells you the underlying C++ type (e.g., QMetaType::Bool, QMetaType::Int, QMetaType::Double, QMetaType::QString). Useful for type checking before setting values or for generating type-appropriate UI controls.",
+        "parameters": [],
+        "returnType": "QMetaType::Type",
+        "returnDescription": "The QMetaType enum value representing the property's data type",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "Uses Qt version-specific type ID handling for Qt5/Qt6 compatibility"
+        },
+        "example": "// Get reference to the Property Manager\nvar StelPropertyMgr = StelApp.getStelPropertyManager();\n\n// Check the type of various properties\nvar prop1 = StelPropertyMgr.getProperty(\"MilkyWay.intensity\");\nif(prop1) {\n    var typeVal = prop1.getType();\n    core.debug(\"MilkyWay.intensity type code: \" + typeVal);\n    // Common type codes:\n    // QMetaType::Bool = 1\n    // QMetaType::Int = 2  \n    // QMetaType::Double = 6\n    // QMetaType::Float = 38\n    // QMetaType::QString = 10\n}\n\nvar prop2 = StelPropertyMgr.getProperty(\"ConstellationMgr.flagLines\");\nif(prop2) {\n    core.debug(\"ConstellationMgr.flagLines type code: \" + prop2.getType());\n}"
+    },
+    {
+        "name": "getMetaProp",
+        "category": "Individual Property - Info",
+        "signature": "QMetaProperty getMetaProp()",
+        "description": "Returns the QMetaProperty object wrapped by this StelProperty. This provides access to the full Qt property system metadata, including the property name, type name, read/write method signatures, notify signal signature, and other attributes. Primarily used for debugging, introspection, and advanced type handling.",
+        "parameters": [],
+        "returnType": "QMetaProperty",
+        "returnDescription": "The QMetaProperty object containing full property metadata",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "Provides direct access to Qt's property system metadata"
+        },
+        "example": "// Get reference to the Property Manager\nvar StelPropertyMgr = StelApp.getStelPropertyManager();\n\n// Get detailed metadata about a property\nvar prop = StelPropertyMgr.getProperty(\"MilkyWay.intensity\");\nif(prop) {\n    var metaProp = prop.getMetaProp();\n    if(metaProp.isValid()) {\n        core.debug(\"Property name: \" + metaProp.name());\n        core.debug(\"Property type: \" + metaProp.typeName());\n        core.debug(\"Is writable: \" + metaProp.isWritable());\n        core.debug(\"Has notify: \" + metaProp.hasNotifySignal());\n        core.debug(\"Is constant: \" + metaProp.isConstant());\n        core.debug(\"Is final: \" + metaProp.isFinal());\n    }\n}\n\n// Compare with getMetaProperty() on StelPropertyMgr:\nvar metaProp2 = StelPropertyMgr.getMetaProperty(\"MilkyWay.intensity\");\n// Both return the same QMetaProperty information"
+    },
+    {
+        "name": "getTarget",
+        "category": "Individual Property - Info",
+        "signature": "QObject* getTarget()",
+        "description": "Returns a pointer to the QObject instance that owns this property. This is the object where the Q_PROPERTY was defined. For auto-registered StelModule properties, this is the module instance itself (e.g., MilkyWay, ConstellationMgr, LandscapeMgr). Useful for understanding which component a property belongs to.",
+        "parameters": [],
+        "returnType": "QObject*",
+        "returnDescription": "Pointer to the QObject that owns this property",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "The target object is set during registration and never changes"
+        },
+        "example": "// Get reference to the Property Manager\nvar StelPropertyMgr = StelApp.getStelPropertyManager();\n\n// Find which object owns a property\nvar prop = StelPropertyMgr.getProperty(\"MilkyWay.intensity\");\nif(prop) {\n    var target = prop.getTarget();\n    if(target) {\n        core.debug(\"Property owner: \" + target.objectName);\n        // Output: Property owner: MilkyWay\n    }\n}\n\n// Group properties by their target object\nvar allProps = StelPropertyMgr.getAllProperties();\nvar targets = {};\nfor(var i = 0; i < allProps.length; i++) {\n    var t = allProps[i].getTarget();\n    if(t) {\n        var name = t.objectName;\n        if(!targets[name]) targets[name] = [];\n        targets[name].push(allProps[i].getId());\n    }\n}\n\n// Print properties grouped by module\nvar moduleNames = Object.keys(targets);\ncore.debug(\"Modules with properties: \" + moduleNames.length);\nfor(var j = 0; j < Math.min(5, moduleNames.length); j++) {\n    var mod = moduleNames[j];\n    core.debug(mod + \": \" + targets[mod].length + \" properties\");\n}"
+    }
+]
