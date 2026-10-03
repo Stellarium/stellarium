@@ -205,7 +205,7 @@ jobs:
   # CI on macOS (Qt6)
   ci-macos-silicon-qt6:
     name: "macOS (arm64; qt6)"
-    runs-on: macos-26
+    runs-on: macos-latest
     if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.actor, 'transifex')"
 
     # @TODO Enable gpsd on macOS instance for CI testing

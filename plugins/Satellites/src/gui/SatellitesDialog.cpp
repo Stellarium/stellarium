@@ -131,8 +131,8 @@ void SatellitesDialog::createDialogContent()
 #endif
 	ui->tabs->setCurrentIndex(0);	
 	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
-	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
-	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
+	connect(ui->titleBar, &TitleBar::movedTo, this, &StelDialog::handleMovedTo);
+	connect(&StelApp::getInstance(), &StelApp::languageChanged, this, &SatellitesDialog::retranslate);
 	Satellites* plugin = GETSTELMODULE(Satellites);
 
 	// Kinetic scrolling
@@ -141,7 +141,7 @@ void SatellitesDialog::createDialogContent()
 	if (gui)
 	{
 		enableKineticScrolling(gui->getFlagUseKineticScrolling());
-		connect(gui, SIGNAL(flagUseKineticScrollingChanged(bool)), this, SLOT(enableKineticScrolling(bool)));
+		connect(gui, &StelGui::flagUseKineticScrollingChanged, this, &SatellitesDialog::enableKineticScrolling);
 	}
 
 	// Remove any test from "color buttons"
@@ -159,20 +159,20 @@ void SatellitesDialog::createDialogContent()
 	connectBoolProperty(ui->checkBoxAutoDisplay,     "Satellites.autoDisplayEnabled");
 	connectIntProperty(ui->updateFrequencySpinBox,   "Satellites.updateFrequencyHours");
 	ui->jumpToSourcesButton->setEnabled(ui->checkBoxAutoAdd);
-	connect(ui->updateButton,            SIGNAL(clicked()),         this,   SLOT(updateTLEs()));
-	connect(ui->jumpToSourcesButton,     SIGNAL(clicked()),         this,   SLOT(jumpToSourcesTab()));
-	connect(plugin, SIGNAL(updateStateChanged(Satellites::UpdateState)), this, SLOT(showUpdateState(Satellites::UpdateState)));
-	connect(plugin, SIGNAL(tleUpdateComplete(int, int, int, int)),       this, SLOT(showUpdateCompleted(int, int, int, int)));
+	connect(ui->updateButton,        &QPushButton::clicked, this, &SatellitesDialog::updateTLEs);
+	connect(ui->jumpToSourcesButton, &QPushButton::clicked, this, &SatellitesDialog::jumpToSourcesTab);
+	connect(plugin, &Satellites::updateStateChanged, this, &SatellitesDialog::showUpdateState);
+	connect(plugin, &Satellites::tleUpdateComplete,  this, &SatellitesDialog::showUpdateCompleted);
 
 	updateTimer = new QTimer(this);
-	connect(updateTimer, SIGNAL(timeout()), this, SLOT(updateCountdown()));
+	connect(updateTimer, &QTimer::timeout, this, &SatellitesDialog::updateCountdown);
 	updateTimer->start(7000);
 
 	// Settings tab / Visualisation settings group
 	// Logic sub-group: Labels
 	connectBoolProperty(ui->labelsCheckBox,     "Satellites.flagLabelsVisible");
 	connectIntProperty(ui->fontSizeSpinBox,     "Satellites.labelFontSize");
-	connect(ui->labelsCheckBox, SIGNAL(clicked(bool)), ui->fontSizeSpinBox, SLOT(setEnabled(bool)));
+	connect(ui->labelsCheckBox, &QCheckBox::clicked, ui->fontSizeSpinBox, &QSpinBox::setEnabled);
 	ui->fontSizeSpinBox->setEnabled(ui->labelsCheckBox->isChecked());
 	// Logic sub-group: Orbit lines
 	connectBoolProperty(ui->orbitLinesCheckBox, "Satellites.flagOrbitLines");
@@ -180,19 +180,19 @@ void SatellitesDialog::createDialogContent()
 	connectIntProperty(ui->orbitFadeSpin,       "Satellites.orbitLineFadeSegments");
 	connectIntProperty(ui->orbitDurationSpin,   "Satellites.orbitLineSegmentDuration");
 	connectIntProperty(ui->orbitThicknessSpin,  "Satellites.orbitLineThickness");
-	connect(ui->orbitLinesCheckBox, SIGNAL(clicked(bool)), this, SLOT(handleOrbitLinesGroup(bool)));
+	connect(ui->orbitLinesCheckBox, &QCheckBox::clicked, this, &SatellitesDialog::handleOrbitLinesGroup);
 	handleOrbitLinesGroup(ui->orbitLinesCheckBox->isChecked());
 	// Logic sub-group: Umbra
 	connectBoolProperty(ui->umbraCheckBox,      "Satellites.flagUmbraVisible");
 	connectBoolProperty(ui->umbraAtAltitude,    "Satellites.flagUmbraAtFixedAltitude");
 	connectDoubleProperty(ui->umbraAltitude,    "Satellites.umbraAltitude");
-	connect(ui->umbraCheckBox, SIGNAL(clicked(bool)), this, SLOT(handleUmbraGroup(bool)));
+	connect(ui->umbraCheckBox, &QCheckBox::clicked, this, &SatellitesDialog::handleUmbraGroup);
 	handleUmbraGroup(ui->umbraCheckBox->isChecked());
 	// Logic sub-group: Markers
 	connectBoolProperty(ui->iconicCheckBox,		"Satellites.flagIconicMode");
 	connectBoolProperty(ui->coloredInvisibleSatellites, "Satellites.flagColoredInvisible");
 	connectBoolProperty(ui->hideInvisibleSatellites, "Satellites.flagHideInvisible");
-	connect(ui->iconicCheckBox, SIGNAL(clicked(bool)), ui->hideInvisibleSatellites, SLOT(setEnabled(bool)));
+	connect(ui->iconicCheckBox, &QCheckBox::clicked, ui->hideInvisibleSatellites, &QCheckBox::setEnabled);
 	ui->hideInvisibleSatellites->setEnabled(ui->iconicCheckBox->isChecked());
 	// Logic sub-group: Colors
 	ui->invisibleColorButton->setup("Satellites.invisibleSatelliteColor", "Satellites/invisible_satellite_color");
@@ -206,16 +206,16 @@ void SatellitesDialog::createDialogContent()
 	connectDoubleProperty(ui->minAltitude,        "Satellites.minVFAltitude");
 	connectDoubleProperty(ui->maxAltitude,        "Satellites.maxVFAltitude");
 	enableMinMaxAltitude(ui->altitudeCheckBox->isChecked());
-	connect(ui->altitudeCheckBox, SIGNAL(clicked(bool)), this, SLOT(enableMinMaxAltitude(bool)));
+	connect(ui->altitudeCheckBox, &QCheckBox::clicked, this, &SatellitesDialog::enableMinMaxAltitude);
 	// Logic sub-group: Visual filter / Magnitude range
 	connectBoolProperty(ui->magnitudeCheckBox,    "Satellites.flagVFMagnitude");
 	connectDoubleProperty(ui->minMagnitude,       "Satellites.minVFMagnitude");
 	connectDoubleProperty(ui->maxMagnitude,       "Satellites.maxVFMagnitude");
 	enableMinMaxMagnitude(ui->magnitudeCheckBox->isChecked());
-	connect(ui->magnitudeCheckBox, SIGNAL(clicked(bool)), this, SLOT(enableMinMaxMagnitude(bool)));
+	connect(ui->magnitudeCheckBox, &QCheckBox::clicked, this, &SatellitesDialog::enableMinMaxMagnitude);
 
-	connect(ui->restoreDefaultsButton, SIGNAL(clicked()), this, SLOT(restoreDefaults()));
-	connect(ui->saveSettingsButton,    SIGNAL(clicked()), this, SLOT(saveSettings()));
+	connect(ui->restoreDefaultsButton, &QPushButton::clicked, this, &SatellitesDialog::restoreDefaults);
+	connect(ui->saveSettingsButton,    &QPushButton::clicked, this, &SatellitesDialog::saveSettings);
 	updateSettingsPage();
 
 	// Satellites tab
@@ -223,72 +223,69 @@ void SatellitesDialog::createDialogContent()
 	filterModel->setSourceModel(plugin->getSatellitesListModel());
 	filterModel->setFilterCaseSensitivity(Qt::CaseInsensitive);
 	ui->satellitesList->setModel(filterModel);
-	connect(ui->lineEditSearch, SIGNAL(textChanged(QString)), filterModel, SLOT(setFilterWildcard(QString)));
+	connect(ui->lineEditSearch, &QLineEdit::textChanged, filterModel, &SatellitesListFilterModel::setFilterWildcard);
 
 	QAction *clearAction = ui->lineEditSearch->addAction(QIcon(":/graphicGui/backspace-white.png"),
 							     QLineEdit::ActionPosition::TrailingPosition);
-	connect(clearAction, SIGNAL(triggered()), this, SLOT(searchSatellitesClear()));
+	connect(clearAction, &QAction::triggered, this, &SatellitesDialog::searchSatellitesClear);
 
 	QItemSelectionModel* selectionModel = ui->satellitesList->selectionModel();
-	connect(selectionModel, SIGNAL(selectionChanged(QItemSelection,QItemSelection)),
-		     this, SLOT(updateSatelliteData()));	
-	connect(ui->satellitesList, SIGNAL(doubleClicked(QModelIndex)),
-		     this, SLOT(trackSatellite(QModelIndex)));
+	connect(selectionModel, &QItemSelectionModel::selectionChanged, this, &SatellitesDialog::updateSatelliteData);
+	connect(ui->satellitesList, &QListView::doubleClicked, this, &SatellitesDialog::trackSatellite);
 
 	// Two-state input, three-state display
 	setRightSideToROMode();
-	connect(ui->displayedCheckbox, SIGNAL(clicked(bool)), ui->displayedCheckbox, SLOT(setChecked(bool)));
-	connect(ui->orbitCheckbox,     SIGNAL(clicked(bool)), ui->orbitCheckbox,     SLOT(setChecked(bool)));
-	connect(ui->userCheckBox,      SIGNAL(clicked(bool)), ui->userCheckBox,      SLOT(setChecked(bool)));
+	connect(ui->displayedCheckbox, &QCheckBox::clicked, ui->displayedCheckbox, &QCheckBox::setChecked);
+	connect(ui->orbitCheckbox,     &QCheckBox::clicked, ui->orbitCheckbox,     &QCheckBox::setChecked);
+	connect(ui->userCheckBox,      &QCheckBox::clicked, ui->userCheckBox,      &QCheckBox::setChecked);
 
 	// Because the previous signals and slots were connected first,
 	// they will be executed before these.
-	connect(ui->displayedCheckbox, SIGNAL(clicked()), this, SLOT(setFlags()));
-	connect(ui->orbitCheckbox,     SIGNAL(clicked()), this, SLOT(setFlags()));
-	connect(ui->userCheckBox,      SIGNAL(clicked()), this, SLOT(setFlags()));
+	connect(ui->displayedCheckbox, &QCheckBox::clicked, this, &SatellitesDialog::setFlags);
+	connect(ui->orbitCheckbox,     &QCheckBox::clicked, this, &SatellitesDialog::setFlags);
+	connect(ui->userCheckBox,      &QCheckBox::clicked, this, &SatellitesDialog::setFlags);
 
-	connect(ui->satMarkerColorPickerButton, SIGNAL(clicked(bool)), this, SLOT(askSatMarkerColor()));
-	connect(ui->satOrbitColorPickerButton,  SIGNAL(clicked(bool)), this, SLOT(askSatOrbitColor()));
-	connect(ui->satInfoColorPickerButton,   SIGNAL(clicked(bool)), this, SLOT(askSatInfoColor()));
-	connect(ui->descriptionTextEdit,        SIGNAL(textChanged()), this, SLOT(descriptionTextChanged()));
+	connect(ui->satMarkerColorPickerButton, &QToolButton::clicked, this, &SatellitesDialog::askSatMarkerColor);
+	connect(ui->satOrbitColorPickerButton,  &QToolButton::clicked, this, &SatellitesDialog::askSatOrbitColor);
+	connect(ui->satInfoColorPickerButton,   &QToolButton::clicked, this, &SatellitesDialog::askSatInfoColor);
+	connect(ui->descriptionTextEdit,        &QTextEdit::textChanged, this, &SatellitesDialog::descriptionTextChanged);
 	// Satellites tab / TLE group
 	connectIntProperty(ui->validAgeSpinBox, "Satellites.tleEpochAgeDays");
-	connect(ui->validAgeSpinBox, SIGNAL(valueChanged(int)), this, SLOT(updateFilteredSatellitesList()));
+	connect(ui->validAgeSpinBox, qOverload<int>(&QSpinBox::valueChanged), this, &SatellitesDialog::updateFilteredSatellitesList);
 
-	connect(ui->groupsListWidget, SIGNAL(itemChanged(QListWidgetItem*)),
-		     this, SLOT(handleGroupChanges(QListWidgetItem*)));
+	connect(ui->groupsListWidget, &QListWidget::itemChanged, this, &SatellitesDialog::handleGroupChanges);
 
-	connect(ui->groupFilterCombo, SIGNAL(currentIndexChanged(int)), this, SLOT(filterListByGroup(int)));
-	connect(ui->groupFilterCombo, SIGNAL(currentIndexChanged(int)), this, SLOT(setRightSideToROMode()));
+	connect(ui->groupFilterCombo, qOverload<int>(&QComboBox::currentIndexChanged), this, &SatellitesDialog::filterListByGroup);
+	connect(ui->groupFilterCombo, qOverload<int>(&QComboBox::currentIndexChanged), this, &SatellitesDialog::setRightSideToROMode);
 
 	importWindow = new SatellitesImportDialog();
-	connect(ui->addSatellitesButton, SIGNAL(clicked()),            importWindow, SLOT(setVisible()));
-	connect(importWindow, SIGNAL(satellitesAccepted(TleDataList)), this,         SLOT(addSatellites(TleDataList)));
-	connect(ui->removeSatellitesButton, SIGNAL(clicked()),         this,         SLOT(removeSatellites()));
-	connect(ui->selectAllButton, SIGNAL(clicked()),                this,         SLOT(selectFilteredSatellitesList()));
+	connect(ui->addSatellitesButton, &QToolButton::clicked, importWindow, [this] { importWindow->setVisible(true); });
+	connect(importWindow, &SatellitesImportDialog::satellitesAccepted, this, &SatellitesDialog::addSatellites);
+	connect(ui->removeSatellitesButton, &QToolButton::clicked, this, &SatellitesDialog::removeSatellites);
+	connect(ui->selectAllButton, &QToolButton::clicked, this, &SatellitesDialog::selectFilteredSatellitesList);
 
 	filterWindow = new SatellitesFilterDialog();
-	connect(ui->customFilterButton, SIGNAL(clicked()), filterWindow, SLOT(setVisible()));
+	connect(ui->customFilterButton, &QToolButton::clicked, filterWindow, [this] { filterWindow->setVisible(true); });
 
 	commWindow = new SatellitesCommDialog();
-	connect(ui->commSatelliteButton, SIGNAL(clicked()), commWindow, SLOT(setVisible()));
+	connect(ui->commSatelliteButton, &QToolButton::clicked, commWindow, [this] { commWindow->setVisible(true); });
 
 	// Sources tab
-	connect(ui->sourceList, SIGNAL(currentRowChanged(int)),			this, SLOT(updateButtonsProperties()));
-	connect(ui->sourceList, SIGNAL(itemChanged(QListWidgetItem*)),		this,	SLOT(saveSourceList()));
-	connect(ui->sourceList, SIGNAL(itemDoubleClicked(QListWidgetItem *)),	this,	SLOT(editSourceRow()));
+	connect(ui->sourceList, &QListWidget::currentRowChanged, this, &SatellitesDialog::updateButtonsProperties);
+	connect(ui->sourceList, &QListWidget::itemChanged,       this, &SatellitesDialog::saveSourceList);
+	connect(ui->sourceList, &QListWidget::itemDoubleClicked, this, &SatellitesDialog::editSourceRow);
 	//FIXME: pressing Enter cause a call of addSourceRow() method...
-	//connect(ui->sourceEdit, SIGNAL(returnPressed()),	this,	SLOT(saveEditedSource()));
-	connect(ui->deleteSourceButton, SIGNAL(clicked()),	this, SLOT(deleteSourceRow()));
-	connect(ui->addSourceButton, SIGNAL(clicked()),	        this, SLOT(addSourceRow()));
-	connect(ui->editSourceButton, SIGNAL(clicked()),	this, SLOT(editSourceRow()));
-	connect(ui->saveSourceButton, SIGNAL(clicked()),	this, SLOT(saveEditedSource()));
-	connect(ui->resetSourcesButton, SIGNAL(clicked()),	this, SLOT(restoreTleSources()));
-	connect(plugin, SIGNAL(satGroupVisibleChanged()),       this, SLOT(updateSatelliteAndSaveData()));
-	connect(plugin, SIGNAL(settingsChanged()),              this, SLOT(toggleCheckableSources()));
-	connect(plugin, SIGNAL(customFilterChanged()),          this, SLOT(updateFilteredSatellitesList()));	
+	//connect(ui->sourceEdit, &QLineEdit::returnPressed,      this, &SatellitesDialog::saveEditedSource);
+	connect(ui->deleteSourceButton, &QToolButton::clicked, this, &SatellitesDialog::deleteSourceRow);
+	connect(ui->addSourceButton, &QToolButton::clicked,    this, &SatellitesDialog::addSourceRow);
+	connect(ui->editSourceButton, &QToolButton::clicked,   this, &SatellitesDialog::editSourceRow);
+	connect(ui->saveSourceButton, &QToolButton::clicked,   this, &SatellitesDialog::saveEditedSource);
+	connect(ui->resetSourcesButton, &QToolButton::clicked, this, &SatellitesDialog::restoreTleSources);
+	connect(plugin, &Satellites::satGroupVisibleChanged,   this, &SatellitesDialog::updateSatelliteAndSaveData);
+	connect(plugin, &Satellites::settingsChanged,          this, &SatellitesDialog::toggleCheckableSources);
+	connect(plugin, &Satellites::customFilterChanged,      this, &SatellitesDialog::updateFilteredSatellitesList);
 	// bug #1350669 (https://bugs.launchpad.net/stellarium/+bug/1350669)
-	connect(ui->sourceList, SIGNAL(currentRowChanged(int)), ui->sourceList, SLOT(repaint()));
+	connect(ui->sourceList, &QListWidget::currentRowChanged, ui->sourceList, qOverload<>(&QListWidget::repaint));
 	ui->editSourceButton->setEnabled(false);
 	ui->deleteSourceButton->setEnabled(false);
 	ui->saveSourceButton->setEnabled(false);
@@ -303,10 +300,10 @@ void SatellitesDialog::createDialogContent()
 #if(SATELLITES_PLUGIN_IRIDIUM == 1)
 	initListIridiumFlares();
 	ui->flaresPredictionDepthSpinBox->setValue(plugin->getIridiumFlaresPredictionDepth());
-	connect(ui->flaresPredictionDepthSpinBox, SIGNAL(valueChanged(int)), plugin, SLOT(setIridiumFlaresPredictionDepth(int)));
-	connect(ui->predictIridiumFlaresPushButton, SIGNAL(clicked()), this, SLOT(predictIridiumFlares()));
-	connect(ui->predictedIridiumFlaresSaveButton, SIGNAL(clicked()), this, SLOT(savePredictedIridiumFlares()));
-	connect(ui->iridiumFlaresTreeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectCurrentIridiumFlare(QModelIndex)));
+	connect(ui->flaresPredictionDepthSpinBox, qOverload<int>(&QSpinBox::valueChanged), plugin, &Satellites::setIridiumFlaresPredictionDepth);
+	connect(ui->predictIridiumFlaresPushButton, &QPushButton::clicked, this, &SatellitesDialog::predictIridiumFlares);
+	connect(ui->predictedIridiumFlaresSaveButton, &QPushButton::clicked, this, &SatellitesDialog::savePredictedIridiumFlares);
+	connect(ui->iridiumFlaresTreeWidget, &QTreeWidget::doubleClicked, this, &SatellitesDialog::selectCurrentIridiumFlare);
 #endif
 }
 

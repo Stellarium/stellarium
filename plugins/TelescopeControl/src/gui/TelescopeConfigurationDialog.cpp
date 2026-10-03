@@ -150,31 +150,31 @@ void TelescopeConfigurationDialog::createDialogContent()
 	#endif
 
 	// Inherited connect
-	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
+	connect(&StelApp::getInstance(), &StelApp::languageChanged, this, &TelescopeConfigurationDialog::retranslate);
 	connect(ui->titleBar, &TitleBar::closeClicked, this, &TelescopeConfigurationDialog::buttonDiscardPressed);
-	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
-	connect(dialog, SIGNAL(rejected()), this, SLOT(buttonDiscardPressed()));
+	connect(ui->titleBar, &TitleBar::movedTo, this, &TelescopeConfigurationDialog::handleMovedTo);
+	connect(dialog, &QDialog::rejected, this, &TelescopeConfigurationDialog::buttonDiscardPressed);
 
 	// Connect: sender, signal, receiver, member
-	connect(ui->radioButtonTelescopeLocal, SIGNAL(toggled(bool)), this, SLOT(toggleTypeLocal(bool)));
-	connect(ui->radioButtonTelescopeConnection, SIGNAL(toggled(bool)), this, SLOT(toggleTypeConnection(bool)));
-	connect(ui->radioButtonTelescopeVirtual, SIGNAL(toggled(bool)), this, SLOT(toggleTypeVirtual(bool)));
-	connect(ui->radioButtonTelescopeRTS2, SIGNAL(toggled(bool)), this, SLOT(toggleTypeRTS2(bool)));
+	connect(ui->radioButtonTelescopeLocal, &QRadioButton::toggled, this, &TelescopeConfigurationDialog::toggleTypeLocal);
+	connect(ui->radioButtonTelescopeConnection, &QRadioButton::toggled, this, &TelescopeConfigurationDialog::toggleTypeConnection);
+	connect(ui->radioButtonTelescopeVirtual, &QRadioButton::toggled, this, &TelescopeConfigurationDialog::toggleTypeVirtual);
+	connect(ui->radioButtonTelescopeRTS2, &QRadioButton::toggled, this, &TelescopeConfigurationDialog::toggleTypeRTS2);
 	#ifdef ENABLE_INDI
-	connect(ui->radioButtonTelescopeINDI, SIGNAL(toggled(bool)), this, SLOT(toggleTypeINDI(bool)));
+	connect(ui->radioButtonTelescopeINDI, &QRadioButton::toggled, this, &TelescopeConfigurationDialog::toggleTypeINDI);
 	#endif
 	#ifdef Q_OS_WIN
-		connect(ui->radioButtonTelescopeASCOM, SIGNAL(toggled(bool)), this, SLOT(toggleTypeASCOM(bool)));
+		connect(ui->radioButtonTelescopeASCOM, &QRadioButton::toggled, this, &TelescopeConfigurationDialog::toggleTypeASCOM);
 	#else
 		ui->radioButtonTelescopeASCOM->hide();
 	#endif
 
-	connect(ui->pushButtonSave, SIGNAL(clicked()), this, SLOT(buttonSavePressed()));
-	connect(ui->pushButtonDiscard, SIGNAL(clicked()), this, SLOT(buttonDiscardPressed()));
+	connect(ui->pushButtonSave, &QPushButton::clicked, this, &TelescopeConfigurationDialog::buttonSavePressed);
+	connect(ui->pushButtonDiscard, &QPushButton::clicked, this, &TelescopeConfigurationDialog::buttonDiscardPressed);
 
-	connect(ui->comboBoxDeviceModel, SIGNAL(currentIndexChanged(int)), this, SLOT(deviceModelSelected(int)));
+	connect(ui->comboBoxDeviceModel, qOverload<int>(&QComboBox::currentIndexChanged), this, &TelescopeConfigurationDialog::deviceModelSelected);
 
-	connect(ui->radioButtonNetworkConnection, SIGNAL(toggled(bool)), this, SLOT(toggleDeviceConnectionMedium(bool)));
+	connect(ui->radioButtonNetworkConnection, &QRadioButton::toggled, this, &TelescopeConfigurationDialog::toggleDeviceConnectionMedium);
 
 	// Setting validators
 	ui->lineEditTelescopeName->setValidator(telescopeNameValidator);

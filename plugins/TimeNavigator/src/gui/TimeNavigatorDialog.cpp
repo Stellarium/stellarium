@@ -92,19 +92,18 @@ void TimeNavigatorDialog::createDialogContent()
 	ui->mainVBox->insertWidget(1, notOnEarthLabel);
 	notOnEarthLabel->hide();
 
-	connect(core, SIGNAL(locationChanged(StelLocation)),
-	        this, SLOT(updateEarthOnlyState()));
+	connect(core, &StelCore::locationChanged, this, &TimeNavigatorDialog::updateEarthOnlyState);
 	updateEarthOnlyState();   // apply correct initial state
 
 	// Kinetic scrolling
 	kineticScrollingList << ui->aboutTextBrowser;
 	StelGui* gui = static_cast<StelGui*>(StelApp::getInstance().getGui());
 	enableKineticScrolling(gui->getFlagUseKineticScrolling());
-	connect(gui, SIGNAL(flagUseKineticScrollingChanged(bool)), this, SLOT(enableKineticScrolling(bool)));
+	connect(gui, &StelGui::flagUseKineticScrollingChanged, this, &TimeNavigatorDialog::enableKineticScrolling);
 
-	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
+	connect(&StelApp::getInstance(), &StelApp::languageChanged, this, &TimeNavigatorDialog::retranslate);
 	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
-	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
+	connect(ui->titleBar, &TitleBar::movedTo, this, &StelDialog::handleMovedTo);
 
 	// ── Tab: Time Steps ──────────────────────────────────────────────────
 

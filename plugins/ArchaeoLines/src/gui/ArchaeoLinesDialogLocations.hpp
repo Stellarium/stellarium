@@ -61,9 +61,7 @@ private slots:
 	//! Called whenever the StelLocationMgr is updated. Taken from LocationDialog.
 	void reloadLocations();
 
-	//! Connected to a QPushButton. When called, modalContext should have been set to 1 or 2 for a meaningful result.
-	void setLocationFromList();
-	//! Connected to the list. A double click on the cell calls this item.
+	//! Connected to the list. A double click on the cell calls this item. When called, modalContext should have been set to 1 or 2 for a meaningful result.
 	void setLocationFromList(const QModelIndex& index);
 };
 

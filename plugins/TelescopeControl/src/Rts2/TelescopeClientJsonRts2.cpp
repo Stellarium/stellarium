@@ -90,7 +90,7 @@ TelescopeClientJsonRts2::TelescopeClientJsonRts2(const QString &name, const QStr
 
 	qCInfo(Telescopes) << "TelescopeRTS2(" << name << ")::TelescopeRTS2: request url:" << rurl.toString();
 
-	connect(&networkManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(replyFinished(QNetworkReply*)));
+	connect(&networkManager, &QNetworkAccessManager::finished, this, &TelescopeClientJsonRts2::replyFinished);
 
 	networkManager.get(cfgRequest);
 }
@@ -181,7 +181,7 @@ void TelescopeClientJsonRts2::replyFinished(QNetworkReply *reply)
 		lastPos.set(cos(ra)*cdec, sin(ra)*cdec, sin(dec));
 		interpolatedPosition.add(lastPos, getNow(), server_micros, 0);
 
-		QTimer::singleShot(refresh_delay, this, SLOT(refreshTimer()));
+		QTimer::singleShot(refresh_delay, this, &TelescopeClientJsonRts2::refreshTimer);
 	}
 	else if (reply->url().path().endsWith("/api/cmd"))
 	{

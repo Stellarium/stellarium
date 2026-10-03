@@ -70,13 +70,13 @@ void CalendarsDialog::createDialogContent()
 	kineticScrollingList << ui->aboutTextBrowser;
 	StelGui* gui= static_cast<StelGui*>(StelApp::getInstance().getGui());
 	enableKineticScrolling(gui->getFlagUseKineticScrolling());
-	connect(gui, SIGNAL(flagUseKineticScrollingChanged(bool)), this, SLOT(enableKineticScrolling(bool)));
+	connect(gui, &StelGui::flagUseKineticScrollingChanged, this, &CalendarsDialog::enableKineticScrolling);
 
-	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
+	connect(&StelApp::getInstance(), &StelApp::languageChanged, this, &CalendarsDialog::retranslate);
 	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
-	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
+	connect(ui->titleBar, &TitleBar::movedTo, this, &StelDialog::handleMovedTo);
 
-	connect(ui->restoreDefaultsButton, SIGNAL(clicked()), this, SLOT(resetCalendarsSettings()));
+	connect(ui->restoreDefaultsButton, &QPushButton::clicked, this, &CalendarsDialog::resetCalendarsSettings);
 	setAboutHtml();
 
 #ifdef STELLARIUM_RELEASE_BUILD
@@ -99,7 +99,7 @@ void CalendarsDialog::createDialogContent()
 	connect(cal->getCal("MayaTzolkin"),        &Calendar::partsChanged, this, &CalendarsDialog::populateMayaTzolkinParts);
 	connect(cal->getCal("AztecXihuitl"),       &Calendar::partsChanged, this, &CalendarsDialog::populateAztecXihuitlParts);
 	connect(cal->getCal("AztecTonalpohualli"), &Calendar::partsChanged, this, &CalendarsDialog::populateAztecTonalpohualliParts);
-	//connect(cal->getCal("Chinese"), SIGNAL(partsChanged(QVector<int>)), this, SLOT(populateChineseParts(QVector<int>)));
+	//connect(cal->getCal("Chinese"), &Calendar::partsChanged, this, &CalendarsDialog::populateChineseParts);
 
 	connectBoolProperty(ui->julianCheckBox,             "Calendars.flagShowJulian");
 	connectBoolProperty(ui->revisedJulianCheckBox,      "Calendars.flagShowRevisedJulian");
@@ -167,10 +167,10 @@ void CalendarsDialog::createDialogContent()
 	connect(ui->uinalSpinBox,             qOverload<int>(&QSpinBox::valueChanged), this, &CalendarsDialog::mayaLongCountChanged);
 	connect(ui->kinSpinBox,               qOverload<int>(&QSpinBox::valueChanged), this, &CalendarsDialog::mayaLongCountChanged);
 	// TODO: Indirect handling of Haab/Tzolkin and Xihuitl/Tonalpohualli, with going back and forth to dates set in the GUI elements.
-	//connect(ui->haabMonthSpinBox, SIGNAL(valueChanged(int)), this, SLOT(mayaHaabChanged()));
-	//connect(ui->haabDaySpinBox,   SIGNAL(valueChanged(int)), this, SLOT(mayaHaabChanged()));
-	//connect(ui->tzolkinNumberSpinBox, SIGNAL(valueChanged(int)), this, SLOT(mayaTzolkinChanged()));
-	//connect(ui->tzolkinNameSpinBox,   SIGNAL(valueChanged(int)), this, SLOT(mayaTzolkinChanged()));
+	//connect(ui->haabMonthSpinBox, qOverload<int>(&QSpinBox::valueChanged), this, &CalendarsDialog::mayaHaabChanged);
+	//connect(ui->haabDaySpinBox,   qOverload<int>(&QSpinBox::valueChanged), this, &CalendarsDialog::mayaHaabChanged);
+	//connect(ui->tzolkinNumberSpinBox, qOverload<int>(&QSpinBox::valueChanged), this, &CalendarsDialog::mayaTzolkinChanged);
+	//connect(ui->tzolkinNameSpinBox,   qOverload<int>(&QSpinBox::valueChanged), this, &CalendarsDialog::mayaTzolkinChanged);
 	// In the first version, only switch full Tzolkin/Haab/Xihuitl/Tonalpohualli cycles. Later versions should allow configuring a date combination and trigger previous/next.
 	StelCore *core=StelApp::getInstance().getCore();
 	connect(ui->previousHaabButton,          &QPushButton::clicked, this, [=](){ core->addSolarDays(-365.);});

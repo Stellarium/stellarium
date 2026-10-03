@@ -524,11 +524,6 @@ QString MeteorShower::getDesignation() const
 	return m_showerID;
 }
 
-Vec3f MeteorShower::getInfoColor(void) const
-{
-	return StelApp::getInstance().getVisionModeNight() ? Vec3f(0.6f, 0.0f, 0.0f) : Vec3f(1.0f, 1.0f, 1.0f);
-}
-
 QString MeteorShower::getInfoString(const StelCore* core, const InfoStringGroup& flags) const
 {
 	QString str, designation = getDesignation();

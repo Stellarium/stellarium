@@ -64,7 +64,7 @@ AppDir:
   runtime:
     env:
       APPDIR_LIBRARY_PATH: $APPDIR/lib/x86_64-linux-gnu:$APPDIR/usr/lib/x86_64-linux-gnu:$APPDIR/usr/lib/x86_64-linux-gnu/pulseaudio
-      QTWEBENGINEPROCESS_PATH: $APPDIR/usr/lib/qt5/libexec/QtWebEngineProcess:$APPDIR/usr/lib/x86_64-linux-gnu/qt5/libexec/QtWebEngineProcess
+      QTWEBENGINEPROCESS_PATH: $APPDIR/usr/lib/x86_64-linux-gnu/qt5/libexec/QtWebEngineProcess
       QTWEBENGINE_DISABLE_SANDBOX: 1
       
 #  test:

@@ -111,14 +111,14 @@ SyncRemotePeer::SyncRemotePeer(QAbstractSocket *socket, bool isServer, const QHa
 	sock->setParent(this); //reparent
 	sock->setSocketOption(QAbstractSocket::LowDelayOption, 1);
 	stream.setVersion(SYNC_DATASTREAM_VERSION);
-	connect(sock, SIGNAL(readyRead()), this, SLOT(receiveMessage()));
-	connect(sock, SIGNAL(disconnected()), this, SLOT(sockDisconnected()));
+	connect(sock, &QAbstractSocket::readyRead, this, &SyncRemotePeer::receiveMessage);
+	connect(sock, &QAbstractSocket::disconnected, this, &SyncRemotePeer::sockDisconnected);
 #if (QT_VERSION>=QT_VERSION_CHECK(5,15,0))
-	connect(sock, SIGNAL(errorOccurred(QAbstractSocket::SocketError)), this, SLOT(sockError(QAbstractSocket::SocketError)));
+	connect(sock, &QAbstractSocket::errorOccurred, this, &SyncRemotePeer::sockError);
 #else
-	connect(sock, SIGNAL(error(QAbstractSocket::SocketError)), this, SLOT(sockError(QAbstractSocket::SocketError)));
+	connect(sock, qOverload<QAbstractSocket::SocketError>(&QAbstractSocket::error), this, &SyncRemotePeer::sockError);
 #endif
-	connect(sock, SIGNAL(stateChanged(QAbstractSocket::SocketState)), this, SLOT(sockStateChanged(QAbstractSocket::SocketState)));
+	connect(sock, &QAbstractSocket::stateChanged, this, &SyncRemotePeer::sockStateChanged);
 
 	// silence CoverityScan...
         msgHeader.msgType=SyncProtocol::SYNC_ERROR;

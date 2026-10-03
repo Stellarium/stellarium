@@ -74,7 +74,7 @@ public:
 		SolarLunarPosition    = 0x01000000, //!< Show Solar and Lunar horizontal position (on Earth location only)
 		Script                = 0x02000000, //!< Should be used by Scripts only which can inject extraInfoStrings.
 		DebugAid              = 0x04000000, //!< Can be used for development only, place messages into extraInfoStrings. Comment them away or delete for releases.
-		NoFont                = 0x08000000,
+		//NoFont                = 0x08000000,
 		PlainText             = 0x10000000  //!< Strip HTML tags from output
 	};
 	Q_DECLARE_FLAGS(InfoStringGroup, InfoStringGroupFlags)

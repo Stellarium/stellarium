@@ -9,17 +9,17 @@
 # NSP6213 YT, 2024
 # Ruslan Kabatsaev, 2025
 # Alexander V. Wolf <alex.v.wolf@gmail.com>, 2026
-# Worachate Boonplod, 2026
 # cardinot <mcardinot@gmail.com>, 2026
+# Worachate Boonplod, 2026
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2026-09-11 17:56+0700\n"
+"POT-Creation-Date: 2026-09-14 20:34+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
-"Last-Translator: cardinot <mcardinot@gmail.com>, 2026\n"
+"Last-Translator: Worachate Boonplod, 2026\n"
 "Language-Team: Thai (https://app.transifex.com/stellarium/teams/80998/th/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -786,7 +786,7 @@ msgstr "จุดตรงข้ามดวงอาทิตย์"
 
 #. TRANSLATORS: Center of the umbra
 #: src/core/modules/GridLinesMgr.cpp:1615
-#: plugins/Satellites/src/Satellites.cpp:3440
+#: plugins/Satellites/src/Satellites.cpp:3467
 msgid "C.U."
 msgstr "ศูนย์กลางเงามืด"
 
@@ -1408,7 +1408,7 @@ msgstr "เส้นผ่านศูนย์กลาง"
 #: src/core/modules/Planet.cpp:1565 src/core/modules/Comet.cpp:229
 #: src/core/modules/Comet.cpp:239 src/gui/StelGuiItems.cpp:1008
 #: src/gui/AstroCalcDialog.cpp:3532 src/gui/AstroCalcDialog.cpp:4101
-#: src/gui/AstroCalcDialog.cpp:8938 plugins/Satellites/src/Satellites.cpp:3440
+#: src/gui/AstroCalcDialog.cpp:8938 plugins/Satellites/src/Satellites.cpp:3467
 #: plugins/Satellites/src/Satellite.cpp:359
 #: plugins/Satellites/src/Satellite.cpp:403
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1198
@@ -3124,7 +3124,7 @@ msgstr "อังกฤษ"
 #. TRANSLATORS: Satellite group: Satellites belonging to the Planet satellites
 #. TRANSLATORS: CelesTrak source [Planet]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=planet&FORMAT=csv
-#: src/core/modules/Planet.cpp:140 plugins/Satellites/src/Satellites.cpp:3848
+#: src/core/modules/Planet.cpp:140 plugins/Satellites/src/Satellites.cpp:3871
 msgid "planet"
 msgstr "ดาวเคราะห์"
 
@@ -3515,7 +3515,7 @@ msgstr "จุดศูนย์กลาง"
 #: src/core/modules/Planet.cpp:1491 src/gui/AstroCalcDialog.cpp:4011
 #: src/ui_astroCalcDialog.h:2724
 msgid "Eclipse magnitude"
-msgstr "ขนาดอุปราคา"
+msgstr "สัดส่วนอุปราคา"
 
 #: src/core/modules/Planet.cpp:1494
 msgid "Eclipse obscuration"
@@ -3577,11 +3577,11 @@ msgstr "ความกว้างของเงามืด"
 
 #: src/core/modules/Planet.cpp:1580
 msgid "Penumbral eclipse magnitude"
-msgstr "ขนาดคราสเงามัว"
+msgstr "สัดส่วนอุปราคาเงามัว"
 
 #: src/core/modules/Planet.cpp:1583
 msgid "Umbral eclipse magnitude"
-msgstr "ขนาดคราสเงามืด"
+msgstr "สัดส่วนอุปราคาเงามืด"
 
 #: src/core/modules/Planet.cpp:1590 src/core/modules/Planet.cpp:1934
 #: src/gui/ViewDialog.cpp:1105
@@ -3795,7 +3795,7 @@ msgstr "จุดใต้ดวงอาทิตย์ที่%1มีลอ�
 #, qt-format
 msgctxt "planet narration"
 msgid "We have a Solar eclipse of magnitude %1"
-msgstr "เกิดสุริยุปราคาที่มีขนาด %1"
+msgstr "เกิดสุริยุปราคาที่มีสัดส่วน %1"
 
 #: src/core/modules/Planet.cpp:1849
 #, qt-format
@@ -3867,13 +3867,13 @@ msgstr "ความกว้างของเงามืดเท่ากั
 #, qt-format
 msgctxt "planet narration"
 msgid "The penumbral eclipse magnitude is %1 percent"
-msgstr "ขนาดของอุปราคาเงามัวเท่ากับ %1 เปอร์เซ็นต์"
+msgstr "สัดส่วนอุปราคาเงามัวเท่ากับ %1 เปอร์เซ็นต์"
 
 #: src/core/modules/Planet.cpp:1928
 #, qt-format
 msgctxt "planet narration"
 msgid "The umbral eclipse magnitude is %1 percent"
-msgstr "ขนาดของอุปราคาเงามืดเท่ากับ %1 เปอร์เซ็นต์"
+msgstr "สัดส่วนอุปราคาเงามืดเท่ากับ %1 เปอร์เซ็นต์"
 
 #: src/core/modules/Planet.cpp:1945
 msgid "Discovered"
@@ -6437,7 +6437,7 @@ msgstr "สัญญาอนุญาตศิลปะเสรี สาม�
 #: plugins/Novae/src/gui/NovaeDialog.cpp:115
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:119
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:132
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:137
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:135
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:209
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:289
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:149
@@ -7251,22 +7251,22 @@ msgstr "เสียง"
 #: src/gui/ConfigurationDialog.cpp:548
 msgctxt "GUI alignment"
 msgid "Bottom-left"
-msgstr ""
+msgstr "ซ้ายล่าง"
 
 #: src/gui/ConfigurationDialog.cpp:549
 msgctxt "GUI alignment"
 msgid "Bottom-right"
-msgstr ""
+msgstr "ขวาล่าง"
 
 #: src/gui/ConfigurationDialog.cpp:550
 msgctxt "GUI alignment"
 msgid "Top-left"
-msgstr ""
+msgstr "ซ้ายบน"
 
 #: src/gui/ConfigurationDialog.cpp:551
 msgctxt "GUI alignment"
 msgid "Top-right"
-msgstr ""
+msgstr "ขวาบน"
 
 #: src/gui/ConfigurationDialog.cpp:1036
 msgid "Select screenshot directory"
@@ -7306,7 +7306,7 @@ msgstr "กิตติกรรมประกาศ"
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:778
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:276
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:299
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:138
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:136
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:210
 #: plugins/Planes/src/gui/PlanesDialog.cpp:248
 #: plugins/TimeNavigator/src/gui/TimeNavigatorDialog.cpp:271
@@ -7329,7 +7329,7 @@ msgstr "ติดต่อ"
 #: plugins/Novae/src/gui/NovaeDialog.cpp:114
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:118
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:131
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:136
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:134
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:208
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:288
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:148
@@ -8011,7 +8011,7 @@ msgstr "การบูรณาการอย่างต่อเนื่อ
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:780
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:281
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:258
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:140
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:138
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:212
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:291
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:197
@@ -8412,7 +8412,7 @@ msgstr "อัตราสูงสุดเท่าที่เคยมีม
 #: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp:941
 msgctxt "Unknown date (year)"
 msgid "Unknown"
-msgstr ""
+msgstr "ไม่ทราบ"
 
 #: src/gui/ViewDialog.cpp:2319
 msgctxt "magnitude algorithm"
@@ -9166,13 +9166,13 @@ msgstr "ซารอส"
 #: src/gui/AstroCalcDialog.cpp:2705
 msgctxt "column name"
 msgid "Penumbral eclipse magnitude"
-msgstr "ขนาดคราสเงามัว"
+msgstr "สัดส่วนอุปราคาเงามัว"
 
 #. TRANSLATORS: The name of column in AstroCalc/Eclipses tool
 #: src/gui/AstroCalcDialog.cpp:2707
 msgctxt "column name"
 msgid "Umbral eclipse magnitude"
-msgstr "ขนาดคราสเงามืด"
+msgstr "สัดส่วนอุปราคาเงามืด"
 
 #. TRANSLATORS: Visibility conditions; the name of column in
 #. AstroCalc/Eclipses tool
@@ -9276,14 +9276,14 @@ msgid ""
 "Penumbral magnitude is the fraction of the Moon's diameter immersed in the "
 "penumbra"
 msgstr ""
-"ขนาดอุปราคาเงามัวคือสัดส่วนตามแนวเส้นผ่านศูนย์กลางของดวงจันทร์ที่ถูกเงามัวของโลกบัง"
+"สัดส่วนอุปราคาเงามัวคืออัตราส่วนตามแนวเส้นผ่านศูนย์กลางของดวงจันทร์ที่ถูกเงามัวของโลกบัง"
 
 #: src/gui/AstroCalcDialog.cpp:3044
 msgid ""
 "Umbral magnitude is the fraction of the Moon's diameter immersed in the "
 "umbra"
 msgstr ""
-"ขนาดอุปราคาเงามืดคือสัดส่วนตามแนวเส้นผ่านศูนย์กลางของดวงจันทร์ที่ถูกเงามืดของโลกบัง"
+"สัดส่วนอุปราคาเงามืดคืออัตราส่วนตามแนวเส้นผ่านศูนย์กลางของดวงจันทร์ที่ถูกเงามืดของโลกบัง"
 
 #: src/gui/AstroCalcDialog.cpp:3159
 msgid "Moon enters penumbra"
@@ -9365,7 +9365,7 @@ msgstr "ลำดับเหตุการณ์ของจันทรุป
 #: src/gui/AstroCalcDialog.cpp:3319
 msgctxt "column name"
 msgid "Eclipse Magnitude"
-msgstr "ขนาดอุปราคา"
+msgstr "สัดส่วนอุปราคา"
 
 #. TRANSLATORS: The name of column in AstroCalc/Eclipses tool
 #: src/gui/AstroCalcDialog.cpp:3321
@@ -9417,7 +9417,7 @@ msgstr "ผสม"
 msgid ""
 "Eclipse magnitude is the fraction of the Sun's diameter obscured by the Moon"
 msgstr ""
-"ขนาดอุปราคาคือสัดส่วนตามแนวเส้นผ่านศูนย์กลางของดวงอาทิตย์ที่ถูกดวงจันทร์บัง"
+"สัดส่วนอุปราคาคืออัตราส่วนตามแนวเส้นผ่านศูนย์กลางของดวงอาทิตย์ที่ถูกดวงจันทร์บัง"
 
 #: src/gui/AstroCalcDialog.cpp:3699
 msgid "Sun's altitude at greatest eclipse"
@@ -9445,22 +9445,22 @@ msgstr "ระยะเวลา"
 #: src/gui/AstroCalcDialog.cpp:3995 src/gui/AstroCalcDialog.cpp:4195
 #: src/ui_astroCalcDialog.h:2725
 msgid "Partial eclipse begins"
-msgstr ""
+msgstr "เริ่มสุริยุปราคาบางส่วน"
 
 #: src/gui/AstroCalcDialog.cpp:4007 src/gui/AstroCalcDialog.cpp:4200
 #: src/ui_astroCalcDialog.h:2721
 msgid "Umbral total or annular eclipse begins"
-msgstr ""
+msgstr "เริ่มสุริยุปราคาเต็มดวงหรือวงแหวน"
 
 #: src/gui/AstroCalcDialog.cpp:4022 src/gui/AstroCalcDialog.cpp:4210
 #: src/ui_astroCalcDialog.h:2726
 msgid "Umbral total or annular eclipse ends"
-msgstr ""
+msgstr "สิ้นสุดสุริยุปราคาเต็มดวงหรือวงแหวน"
 
 #: src/gui/AstroCalcDialog.cpp:4031 src/gui/AstroCalcDialog.cpp:4215
 #: src/ui_astroCalcDialog.h:2723
 msgid "Partial eclipse ends"
-msgstr ""
+msgstr "สิ้ันสุดสุริยุปราคาบางส่วน"
 
 #: src/gui/AstroCalcDialog.cpp:4036
 msgid "Duration of total or annular eclipse"
@@ -15657,6 +15657,8 @@ msgid ""
 "Twinkle is caused by atmospheric turbulence. This option forces its display "
 "regardless of atmosphere (for artistic purpose)."
 msgstr ""
+"การกะพริบเกิดจากความปั่นป่วนในบรรยากาศ "
+"ตัวเลือกนี้จะแสดงดาวกะพริบโดยไม่คำนึงถึงบรรยากาศ (เพื่อความสวยงาม)"
 
 #: src/ui_viewDialog.h:4458
 msgid "even without atmosphere"
@@ -16759,17 +16761,17 @@ msgstr "ความหนาแน่นของกริด:"
 #: src/ui_viewDialog.h:5291
 msgctxt "grid density"
 msgid "Fine"
-msgstr ""
+msgstr "ละเอียด"
 
 #: src/ui_viewDialog.h:5292
 msgctxt "grid density"
 msgid "Normal"
-msgstr ""
+msgstr "ปรกติ"
 
 #: src/ui_viewDialog.h:5293
 msgctxt "grid density"
 msgid "Coarse"
-msgstr ""
+msgstr "หยาบ"
 
 #: src/ui_viewDialog.h:5296
 msgid "Select grid line spacing density"
@@ -16789,7 +16791,7 @@ msgstr "ความหนาของเส้นสำหรับส่วน
 
 #: src/ui_viewDialog.h:5308
 msgid "Partitions thickness:"
-msgstr ""
+msgstr "ความหนาของส่วนย่อย:"
 
 #: src/ui_viewDialog.h:5313
 msgid "Size of celestial points in pixels"
@@ -17183,7 +17185,7 @@ msgstr "กลับสี"
 
 #: src/ui_viewDialog.h:5547
 msgid "Show atmospheric extinction"
-msgstr ""
+msgstr "แสดงการสูญหายโดยบรรยากาศ"
 
 #: src/ui_viewDialog.h:5548 src/ui_tonemappingDialog.h:153
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:530
@@ -17193,7 +17195,7 @@ msgstr "ตั้งใหม่"
 
 #: src/ui_viewDialog.h:5549
 msgid "Reset all"
-msgstr ""
+msgstr "ตั้งใหม่ทั้งหมด"
 
 #: src/ui_configurationDialog.h:2363
 msgid "Configuration"
@@ -17390,7 +17392,7 @@ msgstr "ทิศทางที่คุณต้องการเมื่อ
 
 #: src/ui_configurationDialog.h:2443
 msgid "Selected object information for display"
-msgstr ""
+msgstr "ขัอมูลที่เลือกสำหรับแสดงผล"
 
 #: src/ui_configurationDialog.h:2445
 msgid "Display all information available"
@@ -17607,11 +17609,11 @@ msgstr "อักษรย่อสำหรับหน่วยของคว
 
 #: src/ui_configurationDialog.h:2611
 msgid "Using decimal degrees for coordinates"
-msgstr ""
+msgstr "ใช้องศาแบบทศนิยมสำหรับพิกัด"
 
 #: src/ui_configurationDialog.h:2613
 msgid "Use decimal degrees (coordinates)"
-msgstr ""
+msgstr "ใช้องศาแบบทศนิยม (พิกัด)"
 
 #: src/ui_configurationDialog.h:2615
 msgid "Use common symbols for coordinate systems"
@@ -17653,11 +17655,11 @@ msgstr "มุมทิศจากทิศใต้"
 
 #: src/ui_configurationDialog.h:2632
 msgid "Using decimal degrees in various places, except the coordinates"
-msgstr ""
+msgstr "ใช้องศาแบบทศนิยมเป็นหลัก ยกเว้นพิกัด"
 
 #: src/ui_configurationDialog.h:2634
 msgid "Use decimal degrees (other)"
-msgstr ""
+msgstr "ใช้องศาแบบทศนิยม (อื่น ๆ)"
 
 #: src/ui_configurationDialog.h:2635
 msgid "Show additional buttons"
@@ -18066,7 +18068,7 @@ msgstr "เก็บการตั้งค่าแบบอักษร"
 
 #: src/ui_configurationDialog.h:2849
 msgid "Toolbar location:"
-msgstr ""
+msgstr "ตำแหน่งของแถบเครื่องมือ:"
 
 #: src/ui_configurationDialog.h:2851
 msgid "Corner of the screen where both toolbar bars are docked"
@@ -18142,11 +18144,11 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:2882
 msgid "Pitch:"
-msgstr ""
+msgstr "ระดับเสียง:"
 
 #: src/ui_configurationDialog.h:2883
 msgid "Rate:"
-msgstr ""
+msgstr "อัตรา:"
 
 #: src/ui_configurationDialog.h:2884
 msgid "Volume:"
@@ -19086,7 +19088,7 @@ msgstr "ความหนาของเส้นแสดงตำแหน่
 
 #: src/ui_astroCalcExtraEphemerisDialog.h:264
 msgid "Date format"
-msgstr ""
+msgstr "รูปแบบวันที่"
 
 #: src/ui_astroCalcExtraEphemerisDialog.h:266
 #: src/ui_astroCalcAlmanacWidget.h:1028
@@ -19096,20 +19098,20 @@ msgstr "ปี"
 
 #: src/ui_astroCalcExtraEphemerisDialog.h:269
 msgid "Hour"
-msgstr ""
+msgstr "ชั่วโมง"
 
 #: src/ui_astroCalcExtraEphemerisDialog.h:270
 #: plugins/TelescopeControl/src/INDI/ui_INDIControlWidget.h:176
 msgid "Min"
-msgstr "ต่ำสุด"
+msgstr "นาที"
 
 #: src/ui_astroCalcExtraEphemerisDialog.h:271
 msgid "Sec"
-msgstr ""
+msgstr "วินาที"
 
 #: src/ui_astroCalcExtraEphemerisDialog.h:272
 msgid "Smart format"
-msgstr ""
+msgstr "รูปแบบอัจฉริยะ"
 
 #: src/ui_astroCalcCustomStepsDialog.h:208
 msgid "Custom interval"
@@ -19122,11 +19124,11 @@ msgstr "หน่วยของการวัด:"
 #: src/ui_astroCalcCustomStepsDialog.h:213
 #: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1210
 msgid "Solar altitude:"
-msgstr ""
+msgstr "มุมเงยของดวงอาทิตย์:"
 
 #: src/ui_astroCalcCustomStepsDialog.h:214
 msgid "Twilight:"
-msgstr ""
+msgstr "สนธยา:"
 
 #: src/ui_astroCalcAlmanacWidget.h:962
 msgid "Morning nautical twilight"
@@ -21227,7 +21229,7 @@ msgstr "ใช้หน่วยองศาและลิปดาสำหร
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1540
 msgid "Show center of CCD"
-msgstr ""
+msgstr "แสดงจุดศูนย์กลางของซีซีดี"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1541
 msgid "Telrad view"
@@ -21588,38 +21590,38 @@ msgid "Loading TLE"
 msgstr "กำลังโหลด TLE"
 
 #. TRANSLATORS: Satellite group: Communication satellites
-#: plugins/Satellites/src/Satellites.cpp:3778
+#: plugins/Satellites/src/Satellites.cpp:3801
 msgid "communications"
 msgstr "สื่อสาร"
 
 #. TRANSLATORS: Satellite group: Navigation satellites
-#: plugins/Satellites/src/Satellites.cpp:3780
+#: plugins/Satellites/src/Satellites.cpp:3803
 msgid "navigation"
 msgstr "นำทาง"
 
 #. TRANSLATORS: Satellite group: Scientific satellites
-#: plugins/Satellites/src/Satellites.cpp:3782
+#: plugins/Satellites/src/Satellites.cpp:3805
 msgid "scientific"
 msgstr "วิทยาศาสตร์"
 
 #. TRANSLATORS: Satellite group: Earth Resources satellites
-#: plugins/Satellites/src/Satellites.cpp:3784
+#: plugins/Satellites/src/Satellites.cpp:3807
 msgid "earth resources"
 msgstr "สำรวจทรัพยากรโลก"
 
 #. TRANSLATORS: Satellite group: Satellites in geostationary orbit
-#: plugins/Satellites/src/Satellites.cpp:3786
+#: plugins/Satellites/src/Satellites.cpp:3809
 msgid "geostationary"
 msgstr "ค้างฟ้า"
 
 #. TRANSLATORS: Satellite group: Satellites that are no longer functioning
-#: plugins/Satellites/src/Satellites.cpp:3788
+#: plugins/Satellites/src/Satellites.cpp:3811
 msgid "non-operational"
 msgstr "ยุติการทำงาน"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the space
 #. observatories
-#: plugins/Satellites/src/Satellites.cpp:3790
+#: plugins/Satellites/src/Satellites.cpp:3813
 msgid "observatory"
 msgstr "หอสังเกตการณ์"
 
@@ -21627,7 +21629,7 @@ msgstr "หอสังเกตการณ์"
 #. System (IRNSS) is an autonomous regional satellite navigation system being
 #. developed by the Indian Space Research Organisation (ISRO) which would be
 #. under complete control of the Indian government.
-#: plugins/Satellites/src/Satellites.cpp:3792
+#: plugins/Satellites/src/Satellites.cpp:3815
 msgid "irnss"
 msgstr "ไออาร์เอนเอสเอส"
 
@@ -21635,100 +21637,100 @@ msgstr "ไออาร์เอนเอสเอส"
 #. a proposed three-satellite regional time transfer system and Satellite
 #. Based Augmentation System for the Global Positioning System, that would be
 #. receivable within Japan.
-#: plugins/Satellites/src/Satellites.cpp:3794
+#: plugins/Satellites/src/Satellites.cpp:3817
 msgid "qzss"
 msgstr "คิวแซดเอสเอส"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the COSMOS satellites
-#: plugins/Satellites/src/Satellites.cpp:3796
+#: plugins/Satellites/src/Satellites.cpp:3819
 msgid "cosmos"
 msgstr "คอสมอส"
 
 #. TRANSLATORS: Satellite group: Debris of satellites
-#: plugins/Satellites/src/Satellites.cpp:3798
+#: plugins/Satellites/src/Satellites.cpp:3821
 msgid "debris"
 msgstr "ซาก"
 
 #. TRANSLATORS: Satellite group: Crewed satellites
-#: plugins/Satellites/src/Satellites.cpp:3800
+#: plugins/Satellites/src/Satellites.cpp:3823
 msgid "crewed"
 msgstr "มีมนุษย์"
 
 #. TRANSLATORS: Satellite group: Satellites of ISS resupply missions
-#: plugins/Satellites/src/Satellites.cpp:3802
+#: plugins/Satellites/src/Satellites.cpp:3825
 msgid "resupply"
 msgstr "การส่งเสบียง"
 
 #. TRANSLATORS: Satellite group: are known to broadcast TV signals
-#: plugins/Satellites/src/Satellites.cpp:3804
+#: plugins/Satellites/src/Satellites.cpp:3827
 msgid "tv"
 msgstr "โทรทัศน์"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GONETS satellites
-#: plugins/Satellites/src/Satellites.cpp:3806
+#: plugins/Satellites/src/Satellites.cpp:3829
 msgid "gonets"
 msgstr "โกเนตส์"
 
 #. TRANSLATORS: Satellite group: Last 30 Days' Launches
 #. TRANSLATORS: CelesTrak source [Last 30 Days' Launches]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=last-30-days&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3812
+#: plugins/Satellites/src/Satellites.cpp:3835
 msgid "last-30-days"
 msgstr "30 วันที่ผ่านมา"
 
 #. TRANSLATORS: Satellite group: Space stations
 #. TRANSLATORS: CelesTrak source [Space Stations]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=stations&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3815
+#: plugins/Satellites/src/Satellites.cpp:3838
 msgid "stations"
 msgstr "สถานีอวกาศ"
 
 #. TRANSLATORS: Satellite group: Bright/naked-eye-visible satellites
 #. TRANSLATORS: CelesTrak source [100 (or so) Brightest]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=visual&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3818
+#: plugins/Satellites/src/Satellites.cpp:3841
 msgid "visual"
 msgstr "เห็นได้"
 
 #. TRANSLATORS: Satellite group: Active Satellites
 #. TRANSLATORS: CelesTrak source [Active Satellites]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=active&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3821
+#: plugins/Satellites/src/Satellites.cpp:3844
 msgid "active"
 msgstr "ปฏิบัติงานอยู่"
 
 #. TRANSLATORS: Satellite group: Analyst Satellites
 #. TRANSLATORS: CelesTrak source [Analyst Satellites]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=analyst&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3824
+#: plugins/Satellites/src/Satellites.cpp:3847
 msgid "analyst"
 msgstr "วิเคราะห์"
 
 #. TRANSLATORS: Satellite group: Weather (meteorological) satellites
 #. TRANSLATORS: CelesTrak source [Weather]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=weather&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3830
+#: plugins/Satellites/src/Satellites.cpp:3853
 msgid "weather"
 msgstr "สภาพอากาศ"
 
 #. TRANSLATORS: Satellite group: Earth Resources satellites
 #. TRANSLATORS: CelesTrak source [Earth Resources]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=resource&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3833
+#: plugins/Satellites/src/Satellites.cpp:3856
 msgid "resource"
 msgstr "ทรัพยากร"
 
 #. TRANSLATORS: Satellite group: Search & Rescue (SARSAT) satellites
 #. TRANSLATORS: CelesTrak source [Search & Rescue (SARSAT)]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=sarsat&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3836
+#: plugins/Satellites/src/Satellites.cpp:3859
 msgid "sarsat"
 msgstr "ค้นหาและกู้ภัย"
 
 #. TRANSLATORS: Satellite group: Disaster Monitoring satellites
 #. TRANSLATORS: CelesTrak source [Disaster Monitoring]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=dmc&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3839
+#: plugins/Satellites/src/Satellites.cpp:3862
 msgid "dmc"
 msgstr "ติดตามภัยพิบัติ"
 
@@ -21738,14 +21740,14 @@ msgstr "ติดตามภัยพิบัติ"
 #. TRANSLATORS: CelesTrak source [Tracking and Data Relay Satellite System
 #. (TDRSS)]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=tdrss&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3842
+#: plugins/Satellites/src/Satellites.cpp:3865
 msgid "tdrss"
 msgstr "ทีดีอาร์เอสเอส"
 
 #. TRANSLATORS: Satellite group: ARGOS Data Collection System satellites
 #. TRANSLATORS: CelesTrak source [ARGOS Data Collection System]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=argos&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3845
+#: plugins/Satellites/src/Satellites.cpp:3868
 msgid "argos"
 msgstr "อาร์กอส"
 
@@ -21753,36 +21755,22 @@ msgstr "อาร์กอส"
 #. constellation (LEMUR satellites)
 #. TRANSLATORS: CelesTrak source [Spire]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=spire&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3851
+#: plugins/Satellites/src/Satellites.cpp:3874
 msgid "spire"
 msgstr "สไปร์"
 
 #. TRANSLATORS: Satellite group: Active Geosynchronous Satellites
 #. TRANSLATORS: CelesTrak source [Active Geosynchronous]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=geo&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3857
+#: plugins/Satellites/src/Satellites.cpp:3880
 msgid "geo"
 msgstr "พ้องคาบโลก"
-
-#. TRANSLATORS: Satellite group: GEO Protected Zone
-#. TRANSLATORS: CelesTrak source [GEO Protected Zone]:
-#. https://celestrak.org/NORAD/elements/gp.php?SPECIAL=gpz&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3860
-msgid "gpz"
-msgstr "จีพีแซด"
-
-#. TRANSLATORS: Satellite group: GEO Protected Zone Plus
-#. TRANSLATORS: CelesTrak source [GEO Protected Zone Plus]:
-#. https://celestrak.org/NORAD/elements/gp.php?SPECIAL=gpz-plus&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3863
-msgid "gpz-plus"
-msgstr "จีพีแซด-พลัส"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the INTELSAT
 #. satellites
 #. TRANSLATORS: CelesTrak source [Intelsat]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=intelsat&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3866
+#: plugins/Satellites/src/Satellites.cpp:3883
 msgid "intelsat"
 msgstr "อินเทลแซต"
 
@@ -21790,14 +21778,14 @@ msgstr "อินเทลแซต"
 #. satellites
 #. TRANSLATORS: CelesTrak source [Intelsat]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=eutelsat&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3869
+#: plugins/Satellites/src/Satellites.cpp:3886
 msgid "eutelsat"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the SES satellites
 #. TRANSLATORS: CelesTrak source [SES]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=ses&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3872
+#: plugins/Satellites/src/Satellites.cpp:3889
 msgid "ses"
 msgstr "เซส"
 
@@ -21805,7 +21793,7 @@ msgstr "เซส"
 #. constellation (Iridium is a proper name)
 #. TRANSLATORS: CelesTrak source [Iridium NEXT]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=iridium-NEXT&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3875
+#: plugins/Satellites/src/Satellites.cpp:3892
 msgid "iridium-NEXT"
 msgstr "อิริเดียม-เนกซ์"
 
@@ -21813,7 +21801,7 @@ msgstr "อิริเดียม-เนกซ์"
 #. constellation (Starlink is a proper name)
 #. TRANSLATORS: CelesTrak source [Starlink]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=starlink&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3878
+#: plugins/Satellites/src/Satellites.cpp:3895
 msgid "starlink"
 msgstr "สตาร์ลิงก์"
 
@@ -21821,7 +21809,7 @@ msgstr "สตาร์ลิงก์"
 #. constellation (OneWeb is a proper name)
 #. TRANSLATORS: CelesTrak source [OneWeb]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=oneweb&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3881
+#: plugins/Satellites/src/Satellites.cpp:3898
 msgid "oneweb"
 msgstr "วันเว็บ"
 
@@ -21829,7 +21817,7 @@ msgstr "วันเว็บ"
 #. satellites
 #. TRANSLATORS: CelesTrak source [Orbcomm]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=orbcomm&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3884
+#: plugins/Satellites/src/Satellites.cpp:3901
 msgid "orbcomm"
 msgstr "ออร์ปคอม"
 
@@ -21837,28 +21825,28 @@ msgstr "ออร์ปคอม"
 #. satellites
 #. TRANSLATORS: CelesTrak source [Globalstar]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=globalstar&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3887
+#: plugins/Satellites/src/Satellites.cpp:3904
 msgid "globalstar"
 msgstr "โกลบอลสตาร์"
 
 #. TRANSLATORS: Satellite group: Amateur radio (ham) satellites
 #. TRANSLATORS: CelesTrak source [Amateur Radio]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=amateur&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3890
+#: plugins/Satellites/src/Satellites.cpp:3907
 msgid "amateur"
 msgstr "วิทยุสมัครเล่น"
 
 #. TRANSLATORS: Satellite group: Experimental communication satellites
 #. TRANSLATORS: CelesTrak source [Experimental]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=x-comm&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3893
+#: plugins/Satellites/src/Satellites.cpp:3910
 msgid "x-comm"
 msgstr "เอกซ์-คอมม์"
 
 #. TRANSLATORS: Satellite group: Other communication satellites
 #. TRANSLATORS: CelesTrak source [Other Comm]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=other-comm&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3896
+#: plugins/Satellites/src/Satellites.cpp:3913
 msgid "other-comm"
 msgstr "สื่อสารอื่น ๆ"
 
@@ -21866,7 +21854,7 @@ msgstr "สื่อสารอื่น ๆ"
 #. satellites
 #. TRANSLATORS: CelesTrak source [SatNOGS]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=satnogs&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3899
+#: plugins/Satellites/src/Satellites.cpp:3916
 msgid "satnogs"
 msgstr "แซตนอกส์"
 
@@ -21874,7 +21862,7 @@ msgstr "แซตนอกส์"
 #. constellation (Qianfan is a proper name)
 #. TRANSLATORS: CelesTrak source [Qianfan]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=qianfan&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3902
+#: plugins/Satellites/src/Satellites.cpp:3919
 msgid "qianfan"
 msgstr ""
 
@@ -21882,35 +21870,35 @@ msgstr ""
 #. constellation (Hulianwang is a proper name)
 #. TRANSLATORS: CelesTrak source [Hulianwang Digui]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=hulianwang&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3905
+#: plugins/Satellites/src/Satellites.cpp:3922
 msgid "hulianwang"
 msgstr ""
 
 #. TRANSLATORS: CelesTrak source [Kuiper]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=kuiper&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3907
+#: plugins/Satellites/src/Satellites.cpp:3924
 msgid "kuiper"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Yamal satellites
-#: plugins/Satellites/src/Satellites.cpp:3909
+#: plugins/Satellites/src/Satellites.cpp:3926
 msgid "yamal"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Gorizont
 #. satellites
-#: plugins/Satellites/src/Satellites.cpp:3911
+#: plugins/Satellites/src/Satellites.cpp:3928
 msgid "gorizont"
 msgstr "กอริซอนต์"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Raduga satellites
-#: plugins/Satellites/src/Satellites.cpp:3913
+#: plugins/Satellites/src/Satellites.cpp:3930
 msgid "raduga"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Molniya
 #. satellites
-#: plugins/Satellites/src/Satellites.cpp:3915
+#: plugins/Satellites/src/Satellites.cpp:3932
 msgid "molniya"
 msgstr "โมลนียา"
 
@@ -21919,13 +21907,13 @@ msgstr "โมลนียา"
 #. https://celestrak.org/NORAD/elements/gnss.txt
 #. TRANSLATORS: CelesTrak source [GNSS]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=gnss&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3922
+#: plugins/Satellites/src/Satellites.cpp:3939
 msgid "gnss"
 msgstr "จีเอ็นเอสเอส"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GPS constellation
 #. (the Global Positioning System)
-#: plugins/Satellites/src/Satellites.cpp:3924
+#: plugins/Satellites/src/Satellites.cpp:3941
 msgid "gps"
 msgstr "จีพีเอส"
 
@@ -21933,13 +21921,13 @@ msgstr "จีพีเอส"
 #. (the Global Positioning System)
 #. TRANSLATORS: CelesTrak source [GPS Operational]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=gps-ops&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3927
+#: plugins/Satellites/src/Satellites.cpp:3944
 msgid "gps-ops"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GLONASS
 #. constellation (GLObal NAvigation Satellite System)
-#: plugins/Satellites/src/Satellites.cpp:3929
+#: plugins/Satellites/src/Satellites.cpp:3946
 msgid "glonass"
 msgstr "โกลนาส"
 
@@ -21947,7 +21935,7 @@ msgstr "โกลนาส"
 #. constellation (GLObal NAvigation Satellite System)
 #. TRANSLATORS: CelesTrak supplemental source [GLONASS Operational]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=glo-ops&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3932
+#: plugins/Satellites/src/Satellites.cpp:3949
 msgid "glo-ops"
 msgstr ""
 
@@ -21955,7 +21943,7 @@ msgstr ""
 #. constellation (global navigation satellite system by the European Union)
 #. TRANSLATORS: CelesTrak source [Galileo]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=galileo&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3935
+#: plugins/Satellites/src/Satellites.cpp:3952
 msgid "galileo"
 msgstr "กาลิเลโอ"
 
@@ -21963,7 +21951,7 @@ msgstr "กาลิเลโอ"
 #. constellation (BeiDou Navigation Satellite System)
 #. TRANSLATORS: CelesTrak source [Beidou]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=beidou&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3938
+#: plugins/Satellites/src/Satellites.cpp:3955
 msgid "beidou"
 msgstr "ไป่ตู้"
 
@@ -21972,154 +21960,154 @@ msgstr "ไป่ตู้"
 #. TRANSLATORS: CelesTrak source [Satellite-Based Augmentation System
 #. (WAAS/EGNOS/MSAS)]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=sbas&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3941
+#: plugins/Satellites/src/Satellites.cpp:3958
 msgid "sbas"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Navy Navigation Satellite System (NNSS)
-#: plugins/Satellites/src/Satellites.cpp:3943
+#: plugins/Satellites/src/Satellites.cpp:3960
 msgid "nnss"
 msgstr "เอ็นเอ็นเอสเอส"
 
 #. TRANSLATORS: Satellite group: Russian LEO Navigation Satellites
-#: plugins/Satellites/src/Satellites.cpp:3945
+#: plugins/Satellites/src/Satellites.cpp:3962
 msgid "musson"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Space & Earth Science satellites
 #. TRANSLATORS: CelesTrak source [Space & Earth Science]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=science&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3951
+#: plugins/Satellites/src/Satellites.cpp:3968
 msgid "science"
 msgstr "วิทยาศาสตร์"
 
 #. TRANSLATORS: Satellite group: Geodetic satellites
-#: plugins/Satellites/src/Satellites.cpp:3953
+#: plugins/Satellites/src/Satellites.cpp:3970
 msgid "geodetic"
 msgstr "ภูมิมาตรศาสตร์"
 
 #. TRANSLATORS: Satellite group: Engineering satellites
 #. TRANSLATORS: CelesTrak source [Engineering]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=engineering&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3956
+#: plugins/Satellites/src/Satellites.cpp:3973
 msgid "engineering"
 msgstr "วิศวกรรม"
 
 #. TRANSLATORS: Satellite group: Education satellites
 #. TRANSLATORS: CelesTrak source [Education]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=education&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3959
+#: plugins/Satellites/src/Satellites.cpp:3976
 msgid "education"
 msgstr "การศึกษา"
 
 #. TRANSLATORS: Satellite group: Military satellites
 #. TRANSLATORS: CelesTrak source [Miscellaneous Military]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=military&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3965
+#: plugins/Satellites/src/Satellites.cpp:3982
 msgid "military"
 msgstr "ทหาร"
 
 #. TRANSLATORS: Satellite group: Radar Calibration satellites
 #. TRANSLATORS: CelesTrak source [Radar Calibration]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=radar&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3968
+#: plugins/Satellites/src/Satellites.cpp:3985
 msgid "radar"
 msgstr "เรดาร์"
 
 #. TRANSLATORS: Satellite group: CubeSats (Cube Satellites)
 #. TRANSLATORS: CelesTrak source [CubeSats]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=cubesat&FORMAT=csv
-#: plugins/Satellites/src/Satellites.cpp:3971
+#: plugins/Satellites/src/Satellites.cpp:3988
 msgid "cubesat"
 msgstr "คิวบ์แซต"
 
 #. TRANSLATORS: Satellite group: Other satellites
-#: plugins/Satellites/src/Satellites.cpp:3973
+#: plugins/Satellites/src/Satellites.cpp:3990
 msgid "other"
 msgstr "อื่น ๆ"
 
 #. TRANSLATORS: Satellite group: Meteosat
-#: plugins/Satellites/src/Satellites.cpp:3979
+#: plugins/Satellites/src/Satellites.cpp:3996
 msgid "meteosat"
 msgstr "มีทีโอแซต"
 
 #. TRANSLATORS: Satellite group: Telesat
-#: plugins/Satellites/src/Satellites.cpp:3982
+#: plugins/Satellites/src/Satellites.cpp:3999
 msgid "telesat"
 msgstr "เทเลแซต"
 
 #. TRANSLATORS: Satellite group: ISS Segments
-#: plugins/Satellites/src/Satellites.cpp:3984
+#: plugins/Satellites/src/Satellites.cpp:4001
 msgid "iss"
 msgstr "สถานีอวกาศนานาชาติ"
 
 #. TRANSLATORS: Satellite group: CPF
-#: plugins/Satellites/src/Satellites.cpp:3986
+#: plugins/Satellites/src/Satellites.cpp:4003
 msgid "cpf"
 msgstr "ซีพีเอฟ"
 
 #. TRANSLATORS: Satellite name: International Space Station
-#: plugins/Satellites/src/Satellites.cpp:3990
+#: plugins/Satellites/src/Satellites.cpp:4007
 msgid "ISS (ZARYA)"
 msgstr "ISS (ZARYA)"
 
 #. TRANSLATORS: Satellite name: International Space Station
-#: plugins/Satellites/src/Satellites.cpp:3992
+#: plugins/Satellites/src/Satellites.cpp:4009
 msgid "ISS (NAUKA)"
 msgstr "ISS (NAUKA)"
 
 #. TRANSLATORS: Satellite name: International Space Station
-#: plugins/Satellites/src/Satellites.cpp:3994
+#: plugins/Satellites/src/Satellites.cpp:4011
 msgid "ISS"
 msgstr "สถานีอวกาศนานาชาติ"
 
 #. TRANSLATORS: Satellite name: Hubble Space Telescope
-#: plugins/Satellites/src/Satellites.cpp:3996
+#: plugins/Satellites/src/Satellites.cpp:4013
 msgid "HST"
 msgstr "HST"
 
 #. TRANSLATORS: Satellite name: Spektr-R Space Observatory (or RadioAstron)
-#: plugins/Satellites/src/Satellites.cpp:3998
+#: plugins/Satellites/src/Satellites.cpp:4015
 msgid "SPEKTR-R"
 msgstr "SPEKTR-R"
 
 #. TRANSLATORS: Satellite name: Spektr-RG Space Observatory
-#: plugins/Satellites/src/Satellites.cpp:4000
+#: plugins/Satellites/src/Satellites.cpp:4017
 msgid "SPEKTR-RG"
 msgstr "SPEKTR-RG"
 
 #. TRANSLATORS: Satellite name: International Gamma-Ray Astrophysics
 #. Laboratory (INTEGRAL)
-#: plugins/Satellites/src/Satellites.cpp:4002
+#: plugins/Satellites/src/Satellites.cpp:4019
 msgid "INTEGRAL"
 msgstr "INTEGRAL"
 
 #. TRANSLATORS: Satellite name: China's first space station name
-#: plugins/Satellites/src/Satellites.cpp:4004
+#: plugins/Satellites/src/Satellites.cpp:4021
 msgid "TIANGONG 1"
 msgstr "เทียนกง 1"
 
 #. TRANSLATORS: Satellite name: name of China's space station module
-#: plugins/Satellites/src/Satellites.cpp:4006
+#: plugins/Satellites/src/Satellites.cpp:4023
 msgid "TIANHE"
 msgstr "เทียนเหอ"
 
 #. TRANSLATORS: Satellite name: China's space station name (with name of base
 #. module)
-#: plugins/Satellites/src/Satellites.cpp:4008
+#: plugins/Satellites/src/Satellites.cpp:4025
 msgid "TIANGONG (TIANHE)"
 msgstr "เทียนกง (เทียนเหอ)"
 
 #. TRANSLATORS: An uplink (UL or U/L) is the link from a ground station to a
 #. satellite
-#: plugins/Satellites/src/Satellites.cpp:4013
+#: plugins/Satellites/src/Satellites.cpp:4030
 msgctxt "comms"
 msgid "uplink"
 msgstr "การเชื่อมโยงขึ้น"
 
 #. TRANSLATORS: A downlink (DL) is the link from a satellite to a ground
 #. station
-#: plugins/Satellites/src/Satellites.cpp:4015
+#: plugins/Satellites/src/Satellites.cpp:4032
 msgctxt "comms"
 msgid "downlink"
 msgstr "การเชื่อมโยงลง"
@@ -22128,7 +22116,7 @@ msgstr "การเชื่อมโยงลง"
 #. which emit one or more signals (normally on a fixed frequency) whose
 #. purpose is twofold: station-keeping information (telemetry) and locates the
 #. satellite (determines its azimuth and elevation) in the sky
-#: plugins/Satellites/src/Satellites.cpp:4017
+#: plugins/Satellites/src/Satellites.cpp:4034
 msgctxt "comms"
 msgid "beacon"
 msgstr ""
@@ -22136,65 +22124,65 @@ msgstr ""
 #. TRANSLATORS: Telemetry is the collection of measurements or other data at
 #. satellites and their automatic transmission to receiving equipment
 #. (telecommunication) for monitoring
-#: plugins/Satellites/src/Satellites.cpp:4019
+#: plugins/Satellites/src/Satellites.cpp:4036
 msgctxt "comms"
 msgid "telemetry"
 msgstr "โทรมาตร"
 
 #. TRANSLATORS: The channel for transmission of video data
-#: plugins/Satellites/src/Satellites.cpp:4021
+#: plugins/Satellites/src/Satellites.cpp:4038
 msgctxt "comms"
 msgid "video"
 msgstr "วีดิทัศน์"
 
 #. TRANSLATORS: The broadband is wide bandwidth data transmission which
 #. transports multiple signals at a wide range of frequencies
-#: plugins/Satellites/src/Satellites.cpp:4023
+#: plugins/Satellites/src/Satellites.cpp:4040
 msgctxt "comms"
 msgid "broadband"
 msgstr "แถบความถี่กว้าง"
 
 #. TRANSLATORS: The channel for transmission of commands
-#: plugins/Satellites/src/Satellites.cpp:4025
+#: plugins/Satellites/src/Satellites.cpp:4042
 msgctxt "comms"
 msgid "command"
 msgstr "ช่องของการส่งคำสั่ง"
 
 #. TRANSLATORS: Meteorological is a service on the satellite for transmitting
 #. meteorological data to a ground station
-#: plugins/Satellites/src/Satellites.cpp:4027
+#: plugins/Satellites/src/Satellites.cpp:4044
 msgctxt "comms"
 msgid "meteorological"
 msgstr "อุตุนิยมวิทยา"
 
 #. TRANSLATORS: Maritime is a service on the satellite
-#: plugins/Satellites/src/Satellites.cpp:4029
+#: plugins/Satellites/src/Satellites.cpp:4046
 msgctxt "comms"
 msgid "maritime"
 msgstr "ภาคพื้นสมุทร"
 
 #. TRANSLATORS: Mobile is a service on the satellite
-#: plugins/Satellites/src/Satellites.cpp:4031
+#: plugins/Satellites/src/Satellites.cpp:4048
 msgctxt "comms"
 msgid "mobile"
 msgstr "เคลื่อนที่"
 
 #. TRANSLATORS: Mobile telephony is a service on the satellite
-#: plugins/Satellites/src/Satellites.cpp:4033
+#: plugins/Satellites/src/Satellites.cpp:4050
 msgctxt "comms"
 msgid "mobile telephony"
 msgstr "โทรศัพท์เคลื่อนที่"
 
 #. TRANSLATORS: A repeater is an electronic device that receives a signal and
 #. retransmits it.
-#: plugins/Satellites/src/Satellites.cpp:4035
+#: plugins/Satellites/src/Satellites.cpp:4052
 msgctxt "comms"
 msgid "repeater"
 msgstr "ทวนสัญญาณ"
 
 #. TRANSLATORS: The digital repeater (or digipiter) is used in channels that
 #. transmit data by binary digital signals
-#: plugins/Satellites/src/Satellites.cpp:4037
+#: plugins/Satellites/src/Satellites.cpp:4054
 msgctxt "comms"
 msgid "digipeater"
 msgstr ""
@@ -22202,23 +22190,23 @@ msgstr ""
 #. TRANSLATORS: A radio band is a small frequency band (a contiguous section
 #. of the range of the radio spectrum) in which channels are usually used or
 #. set aside for the same purpose. S-band for example.
-#: plugins/Satellites/src/Satellites.cpp:4039
+#: plugins/Satellites/src/Satellites.cpp:4056
 msgctxt "comms"
 msgid "-band"
 msgstr ""
 
-#: plugins/Satellites/src/Satellites.cpp:4040
+#: plugins/Satellites/src/Satellites.cpp:4057
 msgctxt "comms"
 msgid "crew voice"
 msgstr "เสียงลูกเรือ"
 
-#: plugins/Satellites/src/Satellites.cpp:4041
+#: plugins/Satellites/src/Satellites.cpp:4058
 msgctxt "comms"
 msgid "imaging"
 msgstr "ถ่ายภาพ"
 
 #. TRANSLATORS: Some mode of communication via radio channel
-#: plugins/Satellites/src/Satellites.cpp:4043
+#: plugins/Satellites/src/Satellites.cpp:4060
 msgctxt "comms"
 msgid "mode"
 msgstr "โหมด"
@@ -26774,55 +26762,55 @@ msgstr "การควบคุมระยะไกล"
 msgid "Remote control config"
 msgstr "การปรับแต่งการควบคุมระยะไกล"
 
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:135
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:133
 msgid "Remote Control Plug-in"
 msgstr "โปรแกรมเสริมการควบคุมระยะไกล"
 
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:143
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:141
 msgid ""
 "The Remote Control plugin provides a web interface to allow state changes "
 "and triggering scripts using a connected webbrowser."
 msgstr ""
 "โปรแกรมเสริมการควบคุมระยะไกลทำหน้าที่ควบคุมหรือเปิดใช้งานสคริปต์ผ่านเว็บเบราว์เซอร์"
 
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:149
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:147
 msgid "It is also possible to send commands via command line, e.g.."
 msgstr "นอกจากนี้่ยังสามารถส่งคำสั่งผ่านคอมมานด์ไลน์หรืออื่น ๆ"
 
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:155
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:153
 msgid "This allows triggering automatic show setups for museums etc."
 msgstr ""
 "การกระทำนี้จะเปิดการใช้งานแบบอัตโนมัติ ตัวอย่างเช่น การแสดงในพิพิธภัณฑ์"
 
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:156
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:154
 msgid "This plugin was developed during ESA SoCiS 2015."
 msgstr "โปรแกรมเสริมนี้พัฒนาขึ้นระหว่าง ESA SoCiS 2015"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:158
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:156
 msgid "This plugin uses the {QtWebApp HTTP server} by Stefan Frings."
 msgstr "โปรแกรมเสริมนี้ใช้ {QtWebApp HTTP server} โดย Stefan Frings"
 
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:160
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:158
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:243
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:239
 #: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:197
 msgid "Publications"
 msgstr "สิ่งตีพิมพ์"
 
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:161
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:159
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:244
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:240
 #: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:198
 msgid "If you use this plugin in your publications, please cite:"
 msgstr "หากคุณใช้โปรแกรมเสริมนี้ในงานตีพิมพ์ของคุณ กรุณาอ้างถึง:"
 
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:206
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:204
 #, qt-format
 msgid "Listening on %1, IP: "
 msgstr "กำลังรับสัญญาณ %1, IP: "
 
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:211
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:209
 msgid "Not active."
 msgstr "ไม่ทำงาน"
 
@@ -32076,7 +32064,7 @@ msgstr ""
 #: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp:1256
 msgctxt "celestial object visibility period"
 msgid "evening"
-msgstr ""
+msgstr "หัวค่ำ"
 
 #: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp:1287
 msgctxt ""
@@ -32476,7 +32464,7 @@ msgstr ""
 
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1025
 msgid "General Information"
-msgstr ""
+msgstr "ข้อมูลทั่วไป"
 
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1026
 msgid "Classification of the Sky Culture*"
@@ -39152,9 +39140,10 @@ msgstr "ตัวแบบ"
 
 #. TRANSLATORS: Unit of measure for distance - nautical miles
 #: plugins/Planes/src/AircraftObject.cpp:207
+#: plugins/Planes/src/gui/PlanesDialog.cpp:71
 msgctxt "distance"
-msgid "nmi"
-msgstr ""
+msgid "NM"
+msgstr "ไมล์ทะเล"
 
 #. TRANSLATORS: Unit of measure for distance - feets
 #: plugins/Planes/src/AircraftObject.cpp:209
@@ -39228,12 +39217,6 @@ msgstr "หมายเลขเที่ยวบิน"
 #: plugins/Planes/src/gui/PlanesDialog.cpp:62
 msgid "Aircraft model"
 msgstr "รุ่นของเครื่องบิน"
-
-#. TRANSLATORS: Unit of measure for distance - nautical miles
-#: plugins/Planes/src/gui/PlanesDialog.cpp:71
-msgctxt "distance"
-msgid "NM"
-msgstr "ไมล์ทะเล"
 
 #: plugins/Planes/src/gui/PlanesDialog.cpp:245
 msgid "Planes Plug-in"
@@ -40598,7 +40581,7 @@ msgstr "โลก"
 #: plugins/ObjectVisibility/src/ObjectVisibility.cpp:78
 #: plugins/ObjectVisibility/src/ObjectVisibility.cpp:160
 msgid "Object Visibility"
-msgstr ""
+msgstr "ความสามารถในการเห็นวัตถุ"
 
 #: plugins/ObjectVisibility/src/ObjectVisibility.cpp:81
 msgid ""
@@ -40609,81 +40592,89 @@ msgid ""
 "the Astro-Geo-GIS article \"The 49 brightest stars in the night sky – when "
 "and where can we see them?\""
 msgstr ""
+"แสดงความสามารถในการเห็นดาวหรือวัตถุอวกาศลึกบนแผนที่ดาวเคราะห์ "
+"รองรับการสังเกตจากโลก ดวงจันทร์ ดาวเคราะห์ 8 ดวง พลูโต และดาวบริวารขนาดใหญ่ "
+"4 ดวงของดาวพฤหัสบดี "
+"นอกจากนี้ยังแสดงละติจูดซึ่งเป็นขอบเขตของแสงสนธยาในวันอายันโดยคำนวณจากความเอียงของแกนหมุน"
+" มีรากฐานจากเกณฑ์เชิงเรขาคณิตในบทความ \"The 49 brightest stars in the night "
+"sky – when and where can we see them?\" ของ Astro-Geo-GIS"
 
 #: plugins/ObjectVisibility/src/ObjectVisibility.cpp:167
 msgid "Object Visibility plug-in dialog"
-msgstr ""
+msgstr "หน้าต่างโปรแกรมเสริมความสามารถในการเห็นวัตถุ"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:939
 msgid "Object Visibility Configuration"
-msgstr ""
+msgstr "การปรับแต่งความสามารถในการเห็นวัตถุ"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:940
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:1236
 msgid "Object Visibility plug-in"
-msgstr ""
+msgstr "โปรแกรมเสริมความสามารถในการเห็นวัตถุ"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:941
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:1157
 msgid "Select a star or DSO, then click Calculate."
-msgstr ""
+msgstr "เลือกดาวฤกษ์หรือวัตถุอวกาศลึก แล้วกดปุ่มคำนวณ"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:942
 msgid "Key of stars visibility"
-msgstr ""
+msgstr "สัญลักษณ์แสดงความสามารถในการเห็นดาว"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:943
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:1252
 msgid "Limit of visibility"
-msgstr ""
+msgstr "ขอบเขตที่เห็นได้"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:944
 msgid "Good visibility (default 5° above the horizon)"
-msgstr ""
+msgstr "มองเห็นได้ดี (อยู่เหนือขอบฟ้า 5° ตามค่าปริยาย)"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:945
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:1263
 msgid "Passes zenith"
-msgstr ""
+msgstr "ผ่านจุดจอมฟ้า"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:946
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:1267
 msgid "Circumpolar limit (northern hemisphere)"
-msgstr ""
+msgstr "ขอบเขตวนรอบขั้วฟ้า (ซีกโลกเหนือ)"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:947
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:1271
 msgid "Circumpolar limit (southern hemisphere)"
-msgstr ""
+msgstr "ขอบเขตวนรอบขั้วฟ้า (ซีกโลกใต้)"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:950
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:303
 msgid "Calculate visibility for the selected object."
-msgstr ""
+msgstr "คำนวณความสามารถในการเห็นของวัตถุที่เลือก"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:953
 msgid ""
 "Automatically calculate visibility for the selected star or deep-sky object "
 "and keep it updated while this tab is open."
 msgstr ""
+"คำนวณความสามารถในการเห็นดาวหรือเทห์ฟ้าที่เลือกโดยอัตโนมัติ "
+"และปรับปรุงขณะที่เปิดหน้าต่างนี้ไว้"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:955
 msgid "Calculate automatically"
-msgstr ""
+msgstr "คำนวณโดยอัตโนมัติ"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:956
 msgid "Good visibility:"
-msgstr ""
+msgstr "มองเห็นได้ดี:"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:957
 msgid "°"
-msgstr ""
+msgstr "°"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:959
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:987
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:1013
 msgid "Set location by map click"
-msgstr ""
+msgstr "กำหนดสถานที่ตั้งโดยคลิกบนแผนที่"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:961
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:985
@@ -40694,30 +40685,32 @@ msgid ""
 "Enable to move the observer by clicking on the map. Stays active until you "
 "uncheck it."
 msgstr ""
+"ย้ายสถานที่สังเกตการณ์โดยคลิกบนแผนที่ "
+"จะทำงานจนกว่าคุณจะยกเลิกโดยการล้างเครื่องหมาย"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:963
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:991
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:1017
 msgid "Sync maps"
-msgstr ""
+msgstr "ซิงก์แผนที่"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:965
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:989
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:1015
 msgid "Keep pan and zoom synchronized between the map tabs."
-msgstr ""
+msgstr "จดจำตำแหน่งและการดึงภาพเข้า-ออกในแผนที่ของแต่ละแท็บ"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:967
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:996
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:1018
 msgid "Places, min. population:"
-msgstr ""
+msgstr "สถานที่ซึ่งมีประชากรอย่างน้อย:"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:968
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:997
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:1019
 msgid "Near lines"
-msgstr ""
+msgstr "ใกล้เส้น"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:969
 msgid "Visibility"
@@ -40725,100 +40718,101 @@ msgstr "ความสามารถในการมองเห็น"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:970
 msgid "Solstice twilight limits on Earth"
-msgstr ""
+msgstr "ขอบเขตแสงสนธยาในวันอายันบนโลก"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:971
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:789
 msgid "Solstice twilight limits"
-msgstr ""
+msgstr "ขอบเขตแสงสนธยาในวันอายัน"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:972
 msgid "Reference lines"
-msgstr ""
+msgstr "เส้นอ้างอิง"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:973
 msgid "Lowest Sun"
-msgstr ""
+msgstr "ดวงอาทิตย์อยู่ต่ำที่สุด"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:974
 msgid "Highest Sun"
-msgstr ""
+msgstr "ดวงอาทิตย์อยู่สูงที่สุด"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:976
 msgid "Tropics"
-msgstr ""
+msgstr "เส้นทรอปิก"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:977
 msgid "Polar circles"
-msgstr ""
+msgstr "วงกลมขั้ว"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:978
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:979
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:1003
 msgctxt "twilight"
 msgid "civil"
-msgstr ""
+msgstr "ทางการ"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:980
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:981
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:1004
 msgctxt "twilight"
 msgid "nautical"
-msgstr ""
+msgstr "ทะเล"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:982
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:983
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:1005
 msgctxt "twilight"
 msgid "astronomical"
-msgstr ""
+msgstr "ดาราศาสตร์"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:993
 msgid ""
 "Compute twilight limits from the Sun's current position instead of the "
 "solstice extrema."
 msgstr ""
+"คำนวณขอบเขตแสงสนธยาจากตำแหน่งปัจจุบันของดวงอาทิตย์ แทนที่จะใช้วันอายัน"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:995
 msgid "Compute daily"
-msgstr ""
+msgstr "คำนวณประจำวัน"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:998
 msgid "Twilight limits"
-msgstr ""
+msgstr "ขอบเขตสนธยา"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:999
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:902
 msgid "Twilight Map on Earth"
-msgstr ""
+msgstr "แผนที่แสงสนธยาบนโลก"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:1000
 msgid "Legend"
-msgstr ""
+msgstr "คำอธิบายสัญลักษณ์"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:1001
 msgid "Sun altitude"
-msgstr ""
+msgstr "มุมเงยของดวงอาทิตย์"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:1002
 msgid "rise/set"
-msgstr ""
+msgstr "ขึ้น/ตก"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:1006
 msgid "night"
-msgstr ""
+msgstr "กลางคืน"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:1007
 msgid "Zenith point"
-msgstr ""
+msgstr "จุดจอมฟ้า"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:1020
 msgid "Twilight Map"
-msgstr ""
+msgstr "แผนที่แสงสนธยา"
 
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:294
 msgid "Only stars and DSOs may be used in this plugin!"
-msgstr ""
+msgstr "โปรแกรมเสริมนี้ใช้กับดาวฤกษ์และวัตถุอวกาศลึกเท่านั้น!"
 
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:296
 #, qt-format
@@ -40827,16 +40821,18 @@ msgid ""
 "Pluto and the four Galilean moons.  The current observing body (%1) is not "
 "supported."
 msgstr ""
+"โปรแกรมเสริมนี้ใช้เมื่อสังเกตการณ์จากโลก ดวงจันทร์ ดาวเคราะห์ 8 ดวง พลูโต "
+"และดาวบริวารกาลิเลโอ การสังเกตจากวัตถุปัจจุบัน (%1) ไม่รองรับ"
 
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:301
 msgid "Turn off Calculate automatically to use this button."
-msgstr ""
+msgstr "ปิดการคำนวณอัตโนมัติเพื่อใช้ปุ่มนี้"
 
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:720
 msgid ""
 "Setting the observer location from the twilight map is available on Earth "
 "only."
-msgstr ""
+msgstr "การกำหนดสถานที่สังเกตการณ์จากแผนที่แสงสนธยาสามารถใช้ได้กับโลกเท่านั้น"
 
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:727
 #, qt-format
@@ -40844,98 +40840,101 @@ msgid ""
 "Solstice twilight limits are available for Earth only. Current observing "
 "body: %1"
 msgstr ""
+"ขอบเขตแสงสนธยาในวันอายันสามารถใช้ได้กับโลกเท่านั้น วัตถุปัจจุบันคือ: %1"
 
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:746
 msgid "Twilight limits on Earth are unavailable."
-msgstr ""
+msgstr "ไม่มีแผนที่ขอบเขตแสงสนธยาบนโลก"
 
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:778
 msgid "Daily twilight limits"
-msgstr ""
+msgstr "ขอบเขตสนธยาประจำวัน"
 
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:780
 #, qt-format
 msgid ""
 "Daily twilight limits on Earth in %1 (solar declination %2°, obliquity %3°)"
 msgstr ""
+"ขอบเขตแสงสนธยาประจำวันบนโลกสำหรับปี %1 (เดคลิเนชันของดวงอาทิตย์ %2°, "
+"แกนหมุนเอียง %3°)"
 
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:791
 #, qt-format
 msgid "Solstice twilight limits on Earth in %1 (obliquity %2°)"
-msgstr ""
+msgstr "ขอบเขตแสงสนธยาในวันอายันบนโลกสำหรับปี %1 (แกนหมุนเอียง %2°)"
 
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:891
 msgid "Twilight Map is unavailable."
-msgstr ""
+msgstr "ไม่มีแผนที่แสงสนธยา"
 
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:905
 #, qt-format
 msgid "Solar terminator on %1"
-msgstr ""
+msgstr "รอยต่อกลางวันกลางคืนบน%1"
 
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:941
 msgid "100,000"
-msgstr ""
+msgstr "100,000"
 
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:942
 msgid "500,000"
-msgstr ""
+msgstr "500,000"
 
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:943
 msgid "1,000,000"
-msgstr ""
+msgstr "1,000,000"
 
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:944
 msgid "5,000,000"
-msgstr ""
+msgstr "5,000,000"
 
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:1167
 #, qt-format
 msgid "%1 is selected. Click Calculate."
-msgstr ""
+msgstr "%1ถูกเลือก กดปุ่มคำนวณ"
 
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:1181
 msgid "a planet, moon or the Sun"
-msgstr ""
+msgstr "ดาวเคราะห์ ดาวบริวาร หรือดวงอาทิตย์"
 
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:1183
 msgid "a comet"
-msgstr ""
+msgstr "ดาวหาง"
 
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:1185
 msgid "a minor planet"
-msgstr ""
+msgstr "ดาวเคราะห์น้อย"
 
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:1187
 msgid "an artificial satellite"
-msgstr ""
+msgstr "ดาวเทียม"
 
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:1189
 msgid "a surface feature"
-msgstr ""
+msgstr "ภูมิลักษณ์บนพื้นผิว"
 
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:1191
 msgid "a meteor"
-msgstr ""
+msgstr "ฝนดาวตก"
 
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:1193
 msgid "not a star or deep-sky object"
-msgstr ""
+msgstr "ไม่ใช่ดาวฤกษ์หรือวัตถุอวกาศลึก"
 
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:1199
 #, qt-format
 msgid "%1 is %2. This plug-in only supports stars and deep-sky objects."
-msgstr ""
+msgstr "%1เป็น%2 โปรแกรมเสริมนี้ใช้กับดาวฤกษ์และวัตถุอวกาศลึกเท่านั้น"
 
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:1219
 #, qt-format
 msgid "Visibility of %1 in %2"
-msgstr ""
+msgstr "ความสามารถในการเห็น%1ในปี %2"
 
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:1225
 #, qt-format
 msgid "Visibility of %1 from %3 in %2"
-msgstr ""
+msgstr "ความสามารถในการเห็น%1จาก%3ในปี %2"
 
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:1245
 msgid ""
@@ -40944,16 +40943,22 @@ msgid ""
 "&delta; at the current epoch (precession and proper motion taken into "
 "account), five lines are drawn at fixed geographic latitudes:"
 msgstr ""
+"โปรแกรมเสริมนี้แสดงความสามารถในการเห็นดาวหรือวัตถุอวกาศลึกบนแผนที่ผิวดาวของสถานที่สังเกตการณ์"
+" ใช้เดคลิเนชัน &delta; ของวัตถุในยุคปีปัจจุบัน "
+"(คำนึงถึงการหมุนควงของโลกและการเคลื่อนที่เฉพาะของดาว) โดยวาดเส้น 5 "
+"เส้นในแนวละติจูด:"
 
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:1253
 msgid ""
 "&phi; = &delta; &plusmn; 90&deg;.  The object never rises above the horizon "
 "at latitudes outside this band."
 msgstr ""
+"&phi; = &delta; &plusmn; 90&deg;. ที่ละติจูดนอกแถบนี้ "
+"วัตถุจะไม่ขึ้นเหนือขอบฟ้า"
 
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:1256
 msgid "Extinction free / good visibility"
-msgstr ""
+msgstr "ปราศจากการสูญหายโดยบรรยากาศ / เห็นได้ดี"
 
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:1257
 msgid ""
@@ -40962,23 +40967,28 @@ msgid ""
 " is 5&deg;; you may increase it if you observe from a mountainous site or "
 "want a larger safety margin."
 msgstr ""
+"&phi; = &delta; &plusmn; (90&deg; &minus; h)  ละติจูดที่อยู่ภายในแถบนี้ "
+"วัตถุจะขึ้นไปถึงมุมเงยอย่างน้อย h ขณะผ่านตำแหน่งสุดบน ค่าปริยายของ h คือ "
+"5&deg;; "
+"คุณสามารถเพิ่มค่านี้ได้ถ้าสังเกตจากพื้นที่ที่เป็นภูเขาหรือต้องการเผื่อระยะความปลอดภัยให้มากขึ้น"
 
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:1264
 msgid ""
 "&phi; = &delta;.  At this latitude the object passes through the zenith."
-msgstr ""
+msgstr "&phi; = &delta; ที่ละติจูดนี้ วัตถุจะผ่านจุดจอมฟ้า"
 
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:1268
 msgid ""
 "&phi; = 90&deg; &minus; &delta;.  North of this latitude the object never "
 "sets."
-msgstr ""
+msgstr "&phi; = 90&deg; &minus; &delta; เหนือละติจูดนี้ วัตถุจะไม่ตกลับขอบฟ้า"
 
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:1272
 msgid ""
 "&phi; = &minus;90&deg; &minus; &delta;.  South of this latitude the object "
 "never sets."
 msgstr ""
+"&phi; = &minus;90&deg; &minus; &delta; ใต้ละติจูดนี้ วัตถุจะไม่ตกลับขอบฟ้า"
 
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:1277
 msgid ""
@@ -40987,6 +40997,9 @@ msgid ""
 "daily motion (and, for some, parallax) would make a single snapshot "
 "misleading."
 msgstr ""
+"ดาวเคราะห์ ดวงจันทร์ ดาวบริวาร ดาวเคราะห์น้อย ดาวหาง และดาวเทียม "
+"ไม่สามารถเลือกเป็น <em>วัตถุเป้าหมาย</em> เนื่องจากการเคลื่อนที่อย่างรวดเร็ว"
+" (และแพรัลแล็กซ์ในบางกรณี) ซึ่งข้อมูลชั่วขณะเดียวอาจทำให้เข้าใจผิดได้"
 
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:1284
 msgid ""
@@ -40996,6 +41009,11 @@ msgid ""
 "observer body via Stellarium's Location dialog; the map updates "
 "automatically."
 msgstr ""
+"โปรแกรมเสริมนี้รองรับการสังเกตการณ์จากเทห์ฟ้าต่อไปนี้: โลก ดวงจันทร์ "
+"ดาวเคราะห์ทั้ง 8 ดวง (ตั้งแต่ดาวพุธไปจนถึงดาวเนปจูน) พลูโต "
+"และดวงจันทร์บริวารหลัก 4 ดวงของดาวพฤหัสบดี (ไอโอ ยูโรปา แกนีมีด และคัลลิสโต)"
+" คุณสามารถเปลี่ยนตำแหน่งของผู้สังเกตการณ์ได้ผ่านหน้าต่างตำแหน่งที่ตั้งของ "
+"Stellarium ซึ่งแผนที่นี้จะปรับปรุงข้อมูลให้เป็นปัจจุบันโดยอัตโนมัติ"
 
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:1293
 msgid ""
@@ -41004,6 +41022,10 @@ msgid ""
 "planetarium.  To see Sirius's visibility in 10&thinsp;000 BCE, set the "
 "planetarium's date first, then press Calculate."
 msgstr ""
+"เนื่องจากตำแหน่งของดาวฤกษ์เปลี่ยนแปลงไปตามกาลเวลาอันเป็นผลจากการหมุนควงของแกนโลกและการเคลื่อนที่เฉพาะของดาว"
+" เส้นต่าง ๆ จึงถูกคำนวณโดยอิงกับวันที่ซึ่งแสดงในท้องฟ้าจำลองขณะนั้น "
+"หากต้องการดูความสามารถในการมองเห็นดาวซิริอัสเมื่อ 10&thinsp;000 ปีก่อน ค.ศ. "
+"ให้ตั้งค่าวันที่ในท้องฟ้าจำลองก่อน จากนั้นจึงกดปุ่มคำนวณ"
 
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:1301
 msgid ""
@@ -41014,6 +41036,15 @@ msgid ""
 "are not shown for other observing bodies because civil, nautical, and "
 "astronomical twilight depend on Earth's atmosphere."
 msgstr ""
+"แท็บแผนที่แสงสนธยามีไว้สำหรับโลกเท่านั้น โดยจะแสดงเส้นศูนย์สูตร เส้นทรอปิก "
+"เส้นวงกลมรอบขั้วโลก และเส้นละติจูด ณ จุดเหมายันและครีษมายัน "
+"ซึ่งเป็นตำแหน่งที่ดวงอาทิตย์ทำมุมเงยต่ำสุดหรือสูงสุดที่ระดับ -6&deg;, "
+"-12&deg; หรือ -18&deg; "
+"เส้นเหล่านี้อ้างอิงจากความเอียงของแกนโลกที่ยุคปีปัจจุบัน "
+"ดังนั้นตำแหน่งของเส้นจะเปลี่ยนไปเมื่อเปลี่ยนวันที่ในท้องฟ้าจำลอง "
+"เส้นดังกล่าวจะไม่ปรากฏเมื่อเลือกเทห์ฟ้าอื่นเป็นจุดสังเกตการณ์ "
+"เนื่องจากนิยามของแสงสนธยาทางการ สนธยาทะเล "
+"และสนธยาดาราศาสตร์นั้นขึ้นอยู่กับบรรยากาศของโลก"
 
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:1312
 msgid ""
@@ -41023,6 +41054,13 @@ msgid ""
 "bodies it shows the solar terminator from the Sun's centre, shades the night"
 " side, and marks the Sun zenith point."
 msgstr ""
+"แท็บแผนที่แสงสนธยาแสดงตามเวลาของท้องฟ้าจำลอง สำหรับบนโลก "
+"แผนที่นี้จะแสดงพื้นที่กลางวัน สนธยาทางการ สนธยาทะเล สนธยาดาราศาสตร์ "
+"และพื้นที่กลางคืน "
+"พร้อมทั้งระบุตำแหน่งซึ่งเห็นดวงอาทิตย์และดวงจันทร์อยู่ที่จุดจอมฟ้า "
+"สำหรับบนวัตถุอื่น "
+"แผนที่นี้จะแสดงรอยต่อกลางวันกลางคืนโดยคำนวณจากศูนย์กลางของดวงอาทิตย์ "
+"แสดงพื้นที่กลางคืนและระบุตำแหน่งซึ่งเห็นดวงอาทิตย์อยู่ที่จุดจอมฟ้า"
 
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:1320
 msgid ""
@@ -41032,10 +41070,16 @@ msgid ""
 "refraction.  The -6&deg;, -12&deg;, and -18&deg; twilight boundaries use the"
 " Sun's centre."
 msgstr ""
+"สำหรับดวงอาทิตย์ขึ้นและตกบนโลก "
+"ใช้การประมาณจากขอบบนที่ปรากฏของดวงอาทิตย์ตามปรกติ คือ "
+"จุดศูนย์กลางของดวงอาทิตย์อยู่ต่ำกว่าเส้นขอบฟ้าทางเรขาคณิตประมาณ 50 ลิปดา "
+"โดยคำนึงถึงรัศมีของดวงอาทิตย์และการหักเหของแสงในบรรยากาศมาตรฐาน "
+"ขอบเขตของแสงสนธยาคำนวณจากจุดศูนย์กลางของดวงอาทิตย์ไปที่ระยะ -6&deg;, "
+"-12&deg; และ -18&deg;"
 
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:1329
 msgid "Credits"
-msgstr ""
+msgstr "กิตติกรรมประกาศ"
 
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:1330
 msgid ""
@@ -41044,11 +41088,15 @@ msgid ""
 "from Astro-Geo-GIS, in the article <em>The 49 brightest stars in the night "
 "sky – when and where can we see them?</em>"
 msgstr ""
+"แนวคิดของเส้นและสัญลักษณ์ทั้ง 5 ชนิด "
+"ที่ใช้แสดงความสามารถในการเห็นเทห์ฟ้าบนแผนที่โลก มาจาก Astro-Geo-GIS ในบทความ"
+" <em>The 49 brightest stars in the night sky – when and where can we see "
+"them?</em>"
 
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:1339
 msgid "Read the original article"
-msgstr ""
+msgstr "อ่านบทความต้นฉบับ"
 
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:1342
 msgid "Astro-Geo-GIS website"
-msgstr ""
+msgstr "เว็บไซต์ Astro-Geo-GIS"

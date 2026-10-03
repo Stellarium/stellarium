@@ -47,7 +47,7 @@ StelTextureMgr::StelTextureMgr(QObject *parent)
 	connect(&StelMainView::getInstance(), &StelMainView::frameFinished, this, &StelTextureMgr::onFrameFinished);
 }
 
-StelTextureSP StelTextureMgr::createTexture(const QString& afilename, const StelTexture::StelTextureParams& params)
+StelTextureSP StelTextureMgr::createTexture(const QString& afilename, const StelTexture::Params& params)
 {
 	QFileInfo file(afilename);
 	QString canPath;
@@ -139,7 +139,7 @@ StelTextureSP StelTextureMgr::createTexture(const QString& afilename, const Stel
 }
 
 
-StelTextureSP StelTextureMgr::createTextureThread(const QString& url, const StelTexture::StelTextureParams& params, bool lazyLoading)
+StelTextureSP StelTextureMgr::createTextureThread(const QString& url, const StelTexture::Params& params, bool lazyLoading)
 {
 	if (url.isEmpty())
 		return StelTextureSP();
@@ -193,7 +193,7 @@ void StelTextureMgr::reportTextureLoadEnd()
 }
 
 //! Create a texture from a QImage.
-StelTextureSP StelTextureMgr::createTexture(const QImage &image, const StelTexture::StelTextureParams& params)
+StelTextureSP StelTextureMgr::createTexture(const QImage &image, const StelTexture::Params& params)
 {
 	StelTextureSP tex = StelTextureSP(new StelTexture);
 	tex->loadParams = params;

@@ -134,7 +134,8 @@ Some religions, e.g., Islam or Bahai, adhere to a practice of
 observing a prayer direction towards a particular location.  Azimuth
 lines for two locations can be shown, these lines indicate the great
 circle direction towards the locations which can be edited in the
-configuration window. Default locations are Mecca (Kaaba) and
+configuration window. Default locations are Makkah (the black Kaaba 
+monument defining prayer direction, or \emph{qiblah}) and
 Jerusalem.  The azimuth $q$ towards a location $T=(\lambda_T,
 \varphi_T)$ can be computed for an observer at $O=(\lambda_O, \varphi_O)$
 based on spherical trigonometry on a spherical
@@ -147,7 +148,8 @@ Earth~\citep{Abdali:1997} as
 \noindent You can set \newFeature{0.21.1} geographical coordinates and a name
 label directly, or select locations from Stellarium's location list by
 pressing the \button{Pick...} button.  You can search for locations in the
-list. When you click on a location, its data are taken as target.
+list. When you click on a location, its data are taken as target, 
+and also\newFeature{26.3} distances (angular degrees on a spherical earth, and kilometers on the flattened earth) are displayed.
 
 \subsection{Custom Lines}
 \label{sec:plugin:ArchaeoLines:Custom}
@@ -223,10 +225,10 @@ show\_geographic\_location\_1  &bool        & false         \\
 show\_geographic\_location\_2  &bool        & false         \\
 geographic\_location\_1\_longitude &double  & 39.826175     \\
 geographic\_location\_1\_latitude  &double  & 21.4276       \\
-geographic\_location\_1\_label     &string  & Mecca (Qibla) \\
+geographic\_location\_1\_name      &string  & Makkah (Qibla) \\
 geographic\_location\_2\_longitude &double  & 35.235774     \\
 geographic\_location\_2\_latitude  &double  & 31.778087     \\
-geographic\_location\_2\_label     &string  & Jerusalem     \\\midrule
+geographic\_location\_2\_name      &string  & Jerusalem     \\\midrule
 show\_custom\_azimuth\_1       &bool        & false    \\
 show\_custom\_azimuth\_2       &bool        & false    \\
 custom\_azimuth\_1\_angle      &double      & 0.0      \\

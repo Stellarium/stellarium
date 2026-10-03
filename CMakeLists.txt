@@ -45,7 +45,7 @@ ENDIF()
 # Note: Use integer versions instead of strings for easier handling if required
 SET(STELLARIUM_MAJOR 26)
 # Number of the release (0 is used before first release)
-SET(STELLARIUM_MINOR 2)
+SET(STELLARIUM_MINOR 3)
 IF(STELLARIUM_RELEASE_BUILD)
      ADD_DEFINITIONS(-DSTELLARIUM_RELEASE_BUILD)
      SET(CMAKE_BUILD_TYPE Release)
@@ -445,7 +445,7 @@ SET(ENABLE_SHOWMYSKY 1 CACHE BOOL "Define whether to support ShowMySky atmospher
 # Activate support for XLSX (Excel) files
 SET(ENABLE_XLSX 1 CACHE BOOL "Define whether to support XLSX (Excel) files")
 IF(ENABLE_XLSX)
-     ADD_DEFINITIONS(-DENABLE_XLSX)     
+     ADD_DEFINITIONS(-DENABLE_XLSX)
 ENDIF()
 
 # Activate support for INDI client in Telescope Control plugin

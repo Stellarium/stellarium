@@ -62,18 +62,18 @@ void RemoteControlDialog::createDialogContent()
 	if (gui)
 	{
 		enableKineticScrolling(gui->getFlagUseKineticScrolling());
-		connect(gui, SIGNAL(flagUseKineticScrollingChanged(bool)), this, SLOT(enableKineticScrolling(bool)));
+		connect(gui, &StelGui::flagUseKineticScrollingChanged, this, &RemoteControlDialog::enableKineticScrolling);
 	}
 
 
-	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
+	connect(&StelApp::getInstance(), &StelApp::languageChanged, this, &RemoteControlDialog::retranslate);
 	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
-	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
+	connect(ui->titleBar, &TitleBar::movedTo, this, &StelDialog::handleMovedTo);
 
 	// TODO Fill other buttons
 
 	connectCheckBox(ui->enabledCheckbox,"actionShow_Remote_Control");
-	connect(ui->enabledCheckbox, SIGNAL(clicked(bool)), this, SLOT(updateIPlabel(bool)));
+	connect(ui->enabledCheckbox, &QCheckBox::clicked, this, &RemoteControlDialog::updateIPlabel);
 	updateIPlabel(ui->enabledCheckbox->isChecked());
 
 	connectBoolProperty(ui->activateOnStartCheckBox, "RemoteControl.autoStart");
@@ -83,8 +83,8 @@ void RemoteControlDialog::createDialogContent()
 	ui->passwordEdit->setEnabled(rc->getFlagUsePassword());
 	ui->passwordEdit->setText(rc->getPassword());
 
-	connect(rc,SIGNAL(flagUsePasswordChanged(bool)),ui->passwordEdit,SLOT(setEnabled(bool)));
-	connect(ui->passwordEdit, SIGNAL(textChanged(QString)), rc, SLOT(setPassword(QString)));
+	connect(rc, &RemoteControl::flagUsePasswordChanged, ui->passwordEdit, &QLineEdit::setEnabled);
+	connect(ui->passwordEdit, &QLineEdit::textChanged, rc, &RemoteControl::setPassword);
 
 	connectIntProperty(ui->portNumberSpinBox, "RemoteControl.port");
 
@@ -93,25 +93,25 @@ void RemoteControlDialog::createDialogContent()
 	ui->corsOriginEdit->setEnabled(rc->getFlagEnableCors());
 	ui->corsOriginEdit->setText(rc->getCorsOrigin());
 
-	connect(rc,SIGNAL(flagEnableCorsChanged(bool)),ui->corsOriginEdit,SLOT(setEnabled(bool)));
-	connect(ui->corsOriginEdit, SIGNAL(textChanged(QString)), rc, SLOT(setCorsOrigin(QString)));
+	connect(rc, &RemoteControl::flagEnableCorsChanged, ui->corsOriginEdit, &QLineEdit::setEnabled);
+	connect(ui->corsOriginEdit, &QLineEdit::textChanged, rc, &RemoteControl::setCorsOrigin);
 
 	connectIntProperty(ui->maximumRequestSpinBox, "RemoteControl.maxRequestSize");
 	connectIntProperty(ui->maximumMultipartSpinBox, "RemoteControl.maxMultipartSize");
 
 	ui->restartPanel->setVisible(false);
-	connect(rc, SIGNAL(flagUsePasswordChanged(bool)), this, SLOT(requiresRestart()));
-	connect(rc, SIGNAL(passwordChanged(QString)), this, SLOT(requiresRestart()));
-	connect(rc, SIGNAL(flagEnableCorsChanged(bool)), this, SLOT(requiresRestart()));
-	connect(rc, SIGNAL(corsOriginChanged(QString)), this, SLOT(requiresRestart()));
-	connect(rc, SIGNAL(portChanged(int)), this, SLOT(requiresRestart()));
-	connect(rc, SIGNAL(maxRequestSizeChanged(int)), this, SLOT(requiresRestart()));
-	connect(rc, SIGNAL(maxMultipartSizeChanged(int)), this, SLOT(requiresRestart()));
+	connect(rc, &RemoteControl::flagUsePasswordChanged,  this, &RemoteControlDialog::requiresRestart);
+	connect(rc, &RemoteControl::passwordChanged,         this, &RemoteControlDialog::requiresRestart);
+	connect(rc, &RemoteControl::flagEnableCorsChanged,   this, &RemoteControlDialog::requiresRestart);
+	connect(rc, &RemoteControl::corsOriginChanged,       this, &RemoteControlDialog::requiresRestart);
+	connect(rc, &RemoteControl::portChanged,             this, &RemoteControlDialog::requiresRestart);
+	connect(rc, &RemoteControl::maxRequestSizeChanged,   this, &RemoteControlDialog::requiresRestart);
+	connect(rc, &RemoteControl::maxMultipartSizeChanged, this, &RemoteControlDialog::requiresRestart);
 
-	connect(ui->resetButton, SIGNAL(clicked(bool)),this,SLOT(restart()));
+	connect(ui->resetButton, &QPushButton::clicked, this, &RemoteControlDialog::restart);
 
-	connect(ui->saveSettingsButton, SIGNAL(clicked()), rc, SLOT(saveSettings()));	
-	connect(ui->restoreDefaultsButton, SIGNAL(clicked()), this, SLOT(restoreDefaults()));
+	connect(ui->saveSettingsButton, &QPushButton::clicked, rc, &RemoteControl::saveSettings);
+	connect(ui->restoreDefaultsButton, &QPushButton::clicked, this, &RemoteControlDialog::restoreDefaults);
 
 	setAboutHtml();
 }

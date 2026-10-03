@@ -124,8 +124,8 @@ void NavStars::init()
 #ifndef NO_GUI
 	addAction("actionShow_NavStars_dialog", N_("Navigational Stars"), N_("Show settings dialog"),        mainWindow, "visible");
 #endif
-	connect(StelApp::getInstance().getCore(), SIGNAL(configurationDataSaved()), this, SLOT(saveSettings()));
-	connect(&StelApp::getInstance(), SIGNAL(flagUseDecDegreesCoordsChanged(bool)), this, SLOT(setUseDecimalDegrees(bool)));
+	connect(StelApp::getInstance().getCore(), &StelCore::configurationDataSaved, this, &NavStars::saveSettings);
+	connect(&StelApp::getInstance(), &StelApp::flagUseDecDegreesCoordsChanged, this, &NavStars::setUseDecimalDegrees);
 	setUseDecimalDegrees(StelApp::getInstance().getFlagUseDecDegreesCoords());
 
 #ifndef NO_GUI
@@ -888,7 +888,7 @@ void NavStars::displayTabulatedInfo(const StelObjectP& selectedObject, NavStarsC
 	StelObject::InfoStringGroup infoGroup = StelObject::OtherCoord;		
 	selectedObject->addToExtraInfoString(infoGroup, 
 		oneRowTwoCells(qc_("UTC", "Universal Time Coordinated"), calc.getUTC(), "", false));
-	selectedObject->addToExtraInfoString(infoGroup, "<table style='margin:0em 0em 0em -0.125em;border-spacing:0px;border:0px;'>");
+	selectedObject->addToExtraInfoString(infoGroup, "<table class='info-string'>");
 	selectedObject->addToExtraInfoString(infoGroup, 
 		oneRowTwoCells(qc_("Ho", "Navigation/horizontal coordinate system, sextant measured altitude"), calc.altAppPrintable(), extraText, true));
 	selectedObject->addToExtraInfoString(infoGroup, 

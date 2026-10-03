@@ -109,7 +109,6 @@ public:
 	//! - effectiveTemp = Effective temperature of star in K
 	//! - hasHabitablePlanets (true/false)
 	QVariantMap getInfoMap(const StelCore *core) const override;
-	Vec3f getInfoColor(void) const override;
 	Vec3d getJ2000EquatorialPos(const StelCore* core) const override;
 	//! Get the visual magnitude
 	float getVMagnitude(const StelCore* core) const override;

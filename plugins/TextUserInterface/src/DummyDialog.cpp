@@ -96,7 +96,7 @@ void DummyDialog::setVisible(bool v)
 			return;
 		}
 		dialog = new QDialog(Q_NULLPTR);
-		connect(dialog, SIGNAL(rejected()), this, SLOT(close()));
+		connect(dialog, &QDialog::rejected, this, &DummyDialog::close);
 		createDialogContent();
 		
 		proxy = new DummyCustomProxy(Q_NULLPTR, Qt::Tool);

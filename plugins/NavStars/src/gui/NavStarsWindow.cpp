@@ -59,9 +59,9 @@ void NavStarsWindow::createDialogContent()
 	ns = GETSTELMODULE(NavStars);
 	ui->setupUi(dialog);
 
-	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
+	connect(&StelApp::getInstance(), &StelApp::languageChanged, this, &NavStarsWindow::retranslate);
 	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
-	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
+	connect(ui->titleBar, &TitleBar::movedTo, this, &StelDialog::handleMovedTo);
 
 	populateNavigationalStarsSets();
 	populateNavigationalStarsSetDescription();
@@ -73,7 +73,7 @@ void NavStarsWindow::createDialogContent()
 		idx = ui->nsSetComboBox->findData(QVariant("AngloAmerican"), Qt::UserRole, Qt::MatchCaseSensitive);
 	}
 	ui->nsSetComboBox->setCurrentIndex(idx);
-	connect(ui->nsSetComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(setNavigationalStarsSet(int)));
+	connect(ui->nsSetComboBox, qOverload<int>(&QComboBox::currentIndexChanged), this, &NavStarsWindow::setNavigationalStarsSet);
 
 	connectBoolProperty(ui->displayAtStartupCheckBox,	"NavStars.displayAtStartup");
 	connectBoolProperty(ui->highlightWhenVisible,		"NavStars.highlightWhenVisible");
@@ -83,14 +83,14 @@ void NavStarsWindow::createDialogContent()
 	connectBoolProperty(ui->showExtraDecimals,		"NavStars.showExtraDecimals");
 	connectBoolProperty(ui->useUTCCheckBox,			"NavStars.useUTCTime");
 
-	connect(ui->pushButtonSave, SIGNAL(clicked()), this, SLOT(saveSettings()));	
-	connect(ui->pushButtonReset, SIGNAL(clicked()), this, SLOT(resetSettings()));
+	connect(ui->pushButtonSave, &QPushButton::clicked, this, &NavStarsWindow::saveSettings);
+	connect(ui->pushButtonReset, &QPushButton::clicked, this, &NavStarsWindow::resetSettings);
 
 	populateToday();
-	connect(ui->refreshData, SIGNAL(clicked()), this, SLOT(populateToday()));
+	connect(ui->refreshData, &QPushButton::clicked, this, &NavStarsWindow::populateToday);
 	StelCore* core = StelApp::getInstance().getCore();
-	connect(core, SIGNAL(dateChanged()), this, SLOT(populateToday()));
-	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(populateToday()));
+	connect(core, &StelCore::dateChanged, this, &NavStarsWindow::populateToday);
+	connect(core, &StelCore::locationChanged, this, &NavStarsWindow::populateToday);
 
 	// About tab
 	setAboutHtml();

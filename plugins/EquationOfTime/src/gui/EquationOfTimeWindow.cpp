@@ -52,27 +52,27 @@ void EquationOfTimeWindow::createDialogContent()
 	eq = GETSTELMODULE(EquationOfTime);
 	ui->setupUi(dialog);
 
-	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
+	connect(&StelApp::getInstance(), &StelApp::languageChanged, this, &EquationOfTimeWindow::retranslate);
 	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
-	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
+	connect(ui->titleBar, &TitleBar::movedTo, this, &StelDialog::handleMovedTo);
 
 	ui->checkBoxEnableAtStartup->setChecked(eq->getFlagEnableAtStartup());
-	connect(ui->checkBoxEnableAtStartup, SIGNAL(clicked(bool)), eq, SLOT(setFlagEnableAtStartup(bool)));
+	connect(ui->checkBoxEnableAtStartup, &QCheckBox::clicked, eq, &EquationOfTime::setFlagEnableAtStartup);
 
 	ui->checkBoxInvertedValue->setChecked(eq->getFlagInvertedValue());
-	connect(ui->checkBoxInvertedValue, SIGNAL(clicked(bool)), eq, SLOT(setFlagInvertedValue(bool)));
+	connect(ui->checkBoxInvertedValue, &QCheckBox::clicked, eq, &EquationOfTime::setFlagInvertedValue);
 
 	ui->checkBoxMsFormat->setChecked(eq->getFlagMsFormat());
-	connect(ui->checkBoxMsFormat, SIGNAL(clicked(bool)), eq, SLOT(setFlagMsFormat(bool)));
+	connect(ui->checkBoxMsFormat, &QCheckBox::clicked, eq, &EquationOfTime::setFlagMsFormat);
 
 	ui->spinBoxFontSize->setValue(eq->getFontSize());
-	connect(ui->spinBoxFontSize, SIGNAL(valueChanged(int)), eq, SLOT(setFontSize(int)));
+	connect(ui->spinBoxFontSize, qOverload<int>(&QSpinBox::valueChanged), eq, &EquationOfTime::setFontSize);
 
 	ui->checkBoxShowButton->setChecked(eq->getFlagShowEOTButton());
-	connect(ui->checkBoxShowButton, SIGNAL(clicked(bool)), eq, SLOT(setFlagShowEOTButton(bool)));
+	connect(ui->checkBoxShowButton, &QCheckBox::clicked, eq, &EquationOfTime::setFlagShowEOTButton);
 
-	connect(ui->pushButtonSave, SIGNAL(clicked()), this, SLOT(saveEquationOfTimeSettings()));	
-	connect(ui->pushButtonReset, SIGNAL(clicked()), this, SLOT(resetEquationOfTimeSettings()));
+	connect(ui->pushButtonSave, &QPushButton::clicked, this, &EquationOfTimeWindow::saveEquationOfTimeSettings);
+	connect(ui->pushButtonReset, &QPushButton::clicked, this, &EquationOfTimeWindow::resetEquationOfTimeSettings);
 
 	ui->textColorButton->setup("EquationOfTime.textColor", "EquationOfTime/text_color");
 

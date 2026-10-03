@@ -295,7 +295,7 @@ Planet::Planet(const QString& englishName,
 		QString texMapFile = StelFileMgr::findFile("textures/"+texMapName, StelFileMgr::File);
 		if (!texMapFile.isEmpty())
 		{
-			texMap = texMan.createTextureThread(texMapFile, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT), false);
+			texMap = texMan.createTextureThread(texMapFile, StelTexture::Params().enableMipmapGen().setWrapMode(GL_REPEAT), false);
 			texMapFileOrig = texMapFile;
 		}
 		else
@@ -309,7 +309,7 @@ Planet::Planet(const QString& englishName,
 		QString normalMapFile = StelFileMgr::findFile("textures/"+normalMapName, StelFileMgr::File);
 		if (!normalMapFile.isEmpty())
 		{
-			normalMap = texMan.createTextureThread(normalMapFile, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT), false);
+			normalMap = texMan.createTextureThread(normalMapFile, StelTexture::Params().enableMipmapGen().setWrapMode(GL_REPEAT), false);
 			normalMapFileOrig = normalMapFile;
 		}
 	}
@@ -319,7 +319,7 @@ Planet::Planet(const QString& englishName,
 		QString horizonMapFile = StelFileMgr::findFile("textures/"+horizonMapName, StelFileMgr::File);
 		if (!horizonMapFile.isEmpty())
 		{
-			horizonMap = texMan.createTextureThread(horizonMapFile, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT), false);
+			horizonMap = texMan.createTextureThread(horizonMapFile, StelTexture::Params().enableMipmapGen().setWrapMode(GL_REPEAT), false);
 			horizonMapFileOrig = horizonMapFile;
 		}
 	}
@@ -385,14 +385,14 @@ void Planet::resetTextures()
 	auto& texMan = StelApp::getInstance().getTextureManager();
 	// restore texture
 	if (!texMapFileOrig.isEmpty())
-		texMap = texMan.createTextureThread(texMapFileOrig, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
+		texMap = texMan.createTextureThread(texMapFileOrig, StelTexture::Params().enableMipmapGen().setWrapMode(GL_REPEAT));
 
 	// restore normal map
 	if (!normalMapFileOrig.isEmpty())
-		normalMap = texMan.createTextureThread(normalMapFileOrig, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
+		normalMap = texMan.createTextureThread(normalMapFileOrig, StelTexture::Params().enableMipmapGen().setWrapMode(GL_REPEAT));
 
 	if (!horizonMapFileOrig.isEmpty())
-		horizonMap = texMan.createTextureThread(horizonMapFileOrig, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
+		horizonMap = texMan.createTextureThread(horizonMapFileOrig, StelTexture::Params().enableMipmapGen().setWrapMode(GL_REPEAT));
 }
 
 void Planet::replaceTexture(const QString &texName)
@@ -402,7 +402,7 @@ void Planet::replaceTexture(const QString &texName)
 		auto& texMan = StelApp::getInstance().getTextureManager();
 		QString texMapFile = StelFileMgr::findFile("scripts/" + texName, StelFileMgr::File);
 		if (!texMapFile.isEmpty())
-			texMap = texMan.createTextureThread(texMapFile, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
+			texMap = texMan.createTextureThread(texMapFile, StelTexture::Params().enableMipmapGen().setWrapMode(GL_REPEAT));
 		else
 			qWarning()<<"Cannot resolve path to texture file"<<texName<<"of object"<<englishName;
 	}
@@ -745,7 +745,7 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 	if (flags&Distance)
 	{
 		if (withTables)
-			oss << "<table style='margin:0em 0em 0em -0.125em;border-spacing:0px;border:0px;'>";
+			oss << "<table class='info-string'>";
 
 		const double hdistanceAu = getHeliocentricEclipticPos().norm();
 		const double hdistanceKm = AU * hdistanceAu;
@@ -1009,7 +1009,7 @@ QString Planet::getInfoStringEloPhase(const StelCore *core, const InfoStringGrou
 
 		if (withTables)
 		{
-			oss << "<table style='margin:0em 0em 0em -0.125em;border-spacing:0px;border:0px;'>";
+			oss << "<table class='info-string'>";
 			oss << QString("<tr><td>%1:</td><td align=\"right\">%2</td></tr>").arg(q_("Elongation"), elo);
 			oss << QString("<tr><td>%1 (&Delta;&lambda;<sub>s</sub>):</td><td align=\"right\">%2</td></tr>").arg(q_("Elongation"), dLam);
 			oss << QString("<tr><td>%1:</td><td align=\"right\">%2</td></tr>").arg(q_("Phase angle"), pha);
@@ -1099,7 +1099,7 @@ QString Planet::getInfoStringPeriods(const StelCore *core, const InfoStringGroup
 	{
 		const bool withTables = StelApp::getInstance().getFlagUseFormattingOutput();
 		if (withTables)
-			oss << "<table style='margin:0em 0em 0em -0.125em;border-spacing:0px;border:0px;'>";
+			oss << "<table class='info-string'>";
 		const QByteArray fmt=withTables ? "<tr><td>%1:</td><td style='text-align: right;'> %2</td><td> %3 (%4 a)</td></tr>" : "%1: %2 %3 (%4 a)<br/>";
 		// TRANSLATORS: Unit of measure for period - days
 		QString days = qc_("days", "duration");
@@ -1245,7 +1245,7 @@ QString Planet::getInfoStringExtra(const StelCore *core, const InfoStringGroup& 
 				const QByteArray fmt=withTables ? "<tr><td>%1: </td><td>%2</td></tr>" : "%1: %2<br/>";
 
 				if (withTables)
-					oss << "<table style='margin:0em 0em 0em -0.125em;border-spacing:0px;border:0px;'>";
+					oss << "<table class='info-string'>";
 				oss << QString(fmt).arg(q_("Sidereal day"), StelUtils::hoursToHmsStr(qAbs(siderealDay*24)));
 				if (englishName!=L1S("Sun"))
 					oss << QString(fmt).arg(q_("Mean solar day"), StelUtils::hoursToHmsStr(qAbs(getMeanSolarDay()*24)));
@@ -1337,7 +1337,7 @@ QString Planet::getInfoStringExtra(const StelCore *core, const InfoStringGroup& 
 				chiStr=StelUtils::radToDmsStr(chi, false);
 			if (withTables)
 			{
-				oss << "<table style='margin:0em 0em 0em -0.125em;border-spacing:0px;border:0px;'>";
+				oss << "<table class='info-string'>";
 				oss << QString("<tr><td colspan=\"2\">%1:</td><td align=\"right\"> %2</td></tr>").arg(q_("Position angle of bright limb"), chiStr);
 			}
 			else
@@ -1411,7 +1411,7 @@ QString Planet::getInfoStringExtra(const StelCore *core, const InfoStringGroup& 
 			}
 			if (withTables)
 			{
-				//oss << "<table style='margin:0em 0em 0em -0.125em;border-spacing:0px;border:0px;'>";
+				//oss << "<table class='info-string'>";
 				oss << QString("<tr><td colspan=\"2\">%1:</td><td align=\"right\"> %2</td></tr>").arg(q_("Position Angle of axis"), paAxisStr);
 				oss << QString("<tr><td>%1:</td><td align=\"right\">%2 %3</td><td align=\"right\"> %4</td><td>(%5)</td></tr>").arg(q_("Libration"), totalLibrationStr, qc_("towards", "into the direction of"), librationAngleStr, limbStr);
 				oss << QString("<tr><td>%1:</td><td align=\"right\">L: %2</td><td align=\"right\">B: %3</td></tr>").arg(q_("Libration"), libLStr, libBStr);
@@ -1455,7 +1455,7 @@ QString Planet::getInfoStringExtra(const StelCore *core, const InfoStringGroup& 
 			paAxisStr = withDecimalDegreeOther ? StelUtils::radToDecDegStr(ssop.first[3], 1) : StelUtils::radToDmsStr(ssop.first[3]);
 			if (withTables)
 			{
-				oss << "<table style='margin:0em 0em 0em -0.125em;border-spacing:0px;border:0px;'>";
+				oss << "<table class='info-string'>";
 				oss << QString("<tr><td colspan=\"2\">%1:</td><td align=\"right\"> %2</td></tr>").arg(q_("Position Angle of axis"), paAxisStr);
 				oss << QString("<tr><td>%1:</td><td align=\"right\">L<sub>%2e</sub>: %3</td><td align=\"right\">&phi;<sub>e</sub>: %4</td></tr>").arg(q_("Center point"),   lngSystem, subearthLStr, subearthBStr);
 				oss << QString("<tr><td>%1:</td><td align=\"right\">L<sub>%2s</sub>: %3</td><td align=\"right\">&phi;<sub>s</sub>: %4</td></tr>").arg(q_("Subsolar point"), lngSystem, subsolarLStr, subsolarBStr);
@@ -2440,7 +2440,7 @@ float Planet::getSelectPriority(const StelCore* core) const
 
 Vec3f Planet::getInfoColor(void) const
 {
-	return (static_cast<SolarSystem*>(StelApp::getInstance().getModuleMgr().getModule("SolarSystem")))->getLabelsColor();
+	return getLabelColor();
 }
 
 
@@ -5600,7 +5600,7 @@ Planet::PlanetOBJModel* Planet::loadObjModel() const
 	{
 		auto& texMan = StelApp::getInstance().getTextureManager();
 		//this call starts loading the tex in background
-		mdl->texture = texMan.createTextureThread(mat.map_Kd,StelTexture::StelTextureParams(true,GL_LINEAR,GL_REPEAT,true),false);
+		mdl->texture = texMan.createTextureThread(mat.map_Kd,StelTexture::Params().enableMipmapGen().enableMipmapFilter().setWrapMode(GL_REPEAT),false);
 	}
 
 	//extract the pos array into separate vector, it is the only one we need on CPU side for drawing
@@ -5968,7 +5968,7 @@ Ring::Ring(float radiusMin, float radiusMax, const QString &texname)
 {
 	auto& texMan = StelApp::getInstance().getTextureManager();
 	tex = texMan.createTexture(StelFileMgr::getInstallationDir()+"/textures/"+texname,
-	                           StelTexture::StelTextureParams(true, GL_LINEAR, GL_CLAMP_TO_EDGE, true));
+	                           StelTexture::Params().enableMipmapGen().enableMipmapFilter());
 }
 
 Vec3f Planet::getCurrentOrbitColor() const

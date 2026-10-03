@@ -109,7 +109,7 @@ AngleMeasure::AngleMeasure()
 	messageTimer->setInterval(7000);
 	messageTimer->setSingleShot(true);
 
-	connect(messageTimer, SIGNAL(timeout()), this, SLOT(clearMessage()));
+	connect(messageTimer, &QTimer::timeout, this, &AngleMeasure::clearMessage);
 }
 
 AngleMeasure::~AngleMeasure()
@@ -157,7 +157,7 @@ void AngleMeasure::init()
 	// Initialize the message strings and make sure they are translated when
 	// the language changes.
 	updateMessageText();
-	connect(&app, SIGNAL(languageChanged()), this, SLOT(updateMessageText()));
+	connect(&app, &StelApp::languageChanged, this, &AngleMeasure::updateMessageText);
 
 #ifndef NO_GUI
 	// Add a toolbar button

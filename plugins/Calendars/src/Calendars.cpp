@@ -315,8 +315,8 @@ void Calendars::init()
 		// We must set JD explicitly to enforce creation of parts for a debug mode test in StelMainView::init().
 		cal->setJD(jd);
 #endif
-		connect(cal, SIGNAL(jdChanged(double)), StelApp::getInstance().getCore(), SLOT(setJD(double)));
-		connect(&StelApp::getInstance(), SIGNAL(languageChanged()), cal, SLOT(retranslate()));
+		connect(cal, &Calendar::jdChanged, StelApp::getInstance().getCore(), &StelCore::setJD);
+		connect(&StelApp::getInstance(), &StelApp::languageChanged, cal, &Calendar::retranslate);
 	}
 }
 

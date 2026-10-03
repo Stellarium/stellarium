@@ -63,23 +63,22 @@ void MSSearchDialog::createDialogContent()
 	if (gui)
 	{
 		enableKineticScrolling(gui->getFlagUseKineticScrolling());
-		connect(gui, SIGNAL(flagUseKineticScrollingChanged(bool)), this, SLOT(enableKineticScrolling(bool)));
+		connect(gui, &StelGui::flagUseKineticScrollingChanged, this, &MSSearchDialog::enableKineticScrolling);
 	}
 
-	connect(this, SIGNAL(visibleChanged(bool)), this, SLOT(refreshRangeDates()));
+	connect(this, &MSSearchDialog::visibleChanged, this, &MSSearchDialog::refreshRangeDates);
 
-	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
+	connect(&StelApp::getInstance(), &StelApp::languageChanged, this, &MSSearchDialog::retranslate);
 
 	connect(m_ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
-	connect(m_ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
+	connect(m_ui->titleBar, &TitleBar::movedTo, this, &StelDialog::handleMovedTo);
 
-	connect(m_ui->searchButton, SIGNAL(clicked()), this, SLOT(searchEvents()));
+	connect(m_ui->searchButton, &QPushButton::clicked, this, &MSSearchDialog::searchEvents);
 
-	connect(m_ui->listEvents, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectEvent(QModelIndex)));
+	connect(m_ui->listEvents, &QTreeWidget::doubleClicked, this, &MSSearchDialog::selectEvent);
 
 	// bug #1350669 (https://bugs.launchpad.net/stellarium/+bug/1350669)
-	connect(m_ui->listEvents, SIGNAL(currentItemChanged(QTreeWidgetItem*,QTreeWidgetItem*)),
-		m_ui->listEvents, SLOT(repaint()));
+	connect(m_ui->listEvents, &QTreeWidget::currentItemChanged, m_ui->listEvents, qOverload<>(&QTreeWidget::repaint));
 
 	int year = QDate::fromJulianDay(StelApp::getInstance().getCore()->getJD()).year();
 	m_ui->fromYearSpinBox->setValue(year);

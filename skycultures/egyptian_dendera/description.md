@@ -104,7 +104,7 @@ Pisces are depicted as two fish connected with a ribbon, stockfish, and not the 
 
 The Bull's Thigh is Egyptian (also depicted on diagonal star clocks, two millennia earlier), the Jackal and the Sheep are at the places of the Babylonian asterisms "Fox" and "Ewe". The jackal might stand on a plough, but the constellation of the plough in Mesopotamian uranography used to be in a different position. This is the northern constellation, Ursa Major.
 
-##### Mia (Lion)
+##### Mai / m3j (Lion)
 
 The beast is at the place of the Babylonian "Mad Dog" (rabid dog) and the Greco-Roman Lupus. In Egyptian uranography, this depiction of a lion is frequently preserved, but not necessarily in this area. This is the southern constellation, Lupus.
 

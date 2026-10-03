@@ -57,8 +57,8 @@ MainService::MainService(QObject *parent)
 {
 	//this is run in the main thread
 
-	connect(actionMgr,SIGNAL(actionToggled(QString,bool)),this,SLOT(actionToggled(QString,bool)));
-	connect(propMgr,SIGNAL(stelPropertyChanged(StelProperty*,QVariant)),this,SLOT(propertyChanged(StelProperty*,QVariant)));
+	connect(actionMgr, &StelActionMgr::actionToggled, this, &MainService::actionToggled);
+	connect(propMgr, &StelPropertyMgr::stelPropertyChanged, this, &MainService::propertyChanged);
 
 	Q_ASSERT(this->thread()==objMgr->thread());
 }
@@ -556,7 +556,7 @@ QString MainService::getInfoString()
 	StelObjectP selectedObject = getSelectedObject();
 	if(selectedObject.isNull())
 		return QString();
-	return selectedObject->getInfoString(core,StelObject::AllInfo | StelObject::NoFont);
+	return selectedObject->getInfoString(core,StelObject::AllInfo);
 }
 
 bool MainService::focusObject(const QString &name, MainService::SelectionMode mode)

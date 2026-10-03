@@ -93,31 +93,24 @@ void SatellitesImportDialog::createDialogContent()
 	if (gui)
 	{
 		enableKineticScrolling(gui->getFlagUseKineticScrolling());
-		connect(gui, SIGNAL(flagUseKineticScrollingChanged(bool)), this, SLOT(enableKineticScrolling(bool)));
+		connect(gui, &StelGui::flagUseKineticScrollingChanged, this, &SatellitesImportDialog::enableKineticScrolling);
 	}
 
 	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
-	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
+	connect(ui->titleBar, &TitleBar::movedTo, this, &StelDialog::handleMovedTo);
 
-	connect(ui->pushButtonGetData, SIGNAL(clicked()),
-	        this, SLOT(getData()));
-	connect(ui->pushButtonAbort, SIGNAL(clicked()),
-	        this, SLOT(abortDownloads()));
-	connect(ui->pushButtonAdd, SIGNAL(clicked()),
-	        this, SLOT(acceptNewSatellites()));
-	connect(ui->pushButtonDiscard, SIGNAL(clicked()),
-	        this, SLOT(discardNewSatellites()));
-	connect(ui->pushButtonMarkAll, SIGNAL(clicked()),
-	        this, SLOT(markAll()));
-	connect(ui->pushButtonMarkNone, SIGNAL(clicked()),
-	        this, SLOT(markNone()));
+	connect(ui->pushButtonGetData,  &QPushButton::clicked, this, &SatellitesImportDialog::getData);
+	connect(ui->pushButtonAbort,    &QPushButton::clicked, this, &SatellitesImportDialog::abortDownloads);
+	connect(ui->pushButtonAdd,      &QPushButton::clicked, this, &SatellitesImportDialog::acceptNewSatellites);
+	connect(ui->pushButtonDiscard,  &QPushButton::clicked, this, &SatellitesImportDialog::discardNewSatellites);
+	connect(ui->pushButtonMarkAll,  &QPushButton::clicked, this, &SatellitesImportDialog::markAll);
+	connect(ui->pushButtonMarkNone, &QPushButton::clicked, this, &SatellitesImportDialog::markNone);
 	
 	filterProxyModel = new QSortFilterProxyModel(this);
 	filterProxyModel->setSourceModel(newSatellitesModel);
 	filterProxyModel->setFilterCaseSensitivity(Qt::CaseInsensitive);
 	ui->listView->setModel(filterProxyModel);
-	connect(ui->lineEditSearch, SIGNAL(textChanged(const QString&)),
-	        filterProxyModel, SLOT(setFilterFixedString(const QString&)));
+	connect(ui->lineEditSearch, &QLineEdit::textChanged, filterProxyModel, &QSortFilterProxyModel::setFilterFixedString);
 	
 	reset();
 }
@@ -131,8 +124,7 @@ void SatellitesImportDialog::getData()
 	if (!downloadMgr)
 	{
 		downloadMgr = StelApp::getInstance().getNetworkAccessManager();
-		connect(downloadMgr, SIGNAL(finished(QNetworkReply*)),
-		        this, SLOT(receiveDownload(QNetworkReply*)));
+		connect(downloadMgr, &QNetworkAccessManager::finished, this, &SatellitesImportDialog::receiveDownload);
 	}
 	Satellites* satMgr = GETSTELMODULE(Satellites);
 	

@@ -192,7 +192,7 @@ void TelescopeControl::init()
 			text = q_("Centering screen by telescope coordinates #%1").arg(i);
 			addAction(name, section, text, this, [=](){centeringScreenByTelescope(i);});
 		}
-		connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(translateActionDescriptions()));
+		connect(&StelApp::getInstance(), &StelApp::languageChanged, this, &TelescopeControl::translateActionDescriptions);
 
 #ifndef NO_GUI
 		//Create and initialize dialog windows
