@@ -33,9 +33,7 @@ public:
 	//! @param text the text to be displayed for this node
 	//! @param receiver a QObject which will receive a signal when the value 
 	//! is changed
-	//! @param method the method in the receiver which will be called when
-	//! the value is changed.  Note that this should be passed using the 
-	//! SLOT() macro.
+	//! @param method the method that will be called when the value is changed.
 	//! @param defValue the default value for the node
 	//! @param min the minimum acceptable value for the node
 	//! @param max the maximum acceptable value for the node
@@ -44,8 +42,20 @@ public:
 	//! @param parent the node for the parent menu item
 	//! @param prev the previous node in the current menu (typically 
 	//! shares the same parent)
-	TuiNodeInt(const QString& text, QObject* receiver, const char* method, int defValue, 
-		   int min, int max, int inc, TuiNode* parent=Q_NULLPTR, TuiNode* prev=Q_NULLPTR);
+	template<typename PointerToMethod, typename Receiver>
+	TuiNodeInt(const QString& text, Receiver* receiver, PointerToMethod method,
+	           int defValue, int min, int max, int inc, TuiNode* parent=nullptr,
+	           TuiNode* prev=nullptr)
+		: TuiNodeEditable(text, parent, prev)
+		, value(defValue)
+		, minimum(min)
+		, maximum(max)
+		, increment(inc)
+		, typing(false)
+	{
+		this->connect(this, &TuiNodeInt::setValue, receiver, method);
+	}
+
 	TuiNodeResponse handleEditingKey(int key) override;
 	QString getDisplayText() const override;
 

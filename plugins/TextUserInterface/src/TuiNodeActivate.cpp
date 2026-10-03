@@ -20,13 +20,6 @@
 #include "TuiNodeActivate.hpp"
 #include <QKeyEvent>
 
-
-TuiNodeActivate::TuiNodeActivate(const QString& text, QObject* receiver, const char* method, TuiNode* parent, TuiNode* prev)
-	: TuiNode(text, parent, prev)
-{
-	this->connect(this, SIGNAL(activate()), receiver, method);
-}
-
 TuiNodeResponse TuiNodeActivate::handleKey(int key)
 {
 	if (key==Qt::Key_Return)

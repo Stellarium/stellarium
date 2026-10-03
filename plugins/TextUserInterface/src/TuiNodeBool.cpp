@@ -20,13 +20,6 @@
 #include "TuiNodeBool.hpp"
 #include <QKeyEvent>
 
-
-TuiNodeBool::TuiNodeBool(const QString& text, QObject* receiver, const char* method, bool defValue, TuiNode* parent, TuiNode* prev)
-	: TuiNodeEditable(text, parent, prev), state(defValue)
-{
-	this->connect(this, SIGNAL(setValue(bool)), receiver, method);
-}
-
 TuiNodeResponse TuiNodeBool::handleEditingKey(int key)
 {
 	TuiNodeResponse response;

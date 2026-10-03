@@ -33,13 +33,18 @@ public:
 	//! Create a TuiNodeActivate node.
 	//! @param text the text to be displayed for this node
 	//! @param receiver a QObject which will receive the activation signal
-	//! @param method the method in the receiver which will be called when
-	//! the node is activated.  Note that this should be passed using the 
-	//! SLOT() macro.
+	//! @param method the method that will be called when the node is activated.
 	//! @param parent the node for the parent menu item
 	//! @param prev the previous node in the current menu (typically 
 	//! shares the same parent)
-	TuiNodeActivate(const QString& text, QObject* receiver, const char* method, TuiNode* parent=Q_NULLPTR, TuiNode* prev=Q_NULLPTR);
+	template<typename PointerToMethod, typename Receiver>
+	TuiNodeActivate(const QString& text, Receiver* receiver, PointerToMethod method,
+	                TuiNode* parent=nullptr, TuiNode* prev=nullptr)
+		: TuiNode(text, parent, prev)
+	{
+		this->connect(this, &TuiNodeActivate::activate, receiver, method);
+	}
+
 	TuiNodeResponse handleKey(int key) override;
 	QString getDisplayText() const override;
 

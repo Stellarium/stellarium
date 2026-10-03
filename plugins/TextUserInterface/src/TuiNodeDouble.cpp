@@ -20,14 +20,6 @@
 #include "TuiNodeDouble.hpp"
 #include <QKeyEvent>
 
-TuiNodeDouble::TuiNodeDouble(const QString& text, QObject* receiver, const char* method, double defValue,
-                             double min, double max, double inc, TuiNode* parent, TuiNode* prev)
-	: TuiNodeEditable(text, parent, prev), value(defValue), minimum(min), maximum(max), increment(inc), typing(false), typedDecimal(false)
-{
-	this->connect(this, SIGNAL(setValue(double)), receiver, method);
-	stringValue.setNum(value,'g',-1);
-}
-
 TuiNodeResponse TuiNodeDouble::handleEditingKey(int key)
 {
 	TuiNodeResponse response;
