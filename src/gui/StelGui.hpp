@@ -32,6 +32,7 @@
 class QGraphicsSceneMouseEvent;
 class QTimeLine;
 class StelButton;
+class StelToolTip;
 class BottomStelBar;
 class InfoPanel;
 class ConfigurationDialog;
@@ -91,6 +92,8 @@ public:
 	//! Initialize the StelGui object.
 	void init(QGraphicsWidget* topLevelGraphicsWidget) override;
 	void update();
+
+	void showToolTip(const QPoint& scenePos, const QString& text) override;
 
 	StelStyle getStelStyle() const {return currentStelStyle;}
 	
@@ -385,6 +388,8 @@ private:
 #endif
 	AstroCalcDialog* astroCalcDialog;
 	ObsListDialog* obsListDialog;
+
+	StelToolTip* toolTip;
 
 	bool flagShowFlipButtons;
 	StelButton* flipVert;
