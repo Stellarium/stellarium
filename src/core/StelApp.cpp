@@ -310,6 +310,7 @@ StelApp::StelApp(StelMainView *parent)
 	, flagUseFormattingOutput(false)
 	, flagUseCCSDesignation(false)
 	, flagOverwriteInfoColor(false)
+	, flagExtraPrecision(false) // (SS) 2026-09-13 Extra decimal-digit precision for coordinates in the object info panel
 	, overwriteInfoColor(Vec3f(1.f))
 	, daylightInfoColor(Vec3f(0.f))
 	, flagImmediateSave(false)
@@ -734,7 +735,11 @@ void StelApp::init(QSettings* conf)
 	setFlagPolarDistanceUsage(confSettings->value("gui/flag_use_polar_distance", false).toBool());
 	setFlagUseFormattingOutput(confSettings->value("gui/flag_use_formatting_output", false).toBool());
 	setFlagUseCCSDesignation(confSettings->value("gui/flag_use_ccs_designations", false).toBool());
-	setFlagOverwriteInfoColor(confSettings->value("gui/flag_overwrite_info_color", false).toBool());	
+	setFlagOverwriteInfoColor(confSettings->value("gui/flag_overwrite_info_color", false).toBool());
+	
+	// (SS) 2026-09-13 Extra decimal-digit precision for coordinates in the object info panel.
+	setFlagExtraPrecision(confSettings->value("gui/flag_extra_precision", false).toBool());
+	
 	setOverwriteInfoColor(Vec3f(confSettings->value("color/info_text_color", "1.0,1.0,1.0").toString()));
 	setDaylightInfoColor(Vec3f(confSettings->value("color/daylight_text_color", "0.0,0.0,0.0").toString()));
 
@@ -1378,6 +1383,18 @@ void StelApp::setFlagUseCCSDesignation(bool b)
 		flagUseCCSDesignation = b;
 		StelApp::immediateSave("gui/flag_use_ccs_designations", flagUseCCSDesignation);
 		emit flagUseCCSDesignationChanged(b);
+	}
+}
+
+// (SS) 2026-09-13 Extra decimal-digit precision for coordinates in the object info panel.
+void StelApp::setFlagExtraPrecision(bool b)
+{
+	if (flagExtraPrecision != b)
+	{
+		flagExtraPrecision = b;
+		StelUtils::setExtraPrecision(b); // (SS) 2026-09-30 keep StelUtils in sync
+		StelApp::immediateSave("gui/flag_extra_precision", flagExtraPrecision);
+		emit flagExtraPrecisionChanged(b);
 	}
 }
 

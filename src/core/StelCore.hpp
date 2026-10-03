@@ -58,6 +58,16 @@ class StelCore : public QObject
 	Q_PROPERTY(double aberrationFactor READ getAberrationFactor WRITE setAberrationFactor NOTIFY aberrationFactorChanged)
 	Q_PROPERTY(bool flagUseParallax READ getUseParallax WRITE setUseParallax NOTIFY flagUseParallaxChanged)
 	Q_PROPERTY(double parallaxFactor READ getParallaxFactor WRITE setParallaxFactor NOTIFY parallaxFactorChanged)
+	
+	// (SS) 2026-09-13 Gravitational light deflection by the Sun (major planets and Pluto). Mirrors
+	// the flagUseAberration/aberrationFactor pattern above.
+	Q_PROPERTY(bool flagUseDeflection READ getUseDeflection WRITE setUseDeflection NOTIFY flagUseDeflectionChanged)
+	Q_PROPERTY(double deflectionFactor READ getDeflectionFactor WRITE setDeflectionFactor NOTIFY deflectionFactorChanged)
+	
+	// (SS) 2026-09-15 Moon's visible-disk-center vs. center-of-mass offset (USNO/HMNAO standard
+	// correction). No exaggeration factor - see rationale in ConfigurationDialog patch notes.
+	Q_PROPERTY(bool flagUseLunarFigureCorrection READ getUseLunarFigureCorrection WRITE setUseLunarFigureCorrection NOTIFY flagUseLunarFigureCorrectionChanged)
+	
 	Q_PROPERTY(bool flagUseTopocentricCoordinates READ getUseTopocentricCoordinates WRITE setUseTopocentricCoordinates NOTIFY flagUseTopocentricCoordinatesChanged)
 	Q_PROPERTY(ProjectionType currentProjectionType READ getCurrentProjectionType WRITE setCurrentProjectionType NOTIFY currentProjectionTypeChanged)
 	//! This is just another way to access the projection type, by string instead of enum
@@ -578,6 +588,25 @@ public slots:
 	//! Set aberration factor. Values are clamped to 0...5. (Values above 5 cause graphical problems.)
 	void setParallaxFactor(double factor);
 
+	//! (SS) 2026-09-13 @return whether gravitational light deflection by the Sun is currently used for major planets and Pluto.
+	bool getUseDeflection() const;
+	//! Set whether you want computation and simulation of gravitational light deflection by the Sun
+	//! (a bending of light near the Sun, up to ~1.75 arcsec at the solar limb, falling off with elongation).
+	void setUseDeflection(bool use);
+	//! @return deflection factor. 1 is realistic simulation, but higher values may be useful for didactic purposes.
+	double getDeflectionFactor() const;
+	//! Set deflection factor. Values are clamped to 0...5. (Values above 5 cause graphical problems.)
+	void setDeflectionFactor(double factor);
+
+	//! (SS) 2026-09-15 @return whether the Moon's center-of-figure correction is applied on top of
+	//! Planet::getJ2000EquatorialPos() by Planet::getApparentLimbCenterPos().
+	bool getUseLunarFigureCorrection() const;
+	//! Set whether Planet::getApparentLimbCenterPos() offsets the Moon's center-of-mass position by the
+	//! standard USNO/HMNAO correction (+0.5" ecliptic longitude, -0.25" ecliptic latitude) to
+	//! approximate the visible-disk center instead. Useful for eclipse/occultation work; should be off
+	//! when comparing against JPL Horizons or other center-of-mass ephemerides.
+	void setUseLunarFigureCorrection(bool use);
+
 	//! @return whether topocentric coordinates are currently used.
 	bool getUseTopocentricCoordinates() const;
 	//! Set whether you want topocentric or planetocentric data
@@ -919,7 +948,15 @@ signals:
 	void flagUseParallaxChanged(bool b);
 	//! This signal indicates a change in parallax exaggeration factor
 	void parallaxFactorChanged(double val);
+	
+	//! (SS) 2026-09-13 This signal indicates a switch in use of gravitational light deflection
+	void flagUseDeflectionChanged(bool b);
+	//! (SS) 2026-09-13 This signal indicates a change in deflection exaggeration factor
+	void deflectionFactorChanged(double val);
+	//! (SS) 2026-09-15 This signal indicates a switch in use of the Moon's figure-center correction
+	void flagUseLunarFigureCorrectionChanged(bool b);
 	//! This signal indicates a switch in use of topocentric coordinates
+	
 	void flagUseTopocentricCoordinatesChanged(bool b);
 	//! Emitted whenever the projection type changes
 	void currentProjectionTypeChanged(StelCore::ProjectionType newType);
@@ -1006,6 +1043,16 @@ private:
 	bool flagUseParallax;
 	// value to allow exaggerating parallax effects. 1 is natural value, stretching to e.g. 1000 may be useful for explanations.
 	double parallaxFactor;
+	
+	// (SS) 2026-09-13 flag to indicate we want to include gravitational light deflection by the Sun
+	// (major planets and Pluto).
+	bool flagUseDeflection;
+	// (SS) 2026-09-13 value to allow exaggerating deflection effects. 1 is natural value, stretching may be useful for explanations.
+	double deflectionFactor;
+	// (SS) 2026-09-15 flag to indicate whether Planet::getApparentLimbCenterPos() applies the Moon's
+	// center-of-figure vs. center-of-mass correction. No exaggeration factor - see .hpp comment.
+	bool flagUseLunarFigureCorrection;
+
 	// flag to indicate that we show topocentrically corrected coordinates. (Switching to false for planetocentric coordinates is new for 0.14)
 	bool flagUseTopocentricCoordinates;
 

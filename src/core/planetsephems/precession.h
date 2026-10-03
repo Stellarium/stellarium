@@ -1,5 +1,6 @@
 /*
 Copyright (C) 2015 Georg Zotti
+Copyright (C) 2026 Sylvain Simard
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU Library General Public License as published by
@@ -21,6 +22,8 @@ Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+//=============== LONG-TERM PRECESSION VONDRAK (2011-2012)  ===============
 
 //! Precession modelled from:
 //! J. Vondrák, N. Capitaine, and P. Wallace: New precession expressions, valid for long time intervals
@@ -53,6 +56,59 @@ double getPrecessionAngleVondrakEpsilon(const double jde);
 
 //! Just return (previously computed) ecliptic obliquity. [radians]
 double getPrecessionAngleVondrakCurrentEpsilonA(void);
+
+//================= LONG-TERM PRECESSION OWEN (1990) ======================
+
+//! Precession modelled from:
+//! A Theory of the earth's precession relative to the invariable plane of the solar system
+//! by: William Mann Owen Jr
+//! PhD. dissertation
+//! University of Florida
+//! 1990
+//!
+//! This thesis describes a long-term precession theory of classical angles (chiA, OmegaA, PsiA, epsA) and new ones
+//! (L, I and Delta) inferred at discrete time from a numerical integration over a time spanned of +/- 5000 centuries
+//! from J2000. Chebyshev polynomials fitted to these values achieve standard deviation of the difference between the
+//! tabular values and the polynomial approximations better than 0.013" for classical angles and an order of magnitude
+//! better for new angles.
+//!
+//! While the thesis provides 125 intervals of 80 centuries each of Chebyshev coefficients for eight (8) precession
+//! parameters, this implementation currently only uses 5 intervals centered on J2000 to cover a Time range of
+//! +/- 200 centuries centered around J2000. Additional intervals could be added as required.
+//!
+//! This first method computes the classical precession angles chi_A, omega_A, psi_A and epsilon_A
+//!
+//! A Precession matrix can be built from them using standard rotation mattrices
+//!
+//!                              P = Rz(chi_A) x Rx(-omega_A) x Rz(-psi_A) x Rx(eps0)
+//!
+//! This is the same standard form from Capitaine et al, expressed in the order of row-major matrices
+//!
+//! Return values are in radians
+void getPrecessionAnglesOwenClassic(const double jde, double *epsilon_A, double *chi_A, double *omega_A, double *psi_A);
+
+//! This second method computes the new precession angles L, I and Delta valid when refered to the
+//! invariable plane of the solar system.
+//!
+//! A Precession matrix can be built from them using standard rotation mattrices
+//!
+//!                         P = Rz(-L) x Rx(-I) x Rz(Delta) x Rx(I0) x Rz(L0)
+//!
+//! This is the form used by Owen(1990), expressed in the order of row-major matrices
+//!
+//! Return values are in radians
+void getPrecessionAnglesOwenLIDelta(const double jde, double *L, double *I, double *Delta);
+
+//! Just return the ecliptic obliquity from the Owen long term theory
+double getPrecessionAngleOwenEpsilon(const double jde);
+
+//! Just return the invariable plane angles L0 at J2000
+double getPrecessionAnglesOwenL0(void);
+
+//! Just return the invariable plane angles I0 at J2000
+double getPrecessionAnglesOwenI0(void);
+
+//========================= NUTATION IAU-2000B ============================
 
 // To complete the task of correct&accurate precession-nutation handling, we need fitting IAU-2000A or IAU-2000B Nutation.
 // E.g. A&A 459, 981-985 (2006) P. T. Wallace and N. Capitaine: Precession-nutation procedures consistent with IAU 2006 resolutions. DOI: 10.1051/0004-6361:20065897

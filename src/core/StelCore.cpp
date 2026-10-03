@@ -55,6 +55,11 @@
 
 // Init static transfo matrices
 // See vsop87.doc:
+// (SS) 2026-06-16 Repère de la solution VSOP87 par rapport au repère du FK5-J2000. Les éphémérides VSOP87 sont défini
+// dans le repère inertiel de l'écliptique dynamique. Voir VSOP82, Bretagnon, A&A 114, 278-288 (1982), section III,
+// bas de page p281 23.4392803055555555556 --> 23 degree 26 arcmin 21.4091 arcsecond. L'inclinaison de l'écliptique
+// dynamique sur l'equateur du FK5-J2000 -0.0000275 degree --> -0.0990 arcsec. Angle entre l'équinoxe FK5-J2000 et
+// l'équinoxe dynamique gammaFK5-gammaDyn
 const Mat4d StelCore::matJ2000ToVsop87(Mat4d::xrotation(-23.4392803055555555556*M_PI_180) * Mat4d::zrotation(0.0000275*M_PI_180));
 const Mat4d StelCore::matVsop87ToJ2000(matJ2000ToVsop87.transpose());
 const Mat4d StelCore::matJ2000ToGalactic(-0.054875539726, 0.494109453312, -0.867666135858, 0, -0.873437108010, -0.444829589425, -0.198076386122, 0, -0.483834985808, 0.746982251810, 0.455983795705, 0, 0, 0, 0, 1);
@@ -90,9 +95,12 @@ StelCore::StelCore()
 	, aberrationFactor(1.0)
 	, flagUseParallax(true)
 	, parallaxFactor(1.0)
+	, flagUseDeflection(true)				// (SS) 2026-09-13 Gravitational light deflection by the Sun (major planets and Pluto)
+	, deflectionFactor(1.0)					// (SS) 2026-09-13 Factor to allow exaggerating deflection effects. 1 is natural value, stretching may be useful for explanations.
+	, flagUseLunarFigureCorrection(false)	// (SS) 2026-09-15 Moon's visible-disk-center vs. center-of-mass offset (USNO/HMNAO standard correction)
 	, flagUseTopocentricCoordinates(true)
 	, timeSpeed(JD_SECOND)
-        , savedTimeSpeed(JD_SECOND)
+    , savedTimeSpeed(JD_SECOND)
 	, JD(0.,0.)
 	, presetSkyTime(0.)
 	, milliSecondsOfLastJDUpdate(0)
@@ -154,6 +162,14 @@ StelCore::StelCore()
 	aberrationFactor=conf->value("astro/aberration_factor", 1.0).toDouble();
 	flagUseParallax=conf->value("astro/flag_parallax", true).toBool();
 	parallaxFactor=conf->value("astro/parallax_factor", 1.0).toDouble();
+
+	// (SS) 2026-09-13 Gravitational light deflection by the Sun (major planets and Pluto)
+	flagUseDeflection            = conf->value("astro/flag_deflection", true).toBool();
+	deflectionFactor             = conf->value("astro/deflection_factor", 1.0).toDouble();
+
+	// (SS) 2026-09-15 Lunar center-of-figure vs. center-of-mass correction (USNO/HMNAO standard correction)
+	flagUseLunarFigureCorrection = conf->value("astro/flag_lunar_figure_correction", false).toBool();
+
 	flagUseTopocentricCoordinates=conf->value("astro/flag_topocentric_coordinates", true).toBool();
 	flagUseDST=conf->value("localization/flag_dst", true).toBool();
 
@@ -1355,6 +1371,60 @@ void StelCore::setParallaxFactor(double factor)
 	}
 }
 
+// (SS) 2026-09-13 @return whether gravitational light deflection by the Sun is currently used.
+bool StelCore::getUseDeflection() const
+{
+	return flagUseDeflection;
+}
+
+// (SS) 2026-09-13 Set whether you want computation and simulation of gravitational light deflection
+// by the Sun (major planets and Pluto).
+void StelCore::setUseDeflection(bool use)
+{
+	if (flagUseDeflection != use)
+	{
+		flagUseDeflection = use;
+		StelApp::immediateSave("astro/flag_deflection", use);
+		emit flagUseDeflectionChanged(use);
+	}
+}
+
+// (SS) 2026-09-13 @return deflection factor. 1 is realistic simulation, but higher values may be
+// useful for didactic purposes.
+double StelCore::getDeflectionFactor() const
+{
+	return deflectionFactor;
+}
+
+// (SS) 2026-09-13 Set deflection factor. Values are clamped to 0...5. (Values above 5 cause graphical problems.)
+void StelCore::setDeflectionFactor(double factor)
+{
+	if (!fuzzyEquals(deflectionFactor, factor))
+	{
+		deflectionFactor = qBound(0., factor, 5.);
+		StelApp::immediateSave("astro/deflection_factor", deflectionFactor);
+		emit deflectionFactorChanged(factor);
+	}
+}
+
+// (SS) 2026-09-15 @return whether the Moon's center-of-figure correction is applied.
+bool StelCore::getUseLunarFigureCorrection() const
+{
+	return flagUseLunarFigureCorrection;
+}
+
+// (SS) 2026-09-15 Set whether Planet::getApparentLimbCenterPos() applies the standard USNO/HMNAO
+// center-of-mass-to-center-of-figure correction for the Moon.
+void StelCore::setUseLunarFigureCorrection(bool use)
+{
+	if (flagUseLunarFigureCorrection != use)
+	{
+		flagUseLunarFigureCorrection = use;
+		StelApp::immediateSave("astro/flag_lunar_figure_correction", use);
+		emit flagUseLunarFigureCorrectionChanged(use);
+	}
+}
+
 // @return whether topocentric coordinates are currently used.
 bool StelCore::getUseTopocentricCoordinates() const
 {
@@ -2420,7 +2490,7 @@ double StelCore::getDeltaT() const
 	return JD.second;
 }
 
-
+// (SS) 2025-11-27 : REVISED for differentiating between DE430/431 and DE440/441 ephemeris selection in Moon Secular Acceleration
 // compute and return DeltaT in seconds. Try not to call it directly, current DeltaT, JD, and JDE are available.
 double StelCore::computeDeltaT(const double JD)
 {
@@ -2442,10 +2512,10 @@ double StelCore::computeDeltaT(const double JD)
 	}
 
 	if (!deltaTdontUseMoon)
-		DeltaT += StelUtils::getMoonSecularAcceleration(JD, deltaTnDot, ((de440Active&&EphemWrapper::jd_fits_de440(JD)) ||
-										 (de441Active&&EphemWrapper::jd_fits_de441(JD)) ||
-										 (de430Active&&EphemWrapper::jd_fits_de430(JD)) ||
-										 (de431Active&&EphemWrapper::jd_fits_de431(JD))));
+		DeltaT += StelUtils::getMoonSecularAcceleration(JD, deltaTnDot,((de430Active && EphemWrapper::jd_fits_de430(JD)) ||
+		                                                                (de431Active && EphemWrapper::jd_fits_de431(JD))),
+		                                                               ((de440Active && EphemWrapper::jd_fits_de440(JD)) ||
+		                                                                (de441Active && EphemWrapper::jd_fits_de441(JD)))); 
 
 	return DeltaT;
 }
@@ -2599,11 +2669,19 @@ void StelCore::setCurrentDeltaTAlgorithm(DeltaTAlgorithm algorithm)
 			deltaTfinish	=  2150; // 1997;
 			break;
 		case JPLHorizons:
-			// JPL Horizons algorithm for DeltaT
-			deltaTnDot = -25.7376; // n.dot = -25.7376 "/cy/cy
+			// (SS) 2025-11-27 JPL Horizons algorithm for DeltaT - REVISED
+			// From a communication with Jon Giorgini (JPL) 2025-11-12, n.dot value of -25.82"/cy/cy matches
+			// DE430/DE431 Ephemerides and Stephenson/Morrison/Hohenkerk/Zawilski cubic splines.
+			// However, DE440/DE441 Ephemerides use slightly different lunar model, so we need to apply
+			// the moon secular acceleration correction separately in computeDeltaT() when those are selected.
+			// The n.dot value for DE440/DE441 is -25.936"/cy/cy per Jon Giorgini (JPL) 2025-11-12 email.
+			// The JPL Horizons DeltaT model is valid only from 9999BC to Present. JPL Horizons app actually clamps
+			// Delta-T values to the last EOP file predictions for future dates beyond Present while allowing 
+			// JD value up to 9999-12-30 00:00. Just keep in mind that Delta-T values are not valid beyond Present.
+			deltaTnDot = -25.82; // n.dot = -25.82"/cy/cy
 			deltaTfunc = StelUtils::getDeltaTByJPLHorizons;
-			deltaTstart	= -2999;
-			deltaTfinish	= 1620;
+			deltaTstart = -9998; // 9999BC-03-20 00:00 UT --> JD_UT >= -1930633.5, yearFraction >= -9997.786301369860
+			deltaTfinish = 9999; // 9999AD-12-30 00:00 UT --> JD_UT <=  5373482.5, yearFraction <=  9999.994520547950
 			break;
 		case MeeusSimons:
 			// Meeus & Simons (2000) algorithm for DeltaT
