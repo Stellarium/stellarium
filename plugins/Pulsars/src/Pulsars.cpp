@@ -723,7 +723,7 @@ void Pulsars::startDownload(const QString &urlString)
 	request.setAttribute(QNetworkRequest::RedirectPolicyAttribute, true);
 #endif
 	downloadReply = networkManager->get(request);
-	connect(downloadReply, SIGNAL(downloadProgress(qint64,qint64)), this, SLOT(updateDownloadProgress(qint64,qint64)));
+	connect(downloadReply, &QNetworkReply::downloadProgress, this, &Pulsars::updateDownloadProgress);
 
 	updateState = Pulsars::Updating;
 	emit updateStateChanged(updateState);

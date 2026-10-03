@@ -371,7 +371,7 @@ void MeteorShowersMgr::startDownload(const QString &urlString)
 	request.setAttribute(QNetworkRequest::RedirectPolicyAttribute, true);
 #endif
 	m_downloadReply = m_networkManager->get(request);
-	connect(m_downloadReply, SIGNAL(downloadProgress(qint64,qint64)), this, SLOT(updateDownloadProgress(qint64,qint64)));
+	connect(m_downloadReply, &QNetworkReply::downloadProgress, this, &MeteorShowersMgr::updateDownloadProgress);
 	m_updateState = MeteorShowersMgr::Updating;
 	emit updateStateChanged(m_updateState);
 }

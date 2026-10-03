@@ -637,7 +637,7 @@ void Supernovae::startDownload(const QString &urlString)
 	request.setAttribute(QNetworkRequest::RedirectPolicyAttribute, true);
 #endif
 	downloadReply = networkManager->get(request);
-	connect(downloadReply, SIGNAL(downloadProgress(qint64,qint64)), this, SLOT(updateDownloadProgress(qint64,qint64)));
+	connect(downloadReply, &QNetworkReply::downloadProgress, this, &Supernovae::updateDownloadProgress);
 
 	updateState = Supernovae::Updating;
 	emit updateStateChanged(updateState);

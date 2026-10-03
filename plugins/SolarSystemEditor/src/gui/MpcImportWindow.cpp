@@ -606,7 +606,7 @@ void MpcImportWindow::startDownload(const QString &urlString)
 	request.setAttribute(QNetworkRequest::RedirectPolicyAttribute, true);
 #endif
 	downloadReply = networkManager->get(request);
-	connect(downloadReply, SIGNAL(downloadProgress(qint64,qint64)), this, SLOT(updateDownloadProgress(qint64,qint64)));
+	connect(downloadReply, &QNetworkReply::downloadProgress, this, &MpcImportWindow::updateDownloadProgress);
 }
 
 void MpcImportWindow::abortDownload()
@@ -779,7 +779,7 @@ void MpcImportWindow::sendQueryToUrl(QUrl url)
 
 	connect(networkManager, &QNetworkAccessManager::finished, this, &MpcImportWindow::receiveQueryReply);
 	queryReply = networkManager->post(request, url.query(QUrl::FullyEncoded).toUtf8());	
-	connect(queryReply, SIGNAL(downloadProgress(qint64,qint64)), this, SLOT(updateQueryProgress(qint64,qint64)));
+	connect(queryReply, &QNetworkReply::downloadProgress, this, &MpcImportWindow::updateQueryProgress);
 }
 
 void MpcImportWindow::abortQuery()
