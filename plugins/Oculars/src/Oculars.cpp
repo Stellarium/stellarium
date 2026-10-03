@@ -1139,8 +1139,13 @@ void Oculars::displayPopupMenu()
 		// we will also show the telescopes.
 		if (!oculars.isEmpty())
 		{
-			popup->addAction(q_("&Previous ocular"), this, SLOT(decrementOcularIndex()));
-			popup->addAction(q_("&Next ocular"), this, SLOT(incrementOcularIndex()));
+			QAction* action;
+			action = popup->addAction(q_("&Previous ocular"));
+			connect(action, &QAction::triggered, this, &Oculars::decrementOcularIndex);
+
+			action = popup->addAction(q_("&Next ocular"));
+			connect(action, &QAction::triggered, this, &Oculars::incrementOcularIndex);
+
 			QMenu* submenu = new QMenu(q_("Select &ocular"), popup);
 			int availableOcularCount = 0;
 			for (int index = 0; index < oculars.count(); ++index)
@@ -1223,8 +1228,13 @@ void Oculars::displayPopupMenu()
 		popup->addSeparator();
 		if (flagShowCCD && selectedCCDIndex > -1 && selectedTelescopeIndex > -1)
 		{
-			popup->addAction(q_("&Previous CCD"), this, SLOT(decrementCCDIndex()));
-			popup->addAction(q_("&Next CCD"), this, SLOT(incrementCCDIndex()));
+			QAction* action;
+			action = popup->addAction(q_("&Previous CCD"));
+			connect(action, &QAction::triggered, this, &Oculars::decrementCCDIndex);
+
+			action = popup->addAction(q_("&Next CCD"));
+			connect(action, &QAction::triggered, this, &Oculars::incrementCCDIndex);
+
 			QMenu* submenu = new QMenu(q_("&Select CCD"), popup);
 			for (int index = 0; index < ccds.count(); ++index)
 			{
@@ -1258,7 +1268,8 @@ void Oculars::displayPopupMenu()
 			submenu->addAction(QString("&9: +45") + QChar(0x00B0), submenu, [=](){rotateCCD(45);});
 			submenu->addAction(QString("&0: +90") + QChar(0x00B0), submenu, [=](){rotateCCD(90);});
 
-			submenu->addAction(q_("&Reset rotation"), this, SLOT(ccdRotationReset()));
+			action = submenu->addAction(q_("&Reset rotation"));
+			connect(action, &QAction::triggered, this, &Oculars::ccdRotationReset);
 			popup->addMenu(submenu);			
 			popup->addSeparator();
 		}
@@ -2801,10 +2812,17 @@ QMenu* Oculars::addLensSubmenu(QMenu* parent)
 	Q_ASSERT(parent);
 
 	QMenu *submenu = new QMenu(q_("&Lens"), parent);
-	submenu->addAction(q_("&Previous lens"), this, SLOT(decrementLensIndex()));
-	submenu->addAction(q_("&Next lens"), this, SLOT(incrementLensIndex()));
+	QAction* action;
+	action = submenu->addAction(q_("&Previous lens"));
+	connect(action, &QAction::triggered, this, &Oculars::decrementLensIndex);
+
+	action = submenu->addAction(q_("&Next lens"));
+	connect(action, &QAction::triggered, this, &Oculars::incrementLensIndex);
+
 	submenu->addSeparator();
-	submenu->addAction(q_("None"), this, SLOT(disableLens()));
+
+	action = submenu->addAction(q_("None"));
+	connect(action, &QAction::triggered, this, &Oculars::disableLens);
 
 	for (int index = 0; index < lenses.count(); ++index)
 	{
@@ -2832,8 +2850,14 @@ QMenu* Oculars::addTelescopeSubmenu(QMenu *parent)
 	Q_ASSERT(parent);
 
 	QMenu* submenu = new QMenu(q_("&Telescope"), parent);
-	submenu->addAction(q_("&Previous telescope"), this, SLOT(decrementTelescopeIndex()));
-	submenu->addAction(q_("&Next telescope"), this, SLOT(incrementTelescopeIndex()));
+
+	QAction* action;
+	action = submenu->addAction(q_("&Previous telescope"));
+	connect(action, &QAction::triggered, this, &Oculars::decrementTelescopeIndex);
+
+	action = submenu->addAction(q_("&Next telescope"));
+	connect(action, &QAction::triggered, this, &Oculars::incrementTelescopeIndex);
+
 	submenu->addSeparator();
 	for (int index = 0; index < telescopes.count(); ++index)
 	{
