@@ -701,8 +701,6 @@ void MpcImportWindow::downloadComplete(QNetworkReply *reply)
 
 void MpcImportWindow::deleteDownloadProgressBar()
 {
-	disconnect(this, SLOT(updateDownloadProgress(qint64,qint64)));
-
 	if (downloadProgressBar)
 	{
 		StelApp::getInstance().removeProgressBar(downloadProgressBar);
@@ -921,7 +919,6 @@ void MpcImportWindow::readQueryReply(QNetworkReply * reply)
 
 void MpcImportWindow::deleteQueryProgressBar()
 {
-	disconnect(this, SLOT(updateQueryProgress(qint64,qint64)));
 	if (queryProgressBar)
 	{
 		StelApp::getInstance().removeProgressBar(queryProgressBar);

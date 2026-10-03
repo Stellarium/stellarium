@@ -694,8 +694,6 @@ void Pulsars::updateJSON(void)
 
 void Pulsars::deleteDownloadProgressBar()
 {
-	disconnect(this, SLOT(updateDownloadProgress(qint64,qint64)));
-
 	if (progressBar)
 	{
 		StelApp::getInstance().removeProgressBar(progressBar);

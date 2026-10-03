@@ -342,8 +342,6 @@ void MeteorShowersMgr::actionEnablePlugin(const bool &b)
 
 void MeteorShowersMgr::deleteDownloadProgressBar()
 {
-	disconnect(this, SLOT(updateDownloadProgress(qint64,qint64)));
-
 	if (m_progressBar)
 	{
 		StelApp::getInstance().removeProgressBar(m_progressBar);
