@@ -25,9 +25,9 @@ HttpConnectionHandler::HttpConnectionHandler(const HttpConnectionHandlerSettings
     readTimer.moveToThread(this);
 
     // Connect signals
-    connect(socket, SIGNAL(readyRead()), SLOT(read()));
-    connect(socket, SIGNAL(disconnected()), SLOT(disconnected()));
-    connect(&readTimer, SIGNAL(timeout()), SLOT(readTimeout()));
+    connect(socket, &QTcpSocket::readyRead, this, &HttpConnectionHandler::read);
+    connect(socket, &QTcpSocket::disconnected, this, &HttpConnectionHandler::disconnected);
+    connect(&readTimer, &QTimer::timeout, this, &HttpConnectionHandler::readTimeout);
     readTimer.setSingleShot(true);
 
 #ifndef NDEBUG
