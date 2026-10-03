@@ -153,7 +153,7 @@ void TelescopeConfigurationDialog::createDialogContent()
 	connect(&StelApp::getInstance(), &StelApp::languageChanged, this, &TelescopeConfigurationDialog::retranslate);
 	connect(ui->titleBar, &TitleBar::closeClicked, this, &TelescopeConfigurationDialog::buttonDiscardPressed);
 	connect(ui->titleBar, &TitleBar::movedTo, this, &TelescopeConfigurationDialog::handleMovedTo);
-	connect(dialog, SIGNAL(rejected()), this, SLOT(buttonDiscardPressed()));
+	connect(dialog, &QDialog::rejected, this, &TelescopeConfigurationDialog::buttonDiscardPressed);
 
 	// Connect: sender, signal, receiver, member
 	connect(ui->radioButtonTelescopeLocal, &QRadioButton::toggled, this, &TelescopeConfigurationDialog::toggleTypeLocal);
