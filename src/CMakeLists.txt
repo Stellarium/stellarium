@@ -585,33 +585,34 @@ ENDIF()
 
 
 # ------------------------------------------------------------------
-# 1. ZLIB Target Bridge for Exiv2 (Ninja Dependency Fix)
+# 1. ZLIB Target Bridge for Exiv2 (The Wrapper Fix)
 # ------------------------------------------------------------------
 set(ZLIB_INC_DIR "${CMAKE_SOURCE_DIR}/src/external/zlib")
 
 if(TARGET zlib_stel)
-    # 1. Create the standardized alias that modern Exiv2 uses
-    if(NOT TARGET ZLIB::ZLIB)
-        add_library(ZLIB::ZLIB ALIAS zlib_stel)
-    endif()
+    # Create a real, local file that acts as a custom FindZLIB module
+    set(MOCK_ZLIB_DIR "${CMAKE_BINARY_DIR}/cmake_zlib_bridge")
+    file(MAKE_DIRECTORY "${MOCK_ZLIB_DIR}")
 
-    # 🚀 THE FIXED CACHE INJECTION:
-    # We pass the pure target name 'zlib_stel' to the cache variables.
-    # To prevent Ninja from thinking 'zlib_stel' is a raw missing file,
-    # we explicitly mark it as an advanced library target name.
-    set(ZLIB_LIBRARY zlib_stel CACHE STRING "Target mapping for Exiv2" FORCE)
-    set(ZLIB_LIBRARIES zlib_stel CACHE STRING "Target mapping for Exiv2" FORCE)
+    # Write a custom FindZLIB.cmake that directly exposes Stellarium's target
+    file(WRITE "${MOCK_ZLIB_DIR}/FindZLIB.cmake" "
+        if(NOT TARGET ZLIB::ZLIB)
+            add_library(ZLIB::ZLIB ALIAS zlib_stel)
+        endif()
+        set(ZLIB_FOUND TRUE)
+        set(ZLIB_INCLUDE_DIRS \"${ZLIB_INC_DIR}\")
+        set(ZLIB_LIBRARIES zlib_stel)
+    ")
 
-    # Standard header mapping
-    set(ZLIB_INCLUDE_DIR "${ZLIB_INC_DIR}" CACHE PATH "Path to a file." FORCE)
-    set(ZLIB_INCLUDE_DIRS "${ZLIB_INC_DIR}" CACHE PATH "" FORCE)
-    set(ZLIB_FOUND TRUE CACHE BOOL "" FORCE)
+    # Force CMake's module path to look here FIRST when Exiv2 calls find_package(ZLIB)
+    list(INSERT CMAKE_MODULE_PATH 0 "${MOCK_ZLIB_DIR}")
 
-    # 2. Tell CMake's dependency engine that ZLIB_LIBRARY points to an existing target
-    set_property(GLOBAL PROPERTY TARGET_SUPPORTS_SHARED_LIBS TRUE)
-
-else()
-    set(ZLIB_OUT_LIB ${ZLIB_LIBRARIES})
+    # Clean up old sticky cache variables so they don't override our new system
+    unset(ZLIB_LIBRARY CACHE)
+    unset(ZLIB_LIBRARIES CACHE)
+    unset(ZLIB_INCLUDE_DIR CACHE)
+    unset(ZLIB_INCLUDE_DIRS CACHE)
+    unset(ZLIB_FOUND CACHE)
 endif()
 
 
@@ -627,6 +628,7 @@ CPMFindPackage(NAME exiv2
         # Inject the properties cleanly down into the CPM scope
         "ZLIB_LIBRARY=${ZLIB_OUT_LIB}"
         "ZLIB_INCLUDE_DIR=${ZLIB_INC_DIR}"
+        "EXIV2_ENABLE_INSTALL OFF"      # 🚀 FIXES THE EXPORT ERROR: Disables Exiv2's installation scripts so it won't complain about zlib_stel
         "EXIV2_ENABLE_XMP OFF"          # 🟢 REMOVES EXPAT DEPENDENCY: Bypasses ExpatAdapter.cpp entirely (No XMP sidecar files...)
         "EXIV2_ENABLE_INIH OFF"         # 🟢 BYPASS INIH: Removes the need for the library entirely
         "EXIV2_ENABLE_BMFF OFF"         # 🟢 Turns off ISO Base Media File Format (HEIF/JXL tracking)
