@@ -98,6 +98,10 @@ void TTminusTDBKernelDialog::createDialogContent()
 	connect(core, &StelCore::timeSyncOccurred,        this, &TTminusTDBKernelDialog::updateStatus);
 	if (core->getBSPManager())
 		connect(core->getBSPManager(), &BSPManager::kernelsChanged, this, &TTminusTDBKernelDialog::populateKernelList);
+
+	// (SS) 2026-10-03 Since StelDialog uses a QDialog, keep Enter from activating a button
+	ui->pushButtonRefresh->setAutoDefault(false);
+	ui->pushButtonDefault->setAutoDefault(false);
 }
 
 void TTminusTDBKernelDialog::setDescription() const
