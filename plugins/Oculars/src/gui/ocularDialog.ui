@@ -66,7 +66,7 @@
       <item>
        <widget class="QTabWidget" name="Tabs">
         <property name="focusPolicy">
-         <enum>Qt::FocusPolicy::NoFocus</enum>
+         <enum>Qt::NoFocus</enum>
         </property>
         <property name="currentIndex">
          <number>0</number>
@@ -127,7 +127,7 @@
                <item>
                 <spacer name="horizontalSpacer_7">
                  <property name="orientation">
-                  <enum>Qt::Orientation::Horizontal</enum>
+                  <enum>Qt::Horizontal</enum>
                  </property>
                  <property name="sizeHint" stdset="0">
                   <size>
@@ -140,7 +140,7 @@
                <item>
                 <widget class="QSpinBox" name="arrowButtonScaleSpinBox">
                  <property name="alignment">
-                  <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                  </property>
                  <property name="suffix">
                   <string notr="true">%</string>
@@ -184,7 +184,7 @@
                <item>
                 <spacer name="horizontalSpacer">
                  <property name="orientation">
-                  <enum>Qt::Orientation::Horizontal</enum>
+                  <enum>Qt::Horizontal</enum>
                  </property>
                  <property name="sizeHint" stdset="0">
                   <size>
@@ -203,7 +203,7 @@
                   <string>...font size</string>
                  </property>
                  <property name="alignment">
-                  <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                  </property>
                 </widget>
                </item>
@@ -213,7 +213,7 @@
                   <string>Font size of text on on-screen control panel</string>
                  </property>
                  <property name="alignment">
-                  <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                  </property>
                  <property name="minimum">
                   <number>10</number>
@@ -294,7 +294,7 @@
                <item>
                 <spacer name="colorHorizontalSpacer">
                  <property name="orientation">
-                  <enum>Qt::Orientation::Horizontal</enum>
+                  <enum>Qt::Horizontal</enum>
                  </property>
                  <property name="sizeHint" stdset="0">
                   <size>
@@ -316,7 +316,7 @@
              <item row="16" column="0">
               <spacer name="verticalSpacer_7">
                <property name="orientation">
-                <enum>Qt::Orientation::Vertical</enum>
+                <enum>Qt::Vertical</enum>
                </property>
                <property name="sizeHint" stdset="0">
                 <size>
@@ -394,7 +394,7 @@
              <item row="11" column="0">
               <spacer name="verticalSpacer_6">
                <property name="orientation">
-                <enum>Qt::Orientation::Vertical</enum>
+                <enum>Qt::Vertical</enum>
                </property>
                <property name="sizeHint" stdset="0">
                 <size>
@@ -439,7 +439,7 @@
                <item>
                 <spacer name="horizontalSpacer_4">
                  <property name="orientation">
-                  <enum>Qt::Orientation::Horizontal</enum>
+                  <enum>Qt::Horizontal</enum>
                  </property>
                  <property name="sizeHint" stdset="0">
                   <size>
@@ -455,7 +455,7 @@
                   <string>Opacity of semi-transparent mask</string>
                  </property>
                  <property name="alignment">
-                  <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                  </property>
                  <property name="suffix">
                   <string notr="true">%</string>
@@ -526,10 +526,10 @@
                <item>
                 <spacer name="horizontalSpacer_2">
                  <property name="orientation">
-                  <enum>Qt::Orientation::Horizontal</enum>
+                  <enum>Qt::Horizontal</enum>
                  </property>
                  <property name="sizeType">
-                  <enum>QSizePolicy::Policy::Fixed</enum>
+                  <enum>QSizePolicy::Fixed</enum>
                  </property>
                  <property name="sizeHint" stdset="0">
                   <size>
@@ -558,7 +558,7 @@
                   <string>Horizontal size (width)</string>
                  </property>
                  <property name="alignment">
-                  <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                  </property>
                  <property name="minimum">
                   <number>1</number>
@@ -583,7 +583,7 @@
                   <string>Vertical size (height)</string>
                  </property>
                  <property name="alignment">
-                  <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                  </property>
                  <property name="minimum">
                   <number>1</number>
@@ -609,7 +609,7 @@
                <item>
                 <spacer name="horizontalSpacer_3">
                  <property name="orientation">
-                  <enum>Qt::Orientation::Horizontal</enum>
+                  <enum>Qt::Horizontal</enum>
                  </property>
                  <property name="sizeHint" stdset="0">
                   <size>
@@ -668,10 +668,10 @@
                <item>
                 <spacer name="horizontalSpacer_5">
                  <property name="orientation">
-                  <enum>Qt::Orientation::Horizontal</enum>
+                  <enum>Qt::Horizontal</enum>
                  </property>
                  <property name="sizeType">
-                  <enum>QSizePolicy::Policy::Fixed</enum>
+                  <enum>QSizePolicy::Fixed</enum>
                  </property>
                  <property name="sizeHint" stdset="0">
                   <size>
@@ -712,7 +712,7 @@
                <item>
                 <spacer name="horizontalSpacer_6">
                  <property name="orientation">
-                  <enum>Qt::Orientation::Horizontal</enum>
+                  <enum>Qt::Horizontal</enum>
                  </property>
                  <property name="sizeHint" stdset="0">
                   <size>
@@ -747,7 +747,7 @@
              <string>Telrad view</string>
             </property>
             <property name="alignment">
-             <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignTop</set>
+             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignmentFlag::AlignTop</set>
             </property>
             <layout class="QGridLayout" name="gridLayout_9">
              <property name="leftMargin">
@@ -773,7 +773,7 @@
                   <string comment="abbreviation">FOV:</string>
                  </property>
                  <property name="alignment">
-                  <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
+                  <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
                  </property>
                 </widget>
                </item>
@@ -783,7 +783,7 @@
                   <string>FOV for circle 1</string>
                  </property>
                  <property name="alignment">
-                  <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                  </property>
                  <property name="suffix">
                   <string notr="true">°</string>
@@ -814,7 +814,7 @@
                   <string>FOV for circle 2</string>
                  </property>
                  <property name="alignment">
-                  <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                  </property>
                  <property name="suffix">
                   <string notr="true">°</string>
@@ -845,7 +845,7 @@
                   <string>FOV for circle 3</string>
                  </property>
                  <property name="alignment">
-                  <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                  </property>
                  <property name="suffix">
                   <string notr="true">°</string>
@@ -876,7 +876,7 @@
                   <string>FOV for circle 4</string>
                  </property>
                  <property name="alignment">
-                  <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                  </property>
                  <property name="suffix">
                   <string notr="true">°</string>
@@ -908,7 +908,7 @@
              <item row="5" column="0">
               <spacer name="verticalSpacer_5">
                <property name="orientation">
-                <enum>Qt::Orientation::Vertical</enum>
+                <enum>Qt::Vertical</enum>
                </property>
                <property name="sizeHint" stdset="0">
                 <size>
@@ -924,7 +924,7 @@
           <item row="2" column="0" colspan="2">
            <spacer name="verticalSpacer_3">
             <property name="orientation">
-             <enum>Qt::Orientation::Vertical</enum>
+             <enum>Qt::Vertical</enum>
             </property>
             <property name="sizeHint" stdset="0">
              <size>
@@ -948,7 +948,7 @@
               <item>
                <widget class="QListView" name="ocularListView">
                 <property name="editTriggers">
-                 <set>QAbstractItemView::EditTrigger::NoEditTriggers</set>
+                 <set>QAbstractItemView::NoEditTriggers</set>
                 </property>
                 <property name="isWrapping" stdset="0">
                  <bool>false</bool>
@@ -975,7 +975,7 @@
                    </size>
                   </property>
                   <property name="focusPolicy">
-                   <enum>Qt::FocusPolicy::NoFocus</enum>
+                   <enum>Qt::NoFocus</enum>
                   </property>
                   <property name="text">
                    <string>Add</string>
@@ -997,7 +997,7 @@
                    </size>
                   </property>
                   <property name="focusPolicy">
-                   <enum>Qt::FocusPolicy::NoFocus</enum>
+                   <enum>Qt::NoFocus</enum>
                   </property>
                   <property name="icon">
                    <iconset resource="../../../../data/gui/guiRes.qrc">
@@ -1021,7 +1021,7 @@
                    </size>
                   </property>
                   <property name="focusPolicy">
-                   <enum>Qt::FocusPolicy::NoFocus</enum>
+                   <enum>Qt::NoFocus</enum>
                   </property>
                   <property name="icon">
                    <iconset resource="../../../../data/gui/guiRes.qrc">
@@ -1039,7 +1039,7 @@
                    </size>
                   </property>
                   <property name="focusPolicy">
-                   <enum>Qt::FocusPolicy::NoFocus</enum>
+                   <enum>Qt::NoFocus</enum>
                   </property>
                   <property name="text">
                    <string>Delete</string>
@@ -1081,7 +1081,7 @@
               <item row="2" column="1">
                <widget class="QDoubleSpinBox" name="ocularFL">
                 <property name="alignment">
-                 <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                 </property>
                 <property name="decimals">
                  <number>2</number>
@@ -1114,7 +1114,7 @@
               <item row="1" column="1">
                <widget class="QDoubleSpinBox" name="ocularAFov">
                 <property name="alignment">
-                 <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                 </property>
                 <property name="decimals">
                  <number>2</number>
@@ -1147,7 +1147,7 @@
               <item row="3" column="1">
                <widget class="QDoubleSpinBox" name="ocularFieldStop">
                 <property name="alignment">
-                 <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                 </property>
                 <property name="decimals">
                  <number>3</number>
@@ -1176,7 +1176,7 @@
               <item row="5" column="0">
                <spacer name="verticalSpacer">
                 <property name="orientation">
-                 <enum>Qt::Orientation::Vertical</enum>
+                 <enum>Qt::Vertical</enum>
                 </property>
                 <property name="sizeHint" stdset="0">
                  <size>
@@ -1204,7 +1204,7 @@
               <item>
                <widget class="QListView" name="lensListView">
                 <property name="editTriggers">
-                 <set>QAbstractItemView::EditTrigger::NoEditTriggers</set>
+                 <set>QAbstractItemView::NoEditTriggers</set>
                 </property>
                 <property name="isWrapping" stdset="0">
                  <bool>false</bool>
@@ -1228,7 +1228,7 @@
                    </size>
                   </property>
                   <property name="focusPolicy">
-                   <enum>Qt::FocusPolicy::NoFocus</enum>
+                   <enum>Qt::NoFocus</enum>
                   </property>
                   <property name="text">
                    <string>Add</string>
@@ -1250,7 +1250,7 @@
                    </size>
                   </property>
                   <property name="focusPolicy">
-                   <enum>Qt::FocusPolicy::NoFocus</enum>
+                   <enum>Qt::NoFocus</enum>
                   </property>
                   <property name="icon">
                    <iconset resource="../../../../data/gui/guiRes.qrc">
@@ -1274,7 +1274,7 @@
                    </size>
                   </property>
                   <property name="focusPolicy">
-                   <enum>Qt::FocusPolicy::NoFocus</enum>
+                   <enum>Qt::NoFocus</enum>
                   </property>
                   <property name="icon">
                    <iconset resource="../../../../data/gui/guiRes.qrc">
@@ -1292,7 +1292,7 @@
                    </size>
                   </property>
                   <property name="focusPolicy">
-                   <enum>Qt::FocusPolicy::NoFocus</enum>
+                   <enum>Qt::NoFocus</enum>
                   </property>
                   <property name="text">
                    <string>Delete</string>
@@ -1315,7 +1315,7 @@
               <item row="1" column="1">
                <widget class="QDoubleSpinBox" name="lensMultiplier">
                 <property name="alignment">
-                 <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                 </property>
                 <property name="decimals">
                  <number>3</number>
@@ -1385,7 +1385,7 @@
               <item row="3" column="0">
                <spacer name="verticalSpacer_4">
                 <property name="orientation">
-                 <enum>Qt::Orientation::Vertical</enum>
+                 <enum>Qt::Vertical</enum>
                 </property>
                 <property name="sizeHint" stdset="0">
                  <size>
@@ -1413,7 +1413,7 @@
               <item>
                <widget class="QListView" name="ccdListView">
                 <property name="editTriggers">
-                 <set>QAbstractItemView::EditTrigger::NoEditTriggers</set>
+                 <set>QAbstractItemView::NoEditTriggers</set>
                 </property>
                 <property name="isWrapping" stdset="0">
                  <bool>false</bool>
@@ -1437,7 +1437,7 @@
                    </size>
                   </property>
                   <property name="focusPolicy">
-                   <enum>Qt::FocusPolicy::NoFocus</enum>
+                   <enum>Qt::NoFocus</enum>
                   </property>
                   <property name="text">
                    <string>Add</string>
@@ -1459,7 +1459,7 @@
                    </size>
                   </property>
                   <property name="focusPolicy">
-                   <enum>Qt::FocusPolicy::NoFocus</enum>
+                   <enum>Qt::NoFocus</enum>
                   </property>
                   <property name="icon">
                    <iconset resource="../../../../data/gui/guiRes.qrc">
@@ -1483,7 +1483,7 @@
                    </size>
                   </property>
                   <property name="focusPolicy">
-                   <enum>Qt::FocusPolicy::NoFocus</enum>
+                   <enum>Qt::NoFocus</enum>
                   </property>
                   <property name="icon">
                    <iconset resource="../../../../data/gui/guiRes.qrc">
@@ -1501,7 +1501,7 @@
                    </size>
                   </property>
                   <property name="focusPolicy">
-                   <enum>Qt::FocusPolicy::NoFocus</enum>
+                   <enum>Qt::NoFocus</enum>
                   </property>
                   <property name="text">
                    <string>Delete</string>
@@ -1517,7 +1517,7 @@
               <item row="11" column="1">
                <widget class="QDoubleSpinBox" name="OAGPrismW">
                 <property name="alignment">
-                 <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                 </property>
                 <property name="decimals">
                  <number>2</number>
@@ -1530,7 +1530,7 @@
               <item row="10" column="1">
                <widget class="QDoubleSpinBox" name="OAGPrismH">
                 <property name="alignment">
-                 <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                 </property>
                 <property name="decimals">
                  <number>2</number>
@@ -1550,7 +1550,7 @@
               <item row="3" column="1">
                <widget class="QDoubleSpinBox" name="ccdChipX">
                 <property name="alignment">
-                 <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                 </property>
                 <property name="decimals">
                  <number>2</number>
@@ -1569,7 +1569,7 @@
               <item row="7" column="1">
                <widget class="QSpinBox" name="ccdBinningY">
                 <property name="alignment">
-                 <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                 </property>
                 <property name="minimum">
                  <number>1</number>
@@ -1582,7 +1582,7 @@
               <item row="2" column="1">
                <widget class="QSpinBox" name="ccdResY">
                 <property name="alignment">
-                 <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                 </property>
                 <property name="minimum">
                  <number>1</number>
@@ -1595,7 +1595,7 @@
               <item row="12" column="1">
                <widget class="QDoubleSpinBox" name="OAGPrismPA">
                 <property name="alignment">
-                 <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                 </property>
                 <property name="decimals">
                  <number>0</number>
@@ -1614,7 +1614,7 @@
               <item row="5" column="1">
                <widget class="QDoubleSpinBox" name="ccdRotAngle">
                 <property name="alignment">
-                 <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                 </property>
                 <property name="decimals">
                  <number>0</number>
@@ -1665,7 +1665,7 @@
               <item row="6" column="1">
                <widget class="QSpinBox" name="ccdBinningX">
                 <property name="alignment">
-                 <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                 </property>
                 <property name="minimum">
                  <number>1</number>
@@ -1710,7 +1710,7 @@
               <item row="13" column="0">
                <spacer name="CCDverticalSpacer">
                 <property name="orientation">
-                 <enum>Qt::Orientation::Vertical</enum>
+                 <enum>Qt::Vertical</enum>
                 </property>
                 <property name="sizeHint" stdset="0">
                  <size>
@@ -1723,7 +1723,7 @@
               <item row="4" column="1">
                <widget class="QDoubleSpinBox" name="ccdChipY">
                 <property name="alignment">
-                 <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                 </property>
                 <property name="decimals">
                  <number>2</number>
@@ -1742,7 +1742,7 @@
               <item row="9" column="1">
                <widget class="QDoubleSpinBox" name="OAGDist">
                 <property name="alignment">
-                 <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                 </property>
                 <property name="decimals">
                  <number>2</number>
@@ -1755,7 +1755,7 @@
               <item row="1" column="1">
                <widget class="QSpinBox" name="ccdResX">
                 <property name="alignment">
-                 <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                 </property>
                 <property name="minimum">
                  <number>1</number>
@@ -1825,7 +1825,7 @@
               <item>
                <widget class="QListView" name="telescopeListView">
                 <property name="editTriggers">
-                 <set>QAbstractItemView::EditTrigger::NoEditTriggers</set>
+                 <set>QAbstractItemView::NoEditTriggers</set>
                 </property>
                 <property name="modelColumn">
                  <number>0</number>
@@ -1843,7 +1843,7 @@
                    </size>
                   </property>
                   <property name="focusPolicy">
-                   <enum>Qt::FocusPolicy::NoFocus</enum>
+                   <enum>Qt::NoFocus</enum>
                   </property>
                   <property name="text">
                    <string>Add</string>
@@ -1865,7 +1865,7 @@
                    </size>
                   </property>
                   <property name="focusPolicy">
-                   <enum>Qt::FocusPolicy::NoFocus</enum>
+                   <enum>Qt::NoFocus</enum>
                   </property>
                   <property name="icon">
                    <iconset resource="../../../../data/gui/guiRes.qrc">
@@ -1889,7 +1889,7 @@
                    </size>
                   </property>
                   <property name="focusPolicy">
-                   <enum>Qt::FocusPolicy::NoFocus</enum>
+                   <enum>Qt::NoFocus</enum>
                   </property>
                   <property name="icon">
                    <iconset resource="../../../../data/gui/guiRes.qrc">
@@ -1907,7 +1907,7 @@
                    </size>
                   </property>
                   <property name="focusPolicy">
-                   <enum>Qt::FocusPolicy::NoFocus</enum>
+                   <enum>Qt::NoFocus</enum>
                   </property>
                   <property name="text">
                    <string>Delete</string>
@@ -1930,7 +1930,7 @@
               <item row="1" column="1">
                <widget class="QDoubleSpinBox" name="telescopeFL">
                 <property name="alignment">
-                 <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                 </property>
                 <property name="decimals">
                  <number>2</number>
@@ -1949,7 +1949,7 @@
               <item row="2" column="1">
                <widget class="QDoubleSpinBox" name="telescopeDiameter">
                 <property name="alignment">
-                 <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                 </property>
                 <property name="decimals">
                  <number>2</number>
@@ -2016,7 +2016,7 @@
               <item row="6" column="0">
                <spacer name="verticalSpacer_2">
                 <property name="orientation">
-                 <enum>Qt::Orientation::Vertical</enum>
+                 <enum>Qt::Vertical</enum>
                 </property>
                 <property name="sizeHint" stdset="0">
                  <size>

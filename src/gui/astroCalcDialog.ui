@@ -39,7 +39,7 @@
       <enum>QFrame::StyledPanel</enum>
      </property>
      <property name="frameShadow">
-      <enum>QFrame::Shadow::Plain</enum>
+      <enum>QFrame::Plain</enum>
      </property>
      <layout class="QGridLayout" name="gridLayout_6">
       <property name="leftMargin">
@@ -288,7 +288,7 @@
                  <string>List of objects above horizon</string>
                 </property>
                 <property name="editTriggers">
-                 <set>QAbstractItemView::EditTrigger::NoEditTriggers</set>
+                 <set>QAbstractItemView::NoEditTriggers</set>
                 </property>
                 <property name="rootIsDecorated">
                  <bool>false</bool>
@@ -393,7 +393,7 @@
                 <item>
                  <widget class="QTreeWidget" name="hecPositionsTreeWidget">
                   <property name="editTriggers">
-                   <set>QAbstractItemView::EditTrigger::NoEditTriggers</set>
+                   <set>QAbstractItemView::NoEditTriggers</set>
                   </property>
                   <property name="rootIsDecorated">
                    <bool>false</bool>
@@ -467,7 +467,7 @@
               <item row="1" column="1">
                <widget class="QChartView" name="hecPositionsChartView">
                 <property name="renderHints">
-                 <set>QPainter::RenderHint::Antialiasing|QPainter::RenderHint::TextAntialiasing</set>
+                 <set>QPainter::Antialiasing|QPainter::TextAntialiasing</set>
                 </property>
                </widget>
               </item>
@@ -510,7 +510,7 @@
           <item row="7" column="0" colspan="2">
            <widget class="QTreeWidget" name="ephemerisTreeWidget">
             <property name="editTriggers">
-             <set>QAbstractItemView::EditTrigger::NoEditTriggers</set>
+             <set>QAbstractItemView::NoEditTriggers</set>
             </property>
             <property name="rootIsDecorated">
              <bool>false</bool>
@@ -1439,7 +1439,7 @@
           <item row="5" column="0" colspan="2">
            <widget class="QTreeWidget" name="phenomenaTreeWidget">
             <property name="editTriggers">
-             <set>QAbstractItemView::EditTrigger::NoEditTriggers</set>
+             <set>QAbstractItemView::NoEditTriggers</set>
             </property>
             <property name="rootIsDecorated">
              <bool>false</bool>
@@ -1797,7 +1797,7 @@
                    <enum>QComboBox::NoInsert</enum>
                   </property>
                   <property name="sizeAdjustPolicy">
-                   <enum>QComboBox::SizeAdjustPolicy::AdjustToContents</enum>
+                   <enum>QComboBox::AdjustToContents</enum>
                   </property>
                  </widget>
                 </item>
@@ -1927,7 +1927,7 @@
                    <enum>QComboBox::NoInsert</enum>
                   </property>
                   <property name="sizeAdjustPolicy">
-                   <enum>QComboBox::SizeAdjustPolicy::AdjustToContents</enum>
+                   <enum>QComboBox::AdjustToContents</enum>
                   </property>
                  </widget>
                 </item>
@@ -2278,7 +2278,7 @@
             <item>
              <widget class="QTreeWidget" name="wutMatchingObjectsTreeWidget">
               <property name="editTriggers">
-               <set>QAbstractItemView::EditTrigger::NoEditTriggers</set>
+               <set>QAbstractItemView::NoEditTriggers</set>
               </property>
               <property name="rootIsDecorated">
                <bool>false</bool>
