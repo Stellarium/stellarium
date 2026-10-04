@@ -31,6 +31,10 @@ class QOpenGLDebugMessage;
 #endif
 #include "VecMath.hpp"
 #include "StelApp.hpp"
+#ifdef HAVE_EXIV2
+// To write EXIF metadata in screenshots
+#include <exiv2/exiv2.hpp>
+#endif
 
 class StelGLWidget;
 class StelGraphicsScene;
@@ -288,7 +292,11 @@ signals:
 private slots:
 	// Do the actual screenshot generation in the main thread with this method.
 	void doScreenshot(void);
-
+#ifdef HAVE_EXIV2
+	// Write an EXIF data item to screenshot metadata
+	//void setExifTypedEntry(Exiv2::ExifData *exifData, QString key, Exiv2::TypeId type, QString value);
+	void setExifTypedEntry(Exiv2::ExifData *exifData, const char* key, const char* value);
+#endif
 	void fpsTimerUpdate();
 	void hideCursor();
 

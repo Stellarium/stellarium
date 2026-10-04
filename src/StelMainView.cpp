@@ -1954,21 +1954,98 @@ void StelMainView::doScreenshot(void)
 	im.setDotsPerMeterY(qRound(screenshotDpi*100./2.54));
 	qInfo() << "Saving screenshot to file: " << QDir::toNativeSeparators(shotPath.filePath());
 
-	QImageWriter imageWriter(shotPath.filePath());
-	if (screenShotFormat=="tif")
-		imageWriter.setCompression(1); // use LZW
-	if (screenShotFormat=="jpg")
 	{
-		imageWriter.setQuality(75); // This is actually default
+		// We need to scope the ImageWriter!
+		QImageWriter imageWriter(shotPath.filePath());
+		if (screenShotFormat=="tif")
+			imageWriter.setCompression(1); // use LZW
+		if (screenShotFormat=="jpg")
+		{
+			imageWriter.setQuality(75); // This is actually default
+		}
+		if (screenShotFormat=="jpeg")
+		{
+			imageWriter.setQuality(100);
+		}
+		if (!imageWriter.write(im))
+		{
+			qCritical() << "Failed to write screenshot to:" << QDir::toNativeSeparators(shotPath.filePath());
+		}
+		imageWriter.device()->close();
 	}
-	if (screenShotFormat=="jpeg")
-	{
-		imageWriter.setQuality(100);
+
+#ifdef HAVE_EXIV2
+	// Write EXIF metadata only to JPG, PNG or TIF:
+	if (! QStringList({"jpg", "jpeg", "png", "tif", "tiff"}).contains(screenShotFormat))
+		return;
+
+	try {
+		Exiv2::ExifData exifData;
+
+		// See https://exiv2.org/examples.html#example2, but we can use more modern syntax that reads/assigns respective data type automatically.
+		qDebug() << "WRITING EXIF ENTRIES";
+
+		exifData["Exif.Image.Make"] =                   "Stellarium"; // Or CPU architecture?
+		exifData["Exif.Image.Model"] =                  StelUtils::getApplicationVersion().toLocal8Bit().constData();
+		exifData["Exif.Image.ImageWidth"] =             QString::number(im.width()).toLocal8Bit().constData();
+		exifData["Exif.Image.ImageLength"] =            QString::number(im.height()).toLocal8Bit().constData();
+		exifData["Exif.Image.XResolution"] =           QString("%1/1").arg(screenshotDpi).toStdString().c_str();
+		exifData["Exif.Image.YResolution"] =           QString("%1/1").arg(screenshotDpi).toStdString().c_str();
+		exifData["Exif.Image.ResolutionUnit"] =        "2"; // 2=inches
+		exifData["Exif.Image.Artist"]                = (QSysInfo::productType()=="windows" ? qgetenv("USERNAME") : qgetenv("USER")).constData();
+		exifData["Exif.Image.HostComputer"]          = QString("%1 (%2)").arg(QSysInfo::machineHostName(), StelUtils::getOperatingSystemInfo()).toStdString().c_str();
+		exifData["Exif.Image.Copyright"]             = QString("Copyright %1, %2. All rights reserved").
+				arg(QString(QSysInfo::productType()=="windows" ? qgetenv("USERNAME") : qgetenv("USER")),
+				    QString::number(QDate::currentDate().year())).toStdString().c_str(); // TODO: Add a second null terminator!
+
+		exifData["Exif.Photo.DateTimeOriginal"]     = "2026:10:31 23:59:59";
+		//exifData["Exif.Image.OffsetTimeOriginal"]   =  offset; // from observer timezone offset
+		exifData["Exif.Image.ImageDescription"] =      "my fancy object"; // if we have an object selected
+
+		//exifData["Exif.Image.ExposureTime"]         = exposureTimeSeconds; // not meaningful
+		//exifData["Exif.Image.FNumber"]              = F_number;            // not meaningful
+		//exifData["Exif.Image.GPSTag"]               = IFDpt); // ??
+		///	//exifData["Exif.Image.TimeZoneOffset"]       =  offset; // from observer timezone offset
+		///	//exifData["Exif.Image.FocalLength"]          =  equiv; // if projection is perspective, provide quivalent fl for 35mm
+		//	exifData["Exif.Photo.FocalLengthIn35mmFilm"] =  fl; // equiv.
+		exifData["Exif.Photo.UserComment"]           = "UserComment";
+		exifData["Exif.Photo.Temperature"]           = "20/1"; // Atmosphere temp, Celsius
+		exifData["Exif.Photo.Pressure"]              = "1013/1"; // Atmosphere pressure, hPa
+		exifData["Exif.GPSInfo.GPSVersionID"]        = "02000000"; // mandatory
+		exifData["Exif.GPSInfo.GPSLatitudeRef"]      = "N"; // "N"/"S"
+		exifData["Exif.GPSInfo.GPSLatitude"]         = "48/1 16/1 23123/1000"; // 3 rational numbers dd/1,mm/1,ss/1
+		exifData["Exif.GPSInfo.GPSLongitudeRef"]     = "E"; // "E"/"W"
+		exifData["Exif.GPSInfo.GPSLongitude"]        = "16/1 15/1 14123/1000"; // 3 rational numbers dd/1,mm/1,ss/1
+		//
+		//	exifData["Exif.GPSInfo.GPSDestLatitudeRef"]  = "N"); // "N"/"S" -- declination of target
+		//	exifData["Exif.GPSInfo.GPSDestLatitude"]     = lat); // 3 rational numbers dd/1,mm/1,ss/1 -- declination of target
+		//	exifData["Exif.GPSInfo.GPSDestLongitudeRef"] = "E"); // "E"/"W" -- RA of target
+		//	exifData["Exif.GPSInfo.GPSDestLongitude"]    = lng); // 3 rational numbers dd/1,mm/1,ss/1 -- RA of target
+		//
+		//	exifData["Exif.GPSInfo.GPSAltitudeRef"]      = 0); // 0 indicates MASL.
+		//	exifData["Exif.GPSInfo.GPSAltitude"]         = lng); // 1 rational number, meters
+		//	exifData["Exif.GPSInfo.GPSDateStamp"]        = "2026:10:11"); // String,  "YYYY:MM:DD"
+		//	exifData["Exif.GPSInfo.GPSTimeStamp"]        = time); // 3 rational numbers, hh/1, mm/1, ss/1.
+		//	exifData["Exif.GPSInfo.GPSImgDirectionRef"]  = "T"); // next value is True (not magnetic) azimuth
+		//	exifData["Exif.GPSInfo.GPSImgDirection"]     = azi); // True azimuth, degrees [0..359.99]
+		//	exifData["Exif.Photo.CameraElevationAngle"]  = Exiv2::unsignedRational, altitude); // center orientation, degrees
+		exifData["Exif.GPSInfo.GPSMapDatum"]         = "WGS-84"; // fixed for us
+
+		qDebug() << "WRITING EXIF ENTRIES DONE";
+
+		// *************************************************************************
+		// Finally, write the remaining Exif data to the image file
+		std::unique_ptr<Exiv2::Image> image = Exiv2::ImageFactory::open(shotPath.filePath().toStdString());
+		Q_ASSERT(image.get() != 0);
+		image->setExifData(exifData);
+		image->writeMetadata();
+		//return 0;
 	}
-	if (!imageWriter.write(im))
-	{
-		qCritical() << "Failed to write screenshot to:" << QDir::toNativeSeparators(shotPath.filePath());
+	catch (Exiv2::Error& e) {
+		qCritical() << "Caught Exiv2 exception '" << e.what() << "' -- EXIF data not stored into" << shotPath.filePath();
+		//return -1;
 	}
+#endif
 }
 
 QPoint StelMainView::getMousePos() const
