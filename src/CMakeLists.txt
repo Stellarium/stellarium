@@ -585,35 +585,43 @@ ENDIF()
 
 
 # ------------------------------------------------------------------
-# 1. ZLIB Target Bridge for Exiv2 (The Wrapper Fix)
+# 1. ZLIB Target Bridge for Exiv2 (Export Mismatch Fix)
 # ------------------------------------------------------------------
 set(ZLIB_INC_DIR "${CMAKE_SOURCE_DIR}/src/external/zlib")
 
 if(TARGET zlib_stel)
-    # Create a real, local file that acts as a custom FindZLIB module
+    # 🚀 FIX: Instead of an ALIAS or plain global variable target, we create an
+    # INTERFACE target. Interface targets are globally export-safe, eliminating
+    # the 'not in any export set' fatal validation failure cleanly.
+    if(NOT TARGET ZLIB::ZLIB)
+        add_library(ZLIB::ZLIB INTERFACE GLOBAL)
+        target_link_libraries(ZLIB::ZLIB INTERFACE zlib_stel)
+        target_include_directories(ZLIB::ZLIB INTERFACE "${ZLIB_INC_DIR}")
+    endif()
+
+    # Create a local file that acts as a custom FindZLIB module for Exiv2's scope.
+    # When Exiv2 runs find_package(ZLIB), it loads this file and immediately links
+    # to our export-safe interface target.
     set(MOCK_ZLIB_DIR "${CMAKE_BINARY_DIR}/cmake_zlib_bridge")
     file(MAKE_DIRECTORY "${MOCK_ZLIB_DIR}")
 
-    # Write a custom FindZLIB.cmake that directly exposes Stellarium's target
     file(WRITE "${MOCK_ZLIB_DIR}/FindZLIB.cmake" "
-        if(NOT TARGET ZLIB::ZLIB)
-            add_library(ZLIB::ZLIB ALIAS zlib_stel)
-        endif()
         set(ZLIB_FOUND TRUE)
         set(ZLIB_INCLUDE_DIRS \"${ZLIB_INC_DIR}\")
-        set(ZLIB_LIBRARIES zlib_stel)
+        set(ZLIB_LIBRARIES ZLIB::ZLIB)
     ")
 
-    # Force CMake's module path to look here FIRST when Exiv2 calls find_package(ZLIB)
+    # Inject our mock bridge directory to the top of the CMake module path
     list(INSERT CMAKE_MODULE_PATH 0 "${MOCK_ZLIB_DIR}")
 
-    # Clean up old sticky cache variables so they don't override our new system
+    # Clear out conflicting cache options that break standard evaluation
     unset(ZLIB_LIBRARY CACHE)
     unset(ZLIB_LIBRARIES CACHE)
     unset(ZLIB_INCLUDE_DIR CACHE)
     unset(ZLIB_INCLUDE_DIRS CACHE)
     unset(ZLIB_FOUND CACHE)
 endif()
+
 
 
 
