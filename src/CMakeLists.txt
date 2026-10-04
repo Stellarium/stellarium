@@ -585,23 +585,23 @@ ENDIF()
 
 
 # ------------------------------------------------------------------
-# 1. ZLIB Target Bridge for Exiv2 (Export Mismatch Fix)
+# 1. ZLIB Target Bridge for Exiv2 (Modern CMake 3.24+ Solution)
 # ------------------------------------------------------------------
 set(ZLIB_INC_DIR "${CMAKE_SOURCE_DIR}/src/external/zlib")
 
 if(TARGET zlib_stel)
-    # 🚀 FIX: Instead of an ALIAS or plain global variable target, we create an
-    # INTERFACE target. Interface targets are globally export-safe, eliminating
-    # the 'not in any export set' fatal validation failure cleanly.
+    # 🚀 In CMake 3.24+, an IMPORTED INTERFACE target can safely use a double-colon namespace.
+    # Because it is marked 'IMPORTED', CMake's installation validation system guarantees
+    # that Exiv2's export set will ignore it, preventing the "not in any export set" error!
     if(NOT TARGET ZLIB::ZLIB)
-        add_library(ZLIB::ZLIB INTERFACE GLOBAL)
-        target_link_libraries(ZLIB::ZLIB INTERFACE zlib_stel)
-        target_include_directories(ZLIB::ZLIB INTERFACE "${ZLIB_INC_DIR}")
+        add_library(ZLIB::ZLIB INTERFACE IMPORTED GLOBAL)
+        set_target_properties(ZLIB::ZLIB PROPERTIES
+            INTERFACE_LINK_LIBRARIES "zlib_stel"
+            INTERFACE_INCLUDE_DIRECTORIES "${ZLIB_INC_DIR}"
+        )
     endif()
 
-    # Create a local file that acts as a custom FindZLIB module for Exiv2's scope.
-    # When Exiv2 runs find_package(ZLIB), it loads this file and immediately links
-    # to our export-safe interface target.
+    # Create our clean, isolated FindZLIB bridge module
     set(MOCK_ZLIB_DIR "${CMAKE_BINARY_DIR}/cmake_zlib_bridge")
     file(MAKE_DIRECTORY "${MOCK_ZLIB_DIR}")
 
@@ -611,16 +611,17 @@ if(TARGET zlib_stel)
         set(ZLIB_LIBRARIES ZLIB::ZLIB)
     ")
 
-    # Inject our mock bridge directory to the top of the CMake module path
+    # Force Exiv2's scope to look at our mock bridge first
     list(INSERT CMAKE_MODULE_PATH 0 "${MOCK_ZLIB_DIR}")
 
-    # Clear out conflicting cache options that break standard evaluation
+    # Wipe old conflicting legacy cache variables completely
     unset(ZLIB_LIBRARY CACHE)
     unset(ZLIB_LIBRARIES CACHE)
     unset(ZLIB_INCLUDE_DIR CACHE)
     unset(ZLIB_INCLUDE_DIRS CACHE)
     unset(ZLIB_FOUND CACHE)
 endif()
+
 
 
 
@@ -634,8 +635,9 @@ CPMFindPackage(NAME exiv2
     FIND_PACKAGE_ARGUMENTS "NAMES exiv2 Exiv2"
     OPTIONS
         # Inject the properties cleanly down into the CPM scope
-        "ZLIB_LIBRARY=${ZLIB_OUT_LIB}"
+        #"ZLIB_LIBRARY=${ZLIB_OUT_LIB}"
         "ZLIB_INCLUDE_DIR=${ZLIB_INC_DIR}"
+        "ZLIB_INCLUDE_DIRS=${ZLIB_INC_DIR}"
         "EXIV2_ENABLE_INSTALL OFF"      # 🚀 FIXES THE EXPORT ERROR: Disables Exiv2's installation scripts so it won't complain about zlib_stel
         "EXIV2_ENABLE_XMP OFF"          # 🟢 REMOVES EXPAT DEPENDENCY: Bypasses ExpatAdapter.cpp entirely (No XMP sidecar files...)
         "EXIV2_ENABLE_INIH OFF"         # 🟢 BYPASS INIH: Removes the need for the library entirely
