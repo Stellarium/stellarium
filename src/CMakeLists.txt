@@ -575,6 +575,83 @@ IF(ENABLE_XLSX)
      SET(STELMAIN_DEPS ${STELMAIN_DEPS} QXlsx::QXlsx)
 ENDIF()
 
+
+
+# exiv2 needs zlib and expat, insists on vars ZLIB_LIBRARY ZLIB_INCLUDE_DIR
+#FIND_PACKAGE(EXPAT 2.8.5 MODULE REQUIRED)
+
+#set(ZLIB_LIBRARY ${ZLIB_LIBRARIES})
+#set(ZLIB_INCLUDE_DIR ${CMAKE_SOURCE_DIR}/src/external/zlib)
+
+
+# ------------------------------------------------------------------
+# 1. ZLIB Target Bridge for Exiv2
+# ------------------------------------------------------------------
+set(ZLIB_INC_DIR ${CMAKE_SOURCE_DIR}/src/external/zlib)
+
+# If Stellarium has already declared the local 'zlib_stel' target,
+# map it to the namespaced target that Exiv2 internally looks for.
+if(TARGET zlib_stel)
+    # Exiv2's build chain searches for a ZLIB::ZLIB target first
+    if(NOT TARGET ZLIB::ZLIB)
+        add_library(ZLIB::ZLIB ALIAS zlib_stel)
+    endif()
+
+    # 🟢 Use a generator expression for the actual file path string safely
+        set(ZLIB_OUT_LIB "$<TARGET_FILE:zlib_stel>")
+
+    # 🚀 FORCE OVERRIDE FOR EXIV2'S INTERNAL FIND_PACKAGE:
+    # This prevents FindZLIB from running on the system and throwing a "Not Found" error
+    set(ZLIB_FOUND TRUE CACHE BOOL "Force ZLIB found for internal sub-projects" FORCE)
+    set(ZLIB_LIBRARY zlib_stel CACHE STRING "Force target usage" FORCE)
+    set(ZLIB_INCLUDE_DIR "${ZLIB_INC_DIR}" CACHE PATH "Force bundled header paths" FORCE)
+
+else()
+    # Fallback to whatever variable name Stellarium's external zlib framework relies on
+    set(ZLIB_OUT_LIB ${ZLIB_LIBRARIES})
+endif()
+
+
+
+# 2. Manage Exiv2 via CPM to eliminate precompiled binary ABI mismatches
+# This fetches the latest stable modern 0.28 point release
+CPMFindPackage(NAME exiv2
+    GITHUB_REPOSITORY Exiv2/exiv2
+    GIT_TAG v0.28.3
+    FIND_PACKAGE_ARGUMENTS "NAMES exiv2 Exiv2"
+    OPTIONS
+        # Inject the properties cleanly down into the CPM scope
+        "ZLIB_LIBRARY=${ZLIB_OUT_LIB}"
+        "ZLIB_INCLUDE_DIR=${ZLIB_INC_DIR}"
+        "EXIV2_ENABLE_XMP OFF"          # 🟢 REMOVES EXPAT DEPENDENCY: Bypasses ExpatAdapter.cpp entirely (No XMP sidecar files...)
+        "EXIV2_ENABLE_INIH OFF"         # 🟢 BYPASS INIH: Removes the need for the library entirely
+        "EXIV2_ENABLE_BMFF OFF"         # 🟢 Turns off ISO Base Media File Format (HEIF/JXL tracking)
+        "EXIV2_ENABLE_BROTLI OFF"       # 🟢 Removes the Brotli requirement entirely
+        "EXIV2_BUILD_SAMPLES OFF"       # Speeds up your build time
+        "EXIV2_BUILD_UNIT_TESTS OFF"    # Skips test overhead
+        "EXIV2_BUILD_EXIV2_COMMAND OFF" # 🟢 Disable building the exiv2.exe command line app
+        "EXIV2_ENABLE_VIDEO OFF"        # 🟢 Disable video metadata tracking
+        "EXIV2_ENABLE_LENSDATA OFF"     # 🟢 Disable the massive Nikon lens database lookup tables
+)
+
+
+
+if(exiv2_FOUND OR TARGET Exiv2::exiv2lib)
+     MESSAGE(STATUS "Found/Built Exiv2 ${exiv2_VERSION}")
+     ADD_DEFINITIONS("-DHAVE_EXIV2")
+     ADD_DEFINITIONS("-DEXIV2_SHARED_LIBS")
+
+     # Modern Exiv2 exposes 'Exiv2::exiv2lib' natively via config exports
+     if(TARGET Exiv2::exiv2lib)
+             SET(STELMAIN_DEPS ${STELMAIN_DEPS} Exiv2::exiv2lib)
+     ELSE()
+             SET(STELMAIN_DEPS ${STELMAIN_DEPS} exiv2lib)
+     ENDIF()
+else(exiv2_FOUND OR TARGET Exiv2::exiv2lib)
+     MESSAGE(STATUS "Exiv2 library not found. No EXIF data in screenshots!")
+endif(exiv2_FOUND OR TARGET Exiv2::exiv2lib)
+
+
 IF(HAIKU)
      SET(STELMAIN_DEPS ${STELMAIN_DEPS} network)
 ENDIF()
@@ -630,6 +707,8 @@ ENDIF(ENABLE_PCH)
 IF(ENABLE_SHOWMYSKY)
      TARGET_INCLUDE_DIRECTORIES(stelMain PRIVATE "${ShowMySky_INCLUDE_DIRECTORIES}")
 ENDIF()
+
+
 TARGET_INCLUDE_DIRECTORIES(stelMain PRIVATE "${md4c_SOURCE_DIR}/src")
 
 SET_TARGET_PROPERTIES(stellarium PROPERTIES ENABLE_EXPORTS TRUE)
