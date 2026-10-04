@@ -55,10 +55,10 @@ void PointerCoordinatesWindow::createDialogContent()
 	coord = GETSTELMODULE(PointerCoordinates);
 	ui->setupUi(dialog);
 
-	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
-	connect(&StelApp::getInstance(), SIGNAL(flagUsePolarDistanceChanged(bool)), this, SLOT(populateCoordinates(bool)));
+	connect(&StelApp::getInstance(), &StelApp::languageChanged, this, &PointerCoordinatesWindow::retranslate);
+	connect(&StelApp::getInstance(), &StelApp::flagUsePolarDistanceChanged, this, &PointerCoordinatesWindow::populateCoordinates);
 	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
-	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
+	connect(ui->titleBar, &TitleBar::movedTo, this, &StelDialog::handleMovedTo);
 
 	usePolarDistance = StelApp::getInstance().getFlagPolarDistanceUsage();
 
@@ -81,7 +81,7 @@ void PointerCoordinatesWindow::createDialogContent()
 	}
 	ui->placeComboBox->setCurrentIndex(idx);
 	setCustomCoordinatesAccess(currentPlaceKey);
-	connect(ui->placeComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(setCoordinatesPlace(int)));
+	connect(ui->placeComboBox, qOverload<int>(&QComboBox::currentIndexChanged), this, &PointerCoordinatesWindow::setCoordinatesPlace);
 
 	populateCoordinateSystemsList();
 	idx = ui->coordinateSystemComboBox->findData(coord->getCurrentCoordinateSystemKey(), Qt::UserRole, Qt::MatchCaseSensitive);
@@ -91,14 +91,14 @@ void PointerCoordinatesWindow::createDialogContent()
 		idx = ui->coordinateSystemComboBox->findData(QVariant("RaDecJ2000"), Qt::UserRole, Qt::MatchCaseSensitive);
 	}
 	ui->coordinateSystemComboBox->setCurrentIndex(idx);
-	connect(ui->coordinateSystemComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(setCoordinateSystem(int)));
+	connect(ui->coordinateSystemComboBox, qOverload<int>(&QComboBox::currentIndexChanged), this, &PointerCoordinatesWindow::setCoordinateSystem);
 
 	populateValues();
-	connect(ui->spinBoxX, SIGNAL(valueChanged(int)), this, SLOT(setCustomCoordinatesPlace()));
-	connect(ui->spinBoxY, SIGNAL(valueChanged(int)), this, SLOT(setCustomCoordinatesPlace()));
+	connect(ui->spinBoxX, qOverload<int>(&QSpinBox::valueChanged), this, &PointerCoordinatesWindow::setCustomCoordinatesPlace);
+	connect(ui->spinBoxY, qOverload<int>(&QSpinBox::valueChanged), this, &PointerCoordinatesWindow::setCustomCoordinatesPlace);
 
-	connect(ui->pushButtonSave, SIGNAL(clicked()), this, SLOT(saveCoordinatesSettings()));	
-	connect(ui->pushButtonReset, SIGNAL(clicked()), this, SLOT(resetCoordinatesSettings()));
+	connect(ui->pushButtonSave,  &QPushButton::clicked, this, &PointerCoordinatesWindow::saveCoordinatesSettings);
+	connect(ui->pushButtonReset, &QPushButton::clicked, this, &PointerCoordinatesWindow::resetCoordinatesSettings);
 
 	// About tab
 	setAboutHtml();

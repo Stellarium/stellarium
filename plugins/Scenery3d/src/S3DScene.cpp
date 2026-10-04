@@ -33,18 +33,19 @@ Q_LOGGING_CATEGORY(s3dscene, "stel.plugin.scenery3d.s3dscene")
 void S3DScene::Material::loadTexturesAsync()
 {
 	StelTextureMgr& mgr = StelApp::getInstance().getTextureManager();
+	const auto texParams = StelTexture::Params().enableMipmapGen().enableMipmapFilter().setWrapMode(GL_REPEAT);
 	/*if(!map_Ka.isEmpty())
-		tex_Ka = mgr.createTextureThread(map_Ka, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT, true), false);*/
+		tex_Ka = mgr.createTextureThread(map_Ka, texParams, false);*/
 	if(!map_Kd.isEmpty())
-		tex_Kd = mgr.createTextureThread(map_Kd, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT, true), false);
+		tex_Kd = mgr.createTextureThread(map_Kd, texParams, false);
 	if(!map_Ke.isEmpty())
-		tex_Ke = mgr.createTextureThread(map_Ke, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT, true), false);
+		tex_Ke = mgr.createTextureThread(map_Ke, texParams, false);
 	/*if(!map_Ks.isEmpty())
-		tex_Ks = mgr.createTextureThread(map_Ks, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT, true), false);*/
+		tex_Ks = mgr.createTextureThread(map_Ks, texParams, false);*/
 	if(!map_bump.isEmpty())
-		tex_bump = mgr.createTextureThread(map_bump, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT, true), false);
+		tex_bump = mgr.createTextureThread(map_bump, texParams, false);
 	if(!map_height.isEmpty())
-		tex_height = mgr.createTextureThread(map_height, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT, true), false);
+		tex_height = mgr.createTextureThread(map_height, texParams, false);
 }
 
 void S3DScene::Material::fixup()

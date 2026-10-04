@@ -175,8 +175,8 @@ void ScmConstellationDialog::createDialogContent()
 
 	setIsDarkConstellation(false);
 
-	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
-	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
+	connect(&StelApp::getInstance(), &StelApp::languageChanged, this, &ScmConstellationDialog::retranslate);
+	connect(ui->titleBar, &TitleBar::movedTo, this, &ScmConstellationDialog::handleMovedTo);
 	connect(ui->titleBar, &TitleBar::closeClicked, this, &ScmConstellationDialog::close);
 	connect(ui->tabs, &QTabWidget::currentChanged, this, &ScmConstellationDialog::tabChanged);
 

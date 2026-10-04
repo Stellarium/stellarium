@@ -45,7 +45,7 @@ void SyncServerEventSender::broadcastMessage(const SyncMessage &msg)
 TimeEventSender::TimeEventSender()
 {
 	//this is the only event we need to listen to
-	connect(core,SIGNAL(timeSyncOccurred(double)),this,SLOT(reactToStellariumEvent()));
+	connect(core, &StelCore::timeSyncOccurred, this, &TimeEventSender::reactToStellariumEvent);
 }
 
 Time TimeEventSender::constructMessage()
@@ -88,7 +88,7 @@ Location LocationEventSender::constructMessage()
 SelectionEventSender::SelectionEventSender()
 {
 	objMgr = &StelApp::getInstance().getStelObjectMgr();
-	connect(objMgr,SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)),this,SLOT(reactToStellariumEvent()));
+	connect(objMgr, &StelObjectMgr::selectedObjectChanged, this, &SelectionEventSender::reactToStellariumEvent);
 }
 
 Selection SelectionEventSender::constructMessage()
@@ -112,7 +112,7 @@ Selection SelectionEventSender::constructMessage()
 StelPropertyEventSender::StelPropertyEventSender()
 {
 	propMgr = StelApp::getInstance().getStelPropertyManager();
-	connect(propMgr, SIGNAL(stelPropertyChanged(StelProperty*,QVariant)), this, SLOT(sendStelPropChange(StelProperty*,QVariant)));
+	connect(propMgr, &StelPropertyMgr::stelPropertyChanged, this, &StelPropertyEventSender::sendStelPropChange);
 }
 
 void StelPropertyEventSender::sendStelPropChange(StelProperty* prop, const QVariant &val)

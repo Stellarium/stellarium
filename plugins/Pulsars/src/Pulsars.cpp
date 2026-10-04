@@ -105,7 +105,7 @@ Pulsars::Pulsars()
 #endif
 	conf = StelApp::getInstance().getSettings();
 	setFontSize(StelApp::getInstance().getScreenFontSize());
-	connect(&StelApp::getInstance(), SIGNAL(screenFontSizeChanged(int)), this, SLOT(setFontSize(int)));
+	connect(&StelApp::getInstance(), &StelApp::screenFontSizeChanged, this, &Pulsars::setFontSize);
 }
 
 /*
@@ -219,11 +219,11 @@ void Pulsars::init()
 	updateTimer = new QTimer(this);
 	updateTimer->setSingleShot(false);   // recurring check for update
 	updateTimer->setInterval(13000);     // check once every 13 seconds to see if it is time for an update
-	connect(updateTimer, SIGNAL(timeout()), this, SLOT(checkForUpdate()));
+	connect(updateTimer, &QTimer::timeout, this, &Pulsars::checkForUpdate);
 	updateTimer->start();
 
-	connect(this, SIGNAL(jsonUpdateComplete(void)), this, SLOT(reloadCatalog()));
-	connect(StelApp::getInstance().getCore(), SIGNAL(configurationDataSaved()), this, SLOT(saveSettings()));
+	connect(this, &Pulsars::jsonUpdateComplete, this, &Pulsars::reloadCatalog);
+	connect(StelApp::getInstance().getCore(), &StelCore::configurationDataSaved, this, &Pulsars::saveSettings);
 
 	GETSTELMODULE(StelObjectMgr)->registerStelObjectMgr(this);
 }
@@ -694,8 +694,6 @@ void Pulsars::updateJSON(void)
 
 void Pulsars::deleteDownloadProgressBar()
 {
-	disconnect(this, SLOT(updateDownloadProgress(qint64,qint64)));
-
 	if (progressBar)
 	{
 		StelApp::getInstance().removeProgressBar(progressBar);
@@ -717,7 +715,7 @@ void Pulsars::startDownload(const QString &urlString)
 	progressBar->setValue(0);
 	progressBar->setRange(0, 0);
 
-	connect(networkManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(downloadComplete(QNetworkReply*)));
+	connect(networkManager, &QNetworkAccessManager::finished, this, &Pulsars::downloadComplete);
 	QNetworkRequest request;
 	request.setUrl(QUrl(updateUrl));
 	request.setRawHeader("User-Agent", StelUtils::getUserAgentString().toUtf8());
@@ -725,7 +723,7 @@ void Pulsars::startDownload(const QString &urlString)
 	request.setAttribute(QNetworkRequest::RedirectPolicyAttribute, true);
 #endif
 	downloadReply = networkManager->get(request);
-	connect(downloadReply, SIGNAL(downloadProgress(qint64,qint64)), this, SLOT(updateDownloadProgress(qint64,qint64)));
+	connect(downloadReply, &QNetworkReply::downloadProgress, this, &Pulsars::updateDownloadProgress);
 
 	updateState = Pulsars::Updating;
 	emit updateStateChanged(updateState);
@@ -760,7 +758,7 @@ void Pulsars::downloadComplete(QNetworkReply *reply)
 	if (reply == Q_NULLPTR)
 		return;
 
-	disconnect(networkManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(downloadComplete(QNetworkReply*)));
+	disconnect(networkManager, &QNetworkAccessManager::finished, this, &Pulsars::downloadComplete);
 	deleteDownloadProgressBar();
 
 	if (reply->error() || reply->bytesAvailable()==0)

@@ -124,8 +124,8 @@ void NavStars::init()
 #ifndef NO_GUI
 	addAction("actionShow_NavStars_dialog", N_("Navigational Stars"), N_("Show settings dialog"),        mainWindow, "visible");
 #endif
-	connect(StelApp::getInstance().getCore(), SIGNAL(configurationDataSaved()), this, SLOT(saveSettings()));
-	connect(&StelApp::getInstance(), SIGNAL(flagUseDecDegreesCoordsChanged(bool)), this, SLOT(setUseDecimalDegrees(bool)));
+	connect(StelApp::getInstance().getCore(), &StelCore::configurationDataSaved, this, &NavStars::saveSettings);
+	connect(&StelApp::getInstance(), &StelApp::flagUseDecDegreesCoordsChanged, this, &NavStars::setUseDecimalDegrees);
 	setUseDecimalDegrees(StelApp::getInstance().getFlagUseDecDegreesCoords());
 
 #ifndef NO_GUI

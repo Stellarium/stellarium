@@ -61,7 +61,7 @@ bool ClientErrorHandler::handleMessage(QDataStream &stream, SyncProtocol::tPaylo
 ClientAuthHandler::ClientAuthHandler(SyncClient *client)
 	: ClientHandler(client)
 {
-	connect(this, SIGNAL(authenticated()),client,SIGNAL(connected()));
+	connect(this, &ClientAuthHandler::authenticated, client, &SyncClient::connected);
 }
 
 

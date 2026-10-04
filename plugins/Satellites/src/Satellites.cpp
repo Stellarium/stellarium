@@ -523,7 +523,7 @@ void Satellites::init()
 	StelCore* core = StelApp::getInstance().getCore();
 	connect(core, &StelCore::locationChanged, this, &Satellites::updateObserverLocation);
 	connect(core, &StelCore::configurationDataSaved, this, &Satellites::saveSettings);
-	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(translateData()));
+	connect(&StelApp::getInstance(), &StelApp::languageChanged, this, &Satellites::translateData);
 
 	connect(this, &Satellites::satSelectionChanged, this, &Satellites::changeSelectedSatellite);
 
@@ -2661,6 +2661,12 @@ void Satellites::updateFromOnlineSources()
 	// TRANSLATORS: The full phrase is 'Loading TLE %VALUE%/%MAX%' in progress bar
 	progressBar->setFormat(QString("%1 %v/%m").arg(q_("Loading TLE")));
 
+	QNetworkRequest request;
+	request.setRawHeader("User-Agent", StelUtils::getUserAgentString().toUtf8());
+	#if (QT_VERSION<QT_VERSION_CHECK(6,0,0))
+	request.setAttribute(QNetworkRequest::RedirectPolicyAttribute, true);
+	#endif
+
 	for (auto url : std::as_const(updateUrls))
 	{
 		TleSource source;
@@ -2680,7 +2686,8 @@ void Satellites::updateFromOnlineSources()
 		if (source.url.isValid())
 		{
 			updateSources.append(source);
-			downloadMgr->get(QNetworkRequest(source.url));
+			request.setUrl(source.url);
+			downloadMgr->get(request);
 		}
 	}
 }

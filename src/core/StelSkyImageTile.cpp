@@ -219,7 +219,7 @@ void StelSkyImageTile::getTilesToDraw(QMultiMap<double, StelSkyImageTile*>& resu
 		{
 			// The tile has an associated texture, but it is not yet loaded: load it now
 			StelTextureMgr& texMgr=StelApp::getInstance().getTextureManager();
-			tex = texMgr.createTextureThread(absoluteImageURI, StelTexture::StelTextureParams(true, GL_LINEAR, GL_CLAMP_TO_EDGE, false, decimation));
+			tex = texMgr.createTextureThread(absoluteImageURI, StelTexture::Params().enableMipmapGen().setDecimation(decimation));
 			if (!tex)
 			{
 				qWarning() << "Can't create tile: " << absoluteImageURI;

@@ -85,7 +85,7 @@ void ExoplanetsDialog::createDialogContent()
 	ep = GETSTELMODULE(Exoplanets);
 	ui->setupUi(dialog);
 	ui->tabs->setCurrentIndex(0);	
-	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
+	connect(&StelApp::getInstance(), &StelApp::languageChanged, this, &ExoplanetsDialog::retranslate);
 
 	// Kinetic scrolling
 	kineticScrollingList << ui->aboutTextBrowser << ui->infoTextBrowser << ui->websitesTextBrowser;
@@ -93,20 +93,20 @@ void ExoplanetsDialog::createDialogContent()
 	if (gui)
 	{
 		enableKineticScrolling(gui->getFlagUseKineticScrolling());
-		connect(gui, SIGNAL(flagUseKineticScrollingChanged(bool)), this, SLOT(enableKineticScrolling(bool)));
+		connect(gui, &StelGui::flagUseKineticScrollingChanged, this, &ExoplanetsDialog::enableKineticScrolling);
 	}
 
 	// Settings tab / updates group
 	ui->displayAtStartupCheckBox->setChecked(ep->getEnableAtStartup());
-	connect(ui->displayAtStartupCheckBox, SIGNAL(stateChanged(int)), this, SLOT(setDisplayAtStartupEnabled(int)));
+	connect(ui->displayAtStartupCheckBox, &QCheckBox::stateChanged, this, &ExoplanetsDialog::setDisplayAtStartupEnabled);
 	ui->displayShowExoplanetsButton->setChecked(ep->getFlagShowExoplanetsButton());
-	connect(ui->displayShowExoplanetsButton, SIGNAL(stateChanged(int)), this, SLOT(setDisplayShowExoplanetsButton(int)));
+	connect(ui->displayShowExoplanetsButton, &QCheckBox::stateChanged, this, &ExoplanetsDialog::setDisplayShowExoplanetsButton);
 
-	connect(ui->internetUpdatesCheckbox, SIGNAL(stateChanged(int)), this, SLOT(setUpdatesEnabled(int)));
-	connect(ui->updateButton, SIGNAL(clicked()), this, SLOT(updateJSON()));
-	connect(ep, SIGNAL(updateStateChanged(Exoplanets::UpdateState)), this, SLOT(updateStateReceiver(Exoplanets::UpdateState)));
-	connect(ep, SIGNAL(jsonUpdateComplete(void)), this, SLOT(updateCompleteReceiver(void)));	
-	connect(ui->updateFrequencySpinBox, SIGNAL(valueChanged(int)), this, SLOT(setUpdateValues(int)));
+	connect(ui->internetUpdatesCheckbox, &QCheckBox::stateChanged, this, &ExoplanetsDialog::setUpdatesEnabled);
+	connect(ui->updateButton, &QPushButton::clicked, this, &ExoplanetsDialog::updateJSON);
+	connect(ep, &Exoplanets::updateStateChanged, this, &ExoplanetsDialog::updateStateReceiver);
+	connect(ep, &Exoplanets::jsonUpdateComplete, this, &ExoplanetsDialog::updateCompleteReceiver);
+	connect(ui->updateFrequencySpinBox, qOverload<int>(&QSpinBox::valueChanged), this, &ExoplanetsDialog::setUpdateValues);
 	refreshUpdateValues(); // fetch values for last updated and so on
 	// if the state didn't change, setUpdatesEnabled will not be called, so we force it
 	setUpdatesEnabled(ui->internetUpdatesCheckbox->checkState());
@@ -121,14 +121,14 @@ void ExoplanetsDialog::createDialogContent()
 	ui->habitableExoplanetMarkerColor->setup("Exoplanets.habitableColor", "Exoplanets/habitable_exoplanet_marker_color");
 
 	updateTimer = new QTimer(this);
-	connect(updateTimer, SIGNAL(timeout()), this, SLOT(refreshUpdateValues()));
+	connect(updateTimer, &QTimer::timeout, this, &ExoplanetsDialog::refreshUpdateValues);
 	updateTimer->start(7000);
 
 	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
-	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
+	connect(ui->titleBar, &TitleBar::movedTo, this, &StelDialog::handleMovedTo);
 
-	connect(ui->restoreDefaultsButton, SIGNAL(clicked()), this, SLOT(restoreDefaults()));
-	connect(ui->saveSettingsButton, SIGNAL(clicked()), this, SLOT(saveSettings()));	
+	connect(ui->restoreDefaultsButton, &QPushButton::clicked, this, &ExoplanetsDialog::restoreDefaults);
+	connect(ui->saveSettingsButton,    &QPushButton::clicked, this, &ExoplanetsDialog::saveSettings);
 
 	populateTemperatureScales();
 	int idx = ui->temperatureScaleComboBox->findData(ep->getCurrentTemperatureScaleKey(), Qt::UserRole, Qt::MatchCaseSensitive);
@@ -138,10 +138,10 @@ void ExoplanetsDialog::createDialogContent()
 		idx = ui->temperatureScaleComboBox->findData(QVariant("Celsius"), Qt::UserRole, Qt::MatchCaseSensitive);
 	}
 	ui->temperatureScaleComboBox->setCurrentIndex(idx);
-	connect(ui->temperatureScaleComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(setTemperatureScale(int)));
+	connect(ui->temperatureScaleComboBox, qOverload<int>(&QComboBox::currentIndexChanged), this, &ExoplanetsDialog::setTemperatureScale);
 
 	// Table tab
-	connect(ui->exoplanetsTreeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectCurrentExoplanet(QModelIndex)));
+	connect(ui->exoplanetsTreeWidget, &QTreeWidget::doubleClicked, this, &ExoplanetsDialog::selectCurrentExoplanet);
 
 	// About & Info tabs
 	setAboutHtml();
@@ -157,14 +157,14 @@ void ExoplanetsDialog::createDialogContent()
 
 	populateDiagramsList();	
 	drawDiagram();
-	connect(ui->comboAxisX, SIGNAL(currentIndexChanged(int)), this, SLOT(drawDiagram()));
-	connect(ui->comboAxisY, SIGNAL(currentIndexChanged(int)), this, SLOT(drawDiagram()));
-	connect(ui->checkBoxLogX, SIGNAL(toggled(bool)), this, SLOT(drawDiagram()));
-	connect(ui->checkBoxLogY, SIGNAL(toggled(bool)), this, SLOT(drawDiagram()));
-	connect(ui->minX, SIGNAL(textChanged(const QString &)), this, SLOT(drawDiagram()));
-	connect(ui->maxX, SIGNAL(textChanged(const QString &)), this, SLOT(drawDiagram()));
-	connect(ui->minY, SIGNAL(textChanged(const QString &)), this, SLOT(drawDiagram()));
-	connect(ui->maxY, SIGNAL(textChanged(const QString &)), this, SLOT(drawDiagram()));
+	connect(ui->comboAxisX, qOverload<int>(&QComboBox::currentIndexChanged), this, &ExoplanetsDialog::drawDiagram);
+	connect(ui->comboAxisY, qOverload<int>(&QComboBox::currentIndexChanged), this, &ExoplanetsDialog::drawDiagram);
+	connect(ui->checkBoxLogX, &QCheckBox::toggled, this, &ExoplanetsDialog::drawDiagram);
+	connect(ui->checkBoxLogY, &QCheckBox::toggled, this, &ExoplanetsDialog::drawDiagram);
+	connect(ui->minX, &QLineEdit::textChanged, this, &ExoplanetsDialog::drawDiagram);
+	connect(ui->maxX, &QLineEdit::textChanged, this, &ExoplanetsDialog::drawDiagram);
+	connect(ui->minY, &QLineEdit::textChanged, this, &ExoplanetsDialog::drawDiagram);
+	connect(ui->maxY, &QLineEdit::textChanged, this, &ExoplanetsDialog::drawDiagram);
 	fillExoplanetsTable();
 	updateGuiFromSettings();
 }
@@ -749,7 +749,7 @@ void ExoplanetsDialog::updateCompleteReceiver(void)
 	updateTimer->start();
 	ui->lastUpdateDateTimeEdit->setDateTime(ep->getLastUpdate());
 	QTimer *timer = new QTimer(this);
-	connect(timer, SIGNAL(timeout()), this, SLOT(refreshUpdateValues()));
+	connect(timer, &QTimer::timeout, this, &ExoplanetsDialog::refreshUpdateValues);
 	setAboutHtml();	
 	fillExoplanetsTable();
 }

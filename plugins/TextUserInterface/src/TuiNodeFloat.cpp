@@ -20,13 +20,6 @@
 #include "TuiNodeFloat.hpp"
 #include <QKeyEvent>
 
-TuiNodeFloat::TuiNodeFloat(const QString& text, QObject* receiver, const char* method, float defValue,
-                             float min, float max, float inc, TuiNode* parent, TuiNode* prev)
-	: TuiNodeEditable(text, parent, prev), value(defValue), minimum(min), maximum(max), increment(inc), typing(false), typedDecimal(false)
-{
-	this->connect(this, SIGNAL(setValue(float)), receiver, method);
-}
-
 TuiNodeResponse TuiNodeFloat::handleEditingKey(int key)
 {
 	TuiNodeResponse response;

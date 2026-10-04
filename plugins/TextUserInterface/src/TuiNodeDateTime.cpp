@@ -24,12 +24,6 @@
 #include <QDebug>
 #include <QStringList>
 
-TuiNodeDateTime::TuiNodeDateTime(const QString& text, QObject* receiver, const char* method, double defValue, TuiNode* parent, TuiNode* prev)
-	: TuiNodeEditable(text, parent, prev), value(defValue), editingPart(0), typing(false)
-{
-	this->connect(this, SIGNAL(setValue(double)), receiver, method);
-}
-
 TuiNodeResponse TuiNodeDateTime::handleEditingKey(int key)
 {
 	TuiNodeResponse response;

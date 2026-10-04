@@ -3515,7 +3515,7 @@ msgstr "จุดศูนย์กลาง"
 #: src/core/modules/Planet.cpp:1491 src/gui/AstroCalcDialog.cpp:4011
 #: src/ui_astroCalcDialog.h:2724
 msgid "Eclipse magnitude"
-msgstr "ขนาดอุปราคา"
+msgstr "สัดส่วนอุปราคา"
 
 #: src/core/modules/Planet.cpp:1494
 msgid "Eclipse obscuration"
@@ -3577,11 +3577,11 @@ msgstr "ความกว้างของเงามืด"
 
 #: src/core/modules/Planet.cpp:1580
 msgid "Penumbral eclipse magnitude"
-msgstr "ขนาดคราสเงามัว"
+msgstr "สัดส่วนอุปราคาเงามัว"
 
 #: src/core/modules/Planet.cpp:1583
 msgid "Umbral eclipse magnitude"
-msgstr "ขนาดคราสเงามืด"
+msgstr "สัดส่วนอุปราคาเงามืด"
 
 #: src/core/modules/Planet.cpp:1590 src/core/modules/Planet.cpp:1934
 #: src/gui/ViewDialog.cpp:1105
@@ -3795,7 +3795,7 @@ msgstr "จุดใต้ดวงอาทิตย์ที่%1มีลอ�
 #, qt-format
 msgctxt "planet narration"
 msgid "We have a Solar eclipse of magnitude %1"
-msgstr "เกิดสุริยุปราคาที่มีขนาด %1"
+msgstr "เกิดสุริยุปราคาที่มีสัดส่วน %1"
 
 #: src/core/modules/Planet.cpp:1849
 #, qt-format
@@ -3867,13 +3867,13 @@ msgstr "ความกว้างของเงามืดเท่ากั
 #, qt-format
 msgctxt "planet narration"
 msgid "The penumbral eclipse magnitude is %1 percent"
-msgstr "ขนาดของอุปราคาเงามัวเท่ากับ %1 เปอร์เซ็นต์"
+msgstr "สัดส่วนอุปราคาเงามัวเท่ากับ %1 เปอร์เซ็นต์"
 
 #: src/core/modules/Planet.cpp:1928
 #, qt-format
 msgctxt "planet narration"
 msgid "The umbral eclipse magnitude is %1 percent"
-msgstr "ขนาดของอุปราคาเงามืดเท่ากับ %1 เปอร์เซ็นต์"
+msgstr "สัดส่วนอุปราคาเงามืดเท่ากับ %1 เปอร์เซ็นต์"
 
 #: src/core/modules/Planet.cpp:1945
 msgid "Discovered"
@@ -7251,22 +7251,22 @@ msgstr "เสียง"
 #: src/gui/ConfigurationDialog.cpp:548
 msgctxt "GUI alignment"
 msgid "Bottom-left"
-msgstr ""
+msgstr "ซ้ายล่าง"
 
 #: src/gui/ConfigurationDialog.cpp:549
 msgctxt "GUI alignment"
 msgid "Bottom-right"
-msgstr ""
+msgstr "ขวาล่าง"
 
 #: src/gui/ConfigurationDialog.cpp:550
 msgctxt "GUI alignment"
 msgid "Top-left"
-msgstr ""
+msgstr "ซ้ายบน"
 
 #: src/gui/ConfigurationDialog.cpp:551
 msgctxt "GUI alignment"
 msgid "Top-right"
-msgstr ""
+msgstr "ขวาบน"
 
 #: src/gui/ConfigurationDialog.cpp:1036
 msgid "Select screenshot directory"
@@ -9166,13 +9166,13 @@ msgstr "ซารอส"
 #: src/gui/AstroCalcDialog.cpp:2705
 msgctxt "column name"
 msgid "Penumbral eclipse magnitude"
-msgstr "ขนาดคราสเงามัว"
+msgstr "สัดส่วนอุปราคาเงามัว"
 
 #. TRANSLATORS: The name of column in AstroCalc/Eclipses tool
 #: src/gui/AstroCalcDialog.cpp:2707
 msgctxt "column name"
 msgid "Umbral eclipse magnitude"
-msgstr "ขนาดคราสเงามืด"
+msgstr "สัดส่วนอุปราคาเงามืด"
 
 #. TRANSLATORS: Visibility conditions; the name of column in
 #. AstroCalc/Eclipses tool
@@ -9276,14 +9276,14 @@ msgid ""
 "Penumbral magnitude is the fraction of the Moon's diameter immersed in the "
 "penumbra"
 msgstr ""
-"ขนาดอุปราคาเงามัวคือสัดส่วนตามแนวเส้นผ่านศูนย์กลางของดวงจันทร์ที่ถูกเงามัวของโลกบัง"
+"สัดส่วนอุปราคาเงามัวคืออัตราส่วนตามแนวเส้นผ่านศูนย์กลางของดวงจันทร์ที่ถูกเงามัวของโลกบัง"
 
 #: src/gui/AstroCalcDialog.cpp:3044
 msgid ""
 "Umbral magnitude is the fraction of the Moon's diameter immersed in the "
 "umbra"
 msgstr ""
-"ขนาดอุปราคาเงามืดคือสัดส่วนตามแนวเส้นผ่านศูนย์กลางของดวงจันทร์ที่ถูกเงามืดของโลกบัง"
+"สัดส่วนอุปราคาเงามืดคืออัตราส่วนตามแนวเส้นผ่านศูนย์กลางของดวงจันทร์ที่ถูกเงามืดของโลกบัง"
 
 #: src/gui/AstroCalcDialog.cpp:3159
 msgid "Moon enters penumbra"
@@ -9365,7 +9365,7 @@ msgstr "ลำดับเหตุการณ์ของจันทรุป
 #: src/gui/AstroCalcDialog.cpp:3319
 msgctxt "column name"
 msgid "Eclipse Magnitude"
-msgstr "ขนาดอุปราคา"
+msgstr "สัดส่วนอุปราคา"
 
 #. TRANSLATORS: The name of column in AstroCalc/Eclipses tool
 #: src/gui/AstroCalcDialog.cpp:3321
@@ -9417,7 +9417,7 @@ msgstr "ผสม"
 msgid ""
 "Eclipse magnitude is the fraction of the Sun's diameter obscured by the Moon"
 msgstr ""
-"ขนาดอุปราคาคือสัดส่วนตามแนวเส้นผ่านศูนย์กลางของดวงอาทิตย์ที่ถูกดวงจันทร์บัง"
+"สัดส่วนอุปราคาคืออัตราส่วนตามแนวเส้นผ่านศูนย์กลางของดวงอาทิตย์ที่ถูกดวงจันทร์บัง"
 
 #: src/gui/AstroCalcDialog.cpp:3699
 msgid "Sun's altitude at greatest eclipse"
@@ -9445,22 +9445,22 @@ msgstr "ระยะเวลา"
 #: src/gui/AstroCalcDialog.cpp:3995 src/gui/AstroCalcDialog.cpp:4195
 #: src/ui_astroCalcDialog.h:2725
 msgid "Partial eclipse begins"
-msgstr ""
+msgstr "เริ่มสุริยุปราคาบางส่วน"
 
 #: src/gui/AstroCalcDialog.cpp:4007 src/gui/AstroCalcDialog.cpp:4200
 #: src/ui_astroCalcDialog.h:2721
 msgid "Umbral total or annular eclipse begins"
-msgstr ""
+msgstr "เริ่มสุริยุปราคาเต็มดวงหรือวงแหวน"
 
 #: src/gui/AstroCalcDialog.cpp:4022 src/gui/AstroCalcDialog.cpp:4210
 #: src/ui_astroCalcDialog.h:2726
 msgid "Umbral total or annular eclipse ends"
-msgstr ""
+msgstr "สิ้นสุดสุริยุปราคาเต็มดวงหรือวงแหวน"
 
 #: src/gui/AstroCalcDialog.cpp:4031 src/gui/AstroCalcDialog.cpp:4215
 #: src/ui_astroCalcDialog.h:2723
 msgid "Partial eclipse ends"
-msgstr ""
+msgstr "สิ้ันสุดสุริยุปราคาบางส่วน"
 
 #: src/gui/AstroCalcDialog.cpp:4036
 msgid "Duration of total or annular eclipse"
@@ -15657,6 +15657,8 @@ msgid ""
 "Twinkle is caused by atmospheric turbulence. This option forces its display "
 "regardless of atmosphere (for artistic purpose)."
 msgstr ""
+"การกะพริบเกิดจากความปั่นป่วนในบรรยากาศ "
+"ตัวเลือกนี้จะแสดงดาวกะพริบโดยไม่คำนึงถึงบรรยากาศ (เพื่อความสวยงาม)"
 
 #: src/ui_viewDialog.h:4458
 msgid "even without atmosphere"
@@ -16759,17 +16761,17 @@ msgstr "ความหนาแน่นของกริด:"
 #: src/ui_viewDialog.h:5291
 msgctxt "grid density"
 msgid "Fine"
-msgstr ""
+msgstr "ละเอียด"
 
 #: src/ui_viewDialog.h:5292
 msgctxt "grid density"
 msgid "Normal"
-msgstr ""
+msgstr "ปรกติ"
 
 #: src/ui_viewDialog.h:5293
 msgctxt "grid density"
 msgid "Coarse"
-msgstr ""
+msgstr "หยาบ"
 
 #: src/ui_viewDialog.h:5296
 msgid "Select grid line spacing density"
@@ -16789,7 +16791,7 @@ msgstr "ความหนาของเส้นสำหรับส่วน
 
 #: src/ui_viewDialog.h:5308
 msgid "Partitions thickness:"
-msgstr ""
+msgstr "ความหนาของส่วนย่อย:"
 
 #: src/ui_viewDialog.h:5313
 msgid "Size of celestial points in pixels"
@@ -17183,7 +17185,7 @@ msgstr "กลับสี"
 
 #: src/ui_viewDialog.h:5547
 msgid "Show atmospheric extinction"
-msgstr ""
+msgstr "แสดงการสูญหายโดยบรรยากาศ"
 
 #: src/ui_viewDialog.h:5548 src/ui_tonemappingDialog.h:153
 #: plugins/NebulaTextures/src/ui_nebulaTexturesDialog.h:530
@@ -17193,7 +17195,7 @@ msgstr "ตั้งใหม่"
 
 #: src/ui_viewDialog.h:5549
 msgid "Reset all"
-msgstr ""
+msgstr "ตั้งใหม่ทั้งหมด"
 
 #: src/ui_configurationDialog.h:2363
 msgid "Configuration"
@@ -17390,7 +17392,7 @@ msgstr "ทิศทางที่คุณต้องการเมื่อ
 
 #: src/ui_configurationDialog.h:2443
 msgid "Selected object information for display"
-msgstr ""
+msgstr "ขัอมูลที่เลือกสำหรับแสดงผล"
 
 #: src/ui_configurationDialog.h:2445
 msgid "Display all information available"
@@ -17607,11 +17609,11 @@ msgstr "อักษรย่อสำหรับหน่วยของคว
 
 #: src/ui_configurationDialog.h:2611
 msgid "Using decimal degrees for coordinates"
-msgstr ""
+msgstr "ใช้องศาแบบทศนิยมสำหรับพิกัด"
 
 #: src/ui_configurationDialog.h:2613
 msgid "Use decimal degrees (coordinates)"
-msgstr ""
+msgstr "ใช้องศาแบบทศนิยม (พิกัด)"
 
 #: src/ui_configurationDialog.h:2615
 msgid "Use common symbols for coordinate systems"
@@ -17653,11 +17655,11 @@ msgstr "มุมทิศจากทิศใต้"
 
 #: src/ui_configurationDialog.h:2632
 msgid "Using decimal degrees in various places, except the coordinates"
-msgstr ""
+msgstr "ใช้องศาแบบทศนิยมเป็นหลัก ยกเว้นพิกัด"
 
 #: src/ui_configurationDialog.h:2634
 msgid "Use decimal degrees (other)"
-msgstr ""
+msgstr "ใช้องศาแบบทศนิยม (อื่น ๆ)"
 
 #: src/ui_configurationDialog.h:2635
 msgid "Show additional buttons"
@@ -18066,7 +18068,7 @@ msgstr "เก็บการตั้งค่าแบบอักษร"
 
 #: src/ui_configurationDialog.h:2849
 msgid "Toolbar location:"
-msgstr ""
+msgstr "ตำแหน่งของแถบเครื่องมือ:"
 
 #: src/ui_configurationDialog.h:2851
 msgid "Corner of the screen where both toolbar bars are docked"
@@ -18142,11 +18144,11 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:2882
 msgid "Pitch:"
-msgstr ""
+msgstr "ระดับเสียง:"
 
 #: src/ui_configurationDialog.h:2883
 msgid "Rate:"
-msgstr ""
+msgstr "อัตรา:"
 
 #: src/ui_configurationDialog.h:2884
 msgid "Volume:"
@@ -19086,7 +19088,7 @@ msgstr "ความหนาของเส้นแสดงตำแหน่
 
 #: src/ui_astroCalcExtraEphemerisDialog.h:264
 msgid "Date format"
-msgstr ""
+msgstr "รูปแบบวันที่"
 
 #: src/ui_astroCalcExtraEphemerisDialog.h:266
 #: src/ui_astroCalcAlmanacWidget.h:1028
@@ -19096,20 +19098,20 @@ msgstr "ปี"
 
 #: src/ui_astroCalcExtraEphemerisDialog.h:269
 msgid "Hour"
-msgstr ""
+msgstr "ชั่วโมง"
 
 #: src/ui_astroCalcExtraEphemerisDialog.h:270
 #: plugins/TelescopeControl/src/INDI/ui_INDIControlWidget.h:176
 msgid "Min"
-msgstr "ต่ำสุด"
+msgstr "นาที"
 
 #: src/ui_astroCalcExtraEphemerisDialog.h:271
 msgid "Sec"
-msgstr ""
+msgstr "วินาที"
 
 #: src/ui_astroCalcExtraEphemerisDialog.h:272
 msgid "Smart format"
-msgstr ""
+msgstr "รูปแบบอัจฉริยะ"
 
 #: src/ui_astroCalcCustomStepsDialog.h:208
 msgid "Custom interval"
@@ -19122,11 +19124,11 @@ msgstr "หน่วยของการวัด:"
 #: src/ui_astroCalcCustomStepsDialog.h:213
 #: plugins/TimeNavigator/src/ui_timeNavigatorDialog.h:1210
 msgid "Solar altitude:"
-msgstr ""
+msgstr "มุมเงยของดวงอาทิตย์:"
 
 #: src/ui_astroCalcCustomStepsDialog.h:214
 msgid "Twilight:"
-msgstr ""
+msgstr "สนธยา:"
 
 #: src/ui_astroCalcAlmanacWidget.h:962
 msgid "Morning nautical twilight"
@@ -21227,7 +21229,7 @@ msgstr "ใช้หน่วยองศาและลิปดาสำหร
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1540
 msgid "Show center of CCD"
-msgstr ""
+msgstr "แสดงจุดศูนย์กลางของซีซีดี"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1541
 msgid "Telrad view"
@@ -32062,7 +32064,7 @@ msgstr ""
 #: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp:1256
 msgctxt "celestial object visibility period"
 msgid "evening"
-msgstr ""
+msgstr "หัวค่ำ"
 
 #: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp:1287
 msgctxt ""
@@ -32462,7 +32464,7 @@ msgstr ""
 
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1025
 msgid "General Information"
-msgstr ""
+msgstr "ข้อมูลทั่วไป"
 
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1026
 msgid "Classification of the Sky Culture*"
@@ -40579,7 +40581,7 @@ msgstr "โลก"
 #: plugins/ObjectVisibility/src/ObjectVisibility.cpp:78
 #: plugins/ObjectVisibility/src/ObjectVisibility.cpp:160
 msgid "Object Visibility"
-msgstr ""
+msgstr "ความสามารถในการเห็นวัตถุ"
 
 #: plugins/ObjectVisibility/src/ObjectVisibility.cpp:81
 msgid ""
@@ -40590,81 +40592,89 @@ msgid ""
 "the Astro-Geo-GIS article \"The 49 brightest stars in the night sky – when "
 "and where can we see them?\""
 msgstr ""
+"แสดงความสามารถในการเห็นดาวหรือวัตถุอวกาศลึกบนแผนที่ดาวเคราะห์ "
+"รองรับการสังเกตจากโลก ดวงจันทร์ ดาวเคราะห์ 8 ดวง พลูโต และดาวบริวารขนาดใหญ่ "
+"4 ดวงของดาวพฤหัสบดี "
+"นอกจากนี้ยังแสดงละติจูดซึ่งเป็นขอบเขตของแสงสนธยาในวันอายันโดยคำนวณจากความเอียงของแกนหมุน"
+" มีรากฐานจากเกณฑ์เชิงเรขาคณิตในบทความ \"The 49 brightest stars in the night "
+"sky – when and where can we see them?\" ของ Astro-Geo-GIS"
 
 #: plugins/ObjectVisibility/src/ObjectVisibility.cpp:167
 msgid "Object Visibility plug-in dialog"
-msgstr ""
+msgstr "หน้าต่างโปรแกรมเสริมความสามารถในการเห็นวัตถุ"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:939
 msgid "Object Visibility Configuration"
-msgstr ""
+msgstr "การปรับแต่งความสามารถในการเห็นวัตถุ"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:940
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:1236
 msgid "Object Visibility plug-in"
-msgstr ""
+msgstr "โปรแกรมเสริมความสามารถในการเห็นวัตถุ"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:941
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:1157
 msgid "Select a star or DSO, then click Calculate."
-msgstr ""
+msgstr "เลือกดาวฤกษ์หรือวัตถุอวกาศลึก แล้วกดปุ่มคำนวณ"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:942
 msgid "Key of stars visibility"
-msgstr ""
+msgstr "สัญลักษณ์แสดงความสามารถในการเห็นดาว"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:943
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:1252
 msgid "Limit of visibility"
-msgstr ""
+msgstr "ขอบเขตที่เห็นได้"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:944
 msgid "Good visibility (default 5° above the horizon)"
-msgstr ""
+msgstr "มองเห็นได้ดี (อยู่เหนือขอบฟ้า 5° ตามค่าปริยาย)"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:945
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:1263
 msgid "Passes zenith"
-msgstr ""
+msgstr "ผ่านจุดจอมฟ้า"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:946
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:1267
 msgid "Circumpolar limit (northern hemisphere)"
-msgstr ""
+msgstr "ขอบเขตวนรอบขั้วฟ้า (ซีกโลกเหนือ)"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:947
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:1271
 msgid "Circumpolar limit (southern hemisphere)"
-msgstr ""
+msgstr "ขอบเขตวนรอบขั้วฟ้า (ซีกโลกใต้)"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:950
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:303
 msgid "Calculate visibility for the selected object."
-msgstr ""
+msgstr "คำนวณความสามารถในการเห็นของวัตถุที่เลือก"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:953
 msgid ""
 "Automatically calculate visibility for the selected star or deep-sky object "
 "and keep it updated while this tab is open."
 msgstr ""
+"คำนวณความสามารถในการเห็นดาวหรือเทห์ฟ้าที่เลือกโดยอัตโนมัติ "
+"และปรับปรุงขณะที่เปิดหน้าต่างนี้ไว้"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:955
 msgid "Calculate automatically"
-msgstr ""
+msgstr "คำนวณโดยอัตโนมัติ"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:956
 msgid "Good visibility:"
-msgstr ""
+msgstr "มองเห็นได้ดี:"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:957
 msgid "°"
-msgstr ""
+msgstr "°"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:959
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:987
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:1013
 msgid "Set location by map click"
-msgstr ""
+msgstr "กำหนดสถานที่ตั้งโดยคลิกบนแผนที่"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:961
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:985
@@ -40675,30 +40685,32 @@ msgid ""
 "Enable to move the observer by clicking on the map. Stays active until you "
 "uncheck it."
 msgstr ""
+"ย้ายสถานที่สังเกตการณ์โดยคลิกบนแผนที่ "
+"จะทำงานจนกว่าคุณจะยกเลิกโดยการล้างเครื่องหมาย"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:963
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:991
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:1017
 msgid "Sync maps"
-msgstr ""
+msgstr "ซิงก์แผนที่"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:965
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:989
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:1015
 msgid "Keep pan and zoom synchronized between the map tabs."
-msgstr ""
+msgstr "จดจำตำแหน่งและการดึงภาพเข้า-ออกในแผนที่ของแต่ละแท็บ"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:967
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:996
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:1018
 msgid "Places, min. population:"
-msgstr ""
+msgstr "สถานที่ซึ่งมีประชากรอย่างน้อย:"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:968
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:997
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:1019
 msgid "Near lines"
-msgstr ""
+msgstr "ใกล้เส้น"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:969
 msgid "Visibility"
@@ -40706,100 +40718,101 @@ msgstr "ความสามารถในการมองเห็น"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:970
 msgid "Solstice twilight limits on Earth"
-msgstr ""
+msgstr "ขอบเขตแสงสนธยาในวันอายันบนโลก"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:971
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:789
 msgid "Solstice twilight limits"
-msgstr ""
+msgstr "ขอบเขตแสงสนธยาในวันอายัน"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:972
 msgid "Reference lines"
-msgstr ""
+msgstr "เส้นอ้างอิง"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:973
 msgid "Lowest Sun"
-msgstr ""
+msgstr "ดวงอาทิตย์อยู่ต่ำที่สุด"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:974
 msgid "Highest Sun"
-msgstr ""
+msgstr "ดวงอาทิตย์อยู่สูงที่สุด"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:976
 msgid "Tropics"
-msgstr ""
+msgstr "เส้นทรอปิก"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:977
 msgid "Polar circles"
-msgstr ""
+msgstr "วงกลมขั้ว"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:978
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:979
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:1003
 msgctxt "twilight"
 msgid "civil"
-msgstr ""
+msgstr "ทางการ"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:980
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:981
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:1004
 msgctxt "twilight"
 msgid "nautical"
-msgstr ""
+msgstr "ทะเล"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:982
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:983
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:1005
 msgctxt "twilight"
 msgid "astronomical"
-msgstr ""
+msgstr "ดาราศาสตร์"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:993
 msgid ""
 "Compute twilight limits from the Sun's current position instead of the "
 "solstice extrema."
 msgstr ""
+"คำนวณขอบเขตแสงสนธยาจากตำแหน่งปัจจุบันของดวงอาทิตย์ แทนที่จะใช้วันอายัน"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:995
 msgid "Compute daily"
-msgstr ""
+msgstr "คำนวณประจำวัน"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:998
 msgid "Twilight limits"
-msgstr ""
+msgstr "ขอบเขตสนธยา"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:999
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:902
 msgid "Twilight Map on Earth"
-msgstr ""
+msgstr "แผนที่แสงสนธยาบนโลก"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:1000
 msgid "Legend"
-msgstr ""
+msgstr "คำอธิบายสัญลักษณ์"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:1001
 msgid "Sun altitude"
-msgstr ""
+msgstr "มุมเงยของดวงอาทิตย์"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:1002
 msgid "rise/set"
-msgstr ""
+msgstr "ขึ้น/ตก"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:1006
 msgid "night"
-msgstr ""
+msgstr "กลางคืน"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:1007
 msgid "Zenith point"
-msgstr ""
+msgstr "จุดจอมฟ้า"
 
 #: plugins/ObjectVisibility/src/ui_objectVisibilityDialog.h:1020
 msgid "Twilight Map"
-msgstr ""
+msgstr "แผนที่แสงสนธยา"
 
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:294
 msgid "Only stars and DSOs may be used in this plugin!"
-msgstr ""
+msgstr "โปรแกรมเสริมนี้ใช้กับดาวฤกษ์และวัตถุอวกาศลึกเท่านั้น!"
 
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:296
 #, qt-format
@@ -40808,16 +40821,18 @@ msgid ""
 "Pluto and the four Galilean moons.  The current observing body (%1) is not "
 "supported."
 msgstr ""
+"โปรแกรมเสริมนี้ใช้เมื่อสังเกตการณ์จากโลก ดวงจันทร์ ดาวเคราะห์ 8 ดวง พลูโต "
+"และดาวบริวารกาลิเลโอ การสังเกตจากวัตถุปัจจุบัน (%1) ไม่รองรับ"
 
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:301
 msgid "Turn off Calculate automatically to use this button."
-msgstr ""
+msgstr "ปิดการคำนวณอัตโนมัติเพื่อใช้ปุ่มนี้"
 
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:720
 msgid ""
 "Setting the observer location from the twilight map is available on Earth "
 "only."
-msgstr ""
+msgstr "การกำหนดสถานที่สังเกตการณ์จากแผนที่แสงสนธยาสามารถใช้ได้กับโลกเท่านั้น"
 
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:727
 #, qt-format
@@ -40825,98 +40840,101 @@ msgid ""
 "Solstice twilight limits are available for Earth only. Current observing "
 "body: %1"
 msgstr ""
+"ขอบเขตแสงสนธยาในวันอายันสามารถใช้ได้กับโลกเท่านั้น วัตถุปัจจุบันคือ: %1"
 
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:746
 msgid "Twilight limits on Earth are unavailable."
-msgstr ""
+msgstr "ไม่มีแผนที่ขอบเขตแสงสนธยาบนโลก"
 
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:778
 msgid "Daily twilight limits"
-msgstr ""
+msgstr "ขอบเขตสนธยาประจำวัน"
 
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:780
 #, qt-format
 msgid ""
 "Daily twilight limits on Earth in %1 (solar declination %2°, obliquity %3°)"
 msgstr ""
+"ขอบเขตแสงสนธยาประจำวันบนโลกสำหรับปี %1 (เดคลิเนชันของดวงอาทิตย์ %2°, "
+"แกนหมุนเอียง %3°)"
 
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:791
 #, qt-format
 msgid "Solstice twilight limits on Earth in %1 (obliquity %2°)"
-msgstr ""
+msgstr "ขอบเขตแสงสนธยาในวันอายันบนโลกสำหรับปี %1 (แกนหมุนเอียง %2°)"
 
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:891
 msgid "Twilight Map is unavailable."
-msgstr ""
+msgstr "ไม่มีแผนที่แสงสนธยา"
 
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:905
 #, qt-format
 msgid "Solar terminator on %1"
-msgstr ""
+msgstr "รอยต่อกลางวันกลางคืนบน%1"
 
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:941
 msgid "100,000"
-msgstr ""
+msgstr "100,000"
 
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:942
 msgid "500,000"
-msgstr ""
+msgstr "500,000"
 
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:943
 msgid "1,000,000"
-msgstr ""
+msgstr "1,000,000"
 
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:944
 msgid "5,000,000"
-msgstr ""
+msgstr "5,000,000"
 
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:1167
 #, qt-format
 msgid "%1 is selected. Click Calculate."
-msgstr ""
+msgstr "%1ถูกเลือก กดปุ่มคำนวณ"
 
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:1181
 msgid "a planet, moon or the Sun"
-msgstr ""
+msgstr "ดาวเคราะห์ ดาวบริวาร หรือดวงอาทิตย์"
 
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:1183
 msgid "a comet"
-msgstr ""
+msgstr "ดาวหาง"
 
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:1185
 msgid "a minor planet"
-msgstr ""
+msgstr "ดาวเคราะห์น้อย"
 
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:1187
 msgid "an artificial satellite"
-msgstr ""
+msgstr "ดาวเทียม"
 
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:1189
 msgid "a surface feature"
-msgstr ""
+msgstr "ภูมิลักษณ์บนพื้นผิว"
 
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:1191
 msgid "a meteor"
-msgstr ""
+msgstr "ฝนดาวตก"
 
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:1193
 msgid "not a star or deep-sky object"
-msgstr ""
+msgstr "ไม่ใช่ดาวฤกษ์หรือวัตถุอวกาศลึก"
 
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:1199
 #, qt-format
 msgid "%1 is %2. This plug-in only supports stars and deep-sky objects."
-msgstr ""
+msgstr "%1เป็น%2 โปรแกรมเสริมนี้ใช้กับดาวฤกษ์และวัตถุอวกาศลึกเท่านั้น"
 
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:1219
 #, qt-format
 msgid "Visibility of %1 in %2"
-msgstr ""
+msgstr "ความสามารถในการเห็น%1ในปี %2"
 
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:1225
 #, qt-format
 msgid "Visibility of %1 from %3 in %2"
-msgstr ""
+msgstr "ความสามารถในการเห็น%1จาก%3ในปี %2"
 
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:1245
 msgid ""
@@ -40925,16 +40943,22 @@ msgid ""
 "&delta; at the current epoch (precession and proper motion taken into "
 "account), five lines are drawn at fixed geographic latitudes:"
 msgstr ""
+"โปรแกรมเสริมนี้แสดงความสามารถในการเห็นดาวหรือวัตถุอวกาศลึกบนแผนที่ผิวดาวของสถานที่สังเกตการณ์"
+" ใช้เดคลิเนชัน &delta; ของวัตถุในยุคปีปัจจุบัน "
+"(คำนึงถึงการหมุนควงของโลกและการเคลื่อนที่เฉพาะของดาว) โดยวาดเส้น 5 "
+"เส้นในแนวละติจูด:"
 
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:1253
 msgid ""
 "&phi; = &delta; &plusmn; 90&deg;.  The object never rises above the horizon "
 "at latitudes outside this band."
 msgstr ""
+"&phi; = &delta; &plusmn; 90&deg;. ที่ละติจูดนอกแถบนี้ "
+"วัตถุจะไม่ขึ้นเหนือขอบฟ้า"
 
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:1256
 msgid "Extinction free / good visibility"
-msgstr ""
+msgstr "ปราศจากการสูญหายโดยบรรยากาศ / เห็นได้ดี"
 
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:1257
 msgid ""
@@ -40943,23 +40967,28 @@ msgid ""
 " is 5&deg;; you may increase it if you observe from a mountainous site or "
 "want a larger safety margin."
 msgstr ""
+"&phi; = &delta; &plusmn; (90&deg; &minus; h)  ละติจูดที่อยู่ภายในแถบนี้ "
+"วัตถุจะขึ้นไปถึงมุมเงยอย่างน้อย h ขณะผ่านตำแหน่งสุดบน ค่าปริยายของ h คือ "
+"5&deg;; "
+"คุณสามารถเพิ่มค่านี้ได้ถ้าสังเกตจากพื้นที่ที่เป็นภูเขาหรือต้องการเผื่อระยะความปลอดภัยให้มากขึ้น"
 
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:1264
 msgid ""
 "&phi; = &delta;.  At this latitude the object passes through the zenith."
-msgstr ""
+msgstr "&phi; = &delta; ที่ละติจูดนี้ วัตถุจะผ่านจุดจอมฟ้า"
 
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:1268
 msgid ""
 "&phi; = 90&deg; &minus; &delta;.  North of this latitude the object never "
 "sets."
-msgstr ""
+msgstr "&phi; = 90&deg; &minus; &delta; เหนือละติจูดนี้ วัตถุจะไม่ตกลับขอบฟ้า"
 
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:1272
 msgid ""
 "&phi; = &minus;90&deg; &minus; &delta;.  South of this latitude the object "
 "never sets."
 msgstr ""
+"&phi; = &minus;90&deg; &minus; &delta; ใต้ละติจูดนี้ วัตถุจะไม่ตกลับขอบฟ้า"
 
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:1277
 msgid ""
@@ -40968,6 +40997,9 @@ msgid ""
 "daily motion (and, for some, parallax) would make a single snapshot "
 "misleading."
 msgstr ""
+"ดาวเคราะห์ ดวงจันทร์ ดาวบริวาร ดาวเคราะห์น้อย ดาวหาง และดาวเทียม "
+"ไม่สามารถเลือกเป็น <em>วัตถุเป้าหมาย</em> เนื่องจากการเคลื่อนที่อย่างรวดเร็ว"
+" (และแพรัลแล็กซ์ในบางกรณี) ซึ่งข้อมูลชั่วขณะเดียวอาจทำให้เข้าใจผิดได้"
 
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:1284
 msgid ""
@@ -40977,6 +41009,11 @@ msgid ""
 "observer body via Stellarium's Location dialog; the map updates "
 "automatically."
 msgstr ""
+"โปรแกรมเสริมนี้รองรับการสังเกตการณ์จากเทห์ฟ้าต่อไปนี้: โลก ดวงจันทร์ "
+"ดาวเคราะห์ทั้ง 8 ดวง (ตั้งแต่ดาวพุธไปจนถึงดาวเนปจูน) พลูโต "
+"และดวงจันทร์บริวารหลัก 4 ดวงของดาวพฤหัสบดี (ไอโอ ยูโรปา แกนีมีด และคัลลิสโต)"
+" คุณสามารถเปลี่ยนตำแหน่งของผู้สังเกตการณ์ได้ผ่านหน้าต่างตำแหน่งที่ตั้งของ "
+"Stellarium ซึ่งแผนที่นี้จะปรับปรุงข้อมูลให้เป็นปัจจุบันโดยอัตโนมัติ"
 
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:1293
 msgid ""
@@ -40985,6 +41022,10 @@ msgid ""
 "planetarium.  To see Sirius's visibility in 10&thinsp;000 BCE, set the "
 "planetarium's date first, then press Calculate."
 msgstr ""
+"เนื่องจากตำแหน่งของดาวฤกษ์เปลี่ยนแปลงไปตามกาลเวลาอันเป็นผลจากการหมุนควงของแกนโลกและการเคลื่อนที่เฉพาะของดาว"
+" เส้นต่าง ๆ จึงถูกคำนวณโดยอิงกับวันที่ซึ่งแสดงในท้องฟ้าจำลองขณะนั้น "
+"หากต้องการดูความสามารถในการมองเห็นดาวซิริอัสเมื่อ 10&thinsp;000 ปีก่อน ค.ศ. "
+"ให้ตั้งค่าวันที่ในท้องฟ้าจำลองก่อน จากนั้นจึงกดปุ่มคำนวณ"
 
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:1301
 msgid ""
@@ -40995,6 +41036,15 @@ msgid ""
 "are not shown for other observing bodies because civil, nautical, and "
 "astronomical twilight depend on Earth's atmosphere."
 msgstr ""
+"แท็บแผนที่แสงสนธยามีไว้สำหรับโลกเท่านั้น โดยจะแสดงเส้นศูนย์สูตร เส้นทรอปิก "
+"เส้นวงกลมรอบขั้วโลก และเส้นละติจูด ณ จุดเหมายันและครีษมายัน "
+"ซึ่งเป็นตำแหน่งที่ดวงอาทิตย์ทำมุมเงยต่ำสุดหรือสูงสุดที่ระดับ -6&deg;, "
+"-12&deg; หรือ -18&deg; "
+"เส้นเหล่านี้อ้างอิงจากความเอียงของแกนโลกที่ยุคปีปัจจุบัน "
+"ดังนั้นตำแหน่งของเส้นจะเปลี่ยนไปเมื่อเปลี่ยนวันที่ในท้องฟ้าจำลอง "
+"เส้นดังกล่าวจะไม่ปรากฏเมื่อเลือกเทห์ฟ้าอื่นเป็นจุดสังเกตการณ์ "
+"เนื่องจากนิยามของแสงสนธยาทางการ สนธยาทะเล "
+"และสนธยาดาราศาสตร์นั้นขึ้นอยู่กับบรรยากาศของโลก"
 
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:1312
 msgid ""
@@ -41004,6 +41054,13 @@ msgid ""
 "bodies it shows the solar terminator from the Sun's centre, shades the night"
 " side, and marks the Sun zenith point."
 msgstr ""
+"แท็บแผนที่แสงสนธยาแสดงตามเวลาของท้องฟ้าจำลอง สำหรับบนโลก "
+"แผนที่นี้จะแสดงพื้นที่กลางวัน สนธยาทางการ สนธยาทะเล สนธยาดาราศาสตร์ "
+"และพื้นที่กลางคืน "
+"พร้อมทั้งระบุตำแหน่งซึ่งเห็นดวงอาทิตย์และดวงจันทร์อยู่ที่จุดจอมฟ้า "
+"สำหรับบนวัตถุอื่น "
+"แผนที่นี้จะแสดงรอยต่อกลางวันกลางคืนโดยคำนวณจากศูนย์กลางของดวงอาทิตย์ "
+"แสดงพื้นที่กลางคืนและระบุตำแหน่งซึ่งเห็นดวงอาทิตย์อยู่ที่จุดจอมฟ้า"
 
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:1320
 msgid ""
@@ -41013,10 +41070,16 @@ msgid ""
 "refraction.  The -6&deg;, -12&deg;, and -18&deg; twilight boundaries use the"
 " Sun's centre."
 msgstr ""
+"สำหรับดวงอาทิตย์ขึ้นและตกบนโลก "
+"ใช้การประมาณจากขอบบนที่ปรากฏของดวงอาทิตย์ตามปรกติ คือ "
+"จุดศูนย์กลางของดวงอาทิตย์อยู่ต่ำกว่าเส้นขอบฟ้าทางเรขาคณิตประมาณ 50 ลิปดา "
+"โดยคำนึงถึงรัศมีของดวงอาทิตย์และการหักเหของแสงในบรรยากาศมาตรฐาน "
+"ขอบเขตของแสงสนธยาคำนวณจากจุดศูนย์กลางของดวงอาทิตย์ไปที่ระยะ -6&deg;, "
+"-12&deg; และ -18&deg;"
 
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:1329
 msgid "Credits"
-msgstr ""
+msgstr "กิตติกรรมประกาศ"
 
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:1330
 msgid ""
@@ -41025,11 +41088,15 @@ msgid ""
 "from Astro-Geo-GIS, in the article <em>The 49 brightest stars in the night "
 "sky – when and where can we see them?</em>"
 msgstr ""
+"แนวคิดของเส้นและสัญลักษณ์ทั้ง 5 ชนิด "
+"ที่ใช้แสดงความสามารถในการเห็นเทห์ฟ้าบนแผนที่โลก มาจาก Astro-Geo-GIS ในบทความ"
+" <em>The 49 brightest stars in the night sky – when and where can we see "
+"them?</em>"
 
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:1339
 msgid "Read the original article"
-msgstr ""
+msgstr "อ่านบทความต้นฉบับ"
 
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:1342
 msgid "Astro-Geo-GIS website"
-msgstr ""
+msgstr "เว็บไซต์ Astro-Geo-GIS"

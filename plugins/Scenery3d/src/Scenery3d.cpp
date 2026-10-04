@@ -92,7 +92,7 @@ Scenery3d::Scenery3d() :
 
 	//create scenery3d object
 	renderer = new S3DRenderer();
-	connect(renderer, SIGNAL(message(QString)), this, SLOT(showMessage(QString)));
+	connect(renderer, &S3DRenderer::message, this, &Scenery3d::showMessage);
 }
 
 Scenery3d::~Scenery3d()
@@ -273,7 +273,7 @@ void Scenery3d::init()
 	createActions();
 	createToolbarButtons();
 
-	connect(&StelMainView::getInstance(), SIGNAL(reloadShadersRequested()), this, SLOT(reloadShaders()));
+	connect(&StelMainView::getInstance(), &StelMainView::reloadShadersRequested, this, &Scenery3d::reloadShaders);
 
 	//finally, hook up the lightscape toggle event (external to this plugin) to cubemap redraw
 	StelAction* action = StelApp::getInstance().getStelActionManager()->findAction("actionShow_LandscapeIllumination");

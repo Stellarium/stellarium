@@ -35,13 +35,27 @@ public:
 	//! Create a TuiNodeEnum node.
 	//! @param text the text to be displayed for this node
 	//! @param receiver a QObject which will receive a signal when the value is changed
-	//! @param method the method in the receiver which will be called when the value is changed.  Note that this should be passed using the SLOT() macro.
+	//! @param method the method that will be called when the value is changed.
 	//! @param items a list of string values which the item may take.
 	//! @param defValue the string value which is used as the initially selected value.  Note if this is not in the items list, the first item in the items list will be used instead.
 	//! @param parent the node for the parent menu item
 	//! @param prev the previous node in the current menu (typically shares the same parent)
-	TuiNodeEnum(const QString& text, QObject* receiver, const char* method, const QStringList &items,
-		    const QString &defValue, TuiNode* parent=Q_NULLPTR, TuiNode* prev=Q_NULLPTR);
+	template<typename PointerToMethod, typename Receiver>
+	TuiNodeEnum(const QString& text, Receiver* receiver, PointerToMethod method,
+	            const QStringList &items, const QString &defValue,
+	            TuiNode* parent=nullptr, TuiNode* prev=nullptr)
+		: TuiNodeEditable(text, parent, prev)
+		  , stringList(items)
+		  , defValue(defValue)
+	{
+		this->connect(this, &TuiNodeEnum::setValue, receiver, method);
+
+		if (stringList.contains(defValue))
+			currentIdx = stringList.indexOf(defValue);
+		else
+			currentIdx = 0;
+	}
+
 	TuiNodeResponse handleEditingKey(int key) override;
 	QString getDisplayText() const override;
 

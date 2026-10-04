@@ -24,7 +24,7 @@
 #include <QGraphicsProxyWidget>
 #include <QGraphicsSceneResizeEvent>
 #include <QSettings>
-#include <QWidget>
+#include <QDialog>
 #include "StelApp.hpp"
 #include "StelTranslator.hpp"
 
@@ -196,7 +196,7 @@ protected:
 	static void connectBoolProperty(QGroupBox *checkBox, const QString &propName);
 
 	//! The main dialog
-	QWidget* dialog;
+	QDialog* dialog;
 	class CustomProxy* proxy;
 	//! The name should be set in derived classes' constructors and can be used to store and retrieve the panel locations.
 	QString dialogName;

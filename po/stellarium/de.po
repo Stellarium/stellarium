@@ -42306,10 +42306,12 @@ msgid ""
 "&phi; = &delta; &plusmn; 90&deg;.  The object never rises above the horizon "
 "at latitudes outside this band."
 msgstr ""
+"&phi; = &delta; &plusmn; 90&deg;.  Das Objekt steigt bei Breiten außerhalb "
+"des Bereiches niemals über den Horizont."
 
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:1256
 msgid "Extinction free / good visibility"
-msgstr ""
+msgstr "Extinktionsfrei / gute Sichtbarkeit"
 
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:1257
 msgid ""
@@ -42318,11 +42320,15 @@ msgid ""
 " is 5&deg;; you may increase it if you observe from a mountainous site or "
 "want a larger safety margin."
 msgstr ""
+"&phi; = &delta; &plusmn; (90&deg; &minus; h).  In Breiten innerhalb dieses "
+"Bereichs erreichen Objekte mindestens Höhe h bei oberer Kulmination. "
+"Voreinstellung ist h=5&deg;; höher stellen zur Beobachtung von einem "
+"bergigen Standort oder für mehr Sicherheitsabstand."
 
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:1264
 msgid ""
 "&phi; = &delta;.  At this latitude the object passes through the zenith."
-msgstr ""
+msgstr "&phi; = &delta;.  In dieser Breite geht das Objekt durch den Zenit."
 
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:1268
 msgid ""
@@ -42337,6 +42343,8 @@ msgid ""
 "&phi; = &minus;90&deg; &minus; &delta;.  South of this latitude the object "
 "never sets."
 msgstr ""
+"&phi; = &minus;90&deg; &minus; &delta;.  Südlich dieser Breite geht das "
+"Objekt niemals unter."
 
 #: plugins/ObjectVisibility/src/gui/ObjectVisibilityDialog.cpp:1277
 msgid ""

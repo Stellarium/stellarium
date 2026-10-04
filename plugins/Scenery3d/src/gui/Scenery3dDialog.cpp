@@ -96,13 +96,13 @@ void Scenery3dDialog::createDialogContent()
 
 	//connect UI events
 	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
-	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
+	connect(ui->titleBar, &TitleBar::movedTo, this, &StelDialog::handleMovedTo);
 	connect(ui->scenery3dListWidget, &QListWidget::currentItemChanged, this, &Scenery3dDialog::scenery3dChanged);
 
 	//checkboxes can connect directly to manager
-	//connect(ui->checkBoxEnablePixelLight, SIGNAL(clicked(bool)), mgr, SLOT(setEnablePixelLighting(bool)));
-	//connect(ui->checkBoxEnableShadows,    SIGNAL(clicked(bool)), mgr, SLOT(setEnableShadows(bool)));
-	//connect(ui->checkBoxEnableBump,       SIGNAL(clicked(bool)), mgr, SLOT(setEnableBumps(bool)));
+	//connect(ui->checkBoxEnablePixelLight,   &QCheckBox::clicked, mgr, &Scenery3d::setEnablePixelLighting(bool)));
+	//connect(ui->checkBoxEnableShadows,      &QCheckBox::clicked, mgr, &Scenery3d::setEnableShadows(bool)));
+	//connect(ui->checkBoxEnableBump,         &QCheckBox::clicked, mgr, &Scenery3d::setEnableBumps(bool)));
 	//connect(ui->checkBoxEnableLazyDrawing,  &QCheckBox::clicked, mgr, &Scenery3d::setEnableLazyDrawing);
 	//connect(ui->checkBoxDominantFace,       &QCheckBox::clicked, mgr, &Scenery3d::setOnlyDominantFaceWhenMoving);
 	//connect(ui->checkBoxSecondDominantFace, &QCheckBox::clicked, mgr, &Scenery3d::setSecondDominantFaceWhenMoving);
@@ -149,8 +149,8 @@ void Scenery3dDialog::createDialogContent()
 		shortcutButtons.append(ui->gridCoordinatesGroupBox);
 		ui->radioButton_GCTopRight->setChecked(mgr->getLocationInfoStyle()==S3DRenderer::LocationInfoTopRight);
 		ui->radioButton_GCBottom->setChecked(mgr->getLocationInfoStyle()==S3DRenderer::LocationInfoBottomCenter);
-		connect(ui->radioButton_GCTopRight, SIGNAL(toggled(bool)), this, SLOT(setCoordinateTextStyle()));
-		connect(ui->radioButton_GCBottom, SIGNAL(toggled(bool)), this, SLOT(setCoordinateTextStyle()));
+		connect(ui->radioButton_GCTopRight, &QRadioButton::toggled, this, &Scenery3dDialog::setCoordinateTextStyle);
+		connect(ui->radioButton_GCBottom, &QRadioButton::toggled, this, &Scenery3dDialog::setCoordinateTextStyle);
 	}
 
 	//connectSlotsByName does not work in our case (because this class does not "own" the GUI in the Qt sense)

@@ -65,41 +65,41 @@ void MSConfigDialog::createDialogContent()
 	if (gui)
 	{
 		enableKineticScrolling(gui->getFlagUseKineticScrolling());
-		connect(gui, SIGNAL(flagUseKineticScrollingChanged(bool)), this, SLOT(enableKineticScrolling(bool)));
+		connect(gui, &StelGui::flagUseKineticScrollingChanged, this, &MSConfigDialog::enableKineticScrolling);
 	}
 
-	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
+	connect(&StelApp::getInstance(), &StelApp::languageChanged, this, &MSConfigDialog::retranslate);
 	connect(m_ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
-	connect(m_ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
-	connect(m_ui->bRestoreDefaults, SIGNAL(clicked()), this, SLOT(restoreDefaults()));
+	connect(m_ui->titleBar, &TitleBar::movedTo, this, &StelDialog::handleMovedTo);
+	connect(m_ui->bRestoreDefaults, &QPushButton::clicked, this, &MSConfigDialog::restoreDefaults);
 
 	// General tab
-	connect(m_ui->enableAtStartUp, SIGNAL(clicked(bool)), m_mgr, SLOT(setEnableAtStartup(bool)));
-	connect(m_ui->showEnableButton, SIGNAL(clicked(bool)), m_mgr, SLOT(setShowEnableButton(bool)));
-	connect(m_ui->showSearchButton, SIGNAL(clicked(bool)), m_mgr, SLOT(setShowSearchButton(bool)));
+	connect(m_ui->enableAtStartUp, &QCheckBox::clicked, m_mgr, &MeteorShowersMgr::setEnableAtStartup);
+	connect(m_ui->showEnableButton, &QCheckBox::clicked, m_mgr, &MeteorShowersMgr::setShowEnableButton);
+	connect(m_ui->showSearchButton, &QCheckBox::clicked, m_mgr, &MeteorShowersMgr::setShowSearchButton);
 
 	// Radiant tab
-	connect(m_ui->enableMarker, SIGNAL(clicked(bool)), m_mgr, SLOT(setEnableMarker(bool)));
-	connect(m_ui->activeRadiantsOnly, SIGNAL(clicked(bool)), m_mgr, SLOT(setActiveRadiantOnly(bool)));
-	connect(m_ui->enableLabels, SIGNAL(clicked(bool)), m_mgr, SLOT(setEnableLabels(bool)));
-	connect(m_ui->fontSize, SIGNAL(valueChanged(int)), m_mgr, SLOT(setFontSize(int)));
+	connect(m_ui->enableMarker, &QGroupBox::clicked, m_mgr, &MeteorShowersMgr::setEnableMarker);
+	connect(m_ui->activeRadiantsOnly, &QCheckBox::clicked, m_mgr, &MeteorShowersMgr::setActiveRadiantOnly);
+	connect(m_ui->enableLabels, &QCheckBox::clicked, m_mgr, &MeteorShowersMgr::setEnableLabels);
+	connect(m_ui->fontSize, qOverload<int>(&QSpinBox::valueChanged), m_mgr, &MeteorShowersMgr::setFontSize);
 
 	m_ui->setColorARG->setup("MeteorShowers.colorARG", "MeteorShowers/colorARG");
 	m_ui->setColorARC->setup("MeteorShowers.colorARC", "MeteorShowers/colorARC");
 	m_ui->setColorIR ->setup("MeteorShowers.colorIR",  "MeteorShowers/colorIR");
 
 	// Update tab
-	connect(m_ui->enableUpdates, SIGNAL(clicked(bool)), m_mgr, SLOT(setEnableAutoUpdates(bool)));
-	connect(m_ui->updateFrequency, SIGNAL(valueChanged(int)), m_mgr, SLOT(setUpdateFrequencyHours(int)));
-	connect(m_ui->bUpdate, SIGNAL(clicked()), m_mgr, SLOT(updateCatalog()));
+	connect(m_ui->enableUpdates, &QGroupBox::clicked, m_mgr, &MeteorShowersMgr::setEnableAutoUpdates);
+	connect(m_ui->updateFrequency, qOverload<int>(&QSpinBox::valueChanged), m_mgr, &MeteorShowersMgr::setUpdateFrequencyHours);
+	connect(m_ui->bUpdate, &QPushButton::clicked, m_mgr, &MeteorShowersMgr::updateCatalog);
 
-	connect(m_ui->enableUpdates, SIGNAL(clicked()), this, SLOT(refreshUpdateTab()));
-	connect(m_ui->updateFrequency, SIGNAL(valueChanged(int)), this, SLOT(refreshUpdateTab()));
-	connect(m_ui->bUpdate, SIGNAL(clicked()), this, SLOT(refreshUpdateTab()));
-	connect(m_mgr, SIGNAL(updateStateChanged(MeteorShowersMgr::UpdateState)), this, SLOT(updateStateReceiver(MeteorShowersMgr::UpdateState)));
-	connect(m_mgr, SIGNAL(jsonUpdateComplete(void)), this, SLOT(updateCompleteReceiver(void)));	
+	connect(m_ui->enableUpdates, &QGroupBox::clicked, this, &MSConfigDialog::refreshUpdateTab);
+	connect(m_ui->updateFrequency, qOverload<int>(&QSpinBox::valueChanged), this, &MSConfigDialog::refreshUpdateTab);
+	connect(m_ui->bUpdate, &QPushButton::clicked, this, &MSConfigDialog::refreshUpdateTab);
+	connect(m_mgr, &MeteorShowersMgr::updateStateChanged, this, &MSConfigDialog::updateStateReceiver);
+	connect(m_mgr, &MeteorShowersMgr::jsonUpdateComplete, this, &MSConfigDialog::updateCompleteReceiver);	
 	m_updateTimer = new QTimer(this);
-	connect(m_updateTimer, SIGNAL(timeout()), this, SLOT(refreshUpdateTab()));
+	connect(m_updateTimer, &QTimer::timeout, this, &MSConfigDialog::refreshUpdateTab);
 	m_updateTimer->start(7000); // Duration of time to display changing status in update tab
 
 	// About tab
@@ -176,7 +176,7 @@ void MSConfigDialog::updateCompleteReceiver(void)
 	m_ui->status->setText(QString(q_("Successfully updated")));
 	m_updateTimer->start();
 	QTimer *timer = new QTimer(this);
-	connect(timer, SIGNAL(timeout()), this, SLOT(refreshUpdateTab()));
+	connect(timer, &QTimer::timeout, this, &MSConfigDialog::refreshUpdateTab);
 	setAboutHtml();
 }
 

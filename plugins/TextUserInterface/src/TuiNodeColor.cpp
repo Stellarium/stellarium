@@ -20,12 +20,6 @@
 #include "TuiNodeColor.hpp"
 #include <QKeyEvent>
 
-TuiNodeColor::TuiNodeColor(const QString& text, QObject* receiver, const char* method, Vec3f defValue, TuiNode* parent, TuiNode* prev)
-	: TuiNodeEditable(text, parent, prev), value(defValue), editingPart(0)
-{
-	this->connect(this, SIGNAL(setValue(Vec3f)), receiver, method);
-}
-
 TuiNodeResponse TuiNodeColor::handleEditingKey(int key)
 {
 	TuiNodeResponse response;

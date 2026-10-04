@@ -101,40 +101,40 @@ void MpcImportWindow::createDialogContent()
 	ui->setupUi(dialog);
 
 	//Signals
-	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
+	connect(&StelApp::getInstance(), &StelApp::languageChanged, this, &MpcImportWindow::retranslate);
 	connect(ui->titleBar,            &TitleBar::closeClicked,   this, &StelDialog::close);
-	connect(ui->titleBar,            SIGNAL(movedTo(QPoint)),   this, SLOT(handleMovedTo(QPoint)));
+	connect(ui->titleBar,            &TitleBar::movedTo,   this, &StelDialog::handleMovedTo);
 
-	connect(ui->pushButtonAcquire,       SIGNAL(clicked()), this, SLOT(acquireObjectData()));
-	connect(ui->pushButtonAbortDownload, SIGNAL(clicked()), this, SLOT(abortDownload()));
-	connect(ui->pushButtonAdd,           SIGNAL(clicked()), this, SLOT(addObjects()));
-	connect(ui->pushButtonDiscard,       SIGNAL(clicked()), this, SLOT(discardObjects()));
+	connect(ui->pushButtonAcquire,       &QPushButton::clicked, this, &MpcImportWindow::acquireObjectData);
+	connect(ui->pushButtonAbortDownload, &QPushButton::clicked, this, &MpcImportWindow::abortDownload);
+	connect(ui->pushButtonAdd,           &QPushButton::clicked, this, &MpcImportWindow::addObjects);
+	connect(ui->pushButtonDiscard,       &QPushButton::clicked, this, &MpcImportWindow::discardObjects);
 
-	connect(ui->pushButtonBrowse,        SIGNAL(clicked()), this, SLOT(selectFile()));
-	connect(ui->comboBoxBookmarks,       SIGNAL(currentIndexChanged(int)),this, SLOT(bookmarkSelected(int)));
+	connect(ui->pushButtonBrowse,        &QPushButton::clicked, this, &MpcImportWindow::selectFile);
+	connect(ui->comboBoxBookmarks,       qOverload<int>(&QComboBox::currentIndexChanged), this, &MpcImportWindow::bookmarkSelected);
 
-	connect(ui->radioButtonFile,         SIGNAL(toggled(bool)), ui->frameFile, SLOT(setVisible(bool)));
-	connect(ui->radioButtonURL,          SIGNAL(toggled(bool)), ui->frameURL,  SLOT(setVisible(bool)));
+	connect(ui->radioButtonFile,         &QRadioButton::toggled, ui->frameFile, &QFrame::setVisible);
+	connect(ui->radioButtonURL,          &QRadioButton::toggled, ui->frameURL,  &QFrame::setVisible);
 
-	connect(ui->radioButtonAsteroids,    SIGNAL(toggled(bool)), this, SLOT(switchImportType(bool)));
-	connect(ui->radioButtonComets,       SIGNAL(toggled(bool)), this, SLOT(switchImportType(bool)));
+	connect(ui->radioButtonAsteroids,    &QRadioButton::toggled, this, &MpcImportWindow::switchImportType);
+	connect(ui->radioButtonComets,       &QRadioButton::toggled, this, &MpcImportWindow::switchImportType);
 
-	connect(ui->pushButtonMarkAll,       SIGNAL(clicked()), this, SLOT(markAll()));
-	connect(ui->pushButtonMarkNone,      SIGNAL(clicked()), this, SLOT(unmarkAll()));
+	connect(ui->pushButtonMarkAll,       &QPushButton::clicked, this, &MpcImportWindow::markAll);
+	connect(ui->pushButtonMarkNone,      &QPushButton::clicked, this, &MpcImportWindow::unmarkAll);
 
-	connect(ui->pushButtonSendQuery,     SIGNAL(clicked()),           this, SLOT(sendQuery()));
-	connect(ui->lineEditQuery,           SIGNAL(returnPressed()),     this, SLOT(sendQuery()));
-	connect(ui->pushButtonAbortQuery,    SIGNAL(clicked()),           this, SLOT(abortQuery()));
-	connect(ui->lineEditQuery,           SIGNAL(textEdited(QString)), this, SLOT(resetNotFound()));
-	//connect(ui->lineEditQuery,         SIGNAL(editingFinished()),   this, SLOT(sendQuery()));
-	connect(countdownTimer,              SIGNAL(timeout()),           this, SLOT(updateCountdown()));
+	connect(ui->pushButtonSendQuery,     &QPushButton::clicked,     this, &MpcImportWindow::sendQuery);
+	connect(ui->lineEditQuery,           &QLineEdit::returnPressed, this, &MpcImportWindow::sendQuery);
+	connect(ui->pushButtonAbortQuery,    &QPushButton::clicked,     this, &MpcImportWindow::abortQuery);
+	connect(ui->lineEditQuery,           &QLineEdit::textEdited,    this, &MpcImportWindow::resetNotFound);
+	//connect(ui->lineEditQuery,           &QLineEdit::editingFinished, this, &MpcImportWindow::sendQuery);
+	connect(countdownTimer,              &QTimer::timeout,          this, &MpcImportWindow::updateCountdown);
 
 	filterProxyModel = new QSortFilterProxyModel(this);
 	filterProxyModel->setSourceModel(candidateObjectsModel);
 	filterProxyModel->setFilterCaseSensitivity(Qt::CaseInsensitive);
 	ui->listViewObjects->setModel(filterProxyModel);
-	connect(ui->lineEditSearch, SIGNAL(textChanged(const QString&)),
-	        filterProxyModel, SLOT(setFilterFixedString(const QString&)));
+	connect(ui->lineEditSearch, &QLineEdit::textChanged,
+	        filterProxyModel, &QSortFilterProxyModel::setFilterFixedString);
 
 	loadBookmarks();
 	updateTexts();
@@ -240,7 +240,7 @@ void MpcImportWindow::acquireObjectData()
 
 void MpcImportWindow::addObjects()
 {
-	disconnect(ssoManager, SIGNAL(solarSystemChanged()), this, SLOT(resetDialog()));
+	disconnect(ssoManager, &SolarSystemEditor::solarSystemChanged, this, &MpcImportWindow::resetDialog);
 
 	QList<QString> checkedObjectsNames;
 
@@ -598,7 +598,7 @@ void MpcImportWindow::startDownload(const QString &urlString)
 	enableInterface(false);
 	ui->pushButtonAbortDownload->setVisible(true);
 
-	connect(networkManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(downloadComplete(QNetworkReply*)));
+	connect(networkManager, &QNetworkAccessManager::finished, this, &MpcImportWindow::downloadComplete);
 	QNetworkRequest request;
 	request.setUrl(QUrl(url));
 	request.setRawHeader("User-Agent", StelUtils::getUserAgentString().toUtf8());
@@ -606,7 +606,7 @@ void MpcImportWindow::startDownload(const QString &urlString)
 	request.setAttribute(QNetworkRequest::RedirectPolicyAttribute, true);
 #endif
 	downloadReply = networkManager->get(request);
-	connect(downloadReply, SIGNAL(downloadProgress(qint64,qint64)), this, SLOT(updateDownloadProgress(qint64,qint64)));
+	connect(downloadReply, &QNetworkReply::downloadProgress, this, &MpcImportWindow::updateDownloadProgress);
 }
 
 void MpcImportWindow::abortDownload()
@@ -616,7 +616,7 @@ void MpcImportWindow::abortDownload()
 
 	qDebug() << "Aborting download...";
 
-	disconnect(networkManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(downloadComplete(QNetworkReply*)));
+	disconnect(networkManager, &QNetworkAccessManager::finished, this, &MpcImportWindow::downloadComplete);
 	deleteDownloadProgressBar();
 
 	downloadReply->abort();
@@ -629,7 +629,7 @@ void MpcImportWindow::abortDownload()
 
 void MpcImportWindow::downloadComplete(QNetworkReply *reply)
 {
-	disconnect(networkManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(downloadComplete(QNetworkReply*)));
+	disconnect(networkManager, &QNetworkAccessManager::finished, this, &MpcImportWindow::downloadComplete);
 	deleteDownloadProgressBar();
 	ui->pushButtonAbortDownload->setVisible(false);
 
@@ -696,13 +696,11 @@ void MpcImportWindow::downloadComplete(QNetworkReply *reply)
 	ui->stackedWidget->setCurrentIndex(1);
 	//As this window is persistent, if the Solar System is changed
 	//while there is a list, it should be reset.
-	connect(ssoManager, SIGNAL(solarSystemChanged()), this, SLOT(resetDialog()));
+	connect(ssoManager, &SolarSystemEditor::solarSystemChanged, this, &MpcImportWindow::resetDialog);
 }
 
 void MpcImportWindow::deleteDownloadProgressBar()
 {
-	disconnect(this, SLOT(updateDownloadProgress(qint64,qint64)));
-
 	if (downloadProgressBar)
 	{
 		StelApp::getInstance().removeProgressBar(downloadProgressBar);
@@ -779,9 +777,9 @@ void MpcImportWindow::sendQueryToUrl(QUrl url)
 	request.setAttribute(QNetworkRequest::RedirectPolicyAttribute, true);
 #endif
 
-	connect(networkManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(receiveQueryReply(QNetworkReply*)));
+	connect(networkManager, &QNetworkAccessManager::finished, this, &MpcImportWindow::receiveQueryReply);
 	queryReply = networkManager->post(request, url.query(QUrl::FullyEncoded).toUtf8());	
-	connect(queryReply, SIGNAL(downloadProgress(qint64,qint64)), this, SLOT(updateQueryProgress(qint64,qint64)));
+	connect(queryReply, &QNetworkReply::downloadProgress, this, &MpcImportWindow::updateQueryProgress);
 }
 
 void MpcImportWindow::abortQuery()
@@ -789,7 +787,7 @@ void MpcImportWindow::abortQuery()
 	if (queryReply == nullptr)
 		return;
 
-	disconnect(networkManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(receiveQueryReply(QNetworkReply*)));
+	disconnect(networkManager, &QNetworkAccessManager::finished, this, &MpcImportWindow::receiveQueryReply);
 	deleteQueryProgressBar();
 
 	queryReply->abort();
@@ -806,7 +804,7 @@ void MpcImportWindow::receiveQueryReply(QNetworkReply *reply)
 	if (reply == nullptr)
 		return;
 
-	disconnect(networkManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(receiveQueryReply(QNetworkReply*)));
+	disconnect(networkManager, &QNetworkAccessManager::finished, this, &MpcImportWindow::receiveQueryReply);
 
 	int statusCode = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
 	if (statusCode == 301 || statusCode == 302 || statusCode == 307)
@@ -921,7 +919,6 @@ void MpcImportWindow::readQueryReply(QNetworkReply * reply)
 
 void MpcImportWindow::deleteQueryProgressBar()
 {
-	disconnect(this, SLOT(updateQueryProgress(qint64,qint64)));
 	if (queryProgressBar)
 	{
 		StelApp::getInstance().removeProgressBar(queryProgressBar);

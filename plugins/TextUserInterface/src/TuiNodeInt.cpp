@@ -21,13 +21,6 @@
 #include <QKeyEvent>
 
 
-TuiNodeInt::TuiNodeInt(const QString& text, QObject* receiver, const char* method, int defValue,
-                       int min, int max, int inc, TuiNode* parent, TuiNode* prev)
-	: TuiNodeEditable(text, parent, prev), value(defValue), minimum(min), maximum(max), increment(inc), typing(false)
-{
-	this->connect(this, SIGNAL(setValue(int)), receiver, method);
-}
-
 TuiNodeResponse TuiNodeInt::handleEditingKey(int key)
 {
 	TuiNodeResponse response;

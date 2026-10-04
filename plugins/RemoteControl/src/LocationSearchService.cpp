@@ -31,7 +31,8 @@ LocationSearchService::LocationSearchService(QObject *parent)
 	: AbstractAPIService(parent), locMgr(LocationList())
 {
 	//this is run in the main thread
-	connect(&StelApp::getInstance().getLocationMgr(), SIGNAL(locationListChanged()), this, SLOT(mainLocationManagerUpdated()));
+	connect(&StelApp::getInstance().getLocationMgr(), &StelLocationMgr::locationListChanged,
+	        this, &LocationSearchService::mainLocationManagerUpdated);
 	mainLocationManagerUpdated();
 }
 

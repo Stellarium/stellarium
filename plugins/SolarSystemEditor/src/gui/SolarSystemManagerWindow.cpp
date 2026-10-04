@@ -68,33 +68,32 @@ void SolarSystemManagerWindow::createDialogContent()
 	if (gui)
 	{
 		enableKineticScrolling(gui->getFlagUseKineticScrolling());
-		connect(gui, SIGNAL(flagUseKineticScrollingChanged(bool)), this, SLOT(enableKineticScrolling(bool)));
+		connect(gui, &StelGui::flagUseKineticScrollingChanged, this, &SolarSystemManagerWindow::enableKineticScrolling);
 	}
 
 	//Signals
-	connect(&StelApp::getInstance(), SIGNAL(languageChanged()),
-	        this, SLOT(retranslate()));
+	connect(&StelApp::getInstance(), &StelApp::languageChanged, this, &SolarSystemManagerWindow::retranslate);
 	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
-	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
-	connect(ui->pushButtonCopyFile, SIGNAL(clicked()), this, SLOT(copyConfiguration()));
-	connect(ui->pushButtonReplaceFile, SIGNAL(clicked()), this, SLOT(replaceConfiguration()));
-	connect(ui->pushButtonAddFile, SIGNAL(clicked()), this, SLOT(addConfiguration()));
-	connect(ui->pushButtonRemove, SIGNAL(clicked()), this, SLOT(removeObjects()));
-	connect(ui->pushButtonImportMPC, SIGNAL(clicked()), this, SLOT(newImportMPC()));
-	//connect(ui->pushButtonManual, SIGNAL(clicked()), this, SLOT(newImportManual()));
+	connect(ui->titleBar, &TitleBar::movedTo, this, &StelDialog::handleMovedTo);
+	connect(ui->pushButtonCopyFile, &QPushButton::clicked, this, &SolarSystemManagerWindow::copyConfiguration);
+	connect(ui->pushButtonReplaceFile, &QPushButton::clicked, this, &SolarSystemManagerWindow::replaceConfiguration);
+	connect(ui->pushButtonAddFile, &QPushButton::clicked, this, &SolarSystemManagerWindow::addConfiguration);
+	connect(ui->pushButtonRemove, &QPushButton::clicked, this, &SolarSystemManagerWindow::removeObjects);
+	connect(ui->pushButtonImportMPC, &QPushButton::clicked, this, &SolarSystemManagerWindow::newImportMPC);
+	//connect(ui->pushButtonManual, &QPushButton::clicked, this, &SolarSystemManagerWindow::newImportManual);
 
-	connect(ssEditor, SIGNAL(solarSystemChanged()), this, SLOT(populateSolarSystemList()));
-	connect(ui->pushButtonReset, SIGNAL(clicked()), this, SLOT(resetSSOdefaults()));
+	connect(ssEditor, &SolarSystemEditor::solarSystemChanged, this, &SolarSystemManagerWindow::populateSolarSystemList);
+	connect(ui->pushButtonReset, &QPushButton::clicked, this, &SolarSystemManagerWindow::resetSSOdefaults);
 
 	// bug #1350669 (https://bugs.launchpad.net/stellarium/+bug/1350669)
-	connect(ui->listWidgetObjects, SIGNAL(currentRowChanged(int)), ui->listWidgetObjects, SLOT(repaint()));
+	connect(ui->listWidgetObjects, &QListWidget::currentRowChanged, ui->listWidgetObjects, qOverload<>(&QListWidget::repaint));
 
 	setAboutHtml();
 	updateTexts();
 
 	Q_ASSERT(mpcImportWindow);
 	//Rebuild the list if any planets have been imported
-	connect(mpcImportWindow, SIGNAL(objectsImported()), this, SLOT(populateSolarSystemList()));
+	connect(mpcImportWindow, &MpcImportWindow::objectsImported, this, &SolarSystemManagerWindow::populateSolarSystemList);
 
 	ui->lineEditUserFilePath->setText(ssEditor->getCustomSolarSystemFilePath());
 	populateSolarSystemList();
@@ -135,7 +134,7 @@ void SolarSystemManagerWindow::newImportManual()
 	if (manualImportWindow == nullptr)
 	{
 		manualImportWindow = new ManualImportWindow();
-		connect(manualImportWindow, SIGNAL(visibleChanged(bool)), this, SLOT(resetImportManual(bool)));
+		connect(manualImportWindow, &ManualImportWindow::visibleChanged, this, &SolarSystemManagerWindow::resetImportManual);
 	}
 
 	manualImportWindow->setVisible(true);
@@ -191,7 +190,7 @@ void SolarSystemManagerWindow::removeObjects()
 	if (!ui->listWidgetObjects->selectedItems().isEmpty())
 	{
 		// we must disconnect the signal or else the list will be rebuilt after the first deletion.
-		disconnect(ssEditor, SIGNAL(solarSystemChanged()), this, SLOT(populateSolarSystemList()));
+		disconnect(ssEditor, &SolarSystemEditor::solarSystemChanged, this, &SolarSystemManagerWindow::populateSolarSystemList);
 		// This is slow for many objects.
 		// TODO: For more than 50, it may be better to remove from ini file and reload all ini files.
 		for (auto* item : ui->listWidgetObjects->selectedItems())
@@ -202,7 +201,7 @@ void SolarSystemManagerWindow::removeObjects()
 			//TODO: Ask for confirmation first?
 			ssEditor->removeSsoWithName(ssoId);
 		}
-		connect(ssEditor, SIGNAL(solarSystemChanged()), this, SLOT(populateSolarSystemList()));
+		connect(ssEditor, &SolarSystemEditor::solarSystemChanged, this, &SolarSystemManagerWindow::populateSolarSystemList);
 		populateSolarSystemList();
 	}
 }

@@ -79,10 +79,10 @@ void OnlineQueriesDialog::createDialogContent()
 	ui->verticalLayout->addWidget(view);
 
 	//hook up retranslate event
-	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
+	connect(&StelApp::getInstance(), &StelApp::languageChanged, this, &OnlineQueriesDialog::retranslate);
 	//connect UI events
 	connect(ui->titleBar, &TitleBar::closeClicked, plugin, [=]{ plugin->setEnabled(false);});
-	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
+	connect(ui->titleBar, &TitleBar::movedTo, this, &StelDialog::handleMovedTo);
 
 	// Kinetic scrolling and style sheet for output
 	kineticScrollingList << view;
@@ -90,19 +90,19 @@ void OnlineQueriesDialog::createDialogContent()
 	if (gui)
 	{
 		enableKineticScrolling(gui->getFlagUseKineticScrolling());
-		connect(gui, SIGNAL(flagUseKineticScrollingChanged(bool)), this, SLOT(enableKineticScrolling(bool)));
+		connect(gui, &StelGui::flagUseKineticScrollingChanged, this, &OnlineQueriesDialog::enableKineticScrolling);
 	}
 	setAboutHtml();
 
-	connect(ui->wikipediaPushButton,    SIGNAL(clicked()), plugin, SLOT(queryWikipedia()));
-	connect(ui->aavsoPushButton,        SIGNAL(clicked()), plugin, SLOT(queryAAVSO()));
-	connect(ui->gcvsPushButton,         SIGNAL(clicked()), plugin, SLOT(queryGCVS()));
-	connect(ui->ancientSkiesPushButton, SIGNAL(clicked()), plugin, SLOT(queryASE()));
+	connect(ui->wikipediaPushButton,    &QPushButton::clicked, plugin, &OnlineQueries::queryWikipedia);
+	connect(ui->aavsoPushButton,        &QPushButton::clicked, plugin, &OnlineQueries::queryAAVSO);
+	connect(ui->gcvsPushButton,         &QPushButton::clicked, plugin, &OnlineQueries::queryGCVS);
+	connect(ui->ancientSkiesPushButton, &QPushButton::clicked, plugin, &OnlineQueries::queryASE);
 	// set custom tab buttons to hostnames, or deactivate unconfigured buttons
 	if (!plugin->getCustomUrl1().isEmpty())
 	{
 		ui->custom1PushButton->setText(QUrl(plugin->getCustomUrl1()).host());
-		connect(ui->custom1PushButton, SIGNAL(clicked()), plugin, SLOT(queryCustomSite1()));
+		connect(ui->custom1PushButton, &QPushButton::clicked, plugin, &OnlineQueries::queryCustomSite1);
 	}
 	else {
 		ui->custom1PushButton->setText(qc_("(Custom 1)", "GUI label"));
@@ -111,7 +111,7 @@ void OnlineQueriesDialog::createDialogContent()
 	if (!plugin->getCustomUrl2().isEmpty())
 	{
 		ui->custom2PushButton->setText(QUrl(plugin->getCustomUrl2()).host());
-		connect(ui->custom2PushButton, SIGNAL(clicked()), plugin, SLOT(queryCustomSite2()));
+		connect(ui->custom2PushButton, &QPushButton::clicked, plugin, &OnlineQueries::queryCustomSite2);
 	}
 	else {
 		ui->custom2PushButton->setText(qc_("(Custom 2)", "GUI label"));
@@ -120,7 +120,7 @@ void OnlineQueriesDialog::createDialogContent()
 	if (!plugin->getCustomUrl3().isEmpty())
 	{
 		ui->custom3PushButton->setText(QUrl(plugin->getCustomUrl3()).host());
-		connect(ui->custom3PushButton, SIGNAL(clicked()), plugin, SLOT(queryCustomSite3()));
+		connect(ui->custom3PushButton, &QPushButton::clicked, plugin, &OnlineQueries::queryCustomSite3);
 	}
 	else {
 		ui->custom3PushButton->setText(qc_("(Custom 3)", "GUI label"));

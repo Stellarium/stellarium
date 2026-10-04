@@ -130,8 +130,8 @@ void ScmSkyCultureDialog::createDialogContent()
 	ui->setupUi(dialog);
 	dialog->installEventFilter(this);
 
-	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
-	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
+	connect(&StelApp::getInstance(), &StelApp::languageChanged, this, &ScmSkyCultureDialog::retranslate);
+	connect(ui->titleBar, &TitleBar::movedTo, this, &ScmSkyCultureDialog::handleMovedTo);
 	connect(ui->titleBar, &TitleBar::closeClicked, this, &ScmSkyCultureDialog::close);
 
 	// Overview Tab
