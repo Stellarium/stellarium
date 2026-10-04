@@ -880,6 +880,71 @@ ELSE()
      SET(MD4C_STEL_LIBRARIES md4c::md4c-html)
 ENDIF()
 
+## # For exiv2:
+## CPMFindPackage(NAME Expat
+##     GITHUB_REPOSITORY libexpat/libexpat
+##     GIT_TAG R_2_8_5 # Replace with the specific version tag you need
+##     SOURCE_SUBDIR expat
+##     # Forces find_package to search using standard lowercase config schemas too
+##     FIND_PACKAGE_ARGUMENTS "NAMES expat EXPAT"
+##     OPTIONS
+##             # cause of crashes?
+##             #"EXPAT_MSVC_STATIC_RUNTIME OFF" # 2. Prevents MSVC runtime conflicts on Windows
+##             "EXPAT_BUILD_EXAMPLES OFF"     # Speeds up multi-platform CI/CD builds
+##             "EXPAT_BUILD_TESTS OFF"        # Prevents test-framework cross-compile errors
+## )
+## # Bridge EXPAT target differences for Stellarium and Exiv2
+## if(TARGET EXPAT::EXPAT)
+##     set(EXPAT_LIB EXPAT::EXPAT)
+## elseif(TARGET expat::expat)
+##     set(EXPAT_LIB expat::expat)
+##
+##     # 🚀 FIX: If EXPAT::EXPAT doesn't exist yet, resolve the real target behind expat::expat
+##     if(NOT TARGET EXPAT::EXPAT)
+##         get_target_property(REAL_EXPAT_TARGET expat::expat ALIASED_TARGET)
+##         if(REAL_EXPAT_TARGET)
+##             add_library(EXPAT::EXPAT ALIAS ${REAL_EXPAT_TARGET})
+##         else()
+##             # If it wasn't an ALIAS despite the name, fallback to mapping it directly
+##             add_library(EXPAT::EXPAT ALIAS expat::expat)
+##         endif()
+##     endif()
+##
+## elseif(TARGET expat)
+##     set(EXPAT_LIB expat)
+##     if(NOT TARGET EXPAT::EXPAT)
+##         add_library(EXPAT::EXPAT ALIAS expat)
+##     endif()
+## endif()
+
+## 1. Fetch and compile the exiv2-mandatory 'inih' library
+#CPMFindPackage(NAME inih
+#    GITHUB_REPOSITORY benhoyt/inih
+#    GIT_TAG r58 # Stable release tag
+#    OPTIONS
+#        "INIH_BUILD_SHARED_LIBS OFF" # Build statically to keep it clean
+#        "INIH_ENABLE_INI_READER ON"  # Ensure the modern reader interface is built
+#)
+## FIX: Peer underneath potential ALIAS targets for inih
+#if(NOT TARGET inih::libinih)
+#    if(TARGET inih)
+#        get_target_property(REAL_INIH_TARGET inih ALIASED_TARGET)
+#        if(REAL_INIH_TARGET)
+#            add_library(inih::libinih ALIAS ${REAL_INIH_TARGET})
+#        else()
+#            add_library(inih::libinih ALIAS inih)
+#        endif()
+#    elseif(TARGET libinih)
+#        get_target_property(REAL_INIH_TARGET libinih ALIASED_TARGET)
+#        if(REAL_INIH_TARGET)
+#            add_library(inih::libinih ALIAS ${REAL_INIH_TARGET})
+#        else()
+#            add_library(inih::libinih ALIAS libinih)
+#        endif()
+#    endif()
+#endif()
+
+
 ########### Set some global variables ###########
 IF(UNIX AND NOT WIN32)
      IF(MACOS)
