@@ -59,6 +59,10 @@
 #include <QMessageBox>
 #include <QStandardPaths>
 #include <QStorageInfo>
+#ifdef HAVE_EXIV2
+// To write EXIF metadata in screenshots
+#include <exiv2/exiv2.hpp>
+#endif
 #ifdef Q_OS_WIN
 	#include <QPinchGesture>
 	#include <Windows.h>
