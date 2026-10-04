@@ -585,32 +585,33 @@ ENDIF()
 
 
 # ------------------------------------------------------------------
-# 1. ZLIB Target Bridge for Exiv2
+# 1. ZLIB Target Bridge for Exiv2 (CMake 3.18+ Compatible)
 # ------------------------------------------------------------------
-set(ZLIB_INC_DIR ${CMAKE_SOURCE_DIR}/src/external/zlib)
+set(ZLIB_INC_DIR "${CMAKE_SOURCE_DIR}/src/external/zlib")
 
-# If Stellarium has already declared the local 'zlib_stel' target,
-# map it to the namespaced target that Exiv2 internally looks for.
 if(TARGET zlib_stel)
-    # Exiv2's build chain searches for a ZLIB::ZLIB target first
+    # Exiv2's modern build chain looks for ZLIB::ZLIB first
     if(NOT TARGET ZLIB::ZLIB)
         add_library(ZLIB::ZLIB ALIAS zlib_stel)
     endif()
 
-    # 🟢 Use a generator expression for the actual file path string safely
-        set(ZLIB_OUT_LIB "$<TARGET_FILE:zlib_stel>")
+    # 🚀 THE 3.18 TRICK: Pre-populate the exact cache variables FindZLIB checks.
+    # By setting these to 'FORCE', FindZLIB's internal find_path/find_library
+    # calls are skipped completely because CMake thinks they are already found.
+    set(ZLIB_INCLUDE_DIR "${ZLIB_INC_DIR}" CACHE PATH "Path to a file." FORCE)
 
-    # 🚀 FORCE OVERRIDE FOR EXIV2'S INTERNAL FIND_PACKAGE:
-    # This prevents FindZLIB from running on the system and throwing a "Not Found" error
-    set(ZLIB_FOUND TRUE CACHE BOOL "Force ZLIB found for internal sub-projects" FORCE)
-    set(ZLIB_LIBRARY zlib_stel CACHE STRING "Force target usage" FORCE)
-    set(ZLIB_INCLUDE_DIR "${ZLIB_INC_DIR}" CACHE PATH "Force bundled header paths" FORCE)
+    # We pass the actual target name here. CMake allows target names inside
+    # ZLIB_LIBRARY, and because it is not empty, FindPackageHandleStandardArgs passes.
+    set(ZLIB_LIBRARY zlib_stel CACHE FILEPATH "Path to a library." FORCE)
+
+    # Standard fallback variables that some Find modules or older sub-projects look for
+    set(ZLIB_FOUND TRUE CACHE BOOL "" FORCE)
+    set(ZLIB_INCLUDE_DIRS "${ZLIB_INC_DIR}" CACHE PATH "" FORCE)
+    set(ZLIB_LIBRARIES zlib_stel CACHE STRING "" FORCE)
 
 else()
-    # Fallback to whatever variable name Stellarium's external zlib framework relies on
     set(ZLIB_OUT_LIB ${ZLIB_LIBRARIES})
 endif()
-
 
 
 # 2. Manage Exiv2 via CPM to eliminate precompiled binary ABI mismatches
