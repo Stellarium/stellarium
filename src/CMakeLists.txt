@@ -585,14 +585,12 @@ ENDIF()
 
 
 # ------------------------------------------------------------------
-# 1. ZLIB Target Bridge for Exiv2 (Modern CMake 3.24+ Solution)
+# 1. ZLIB Target Bridge for Exiv2 (Global Directory Property Fix)
 # ------------------------------------------------------------------
 set(ZLIB_INC_DIR "${CMAKE_SOURCE_DIR}/src/external/zlib")
 
 if(TARGET zlib_stel)
-    # 🚀 In CMake 3.24+, an IMPORTED INTERFACE target can safely use a double-colon namespace.
-    # Because it is marked 'IMPORTED', CMake's installation validation system guarantees
-    # that Exiv2's export set will ignore it, preventing the "not in any export set" error!
+    # 1. Create a true namespaced IMPORTED target so export validation succeeds natively
     if(NOT TARGET ZLIB::ZLIB)
         add_library(ZLIB::ZLIB INTERFACE IMPORTED GLOBAL)
         set_target_properties(ZLIB::ZLIB PROPERTIES
@@ -601,7 +599,13 @@ if(TARGET zlib_stel)
         )
     endif()
 
-    # Create our clean, isolated FindZLIB bridge module
+    # 🚀 THE CRITICAL FIX FOR INTERNAL OBJECT TARGETS (exiv2lib_int):
+    # Instead of relying on Exiv2 to pass the include paths to its sub-targets,
+    # we append Stellarium's bundled zlib path to the directory-level properties.
+    # Because CPM adds packages down-tree, all downstream subdirectories inherit this.
+    include_directories("${ZLIB_INC_DIR}")
+
+    # Create our custom mock FindZLIB module as a safe fallback match
     set(MOCK_ZLIB_DIR "${CMAKE_BINARY_DIR}/cmake_zlib_bridge")
     file(MAKE_DIRECTORY "${MOCK_ZLIB_DIR}")
 
@@ -611,18 +615,16 @@ if(TARGET zlib_stel)
         set(ZLIB_LIBRARIES ZLIB::ZLIB)
     ")
 
-    # Force Exiv2's scope to look at our mock bridge first
+    # Force search lookup tracking to prefer our custom bridge folder
     list(INSERT CMAKE_MODULE_PATH 0 "${MOCK_ZLIB_DIR}")
 
-    # Wipe old conflicting legacy cache variables completely
+    # Fully drop sticky old cache variables that can break generation mapping
     unset(ZLIB_LIBRARY CACHE)
     unset(ZLIB_LIBRARIES CACHE)
     unset(ZLIB_INCLUDE_DIR CACHE)
     unset(ZLIB_INCLUDE_DIRS CACHE)
     unset(ZLIB_FOUND CACHE)
 endif()
-
-
 
 
 
