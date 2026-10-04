@@ -38,6 +38,7 @@ class StelSkyDrawer;
 class StelGeodesicGrid;
 class StelMovementMgr;
 class StelObserver;
+class BSPManager;	// (SS) 2026-10-03 JPL SPK kernel (*.bsp) manager
 
 //! @class StelCore
 //! Main class for Stellarium core processing.
@@ -54,6 +55,8 @@ class StelCore : public QObject
 	Q_PROPERTY(bool flipHorz READ getFlipHorz WRITE setFlipHorz NOTIFY flipHorzChanged)
 	Q_PROPERTY(bool flipVert READ getFlipVert WRITE setFlipVert NOTIFY flipVertChanged)
 	Q_PROPERTY(bool flagUseNutation READ getUseNutation WRITE setUseNutation NOTIFY flagUseNutationChanged)
+	// (SS) 2026-10-03 File name (in the user's ephemBSP folder) of the SPK kernel providing TT-TDB, e.g. "de431t.bsp"
+	Q_PROPERTY(QString ttMinusTdbKernel READ getTTminusTDBKernel WRITE setTTminusTDBKernel NOTIFY ttMinusTdbKernelChanged)
 	Q_PROPERTY(bool flagUseAberration READ getUseAberration WRITE setUseAberration NOTIFY flagUseAberrationChanged)
 	Q_PROPERTY(double aberrationFactor READ getAberrationFactor WRITE setAberrationFactor NOTIFY aberrationFactorChanged)
 	Q_PROPERTY(bool flagUseParallax READ getUseParallax WRITE setUseParallax NOTIFY flagUseParallaxChanged)
@@ -378,6 +381,27 @@ public:
 	//! @return valid range as explanatory string.
 	QString getCurrentDeltaTAlgorithmValidRangeDescription(const double JD, QString* marker) const;
 
+	//! (SS) 2026-10-03 Manager of the JPL SPK kernels (*.bsp) found in the "ephemBSP" folder of the user data directory.
+	//! Never null once init() has run.
+	BSPManager* getBSPManager() const { return bspMgr; }
+	//! (SS) 2026-10-03 TT-TDB in seconds at the given JD(TDB), read from the SPK kernel selected with setTTminusTDBKernel().
+	//! @return false if that kernel is missing, has no TT-TDB data or does not cover the date.
+	bool getTTminusTDB(double jdTDB, double& seconds) const;
+
+	//! (SS) 2026-10-03 Where getDeltaTByJPLHorizons() gets TT-TDB from at a given date
+	enum TTminusTDBSource
+	{
+		TTminusTDBFromKernel, //!< SPK kernel (*.bsp) selected with setTTminusTDBKernel()
+		TTminusTDBFromDE440T, //!< DE440T Linux file (valid 1550..2650), used when no kernel applies
+		TTminusTDBNone        //!< nothing available: TT-TDB is taken as zero
+	};
+	//! (SS) 2026-10-03 Same order of preference as StelUtils::getDeltaTByJPLHorizons(): kernel, then DE440T file, then zero.
+	//! @param jdTDB date
+	//! @param seconds receives TT-TDB in seconds (0 for TTminusTDBNone)
+	//! @return the source that supplied the value
+	TTminusTDBSource getTTminusTDBSource(double jdTDB, double& seconds) const;
+
+
 	//! Checks for altitude of the Sun - is it night or day?
 	//! @return true if sun higher than about -6 degrees, i.e. "day" includes civil twilight.
 	//! @note Useful mostly for brightness-controlled GUI decisions like font colors.
@@ -564,6 +588,11 @@ public slots:
 	bool getUseNutation() const;
 	//! Set whether you want computation and simulation of nutation (a slight wobble of Earth's axis, just a few arcseconds).
 	void setUseNutation(bool use);
+
+	//! (SS) 2026-10-03 @return file name of the SPK kernel (in ephemBSP) used for TT-TDB.
+	QString getTTminusTDBKernel() const;
+	//! (SS) 2026-10-03 Select the SPK kernel (file name in ephemBSP) used for TT-TDB. Default: de431t.bsp.
+	void setTTminusTDBKernel(const QString& fileName);
 
 	//! @return whether aberration is currently used.
 	bool getUseAberration() const;
@@ -940,6 +969,8 @@ signals:
 	void flipVertChanged(bool b);
 	//! This signal indicates a switch in use of nutation
 	void flagUseNutationChanged(bool b);
+	//! (SS) 2026-10-03 This signal indicates that another SPK kernel was selected for TT-TDB
+	void ttMinusTdbKernelChanged(const QString& fileName);
 	//! This signal indicates a switch in use of aberration
 	void flagUseAberrationChanged(bool b);
 	//! This signal indicates a change in aberration exaggeration factor
@@ -997,6 +1028,9 @@ private:
 
 	// The currentrly used time correction (DeltaT)
 	DeltaTAlgorithm currentDeltaTAlgorithm;
+
+	// (SS) 2026-10-03 JPL SPK kernel (*.bsp) manager, created in init()
+	BSPManager* bspMgr = Q_NULLPTR;
 
 	// Parameters to use when creating new instances of StelProjector
 	StelProjector::StelProjectorParams currentProjectorParams;

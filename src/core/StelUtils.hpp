@@ -28,6 +28,8 @@
 #include <QDateTime>
 #include <QString>
 
+#include <functional> // (SS) 2026-10-03 Needed after adding BSP file access.
+
 // astronomical unit (km)
 #define AU 149597870.691
 #define AUf 149597870.691f
@@ -886,6 +888,10 @@ namespace StelUtils
 	//! @param jDay the date and time expressed as a Julian day
 	//! @return Delta-T in seconds or 0 if year not in -391..1600
 	double getDeltaTByChaprontTouze(const double jDay);	
+
+	//! (SS) 2026-10-03 Provider of TT-TDB (seconds, argument JD) used by getDeltaTByJPLHorizons(); installed by StelCore.
+	typedef std::function<bool(double jdTDB, double& seconds)> TTminusTDBProvider;
+	void setTTminusTDBProvider(const TTminusTDBProvider& provider);
 
 	//! Get Delta-T estimation for a given date.
 	//! Implementation of the "historical" part of the algorithm by JPL Horizons for DeltaT computation.

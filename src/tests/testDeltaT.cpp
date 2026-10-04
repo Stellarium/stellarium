@@ -28,6 +28,7 @@
 // (SS) 2025-11-27 Needed to locate ephemeris file for testing JPL Horizons Delta-T
 #include "StelFileMgr.hpp"
 #include "EphemWrapper.hpp"
+#include "BSPManager.hpp"	// (SS) 2026-10-03
 
 #include "StelUtils.hpp"
 
@@ -219,6 +220,30 @@ void TestDeltaT::initTestCase()
 	// (SS) 2025-11-27 Initialize Stellarium file manager to locate ephemeris files
 	StelFileMgr::init();
 
+	// (SS) 2026-10-03 TT - TDB for the JPL Horizons Delta-T algorithm can be taken from an SPK kernel (de431t.bsp), valid over
+	// the full 9999BC..9999AD range. The kernel is looked for in the folder given by the environment variable STELLARIUM_BSP_DIR
+	// or, if that is not set, in the "ephemBSP" folder of the Stellarium user directory. Without the kernel (e.g. on a CI server)
+	// the tests behave as before: DE440T Linux file only, with the 2 ms criterion after 2650-01-25.
+	QString bspDir = qEnvironmentVariable("STELLARIUM_BSP_DIR");
+	if (bspDir.isEmpty())
+		bspDir = StelFileMgr::getUserDir() + "/ephemBSP";
+	bspMgr = new BSPManager(bspDir);
+	bspMgr->rescan();
+	bspMgr->setTTminusTDBKernel(BSPManager::defaultTTminusTDBKernel());
+	if (bspMgr->ttMinusTDBAvailable(2451545.0) && bspMgr->ttMinusTDBAvailable(5373119.5))
+	{
+		bspProvider = [this](double jdTDB, double& seconds) { return bspMgr->ttMinusTDB(jdTDB, seconds); };
+		StelUtils::setTTminusTDBProvider(bspProvider);
+		useBspTT = true;
+		qInfo() << "Use TT-TDB from SPK kernel" << bspMgr->ttMinusTDBKernel() << "in" << bspDir;
+	}
+	else
+	{
+		qInfo() << "No usable" << BSPManager::defaultTTminusTDBKernel() << "in" << bspDir << ": TT-TDB from the DE440T Linux file only";
+		delete bspMgr;
+		bspMgr = nullptr;
+	}
+
 	//(SS) 2025-11-27: The linux_p1550p2650.440t file must be in the Stellarium user or installation directory
 	de440FilePath = StelFileMgr::findFile("ephem/" + QString(DE440_FILENAME), StelFileMgr::File);
 	if (!de440FilePath.isEmpty())
@@ -230,6 +255,15 @@ void TestDeltaT::initTestCase()
 	{
 		qWarning() << "DE440 ephemeris file not found, JPL Horizons test will not be performed";
 	}
+}
+
+// (SS) 2026-10-03 Remove the TT-TDB provider again and release the SPK kernels
+void TestDeltaT::cleanupTestCase()
+{
+	StelUtils::setTTminusTDBProvider(nullptr);
+	delete bspMgr;
+	bspMgr = nullptr;
+	useBspTT = false;
 }
 
 void TestDeltaT::testDeltaTByEspenakMeeus()
@@ -1200,76 +1234,72 @@ void TestDeltaT::testDeltaTByJPLHorizons()
 	const bool useDE44x     = true;
 
 	// Pass/Fail criteria +/- 0.1 seconds from 9999BC to 1962-01-20
-	double acceptableError_before_1962 = 0.1;
-	// Pass/Fail criteria +/- 10 microseconds from 1962-02-20 to 2650-01-25
-	double acceptableError_1962_to_2650 = 0.00001;
-	// Pass/Fail criteria +/- 2 millisecond from 2650-01-25 to 9999AD
-	double acceptableError_after_2650 = 0.002;
+	const double acceptableError_before_1962 = 0.1;
+	// Pass/Fail criteria +/- 10 microseconds from 1962-01-20 to 2650-01-25
+	const double acceptableError_1962_to_2650 = 0.00001;
 
-	if (de440FilePath.isEmpty())
-		qWarning() << "JPL Horizons test has been marked as 'passed' (It cannot be passed, because DE440 file has not been found)!";
-	else
-	{	
-		while (data.count() >= 2)
+	// (SS) 2026-10-03 TT - TDB can come from two sources, and each one that is available is tested:
+	//  - the SPK kernel de431t.bsp (see initTestCase()), valid over the full range: the criterion is +/- 10 microseconds
+	//    from 2650-01-25 to about 7000AD. Beyond that the difference with JPL Horizons grows with the distance from J2000
+	//    (about 10 microseconds at 7151, 25 microseconds at 9998, probably because Horizons gets TT - TDB from a longer-term
+	//    model than the DE431T time ephemeris), so the criterion is +/- 30 microseconds from about 7000AD to 9999AD;
+	//  - the DE440T Linux file, valid from 1550 to 2650 only (TT - TDB = 0 afterwards): +/- 2 milliseconds from 2650-01-25 to 9999AD.
+
+	if (de440FilePath.isEmpty() && !useBspTT)
+	{
+		qWarning() << "JPL Horizons test has been marked as 'passed' (It cannot be passed, because neither the DE440 file nor an SPK kernel with TT-TDB has been found)!";
+		return;
+	}
+
+	const QVariantList allData = data;
+	auto verifyAll = [&](const QString& source, double acceptableError_2650_to_7000, double acceptableError_after_7000)
+	{
+		// All data points are evaluated (the test does not stop at the first failure) so that the pattern of the errors is visible.
+		QVariantList d = allData;
+		QStringList failures;
+		while (d.count() >= 2)
 		{
-			double JD = data.takeFirst().toDouble();
+			const double JD = d.takeFirst().toDouble();
+			const double expectedResult = d.takeFirst().toDouble();
+			double result = StelUtils::getDeltaTByJPLHorizons(JD);
+			result += StelUtils::getMoonSecularAcceleration(JD, deltaTnDot, useDE43x, useDE44x); // Correction is done only up to 1955.5
+			const double actualError = qAbs(qAbs(expectedResult) - qAbs(result));
 
-			if (JD < 2437684.5) // les than 1962-01-20
-			{
-				double expectedResult = data.takeFirst().toDouble();
-				double result         = StelUtils::getDeltaTByJPLHorizons(JD);
-				result += StelUtils::getMoonSecularAcceleration(JD, deltaTnDot, useDE43x, useDE44x); // Correction is done only up to 1955.5
-				double actualError = qAbs(qAbs(expectedResult) - qAbs(result));
+			double acceptableError = (JD < 4277757.5) ? acceptableError_2650_to_7000 : acceptableError_after_7000; // 4277757.5 = about 7000-01-01
+			if (JD < 2437684.5)        // less than 1962-01-20
+				acceptableError = acceptableError_before_1962;
+			else if (JD < 2688976.5)   // between 1962-01-20 and 2650-01-25
+				acceptableError = acceptableError_1962_to_2650;
 
-				QString dateTime = StelUtils::julianDayToISO8601String(JD, true);
-
-				QVERIFY2(actualError <= acceptableError_before_1962,
-						QString("date=%1 JD=%2 result=%3 expected=%4 error=%5 acceptable=%6")
-								.arg(dateTime)
-								.arg(JD, 0, 'f', 5)
-								.arg(result, 0, 'f', 5)
-								.arg(expectedResult, 0, 'f', 5)
-								.arg(actualError, 0, 'f', 5)
-								.arg(acceptableError_before_1962, 0, 'f', 5)
-								.toUtf8());
-			}
-			else if (JD >= 2437684.5 && JD < 2688976.5) // between 1962-01-20 and 2650-01-25
-			{
-				double expectedResult = data.takeFirst().toDouble();
-				double result         = StelUtils::getDeltaTByJPLHorizons(JD);
-				result += StelUtils::getMoonSecularAcceleration(JD, deltaTnDot, useDE43x, useDE44x);
-				double actualError = qAbs(qAbs(expectedResult) - qAbs(result));
-
-				QString dateTime = StelUtils::julianDayToISO8601String(JD, true);
-
-				QVERIFY2(actualError <= acceptableError_1962_to_2650,
-				         QString("date=%1 JD=%2 result=%3 expected=%4 error=%5 acceptable=%6")
+			const QString dateTime = StelUtils::julianDayToISO8601String(JD, true);
+			if (JD >= 2688976.5)
+				qInfo().noquote() << QString("[%1] %2 JD=%3 error=%4 us (acceptable %5 us)")
+					.arg(source, dateTime).arg(JD, 0, 'f', 5).arg(actualError * 1e6, 0, 'f', 2).arg(acceptableError * 1e6, 0, 'f', 1);
+			if (actualError > acceptableError)
+				failures << QString("date=%1 JD=%2 result=%3 expected=%4 error=%5 acceptable=%6")
 				                 .arg(dateTime)
 				                 .arg(JD, 0, 'f', 5)
-				                 .arg(result, 0, 'f', 5)
-				                 .arg(expectedResult, 0, 'f', 5)
-				                 .arg(actualError, 0, 'f', 5)
-				                 .arg(acceptableError_1962_to_2650, 0, 'f', 5)
-				                 .toUtf8());
-			}
-			else // after 2650-01-25
-			{
-				double expectedResult = data.takeFirst().toDouble();
-				double result         = StelUtils::getDeltaTByJPLHorizons(JD);
-				result += StelUtils::getMoonSecularAcceleration(JD, deltaTnDot, useDE43x, useDE44x);
-				double actualError = qAbs(qAbs(expectedResult) - qAbs(result));
-				QString dateTime   = StelUtils::julianDayToISO8601String(JD, true);
-				QVERIFY2(actualError <= acceptableError_after_2650,
-				         QString("date=%1 JD=%2 result=%3 expected=%4 error=%5 acceptable=%6")
-				                 .arg(dateTime)
-				                 .arg(JD, 0, 'f', 5)
-				                 .arg(result, 0, 'f', 5)
-				                 .arg(expectedResult, 0, 'f', 5)
-				                 .arg(actualError, 0, 'f', 5)
-				                 .arg(acceptableError_after_2650, 0, 'f', 5)
-				                 .toUtf8());
-			}
-		}				
+				                 .arg(result, 0, 'f', 6)
+				                 .arg(expectedResult, 0, 'f', 6)
+				                 .arg(actualError, 0, 'f', 6)
+				                 .arg(acceptableError, 0, 'f', 6);
+		}
+		QVERIFY2(failures.isEmpty(), qPrintable(QString("[%1] %2 failure(s): %3").arg(source).arg(failures.size()).arg(failures.join("; "))));
+	};
+
+	if (useBspTT)
+	{
+		StelUtils::setTTminusTDBProvider(bspProvider);
+		verifyAll(QString("TT-TDB from SPK kernel"), 0.00001, 0.00003);
+		if (QTest::currentTestFailed())
+			return;
+	}
+	if (!de440FilePath.isEmpty())
+	{
+		StelUtils::setTTminusTDBProvider(nullptr); // old path: DE440T Linux file, zero outside 1550..2650
+		verifyAll(QString("TT-TDB from DE440T file"), 0.002, 0.002);
+		if (useBspTT)
+			StelUtils::setTTminusTDBProvider(bspProvider);
 	}
 }
 

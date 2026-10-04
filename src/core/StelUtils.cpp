@@ -70,14 +70,6 @@ bool getExtraPrecision()
 	return flagExtraPrecisionUtils;
 }
 
-/*
-// (SS) 2026-09-13 Small helper to avoid repeating StelApp::getInstance().getFlagExtraPrecision() at every call site.
-inline bool extraPrecision()
-{
-	return StelApp::getInstance().getFlagExtraPrecision();
-}
-*/
-
 // (SS) 2026-09-30 No longer calls StelApp::getInstance(), which asserts in unit tests.
 inline bool extraPrecision()
 {
@@ -2255,6 +2247,16 @@ static const double StephensonMorrisonHohenkerkZawilski2020DeltaTtableS15[40][6]
 	/*	40 */ {1962.0, 1965.0, 33.621,    0.868,     0.406,    0.199   }
 };
 
+// (SS) 2026-10-03 Provider of TT - TDB (seconds) used by getDeltaTByJPLHorizons(). It is installed by StelCore, which owns the
+// manager of the JPL SPK kernels (*.bsp), so that StelUtils needs no access to StelApp/StelCore (unit tests have none).
+// With no provider installed, or when it cannot supply the date, the old DE440T Linux file is used (and then 0).
+static TTminusTDBProvider ttMinusTdbProvider;
+
+void setTTminusTDBProvider(const TTminusTDBProvider& provider)
+{
+	ttMinusTdbProvider = provider;
+}
+
 double getDeltaTByJPLHorizons(const double jDay)
 { 
 	int year, month, day;
@@ -2381,13 +2383,22 @@ double getDeltaTByJPLHorizons(const double jDay)
 		double leapSeconds = 0.0;
 		double TTmTDB      = 0.0;
 
-		// Get TT - TDB from JPL DE440T ephemerides file, The central body is not relevant. We use the Sun (id=11) by default
+		// (SS) 2026-10-03 First choice: TT - TDB, in seconds, from the SPK kernel selected in Stellarium (de431t.bsp by default, which covers
+		// BC10000..AD10000) through the provider installed by StelCore. jDay is JD(UTC) rather than JD(TDB), which is harmless here:
+		// TT - TDB changes by less than 4e-10 s per second, so the ~69 s offset is worth less than 3e-8 s.
+		bool ttOK = ttMinusTdbProvider && ttMinusTdbProvider(jDay, TTmTDB);
+
+		// Second choice, if no provider is installed or the kernel does not cover this date: get TT - TDB from the JPL DE440T
+		// ephemerides file. The central body is not relevant. We use the Sun (id=11) by default.
 		// TT - TDB is given in seconds in the first entry of the output array: xyz[0]
-		bool deOK = GetDe440Coor(jDay, TTmTDB_id, xyz, 11);
-		if (deOK)
-			TTmTDB = xyz[0];
-		else
-			TTmTDB = 0.0; // Fallback to zero if DE440T data is not available
+		if (!ttOK)
+		{
+			bool deOK = GetDe440Coor(jDay, TTmTDB_id, xyz, 11);
+			if (deOK)
+				TTmTDB = xyz[0];
+			else
+				TTmTDB = 0.0; // Fallback to zero if DE440T data is not available
+		}
 
 		// Track whether we've already warned about dubious years
 		static bool warnedDubiousYear = false;
@@ -2881,19 +2892,35 @@ double getDeltaTByStephensonMorrisonHohenkerk2016(const double jDay)
 		+ StephensonMorrisonHohenkerk2016DeltaTtableS15[i][3])*t + StephensonMorrisonHohenkerk2016DeltaTtableS15[i][2];
 }
 
+// (SS) 2026-10-03	Add Special case for yearFractionValue: Gregorian reform year 1582.
+//					Use linear interpolation between Julian and Gregorian calendar.
 // (SS) 2025-11-27 Implementation of secular acceleration of the Moon - REVISED
 // Note: useDE43x and useDE44x are mutually exclusive; if both are true, useDE44x takes precedence.
 // Note: added day fraction to year fraction calculation to achieve higher accuracy for JPL Horizons algorithm.
-// IMPORTANT NOTE: The secular acceleration formula is not valid after 1955.5 (start of atomic time). 
+// IMPORTANT NOTE: The secular acceleration formula is not valid after 1955.5 (start of atomic time).
 //                 It must return 0.0 in that case. TODO: Evaluate impact on previous DeltaT calculations!
 double getMoonSecularAcceleration(const double jDay, const double nd, const bool useDE43x, const bool useDE44x)
 {
 	int year, month, day;
-	getDateFromJulianDay(jDay, &year, &month, &day);
+	double fractionDay;
+	double dayWithFraction;
+	double yearFractionValue;
 
-	double fractionDay       = jDay + 0.5 - std::floor(jDay + 0.5);
-	double dayWithFraction   = day - 1 + fractionDay;
-	double yearFractionValue = yearFraction(year, month, dayWithFraction);
+	// Special case for yearFractionValue: Gregorian reform year 1582.
+	constexpr double JD_1582_START = 2298883.5; // 1582-01-01 00:00:00.000 Julian
+	constexpr double JD_1583_START = 2299238.5; // 1583-01-01 00:00:00.000 Gregorian
+
+	if (jDay >= JD_1582_START && jDay < JD_1583_START)
+	{
+		yearFractionValue = 1582.0 + (jDay - JD_1582_START) / (JD_1583_START - JD_1582_START);
+	}
+	else
+	{
+		getDateFromJulianDay(jDay, &year, &month, &day);
+		fractionDay       = jDay + 0.5 - std::floor(jDay + 0.5);
+		dayWithFraction   = day - 1 + fractionDay;
+		yearFractionValue = yearFraction(year, month, dayWithFraction);
+	}
 
 	// Secular acceleration formula is not valid after 1955.5 (start of atomic time)
 	if (yearFractionValue > 1955.5) return 0.0;

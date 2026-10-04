@@ -176,6 +176,10 @@ SET(stellarium_lib_SRCS
      core/planetsephems/de440.hpp
      core/planetsephems/de441.cpp
      core/planetsephems/de441.hpp
+     core/planetsephems/BSPReader.cpp
+     core/planetsephems/BSPReader.hpp
+     core/planetsephems/BSPManager.cpp
+     core/planetsephems/BSPManager.hpp
      core/planetsephems/htc20b.c
      core/planetsephems/htc20b.h
      core/modules/AtmosphereLightweight.cpp
@@ -366,6 +370,8 @@ IF(STELLARIUM_GUI_MODE STREQUAL "Standard")
           gui/GreatRedSpotDialog.cpp
           gui/CustomDeltaTEquationDialog.hpp
           gui/CustomDeltaTEquationDialog.cpp
+          gui/TTminusTDBKernelDialog.hpp
+          gui/TTminusTDBKernelDialog.cpp
           gui/ConfigureScreenshotsDialog.hpp
           gui/ConfigureScreenshotsDialog.cpp
           gui/AstroCalcDialog.hpp
@@ -410,6 +416,7 @@ IF(STELLARIUM_GUI_MODE STREQUAL "Standard")
           gui/atmosphereDialog.ui
           gui/greatRedSpotDialog.ui
           gui/customDeltaTEquationDialog.ui
+          gui/ttMinusTdbKernelDialog.ui
           gui/configureScreenshotsDialog.ui
           gui/astroCalcDialog.ui
           gui/astroCalcExtraEphemerisDialog.ui
@@ -975,6 +982,26 @@ IF(ENABLE_TESTING)
      ADD_DEPENDENCIES(buildTests testSiderealTime)
      ADD_TEST(testSiderealTime testSiderealTime)
      SET_TARGET_PROPERTIES(testSiderealTime PROPERTIES FOLDER "src/tests")
+
+     SET(tests_testBSPReader_SRCS
+          tests/testBSPReader.hpp
+          tests/testBSPReader.cpp
+     )
+     ADD_EXECUTABLE(testBSPReader ${tests_testBSPReader_SRCS})
+     TARGET_LINK_LIBRARIES(testBSPReader ${TESTS_LIBRARIES})
+     ADD_DEPENDENCIES(buildTests testBSPReader)
+     ADD_TEST(testBSPReader testBSPReader)
+     SET_TARGET_PROPERTIES(testBSPReader PROPERTIES FOLDER "src/tests")
+
+     SET(tests_testBSPManager_SRCS
+          tests/testBSPManager.hpp
+          tests/testBSPManager.cpp
+     )
+     ADD_EXECUTABLE(testBSPManager ${tests_testBSPManager_SRCS})
+     TARGET_LINK_LIBRARIES(testBSPManager ${TESTS_LIBRARIES})
+     ADD_DEPENDENCIES(buildTests testBSPManager)
+     ADD_TEST(testBSPManager testBSPManager)
+     SET_TARGET_PROPERTIES(testBSPManager PROPERTIES FOLDER "src/tests")
 
      SET(tests_testEphemeris_SRCS
           tests/testEphemeris.hpp

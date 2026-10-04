@@ -24,6 +24,9 @@
 #include <QtTest>
 #include <QVector>
 #include <QString>
+#include <functional>
+
+class BSPManager;	// (SS) 2026-10-03
 
 class TestDeltaT : public QObject
 {
@@ -31,6 +34,7 @@ class TestDeltaT : public QObject
 
 private slots:
 	void initTestCase();
+	void cleanupTestCase(); // (SS) 2026-10-03 Remove the TT-TDB provider again and release the SPK kernels
 	void testDeltaTByEspenakMeeus();
 	void testDeltaTByChaprontMeeus();
 	void testDeltaTByChaprontMeeusWideDates();
@@ -57,6 +61,10 @@ private slots:
 private:
 	QVariantList genericData;
 	QString de440FilePath;  // (SS) 2025-11-21 Added for JPL Horizons testing
+	// (SS) 2026-10-03 TT-TDB from an SPK kernel (de431t.bsp), used by the JPL Horizons Delta-T when the kernel is available
+	BSPManager* bspMgr = nullptr;
+	bool useBspTT = false;
+	std::function<bool(double, double&)> bspProvider;
 };
 
 #endif // _TESTDELTAT_HPP

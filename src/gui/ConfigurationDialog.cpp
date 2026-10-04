@@ -22,6 +22,7 @@
 #include "Dialog.hpp"
 #include "ConfigurationDialog.hpp"
 #include "CustomDeltaTEquationDialog.hpp"
+#include "TTminusTDBKernelDialog.hpp"	// (SS) 2026-10-03
 #include "ConfigureScreenshotsDialog.hpp"
 #include "StelMainView.hpp"
 #include "StelSpeechMgr.hpp"
@@ -91,6 +92,7 @@ ConfigurationDialog::ConfigurationDialog(StelGui* agui, QObject* parent)
 	, gui(agui)
 	, customDeltaTEquationDialog(Q_NULLPTR)
 	, configureScreenshotsDialog(Q_NULLPTR)
+	, ttMinusTdbKernelDialog(Q_NULLPTR)
 	, savedProjectionType(StelApp::getInstance().getCore()->getCurrentProjectionType())
 {
 	ui = new Ui_configurationDialogForm;
@@ -104,6 +106,8 @@ ConfigurationDialog::~ConfigurationDialog()
 	customDeltaTEquationDialog = Q_NULLPTR;
 	delete configureScreenshotsDialog;
 	configureScreenshotsDialog = Q_NULLPTR;
+	delete ttMinusTdbKernelDialog;
+	ttMinusTdbKernelDialog = Q_NULLPTR;
 	delete currentDownloadFile;
 	currentDownloadFile = Q_NULLPTR;
 }
@@ -137,6 +141,7 @@ void ConfigurationDialog::retranslate()
 		populatePluginsList();
 
 		populateDeltaTAlgorithmsList();
+		updateDeltaTWrenchButton();	// (SS) 2026-10-03
 		populateDateFormatsList();
 		populateTimeFormatsList();
 
@@ -324,8 +329,7 @@ void ConfigurationDialog::createDialogContent()
 	ui->deltaTAlgorithmComboBox->setCurrentIndex(idx);
 	connect(ui->deltaTAlgorithmComboBox, qOverload<int>(&QComboBox::currentIndexChanged), this, &ConfigurationDialog::setDeltaTAlgorithm);
 	connect(ui->pushButtonCustomDeltaTEquationDialog, &QToolButton::clicked, this, &ConfigurationDialog::showCustomDeltaTEquationDialog);
-	if (core->getCurrentDeltaTAlgorithm()==StelCore::Custom)
-		ui->pushButtonCustomDeltaTEquationDialog->setEnabled(true);
+	updateDeltaTWrenchButton();	// (SS) 2026-10-03 enabled for Custom and for JPL Horizons
 
 	// Tools tab
 	ui->sphericMirrorCheckbox->setChecked(StelApp::getInstance().getViewportEffect() == "sphericMirrorDistorter");
@@ -1498,6 +1502,7 @@ void ConfigurationDialog::saveAllSettings()
         conf->setValue("navigation/today_time",                         core->getInitTodayTime());
         conf->setValue("navigation/preset_sky_time",                    core->getPresetSkyTime());
         conf->setValue("navigation/time_correction_algorithm",          core->getCurrentDeltaTAlgorithmKey());
+        conf->setValue("astro/ttmtdb_kernel",                          core->getTTminusTDBKernel());	// (SS) 2026-10-03
 	StelLocaleMgr & localeManager = StelApp::getInstance().getLocaleMgr();
         conf->setValue("localization/time_display_format",              localeManager.getTimeFormatStr());
         conf->setValue("localization/date_display_format",              localeManager.getDateFormatStr());
@@ -2330,10 +2335,7 @@ void ConfigurationDialog::setDeltaTAlgorithm(int algorithmID)
 	QString currentAlgorithm = ui->deltaTAlgorithmComboBox->itemData(algorithmID).toString();
 	core->setCurrentDeltaTAlgorithmKey(currentAlgorithm);
 	setDeltaTAlgorithmDescription();
-	if (currentAlgorithm.contains("Custom"))
-		ui->pushButtonCustomDeltaTEquationDialog->setEnabled(true);
-	else
-		ui->pushButtonCustomDeltaTEquationDialog->setEnabled(false);
+	updateDeltaTWrenchButton();	// (SS) 2026-10-03
 }
 
 void ConfigurationDialog::setDeltaTAlgorithmDescription()
@@ -2342,12 +2344,37 @@ void ConfigurationDialog::setDeltaTAlgorithmDescription()
 	ui->deltaTAlgorithmDescription->setHtml(StelApp::getInstance().getCore()->getCurrentDeltaTAlgorithmDescription());
 }
 
+// (SS) 2026-10-03 The wrench button opens the settings dialog that goes with the current Delta-T algorithm:
+// the custom equation for Custom, the TT-TDB kernel selection for JPL Horizons.
 void ConfigurationDialog::showCustomDeltaTEquationDialog()
 {
+	if (StelApp::getInstance().getCore()->getCurrentDeltaTAlgorithm() == StelCore::JPLHorizons)
+	{
+		if (ttMinusTdbKernelDialog == Q_NULLPTR)
+			ttMinusTdbKernelDialog = new TTminusTDBKernelDialog();
+
+		ttMinusTdbKernelDialog->setVisible(true);
+		return;
+	}
+
 	if (customDeltaTEquationDialog == Q_NULLPTR)
 		customDeltaTEquationDialog = new CustomDeltaTEquationDialog();
 
 	customDeltaTEquationDialog->setVisible(true);
+}
+
+// (SS) 2026-10-03 The wrench button is enabled for the algorithms that have a settings dialog, with a tooltip saying which one
+void ConfigurationDialog::updateDeltaTWrenchButton()
+{
+	const StelCore::DeltaTAlgorithm algorithm = StelApp::getInstance().getCore()->getCurrentDeltaTAlgorithm();
+	const bool isJPLHorizons = (algorithm == StelCore::JPLHorizons);
+
+	ui->pushButtonCustomDeltaTEquationDialog->setEnabled(algorithm == StelCore::Custom || isJPLHorizons);
+	ui->pushButtonCustomDeltaTEquationDialog->setToolTip(isJPLHorizons ? q_("Select the source of TT-TDB (SPK kernel)") : q_("Edit equation"));
+
+	// Do not leave the kernel dialog open when another algorithm is selected
+	if (!isJPLHorizons && ttMinusTdbKernelDialog != Q_NULLPTR && ttMinusTdbKernelDialog->visible())
+		ttMinusTdbKernelDialog->close();
 }
 
 void ConfigurationDialog::showConfigureScreenshotsDialog()

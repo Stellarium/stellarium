@@ -39,9 +39,11 @@
 #include "StelFileMgr.hpp"
 #include "StelMainView.hpp"
 #include "EphemWrapper.hpp"
+#include "BSPManager.hpp"	// (SS) 2026-10-03
 #include "NomenclatureItem.hpp"
 #include "precession.h"
 #include "Star.hpp"
+#include <de440.hpp>		// (SS) 2026-10-03 GetDe440Coor(), used as fallback for TT-TDB
 
 #include <QSettings>
 #include <QDebug>
@@ -184,6 +186,7 @@ StelCore::StelCore()
 
 StelCore::~StelCore()
 {
+	StelUtils::setTTminusTDBProvider(nullptr);
 	delete toneReproducer; toneReproducer=Q_NULLPTR;
 	delete geodesicGrid; geodesicGrid=Q_NULLPTR;
 	delete skyDrawer; skyDrawer=Q_NULLPTR;
@@ -265,6 +268,19 @@ void StelCore::init()
 	// Define default algorithm for time correction (Delta T)
 	QString tmpDT = conf->value("navigation/time_correction_algorithm", "EspenakMeeusModified").toString();
 	setCurrentDeltaTAlgorithmKey(tmpDT);
+
+	// (SS) 2026-10-03 JPL SPK kernels (*.bsp) are looked for in the "ephemBSP" folder of the user data directory
+	// (created if missing). For now they provide TT-TDB for the JPL Horizons style computations (default kernel:
+	// de431t.bsp, which covers BC10000..AD10000). The folder is scanned here and again on request (Refresh button).
+	const QString bspDir = StelFileMgr::getUserDir() + "/ephemBSP";
+	QDir().mkpath(bspDir);
+	bspMgr = new BSPManager(bspDir, this);
+	bspMgr->setTTminusTDBKernel(conf->value("astro/ttmtdb_kernel", BSPManager::defaultTTminusTDBKernel()).toString());
+	qInfo().noquote() << "SPK kernels (*.bsp) found in" << bspDir << ":" << bspMgr->rescan();
+
+	// (SS) 2026-10-03 getDeltaTByJPLHorizons() takes TT-TDB from the selected SPK kernel
+	StelUtils::setTTminusTDBProvider([this](double jdTDB, double& seconds)
+	                                 { return bspMgr && bspMgr->ttMinusTDB(jdTDB, seconds); });
 
 	// Define variables of custom equation for calculation of Delta T
 	// Default: ndot = -26.0 "/cy/cy; year = 1820; DeltaT = -20 + 32*u^2, where u = (currentYear-1820)/100
@@ -1271,9 +1287,18 @@ double StelCore::getJD() const
 
 void StelCore::setJDE(double newJDE)
 {
-	// nitpickerish this is not exact, but as good as it gets...
-	JD.second=computeDeltaT(newJDE);
-	JD.first=newJDE-JD.second/86400.0;
+	// (SS) 2026-10-01 REVISED: JD(UT) is not known yet, so the first estimate of Delta-T
+	// has to be evaluated at JDE. Because Delta-T is a function of JD(UT) rather than JDE,
+	// that estimate is off by about DeltaT * dDeltaT/dt (about 1e-6 s today, but up to
+	// about 1 s near 9999BC where DeltaT is ~440000 s). We therefore do one fixed-point
+	// iteration: estimate JD(UT) from the first Delta-T, then re-evaluate Delta-T at that
+	// JD(UT). The iteration contracts by a factor dDeltaT/dt (~2.4e-6 at worst), so the
+	// residual error on JD(UT) is of order microseconds, consistent with setJD().
+	// JDE = JD.first + JD.second/86400 is preserved exactly, so everything that depends
+	// only on JDE (ephemerides, precession, nutation) is unchanged.
+	const double jdFirstGuess = newJDE - computeDeltaT(newJDE) / 86400.0;
+	JD.second                 = computeDeltaT(jdFirstGuess);
+	JD.first                  = newJDE - JD.second / 86400.0;
 	resetSync();
 	setClearSkyOnce();
 }
@@ -1308,6 +1333,48 @@ void StelCore::setUseNutation(bool use)
 		StelApp::immediateSave("astro/flag_nutation", use);
 		emit flagUseNutationChanged(use);
 	}
+}
+
+// (SS) 2026-10-03 @return file name of the SPK kernel used for TT-TDB
+QString StelCore::getTTminusTDBKernel() const
+{
+	return bspMgr ? bspMgr->ttMinusTDBKernel() : QString();
+}
+
+// (SS) 2026-10-03 Select the SPK kernel (file name in ephemBSP) used for TT-TDB. An empty name or "none" selects no kernel.
+void StelCore::setTTminusTDBKernel(const QString& fileName)
+{
+	if (!bspMgr) return;
+	const QString previous = bspMgr->ttMinusTDBKernel();
+	bspMgr->setTTminusTDBKernel(fileName); // normalizes empty names to "none"
+	const QString current = bspMgr->ttMinusTDBKernel();
+	if (current == previous) return;
+
+	StelApp::immediateSave("astro/ttmtdb_kernel", current);
+	// Recompute Delta-T for the current date so that the new TT-TDB source takes effect immediately
+	if (getCurrentDeltaTAlgorithm() == JPLHorizons) setJD(getJD());
+	emit ttMinusTdbKernelChanged(current);
+}
+
+// (SS) 2026-10-03 TT-TDB in seconds at JD(TDB), from the selected SPK kernel
+bool StelCore::getTTminusTDB(double jdTDB, double& seconds) const
+{
+	return bspMgr && bspMgr->ttMinusTDB(jdTDB, seconds);
+}
+
+// (SS) 2026-10-03 Where TT-TDB comes from at the given date: SPK kernel, else DE440T Linux file, else zero
+StelCore::TTminusTDBSource StelCore::getTTminusTDBSource(double jdTDB, double& seconds) const
+{
+	if (bspMgr && bspMgr->ttMinusTDB(jdTDB, seconds)) return TTminusTDBFromKernel;
+
+	double xyz[6];
+	if (GetDe440Coor(jdTDB, 17, xyz, 11)) // same call as in StelUtils::getDeltaTByJPLHorizons(); id 17 = TT-TDB
+	{
+		seconds = xyz[0];
+		return TTminusTDBFromDE440T;
+	}
+	seconds = 0.0;
+	return TTminusTDBNone;
 }
 
 // @return whether aberration is currently used.

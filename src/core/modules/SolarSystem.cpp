@@ -2107,7 +2107,10 @@ void SolarSystem::computePositions(StelCore *core, double dateJDE, PlanetP obser
 // The elements have to be ordered hierarchically, eg. it's important to compute earth before moon.
 void SolarSystem::computeTransMatrices(double dateJDE, const Vec3d& observerPos)
 {
-	const double dateJD=dateJDE - (StelApp::getInstance().getCore()->computeDeltaT(dateJDE))/86400.0;
+	// (SS) 2026-10-01 One fixed-point iteration so that Delta-T is evaluated at JD(UT), not JDE.
+	const double jdFirstGuess = dateJDE - StelApp::getInstance().getCore()->computeDeltaT(dateJDE) / 86400.0;
+	const double dateJD       = dateJDE - StelApp::getInstance().getCore()->computeDeltaT(jdFirstGuess) / 86400.0;
+	//const double dateJD=dateJDE - (StelApp::getInstance().getCore()->computeDeltaT(dateJDE))/86400.0;
 
 	if (flagLightTravelTime)
 	{

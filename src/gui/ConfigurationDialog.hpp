@@ -32,6 +32,7 @@ class QNetworkAccessManager;
 class QListWidgetItem;
 class StelGui;
 class CustomDeltaTEquationDialog;
+class TTminusTDBKernelDialog;	// (SS) 2026-10-03
 class ConfigureScreenshotsDialog;
 
 class ConfigurationDialog : public StelDialog
@@ -198,10 +199,15 @@ private:
 
 	CustomDeltaTEquationDialog* customDeltaTEquationDialog;
 	ConfigureScreenshotsDialog * configureScreenshotsDialog;
+	TTminusTDBKernelDialog* ttMinusTdbKernelDialog;	// (SS) 2026-10-03 TT-TDB kernel selection, opened by the Delta-T wrench button for the JPL Horizons algorithm
 
 	int savedProjectionType;
 
 	void populateTooltips();
+
+	//! (SS) 2026-10-03 Enable the Delta-T wrench button for the algorithms that have a settings dialog (Custom, JPL Horizons)
+	//! and set its tooltip accordingly.
+	void updateDeltaTWrenchButton();
 	
 	//! Set the displayed fields checkboxes from the current displayed fields.
 	void updateSelectedInfoCheckBoxes();
