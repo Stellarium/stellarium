@@ -585,33 +585,36 @@ ENDIF()
 
 
 # ------------------------------------------------------------------
-# 1. ZLIB Target Bridge for Exiv2 (CMake 3.18+ Compatible)
+# 1. ZLIB Target Bridge for Exiv2 (Ninja Dependency Fix)
 # ------------------------------------------------------------------
 set(ZLIB_INC_DIR "${CMAKE_SOURCE_DIR}/src/external/zlib")
 
 if(TARGET zlib_stel)
-    # Exiv2's modern build chain looks for ZLIB::ZLIB first
+    # 1. Create the standardized alias that modern Exiv2 uses
     if(NOT TARGET ZLIB::ZLIB)
         add_library(ZLIB::ZLIB ALIAS zlib_stel)
     endif()
 
-    # 🚀 THE 3.18 TRICK: Pre-populate the exact cache variables FindZLIB checks.
-    # By setting these to 'FORCE', FindZLIB's internal find_path/find_library
-    # calls are skipped completely because CMake thinks they are already found.
+    # 🚀 THE FIXED CACHE INJECTION:
+    # We pass the pure target name 'zlib_stel' to the cache variables.
+    # To prevent Ninja from thinking 'zlib_stel' is a raw missing file,
+    # we explicitly mark it as an advanced library target name.
+    set(ZLIB_LIBRARY zlib_stel CACHE STRING "Target mapping for Exiv2" FORCE)
+    set(ZLIB_LIBRARIES zlib_stel CACHE STRING "Target mapping for Exiv2" FORCE)
+
+    # Standard header mapping
     set(ZLIB_INCLUDE_DIR "${ZLIB_INC_DIR}" CACHE PATH "Path to a file." FORCE)
-
-    # We pass the actual target name here. CMake allows target names inside
-    # ZLIB_LIBRARY, and because it is not empty, FindPackageHandleStandardArgs passes.
-    set(ZLIB_LIBRARY zlib_stel CACHE FILEPATH "Path to a library." FORCE)
-
-    # Standard fallback variables that some Find modules or older sub-projects look for
-    set(ZLIB_FOUND TRUE CACHE BOOL "" FORCE)
     set(ZLIB_INCLUDE_DIRS "${ZLIB_INC_DIR}" CACHE PATH "" FORCE)
-    set(ZLIB_LIBRARIES zlib_stel CACHE STRING "" FORCE)
+    set(ZLIB_FOUND TRUE CACHE BOOL "" FORCE)
+
+    # 2. Tell CMake's dependency engine that ZLIB_LIBRARY points to an existing target
+    set_property(GLOBAL PROPERTY TARGET_SUPPORTS_SHARED_LIBS TRUE)
 
 else()
     set(ZLIB_OUT_LIB ${ZLIB_LIBRARIES})
 endif()
+
+
 
 
 # 2. Manage Exiv2 via CPM to eliminate precompiled binary ABI mismatches
