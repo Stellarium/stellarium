@@ -60,8 +60,8 @@
 #endif
 
 #ifdef Q_OS_HAIKU
-#include <os/kernel/OS.h>
-#include <private/shared/cpu_type.h>
+#include <OS.h>
+#include <cpu_type.h>
 #endif
 
 void printSystemInfo()
