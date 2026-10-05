@@ -542,6 +542,10 @@ namespace StelUtils
 	//! Also handles negative and distant years.
 	QString julianDayToISO8601String(const double jd, bool addMS = false);
 
+	//! Format the given Julian Day in (UTC) EXIF date string (for screenshots).
+	//! Also handles negative and distant years.
+	QString julianDayToExifString(const double jd);
+
 	//! Return the Julian Date matching the ISO8601 date string.
 	//! Also handles negative and distant years.
 	double getJulianDayFromISO8601String(const QString& iso8601Date, bool* ok);
