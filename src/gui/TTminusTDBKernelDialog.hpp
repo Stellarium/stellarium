@@ -28,6 +28,7 @@
 
 class Ui_ttMinusTdbKernelDialogForm;
 class StelCore;
+class QTimer;
 
 //! @class TTminusTDBKernelDialog
 //! Lets the user pick the SPK kernel (*.bsp file in the "ephemBSP" folder of the user data directory) that provides
@@ -60,10 +61,14 @@ private slots:
 	void defaultClicked();
 	void updateInfo();
 	void updateStatus();
+	//! (SS) 2026-10-04 Called by a timer: refresh the status line when the panel is shown and the simulation time has moved.
+	void updateStatusIfVisible();
 
 private:
 	StelCore* core;
 	bool populating;
+	QTimer* statusTimer;	//!< drives updateStatusIfVisible() while the time is running
+	double lastStatusJDE;	//!< JDE for which the status line was last computed
 
 	void setDescription() const;
 	QString kernelInfoText(const QString& key) const;

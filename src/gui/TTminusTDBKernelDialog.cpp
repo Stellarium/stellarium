@@ -32,6 +32,7 @@
 #include <QDir>
 #include <QLocale>
 #include <QStringList>
+#include <QTimer>
 
 namespace
 {
@@ -56,6 +57,8 @@ QString formatMicroseconds(double seconds)
 TTminusTDBKernelDialog::TTminusTDBKernelDialog()
 	: StelDialog("TTminusTDBKernel")
 	, populating(false)
+	, statusTimer(Q_NULLPTR)
+	, lastStatusJDE(0.)
 {
 	ui = new Ui_ttMinusTdbKernelDialogForm;
 	core = StelApp::getInstance().getCore();
@@ -102,6 +105,13 @@ void TTminusTDBKernelDialog::createDialogContent()
 	// (SS) 2026-10-03 Since StelDialog uses a QDialog, keep Enter from activating a button
 	ui->pushButtonRefresh->setAutoDefault(false);
 	ui->pushButtonDefault->setAutoDefault(false);
+
+	// (SS) 2026-10-04 The status line follows the simulation time while it is running (dateChanged() and timeSyncOccurred() are
+	// not emitted then), but is only recomputed when the panel is shown and the time has moved.
+	statusTimer = new QTimer(this);
+	statusTimer->setInterval(500);
+	connect(statusTimer, &QTimer::timeout, this, &TTminusTDBKernelDialog::updateStatusIfVisible);
+	statusTimer->start();
 }
 
 void TTminusTDBKernelDialog::setDescription() const
@@ -237,7 +247,9 @@ void TTminusTDBKernelDialog::updateStatus()
 
 	// The simulation time is in TDB when the JPL Horizons algorithm is active
 	double seconds = 0.;
-	const StelCore::TTminusTDBSource source = core->getTTminusTDBSource(core->getJDE(), seconds);
+	const double jde = core->getJDE();
+	lastStatusJDE = jde;
+	const StelCore::TTminusTDBSource source = core->getTTminusTDBSource(jde, seconds);
 	const QString selected = core->getTTminusTDBKernel();
 	const bool none = (selected == BSPManager::noTTminusTDBKernel());
 	QString text;
@@ -264,4 +276,12 @@ void TTminusTDBKernelDialog::updateStatus()
 			break;
 	}
 	ui->labelStatus->setText(text);
+}
+
+// (SS) 2026-10-04 Nothing to do when the panel is closed or when the time is not moving
+void TTminusTDBKernelDialog::updateStatusIfVisible()
+{
+	if (!ui || !dialog || !visible() || core->getJDE() == lastStatusJDE)
+		return;
+	updateStatus();
 }
