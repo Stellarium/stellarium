@@ -1,0 +1,22 @@
+extends: plumber:default
+version: '2.0'
+
+github:
+  controls:
+    githubActionMustComeFromAuthorizedSources:
+      includePlumberDefaults: true
+      # Third-party actions the Stellarium workflows use today
+      trustedGithubActions:
+        - advanced-security/filter-sarif
+        - carlosperate/download-file-action
+        - coactions/setup-xvfb
+        - coverallsapp/github-action
+        - eps1lon/actions-label-merge-conflict
+        - erclu/check-crlf
+        - jurplel/install-qt-action
+        - kentaro-m/auto-assign-action
+        - peaceiris/actions-label-commenter
+        - vmactions/freebsd-vm
+        - vmactions/haiku-vm
+        - vmactions/openbsd-vm
+        - wyozi/contextual-qa-checklist-action
