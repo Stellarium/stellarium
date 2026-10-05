@@ -35,6 +35,7 @@
 #include <QJsonObject>
 #include <QMessageBox>
 #include <QTemporaryDir>
+#include <QTextStream>
 
 namespace
 {
@@ -132,6 +133,15 @@ bool ScmSkyCultureExportDialog::exportSkyCulture()
 	// Let the user choose the export directory with skyCulturesPath as default
 	QDir finalDirectory;
 	if (!chooseExportDirectory(skyCultureId, finalDirectory)) return false;
+	if (QFileInfo(finalDirectory.absolutePath()).isSymLink())
+	{
+		qWarning() << "SkyCultureMaker: Cannot export to a symbolic-link sky culture directory at"
+		           << finalDirectory.absolutePath();
+		maker->showUserWarningMessage(ui->titleBar->title(), q_("The sky culture directory is a symbolic link. "
+		                                                        "Exporting to symbolic links is not supported. "
+		                                                        "Resolve the link before exporting."));
+		return false;
+	}
 
 	const bool isOverwrite = finalDirectory.exists();
 	QDir skyCultureDirectory;
@@ -182,10 +192,9 @@ bool ScmSkyCultureExportDialog::exportSkyCulture()
 		return false;
 	};
 
-	// Serialize jsonObject into fileName inside the working directory. On failure calls fail() and returns
-	// false: buildErrorMsg is shown when the document is empty, writeErrorMsg when the file cannot be opened.
+	// Serialize jsonObject into fileName inside the working directory. On failure calls fail() and returns false.
 	auto writeJson = [&](const QString& fileName, const QJsonObject& jsonObject, const QString& buildErrorMsg,
-	                     const QString& writeErrorMsg) -> bool
+	                     const QString& openErrorMsg, const QString& writeErrorMsg) -> bool
 	{
 		QJsonDocument doc(jsonObject);
 		if (doc.isNull() || doc.isEmpty())
@@ -195,9 +204,13 @@ bool ScmSkyCultureExportDialog::exportSkyCulture()
 		QFile file(skyCultureDirectory.absoluteFilePath(fileName));
 		if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
 		{
-			return fail("Failed to open " + fileName + " for writing.", writeErrorMsg);
+			return fail("Failed to open " + fileName + " for writing.", openErrorMsg);
 		}
-		file.write(doc.toJson(QJsonDocument::Indented));
+		const QByteArray json = doc.toJson(QJsonDocument::Indented);
+		if (file.write(json) != json.size() || !file.flush() || file.error() != QFileDevice::NoError)
+		{
+			return fail("Failed to write " + fileName + ".", writeErrorMsg);
+		}
 		file.close();
 		return true;
 	};
@@ -216,7 +229,7 @@ bool ScmSkyCultureExportDialog::exportSkyCulture()
 	qDebug() << "SkyCultureMaker: Exporting sky culture. Merge lines on export:" << mergeLinesOnExport;
 	if (!writeJson("index.json", currentSkyCulture->toJson(mergeLinesOnExport),
 	               q_("Failed to create JSON document for sky culture."),
-	               q_("Failed to open index.json for writing.")))
+	               q_("Failed to open index.json for writing."), q_("Failed to write index.json.")))
 	{
 		return false;
 	}
@@ -227,7 +240,7 @@ bool ScmSkyCultureExportDialog::exportSkyCulture()
 	currentSkyCulture->mergeLocations();
 	if (!writeJson("territory.geojson", currentSkyCulture->getTerritoryGeoJson(),
 	               q_("Failed to create GeoJSON document for sky culture."),
-	               q_("Failed to open territory.geojson for writing.")))
+	               q_("Failed to open territory.geojson for writing."), q_("Failed to write territory.geojson.")))
 	{
 		return false;
 	}
@@ -299,8 +312,9 @@ bool ScmSkyCultureExportDialog::exportSkyCulture()
 
 		if (!keepBackup)
 		{
-			if (!QDir(backupPath).removeRecursively())
-				qWarning() << "SkyCultureMaker: Failed to remove backup at" << backupPath;
+			const bool removed = QFileInfo(backupPath).isSymLink() ? QFile::remove(backupPath)
+			                                                       : QDir(backupPath).removeRecursively();
+			if (!removed) qWarning() << "SkyCultureMaker: Failed to remove backup at" << backupPath;
 		}
 	}
 
@@ -365,6 +379,10 @@ bool ScmSkyCultureExportDialog::saveSkyCultureCMakeListsFile(const QDir& directo
 	out << "        FILES_MATCHING PATTERN \"*\"\n";
 	out << "        PATTERN \"CMakeLists.txt\" EXCLUDE)\n";
 
+	out.flush();
+	const bool streamSucceeded = out.status() == QTextStream::Ok;
+	const bool fileFlushed     = cmakeListsFile.flush();
+	const bool writeSucceeded  = streamSucceeded && fileFlushed && cmakeListsFile.error() == QFileDevice::NoError;
 	cmakeListsFile.close();
-	return true;
+	return writeSucceeded;
 }
