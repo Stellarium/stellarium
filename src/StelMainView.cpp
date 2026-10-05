@@ -33,6 +33,9 @@
 #include "StelOpenGL.hpp"
 #include "StelOpenGLArray.hpp"
 #include "StelProjector.hpp"
+#include "StelMovementMgr.hpp"
+#include "Landscape.hpp"
+#include "LandscapeMgr.hpp"
 
 #include <QDebug>
 #include <QDir>
@@ -1709,6 +1712,26 @@ void StelMainView::saveScreenShot(const QString& filePrefix, const QString& save
 	emit screenshotRequested();
 }
 
+#ifdef HAVE_EXIV2
+// Helper to convert decimal degrees to EXIF GPS rational components (Degrees, Minutes, Seconds)
+std::string convertToExifDms(double decimalDegrees) {
+	double absolute = std::abs(decimalDegrees);
+	int degrees = static_cast<int>(absolute);
+
+	double minutesRaw = (absolute - degrees) * 60.0;
+	int minutes = static_cast<int>(minutesRaw);
+
+	double seconds = (minutesRaw - minutes) * 60.0;
+
+	// EXIF rational structures accept strings formatted as "deg/1 min/1 sec/1000"
+	// We scale seconds by 1000 to preserve precision up to 3 decimal places
+	std::ostringstream oss;
+	oss << degrees << "/1 " << minutes << "/1 "
+	    << static_cast<int>(std::round(seconds * 1000.0)) << "/1000";
+	return oss.str();
+}
+#endif
+
 void StelMainView::doScreenshot(void)
 {
 	QFileInfo shotDir;
@@ -2002,38 +2025,58 @@ void StelMainView::doScreenshot(void)
 				arg(QString(QSysInfo::productType()=="windows" ? qgetenv("USERNAME") : qgetenv("USER")),
 				    QString::number(QDate::currentDate().year())).toStdString().c_str(); // TODO: Add a second null terminator!
 
-		exifData["Exif.Photo.DateTimeOriginal"]     = "2026:10:31 23:59:59";
-		//exifData["Exif.Image.OffsetTimeOriginal"]   =  offset; // from observer timezone offset
-		exifData["Exif.Image.ImageDescription"] =      "my fancy object"; // if we have an object selected
+		QString dateTimeStr=StelUtils::julianDayToExifString(core->getJD());
+		exifData["Exif.Photo.DateTimeOriginal"]     = dateTimeStr.toStdString().c_str();
+		//exifData["Exif.Photo.DateTimeOriginal"]     = "2026:10:31 23:59:59";
+		//exifData["Exif.Image.OffsetTimeOriginal"]   =  offset; // from observer timezone offset TODO: dateTimeStr should be zone time!
+
+		const double fov=core->getMovementMgr()->getCurrentFov();
+		StelObjectMgr *objMgr=&StelApp::getInstance().getStelObjectMgr();
+		auto sel=objMgr->getSelectedObject();
+		if (sel.length()>0)
+			exifData["Exif.Image.ImageDescription"] = QString("%1 (%2: %3°)").arg(sel[0]->getNameI18n(), qc_("FOV", "abbreviation"),
+											     QString::number(fov, 'g', 3)).toStdString().c_str();
+		else
+			exifData["Exif.Image.ImageDescription"] = QString("%1 (%2: %3°)").arg(qc_("Stellarium View", "Screenshot default title"),
+											      qc_("FOV", "abbreviation"),
+											      QString::number(fov, 'g', 3)).toStdString().c_str();
 
 		//exifData["Exif.Image.ExposureTime"]         = exposureTimeSeconds; // not meaningful
 		//exifData["Exif.Image.FNumber"]              = F_number;            // not meaningful
 		//exifData["Exif.Image.GPSTag"]               = IFDpt); // ??
 		///	//exifData["Exif.Image.TimeZoneOffset"]       =  offset; // from observer timezone offset
-		///	//exifData["Exif.Image.FocalLength"]          =  equiv; // if projection is perspective, provide quivalent fl for 35mm
-		//	exifData["Exif.Photo.FocalLengthIn35mmFilm"] =  fl; // equiv.
+		///	//exifData["Exif.Image.FocalLength"]          =  equiv; // Maybe diagonal relative to 35mm? (vFoV=24mm)
+
+		// TODO: Limit to perspective projection only?
+		const double focalLengthEquiv=24.0/(2*tan(fov*M_PI_180*0.5));
+		exifData["Exif.Photo.FocalLengthIn35mmFilm"] = QString::number(int(focalLengthEquiv)).toStdString().c_str();
 		exifData["Exif.Photo.UserComment"]           = "UserComment";
-		exifData["Exif.Photo.Temperature"]           = "20/1"; // Atmosphere temp, Celsius
-		exifData["Exif.Photo.Pressure"]              = "1013/1"; // Atmosphere pressure, hPa
-		exifData["Exif.GPSInfo.GPSVersionID"]        = "02000000"; // mandatory
-		exifData["Exif.GPSInfo.GPSLatitudeRef"]      = "N"; // "N"/"S"
-		exifData["Exif.GPSInfo.GPSLatitude"]         = "48/1 16/1 23123/1000"; // 3 rational numbers dd/1,mm/1,ss/1
-		exifData["Exif.GPSInfo.GPSLongitudeRef"]     = "E"; // "E"/"W"
-		exifData["Exif.GPSInfo.GPSLongitude"]        = "16/1 15/1 14123/1000"; // 3 rational numbers dd/1,mm/1,ss/1
-		//
+		//Landscape *landscape=dynamic_cast<LandscapeMgr*>(GETSTELMODULE(LandscapeMgr))->getCurrentLandscape();
+
+		LandscapeMgr *landscapeMgr=dynamic_cast<LandscapeMgr*>(GETSTELMODULE(LandscapeMgr));
+		StelSkyDrawer *drawer=core->getSkyDrawer();
+		exifData["Exif.Photo.Temperature"]           = landscapeMgr->getFlagAtmosphere() ? QString("%1/100").arg(int(100.*drawer->getAtmosphereTemperature())).toStdString().c_str() : "0/1"; // Atmosphere temp, Celsius
+		exifData["Exif.Photo.Pressure"]              = landscapeMgr->getFlagAtmosphere() ? QString("%1/100").arg(int(100.*drawer->getAtmospherePressure())).toStdString().c_str()    : "0/1"; // Atmosphere pressure, hPa
+		StelLocation loc=core->getCurrentLocation();
+		exifData["Exif.GPSInfo.GPSVersionID"]        = "02000000"; // mandatory. It should display as 2.0.0.0, though, not 128.0.0.0.
+		exifData["Exif.GPSInfo.GPSLatitudeRef"]      = (loc.getLatitude()>0.f ? "N" : "S");
+		exifData["Exif.GPSInfo.GPSLatitude"]         = convertToExifDms(loc.getLatitude()); // 3 rational numbers dd/1,mm/1,ss/1
+		exifData["Exif.GPSInfo.GPSLongitudeRef"]     = (loc.getLongitude()>0.f ? "E" : "W");
+		exifData["Exif.GPSInfo.GPSLongitude"]        = convertToExifDms(loc.getLongitude()); // 3 rational numbers dd/1,mm/1,ss/1
+		exifData["Exif.GPSInfo.GPSAltitudeRef"]      = "0"; // 0 indicates MASL.
+		exifData["Exif.GPSInfo.GPSAltitude"]         = QString("%1/1").arg(loc.altitude).toStdString().c_str(); // 1 rational number, meters
+		exifData["Exif.GPSInfo.GPSMapDatum"]         = "WGS-84"; // fixed for us
+
 		//	exifData["Exif.GPSInfo.GPSDestLatitudeRef"]  = "N"); // "N"/"S" -- declination of target
 		//	exifData["Exif.GPSInfo.GPSDestLatitude"]     = lat); // 3 rational numbers dd/1,mm/1,ss/1 -- declination of target
 		//	exifData["Exif.GPSInfo.GPSDestLongitudeRef"] = "E"); // "E"/"W" -- RA of target
 		//	exifData["Exif.GPSInfo.GPSDestLongitude"]    = lng); // 3 rational numbers dd/1,mm/1,ss/1 -- RA of target
 		//
-		//	exifData["Exif.GPSInfo.GPSAltitudeRef"]      = 0); // 0 indicates MASL.
-		//	exifData["Exif.GPSInfo.GPSAltitude"]         = lng); // 1 rational number, meters
 		//	exifData["Exif.GPSInfo.GPSDateStamp"]        = "2026:10:11"); // String,  "YYYY:MM:DD"
 		//	exifData["Exif.GPSInfo.GPSTimeStamp"]        = time); // 3 rational numbers, hh/1, mm/1, ss/1.
 		//	exifData["Exif.GPSInfo.GPSImgDirectionRef"]  = "T"); // next value is True (not magnetic) azimuth
 		//	exifData["Exif.GPSInfo.GPSImgDirection"]     = azi); // True azimuth, degrees [0..359.99]
 		//	exifData["Exif.Photo.CameraElevationAngle"]  = Exiv2::unsignedRational, altitude); // center orientation, degrees
-		exifData["Exif.GPSInfo.GPSMapDatum"]         = "WGS-84"; // fixed for us
 
 		qDebug() << "WRITING EXIF ENTRIES DONE";
 
