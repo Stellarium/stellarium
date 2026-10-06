@@ -73,8 +73,8 @@ scripts/tests/media
 scripts/tests/videotest_avi.ssc
 scripts/tests/QJSEngine_basictest.ssc
 skycultures/modern_her
-/skycultures/*.bak/
-/skycultures/*.bak[0-9]*/
+skycultures/*.bak/
+skycultures/*.bak[0-9]*/
 *.tif
 valgrind.log
 *_old*
