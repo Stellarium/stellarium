@@ -48,7 +48,6 @@ namespace scm
 class ScmSkyCulture
 {
 public:
-
 	/// Checks if the given ID is valid for a sky culture.
 	static bool isValidId(const QString& id)
 	{
