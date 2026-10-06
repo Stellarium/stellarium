@@ -39,14 +39,14 @@
 
 namespace
 {
-// Returns a unique backup path "<basePath>_old", "<basePath>_old(1)", ... that does not yet exist,
+// Returns a unique backup path "<basePath>.bak", "<basePath>.bak1", ... that does not yet exist,
 // so successive backups never overwrite each other.
 QString makeUniqueBackupPath(const QString& basePath)
 {
-	QString candidate = basePath + "_old";
-	for (int n = 1; QFileInfo::exists(candidate); ++n)
+	QString candidate = basePath + ".bak";
+	for (int n = 1; (QFileInfo::exists(candidate) || QFileInfo(candidate).isSymLink()); ++n)
 	{
-		candidate = basePath + "_old(" + QString::number(n) + ")";
+		candidate = basePath + ".bak" + QString::number(n);
 	}
 	return candidate;
 }
@@ -129,6 +129,14 @@ bool ScmSkyCultureExportDialog::exportSkyCulture()
 	}
 
 	QString skyCultureId = currentSkyCulture->getId();
+	if (!scm::ScmSkyCulture::isValidId(skyCultureId))
+	{
+		qWarning() << "SkyCultureMaker: Refusing to export with invalid sky culture ID" << skyCultureId;
+		maker->showUserWarningMessage(
+			ui->titleBar->title(),
+			q_("The sky culture ID must not be empty, '.', '..', or contain path separators."));
+		return false;
+	}
 
 	// Let the user choose the export directory with skyCulturesPath as default
 	QDir finalDirectory;
@@ -156,6 +164,7 @@ bool ScmSkyCultureExportDialog::exportSkyCulture()
 		                       QMessageBox::Yes | QMessageBox::No, &StelMainView::getInstance());
 		confirmBox.setDefaultButton(QMessageBox::No);
 		QCheckBox* keepBackupCB = new QCheckBox(q_("Keep a backup of the original sky culture"), &confirmBox);
+		keepBackupCB->setChecked(true);
 		confirmBox.setCheckBox(keepBackupCB);
 		if (confirmBox.exec() != QMessageBox::Yes)
 		{
