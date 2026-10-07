@@ -1,0 +1,36 @@
+#
+# Check the GitHub Actions workflows with Plumber
+# See https://github.com/getplumber/plumber
+#
+name: "Plumber"
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  plumber:
+    name: "Plumber"
+    runs-on: ubuntu-latest
+    if: "!contains(github.actor, 'transifex')"
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      security-events: write
+      id-token: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Plumber analysis
+        uses: getplumber/plumber@fb943e4efba61cf7b0a0c56f6648710a7453519b # v0.5.20
+        with:
+          upload-sarif: ${{ github.event.pull_request.head.repo.fork != true }}
+          score-push: true
+          min-points: 100
