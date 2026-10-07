@@ -33,4 +33,4 @@ jobs:
         with:
           upload-sarif: ${{ github.event.pull_request.head.repo.fork != true }}
           score-push: true
-          min-points: 85
+          min-points: 100
