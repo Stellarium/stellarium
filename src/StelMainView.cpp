@@ -33,6 +33,7 @@
 #include "StelOpenGL.hpp"
 #include "StelOpenGLArray.hpp"
 #include "StelProjector.hpp"
+#include "StelObjectMgr.hpp"
 #include "StelMovementMgr.hpp"
 #include "Landscape.hpp"
 #include "LandscapeMgr.hpp"
@@ -2030,17 +2031,23 @@ void StelMainView::doScreenshot(void)
 		//exifData["Exif.Photo.DateTimeOriginal"]     = "2026:10:31 23:59:59";
 		//exifData["Exif.Image.OffsetTimeOriginal"]   =  offset; // from observer timezone offset TODO: dateTimeStr should be zone time!
 
+		QString circumstances=QString("%1.").arg(core->getUseTopocentricCoordinates() ? "Topocentric" : "Geocentric"); // TODO: more data
 		const double fov=core->getMovementMgr()->getCurrentFov();
 		StelObjectMgr *objMgr=&StelApp::getInstance().getStelObjectMgr();
 		auto sel=objMgr->getSelectedObject();
 		if (sel.length()>0)
+		{
 			exifData["Exif.Image.ImageDescription"] = QString("%1 (%2: %3°)").arg(sel[0]->getNameI18n(), qc_("FOV", "abbreviation"),
 											     QString::number(fov, 'g', 3)).toStdString().c_str();
+			exifData["Exif.Photo.UserComment"]      = sel[0]->getInfoString(core, (StelObject::DefaultInfo | StelObject::PlainText)).toStdString().c_str();
+		}
 		else
+		{
 			exifData["Exif.Image.ImageDescription"] = QString("%1 (%2: %3°)").arg(qc_("Stellarium View", "Screenshot default title"),
 											      qc_("FOV", "abbreviation"),
 											      QString::number(fov, 'g', 3)).toStdString().c_str();
-
+			exifData["Exif.Photo.UserComment"]      = circumstances.toStdString().c_str();
+		}
 		//exifData["Exif.Image.ExposureTime"]         = exposureTimeSeconds; // not meaningful
 		//exifData["Exif.Image.FNumber"]              = F_number;            // not meaningful
 		//exifData["Exif.Image.GPSTag"]               = IFDpt); // ??
@@ -2050,7 +2057,6 @@ void StelMainView::doScreenshot(void)
 		// TODO: Limit to perspective projection only?
 		const double focalLengthEquiv=24.0/(2*tan(fov*M_PI_180*0.5));
 		exifData["Exif.Photo.FocalLengthIn35mmFilm"] = QString::number(int(focalLengthEquiv)).toStdString().c_str();
-		exifData["Exif.Photo.UserComment"]           = "UserComment";
 		//Landscape *landscape=dynamic_cast<LandscapeMgr*>(GETSTELMODULE(LandscapeMgr))->getCurrentLandscape();
 
 		LandscapeMgr *landscapeMgr=dynamic_cast<LandscapeMgr*>(GETSTELMODULE(LandscapeMgr));
