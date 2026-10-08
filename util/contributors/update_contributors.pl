@@ -40,7 +40,7 @@ $prefix = "        ";
 		 't4saha', 'jess', 'pjw', 'wlaun', 'S', 'transifex-integration\[bot\]', 'codesee-maps\[bot\]');
 # replacements for nicks
 %replacements = ('holgerno'=>'Holger Nießner', 'Hans'=>'Hans Lambermont', 'rossmitchell'=>'Ross Mitchell',
-		 'seescho'=>'Edgar Scholz', 'martinber'=>'Martin Bernardi', 'daniel.adastra'=>'Daniel Adastra',
+		 'seescho'=>'Edgar Scholz', 'martinber'=>'Martin Bernardi', 'daniel.adastra'=>'Daniel Alomar',
 		 'arya-s'=>'Andrei Borza', 'alex'=>'Alexander Duytschaever','GunChleoc'=>'Fòram na Gàidhlig',
 		 'miroslavbroz'=>'Miroslav Broz', 'espie'=>'Marc Espie', 'rich'=>'Pavel Klimenko',
 		 'Snow Sailor'=>'Nick Kanel', 'JAY-Githb'=>'Jay Respler', 'Jonas-Persson-NTNU'=>'Jonas Persson',

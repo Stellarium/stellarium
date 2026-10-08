@@ -43,7 +43,8 @@ sed -e 's/Qt::FocusPolicy::NoFocus/Qt::NoFocus/g' \
 	-e 's/QAbstractSpinBox::ButtonSymbols::UpDownArrows/QAbstractSpinBox::UpDownArrows/g' \
 	-e 's/QComboBox::InsertPolicy::NoInsert/QComboBox::NoInsert/g' \
 	-e 's/QComboBox::SizeAdjustPolicy::AdjustToContentsOnFirstShow/QComboBox::AdjustToContentsOnFirstShow/g' \
-	-e 's/QFrame::Shadow::Raised/QFrame::Raised/g' \
+	-e 's/QFrame::Shadow::\([A-Za-z]*\)/QFrame::\1/g' \
+	-e 's/QAbstractItemView::EditTrigger::\([A-Za-z]*\)/QAbstractItemView::\1/g' \
 	-e 's/QFrame::Shape::NoFrame/QFrame::NoFrame/g' \
 	-e 's/QFrame::Shape::StyledPanel/QFrame::StyledPanel/g' \
 	-e 's/QListView::Movement::Static/QListView::Static/g' \
@@ -59,4 +60,6 @@ sed -e 's/Qt::FocusPolicy::NoFocus/Qt::NoFocus/g' \
 	-e 's/Qt::TextInteractionFlag::NoTextInteraction/Qt::NoTextInteraction/g' \
 	-e 's/QTabWidget::TabPosition::North/QTabWidget::North/g' \
 	-e 's/QTabWidget::TabPosition::South/QTabWidget::South/g' \
+	-e 's/QPainter::RenderHint::\([A-Za-z]*\)/QPainter::\1/g' \
+	-e 's/QComboBox::SizeAdjustPolicy::\([A-Za-z]*\)/QComboBox::\1/g' \
 	   "$@"

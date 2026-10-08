@@ -3732,17 +3732,26 @@ void AstroCalcDialog::generateSolarEclipses()
 
 void AstroCalcDialog::setSolarEclipseLocalHeaderNames()
 {
-	solareclipselocalHeader = QStringList({
-		q_("Date"),
-		q_("Type"),
-		"P1",
-		"U1",
-		"G",
-		"M",
-		"U4",
-		"P4",
-		qc_("Duration", "column name")});
-	ui->solareclipselocalTreeWidget->setHeaderLabels(solareclipselocalHeader);
+	const QString headers[][2] = {
+		{q_("Date"),                     ""},
+		{q_("Type"),                     ""},
+		{"P1",                           q_("Partial eclipse begins")},
+		{"U1",                           q_("Umbral total or annular eclipse begins")},
+		{"G",                            q_("Greatest eclipse")},
+		{"M",                            q_("Eclipse magnitude")},
+		{"U4",                           q_("Umbral total or annular eclipse ends")},
+		{"P4",                           q_("Partial eclipse ends")},
+		{qc_("Duration", "column name"), ""},
+	};
+	solareclipselocalHeader.clear();
+	const auto header = ui->solareclipselocalTreeWidget->headerItem();
+	for (int colN = 0; colN < SolarEclipseLocalCount; ++colN)
+	{
+		solareclipselocalHeader.push_back(headers[colN][0]);
+		header->setText(colN, headers[colN][0]);
+		if (!headers[colN][1].isEmpty())
+			header->setToolTip(colN, headers[colN][1]);
+	}
 
 	// adjust the column width
 	for (int i = 0; i < SolarEclipseLocalCount; ++i)

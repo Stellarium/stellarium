@@ -715,10 +715,10 @@
              <enum>QAbstractItemView::SelectionBehavior::SelectRows</enum>
             </property>
             <property name="selectionMode">
-             <enum>QAbstractItemView::SelectionMode::SingleSelection</enum>
+             <enum>QAbstractItemView::SingleSelection</enum>
             </property>
             <property name="editTriggers">
-             <set>QAbstractItemView::EditTrigger::NoEditTriggers</set>
+             <set>QAbstractItemView::NoEditTriggers</set>
             </property>
             <property name="showGrid">
              <bool>true</bool>
@@ -1031,7 +1031,7 @@
                 </sizepolicy>
                </property>
                <property name="frameShape">
-                <enum>QFrame::Shape::StyledPanel</enum>
+                <enum>QFrame::StyledPanel</enum>
                </property>
                <layout class="QGridLayout" name="addPolygonGridLayout">
                 <property name="leftMargin">
