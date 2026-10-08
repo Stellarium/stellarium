@@ -23,6 +23,7 @@
 #include "ConfigurationDialog.hpp"
 #include "CustomDeltaTEquationDialog.hpp"
 #include "TTminusTDBKernelDialog.hpp"	// (SS) 2026-10-03
+#include "EOPDialog.hpp"	// (SS) 2026-10-07
 #include "ConfigureScreenshotsDialog.hpp"
 #include "StelMainView.hpp"
 #include "StelSpeechMgr.hpp"
@@ -93,6 +94,7 @@ ConfigurationDialog::ConfigurationDialog(StelGui* agui, QObject* parent)
 	, customDeltaTEquationDialog(Q_NULLPTR)
 	, configureScreenshotsDialog(Q_NULLPTR)
 	, ttMinusTdbKernelDialog(Q_NULLPTR)
+	, eopDialog(Q_NULLPTR)
 	, savedProjectionType(StelApp::getInstance().getCore()->getCurrentProjectionType())
 {
 	ui = new Ui_configurationDialogForm;
@@ -108,6 +110,8 @@ ConfigurationDialog::~ConfigurationDialog()
 	configureScreenshotsDialog = Q_NULLPTR;
 	delete ttMinusTdbKernelDialog;
 	ttMinusTdbKernelDialog = Q_NULLPTR;
+	delete eopDialog;
+	eopDialog = Q_NULLPTR;
 	delete currentDownloadFile;
 	currentDownloadFile = Q_NULLPTR;
 }
@@ -207,6 +211,9 @@ void ConfigurationDialog::createDialogContent()
 	resetEphemControls();
 
 	connectBoolProperty(ui->nutationCheckBox,    "StelCore.flagUseNutation");
+	// (SS) 2026-10-07 Earth Orientation Parameters: checkbox and wrench button that opens the EOP dialog
+	connectBoolProperty(ui->eopCheckBox,         "StelCore.flagUseEOP");
+	connect(ui->eopToolButton, &QToolButton::clicked, this, &ConfigurationDialog::showEOPDialog);
 	connectBoolProperty(ui->aberrationCheckBox,  "StelCore.flagUseAberration");
 	connectDoubleProperty(ui->aberrationSpinBox, "StelCore.aberrationFactor");
 	connectBoolProperty(ui->parallaxCheckBox,    "StelCore.flagUseParallax");
@@ -1371,6 +1378,8 @@ void ConfigurationDialog::saveAllSettings()
 
         conf->setValue("projection/type",                               core->getCurrentProjectionTypeKey());
         conf->setValue("astro/flag_nutation",                           core->getUseNutation());
+        conf->setValue("astro/flag_eop",                                core->getUseEOP());	// (SS) 2026-10-07
+        conf->setValue("astro/eop_model",                               core->getEOPModel());	// (SS) 2026-10-07
         conf->setValue("astro/flag_aberration",                         core->getUseAberration());
         conf->setValue("astro/aberration_factor",                       core->getAberrationFactor());
         conf->setValue("astro/flag_parallax",                           core->getUseParallax());
@@ -2383,6 +2392,15 @@ void ConfigurationDialog::showConfigureScreenshotsDialog()
 		configureScreenshotsDialog = new ConfigureScreenshotsDialog();
 
 	configureScreenshotsDialog->setVisible(true);
+}
+
+// (SS) 2026-10-07 Show the EOP dialog
+void ConfigurationDialog::showEOPDialog()
+{
+	if (eopDialog == Q_NULLPTR)
+		eopDialog = new EOPDialog();
+
+	eopDialog->setVisible(true);
 }
 
 void ConfigurationDialog::populateDateFormatsList()

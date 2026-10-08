@@ -39,6 +39,8 @@ class StelGeodesicGrid;
 class StelMovementMgr;
 class StelObserver;
 class BSPManager;	// (SS) 2026-10-03 JPL SPK kernel (*.bsp) manager
+class EOPManager;	// (SS) 2026-10-05 Earth Orientation Parameters (EOP) file manager
+class EOPUpdater;	// (SS) 2026-10-07 downloads the EOP files of the IERS
 
 //! @class StelCore
 //! Main class for Stellarium core processing.
@@ -55,6 +57,8 @@ class StelCore : public QObject
 	Q_PROPERTY(bool flipHorz READ getFlipHorz WRITE setFlipHorz NOTIFY flipHorzChanged)
 	Q_PROPERTY(bool flipVert READ getFlipVert WRITE setFlipVert NOTIFY flipVertChanged)
 	Q_PROPERTY(bool flagUseNutation READ getUseNutation WRITE setUseNutation NOTIFY flagUseNutationChanged)
+	// (SS) 2026-10-07 Apply the Earth Orientation Parameters (EOP) to the transformation matrices. When off, all EOP values are 0.
+	Q_PROPERTY(bool flagUseEOP READ getUseEOP WRITE setUseEOP NOTIFY flagUseEOPChanged)
 	// (SS) 2026-10-03 File name (in the user's ephemBSP folder) of the SPK kernel providing TT-TDB, e.g. "de431t.bsp"
 	Q_PROPERTY(QString ttMinusTdbKernel READ getTTminusTDBKernel WRITE setTTminusTDBKernel NOTIFY ttMinusTdbKernelChanged)
 	Q_PROPERTY(bool flagUseAberration READ getUseAberration WRITE setUseAberration NOTIFY flagUseAberrationChanged)
@@ -387,6 +391,48 @@ public:
 	//! (SS) 2026-10-03 TT-TDB in seconds at the given JD(TDB), read from the SPK kernel selected with setTTminusTDBKernel().
 	//! @return false if that kernel is missing, has no TT-TDB data or does not cover the date.
 	bool getTTminusTDB(double jdTDB, double& seconds) const;
+
+	//! (SS) 2026-10-05 Manager of the Earth Orientation Parameters (EOP) files found in the "eop" folder of the user data directory.
+	//! Never null once init() has run.
+	EOPManager* getEOPManager() const { return eopMgr; }
+	//! (SS) 2026-10-05 IAU 1980 nutation corrections from the EOP files at JD(UTC), in arcsec: to be added to dPsi and dEps of the nutation model.
+	//! The last known values are kept after the end of the predictions.
+	//! @return false if no EOP data is loaded or the date is before the first record
+	bool getEOPNutationCorrections(double jdUTC, double& dpsiArcsec, double& depsArcsec) const;
+	//! (SS) 2026-10-05 Names of the EOP files that are merged (explicit selection or default one)
+	QStringList getEOPFiles() const;
+	//! (SS) 2026-10-05 Select the EOP files to merge (names inside the eop folder) and reload them. An empty list selects the default files.
+	void setEOPFiles(const QStringList& fileNames);
+	//! (SS) 2026-10-07 EOP values to apply at a date. All members are 0 when a value is not available.
+	struct EOPValues
+	{
+		double xp = 0., yp = 0.;       //!< pole coordinates [arcsec]
+		double ut1utc = 0.;            //!< UT1 - UTC [s]
+		double lod = 0.;               //!< length of day excess [s]
+		double dpsi = 0., deps = 0.;   //!< celestial pole offsets w.r.t. the IAU 1980 nutation [arcsec]
+		double dx = 0., dy = 0.;       //!< celestial pole offsets w.r.t. IAU 2006/2000A [arcsec]
+	};
+	//! (SS) 2026-10-07 EOP values at JD(UTC), linearly interpolated between the daily records. After the last value of a
+	//! parameter, its last valid value is kept. All values are 0 when the EOP corrections are switched off (flagUseEOP).
+	//! @return false if EOP are on and no data is available for that date (the values are then 0)
+	bool getEOPValues(double jdUTC, EOPValues& values) const;
+	//! (SS) 2026-10-07 @return whether the EOP corrections are applied
+	bool getUseEOP() const;
+	//! (SS) 2026-10-07 Set whether the EOP corrections are applied (off: all EOP values are 0).
+	void setUseEOP(bool use);
+	//! (SS) 2026-10-07 Nutation model that decides which EOP files are merged last: "IAU1980" (default, as JPL Horizons)
+	//! or "IAU2000A". Their pole, UT1-UTC and LOD values then win.
+	QString getEOPModel() const;
+	void setEOPModel(const QString& key);
+	//! (SS) 2026-10-07 Scan the eop folder again, merge the selected files and update the log
+	void rescanEOPFiles();
+	//! (SS) 2026-10-07 Download the EOP files of the IERS (finals.all, finals2000A.all, EOP 14 C04, EOP 20 C04 u24) into the eop folder,
+	//! add the download date to their names, then scan the folder again and merge the selected files.
+	//! Unless @p force is true, only the series whose newest local file is older than its refresh delay are downloaded.
+	//! Called a few seconds after start-up when the configuration key astro/eop_auto_update is true (default).
+	//! The result is given by eopUpdateFinished().
+	void updateEOPFiles(bool force = false);
+	bool isUpdatingEOP() const;
 
 	//! (SS) 2026-10-03 Where getDeltaTByJPLHorizons() gets TT-TDB from at a given date
 	enum TTminusTDBSource
@@ -969,8 +1015,18 @@ signals:
 	void flipVertChanged(bool b);
 	//! This signal indicates a switch in use of nutation
 	void flagUseNutationChanged(bool b);
+	//! (SS) 2026-10-07 This signal indicates a switch in the use of the EOP corrections
+	void flagUseEOPChanged(bool b);
+	//! (SS) 2026-10-07 This signal indicates that another Nutation model ("IAU1980" or "IAU2000A") was selected for the EOP
+	void eopModelChanged(const QString& key);
 	//! (SS) 2026-10-03 This signal indicates that another SPK kernel was selected for TT-TDB
 	void ttMinusTdbKernelChanged(const QString& fileName);
+	//! (SS) 2026-10-05 This signal indicates that the set of merged EOP files changed or was reloaded
+	void eopFilesChanged(const QStringList& fileNames);
+	//! (SS) 2026-10-07 Download progress of the file being downloaded by updateEOPFiles()
+	void eopUpdateProgress(qint64 received, qint64 total);
+	//! (SS) 2026-10-07 updateEOPFiles() is done. @param ok no download failed. @param written files written in the eop folder
+	void eopUpdateFinished(bool ok, const QStringList& written, const QString& message);
 	//! This signal indicates a switch in use of aberration
 	void flagUseAberrationChanged(bool b);
 	//! This signal indicates a change in aberration exaggeration factor
@@ -1032,6 +1088,13 @@ private:
 	// (SS) 2026-10-03 JPL SPK kernel (*.bsp) manager, created in init()
 	BSPManager* bspMgr = Q_NULLPTR;
 
+	// (SS) 2026-10-05 Earth Orientation Parameters (EOP) file manager, created in init()
+	EOPManager* eopMgr = Q_NULLPTR;
+	// (SS) 2026-10-07 downloads the EOP files, created by the first call of updateEOPFiles()
+	EOPUpdater* eopUpdater = Q_NULLPTR;
+	// (SS) 2026-10-07 writes the report of the last merge of the EOP files in the log, one line at a time
+	void logEOPReport() const;
+
 	// Parameters to use when creating new instances of StelProjector
 	StelProjector::StelProjectorParams currentProjectorParams;
 
@@ -1069,6 +1132,8 @@ private:
 
 	// flag to indicate we want to use nutation (the small-scale wobble of earth's axis)
 	bool flagUseNutation;
+	// (SS) 2026-10-07 flag to indicate we want to apply the Earth Orientation Parameters (EOP)
+	bool flagUseEOP;
 	// flag to indicate we want to use aberration (a small-scale wobble of stellar positions (~20 arceconds on earth) due to finite speed of light and observer in motion on a planet.)
 	bool flagUseAberration;
 	// value to allow exaggerating aberration effects. 1 is natural value, stretching to e.g. 1000 may be useful for explanations.

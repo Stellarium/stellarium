@@ -40,6 +40,8 @@
 #include "StelMainView.hpp"
 #include "EphemWrapper.hpp"
 #include "BSPManager.hpp"	// (SS) 2026-10-03
+#include "EOPManager.hpp"	// (SS) 2026-10-05
+#include "EOPUpdater.hpp"	// (SS) 2026-10-07
 #include "NomenclatureItem.hpp"
 #include "precession.h"
 #include "Star.hpp"
@@ -52,6 +54,8 @@
 #include <QTimeZone>
 #include <QFile>
 #include <QDir>
+#include <QDateTime>
+#include <QTimer>
 #include <QRegularExpression>
 #include <QOpenGLShaderProgram>
 
@@ -93,6 +97,7 @@ StelCore::StelCore()
 	, currentDeltaTAlgorithm(EspenakMeeus)
 	, position(Q_NULLPTR)
 	, flagUseNutation(true)
+	, flagUseEOP(true)
 	, flagUseAberration(true)
 	, aberrationFactor(1.0)
 	, flagUseParallax(true)
@@ -160,6 +165,7 @@ StelCore::StelCore()
 	currentProjectorParams.devicePixelsPerPixel = StelApp::getInstance().getDevicePixelsPerPixel();
 
 	flagUseNutation=conf->value("astro/flag_nutation", true).toBool();
+	flagUseEOP=conf->value("astro/flag_eop", true).toBool();	// (SS) 2026-10-07
 	flagUseAberration=conf->value("astro/flag_aberration", true).toBool();
 	aberrationFactor=conf->value("astro/aberration_factor", 1.0).toDouble();
 	flagUseParallax=conf->value("astro/flag_parallax", true).toBool();
@@ -281,6 +287,28 @@ void StelCore::init()
 	// (SS) 2026-10-03 getDeltaTByJPLHorizons() takes TT-TDB from the selected SPK kernel
 	StelUtils::setTTminusTDBProvider([this](double jdTDB, double& seconds)
 	                                 { return bspMgr && bspMgr->ttMinusTDB(jdTDB, seconds); });
+
+	// (SS) 2026-10-05 Earth Orientation Parameters (EOP) files are looked for in the "eop" folder of the user data directory
+	// (created if missing). Without an explicit choice ("astro/eop_files", names separated by '|') the historic file and the newest
+	// version of each other file are merged. The folder is scanned here and again on request (Refresh button).
+	const QString eopDir = StelFileMgr::getUserDir() + "/eop";
+	QDir().mkpath(eopDir);
+	eopMgr = new EOPManager(eopDir, this);
+	// (SS) 2026-10-07 Nutation model of the EOP: the files of this model are merged last (default IAU 1980, as JPL Horizons)
+	{
+		const EOPManager::Model eopModel = EOPManager::modelFromKey(conf->value("astro/eop_model", "IAU1980").toString());
+		if (eopModel != EOPManager::Model::Unknown)
+			eopMgr->setPreferredModel(eopModel);
+	}
+	const QString eopSelection = conf->value("astro/eop_files", "").toString();
+	eopMgr->setSelectedFiles(eopSelection.isEmpty() ? QStringList() : eopSelection.split('|', Qt::SkipEmptyParts));
+	qInfo().noquote() << "EOP files found in" << eopDir << ":" << eopMgr->rescan().join(", ");
+	eopMgr->reload();
+	qInfo().noquote() << "EOP files merged:" << eopMgr->selectedFiles().join(", ");
+	logEOPReport();
+	// a few seconds after start-up, download the files that are missing or older than their refresh delay
+	if (conf->value("astro/eop_auto_update", true).toBool())
+		QTimer::singleShot(3000, this, [this]() { updateEOPFiles(false); });
 
 	// Define variables of custom equation for calculation of Delta T
 	// Default: ndot = -26.0 "/cy/cy; year = 1820; DeltaT = -20 + 32*u^2, where u = (currentYear-1820)/100
@@ -1333,6 +1361,180 @@ void StelCore::setUseNutation(bool use)
 		StelApp::immediateSave("astro/flag_nutation", use);
 		emit flagUseNutationChanged(use);
 	}
+}
+
+// (SS) 2026-10-07 One log line for each line of the report of EOPManager
+void StelCore::logEOPReport() const
+{
+	if (!eopMgr)
+		return;
+	const QStringList lines = eopMgr->lastReport().split('\n');
+	for (const QString& line : lines)
+		if (!line.trimmed().isEmpty())
+			qInfo().noquote() << line;
+}
+
+// (SS) 2026-10-07 Download the EOP files of the IERS
+void StelCore::updateEOPFiles(bool force)
+{
+	if (!eopMgr || (eopUpdater && eopUpdater->isRunning()))
+		return;
+
+	const QDate today = QDate::currentDate();
+	QList<EOPUpdater::Source> todo;
+	const QList<EOPUpdater::Source> sources = EOPUpdater::defaultSources();
+	for (const EOPUpdater::Source& src : sources)
+		if (force || eopMgr->isOlderThan(EOPManager::keyFromName(src.fileName), today, src.refreshDays))
+			todo << src;
+
+	if (todo.isEmpty())
+	{
+		qInfo().noquote() << "EOP files are up to date";
+		emit eopUpdateFinished(true, QStringList(), QStringLiteral("EOP files are up to date"));
+		return;
+	}
+
+	if (!eopUpdater)
+	{
+		eopUpdater = new EOPUpdater(StelApp::getInstance().getNetworkAccessManager(), eopMgr->directory(), this);
+		connect(eopUpdater, &EOPUpdater::progress, this, &StelCore::eopUpdateProgress);
+		connect(eopUpdater, &EOPUpdater::fileFinished, this, [](const QString&, bool ok, const QString& message)
+		{
+			if (ok)
+				qInfo().noquote() << "EOP update:" << message;
+			else
+				qWarning().noquote() << "EOP update:" << message;
+		});
+		connect(eopUpdater, &EOPUpdater::finished, this, [this](bool ok, const QStringList& written, const QString& message)
+		{
+			if (!written.isEmpty())
+			{
+				// new files: scan the folder again; without an explicit selection the newest files are merged
+				qInfo().noquote() << "EOP files found:" << eopMgr->rescan().join(", ");
+				eopMgr->reload();
+				qInfo().noquote() << "EOP files merged:" << eopMgr->selectedFiles().join(", ");
+				logEOPReport();
+				emit eopFilesChanged(eopMgr->selectedFiles());
+			}
+			if (!ok)
+				qWarning().noquote() << "EOP update failed:" << message;
+			emit eopUpdateFinished(ok, written, message);
+		});
+	}
+	qInfo().noquote() << "EOP update: downloading" << todo.size() << "file(s) from the IERS data center";
+	eopUpdater->start(todo, today);
+}
+
+bool StelCore::isUpdatingEOP() const
+{
+	return eopUpdater && eopUpdater->isRunning();
+}
+
+// (SS) 2026-10-05 IAU 1980 nutation corrections from the EOP files, in arcsec
+bool StelCore::getEOPNutationCorrections(double jdUTC, double& dpsiArcsec, double& depsArcsec) const
+{
+	if (!flagUseEOP) // (SS) 2026-10-07 EOP corrections switched off: all values are 0
+	{
+		dpsiArcsec = depsArcsec = 0.;
+		return true;
+	}
+	return eopMgr && eopMgr->getNutationCorrections(jdUTC, dpsiArcsec, depsArcsec);
+}
+
+// (SS) 2026-10-07 EOP values at a date, all 0 when the EOP corrections are switched off
+bool StelCore::getEOPValues(double jdUTC, EOPValues& values) const
+{
+	values = EOPValues();
+	if (!flagUseEOP)
+		return true;
+	EOPReader::Interpolated e;
+	if (!eopMgr || !eopMgr->getEOP(jdUTC, e))
+		return false;
+	const EOPReader::Record& r = e.rec;
+	if (r.hasPole)
+	{
+		values.xp = r.xp;
+		values.yp = r.yp;
+	}
+	if (r.hasUT)
+		values.ut1utc = r.ut1utc;
+	if (r.hasLOD)
+		values.lod = r.lod;
+	if (r.hasNutation)
+	{
+		values.dpsi = r.dpsi;
+		values.deps = r.deps;
+	}
+	if (r.hasDXDY)
+	{
+		values.dx = r.dx;
+		values.dy = r.dy;
+	}
+	return true;
+}
+
+bool StelCore::getUseEOP() const
+{
+	return flagUseEOP;
+}
+
+// (SS) 2026-10-07 Set whether the EOP corrections are applied. Saved immediately like the nutation flag.
+void StelCore::setUseEOP(bool use)
+{
+	if (flagUseEOP != use)
+	{
+		flagUseEOP = use;
+		StelApp::immediateSave("astro/flag_eop", use);
+		emit flagUseEOPChanged(use);
+	}
+}
+
+QString StelCore::getEOPModel() const
+{
+	return EOPManager::modelKey(eopMgr ? eopMgr->preferredModel() : EOPManager::Model::IAU1980);
+}
+
+// (SS) 2026-10-07 The files of the selected model are merged last, then the merge is done again
+void StelCore::setEOPModel(const QString& key)
+{
+	const EOPManager::Model model = EOPManager::modelFromKey(key);
+	if (!eopMgr || model == EOPManager::Model::Unknown || model == eopMgr->preferredModel())
+		return;
+	eopMgr->setPreferredModel(model);
+	eopMgr->reload();
+	StelApp::immediateSave("astro/eop_model", EOPManager::modelKey(model));
+	qInfo().noquote() << "EOP model:" << EOPManager::modelKey(model) << "- merged files:" << eopMgr->mergeOrder().join(", ");
+	logEOPReport();
+	emit eopModelChanged(EOPManager::modelKey(model));
+	emit eopFilesChanged(eopMgr->selectedFiles());
+}
+
+// (SS) 2026-10-07 Scan the eop folder again and merge the selected files
+void StelCore::rescanEOPFiles()
+{
+	if (!eopMgr)
+		return;
+	qInfo().noquote() << "EOP files found:" << eopMgr->rescan().join(", ");
+	eopMgr->reload();
+	qInfo().noquote() << "EOP files merged:" << eopMgr->selectedFiles().join(", ");
+	logEOPReport();
+	emit eopFilesChanged(eopMgr->selectedFiles());
+}
+
+// (SS) 2026-10-05 Names of the EOP files that are merged
+QStringList StelCore::getEOPFiles() const
+{
+	return eopMgr ? eopMgr->selectedFiles() : QStringList();
+}
+
+// (SS) 2026-10-05 Select the EOP files to merge. An empty list selects the default files.
+void StelCore::setEOPFiles(const QStringList& fileNames)
+{
+	if (!eopMgr) return;
+	eopMgr->setSelectedFiles(fileNames);
+	eopMgr->reload();
+	StelApp::immediateSave("astro/eop_files", fileNames.join(QLatin1Char('|')));
+	emit eopFilesChanged(eopMgr->selectedFiles());
 }
 
 // (SS) 2026-10-03 @return file name of the SPK kernel used for TT-TDB

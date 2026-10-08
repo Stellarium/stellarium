@@ -33,6 +33,7 @@ class QListWidgetItem;
 class StelGui;
 class CustomDeltaTEquationDialog;
 class TTminusTDBKernelDialog;	// (SS) 2026-10-03
+class EOPDialog;		// (SS) 2026-10-07 Earth Orientation Parameters (EOP) dialog
 class ConfigureScreenshotsDialog;
 
 class ConfigurationDialog : public StelDialog
@@ -152,6 +153,9 @@ private slots:
 
 	void showConfigureScreenshotsDialog();
 
+	//! (SS) 2026-10-07 Show the EOP dialog (wrench button next to the EOP checkbox of the Tools tab)
+	void showEOPDialog();
+
 	void updateDateTimeDisplayFormat();
 
 	void populateDateFormatsList();
@@ -200,6 +204,7 @@ private:
 	CustomDeltaTEquationDialog* customDeltaTEquationDialog;
 	ConfigureScreenshotsDialog * configureScreenshotsDialog;
 	TTminusTDBKernelDialog* ttMinusTdbKernelDialog;	// (SS) 2026-10-03 TT-TDB kernel selection, opened by the Delta-T wrench button for the JPL Horizons algorithm
+	EOPDialog* eopDialog;	// (SS) 2026-10-07 EOP files, model, values and table, opened by the wrench button next to the EOP checkbox
 
 	int savedProjectionType;
 

@@ -180,6 +180,12 @@ SET(stellarium_lib_SRCS
      core/planetsephems/BSPReader.hpp
      core/planetsephems/BSPManager.cpp
      core/planetsephems/BSPManager.hpp
+     core/planetsephems/EOPReader.cpp
+     core/planetsephems/EOPReader.hpp
+     core/planetsephems/EOPManager.cpp
+     core/planetsephems/EOPManager.hpp
+     core/planetsephems/EOPUpdater.cpp
+     core/planetsephems/EOPUpdater.hpp
      core/planetsephems/htc20b.c
      core/planetsephems/htc20b.h
      core/modules/AtmosphereLightweight.cpp
@@ -372,6 +378,8 @@ IF(STELLARIUM_GUI_MODE STREQUAL "Standard")
           gui/CustomDeltaTEquationDialog.cpp
           gui/TTminusTDBKernelDialog.hpp
           gui/TTminusTDBKernelDialog.cpp
+          gui/EOPDialog.hpp
+          gui/EOPDialog.cpp
           gui/ConfigureScreenshotsDialog.hpp
           gui/ConfigureScreenshotsDialog.cpp
           gui/AstroCalcDialog.hpp
@@ -417,6 +425,7 @@ IF(STELLARIUM_GUI_MODE STREQUAL "Standard")
           gui/greatRedSpotDialog.ui
           gui/customDeltaTEquationDialog.ui
           gui/ttMinusTdbKernelDialog.ui
+          gui/eopDialog.ui
           gui/configureScreenshotsDialog.ui
           gui/astroCalcDialog.ui
           gui/astroCalcExtraEphemerisDialog.ui
@@ -1002,6 +1011,28 @@ IF(ENABLE_TESTING)
      ADD_DEPENDENCIES(buildTests testBSPManager)
      ADD_TEST(testBSPManager testBSPManager)
      SET_TARGET_PROPERTIES(testBSPManager PROPERTIES FOLDER "src/tests")
+
+     SET(tests_testEOPReader_SRCS
+          tests/testEOPReader.hpp
+          tests/testEOPReader.cpp
+          tests/EOPTestData.hpp
+     )
+     ADD_EXECUTABLE(testEOPReader ${tests_testEOPReader_SRCS})
+     TARGET_LINK_LIBRARIES(testEOPReader ${TESTS_LIBRARIES})
+     ADD_DEPENDENCIES(buildTests testEOPReader)
+     ADD_TEST(testEOPReader testEOPReader)
+     SET_TARGET_PROPERTIES(testEOPReader PROPERTIES FOLDER "src/tests")
+
+     SET(tests_testEOPManager_SRCS
+          tests/testEOPManager.hpp
+          tests/testEOPManager.cpp
+          tests/EOPTestData.hpp
+     )
+     ADD_EXECUTABLE(testEOPManager ${tests_testEOPManager_SRCS})
+     TARGET_LINK_LIBRARIES(testEOPManager ${TESTS_LIBRARIES})
+     ADD_DEPENDENCIES(buildTests testEOPManager)
+     ADD_TEST(testEOPManager testEOPManager)
+     SET_TARGET_PROPERTIES(testEOPManager PROPERTIES FOLDER "src/tests")
 
      SET(tests_testEphemeris_SRCS
           tests/testEphemeris.hpp
