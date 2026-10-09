@@ -16,7 +16,9 @@ jobs:
   plumber:
     name: "Plumber"
     runs-on: ubuntu-latest
-    if: "!contains(github.actor, 'transifex')"
+    # Runs on this repository only: a fork's master is usually unprotected,
+    # which the branch protection control reports, so forks skip the job.
+    if: "github.repository == 'Stellarium/stellarium' && !contains(github.actor, 'transifex')"
     timeout-minutes: 10
     permissions:
       contents: read
