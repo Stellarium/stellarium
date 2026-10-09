@@ -457,7 +457,7 @@ void HipsSurvey::draw(StelPainter* sPainter, double angle, HipsSurvey::DrawCallb
 		if (landscapeMgr)
 		{
 			const float atmLum = qMax(0.f, landscapeMgr->getAtmosphereAverageLuminance() - lightPollutionLum);
-			const float modelFactor = landscapeMgr->getAtmosphereModel() == "showmysky" ? 0.2f : 1.f;
+			const float modelFactor = landscapeMgr->getAtmosphereModel().toLower() == "showmysky" ? 0.2f : 1.f;
 			const float atmFactor = qMax(0.35f, 50.0f * (0.02f - modelFactor * atmLum));
 			extinctionColor *= atmFactor * atmFactor;
 		}

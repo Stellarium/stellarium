@@ -379,7 +379,7 @@ void main(void)
 	if (atmLum>0.05f) return; // Approximate values for Preetham: 10cd/m^2 at sunset, 3.3 at civil twilight (sun at -6deg). 0.0145 sun at -12, 0.0004 sun at -18,  0.01 at Full Moon!?
 	// The atmLum of Bruneton's model is about 1/2 higher than that of Preetham/Schaefer. We must rebalance that!
 	float atmFactor=20.0f;
-	if (lMgr->getAtmosphereModel()=="showmysky")
+	if (lMgr->getAtmosphereModel().toLower()=="showmysky")
 		atmFactor=20.0f*(0.05f-0.2f*atmLum); // The factor 0.2f was found empirically. Nominally it should be 0.667, but 0.2 or at least 0.4 looks better.
 	else
 		atmFactor=20.0f*(0.05f-atmLum);

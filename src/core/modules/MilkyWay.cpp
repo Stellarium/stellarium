@@ -351,7 +351,7 @@ void main(void)
 	//omgr->setExtraInfoString(StelObject::DebugAid, QString("AtmLum: %1<br/>").arg(QString::number(atmLum, 'f', 4)));
 	// The atmLum of Bruneton's model is about 1/2 higher than that of Preetham/Schaefer. We must rebalance that!
 	float atmFactor=0.35;
-	if (lMgr->getAtmosphereModel()=="showmysky")
+	if (lMgr->getAtmosphereModel().toLower()=="showmysky")
 	{
 		atmFactor=qMax(0.35f, 50.0f*(0.02f-0.2f*atmLum)); // The factor 0.2f was found empirically. Nominally it should be 0.667, but 0.2 or at least 0.4 looks better.
 	}
