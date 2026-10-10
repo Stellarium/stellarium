@@ -1132,45 +1132,55 @@ void StarMgr::loadWds(const QString& WdsFileName)
 	wdsStarsIndex.clear();
 
 	qInfo().noquote() << "Loading double stars from" << QDir::toNativeSeparators(WdsFileName);
+	
 	QFile dsFile(WdsFileName);
-	if (!dsFile.open(QIODevice::ReadOnly | QIODevice::Text))
+	if (!dsFile.open(QIODevice::ReadOnly))
 	{
-		qWarning().noquote() << "Could not open" << QDir::toNativeSeparators(WdsFileName);
+		qDebug().noquote() << "Cannot open file" << QDir::toNativeSeparators(WdsFileName);
 		return;
 	}
-	const QStringList& allRecords = QString::fromUtf8(dsFile.readAll()).split('\n');
+	QByteArray data = StelUtils::uncompress(dsFile);
 	dsFile.close();
+	//check if decompressing was successful
+	if(data.isEmpty())
+	{
+		qDebug().noquote() << "Could not decompress file" << QDir::toNativeSeparators(WdsFileName);
+		return;
+	}
+	//create and open a QBuffer for reading
+	QBuffer buf(&data);
+	buf.open(QIODevice::ReadOnly);
 
 	int readOk=0;
 	int totalRecords=0;
-	int lineNumber=0;
-
+	// Version of WDS catalog
+	static const QRegularExpression versionRx("\\s*Version:\\s*([\\d\\-\\.]+)\\s*");
+	
 	// record structure is delimited with a tab character.
-	for (const auto& record : allRecords)
+	while (!buf.atEnd())
 	{
-		++lineNumber;
+		QString record = QString::fromUtf8(buf.readLine());
+
 		// skip comments and empty lines
 		if (record.startsWith("//") || record.startsWith("#") || record.isEmpty())
+		{
+			QRegularExpressionMatch versionMatch=versionRx.match(record);
+			if (versionMatch.hasMatch())
+				qInfo().noquote() << "[...]" << QString("WDS %1").arg(versionMatch.captured(1).trimmed());
 			continue;
+		}
 
-		++totalRecords;
+		totalRecords++;
 		const QStringList& fields = record.split('\t');
 
 		bool ok;
 		StarId hip = fields.at(0).toLongLong(&ok);
 		if (!ok)
-		{
-			qWarning() << "Parse error at line" << lineNumber << "in" << QDir::toNativeSeparators(WdsFileName)
-				   << " - failed to convert " << fields.at(0) << "to a number";
 			continue;
-		}
-
+		
 		// Don't set the star if it's already set
 		if (wdsStarsMap.contains(hip))
-		{
-			qWarning() << "HIP" << hip << "already processed. Ignoring record:" << record;
 			continue;
-		}
 
 		wds doubleStar = {fields.at(1).trimmed(), fields.at(2).toInt(), fields.at(3).toFloat(),fields.at(4).toFloat()};
 		wdsStarsMap[hip] = doubleStar;
@@ -2433,9 +2443,9 @@ void StarMgr::populateStarsDesignations()
 	else
 		loadGcvs(filePath);
 
-	filePath = StelFileMgr::findFile("stars/hip_gaia3/wds_hip_part.dat");
+	filePath = StelFileMgr::findFile("stars/hip_gaia3/wds.cat");
 	if (filePath.isEmpty())
-		qWarning() << "Could not load double stars file: stars/hip_gaia3/wds_hip_part.dat";
+		qWarning() << "Could not load double stars file: stars/hip_gaia3/wds.cat";
 	else
 		loadWds(filePath);
 
