@@ -29,6 +29,7 @@
 #include <QString>
 #include <QtEndian>
 #include <cmath>
+#include <limits>
 
 // Epoch in JD of the star catalog data
 #define STAR_CATALOG_JDEPOCH 2457389.0
@@ -88,9 +89,10 @@ struct Star
          return 127;
       return index;
    }
-   inline double  getMag() const { return static_cast<const Derived *>(this)->getMag(); } // should return in millimag
-   inline float   getBV() const { return static_cast<const Derived *>(this)->getBV(); }   // should return in mag
-   // VIP flag is for situation where it can bypass some check (e.g., magnitude display cutoff for Star1 in far
+    inline double  getMag() const { return static_cast<const Derived *>(this)->getMag(); } // should return in millimag
+    inline float   getBV() const { return static_cast<const Derived *>(this)->getBV(); }   // should return in mag
+    inline bool    hasBV() const { return static_cast<const Derived *>(this)->hasBV(); }   // true if catalog has real BP-RP color
+    // VIP flag is for situation where it can bypass some check (e.g., magnitude display cutoff for Star1 in far
    // past/future)
    inline bool    isVIP() const { return static_cast<const Derived *>(this)->isVIP(); }
    inline StarId  getHip() const { return static_cast<const Derived *>(this)->getHip(); }
@@ -473,6 +475,7 @@ private:
 
 public:
    StelObjectP   createStelObject(const SpecialZoneArray<Star1> * a, const SpecialZoneData<Star1> * z) const;
+   static inline float missingBVMag = 0.0f;  //!< B-V value used when catalog sentinel indicates missing BP-RP
    inline int    getMag() const { return qFromLittleEndian(d.vmag); } // in milli-mag
    inline int    getSpInt() const { return qFromLittleEndian(d.spInt); }
    inline double getX0() const { return qFromLittleEndian(d.x0) / 2.e9; }
@@ -518,7 +521,15 @@ public:
       return letter_value;
    }
    inline int getObjType() const { return qFromLittleEndian(d.objtype); }
-   float      getBV(void) const { return static_cast<float>(qFromLittleEndian(d.b_v)) / 1000.f; }
+   float      getBV(void) const
+   {
+      const qint16 bv = qFromLittleEndian(d.b_v);
+      return bv == std::numeric_limits<qint16>::max() ? missingBVMag : static_cast<float>(bv) / 1000.f;
+   }
+   bool       hasBV(void) const
+   {
+      return qFromLittleEndian(d.b_v) != std::numeric_limits<qint16>::max();
+   }
    bool       isVIP() const { return true; }
    bool       hasName() const { return getHip(); } // OR gaia??
    QString    getNameI18n(void) const;
@@ -546,6 +557,7 @@ private:
    } d;
 
 public:
+   static inline float missingBVMag = 0.0f;  //!< B-V value used when catalog sentinel indicates missing BP-RP
    inline double getX0() const { return qFromLittleEndian(d.x0) * MAS2RAD; }
    inline double getX1() const { return qFromLittleEndian(d.x1) * MAS2RAD; }
    inline double getX2() const { return 0; }
@@ -560,7 +572,15 @@ public:
    StelObjectP    createStelObject(const SpecialZoneArray<Star2> * a, const SpecialZoneData<Star2> * z) const;
    StarId         getHip() const { return 0; }
    StarId         getGaia() const { return qFromLittleEndian(d.gaia_id); }
-   float          getBV(void) const { return static_cast<float>(qFromLittleEndian(d.b_v)) / 1000.f; }
+   float          getBV(void) const
+   {
+      const qint16 bv = qFromLittleEndian(d.b_v);
+      return bv == std::numeric_limits<qint16>::max() ? missingBVMag : static_cast<float>(bv) / 1000.f;
+   }
+   bool           hasBV(void) const
+   {
+      return qFromLittleEndian(d.b_v) != std::numeric_limits<qint16>::max();
+   }
    QString        getNameI18n(void) const { return QString(); }
    QString        getScreenNameI18n(const bool) const { return QString(); }
    QString        getDesignation(void) const { return QString(); }
@@ -592,6 +612,7 @@ private:
 
 public:
    StelObjectP   createStelObject(const SpecialZoneArray<Star3> * a, const SpecialZoneData<Star3> * z) const;
+   static inline float missingBVMag = 0.0f;  //!< B-V value used when catalog sentinel indicates missing BP-RP
    inline double getX0() const
    {
       quint32 x0 = d.x0[0] | (d.x0[1] << 8) | (d.x0[2] << 16);
@@ -610,7 +631,15 @@ public:
    double         getPlx() const { return 0.; }
    double         getPlxErr() const { return 0.; }
    double         getRV() const { return 0.; }
-   double         getBV() const { return (0.025 * qFromLittleEndian(d.b_v)) - 1.; } // in mag
+   float          getBV() const
+   {
+      const quint8 bv = qFromLittleEndian(d.b_v);
+      return bv == std::numeric_limits<quint8>::max() ? missingBVMag : (0.025 * bv) - 1.;
+   } // in mag
+   bool           hasBV() const
+   {
+      return qFromLittleEndian(d.b_v) != std::numeric_limits<quint8>::max();
+   }
    double         getMag() const { return qFromLittleEndian(d.vmag) * 20 + 16000; } // in milli-mag
    StarId         getHip() const { return 0; }
    StarId         getGaia() const { return qFromLittleEndian(d.gaia_id); }
