@@ -176,6 +176,16 @@ SET(stellarium_lib_SRCS
      core/planetsephems/de440.hpp
      core/planetsephems/de441.cpp
      core/planetsephems/de441.hpp
+     core/planetsephems/BSPReader.cpp
+     core/planetsephems/BSPReader.hpp
+     core/planetsephems/BSPManager.cpp
+     core/planetsephems/BSPManager.hpp
+     core/planetsephems/EOPReader.cpp
+     core/planetsephems/EOPReader.hpp
+     core/planetsephems/EOPManager.cpp
+     core/planetsephems/EOPManager.hpp
+     core/planetsephems/EOPUpdater.cpp
+     core/planetsephems/EOPUpdater.hpp
      core/planetsephems/htc20b.c
      core/planetsephems/htc20b.h
      core/modules/AtmosphereLightweight.cpp
@@ -366,6 +376,10 @@ IF(STELLARIUM_GUI_MODE STREQUAL "Standard")
           gui/GreatRedSpotDialog.cpp
           gui/CustomDeltaTEquationDialog.hpp
           gui/CustomDeltaTEquationDialog.cpp
+          gui/TTminusTDBKernelDialog.hpp
+          gui/TTminusTDBKernelDialog.cpp
+          gui/EOPDialog.hpp
+          gui/EOPDialog.cpp
           gui/ConfigureScreenshotsDialog.hpp
           gui/ConfigureScreenshotsDialog.cpp
           gui/AstroCalcDialog.hpp
@@ -410,6 +424,8 @@ IF(STELLARIUM_GUI_MODE STREQUAL "Standard")
           gui/atmosphereDialog.ui
           gui/greatRedSpotDialog.ui
           gui/customDeltaTEquationDialog.ui
+          gui/ttMinusTdbKernelDialog.ui
+          gui/eopDialog.ui
           gui/configureScreenshotsDialog.ui
           gui/astroCalcDialog.ui
           gui/astroCalcExtraEphemerisDialog.ui
@@ -564,7 +580,9 @@ IF(ENABLE_SPOUT AND SPOUT_LIBRARY_DLL)
      CONFIGURE_FILE(${SPOUT_LIBRARY_DLL} ${CMAKE_CURRENT_BINARY_DIR} COPYONLY)
 ENDIF()
 
-SET(STELMAIN_DEPS ${MD4C_STEL_LIBRARIES} ${ZLIB_LIBRARIES} glues_stel ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} ${STELLARIUM_QT_LIBRARIES} ${SPOUT_LIBRARY} ${STD_EXECUTION_LIBS})
+# (SS) 2025-11-27 - Added erfa_201 to the dependencies
+# (SS) 2025-12-03 - Changed erfa_201 to erfa
+SET(STELMAIN_DEPS ${MD4C_STEL_LIBRARIES} ${ZLIB_LIBRARIES} glues_stel erfa ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} ${STELLARIUM_QT_LIBRARIES} ${SPOUT_LIBRARY} ${STD_EXECUTION_LIBS})
 IF(USE_BUNDLED_QTCOMPRESS)
      SET(STELMAIN_DEPS ${STELMAIN_DEPS} qtcompress_stel)
 ENDIF()
@@ -977,6 +995,48 @@ IF(ENABLE_TESTING)
      ADD_DEPENDENCIES(buildTests testSiderealTime)
      ADD_TEST(testSiderealTime testSiderealTime)
      SET_TARGET_PROPERTIES(testSiderealTime PROPERTIES FOLDER "src/tests")
+
+     SET(tests_testBSPReader_SRCS
+          tests/testBSPReader.hpp
+          tests/testBSPReader.cpp
+     )
+     ADD_EXECUTABLE(testBSPReader ${tests_testBSPReader_SRCS})
+     TARGET_LINK_LIBRARIES(testBSPReader ${TESTS_LIBRARIES})
+     ADD_DEPENDENCIES(buildTests testBSPReader)
+     ADD_TEST(testBSPReader testBSPReader)
+     SET_TARGET_PROPERTIES(testBSPReader PROPERTIES FOLDER "src/tests")
+
+     SET(tests_testBSPManager_SRCS
+          tests/testBSPManager.hpp
+          tests/testBSPManager.cpp
+     )
+     ADD_EXECUTABLE(testBSPManager ${tests_testBSPManager_SRCS})
+     TARGET_LINK_LIBRARIES(testBSPManager ${TESTS_LIBRARIES})
+     ADD_DEPENDENCIES(buildTests testBSPManager)
+     ADD_TEST(testBSPManager testBSPManager)
+     SET_TARGET_PROPERTIES(testBSPManager PROPERTIES FOLDER "src/tests")
+
+     SET(tests_testEOPReader_SRCS
+          tests/testEOPReader.hpp
+          tests/testEOPReader.cpp
+          tests/EOPTestData.hpp
+     )
+     ADD_EXECUTABLE(testEOPReader ${tests_testEOPReader_SRCS})
+     TARGET_LINK_LIBRARIES(testEOPReader ${TESTS_LIBRARIES})
+     ADD_DEPENDENCIES(buildTests testEOPReader)
+     ADD_TEST(testEOPReader testEOPReader)
+     SET_TARGET_PROPERTIES(testEOPReader PROPERTIES FOLDER "src/tests")
+
+     SET(tests_testEOPManager_SRCS
+          tests/testEOPManager.hpp
+          tests/testEOPManager.cpp
+          tests/EOPTestData.hpp
+     )
+     ADD_EXECUTABLE(testEOPManager ${tests_testEOPManager_SRCS})
+     TARGET_LINK_LIBRARIES(testEOPManager ${TESTS_LIBRARIES})
+     ADD_DEPENDENCIES(buildTests testEOPManager)
+     ADD_TEST(testEOPManager testEOPManager)
+     SET_TARGET_PROPERTIES(testEOPManager PROPERTIES FOLDER "src/tests")
 
      SET(tests_testEphemeris_SRCS
           tests/testEphemeris.hpp

@@ -39,9 +39,13 @@
 #include "StelFileMgr.hpp"
 #include "StelMainView.hpp"
 #include "EphemWrapper.hpp"
+#include "BSPManager.hpp"	// (SS) 2026-10-03
+#include "EOPManager.hpp"	// (SS) 2026-10-05
+#include "EOPUpdater.hpp"	// (SS) 2026-10-07
 #include "NomenclatureItem.hpp"
 #include "precession.h"
 #include "Star.hpp"
+#include <de440.hpp>		// (SS) 2026-10-03 GetDe440Coor(), used as fallback for TT-TDB
 
 #include <QSettings>
 #include <QDebug>
@@ -50,11 +54,18 @@
 #include <QTimeZone>
 #include <QFile>
 #include <QDir>
+#include <QDateTime>
+#include <QTimer>
 #include <QRegularExpression>
 #include <QOpenGLShaderProgram>
 
 // Init static transfo matrices
 // See vsop87.doc:
+// (SS) 2026-06-16 Repère de la solution VSOP87 par rapport au repère du FK5-J2000. Les éphémérides VSOP87 sont défini
+// dans le repère inertiel de l'écliptique dynamique. Voir VSOP82, Bretagnon, A&A 114, 278-288 (1982), section III,
+// bas de page p281 23.4392803055555555556 --> 23 degree 26 arcmin 21.4091 arcsecond. L'inclinaison de l'écliptique
+// dynamique sur l'equateur du FK5-J2000 -0.0000275 degree --> -0.0990 arcsec. Angle entre l'équinoxe FK5-J2000 et
+// l'équinoxe dynamique gammaFK5-gammaDyn
 const Mat4d StelCore::matJ2000ToVsop87(Mat4d::xrotation(-23.4392803055555555556*M_PI_180) * Mat4d::zrotation(0.0000275*M_PI_180));
 const Mat4d StelCore::matVsop87ToJ2000(matJ2000ToVsop87.transpose());
 const Mat4d StelCore::matJ2000ToGalactic(-0.054875539726, 0.494109453312, -0.867666135858, 0, -0.873437108010, -0.444829589425, -0.198076386122, 0, -0.483834985808, 0.746982251810, 0.455983795705, 0, 0, 0, 0, 1);
@@ -86,13 +97,17 @@ StelCore::StelCore()
 	, currentDeltaTAlgorithm(EspenakMeeus)
 	, position(Q_NULLPTR)
 	, flagUseNutation(true)
+	, flagUseEOP(true)
 	, flagUseAberration(true)
 	, aberrationFactor(1.0)
 	, flagUseParallax(true)
 	, parallaxFactor(1.0)
+	, flagUseDeflection(true)				// (SS) 2026-09-13 Gravitational light deflection by the Sun (major planets and Pluto)
+	, deflectionFactor(1.0)					// (SS) 2026-09-13 Factor to allow exaggerating deflection effects. 1 is natural value, stretching may be useful for explanations.
+	, flagUseLunarFigureCorrection(false)	// (SS) 2026-09-15 Moon's visible-disk-center vs. center-of-mass offset (USNO/HMNAO standard correction)
 	, flagUseTopocentricCoordinates(true)
 	, timeSpeed(JD_SECOND)
-        , savedTimeSpeed(JD_SECOND)
+    , savedTimeSpeed(JD_SECOND)
 	, JD(0.,0.)
 	, presetSkyTime(0.)
 	, milliSecondsOfLastJDUpdate(0)
@@ -150,10 +165,19 @@ StelCore::StelCore()
 	currentProjectorParams.devicePixelsPerPixel = StelApp::getInstance().getDevicePixelsPerPixel();
 
 	flagUseNutation=conf->value("astro/flag_nutation", true).toBool();
+	flagUseEOP=conf->value("astro/flag_eop", true).toBool();	// (SS) 2026-10-07
 	flagUseAberration=conf->value("astro/flag_aberration", true).toBool();
 	aberrationFactor=conf->value("astro/aberration_factor", 1.0).toDouble();
 	flagUseParallax=conf->value("astro/flag_parallax", true).toBool();
 	parallaxFactor=conf->value("astro/parallax_factor", 1.0).toDouble();
+
+	// (SS) 2026-09-13 Gravitational light deflection by the Sun (major planets and Pluto)
+	flagUseDeflection            = conf->value("astro/flag_deflection", true).toBool();
+	deflectionFactor             = conf->value("astro/deflection_factor", 1.0).toDouble();
+
+	// (SS) 2026-09-15 Lunar center-of-figure vs. center-of-mass correction (USNO/HMNAO standard correction)
+	flagUseLunarFigureCorrection = conf->value("astro/flag_lunar_figure_correction", false).toBool();
+
 	flagUseTopocentricCoordinates=conf->value("astro/flag_topocentric_coordinates", true).toBool();
 	flagUseDST=conf->value("localization/flag_dst", true).toBool();
 
@@ -168,6 +192,7 @@ StelCore::StelCore()
 
 StelCore::~StelCore()
 {
+	StelUtils::setTTminusTDBProvider(nullptr);
 	delete toneReproducer; toneReproducer=Q_NULLPTR;
 	delete geodesicGrid; geodesicGrid=Q_NULLPTR;
 	delete skyDrawer; skyDrawer=Q_NULLPTR;
@@ -249,6 +274,41 @@ void StelCore::init()
 	// Define default algorithm for time correction (Delta T)
 	QString tmpDT = conf->value("navigation/time_correction_algorithm", "EspenakMeeusModified").toString();
 	setCurrentDeltaTAlgorithmKey(tmpDT);
+
+	// (SS) 2026-10-03 JPL SPK kernels (*.bsp) are looked for in the "ephemBSP" folder of the user data directory
+	// (created if missing). For now they provide TT-TDB for the JPL Horizons style computations (default kernel:
+	// de431t.bsp, which covers BC10000..AD10000). The folder is scanned here and again on request (Refresh button).
+	const QString bspDir = StelFileMgr::getUserDir() + "/ephemBSP";
+	QDir().mkpath(bspDir);
+	bspMgr = new BSPManager(bspDir, this);
+	bspMgr->setTTminusTDBKernel(conf->value("astro/ttmtdb_kernel", BSPManager::defaultTTminusTDBKernel()).toString());
+	qInfo().noquote() << "SPK kernels (*.bsp) found in" << bspDir << ":" << bspMgr->rescan();
+
+	// (SS) 2026-10-03 getDeltaTByJPLHorizons() takes TT-TDB from the selected SPK kernel
+	StelUtils::setTTminusTDBProvider([this](double jdTDB, double& seconds)
+	                                 { return bspMgr && bspMgr->ttMinusTDB(jdTDB, seconds); });
+
+	// (SS) 2026-10-05 Earth Orientation Parameters (EOP) files are looked for in the "eop" folder of the user data directory
+	// (created if missing). Without an explicit choice ("astro/eop_files", names separated by '|') the historic file and the newest
+	// version of each other file are merged. The folder is scanned here and again on request (Refresh button).
+	const QString eopDir = StelFileMgr::getUserDir() + "/eop";
+	QDir().mkpath(eopDir);
+	eopMgr = new EOPManager(eopDir, this);
+	// (SS) 2026-10-07 Nutation model of the EOP: the files of this model are merged last (default IAU 1980, as JPL Horizons)
+	{
+		const EOPManager::Model eopModel = EOPManager::modelFromKey(conf->value("astro/eop_model", "IAU1980").toString());
+		if (eopModel != EOPManager::Model::Unknown)
+			eopMgr->setPreferredModel(eopModel);
+	}
+	const QString eopSelection = conf->value("astro/eop_files", "").toString();
+	eopMgr->setSelectedFiles(eopSelection.isEmpty() ? QStringList() : eopSelection.split('|', Qt::SkipEmptyParts));
+	qInfo().noquote() << "EOP files found in" << eopDir << ":" << eopMgr->rescan().join(", ");
+	eopMgr->reload();
+	qInfo().noquote() << "EOP files merged:" << eopMgr->selectedFiles().join(", ");
+	logEOPReport();
+	// a few seconds after start-up, download the files that are missing or older than their refresh delay
+	if (conf->value("astro/eop_auto_update", true).toBool())
+		QTimer::singleShot(3000, this, [this]() { updateEOPFiles(false); });
 
 	// Define variables of custom equation for calculation of Delta T
 	// Default: ndot = -26.0 "/cy/cy; year = 1820; DeltaT = -20 + 32*u^2, where u = (currentYear-1820)/100
@@ -1255,9 +1315,18 @@ double StelCore::getJD() const
 
 void StelCore::setJDE(double newJDE)
 {
-	// nitpickerish this is not exact, but as good as it gets...
-	JD.second=computeDeltaT(newJDE);
-	JD.first=newJDE-JD.second/86400.0;
+	// (SS) 2026-10-01 REVISED: JD(UT) is not known yet, so the first estimate of Delta-T
+	// has to be evaluated at JDE. Because Delta-T is a function of JD(UT) rather than JDE,
+	// that estimate is off by about DeltaT * dDeltaT/dt (about 1e-6 s today, but up to
+	// about 1 s near 9999BC where DeltaT is ~440000 s). We therefore do one fixed-point
+	// iteration: estimate JD(UT) from the first Delta-T, then re-evaluate Delta-T at that
+	// JD(UT). The iteration contracts by a factor dDeltaT/dt (~2.4e-6 at worst), so the
+	// residual error on JD(UT) is of order microseconds, consistent with setJD().
+	// JDE = JD.first + JD.second/86400 is preserved exactly, so everything that depends
+	// only on JDE (ephemerides, precession, nutation) is unchanged.
+	const double jdFirstGuess = newJDE - computeDeltaT(newJDE) / 86400.0;
+	JD.second                 = computeDeltaT(jdFirstGuess);
+	JD.first                  = newJDE - JD.second / 86400.0;
 	resetSync();
 	setClearSkyOnce();
 }
@@ -1292,6 +1361,222 @@ void StelCore::setUseNutation(bool use)
 		StelApp::immediateSave("astro/flag_nutation", use);
 		emit flagUseNutationChanged(use);
 	}
+}
+
+// (SS) 2026-10-07 One log line for each line of the report of EOPManager
+void StelCore::logEOPReport() const
+{
+	if (!eopMgr)
+		return;
+	const QStringList lines = eopMgr->lastReport().split('\n');
+	for (const QString& line : lines)
+		if (!line.trimmed().isEmpty())
+			qInfo().noquote() << line;
+}
+
+// (SS) 2026-10-07 Download the EOP files of the IERS
+void StelCore::updateEOPFiles(bool force)
+{
+	if (!eopMgr || (eopUpdater && eopUpdater->isRunning()))
+		return;
+
+	const QDate today = QDate::currentDate();
+	QList<EOPUpdater::Source> todo;
+	const QList<EOPUpdater::Source> sources = EOPUpdater::defaultSources();
+	for (const EOPUpdater::Source& src : sources)
+		if (force || eopMgr->isOlderThan(EOPManager::keyFromName(src.fileName), today, src.refreshDays))
+			todo << src;
+
+	if (todo.isEmpty())
+	{
+		qInfo().noquote() << "EOP files are up to date";
+		emit eopUpdateFinished(true, QStringList(), QStringLiteral("EOP files are up to date"));
+		return;
+	}
+
+	if (!eopUpdater)
+	{
+		eopUpdater = new EOPUpdater(StelApp::getInstance().getNetworkAccessManager(), eopMgr->directory(), this);
+		connect(eopUpdater, &EOPUpdater::progress, this, &StelCore::eopUpdateProgress);
+		connect(eopUpdater, &EOPUpdater::fileFinished, this, [](const QString&, bool ok, const QString& message)
+		{
+			if (ok)
+				qInfo().noquote() << "EOP update:" << message;
+			else
+				qWarning().noquote() << "EOP update:" << message;
+		});
+		connect(eopUpdater, &EOPUpdater::finished, this, [this](bool ok, const QStringList& written, const QString& message)
+		{
+			if (!written.isEmpty())
+			{
+				// new files: scan the folder again; without an explicit selection the newest files are merged
+				qInfo().noquote() << "EOP files found:" << eopMgr->rescan().join(", ");
+				eopMgr->reload();
+				qInfo().noquote() << "EOP files merged:" << eopMgr->selectedFiles().join(", ");
+				logEOPReport();
+				emit eopFilesChanged(eopMgr->selectedFiles());
+			}
+			if (!ok)
+				qWarning().noquote() << "EOP update failed:" << message;
+			emit eopUpdateFinished(ok, written, message);
+		});
+	}
+	qInfo().noquote() << "EOP update: downloading" << todo.size() << "file(s) from the IERS data center";
+	eopUpdater->start(todo, today);
+}
+
+bool StelCore::isUpdatingEOP() const
+{
+	return eopUpdater && eopUpdater->isRunning();
+}
+
+// (SS) 2026-10-05 IAU 1980 nutation corrections from the EOP files, in arcsec
+bool StelCore::getEOPNutationCorrections(double jdUTC, double& dpsiArcsec, double& depsArcsec) const
+{
+	if (!flagUseEOP) // (SS) 2026-10-07 EOP corrections switched off: all values are 0
+	{
+		dpsiArcsec = depsArcsec = 0.;
+		return true;
+	}
+	return eopMgr && eopMgr->getNutationCorrections(jdUTC, dpsiArcsec, depsArcsec);
+}
+
+// (SS) 2026-10-07 EOP values at a date, all 0 when the EOP corrections are switched off
+bool StelCore::getEOPValues(double jdUTC, EOPValues& values) const
+{
+	values = EOPValues();
+	if (!flagUseEOP)
+		return true;
+	EOPReader::Interpolated e;
+	if (!eopMgr || !eopMgr->getEOP(jdUTC, e))
+		return false;
+	const EOPReader::Record& r = e.rec;
+	if (r.hasPole)
+	{
+		values.xp = r.xp;
+		values.yp = r.yp;
+	}
+	if (r.hasUT)
+		values.ut1utc = r.ut1utc;
+	if (r.hasLOD)
+		values.lod = r.lod;
+	if (r.hasNutation)
+	{
+		values.dpsi = r.dpsi;
+		values.deps = r.deps;
+	}
+	if (r.hasDXDY)
+	{
+		values.dx = r.dx;
+		values.dy = r.dy;
+	}
+	return true;
+}
+
+bool StelCore::getUseEOP() const
+{
+	return flagUseEOP;
+}
+
+// (SS) 2026-10-07 Set whether the EOP corrections are applied. Saved immediately like the nutation flag.
+void StelCore::setUseEOP(bool use)
+{
+	if (flagUseEOP != use)
+	{
+		flagUseEOP = use;
+		StelApp::immediateSave("astro/flag_eop", use);
+		emit flagUseEOPChanged(use);
+	}
+}
+
+QString StelCore::getEOPModel() const
+{
+	return EOPManager::modelKey(eopMgr ? eopMgr->preferredModel() : EOPManager::Model::IAU1980);
+}
+
+// (SS) 2026-10-07 The files of the selected model are merged last, then the merge is done again
+void StelCore::setEOPModel(const QString& key)
+{
+	const EOPManager::Model model = EOPManager::modelFromKey(key);
+	if (!eopMgr || model == EOPManager::Model::Unknown || model == eopMgr->preferredModel())
+		return;
+	eopMgr->setPreferredModel(model);
+	eopMgr->reload();
+	StelApp::immediateSave("astro/eop_model", EOPManager::modelKey(model));
+	qInfo().noquote() << "EOP model:" << EOPManager::modelKey(model) << "- merged files:" << eopMgr->mergeOrder().join(", ");
+	logEOPReport();
+	emit eopModelChanged(EOPManager::modelKey(model));
+	emit eopFilesChanged(eopMgr->selectedFiles());
+}
+
+// (SS) 2026-10-07 Scan the eop folder again and merge the selected files
+void StelCore::rescanEOPFiles()
+{
+	if (!eopMgr)
+		return;
+	qInfo().noquote() << "EOP files found:" << eopMgr->rescan().join(", ");
+	eopMgr->reload();
+	qInfo().noquote() << "EOP files merged:" << eopMgr->selectedFiles().join(", ");
+	logEOPReport();
+	emit eopFilesChanged(eopMgr->selectedFiles());
+}
+
+// (SS) 2026-10-05 Names of the EOP files that are merged
+QStringList StelCore::getEOPFiles() const
+{
+	return eopMgr ? eopMgr->selectedFiles() : QStringList();
+}
+
+// (SS) 2026-10-05 Select the EOP files to merge. An empty list selects the default files.
+void StelCore::setEOPFiles(const QStringList& fileNames)
+{
+	if (!eopMgr) return;
+	eopMgr->setSelectedFiles(fileNames);
+	eopMgr->reload();
+	StelApp::immediateSave("astro/eop_files", fileNames.join(QLatin1Char('|')));
+	emit eopFilesChanged(eopMgr->selectedFiles());
+}
+
+// (SS) 2026-10-03 @return file name of the SPK kernel used for TT-TDB
+QString StelCore::getTTminusTDBKernel() const
+{
+	return bspMgr ? bspMgr->ttMinusTDBKernel() : QString();
+}
+
+// (SS) 2026-10-03 Select the SPK kernel (file name in ephemBSP) used for TT-TDB. An empty name or "none" selects no kernel.
+void StelCore::setTTminusTDBKernel(const QString& fileName)
+{
+	if (!bspMgr) return;
+	const QString previous = bspMgr->ttMinusTDBKernel();
+	bspMgr->setTTminusTDBKernel(fileName); // normalizes empty names to "none"
+	const QString current = bspMgr->ttMinusTDBKernel();
+	if (current == previous) return;
+
+	StelApp::immediateSave("astro/ttmtdb_kernel", current);
+	// Recompute Delta-T for the current date so that the new TT-TDB source takes effect immediately
+	if (getCurrentDeltaTAlgorithm() == JPLHorizons) setJD(getJD());
+	emit ttMinusTdbKernelChanged(current);
+}
+
+// (SS) 2026-10-03 TT-TDB in seconds at JD(TDB), from the selected SPK kernel
+bool StelCore::getTTminusTDB(double jdTDB, double& seconds) const
+{
+	return bspMgr && bspMgr->ttMinusTDB(jdTDB, seconds);
+}
+
+// (SS) 2026-10-03 Where TT-TDB comes from at the given date: SPK kernel, else DE440T Linux file, else zero
+StelCore::TTminusTDBSource StelCore::getTTminusTDBSource(double jdTDB, double& seconds) const
+{
+	if (bspMgr && bspMgr->ttMinusTDB(jdTDB, seconds)) return TTminusTDBFromKernel;
+
+	double xyz[6];
+	if (GetDe440Coor(jdTDB, 17, xyz, 11)) // same call as in StelUtils::getDeltaTByJPLHorizons(); id 17 = TT-TDB
+	{
+		seconds = xyz[0];
+		return TTminusTDBFromDE440T;
+	}
+	seconds = 0.0;
+	return TTminusTDBNone;
 }
 
 // @return whether aberration is currently used.
@@ -1352,6 +1637,60 @@ void StelCore::setParallaxFactor(double factor)
 		parallaxFactor=qBound(0.,factor, 100000.);
 		StelApp::immediateSave("astro/parallax_factor", parallaxFactor);
 		emit parallaxFactorChanged(factor);
+	}
+}
+
+// (SS) 2026-09-13 @return whether gravitational light deflection by the Sun is currently used.
+bool StelCore::getUseDeflection() const
+{
+	return flagUseDeflection;
+}
+
+// (SS) 2026-09-13 Set whether you want computation and simulation of gravitational light deflection
+// by the Sun (major planets and Pluto).
+void StelCore::setUseDeflection(bool use)
+{
+	if (flagUseDeflection != use)
+	{
+		flagUseDeflection = use;
+		StelApp::immediateSave("astro/flag_deflection", use);
+		emit flagUseDeflectionChanged(use);
+	}
+}
+
+// (SS) 2026-09-13 @return deflection factor. 1 is realistic simulation, but higher values may be
+// useful for didactic purposes.
+double StelCore::getDeflectionFactor() const
+{
+	return deflectionFactor;
+}
+
+// (SS) 2026-09-13 Set deflection factor. Values are clamped to 0...5. (Values above 5 cause graphical problems.)
+void StelCore::setDeflectionFactor(double factor)
+{
+	if (!fuzzyEquals(deflectionFactor, factor))
+	{
+		deflectionFactor = qBound(0., factor, 5.);
+		StelApp::immediateSave("astro/deflection_factor", deflectionFactor);
+		emit deflectionFactorChanged(factor);
+	}
+}
+
+// (SS) 2026-09-15 @return whether the Moon's center-of-figure correction is applied.
+bool StelCore::getUseLunarFigureCorrection() const
+{
+	return flagUseLunarFigureCorrection;
+}
+
+// (SS) 2026-09-15 Set whether Planet::getApparentLimbCenterPos() applies the standard USNO/HMNAO
+// center-of-mass-to-center-of-figure correction for the Moon.
+void StelCore::setUseLunarFigureCorrection(bool use)
+{
+	if (flagUseLunarFigureCorrection != use)
+	{
+		flagUseLunarFigureCorrection = use;
+		StelApp::immediateSave("astro/flag_lunar_figure_correction", use);
+		emit flagUseLunarFigureCorrectionChanged(use);
 	}
 }
 
@@ -2420,7 +2759,7 @@ double StelCore::getDeltaT() const
 	return JD.second;
 }
 
-
+// (SS) 2025-11-27 : REVISED for differentiating between DE430/431 and DE440/441 ephemeris selection in Moon Secular Acceleration
 // compute and return DeltaT in seconds. Try not to call it directly, current DeltaT, JD, and JDE are available.
 double StelCore::computeDeltaT(const double JD)
 {
@@ -2442,10 +2781,10 @@ double StelCore::computeDeltaT(const double JD)
 	}
 
 	if (!deltaTdontUseMoon)
-		DeltaT += StelUtils::getMoonSecularAcceleration(JD, deltaTnDot, ((de440Active&&EphemWrapper::jd_fits_de440(JD)) ||
-										 (de441Active&&EphemWrapper::jd_fits_de441(JD)) ||
-										 (de430Active&&EphemWrapper::jd_fits_de430(JD)) ||
-										 (de431Active&&EphemWrapper::jd_fits_de431(JD))));
+		DeltaT += StelUtils::getMoonSecularAcceleration(JD, deltaTnDot,((de430Active && EphemWrapper::jd_fits_de430(JD)) ||
+		                                                                (de431Active && EphemWrapper::jd_fits_de431(JD))),
+		                                                               ((de440Active && EphemWrapper::jd_fits_de440(JD)) ||
+		                                                                (de441Active && EphemWrapper::jd_fits_de441(JD)))); 
 
 	return DeltaT;
 }
@@ -2599,11 +2938,19 @@ void StelCore::setCurrentDeltaTAlgorithm(DeltaTAlgorithm algorithm)
 			deltaTfinish	=  2150; // 1997;
 			break;
 		case JPLHorizons:
-			// JPL Horizons algorithm for DeltaT
-			deltaTnDot = -25.7376; // n.dot = -25.7376 "/cy/cy
+			// (SS) 2025-11-27 JPL Horizons algorithm for DeltaT - REVISED
+			// From a communication with Jon Giorgini (JPL) 2025-11-12, n.dot value of -25.82"/cy/cy matches
+			// DE430/DE431 Ephemerides and Stephenson/Morrison/Hohenkerk/Zawilski cubic splines.
+			// However, DE440/DE441 Ephemerides use slightly different lunar model, so we need to apply
+			// the moon secular acceleration correction separately in computeDeltaT() when those are selected.
+			// The n.dot value for DE440/DE441 is -25.936"/cy/cy per Jon Giorgini (JPL) 2025-11-12 email.
+			// The JPL Horizons DeltaT model is valid only from 9999BC to Present. JPL Horizons app actually clamps
+			// Delta-T values to the last EOP file predictions for future dates beyond Present while allowing 
+			// JD value up to 9999-12-30 00:00. Just keep in mind that Delta-T values are not valid beyond Present.
+			deltaTnDot = -25.82; // n.dot = -25.82"/cy/cy
 			deltaTfunc = StelUtils::getDeltaTByJPLHorizons;
-			deltaTstart	= -2999;
-			deltaTfinish	= 1620;
+			deltaTstart = -9998; // 9999BC-03-20 00:00 UT --> JD_UT >= -1930633.5, yearFraction >= -9997.786301369860
+			deltaTfinish = 9999; // 9999AD-12-30 00:00 UT --> JD_UT <=  5373482.5, yearFraction <=  9999.994520547950
 			break;
 		case MeeusSimons:
 			// Meeus & Simons (2000) algorithm for DeltaT

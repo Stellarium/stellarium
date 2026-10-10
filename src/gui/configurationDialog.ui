@@ -1481,6 +1481,16 @@
              <property name="bottomMargin">
               <number>0</number>
              </property>
+			 <item row="0" column="2">
+			    <widget class="QCheckBox" name="checkBoxExtraPrecision">
+				    <property name="toolTip">
+					    <string>Display additional decimal digits for RA/Dec and other coordinates in the object information panel (e.g. 6 digits for RA, 5 for Declination, matching JPL Horizons' Extra Precision output).</string>
+					</property>
+					<property name="text">
+					    <string>Extra precision</string>
+					</property>
+				</widget>
+			 </item>
              <item row="0" column="0">
               <widget class="QCheckBox" name="checkBoxUMSurfaceBrightness">
                <property name="text">
@@ -2328,7 +2338,59 @@
                  </item>
                 </layout>
                </item>
-               <item row="1" column="0">
+			   <item row="2" column="3">
+				<layout class="QHBoxLayout" name="horizontalLayout_IncludeDeflection">
+				    <item>
+					    <widget class="QCheckBox" name="deflectionCheckBox">
+							<property name="sizePolicy">
+									  <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+										  <horstretch>0</horstretch>
+										  <verstretch>0</verstretch>
+									  </sizepolicy>
+								  </property>
+							<property name="toolTip">
+									  <string>Gravitational light deflection by the Sun bends light near the Sun, up to about 1.75 arcseconds at the solar limb, falling off with elongation. Applied to major planets and Pluto.</string>
+								  </property>
+							<property name="text">
+									  <string>Light deflection</string>
+								  </property>
+						</widget>
+					</item>
+					<item>
+						<widget class="QDoubleSpinBox" name="deflectionSpinBox">
+								  <property name="toolTip">
+									  <string>Exaggerate gravitational light deflection (for didactic explanations)</string>
+								  </property>
+								  <property name="alignment">
+									  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+								  </property>
+								  <property name="decimals">
+									  <number>1</number>
+								  </property>
+								  <property name="maximum">
+									  <double>5.000000000000000</double>
+								  </property>
+								  <property name="singleStep">
+									  <double>0.100000000000000</double>
+								  </property>
+								  <property name="value">
+									  <double>1.000000000000000</double>
+								  </property>
+							  </widget>
+					</item>
+				</layout>
+			   </item>
+			   <item row="2" column="0">
+					  <widget class="QCheckBox" name="lunarFigureCorrectionCheckBox">
+						  <property name="toolTip">
+							  <string>Offset the Moon's position from its center of mass to an approximation of its visible-disk center (+0.5 arcsec ecliptic longitude, -0.25 arcsec ecliptic latitude - USNO/HMNAO standard correction). Useful for eclipse and occultation work.</string>
+						  </property>
+						  <property name="text">
+							  <string>Lunar figure correction</string>
+						  </property>
+					  </widget>
+				  </item>
+			   <item row="1" column="0">
                 <widget class="QLabel" name="label_Include">
                  <property name="text">
                   <string>Include </string>
@@ -2344,6 +2406,51 @@
                   <string>Nutation</string>
                  </property>
                 </widget>
+               </item>
+               <item row="1" column="3">
+                <layout class="QHBoxLayout" name="horizontalLayout_IncludeEOP">
+                 <item>
+                  <widget class="QCheckBox" name="eopCheckBox">
+                   <property name="toolTip">
+                    <string>Apply the Earth Orientation Parameters (EOP) published by the IERS to the transformation matrices. When off, all EOP values are 0.</string>
+                   </property>
+                   <property name="text">
+                    <string>EOP</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QToolButton" name="eopToolButton">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
+                   <property name="toolTip">
+                    <string>Earth Orientation Parameters: files, model, current values and table...</string>
+                   </property>
+                   <property name="icon">
+                    <iconset resource="../../data/gui/guiRes.qrc">
+                     <normaloff>:/graphicGui/uibtSettings.png</normaloff>
+                     <disabledoff>:/graphicGui/uibtSettings-disabled.png</disabledoff>:/graphicGui/uibtSettings.png</iconset>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <spacer name="horizontalSpacer_EOP">
+                   <property name="orientation">
+                    <enum>Qt::Horizontal</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>40</width>
+                     <height>20</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                </layout>
                </item>
                <item row="1" column="1">
                 <widget class="QCheckBox" name="topocentricCheckBox">
@@ -3448,6 +3555,7 @@
   <tabstop>checkBoxUMShortNotationSurfaceBrightness</tabstop>
   <tabstop>checkBoxUseCCSDesignations</tabstop>
   <tabstop>checkBoxUseFormattingOutput</tabstop>
+  <tabstop>checkBoxExtraPrecision</tabstop>
   <tabstop>checkBoxDecimalDegreesCoords</tabstop>
   <tabstop>checkBoxDecimalDegreesOther</tabstop>
   <tabstop>checkBoxAzimuthFromSouth</tabstop>
@@ -3505,8 +3613,12 @@
   <tabstop>guiFontSizeSpinBox</tabstop>
   <tabstop>topocentricCheckBox</tabstop>
   <tabstop>nutationCheckBox</tabstop>
+  <tabstop>eopCheckBox</tabstop>
+  <tabstop>eopToolButton</tabstop>
   <tabstop>aberrationCheckBox</tabstop>
   <tabstop>aberrationSpinBox</tabstop>
+  <tabstop>deflectionCheckBox</tabstop>
+  <tabstop>deflectionSpinBox</tabstop>
   <tabstop>minFpsSpinBox</tabstop>
   <tabstop>maxFpsSpinBox</tabstop>
   <tabstop>solarSystemThreadNumberSpinBox</tabstop>

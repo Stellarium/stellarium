@@ -22,6 +22,8 @@
 #include "Dialog.hpp"
 #include "ConfigurationDialog.hpp"
 #include "CustomDeltaTEquationDialog.hpp"
+#include "TTminusTDBKernelDialog.hpp"	// (SS) 2026-10-03
+#include "EOPDialog.hpp"	// (SS) 2026-10-07
 #include "ConfigureScreenshotsDialog.hpp"
 #include "StelMainView.hpp"
 #include "StelSpeechMgr.hpp"
@@ -91,6 +93,8 @@ ConfigurationDialog::ConfigurationDialog(StelGui* agui, QObject* parent)
 	, gui(agui)
 	, customDeltaTEquationDialog(Q_NULLPTR)
 	, configureScreenshotsDialog(Q_NULLPTR)
+	, ttMinusTdbKernelDialog(Q_NULLPTR)
+	, eopDialog(Q_NULLPTR)
 	, savedProjectionType(StelApp::getInstance().getCore()->getCurrentProjectionType())
 {
 	ui = new Ui_configurationDialogForm;
@@ -104,6 +108,10 @@ ConfigurationDialog::~ConfigurationDialog()
 	customDeltaTEquationDialog = Q_NULLPTR;
 	delete configureScreenshotsDialog;
 	configureScreenshotsDialog = Q_NULLPTR;
+	delete ttMinusTdbKernelDialog;
+	ttMinusTdbKernelDialog = Q_NULLPTR;
+	delete eopDialog;
+	eopDialog = Q_NULLPTR;
 	delete currentDownloadFile;
 	currentDownloadFile = Q_NULLPTR;
 }
@@ -137,6 +145,7 @@ void ConfigurationDialog::retranslate()
 		populatePluginsList();
 
 		populateDeltaTAlgorithmsList();
+		updateDeltaTWrenchButton();	// (SS) 2026-10-03
 		populateDateFormatsList();
 		populateTimeFormatsList();
 
@@ -202,10 +211,24 @@ void ConfigurationDialog::createDialogContent()
 	resetEphemControls();
 
 	connectBoolProperty(ui->nutationCheckBox,    "StelCore.flagUseNutation");
+	// (SS) 2026-10-07 Earth Orientation Parameters: checkbox and wrench button that opens the EOP dialog
+	connectBoolProperty(ui->eopCheckBox,         "StelCore.flagUseEOP");
+	connect(ui->eopToolButton, &QToolButton::clicked, this, &ConfigurationDialog::showEOPDialog);
 	connectBoolProperty(ui->aberrationCheckBox,  "StelCore.flagUseAberration");
 	connectDoubleProperty(ui->aberrationSpinBox, "StelCore.aberrationFactor");
 	connectBoolProperty(ui->parallaxCheckBox,    "StelCore.flagUseParallax");
 	connectDoubleProperty(ui->parallaxSpinBox,   "StelCore.parallaxFactor");
+
+	// (SS) 2026-09-13 Gravitational light deflection toggle/factor. setUseDeflection()/setDeflectionFactor()
+	// already call StelApp::immediateSave() themselves (like aberration/parallax), so no extra manual
+	// connect() is needed here, unlike topocentricCheckBox below (see GH #4112).
+	connectBoolProperty(ui->deflectionCheckBox, "StelCore.flagUseDeflection");
+	connectDoubleProperty(ui->deflectionSpinBox, "StelCore.deflectionFactor");
+	
+	// (SS) 2026-09-15 Lunar figure-center correction toggle. setUseLunarFigureCorrection() already
+	// calls StelApp::immediateSave() itself, same as deflection/aberration/parallax above.
+	connectBoolProperty(ui->lunarFigureCorrectionCheckBox, "StelCore.flagUseLunarFigureCorrection");
+
 	connectBoolProperty(ui->topocentricCheckBox, "StelCore.flagUseTopocentricCoordinates");
 	// We cannot link flag setting to immediate storing. (GH #4112)
 	// The immediate-store is now triggered by this click
@@ -219,6 +242,12 @@ void ConfigurationDialog::createDialogContent()
 	connectBoolProperty(ui->checkBoxUMShortNotationSurfaceBrightness, "NebulaMgr.flagSurfaceBrightnessShortNotationUsage");
 	connectBoolProperty(ui->checkBoxUseFormattingOutput, "StelApp.flagUseFormattingOutput");
 	connectBoolProperty(ui->checkBoxUseCCSDesignations,  "StelApp.flagUseCCSDesignation");
+
+	// (SS) 2026-09-13 Extra decimal-digit precision for RA/Dec and other coordinates in the object
+	// info panel (e.g. 6 digits RA / 5 digits Dec, matching JPL Horizons' Extra Precision mode).
+	// GUI toggle only for now - the digit-count logic itself is wired in separately.
+	connectBoolProperty(ui->checkBoxExtraPrecision, "StelApp.flagExtraPrecision");
+
 	connectBoolProperty(ui->overwriteTextColorCheckBox,  "StelApp.flagOverwriteInfoColor");
 
 	// Selected object info
@@ -307,8 +336,7 @@ void ConfigurationDialog::createDialogContent()
 	ui->deltaTAlgorithmComboBox->setCurrentIndex(idx);
 	connect(ui->deltaTAlgorithmComboBox, qOverload<int>(&QComboBox::currentIndexChanged), this, &ConfigurationDialog::setDeltaTAlgorithm);
 	connect(ui->pushButtonCustomDeltaTEquationDialog, &QToolButton::clicked, this, &ConfigurationDialog::showCustomDeltaTEquationDialog);
-	if (core->getCurrentDeltaTAlgorithm()==StelCore::Custom)
-		ui->pushButtonCustomDeltaTEquationDialog->setEnabled(true);
+	updateDeltaTWrenchButton();	// (SS) 2026-10-03 enabled for Custom and for JPL Horizons
 
 	// Tools tab
 	ui->sphericMirrorCheckbox->setChecked(StelApp::getInstance().getViewportEffect() == "sphericMirrorDistorter");
@@ -1350,10 +1378,18 @@ void ConfigurationDialog::saveAllSettings()
 
         conf->setValue("projection/type",                               core->getCurrentProjectionTypeKey());
         conf->setValue("astro/flag_nutation",                           core->getUseNutation());
+        conf->setValue("astro/flag_eop",                                core->getUseEOP());	// (SS) 2026-10-07
+        conf->setValue("astro/eop_model",                               core->getEOPModel());	// (SS) 2026-10-07
         conf->setValue("astro/flag_aberration",                         core->getUseAberration());
         conf->setValue("astro/aberration_factor",                       core->getAberrationFactor());
         conf->setValue("astro/flag_parallax",                           core->getUseParallax());
         conf->setValue("astro/parallax_factor",                         core->getParallaxFactor());
+		
+		// (SS) 2026-09-13 Added deflection and lunar figure correction settings to the configuration file
+		conf->setValue("astro/flag_deflection",							core->getUseDeflection());
+		conf->setValue("astro/deflection_factor",						core->getDeflectionFactor());
+		conf->setValue("astro/flag_lunar_figure_correction",			core->getUseLunarFigureCorrection());
+
         conf->setValue("astro/flag_topocentric_coordinates",            core->getUseTopocentricCoordinates());
         conf->setValue("astro/solar_system_threads",                    propMgr->getStelPropertyValue("SolarSystem.extraThreads").toInt());
 
@@ -1454,6 +1490,10 @@ void ConfigurationDialog::saveAllSettings()
         conf->setValue("gui/flag_use_polar_distance",                   propMgr->getStelPropertyValue("StelApp.flagUsePolarDistance").toBool());
         conf->setValue("gui/flag_use_formatting_output",                propMgr->getStelPropertyValue("StelApp.flagUseFormattingOutput").toBool());
         conf->setValue("gui/flag_use_ccs_designations",                 propMgr->getStelPropertyValue("StelApp.flagUseCCSDesignation").toBool());
+
+		// (SS) 2026-09-13 Added new settings for extra precision
+		conf->setValue("gui/flag_extra_precision",						propMgr->getStelPropertyValue("StelApp.flagExtraPrecision").toBool());
+
         conf->setValue("gui/flag_overwrite_info_color",                 propMgr->getStelPropertyValue("StelApp.flagOverwriteInfoColor").toBool());
         conf->setValue("gui/flag_time_jd",                              gui->getButtonBar()->getFlagTimeJd());
         conf->setValue("gui/flag_show_buttons_background",              propMgr->getStelPropertyValue("StelGui.flagUseButtonsBackground").toBool());
@@ -1471,6 +1511,7 @@ void ConfigurationDialog::saveAllSettings()
         conf->setValue("navigation/today_time",                         core->getInitTodayTime());
         conf->setValue("navigation/preset_sky_time",                    core->getPresetSkyTime());
         conf->setValue("navigation/time_correction_algorithm",          core->getCurrentDeltaTAlgorithmKey());
+        conf->setValue("astro/ttmtdb_kernel",                          core->getTTminusTDBKernel());	// (SS) 2026-10-03
 	StelLocaleMgr & localeManager = StelApp::getInstance().getLocaleMgr();
         conf->setValue("localization/time_display_format",              localeManager.getTimeFormatStr());
         conf->setValue("localization/date_display_format",              localeManager.getDateFormatStr());
@@ -2303,10 +2344,7 @@ void ConfigurationDialog::setDeltaTAlgorithm(int algorithmID)
 	QString currentAlgorithm = ui->deltaTAlgorithmComboBox->itemData(algorithmID).toString();
 	core->setCurrentDeltaTAlgorithmKey(currentAlgorithm);
 	setDeltaTAlgorithmDescription();
-	if (currentAlgorithm.contains("Custom"))
-		ui->pushButtonCustomDeltaTEquationDialog->setEnabled(true);
-	else
-		ui->pushButtonCustomDeltaTEquationDialog->setEnabled(false);
+	updateDeltaTWrenchButton();	// (SS) 2026-10-03
 }
 
 void ConfigurationDialog::setDeltaTAlgorithmDescription()
@@ -2315,12 +2353,37 @@ void ConfigurationDialog::setDeltaTAlgorithmDescription()
 	ui->deltaTAlgorithmDescription->setHtml(StelApp::getInstance().getCore()->getCurrentDeltaTAlgorithmDescription());
 }
 
+// (SS) 2026-10-03 The wrench button opens the settings dialog that goes with the current Delta-T algorithm:
+// the custom equation for Custom, the TT-TDB kernel selection for JPL Horizons.
 void ConfigurationDialog::showCustomDeltaTEquationDialog()
 {
+	if (StelApp::getInstance().getCore()->getCurrentDeltaTAlgorithm() == StelCore::JPLHorizons)
+	{
+		if (ttMinusTdbKernelDialog == Q_NULLPTR)
+			ttMinusTdbKernelDialog = new TTminusTDBKernelDialog();
+
+		ttMinusTdbKernelDialog->setVisible(true);
+		return;
+	}
+
 	if (customDeltaTEquationDialog == Q_NULLPTR)
 		customDeltaTEquationDialog = new CustomDeltaTEquationDialog();
 
 	customDeltaTEquationDialog->setVisible(true);
+}
+
+// (SS) 2026-10-03 The wrench button is enabled for the algorithms that have a settings dialog, with a tooltip saying which one
+void ConfigurationDialog::updateDeltaTWrenchButton()
+{
+	const StelCore::DeltaTAlgorithm algorithm = StelApp::getInstance().getCore()->getCurrentDeltaTAlgorithm();
+	const bool isJPLHorizons = (algorithm == StelCore::JPLHorizons);
+
+	ui->pushButtonCustomDeltaTEquationDialog->setEnabled(algorithm == StelCore::Custom || isJPLHorizons);
+	ui->pushButtonCustomDeltaTEquationDialog->setToolTip(isJPLHorizons ? q_("Select the source of TT-TDB (SPK kernel)") : q_("Edit equation"));
+
+	// Do not leave the kernel dialog open when another algorithm is selected
+	if (!isJPLHorizons && ttMinusTdbKernelDialog != Q_NULLPTR && ttMinusTdbKernelDialog->visible())
+		ttMinusTdbKernelDialog->close();
 }
 
 void ConfigurationDialog::showConfigureScreenshotsDialog()
@@ -2329,6 +2392,15 @@ void ConfigurationDialog::showConfigureScreenshotsDialog()
 		configureScreenshotsDialog = new ConfigureScreenshotsDialog();
 
 	configureScreenshotsDialog->setVisible(true);
+}
+
+// (SS) 2026-10-07 Show the EOP dialog
+void ConfigurationDialog::showEOPDialog()
+{
+	if (eopDialog == Q_NULLPTR)
+		eopDialog = new EOPDialog();
+
+	eopDialog->setVisible(true);
 }
 
 void ConfigurationDialog::populateDateFormatsList()
