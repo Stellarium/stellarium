@@ -483,8 +483,32 @@ bool StelTexture::glLoad(const GLData& data)
 	}
 
 	//do pixel transfer
-	gl->glTexImage2D(GL_TEXTURE_2D, 0, data.format, width, height, 0, static_cast<GLenum>(data.format),
+
+	GLenum format = data.format;
+	GLenum internalFormat = data.format;
+	if(StelMainView::getInstance().getGLInformation().isHighGraphicsMode &&
+	   loadParams.colorSpace == ColorSpace::sRGB)
+	{
+		if(data.format == GL_RGB)
+		{
+			format = GL_RGB;
+			internalFormat = GL_SRGB8;
+		}
+		else if(data.format == GL_RGBA)
+		{
+			format = GL_RGBA;
+			internalFormat = GL_SRGB8_ALPHA8;
+		}
+		else
+		{
+			qCritical() << "Bad data format for sRGB color space:" << format;
+			assert(!"sRGB data format must be either RGB or RGBA");
+		}
+	}
+	StelOpenGL::checkGLErrors(__FILE__, __LINE__);
+	gl->glTexImage2D(GL_TEXTURE_2D, 0, internalFormat, width, height, 0, format,
 	                 static_cast<GLenum>(data.type), data.data.constData());
+	StelOpenGL::checkGLErrors(__FILE__, __LINE__);
 
 	//for now, assume full sized 8 bit GL formats used internally
 	glSize = static_cast<uint>(data.data.size());
@@ -517,7 +541,10 @@ bool StelTexture::glLoad(const GLData& data)
 		{
 			glSize = glSize + glSize/3; //mipmaps require 1/3 more mem
 		}
+
+		StelOpenGL::checkGLErrors(__FILE__, __LINE__);
 		gl->glGenerateMipmap(GL_TEXTURE_2D);
+		StelOpenGL::checkGLErrors(__FILE__, __LINE__);
 	}
 
 	//register ID with textureMgr and increment size

@@ -20,6 +20,7 @@
  */
 
 #include "MilkyWay.hpp"
+#include "StelSRGB.hpp"
 #include "StelFader.hpp"
 #include "StelTexture.hpp"
 #include "StelUtils.hpp"
@@ -376,7 +377,7 @@ void main(void)
 	renderProgram->setUniformValue(shaderVars.mainTex, mainTexSampler);
 
 	renderProgram->setUniformValue(shaderVars.projectionMatrixInverse, projector->getProjectionMatrix().toQMatrix().inverted());
-	renderProgram->setUniformValue(shaderVars.brightness, c.toQVector());
+	renderProgram->setUniformValue(shaderVars.brightness, colorToShader(c));
 	renderProgram->setUniformValue(shaderVars.saturation, GLfloat(saturation));
 
 	core->setAberrationUniforms(*renderProgram);
