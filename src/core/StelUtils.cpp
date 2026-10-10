@@ -962,6 +962,25 @@ QString julianDayToISO8601String(const double jd, bool addMS)
 	return res;
 }
 
+QString julianDayToExifString(const double jd)
+{
+	int year, month, day, hour, minute, second;
+	getDateTimeFromJulianDay(jd, &year, &month, &day, &hour, &minute, &second, Q_NULLPTR );
+
+	QString res = QString("%1:%2:%3 %4:%5:%6")
+				 .arg((year >= 0 ? year : -1* year),4,10,QLatin1Char('0'))
+				 .arg(month,2,10,QLatin1Char('0'))
+				 .arg(day,2,10,QLatin1Char('0'))
+				 .arg(hour,2,10,QLatin1Char('0'))
+				 .arg(minute,2,10,QLatin1Char('0'))
+				 .arg(second,2,10,QLatin1Char('0'));
+	if (year < 0)
+	{
+		res.prepend("-");
+	}
+	return res;
+}
+
 // Format the date per the fmt.
 QString localeDateString(const int year, const int month, const int day, const int dayOfWeek, const QString &fmt)
 {

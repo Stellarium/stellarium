@@ -575,6 +575,101 @@ IF(ENABLE_XLSX)
      SET(STELMAIN_DEPS ${STELMAIN_DEPS} QXlsx::QXlsx)
 ENDIF()
 
+
+
+# exiv2 needs zlib and expat, insists on vars ZLIB_LIBRARY ZLIB_INCLUDE_DIR
+#FIND_PACKAGE(EXPAT 2.8.5 MODULE REQUIRED)
+
+#set(ZLIB_LIBRARY ${ZLIB_LIBRARIES})
+#set(ZLIB_INCLUDE_DIR ${CMAKE_SOURCE_DIR}/src/external/zlib)
+
+
+# ------------------------------------------------------------------
+# 1. ZLIB Target Bridge for Exiv2 (Global Directory Property Fix)
+# ------------------------------------------------------------------
+set(ZLIB_INC_DIR "${CMAKE_SOURCE_DIR}/src/external/zlib")
+
+if(TARGET zlib_stel)
+    # 1. Create a true namespaced IMPORTED target so export validation succeeds natively
+    if(NOT TARGET ZLIB::ZLIB)
+        add_library(ZLIB::ZLIB INTERFACE IMPORTED GLOBAL)
+        set_target_properties(ZLIB::ZLIB PROPERTIES
+            INTERFACE_LINK_LIBRARIES "zlib_stel"
+            INTERFACE_INCLUDE_DIRECTORIES "${ZLIB_INC_DIR}"
+        )
+    endif()
+
+    # 🚀 THE CRITICAL FIX FOR INTERNAL OBJECT TARGETS (exiv2lib_int):
+    # Instead of relying on Exiv2 to pass the include paths to its sub-targets,
+    # we append Stellarium's bundled zlib path to the directory-level properties.
+    # Because CPM adds packages down-tree, all downstream subdirectories inherit this.
+    include_directories("${ZLIB_INC_DIR}")
+
+    # Create our custom mock FindZLIB module as a safe fallback match
+    set(MOCK_ZLIB_DIR "${CMAKE_BINARY_DIR}/cmake_zlib_bridge")
+    file(MAKE_DIRECTORY "${MOCK_ZLIB_DIR}")
+
+    file(WRITE "${MOCK_ZLIB_DIR}/FindZLIB.cmake" "
+        set(ZLIB_FOUND TRUE)
+        set(ZLIB_INCLUDE_DIRS \"${ZLIB_INC_DIR}\")
+        set(ZLIB_LIBRARIES ZLIB::ZLIB)
+    ")
+
+    # Force search lookup tracking to prefer our custom bridge folder
+    list(INSERT CMAKE_MODULE_PATH 0 "${MOCK_ZLIB_DIR}")
+
+    # Fully drop sticky old cache variables that can break generation mapping
+    unset(ZLIB_LIBRARY CACHE)
+    unset(ZLIB_LIBRARIES CACHE)
+    unset(ZLIB_INCLUDE_DIR CACHE)
+    unset(ZLIB_INCLUDE_DIRS CACHE)
+    unset(ZLIB_FOUND CACHE)
+endif()
+
+
+
+
+# 2. Manage Exiv2 via CPM to eliminate precompiled binary ABI mismatches
+# This fetches the latest stable modern 0.28 point release
+CPMFindPackage(NAME exiv2
+    GITHUB_REPOSITORY Exiv2/exiv2
+    GIT_TAG v0.28.3
+    FIND_PACKAGE_ARGUMENTS "NAMES exiv2 Exiv2"
+    OPTIONS
+        # Inject the properties cleanly down into the CPM scope
+        #"ZLIB_LIBRARY=${ZLIB_OUT_LIB}"
+        "ZLIB_INCLUDE_DIR=${ZLIB_INC_DIR}"
+        "ZLIB_INCLUDE_DIRS=${ZLIB_INC_DIR}"
+        "EXIV2_ENABLE_INSTALL OFF"      # 🚀 FIXES THE EXPORT ERROR: Disables Exiv2's installation scripts so it won't complain about zlib_stel
+        "EXIV2_ENABLE_XMP OFF"          # 🟢 REMOVES EXPAT DEPENDENCY: Bypasses ExpatAdapter.cpp entirely (No XMP sidecar files...)
+        "EXIV2_ENABLE_INIH OFF"         # 🟢 BYPASS INIH: Removes the need for the library entirely
+        "EXIV2_ENABLE_BMFF OFF"         # 🟢 Turns off ISO Base Media File Format (HEIF/JXL tracking)
+        "EXIV2_ENABLE_BROTLI OFF"       # 🟢 Removes the Brotli requirement entirely
+        "EXIV2_BUILD_SAMPLES OFF"       # Speeds up your build time
+        "EXIV2_BUILD_UNIT_TESTS OFF"    # Skips test overhead
+        "EXIV2_BUILD_EXIV2_COMMAND OFF" # 🟢 Disable building the exiv2.exe command line app
+        "EXIV2_ENABLE_VIDEO OFF"        # 🟢 Disable video metadata tracking
+        "EXIV2_ENABLE_LENSDATA OFF"     # 🟢 Disable the massive Nikon lens database lookup tables
+)
+
+
+
+if(exiv2_FOUND OR TARGET Exiv2::exiv2lib)
+     MESSAGE(STATUS "Found/Built Exiv2 ${exiv2_VERSION}")
+     ADD_DEFINITIONS("-DHAVE_EXIV2")
+     ADD_DEFINITIONS("-DEXIV2_SHARED_LIBS")
+
+     # Modern Exiv2 exposes 'Exiv2::exiv2lib' natively via config exports
+     if(TARGET Exiv2::exiv2lib)
+             SET(STELMAIN_DEPS ${STELMAIN_DEPS} Exiv2::exiv2lib)
+     ELSE()
+             SET(STELMAIN_DEPS ${STELMAIN_DEPS} exiv2lib)
+     ENDIF()
+else(exiv2_FOUND OR TARGET Exiv2::exiv2lib)
+     MESSAGE(STATUS "Exiv2 library not found. No EXIF data in screenshots!")
+endif(exiv2_FOUND OR TARGET Exiv2::exiv2lib)
+
+
 IF(HAIKU)
      SET(STELMAIN_DEPS ${STELMAIN_DEPS} network)
 ENDIF()
@@ -630,6 +725,8 @@ ENDIF(ENABLE_PCH)
 IF(ENABLE_SHOWMYSKY)
      TARGET_INCLUDE_DIRECTORIES(stelMain PRIVATE "${ShowMySky_INCLUDE_DIRECTORIES}")
 ENDIF()
+
+
 TARGET_INCLUDE_DIRECTORIES(stelMain PRIVATE "${md4c_SOURCE_DIR}/src")
 
 IF(HAIKU)
