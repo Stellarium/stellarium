@@ -1,0 +1,2358 @@
+[
+    {
+        "name": "getFlagShow",
+        "category": "Nebula Manager - Core",
+        "signature": "bool getFlagShow()",
+        "description": "Returns whether deep-sky object rendering is currently enabled. When disabled, no nebulae, galaxies, or star clusters will be displayed.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if DSO rendering is enabled, false if disabled",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0"
+        },
+        "example": "if(NebulaMgr.getFlagShow()) {\n    core.debug(\"Deep-sky objects are visible\");\n} else {\n    NebulaMgr.setFlagShow(true);\n}"
+    },
+    {
+        "name": "setFlagShow",
+        "category": "Nebula Manager - Core",
+        "signature": "setFlagShow(bool enabled)",
+        "description": "Enables or disables rendering of all deep-sky objects (nebulae, galaxies, star clusters, etc.).",
+        "parameters": [
+            {
+                "name": "enabled",
+                "type": "bool",
+                "description": "true to show deep-sky objects, false to hide them",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0"
+        },
+        "example": "// Enable deep-sky objects\nNebulaMgr.setFlagShow(true);\n\n// Disable all deep-sky objects\nNebulaMgr.setFlagShow(false);\n\n// Toggle current state\nvar current = NebulaMgr.getFlagShow();\nNebulaMgr.setFlagShow(!current);"
+    },
+    {
+        "name": "getFlagHints",
+        "category": "Nebula Manager - Core",
+        "signature": "bool getFlagHints()",
+        "description": "Returns whether nebula hints (symbol markers for DSOs) are currently visible.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if hints are visible, false if hidden",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0"
+        },
+        "example": "if(NebulaMgr.getFlagHints()) {\n    core.debug(\"Nebula hints are visible\");\n} else {\n    NebulaMgr.setFlagHints(true);\n}"
+    },
+    {
+        "name": "setFlagHints",
+        "category": "Nebula Manager - Core",
+        "signature": "setFlagHints(bool visible)",
+        "description": "Shows or hides nebula hints (symbol markers for DSOs). Hints help locate deep-sky objects on the sky.",
+        "parameters": [
+            {
+                "name": "visible",
+                "type": "bool",
+                "description": "true to show hints, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0"
+        },
+        "example": "// Show DSO hints\nNebulaMgr.setFlagHints(true);\n\n// Hide DSO hints (only labels visible)\nNebulaMgr.setFlagHints(false);"
+    },
+    {
+        "name": "getHintsAmount",
+        "category": "Nebula Manager - Core",
+        "signature": "double getHintsAmount()",
+        "description": "Returns the amount of nebula hints displayed. Higher values show fainter objects. The actual amount is also affected by the current field of view.",
+        "parameters": [],
+        "returnType": "double",
+        "returnDescription": "Hints amount (0.0 to 10.0)",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0"
+        },
+        "example": "var hintsAmount = NebulaMgr.getHintsAmount();\ncore.debug(\"Hints amount: \" + hintsAmount);"
+    },
+    {
+        "name": "setHintsAmount",
+        "category": "Nebula Manager - Core",
+        "signature": "setHintsAmount(double amount)",
+        "description": "Sets the amount of nebula hints displayed. 0 = no hints, 10 = maximum hints (shows faintest DSOs).",
+        "parameters": [
+            {
+                "name": "amount",
+                "type": "double",
+                "description": "Hints amount (0.0 to 10.0, default: 3.0)",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0"
+        },
+        "example": "// Show many DSO hints\nNebulaMgr.setHintsAmount(8.0);\n\n// Show only brightest DSOs\nNebulaMgr.setHintsAmount(2.0);"
+    },
+    {
+        "name": "getLabelsAmount",
+        "category": "Nebula Manager - Core",
+        "signature": "double getLabelsAmount()",
+        "description": "Returns the amount of nebula labels displayed. Higher values show labels for fainter objects.",
+        "parameters": [],
+        "returnType": "double",
+        "returnDescription": "Labels amount (0.0 to 10.0)",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0"
+        },
+        "example": "var labelsAmount = NebulaMgr.getLabelsAmount();\ncore.debug(\"Labels amount: \" + labelsAmount);"
+    },
+    {
+        "name": "setLabelsAmount",
+        "category": "Nebula Manager - Core",
+        "signature": "setLabelsAmount(double amount)",
+        "description": "Sets the amount of nebula labels displayed. 0 = no labels, 10 = maximum labels (shows labels for faintest DSOs).",
+        "parameters": [
+            {
+                "name": "amount",
+                "type": "double",
+                "description": "Labels amount (0.0 to 10.0, default: 3.0)",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0"
+        },
+        "example": "// Show many DSO labels\nNebulaMgr.setLabelsAmount(7.0);\n\n// Show labels only for bright DSOs\nNebulaMgr.setLabelsAmount(2.0);"
+    },
+    {
+        "name": "getHintsBrightness",
+        "category": "Nebula Manager - Core",
+        "signature": "double getHintsBrightness()",
+        "description": "Returns the brightness of nebula hint markers (0.0 to 1.0).",
+        "parameters": [],
+        "returnType": "double",
+        "returnDescription": "Hints brightness (0.0 to 1.0)",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0"
+        },
+        "example": "var brightness = NebulaMgr.getHintsBrightness();\ncore.debug(\"Hints brightness: \" + brightness);"
+    },
+    {
+        "name": "setHintsBrightness",
+        "category": "Nebula Manager - Core",
+        "signature": "setHintsBrightness(double brightness)",
+        "description": "Sets the brightness of nebula hint markers. 0 = invisible, 1 = full brightness.",
+        "parameters": [
+            {
+                "name": "brightness",
+                "type": "double",
+                "description": "Brightness value (0.0 to 1.0, default: 1.0)",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0"
+        },
+        "example": "// Dim hints for less visual clutter\nNebulaMgr.setHintsBrightness(0.5);\n\n// Full brightness hints\nNebulaMgr.setHintsBrightness(1.0);"
+    },
+    {
+        "name": "getLabelsBrightness",
+        "category": "Nebula Manager - Core",
+        "signature": "double getLabelsBrightness()",
+        "description": "Returns the brightness of nebula labels (0.0 to 1.0).",
+        "parameters": [],
+        "returnType": "double",
+        "returnDescription": "Labels brightness (0.0 to 1.0)",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0"
+        },
+        "example": "var labelBrightness = NebulaMgr.getLabelsBrightness();\ncore.debug(\"Labels brightness: \" + labelBrightness);"
+    },
+    {
+        "name": "setLabelsBrightness",
+        "category": "Nebula Manager - Core",
+        "signature": "setLabelsBrightness(double brightness)",
+        "description": "Sets the brightness of nebula labels. 0 = invisible, 1 = full brightness.",
+        "parameters": [
+            {
+                "name": "brightness",
+                "type": "double",
+                "description": "Brightness value (0.0 to 1.0, default: 1.0)",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0"
+        },
+        "example": "// Dim labels for less clutter\nNebulaMgr.setLabelsBrightness(0.6);\n\n// Full brightness labels\nNebulaMgr.setLabelsBrightness(1.0);"
+    },
+    {
+        "name": "getLabelsColor",
+        "category": "Nebula Manager - Colors",
+        "signature": "Vec3f getLabelsColor()",
+        "description": "Returns the current color of deep-sky object labels. IMPORTANT: For reading color values, use core.getStelProperty('NebulaMgr.labelsColor') instead of direct access.",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0"
+        },
+        "example": "// RECOMMENDED: Use StelProperty\nvar labelColor = core.getStelProperty('NebulaMgr.labelsColor');\ncore.debug(\"Labels color: \" + labelColor);\n\n// Alternative: Direct call\nvar colorObj = NebulaMgr.getLabelsColor();\nvar colorStr = String(colorObj); // '[R, G, B]'\nvar parts = colorStr.slice(1, -1).split(',').map(parseFloat);\ncore.debug(\"Labels color - R: \" + parts[0] + \", G: \" + parts[1] + \", B: \" + parts[2]);"
+    },
+    {
+        "name": "setLabelsColor",
+        "category": "Nebula Manager - Colors",
+        "signature": "setLabelsColor(Vec3f color)",
+        "description": "Sets the color of deep-sky object labels.",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector (R, G, B) with values between 0.0 and 1.0",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0"
+        },
+        "example": "// Set labels to light blue\nvar lightBlue = core.vec3f(0.5, 0.7, 1.0);\nNebulaMgr.setLabelsColor(lightBlue);\n\n// Set labels to white\nvar white = core.vec3f(1.0, 1.0, 1.0);\nNebulaMgr.setLabelsColor(white);"
+    },
+    {
+        "name": "setHintsFadeDuration",
+        "category": "Nebula Manager - Core",
+        "signature": "setHintsFadeDuration(float duration)",
+        "description": "Sets the fade duration for nebula hints when they appear or disappear. Controls how smoothly hints transition between visible and hidden states.",
+        "parameters": [
+            {
+                "name": "duration",
+                "type": "float",
+                "description": "Fade duration in seconds (0 = instant, 2 = slow fade)",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0"
+        },
+        "example": "// Fast fade\nNebulaMgr.setHintsFadeDuration(0.5);\n\n// Slow dramatic fade\nNebulaMgr.setHintsFadeDuration(2.0);"
+    },
+    {
+        "name": "getHintsProportional",
+        "category": "Nebula Manager - Settings",
+        "signature": "bool getHintsProportional()",
+        "description": "Returns whether hints (symbols) are scaled proportionally to the actual angular size of the deep-sky object. When enabled, larger objects have larger symbols.",
+        "parameters": [],
+        "returnType": "bool",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0"
+        },
+        "example": "if(NebulaMgr.getHintsProportional()) {\n    core.debug(\"Hints are proportional to object size\");\n}"
+    },
+    {
+        "name": "setHintsProportional",
+        "category": "Nebula Manager - Settings",
+        "signature": "setHintsProportional(bool proportional)",
+        "description": "Sets whether hints (symbols) should be scaled proportionally to the actual angular size of the deep-sky object.",
+        "parameters": [
+            {
+                "name": "proportional",
+                "type": "bool",
+                "description": "true to scale hints with object size, false to use fixed size",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0"
+        },
+        "example": "// Enable proportional hints (large DSOs have larger symbols)\nNebulaMgr.setHintsProportional(true);\n\n// Use fixed-size hints\nNebulaMgr.setHintsProportional(false);"
+    },
+    {
+        "name": "getFlagOutlines",
+        "category": "Nebula Manager - Settings",
+        "signature": "bool getFlagOutlines()",
+        "description": "Returns whether outlines are displayed for large deep-sky objects instead of simple hint symbols.",
+        "parameters": [],
+        "returnType": "bool",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.13.0"
+        },
+        "example": "if(NebulaMgr.getFlagOutlines()) {\n    core.debug(\"DSO outlines are visible\");\n}"
+    },
+    {
+        "name": "setFlagOutlines",
+        "category": "Nebula Manager - Settings",
+        "signature": "setFlagOutlines(bool enabled)",
+        "description": "Enables or disables outlines for large deep-sky objects. Outlines show the actual shape of large DSOs like the Veil Nebula or Andromeda Galaxy.",
+        "parameters": [
+            {
+                "name": "enabled",
+                "type": "bool",
+                "description": "true to show outlines, false to use standard hints",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.13.0"
+        },
+        "example": "// Show detailed outlines for large DSOs\nNebulaMgr.setFlagOutlines(true);\n\n// Use standard hint symbols\nNebulaMgr.setFlagOutlines(false);"
+    },
+    {
+        "name": "getFlagAdditionalNames",
+        "category": "Nebula Manager - Settings",
+        "signature": "bool getFlagAdditionalNames()",
+        "description": "Returns whether additional names (aliases) for deep-sky objects are displayed in the information panel.",
+        "parameters": [],
+        "returnType": "bool",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0"
+        },
+        "example": "if(NebulaMgr.getFlagAdditionalNames()) {\n    core.debug(\"Additional DSO names are displayed\");\n}"
+    },
+    {
+        "name": "setFlagAdditionalNames",
+        "category": "Nebula Manager - Settings",
+        "signature": "setFlagAdditionalNames(bool enabled)",
+        "description": "Enables or disables display of additional names (aliases) for deep-sky objects in the information panel.",
+        "parameters": [
+            {
+                "name": "enabled",
+                "type": "bool",
+                "description": "true to show additional names, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0"
+        },
+        "example": "// Show all common names for DSOs\nNebulaMgr.setFlagAdditionalNames(true);\n\n// Show only primary names\nNebulaMgr.setFlagAdditionalNames(false);"
+    },
+    {
+        "name": "getDesignationUsage",
+        "category": "Nebula Manager - Settings",
+        "signature": "bool getDesignationUsage()",
+        "description": "Returns whether catalog designations (e.g., 'M31', 'NGC 224') are used instead of common names for labels.",
+        "parameters": [],
+        "returnType": "bool",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0"
+        },
+        "example": "if(NebulaMgr.getDesignationUsage()) {\n    core.debug(\"Catalog designations are shown instead of common names\");\n}"
+    },
+    {
+        "name": "setDesignationUsage",
+        "category": "Nebula Manager - Settings",
+        "signature": "setDesignationUsage(bool enabled)",
+        "description": "Sets whether catalog designations (like 'M31') should be used instead of common names for object labels.",
+        "parameters": [
+            {
+                "name": "enabled",
+                "type": "bool",
+                "description": "true to use catalog designations, false to use common names",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0"
+        },
+        "example": "// Use catalog numbers (M31, NGC 224) for labels\nNebulaMgr.setDesignationUsage(true);\n\n// Use common names (Andromeda Galaxy) for labels\nNebulaMgr.setDesignationUsage(false);"
+    },
+    {
+        "name": "getFlagSurfaceBrightnessUsage",
+        "category": "Nebula Manager - Settings",
+        "signature": "bool getFlagSurfaceBrightnessUsage()",
+        "description": "Returns whether surface brightness is used instead of integrated magnitude for determining DSO visibility and hint display.",
+        "parameters": [],
+        "returnType": "bool",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.13.0"
+        },
+        "example": "if(NebulaMgr.getFlagSurfaceBrightnessUsage()) {\n    core.debug(\"Surface brightness affects DSO visibility\");\n}"
+    },
+    {
+        "name": "setFlagSurfaceBrightnessUsage",
+        "category": "Nebula Manager - Settings",
+        "signature": "setFlagSurfaceBrightnessUsage(bool enabled)",
+        "description": "Sets whether surface brightness should be used instead of integrated magnitude for visibility calculations. More accurate for extended objects like galaxies.",
+        "parameters": [
+            {
+                "name": "enabled",
+                "type": "bool",
+                "description": "true to use surface brightness, false to use integrated magnitude",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.13.0"
+        },
+        "example": "// Use surface brightness for better extended object visibility\nNebulaMgr.setFlagSurfaceBrightnessUsage(true);\n\n// Use standard magnitude\nNebulaMgr.setFlagSurfaceBrightnessUsage(false);"
+    },
+    {
+        "name": "getFlagSurfaceBrightnessArcsecUsage",
+        "category": "Nebula Manager - Settings",
+        "signature": "bool getFlagSurfaceBrightnessArcsecUsage()",
+        "description": "Returns whether surface brightness is displayed in mag/arcsec² (instead of mag/arcmin²).",
+        "parameters": [],
+        "returnType": "bool",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0"
+        },
+        "example": "if(NebulaMgr.getFlagSurfaceBrightnessArcsecUsage()) {\n    core.debug(\"Surface brightness in mag/arcsec²\");\n}"
+    },
+    {
+        "name": "setFlagSurfaceBrightnessArcsecUsage",
+        "category": "Nebula Manager - Settings",
+        "signature": "setFlagSurfaceBrightnessArcsecUsage(bool enabled)",
+        "description": "Sets the unit for surface brightness display. mag/arcsec² is the professional astronomical standard.",
+        "parameters": [
+            {
+                "name": "enabled",
+                "type": "bool",
+                "description": "true for mag/arcsec², false for mag/arcmin²",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0"
+        },
+        "example": "// Use professional units (mag/arcsec²)\nNebulaMgr.setFlagSurfaceBrightnessArcsecUsage(true);\n\n// Use mag/arcmin²\nNebulaMgr.setFlagSurfaceBrightnessArcsecUsage(false);"
+    },
+    {
+        "name": "getFlagSurfaceBrightnessShortNotationUsage",
+        "category": "Nebula Manager - Settings",
+        "signature": "bool getFlagSurfaceBrightnessShortNotationUsage()",
+        "description": "Returns whether short notation (m/□') is used for surface brightness instead of full text.",
+        "parameters": [],
+        "returnType": "bool",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0"
+        },
+        "example": "if(NebulaMgr.getFlagSurfaceBrightnessShortNotationUsage()) {\n    core.debug(\"Using short notation for surface brightness\");\n}"
+    },
+    {
+        "name": "setFlagSurfaceBrightnessShortNotationUsage",
+        "category": "Nebula Manager - Settings",
+        "signature": "setFlagSurfaceBrightnessShortNotationUsage(bool enabled)",
+        "description": "Sets whether short notation (e.g., 'm/□') should be used for surface brightness display.",
+        "parameters": [
+            {
+                "name": "enabled",
+                "type": "bool",
+                "description": "true for short notation, false for full text",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0"
+        },
+        "example": "NebulaMgr.setFlagSurfaceBrightnessShortNotationUsage(true);"
+    },
+    {
+        "name": "getFlagSizeLimitsUsage",
+        "category": "Nebula Manager - Settings",
+        "signature": "bool getFlagSizeLimitsUsage()",
+        "description": "Returns whether angular size limits are applied to filter DSOs by size.",
+        "parameters": [],
+        "returnType": "bool",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0"
+        },
+        "example": "if(NebulaMgr.getFlagSizeLimitsUsage()) {\n    core.debug(\"DSO size limits are active\");\n}"
+    },
+    {
+        "name": "setFlagSizeLimitsUsage",
+        "category": "Nebula Manager - Settings",
+        "signature": "setFlagSizeLimitsUsage(bool enabled)",
+        "description": "Enables or disables angular size limits for filtering deep-sky objects.",
+        "parameters": [
+            {
+                "name": "enabled",
+                "type": "bool",
+                "description": "true to enable size limits, false to disable",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0"
+        },
+        "example": "// Only show DSOs between min and max size\nNebulaMgr.setFlagSizeLimitsUsage(true);\nNebulaMgr.setMinSizeLimit(5.0);\nNebulaMgr.setMaxSizeLimit(30.0);\n\n// Disable size filtering\nNebulaMgr.setFlagSizeLimitsUsage(false);"
+    },
+    {
+        "name": "getMinSizeLimit",
+        "category": "Nebula Manager - Settings",
+        "signature": "double getMinSizeLimit()",
+        "description": "Returns the minimum angular size (in arcminutes) for DSOs to be displayed when size limits are enabled.",
+        "parameters": [],
+        "returnType": "double",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0"
+        },
+        "example": "var minSize = NebulaMgr.getMinSizeLimit();\ncore.debug(\"Minimum DSO size: \" + minSize + \" arcmin\");"
+    },
+    {
+        "name": "setMinSizeLimit",
+        "category": "Nebula Manager - Settings",
+        "signature": "setMinSizeLimit(double size)",
+        "description": "Sets the minimum angular size (in arcminutes) for DSOs to be displayed. Objects smaller than this are filtered out.",
+        "parameters": [
+            {
+                "name": "size",
+                "type": "double",
+                "description": "Minimum size in arcminutes (recommended: 1.0 to 600.0)",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0"
+        },
+        "example": "// Only show DSOs larger than 10 arcminutes\nNebulaMgr.setMinSizeLimit(10.0);"
+    },
+    {
+        "name": "getMaxSizeLimit",
+        "category": "Nebula Manager - Settings",
+        "signature": "double getMaxSizeLimit()",
+        "description": "Returns the maximum angular size (in arcminutes) for DSOs to be displayed when size limits are enabled.",
+        "parameters": [],
+        "returnType": "double",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0"
+        },
+        "example": "var maxSize = NebulaMgr.getMaxSizeLimit();\ncore.debug(\"Maximum DSO size: \" + maxSize + \" arcmin\");"
+    },
+    {
+        "name": "setMaxSizeLimit",
+        "category": "Nebula Manager - Settings",
+        "signature": "setMaxSizeLimit(double size)",
+        "description": "Sets the maximum angular size (in arcminutes) for DSOs to be displayed. Objects larger than this are filtered out.",
+        "parameters": [
+            {
+                "name": "size",
+                "type": "double",
+                "description": "Maximum size in arcminutes (recommended: 1.0 to 600.0)",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0"
+        },
+        "example": "// Only show DSOs smaller than 60 arcminutes (1 degree)\nNebulaMgr.setMaxSizeLimit(60.0);"
+    },
+    {
+        "name": "getFlagShowOnlyNamedDSO",
+        "category": "Nebula Manager - Settings",
+        "signature": "bool getFlagShowOnlyNamedDSO()",
+        "description": "Returns whether only deep-sky objects with common names are displayed. Objects without common names are hidden.",
+        "parameters": [],
+        "returnType": "bool",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0"
+        },
+        "example": "if(NebulaMgr.getFlagShowOnlyNamedDSO()) {\n    core.debug(\"Only named DSOs are visible\");\n}"
+    },
+    {
+        "name": "setFlagShowOnlyNamedDSO",
+        "category": "Nebula Manager - Settings",
+        "signature": "setFlagShowOnlyNamedDSO(bool enabled)",
+        "description": "Sets whether only deep-sky objects with common names should be displayed. Useful for reducing clutter.",
+        "parameters": [
+            {
+                "name": "enabled",
+                "type": "bool",
+                "description": "true to show only named DSOs, false to show all",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0"
+        },
+        "example": "// Show only well-known named DSOs\nNebulaMgr.setFlagShowOnlyNamedDSO(true);\n\n// Show all DSOs (including anonymous ones)\nNebulaMgr.setFlagShowOnlyNamedDSO(false);"
+    },
+    {
+        "name": "getFlagUseTypeFilters",
+        "category": "Nebula Manager - Settings",
+        "signature": "bool getFlagUseTypeFilters()",
+        "description": "Returns whether type filters are currently enabled. When disabled, all object types are shown regardless of filter settings.",
+        "parameters": [],
+        "returnType": "bool",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0"
+        },
+        "example": "if(NebulaMgr.getFlagUseTypeFilters()) {\n    core.debug(\"Type filters are active\");\n}"
+    },
+    {
+        "name": "setFlagUseTypeFilters",
+        "category": "Nebula Manager - Settings",
+        "signature": "setFlagUseTypeFilters(bool enabled)",
+        "description": "Enables or disables type filters. When enabled, only object types selected in typeFilters will be displayed.",
+        "parameters": [
+            {
+                "name": "enabled",
+                "type": "bool",
+                "description": "true to enable type filters, false to disable",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0"
+        },
+        "example": "// Enable type filtering\nNebulaMgr.setFlagUseTypeFilters(true);\nNebulaMgr.setTypeFilters(64); // Show only bright nebulae\n\n// Disable type filtering (show all)\nNebulaMgr.setFlagUseTypeFilters(false);"
+    },
+    {
+        "name": "getCirclesColor",
+        "category": "Nebula Manager - Colors",
+        "signature": "Vec3f getCirclesColor()",
+        "description": "Returns the default color used for nebula symbols (circles, etc.) for objects without specific type coloring.",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0"
+        },
+        "example": "var color = core.getStelProperty('NebulaMgr.circlesColor');\ncore.debug(\"Circle color: \" + color);"
+    },
+    {
+        "name": "setCirclesColor",
+        "category": "Nebula Manager - Colors",
+        "signature": "setCirclesColor(Vec3f color)",
+        "description": "Sets the default color used for nebula symbols (circles, etc.) for objects without specific type coloring.",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0"
+        },
+        "example": "// Set circles to gold\nvar gold = core.vec3f(1.0, 0.84, 0.0);\nNebulaMgr.setCirclesColor(gold);"
+    },
+    {
+        "name": "getRegionsColor",
+        "category": "Nebula Manager - Colors",
+        "signature": "Vec3f getRegionsColor()",
+        "description": "Returns the color used for region symbols (dashed shapes representing sky regions).",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0"
+        },
+        "example": "var color = core.getStelProperty('NebulaMgr.regionsColor');"
+    },
+    {
+        "name": "setRegionsColor",
+        "category": "Nebula Manager - Colors",
+        "signature": "setRegionsColor(Vec3f color)",
+        "description": "Sets the color used for region symbols (dashed shapes representing sky regions).",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0"
+        },
+        "example": "NebulaMgr.setRegionsColor(core.vec3f(0.7, 0.7, 0.2));"
+    },
+    {
+        "name": "getGalaxyColor",
+        "category": "Nebula Manager - Colors",
+        "signature": "Vec3f getGalaxyColor()",
+        "description": "Returns the color used for galaxy symbols (ellipses).",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0"
+        },
+        "example": "var galaxyColor = core.getStelProperty('NebulaMgr.galaxiesColor');"
+    },
+    {
+        "name": "setGalaxyColor",
+        "category": "Nebula Manager - Colors",
+        "signature": "setGalaxyColor(Vec3f color)",
+        "description": "Sets the color used for galaxy symbols (ellipses).",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0"
+        },
+        "example": "// Set galaxies to red\nvar red = core.vec3f(1.0, 0.2, 0.2);\nNebulaMgr.setGalaxyColor(red);"
+    },
+    {
+        "name": "getActiveGalaxyColor",
+        "category": "Nebula Manager - Colors",
+        "signature": "Vec3f getActiveGalaxyColor()",
+        "description": "Returns the color used for active galaxy symbols.",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0"
+        },
+        "example": "var color = core.getStelProperty('NebulaMgr.activeGalaxiesColor');"
+    },
+    {
+        "name": "setActiveGalaxyColor",
+        "category": "Nebula Manager - Colors",
+        "signature": "setActiveGalaxyColor(Vec3f color)",
+        "description": "Sets the color used for active galaxy symbols.",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0"
+        },
+        "example": "NebulaMgr.setActiveGalaxyColor(core.vec3f(1.0, 0.5, 0.2));"
+    },
+    {
+        "name": "getRadioGalaxyColor",
+        "category": "Nebula Manager - Colors",
+        "signature": "Vec3f getRadioGalaxyColor()",
+        "description": "Returns the color used for radio galaxy symbols.",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0"
+        },
+        "example": "var color = core.getStelProperty('NebulaMgr.radioGalaxiesColor');"
+    },
+    {
+        "name": "setRadioGalaxyColor",
+        "category": "Nebula Manager - Colors",
+        "signature": "setRadioGalaxyColor(Vec3f color)",
+        "description": "Sets the color used for radio galaxy symbols.",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0"
+        },
+        "example": "NebulaMgr.setRadioGalaxyColor(core.vec3f(0.3, 0.3, 0.3));"
+    },
+    {
+        "name": "getInteractingGalaxyColor",
+        "category": "Nebula Manager - Colors",
+        "signature": "Vec3f getInteractingGalaxyColor()",
+        "description": "Returns the color used for interacting galaxy symbols.",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0"
+        },
+        "example": "var color = core.getStelProperty('NebulaMgr.interactingGalaxiesColor');"
+    },
+    {
+        "name": "setInteractingGalaxyColor",
+        "category": "Nebula Manager - Colors",
+        "signature": "setInteractingGalaxyColor(Vec3f color)",
+        "description": "Sets the color used for interacting galaxy symbols.",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0"
+        },
+        "example": "NebulaMgr.setInteractingGalaxyColor(core.vec3f(0.2, 0.5, 1.0));"
+    },
+    {
+        "name": "getQuasarColor",
+        "category": "Nebula Manager - Colors",
+        "signature": "Vec3f getQuasarColor()",
+        "description": "Returns the color used for quasar symbols.",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0"
+        },
+        "example": "var color = core.getStelProperty('NebulaMgr.quasarsColor');"
+    },
+    {
+        "name": "setQuasarColor",
+        "category": "Nebula Manager - Colors",
+        "signature": "setQuasarColor(Vec3f color)",
+        "description": "Sets the color used for quasar symbols.",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0"
+        },
+        "example": "NebulaMgr.setQuasarColor(core.vec3f(1.0, 0.2, 0.2));"
+    },
+    {
+        "name": "getPossibleQuasarColor",
+        "category": "Nebula Manager - Colors",
+        "signature": "Vec3f getPossibleQuasarColor()",
+        "description": "Returns the color used for possible quasar symbols.",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0"
+        },
+        "example": "var color = core.getStelProperty('NebulaMgr.possibleQuasarsColor');"
+    },
+    {
+        "name": "setPossibleQuasarColor",
+        "category": "Nebula Manager - Colors",
+        "signature": "setPossibleQuasarColor(Vec3f color)",
+        "description": "Sets the color used for possible quasar symbols.",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0"
+        },
+        "example": "NebulaMgr.setPossibleQuasarColor(core.vec3f(0.8, 0.3, 0.3));"
+    },
+    {
+        "name": "getClusterColor",
+        "category": "Nebula Manager - Colors",
+        "signature": "Vec3f getClusterColor()",
+        "description": "Returns the color used for star cluster symbols (both open and globular).",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0"
+        },
+        "example": "var clusterColor = core.getStelProperty('NebulaMgr.clustersColor');"
+    },
+    {
+        "name": "setClusterColor",
+        "category": "Nebula Manager - Colors",
+        "signature": "setClusterColor(Vec3f color)",
+        "description": "Sets the color used for star cluster symbols (both open and globular).",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0"
+        },
+        "example": "// Set clusters to yellow\nNebulaMgr.setClusterColor(core.vec3f(1.0, 1.0, 0.1));"
+    },
+    {
+        "name": "getOpenClusterColor",
+        "category": "Nebula Manager - Colors",
+        "signature": "Vec3f getOpenClusterColor()",
+        "description": "Returns the color used for open star cluster symbols.",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0"
+        },
+        "example": "var color = core.getStelProperty('NebulaMgr.openClustersColor');"
+    },
+    {
+        "name": "setOpenClusterColor",
+        "category": "Nebula Manager - Colors",
+        "signature": "setOpenClusterColor(Vec3f color)",
+        "description": "Sets the color used for open star cluster symbols.",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0"
+        },
+        "example": "NebulaMgr.setOpenClusterColor(core.vec3f(1.0, 1.0, 0.1));"
+    },
+    {
+        "name": "getGlobularClusterColor",
+        "category": "Nebula Manager - Colors",
+        "signature": "Vec3f getGlobularClusterColor()",
+        "description": "Returns the color used for globular star cluster symbols (circled cross).",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0"
+        },
+        "example": "var color = core.getStelProperty('NebulaMgr.globularClustersColor');"
+    },
+    {
+        "name": "setGlobularClusterColor",
+        "category": "Nebula Manager - Colors",
+        "signature": "setGlobularClusterColor(Vec3f color)",
+        "description": "Sets the color used for globular star cluster symbols (circled cross).",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0"
+        },
+        "example": "NebulaMgr.setGlobularClusterColor(core.vec3f(1.0, 1.0, 0.1));"
+    },
+    {
+        "name": "getStellarAssociationColor",
+        "category": "Nebula Manager - Colors",
+        "signature": "Vec3f getStellarAssociationColor()",
+        "description": "Returns the color used for stellar association symbols.",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0"
+        },
+        "example": "var color = core.getStelProperty('NebulaMgr.stellarAssociationsColor');"
+    },
+    {
+        "name": "setStellarAssociationColor",
+        "category": "Nebula Manager - Colors",
+        "signature": "setStellarAssociationColor(Vec3f color)",
+        "description": "Sets the color used for stellar association symbols.",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0"
+        },
+        "example": "NebulaMgr.setStellarAssociationColor(core.vec3f(1.0, 1.0, 0.1));"
+    },
+    {
+        "name": "getStarCloudColor",
+        "category": "Nebula Manager - Colors",
+        "signature": "Vec3f getStarCloudColor()",
+        "description": "Returns the color used for star cloud symbols.",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0"
+        },
+        "example": "var color = core.getStelProperty('NebulaMgr.starCloudsColor');"
+    },
+    {
+        "name": "setStarCloudColor",
+        "category": "Nebula Manager - Colors",
+        "signature": "setStarCloudColor(Vec3f color)",
+        "description": "Sets the color used for star cloud symbols.",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0"
+        },
+        "example": "NebulaMgr.setStarCloudColor(core.vec3f(1.0, 1.0, 0.1));"
+    },
+    {
+        "name": "getNebulaColor",
+        "category": "Nebula Manager - Colors",
+        "signature": "Vec3f getNebulaColor()",
+        "description": "Returns the color used for bright nebula symbols (emission nebula boxes, etc.).",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0"
+        },
+        "example": "var nebulaColor = core.getStelProperty('NebulaMgr.nebulaeColor');"
+    },
+    {
+        "name": "setNebulaColor",
+        "category": "Nebula Manager - Colors",
+        "signature": "setNebulaColor(Vec3f color)",
+        "description": "Sets the color used for bright nebula symbols (emission nebula boxes, etc.).",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0"
+        },
+        "example": "// Set nebulae to green\nNebulaMgr.setNebulaColor(core.vec3f(0.1, 1.0, 0.1));"
+    },
+    {
+        "name": "getPlanetaryNebulaColor",
+        "category": "Nebula Manager - Colors",
+        "signature": "Vec3f getPlanetaryNebulaColor()",
+        "description": "Returns the color used for planetary nebula symbols.",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0"
+        },
+        "example": "var color = core.getStelProperty('NebulaMgr.planetaryNebulaeColor');"
+    },
+    {
+        "name": "setPlanetaryNebulaColor",
+        "category": "Nebula Manager - Colors",
+        "signature": "setPlanetaryNebulaColor(Vec3f color)",
+        "description": "Sets the color used for planetary nebula symbols.",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0"
+        },
+        "example": "NebulaMgr.setPlanetaryNebulaColor(core.vec3f(0.1, 1.0, 0.1));"
+    },
+    {
+        "name": "getReflectionNebulaColor",
+        "category": "Nebula Manager - Colors",
+        "signature": "Vec3f getReflectionNebulaColor()",
+        "description": "Returns the color used for reflection nebula symbols.",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0"
+        },
+        "example": "var color = core.getStelProperty('NebulaMgr.reflectionNebulaeColor');"
+    },
+    {
+        "name": "setReflectionNebulaColor",
+        "category": "Nebula Manager - Colors",
+        "signature": "setReflectionNebulaColor(Vec3f color)",
+        "description": "Sets the color used for reflection nebula symbols.",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0"
+        },
+        "example": "NebulaMgr.setReflectionNebulaColor(core.vec3f(0.1, 1.0, 0.1));"
+    },
+    {
+        "name": "getBipolarNebulaColor",
+        "category": "Nebula Manager - Colors",
+        "signature": "Vec3f getBipolarNebulaColor()",
+        "description": "Returns the color used for bipolar nebula symbols.",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0"
+        },
+        "example": "var color = core.getStelProperty('NebulaMgr.bipolarNebulaeColor');"
+    },
+    {
+        "name": "setBipolarNebulaColor",
+        "category": "Nebula Manager - Colors",
+        "signature": "setBipolarNebulaColor(Vec3f color)",
+        "description": "Sets the color used for bipolar nebula symbols.",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0"
+        },
+        "example": "NebulaMgr.setBipolarNebulaColor(core.vec3f(0.1, 1.0, 0.1));"
+    },
+    {
+        "name": "getEmissionNebulaColor",
+        "category": "Nebula Manager - Colors",
+        "signature": "Vec3f getEmissionNebulaColor()",
+        "description": "Returns the color used for emission nebula symbols.",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0"
+        },
+        "example": "var color = core.getStelProperty('NebulaMgr.emissionNebulaeColor');"
+    },
+    {
+        "name": "setEmissionNebulaColor",
+        "category": "Nebula Manager - Colors",
+        "signature": "setEmissionNebulaColor(Vec3f color)",
+        "description": "Sets the color used for emission nebula symbols.",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0"
+        },
+        "example": "NebulaMgr.setEmissionNebulaColor(core.vec3f(0.1, 1.0, 0.1));"
+    },
+    {
+        "name": "getDarkNebulaColor",
+        "category": "Nebula Manager - Colors",
+        "signature": "Vec3f getDarkNebulaColor()",
+        "description": "Returns the color used for dark nebula symbols (gray boxes).",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0"
+        },
+        "example": "var darkNebulaColor = core.getStelProperty('NebulaMgr.darkNebulaeColor');"
+    },
+    {
+        "name": "setDarkNebulaColor",
+        "category": "Nebula Manager - Colors",
+        "signature": "setDarkNebulaColor(Vec3f color)",
+        "description": "Sets the color used for dark nebula symbols (gray boxes).",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0"
+        },
+        "example": "// Set dark nebulae to dark gray\nNebulaMgr.setDarkNebulaColor(core.vec3f(0.3, 0.3, 0.3));"
+    },
+    {
+        "name": "getHydrogenRegionColor",
+        "category": "Nebula Manager - Colors",
+        "signature": "Vec3f getHydrogenRegionColor()",
+        "description": "Returns the color used for HII region (ionized hydrogen) symbols.",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0"
+        },
+        "example": "var color = core.getStelProperty('NebulaMgr.hydrogenRegionsColor');"
+    },
+    {
+        "name": "setHydrogenRegionColor",
+        "category": "Nebula Manager - Colors",
+        "signature": "setHydrogenRegionColor(Vec3f color)",
+        "description": "Sets the color used for HII region (ionized hydrogen) symbols.",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0"
+        },
+        "example": "NebulaMgr.setHydrogenRegionColor(core.vec3f(0.1, 1.0, 0.1));"
+    },
+    {
+        "name": "getSupernovaRemnantColor",
+        "category": "Nebula Manager - Colors",
+        "signature": "Vec3f getSupernovaRemnantColor()",
+        "description": "Returns the color used for supernova remnant symbols.",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0"
+        },
+        "example": "var color = core.getStelProperty('NebulaMgr.supernovaRemnantsColor');"
+    },
+    {
+        "name": "setSupernovaRemnantColor",
+        "category": "Nebula Manager - Colors",
+        "signature": "setSupernovaRemnantColor(Vec3f color)",
+        "description": "Sets the color used for supernova remnant symbols.",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0"
+        },
+        "example": "NebulaMgr.setSupernovaRemnantColor(core.vec3f(0.1, 1.0, 0.1));"
+    },
+    {
+        "name": "getSupernovaCandidateColor",
+        "category": "Nebula Manager - Colors",
+        "signature": "Vec3f getSupernovaCandidateColor()",
+        "description": "Returns the color used for supernova candidate symbols.",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.19.0"
+        },
+        "example": "var color = core.getStelProperty('NebulaMgr.supernovaCandidatesColor');"
+    },
+    {
+        "name": "setSupernovaCandidateColor",
+        "category": "Nebula Manager - Colors",
+        "signature": "setSupernovaCandidateColor(Vec3f color)",
+        "description": "Sets the color used for supernova candidate symbols.",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.19.0"
+        },
+        "example": "NebulaMgr.setSupernovaCandidateColor(core.vec3f(0.8, 0.2, 0.2));"
+    },
+    {
+        "name": "getSupernovaRemnantCandidateColor",
+        "category": "Nebula Manager - Colors",
+        "signature": "Vec3f getSupernovaRemnantCandidateColor()",
+        "description": "Returns the color used for supernova remnant candidate symbols.",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.19.0"
+        },
+        "example": "var color = core.getStelProperty('NebulaMgr.supernovaRemnantCandidatesColor');"
+    },
+    {
+        "name": "setSupernovaRemnantCandidateColor",
+        "category": "Nebula Manager - Colors",
+        "signature": "setSupernovaRemnantCandidateColor(Vec3f color)",
+        "description": "Sets the color used for supernova remnant candidate symbols.",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.19.0"
+        },
+        "example": "NebulaMgr.setSupernovaRemnantCandidateColor(core.vec3f(0.6, 0.2, 0.2));"
+    },
+    {
+        "name": "getInterstellarMatterColor",
+        "category": "Nebula Manager - Colors",
+        "signature": "Vec3f getInterstellarMatterColor()",
+        "description": "Returns the color used for interstellar matter symbols.",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0"
+        },
+        "example": "var color = core.getStelProperty('NebulaMgr.interstellarMatterColor');"
+    },
+    {
+        "name": "setInterstellarMatterColor",
+        "category": "Nebula Manager - Colors",
+        "signature": "setInterstellarMatterColor(Vec3f color)",
+        "description": "Sets the color used for interstellar matter symbols.",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0"
+        },
+        "example": "NebulaMgr.setInterstellarMatterColor(core.vec3f(0.1, 1.0, 0.1));"
+    },
+    {
+        "name": "getEmissionObjectColor",
+        "category": "Nebula Manager - Colors",
+        "signature": "Vec3f getEmissionObjectColor()",
+        "description": "Returns the color used for emission object symbols.",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0"
+        },
+        "example": "var color = core.getStelProperty('NebulaMgr.emissionObjectsColor');"
+    },
+    {
+        "name": "setEmissionObjectColor",
+        "category": "Nebula Manager - Colors",
+        "signature": "setEmissionObjectColor(Vec3f color)",
+        "description": "Sets the color used for emission object symbols.",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0"
+        },
+        "example": "NebulaMgr.setEmissionObjectColor(core.vec3f(0.8, 0.5, 0.2));"
+    },
+    {
+        "name": "getBlLacObjectColor",
+        "category": "Nebula Manager - Colors",
+        "signature": "Vec3f getBlLacObjectColor()",
+        "description": "Returns the color used for BL Lac object symbols.",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0"
+        },
+        "example": "var color = core.getStelProperty('NebulaMgr.blLacObjectsColor');"
+    },
+    {
+        "name": "setBlLacObjectColor",
+        "category": "Nebula Manager - Colors",
+        "signature": "setBlLacObjectColor(Vec3f color)",
+        "description": "Sets the color used for BL Lac object symbols.",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0"
+        },
+        "example": "NebulaMgr.setBlLacObjectColor(core.vec3f(0.6, 0.6, 0.8));"
+    },
+    {
+        "name": "getBlazarColor",
+        "category": "Nebula Manager - Colors",
+        "signature": "Vec3f getBlazarColor()",
+        "description": "Returns the color used for blazar symbols.",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0"
+        },
+        "example": "var color = core.getStelProperty('NebulaMgr.blazarsColor');"
+    },
+    {
+        "name": "setBlazarColor",
+        "category": "Nebula Manager - Colors",
+        "signature": "setBlazarColor(Vec3f color)",
+        "description": "Sets the color used for blazar symbols.",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0"
+        },
+        "example": "NebulaMgr.setBlazarColor(core.vec3f(0.7, 0.5, 0.9));"
+    },
+    {
+        "name": "getMolecularCloudColor",
+        "category": "Nebula Manager - Colors",
+        "signature": "Vec3f getMolecularCloudColor()",
+        "description": "Returns the color used for molecular cloud symbols.",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0"
+        },
+        "example": "var color = core.getStelProperty('NebulaMgr.molecularCloudsColor');"
+    },
+    {
+        "name": "setMolecularCloudColor",
+        "category": "Nebula Manager - Colors",
+        "signature": "setMolecularCloudColor(Vec3f color)",
+        "description": "Sets the color used for molecular cloud symbols.",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0"
+        },
+        "example": "NebulaMgr.setMolecularCloudColor(core.vec3f(0.3, 0.5, 0.3));"
+    },
+    {
+        "name": "getYoungStellarObjectColor",
+        "category": "Nebula Manager - Colors",
+        "signature": "Vec3f getYoungStellarObjectColor()",
+        "description": "Returns the color used for young stellar object (YSO) symbols.",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0"
+        },
+        "example": "var color = core.getStelProperty('NebulaMgr.youngStellarObjectsColor');"
+    },
+    {
+        "name": "setYoungStellarObjectColor",
+        "category": "Nebula Manager - Colors",
+        "signature": "setYoungStellarObjectColor(Vec3f color)",
+        "description": "Sets the color used for young stellar object (YSO) symbols.",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0"
+        },
+        "example": "NebulaMgr.setYoungStellarObjectColor(core.vec3f(1.0, 0.7, 0.3));"
+    },
+    {
+        "name": "getPossiblePlanetaryNebulaColor",
+        "category": "Nebula Manager - Colors",
+        "signature": "Vec3f getPossiblePlanetaryNebulaColor()",
+        "description": "Returns the color used for possible planetary nebula symbols.",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0"
+        },
+        "example": "var color = core.getStelProperty('NebulaMgr.possiblePlanetaryNebulaeColor');"
+    },
+    {
+        "name": "setPossiblePlanetaryNebulaColor",
+        "category": "Nebula Manager - Colors",
+        "signature": "setPossiblePlanetaryNebulaColor(Vec3f color)",
+        "description": "Sets the color used for possible planetary nebula symbols.",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0"
+        },
+        "example": "NebulaMgr.setPossiblePlanetaryNebulaColor(core.vec3f(0.5, 0.8, 0.5));"
+    },
+    {
+        "name": "getProtoplanetaryNebulaColor",
+        "category": "Nebula Manager - Colors",
+        "signature": "Vec3f getProtoplanetaryNebulaColor()",
+        "description": "Returns the color used for protoplanetary nebula symbols.",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0"
+        },
+        "example": "var color = core.getStelProperty('NebulaMgr.protoplanetaryNebulaeColor');"
+    },
+    {
+        "name": "setProtoplanetaryNebulaColor",
+        "category": "Nebula Manager - Colors",
+        "signature": "setProtoplanetaryNebulaColor(Vec3f color)",
+        "description": "Sets the color used for protoplanetary nebula symbols.",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0"
+        },
+        "example": "NebulaMgr.setProtoplanetaryNebulaColor(core.vec3f(0.7, 0.5, 0.3));"
+    },
+    {
+        "name": "getStarColor",
+        "category": "Nebula Manager - Colors",
+        "signature": "Vec3f getStarColor()",
+        "description": "Returns the color used for star symbols (within DSO catalogs).",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0"
+        },
+        "example": "var starColor = core.getStelProperty('NebulaMgr.starsColor');"
+    },
+    {
+        "name": "setStarColor",
+        "category": "Nebula Manager - Colors",
+        "signature": "setStarColor(Vec3f color)",
+        "description": "Sets the color used for star symbols (within DSO catalogs).",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0"
+        },
+        "example": "NebulaMgr.setStarColor(core.vec3f(1.0, 0.8, 0.5));"
+    },
+    {
+        "name": "getSymbioticStarColor",
+        "category": "Nebula Manager - Colors",
+        "signature": "Vec3f getSymbioticStarColor()",
+        "description": "Returns the color used for symbiotic star symbols.",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0"
+        },
+        "example": "var color = core.getStelProperty('NebulaMgr.symbioticStarsColor');"
+    },
+    {
+        "name": "setSymbioticStarColor",
+        "category": "Nebula Manager - Colors",
+        "signature": "setSymbioticStarColor(Vec3f color)",
+        "description": "Sets the color used for symbiotic star symbols.",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0"
+        },
+        "example": "NebulaMgr.setSymbioticStarColor(core.vec3f(1.0, 0.6, 0.6));"
+    },
+    {
+        "name": "getEmissionLineStarColor",
+        "category": "Nebula Manager - Colors",
+        "signature": "Vec3f getEmissionLineStarColor()",
+        "description": "Returns the color used for emission-line star symbols.",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0"
+        },
+        "example": "var color = core.getStelProperty('NebulaMgr.emissionLineStarsColor');"
+    },
+    {
+        "name": "setEmissionLineStarColor",
+        "category": "Nebula Manager - Colors",
+        "signature": "setEmissionLineStarColor(Vec3f color)",
+        "description": "Sets the color used for emission-line star symbols.",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0"
+        },
+        "example": "NebulaMgr.setEmissionLineStarColor(core.vec3f(0.8, 0.5, 0.8));"
+    },
+    {
+        "name": "getGalaxyClusterColor",
+        "category": "Nebula Manager - Colors",
+        "signature": "Vec3f getGalaxyClusterColor()",
+        "description": "Returns the color used for galaxy cluster symbols.",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0"
+        },
+        "example": "var color = core.getStelProperty('NebulaMgr.galaxyClustersColor');"
+    },
+    {
+        "name": "setGalaxyClusterColor",
+        "category": "Nebula Manager - Colors",
+        "signature": "setGalaxyClusterColor(Vec3f color)",
+        "description": "Sets the color used for galaxy cluster symbols.",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0"
+        },
+        "example": "NebulaMgr.setGalaxyClusterColor(core.vec3f(0.2, 0.8, 1.0));"
+    },
+    {
+        "name": "getCatalogFilters",
+        "category": "Nebula Manager - Catalogs",
+        "signature": "int getCatalogFilters()",
+        "description": "Returns the current catalog filter flags as an integer bitmask. Determines which astronomical catalogs are displayed (NGC, IC, Messier, etc.).",
+        "parameters": [],
+        "returnType": "int",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0"
+        },
+        "example": "var catalogFilters = NebulaMgr.getCatalogFilters();\ncore.debug(\"Catalog filters: \" + catalogFilters);"
+    },
+    {
+        "name": "setCatalogFilters",
+        "category": "Nebula Manager - Catalogs",
+        "signature": "setCatalogFilters(int flags)",
+        "description": "Sets the catalog filter flags. Controls which astronomical catalogs are displayed. Flags can be combined using bitwise OR (|).",
+        "parameters": [
+            {
+                "name": "flags",
+                "type": "int",
+                "description": "Catalog filter bitmask (CatNGC, CatIC, CatM, CatC, CatB, CatSh2, CatVdB, CatRCW, CatLDN, CatLBN, CatCr, CatMel, CatPGC, CatUGC, CatCed, CatArp, CatVV, CatPK, CatPNG, CatSNRG, CatACO, CatHCG, CatESO, CatVdBH, CatDWB, CatTr, CatSt, CatRu, CatVdBHa, CatOther, CatAll)",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0"
+        },
+        "example": "// Show only Messier and NGC catalogs\nNebulaMgr.setCatalogFilters(4 | 1); // CatM (4) | CatNGC (1)\n\n// Show all catalogs\nNebulaMgr.selectAllCatalogs();\n\n// Show only standard catalogs (M, NGC, IC)\nNebulaMgr.selectStandardCatalogs();\n\n// Disable all catalogs\nNebulaMgr.selectNoneCatalogs();"
+    },
+    {
+        "name": "selectAllCatalogs",
+        "category": "Nebula Manager - Catalogs",
+        "signature": "selectAllCatalogs()",
+        "description": "Enables display of all available deep-sky catalogs. Shows all objects from all catalog sources.",
+        "parameters": [],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0"
+        },
+        "example": "// Show all DSO catalogs\nNebulaMgr.selectAllCatalogs();\ncore.debug(\"All DSO catalogs enabled\");"
+    },
+    {
+        "name": "selectStandardCatalogs",
+        "category": "Nebula Manager - Catalogs",
+        "signature": "selectStandardCatalogs()",
+        "description": "Enables a standard selection of catalogs: Messier (M), NGC, and IC. This is a good default for most observers.",
+        "parameters": [],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0"
+        },
+        "example": "// Show only M, NGC, IC catalogs\nNebulaMgr.selectStandardCatalogs();"
+    },
+    {
+        "name": "selectNoneCatalogs",
+        "category": "Nebula Manager - Catalogs",
+        "signature": "selectNoneCatalogs()",
+        "description": "Disables all catalog filters, hiding all deep-sky objects regardless of their catalog origin.",
+        "parameters": [],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0"
+        },
+        "example": "// Hide all DSO catalogs\nNebulaMgr.selectNoneCatalogs();"
+    },
+    {
+        "name": "loadCatalogFilters",
+        "category": "Nebula Manager - Catalogs",
+        "signature": "loadCatalogFilters()",
+        "description": "Loads catalog filter settings from the Stellarium configuration file (config.ini).",
+        "parameters": [],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0"
+        },
+        "example": "// Reload catalog filters from config\nNebulaMgr.loadCatalogFilters();"
+    },
+    {
+        "name": "storeCatalogFilters",
+        "category": "Nebula Manager - Catalogs",
+        "signature": "storeCatalogFilters()",
+        "description": "Saves current catalog filter settings to the Stellarium configuration file (config.ini).",
+        "parameters": [],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0"
+        },
+        "example": "// Save current catalog filters to config\nNebulaMgr.storeCatalogFilters();"
+    },
+    {
+        "name": "getTypeFilters",
+        "category": "Nebula Manager - Catalogs",
+        "signature": "int getTypeFilters()",
+        "description": "Returns the current type filter flags as an integer bitmask. Determines which types of deep-sky objects are displayed (galaxies, clusters, nebulae, etc.).",
+        "parameters": [],
+        "returnType": "int",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0"
+        },
+        "example": "var typeFilters = NebulaMgr.getTypeFilters();\ncore.debug(\"Type filters: \" + typeFilters);"
+    },
+    {
+        "name": "setTypeFilters",
+        "category": "Nebula Manager - Catalogs",
+        "signature": "setTypeFilters(int flags)",
+        "description": "Sets the type filter flags. Controls which types of deep-sky objects are displayed. Flags can be combined using bitwise OR (|).",
+        "parameters": [
+            {
+                "name": "flags",
+                "type": "int",
+                "description": "Type filter bitmask (TypeGalaxies, TypeActiveGalaxies, TypeInteractingGalaxies, TypeOpenStarClusters, TypeGlobularStarClusters, TypeHydrogenRegions, TypeBrightNebulae, TypeDarkNebulae, TypePlanetaryNebulae, TypeSupernovaRemnants, TypeGalaxyClusters, TypeOther, TypeAll)",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0"
+        },
+        "example": "// Show only galaxies and star clusters\nNebulaMgr.setTypeFilters(1 | 8); // TypeGalaxies (1) | TypeOpenStarClusters (8)\n\n// Show all types\nNebulaMgr.setTypeFilters(0xFFFFFFFF);\n\n// Show only nebulae\nNebulaMgr.setTypeFilters(64 | 128 | 256); // TypeBrightNebulae, TypeDarkNebulae, TypePlanetaryNebulae"
+    },
+    {
+        "name": "searchM",
+        "category": "Nebula Manager - Search",
+        "signature": "NebulaP searchM(unsigned int mNumber)",
+        "description": "Searches for a deep-sky object by its Messier catalog number (e.g., M31, M42, M45).",
+        "parameters": [
+            {
+                "name": "mNumber",
+                "type": "int",
+                "description": "Messier catalog number (1 to 110)",
+                "required": true
+            }
+        ],
+        "returnType": "NebulaP",
+        "returnDescription": "Nebula object pointer, or null if not found",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0"
+        },
+        "example": "// Find M31 (Andromeda Galaxy)\nvar m31 = NebulaMgr.searchM(31);\nif(m31) {\n    core.debug(\"Found M31: \" + m31.getEnglishName());\n    core.moveToObject(\"M31\", 2);\n}"
+    },
+    {
+        "name": "searchNGC",
+        "category": "Nebula Manager - Search",
+        "signature": "NebulaP searchNGC(unsigned int ngcNumber)",
+        "description": "Searches for a deep-sky object by its NGC (New General Catalogue) number.",
+        "parameters": [
+            {
+                "name": "ngcNumber",
+                "type": "int",
+                "description": "NGC catalog number",
+                "required": true
+            }
+        ],
+        "returnType": "NebulaP",
+        "returnDescription": "Nebula object pointer, or null if not found",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0"
+        },
+        "example": "// Find NGC 6992 (Veil Nebula)\nvar ngc6992 = NebulaMgr.searchNGC(6992);\nif(ngc6992) {\n    core.debug(\"Found NGC 6992\");\n}"
+    },
+    {
+        "name": "searchIC",
+        "category": "Nebula Manager - Search",
+        "signature": "NebulaP searchIC(unsigned int icNumber)",
+        "description": "Searches for a deep-sky object by its IC (Index Catalogue) number.",
+        "parameters": [
+            {
+                "name": "icNumber",
+                "type": "int",
+                "description": "IC catalog number",
+                "required": true
+            }
+        ],
+        "returnType": "NebulaP",
+        "returnDescription": "Nebula object pointer, or null if not found",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0"
+        },
+        "example": "// Find IC 434 (Horsehead Nebula region)\nvar ic434 = NebulaMgr.searchIC(434);"
+    },
+    {
+        "name": "searchForCommonName",
+        "category": "Nebula Manager - Search",
+        "signature": "NebulaP searchForCommonName(QString name)",
+        "description": "Searches for a deep-sky object by its common name (e.g., 'Andromeda Galaxy', 'Orion Nebula', 'Pleiades').",
+        "parameters": [
+            {
+                "name": "name",
+                "type": "QString",
+                "description": "Common name of the deep-sky object (case-insensitive)",
+                "required": true
+            }
+        ],
+        "returnType": "NebulaP",
+        "returnDescription": "Nebula object pointer, or null if not found",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0"
+        },
+        "example": "// Find the Orion Nebula by name\nvar orionNebula = NebulaMgr.searchForCommonName(\"Orion Nebula\");\nif(orionNebula) {\n    core.moveToObject(orionNebula.getEnglishName(), 2);\n}"
+    },
+    {
+        "name": "getLatestSelectedDSODesignation",
+        "category": "Nebula Manager - Utilities",
+        "signature": "QString getLatestSelectedDSODesignation()",
+        "description": "Returns the catalog designation (e.g., 'M31', 'NGC 224') of the most recently selected deep-sky object.",
+        "parameters": [],
+        "returnType": "QString",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0"
+        },
+        "example": "var lastDSO = NebulaMgr.getLatestSelectedDSODesignation();\ncore.debug(\"Last selected DSO: \" + lastDSO);"
+    },
+    {
+        "name": "getLatestSelectedDSODesignationWIC",
+        "category": "Nebula Manager - Utilities",
+        "signature": "QString getLatestSelectedDSODesignationWIC()",
+        "description": "Returns the catalog designation of the most recently selected deep-sky object without considering catalog filter settings.",
+        "parameters": [],
+        "returnType": "QString",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0"
+        },
+        "example": "var lastDSO = NebulaMgr.getLatestSelectedDSODesignationWIC();\ncore.debug(\"Last selected DSO (without filter): \" + lastDSO);"
+    },
+    {
+        "name": "getAllDeepSkyObjects",
+        "category": "Nebula Manager - Search",
+        "signature": "const QVector<NebulaP> getAllDeepSkyObjects()",
+        "description": "Returns a list containing all deep-sky objects (nebulae, galaxies, clusters) loaded in Stellarium.",
+        "parameters": [],
+        "returnType": "const QVector<NebulaP>",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0"
+        },
+        "example": "var allDSO = NebulaMgr.getAllDeepSkyObjects();\ncore.debug(\"Total DSO loaded: \" + allDSO.length);"
+    },
+    {
+        "name": "getDeepSkyObjectsByType",
+        "category": "Nebula Manager - Search",
+        "signature": "const QList<NebulaP> getDeepSkyObjectsByType(QString type)",
+        "description": "Returns a list of deep-sky objects filtered by type. Types can be numeric constants (e.g., '100' for Messier, '108' for NGC).",
+        "parameters": [
+            {
+                "name": "type",
+                "type": "QString",
+                "description": "Object type identifier (as string or integer)",
+                "required": true
+            }
+        ],
+        "returnType": "const QList<NebulaP>",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0"
+        },
+        "example": "// Get all Messier objects\nvar messierObjects = NebulaMgr.getDeepSkyObjectsByType(\"100\");\ncore.debug(\"Messier objects: \" + messierObjects.length);\n\n// Get all NGC objects\nvar ngcObjects = NebulaMgr.getDeepSkyObjectsByType(\"108\");\n\n// Get all galaxies (type 0)\nvar galaxies = NebulaMgr.getDeepSkyObjectsByType(\"0\");"
+    },
+    {
+        "name": "computeMaxMagHint",
+        "category": "Nebula Manager - Utilities",
+        "signature": "float computeMaxMagHint(StelSkyDrawer skyDrawer)",
+        "description": "Computes the maximum magnitude for which nebula hints will be displayed based on current sky conditions and hint amount settings.",
+        "parameters": [
+            {
+                "name": "skyDrawer",
+                "type": "StelSkyDrawer",
+                "description": "The sky drawer object containing current sky conditions",
+                "required": true
+            }
+        ],
+        "returnType": "float",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0"
+        },
+        "example": "var core = StelApp.getCore();\nvar maxMag = NebulaMgr.computeMaxMagHint(core.getSkyDrawer());\ncore.debug(\"Hint display limit magnitude: \" + maxMag);"
+    }
+]

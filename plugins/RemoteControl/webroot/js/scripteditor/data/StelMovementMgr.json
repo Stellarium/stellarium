@@ -1,0 +1,1363 @@
+[
+    {
+        "name": "⚠️ IMPORTANT NOTE",
+        "category": "StelMovementMgr",
+        "signature": "USING GETTERS",
+        "description": "⚠️ **IMPORTANT:** Many `get` methods in `StelMovementMgr` are `public` methods, NOT `slots`. They may NOT work reliably in scripts. For reading state, prefer using `core.getStelProperty()` with the documented `Q_PROPERTY` names where available (e.g., `core.getStelProperty('StelMovementMgr.currentFov')`).\n\nFor writing state, the `set` methods and action slots (e.g., `setFlagTracking`, `zoomTo`, `lookNorth`) are `public slots` and are safe to use.",
+        "parameters": [],
+        "returnType": "void",
+        "type": "warning",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Read this note before using this module."
+        },
+        "example": "// ✅ Safe way to read current FOV:\nvar fov = core.getStelProperty('StelMovementMgr.currentFov');\n\n// ❌ May not work:\n// var fov = StelMovementMgr.getCurrentFov();\n\n// ✅ Safe way to write (set) values:\nStelMovementMgr.zoomTo(60.0, 1.0);\nStelMovementMgr.setFlagTracking(true);"
+    },
+    {
+        "name": "setFlagTracking",
+        "category": "Movement Manager - Tracking",
+        "signature": "setFlagTracking(bool enabled)",
+        "description": "Enables or disables tracking of the selected object. When enabled, the camera follows the selected object automatically.",
+        "parameters": [
+            {
+                "name": "enabled",
+                "type": "bool",
+                "description": "`true` to enable tracking, `false` to disable.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "alternative": "Use `core.getStelProperty('StelMovementMgr.tracking')` to read the current state.",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "// Enable tracking of the selected object\nStelMovementMgr.setFlagTracking(true);\n\n// Disable tracking\nStelMovementMgr.setFlagTracking(false);\n\n// Read tracking state (alternative method)\nvar isTracking = core.getStelProperty('StelMovementMgr.tracking');\ncore.debug(\"Tracking is \" + (isTracking ? \"on\" : \"off\"));"
+    },
+    {
+        "name": "getFlagTracking",
+        "category": "Movement Manager - Tracking",
+        "signature": "bool getFlagTracking()",
+        "description": "⚠️ **WARNING:** This is a `public` method, not a `slot`. It may not work reliably in scripts. Use `core.getStelProperty('StelMovementMgr.tracking')` instead.\n\nReturns whether the view is currently tracking the selected object.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "`true` if tracking is enabled.",
+        "type": "method",
+        "alternative": "core.getStelProperty('StelMovementMgr.tracking')",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "This is a `public` method. Its reliability in scripts is not guaranteed."
+        },
+        "example": "// Alternative method (recommended):\nvar isTracking = core.getStelProperty('StelMovementMgr.tracking');\ncore.debug(\"Tracking is \" + (isTracking ? \"on\" : \"off\"));"
+    },
+    {
+        "name": "setFlagLockEquPos",
+        "category": "Movement Manager - Lock",
+        "signature": "setFlagLockEquPos(bool locked)",
+        "description": "Locks or unlocks the equatorial position. When locked, the view remains fixed in equatorial coordinates as time passes.",
+        "parameters": [
+            {
+                "name": "locked",
+                "type": "bool",
+                "description": "`true` to lock equatorial position, `false` to unlock.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "// Lock view to equatorial coordinates (sky stays fixed)\nStelMovementMgr.setFlagLockEquPos(true);\n\n// Unlock (allow Earth rotation effect)\nStelMovementMgr.setFlagLockEquPos(false);"
+    },
+    {
+        "name": "setEquatorialMount",
+        "category": "Movement Manager - Mount Mode",
+        "signature": "setEquatorialMount(bool equatorial)",
+        "description": "Switches between equatorial mount and alt-azimuthal mount modes. Equatorial mode follows the celestial sphere rotation, while alt-azimuthal mode is fixed to the horizon.",
+        "parameters": [
+            {
+                "name": "equatorial",
+                "type": "bool",
+                "description": "`true` for equatorial mount, `false` for alt-azimuthal.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "alternative": "Use `core.getStelProperty('StelMovementMgr.equatorialMount')` to read the current state.",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "// Switch to equatorial mount\nStelMovementMgr.setEquatorialMount(true);\n\n// Switch to alt-azimuthal mount\nStelMovementMgr.setEquatorialMount(false);\n\n// Read mount mode state (alternative method)\nvar isEquatorial = core.getStelProperty('StelMovementMgr.equatorialMount');\ncore.debug(\"Equatorial mount is \" + (isEquatorial ? \"on\" : \"off\"));"
+    },
+    {
+        "name": "getEquatorialMount",
+        "category": "Movement Manager - Mount Mode",
+        "signature": "bool getEquatorialMount()",
+        "description": "⚠️ **WARNING:** This is a `public` method, not a `slot`. It may not work reliably in scripts. Use `core.getStelProperty('StelMovementMgr.equatorialMount')` instead.\n\nReturns whether the mount mode is equatorial (`true`) or alt-azimuthal (`false`).",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "`true` for equatorial mount, `false` for alt-azimuthal.",
+        "type": "method",
+        "alternative": "core.getStelProperty('StelMovementMgr.equatorialMount')",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "This is a `public` method. Its reliability in scripts is not guaranteed."
+        },
+        "example": "// Alternative method (recommended):\nvar isEquatorial = core.getStelProperty('StelMovementMgr.equatorialMount');"
+    },
+    {
+        "name": "toggleMountMode",
+        "category": "Movement Manager - Mount Mode",
+        "signature": "toggleMountMode()",
+        "description": "Toggles between equatorial and alt-azimuthal mount modes.",
+        "parameters": [],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "// Toggle mount mode\nStelMovementMgr.toggleMountMode();"
+    },
+    {
+        "name": "setMountMode",
+        "category": "Movement Manager - Mount Mode",
+        "signature": "setMountMode(int mode)",
+        "description": "Sets the mount mode. Controls the coordinate system used for view movement.\n- `0` = Alt-Azimuthal (horizon-based)\n- `1` = Equatorial (Equinox Equatorial)\n- `2` = Galactic\n- `3` = Supergalactic",
+        "parameters": [
+            {
+                "name": "mode",
+                "type": "int",
+                "description": "Mount mode (0=AltAz, 1=Equatorial, 2=Galactic, 3=Supergalactic)",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "This is a `public` method, but is safe to use."
+        },
+        "example": "// Set to equatorial mode\nStelMovementMgr.setMountMode(1);\n\n// Set to galactic mode\nStelMovementMgr.setMountMode(2);"
+    },
+    {
+        "name": "getMountMode",
+        "category": "Movement Manager - Mount Mode",
+        "signature": "int getMountMode()",
+        "description": "⚠️ **WARNING:** This is a `public` method, not a `slot`. It may not work reliably in scripts.\n\nReturns the current mount mode.\n- `0` = Alt-Azimuthal\n- `1` = Equatorial\n- `2` = Galactic\n- `3` = Supergalactic",
+        "parameters": [],
+        "returnType": "int",
+        "returnDescription": "Current mount mode (0-3).",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "This is a `public` method. Its reliability in scripts is not guaranteed."
+        },
+        "example": "// May not work reliably:\n// var mode = StelMovementMgr.getMountMode();"
+    },
+    {
+        "name": "setFov",
+        "category": "Movement Manager - Field of View",
+        "signature": "setFov(double fov)",
+        "description": "Sets the current field of view in degrees instantly (no animation). Values are clamped between `minFov` and `maxFov`.",
+        "parameters": [
+            {
+                "name": "fov",
+                "type": "double",
+                "description": "Field of view in degrees.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "This is a `public` method, but is safe to use."
+        },
+        "example": "// Instantly zoom in to 10 degrees\nStelMovementMgr.setFov(10.0);\n\n// Instantly zoom out to 90 degrees\nStelMovementMgr.setFov(90.0);\n\n// Read current FOV (alternative method)\nvar currentFov = core.getStelProperty('StelMovementMgr.currentFov');\ncore.debug(\"Current FOV: \" + currentFov);"
+    },
+    {
+        "name": "getCurrentFov",
+        "category": "Movement Manager - Field of View",
+        "signature": "double getCurrentFov()",
+        "description": "⚠️ **WARNING:** This is a `public` method, not a `slot`. Use `core.getStelProperty('StelMovementMgr.currentFov')` instead.\n\nReturns the current field of view in degrees.",
+        "parameters": [],
+        "returnType": "double",
+        "returnDescription": "Field of view in degrees.",
+        "type": "method",
+        "alternative": "core.getStelProperty('StelMovementMgr.currentFov')",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "This is a `public` method. Its reliability in scripts is not guaranteed."
+        },
+        "example": "// Alternative method (recommended):\nvar fov = core.getStelProperty('StelMovementMgr.currentFov');\ncore.debug(\"Current FOV: \" + fov + \"°\");"
+    },
+    {
+        "name": "zoomTo",
+        "category": "Movement Manager - Field of View",
+        "signature": "zoomTo(double aimFov, float zoomDuration)",
+        "description": "Smoothly zooms to a target field of view over a specified duration.",
+        "parameters": [
+            {
+                "name": "aimFov",
+                "type": "double",
+                "description": "Target field of view in degrees.",
+                "required": true
+            },
+            {
+                "name": "zoomDuration",
+                "type": "float",
+                "description": "Duration of the zoom animation in seconds. Use `0` for an instant change.",
+                "required": false,
+                "default": "1.0"
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "// Smooth zoom to 5 degrees over 2 seconds\nStelMovementMgr.zoomTo(5.0, 2.0);\n\n// Smooth zoom to 90 degrees over 1 second\nStelMovementMgr.zoomTo(90.0, 1.0);\n\n// Instant zoom\nStelMovementMgr.zoomTo(60.0, 0);"
+    },
+    {
+        "name": "zoomIn",
+        "category": "Movement Manager - Zoom",
+        "signature": "zoomIn(bool start)",
+        "description": "Starts or stops continuous zooming in (increasing magnification). Use with a timer for smooth zoom effects.",
+        "parameters": [
+            {
+                "name": "start",
+                "type": "bool",
+                "description": "`true` to start zooming in, `false` to stop.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "// Start zooming in\nStelMovementMgr.zoomIn(true);\ncore.wait(2);\n// Stop zooming\nStelMovementMgr.zoomIn(false);"
+    },
+    {
+        "name": "zoomOut",
+        "category": "Movement Manager - Zoom",
+        "signature": "zoomOut(bool start)",
+        "description": "Starts or stops continuous zooming out (decreasing magnification).",
+        "parameters": [
+            {
+                "name": "start",
+                "type": "bool",
+                "description": "`true` to start zooming out, `false` to stop.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "// Start zooming out\nStelMovementMgr.zoomOut(true);\ncore.wait(2);\nStelMovementMgr.zoomOut(false);"
+    },
+    {
+        "name": "autoZoomIn",
+        "category": "Movement Manager - Auto Zoom",
+        "signature": "autoZoomIn(float moveDuration, bool allowManualZoom)",
+        "description": "Automatically zooms in on the currently selected object and optionally centers it. This is the action typically bound to the '/' key.",
+        "parameters": [
+            {
+                "name": "moveDuration",
+                "type": "float",
+                "description": "Duration for the zoom animation in seconds.",
+                "required": false,
+                "default": "1.0"
+            },
+            {
+                "name": "allowManualZoom",
+                "type": "bool",
+                "description": "If `true`, allows additional manual zooming beyond the automatic level.",
+                "required": false,
+                "default": "true"
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "// Select an object and zoom in\ncore.selectObjectByName(\"Mars\", true);\nStelMovementMgr.autoZoomIn(1.5, true);"
+    },
+    {
+        "name": "autoZoomOut",
+        "category": "Movement Manager - Auto Zoom",
+        "signature": "autoZoomOut(float moveDuration, bool full)",
+        "description": "Automatically zooms out, either to a satellite system view or to the initial view. This is the action typically bound to the '\\\\' key.",
+        "parameters": [
+            {
+                "name": "moveDuration",
+                "type": "float",
+                "description": "Duration for the zoom animation in seconds.",
+                "required": false,
+                "default": "1.0"
+            },
+            {
+                "name": "full",
+                "type": "bool",
+                "description": "If `true`, zooms out fully to the initial view even from a satellite view.",
+                "required": false,
+                "default": "false"
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "// Zoom out to see the satellite system of the selected object\nStelMovementMgr.autoZoomOut(1.0, false);\n\n// Zoom out fully to the initial view\nStelMovementMgr.autoZoomOut(2.0, true);"
+    },
+    {
+        "name": "setInitFov",
+        "category": "Movement Manager - Initial Settings",
+        "signature": "setInitFov(double fov)",
+        "description": "Sets the initial field of view value. This will be used when resetting the view.",
+        "parameters": [
+            {
+                "name": "fov",
+                "type": "double",
+                "description": "Initial FOV in degrees.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "// Set 45° as the default FOV\nStelMovementMgr.setInitFov(45.0);"
+    },
+    {
+        "name": "setUserMaxFov",
+        "category": "Movement Manager - Limits",
+        "signature": "setUserMaxFov(double max)",
+        "description": "Sets the user-configured maximum field of view limit. Useful for planetarium domes where FOV should never exceed 180°.",
+        "parameters": [
+            {
+                "name": "max",
+                "type": "double",
+                "description": "Maximum FOV in degrees (1 to 360).",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.19.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "// Limit FOV to 180° for planetarium\nStelMovementMgr.setUserMaxFov(180.0);\n\n// No artificial limit (up to projection max)\nStelMovementMgr.setUserMaxFov(360.0);"
+    },
+    {
+        "name": "setFlagAutoZoomOutResetsDirection",
+        "category": "Movement Manager - Settings",
+        "signature": "setFlagAutoZoomOutResetsDirection(bool reset)",
+        "description": "Sets whether auto-zoom out should reset the viewing direction to the initial position.",
+        "parameters": [
+            {
+                "name": "reset",
+                "type": "bool",
+                "description": "`true` to reset direction on zoom out.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "StelMovementMgr.setFlagAutoZoomOutResetsDirection(true);"
+    },
+    {
+        "name": "setFlagEnableMoveAtScreenEdge",
+        "category": "Movement Manager - Navigation",
+        "signature": "setFlagEnableMoveAtScreenEdge(bool enabled)",
+        "description": "⚠️ **WARNING:** This is a `public` method, not a `slot`. It may not work reliably in scripts.\n\nEnables or disables view movement when the mouse cursor reaches the screen edge.",
+        "parameters": [
+            {
+                "name": "enabled",
+                "type": "bool",
+                "description": "`true` to enable edge movement.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "This is a `public` method. Its reliability in scripts is not guaranteed."
+        },
+        "example": "// May not work reliably:\n// StelMovementMgr.setFlagEnableMoveAtScreenEdge(true);"
+    },
+    {
+        "name": "setFlagEnableMouseNavigation",
+        "category": "Movement Manager - Navigation",
+        "signature": "setFlagEnableMouseNavigation(bool enabled)",
+        "description": "Enables or disables mouse dragging for view navigation.",
+        "parameters": [
+            {
+                "name": "enabled",
+                "type": "bool",
+                "description": "`true` to enable mouse navigation.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "StelMovementMgr.setFlagEnableMouseNavigation(true);"
+    },
+    {
+        "name": "setFlagEnableMouseZooming",
+        "category": "Movement Manager - Navigation",
+        "signature": "setFlagEnableMouseZooming(bool enabled)",
+        "description": "Enables or disables mouse wheel zooming.",
+        "parameters": [
+            {
+                "name": "enabled",
+                "type": "bool",
+                "description": "`true` to enable mouse zooming.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "StelMovementMgr.setFlagEnableMouseZooming(true);"
+    },
+    {
+        "name": "setFlagEnableMoveKeys",
+        "category": "Movement Manager - Navigation",
+        "signature": "setFlagEnableMoveKeys(bool enabled)",
+        "description": "Enables or disables keyboard arrow keys for view movement.",
+        "parameters": [
+            {
+                "name": "enabled",
+                "type": "bool",
+                "description": "`true` to enable movement keys.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "StelMovementMgr.setFlagEnableMoveKeys(true);"
+    },
+    {
+        "name": "setFlagEnableZoomKeys",
+        "category": "Movement Manager - Navigation",
+        "signature": "setFlagEnableZoomKeys(bool enabled)",
+        "description": "Enables or disables keyboard zoom keys (PageUp/PageDown).",
+        "parameters": [
+            {
+                "name": "enabled",
+                "type": "bool",
+                "description": "`true` to enable zoom keys.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "StelMovementMgr.setFlagEnableZoomKeys(true);"
+    },
+    {
+        "name": "setFlagIndicationMountMode",
+        "category": "Movement Manager - Mount Mode",
+        "signature": "setFlagIndicationMountMode(bool show)",
+        "description": "Shows or hides the on-screen indicator for the current mount mode.",
+        "parameters": [
+            {
+                "name": "show",
+                "type": "bool",
+                "description": "`true` to show indicator, `false` to hide.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "StelMovementMgr.setFlagIndicationMountMode(true);"
+    },
+    {
+        "name": "setAutoMoveDuration",
+        "category": "Movement Manager - Animation",
+        "signature": "setAutoMoveDuration(float duration)",
+        "description": "Sets the duration of automatic movement animations in seconds.",
+        "parameters": [
+            {
+                "name": "duration",
+                "type": "float",
+                "description": "Duration in seconds.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "// Faster auto-moves\nStelMovementMgr.setAutoMoveDuration(0.8);\n\n// Slower, more cinematic moves\nStelMovementMgr.setAutoMoveDuration(3.0);"
+    },
+    {
+        "name": "getAutoMoveDuration",
+        "category": "Movement Manager - Animation",
+        "signature": "float getAutoMoveDuration()",
+        "description": "⚠️ **WARNING:** This is a `public` method, not a `slot`. It may not work reliably in scripts.\n\nReturns the duration of automatic movement animations in seconds.",
+        "parameters": [],
+        "returnType": "float",
+        "returnDescription": "Auto-move duration in seconds.",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "This is a `public` method. Its reliability in scripts is not guaranteed."
+        },
+        "example": "// May not work reliably:\n// var duration = StelMovementMgr.getAutoMoveDuration();"
+    },
+    {
+        "name": "setMovementSpeedFactor",
+        "category": "Movement Manager - Animation",
+        "signature": "setMovementSpeedFactor(float factor)",
+        "description": "⚠️ **WARNING:** This is a `public` method, not a `slot`. It may not work reliably in scripts.\n\nSets the global movement speed factor. Values >1 speed up movements, <1 slow them down.",
+        "parameters": [
+            {
+                "name": "factor",
+                "type": "float",
+                "description": "Speed multiplier (e.g., 2.0 = twice as fast).",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "This is a `public` method. Its reliability in scripts is not guaranteed."
+        },
+        "example": "// May not work reliably:\n// StelMovementMgr.setMovementSpeedFactor(2.0);"
+    },
+    {
+        "name": "setInitViewDirectionToCurrent",
+        "category": "Movement Manager - Initial Settings",
+        "signature": "setInitViewDirectionToCurrent()",
+        "description": "Sets the initial viewing direction to the current view direction. The setting is saved to the configuration file.",
+        "parameters": [],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "// Set the current view as the new default view\nStelMovementMgr.setInitViewDirectionToCurrent();\ncore.debug(\"New default view direction saved\");"
+    },
+    {
+        "name": "resetInitViewPos",
+        "category": "Movement Manager - Initial Settings",
+        "signature": "resetInitViewPos()",
+        "description": "Resets the view to the initial position and orientation as configured at startup.",
+        "parameters": [],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "// Return to the default view\nStelMovementMgr.resetInitViewPos();"
+    },
+    {
+        "name": "moveToObject",
+        "category": "Movement Manager - Movement",
+        "signature": "moveToObject(StelObjectP target, float moveDuration, int zooming)",
+        "description": "Smoothly moves the view to center on a specific celestial object.",
+        "parameters": [
+            {
+                "name": "target",
+                "type": "StelObjectP",
+                "description": "Target object to center the view on.",
+                "required": true
+            },
+            {
+                "name": "moveDuration",
+                "type": "float",
+                "description": "Duration of the move animation in seconds.",
+                "required": false,
+                "default": "1.0"
+            },
+            {
+                "name": "zooming",
+                "type": "int",
+                "description": "Zoom mode: `-1` = Zoom Out, `0` = Zoom None, `1` = Zoom In.",
+                "required": false,
+                "default": "0"
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "This is a `public` method, but is safe to use."
+        },
+        "example": "// Get the Mars object and center the view on it\nvar mars = core.getObjectInfo(\"Mars\");\nStelMovementMgr.moveToObject(mars, 2.0, 1);"
+    },
+    {
+        "name": "moveToJ2000",
+        "category": "Movement Manager - Movement",
+        "signature": "moveToJ2000(Vec3d aim, Vec3d aimUp, float moveDuration, int zooming)",
+        "description": "Smoothly moves the view to a specific J2000 equatorial coordinate.",
+        "parameters": [
+            {
+                "name": "aim",
+                "type": "Vec3d",
+                "description": "Target J2000 direction vector.",
+                "required": true
+            },
+            {
+                "name": "aimUp",
+                "type": "Vec3d",
+                "description": "Up vector for the target view.",
+                "required": true
+            },
+            {
+                "name": "moveDuration",
+                "type": "float",
+                "description": "Duration of the animation in seconds.",
+                "required": false,
+                "default": "1.0"
+            },
+            {
+                "name": "zooming",
+                "type": "int",
+                "description": "Zoom mode: `-1` = Zoom Out, `0` = Zoom None, `1` = Zoom In.",
+                "required": false,
+                "default": "0"
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "// Move to the celestial equator at 0h RA, 0° Dec\nvar aim = core.vec3d(\"0h\", \"0d\");\nvar up = core.vec3d(0, 0, 1);\nStelMovementMgr.moveToJ2000(aim, up, 2.0, 0);"
+    },
+    {
+        "name": "moveToAltAzi",
+        "category": "Movement Manager - Movement",
+        "signature": "moveToAltAzi(Vec3d aim, Vec3d aimUp, float moveDuration, int zooming)",
+        "description": "Smoothly moves the view to a specific Altitude/Azimuth coordinate. **Note:** Only works when the mount mode is Alt-Azimuthal.",
+        "parameters": [
+            {
+                "name": "aim",
+                "type": "Vec3d",
+                "description": "Target Alt/Az direction vector.",
+                "required": true
+            },
+            {
+                "name": "aimUp",
+                "type": "Vec3d",
+                "description": "Up vector for the target view.",
+                "required": true
+            },
+            {
+                "name": "moveDuration",
+                "type": "float",
+                "description": "Duration of the animation in seconds.",
+                "required": false,
+                "default": "1.0"
+            },
+            {
+                "name": "zooming",
+                "type": "int",
+                "description": "Zoom mode: `-1` = Zoom Out, `0` = Zoom None, `1` = Zoom In.",
+                "required": false,
+                "default": "0"
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "This is a `public slot` and is safe to use, but only works in Alt-Azimuth mount mode."
+        },
+        "example": "// Switch to Alt-Azimuth mode first\nStelMovementMgr.setEquatorialMount(false);\n\n// Move to the zenith\nvar aim = core.vec3d(0, 0, 1);\nvar up = core.vec3d(0, 0, 1);\nStelMovementMgr.moveToAltAzi(aim, up, 1.5, 0);"
+    },
+    {
+        "name": "panView",
+        "category": "Movement Manager - Movement",
+        "signature": "panView(double deltaAz, double deltaAlt)",
+        "description": "Pans the view instantly by adding azimuth and altitude offsets to the current direction.",
+        "parameters": [
+            {
+                "name": "deltaAz",
+                "type": "double",
+                "description": "Azimuth change in radians.",
+                "required": true
+            },
+            {
+                "name": "deltaAlt",
+                "type": "double",
+                "description": "Altitude change in radians.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "// Pan 10 degrees east and 5 degrees up\nStelMovementMgr.panView(10 * Math.PI/180, 5 * Math.PI/180);"
+    },
+    {
+        "name": "turnRight",
+        "category": "Movement Manager - Keyboard Control",
+        "signature": "turnRight(bool start)",
+        "description": "Starts or stops continuous panning to the right (east direction).",
+        "parameters": [
+            {
+                "name": "start",
+                "type": "bool",
+                "description": "`true` to start, `false` to stop.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "// Start turning right for 1 second\nStelMovementMgr.turnRight(true);\ncore.wait(1);\nStelMovementMgr.turnRight(false);"
+    },
+    {
+        "name": "turnLeft",
+        "category": "Movement Manager - Keyboard Control",
+        "signature": "turnLeft(bool start)",
+        "description": "Starts or stops continuous panning to the left (west direction).",
+        "parameters": [
+            {
+                "name": "start",
+                "type": "bool",
+                "description": "`true` to start, `false` to stop.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "StelMovementMgr.turnLeft(true);\ncore.wait(1);\nStelMovementMgr.turnLeft(false);"
+    },
+    {
+        "name": "turnUp",
+        "category": "Movement Manager - Keyboard Control",
+        "signature": "turnUp(bool start)",
+        "description": "Starts or stops continuous panning upward (toward the zenith or north celestial pole).",
+        "parameters": [
+            {
+                "name": "start",
+                "type": "bool",
+                "description": "`true` to start, `false` to stop.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "StelMovementMgr.turnUp(true);\ncore.wait(1);\nStelMovementMgr.turnUp(false);"
+    },
+    {
+        "name": "turnDown",
+        "category": "Movement Manager - Keyboard Control",
+        "signature": "turnDown(bool start)",
+        "description": "Starts or stops continuous panning downward (toward the nadir or south celestial pole).",
+        "parameters": [
+            {
+                "name": "start",
+                "type": "bool",
+                "description": "`true` to start, `false` to stop.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "StelMovementMgr.turnDown(true);\ncore.wait(1);\nStelMovementMgr.turnDown(false);"
+    },
+    {
+        "name": "moveSlow",
+        "category": "Movement Manager - Keyboard Control",
+        "signature": "moveSlow(bool slow)",
+        "description": "⚠️ **WARNING:** This is a `public` method, not a `slot`. It may not work reliably in scripts.\n\nEnables or disables slow movement mode (reduces movement speed to 20%).",
+        "parameters": [
+            {
+                "name": "slow",
+                "type": "bool",
+                "description": "`true` for slow movement, `false` for normal speed.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "This is a `public` method. Its reliability in scripts is not guaranteed."
+        },
+        "example": "// May not work reliably:\n// StelMovementMgr.moveSlow(true);"
+    },
+    {
+        "name": "lookEast",
+        "category": "Movement Manager - Direction Shortcuts",
+        "signature": "lookEast(bool zero)",
+        "description": "Instantly points the view toward the eastern horizon.",
+        "parameters": [
+            {
+                "name": "zero",
+                "type": "bool",
+                "description": "`true` to center exactly on the horizon, `false` to keep the current altitude.",
+                "required": false,
+                "default": "false"
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "// Look east at the current altitude\nStelMovementMgr.lookEast(false);\n\n// Look east at the horizon\nStelMovementMgr.lookEast(true);"
+    },
+    {
+        "name": "lookWest",
+        "category": "Movement Manager - Direction Shortcuts",
+        "signature": "lookWest(bool zero)",
+        "description": "Instantly points the view toward the western horizon.",
+        "parameters": [
+            {
+                "name": "zero",
+                "type": "bool",
+                "description": "`true` to center exactly on the horizon, `false` to keep the current altitude.",
+                "required": false,
+                "default": "false"
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "StelMovementMgr.lookWest(true);"
+    },
+    {
+        "name": "lookNorth",
+        "category": "Movement Manager - Direction Shortcuts",
+        "signature": "lookNorth(bool zero)",
+        "description": "Instantly points the view toward the northern horizon.",
+        "parameters": [
+            {
+                "name": "zero",
+                "type": "bool",
+                "description": "`true` to center exactly on the horizon, `false` to keep the current altitude.",
+                "required": false,
+                "default": "false"
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "StelMovementMgr.lookNorth(true);"
+    },
+    {
+        "name": "lookSouth",
+        "category": "Movement Manager - Direction Shortcuts",
+        "signature": "lookSouth(bool zero)",
+        "description": "Instantly points the view toward the southern horizon.",
+        "parameters": [
+            {
+                "name": "zero",
+                "type": "bool",
+                "description": "`true` to center exactly on the horizon, `false` to keep the current altitude.",
+                "required": false,
+                "default": "false"
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "StelMovementMgr.lookSouth(true);"
+    },
+    {
+        "name": "lookZenith",
+        "category": "Movement Manager - Direction Shortcuts",
+        "signature": "lookZenith()",
+        "description": "Instantly points the view straight up (zenith).",
+        "parameters": [],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "// Look directly overhead\nStelMovementMgr.lookZenith();"
+    },
+    {
+        "name": "lookNadir",
+        "category": "Movement Manager - Direction Shortcuts",
+        "signature": "lookNadir()",
+        "description": "Instantly points the view straight down (nadir).",
+        "parameters": [],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "// Look directly down\nStelMovementMgr.lookNadir();"
+    },
+    {
+        "name": "lookTowardsNCP",
+        "category": "Movement Manager - Direction Shortcuts",
+        "signature": "lookTowardsNCP()",
+        "description": "Instantly points the view toward the North Celestial Pole.",
+        "parameters": [],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "// Look at the Polaris region\nStelMovementMgr.lookTowardsNCP();"
+    },
+    {
+        "name": "lookTowardsSCP",
+        "category": "Movement Manager - Direction Shortcuts",
+        "signature": "lookTowardsSCP()",
+        "description": "Instantly points the view toward the South Celestial Pole.",
+        "parameters": [],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "StelMovementMgr.lookTowardsSCP();"
+    },
+    {
+        "name": "deselection",
+        "category": "Movement Manager - Selection",
+        "signature": "deselection()",
+        "description": "Deselects the currently selected object.",
+        "parameters": [],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "// Clear the current selection\nStelMovementMgr.deselection();"
+    },
+    {
+        "name": "reSelectLastObject",
+        "category": "Movement Manager - Selection",
+        "signature": "reSelectLastObject()",
+        "description": "Re-selects the last object that was selected.",
+        "parameters": [],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "// Re-select the previously selected object\nStelMovementMgr.reSelectLastObject();"
+    },
+    {
+        "name": "moveViewport",
+        "category": "Movement Manager - Viewport",
+        "signature": "moveViewport(double offsetX, double offsetY, float duration)",
+        "description": "Animates the viewport offset, allowing the view center to be shifted. Useful for planetarium domes or panoramic displays.",
+        "parameters": [
+            {
+                "name": "offsetX",
+                "type": "double",
+                "description": "Horizontal offset percentage (-50 to 50).",
+                "required": true
+            },
+            {
+                "name": "offsetY",
+                "type": "double",
+                "description": "Vertical offset percentage (-50 to 50).",
+                "required": true
+            },
+            {
+                "name": "duration",
+                "type": "float",
+                "description": "Animation duration in seconds. Use `0` for an instant change.",
+                "required": false,
+                "default": "0.0"
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "// Shift the view down by 20% over 2 seconds\nStelMovementMgr.moveViewport(0, 20, 2.0);\n\n// Reset the viewport instantly\nStelMovementMgr.moveViewport(0, 0, 0);"
+    },
+    {
+        "name": "setViewportHorizontalOffsetTarget",
+        "category": "Movement Manager - Viewport",
+        "signature": "setViewportHorizontalOffsetTarget(double offset)",
+        "description": "Sets the target horizontal viewport offset percentage instantly (no animation).",
+        "parameters": [
+            {
+                "name": "offset",
+                "type": "double",
+                "description": "Horizontal offset percentage (-50 to 50).",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "StelMovementMgr.setViewportHorizontalOffsetTarget(10);"
+    },
+    {
+        "name": "setViewportVerticalOffsetTarget",
+        "category": "Movement Manager - Viewport",
+        "signature": "setViewportVerticalOffsetTarget(double offset)",
+        "description": "Sets the target vertical viewport offset percentage instantly (no animation).",
+        "parameters": [
+            {
+                "name": "offset",
+                "type": "double",
+                "description": "Vertical offset percentage (-50 to 50).",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "StelMovementMgr.setViewportVerticalOffsetTarget(-15);"
+    },
+    {
+        "name": "setViewDirectionJ2000",
+        "category": "Movement Manager - View Direction",
+        "signature": "setViewDirectionJ2000(Vec3d direction)",
+        "description": "⚠️ **WARNING:** This is a `public` method, not a `slot`. It may not work reliably in scripts.\n\nSets the view direction to a specific J2000 equatorial coordinate.",
+        "parameters": [
+            {
+                "name": "direction",
+                "type": "Vec3d",
+                "description": "View direction vector in J2000 coordinates.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "This is a `public` method. Its reliability in scripts is not guaranteed."
+        },
+        "example": "// May not work reliably:\n// var dir = core.vec3d(\"0h\", \"0d\");\n// StelMovementMgr.setViewDirectionJ2000(dir);\n\n// Use moveToJ2000 instead for reliable movement:\nStelMovementMgr.moveToJ2000(dir, core.vec3d(0,0,1), 1.0, 0);"
+    },
+    {
+        "name": "setViewUpVector",
+        "category": "Movement Manager - View Orientation",
+        "signature": "setViewUpVector(Vec3d up)",
+        "description": "⚠️ **WARNING:** This is a `public` method, not a `slot`. It may not work reliably in scripts.\n\nSets the up vector in the current mount frame coordinates.",
+        "parameters": [
+            {
+                "name": "up",
+                "type": "Vec3d",
+                "description": "Up vector in the current mount frame.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "This is a `public` method. Its reliability in scripts is not guaranteed."
+        },
+        "example": "// May not work reliably:\n// var up = core.vec3d(0, 0, 1);\n// StelMovementMgr.setViewUpVector(up);"
+    },
+    {
+        "name": "smoothPan",
+        "category": "Movement Manager - Advanced Movement",
+        "signature": "smoothPan(double deltaX, double deltaY, double duration, bool enable)",
+        "description": "Starts or stops smooth panning by a predetermined amount over a specified duration.",
+        "parameters": [
+            {
+                "name": "deltaX",
+                "type": "double",
+                "description": "Horizontal pan amount in degrees.",
+                "required": true
+            },
+            {
+                "name": "deltaY",
+                "type": "double",
+                "description": "Vertical pan amount in degrees.",
+                "required": true
+            },
+            {
+                "name": "duration",
+                "type": "double",
+                "description": "Duration for the pan in seconds.",
+                "required": true
+            },
+            {
+                "name": "enable",
+                "type": "bool",
+                "description": "`true` to start panning, `false` to stop.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "// Smoothly pan 30 degrees to the right over 2 seconds\nStelMovementMgr.smoothPan(30, 0, 2.0, true);\n"
+    },
+    {
+        "name": "setInhibitAllAutomoves",
+        "category": "Movement Manager - Advanced",
+        "signature": "setInhibitAllAutomoves(bool inhibit)",
+        "description": "Inhibits all automatic movements (tracking, auto-centering, etc.). Useful for planetarium setups where manual control should be absolute.",
+        "parameters": [
+            {
+                "name": "inhibit",
+                "type": "bool",
+                "description": "`true` to inhibit all automoves, `false` to allow.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "// Inhibit automatic movements (e.g., for a planetarium show)\nStelMovementMgr.setInhibitAllAutomoves(true);\n\n// Allow automatic movements\nStelMovementMgr.setInhibitAllAutomoves(false);"
+    }
+]

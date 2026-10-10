@@ -1,0 +1,562 @@
+/* ========================================================================
+ * apiExplorer.css - Styles for API Explorer
+ * 
+ * @license GPLv2+
+ * ======================================================================== */
+
+/* ========================================================================
+ * API EXPLORER STYLES
+ * ======================================================================== */
+#sub-tab-api-explorer > .flex {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    gap: 15px;
+    align-items: start;
+}
+
+.api-explorer-sidebar {
+    grid-column: 1;
+    padding: 12px;
+    background: var(--stel-bg-panel);
+    border: 1px solid var(--stel-border);
+    border-radius: var(--stel-radius-lg);
+    max-height: 100%;
+    overflow-y: auto;
+    position: sticky;
+    top: 0;
+}
+
+.api-explorer-sidebar header {
+    margin-bottom: 12px;
+}
+
+.api-explorer-sidebar header h3 {
+    margin: 0 0 10px 0;
+    font-size: 13px;
+    color: var(--stel-text-dark);
+}
+
+#api-explorer-main {
+    grid-column: 2;
+    min-width: 0;
+}
+
+.api-service-tree .service-node {
+    margin-bottom: 4px;
+}
+
+.api-service-tree .service-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 10px;
+    background: var(--stel-bg-dark);
+    border-radius: var(--stel-radius-sm);
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+    color: var(--stel-text-secondary);
+    transition: background var(--stel-transition-fast);
+}
+
+.api-service-tree .service-header:hover {
+    background: var(--stel-bg-darker);
+}
+
+.api-service-tree .service-header .name {
+    flex: 1 1 auto;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.api-service-tree .service-header .arrow {
+    margin-left: auto;
+    font-size: 8px;
+    transition: transform var(--stel-transition-fast);
+    flex-shrink: 0;
+}
+
+.api-service-tree .service-header.expanded .arrow {
+    transform: rotate(90deg);
+}
+
+.api-service-tree .operation-list {
+    display: none;
+    padding: 4px 0 4px 18px;
+}
+
+.api-service-tree .operation-list.expanded {
+    display: block;
+}
+
+.api-service-tree .operation-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 8px;
+    margin-bottom: 1px;
+    border-radius: var(--stel-radius-sm);
+    cursor: pointer;
+    font-size: 1em;
+    color: rgb(200, 200, 200);
+    transition: all var(--stel-transition-fast);
+    border-left: 2px solid transparent;
+}
+
+.api-service-tree .operation-item:hover {
+    background: var(--stel-accent-subtle);
+    color: var(--stel-text-primary);
+}
+
+.api-service-tree .operation-item.active {
+    background: var(--stel-accent-light);
+    color: var(--stel-text-primary);
+    border-left-color: var(--stel-accent);
+}
+
+/* Operation Panel */
+#api-operation-panel .operation-details {
+    padding: 15px;
+}
+
+#api-operation-panel .operation-path {
+    font-family: var(--stel-font-mono);
+    font-size: 11px;
+    color: var(--stel-text-muted);
+    padding: 10px;
+    background: var(--stel-bg-darker);
+    border-radius: var(--stel-radius-sm);
+    margin: 10px 0;
+    word-break: break-all;
+    border: 1px solid var(--stel-border);
+}
+
+#api-operation-panel .operation-desc {
+    color: var(--stel-text-secondary);
+    font-size: 11px;
+    margin: 10px 0;
+    line-height: 1.5;
+}
+
+#api-operation-panel .params-section {
+    margin: 15px 0;
+}
+
+#api-operation-panel .params-section h3,
+#api-operation-panel .params-section h4 {
+    color: var(--stel-text-primary);
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+
+#api-operation-panel .param-group {
+    margin-bottom: 12px;
+}
+
+#api-operation-panel .param-group label {
+    display: block;
+    font-weight: bold;
+    color: var(--stel-text-primary);
+    font-size: 11px;
+    margin-bottom: 4px;
+    word-break: break-all;
+}
+
+#api-operation-panel .param-group .param-hint {
+    display: block;
+    color: rgb(150, 150, 150);
+    font-size: 9px;
+    margin-top: 4px;
+}
+
+#api-operation-panel .param-required {
+    color: var(--stel-error);
+}
+
+#api-operation-panel .response-section {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid var(--stel-border);
+}
+
+/* Response Area */
+#explorer-response-area {
+    border-radius: var(--stel-radius-md);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 200px;
+    max-height: 70vh;
+    resize: vertical;
+}
+
+.response-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+    background: rgba(0, 0, 0, 0.3);
+    border-bottom: 1px solid var(--stel-border);
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.response-toolbar-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.response-toolbar-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.response-type-badge {
+    background: var(--stel-bg-darker);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 10px;
+    font-weight: bold;
+    color: var(--stel-success);
+    font-family: var(--stel-font-mono);
+}
+
+.response-type-badge.error {
+    color: var(--stel-error);
+    background: rgba(249, 38, 114, 0.15);
+}
+
+.response-status {
+    font-size: 11px;
+    font-weight: bold;
+    font-family: var(--stel-font-mono);
+    padding: 3px 8px;
+    border-radius: var(--stel-radius-sm);
+}
+
+.response-status.success {
+    color: var(--stel-success);
+    background: rgba(166, 227, 158, 0.1);
+}
+
+.response-status.error {
+    color: var(--stel-error);
+    background: rgba(249, 38, 114, 0.1);
+}
+
+.toggle-display-btn,
+.copy-btn {
+    background: var(--stel-bg-darker);
+    border: 1px solid var(--stel-border);
+    border-radius: var(--stel-radius-sm);
+    padding: 4px 12px;
+    font-size: 10px;
+    font-family: var(--stel-font-mono);
+    cursor: pointer;
+    color: var(--stel-text-primary);
+    transition: all var(--stel-transition-fast);
+}
+
+.toggle-display-btn:hover,
+.copy-btn:hover {
+    background: var(--stel-accent-subtle);
+    color: var(--stel-accent);
+    border-color: var(--stel-accent);
+}
+
+.response-content-wrapper {
+    padding: 15px;
+    overflow-x: auto;
+    overflow-y: auto;
+    flex: 1 1 auto;
+    min-height: 150px;
+    max-height: calc(85vh - 60px);
+    background: var(--stel-bg-code);
+}
+
+/* ========================================================================
+ * RTL (Right-to-Left) Support for HTML Responses (Arabic, Hebrew, Persian)
+ * ======================================================================== */
+
+/* Base styles for RTL direction in response area */
+.response-content-wrapper[dir="rtl"],
+.response-content-wrapper .html-response[dir="rtl"] {
+    direction: rtl;
+    text-align: right;
+}
+
+/* Improve readability of tables in RTL mode */
+.response-content-wrapper .html-response table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 8px 0;
+}
+
+.response-content-wrapper .html-response th,
+.response-content-wrapper .html-response td {
+    padding: 6px 10px;
+    border: 1px solid var(--stel-border);
+    text-align: inherit; /* Inherit from parent RTL setting */
+    word-break: break-word;
+}
+
+/* When in RTL mode, table headers should be right-aligned */
+.response-content-wrapper[dir="rtl"] .html-response th {
+    text-align: right;
+}
+
+/* Ensure mixed content (numbers, Latin text) is displayed correctly */
+.html-response span[dir="auto"],
+.html-response div[dir="auto"] {
+    unicode-bidi: embed;
+}
+
+/* Improve spacing for lists in RTL mode */
+.response-content-wrapper[dir="rtl"] .html-response ul,
+.response-content-wrapper[dir="rtl"] .html-response ol {
+    padding-right: 20px;
+    padding-left: 0;
+}
+
+/* Better alignment for key-value pairs (e.g., "النوع: كوكب") in RTL */
+.response-content-wrapper[dir="rtl"] .html-response br + b,
+.response-content-wrapper[dir="rtl"] .html-response p b {
+    display: inline-block;
+    margin-left: 5px;
+}
+
+/* Style for the new toggle button to match existing ones */
+.toggle-dir-btn {
+    background: var(--stel-bg-darker);
+    border: 1px solid var(--stel-border);
+    border-radius: var(--stel-radius-sm);
+    padding: 4px 12px;
+    font-size: 10px;
+    font-family: var(--stel-font-mono);
+    cursor: pointer;
+    color: var(--stel-text-primary);
+    transition: all var(--stel-transition-fast);
+}
+
+.toggle-dir-btn:hover {
+    background: var(--stel-accent-subtle);
+    color: var(--stel-accent);
+    border-color: var(--stel-accent);
+}
+
+/* JSON Viewer */
+.json-viewer {
+    font-family: var(--stel-font-mono);
+    font-size: 11px;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-word;
+    color: var(--stel-text-primary);
+}
+
+.json-key {
+    color: var(--stel-info);
+    font-weight: bold;
+}
+
+.json-string {
+    color: var(--stel-success);
+}
+
+.json-number {
+    color: var(--stel-number);
+}
+
+.json-boolean {
+    color: var(--stel-error);
+    font-weight: bold;
+}
+
+.json-null {
+    color: var(--stel-text-muted);
+    font-style: italic;
+}
+
+/* Table response styles */
+.response-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 11px;
+    font-family: var(--stel-font-sans);
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+.response-table th {
+    background: var(--stel-bg-darker);
+    padding: 10px 12px;
+    text-align: left;
+    font-weight: bold;
+    color: var(--stel-accent);
+    border-bottom: 1px solid var(--stel-border);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    font-family: var(--stel-font-mono);
+    font-size: 13px;
+}
+
+.response-table td {
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--stel-border-light);
+    color: var(--stel-text-primary);
+    vertical-align: top;
+}
+
+.response-table tr:hover td {
+    background: var(--stel-accent-subtle);
+}
+
+/* Array list styles */
+.array-list {
+    font-family: var(--stel-font-mono);
+    font-size: 11px;
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.array-item {
+    padding: 6px 8px;
+    border-bottom: 1px solid var(--stel-border-light);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: flex-start;
+    transition: background var(--stel-transition-fast);
+}
+
+.array-item:hover {
+    background: var(--stel-accent-subtle);
+}
+
+.array-index {
+    color: var(--stel-text-muted);
+    min-width: 40px;
+    font-family: var(--stel-font-mono);
+    font-size: 10px;
+}
+
+.array-value {
+    color: var(--stel-success);
+    word-break: break-word;
+    flex: 1;
+}
+
+/* cURL command display */
+.curl-command {
+    background: var(--stel-bg-darker);
+    padding: 15px;
+    border-radius: var(--stel-radius-md);
+    overflow-x: auto;
+    font-family: var(--stel-font-mono);
+    font-size: 11px;
+    color: var(--stel-success);
+    margin: 0;
+    white-space: pre-wrap;
+    word-break: break-word;
+    line-height: 1.5;
+}
+
+/* Error response styling */
+.response-error {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 20px;
+    background: rgba(249, 38, 114, 0.08);
+    border-radius: var(--stel-radius-md);
+    /*border-left: 3px solid var(--stel-error);*/
+}
+
+.error-message {
+    color: var(--stel-error);
+    font-weight: bold;
+    font-family: var(--stel-font-mono);
+    font-size: 12px;
+}
+
+/* API Welcome Message */
+.api-welcome-content {
+    padding: 20px 25px;
+    max-width: 800px;
+    color: var(--stel-text-dark);
+    line-height: 1.7;
+}
+
+.api-welcome-header h2 {
+    font-size: 20px;
+    margin: 0 0 6px 0;
+    color: var(--stel-text-dark);
+}
+
+.api-welcome-subtitle {
+    font-size: 12px;
+    color: var(--stel-text-dark);
+    margin: 0;
+}
+
+.api-welcome-section {
+    margin-bottom: 22px;
+}
+
+.api-welcome-section h3 {
+    font-size: 14px;
+    color: var(--stel-dark);
+    margin: 0 0 10px 0;
+    padding-bottom: 5px;
+    border-bottom: 1px solid rgba(253, 216, 134, 0.15);
+}
+
+.api-welcome-services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.api-service-mini-card {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    padding: 10px 12px;
+    background: var(--stel-bg-panel);
+    border: 1px solid var(--stel-border);
+    border-radius: var(--stel-radius-md);
+    transition: background var(--stel-transition-fast);
+}
+
+.api-service-mini-card:hover {
+    background: var(--stel-bg-darker);
+}
+
+.api-service-mini-card strong {
+    font-size: 14px;
+    color: var(--stel-text-dark);
+}
+
+.api-service-mini-card small {
+    font-size: 10px;
+    /*color: var(--stel-text-dark);*/
+		color: rgb(200, 200, 200);
+    line-height: 1.4;
+}
+
+.api-welcome-tip {
+    background: var(--stel-accent-subtle);
+    border: 1px solid rgba(253, 216, 134, 0.2);
+    border-radius: var(--stel-radius-md);
+    padding: 15px 18px;
+    margin-top: 20px;
+}
