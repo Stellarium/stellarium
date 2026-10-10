@@ -254,16 +254,14 @@ bool scm::ScmSkyCulture::saveDescriptionAsMarkdown(QFile &file)
 
 		out << "## License\n\n" << license.name << "\n\n";
 
-		try
-		{
-			file.close();
-			return true; // successfully saved
-		}
-		catch (const std::exception &e)
-		{
-			qWarning("SkyCultureMaker: Error closing file: %s", e.what());
-			return false; // error occurred while closing the file
-		}
+		out.flush();
+		const bool streamSucceeded = out.status() == QTextStream::Ok;
+		const bool fileFlushed     = file.flush();
+		const bool saveSucceeded   = streamSucceeded && fileFlushed && file.error() == QFileDevice::NoError;
+		file.close();
+		if (!saveSucceeded)
+			qWarning("SkyCultureMaker: Error writing description file: %s", qPrintable(file.fileName()));
+		return saveSucceeded;
 	}
 	else
 	{
