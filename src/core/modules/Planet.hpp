@@ -803,6 +803,7 @@ protected:
 
 	PlanetOBJModel* loadObjModel() const;
 
+	size_t  ID;                      //!< ID for faster identification than comparing englishName. Computed as qHash(englishName).
 	QString englishName;             //!< english planet name
 	QString nameI18;                 //!< International translated name
 	QString texMapName;              //!< Texture file path
