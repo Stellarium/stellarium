@@ -658,7 +658,7 @@
                  </property>
                 </widget>
                </item>
-               <item row="5" column="0" colspan="3">
+               <item row="6" column="0" colspan="3">
                 <layout class="QHBoxLayout" name="horizontalLayout_starLabel">
                  <item>
                   <widget class="QCheckBox" name="starLabelCheckBox">
@@ -738,7 +738,7 @@
                  </property>
                 </widget>
                </item>
-               <item row="6" column="0" colspan="3">
+               <item row="7" column="0" colspan="3">
                 <widget class="QCheckBox" name="checkBoxAdditionalNamesStars">
                  <property name="toolTip">
                   <string>Show all available proper names</string>
@@ -748,7 +748,7 @@
                  </property>
                 </widget>
                </item>
-               <item row="7" column="0" colspan="3">
+               <item row="8" column="0" colspan="3">
                 <widget class="QCheckBox" name="checkBoxStarDesignationsOnlyUsage">
                  <property name="toolTip">
                   <string>Use designations of stars instead of their common names for screen labels</string>
@@ -781,7 +781,7 @@
                  </property>
                 </widget>
                </item>
-               <item row="8" column="0" colspan="3">
+               <item row="9" column="0" colspan="3">
                 <layout class="QHBoxLayout" name="horizontalLayout_28">
                  <property name="leftMargin">
                   <number>22</number>
@@ -831,7 +831,7 @@
                  </item>
                 </layout>
                </item>
-               <item row="4" column="0" colspan="3">
+               <item row="4" column="0">
                 <widget class="QCheckBox" name="spikyStarsCheckBox">
                  <property name="toolTip">
                   <string>Show stars with pointed rays</string>
@@ -840,6 +840,44 @@
                   <string>Spiky stars</string>
                  </property>
                 </widget>
+               </item>
+               <item row="4" column="1" colspan="2">
+                <layout class="QHBoxLayout" name="horizontalLayoutPsfStars">
+                 <item>
+                  <widget class="QCheckBox" name="psfStarsCheckBox">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
+                   <property name="toolTip">
+                    <string>Render catalogue stars with a point spread function profile</string>
+                   </property>
+                   <property name="text">
+                    <string>PSF stars</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QToolButton" name="psfStarsPropertiesButton">
+                   <property name="enabled">
+                    <bool>false</bool>
+                   </property>
+                   <property name="toolTip">
+                    <string>PSF star settings</string>
+                   </property>
+                   <property name="text">
+                    <string notr="true"/>
+                   </property>
+                   <property name="icon">
+                    <iconset resource="../../data/gui/guiRes.qrc">
+                     <normaloff>:/graphicGui/uibtSettings.png</normaloff>
+                     <disabledoff>:/graphicGui/uibtSettings-disabled.png</disabledoff>:/graphicGui/uibtSettings.png</iconset>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
                </item>
                <item row="2" column="1">
                 <widget class="QCheckBox" name="starTwinkleWithoutAtmosphereCheckBox">
