@@ -112,7 +112,7 @@ TelescopeClientDirectLx200::TelescopeClientDirectLx200 (const QString &name, con
 			qCWarning(Telescopes) << "ERROR creating TelescopeClientDirectLx200: cannot connect to" << hostName << "port" << tcpPort;
 			return;
 		}
-		// lx200 will be deleted in the destructor of Server
+		// Server owns the connection and deletes it with its socket list in Server::SocketList::clear().
 		addConnection(connection);
 	}
 	else
@@ -129,8 +129,7 @@ TelescopeClientDirectLx200::TelescopeClientDirectLx200 (const QString &name, con
 			qCWarning(Telescopes) << "ERROR creating TelescopeClientDirectLx200: cannot open serial device" << serialDeviceName;
 			return;
 		}
-		// lx200 will be deleted in the destructor of Server
-		// TODO: GZ2024: Server destructor is empty. Who deletes lx200 in version 24.2? Someone please clarify and fix documentation, then delete this note.
+		// Server owns the connection and deletes it with its socket list in Server::SocketList::clear().
 		addConnection(connection);
 	}
 	
