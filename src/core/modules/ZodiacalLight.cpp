@@ -27,6 +27,7 @@
 #include "StelTexture.hpp"
 #include "StelUtils.hpp"
 #include "StelFileMgr.hpp"
+#include "StelMainView.hpp"
 #include "StelModuleMgr.hpp"
 #include "LandscapeMgr.hpp"
 
@@ -392,6 +393,10 @@ void main(void)
 	Q_ASSERT(atmFactor<=1.0f);
 	Q_ASSERT(atmFactor>=0.0f);
 	c*=atmFactor*atmFactor;
+
+	if (StelMainView::getInstance().getGLInformation().isHighGraphicsMode)
+		c *= 1.1f;
+
 
 	if (c[0]<0) c[0]=0;
 	if (c[1]<0) c[1]=0;
