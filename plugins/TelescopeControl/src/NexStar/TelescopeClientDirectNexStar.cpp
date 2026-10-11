@@ -48,24 +48,48 @@ TelescopeClientDirectNexStar::TelescopeClientDirectNexStar(const QString &name, 
 {
 	interpolatedPosition.reset();
 	
-	//Extract parameters
-	//Format: "serial_port_name:time_delay"
-	static const QRegularExpression paramRx("^([^:]*):(\\d+)$");
-	QRegularExpressionMatch paramMatch=paramRx.match(parameters);
+	//Extract parameters. Accept the same serial and TCP formats as LX200:
+	// Serial:  "serial_port_name:time_delay"
+	// Network: "host_name:tcp_port:time_delay"
+	static const QRegularExpression tcpParamRx("^([^:]+):(\\d+):(\\d+)$");
+	static const QRegularExpression serialParamRx("^([^:]*):(\\d+)$");
+	QRegularExpressionMatch tcpMatch = tcpParamRx.match(parameters);
 	QString serialDeviceName;
-	if (paramMatch.hasMatch())
+	QString hostName;
+	int tcpPort = 0;
+	const bool useNetwork = tcpMatch.hasMatch();
+	if (useNetwork)
 	{
-		// This RegExp only matches valid integers
-		serialDeviceName = paramMatch.captured(1).trimmed();
-		time_delay       = paramMatch.captured(2).toInt();
+		hostName   = tcpMatch.captured(1).trimmed();
+		tcpPort    = tcpMatch.captured(2).toInt();
+		time_delay = tcpMatch.captured(3).toInt();
+		if (hostName.isEmpty() || tcpPort <= 0 || tcpPort > 65535)
+		{
+			qCWarning(Telescopes) << "ERROR creating TelescopeClientDirectNexStar: invalid host or port.";
+			return;
+		}
 	}
 	else
 	{
-		qCWarning(Telescopes) << "ERROR creating TelescopeClientDirectNexStar: invalid parameters.";
-		return;
+		QRegularExpressionMatch serialMatch = serialParamRx.match(parameters);
+		if (serialMatch.hasMatch())
+		{
+			serialDeviceName = serialMatch.captured(1).trimmed();
+			time_delay       = serialMatch.captured(2).toInt();
+		}
+		else
+		{
+			qCWarning(Telescopes) << "ERROR creating TelescopeClientDirectNexStar: invalid parameters.";
+			return;
+		}
 	}
 	
-	qCDebug(Telescopes) << "TelescopeClientDirectNexStar parameters: port, time_delay:" << serialDeviceName << time_delay;
+	if (useNetwork)
+		qCDebug(Telescopes) << "TelescopeClientDirectNexStar parameters: host, port, time_delay:"
+		                    << hostName << tcpPort << time_delay;
+	else
+		qCDebug(Telescopes) << "TelescopeClientDirectNexStar parameters: port, time_delay:"
+		                    << serialDeviceName << time_delay;
 	
 	//Validation: Time delay
 	if (time_delay <= 0 || time_delay > 10000000)
@@ -76,22 +100,40 @@ TelescopeClientDirectNexStar::TelescopeClientDirectNexStar(const QString &name, 
 	
 	//end_of_timeout = -0x8000000000000000LL;
 	
-	#ifdef Q_OS_WIN
-	if(serialDeviceName.right(serialDeviceName.size() - 3).toInt() > 9)
-		serialDeviceName = "\\\\.\\" + serialDeviceName; // "\\.\COMxx", not sure if it will work
-	#endif //Q_OS_WIN
-	
 	//Try to establish a connection to the telescope
-	nexstar = new NexStarConnection(*this, qPrintable(serialDeviceName));
-	if (nexstar->isClosed())
+	if (useNetwork)
 	{
-		qCWarning(Telescopes) << "ERROR creating TelescopeClientDirectNexStar: cannot open serial device" << serialDeviceName;
-		return;
+		NexStarTcpConnection *connection = new NexStarTcpConnection(*this, qPrintable(hostName), tcpPort);
+		if (connection->isClosed())
+		{
+			qCWarning(Telescopes) << "ERROR creating TelescopeClientDirectNexStar: cannot connect to"
+			                      << hostName << "port" << tcpPort;
+			delete connection;
+			return;
+		}
+		nexstar = connection;
+		// Server owns the connection and deletes it with its socket list in Server::SocketList::clear().
+		addConnection(connection);
 	}
-	
-	//This connection will be deleted in the destructor of Server
-	// TODO: GZ2024: Server destructor is empty. Who deletes nexstar in version 24.2? Someone please clarify and fix documentation, then delete this note.
-	addConnection(nexstar);
+	else
+	{
+		#ifdef Q_OS_WIN
+		if(serialDeviceName.right(serialDeviceName.size() - 3).toInt() > 9)
+			serialDeviceName = "\\\\.\\" + serialDeviceName; // "\\.\COMxx", not sure if it will work
+		#endif //Q_OS_WIN
+
+		NexStarSerialConnection *connection = new NexStarSerialConnection(*this, qPrintable(serialDeviceName));
+		if (connection->isClosed())
+		{
+			qCWarning(Telescopes) << "ERROR creating TelescopeClientDirectNexStar: cannot open serial device"
+			                      << serialDeviceName;
+			delete connection;
+			return;
+		}
+		nexstar = connection;
+		// Server owns the connection and deletes it with its socket list in Server::SocketList::clear().
+		addConnection(connection);
+	}
 	
 	last_ra = 0;
 	queue_get_position = true;
@@ -149,7 +191,17 @@ void TelescopeClientDirectNexStar::telescopeSync(const Vec3d &j2000Pos, StelObje
 
 void TelescopeClientDirectNexStar::telescopeAbortSlew()
 {
+	if (!isConnected())
+		return;
 	nexstar->sendAbort();
+
+	// sendAbort() discards every queued command, including any position query
+	// that was in flight. That would leave queue_get_position stuck false and
+	// stop the position polling entirely. Re-arm it, but with a short delay so
+	// that answers to the discarded queries can arrive and be ignored before
+	// the next query is sent.
+	queue_get_position = true;
+	next_pos_time = GetNow() + 500000;
 }
 
 void TelescopeClientDirectNexStar::gotoReceived(unsigned int ra_int, int dec_int)
@@ -214,6 +266,8 @@ void TelescopeClientDirectNexStar::decReceived(unsigned int dec_int)
 
 void TelescopeClientDirectNexStar::step(long long int timeout_micros)
 {
+	if (!isConnected())
+		return;
 	long long int now = GetNow();
 	if (queue_get_position && now >= next_pos_time)
 	{
@@ -226,12 +280,12 @@ void TelescopeClientDirectNexStar::step(long long int timeout_micros)
 
 bool TelescopeClientDirectNexStar::isConnected(void) const
 {
-	return (!nexstar->isClosed());//TODO
+	return (nexstar && !nexstar->isClosed());
 }
 
 bool TelescopeClientDirectNexStar::isInitialized(void) const
 {
-	return (!nexstar->isClosed());
+	return (nexstar && !nexstar->isClosed());
 }
 
 //Merged from Connection::sendPosition() and TelescopeTCP::performReading()

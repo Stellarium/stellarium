@@ -326,7 +326,7 @@ void TelescopeConfigurationDialog::initExistingTelescopeConfiguration(int slot)
 
 		// A directly-connected device uses either a serial port or a network
 		// (TCP/IP) connection. An empty serial port with a host name stored
-		// means the LX200 protocol is spoken over TCP.
+		// means the device protocol is spoken over TCP.
 		if (serialPortName.isEmpty() && !host.isEmpty())
 		{
 			ui->radioButtonNetworkConnection->setChecked(true);
@@ -447,8 +447,9 @@ void TelescopeConfigurationDialog::toggleTypeLocal(bool isChecked)
 bool TelescopeConfigurationDialog::currentDeviceModelSupportsNetwork() const
 {
 	const QString deviceModelName = ui->comboBoxDeviceModel->currentText();
-	// Only the LX200 (or compatible) protocol is supported over TCP/IP so far.
-	return telescopeManager->getDeviceModels().value(deviceModelName).server == QLatin1String("TelescopeServerLx200");
+	const QString server = telescopeManager->getDeviceModels().value(deviceModelName).server;
+	return server == QLatin1String("TelescopeServerLx200") ||
+	       server == QLatin1String("TelescopeServerNexStar");
 }
 
 void TelescopeConfigurationDialog::updateDeviceConnectionMediumState()
@@ -581,7 +582,7 @@ void TelescopeConfigurationDialog::buttonSavePressed()
 		type = TelescopeControl::ConnectionInternal;
 		if (ui->radioButtonNetworkConnection->isChecked() && currentDeviceModelSupportsNetwork())
 		{
-			// Directly connected over TCP/IP (LX200 protocol over the network)
+			// Directly connected over TCP/IP (serial device protocol over the network)
 			QString deviceHost = ui->lineEditDeviceHost->text().trimmed();
 			if (deviceHost.isEmpty())
 				return;
