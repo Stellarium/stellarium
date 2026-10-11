@@ -382,7 +382,7 @@ void TelescopeDialog::setAboutText()
 	helpPage += q_("The topmost field represents the choice between the two types of connections (see {above}):").replace(a_rx, "<a href=\"#usingthisplugin\">\\1</a>");
 	helpPage += "</p>";
 	helpPage += "<p><b>" + q_("Telescope controlled by:") + "</b></p><ul>";
-	helpPage += "<li>" + q_("<b>Stellarium, directly (serial port or network)</b> is the DIRECT case. LX200-compatible mounts can be connected either through a serial port or over a TCP/IP network (see {Device settings}).").replace(a_rx, "<a href=\"#device_settings\">\\1</a>") + "</li>";
+	helpPage += "<li>" + q_("<b>Stellarium, directly (serial port or network)</b> is the DIRECT case. LX200-compatible and NexStar-compatible mounts can be connected either through a serial port or over a TCP/IP network (see {Device settings}).").replace(a_rx, "<a href=\"#device_settings\">\\1</a>") + "</li>";
 	helpPage += "<li>" + q_("<b>External software or a remote computer</b> is the INDIRECT case") + "</li>";
 	helpPage += "<li>";
 	// TRANSLATORS: The text between braces is the text of an HTML link.
@@ -405,7 +405,7 @@ void TelescopeDialog::setAboutText()
 	helpPage += "</p>";
 	helpPage += "<p>";
 	// TRANSLATORS: The text between braces is the text of an HTML link.
-	helpPage += q_("<b>Connection</b> selects how Stellarium reaches the telescope. Choose <b>Serial port</b> for a device attached through a serial or USB cable. For LX200-compatible mounts you can instead choose <b>Network (TCP)</b> to talk to the telescope over TCP/IP - for example a Wi-Fi/Ethernet adapter or a software bridge that exposes the Meade LX200 protocol on a network port.");
+	helpPage += q_("<b>Connection</b> selects how Stellarium reaches the telescope. Choose <b>Serial port</b> for a device attached through a serial or USB cable. For LX200-compatible and NexStar-compatible mounts you can instead choose <b>Network (TCP)</b> to talk to the telescope over TCP/IP - for example a Wi-Fi/Ethernet adapter or a software bridge that exposes the Meade LX200 or Celestron NexStar protocol on a network port.");
 	helpPage += "</p>";
 	helpPage += "<p>" + q_("<b>Serial port</b> sets the serial port used by the telescope.") + "</p>";
 	helpPage += "<p>" + q_("There is a pop-up box that suggests some default values:") + "</p><ul>";
@@ -419,7 +419,7 @@ void TelescopeDialog::setAboutText()
 	// TRANSLATORS: The text between braces is the text of an HTML link.
 	helpPage += q_("<b>Device model</b>: see {Supported devices} below.").replace(a_rx, "<a href=\"#devices\">\\1</a>");
 	helpPage += "</p>";
-	helpPage += "<p>" + q_("When <b>Network (TCP)</b> is selected, the <b>Serial port</b> field is replaced by <b>Host</b> and <b>Port</b> fields: enter the host name or IP address of the telescope (or of the computer running the LX200 network bridge) and the TCP port it is listening on. The <b>Network (TCP)</b> option is available only for LX200-compatible device models.") + "</p>";
+	helpPage += "<p>" + q_("When <b>Network (TCP)</b> is selected, the <b>Serial port</b> field is replaced by <b>Host</b> and <b>Port</b> fields: enter the host name or IP address of the telescope (or of the computer running the network bridge) and the TCP port it is listening on. The <b>Network (TCP)</b> option is available for LX200-compatible and NexStar-compatible device models.") + "</p>";
 	helpPage += "<p><a href=\"#top\"><small>[" + q_("Back to top") + "]</small></a></p>";
 
 	helpPage += "<h4><a name=\"connection_settings\" />" + q_("Connection settings") + "</h4>";
@@ -486,7 +486,7 @@ void TelescopeDialog::setAboutText()
 	// TRANSLATORS: The text between braces is the text of an HTML link.
 	helpPage += q_("All devices listed in the {'Device model' list} are convenience definitions using one of the two built-in interfaces: the Meade LX200 (the Meade Autostar controller) interface and the Celestron NexStar interface.").replace(a_rx, "<a href=\"#device_settings\">\\1</a>");
 	helpPage += "</p>";
-	helpPage += "<p>" + q_("Devices using the Meade LX200 interface can be connected either through a serial/USB port or over a TCP/IP network. Devices using the Celestron NexStar interface are connected through a serial/USB port only.") + "</p>";
+	helpPage += "<p>" + q_("Devices using the Meade LX200 or Celestron NexStar interface can be connected either through a serial/USB port or over a TCP/IP network.") + "</p>";
 	helpPage += "<p>" + q_("The device list contains the following:") + "</p><dl>";
 	helpPage += "<dt><b>Celestron NexStar (compatible)</b></dt><dd>" + q_("Any device using the NexStar interface.") + "</dd>";
 	helpPage += "<dt><b>Losmandy G-11</b></dt><dd>" + q_("A computerized telescope mount made by Losmandy (Meade LX-200/Autostar interface).") + "</dd>";
