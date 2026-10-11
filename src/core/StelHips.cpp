@@ -457,7 +457,10 @@ void HipsSurvey::draw(StelPainter* sPainter, double angle, HipsSurvey::DrawCallb
 		if (landscapeMgr)
 		{
 			const float atmLum = qMax(0.f, landscapeMgr->getAtmosphereAverageLuminance() - lightPollutionLum);
-			const float modelFactor = landscapeMgr->getAtmosphereModel().toLower() == "showmysky" ? 0.2f : 1.f;
+			const auto atmoModel = landscapeMgr->getAtmosphereModel();
+			const bool smsLikeAtmosphere = atmoModel.compare(L1S("showmysky"), Qt::CaseInsensitive) == 0 ||
+			                               atmoModel.compare(L1S("lightweight"), Qt::CaseInsensitive) == 0;
+			const float modelFactor = smsLikeAtmosphere ? 0.2f : 1.f;
 			const float atmFactor = qMax(0.35f, 50.0f * (0.02f - modelFactor * atmLum));
 			extinctionColor *= atmFactor * atmFactor;
 		}
