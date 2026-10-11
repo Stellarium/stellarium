@@ -3490,7 +3490,7 @@ float Planet::getVMagnitude(const StelCore* core, double eclipseFactor) const
 						return static_cast<float>(-9.395 + d + (6.16e-4*phaseDeg -3.7e-4)*phaseDeg);
 					else {
 						const double p= phaseDeg/180.;
-						const double bracket= 1.0 - (((((-1.876*p + 2.809)*p - 0.062)*p -0.363)*p -1.507)*p);
+						const double bracket= 1.0 + (((((-1.876*p + 2.809)*p - 0.062)*p -0.363)*p -1.507)*p);
 						return static_cast<float>(-9.428 + d - 2.5*log10(bracket));
 					}
 				}
