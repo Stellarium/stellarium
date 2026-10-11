@@ -24,6 +24,7 @@
 #include "RefractionExtinction.hpp"
 #include "LandscapeMgr.hpp"
 #include "StelPainter.hpp"
+#include "StelMainView.hpp"
 #include "StelSkyDrawer.hpp"
 #include "StelTextureMgr.hpp"
 #include "StelToneReproducer.hpp"
@@ -463,6 +464,8 @@ void HipsSurvey::draw(StelPainter* sPainter, double angle, HipsSurvey::DrawCallb
 			const float modelFactor = smsLikeAtmosphere ? 0.2f : 1.f;
 			const float atmFactor = qMax(0.35f, 50.0f * (0.02f - modelFactor * atmLum));
 			extinctionColor *= atmFactor * atmFactor;
+			if (StelMainView::getInstance().getGLInformation().isHighGraphicsMode)
+				extinctionColor *= 1.1f;
 		}
 	}
 
