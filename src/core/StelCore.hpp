@@ -28,6 +28,8 @@
 #include "StelPropertyMgr.hpp"
 #include "SolarSystem.hpp"
 #include "Dithering.hpp"
+#include "HorizonsZones.hpp"	// (SS) 2026-10-09 TIME ZONES of the JPL Horizons precession-nutation path
+#include "HorizonsPrecNut.hpp"	// (SS) 2026-10-09 precession and nutation of the JPL Horizons path
 #include <QString>
 #include <QStringList>
 #include <QTime>
@@ -59,6 +61,9 @@ class StelCore : public QObject
 	Q_PROPERTY(bool flagUseNutation READ getUseNutation WRITE setUseNutation NOTIFY flagUseNutationChanged)
 	// (SS) 2026-10-07 Apply the Earth Orientation Parameters (EOP) to the transformation matrices. When off, all EOP values are 0.
 	Q_PROPERTY(bool flagUseEOP READ getUseEOP WRITE setUseEOP NOTIFY flagUseEOPChanged)
+	// (SS) 2026-10-09 Master switch of the precession-nutation path: off (default) = Vondrak (2011/2012) precession and IAU 2000B nutation,
+	// on = precession and nutation models of JPL Horizons, selected by TIME ZONE (see HorizonsZones). Independent of the Delta-T algorithm and of the ephemerides.
+	Q_PROPERTY(bool flagUseHorizonsPrecNut READ getUseHorizonsPrecNut WRITE setUseHorizonsPrecNut NOTIFY flagUseHorizonsPrecNutChanged)
 	// (SS) 2026-10-03 File name (in the user's ephemBSP folder) of the SPK kernel providing TT-TDB, e.g. "de431t.bsp"
 	Q_PROPERTY(QString ttMinusTdbKernel READ getTTminusTDBKernel WRITE setTTminusTDBKernel NOTIFY ttMinusTdbKernelChanged)
 	Q_PROPERTY(bool flagUseAberration READ getUseAberration WRITE setUseAberration NOTIFY flagUseAberrationChanged)
@@ -446,6 +451,55 @@ public:
 	//! @param seconds receives TT-TDB in seconds (0 for TTminusTDBNone)
 	//! @return the source that supplied the value
 	TTminusTDBSource getTTminusTDBSource(double jdTDB, double& seconds) const;
+
+	//! (SS) 2026-10-09 Current date in Julian Day (TT).
+	//! With the JPL Horizons Delta-T algorithm, getJDE() is JD(TDB) and JD(TT) = JDE + (TT-TDB)/86400, with TT-TDB read from the
+	//! source given by getTTminusTDBSource(). With any other algorithm getJDE() already is JD(TT) and is returned as is.
+	double getJDTT() const;
+	//! (SS) 2026-10-09 Same date as getJDTT() in two parts for ERFA: jd1 + jd2 = JD(TT), with jd1 = 2451545.0 (J2000) and
+	//! jd2 the days since J2000, which keeps the sub-microsecond resolution of the double that a single JD(TT) cannot give.
+	void getJDTTParts(double& jd1, double& jd2) const;
+	//! (SS) 2026-10-09 Current date in Julian Day (UT1). With the JPL Horizons Delta-T algorithm, getJD() is UT1 before 1962-01-19 12h
+	//! and UTC after: JD(UT1) = JD(UTC) + (UT1-UTC)/86400, with UT1-UTC from the EOP (0 when the EOP are off or not available).
+	//! With any other algorithm getJD() already is JD(UT1) and is returned as is.
+	double getJDUT1() const;
+	//! (SS) 2026-10-09 JD of 0h UTC of today, from the clock of the computer (not the simulated date). Used to place the limit of zone 3.
+	double getJDUTCNow() const;
+	//! (SS) 2026-10-09 JD(UTC) at which TIME ZONE 3 ends and TIME ZONE 4 (last EOP kept constant) starts. Either 0h UTC of today +
+	//! getHorizonsZone4Days() (default) or, when setHorizonsZone4FromEOP(true) and EOP data with nutation corrections is loaded,
+	//! the last date of those corrections (after it the EOP are held constant, as in zone 4).
+	double getHorizonsZone4Start() const;
+	//! (SS) 2026-10-09 TIME ZONE of the current date (see HorizonsZones), using getJD(), getJDTT() and getHorizonsZone4Start()
+	HorizonsZones::Zone getHorizonsZone() const;
+	//! (SS) 2026-10-09 Days after 0h UTC of today at which zone 4 starts. Default 86 (the Horizons manual says about 78). Saved in astro/horizons_zone4_days.
+	int getHorizonsZone4Days() const { return horizonsZone4Days; }
+	void setHorizonsZone4Days(int days);
+	//! (SS) 2026-10-09 Take the start of zone 4 from the end of the EOP nutation corrections instead of a fixed number of days.
+	//! Saved in astro/horizons_zone4_from_eop (default false).
+	bool getHorizonsZone4FromEOP() const { return horizonsZone4FromEOP; }
+	void setHorizonsZone4FromEOP(bool b);
+	//! (SS) 2026-10-09 True when the matrices from J2000 to the equator and equinox of date come from the JPL Horizons models
+	//! (master switch on, observer on Earth, date inside the range of Horizons) instead of Vondrak (2011/2012) and IAU 2000B.
+	//! Updated by updateTransformMatrices() at each frame.
+	bool getHorizonsPrecNutActive() const { return horizonsPNActive; }
+	//! (SS) 2026-10-09 True obliquity of date [rad] of the JPL Horizons path (mean obliquity of the TIME ZONE + dEps incl. EOP),
+	//! to be used for the apparent ecliptic of date. Only valid when getHorizonsPrecNutActive().
+	double getHorizonsEpsTrue() const { return horizonsPN.epsTrue; }
+	//! (SS) 2026-10-09 Mean obliquity of date [rad] of the JPL Horizons path. Only valid when getHorizonsPrecNutActive().
+	double getHorizonsEpsMean() const { return horizonsPN.epsMean; }
+	//! (SS) 2026-10-09 TIME ZONE of the date as computed with the last update of the matrices (None when not active).
+	HorizonsZones::Zone getHorizonsActiveZone() const { return horizonsPNActive ? horizonsPN.zone : HorizonsZones::Zone::None; }
+	//! (SS) 2026-10-09 The offset in dPsi that matches JPL Horizons is not the same for the Moon in zones 4 and 5. True when the
+	//! equatorial position of the Moon needs horizonsMoonCorrection() on top of the global matrix.
+	bool getHorizonsMoonCorrectionActive() const { return horizonsMoonCorrActive; }
+	//! (SS) 2026-10-09 Tiny rotation (about 1 mas) that turns a vector of the equinox equatorial frame computed with the global matrix
+	//! into the one computed with the dPsi offset of the Moon.
+	Vec3d horizonsMoonCorrection(const Vec3d& v) const { return matHorizonsMoonCorr * v; }
+	//! (SS) 2026-10-09 @return whether the precession-nutation models of JPL Horizons are used (master switch, default false)
+	bool getUseHorizonsPrecNut() const;
+	//! (SS) 2026-10-09 Choose the precession-nutation path: false = Vondrak (2011/2012) and IAU 2000B (as before), true = JPL Horizons models by TIME ZONE.
+	//! Nutation can be switched off in both paths with setUseNutation().
+	void setUseHorizonsPrecNut(bool use);
 
 
 	//! Checks for altitude of the Sun - is it night or day?
@@ -1017,6 +1071,8 @@ signals:
 	void flagUseNutationChanged(bool b);
 	//! (SS) 2026-10-07 This signal indicates a switch in the use of the EOP corrections
 	void flagUseEOPChanged(bool b);
+	//! (SS) 2026-10-09 This signal indicates a change of the precession-nutation path (JPL Horizons models or Vondrak 2011/2012 and IAU 2000B)
+	void flagUseHorizonsPrecNutChanged(bool b);
 	//! (SS) 2026-10-07 This signal indicates that another Nutation model ("IAU1980" or "IAU2000A") was selected for the EOP
 	void eopModelChanged(const QString& key);
 	//! (SS) 2026-10-03 This signal indicates that another SPK kernel was selected for TT-TDB
@@ -1134,6 +1190,20 @@ private:
 	bool flagUseNutation;
 	// (SS) 2026-10-07 flag to indicate we want to apply the Earth Orientation Parameters (EOP)
 	bool flagUseEOP;
+	// (SS) 2026-10-09 master switch: precession-nutation models of JPL Horizons (true) or Vondrak (2011/2012) with IAU 2000B (false)
+	bool flagUseHorizonsPrecNut;
+	// (SS) 2026-10-09 result of the JPL Horizons precession-nutation of the current date, see updateHorizonsPrecNut()
+	void updateHorizonsPrecNut();
+	HorizonsPrecNut::Result horizonsPN;
+	bool horizonsPNActive = false;
+	bool horizonsMoonCorrActive = false;
+	bool horizonsMoonCorrValid = false;	//!< matHorizonsMoonCorr is the one of the current date
+	bool horizonsPNDirty = true;		//!< the settings changed: compute again even if the date did not change
+	QPair<double, double> horizonsPNJD = QPair<double, double>(0., 0.);	//!< JD of the last computation
+	Mat4d matHorizonsMoonCorr;
+	// (SS) 2026-10-09 start of TIME ZONE 4 (see getHorizonsZone4Start()): days after today, or end of the EOP nutation corrections
+	int horizonsZone4Days;
+	bool horizonsZone4FromEOP;
 	// flag to indicate we want to use aberration (a small-scale wobble of stellar positions (~20 arceconds on earth) due to finite speed of light and observer in motion on a planet.)
 	bool flagUseAberration;
 	// value to allow exaggerating aberration effects. 1 is natural value, stretching to e.g. 1000 may be useful for explanations.

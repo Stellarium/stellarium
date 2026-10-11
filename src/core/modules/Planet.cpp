@@ -2086,7 +2086,9 @@ QVariantMap Planet::getInfoMap(const StelCore *core) const
 			// some users require not "modern elongation" but just the DeltaLambda (GH:#1786)
 			double raSun, deSun, ra, de, lSun, ecLong, bSun, ecLat;
 			double obl=earth->getRotObliquity(core->getJDE());
-			if (core->getUseNutation())
+			if (core->getHorizonsPrecNutActive())	// (SS) 2026-10-09 JPL Horizons path: true obliquity of the TIME ZONE (includes dEps)
+				obl=core->getHorizonsEpsTrue();
+			else if (core->getUseNutation())
 			{
 				double dEps, dPsi;
 				getNutationAngles(core->getJDE(), &dPsi, &dEps);
@@ -3293,7 +3295,9 @@ double Planet::getElongationDLambda() const
 	static SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
 	double raSun, deSun, ra, de, lSun, ecLong, bSun, ecLat;
 	double obl=ssystem->getEarth()->getRotObliquity(core->getJDE());
-	if (core->getUseNutation())
+	if (core->getHorizonsPrecNutActive())	// (SS) 2026-10-09 JPL Horizons path: true obliquity of the TIME ZONE (includes dEps)
+		obl=core->getHorizonsEpsTrue();
+	else if (core->getUseNutation())
 	{
 		double dEps, dPsi;
 		getNutationAngles(core->getJDE(), &dPsi, &dEps);

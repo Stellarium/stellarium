@@ -2412,7 +2412,7 @@
                  <item>
                   <widget class="QCheckBox" name="eopCheckBox">
                    <property name="toolTip">
-                    <string>Apply the Earth Orientation Parameters (EOP) published by the IERS to the transformation matrices. When off, all EOP values are 0.</string>
+                    <string>Apply the Earth Orientation Parameters (EOP) published by the IERS to the transformation matrices. When off, all EOP values are 0. Only used by the JPL Horizons precession and nutation.</string>
                    </property>
                    <property name="text">
                     <string>EOP</string>
@@ -2459,6 +2459,16 @@
                  </property>
                  <property name="text">
                   <string>Topocentric coordinates</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="0" colspan="4">
+                <widget class="QCheckBox" name="horizonsPrecNutCheckBox">
+                 <property name="toolTip">
+                  <string>Use the precession and nutation models of JPL Horizons instead of Vondrak (2011/2012) and IAU 2000B: Owen (1990) or IAU 1976 precession and IAU 1980 nutation, selected by date, with the EOP corrections. Applies to an observer on Earth. Independent of the Delta-T algorithm and of the ephemerides (JPL Horizons Delta-T and DE441 reproduce the JPL Horizons app).</string>
+                 </property>
+                 <property name="text">
+                  <string>JPL Horizons precession and nutation</string>
                  </property>
                 </widget>
                </item>
@@ -3614,6 +3624,7 @@
   <tabstop>topocentricCheckBox</tabstop>
   <tabstop>nutationCheckBox</tabstop>
   <tabstop>eopCheckBox</tabstop>
+  <tabstop>horizonsPrecNutCheckBox</tabstop>
   <tabstop>eopToolButton</tabstop>
   <tabstop>aberrationCheckBox</tabstop>
   <tabstop>aberrationSpinBox</tabstop>

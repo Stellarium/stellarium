@@ -214,6 +214,11 @@ void ConfigurationDialog::createDialogContent()
 	// (SS) 2026-10-07 Earth Orientation Parameters: checkbox and wrench button that opens the EOP dialog
 	connectBoolProperty(ui->eopCheckBox,         "StelCore.flagUseEOP");
 	connect(ui->eopToolButton, &QToolButton::clicked, this, &ConfigurationDialog::showEOPDialog);
+	// (SS) 2026-10-09 Master switch of the precession-nutation path. The EOP are only used by the JPL Horizons path: the
+	// EOP checkbox is available only when this path is selected (the wrench button stays available to look at the files).
+	connectBoolProperty(ui->horizonsPrecNutCheckBox, "StelCore.flagUseHorizonsPrecNut");
+	connect(core, &StelCore::flagUseHorizonsPrecNutChanged, ui->eopCheckBox, &QCheckBox::setEnabled);
+	ui->eopCheckBox->setEnabled(core->getUseHorizonsPrecNut());
 	connectBoolProperty(ui->aberrationCheckBox,  "StelCore.flagUseAberration");
 	connectDoubleProperty(ui->aberrationSpinBox, "StelCore.aberrationFactor");
 	connectBoolProperty(ui->parallaxCheckBox,    "StelCore.flagUseParallax");
@@ -1379,6 +1384,7 @@ void ConfigurationDialog::saveAllSettings()
         conf->setValue("projection/type",                               core->getCurrentProjectionTypeKey());
         conf->setValue("astro/flag_nutation",                           core->getUseNutation());
         conf->setValue("astro/flag_eop",                                core->getUseEOP());	// (SS) 2026-10-07
+        conf->setValue("astro/flag_horizons_precnut",                   core->getUseHorizonsPrecNut());	// (SS) 2026-10-09
         conf->setValue("astro/eop_model",                               core->getEOPModel());	// (SS) 2026-10-07
         conf->setValue("astro/flag_aberration",                         core->getUseAberration());
         conf->setValue("astro/aberration_factor",                       core->getAberrationFactor());

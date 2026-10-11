@@ -186,6 +186,10 @@ SET(stellarium_lib_SRCS
      core/planetsephems/EOPManager.hpp
      core/planetsephems/EOPUpdater.cpp
      core/planetsephems/EOPUpdater.hpp
+     core/planetsephems/HorizonsZones.cpp
+     core/planetsephems/HorizonsZones.hpp
+     core/planetsephems/HorizonsPrecNut.cpp
+     core/planetsephems/HorizonsPrecNut.hpp
      core/planetsephems/htc20b.c
      core/planetsephems/htc20b.h
      core/modules/AtmosphereLightweight.cpp
@@ -863,6 +867,26 @@ IF(ENABLE_TESTING)
      ADD_DEPENDENCIES(buildTests testDeltaT)
      ADD_TEST(testDeltaT testDeltaT)
      SET_TARGET_PROPERTIES(testDeltaT PROPERTIES FOLDER "src/tests")
+
+     SET(tests_testTimescales_SRCS
+          tests/testTimescales.hpp
+          tests/testTimescales.cpp
+     )
+     ADD_EXECUTABLE(testTimescales ${tests_testTimescales_SRCS})
+     TARGET_LINK_LIBRARIES(testTimescales ${TESTS_LIBRARIES})
+     ADD_DEPENDENCIES(buildTests testTimescales)
+     ADD_TEST(testTimescales testTimescales)
+     SET_TARGET_PROPERTIES(testTimescales PROPERTIES FOLDER "src/tests")
+
+     SET(tests_testHorizonsPrecNut_SRCS
+          tests/testHorizonsPrecNut.hpp
+          tests/testHorizonsPrecNut.cpp
+     )
+     ADD_EXECUTABLE(testHorizonsPrecNut ${tests_testHorizonsPrecNut_SRCS})
+     TARGET_LINK_LIBRARIES(testHorizonsPrecNut ${TESTS_LIBRARIES})
+     ADD_DEPENDENCIES(buildTests testHorizonsPrecNut)
+     ADD_TEST(testHorizonsPrecNut testHorizonsPrecNut)
+     SET_TARGET_PROPERTIES(testHorizonsPrecNut PROPERTIES FOLDER "src/tests")
 
      SET(tests_testConversions_SRCS
           tests/testConversions.hpp

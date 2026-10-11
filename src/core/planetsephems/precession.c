@@ -431,6 +431,81 @@ static const double CHI_A_DEG[10][iC_END - iC_START + 1] = {
 		{ -1.0320166416967075E-8 , -1.0148113464009015E-7 , -2.2135404747652171E-7 ,  2.3720647656961084E-7 ,  1.3918759086160525E-6 }
 };
 
+// (SS) 2026-10-09 Compute the classical angles epsilon_A, chi_A, omega_A, psi_A of the Owen(90) long-term theory at date jde (JD_TT)
+// without any cache. Used by getPrecessionAnglesOwenClassic() (which caches the result) and getPrecessionAnglesOwenClassicExact().
+static void computeOwenClassic(const double jde, double *epsilon_A, double *chi_A, double *omega_A, double *psi_A)
+{
+	// Convert jde to Julian centuries since J2000.0
+	double T = (jde - 2451545.0) * (1.0 / 36525.0);
+	assert(fabs(T) <= LIMITS);
+
+	// Calculate the ordinal number of the set of Chebyshev coefficients to be used
+	// for finding precession angles at a given date in the long-term theory.
+	// Each set of Chebyshev coefficients covers a time interval of 80 Julian centuries.
+	// We currently use 5 sets of Chebyshev coefficients from Owen's long-term theory
+	// to cover the time spanned between +/- 200 centuries from J2000.0.
+	// The index computed by Owen are 61, 62, 63, 64 and 65.
+	// Index 61 : 18,000BC to 10,000BC
+	// Index 62 : 10,000BC to  2,000BC
+	// Index 63 :  2,000BC to  6,000AD
+	// Index 64 :  6,000AD to 14,000AD
+	// Index 65 : 14,000AD to 22,000AD
+	// Since we are using five sets of Chebyshev coefficients, we have to map these five index values
+	// to 0, 1, 2, 3 and 4 for our implementation. We can do this by subtracting macro iC_START from the computed index value.
+	double index = (T + 5080) / 80;
+	int iC       = (int)index;
+
+	// Note : As the end of an interval is equivalent to the beginning of the next interval, we could compute the end of the
+	// very last interval (i.e. at the LIMITS of Time) by stepping back one count of the index to use Chebyshev coefficients
+	// of the last interval. Otherwise the index would point beyond in the no man's land...
+	if (T >= LIMITS) iC--;
+
+	int iCmap = iC - iC_START;
+
+	// Calculate The central time in a time interval of the table of long-term Chebyshev coefficients.
+	// Since we are using only five sets of Chebyshev coefficients from Owen long-term theory,
+	// the only five values of Tc are used: -160, -80, 0, +80, +160. Tc = 0 corresponds to J2000.0, or jde = 2451545.0
+	int Tc = 80 * iC - 5040;
+
+	// Calculate the dimensionless time argument to Chebyshev polynomials.
+	// This is the fractional time interval between the central time of the record and the given date
+	// normalized so that it is between -1 and 1. For example, if the given date is exactly at the central time
+	// of the record, then t = 0. If the given date is at the beginning of the record, then t = -1.
+	// If the given date is at the end of the record, then t = +1.
+	double t = (T - Tc) / 40.0;
+
+	// Then Compute the Chebyshev polynomials Tn(t)
+	// Owen's long-term precession theory uses Chebyshev polynomials to represent the precession angles
+	// as a function of time. Owen uses Chebyshev polynomials of 10 terms, which are defined by the
+	// following recursive equations: Set polynomial degree 0 & 1 term as starting conditions
+	double Tn[10] = {0.0};
+	Tn[0]         = 1.0;
+	Tn[1]         = t;
+	for (int i = 2; i < 10; i++)
+		Tn[i] = 2 * t * Tn[i - 1] - Tn[i - 2];
+
+	// We now need to compute all four classic precession angles (epsilon_A, chi_A, omega_A, psi_A) using the
+	// Chebyshev polynomials and the corresponding coefficients from their respective table. The value
+	// obtained is in degree and need to be converted to radians for the next steps of the calculation.
+	double epsilon_A_deg = 0.0;
+	double chi_A_deg     = 0.0;
+	double omega_A_deg   = 0.0;
+	double psi_A_deg     = 0.0;
+
+	for (int i = 0; i < 10; i++)
+	{
+		epsilon_A_deg += EPS_A_DEG[i][iCmap] * Tn[i];
+		chi_A_deg += CHI_A_DEG[i][iCmap] * Tn[i];
+		omega_A_deg += OMEGA_A_DEG[i][iCmap] * Tn[i];
+		psi_A_deg += PSI_A_DEG[i][iCmap] * Tn[i];
+	}
+
+	*epsilon_A = epsilon_A_deg * DD2R;
+	*chi_A     = chi_A_deg * DD2R;
+	*omega_A   = omega_A_deg * DD2R;
+	*psi_A     = psi_A_deg * DD2R;
+}
+
 // compute classical angles epsilon_A, chi_A, omega_A, psi_A using Owen(90) long-term precession theory.
 // jde: date JD_TT
 void getPrecessionAnglesOwenClassic(const double jde, double *epsilon_A, double *chi_A, double *omega_A, double *psi_A)
@@ -438,81 +513,19 @@ void getPrecessionAnglesOwenClassic(const double jde, double *epsilon_A, double 
 	if (fabs(jde - c_lastJDE) > PRECESSION_EPOCH_THRESHOLD)
 	{
 		c_lastJDE = jde;
-
-		// Convert jde to Julian centuries since J2000.0
-		double T = (jde - 2451545.0) * (1.0 / 36525.0);
-		assert(fabs(T) <= LIMITS);
-
-		// Calculate the ordinal number of the set of Chebyshev coefficients to be used
-		// for finding precession angles at a given date in the long-term theory.
-		// Each set of Chebyshev coefficients covers a time interval of 80 Julian centuries.
-		// We currently use 5 sets of Chebyshev coefficients from Owen's long-term theory
-		// to cover the time spanned between +/- 200 centuries from J2000.0.
-		// The index computed by Owen are 61, 62, 63, 64 and 65.
-		// Index 61 : 18,000BC to 10,000BC
-		// Index 62 : 10,000BC to  2,000BC
-		// Index 63 :  2,000BC to  6,000AD
-		// Index 64 :  6,000AD to 14,000AD
-		// Index 65 : 14,000AD to 22,000AD
-		// Since we are using five sets of Chebyshev coefficients, we have to map these five index values
-		// to 0, 1, 2, 3 and 4 for our implementation. We can do this by subtracting macro iC_START from the computed index value.
-		double index = (T + 5080) / 80;
-		int iC       = (int)index;
-
-		// Note : As the end of an interval is equivalent to the beginning of the next interval, we could compute the end of the
-		// very last interval (i.e. at the LIMITS of Time) by stepping back one count of the index to use Chebyshev coefficients
-		// of the last interval. Otherwise the index would point beyond in the no man's land...
-		if (T >= LIMITS) iC--;
-
-		int iCmap = iC - iC_START;
-
-		// Calculate The central time in a time interval of the table of long-term Chebyshev coefficients.
-		// Since we are using only five sets of Chebyshev coefficients from Owen long-term theory,
-		// the only five values of Tc are used: -160, -80, 0, +80, +160. Tc = 0 corresponds to J2000.0, or jde = 2451545.0
-		int Tc = 80 * iC - 5040;
-
-		// Calculate the dimensionless time argument to Chebyshev polynomials.
-		// This is the fractional time interval between the central time of the record and the given date
-		// normalized so that it is between -1 and 1. For example, if the given date is exactly at the central time
-		// of the record, then t = 0. If the given date is at the beginning of the record, then t = -1.
-		// If the given date is at the end of the record, then t = +1.
-		double t = (T - Tc) / 40.0;
-
-		// Then Compute the Chebyshev polynomials Tn(t)
-		// Owen's long-term precession theory uses Chebyshev polynomials to represent the precession angles
-		// as a function of time. Owen uses Chebyshev polynomials of 10 terms, which are defined by the
-		// following recursive equations: Set polynomial degree 0 & 1 term as starting conditions
-		double Tn[10] = {0.0};
-		Tn[0]         = 1.0;
-		Tn[1]         = t;
-		for (int i = 2; i < 10; i++)
-			Tn[i] = 2 * t * Tn[i - 1] - Tn[i - 2];
-
-		// We now need to compute all four classic precession angles (epsilon_A, chi_A, omega_A, psi_A) using the
-		// Chebyshev polynomials and the corresponding coefficients from their respective table. The value
-		// obtained is in degree and need to be converted to radians for the next steps of the calculation.
-		double epsilon_A_deg = 0.0;
-		double chi_A_deg     = 0.0;
-		double omega_A_deg   = 0.0;
-		double psi_A_deg     = 0.0;
-
-		for (int i = 0; i < 10; i++)
-		{
-			epsilon_A_deg += EPS_A_DEG[i][iCmap] * Tn[i];
-			chi_A_deg += CHI_A_DEG[i][iCmap] * Tn[i];
-			omega_A_deg += OMEGA_A_DEG[i][iCmap] * Tn[i];
-			psi_A_deg += PSI_A_DEG[i][iCmap] * Tn[i];
-		}
-
-		c_epsilon_A = epsilon_A_deg * DD2R;
-		c_chi_A     = chi_A_deg * DD2R;
-		c_omega_A   = omega_A_deg * DD2R;
-		c_psi_A     = psi_A_deg * DD2R;
+		computeOwenClassic(jde, &c_epsilon_A, &c_chi_A, &c_omega_A, &c_psi_A);
 	}
 	*epsilon_A = c_epsilon_A;
 	*chi_A     = c_chi_A;
 	*omega_A   = c_omega_A;
 	*psi_A     = c_psi_A;
+}
+
+// (SS) 2026-10-09 Same angles as getPrecessionAnglesOwenClassic() but evaluated at exactly jde: no cache, no threshold of one day
+// (about 138 mas of precession), no shared state with the other precession functions. Used by the JPL Horizons path.
+void getPrecessionAnglesOwenClassicExact(const double jde, double *epsilon_A, double *chi_A, double *omega_A, double *psi_A)
+{
+	computeOwenClassic(jde, epsilon_A, chi_A, omega_A, psi_A);
 }
 
 // compute invariable plane angles L, I, Delta, using the Owen(90) long term precession theory.

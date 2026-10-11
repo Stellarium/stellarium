@@ -98,6 +98,9 @@ StelCore::StelCore()
 	, position(Q_NULLPTR)
 	, flagUseNutation(true)
 	, flagUseEOP(true)
+	, flagUseHorizonsPrecNut(false)
+	, horizonsZone4Days(HorizonsZones::DEFAULT_ZONE4_DAYS)
+	, horizonsZone4FromEOP(false)
 	, flagUseAberration(true)
 	, aberrationFactor(1.0)
 	, flagUseParallax(true)
@@ -166,6 +169,9 @@ StelCore::StelCore()
 
 	flagUseNutation=conf->value("astro/flag_nutation", true).toBool();
 	flagUseEOP=conf->value("astro/flag_eop", true).toBool();	// (SS) 2026-10-07
+	flagUseHorizonsPrecNut=conf->value("astro/flag_horizons_precnut", false).toBool();	// (SS) 2026-10-09
+	horizonsZone4Days=qBound(0, conf->value("astro/horizons_zone4_days", HorizonsZones::DEFAULT_ZONE4_DAYS).toInt(), 365);	// (SS) 2026-10-09
+	horizonsZone4FromEOP=conf->value("astro/horizons_zone4_from_eop", false).toBool();	// (SS) 2026-10-09
 	flagUseAberration=conf->value("astro/flag_aberration", true).toBool();
 	aberrationFactor=conf->value("astro/aberration_factor", 1.0).toDouble();
 	flagUseParallax=conf->value("astro/flag_parallax", true).toBool();
@@ -304,6 +310,7 @@ void StelCore::init()
 	eopMgr->setSelectedFiles(eopSelection.isEmpty() ? QStringList() : eopSelection.split('|', Qt::SkipEmptyParts));
 	qInfo().noquote() << "EOP files found in" << eopDir << ":" << eopMgr->rescan().join(", ");
 	eopMgr->reload();
+	horizonsPNDirty = true;	// (SS) 2026-10-09
 	qInfo().noquote() << "EOP files merged:" << eopMgr->selectedFiles().join(", ");
 	logEOPReport();
 	// a few seconds after start-up, download the files that are missing or older than their refresh delay
@@ -1127,6 +1134,69 @@ StelProjector::ModelViewTranformP StelCore::getSupergalacticModelViewTransform(R
 	return StelProjector::ModelViewTranformP(refr);
 }
 
+// (SS) 2026-10-09 Compute the JPL Horizons precession-nutation matrix of the current date when the master switch is on and the
+// observer is on Earth. The result is kept as long as the date and the settings do not change (static time).
+void StelCore::updateHorizonsPrecNut()
+{
+	horizonsPNActive = false;
+	horizonsMoonCorrActive = false;
+	if (!flagUseHorizonsPrecNut || position->getHomePlanet()->getEnglishName() != QLatin1String("Earth"))
+		return;
+
+	if (!horizonsPNDirty && JD.first == horizonsPNJD.first && JD.second == horizonsPNJD.second)
+	{
+		horizonsPNActive = horizonsPN.ok;
+		horizonsMoonCorrActive = horizonsPNActive && horizonsMoonCorrValid;
+		return;
+	}
+
+	HorizonsPrecNut::Params p;
+	p.jdUT = JD.first;
+	p.jdTDB = getJDE();
+	p.jdTT = getJDTT();
+	p.zone4Start = getHorizonsZone4Start();
+	p.useNutation = flagUseNutation;
+	const HorizonsZones::Zone zone = HorizonsZones::zoneFor(p.jdUT, p.jdTT, p.zone4Start);
+	if (flagUseNutation && flagUseEOP)
+	{
+		if (zone == HorizonsZones::Zone::Zone3)
+		{
+			EOPValues v;
+			if (getEOPValues(JD.first, v))
+			{
+				p.eopDpsi = v.dpsi;
+				p.eopDeps = v.deps;
+			}
+		}
+		else if ((zone == HorizonsZones::Zone::Zone4 || zone == HorizonsZones::Zone::Zone5) && eopMgr
+		         && eopMgr->reader().hasLast(EOPReader::Group::Nutation))
+		{
+			// after the last predicted value, the last dPsi and dEps are kept (constant EOP regime of Horizons)
+			const EOPReader::Record& r = eopMgr->reader().lastRecord(EOPReader::Group::Nutation);
+			p.eopDpsi = r.dpsi;
+			p.eopDeps = r.deps;
+		}
+	}
+	horizonsPN = HorizonsPrecNut::compute(p);
+
+	horizonsMoonCorrValid = false;
+	if (horizonsPN.ok && flagUseNutation && (zone == HorizonsZones::Zone::Zone4 || zone == HorizonsZones::Zone::Zone5))
+	{
+		p.forMoon = true;
+		const HorizonsPrecNut::Result moon = HorizonsPrecNut::compute(p);
+		if (moon.ok)
+		{
+			// p3(Moon) = P3(Moon) * P3(global)^T * p3(global)
+			matHorizonsMoonCorr = HorizonsPrecNut::toMat4d(moon.r) * HorizonsPrecNut::toMat4dTransposed(horizonsPN.r);
+			horizonsMoonCorrValid = true;
+		}
+	}
+	horizonsPNJD = JD;
+	horizonsPNDirty = false;
+	horizonsPNActive = horizonsPN.ok;
+	horizonsMoonCorrActive = horizonsPNActive && horizonsMoonCorrValid;
+}
+
 // GZ: One of the most important functions, totally void of doc. :-(
 // called in update() (for every frame)
 void StelCore::updateTransformMatrices()
@@ -1138,6 +1208,12 @@ void StelCore::updateTransformMatrices()
 	// in effect, this matrix transforms from VSOP87 ecliptical J2000 to planet-based equatorial coordinates.
 	// For earth, matJ2000ToEquinoxEqu is the precession matrix.	
 	matEquinoxEquDateToJ2000 = matVsop87ToJ2000 * position->getRotEquatorialToVsop87();
+	// (SS) 2026-10-09 Master switch: for an observer on Earth the J2000 -> equinox of date matrix comes from the JPL Horizons
+	// precession and nutation models (TIME ZONES) instead of Vondrak (2011/2012) with IAU 2000B. Everything that goes
+	// through these matrices (planets, stars, grids, alt-az) is then consistent.
+	updateHorizonsPrecNut();
+	if (horizonsPNActive)
+		matEquinoxEquDateToJ2000 = HorizonsPrecNut::toMat4dTransposed(horizonsPN.r);
 	matJ2000ToEquinoxEqu = matEquinoxEquDateToJ2000.transpose();
 	matJ2000ToAltAz = matEquinoxEquToAltAz*matJ2000ToEquinoxEqu;
 	matAltAzToJ2000 = matJ2000ToAltAz.transpose();
@@ -1358,6 +1434,7 @@ void StelCore::setUseNutation(bool use)
 	if (flagUseNutation != use)
 	{
 		flagUseNutation=use;
+		horizonsPNDirty = true;	// (SS) 2026-10-09
 		StelApp::immediateSave("astro/flag_nutation", use);
 		emit flagUseNutationChanged(use);
 	}
@@ -1412,6 +1489,7 @@ void StelCore::updateEOPFiles(bool force)
 				// new files: scan the folder again; without an explicit selection the newest files are merged
 				qInfo().noquote() << "EOP files found:" << eopMgr->rescan().join(", ");
 				eopMgr->reload();
+				horizonsPNDirty = true;	// (SS) 2026-10-09
 				qInfo().noquote() << "EOP files merged:" << eopMgr->selectedFiles().join(", ");
 				logEOPReport();
 				emit eopFilesChanged(eopMgr->selectedFiles());
@@ -1484,6 +1562,7 @@ void StelCore::setUseEOP(bool use)
 	if (flagUseEOP != use)
 	{
 		flagUseEOP = use;
+		horizonsPNDirty = true;	// (SS) 2026-10-09
 		StelApp::immediateSave("astro/flag_eop", use);
 		emit flagUseEOPChanged(use);
 	}
@@ -1502,6 +1581,7 @@ void StelCore::setEOPModel(const QString& key)
 		return;
 	eopMgr->setPreferredModel(model);
 	eopMgr->reload();
+	horizonsPNDirty = true;	// (SS) 2026-10-09
 	StelApp::immediateSave("astro/eop_model", EOPManager::modelKey(model));
 	qInfo().noquote() << "EOP model:" << EOPManager::modelKey(model) << "- merged files:" << eopMgr->mergeOrder().join(", ");
 	logEOPReport();
@@ -1516,6 +1596,7 @@ void StelCore::rescanEOPFiles()
 		return;
 	qInfo().noquote() << "EOP files found:" << eopMgr->rescan().join(", ");
 	eopMgr->reload();
+	horizonsPNDirty = true;	// (SS) 2026-10-09
 	qInfo().noquote() << "EOP files merged:" << eopMgr->selectedFiles().join(", ");
 	logEOPReport();
 	emit eopFilesChanged(eopMgr->selectedFiles());
@@ -1533,6 +1614,7 @@ void StelCore::setEOPFiles(const QStringList& fileNames)
 	if (!eopMgr) return;
 	eopMgr->setSelectedFiles(fileNames);
 	eopMgr->reload();
+	horizonsPNDirty = true;	// (SS) 2026-10-09
 	StelApp::immediateSave("astro/eop_files", fileNames.join(QLatin1Char('|')));
 	emit eopFilesChanged(eopMgr->selectedFiles());
 }
@@ -1577,6 +1659,103 @@ StelCore::TTminusTDBSource StelCore::getTTminusTDBSource(double jdTDB, double& s
 	}
 	seconds = 0.0;
 	return TTminusTDBNone;
+}
+
+// (SS) 2026-10-09 JD(TT). JDE is JD(TDB) with the JPL Horizons Delta-T algorithm and JD(TT) with all the others.
+double StelCore::getJDTT() const
+{
+	double jde = getJDE();
+	if (currentDeltaTAlgorithm != JPLHorizons)
+		return jde;
+	double seconds = 0.;
+	getTTminusTDBSource(jde, seconds);	// TT-TDB is a function of TDB: no iteration needed
+	return jde + seconds / 86400.0;
+}
+
+// (SS) 2026-10-09 JD(TT) in two parts, jd1 = J2000 and jd2 = days since J2000 (the TT-TDB term of 1.7 ms at most is added to the small part)
+void StelCore::getJDTTParts(double& jd1, double& jd2) const
+{
+	jd1 = 2451545.0;
+	double seconds = JD.second;	// TT-UT in the other algorithms, TDB-UT (or TDB-UTC) with JPL Horizons
+	if (currentDeltaTAlgorithm == JPLHorizons)
+	{
+		double ttMinusTdb = 0.;
+		getTTminusTDBSource(getJDE(), ttMinusTdb);
+		seconds += ttMinusTdb;
+	}
+	jd2 = (JD.first - jd1) + seconds / 86400.0;
+}
+
+// (SS) 2026-10-09 JD(UT1). JD.first is UTC from 1962-01-19 12h (2437684.0) with the JPL Horizons Delta-T algorithm (see StelUtils::getDeltaTByJPLHorizons()).
+double StelCore::getJDUT1() const
+{
+	if (currentDeltaTAlgorithm != JPLHorizons || JD.first < HorizonsZones::JD_DELTAT_UTC_START)
+		return JD.first;
+	EOPValues v;
+	if (!getEOPValues(JD.first, v))	// no EOP data for that date: UT1-UTC is taken as 0
+		return JD.first;
+	return JD.first + v.ut1utc / 86400.0;
+}
+
+// (SS) 2026-10-09 0h UTC of today, from the clock of the computer
+double StelCore::getJDUTCNow() const
+{
+	return HorizonsZones::utcDayStartJD(QDateTime::currentMSecsSinceEpoch());
+}
+
+// (SS) 2026-10-09 Where TIME ZONE 3 ends and TIME ZONE 4 starts
+double StelCore::getHorizonsZone4Start() const
+{
+	if (horizonsZone4FromEOP && eopMgr)
+	{
+		const EOPReader::Span sp = eopMgr->reader().span(EOPReader::Group::Nutation);
+		if (sp.valid)
+			return sp.lastMJD + 2400000.5;	// after the last dPsi, dEps the last values are held: this is what zone 4 does
+	}
+	return getJDUTCNow() + horizonsZone4Days;
+}
+
+HorizonsZones::Zone StelCore::getHorizonsZone() const
+{
+	return HorizonsZones::zoneFor(JD.first, getJDTT(), getHorizonsZone4Start());
+}
+
+void StelCore::setHorizonsZone4Days(int days)
+{
+	days = qBound(0, days, 365);
+	if (horizonsZone4Days != days)
+	{
+		horizonsZone4Days = days;
+		horizonsPNDirty = true;
+		StelApp::immediateSave("astro/horizons_zone4_days", days);
+	}
+}
+
+void StelCore::setHorizonsZone4FromEOP(bool b)
+{
+	if (horizonsZone4FromEOP != b)
+	{
+		horizonsZone4FromEOP = b;
+		horizonsPNDirty = true;
+		StelApp::immediateSave("astro/horizons_zone4_from_eop", b);
+	}
+}
+
+// (SS) 2026-10-09 Master switch of the precession-nutation path. Saved immediately like the nutation flag.
+bool StelCore::getUseHorizonsPrecNut() const
+{
+	return flagUseHorizonsPrecNut;
+}
+
+void StelCore::setUseHorizonsPrecNut(bool use)
+{
+	if (flagUseHorizonsPrecNut != use)
+	{
+		flagUseHorizonsPrecNut = use;
+		horizonsPNDirty = true;
+		StelApp::immediateSave("astro/flag_horizons_precnut", use);
+		emit flagUseHorizonsPrecNutChanged(use);
+	}
 }
 
 // @return whether aberration is currently used.

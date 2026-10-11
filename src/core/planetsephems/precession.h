@@ -87,6 +87,12 @@ double getPrecessionAngleVondrakCurrentEpsilonA(void);
 //! Return values are in radians
 void getPrecessionAnglesOwenClassic(const double jde, double *epsilon_A, double *chi_A, double *omega_A, double *psi_A);
 
+//! (SS) 2026-10-09 Same as getPrecessionAnglesOwenClassic() but without cache: the angles are evaluated at exactly jde.
+//! The cached function returns the values of the last evaluation when jde differs by less than PRECESSION_EPOCH_THRESHOLD (one day,
+//! about 138 mas of precession), shares that state with the other precession functions, and is therefore not suited to
+//! comparisons with JPL Horizons at the milliarcsecond level.
+void getPrecessionAnglesOwenClassicExact(const double jde, double *epsilon_A, double *chi_A, double *omega_A, double *psi_A);
+
 //! This second method computes the new precession angles L, I and Delta valid when refered to the
 //! invariable plane of the solar system.
 //!
