@@ -39,7 +39,8 @@
 
 class NexStarConnection;
 
-//! Telescope client that connects directly to a Celestron NexStar through a serial port.
+//! Telescope client that connects directly to a Celestron NexStar through a serial port or TCP/IP.
+//! Parameters are "serial_port_name:time_delay" or "host_name:tcp_port:time_delay".
 //! This class has been created by merging the code of TelescopeTCP and ServerNexStar.
 class TelescopeClientDirectNexStar : public TelescopeClient, public Server
 {
