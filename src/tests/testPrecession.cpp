@@ -28,6 +28,20 @@
 #include <erfa.h>    // (SS) 2026-06-15 Added to generate a baseline and call to eraSepp() function
 #include <erfam.h>   // (SS) 2026-06-15 Added to generate a baseline and call to eraSepp() function
 
+// (SS) 2026-10-13 Provide a simple fopen_s wrapper on non-MSVC platforms
+// so existing code can keep using fopen_s(&fp, path, mode) and
+// check for return 0 on success.
+#ifndef _MSC_VER
+# include < cstdio>
+# include < errno.h>
+static inline int fopen_s(FILE** pFile, const char* filename, const char* mode)
+{
+	if (!pFile) return EINVAL;
+	*pFile = fopen(filename, mode);
+	return (*pFile) ? 0 : errno;
+}
+#endif
+
 QTEST_GUILESS_MAIN(TestPrecession)
 
 static const double arcSec2Rad=M_PI*2.0/(360.0*3600.0);
