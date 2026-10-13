@@ -32,8 +32,8 @@
 // so existing code can keep using fopen_s(&fp, path, mode) and
 // check for return 0 on success.
 #ifndef _MSC_VER
-# include < cstdio>
-# include < errno.h>
+# include <cstdio>
+# include <errno.h>
 static inline int fopen_s(FILE** pFile, const char* filename, const char* mode)
 {
 	if (!pFile) return EINVAL;
