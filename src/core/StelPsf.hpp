@@ -21,6 +21,9 @@
 #ifndef STELPSF_HPP
 #define STELPSF_HPP
 
+#include "StelUtils.hpp"
+#include "StelSRGB.hpp"
+
 #include <algorithm>
 #include <cmath>
 
@@ -34,6 +37,16 @@ inline float smoothStep(float edge0, float edge1, float x)
 {
 	const float t = std::clamp((x - edge0) / (edge1 - edge0), 0.f, 1.f);
 	return t * t * (3.f - 2.f * t);
+}
+
+// Legacy faint-star luminance is a display-space multiplier. Decode it before
+// the PSF shader encodes its output, otherwise sRGB lifts the faintest stars.
+// Fade from zero at the legacy visibility cutoff to full strength at twice
+// that multiplier, so catalog culling does not introduce a brightness step.
+inline float faintSourceLuminance(float displayLuminance, float visibilityThreshold)
+{
+	return srgbToLinear(displayLuminance)
+	     * smoothStep(visibilityThreshold, 2.f * visibilityThreshold, displayLuminance);
 }
 
 inline float glowOnset(float peakRadiance)
@@ -67,8 +80,7 @@ inline float reflectiveGlowOnset(float peakRadiance, float discRadius, float poi
 	if (discRadius <= 0.f)
 		return 1.f;
 	// Peak required for unit radiance at the limb in the PSF glow profile.
-	constexpr float pi = 3.14159265358979323846f;
-	const float linkedPeak = std::pow(discRadius * pi / pointRadius, 2.5f);
+	const float linkedPeak = std::pow(discRadius * M_PIf / pointRadius, 2.5f);
 	return linkedPeak > 0.f ? glowOnset(peakRadiance / linkedPeak) : 1.f;
 }
 
@@ -82,17 +94,18 @@ inline float boundedFlareDecay(double decay, float current)
 
 inline float glowRadius(float peakRadiance, float strength, float pointRadius, float decay)
 {
-	constexpr float pi = 3.14159265358979323846f;
 	constexpr float minVisibleRadiance = 1.f / (255.f * 12.92f);
+	// This utility also accepts externally supplied parameters; reject invalid
+	// inputs once here so its analytic bound stays finite and nonnegative.
 	if (!(peakRadiance > 0.f) || !(strength > 0.f) || !(pointRadius > 0.f)
-	    || !(decay > 0.f && decay < pi) || !std::isfinite(peakRadiance)
+	    || !(decay > 0.f && decay < M_PIf) || !std::isfinite(peakRadiance)
 	    || !std::isfinite(strength) || !std::isfinite(pointRadius))
 		return 0.f;
 	if (peakRadiance * strength <= minVisibleRadiance)
 		return 0.f;
 
 	const float a = decay / pointRadius;
-	const float invB = (pi - decay) / pointRadius;
+	const float invB = (M_PIf - decay) / pointRadius;
 	// Invert the shader's falloff, including the exact fade used for this draw.
 	// Clamping strength here would give a nonzero radius as the glow fades out.
 	return std::pow(peakRadiance, 0.4f)

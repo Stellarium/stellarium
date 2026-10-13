@@ -767,7 +767,7 @@ IF(ENABLE_TESTING)
      SET_TARGET_PROPERTIES(buildTests PROPERTIES FOLDER "src/tests")
 
      ADD_EXECUTABLE(testStelPsf tests/testStelPsf.cpp)
-     TARGET_LINK_LIBRARIES(testStelPsf Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Test)
+     TARGET_LINK_LIBRARIES(testStelPsf Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Gui Qt${QT_VERSION_MAJOR}::Test)
      ADD_DEPENDENCIES(buildTests testStelPsf)
      ADD_TEST(testStelPsf testStelPsf)
      SET_TARGET_PROPERTIES(testStelPsf PROPERTIES FOLDER "src/tests")

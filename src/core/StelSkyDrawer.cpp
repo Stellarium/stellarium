@@ -19,6 +19,7 @@
 
 
 #include "StelSkyDrawer.hpp"
+#include "StelSRGB.hpp"
 #include "StelPsf.hpp"
 #include "StelProjector.hpp"
 #include "StelFileMgr.hpp"
@@ -52,6 +53,7 @@ namespace
 // The 0.025 corresponds to the maximum eye resolution in degree
 constexpr float EYE_RESOLUTION = 0.25f;
 constexpr float MAX_LINEAR_RADIUS = 8.f;
+constexpr float MIN_POINT_SOURCE_LUMINANCE = 0.05f;
 // Keep very bright point-source PSF halos under control. This preserves contrast
 // for objects such as Venus and bright supernovae while letting the full Moon
 // stand out without using its full integrated magnitude.
@@ -66,11 +68,6 @@ constexpr float PSF_MOON_GLARE_MAG_LIMIT = -4.5f;
 constexpr float PSF_FULL_MOON_MAG = -12.7f;
 constexpr float PSF_TEXTURED_MOON_HALO_RADIUS_FACTOR = 1.45f;
 constexpr float PSF_TEXTURED_MOON_HALO_SOURCE_RADIUS_FACTOR = 5.5f;
-
-float psfDisplayToLinear(float x, float gamma)
-{
-	return x <= 0.f ? 0.f : std::pow(x, gamma);
-}
 
 float Gamma(float gamma, float x)
 {
@@ -290,6 +287,8 @@ void StelSkyDrawer::init()
 		setupCurrentVAO();
 		vao->release();
 	}
+	// VAOs are optional (notably with Qt5/ANGLE). drawBatch also sets up
+	// and disables attributes explicitly when creation is unsupported.
 	psfVao->create();
 
 	vbo->release();
@@ -482,7 +481,7 @@ bool StelSkyDrawer::computeRCMag(float mag, RCMag* rcMag) const
 	if (rcMag->radius<1.2f)
 	{
 		rcMag->luminance= rcMag->radius * rcMag->radius * rcMag->radius / 1.728f;
-		if (rcMag->luminance < 0.05f)
+		if (rcMag->luminance < MIN_POINT_SOURCE_LUMINANCE)
 		{
 			rcMag->radius = rcMag->luminance = 0.f;
 			return false;
@@ -548,7 +547,7 @@ void StelSkyDrawer::postDrawPointSource(StelPainter* sPainter, bool drawInCorona
 		texHalo->bind();
 	sPainter->setBlending(true, GL_ONE, GL_ONE);
 
-	flushPsfPointSources(sPainter);
+	flushPsfPointSources(*sPainter);
 	if (nbPointSources==0)
 		return;
 
@@ -583,11 +582,11 @@ bool StelSkyDrawer::drawPointSource(StelPainter* sPainter, const Vec3d& v, const
 	if (!(checkInScreen ? sPainter->getProjector()->projectCheck(v, win) : sPainter->getProjector()->project(v, win)))
 		return false;
 
-	if (flagPsfStars && std::isfinite(rcMag.magnitude))
+	if (flagPsfStars && !std::isnan(rcMag.magnitude))
 	{
 		if (rcMag.luminance <= 0.f)
 			return false;
-		drawPsfPointSource(sPainter, v, Vec3f(static_cast<float>(win[0]), static_cast<float>(win[1]), static_cast<float>(win[2])), rcMag.magnitude, color, twinkleFactor, rcMag.luminance);
+		drawPsfPointSource(*sPainter, v, Vec3f(static_cast<float>(win[0]), static_cast<float>(win[1]), static_cast<float>(win[2])), rcMag.magnitude, color, twinkleFactor, rcMag.luminance);
 		return true;
 	}
 
@@ -636,18 +635,17 @@ bool StelSkyDrawer::drawPointSource(StelPainter* sPainter, const Vec3d& v, const
 
 bool StelSkyDrawer::computePsfPeakRadiance(float mag, float* peakRadiance) const
 {
-	if (!std::isfinite(mag))
+	if (std::isnan(mag))
 		return false;
-	const float r = qMax(psfStarPointRadius, 1.0e-3f);
+	const float r = psfStarPointRadius;
 	RCMag legacyRCMag;
 	if (!computeRCMag(mag, &legacyRCMag))
 		return false;
 
-	const float screenScale = qMax(StelApp::getInstance().getScreenScale(), 1.0e-3f);
+	const float screenScale = StelApp::getInstance().getScreenScale();
 	const float legacyRadius = legacyRCMag.radius / screenScale;
-	float legacyFlux = legacyRCMag.luminance * legacyRadius * legacyRadius;
-	if (!std::isfinite(legacyFlux) || legacyFlux <= 0.f)
-		return false;
+	const float linearLuminance = StelPsf::faintSourceLuminance(legacyRCMag.luminance, MIN_POINT_SOURCE_LUMINANCE);
+	float legacyFlux = linearLuminance * legacyRadius * legacyRadius;
 
 	const float brightSourceBlend = StelPsf::smoothStep(0.f, 13.f, -mag);
 	if (brightSourceBlend > 0.f)
@@ -655,12 +653,14 @@ bool StelSkyDrawer::computePsfPeakRadiance(float mag, float* peakRadiance) const
 		const float cappedMag = qMax(mag, psfStarBrightSourceMagLimit);
 		const float rawRadius = eye->adaptLuminanceScaledLn(pointSourceMagToLnLuminance(cappedMag), static_cast<float>(starRelativeScale)*1.40f*0.5f) * starLinearScale;
 		const float rawFlux = rawRadius * rawRadius;
-		if (std::isfinite(rawFlux) && rawFlux > legacyFlux)
+		if (rawFlux > legacyFlux)
 			legacyFlux += (rawFlux - legacyFlux) * brightSourceBlend;
 	}
 
 	float peak = 3.f * legacyFlux / (M_PIf * r * r);
 	const float dimGate = 1.f / (255.f * 12.92f);
+	// Exposure includes exponentiation and user-controlled star scales. Reject
+	// overflow here, before it can reach vertex coordinates or shader inputs.
 	if (!std::isfinite(peak) || peak <= dimGate)
 		return false;
 
@@ -672,7 +672,7 @@ bool StelSkyDrawer::computePsfPeakRadiance(float mag, float* peakRadiance) const
 
 float StelSkyDrawer::getPsfPointSourceLabelOffset(const RCMag& rcMag, const Vec3f& color, float baseOffset, float psfOffsetScale, float discRadius) const
 {
-	if (!flagPsfStars || !std::isfinite(rcMag.magnitude) || rcMag.luminance <= 0.f)
+	if (!flagPsfStars || std::isnan(rcMag.magnitude) || rcMag.luminance <= 0.f)
 		return baseOffset;
 
 	float peakRadiance = 0.f;
@@ -698,7 +698,7 @@ float StelSkyDrawer::getPsfPointSourceLabelOffset(const RCMag& rcMag, const Vec3
 
 float StelSkyDrawer::getPsfMoonHaloLabelOffset(float appMag, const Vec3f& color, float sourceRadius, float baseOffset, float psfOffsetScale) const
 {
-	if (!flagPsfStars || !std::isfinite(appMag) || sourceRadius <= 0.f)
+	if (!flagPsfStars || std::isnan(appMag) || sourceRadius <= 0.f)
 		return baseOffset;
 
 	const float scale = StelApp::getInstance().getScreenScale();
@@ -737,12 +737,12 @@ float StelSkyDrawer::computePsfGlowRadius(float peakRadiance, float alpha) const
 
 Vec3f StelSkyDrawer::psfGreenNormalization(const Vec3f& c, float saturationLimit, float& greenScale) const
 {
-	const float gamma = qMax(eye->getDisplayGamma(), 1.0e-3f);
-	float r = psfDisplayToLinear(c[0], gamma);
-	float g = psfDisplayToLinear(c[1], gamma);
-	float b = psfDisplayToLinear(c[2], gamma);
+	const Vec3f linear = srgbToLinear(c);
+	float r = linear[0];
+	float g = linear[1];
+	float b = linear[2];
 	const float mx = std::max({r, g, b});
-	if (mx <= 0.f)
+	if (mx == 0.f)
 	{
 		greenScale = 1.f;
 		return c;
@@ -767,7 +767,7 @@ Vec3f StelSkyDrawer::psfGreenNormalization(const Vec3f& c, float saturationLimit
 	return Vec3f(r, g, b);
 }
 
-void StelSkyDrawer::addPsfStarVertices(QVector<PsfStarVertex>& vertices, StelPainter* sPainter, const Vec3d& direction, const Vec3f& center, const Vec3f& color, float peakRadiance, float radius, float sourceRadius, float alpha)
+void StelSkyDrawer::addPsfStarVertices(QVector<PsfStarVertex>& vertices, StelPainter& sPainter, const Vec3d& direction, const Vec3f& center, const Vec3f& color, float peakRadiance, float radius, float sourceRadius, float alpha)
 {
 	static const Vec2f corners[] = {
 		Vec2f(-1.f, -1.f), Vec2f( 1.f, -1.f), Vec2f( 1.f,  1.f),
@@ -781,8 +781,11 @@ void StelSkyDrawer::addPsfStarVertices(QVector<PsfStarVertex>& vertices, StelPai
 	float maxX = center[0] + pixelRadius;
 	float minY = center[1] - pixelRadius;
 	float maxY = center[1] + pixelRadius;
+	// Normally a local Jacobian stretches a screen-space PSF quad. Near
+	// projection singularities, use a bounding rectangle instead and evaluate
+	// the angular distance to the source by unprojecting each fragment.
 	bool useAngularPsf = false;
-	if (sPainter && flagPsfStarProjectionCorrection)
+	if (flagPsfStarProjectionCorrection)
 	{
 		Vec3d n(direction);
 		n.normalize();
@@ -796,7 +799,7 @@ void StelSkyDrawer::addPsfStarVertices(QVector<PsfStarVertex>& vertices, StelPai
 		Vec3d tangentY(n ^ tangentX);
 		tangentY.normalize();
 
-		const StelProjectorP projector = sPainter->getProjector();
+		const StelProjectorP projector = sPainter.getProjector();
 		const double pixelPerRad = projector->getPixelPerRadAtCenter();
 		const double angularStep = 1.0 / pixelPerRad;
 		Vec3d projectedX;
@@ -896,9 +899,9 @@ void StelSkyDrawer::addPsfStarVertices(QVector<PsfStarVertex>& vertices, StelPai
 	}
 }
 
-void StelSkyDrawer::drawPsfPointSource(StelPainter* sPainter, const Vec3d& direction, const Vec3f& win, float appMag, const Vec3f& color, float twinkleFactor, float luminanceScale, float sourceRadius, float discRadius)
+void StelSkyDrawer::drawPsfPointSource(StelPainter& sPainter, const Vec3d& direction, const Vec3f& win, float appMag, const Vec3f& color, float twinkleFactor, float luminanceScale, float sourceRadius, float discRadius)
 {
-	if (!std::isfinite(luminanceScale) || luminanceScale <= 0.f)
+	if (luminanceScale <= 0.f)
 		return;
 
 	float peakRadiance = 0.f;
@@ -933,60 +936,63 @@ void StelSkyDrawer::drawPsfPointSource(StelPainter* sPainter, const Vec3d& direc
 	if (psfPointVertices.size() >= static_cast<int>(maxPointSources*6) ||
 	    psfGlowVertices.size() >= static_cast<int>(maxPointSources*6))
 	{
-		postDrawPointSource(sPainter);
+		postDrawPointSource(&sPainter);
 	}
 }
 
-void StelSkyDrawer::flushPsfPointSources(StelPainter* sPainter)
+void StelSkyDrawer::flushPsfPointSources(StelPainter& sPainter)
 {
 	if (psfPointVertices.isEmpty() && psfGlowVertices.isEmpty())
 		return;
 
-	const StelProjectorP projector = sPainter->getProjector();
+	const StelProjectorP projector = sPainter.getProjector();
 	if (!psfShaderProjector || !projector->isSameProjection(*psfShaderProjector))
 	{
 		psfPointShaderProgram.reset();
 		psfGlowShaderProgram.reset();
 		psfShaderProjector = projector;
 
-		const char *psfVsrc =
-			"ATTRIBUTE highp vec2 center;\n"
-			"ATTRIBUTE highp vec2 corner;\n"
-			"ATTRIBUTE highp vec3 direction;\n"
-			"ATTRIBUTE highp float angularMode;\n"
-			"ATTRIBUTE highp vec4 color;\n"
-			"ATTRIBUTE highp float peakRadiance;\n"
-			"ATTRIBUTE highp float psfRadius;\n"
-			"ATTRIBUTE highp float sourceRadius;\n"
-			"uniform highp mat4 projectionMatrix;\n"
-			"VARYING highp vec2 vCorner;\n"
-			"VARYING highp vec3 outDirection;\n"
-			"VARYING highp float outAngularMode;\n"
-			"VARYING highp vec4 outColor;\n"
-			"VARYING highp float outPeakRadiance;\n"
-			"VARYING highp float outPsfRadius;\n"
-			"VARYING highp float outSourceRadius;\n"
-			"void main(void)\n"
-			"{\n"
-			"    gl_Position = projectionMatrix * vec4(center, 0.0, 1.0);\n"
-			"    vCorner = corner;\n"
-			"    outDirection = normalize(direction);\n"
-			"    outAngularMode = angularMode;\n"
-			"    outColor = color;\n"
-			"    outPeakRadiance = peakRadiance;\n"
-			"    outPsfRadius = psfRadius;\n"
-			"    outSourceRadius = sourceRadius;\n"
-			"}\n";
+		// Directions and radiance retain high precision: angular subtraction can
+		// resolve subpixel separations, and bright sources exceed mediump range.
+		const char *psfVsrc = R"(
+ATTRIBUTE highp vec2 center;
+ATTRIBUTE mediump vec2 corner;
+ATTRIBUTE highp vec3 direction;
+ATTRIBUTE mediump float angularMode;
+ATTRIBUTE mediump vec4 color;
+ATTRIBUTE highp float peakRadiance;
+ATTRIBUTE highp float psfRadius;
+ATTRIBUTE highp float sourceRadius;
+uniform highp mat4 projectionMatrix;
+VARYING mediump vec2 vCorner;
+VARYING highp vec3 outDirection;
+VARYING mediump float outAngularMode;
+VARYING mediump vec4 outColor;
+VARYING highp float outPeakRadiance;
+VARYING highp float outPsfRadius;
+VARYING highp float outSourceRadius;
+void main(void)
+{
+    gl_Position = projectionMatrix * vec4(center, 0.0, 1.0);
+    vCorner = corner;
+    outDirection = normalize(direction);
+    outAngularMode = angularMode;
+    outColor = color;
+    outPeakRadiance = peakRadiance;
+    outPsfRadius = psfRadius;
+    outSourceRadius = sourceRadius;
+}
+)";
 
 		const QByteArray psfDistanceFsrc =
-			projector->getUnProjectShader() +
+			projector->getUnProjectShader() + makeSRGBUtilsShader() +
 			R"(
 uniform highp float pointScale;
 uniform highp float psfPixelPerRad;
-VARYING highp vec2 vCorner;
+VARYING mediump vec2 vCorner;
 VARYING highp vec3 outDirection;
-VARYING highp float outAngularMode;
-VARYING highp vec4 outColor;
+VARYING mediump float outAngularMode;
+VARYING mediump vec4 outColor;
 VARYING highp float outPeakRadiance;
 VARYING highp float outPsfRadius;
 VARYING highp float outSourceRadius;
@@ -1001,13 +1007,22 @@ highp float psfDistancePx()
 	pixelDirection = normalize(pixelDirection);
 	// Chord length avoids cancellation of 1 - dot() for small angular distances.
 	highp float angle = 2.0 * asin(clamp(0.5 * length(pixelDirection - outDirection), 0.0, 1.0));
-	return angle * psfPixelPerRad / max(pointScale, 0.001);
+	return angle * psfPixelPerRad / pointScale;
+}
+// Match the display-encoded framebuffer used by the existing additive renderer.
+// This converts each contribution; blending overlapping sources is still in
+// display space, as elsewhere in the legacy point-source rendering path.
+mediump vec3 psfDisplayColor(highp vec3 radiance)
+{
+	// Saturation is inevitable in the output buffer. Clamp before passing to
+	// the shared mediump sRGB utility to avoid overflow on OpenGL ES devices.
+	return linearToSRGB(clamp(radiance, 0.0, 1.0));
 }
 highp float psfMoonGlareMask(highp float px, highp float pointRadius, highp float glareReduction)
 {
 	if (outSourceRadius <= 0.0 || glareReduction <= 0.0)
 		return 1.0;
-	highp float reduction = glareReduction * smoothstep(0.0, max(pointRadius, 0.001), outSourceRadius);
+	highp float reduction = glareReduction * smoothstep(0.0, pointRadius, outSourceRadius);
 	highp float rim = smoothstep(max(0.0, outSourceRadius - pointRadius * 1.5), outSourceRadius + pointRadius * 2.0, px);
 	return mix(1.0, rim, reduction);
 }
@@ -1025,7 +1040,7 @@ void main(void)
 	highp float x = clamp(px / pointRadius, 0.0, 1.0);
 	highp float falloff = 1.0 - x * x;
 	falloff *= falloff;
-	FRAG_COLOR = vec4(outColor.rgb * (outColor.a * falloff * outPeakRadiance * psfMoonGlareMask(px, pointRadius, psfMoonGlareReduction)), 1.0);
+	FRAG_COLOR = vec4(psfDisplayColor(outColor.rgb * (outColor.a * falloff * outPeakRadiance * psfMoonGlareMask(px, pointRadius, psfMoonGlareReduction))), 1.0);
 }
 )";
 		const QByteArray psfGlowFsrc =
@@ -1042,9 +1057,12 @@ void main(void)
 	if (px >= outPsfRadius || px < 0.0)
 		discard;
 	highp float p04 = pow(outPeakRadiance, 0.4);
-	highp float s = max((p04 / max(px, 0.0001) - psfA) * psfB, 0.0);
+	// The glow is capped at its peak inside this radius. Evaluating at the
+	// cap boundary avoids the singularity at px == 0 without an arbitrary epsilon.
+	highp float peakRadius = p04 / (psfA + p04 / psfB);
+	highp float s = max((p04 / max(px, peakRadius) - psfA) * psfB, 0.0);
 	highp float val = min(s * s * sqrt(s), outPeakRadiance);
-	FRAG_COLOR = vec4(outColor.rgb * outColor.a * val * flareStrength * psfMoonGlareMask(px, pointRadius, psfMoonGlareReduction), 1.0);
+	FRAG_COLOR = vec4(psfDisplayColor(outColor.rgb * outColor.a * val * flareStrength * psfMoonGlareMask(px, pointRadius, psfMoonGlareReduction)), 1.0);
 }
 )";
 		auto createPsfProgram = [psfVsrc](const QByteArray& fsrc, const char* name, PsfStarShaderVars& vars) -> std::unique_ptr<QOpenGLShaderProgram>
@@ -1114,7 +1132,7 @@ void main(void)
 		projector->setUnProjectUniforms(*program);
 		if (glow)
 		{
-			const float r = qMax(psfStarPointRadius, 1.0e-3f);
+			const float r = psfStarPointRadius;
 			const float a = psfStarFlareDecay / r;
 			const float b = 1.f / (M_PIf / r - a);
 			program->setUniformValue(vars.psfA, a);
@@ -1349,7 +1367,7 @@ void StelSkyDrawer::postDrawSky3dModel(StelPainter* painter, const Vec3d& v, flo
 	if (!noStarHalo)
 	{
 		preDrawPointSource(painter);
-		if (psfTexturedMoonHalo && std::isfinite(haloMag))
+		if (psfTexturedMoonHalo && !std::isnan(haloMag))
 		{
 			Vec3d win;
 			if (painter->getProjector()->project(v, win) && rcm.luminance > 0.f)
@@ -1370,13 +1388,13 @@ void StelSkyDrawer::postDrawSky3dModel(StelPainter* painter, const Vec3d& v, flo
 				}
 			}
 		}
-		else if (flagPsfStars && std::isfinite(haloMag))
+		else if (flagPsfStars && !std::isnan(haloMag))
 		{
 			Vec3d win;
 			if (painter->getProjector()->project(v, win) && rcm.luminance > 0.f)
 			{
-				const float scale = qMax(StelApp::getInstance().getScreenScale(), 1.0e-3f);
-				drawPsfPointSource(painter, v, Vec3f(static_cast<float>(win[0]), static_cast<float>(win[1]), static_cast<float>(win[2])), haloMag, color, 1.f, 1.f, isMoon ? sourceRadius / scale : 0.f, sourceRadius);
+				const float scale = StelApp::getInstance().getScreenScale();
+				drawPsfPointSource(*painter, v, Vec3f(static_cast<float>(win[0]), static_cast<float>(win[1]), static_cast<float>(win[2])), haloMag, color, 1.f, 1.f, isMoon ? sourceRadius / scale : 0.f, sourceRadius);
 			}
 		}
 		else

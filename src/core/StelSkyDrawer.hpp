@@ -501,15 +501,23 @@ private:
 	//! @return V magnitude of the point source
 	float pointSourceLuminanceToMag(float lum) const;
 
+	//! Derive the linear PSF peak from the legacy exposure/size model.
+	//! Returns false for a missing (NaN), invisible or overflowing source.
 	bool computePsfPeakRadiance(float mag, float* peakRadiance) const;
+	//! Logical-pixel radius where the faded glow falls below one sRGB code value.
 	float computePsfGlowRadius(float peakRadiance, float alpha) const;
+	//! Decode a nonnegative display-sRGB color to linear light and normalize
+	//! its largest component to one, then lift strongly saturated components.
+	//! greenScale is the inverse resulting green component; multiplying the
+	//! peak by it anchors green-channel intensity across stellar colors.
+	//! Black stays black and uses a scale of one to avoid division by zero.
 	Vec3f psfGreenNormalization(const Vec3f& c, float saturationLimit, float& greenScale) const;
-	void addPsfStarVertices(QVector<PsfStarVertex>& vertices, StelPainter* sPainter, const Vec3d& direction, const Vec3f& center, const Vec3f& color, float peakRadiance, float radius, float sourceRadius=0.f, float alpha=1.f);
+	void addPsfStarVertices(QVector<PsfStarVertex>& vertices, StelPainter& sPainter, const Vec3d& direction, const Vec3f& center, const Vec3f& color, float peakRadiance, float radius, float sourceRadius=0.f, float alpha=1.f);
 	// appMag: rendering magnitude as described by RCMag::magnitude, including any lunar glare limit.
 	// sourceRadius: lunar glare mask radius in logical pixels (zero for other sources).
 	// discRadius: actual body radius in physical pixels, for the point/glow transitions.
-	void drawPsfPointSource(StelPainter* sPainter, const Vec3d& direction, const Vec3f& win, float appMag, const Vec3f& color, float twinkleFactor, float luminanceScale, float sourceRadius=0.f, float discRadius=0.f);
-	void flushPsfPointSources(StelPainter* sPainter);
+	void drawPsfPointSource(StelPainter& sPainter, const Vec3d& direction, const Vec3f& win, float appMag, const Vec3f& color, float twinkleFactor, float luminanceScale, float sourceRadius=0.f, float discRadius=0.f);
+	void flushPsfPointSources(StelPainter& sPainter);
 
 	//! Compute the log of the luminance for a point source with the given mag for the current FOV
 	//! @param mag V magnitude of the point source

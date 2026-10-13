@@ -25,6 +25,7 @@ class TestStelPsf : public QObject
 {
 	Q_OBJECT
 private slots:
+	void faintSourceTransition();
 	void glowTransition();
 	void boundedGlowPeak();
 	void resolvedDisc();
@@ -32,6 +33,37 @@ private slots:
 	void parameterBounds();
 	void glowBounds();
 };
+
+void TestStelPsf::faintSourceTransition()
+{
+	constexpr float cutoff = 0.05f;
+	QCOMPARE(StelPsf::faintSourceLuminance(cutoff, cutoff), 0.f);
+	QCOMPARE(StelPsf::faintSourceLuminance(0.f, cutoff), 0.f);
+	QCOMPARE(StelPsf::faintSourceLuminance(1.f, cutoff), 1.f);
+	QVERIFY(StelPsf::faintSourceLuminance(std::nextafter(cutoff, 1.f), cutoff) < 1.e-12f);
+	float previous = 0.f;
+	for (int i = 0; i <= 1000; ++i)
+	{
+		const float display = i / 1000.f;
+		const float linear = StelPsf::faintSourceLuminance(display, cutoff);
+		QVERIFY(linear >= previous);
+		QVERIFY(linear <= srgbToLinear(display));
+		previous = linear;
+		if (display >= 2.f * cutoff)
+		{
+			// Independently encode the result: above the fade interval the
+			// legacy display multiplier must survive a linear/sRGB round trip.
+			const double encoded = linear <= 0.0031308 ? 12.92 * linear
+				: 1.055 * std::pow(double(linear), 1. / 2.4) - 0.055;
+			QVERIFY(std::abs(encoded - display) < 1.e-6);
+		}
+	}
+	// With default point radius 1.5 and legacy faint-star radius 1.2,
+	// a source just above the cutoff must have a sub-code-value centre.
+	const float peak = 3.f * StelPsf::faintSourceLuminance(0.051f, cutoff)
+		* 1.2f * 1.2f / (M_PIf * 1.5f * 1.5f);
+	QVERIFY(peak * 12.92f * 255.f < 1.f);
+}
 
 void TestStelPsf::glowTransition()
 {
