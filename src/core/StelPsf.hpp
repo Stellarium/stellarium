@@ -22,7 +22,6 @@
 #define STELPSF_HPP
 
 #include "StelUtils.hpp"
-#include "StelSRGB.hpp"
 
 #include <algorithm>
 #include <cmath>
@@ -39,13 +38,13 @@ inline float smoothStep(float edge0, float edge1, float x)
 	return t * t * (3.f - 2.f * t);
 }
 
-// Legacy faint-star luminance is a display-space multiplier. Decode it before
-// the PSF shader encodes its output, otherwise sRGB lifts the faintest stars.
+// Keep the legacy display-space brightness calibration. The shader decodes
+// the complete profile, including its falloff, before applying linear color.
 // Fade from zero at the legacy visibility cutoff to full strength at twice
 // that multiplier, so catalog culling does not introduce a brightness step.
 inline float faintSourceLuminance(float displayLuminance, float visibilityThreshold)
 {
-	return srgbToLinear(displayLuminance)
+	return displayLuminance
 	     * smoothStep(visibilityThreshold, 2.f * visibilityThreshold, displayLuminance);
 }
 

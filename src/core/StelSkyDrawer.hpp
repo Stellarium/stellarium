@@ -501,7 +501,7 @@ private:
 	//! @return V magnitude of the point source
 	float pointSourceLuminanceToMag(float lum) const;
 
-	//! Derive the linear PSF peak from the legacy exposure/size model.
+	//! Derive the PSF profile amplitude from the legacy exposure/size model.
 	//! Returns false for a missing (NaN), invisible or overflowing source.
 	bool computePsfPeakRadiance(float mag, float* peakRadiance) const;
 	//! Logical-pixel radius where the faded glow falls below one sRGB code value.

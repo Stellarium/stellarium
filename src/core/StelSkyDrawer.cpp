@@ -644,8 +644,8 @@ bool StelSkyDrawer::computePsfPeakRadiance(float mag, float* peakRadiance) const
 
 	const float screenScale = StelApp::getInstance().getScreenScale();
 	const float legacyRadius = legacyRCMag.radius / screenScale;
-	const float linearLuminance = StelPsf::faintSourceLuminance(legacyRCMag.luminance, MIN_POINT_SOURCE_LUMINANCE);
-	float legacyFlux = linearLuminance * legacyRadius * legacyRadius;
+	const float displayLuminance = StelPsf::faintSourceLuminance(legacyRCMag.luminance, MIN_POINT_SOURCE_LUMINANCE);
+	float legacyFlux = displayLuminance * legacyRadius * legacyRadius;
 
 	const float brightSourceBlend = StelPsf::smoothStep(0.f, 13.f, -mag);
 	if (brightSourceBlend > 0.f)
@@ -1009,14 +1009,18 @@ highp float psfDistancePx()
 	highp float angle = 2.0 * asin(clamp(0.5 * length(pixelDirection - outDirection), 0.0, 1.0));
 	return angle * psfPixelPerRad / pointScale;
 }
-// Match the display-encoded framebuffer used by the existing additive renderer.
-// This converts each contribution; blending overlapping sources is still in
-// display space, as elsewhere in the legacy point-source rendering path.
-mediump vec3 psfDisplayColor(highp vec3 radiance)
+// The legacy exposure model calibrates the scalar PSF profile in display space.
+// Decode the complete profile (not just its peak), then apply linear stellar
+// color and encode for the additive display-space framebuffer. This preserves
+// the older neutral-star profile without lifting its faint wings. Above unit
+// brightness retain the existing HDR scaling toward saturated highlights.
+// Extended bodies retain their existing radiance calibration (e.g. lunar glare).
+mediump vec3 psfDisplayColor(highp float brightness)
 {
-	// Saturation is inevitable in the output buffer. Clamp before passing to
-	// the shared mediump sRGB utility to avoid overflow on OpenGL ES devices.
-	return linearToSRGB(clamp(radiance, 0.0, 1.0));
+	highp float intensity = brightness;
+	if (outSourceRadius == 0.0 && brightness < 1.0)
+		intensity = srgbToLinear(clamp(brightness, 0.0, 1.0));
+	return linearToSRGB(clamp(outColor.rgb * intensity, 0.0, 1.0));
 }
 highp float psfMoonGlareMask(highp float px, highp float pointRadius, highp float glareReduction)
 {
@@ -1040,7 +1044,7 @@ void main(void)
 	highp float x = clamp(px / pointRadius, 0.0, 1.0);
 	highp float falloff = 1.0 - x * x;
 	falloff *= falloff;
-	FRAG_COLOR = vec4(psfDisplayColor(outColor.rgb * (outColor.a * falloff * outPeakRadiance * psfMoonGlareMask(px, pointRadius, psfMoonGlareReduction))), 1.0);
+	FRAG_COLOR = vec4(psfDisplayColor(outColor.a * falloff * outPeakRadiance * psfMoonGlareMask(px, pointRadius, psfMoonGlareReduction)), 1.0);
 }
 )";
 		const QByteArray psfGlowFsrc =
@@ -1062,7 +1066,7 @@ void main(void)
 	highp float peakRadius = p04 / (psfA + p04 / psfB);
 	highp float s = max((p04 / max(px, peakRadius) - psfA) * psfB, 0.0);
 	highp float val = min(s * s * sqrt(s), outPeakRadiance);
-	FRAG_COLOR = vec4(psfDisplayColor(outColor.rgb * outColor.a * val * flareStrength * psfMoonGlareMask(px, pointRadius, psfMoonGlareReduction)), 1.0);
+	FRAG_COLOR = vec4(psfDisplayColor(outColor.a * val * flareStrength * psfMoonGlareMask(px, pointRadius, psfMoonGlareReduction)), 1.0);
 }
 )";
 		auto createPsfProgram = [psfVsrc](const QByteArray& fsrc, const char* name, PsfStarShaderVars& vars) -> std::unique_ptr<QOpenGLShaderProgram>
