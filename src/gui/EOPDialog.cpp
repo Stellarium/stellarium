@@ -276,7 +276,7 @@ void EOPDialog::createDialogContent()
 		customFields = presetFields("default");
 	setPresetRadioButton(fieldsMode);
 	setFieldCheckBoxes(presetFields(fieldsMode));
-	ui->checkBoxAutoUpdate->setChecked(conf->value("astro/eop_auto_update", true).toBool());
+	ui->checkBoxAutoUpdate->setChecked(core->getEOPAutoUpdate());
 
 	// Signals and slots
 	connect(&StelApp::getInstance(), &StelApp::languageChanged, this, &EOPDialog::retranslate);
@@ -521,7 +521,7 @@ void EOPDialog::updateFinished(bool ok, const QStringList& written, const QStrin
 
 void EOPDialog::autoUpdateToggled(bool on)
 {
-	StelApp::immediateSave("astro/eop_auto_update", on);
+	core->setEOPAutoUpdate(on);
 }
 
 void EOPDialog::updateUpdateStatus()
@@ -535,6 +535,8 @@ void EOPDialog::updateUpdateStatus()
 		if (fi.valid && fi.generated.isValid() && (!newest.isValid() || fi.generated > newest))
 			newest = fi.generated;
 	QString s = newest.isValid() ? q_("Newest download: %1").arg(newest.toString("yyyy-MM-dd")) : q_("No dated file in the folder.");
+	if (mgr->isEmpty() && lastUpdateMessage.isEmpty())
+		s += "\n" + q_("No EOP data is loaded: all EOP values are taken as 0. Click Update from IERS to download the files.");
 	if (!lastUpdateMessage.isEmpty())
 		s += "\n" + lastUpdateMessage;
 	ui->labelUpdateStatus->setText(s);
@@ -632,7 +634,7 @@ void EOPDialog::updateLiveValues()
 	if (!mgr || !mgr->getEOP(jd, e))
 	{
 		t->setRowCount(0);
-		ui->labelLiveNote->setText((note + " " + q_("No EOP value is available for this date.")).trimmed());
+		ui->labelLiveNote->setText((note + " " + q_("No EOP value is available for this date: the EOP values are taken as 0.")).trimmed());
 		return;
 	}
 

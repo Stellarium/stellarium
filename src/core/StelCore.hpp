@@ -431,6 +431,10 @@ public:
 	void setEOPModel(const QString& key);
 	//! (SS) 2026-10-07 Scan the eop folder again, merge the selected files and update the log
 	void rescanEOPFiles();
+	//! (SS) 2026-10-10 Whether the EOP files are downloaded a few seconds after start-up. Default false: they are only
+	//! downloaded by the Update button of the EOP dialog.
+	bool getEOPAutoUpdate() const;
+	void setEOPAutoUpdate(bool on);
 	//! (SS) 2026-10-07 Download the EOP files of the IERS (finals.all, finals2000A.all, EOP 14 C04, EOP 20 C04 u24) into the eop folder,
 	//! add the download date to their names, then scan the folder again and merge the selected files.
 	//! Unless @p force is true, only the series whose newest local file is older than its refresh delay are downloaded.
@@ -1148,6 +1152,7 @@ private:
 	EOPManager* eopMgr = Q_NULLPTR;
 	// (SS) 2026-10-07 downloads the EOP files, created by the first call of updateEOPFiles()
 	EOPUpdater* eopUpdater = Q_NULLPTR;
+	bool eopAutoUpdate = false;	// (SS) 2026-10-10
 	// (SS) 2026-10-07 writes the report of the last merge of the EOP files in the log, one line at a time
 	void logEOPReport() const;
 

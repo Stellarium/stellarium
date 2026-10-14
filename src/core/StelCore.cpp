@@ -313,9 +313,13 @@ void StelCore::init()
 	horizonsPNDirty = true;	// (SS) 2026-10-09
 	qInfo().noquote() << "EOP files merged:" << eopMgr->selectedFiles().join(", ");
 	logEOPReport();
-	// a few seconds after start-up, download the files that are missing or older than their refresh delay
-	if (conf->value("astro/eop_auto_update", true).toBool())
+	// (SS) 2026-10-10 No download at start-up unless the user switched it on in the EOP dialog (default off). If it is on, a few
+	// seconds after start-up the files that are missing or older than their refresh delay are downloaded.
+	eopAutoUpdate = conf->value("astro/eop_auto_update", false).toBool();
+	if (eopAutoUpdate)
 		QTimer::singleShot(3000, this, [this]() { updateEOPFiles(false); });
+	else if (eopMgr->isEmpty())
+		qInfo().noquote() << "No EOP file found in" << eopDir << ": all EOP values are taken as 0. Use the Update button of the EOP dialog (Tools tab) to download the files.";
 
 	// Define variables of custom equation for calculation of Delta T
 	// Default: ndot = -26.0 "/cy/cy; year = 1820; DeltaT = -20 + 32*u^2, where u = (currentYear-1820)/100
@@ -1511,11 +1515,9 @@ bool StelCore::isUpdatingEOP() const
 // (SS) 2026-10-05 IAU 1980 nutation corrections from the EOP files, in arcsec
 bool StelCore::getEOPNutationCorrections(double jdUTC, double& dpsiArcsec, double& depsArcsec) const
 {
+	dpsiArcsec = depsArcsec = 0.;	// (SS) 2026-10-10 0 when the EOP are off or when no EOP data is available
 	if (!flagUseEOP) // (SS) 2026-10-07 EOP corrections switched off: all values are 0
-	{
-		dpsiArcsec = depsArcsec = 0.;
 		return true;
-	}
 	return eopMgr && eopMgr->getNutationCorrections(jdUTC, dpsiArcsec, depsArcsec);
 }
 
@@ -1600,6 +1602,25 @@ void StelCore::rescanEOPFiles()
 	qInfo().noquote() << "EOP files merged:" << eopMgr->selectedFiles().join(", ");
 	logEOPReport();
 	emit eopFilesChanged(eopMgr->selectedFiles());
+}
+
+bool StelCore::getEOPAutoUpdate() const
+{
+	return eopAutoUpdate;
+}
+
+// (SS) 2026-10-10
+void StelCore::setEOPAutoUpdate(bool on)
+{
+	if (eopAutoUpdate != on)
+	{
+		eopAutoUpdate = on;
+		// written and flushed directly, to be sure that the choice is in config.ini at the next start
+		QSettings* conf = StelApp::getInstance().getSettings();
+		conf->setValue("astro/eop_auto_update", on);
+		conf->sync();
+		qInfo().noquote() << "EOP files downloaded at start-up:" << (on ? "yes" : "no");
+	}
 }
 
 // (SS) 2026-10-05 Names of the EOP files that are merged

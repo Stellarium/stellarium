@@ -1386,6 +1386,7 @@ void ConfigurationDialog::saveAllSettings()
         conf->setValue("astro/flag_eop",                                core->getUseEOP());	// (SS) 2026-10-07
         conf->setValue("astro/flag_horizons_precnut",                   core->getUseHorizonsPrecNut());	// (SS) 2026-10-09
         conf->setValue("astro/eop_model",                               core->getEOPModel());	// (SS) 2026-10-07
+        conf->setValue("astro/eop_auto_update",                         core->getEOPAutoUpdate());	// (SS) 2026-10-10
         conf->setValue("astro/flag_aberration",                         core->getUseAberration());
         conf->setValue("astro/aberration_factor",                       core->getAberrationFactor());
         conf->setValue("astro/flag_parallax",                           core->getUseParallax());
