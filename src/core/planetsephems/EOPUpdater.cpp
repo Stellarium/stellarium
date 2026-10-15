@@ -117,7 +117,10 @@ void EOPUpdater::startNext()
 
 	QNetworkRequest req(queue.at(index).url);
 	req.setAttribute(QNetworkRequest::RedirectPolicyAttribute, QNetworkRequest::NoLessSafeRedirectPolicy);
+	// (SS) 2026-10-14 setTransferTimeout() requires Qt 5.15; older Qt versions have no timeout.
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 15, 0))
 	req.setTransferTimeout(120000);
+#endif
 	reply = nam->get(req);
 	connect(reply, &QNetworkReply::downloadProgress, this, &EOPUpdater::progress);
 	connect(reply, &QNetworkReply::finished, this, &EOPUpdater::onFinished);

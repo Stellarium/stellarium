@@ -28,24 +28,27 @@
 #include <erfa.h>    // (SS) 2026-06-15 Added to generate a baseline and call to eraSepp() function
 #include <erfam.h>   // (SS) 2026-06-15 Added to generate a baseline and call to eraSepp() function
 
-// (SS) 2026-10-13 Provide a simple fopen_s wrapper on non-MSVC platforms
-// so existing code can keep using fopen_s(&fp, path, mode) and
-// check for return 0 on success.
-#ifndef _MSC_VER
-# include <cstdio>
-# include <errno.h>
-static inline int fopen_s(FILE** pFile, const char* filename, const char* mode)
-{
-	if (!pFile) return EINVAL;
-	*pFile = fopen(filename, mode);
-	return (*pFile) ? 0 : errno;
-}
-#endif
+// (SS) 2026-10-14 Output is done with C++ streams (std::cout, std::ofstream) instead of the C functions
+// printf(), fprintf() and fopen_s(), so that no platform specific wrapper is needed anymore.
+#include <fstream>
+#include <iostream>
+#include <iomanip>
+#include <sstream>
+#include <string>
 
 QTEST_GUILESS_MAIN(TestPrecession)
 
 static const double arcSec2Rad=M_PI*2.0/(360.0*3600.0);
 static const double eps0=84381.406*arcSec2Rad;
+
+// (SS) 2026-10-14 Equivalent of printf("%<width>.<precision>f", value) for use with C++ streams.
+// A fresh ostringstream is used so that no formatting state leaks into std::cout or the output files.
+static std::string fx(double value, int width, int precision)
+{
+	std::ostringstream os;
+	os << std::fixed << std::setw(width) << std::setprecision(precision) << value;
+	return os.str();
+}
 
 void TestPrecession::initTestCase()
 {
@@ -119,20 +122,20 @@ void TestPrecession::testPrecessionAnglesVondrak()
 	double I_rad;
 	double Delta_rad;
 	
-	printf("\n");
+	std::cout << "\n";
 	// 1219339.078000 is the Julian Date of the example in section A.5 of Vondrak et al (2011)
 	// 1375 BCE, May 03, 13:52:19.2 TT (Gregorian Calendar)
 	// 1375 BCE, May 15, 13:52:19.2 TT (Julian Calendar)
 	JulianDay = 1219339.078000;
-	printf("Julian Day       = %13.6f\n", JulianDay);
+	std::cout << "Julian Day       = " << fx(JulianDay, 13, 6) << "\n";
 
 	// Compute the Julian Epoch of the corresponding Julian Date
 	epj = 2000.0 + (JulianDay - ERFA_DJ00) / ERFA_DJY;
-	printf("Julian Epoch     = %18.10f\n", epj);
+	std::cout << "Julian Epoch     = " << fx(epj, 18, 10) << "\n";
 
 	// Compute time in Julian centuries from J2000
 	T = (JulianDay - ERFA_DJ00) / ERFA_DJC;
-	printf("Julian Centuries = %11.3f\n\n", T);
+	std::cout << "Julian Centuries = " << fx(T, 11, 3) << "\n\n";
 
 	/*************************************************************************************************************/
 	/* 1st : Compute Ecliptic & Equator pole vectors & Precession matrix using ERFA library                      */
@@ -141,22 +144,27 @@ void TestPrecession::testPrecessionAnglesVondrak()
 	// Compute the ecliptic pole vector for the Julian Epoch using the ERFA library
 	double pecl_era[3] = {0.0};
 	eraLtpecl(epj, pecl_era);
-	printf("pecl_erfa vector :  %18.15f   %18.15f   %18.15f  radians\n", pecl_era[0], pecl_era[1], pecl_era[2]);
+	std::cout << "pecl_erfa vector :  " << fx(pecl_era[0], 18, 15) << "   " << fx(pecl_era[1], 18, 15) << "   "
+		<< fx(pecl_era[2], 18, 15) << "  radians\n";
 
 	// Compute the equator pole vector for the Julian Epoch using the ERFA library
 	double pequ_era[3] = {0.0};
 	eraLtpequ(epj, pequ_era);
-	printf("pequ_erfa vector :  %18.15f   %18.15f   %18.15f  radians\n\n", pequ_era[0], pequ_era[1], pequ_era[2]);
+	std::cout << "pequ_erfa vector :  " << fx(pequ_era[0], 18, 15) << "   " << fx(pequ_era[1], 18, 15) << "   "
+		<< fx(pequ_era[2], 18, 15) << "  radians\n\n";
 
 	// Compute the Precession matrix P for the Julian Epoch using the ERFA library
 	double rp_era[3][3] = {0.0};
 	eraLtp(epj, rp_era);
 
-	printf("Precession matrix as computed by ERFA Library\n");
-	printf("rp_era  1st row  :  %18.15f   %18.15f   %18.15f  radians\n", rp_era[0][0], rp_era[0][1], rp_era[0][2]);
-	printf("rp_era  2nd row  :  %18.15f   %18.15f   %18.15f  radians\n", rp_era[1][0], rp_era[1][1], rp_era[1][2]);
-	printf("rp_era  3rd row  :  %18.15f   %18.15f   %18.15f  radians\n", rp_era[2][0], rp_era[2][1], rp_era[2][2]);
-	printf("\n");
+	std::cout << "Precession matrix as computed by ERFA Library\n";
+	std::cout << "rp_era  1st row  :  " << fx(rp_era[0][0], 18, 15) << "   " << fx(rp_era[0][1], 18, 15) << "   "
+		<< fx(rp_era[0][2], 18, 15) << "  radians\n";
+	std::cout << "rp_era  2nd row  :  " << fx(rp_era[1][0], 18, 15) << "   " << fx(rp_era[1][1], 18, 15) << "   "
+		<< fx(rp_era[1][2], 18, 15) << "  radians\n";
+	std::cout << "rp_era  3rd row  :  " << fx(rp_era[2][0], 18, 15) << "   " << fx(rp_era[2][1], 18, 15) << "   "
+		<< fx(rp_era[2][2], 18, 15) << "  radians\n";
+	std::cout << "\n";
 
 	/*************************************************************************************************************/
 	/* 2nd : Compute Ecliptic & Equator pole vectors & Precession matrix using Stellarium's PQXYe                */
@@ -180,7 +188,7 @@ void TestPrecession::testPrecessionAnglesVondrak()
 	// However, these reference values are not valid since they were obtained with the faulty coefficient C7 of Q_A
 	// I therefore replaced these quad precision reference values by those computed in a dedicated FORTRAN program of mine
 	// I also improved the pass/fail criteria, from 1e-6 to 1e-15 which is at double precision level.
-	printf("Verification of Stellarium's PECL and PEQR vectors against improved quadrupole precision reference values\n");
+	std::cout << "Verification of Stellarium's PECL and PEQR vectors against improved quadrupole precision reference values\n";
 	QVERIFY2(fabs(P_A  - 0.00041724785764001342) <= 1e-15, QString("JD %1: Pecl,x: %2 Difference: %3").arg(JulianDay).arg(P_A).arg(P_A   - 0.00041724785764001342).toUtf8());
 	QVERIFY2(fabs(VEC2 + 0.40495491375826546509) <= 1e-15, QString("JD %1: Pecl,y: %2 Difference: %3").arg(JulianDay).arg(VEC2).arg(VEC2 + 0.40495491375826546509).toUtf8());
 	QVERIFY2(fabs(VEC3 - 0.91433655932991166508) <= 1e-15, QString("JD %1: Pecl,z: %2 Difference: %3").arg(JulianDay).arg(VEC3).arg(VEC3 - 0.91433655932991166508).toUtf8());
@@ -221,11 +229,14 @@ void TestPrecession::testPrecessionAnglesVondrak()
 	Mat3d RP(EQX[0], EQX[1], EQX[2], V[0], V[1], V[2], PEQR[0], PEQR[1], PEQR[2]);	
 	
 	Mat3d RTP = RP.transpose();
-	printf("\n");
-	printf("3x3 Precession matrix as computed by Stellarium's PQXYe parameterisation\n");
-	printf("RTP 1st row      :  %18.15f   %18.15f   %18.15f  radians\n", RTP[0], RTP[3], RTP[6]);
-	printf("RTP 2nd row      :  %18.15f   %18.15f   %18.15f  radians\n", RTP[1], RTP[4], RTP[7]);
-	printf("RTP 3rd row      :  %18.15f   %18.15f   %18.15f  radians\n", RTP[2], RTP[5], RTP[8]);
+	std::cout << "\n";
+	std::cout << "3x3 Precession matrix as computed by Stellarium's PQXYe parameterisation\n";
+	std::cout << "RTP 1st row      :  " << fx(RTP[0], 18, 15) << "   " << fx(RTP[3], 18, 15) << "   "
+		<< fx(RTP[6], 18, 15) << "  radians\n";
+	std::cout << "RTP 2nd row      :  " << fx(RTP[1], 18, 15) << "   " << fx(RTP[4], 18, 15) << "   "
+		<< fx(RTP[7], 18, 15) << "  radians\n";
+	std::cout << "RTP 3rd row      :  " << fx(RTP[2], 18, 15) << "   " << fx(RTP[5], 18, 15) << "   "
+		<< fx(RTP[8], 18, 15) << "  radians\n";
 
 	/*************************************************************************************************************/
 	/* 4th : Compute Ecliptic & Equator pole vectors & Precession matrix using Stellarium's ChiA-OmgA-PsiA-eps0  */
@@ -255,13 +266,17 @@ void TestPrecession::testPrecessionAnglesVondrak()
 	Vec4d RTRot_row2 = RTRot.getRow(1);
 	Vec4d RTRot_row3 = RTRot.getRow(2);
 	Vec4d RTRot_row4 = RTRot.getRow(3);
-	printf("\n");
-	printf("4x4 Precession matrix as computed by Stellarium's ChiA-OmgA-PsiA-eps0 parameterisation\n");
-	printf("RTRot 1st row    :  %18.15f   %18.15f   %18.15f   %18.15f\n", RTRot_row1[0], RTRot_row1[1], RTRot_row1[2], RTRot_row1[3]);
-	printf("RTRot 2nd row    :  %18.15f   %18.15f   %18.15f   %18.15f\n", RTRot_row2[0], RTRot_row2[1], RTRot_row2[2], RTRot_row2[3]);
-	printf("RTRot 3rd row    :  %18.15f   %18.15f   %18.15f   %18.15f\n", RTRot_row3[0], RTRot_row3[1], RTRot_row3[2], RTRot_row3[3]);
-	printf("RTRot 4th row    :  %18.15f   %18.15f   %18.15f   %18.15f\n", RTRot_row4[0], RTRot_row4[1], RTRot_row4[2], RTRot_row4[3]);
-	printf("\n");
+	std::cout << "\n";
+	std::cout << "4x4 Precession matrix as computed by Stellarium's ChiA-OmgA-PsiA-eps0 parameterisation\n";
+	std::cout << "RTRot 1st row    :  " << fx(RTRot_row1[0], 18, 15) << "   " << fx(RTRot_row1[1], 18, 15) << "   "
+		<< fx(RTRot_row1[2], 18, 15) << "   " << fx(RTRot_row1[3], 18, 15) << "\n";
+	std::cout << "RTRot 2nd row    :  " << fx(RTRot_row2[0], 18, 15) << "   " << fx(RTRot_row2[1], 18, 15) << "   "
+		<< fx(RTRot_row2[2], 18, 15) << "   " << fx(RTRot_row2[3], 18, 15) << "\n";
+	std::cout << "RTRot 3rd row    :  " << fx(RTRot_row3[0], 18, 15) << "   " << fx(RTRot_row3[1], 18, 15) << "   "
+		<< fx(RTRot_row3[2], 18, 15) << "   " << fx(RTRot_row3[3], 18, 15) << "\n";
+	std::cout << "RTRot 4th row    :  " << fx(RTRot_row4[0], 18, 15) << "   " << fx(RTRot_row4[1], 18, 15) << "   "
+		<< fx(RTRot_row4[2], 18, 15) << "   " << fx(RTRot_row4[3], 18, 15) << "\n";
+	std::cout << "\n";
 
 
 	/*************************************************************************************************************/
@@ -301,11 +316,13 @@ void TestPrecession::testPrecessionAnglesVondrak()
 	b[2] = RP[8];
 
 	Angle0 = eraSepp(a, b);
-	printf("Angular separation between (a) EQR of ERFA and (b) EQR of Stellarium's PQXYe parameterisations\n");
-	printf("a     (radians)  :  %18.15f   %18.15f   %18.15f\n", rp_era[2][0], rp_era[2][1], rp_era[2][2]);
-	printf("b     (radians)  :  %18.15f   %18.15f   %18.15f\n", RP[6], RP[7], RP[8]);
-	printf("Angle0 (arcsec)  :   %0.6f\n", Angle0 * ERFA_DR2AS); // Convert from radians to Arcsecond
-	printf("\n");
+	std::cout << "Angular separation between (a) EQR of ERFA and (b) EQR of Stellarium's PQXYe parameterisations\n";
+	std::cout << "a     (radians)  :  " << fx(rp_era[2][0], 18, 15) << "   " << fx(rp_era[2][1], 18, 15) << "   "
+		<< fx(rp_era[2][2], 18, 15) << "\n";
+	std::cout << "b     (radians)  :  " << fx(RP[6], 18, 15) << "   " << fx(RP[7], 18, 15) << "   " << fx(RP[8], 18, 15)
+		<< "\n";
+	std::cout << "Angle0 (arcsec)  :   " << fx(Angle0 * ERFA_DR2AS, 0, 6) << "\n"; // Convert from radians to Arcsecond
+	std::cout << "\n";
 
 	// Equator pole vector from Stellarium 4x4 RRot Precession matrix based on espA-ChiA-OmgA-PsiA parameterisation	
 	b[0] = RRot[8];
@@ -313,23 +330,25 @@ void TestPrecession::testPrecessionAnglesVondrak()
 	b[2] = RRot[10];
 
 	Angle1 = eraSepp(a, b);
-	printf("Angular separation between (a) EQR of ERFA and (b) EQR of Stellarium's ChiA-OmgA-PsiA-eps0 parameterisations\n");
-	printf("a     (radians)  :  %18.15f   %18.15f   %18.15f\n", rp_era[2][0], rp_era[2][1], rp_era[2][2]);
-	printf("b     (radians)  :  %18.15f   %18.15f   %18.15f\n", RRot[8], RRot[9], RRot[10]);
-	printf("Angle1 (arcsec)  :   %0.6f\n", Angle1 * ERFA_DR2AS); // Convert from radians to Arcsecond
-	printf("\n");
+	std::cout << "Angular separation between (a) EQR of ERFA and (b) EQR of Stellarium's ChiA-OmgA-PsiA-eps0 parameterisations\n";
+	std::cout << "a     (radians)  :  " << fx(rp_era[2][0], 18, 15) << "   " << fx(rp_era[2][1], 18, 15) << "   "
+		<< fx(rp_era[2][2], 18, 15) << "\n";
+	std::cout << "b     (radians)  :  " << fx(RRot[8], 18, 15) << "   " << fx(RRot[9], 18, 15) << "   "
+		<< fx(RRot[10], 18, 15) << "\n";
+	std::cout << "Angle1 (arcsec)  :   " << fx(Angle1 * ERFA_DR2AS, 0, 6) << "\n"; // Convert from radians to Arcsecond
+	std::cout << "\n";
 
 	/*************************************************************************************************************/
 	/* 6th : Build the Precession matrix P using Owen(90) L, I, Delta, I0, L0 method                             */
 	/*************************************************************************************************************/
 
 	L0_rad           = getPrecessionAnglesOwenL0();
-	printf("L0     (radians):  %18.15f\n", L0_rad);
-	printf("L0     (arcsecd):  %18.11f\n\n", L0_rad * ERFA_DR2AS);
+	std::cout << "L0     (radians):  " << fx(L0_rad, 18, 15) << "\n";
+	std::cout << "L0     (arcsecd):  " << fx(L0_rad * ERFA_DR2AS, 18, 11) << "\n\n";
 
 	I0_rad           = getPrecessionAnglesOwenI0();
-	printf("I0     (radians):  %18.15f\n", I0_rad);
-	printf("I0     (arcsecd):  %18.11f\n", I0_rad * ERFA_DR2AS);
+	std::cout << "I0     (radians):  " << fx(I0_rad, 18, 15) << "\n";
+	std::cout << "I0     (arcsecd):  " << fx(I0_rad * ERFA_DR2AS, 18, 11) << "\n";
 
 	//getPrecessionAnglesOwenLIDelta(ERFA_DJ00 + 120 * ERFA_DJC - 2, &L_rad, &I_rad, &Delta_rad);
 	getPrecessionAnglesOwenLIDelta(JulianDay, &L_rad, &I_rad, &Delta_rad);
@@ -341,13 +360,17 @@ void TestPrecession::testPrecessionAnglesVondrak()
 	Vec4d RTP_LID_row2 = RTP_LID.getRow(1);
 	Vec4d RTP_LID_row3 = RTP_LID.getRow(2);
 	Vec4d RTP_LID_row4 = RTP_LID.getRow(3);
-	printf("\n");
-	printf("4x4 Precession matrix as computed by Owen(90) L, I, Delta\n");
-	printf("RTP_LID 1st row  :  %18.15f   %18.15f   %18.15f   %18.15f\n", RTP_LID_row1[0], RTP_LID_row1[1], RTP_LID_row1[2], RTP_LID_row1[3]);
-	printf("RTP_LID 2nd row  :  %18.15f   %18.15f   %18.15f   %18.15f\n", RTP_LID_row2[0], RTP_LID_row2[1], RTP_LID_row2[2], RTP_LID_row2[3]);
-	printf("RTP_LID 3rd row  :  %18.15f   %18.15f   %18.15f   %18.15f\n", RTP_LID_row3[0], RTP_LID_row3[1], RTP_LID_row3[2], RTP_LID_row3[3]);
-	printf("RTP_LID 4th row  :  %18.15f   %18.15f   %18.15f   %18.15f\n", RTP_LID_row4[0], RTP_LID_row4[1], RTP_LID_row4[2], RTP_LID_row4[3]);
-	printf("\n");
+	std::cout << "\n";
+	std::cout << "4x4 Precession matrix as computed by Owen(90) L, I, Delta\n";
+	std::cout << "RTP_LID 1st row  :  " << fx(RTP_LID_row1[0], 18, 15) << "   " << fx(RTP_LID_row1[1], 18, 15) << "   "
+		<< fx(RTP_LID_row1[2], 18, 15) << "   " << fx(RTP_LID_row1[3], 18, 15) << "\n";
+	std::cout << "RTP_LID 2nd row  :  " << fx(RTP_LID_row2[0], 18, 15) << "   " << fx(RTP_LID_row2[1], 18, 15) << "   "
+		<< fx(RTP_LID_row2[2], 18, 15) << "   " << fx(RTP_LID_row2[3], 18, 15) << "\n";
+	std::cout << "RTP_LID 3rd row  :  " << fx(RTP_LID_row3[0], 18, 15) << "   " << fx(RTP_LID_row3[1], 18, 15) << "   "
+		<< fx(RTP_LID_row3[2], 18, 15) << "   " << fx(RTP_LID_row3[3], 18, 15) << "\n";
+	std::cout << "RTP_LID 4th row  :  " << fx(RTP_LID_row4[0], 18, 15) << "   " << fx(RTP_LID_row4[1], 18, 15) << "   "
+		<< fx(RTP_LID_row4[2], 18, 15) << "   " << fx(RTP_LID_row4[3], 18, 15) << "\n";
+	std::cout << "\n";
 
 	/*************************************************************************************************************/
 	/* 7th : Angular separation between Equator pole of Owen(90) L, I, Delta & the other parameterisations       */
@@ -364,12 +387,13 @@ void TestPrecession::testPrecessionAnglesVondrak()
 	b[2]   = RP_LID[10];
 
 	Angle5 = eraSepp(a, b);
-	printf("Angular separation between (a) EQR of ERFA and (b) EQR of Owen(90) L, I, Delta, I0, L0 "
-	       "parameterisations\n");
-	printf("a     (radians)  :  %18.15f   %18.15f   %18.15f\n", rp_era[2][0], rp_era[2][1], rp_era[2][2]);
-	printf("b     (radians)  :  %18.15f   %18.15f   %18.15f\n", RP_LID[8], RP_LID[9], RP_LID[10]);
-	printf("Angle5 (arcsec)  :   %0.6f\n", Angle5 * ERFA_DR2AS); // Convert from radians to Arcsecond
-	printf("\n");
+	std::cout << "Angular separation between (a) EQR of ERFA and (b) EQR of Owen(90) L, I, Delta, I0, L0 parameterisations\n";
+	std::cout << "a     (radians)  :  " << fx(rp_era[2][0], 18, 15) << "   " << fx(rp_era[2][1], 18, 15) << "   "
+		<< fx(rp_era[2][2], 18, 15) << "\n";
+	std::cout << "b     (radians)  :  " << fx(RP_LID[8], 18, 15) << "   " << fx(RP_LID[9], 18, 15) << "   "
+		<< fx(RP_LID[10], 18, 15) << "\n";
+	std::cout << "Angle5 (arcsec)  :   " << fx(Angle5 * ERFA_DR2AS, 0, 6) << "\n"; // Convert from radians to Arcsecond
+	std::cout << "\n";
 
 	// Equator pole vector from Stellarium 4x4 RRot Precession matrix based on espA-ChiA-OmgA-PsiA parameterisation
 	a[0] = RRot[8];
@@ -382,20 +406,21 @@ void TestPrecession::testPrecessionAnglesVondrak()
 	b[2]   = RP_LID[10];
 
 	Angle7 = eraSepp(a, b);
-	printf("Angular separation between (a) EQR of Stellarium's ChiA-OmgA-PsiA-eps0 and (b) EQR of Owen(90) L, I, Delta, I0, L0 "
-	       "parameterisations\n");
-	printf("a     (radians)  :  %18.15f   %18.15f   %18.15f\n", RRot[8], RRot[9], RRot[10]);
-	printf("b     (radians)  :  %18.15f   %18.15f   %18.15f\n", RP_LID[8], RP_LID[9], RP_LID[10]);
-	printf("Angle7 (arcsec)  :   %0.6f\n", Angle7 * ERFA_DR2AS); // Convert from radians to Arcsecond
-	printf("\n");
+	std::cout << "Angular separation between (a) EQR of Stellarium's ChiA-OmgA-PsiA-eps0 and (b) EQR of Owen(90) L, I, Delta, I0, L0 parameterisations\n";
+	std::cout << "a     (radians)  :  " << fx(RRot[8], 18, 15) << "   " << fx(RRot[9], 18, 15) << "   "
+		<< fx(RRot[10], 18, 15) << "\n";
+	std::cout << "b     (radians)  :  " << fx(RP_LID[8], 18, 15) << "   " << fx(RP_LID[9], 18, 15) << "   "
+		<< fx(RP_LID[10], 18, 15) << "\n";
+	std::cout << "Angle7 (arcsec)  :   " << fx(Angle7 * ERFA_DR2AS, 0, 6) << "\n"; // Convert from radians to Arcsecond
+	std::cout << "\n";
 
 	/*************************************************************************************************************/
 	/* 8th : Build the Precession matrix P using Owen(90) Classic angles espA-ChiA-OmgA-PsiA parameterisatio     */
 	/*************************************************************************************************************/
 
 	eps0_owen = getPrecessionAngleOwenEpsilon(ERFA_DJ00);
-	printf("Eps0  (radians) :  %18.15f\n", eps0_owen);
-	printf("Eps0  (arcsecd) :  %18.11f\n", eps0_owen * ERFA_DR2AS);
+	std::cout << "Eps0  (radians) :  " << fx(eps0_owen, 18, 15) << "\n";
+	std::cout << "Eps0  (arcsecd) :  " << fx(eps0_owen * ERFA_DR2AS, 18, 11) << "\n";
 
 	getPrecessionAnglesOwenClassic(ERFA_DJ00 + 120 * ERFA_DJC - 2, &epsilon_A, &chi_A, &omega_A, &psi_A);
 	getPrecessionAnglesOwenClassic(JulianDay, &epsilon_A, &chi_A, &omega_A, &psi_A);
@@ -407,13 +432,17 @@ void TestPrecession::testPrecessionAnglesVondrak()
 	Vec4d RTP_Clas_row2 = RTP_Clas.getRow(1);
 	Vec4d RTP_Clas_row3 = RTP_Clas.getRow(2);
 	Vec4d RTP_Clas_row4 = RTP_Clas.getRow(3);
-	printf("\n");
-	printf("4x4 Precession matrix as computed by Owen (90) classic ChiA-OmgA-PsiA-eps0 parameterisation\n");
-	printf("RTP_Clas 1st row    :  %18.15f   %18.15f   %18.15f   %18.15f\n", RTP_Clas_row1[0], RTP_Clas_row1[1], RTP_Clas_row1[2], RTP_Clas_row1[3]);
-	printf("RTP_Clas 2nd row    :  %18.15f   %18.15f   %18.15f   %18.15f\n", RTP_Clas_row2[0], RTP_Clas_row2[1], RTP_Clas_row2[2], RTP_Clas_row2[3]);
-	printf("RTP_Clas 3rd row    :  %18.15f   %18.15f   %18.15f   %18.15f\n", RTP_Clas_row3[0], RTP_Clas_row3[1], RTP_Clas_row3[2], RTP_Clas_row3[3]);
-	printf("RTP_Clas 4th row    :  %18.15f   %18.15f   %18.15f   %18.15f\n", RTP_Clas_row4[0], RTP_Clas_row4[1], RTP_Clas_row4[2], RTP_Clas_row4[3]);
-	printf("\n");
+	std::cout << "\n";
+	std::cout << "4x4 Precession matrix as computed by Owen (90) classic ChiA-OmgA-PsiA-eps0 parameterisation\n";
+	std::cout << "RTP_Clas 1st row    :  " << fx(RTP_Clas_row1[0], 18, 15) << "   " << fx(RTP_Clas_row1[1], 18, 15)
+		<< "   " << fx(RTP_Clas_row1[2], 18, 15) << "   " << fx(RTP_Clas_row1[3], 18, 15) << "\n";
+	std::cout << "RTP_Clas 2nd row    :  " << fx(RTP_Clas_row2[0], 18, 15) << "   " << fx(RTP_Clas_row2[1], 18, 15)
+		<< "   " << fx(RTP_Clas_row2[2], 18, 15) << "   " << fx(RTP_Clas_row2[3], 18, 15) << "\n";
+	std::cout << "RTP_Clas 3rd row    :  " << fx(RTP_Clas_row3[0], 18, 15) << "   " << fx(RTP_Clas_row3[1], 18, 15)
+		<< "   " << fx(RTP_Clas_row3[2], 18, 15) << "   " << fx(RTP_Clas_row3[3], 18, 15) << "\n";
+	std::cout << "RTP_Clas 4th row    :  " << fx(RTP_Clas_row4[0], 18, 15) << "   " << fx(RTP_Clas_row4[1], 18, 15)
+		<< "   " << fx(RTP_Clas_row4[2], 18, 15) << "   " << fx(RTP_Clas_row4[3], 18, 15) << "\n";
+	std::cout << "\n";
 
 	/*************************************************************************************************************/
 	/* 9th : Angular separation between Equator pole of Owen(90) Classic Angles & the other parameterisations    */
@@ -430,12 +459,13 @@ void TestPrecession::testPrecessionAnglesVondrak()
 	b[2]   = RP_Clas[10];
 
 	Angle9 = eraSepp(a, b);
-	printf("Angular separation between (a) EQR of ERFA and (b) EQR of Owen(90) classic ChiA-OmgA-PsiA-eps0 "
-	       "parameterisations\n");
-	printf("a     (radians)  :  %18.15f   %18.15f   %18.15f\n", rp_era[2][0], rp_era[2][1], rp_era[2][2]);
-	printf("b     (radians)  :  %18.15f   %18.15f   %18.15f\n", RP_Clas[8], RP_Clas[9], RP_Clas[10]);
-	printf("Angle9 (arcsec)  :   %0.6f\n", Angle9 * ERFA_DR2AS); // Convert from radians to Arcsecond
-	printf("\n");
+	std::cout << "Angular separation between (a) EQR of ERFA and (b) EQR of Owen(90) classic ChiA-OmgA-PsiA-eps0 parameterisations\n";
+	std::cout << "a     (radians)  :  " << fx(rp_era[2][0], 18, 15) << "   " << fx(rp_era[2][1], 18, 15) << "   "
+		<< fx(rp_era[2][2], 18, 15) << "\n";
+	std::cout << "b     (radians)  :  " << fx(RP_Clas[8], 18, 15) << "   " << fx(RP_Clas[9], 18, 15) << "   "
+		<< fx(RP_Clas[10], 18, 15) << "\n";
+	std::cout << "Angle9 (arcsec)  :   " << fx(Angle9 * ERFA_DR2AS, 0, 6) << "\n"; // Convert from radians to Arcsecond
+	std::cout << "\n";
 
 	// Equator pole vector from Stellarium 4x4 RRot Precession matrix based on espA-ChiA-OmgA-PsiA parameterisation
 	a[0] = RRot[8];
@@ -448,12 +478,13 @@ void TestPrecession::testPrecessionAnglesVondrak()
 	b[2] = RP_Clas[10];
 
 	Angle11 = eraSepp(a, b);
-	printf("Angular separation between (a) EQR of Stellarium's ChiA-OmgA-PsiA-eps0 and (b)  EQR of Owen(90) "
-	       "classic ChiA-OmgA-PsiA-eps0 parameterisations\n");
-	printf("a     (radians)  :  %18.15f   %18.15f   %18.15f\n", RRot[8], RRot[9], RRot[10]);
-	printf("b     (radians)  :  %18.15f   %18.15f   %18.15f\n", RP_Clas[8], RP_Clas[9], RP_Clas[10]);
-	printf("Angle11 (arcsec) :   %0.6f\n", Angle11 * ERFA_DR2AS); // Convert from radians to Arcsecond
-	printf("\n");
+	std::cout << "Angular separation between (a) EQR of Stellarium's ChiA-OmgA-PsiA-eps0 and (b)  EQR of Owen(90) classic ChiA-OmgA-PsiA-eps0 parameterisations\n";
+	std::cout << "a     (radians)  :  " << fx(RRot[8], 18, 15) << "   " << fx(RRot[9], 18, 15) << "   "
+		<< fx(RRot[10], 18, 15) << "\n";
+	std::cout << "b     (radians)  :  " << fx(RP_Clas[8], 18, 15) << "   " << fx(RP_Clas[9], 18, 15) << "   "
+		<< fx(RP_Clas[10], 18, 15) << "\n";
+	std::cout << "Angle11 (arcsec) :   " << fx(Angle11 * ERFA_DR2AS, 0, 6) << "\n"; // Convert from radians to Arcsecond
+	std::cout << "\n";
 
 	// Equator pole vector from Owen(90) Precession matrix based on L, I, Delta parameterisation
 	a[0] = RP_LID[8];
@@ -466,32 +497,28 @@ void TestPrecession::testPrecessionAnglesVondrak()
 	b[2] = RP_Clas[10];
 
 	Angle13 = eraSepp(a, b);
-	printf("Angular separation between (a) EQR of Owen(90) L, I, Delta, I0, L0 and (b) EQR of Owen(90) classic ChiA-OmgA-PsiA-eps0 "
-	       "parameterisations\n");
-	printf("a     (radians)  :  %18.15f   %18.15f   %18.15f\n", RP_LID[8], RP_LID[9], RP_LID[10]);
-	printf("b     (radians)  :  %18.15f   %18.15f   %18.15f\n", RP_Clas[8], RP_Clas[9], RP_Clas[10]);
-	printf("Angle13 (arcsec) :   %0.6f\n", Angle13 * ERFA_DR2AS); // Convert from radians to Arcsecond
-	printf("\n");
+	std::cout << "Angular separation between (a) EQR of Owen(90) L, I, Delta, I0, L0 and (b) EQR of Owen(90) classic ChiA-OmgA-PsiA-eps0 parameterisations\n";
+	std::cout << "a     (radians)  :  " << fx(RP_LID[8], 18, 15) << "   " << fx(RP_LID[9], 18, 15) << "   "
+		<< fx(RP_LID[10], 18, 15) << "\n";
+	std::cout << "b     (radians)  :  " << fx(RP_Clas[8], 18, 15) << "   " << fx(RP_Clas[9], 18, 15) << "   "
+		<< fx(RP_Clas[10], 18, 15) << "\n";
+	std::cout << "Angle13 (arcsec) :   " << fx(Angle13 * ERFA_DR2AS, 0, 6) << "\n"; // Convert from radians to Arcsecond
+	std::cout << "\n";
 	
 	/*************************************************************************************************************/
 	/* 10th : This section captures Vondrak Precession from -2000 to +2000 centuries from J2000.0                */
 	/*************************************************************************************************************/
 
-	FILE* fp1 = 0; // File pointer for output file1
+	std::ofstream out1("../../Testing/Temporary/output1.txt"); // Output stream for output file1
 
-	if (fopen_s(&fp1, "../../Testing/Temporary/output1.txt", "w+") != 0)
+	if (!out1.is_open())
 	{
-		perror("Error opening file output1.txt");
+		std::cerr << "Error opening file output1.txt" << std::endl;
 		return;
 	}
 
-	fprintf(fp1, "Now Processing: Vondrak Precession only from -2000 to +2000 centuries from J2000.0 @ 1 century "
-	             "per step \n");
-	fprintf(fp1, "     JD_TT        "
-	             "     EPJ     "
-	             "     centuries  "
-	             "   Sep Angle 0 "
-	             "      Sep Angle 1\n");
+	out1 << "Now Processing: Vondrak Precession only from -2000 to +2000 centuries from J2000.0 @ 1 century per step \n";
+	out1 << "     JD_TT             EPJ          centuries     Sep Angle 0       Sep Angle 1\n";
 
 	const double DAYSTEP1 = ERFA_DJC; // Step 1 Julian century of 36525 days
 
@@ -575,7 +602,8 @@ void TestPrecession::testPrecessionAnglesVondrak()
 		/*                       file is stored here: stellarium\Testing\Temporary                       */
 		/*************************************************************************************************/
 
-		fprintf(fp1, "%0.5f   %0.5f   %0.6f     %0.6f     %0.15f\n", JulianDay, epj, T, Angle0, Angle1);
+		out1 << fx(JulianDay, 0, 5) << "   " << fx(epj, 0, 5) << "   " << fx(T, 0, 6) << "     " << fx(Angle0, 0, 6)
+			<< "     " << fx(Angle1, 0, 15) << "\n";
 	}
 
 
@@ -583,26 +611,16 @@ void TestPrecession::testPrecessionAnglesVondrak()
 	/* 11th : This section captures Vondrak & Owen Precession between -200 & +200 centuries from J2000.0         */
 	/*************************************************************************************************************/
 		
-	FILE* fp2 = 0; // File pointer for output file2
+	std::ofstream out2("../../Testing/Temporary/output2.txt"); // Output stream for output file2
 
-	if (fopen_s(&fp2, "../../Testing/Temporary/output2.txt", "w+") != 0)
+	if (!out2.is_open())
 	{
-		perror("Error opening file output2.txt");
+		std::cerr << "Error opening file output2.txt" << std::endl;
 		return;
 	}
 
-	fprintf(fp2, "Now Processing: Vondrak & Owen Precession from -200 to +200 centuries from J2000.0 @ 0.2 century "
-	             "per step \n");
-	fprintf(fp2, "    JD_TT"
-	             "            EPJ"
-	             "        centuries"
-	             "     Sep Angle 0"
-	             "       Sep Angle 1"
-	             "           Sep Angle 5"
-	             "            Sep Angle 7"
-	             "            Sep Angle 9"
-	             "            Sep Angle 11"
-	             "          Sep Angle 13\n");
+	out2 << "Now Processing: Vondrak & Owen Precession from -200 to +200 centuries from J2000.0 @ 0.2 century per step \n";
+	out2 << "    JD_TT            EPJ        centuries     Sep Angle 0       Sep Angle 1           Sep Angle 5            Sep Angle 7            Sep Angle 9            Sep Angle 11          Sep Angle 13\n";
 
 	const double DAYSTEP2 = 7305.0; // Step 0.2 Julian century of 7305.0 days
 
@@ -794,36 +812,25 @@ void TestPrecession::testPrecessionAnglesVondrak()
 		/*                          file is stored here: stellarium\Testing\Temporary                            */
 		/*********************************************************************************************************/
 	
-		fprintf(fp2,
-		        "%0.5f   %0.5f   %0.6f     %0.6f     %0.15f     %0.15f     %0.15f     %0.15f     %0.15f     "
-		        "%0.15f\n",
-		        JulianDay, epj, T, Angle0, Angle1, Angle5, Angle7, Angle9, Angle11, Angle13);
+		out2 << fx(JulianDay, 0, 5) << "   " << fx(epj, 0, 5) << "   " << fx(T, 0, 6) << "     " << fx(Angle0, 0, 6)
+			<< "     " << fx(Angle1, 0, 15) << "     " << fx(Angle5, 0, 15) << "     " << fx(Angle7, 0, 15) << "     "
+			<< fx(Angle9, 0, 15) << "     " << fx(Angle11, 0, 15) << "     " << fx(Angle13, 0, 15) << "\n";
 	}
 	
 	/*************************************************************************************************************/
 	/* 12th : This section captures Vondrak & Owen Precession between -10 & +10 centuries from J2000.0          */
 	/*************************************************************************************************************/
 
-	FILE* fp3 = 0; // File pointer for output file2
+	std::ofstream out3("../../Testing/Temporary/output3.txt"); // Output stream for output file3
 
-	if (fopen_s(&fp3, "../../Testing/Temporary/output3.txt", "w+") != 0)
+	if (!out3.is_open())
 	{
-		perror("Error opening file output3.txt");
+		std::cerr << "Error opening file output3.txt" << std::endl;
 		return;
 	}
 
-	fprintf(fp3, "Now Processing: Vondrak & Owen Precession from -10 to +10 centuries from J2000.0 @ 0.01 century "
-	             "per step \n");
-	fprintf(fp3, "    JD_TT"
-	             "            EPJ"
-	             "        centuries"
-	             "     Sep Angle 0"
-	             "       Sep Angle 1"
-	             "           Sep Angle 5"
-	             "            Sep Angle 7"
-	             "            Sep Angle 9"
-	             "            Sep Angle 11"
-	             "          Sep Angle 13\n");
+	out3 << "Now Processing: Vondrak & Owen Precession from -10 to +10 centuries from J2000.0 @ 0.01 century per step \n";
+	out3 << "    JD_TT            EPJ        centuries     Sep Angle 0       Sep Angle 1           Sep Angle 5            Sep Angle 7            Sep Angle 9            Sep Angle 11          Sep Angle 13\n";
 
 	const double DAYSTEP3 = 365.25; // Step 0.01 Julian century of 365.25 days
 
@@ -1007,13 +1014,10 @@ void TestPrecession::testPrecessionAnglesVondrak()
 		/*                          file is stored here: stellarium\Testing\Temporary                            */
 		/*********************************************************************************************************/
 	
-		fprintf(fp3,
-		        "%0.5f   %0.5f   %0.6f     %0.6f     %0.15f     %0.15f     %0.15f     %0.15f     %0.15f     "
-		        "%0.15f\n",
-		        JulianDay, epj, T, Angle0, Angle1, Angle5, Angle7, Angle9, Angle11, Angle13);
+		out3 << fx(JulianDay, 0, 5) << "   " << fx(epj, 0, 5) << "   " << fx(T, 0, 6) << "     " << fx(Angle0, 0, 6)
+			<< "     " << fx(Angle1, 0, 15) << "     " << fx(Angle5, 0, 15) << "     " << fx(Angle7, 0, 15) << "     "
+			<< fx(Angle9, 0, 15) << "     " << fx(Angle11, 0, 15) << "     " << fx(Angle13, 0, 15) << "\n";
 	}
 
-	fclose(fp1);
-	fclose(fp2);
-	fclose(fp3);
+	// (SS) 2026-10-14 out1, out2 and out3 are closed automatically when they go out of scope (RAII)
 }

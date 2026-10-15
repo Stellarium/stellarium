@@ -47,6 +47,13 @@
 #include <algorithm>
 #include <cmath>
 
+//(SS) 2026-10-14 Added to mimick StelSkyCultureMgr.cpp on how to handle SkipEmptyParts in different Qt version.
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 14, 0))
+constexpr auto SkipEmptyParts = Qt::SkipEmptyParts;
+#else
+constexpr auto SkipEmptyParts = QString::SkipEmptyParts;
+#endif
+
 namespace
 {
 // The EOP fields, as the columns of the IERS files. Dates and types (final or prediction) are text, the other fields are numbers.
@@ -271,7 +278,8 @@ void EOPDialog::createDialogContent()
 	fieldsMode = conf->value("astro/eop_fields_mode", "default").toString();
 	if (fieldsMode != "all" && fieldsMode != "default" && fieldsMode != "short" && fieldsMode != "none" && fieldsMode != "custom")
 		fieldsMode = "default";
-	customFields = conf->value("astro/eop_fields", "").toString().split(QLatin1Char(','), Qt::SkipEmptyParts);
+	//(SS) 2026-10-14: Handling SkipEmptyParts for different Qt versions
+	customFields = conf->value("astro/eop_fields", "").toString().split(QLatin1Char(','), SkipEmptyParts);
 	if (customFields.isEmpty())
 		customFields = presetFields("default");
 	setPresetRadioButton(fieldsMode);
