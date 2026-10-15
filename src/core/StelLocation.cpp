@@ -272,7 +272,10 @@ double StelLocation::distanceKm(const Planet& planet, const double long1, const 
 double StelLocation::distanceKm(const double otherLong, const double otherLat) const
 {
 	PlanetP planet=GETSTELMODULE(SolarSystem)->searchByEnglishName(planetName);
-	return distanceKm(*planet, static_cast<double>(longitude), static_cast<double>(latitude), otherLong, otherLat);
+	if (planet.isNull()) // a "spaceship" or unknown celestial body
+		return 0.0;
+	else
+		return distanceKm(*planet, static_cast<double>(longitude), static_cast<double>(latitude), otherLong, otherLat);
 }
 
 double StelLocation::getAzimuthForLocation(double longObs, double latObs, double longTarget, double latTarget)

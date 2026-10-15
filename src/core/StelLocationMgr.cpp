@@ -1731,6 +1731,9 @@ void StelLocationMgr::changePlanetMapForLocation(StelLocation loc)
 {
 	if (loc.planetName==planetName)
 		return;
+	
+	if(loc.planetName.contains("spaceship", Qt::CaseInsensitive) || loc.planetName.contains("->"))
+		return;
 
 	planetName=loc.planetName;
 	if (planetName=="Earth")
@@ -1738,7 +1741,7 @@ void StelLocationMgr::changePlanetMapForLocation(StelLocation loc)
 	else
 	{
 		SolarSystem *ssm=GETSTELMODULE(SolarSystem);
-		PlanetP p=ssm->searchByEnglishName(loc.planetName); // nullptr for "SpaceShip" transitions
+		PlanetP p=ssm->searchByEnglishName(loc.planetName);
 		QString mapName="textures/" + (p ? p->getTextMapName() : planetName) + ".png";
 
 		if (!planetSurfaceMap.load(StelFileMgr::findFile(mapName, StelFileMgr::File)))
