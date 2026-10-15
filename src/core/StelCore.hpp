@@ -1199,6 +1199,9 @@ private:
 	bool flagUseHorizonsPrecNut;
 	// (SS) 2026-10-09 result of the JPL Horizons precession-nutation of the current date, see updateHorizonsPrecNut()
 	void updateHorizonsPrecNut();
+	// (SS) 2026-10-15 helpers of updateHorizonsPrecNut(), split off to reduce its complexity (CodeFactor)
+	void setHorizonsEOPNutation(HorizonsPrecNut::Params& p, HorizonsZones::Zone zone) const;
+	bool computeHorizonsMoonCorr(HorizonsPrecNut::Params p, HorizonsZones::Zone zone);
 	HorizonsPrecNut::Result horizonsPN;
 	bool horizonsPNActive = false;
 	bool horizonsMoonCorrActive = false;

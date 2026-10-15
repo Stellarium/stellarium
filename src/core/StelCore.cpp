@@ -1142,6 +1142,50 @@ StelProjector::ModelViewTranformP StelCore::getSupergalacticModelViewTransform(R
 	return StelProjector::ModelViewTranformP(refr);
 }
 
+// (SS) 2026-10-15 Part of updateHorizonsPrecNut(): the EOP corrections dPsi and dEps of the nutation, chosen by TIME ZONE.
+// They are only used when both nutation and EOP are on, so p is left untouched otherwise.
+void StelCore::setHorizonsEOPNutation(HorizonsPrecNut::Params& p, HorizonsZones::Zone zone) const
+{
+	if (!(flagUseNutation && flagUseEOP))
+		return;
+
+	if (zone == HorizonsZones::Zone::Zone3)
+	{
+		EOPValues v;
+		if (getEOPValues(JD.first, v))
+		{
+			p.eopDpsi = v.dpsi;
+			p.eopDeps = v.deps;
+		}
+	}
+	else if ((zone == HorizonsZones::Zone::Zone4 || zone == HorizonsZones::Zone::Zone5) && eopMgr
+	         && eopMgr->reader().hasLast(EOPReader::Group::Nutation))
+	{
+		// after the last predicted value, the last dPsi and dEps are kept (constant EOP regime of Horizons)
+		const EOPReader::Record& r = eopMgr->reader().lastRecord(EOPReader::Group::Nutation);
+		p.eopDpsi = r.dpsi;
+		p.eopDeps = r.deps;
+	}
+}
+
+// (SS) 2026-10-15 Part of updateHorizonsPrecNut(): the correction for the Moon in TIME ZONES 4 and 5, on top of the global matrix
+// horizonsPN (which must be computed first). p is a copy on purpose, because forMoon is changed.
+// @return true when matHorizonsMoonCorr was set
+bool StelCore::computeHorizonsMoonCorr(HorizonsPrecNut::Params p, HorizonsZones::Zone zone)
+{
+	if (!horizonsPN.ok || !flagUseNutation || !(zone == HorizonsZones::Zone::Zone4 || zone == HorizonsZones::Zone::Zone5))
+		return false;
+
+	p.forMoon = true;
+	const HorizonsPrecNut::Result moon = HorizonsPrecNut::compute(p);
+	if (!moon.ok)
+		return false;
+
+	// p3(Moon) = P3(Moon) * P3(global)^T * p3(global)
+	matHorizonsMoonCorr = HorizonsPrecNut::toMat4d(moon.r) * HorizonsPrecNut::toMat4dTransposed(horizonsPN.r);
+	return true;
+}
+
 // (SS) 2026-10-09 Compute the JPL Horizons precession-nutation matrix of the current date when the master switch is on and the
 // observer is on Earth. The result is kept as long as the date and the settings do not change (static time).
 void StelCore::updateHorizonsPrecNut()
@@ -1165,40 +1209,9 @@ void StelCore::updateHorizonsPrecNut()
 	p.zone4Start = getHorizonsZone4Start();
 	p.useNutation = flagUseNutation;
 	const HorizonsZones::Zone zone = HorizonsZones::zoneFor(p.jdUT, p.jdTT, p.zone4Start);
-	if (flagUseNutation && flagUseEOP)
-	{
-		if (zone == HorizonsZones::Zone::Zone3)
-		{
-			EOPValues v;
-			if (getEOPValues(JD.first, v))
-			{
-				p.eopDpsi = v.dpsi;
-				p.eopDeps = v.deps;
-			}
-		}
-		else if ((zone == HorizonsZones::Zone::Zone4 || zone == HorizonsZones::Zone::Zone5) && eopMgr
-		         && eopMgr->reader().hasLast(EOPReader::Group::Nutation))
-		{
-			// after the last predicted value, the last dPsi and dEps are kept (constant EOP regime of Horizons)
-			const EOPReader::Record& r = eopMgr->reader().lastRecord(EOPReader::Group::Nutation);
-			p.eopDpsi = r.dpsi;
-			p.eopDeps = r.deps;
-		}
-	}
+	setHorizonsEOPNutation(p, zone);
 	horizonsPN = HorizonsPrecNut::compute(p);
-
-	horizonsMoonCorrValid = false;
-	if (horizonsPN.ok && flagUseNutation && (zone == HorizonsZones::Zone::Zone4 || zone == HorizonsZones::Zone::Zone5))
-	{
-		p.forMoon = true;
-		const HorizonsPrecNut::Result moon = HorizonsPrecNut::compute(p);
-		if (moon.ok)
-		{
-			// p3(Moon) = P3(Moon) * P3(global)^T * p3(global)
-			matHorizonsMoonCorr = HorizonsPrecNut::toMat4d(moon.r) * HorizonsPrecNut::toMat4dTransposed(horizonsPN.r);
-			horizonsMoonCorrValid = true;
-		}
-	}
+	horizonsMoonCorrValid = computeHorizonsMoonCorr(p, zone);
 	horizonsPNJD = JD;
 	horizonsPNDirty = false;
 	horizonsPNActive = horizonsPN.ok;
