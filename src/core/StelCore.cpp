@@ -307,7 +307,11 @@ void StelCore::init()
 			eopMgr->setPreferredModel(eopModel);
 	}
 	const QString eopSelection = conf->value("astro/eop_files", "").toString();
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)) // (SS) 2026-10-15 Added to handle different Qt versions
 	eopMgr->setSelectedFiles(eopSelection.isEmpty() ? QStringList() : eopSelection.split('|', Qt::SkipEmptyParts));
+#else
+	eopMgr->setSelectedFiles(eopSelection.isEmpty() ? QStringList() : eopSelection.split('|', QString::SkipEmptyParts));
+#endif
 	qInfo().noquote() << "EOP files found in" << eopDir << ":" << eopMgr->rescan().join(", ");
 	eopMgr->reload();
 	horizonsPNDirty = true;	// (SS) 2026-10-09
