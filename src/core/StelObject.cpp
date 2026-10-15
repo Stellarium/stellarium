@@ -151,7 +151,7 @@ float StelObject::getVMagnitude(const StelCore* core) const
 Vec4d StelObject::getRTSTime(const StelCore *core, const double altitude) const
 {
 	const StelLocation loc=core->getCurrentLocation();
-	if (loc.name.contains("->")) // a spaceship
+	if (core->getCurrentObserver()->isObserverLifeOver()) // a spaceship
 		return Vec4d(0., 0., 0., -1000.);
 
 	//StelObjectMgr* omgr=GETSTELMODULE(StelObjectMgr);
