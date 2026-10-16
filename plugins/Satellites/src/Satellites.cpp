@@ -3250,6 +3250,13 @@ QString Satellites::getSatIdFromLine2(const QString& line)
 	// Strip any leading zeros as they should be unique ints as strings.
 	static const QRegularExpression re("^[0]*\\B");
 	id.remove(re);
+
+	// Check wrong chars of Alpha-5 Propagator
+	static const QRegularExpression rx("^[OI]\\B");
+	QRegularExpressionMatch wrongMatch = rx.match(id);
+	if (wrongMatch.hasMatch())
+		return QString();
+
 	// Decoding Alpha-5 Propagator (compatible with CSV)
 	id = decodeSatIDFromAlpha5(id);
 	
