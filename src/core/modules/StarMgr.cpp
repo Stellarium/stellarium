@@ -1153,12 +1153,14 @@ void StarMgr::loadWds(const QString& WdsFileName)
 
 	int readOk=0;
 	int totalRecords=0;
+	int lineNumber=0;
 	// Version of WDS catalog
 	static const QRegularExpression versionRx("\\s*Version:\\s*([\\d\\-\\.]+)\\s*");
 	
 	// record structure is delimited with a tab character.
 	while (!buf.atEnd())
 	{
+		++lineNumber;
 		QString record = QString::fromUtf8(buf.readLine());
 
 		// skip comments and empty lines
@@ -1179,6 +1181,7 @@ void StarMgr::loadWds(const QString& WdsFileName)
 		// We must ignore lines without HIP or Gaia DR3 entry
 		if (!ok)
 		{
+			qWarning().noquote() << "Parse error at line" << lineNumber << "in" << QDir::toNativeSeparators(WdsFileName)   << " - failed to convert " << fields.at(0) << "to a number";
 			continue;
 		}
 		
