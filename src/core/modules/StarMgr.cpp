@@ -1136,7 +1136,7 @@ void StarMgr::loadWds(const QString& WdsFileName)
 	QFile dsFile(WdsFileName);
 	if (!dsFile.open(QIODevice::ReadOnly))
 	{
-		qDebug().noquote() << "Cannot open file" << QDir::toNativeSeparators(WdsFileName);
+		qWarning().noquote() << "Cannot open file" << QDir::toNativeSeparators(WdsFileName);
 		return;
 	}
 	QByteArray data = StelUtils::uncompress(dsFile);
@@ -1144,7 +1144,7 @@ void StarMgr::loadWds(const QString& WdsFileName)
 	//check if decompressing was successful
 	if(data.isEmpty())
 	{
-		qDebug().noquote() << "Could not decompress file" << QDir::toNativeSeparators(WdsFileName);
+		qWarning().noquote() << "Could not decompress file" << QDir::toNativeSeparators(WdsFileName);
 		return;
 	}
 	//create and open a QBuffer for reading
@@ -1174,17 +1174,27 @@ void StarMgr::loadWds(const QString& WdsFileName)
 		const QStringList& fields = record.split('\t');
 
 		bool ok;
-		StarId hip = fields.at(0).toLongLong(&ok);
+		StarId star_id = fields.at(0).toLongLong(&ok);
+		
+		// We must ignore lines without HIP or Gaia DR3 entry
 		if (!ok)
+		{
 			continue;
+		}
 		
 		// Don't set the star if it's already set
-		if (wdsStarsMap.contains(hip))
+		if (wdsStarsMap.contains(star_id))
+		{
+			if (star_id > NR_OF_HIP)
+				qWarning().noquote() << "Gaia DR3" << star_id << "already processed. Ignoring record:" << record;
+			else
+				qWarning().noquote() << "HIP" << star_id << "already processed. Ignoring record:" << record;
 			continue;
+		}
 
 		wds doubleStar = {fields.at(1).trimmed(), fields.at(2).toInt(), fields.at(3).toFloat(),fields.at(4).toFloat()};
-		wdsStarsMap[hip] = doubleStar;
-		wdsStarsIndex[QString("WDS J%1").arg(doubleStar.designation.toUpper())] = hip;
+		wdsStarsMap[star_id] = doubleStar;
+		wdsStarsIndex[QString("WDS J%1").arg(doubleStar.designation.toUpper())] = star_id;
 		++readOk;
 	}
 
