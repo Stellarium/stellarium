@@ -1032,9 +1032,7 @@ void StarMgr::loadSciDesignations(const QString& sciNameFile, QHash<StarId, QStr
 			sci_name.replace('_',' ');
 			// Don't set the main sci name if it's already set - it's additional sci name
 			if (map.contains(hip))
-			{
 				map[hip].append(" - " + sci_name);
-			}
 			else
 				map.insert(hip, sci_name);
 			index[sci_name] = hip;
@@ -2051,66 +2049,26 @@ QVector<QPair<QString,StelObjectP>> StarMgr::listMatchingObjects(const QString& 
 	while (ite.hasNext())
 	{
 		ite.next();
-		if (ite.key().indexOf(bayerRegEx)==0 || ite.key().indexOf(objPrefix)==0)
+		if (maxNbItem<=0)
+			break;
+		const StarId id = ite.value();
+		QStringList names = getSciExtraDesignation(id).split(" - ");
+		for (const auto &name : std::as_const(names))
 		{
-			if (maxNbItem<=0)
-				break;
-			const StarId id = ite.value();
-			QStringList names = getSciExtraDesignation(id).split(" - ");
-			for (const auto &name : std::as_const(names))
+			found = (!useStartOfWords && (name==objPrefix || name==objPrefixUpper));
+
+			if (!found) continue;
+
+			const auto star = id <= NR_OF_HIP ? searchHP(id) : searchGaia(id);
+			assert(star);
+			if(star)
 			{
-				if (useStartOfWords && name.startsWith(objPrefix, Qt::CaseInsensitive))
-					found = true;
-				else found = (!useStartOfWords && name.contains(objPrefix, Qt::CaseInsensitive));
-
-				if (!found) continue;
-
-				const auto star = id <= NR_OF_HIP ? searchHP(id) : searchGaia(id);
-				assert(star);
-				if(star)
-				{
-					if (maxNbItem<=0)
-						break;
-					result.append({name, star});
-					--maxNbItem;
-				}
+				if (maxNbItem<=0)
+					break;
+				result.append({name, star});
+				--maxNbItem;
 			}
 		}
-		else if (ite.key().at(0) != objPrefix.at(0))
-			break;
-	}
-
-	ite.toFront(); // reset
-	while (ite.hasNext())
-	{
-		ite.next();
-		if (ite.key().indexOf(bayerRegExCI)==0 || ite.key().indexOf(objPrefixUpper)==0)
-		{
-			if (maxNbItem<=0)
-				break;
-			const StarId id = ite.value();
-			QStringList names = getSciExtraDesignation(id).split(" - ");
-			for (const auto &name : std::as_const(names))
-			{
-				if (useStartOfWords && name.startsWith(objPrefix, Qt::CaseInsensitive))
-					found = true;
-				else found = (!useStartOfWords && name.contains(objPrefix, Qt::CaseInsensitive));
-
-				if (!found) continue;
-
-				const auto star = id <= NR_OF_HIP ? searchHP(id) : searchGaia(id);
-				assert(star);
-				if(star)
-				{
-					if (maxNbItem<=0)
-						break;
-					result.append({name, star});
-					--maxNbItem;
-				}
-			}
-		}
-		else if (ite.key().at(0) != objPrefixUpper.at(0))
-			break;
 	}
 
 	// Search for sci names for var stars
