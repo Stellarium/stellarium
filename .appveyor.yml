@@ -33,7 +33,8 @@ environment:
     QT_VERSION_MAJOR: 6
     QT_BASEDIR: C:\Qt\6.9\msvc2022_64
     CMAKE_GENERATOR: Visual Studio 17 2022
-    CMAKE_ARGS: -A x64 -DSCM_SHOULD_ENABLE_CONVERTER=ON
+    CMAKE_ARGS: -A x64 -DSCM_SHOULD_ENABLE_CONVERTER=ON -DGENERATE_STELMAINLIB=ON
+    BUILD_PLUGIN_SDK: true
     exiv2url: https://github.com/Exiv2/exiv2/releases/download/v0.28.0/exiv2-0.28.0-2019msvc64.zip
     exiv2baseName: exiv2-0.28.0-2019msvc64
     scConverterEnabled: true
@@ -89,6 +90,7 @@ before_build:
   - set SIGNING=false
   - set INSTALL_CONVERTER=false
   - set INSTALL_CONVERTER_DEPS=false
+  - set PLUGIN_SDK_CMAKE_ARGS=
   - set INNSPATH=C:\Program Files (x86)\Inno Setup 5;C:\Program Files (x86)\Inno Setup 6
   - set PATH=%VSPATH%;%QT_BASEDIR%;%QT_BASEDIR%\bin;c:\%exiv2baseName%\bin;%INNSPATH%;c:\%gettextBaseName%\bin;c:\%tidyBaseName%\bin;c:\skyculture-converter;%PATH%
 
@@ -112,6 +114,7 @@ before_build:
   - ps: if($env:PUBLISH_BINARY -eq 'true' -and $env:scConverterEnabled -eq 'true') { $env:INSTALL_CONVERTER = 'true' }
   - ps: if($env:PUBLISH_BINARY -eq "true" -and $env:APPVEYOR_REPO_COMMIT_MESSAGE.contains('[signing]')) { $env:SIGNING = 'true' }
   - ps: if($env:SIGNING -eq "true") { $env:USE_EXTRA_EXE = 'false' }
+  - ps: if($env:BUILD_PLUGIN_SDK -eq "true") { $env:PLUGIN_SDK_CMAKE_ARGS = "-DSTELLARIUM_PLUGIN_SDK_SOURCE_REVISION=$env:APPVEYOR_REPO_COMMIT -DSTELLARIUM_PLUGIN_SDK_BUILD_ID=appveyor-$env:APPVEYOR_BUILD_ID-$env:APPVEYOR_JOB_ID" }
 
   - ps: if($env:exiv2url -ne $null) { appveyor DownloadFile $env:exiv2url -FileName c:\$env:exiv2baseName.zip }
   - ps: if($env:exiv2url -ne $null) { 7z e c:\$env:exiv2baseName.zip -spf -oc:\ }
@@ -145,8 +148,8 @@ before_build:
 
   - cd c:\stellarium
   - mkdir build && cd build
-  - if [%PUBLISH_BINARY%]==[true] cmake -DCMAKE_PREFIX_PATH=c:\%exiv2baseName%;c:\%gettextBaseName%;c:\%tidyBaseName% -DENABLE_MEDIA=On -DCMAKE_INSTALL_PREFIX=c:\stellarium-package -G "%CMAKE_GENERATOR%" %CMAKE_ARGS% ..
-  - if [%PUBLISH_BINARY%]==[false] cmake -DCMAKE_PREFIX_PATH=c:\%exiv2baseName%;c:\%gettextBaseName%;c:\%tidyBaseName% -DENABLE_MEDIA=On -DENABLE_TESTING=On -DENABLE_NLS=Off -DCMAKE_INSTALL_PREFIX=c:\stellarium-package -G "%CMAKE_GENERATOR%" %CMAKE_ARGS% ..
+  - if [%PUBLISH_BINARY%]==[true] cmake -DCMAKE_PREFIX_PATH=c:\%exiv2baseName%;c:\%gettextBaseName%;c:\%tidyBaseName% -DENABLE_MEDIA=On -DCMAKE_INSTALL_PREFIX=c:\stellarium-package %PLUGIN_SDK_CMAKE_ARGS% -G "%CMAKE_GENERATOR%" %CMAKE_ARGS% ..
+  - if [%PUBLISH_BINARY%]==[false] cmake -DCMAKE_PREFIX_PATH=c:\%exiv2baseName%;c:\%gettextBaseName%;c:\%tidyBaseName% -DENABLE_MEDIA=On -DENABLE_TESTING=On -DENABLE_NLS=Off -DCMAKE_INSTALL_PREFIX=c:\stellarium-package %PLUGIN_SDK_CMAKE_ARGS% -G "%CMAKE_GENERATOR%" %CMAKE_ARGS% ..
 
 build:
   project: c:\stellarium\build\Stellarium.sln
@@ -169,6 +172,41 @@ after_test:
   #- set PATH=C:\Qt\6.9\msvc2022_arm64\bin;%PATH%
   # CAVEAT: problem in next line? TODO: Change the following line so that windeployqt actually copies the arm dlls!
   - if [%PUBLISH_BINARY%]==[true] cmake --build c:\stellarium\build\ --config %configuration% --target install
+  - ps: |
+      if ($env:BUILD_PLUGIN_SDK -eq "true") {
+        cmake --build c:\stellarium\build\ --config $env:CONFIGURATION --target stellarium-plugin-sdk-archive
+        if ($LASTEXITCODE -ne 0) {
+          throw "Stellarium plug-in SDK archive build failed"
+        }
+
+        $packages = "c:\stellarium\build\packages"
+        if (-not (Test-Path -LiteralPath $packages -PathType Container)) {
+          throw "Stellarium plug-in SDK package directory is missing"
+        }
+        $archives = @(Get-ChildItem -LiteralPath $packages -Filter "*-plugin-sdk-windows-x64-*.zip" -File)
+        if ($archives.Count -ne 1) {
+          throw "Expected one Stellarium plug-in SDK archive; found $($archives.Count)"
+        }
+        $archive = $archives[0]
+        if ($archive.Name -notmatch "-plugin-sdk-windows-x64-msvc[0-9]+-qt6[0-9.]*-release-experimental[.]zip$") {
+          throw "Unexpected Stellarium plug-in SDK archive name: $($archive.Name)"
+        }
+
+        $checksumPath = "$($archive.FullName).sha256"
+        if (-not (Test-Path -LiteralPath $checksumPath -PathType Leaf)) {
+          throw "Stellarium plug-in SDK archive checksum is missing"
+        }
+        $checksum = Get-Content -LiteralPath $checksumPath -Raw
+        $hashMatch = [regex]::Match($checksum, "^([0-9a-fA-F]{64})")
+        if (-not $hashMatch.Success) {
+          throw "Stellarium plug-in SDK archive checksum is malformed"
+        }
+        $expectedHash = $hashMatch.Groups[1].Value.ToLowerInvariant()
+        $actualHash = (Get-FileHash -Algorithm SHA256 -LiteralPath $archive.FullName).Hash.ToLowerInvariant()
+        if ($actualHash -cne $expectedHash) {
+          throw "Stellarium plug-in SDK archive checksum mismatch"
+        }
+      }
   # Where are we after cmake build?
   #- echo %cd%
   - if [%DEBUG_WINDEPLOYQT%]==[true] cd c:\stellarium\build\
