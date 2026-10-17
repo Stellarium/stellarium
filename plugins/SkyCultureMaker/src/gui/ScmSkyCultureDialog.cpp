@@ -24,6 +24,7 @@
 #include "ScmSkyCultureDialog.hpp"
 #include "NebulaMgr.hpp"
 #include "ScmPolygonInfoTreeItem.hpp"
+#include "ScmSkyCulture.hpp"
 #include "StarMgr.hpp"
 #include "StelMovementMgr.hpp"
 #include "StelObjectMgr.hpp"
@@ -139,18 +140,12 @@ void ScmSkyCultureDialog::createDialogContent()
 	        [this]()
 	        {
 			name = ui->skyCultureNameLE->text();
-			if (name.isEmpty())
-			{
-				ui->ExportSkyCultureBtn->setEnabled(false);
-			}
-			else
-			{
-				ui->ExportSkyCultureBtn->setEnabled(true);
-			}
 			setIdFromName(name);
+			updateSkyCultureIdValidation();
 		});
 
 	ui->ExportSkyCultureBtn->setEnabled(false);
+	updateSkyCultureIdValidation();
 	ui->RemoveConstellationBtn->setEnabled(false);
 	ui->EditConstellationBtn->setEnabled(false);
 
@@ -467,9 +462,21 @@ void ScmSkyCultureDialog::setIdFromName(QString &name)
 	maker->getCurrentSkyCulture()->setId(id);
 }
 
+void ScmSkyCultureDialog::updateSkyCultureIdValidation()
+{
+	if (!ui || !dialog) return;
+
+	const auto *currentSkyCulture = maker != nullptr ? maker->getCurrentSkyCulture() : nullptr;
+	const bool hasName            = !name.isEmpty();
+	const bool hasValidId         = currentSkyCulture != nullptr &&
+	                                scm::ScmSkyCulture::isValidId(currentSkyCulture->getId());
+	ui->ExportSkyCultureBtn->setEnabled(hasName && hasValidId);
+	ui->skyCultureIdErrorLbl->setVisible(hasName && !hasValidId);
+}
+
 void ScmSkyCultureDialog::updateAddConstellationButtons(bool enabled)
 {
-	if(ui && dialog)
+	if (ui && dialog)
 	{
 		ui->AddConstellationBtn->setEnabled(enabled);
 		ui->AddDarkConstellationBtn->setEnabled(enabled);
@@ -695,7 +702,7 @@ void ScmSkyCultureDialog::populateDescriptionTab(const scm::Description &desc)
 	ui->skyCultureNameLE->setText(desc.name);
 	ui->skyCultureNameLE->blockSignals(false);
 	name = desc.name;
-	ui->ExportSkyCultureBtn->setEnabled(!desc.name.isEmpty());
+	updateSkyCultureIdValidation();
 
 	// Description text fields
 	ui->introTE->setPlainText(desc.introduction);
@@ -866,6 +873,7 @@ void ScmSkyCultureDialog::resetDialog()
 
 		name.clear();
 		setIdFromName(name);
+		updateSkyCultureIdValidation();
 		resetConstellations();
 		maker->setSkyCultureDescription(getDescriptionFromTextEdit());
 
