@@ -1,0 +1,330 @@
+/* ========================================================================
+ * stellarium.css - CodeMirror Theme for Script Editor
+ * ========================================================================
+ * Scoped to .cm-s-stellarium.CodeMirror (the theme class applied by CodeMirror)
+ * Version : 1.0
+ * ======================================================================== */
+
+/* ------------------------------------------------------------------------
+ * 1. EDITOR BASE
+ * ------------------------------------------------------------------------ */
+
+.cm-s-stellarium.CodeMirror {
+    background: #1A1C1E;
+    color: #DCDBDA;
+    font-family: 'DejaVuSansMono', 'Courier New', 'Consolas', monospace;
+    font-size: 13px;
+    line-height: 1.2;
+}
+
+/* ------------------------------------------------------------------------
+ * 2. GUTTERS (Line Numbers Area)
+ * ------------------------------------------------------------------------ */
+
+.cm-s-stellarium .CodeMirror-gutters {
+    background: #2A2C2E;
+    border-right: 1px solid #3A3C3E;
+}
+
+.cm-s-stellarium .CodeMirror-linenumber {
+    color: #6A6C6E;
+    padding: 0 8px 0 5px;
+}
+
+.cm-s-stellarium .CodeMirror-guttermarker {
+    color: #FFEE80;
+}
+
+.cm-s-stellarium .CodeMirror-guttermarker-subtle {
+    color: #D0D0D0;
+}
+
+/* ------------------------------------------------------------------------
+ * 3. CURSOR & SELECTION
+ * ------------------------------------------------------------------------ */
+
+.cm-s-stellarium .CodeMirror-cursor {
+    border-left: 2px solid #FD971F;
+}
+
+.cm-s-stellarium .CodeMirror-selected {
+    background: rgba(253, 151, 31, 0.2);
+}
+
+.cm-s-stellarium .CodeMirror-activeline-background {
+    background: rgba(253, 151, 31, 0.08);
+}
+
+/* ------------------------------------------------------------------------
+ * 4. LAYOUT (Scroll / Sizer / Lines)
+ * ------------------------------------------------------------------------ */
+
+.cm-s-stellarium .CodeMirror-scroll {
+    min-height: 100%;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: auto;
+}
+
+.cm-s-stellarium .CodeMirror-sizer {
+    min-height: 100%;
+    padding-bottom: 20px;
+}
+
+.cm-s-stellarium .CodeMirror-lines {
+    min-height: 100%;
+    padding: 4px 0;
+}
+
+/* ------------------------------------------------------------------------
+ * 5. BRACKETS
+ * ------------------------------------------------------------------------ */
+
+.cm-s-stellarium .CodeMirror-matchingbracket {
+    background: rgba(166, 226, 46, 0.2);
+    color: #A6E22E;
+    border-bottom: 1px solid #A6E22E;
+}
+
+.cm-s-stellarium .CodeMirror-nonmatchingbracket {
+    background: rgba(249, 38, 114, 0.2);
+    color: #F92672;
+}
+
+.cm-s-stellarium .cm-bracket-error {
+    background: rgba(249, 38, 114, 0.15);
+    /*border-bottom: 2px wavy #F92672;*/
+    color: #F92672;
+}
+
+.cm-s-stellarium .cm-bracket {
+    color: #FD971F;
+    font-weight: bold;
+}
+
+.cm-s-stellarium .cm-bracket-close {
+    color: #F92672;
+}
+
+/* ------------------------------------------------------------------------
+ * 6. PLACEHOLDER
+ * ------------------------------------------------------------------------ */
+
+.cm-s-stellarium .CodeMirror-placeholder {
+    color: #525455;
+    font-style: italic;
+    opacity: 0.7;
+}
+
+/* ------------------------------------------------------------------------
+ * 7. SYNTAX TOKENS
+ * ------------------------------------------------------------------------ */
+
+/* Keywords */
+.cm-s-stellarium .cm-keyword {
+    color: #FF9D00;
+    font-weight: bold;
+}
+
+/* Built-in objects / namespace */
+.cm-s-stellarium .cm-builtin {
+    color: #aeeeff;
+    font-weight: bold;
+}
+
+/* Strings */
+.cm-s-stellarium .cm-string {
+    color: #E6DB74;
+}
+
+/* Numbers */
+.cm-s-stellarium .cm-number {
+    color: #e25e5e;
+}
+
+/* Comments */
+.cm-s-stellarium .cm-comment {
+    color: #ff9517;
+    font-style: italic;
+}
+
+/* Operators */
+.cm-s-stellarium .cm-operator {
+    color: #dbcd4d;
+}
+
+/* Variables (stellarium) */
+.cm-s-stellarium .cm-variable {
+    color: #e6db74;
+}
+
+/* User-defined variables */
+.cm-s-stellarium .cm-variable-user {
+    color: #b2eaf4 !important;
+    font-style: italic;
+}
+
+/* ------------------------------------------------------------------------
+ * 8. FUNCTION STATES
+ * ------------------------------------------------------------------------ */
+
+/* Valid function call */
+.cm-s-stellarium .cm-function-valid {
+    color: #00ff00;
+    font-weight: bold;
+}
+
+/* Invalid function (does not exist) */
+.cm-s-stellarium .cm-function-invalid {
+    color: #fc0d63;
+    text-decoration: underline wavy #fc0d63;
+    font-weight: normal;
+}
+
+/* Pending / incomplete function */
+.cm-s-stellarium .cm-function-pending {
+    color: #8AD500;
+    font-style: italic;
+    font-weight: normal;
+}
+
+/* Function name case mismatch */
+.cm-s-stellarium .cm-function-case-error {
+    color: #FF9D00;
+    text-decoration: underline wavy #FF9D00;
+}
+
+/* ------------------------------------------------------------------------
+ * 9. ERRORS
+ * ------------------------------------------------------------------------ */
+
+.cm-s-stellarium .cm-error {
+    color: #F92672;
+    text-decoration: underline wavy #F92672;
+    background: rgba(249, 38, 114, 0.1);
+}
+
+/* ------------------------------------------------------------------------
+ * 10. EDITOR STATE (scoped to container, not theme)
+ * ------------------------------------------------------------------------ */
+
+.script-editor-container.editor-running {
+    box-shadow: inset 0 0 30px rgba(253, 216, 134, 0.15);
+    border-color: rgba(253, 216, 134, 0.5);
+}
+
+.script-editor-container.editor-focused {
+    box-shadow: 0 0 0 2px rgba(253, 151, 31, 0.3);
+    transition: box-shadow 0.2s ease;
+}
+
+/* ------------------------------------------------------------------------
+ * 11. SCROLLBAR STYLING
+ * ------------------------------------------------------------------------ */
+
+.cm-s-stellarium .CodeMirror-scroll::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+}
+
+.cm-s-stellarium .CodeMirror-scroll::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+}
+
+.cm-s-stellarium .CodeMirror-scroll::-webkit-scrollbar-thumb {
+    background: #5D5F62;
+    border-radius: 3px;
+}
+
+.cm-s-stellarium .CodeMirror-scroll {
+    scrollbar-width: thin;
+    scrollbar-color: #5D5F62 rgba(0, 0, 0, 0.2);
+}
+
+/* ------------------------------------------------------------------------
+ * 12. AUTOCOMPLETE HINTS
+ * ------------------------------------------------------------------------
+ * Note: `!important` is required here because CodeMirror applies
+ * hint styles inline with high specificity.
+ * ------------------------------------------------------------------------ */
+
+.CodeMirror-hints.stellarium {
+    background: linear-gradient(#5D5F62, #3A3C3E);
+    border: 1px solid #FD971F;
+    border-radius: 6px;
+    font-family: 'DejaVuSansMono', monospace;
+    font-size: 11px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    min-width: 280px;
+    max-height: 300px;
+    z-index: 10000;
+}
+
+.CodeMirror-hints.stellarium .CodeMirror-hint {
+    padding: 6px 12px;
+    border-radius: 3px;
+    color: #DCDBDA;
+    cursor: pointer;
+}
+
+.CodeMirror-hints.stellarium .CodeMirror-hint-active {
+    background: #FD971F !important;
+    color: #1A1C1E !important;
+}
+
+/* Autocomplete item inner structure */
+.CodeMirror-hints.stellarium .autocomplete-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: 15px;
+}
+
+.CodeMirror-hints.stellarium .autocomplete-name {
+    font-weight: bold;
+    font-family: monospace;
+    font-size: 11px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.CodeMirror-hints.stellarium .autocomplete-category {
+    font-size: 9px;
+    padding: 2px 8px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 12px;
+    color: #8A8C8E;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.CodeMirror-hints.stellarium .CodeMirror-hint-active .autocomplete-category {
+    background: rgba(0, 0, 0, 0.2);
+    color: #699aca;
+}
+
+.CodeMirror-hints.stellarium .autocomplete-variable {
+    color: #A6E22E !important;
+    font-style: italic;
+}
+
+.CodeMirror-hints.stellarium .autocomplete-literal {
+    color: #cebdee !important;
+    font-weight: bold;
+}
+
+.cm-s-stellarium span.cm-variable-3 { color: #cce5ff; }
+
+/* Properties: obj.method */
+.cm-s-stellarium .cm-property {
+    color: #F8F8F2;
+}
+
+/* Atoms: true, false, null, undefined */
+.cm-s-stellarium .cm-atom {
+    color: #AE81FF;
+    font-weight: bold;
+}
