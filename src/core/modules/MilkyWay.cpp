@@ -20,10 +20,12 @@
  */
 
 #include "MilkyWay.hpp"
+#include "StelSRGB.hpp"
 #include "StelFader.hpp"
 #include "StelTexture.hpp"
 #include "StelUtils.hpp"
 #include "StelFileMgr.hpp"
+#include "StelMainView.hpp"
 
 #include "StelProjector.hpp"
 #include "StelToneReproducer.hpp"
@@ -354,13 +356,27 @@ void main(void)
 	const auto atmoModel = lMgr->getAtmosphereModel();
 	const bool smsLikeAtmosphere = atmoModel.compare(L1S("showmysky"), Qt::CaseInsensitive) == 0 ||
 	                               atmoModel.compare(L1S("lightweight"), Qt::CaseInsensitive) == 0;
-	if (smsLikeAtmosphere)
+	if (StelMainView::getInstance().getGLInformation().isHighGraphicsMode)
 	{
-		atmFactor=qMax(0.35f, 50.0f*(0.02f-0.2f*atmLum)); // The factor 0.2f was found empirically. Nominally it should be 0.667, but 0.2 or at least 0.4 looks better.
+		if (smsLikeAtmosphere)
+		{
+			atmFactor=qMax(0.45f, 55.0f*(0.02f-0.2f*atmLum)); // The factor 0.2f was found empirically. Nominally it should be 0.667, but 0.2 or at least 0.4 looks better.
+		}
+		else
+		{
+			atmFactor=qMax(0.45f, 55.0f*(0.02f-atmLum)); // keep visible in twilight, but this is enough for some effect with the moon.
+		}
 	}
 	else
 	{
-		atmFactor=qMax(0.35f, 50.0f*(0.02f-atmLum)); // keep visible in twilight, but this is enough for some effect with the moon.
+		if (smsLikeAtmosphere)
+		{
+			atmFactor=qMax(0.35f, 50.0f*(0.02f-0.2f*atmLum)); // The factor 0.2f was found empirically. Nominally it should be 0.667, but 0.2 or at least 0.4 looks better.
+		}
+		else
+		{
+			atmFactor=qMax(0.35f, 50.0f*(0.02f-atmLum)); // keep visible in twilight, but this is enough for some effect with the moon.
+		}
 	}
 	//omgr->addToExtraInfoString(StelObject::DebugAid, QString("AtmFactor: %1<br/>").arg(QString::number(atmFactor, 'f', 4)));
 	c*=atmFactor*atmFactor;
@@ -379,7 +395,7 @@ void main(void)
 	renderProgram->setUniformValue(shaderVars.mainTex, mainTexSampler);
 
 	renderProgram->setUniformValue(shaderVars.projectionMatrixInverse, projector->getProjectionMatrix().toQMatrix().inverted());
-	renderProgram->setUniformValue(shaderVars.brightness, c.toQVector());
+	renderProgram->setUniformValue(shaderVars.brightness, colorToShader(c));
 	renderProgram->setUniformValue(shaderVars.saturation, GLfloat(saturation));
 
 	core->setAberrationUniforms(*renderProgram);
