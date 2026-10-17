@@ -39,6 +39,7 @@
 #include <QRegularExpression>
 #include <QDebug>
 #include <QSettings>
+#include <cmath>
 
 int StelObject::stelObjectPMetaTypeID = qRegisterMetaType<StelObjectP>();
 
@@ -380,6 +381,10 @@ QString StelObject::getMagnitudeNarration(const StelCore *core, const InfoString
 QString StelObject::getB_VInfoString(float b_v)
 {
 	return QString("%1: <b>%2</b><br/>").arg(q_("Color Index (B-V)"), QString::number(b_v, 'f', 2));
+}
+QString StelObject::getB_VMissingInfoString()
+{
+	return QString("%1: <b>--</b><br/>").arg(q_("Color Index (B-V)"));
 }
 QString StelObject::getB_VNarration(float b_v)
 {
