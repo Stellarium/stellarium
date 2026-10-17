@@ -28,6 +28,8 @@
 #include "StelPropertyMgr.hpp"
 #include "SolarSystem.hpp"
 #include "Dithering.hpp"
+#include "HorizonsZones.hpp"	// (SS) 2026-10-09 TIME ZONES of the JPL Horizons precession-nutation path
+#include "HorizonsPrecNut.hpp"	// (SS) 2026-10-09 precession and nutation of the JPL Horizons path
 #include <QString>
 #include <QStringList>
 #include <QTime>
@@ -38,6 +40,9 @@ class StelSkyDrawer;
 class StelGeodesicGrid;
 class StelMovementMgr;
 class StelObserver;
+class BSPManager;	// (SS) 2026-10-03 JPL SPK kernel (*.bsp) manager
+class EOPManager;	// (SS) 2026-10-05 Earth Orientation Parameters (EOP) file manager
+class EOPUpdater;	// (SS) 2026-10-07 downloads the EOP files of the IERS
 
 //! @class StelCore
 //! Main class for Stellarium core processing.
@@ -54,10 +59,27 @@ class StelCore : public QObject
 	Q_PROPERTY(bool flipHorz READ getFlipHorz WRITE setFlipHorz NOTIFY flipHorzChanged)
 	Q_PROPERTY(bool flipVert READ getFlipVert WRITE setFlipVert NOTIFY flipVertChanged)
 	Q_PROPERTY(bool flagUseNutation READ getUseNutation WRITE setUseNutation NOTIFY flagUseNutationChanged)
+	// (SS) 2026-10-07 Apply the Earth Orientation Parameters (EOP) to the transformation matrices. When off, all EOP values are 0.
+	Q_PROPERTY(bool flagUseEOP READ getUseEOP WRITE setUseEOP NOTIFY flagUseEOPChanged)
+	// (SS) 2026-10-09 Master switch of the precession-nutation path: off (default) = Vondrak (2011/2012) precession and IAU 2000B nutation,
+	// on = precession and nutation models of JPL Horizons, selected by TIME ZONE (see HorizonsZones). Independent of the Delta-T algorithm and of the ephemerides.
+	Q_PROPERTY(bool flagUseHorizonsPrecNut READ getUseHorizonsPrecNut WRITE setUseHorizonsPrecNut NOTIFY flagUseHorizonsPrecNutChanged)
+	// (SS) 2026-10-03 File name (in the user's ephemBSP folder) of the SPK kernel providing TT-TDB, e.g. "de431t.bsp"
+	Q_PROPERTY(QString ttMinusTdbKernel READ getTTminusTDBKernel WRITE setTTminusTDBKernel NOTIFY ttMinusTdbKernelChanged)
 	Q_PROPERTY(bool flagUseAberration READ getUseAberration WRITE setUseAberration NOTIFY flagUseAberrationChanged)
 	Q_PROPERTY(double aberrationFactor READ getAberrationFactor WRITE setAberrationFactor NOTIFY aberrationFactorChanged)
 	Q_PROPERTY(bool flagUseParallax READ getUseParallax WRITE setUseParallax NOTIFY flagUseParallaxChanged)
 	Q_PROPERTY(double parallaxFactor READ getParallaxFactor WRITE setParallaxFactor NOTIFY parallaxFactorChanged)
+	
+	// (SS) 2026-09-13 Gravitational light deflection by the Sun (major planets and Pluto). Mirrors
+	// the flagUseAberration/aberrationFactor pattern above.
+	Q_PROPERTY(bool flagUseDeflection READ getUseDeflection WRITE setUseDeflection NOTIFY flagUseDeflectionChanged)
+	Q_PROPERTY(double deflectionFactor READ getDeflectionFactor WRITE setDeflectionFactor NOTIFY deflectionFactorChanged)
+	
+	// (SS) 2026-09-15 Moon's visible-disk-center vs. center-of-mass offset (USNO/HMNAO standard
+	// correction). No exaggeration factor - see rationale in ConfigurationDialog patch notes.
+	Q_PROPERTY(bool flagUseLunarFigureCorrection READ getUseLunarFigureCorrection WRITE setUseLunarFigureCorrection NOTIFY flagUseLunarFigureCorrectionChanged)
+	
 	Q_PROPERTY(bool flagUseTopocentricCoordinates READ getUseTopocentricCoordinates WRITE setUseTopocentricCoordinates NOTIFY flagUseTopocentricCoordinatesChanged)
 	Q_PROPERTY(ProjectionType currentProjectionType READ getCurrentProjectionType WRITE setCurrentProjectionType NOTIFY currentProjectionTypeChanged)
 	//! This is just another way to access the projection type, by string instead of enum
@@ -368,6 +390,122 @@ public:
 	//! @return valid range as explanatory string.
 	QString getCurrentDeltaTAlgorithmValidRangeDescription(const double JD, QString* marker) const;
 
+	//! (SS) 2026-10-03 Manager of the JPL SPK kernels (*.bsp) found in the "ephemBSP" folder of the user data directory.
+	//! Never null once init() has run.
+	BSPManager* getBSPManager() const { return bspMgr; }
+	//! (SS) 2026-10-03 TT-TDB in seconds at the given JD(TDB), read from the SPK kernel selected with setTTminusTDBKernel().
+	//! @return false if that kernel is missing, has no TT-TDB data or does not cover the date.
+	bool getTTminusTDB(double jdTDB, double& seconds) const;
+
+	//! (SS) 2026-10-05 Manager of the Earth Orientation Parameters (EOP) files found in the "eop" folder of the user data directory.
+	//! Never null once init() has run.
+	EOPManager* getEOPManager() const { return eopMgr; }
+	//! (SS) 2026-10-05 IAU 1980 nutation corrections from the EOP files at JD(UTC), in arcsec: to be added to dPsi and dEps of the nutation model.
+	//! The last known values are kept after the end of the predictions.
+	//! @return false if no EOP data is loaded or the date is before the first record
+	bool getEOPNutationCorrections(double jdUTC, double& dpsiArcsec, double& depsArcsec) const;
+	//! (SS) 2026-10-05 Names of the EOP files that are merged (explicit selection or default one)
+	QStringList getEOPFiles() const;
+	//! (SS) 2026-10-05 Select the EOP files to merge (names inside the eop folder) and reload them. An empty list selects the default files.
+	void setEOPFiles(const QStringList& fileNames);
+	//! (SS) 2026-10-07 EOP values to apply at a date. All members are 0 when a value is not available.
+	struct EOPValues
+	{
+		double xp = 0., yp = 0.;       //!< pole coordinates [arcsec]
+		double ut1utc = 0.;            //!< UT1 - UTC [s]
+		double lod = 0.;               //!< length of day excess [s]
+		double dpsi = 0., deps = 0.;   //!< celestial pole offsets w.r.t. the IAU 1980 nutation [arcsec]
+		double dx = 0., dy = 0.;       //!< celestial pole offsets w.r.t. IAU 2006/2000A [arcsec]
+	};
+	//! (SS) 2026-10-07 EOP values at JD(UTC), linearly interpolated between the daily records. After the last value of a
+	//! parameter, its last valid value is kept. All values are 0 when the EOP corrections are switched off (flagUseEOP).
+	//! @return false if EOP are on and no data is available for that date (the values are then 0)
+	bool getEOPValues(double jdUTC, EOPValues& values) const;
+	//! (SS) 2026-10-07 @return whether the EOP corrections are applied
+	bool getUseEOP() const;
+	//! (SS) 2026-10-07 Set whether the EOP corrections are applied (off: all EOP values are 0).
+	void setUseEOP(bool use);
+	//! (SS) 2026-10-07 Nutation model that decides which EOP files are merged last: "IAU1980" (default, as JPL Horizons)
+	//! or "IAU2000A". Their pole, UT1-UTC and LOD values then win.
+	QString getEOPModel() const;
+	void setEOPModel(const QString& key);
+	//! (SS) 2026-10-07 Scan the eop folder again, merge the selected files and update the log
+	void rescanEOPFiles();
+	//! (SS) 2026-10-10 Whether the EOP files are downloaded a few seconds after start-up. Default false: they are only
+	//! downloaded by the Update button of the EOP dialog.
+	bool getEOPAutoUpdate() const;
+	void setEOPAutoUpdate(bool on);
+	//! (SS) 2026-10-07 Download the EOP files of the IERS (finals.all, finals2000A.all, EOP 14 C04, EOP 20 C04 u24) into the eop folder,
+	//! add the download date to their names, then scan the folder again and merge the selected files.
+	//! Unless @p force is true, only the series whose newest local file is older than its refresh delay are downloaded.
+	//! Called a few seconds after start-up when the configuration key astro/eop_auto_update is true (default).
+	//! The result is given by eopUpdateFinished().
+	void updateEOPFiles(bool force = false);
+	bool isUpdatingEOP() const;
+
+	//! (SS) 2026-10-03 Where getDeltaTByJPLHorizons() gets TT-TDB from at a given date
+	enum TTminusTDBSource
+	{
+		TTminusTDBFromKernel, //!< SPK kernel (*.bsp) selected with setTTminusTDBKernel()
+		TTminusTDBFromDE440T, //!< DE440T Linux file (valid 1550..2650), used when no kernel applies
+		TTminusTDBNone        //!< nothing available: TT-TDB is taken as zero
+	};
+	//! (SS) 2026-10-03 Same order of preference as StelUtils::getDeltaTByJPLHorizons(): kernel, then DE440T file, then zero.
+	//! @param jdTDB date
+	//! @param seconds receives TT-TDB in seconds (0 for TTminusTDBNone)
+	//! @return the source that supplied the value
+	TTminusTDBSource getTTminusTDBSource(double jdTDB, double& seconds) const;
+
+	//! (SS) 2026-10-09 Current date in Julian Day (TT).
+	//! With the JPL Horizons Delta-T algorithm, getJDE() is JD(TDB) and JD(TT) = JDE + (TT-TDB)/86400, with TT-TDB read from the
+	//! source given by getTTminusTDBSource(). With any other algorithm getJDE() already is JD(TT) and is returned as is.
+	double getJDTT() const;
+	//! (SS) 2026-10-09 Same date as getJDTT() in two parts for ERFA: jd1 + jd2 = JD(TT), with jd1 = 2451545.0 (J2000) and
+	//! jd2 the days since J2000, which keeps the sub-microsecond resolution of the double that a single JD(TT) cannot give.
+	void getJDTTParts(double& jd1, double& jd2) const;
+	//! (SS) 2026-10-09 Current date in Julian Day (UT1). With the JPL Horizons Delta-T algorithm, getJD() is UT1 before 1962-01-19 12h
+	//! and UTC after: JD(UT1) = JD(UTC) + (UT1-UTC)/86400, with UT1-UTC from the EOP (0 when the EOP are off or not available).
+	//! With any other algorithm getJD() already is JD(UT1) and is returned as is.
+	double getJDUT1() const;
+	//! (SS) 2026-10-09 JD of 0h UTC of today, from the clock of the computer (not the simulated date). Used to place the limit of zone 3.
+	double getJDUTCNow() const;
+	//! (SS) 2026-10-09 JD(UTC) at which TIME ZONE 3 ends and TIME ZONE 4 (last EOP kept constant) starts. Either 0h UTC of today +
+	//! getHorizonsZone4Days() (default) or, when setHorizonsZone4FromEOP(true) and EOP data with nutation corrections is loaded,
+	//! the last date of those corrections (after it the EOP are held constant, as in zone 4).
+	double getHorizonsZone4Start() const;
+	//! (SS) 2026-10-09 TIME ZONE of the current date (see HorizonsZones), using getJD(), getJDTT() and getHorizonsZone4Start()
+	HorizonsZones::Zone getHorizonsZone() const;
+	//! (SS) 2026-10-09 Days after 0h UTC of today at which zone 4 starts. Default 86 (the Horizons manual says about 78). Saved in astro/horizons_zone4_days.
+	int getHorizonsZone4Days() const { return horizonsZone4Days; }
+	void setHorizonsZone4Days(int days);
+	//! (SS) 2026-10-09 Take the start of zone 4 from the end of the EOP nutation corrections instead of a fixed number of days.
+	//! Saved in astro/horizons_zone4_from_eop (default false).
+	bool getHorizonsZone4FromEOP() const { return horizonsZone4FromEOP; }
+	void setHorizonsZone4FromEOP(bool b);
+	//! (SS) 2026-10-09 True when the matrices from J2000 to the equator and equinox of date come from the JPL Horizons models
+	//! (master switch on, observer on Earth, date inside the range of Horizons) instead of Vondrak (2011/2012) and IAU 2000B.
+	//! Updated by updateTransformMatrices() at each frame.
+	bool getHorizonsPrecNutActive() const { return horizonsPNActive; }
+	//! (SS) 2026-10-09 True obliquity of date [rad] of the JPL Horizons path (mean obliquity of the TIME ZONE + dEps incl. EOP),
+	//! to be used for the apparent ecliptic of date. Only valid when getHorizonsPrecNutActive().
+	double getHorizonsEpsTrue() const { return horizonsPN.epsTrue; }
+	//! (SS) 2026-10-09 Mean obliquity of date [rad] of the JPL Horizons path. Only valid when getHorizonsPrecNutActive().
+	double getHorizonsEpsMean() const { return horizonsPN.epsMean; }
+	//! (SS) 2026-10-09 TIME ZONE of the date as computed with the last update of the matrices (None when not active).
+	HorizonsZones::Zone getHorizonsActiveZone() const { return horizonsPNActive ? horizonsPN.zone : HorizonsZones::Zone::None; }
+	//! (SS) 2026-10-09 The offset in dPsi that matches JPL Horizons is not the same for the Moon in zones 4 and 5. True when the
+	//! equatorial position of the Moon needs horizonsMoonCorrection() on top of the global matrix.
+	bool getHorizonsMoonCorrectionActive() const { return horizonsMoonCorrActive; }
+	//! (SS) 2026-10-09 Tiny rotation (about 1 mas) that turns a vector of the equinox equatorial frame computed with the global matrix
+	//! into the one computed with the dPsi offset of the Moon.
+	Vec3d horizonsMoonCorrection(const Vec3d& v) const { return matHorizonsMoonCorr * v; }
+	//! (SS) 2026-10-09 @return whether the precession-nutation models of JPL Horizons are used (master switch, default false)
+	bool getUseHorizonsPrecNut() const;
+	//! (SS) 2026-10-09 Choose the precession-nutation path: false = Vondrak (2011/2012) and IAU 2000B (as before), true = JPL Horizons models by TIME ZONE.
+	//! Nutation can be switched off in both paths with setUseNutation().
+	void setUseHorizonsPrecNut(bool use);
+
+
 	//! Checks for altitude of the Sun - is it night or day?
 	//! @return true if sun higher than about -6 degrees, i.e. "day" includes civil twilight.
 	//! @note Useful mostly for brightness-controlled GUI decisions like font colors.
@@ -555,6 +693,11 @@ public slots:
 	//! Set whether you want computation and simulation of nutation (a slight wobble of Earth's axis, just a few arcseconds).
 	void setUseNutation(bool use);
 
+	//! (SS) 2026-10-03 @return file name of the SPK kernel (in ephemBSP) used for TT-TDB.
+	QString getTTminusTDBKernel() const;
+	//! (SS) 2026-10-03 Select the SPK kernel (file name in ephemBSP) used for TT-TDB. Default: de431t.bsp.
+	void setTTminusTDBKernel(const QString& fileName);
+
 	//! @return whether aberration is currently used.
 	bool getUseAberration() const;
 	//! Set whether you want computation and simulation of aberration (a slight wobble of stellar positions due to finite speed of light, about 20 arcseconds when observing from earth).
@@ -577,6 +720,25 @@ public slots:
 	double getParallaxFactor() const;
 	//! Set aberration factor. Values are clamped to 0...5. (Values above 5 cause graphical problems.)
 	void setParallaxFactor(double factor);
+
+	//! (SS) 2026-09-13 @return whether gravitational light deflection by the Sun is currently used for major planets and Pluto.
+	bool getUseDeflection() const;
+	//! Set whether you want computation and simulation of gravitational light deflection by the Sun
+	//! (a bending of light near the Sun, up to ~1.75 arcsec at the solar limb, falling off with elongation).
+	void setUseDeflection(bool use);
+	//! @return deflection factor. 1 is realistic simulation, but higher values may be useful for didactic purposes.
+	double getDeflectionFactor() const;
+	//! Set deflection factor. Values are clamped to 0...5. (Values above 5 cause graphical problems.)
+	void setDeflectionFactor(double factor);
+
+	//! (SS) 2026-09-15 @return whether the Moon's center-of-figure correction is applied on top of
+	//! Planet::getJ2000EquatorialPos() by Planet::getApparentLimbCenterPos().
+	bool getUseLunarFigureCorrection() const;
+	//! Set whether Planet::getApparentLimbCenterPos() offsets the Moon's center-of-mass position by the
+	//! standard USNO/HMNAO correction (+0.5" ecliptic longitude, -0.25" ecliptic latitude) to
+	//! approximate the visible-disk center instead. Useful for eclipse/occultation work; should be off
+	//! when comparing against JPL Horizons or other center-of-mass ephemerides.
+	void setUseLunarFigureCorrection(bool use);
 
 	//! @return whether topocentric coordinates are currently used.
 	bool getUseTopocentricCoordinates() const;
@@ -911,6 +1073,20 @@ signals:
 	void flipVertChanged(bool b);
 	//! This signal indicates a switch in use of nutation
 	void flagUseNutationChanged(bool b);
+	//! (SS) 2026-10-07 This signal indicates a switch in the use of the EOP corrections
+	void flagUseEOPChanged(bool b);
+	//! (SS) 2026-10-09 This signal indicates a change of the precession-nutation path (JPL Horizons models or Vondrak 2011/2012 and IAU 2000B)
+	void flagUseHorizonsPrecNutChanged(bool b);
+	//! (SS) 2026-10-07 This signal indicates that another Nutation model ("IAU1980" or "IAU2000A") was selected for the EOP
+	void eopModelChanged(const QString& key);
+	//! (SS) 2026-10-03 This signal indicates that another SPK kernel was selected for TT-TDB
+	void ttMinusTdbKernelChanged(const QString& fileName);
+	//! (SS) 2026-10-05 This signal indicates that the set of merged EOP files changed or was reloaded
+	void eopFilesChanged(const QStringList& fileNames);
+	//! (SS) 2026-10-07 Download progress of the file being downloaded by updateEOPFiles()
+	void eopUpdateProgress(qint64 received, qint64 total);
+	//! (SS) 2026-10-07 updateEOPFiles() is done. @param ok no download failed. @param written files written in the eop folder
+	void eopUpdateFinished(bool ok, const QStringList& written, const QString& message);
 	//! This signal indicates a switch in use of aberration
 	void flagUseAberrationChanged(bool b);
 	//! This signal indicates a change in aberration exaggeration factor
@@ -919,7 +1095,15 @@ signals:
 	void flagUseParallaxChanged(bool b);
 	//! This signal indicates a change in parallax exaggeration factor
 	void parallaxFactorChanged(double val);
+	
+	//! (SS) 2026-09-13 This signal indicates a switch in use of gravitational light deflection
+	void flagUseDeflectionChanged(bool b);
+	//! (SS) 2026-09-13 This signal indicates a change in deflection exaggeration factor
+	void deflectionFactorChanged(double val);
+	//! (SS) 2026-09-15 This signal indicates a switch in use of the Moon's figure-center correction
+	void flagUseLunarFigureCorrectionChanged(bool b);
 	//! This signal indicates a switch in use of topocentric coordinates
+	
 	void flagUseTopocentricCoordinatesChanged(bool b);
 	//! Emitted whenever the projection type changes
 	void currentProjectionTypeChanged(StelCore::ProjectionType newType);
@@ -961,6 +1145,17 @@ private:
 	// The currentrly used time correction (DeltaT)
 	DeltaTAlgorithm currentDeltaTAlgorithm;
 
+	// (SS) 2026-10-03 JPL SPK kernel (*.bsp) manager, created in init()
+	BSPManager* bspMgr = Q_NULLPTR;
+
+	// (SS) 2026-10-05 Earth Orientation Parameters (EOP) file manager, created in init()
+	EOPManager* eopMgr = Q_NULLPTR;
+	// (SS) 2026-10-07 downloads the EOP files, created by the first call of updateEOPFiles()
+	EOPUpdater* eopUpdater = Q_NULLPTR;
+	bool eopAutoUpdate = false;	// (SS) 2026-10-10
+	// (SS) 2026-10-07 writes the report of the last merge of the EOP files in the log, one line at a time
+	void logEOPReport() const;
+
 	// Parameters to use when creating new instances of StelProjector
 	StelProjector::StelProjectorParams currentProjectorParams;
 
@@ -998,6 +1193,25 @@ private:
 
 	// flag to indicate we want to use nutation (the small-scale wobble of earth's axis)
 	bool flagUseNutation;
+	// (SS) 2026-10-07 flag to indicate we want to apply the Earth Orientation Parameters (EOP)
+	bool flagUseEOP;
+	// (SS) 2026-10-09 master switch: precession-nutation models of JPL Horizons (true) or Vondrak (2011/2012) with IAU 2000B (false)
+	bool flagUseHorizonsPrecNut;
+	// (SS) 2026-10-09 result of the JPL Horizons precession-nutation of the current date, see updateHorizonsPrecNut()
+	void updateHorizonsPrecNut();
+	// (SS) 2026-10-15 helpers of updateHorizonsPrecNut(), split off to reduce its complexity (CodeFactor)
+	void setHorizonsEOPNutation(HorizonsPrecNut::Params& p, HorizonsZones::Zone zone) const;
+	bool computeHorizonsMoonCorr(HorizonsPrecNut::Params p, HorizonsZones::Zone zone);
+	HorizonsPrecNut::Result horizonsPN;
+	bool horizonsPNActive = false;
+	bool horizonsMoonCorrActive = false;
+	bool horizonsMoonCorrValid = false;	//!< matHorizonsMoonCorr is the one of the current date
+	bool horizonsPNDirty = true;		//!< the settings changed: compute again even if the date did not change
+	QPair<double, double> horizonsPNJD = QPair<double, double>(0., 0.);	//!< JD of the last computation
+	Mat4d matHorizonsMoonCorr;
+	// (SS) 2026-10-09 start of TIME ZONE 4 (see getHorizonsZone4Start()): days after today, or end of the EOP nutation corrections
+	int horizonsZone4Days;
+	bool horizonsZone4FromEOP;
 	// flag to indicate we want to use aberration (a small-scale wobble of stellar positions (~20 arceconds on earth) due to finite speed of light and observer in motion on a planet.)
 	bool flagUseAberration;
 	// value to allow exaggerating aberration effects. 1 is natural value, stretching to e.g. 1000 may be useful for explanations.
@@ -1006,6 +1220,16 @@ private:
 	bool flagUseParallax;
 	// value to allow exaggerating parallax effects. 1 is natural value, stretching to e.g. 1000 may be useful for explanations.
 	double parallaxFactor;
+	
+	// (SS) 2026-09-13 flag to indicate we want to include gravitational light deflection by the Sun
+	// (major planets and Pluto).
+	bool flagUseDeflection;
+	// (SS) 2026-09-13 value to allow exaggerating deflection effects. 1 is natural value, stretching may be useful for explanations.
+	double deflectionFactor;
+	// (SS) 2026-09-15 flag to indicate whether Planet::getApparentLimbCenterPos() applies the Moon's
+	// center-of-figure vs. center-of-mass correction. No exaggeration factor - see .hpp comment.
+	bool flagUseLunarFigureCorrection;
+
 	// flag to indicate that we show topocentrically corrected coordinates. (Switching to false for planetocentric coordinates is new for 0.14)
 	bool flagUseTopocentricCoordinates;
 
