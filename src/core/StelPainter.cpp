@@ -41,6 +41,9 @@
 #include <QOpenGLShader>
 #include <QOpenGLTexture>
 #include <QApplication>
+#include <QTextBoundaryFinder>
+#include <QStringView>
+#include <QVector>
 
 namespace
 {
@@ -615,6 +618,18 @@ void StelPainter::sSphereMap(double radius, unsigned int slices, unsigned int st
 // @param yshift shift in pixel in the rotated y direction.
 void StelPainter::drawTextGravity180(const float x, const float y, const QString& str, const float xshift, const float yshift)
 {
+	// lambda function to convert string into grapheme clusters made of multiple Unicode points which may be perceived as "character"
+	auto getCluster = [](const QString &str)
+	{
+		QVector<QStringView> stringCluster;
+		QTextBoundaryFinder finder(QTextBoundaryFinder::Grapheme, str);
+		int start = 0;
+		for(int end = finder.toNextBoundary(); end != -1; end = finder.toNextBoundary()){
+			stringCluster << QStringView(str).mid(start, end - start);
+			start = end;
+		}
+		return stringCluster;
+	};
 	const float dx = x - static_cast<float>(prj->viewportCenter[0]);
 	const float dy = y - static_cast<float>(prj->viewportCenter[1]);
 	float d = std::sqrt(dx*dx + dy*dy);
@@ -660,17 +675,19 @@ void StelPainter::drawTextGravity180(const float x, const float y, const QString
 	{
 		// rtl tracks the right-to-left status of the text in the current position.
 		const bool rtl = StelApp::getInstance().getLocaleMgr().isSkyRTL();
-		const int slen = label32.length();
+		const QVector<QStringView> cluster=getCluster(str);
+		const int slen = cluster.size();
 		const int startI = rtl ? slen - 1 : 0;
 		const int endI = rtl ? -1 : slen;
 		const int inc = rtl ? -1 : 1;
 		for (int i = startI; i != endI; i += inc)
 		{
-			const QString c = QString::fromUcs4(&label32[i], 1);
+			const QStringView c = cluster[i];
+			const QString cStr = c.toString();
 			const float x = d * std::cos(theta) + xVc;
 			const float y = d * std::sin(theta) + yVc;
-			drawText(x, y, c, 90.f + theta*M_180_PIf, 0., 0.);
-			theta += fm.horizontalAdvance(c) * anglePerUnitWidth;
+			drawText(x, y, cStr, 90.f + theta*M_180_PIf, 0., 0.);
+			theta += fm.horizontalAdvance(cStr) * anglePerUnitWidth;
 		}
 	}
 	else
@@ -694,27 +711,27 @@ void StelPainter::drawTextGravity180(const float x, const float y, const QString
 					if (ch!=LRM32)
 						cleanedIsolated.append(1, ch);
 				}
-
 				// For now, we just use QString::isRightToLeft() on the back-converted inner string.
 				// TODO: If that is not enough, we will have to manually analyze the string until the first strong character tells us its direction.
 				const QString isolatedString=QString::fromUcs4(cleanedIsolated.data(), cleanedIsolated.length());
 				const bool isoRtl=isolatedString.isRightToLeft();
-				const int isoLength=cleanedIsolated.length();
-
+				const QVector<QStringView> isoCluster = getCluster(isolatedString);
+				const int clusLength=isoCluster.size();
 				//qDebug() << "From" << posBegin << "to" << posEnd << ", length" << isoLength;
 				//qDebug() << ( subrtl ?  "RTL: " : "NOT RTL: " ) << isolatedString;
 
-				const int startI = isoRtl ? isoLength - 1 : 0;
-				const int endI = isoRtl ? -1 : isoLength;
+				const int startI = isoRtl ? clusLength - 1 : 0;
+				const int endI = isoRtl ? -1 : clusLength;
 				const int inc = isoRtl ? -1 : 1;
 				for (int i = startI; i != endI; i += inc)
 				{
-					const QString c = QString::fromUcs4(&cleanedIsolated[i], 1);
+					const QStringView c = isoCluster[i];
+					const QString cStr = c.toString();
 					//qDebug() << "inner char at pos " << i << ":" << c;
 					const float x = d * std::cos(theta) + xVc;
 					const float y = d * std::sin(theta) + yVc;
-					drawText(x, y, c, 90.f + theta*M_180_PIf, 0., 0.);
-					theta += fm.horizontalAdvance(c) * anglePerUnitWidth;
+					drawText(x, y, cStr, 90.f + theta*M_180_PIf, 0., 0.);
+					theta += fm.horizontalAdvance(cStr) * anglePerUnitWidth;
 				}
 				i+=isolatedLength+1;
 			}
