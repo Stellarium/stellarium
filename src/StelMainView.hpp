@@ -288,6 +288,7 @@ signals:
 private slots:
 	// Do the actual screenshot generation in the main thread with this method.
 	void doScreenshot(void);
+
 	void fpsTimerUpdate();
 	void hideCursor();
 
