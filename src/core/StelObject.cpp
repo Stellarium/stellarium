@@ -1698,7 +1698,7 @@ void StelObject::postProcessInfoString(QString& str, const InfoStringGroup& flag
 		static const QRegularExpression tableRe2("<table\\s*>");
 		static const QRegularExpression tableRe3("<table style='[^']*'>");
 		static const QRegularExpression tableRe5("<table class='[^']*'>");
-		static const QRegularExpression spanRe("<span\\s*>(.*)</span>");
+		static const QRegularExpression spanRe("<span\\s*.*?>(.*?)</span>");
 		str.replace("<b>", "");
 		str.replace("</b>", "");
 		str.replace(h2Re, "");
@@ -1714,7 +1714,7 @@ void StelObject::postProcessInfoString(QString& str, const InfoStringGroup& flag
 		str.replace(tableRe3, "");
 		str.replace(tableRe5, "");
 		str.replace("</table>", "");
-		str.replace(spanRe, "\1");
+		str.replace(spanRe, "\\1");
 	}
 }
 
