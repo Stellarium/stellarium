@@ -576,16 +576,8 @@ IF(ENABLE_XLSX)
 ENDIF()
 
 
-
-# exiv2 needs zlib and expat, insists on vars ZLIB_LIBRARY ZLIB_INCLUDE_DIR
-#FIND_PACKAGE(EXPAT 2.8.5 MODULE REQUIRED)
-
-#set(ZLIB_LIBRARY ${ZLIB_LIBRARIES})
-#set(ZLIB_INCLUDE_DIR ${CMAKE_SOURCE_DIR}/src/external/zlib)
-
-
 # ------------------------------------------------------------------
-# 1. ZLIB Target Bridge for Exiv2 (Global Directory Property Fix)
+# ZLIB Target Bridge for Exiv2 (Global Directory Property Fix)
 # ------------------------------------------------------------------
 set(ZLIB_INC_DIR "${CMAKE_SOURCE_DIR}/src/external/zlib")
 
@@ -599,7 +591,7 @@ if(TARGET zlib_stel)
         )
     endif()
 
-    # 🚀 THE CRITICAL FIX FOR INTERNAL OBJECT TARGETS (exiv2lib_int):
+    # THE CRITICAL FIX FOR INTERNAL OBJECT TARGETS (exiv2lib_int):
     # Instead of relying on Exiv2 to pass the include paths to its sub-targets,
     # we append Stellarium's bundled zlib path to the directory-level properties.
     # Because CPM adds packages down-tree, all downstream subdirectories inherit this.
@@ -626,8 +618,8 @@ if(TARGET zlib_stel)
     unset(ZLIB_FOUND CACHE)
 endif()
 
-
-# 🚀 1. Fetch the Expat source code cleanly to disk via CPM
+# EXPAT: XML parsing for XMP tags for exiv2
+# 1. Fetch the Expat source code via CPM
 CPMFindPackage(
     NAME EXPAT
     GITHUB_REPOSITORY libexpat/libexpat
@@ -635,18 +627,18 @@ CPMFindPackage(
     DOWNLOAD_ONLY ON
 )
 
-# 🚀 2. Define the absolute paths to the download and build directories
+# 2. Define the absolute paths to the download and build directories
 set(REAL_EXPAT_SRC "${CMAKE_BINARY_DIR}/_deps/expat-src")
 set(REAL_EXPAT_BLD "${CMAKE_BINARY_DIR}/_deps/expat-build")
 set(COMPILATION_SRC_DIR "${REAL_EXPAT_SRC}/expat")
 set(CORRECT_INC_DIR "${COMPILATION_SRC_DIR}/lib")
 
-# 🚀 3. Materialize the directory on disk immediately for Ninja's validation path checks
+# 3. Materialize the directory on disk immediately for Ninja's validation path checks
 if(NOT EXISTS "${CORRECT_INC_DIR}")
     file(MAKE_DIRECTORY "${CORRECT_INC_DIR}")
 endif()
 
-# 🚀 4. Build the static library manually from the TRUE source code directory
+# 4. Build the static library manually from the TRUE source code directory
 if(EXISTS "${COMPILATION_SRC_DIR}/CMakeLists.txt")
     set(EXPAT_BUILD_TOOLS OFF CACHE BOOL "" FORCE)
     set(EXPAT_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
@@ -658,18 +650,18 @@ if(EXISTS "${COMPILATION_SRC_DIR}/CMakeLists.txt")
     endif()
 endif()
 
-# 🚀 5. Provide the static library folder path straight to the link directory register
+# 5. Provide the static library folder path straight to the link directory register
 link_directories("${REAL_EXPAT_BLD}")
 
-# 🚀 6. Create a Global Interface Target instead of an ALIAS
+# 6. Create a Global Interface Target instead of an ALIAS
 if(NOT TARGET EXPAT::EXPAT)
     add_library(EXPAT::EXPAT INTERFACE IMPORTED GLOBAL)
-    # 🟢 Link the interface block directly to the real compiled file target name
+    # Link the interface block directly to the real compiled file target name
     target_link_libraries(EXPAT::EXPAT INTERFACE expat)
     target_include_directories(EXPAT::EXPAT INTERFACE "${CORRECT_INC_DIR}" "${REAL_EXPAT_BLD}")
 endif()
 
-# 🚀 7. THE WINNING MATCH: Force the old-school string variable to find 'libexpatMD'
+# 7. Force the old-school string variable to find 'libexpatMD'
 # This ensures that stellarium.exe asks link.exe for libexpatMD.lib instead of a missing placeholder file!
 set(EXPAT_FOUND TRUE CACHE BOOL "Force true" FORCE)
 set(EXPAT_INCLUDE_DIR "${CORRECT_INC_DIR}" CACHE PATH "Path to Expat headers" FORCE)
@@ -677,46 +669,33 @@ set(EXPAT_INCLUDE_DIRS "${CORRECT_INC_DIR};${REAL_EXPAT_BLD}" CACHE PATH "Path t
 set(EXPAT_LIBRARY libexpatMD CACHE STRING "Expat target library link name" FORCE)
 set(EXPAT_LIBRARIES libexpatMD CACHE STRING "Expat target library link name" FORCE)
 
-message(STATUS "🚀 Link Target Fully Synchronized: EXPAT_LIBRARY=${EXPAT_LIBRARY}")
+message(STATUS "EXPAT_LIBRARY=${EXPAT_LIBRARY}")
 
 
-
-
-
-# Storing XMP-based lens data for non-perspective projections requires XMP support. Exiv2 0.28+ have internal support, still no need for expat!
-# Enable full XMP metadata support
-#set(EXIV2_ENABLE_XMP ON CACHE BOOL "" FORCE)
-
-# Force Exiv2 to use its native internal parser, eliminating the Expat dependency
-#set(EXIV2_ENABLE_EXTERNAL_XMP OFF CACHE BOOL "" FORCE)
-
-# 2. Manage Exiv2 via CPM to eliminate precompiled binary ABI mismatches
-# This fetches the latest stable modern 0.28 point release
+# EXIV2
+# Manage Exiv2 via CPM to eliminate precompiled binary ABI mismatches
+# This fetches the latest stable modern 0.28 point release (2026-10)
 CPMFindPackage(NAME exiv2
     GITHUB_REPOSITORY Exiv2/exiv2
     GIT_TAG v0.28.3
     FIND_PACKAGE_ARGUMENTS "NAMES exiv2 Exiv2"
     OPTIONS
         # Inject the properties cleanly down into the CPM scope
-        #"ZLIB_LIBRARY=${ZLIB_OUT_LIB}"
         "ZLIB_INCLUDE_DIR=${ZLIB_INC_DIR}"
         "ZLIB_INCLUDE_DIRS=${ZLIB_INC_DIR}"
-        "EXIV2_ENABLE_INSTALL OFF"      # 🚀 FIXES THE EXPORT ERROR: Disables Exiv2's installation scripts so it won't complain about zlib_stel
-        #"EXIV2_ENABLE_XMP OFF"          # 🟢 REMOVES EXPAT DEPENDENCY: Bypasses ExpatAdapter.cpp entirely (No XMP sidecar files...)
-        "EXIV2_ENABLE_XMP ON"          # 🟢 REMOVES EXPAT DEPENDENCY: Bypasses ExpatAdapter.cpp entirely (No XMP sidecar files...)
+        "EXIV2_ENABLE_INSTALL OFF"      # FIXES THE EXPORT ERROR: Disables Exiv2's installation scripts so it won't complain about zlib_stel
+        "EXIV2_ENABLE_XMP ON"           # For advanced Google (GPano) or Adobe tags
         "EXIV2_ENABLE_EXTERNAL_XMP OFF" # use internal parser, no expat
         "EXIV2_USE_EXPAT OFF"           # Explicitly disable
-        "EXIV2_ENABLE_INIH OFF"         # 🟢 BYPASS INIH: Removes the need for the library entirely
-        "EXIV2_ENABLE_BMFF OFF"         # 🟢 Turns off ISO Base Media File Format (HEIF/JXL tracking)
-        "EXIV2_ENABLE_BROTLI OFF"       # 🟢 Removes the Brotli requirement entirely
+        "EXIV2_ENABLE_INIH OFF"         # BYPASS INIH: Removes the need for the library entirely
+        "EXIV2_ENABLE_BMFF OFF"         # Turns off ISO Base Media File Format (HEIF/JXL tracking)
+        "EXIV2_ENABLE_BROTLI OFF"       # Removes the Brotli requirement entirely
         "EXIV2_BUILD_SAMPLES OFF"       # Speeds up your build time
         "EXIV2_BUILD_UNIT_TESTS OFF"    # Skips test overhead
-        "EXIV2_BUILD_EXIV2_COMMAND OFF" # 🟢 Disable building the exiv2.exe command line app
-        "EXIV2_ENABLE_VIDEO OFF"        # 🟢 Disable video metadata tracking
-        "EXIV2_ENABLE_LENSDATA OFF"     # 🟢 Disable the massive Nikon lens database lookup tables
+        "EXIV2_BUILD_EXIV2_COMMAND OFF" # Disable building the exiv2.exe command line app
+        "EXIV2_ENABLE_VIDEO OFF"        # Disable video metadata tracking
+        "EXIV2_ENABLE_LENSDATA OFF"     # Disable the massive Nikon lens database lookup tables
 )
-
-
 
 if(exiv2_FOUND OR TARGET Exiv2::exiv2lib)
      MESSAGE(STATUS "Found/Built Exiv2 ${exiv2_VERSION}")
