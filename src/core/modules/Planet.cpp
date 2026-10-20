@@ -320,7 +320,8 @@ Planet::Planet(const QString& englishName,
 		QString horizonMapFile = StelFileMgr::findFile("textures/"+horizonMapName, StelFileMgr::File);
 		if (!horizonMapFile.isEmpty())
 		{
-			horizonMap = texMan.createTextureThread(horizonMapFile, StelTexture::Params().enableMipmapGen().setWrapMode(GL_REPEAT), false);
+			const auto params = StelTexture::Params().enableMipmapGen().setWrapMode(GL_REPEAT).useLinearSRGB();
+			horizonMap = texMan.createTextureThread(horizonMapFile, params, false);
 			horizonMapFileOrig = horizonMapFile;
 		}
 	}
