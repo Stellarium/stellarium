@@ -240,7 +240,7 @@ void TelescopeClientJsonRts2::telescopeGoto(const Vec3d &j2000Pos, StelObjectP s
 		double ra, dec;
 		StelUtils::rectToSphe(&ra, &dec, j2000Pos);
 
-		query.addQueryItem("c", QString("move+%1+%2").arg(ra * 180 / M_PI).arg(dec * 180 / M_PI));
+		query.addQueryItem("c", QString("move+%1+%2").arg(ra * 180 / M_PI, 0, 'f', 7).arg(dec * 180 / M_PI, 0, 'f', 7));
 	}
 	set.setQuery(query);
 
