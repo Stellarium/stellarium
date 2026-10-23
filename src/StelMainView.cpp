@@ -2123,8 +2123,11 @@ void StelMainView::doScreenshot(void)
 
 				// 3. Define the full field of view dimensions in pixels
 				xmpData["Xmp.GPano.UsePanoramaViewer"]    = "True";
-				xmpData["Xmp.GPano.FullPanoWidthPixels"]  = std::to_string(im.width());
-				xmpData["Xmp.GPano.FullPanoHeightPixels"] = std::to_string(im.height());
+				xmpData["Xmp.GPano.FullPanoImageWidthPixels"]  = std::to_string(im.width());
+				xmpData["Xmp.GPano.FullPanoImageHeightPixels"] = std::to_string(im.height());
+				// Unfortunately, if not 2:1 sized, GPano viewers will still not show it. So this requires custom screenshot sizes.
+				if (im.width() != 2*im.height())
+					qInfo() << "EXIF Info: Image dimension skewed. This will not load as panorama in GPano aware viewers. Use custom size if needed.";
 				// TBD: We can offset viewport centre also here, but it may not be meaningful in XMP terms.
 				qDebug() << "EXIF: Done writing ProjectionCylinderFill data";
 				break;
@@ -2141,15 +2144,12 @@ void StelMainView::doScreenshot(void)
 
 				// 3. Define the full field of view dimensions in pixels
 				int hFull=im.height()*(180./fov);
-				xmpData["Xmp.GPano.FullPanoHeightPixels"] = QString::number(hFull).toStdString().c_str();
-				xmpData["Xmp.GPano.FullPanoWidthPixels"]  = QString::number(2*hFull).toStdString().c_str();
-
+				xmpData["Xmp.GPano.FullPanoImageHeightPixels"] = QString::number(hFull).toStdString().c_str();
+				xmpData["Xmp.GPano.FullPanoImageWidthPixels"]  = QString::number(2*hFull).toStdString().c_str();
 
 				// Replace 'centerOffsetOffsetX' and 'Y' with Stellarium's actual projection offset variables
 				double centerOffset_x =  core->getViewportHorizontalOffset()*im.width()/100.;
 				double centerOffset_y = -core->getViewportVerticalOffset()*im.height()/100.; // VERIFY DIRECTION
-
-
 
 				// 4. Define the portion of the view your crop actually occupies
 				// We actually are zooming into the center of a much larger pano.
@@ -2157,8 +2157,8 @@ void StelMainView::doScreenshot(void)
 				xmpData["Xmp.GPano.UsePanoramaViewer"]    = "True";
 				xmpData["Xmp.GPano.CroppedAreaImageWidthPixels"]  = std::to_string(im.width());
 				xmpData["Xmp.GPano.CroppedAreaImageHeightPixels"] = std::to_string(im.height());
-				xmpData["Xmp.GPano.CroppedAreaLeftPixels"]   = std::to_string((2*hFull-im.width())/2  + centerOffset_x);
-				xmpData["Xmp.GPano.CroppedAreaTopPixels"]    = std::to_string((  hFull-im.height())/2 + centerOffset_y);
+				xmpData["Xmp.GPano.CroppedAreaLeftPixels"]   = std::to_string(int((2*hFull-im.width())/2  + centerOffset_x));
+				xmpData["Xmp.GPano.CroppedAreaTopPixels"]    = std::to_string(int((  hFull-im.height())/2 + centerOffset_y));
 
 				// 2. Spatial Orientation (Pan/Tilt/Roll)
 				double gpanoHeading, gpanoPitch;
@@ -2183,32 +2183,36 @@ void StelMainView::doScreenshot(void)
 				break;
 			case StelCore::ProjectionMercator:
 			{
+				StelProjectorP proj=core->getProjection(StelCore::FrameAltAz); // This is a new projector. Not sure this works...
 				// Set the human-readable string descriptive name
 				exifData["Exif.Photo.LensModel"] = QString("%1-degree VFoV Mercator Lens").arg(QString::number(fov, 'g', 1)).toStdString().c_str();
 
-				Exiv2::XmpProperties::registerNs("http://google.com", "GPano");
+				Exiv2::XmpProperties::registerNs("http://ns.google.com/photos/1.0/panorama/", "GPano");
 
 				// 2. Define the projection type (e.g., "cylindrical" or "equirectangular")
 				xmpData["Xmp.GPano.ProjectionType"] = "cylindrical"; // It's indeed that!
+				xmpData["Xmp.GPano.CroppedAreaImageWidthPixels"]  = std::to_string(im.width());
+				xmpData["Xmp.GPano.CroppedAreaImageHeightPixels"] = std::to_string(im.height());
+
 
 				// 3. Define the full field of view dimensions in pixels
-				int hFullEqui=im.height()*(180./fov);
-				xmpData["Xmp.GPano.FullPanoWidthPixels"]  = QString::number(2*hFullEqui).toStdString().c_str();
+				//int hFullEqui=im.height()*(180./fov);
+				// The cylindrical projects the poles to infinity. We cut off somewhere near 80° unless viewport is also shifted.
+				// Unfortunately, our vertical FoV is bogus in this projection. We may need to unproject corners and centers.
+				// Esp., we must know width of a full 360° pano. The height remains unspecified, because it is always a crop.
+				// Ah, but 2*pxPerRad should be 360° width! So simple?
 
-				// We have a fov, e.g. 40°. That extends +/-20 from horizon.
-
-
-
-
-				//xmpData["Xmp.GPano.FullPanoHeightPixels"] = QString::number(hFull).toStdString().c_str();
+				const double centerPixelPerRad=proj->getPixelPerRadAtCenter();
+				xmpData["Xmp.GPano.FullPanoImageWidthPixels"]  = QString::number(int(2*centerPixelPerRad)).toStdString().c_str();
+				xmpData["Xmp.GPano.CroppedAreaTopPixels"]    = std::to_string(int((-im.height())/2)); // TBD: Adjust for viewport shift.
 
 				// 4. Define the portion of the view your crop actually occupies
 				// We actually are zooming into the center of a much larger pano.
-				// TBD: extend for viewport offset!
-				//xmpData["Xmp.GPano.CroppedAreaLeftPixels"]   = std::to_string((2*hFull-im.width())/2);
-				//xmpData["Xmp.GPano.CroppedAreaTopPixels"]    = std::to_string((hFull-im.height())/2);
-				xmpData["Xmp.GPano.CroppedAreaImageWidthPixels"]  = std::to_string(im.width());
-				xmpData["Xmp.GPano.CroppedAreaImageHeightPixels"] = std::to_string(im.height());
+				// The left edge depends on view size and view azimuth.
+				if (im.width()>=2*centerPixelPerRad)
+					xmpData["Xmp.GPano.CroppedAreaLeftPixels"]   = std::to_string(0);
+				else
+					xmpData["Xmp.GPano.CroppedAreaLeftPixels"]   = std::to_string(int(centerPixelPerRad-im.width()/2));
 			}
 				qDebug() << "EXIF: Done writing ProjectionMercator data";
 				break;
