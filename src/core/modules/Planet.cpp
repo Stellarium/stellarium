@@ -391,10 +391,10 @@ void Planet::resetTextures()
 
 	// restore normal map
 	if (!normalMapFileOrig.isEmpty())
-		normalMap = texMan.createTextureThread(normalMapFileOrig, StelTexture::Params().enableMipmapGen().setWrapMode(GL_REPEAT));
+		normalMap = texMan.createTextureThread(normalMapFileOrig, StelTexture::Params().enableMipmapGen().setWrapMode(GL_REPEAT).useLinearSRGB());
 
 	if (!horizonMapFileOrig.isEmpty())
-		horizonMap = texMan.createTextureThread(horizonMapFileOrig, StelTexture::Params().enableMipmapGen().setWrapMode(GL_REPEAT));
+		horizonMap = texMan.createTextureThread(horizonMapFileOrig, StelTexture::Params().enableMipmapGen().setWrapMode(GL_REPEAT).useLinearSRGB());
 }
 
 void Planet::replaceTexture(const QString &texName)
