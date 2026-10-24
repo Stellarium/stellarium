@@ -200,7 +200,7 @@ private:
 	QUrl getUrlFor(const QString& path) const;
 	int getPropertyInt(const QString& key, int fallback = 0);
 	bool getAllsky();
-	HipsTile* getTile(int order, int pix);
+	HipsTile* getTile(int order, int pix, bool linearColor = false);
 	/*! @brief Bind textures for drawing
 
 	    If @p tile is not ready for drawing (e.g. not fully loaded), alter

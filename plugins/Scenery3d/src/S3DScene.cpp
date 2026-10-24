@@ -34,6 +34,7 @@ void S3DScene::Material::loadTexturesAsync()
 {
 	StelTextureMgr& mgr = StelApp::getInstance().getTextureManager();
 	const auto texParams = StelTexture::Params().enableMipmapGen().enableMipmapFilter().setWrapMode(GL_REPEAT);
+	const auto texParamsLin = StelTexture::Params(texParams).useLinearSRGB();
 	/*if(!map_Ka.isEmpty())
 		tex_Ka = mgr.createTextureThread(map_Ka, texParams, false);*/
 	if(!map_Kd.isEmpty())
@@ -43,9 +44,9 @@ void S3DScene::Material::loadTexturesAsync()
 	/*if(!map_Ks.isEmpty())
 		tex_Ks = mgr.createTextureThread(map_Ks, texParams, false);*/
 	if(!map_bump.isEmpty())
-		tex_bump = mgr.createTextureThread(map_bump, texParams, false);
+		tex_bump = mgr.createTextureThread(map_bump, texParamsLin, false);
 	if(!map_height.isEmpty())
-		tex_height = mgr.createTextureThread(map_height, texParams, false);
+		tex_height = mgr.createTextureThread(map_height, texParamsLin, false);
 }
 
 void S3DScene::Material::fixup()

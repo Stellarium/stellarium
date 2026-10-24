@@ -21,11 +21,13 @@
 #include "ZodiacalLight.hpp"
 #include "SolarSystem.hpp"
 #include "StelFader.hpp"
+#include "StelSRGB.hpp"
 // For debugging draw() only:
 //#include "StelObjectMgr.hpp"
 #include "StelTexture.hpp"
 #include "StelUtils.hpp"
 #include "StelFileMgr.hpp"
+#include "StelMainView.hpp"
 #include "StelModuleMgr.hpp"
 #include "LandscapeMgr.hpp"
 
@@ -392,6 +394,10 @@ void main(void)
 	Q_ASSERT(atmFactor>=0.0f);
 	c*=atmFactor*atmFactor;
 
+	if (StelMainView::getInstance().getGLInformation().isHighGraphicsMode)
+		c *= 1.1f;
+
+
 	if (c[0]<0) c[0]=0;
 	if (c[1]<0) c[1]=0;
 	if (c[2]<0) c[2]=0;
@@ -408,7 +414,7 @@ void main(void)
 	renderProgram->setUniformValue(shaderVars.mainTex, mainTexSampler);
 
 	renderProgram->setUniformValue(shaderVars.projectionMatrixInverse, projector->getProjectionMatrix().toQMatrix().inverted());
-	renderProgram->setUniformValue(shaderVars.brightness, c.toQVector());
+	renderProgram->setUniformValue(shaderVars.brightness, colorToShader(c));
 	renderProgram->setUniformValue(shaderVars.lambdaSun, GLfloat(lambdaSun));
 
 	projector->setUnProjectUniforms(*renderProgram);

@@ -309,7 +309,8 @@ Planet::Planet(const QString& englishName,
 		QString normalMapFile = StelFileMgr::findFile("textures/"+normalMapName, StelFileMgr::File);
 		if (!normalMapFile.isEmpty())
 		{
-			normalMap = texMan.createTextureThread(normalMapFile, StelTexture::Params().enableMipmapGen().setWrapMode(GL_REPEAT), false);
+			const auto params = StelTexture::Params().enableMipmapGen().setWrapMode(GL_REPEAT).useLinearSRGB();
+			normalMap = texMan.createTextureThread(normalMapFile, params, false);
 			normalMapFileOrig = normalMapFile;
 		}
 	}
@@ -319,7 +320,8 @@ Planet::Planet(const QString& englishName,
 		QString horizonMapFile = StelFileMgr::findFile("textures/"+horizonMapName, StelFileMgr::File);
 		if (!horizonMapFile.isEmpty())
 		{
-			horizonMap = texMan.createTextureThread(horizonMapFile, StelTexture::Params().enableMipmapGen().setWrapMode(GL_REPEAT), false);
+			const auto params = StelTexture::Params().enableMipmapGen().setWrapMode(GL_REPEAT).useLinearSRGB();
+			horizonMap = texMan.createTextureThread(horizonMapFile, params, false);
 			horizonMapFileOrig = horizonMapFile;
 		}
 	}
@@ -389,10 +391,10 @@ void Planet::resetTextures()
 
 	// restore normal map
 	if (!normalMapFileOrig.isEmpty())
-		normalMap = texMan.createTextureThread(normalMapFileOrig, StelTexture::Params().enableMipmapGen().setWrapMode(GL_REPEAT));
+		normalMap = texMan.createTextureThread(normalMapFileOrig, StelTexture::Params().enableMipmapGen().setWrapMode(GL_REPEAT).useLinearSRGB());
 
 	if (!horizonMapFileOrig.isEmpty())
-		horizonMap = texMan.createTextureThread(horizonMapFileOrig, StelTexture::Params().enableMipmapGen().setWrapMode(GL_REPEAT));
+		horizonMap = texMan.createTextureThread(horizonMapFileOrig, StelTexture::Params().enableMipmapGen().setWrapMode(GL_REPEAT).useLinearSRGB());
 }
 
 void Planet::replaceTexture(const QString &texName)
