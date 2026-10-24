@@ -1168,7 +1168,14 @@ void StelMovementMgr::updateVisionVector(double deltaTime)
 		else // no targetObject:
 		{
 			move.startUp=getViewUpVectorJ2000();
-			move.aimUp=mountFrameToJ2000(Vec3d(0., 0., 1.));
+			// Use the up vector prepared by the caller only when the move ends close to the pole of the mount frame,
+			// where the vertical axis cannot be used. Otherwise keep the view upright as before.
+			Vec3d aimMountFrame = (move.mountMode==MountAltAzimuthal) ? move.aim : j2000ToMountFrame(move.aim);
+			aimMountFrame.normalize();
+			if (fabs(aimMountFrame[2]) > 0.9999)
+				move.aimUp=mountFrameToJ2000(move.aimUpCopy);
+			else
+				move.aimUp=mountFrameToJ2000(Vec3d(0., 0., 1.));
 		}
 		move.coef+=move.speed*static_cast<float>(deltaTime)*1000;
 		//setViewUpVectorJ2000(mountFrameToJ2000(move.aimUp)); // Is this the little flicker? --> NO This would show tited view.
@@ -1434,7 +1441,7 @@ void StelMovementMgr::moveToJ2000(const Vec3d& aim, const Vec3d& aimUp, float mo
 	move.aim*=2.;
 	move.aimUp=aimUp; // the new up vector. We cannot simply keep vertical axis, there may be the intention to look into the pole or so.
 	move.aimUp.normalize();
-	move.aimUpCopy=move.aimUp;
+	move.aimUpCopy=j2000ToMountFrame(move.aimUp); // the copy is applied with setViewUpVector(), which expects the mount frame
 	move.start=viewDirectionJ2000;	
 	move.start.normalize();
 	move.startUp=getViewUpVectorJ2000();
