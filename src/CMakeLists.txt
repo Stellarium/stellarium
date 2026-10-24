@@ -697,14 +697,19 @@ if(exiv2_FOUND OR TARGET Exiv2::exiv2lib OR TARGET exiv2lib)
           set(STELMAIN_DEPS ${STELMAIN_DEPS} exiv2lib)
      endif()
 
-     # MAC FIX: Inject the missing iconv library down to Exiv2
-     # This modifies the link properties *only* for the generated target on Apple systems.
-     # Windows/Linux skip this, maintaining a pristine environment.
+     # MAC LINK INJECTION: Check if the target is a true build target
+     # If it is an ALIAS target, the system handles it, and we must skip mutating it!
      if(APPLE)
           if(TARGET Exiv2::exiv2lib)
-               target_link_libraries(Exiv2::exiv2lib INTERFACE iconv)
+               get_target_property(IS_ALIAS Exiv2::exiv2lib ALIAS)
+               if(NOT IS_ALIAS)
+                    target_link_libraries(Exiv2::exiv2lib INTERFACE iconv)
+               endif()
           elseif(TARGET exiv2lib)
-               target_link_libraries(exiv2lib INTERFACE iconv)
+               get_target_property(IS_ALIAS exiv2lib ALIAS)
+               if(NOT IS_ALIAS)
+                    target_link_libraries(exiv2lib INTERFACE iconv)
+               endif()
           endif()
      endif(APPLE)
 else()
