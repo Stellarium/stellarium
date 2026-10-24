@@ -24,8 +24,7 @@ Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 
 #include "NexStarCommand.hpp"
 #include "TelescopeClientDirectNexStar.hpp"
-#include "common/LogFile.hpp"
-#include "StelUtils.hpp"
+#include "common/TelescopeLogging.hpp"
 
 #include <cmath>
 
@@ -44,9 +43,7 @@ NexStarCommandGotoPosition::NexStarCommandGotoPosition(Server &server, unsigned 
 
 bool NexStarCommandGotoPosition::writeCommandToBuffer(char *&p,char *end)
 {
-	#ifdef DEBUG5
 	char *b = p;
-	#endif
 	
 	if (end-p < 18)
 		return false;
@@ -78,10 +75,8 @@ bool NexStarCommandGotoPosition::writeCommandToBuffer(char *&p,char *end)
 	*p = 0;
 
 	has_been_written_to_buffer = true;
-	#ifdef DEBUG5
-	*log_file << Now() << "NexStarCommandGotoPosition::writeCommandToBuffer:"
-		  << b << StelUtils::getEndLineChar();
-	#endif
+	qCDebug(Telescopes) << server.getLogPrefix() << "NexStarCommandGotoPosition::writeCommandToBuffer:"
+	                    << QByteArray(b, static_cast<int>(p - b));
 	
 	return true;
 }
@@ -93,22 +88,19 @@ int NexStarCommandGotoPosition::readAnswerFromBuffer(const char *&buff, const ch
 	
 	if (*buff=='#')
 	{
-		#ifdef DEBUG4
-		*log_file << Now() << "NexStarCommandGotoPosition::readAnswerFromBuffer: slew ok"
-			  << StelUtils::getEndLineChar();
-		#endif
+		qCDebug(Telescopes) << server.getLogPrefix()
+		                    << "NexStarCommandGotoPosition::readAnswerFromBuffer: slew ok";
 	}
 	else
 	{
-		#ifdef DEBUG4
-		*log_file << Now() << "NexStarCommandGotoPosition::readAnswerFromBuffer: slew failed." << StelUtils::getEndLineChar();
-		#endif
+		qCWarning(Telescopes) << server.getLogPrefix()
+		                      << "NexStarCommandGotoPosition::readAnswerFromBuffer: slew failed.";
 	}
 	buff++;
 	return 1;
 }
 
-void NexStarCommandGotoPosition::print(QTextStream &o) const
+void NexStarCommandGotoPosition::print(QDebug &o) const
 {
 	o << "NexStarCommandGotoPosition("
 	  << ra << "," << dec <<')';
@@ -122,9 +114,7 @@ NexStarCommandSync::NexStarCommandSync(Server &server, unsigned int ra_int, int 
 
 bool NexStarCommandSync::writeCommandToBuffer(char *&p,char *end)
 {
-	#ifdef DEBUG5
 	char *b = p;
-	#endif
 
 	if (end-p < 18)
 		return false;
@@ -156,10 +146,8 @@ bool NexStarCommandSync::writeCommandToBuffer(char *&p,char *end)
 	*p = 0;
 
 	has_been_written_to_buffer = true;
-	#ifdef DEBUG5
-	*log_file << Now() << "NexStarCommandSync::writeCommandToBuffer:"
-		  << b << StelUtils::getEndLineChar();
-	#endif
+	qCDebug(Telescopes) << server.getLogPrefix() << "NexStarCommandSync::writeCommandToBuffer:"
+	                    << QByteArray(b, static_cast<int>(p - b));
 
 	return true;
 }
@@ -171,22 +159,18 @@ int NexStarCommandSync::readAnswerFromBuffer(const char *&buff, const char *end)
 
 	if (*buff=='#')
 	{
-		#ifdef DEBUG4
-		*log_file << Now() << "NexStarCommandSync::readAnswerFromBuffer: sync ok"
-			  << StelUtils::getEndLineChar();
-		#endif
+		qCDebug(Telescopes) << server.getLogPrefix() << "NexStarCommandSync::readAnswerFromBuffer: sync ok";
 	}
 	else
 	{
-		#ifdef DEBUG4
-		*log_file << Now() << "NexStarCommandSync::readAnswerFromBuffer: sync failed." << StelUtils::getEndLineChar();
-		#endif
+		qCWarning(Telescopes) << server.getLogPrefix()
+		                      << "NexStarCommandSync::readAnswerFromBuffer: sync failed.";
 	}
 	buff++;
 	return 1;
 }
 
-void NexStarCommandSync::print(QTextStream &o) const
+void NexStarCommandSync::print(QDebug &o) const
 {
 	o << "NexStarCommandSync("
 	  << ra << "," << dec <<')';
@@ -194,9 +178,7 @@ void NexStarCommandSync::print(QTextStream &o) const
 
 bool NexStarCommandAbort::writeCommandToBuffer(char *&p,char *end)
 {
-	#ifdef DEBUG5
 	char *b = p;
-	#endif
 
 	if (end-p < 1)
 		return false;
@@ -204,10 +186,8 @@ bool NexStarCommandAbort::writeCommandToBuffer(char *&p,char *end)
 	*p++ = 'M';
 
 	has_been_written_to_buffer = true;
-	#ifdef DEBUG5
-	*log_file << Now() << "NexStarCommandAbort::writeCommandToBuffer:"
-		  << b << StelUtils::getEndLineChar();
-	#endif
+	qCDebug(Telescopes) << server.getLogPrefix() << "NexStarCommandAbort::writeCommandToBuffer:"
+	                    << QByteArray(b, static_cast<int>(p - b));
 
 	return true;
 }
@@ -217,17 +197,16 @@ int NexStarCommandAbort::readAnswerFromBuffer(const char *&buff, const char *end
 	if (buff >= end)
 		return 0;
 
-#ifdef DEBUG4
 	if (*buff=='#')
-		*log_file << Now() << "NexStarCommandAbort::readAnswerFromBuffer: answer ok" << StelUtils::getEndLineChar();
+		qCDebug(Telescopes) << server.getLogPrefix() << "NexStarCommandAbort::readAnswerFromBuffer: answer ok";
 	else
-		*log_file << Now() << "NexStarCommandAbort::readAnswerFromBuffer: abort failed." << StelUtils::getEndLineChar();
-#endif
+		qCWarning(Telescopes) << server.getLogPrefix()
+		                      << "NexStarCommandAbort::readAnswerFromBuffer: abort failed.";
 	buff++;
 	return 1;
 }
 
-void NexStarCommandAbort::print(QTextStream &o) const
+void NexStarCommandAbort::print(QDebug &o) const
 {
 	o << "NexStarCommandAbort()";
 }
@@ -263,10 +242,8 @@ int NexStarCommandGetRaDec::readAnswerFromBuffer(const char *&buff, const char *
 
 	if (*p++ != ',')
 	{
-		#ifdef DEBUG4
-		*log_file << Now() << "NexStarCommandGetRaDec::readAnswerFromBuffer: "
-				      "error: ',' expected" << StelUtils::getEndLineChar();
-		#endif
+		qCWarning(Telescopes) << server.getLogPrefix()
+		                      << "NexStarCommandGetRaDec::readAnswerFromBuffer: error: ',' expected";
 		return -1;
 	}
 
@@ -283,19 +260,14 @@ int NexStarCommandGetRaDec::readAnswerFromBuffer(const char *&buff, const char *
 
 	if (*p++ != '#')
 	{
-		#ifdef DEBUG4
-		*log_file << Now() << "NexStarCommandGetRaDec::readAnswerFromBuffer: "
-				      "error: '#' expected" << StelUtils::getEndLineChar();
-		#endif
+		qCWarning(Telescopes) << server.getLogPrefix()
+		                      << "NexStarCommandGetRaDec::readAnswerFromBuffer: error: '#' expected";
 		return -1;
 	}
-	
-	
-	#ifdef DEBUG4
-	*log_file << Now() << "NexStarCommandGetRaDec::readAnswerFromBuffer: "
-	                      "ra = " << ra << ", dec = " << dec
-		  << StelUtils::getEndLineChar();
-	#endif
+
+	qCDebug(Telescopes).nospace() << server.getLogPrefix()
+	                              << "NexStarCommandGetRaDec::readAnswerFromBuffer: ra = "
+	                              << ra << ", dec = " << dec;
 	buff = p;
 
 	server.raReceived(static_cast<unsigned int>(ra));
@@ -303,7 +275,7 @@ int NexStarCommandGetRaDec::readAnswerFromBuffer(const char *&buff, const char *
 	return 1;
 }
 
-void NexStarCommandGetRaDec::print(QTextStream &o) const
+void NexStarCommandGetRaDec::print(QDebug &o) const
 {
 	o << "NexStarCommandGetRaDec";
 }

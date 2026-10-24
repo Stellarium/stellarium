@@ -23,8 +23,7 @@ Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 */
 
 #include "TcpConnection.hpp"
-#include "LogFile.hpp"
-#include "StelUtils.hpp"
+#include "TelescopeLogging.hpp"
 
 #ifdef Q_OS_WIN
   #include <ws2tcpip.h> // getaddrinfo, freeaddrinfo
@@ -78,8 +77,8 @@ TcpConnection::TcpConnection(Server &server, const char *host, int port)
 	const int gai_rc = getaddrinfo(host, port_string.c_str(), &hints, &address_list);
 	if (gai_rc != 0 || address_list == nullptr)
 	{
-		*log_file << Now() << "TcpConnection::TcpConnection(" << host << ':' << port << "): "
-		             "cannot resolve host: " << gai_strerror(gai_rc) << StelUtils::getEndLineChar();
+		qCWarning(Telescopes).nospace() << getLogPrefix() << "TcpConnection::TcpConnection(" << host << ':' << port
+		                                << "): cannot resolve host: " << gai_strerror(gai_rc);
 		return;
 	}
 
@@ -142,7 +141,7 @@ TcpConnection::TcpConnection(Server &server, const char *host, int port)
 	{
 		// Note: after a non-blocking connect ERRNO is not a reliable indicator
 		// of the failure reason, so we do not print it here.
-		*log_file << Now() << "TcpConnection::TcpConnection(" << host << ':' << port << "): "
-		             "cannot connect to host" << StelUtils::getEndLineChar();
+		qCWarning(Telescopes).nospace() << getLogPrefix() << "TcpConnection::TcpConnection(" << host << ':' << port
+		                                << "): cannot connect to host";
 	}
 }

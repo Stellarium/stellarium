@@ -62,3 +62,17 @@ You can edit the "Serial port" drop-down list to add serial ports that are not
 included in the list. For now, this list is empty in the Mac OS X version, so
 the names of serial devices always have to be entered manually.
 
+
+4. LOGGING
+==========
+
+Internal telescope drivers use Stellarium's standard Qt logging through the
+stel.Telescopes category. Messages associated with a telescope start with its
+slot number in brackets, for example [23]. Debug messages, including protocol
+traffic, are disabled by default. To enable them, set the environment variable
+QT_LOGGING_RULES="stel.Telescopes.debug=true" before starting Stellarium.
+
+The "Log external telescope server messages to files" checkbox applies only to
+external server executables. These retain their own logging and the existing
+log_TelescopeServer<slot>.txt files. Internal drivers no longer create these
+files.

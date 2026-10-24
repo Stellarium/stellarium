@@ -24,12 +24,10 @@ Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 
 #include "Connection.hpp"
 #include "Server.hpp"
-#include "LogFile.hpp"
-#include "StelUtils.hpp"
+#include "TelescopeLogging.hpp"
 
 #include <cmath>
 
-#ifdef DEBUG5
 #include <QTextStream>
 
 struct PrintRaDec
@@ -39,8 +37,10 @@ struct PrintRaDec
 	const int dec_int;
 };
 
-static QTextStream &operator<<(QTextStream &o, const PrintRaDec &x)
+static QDebug operator<<(QDebug debug, const PrintRaDec &x)
 {
+	QString text;
+	QTextStream o(&text);
 	unsigned int h = x.ra_int;
 	int d = static_cast<int>(std::floor(0.5+x.dec_int*(360*3600*1000/4294967296.0)));
 	char dec_sign;
@@ -84,9 +84,9 @@ static QTextStream &operator<<(QTextStream &o, const PrintRaDec &x)
 	  << qSetFieldWidth(2) << dec_s  << qSetFieldWidth(0) << '.'
 	  << qSetFieldWidth(3) << dec_ms << qSetFieldWidth(0)
 	  << qSetPadChar(' ');
-	return o;
+	debug << qPrintable(text);
+	return debug;
 }
-#endif
 
 Connection::Connection(Server &server, SOCKET fd) : Socket(server, fd)
 {
@@ -134,24 +134,21 @@ void Connection::performWriting(void)
 	{
 		if (ERRNO != EINTR && ERRNO != EAGAIN)
 		{
-			*log_file << Now() << "Connection::performWriting: writeNonblocking failed: "
-					   << STRERROR(ERRNO) << StelUtils::getEndLineChar();
+			qCWarning(Telescopes) << getLogPrefix()
+			                      << "Connection::performWriting: writeNonblocking failed:"
+			                      << STRERROR(ERRNO);
 		hangup();
 		}
 	}
 	else if (rc > 0)
 	{
-	#ifdef DEBUG5
 		if (isAsciiConnection())
 		{
-			*log_file << Now() << "Connection::performWriting: writeNonblocking("
-			                   << to_write << ") returned "
-			                   << rc << "; ";
-			for (int i = 0; i < rc; i++)
-				*log_file << write_buff[i];
-			*log_file << StelUtils::getEndLineChar();
+			qCDebug(Telescopes).nospace() << getLogPrefix()
+			                              << "Connection::performWriting: writeNonblocking("
+			                              << to_write << ") returned " << rc << "; "
+			                              << QByteArray(write_buff, rc);
 		}
-	#endif
 		if (rc >= to_write)
 		{
 			// everything written
@@ -174,14 +171,15 @@ void Connection::performReading(void)
 	{
 		if (ERRNO == ECONNRESET)
 		{
-			*log_file << Now() << "Connection::performReading: "
-					      "client has closed the connection" << StelUtils::getEndLineChar();
+			qCInfo(Telescopes) << getLogPrefix()
+			                   << "Connection::performReading: client has closed the connection";
 			hangup();
 		} 
 		else if (ERRNO != EINTR && ERRNO != EAGAIN)
 		{
-			*log_file << Now() << "Connection::performReading: readNonblocking failed: "
-					   << STRERROR(ERRNO) << StelUtils::getEndLineChar();
+			qCWarning(Telescopes) << getLogPrefix()
+			                      << "Connection::performReading: readNonblocking failed:"
+			                      << STRERROR(ERRNO);
 			hangup();
 		}
 	} 
@@ -189,23 +187,19 @@ void Connection::performReading(void)
 	{
 		if (isTcpConnection())
 		{
-			*log_file << Now() << "Connection::performReading: "
-					      "client has closed the connection" << StelUtils::getEndLineChar();
+			qCInfo(Telescopes) << getLogPrefix()
+			                   << "Connection::performReading: client has closed the connection";
 			hangup();
 		}
 	}
 	else
 	{
-	#ifdef DEBUG5
 		if (isAsciiConnection())
 		{
-			*log_file << Now() << "Connection::performReading: readNonblocking returned "
-			                   << rc << "; ";
-			for (int i = 0; i < rc; i++)
-				*log_file << read_buff_end[i];
-			*log_file << StelUtils::getEndLineChar();
+			qCDebug(Telescopes).nospace() << getLogPrefix()
+			                              << "Connection::performReading: readNonblocking returned "
+			                              << rc << "; " << QByteArray(read_buff_end, rc);
 		}
-	#endif
 	
 		read_buff_end += rc;
 		const char *p = read_buff;
@@ -213,13 +207,17 @@ void Connection::performReading(void)
 		if (p >= read_buff_end)
 		{
 			// everything handled
-			//*log_file << Now() << "Connection::performReading: everything handled" << StelUtils::getEndLineChar();
+			/*
+			qCDebug(Telescopes) << getLogPrefix() << "Connection::performReading: everything handled";
+			*/
 			read_buff_end = read_buff;
 		}
 		else if (p > read_buff)
 		{
-			//*log_file << Now() << "Connection::performReading: partly handled: "
-			//          << (p-read_buff) << StelUtils::getEndLineChar();
+			/*
+			qCDebug(Telescopes) << getLogPrefix() << "Connection::performReading: partly handled:"
+			                                      << (p - read_buff);
+			*/
 			// partly handled
 			memmove(read_buff, p, static_cast<size_t>(read_buff_end - p));
 			read_buff_end -= (p - read_buff);
@@ -235,8 +233,7 @@ void Connection::dataReceived(const char *&p, const char *read_buff_end)
 					((static_cast<unsigned int>(static_cast<unsigned char>(p[1]))) << 8) );
 		if (size > static_cast<int>(sizeof(read_buff)) || size < 4)
 		{
-			*log_file << Now() << "Connection::dataReceived: "
-					      "bad packet size: " << size << StelUtils::getEndLineChar();
+			qCWarning(Telescopes) << getLogPrefix() << "Connection::dataReceived: bad packet size:" << size;
 			hangup();
 			return;
 		}
@@ -255,8 +252,9 @@ void Connection::dataReceived(const char *&p, const char *read_buff_end)
 			{
 				if (size < 12)
 				{
-					*log_file << Now() << "Connection::dataReceived: "
-							      "type 0: bad packet size: " << size << StelUtils::getEndLineChar();
+					qCWarning(Telescopes) << getLogPrefix()
+					                      << "Connection::dataReceived: type 0: bad packet size:"
+					                      << size;
 					hangup();
 					return;
 				}
@@ -280,11 +278,8 @@ void Connection::dataReceived(const char *&p, const char *read_buff_end)
 						 ((static_cast<unsigned int>(static_cast<unsigned char>(p[17]))) <<  8) |
 						 ((static_cast<unsigned int>(static_cast<unsigned char>(p[18]))) << 16) |
 						 ((static_cast<unsigned int>(static_cast<unsigned char>(p[19]))) << 24) );
-				#ifdef DEBUG5
-				*log_file << Now() << "Connection::dataReceived: "
-				                   << PrintRaDec(ra_int, dec_int)
-						   << StelUtils::getEndLineChar();
-				#endif
+				qCDebug(Telescopes) << getLogPrefix() << "Connection::dataReceived:"
+				                    << PrintRaDec(ra_int, dec_int);
 				
 				server.gotoReceived(ra_int, dec_int);
 			}
@@ -292,11 +287,8 @@ void Connection::dataReceived(const char *&p, const char *read_buff_end)
 			
 			default:
 			//No other types of commands are acceptable at the moment
-				*log_file << Now()
-				          << "Connection::dataReceived: "
-				             "ignoring unknown packet, type: "
-				          << type
-					  << StelUtils::getEndLineChar();
+			qCWarning(Telescopes) << getLogPrefix()
+			                      << "Connection::dataReceived: ignoring unknown packet, type:" << type;
 			break;
 		}
 		
@@ -308,11 +300,7 @@ void Connection::sendPosition(unsigned int ra_int, int dec_int, int status)
 {
 	if (!IS_INVALID_SOCKET(fd))
 	{
-	#ifdef DEBUG5
-		*log_file << Now() << "Connection::sendPosition: "
-		                   << PrintRaDec(ra_int, dec_int)
-				   << StelUtils::getEndLineChar();
-	#endif
+		qCDebug(Telescopes) << getLogPrefix() << "Connection::sendPosition:" << PrintRaDec(ra_int, dec_int);
 	if (write_buff_end - write_buff + 24 < static_cast<int>(sizeof(write_buff)))
 	{
 		// length of packet:
@@ -349,9 +337,9 @@ void Connection::sendPosition(unsigned int ra_int, int dec_int, int status)
 		}
 		else
 		{
-			*log_file << Now() << "Connection::sendPosition: "
-			                      "communication is too slow, I will ignore this command"
-					   << StelUtils::getEndLineChar();
+			qCWarning(Telescopes) << getLogPrefix()
+			                      << "Connection::sendPosition: communication is too slow, "
+			                         "I will ignore this command";
 		}
 	}
 }
