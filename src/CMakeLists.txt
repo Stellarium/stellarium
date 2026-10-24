@@ -660,6 +660,8 @@ endif()
 # ==============================================================================
 # 2. EXIV2 (Now automatically inherits EXPAT::EXPAT seamlessly)
 # ==============================================================================
+# Protect Windows, and safely discover native packages on BSD/macOS environments
+set(EXIV2_EXTRA_OPTIONS "")
 if(NOT WIN32)
      if(CMAKE_SYSTEM_NAME STREQUAL "Haiku" OR CMAKE_SYSTEM_NAME STREQUAL "OpenBSD" OR CMAKE_SYSTEM_NAME STREQUAL "FreeBSD" OR BSD)
          # On Haiku and *BSD, try finding the system-installed package first without tight version limits. An older V0.27 should still be OK.
@@ -667,6 +669,9 @@ if(NOT WIN32)
      elseif(APPLE)
             # On macOS, find the built-in system SDK iconv engine
             find_package(Iconv REQUIRED)
+            # Pass the iconv library path flags straight down into the CPM scope options
+            list(APPEND EXIV2_EXTRA_OPTIONS "Iconv_LIBRARY=${Iconv_LIBRARIES}")
+            list(APPEND EXIV2_EXTRA_OPTIONS "Iconv_INCLUDE_DIR=${Iconv_INCLUDE_DIRS}")
      endif()
 endif(NOT WIN32)
 
@@ -691,6 +696,7 @@ if(NOT exiv2_FOUND AND NOT TARGET Exiv2::exiv2lib AND NOT TARGET exiv2lib)
              "EXIV2_BUILD_EXIV2_COMMAND OFF"
              "EXIV2_ENABLE_VIDEO OFF"
              "EXIV2_ENABLE_LENSDATA OFF"
+             ${EXIV2_EXTRA_OPTIONS}          # Inject Iconv arguments on macOS
      )
 endif(NOT exiv2_FOUND AND NOT TARGET Exiv2::exiv2lib AND NOT TARGET exiv2lib)
 
@@ -704,12 +710,6 @@ if(exiv2_FOUND OR TARGET Exiv2::exiv2lib OR TARGET exiv2lib)
      else()
           set(STELMAIN_DEPS ${STELMAIN_DEPS} exiv2lib)
      endif()
-
-     if(APPLE AND TARGET Iconv::Iconv)
-          set(STELMAIN_DEPS ${STELMAIN_DEPS} Iconv::Iconv)
-     endif()
-
-
 else()
      message(STATUS "Exiv2 library not found. No EXIF data in screenshots!")
 endif()
