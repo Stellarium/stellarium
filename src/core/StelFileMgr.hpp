@@ -26,6 +26,7 @@
 #include <QSet>
 #include <QString>
 #include <QStringList>
+#include "StelMainExport.hpp"
 
 class QFileInfo;
 
@@ -39,7 +40,7 @@ class QFileInfo;
 //! @author Lippo Huhtala <lippo.huhtala@meridea.com>
 //! @author Matthew Gates <matthewg42@gmail.com>
 //! @sa @ref fileStructure description.
-class StelFileMgr
+class STELMAIN_EXPORT StelFileMgr
 {
 public:
 	//! @enum Flags used as named bitfield flags as specifiers to filter results of StelFileMgr methods.

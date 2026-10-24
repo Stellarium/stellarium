@@ -23,6 +23,7 @@
 #include <QString>
 #include <QObject>
 #include <functional>
+#include "StelMainExport.hpp"
 
 // Predeclaration
 class StelCore;
@@ -47,7 +48,7 @@ class QSettings;
 //!	Update sky culture, i.e. load data if necessary and translate them to current sky language if needed.
 //! colorSchemeChanged(const QString&)
 //!	Load the given color style
-class StelModule : public QObject
+class STELMAIN_EXPORT StelModule : public QObject
 {
 	Q_OBJECT
 	// Do not add Q_OBJECT here!!
