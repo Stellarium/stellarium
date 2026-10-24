@@ -23,8 +23,7 @@ Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 */
 
 #include "SerialPort.hpp"
-#include "LogFile.hpp"
-#include "StelUtils.hpp"
+#include "TelescopeLogging.hpp"
 
 #ifndef Q_OS_WIN
 #include <unistd.h>
@@ -44,8 +43,8 @@ SerialPort::SerialPort(Server &server, const char *serial_device)
 	handle = CreateFileW(LPCWSTR(QString(serial_device).utf16()), GENERIC_READ | GENERIC_WRITE, 0, nullptr, OPEN_EXISTING, 0, nullptr);
 	if (handle == INVALID_HANDLE_VALUE)
 	{
-		*log_file << Now() << "SerialPort::SerialPort(" << serial_device << "): "
-				      "CreateFile() failed: " << GetLastError() << StelUtils::getEndLineChar();
+		qCWarning(Telescopes).nospace() << getLogPrefix() << "SerialPort::SerialPort(" << serial_device
+		                                << "): CreateFile() failed: " << GetLastError();
 	}
 	else
 	{
@@ -57,15 +56,15 @@ SerialPort::SerialPort(Server &server, const char *serial_device)
 		timeouts.WriteTotalTimeoutConstant = 0;
 		if (!SetCommTimeouts(handle, &timeouts))
 		{
-			*log_file << Now() << "SerialPort::SerialPort(" << serial_device << "): "
-					      "SetCommTimeouts() failed: " << GetLastError() << StelUtils::getEndLineChar();
+			qCWarning(Telescopes).nospace() << getLogPrefix() << "SerialPort::SerialPort(" << serial_device
+			                                << "): SetCommTimeouts() failed: " << GetLastError();
 		}
 		else
 		{
 			if (!GetCommState(handle, &dcb_original))
 			{
-				*log_file << Now() << "SerialPort::SerialPort(" << serial_device << "): "
-						      "GetCommState() failed: " << GetLastError() << StelUtils::getEndLineChar();
+				qCWarning(Telescopes).nospace() << getLogPrefix() << "SerialPort::SerialPort(" << serial_device
+				                                << "): GetCommState() failed: " << GetLastError();
 			}
 			else
 			{
@@ -74,15 +73,15 @@ SerialPort::SerialPort(Server &server, const char *serial_device)
 				dcb.DCBlength = sizeof(dcb);
 				if (!BuildCommDCBW(LPCWSTR(QString("9600,n,8,1").utf16()), &dcb))
 				{
-					*log_file << Now() << "SerialPort::SerialPort(" << serial_device << "): "
-							      "BuildCommDCB() failed: " << GetLastError() << StelUtils::getEndLineChar();
+					qCWarning(Telescopes).nospace() << getLogPrefix() << "SerialPort::SerialPort(" << serial_device
+					                                << "): BuildCommDCB() failed: " << GetLastError();
 				}
 				else
 				{
 					if (!SetCommState(handle, &dcb))
 					{
-						*log_file << Now() << "SerialPort::SerialPort(" << serial_device << "): "
-								      "SetCommState() failed: " << GetLastError() << StelUtils::getEndLineChar();
+						qCWarning(Telescopes).nospace() << getLogPrefix() << "SerialPort::SerialPort(" << serial_device
+						                                << "): SetCommState() failed: " << GetLastError();
 					}
 					else
 					{
@@ -99,22 +98,22 @@ SerialPort::SerialPort(Server &server, const char *serial_device)
 	fd = open(serial_device, O_RDWR|O_NOCTTY);
 	if (fd < 0)
 	{
-		*log_file << Now() << "SerialPort::SerialPort(" << serial_device << "): "
-				      "open() failed: " << strerror(errno) << StelUtils::getEndLineChar();
+		qCWarning(Telescopes).nospace() << getLogPrefix() << "SerialPort::SerialPort(" << serial_device
+		                                << "): open() failed: " << strerror(errno);
 	}
 	else
 	{
 		if (SETNONBLOCK(fd) < 0)
 		{
-			*log_file << Now() << "SerialPort::SerialPort(" << serial_device << "): "
-					      "fcntl(O_NONBLOCK) failed: " << STRERROR(ERRNO) << StelUtils::getEndLineChar();
+			qCWarning(Telescopes).nospace() << getLogPrefix() << "SerialPort::SerialPort(" << serial_device
+			                                << "): fcntl(O_NONBLOCK) failed: " << STRERROR(ERRNO);
 		}
 		else
 		{
 			if (tcgetattr(fd,&termios_original) < 0)
 			{
-				*log_file << Now() << "SerialPort::SerialPort(" << serial_device << "): "
-						      "tcgetattr failed: " << strerror(errno) << StelUtils::getEndLineChar();
+				qCWarning(Telescopes).nospace() << getLogPrefix() << "SerialPort::SerialPort(" << serial_device
+				                                << "): tcgetattr failed: " << strerror(errno);
 			}
 			else
 			{
@@ -130,8 +129,8 @@ SerialPort::SerialPort(Server &server, const char *serial_device)
 				termios_new.c_cc[VMIN] = 1;
 				if (tcsetattr(fd,TCSAFLUSH,&termios_new) < 0)
 				{
-					*log_file << Now() << "SerialPort::SerialPort(" << serial_device << "): "
-							      "tcsetattr failed: " << strerror(errno) << StelUtils::getEndLineChar();
+					qCWarning(Telescopes).nospace() << getLogPrefix() << "SerialPort::SerialPort(" << serial_device
+					                                << "): tcsetattr failed: " << strerror(errno);
 				}
 				else
 				{

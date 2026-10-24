@@ -35,8 +35,9 @@
 #include "StelTextureTypes.hpp"
 #include "VecMath.hpp"
 
+#include "common/TelescopeLogging.hpp"
+
 #include <memory>
-#include <QLoggingCategory>
 #include <QFile>
 #include <QHash>
 #include <QMap>
@@ -44,7 +45,6 @@
 #include <QSettings>
 #include <QString>
 #include <QStringList>
-#include <QTextStream>
 #include <QVariant>
 
 class StelObject;
@@ -76,14 +76,6 @@ setting up the connection.
 //! No esoteric features like motor focus, electric heating and such.
 //! The actual controlling of a telescope is left to the implementation
 //! of the abstract base class TelescopeClient.
-
-
-//! @note You can finetune the amount of TelescopeControl related messages in the logfile by configuring the logging category stel.Telescopes.
-//! For this, e.g. set environment variable QT_LOGGING_RULES="*.debug=false;stel.Telescopes.debug=true;".
-//! By default, only Info and more severe messages are displayed.
-Q_DECLARE_LOGGING_CATEGORY(Telescopes)
-
-
 class TelescopeControl : public StelObjectModule
 {
 	Q_OBJECT
@@ -232,6 +224,7 @@ public:
 	//! Forces a call of loadDeviceModels(). Stops all active telescopes.
 	bool setServerExecutablesDirectoryPath(const QString& newPath);
 
+	//! Whether external telescope servers receive a log file path. Internal logs use stel.Telescopes.
 	bool getFlagUseTelescopeServerLogs() const { return useTelescopeServerLogs; }
 
 	static constexpr int MIN_SLOT_NUMBER = 1;
@@ -461,8 +454,6 @@ private:
 	QHash<ConnectionType, QString> connectionTypeNames;
 
 	bool useTelescopeServerLogs = false;
-	QHash<int, QFile*> telescopeServerLogFiles;
-	QHash<int, QTextStream*> telescopeServerLogStreams;
 
 	bool useServerExecutables = false;
 	QString serverExecutablesDirectoryPath;
@@ -504,10 +495,6 @@ private:
 	//! Copies the default device_models.json to the given destination
 	//! @returns true if the file has been copied successfully
 	bool restoreDeviceModelsListTo(QString deviceModelsListPath);
-
-	void addLogAtSlot(int slot);
-	void logAtSlot(int slot);
-	void removeLogAtSlot(int slot);
 
 	static void translations();
 

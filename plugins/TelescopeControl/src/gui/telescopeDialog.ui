@@ -461,7 +461,10 @@
              </size>
             </property>
             <property name="text">
-             <string>Log telescope driver messages to files</string>
+             <string>Log external telescope server messages to files</string>
+            </property>
+            <property name="toolTip">
+             <string>Internal telescope driver messages use Stellarium's standard logging.</string>
             </property>
            </widget>
           </item>

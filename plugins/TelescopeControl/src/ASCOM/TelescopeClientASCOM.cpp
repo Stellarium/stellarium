@@ -29,8 +29,9 @@
 #include "StelMainView.hpp"
 #include "StelTranslator.hpp"
 
-TelescopeClientASCOM::TelescopeClientASCOM(const QString& name, const QString& params, TelescopeControl::Equinox eq)
-	: TelescopeClient(name)
+TelescopeClientASCOM::TelescopeClientASCOM(const QString& name, const QString& params,
+                                           TelescopeControl::Equinox eq, int slot)
+	: TelescopeClient(name, slot)
 	, mEquinox(eq)
 	, mInterpolatedPosition(1, 0, 0)
 	, mCurrentTargetPosition(1, 0, 0)
@@ -43,7 +44,8 @@ TelescopeClientASCOM::TelescopeClientASCOM(const QString& name, const QString& p
 		mAscomUseDeviceEqCoordType = paramMatch.captured(2).trimmed() == "true";
 	}
 
-        qCInfo(Telescopes) << "TelescopeClientASCOM::TelescopeClientASCOM with telescope name " << name << " and ascomDeviceId " << mAscomDeviceId;
+	qCInfo(Telescopes) << getLogPrefix() << "TelescopeClientASCOM::TelescopeClientASCOM with telescope name "
+	                   << name << " and ascomDeviceId " << mAscomDeviceId;
 
 	mAscomDevice = new ASCOMDevice(this, mAscomDeviceId);
 	mAscomDevice->connect();

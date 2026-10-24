@@ -45,7 +45,8 @@ class TelescopeClientDirectLx200 : public TelescopeClient, public Server
 {
 	Q_OBJECT
 public:
-	TelescopeClientDirectLx200(const QString &name, const QString &parameters, TelescopeControl::Equinox eq = TelescopeControl::EquinoxJ2000);
+	TelescopeClientDirectLx200(const QString &name, const QString &parameters,
+	                           TelescopeControl::Equinox eq = TelescopeControl::EquinoxJ2000, int slot = 0);
 	~TelescopeClientDirectLx200(void) override
 	{
 		//hangup();

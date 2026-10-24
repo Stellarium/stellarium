@@ -12,9 +12,5 @@ ADD_DEFINITIONS(-DTELESCOPE_CONTROL_PLUGIN_LICENSE="GNU GPLv2 or later")
 # otherwise the local copy will be overwritten each time Stellarium is started.
 ADD_DEFINITIONS(-DTELESCOPE_CONTROL_CONFIG_VERSION="0.4.1")
 
-#Temporary debugging definitions for the telescope servers code
-ADD_DEFINITIONS(-DDEBUG3 -DDEBUG4 -DDEBUG5)
-
 ADD_SUBDIRECTORY( src )
-
 

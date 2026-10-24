@@ -29,10 +29,11 @@
 #include <libindi/inditelescope.h>
 #include "INDIControlWidget.hpp"
 
-TelescopeClientINDI::TelescopeClientINDI(const QString &name, const QString &params):
-	TelescopeClient(name)
+TelescopeClientINDI::TelescopeClientINDI(const QString &name, const QString &params, int slot)
+	: TelescopeClient(name, slot)
+	, mConnection(nullptr, slot)
 {
-	qCDebug(Telescopes) << "TelescopeClientINDI::TelescopeClientINDI";
+	qCDebug(Telescopes) << getLogPrefix() << "TelescopeClientINDI::TelescopeClientINDI";
 
 	static const QRegularExpression paramRx("^([^:]*):(\\d+):([^:]*)$");
 	QRegularExpressionMatch paramMatch=paramRx.match(params);
@@ -145,13 +146,15 @@ void TelescopeClientINDI::move(double angle, double speed)
 {
 	if (angle < 0.0 || angle >= 360.0)
 	{
-		qCWarning(Telescopes) << "TelescopeClientINDI::move angle " << angle << " out of range [0,360)";
+		qCWarning(Telescopes) << getLogPrefix() << "TelescopeClientINDI::move angle" << angle
+		                      << "out of range [0,360)";
 		return;
 	}
 
 	if (speed < 0.0 || speed > 1.0)
 	{
-		qCWarning(Telescopes) << "TelescopeClientINDI::move speed " << speed << "out of range [0,1]";
+		qCWarning(Telescopes) << getLogPrefix() << "TelescopeClientINDI::move speed" << speed
+		                      << "out of range [0,1]";
 		return;
 	}
 

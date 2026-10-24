@@ -34,8 +34,9 @@
 
 #include "TelescopeClientJsonRts2.hpp"
 
-TelescopeClientJsonRts2::TelescopeClientJsonRts2(const QString &name, const QString &params, TelescopeControl::Equinox eq)
-	: TelescopeClient(name)
+TelescopeClientJsonRts2::TelescopeClientJsonRts2(const QString &name, const QString &params,
+                                                 TelescopeControl::Equinox eq, int slot)
+	: TelescopeClient(name, slot)
 	, networkManager(new QNetworkAccessManager)
 	, equinox(eq)
 	, baseurl("http://localhost:8889/")
@@ -65,16 +66,18 @@ TelescopeClientJsonRts2::TelescopeClientJsonRts2(const QString &name, const QStr
 	}
 	else
 	{
-		qCWarning(Telescopes) << "ERROR creating TelescopeClientJsonRts2: invalid parameters.";
+		qCWarning(Telescopes) << getLogPrefix()
+		                      << "ERROR creating TelescopeClientJsonRts2: invalid parameters.";
 		return;
 	}
 
-	qCInfo(Telescopes) << "TelescopeRTS2(" << name << ") URL, refresh timeout: " << url << "," << refresh_delay;
+	qCInfo(Telescopes) << getLogPrefix() << "TelescopeRTS2(" << name << ") URL, refresh timeout: " << url << ","
+	                   << refresh_delay;
 
 	baseurl.setUrl(url);
 	if (!baseurl.isValid())
 	{
-		qCWarning(Telescopes) << "TelescopeRTS2(" << name << ") invalid URL: " << url;
+		qCWarning(Telescopes) << getLogPrefix() << "TelescopeRTS2(" << name << ") invalid URL: " << url;
 		return;
 	}
 
@@ -88,7 +91,8 @@ TelescopeClientJsonRts2::TelescopeClientJsonRts2(const QString &name, const QStr
 
 	cfgRequest.setUrl(rurl);
 
-	qCInfo(Telescopes) << "TelescopeRTS2(" << name << ")::TelescopeRTS2: request url:" << rurl.toString();
+	qCInfo(Telescopes) << getLogPrefix() << "TelescopeRTS2(" << name
+	                   << ")::TelescopeRTS2: request url:" << rurl.toString();
 
 	connect(&networkManager, &QNetworkAccessManager::finished, this, &TelescopeClientJsonRts2::replyFinished);
 
@@ -114,7 +118,8 @@ void TelescopeClientJsonRts2::replyFinished(QNetworkReply *reply)
 			setReadOnly(true);
 			return;
 		}
-		qCWarning(Telescopes) << "TelescopeRTS2(" << name << ")::replyFinished: error " << reply->error() << " url: " << reply->url().toString();
+		qCWarning(Telescopes) << getLogPrefix() << "TelescopeRTS2(" << name << ")::replyFinished: error "
+		                      << reply->error() << " url: " << reply->url().toString();
 		telName = "";
 		if (reconnectTimer < 0)
 			reconnectTimer = startTimer(15000);
@@ -129,7 +134,10 @@ void TelescopeClientJsonRts2::replyFinished(QNetworkReply *reply)
 	}
 
 	QByteArray data = reply->readAll();
-	//qCDebug(Telescopes) << "TelescopeRTS2(" << name << ")::replyFinished: data " << (QString) data;
+	/*
+	qCDebug(Telescopes) << getLogPrefix() << "TelescopeRTS2(" << name << ")::replyFinished: data "
+	                    << QString::fromUtf8(data);
+	*/
 
 	QJsonDocument doc;
 	QJsonParseError jsonError;
@@ -157,7 +165,8 @@ void TelescopeClientJsonRts2::replyFinished(QNetworkReply *reply)
 
 		request.setUrl(rurl);
 
-		qCDebug(Telescopes) << "TelescopeRTS2(" << name << ")::replyFinished: request url:" << rurl.toString();
+		qCDebug(Telescopes) << getLogPrefix() << "TelescopeRTS2(" << name
+		                    << ")::replyFinished: request url:" << rurl.toString();
 
 		refreshTimer();
 	}
@@ -175,8 +184,9 @@ void TelescopeClientJsonRts2::replyFinished(QNetworkReply *reply)
 		const double ra = telObject["ra"].toDouble() * M_PI / 180.0;
 		const double dec = telObject["dec"].toDouble() * M_PI / 180.0;
 		const double cdec = cos(dec);
-	
-		qCDebug(Telescopes) << "TelescopeRTS2(" << name << ")::replyFinished: RADEC" << ra << dec;
+
+		qCDebug(Telescopes) << getLogPrefix() << "TelescopeRTS2(" << name << ")::replyFinished: RADEC" << ra
+		                    << dec;
 
 		lastPos.set(cos(ra)*cdec, sin(ra)*cdec, sin(dec));
 		interpolatedPosition.add(lastPos, getNow(), server_micros, 0);
@@ -187,7 +197,7 @@ void TelescopeClientJsonRts2::replyFinished(QNetworkReply *reply)
 	{
 		QJsonObject docObject = doc.object();
 		int cmdRet = docObject["ret"].toInt();
-		qCDebug(Telescopes) << "Move command finished: " << cmdRet;
+		qCDebug(Telescopes) << getLogPrefix() << "Move command finished: " << cmdRet;
 		if (cmdRet == 0)
 			getReadOnly();
 		else
@@ -195,7 +205,8 @@ void TelescopeClientJsonRts2::replyFinished(QNetworkReply *reply)
 	}
 	else
 	{
-		qCWarning(Telescopes) << "TelescopeRTS2(" << name << ")::replyFinished: unhandled reply: " << reply->url().toString();
+		qCWarning(Telescopes) << getLogPrefix() << "TelescopeRTS2(" << name
+		                      << ")::replyFinished: unhandled reply: " << reply->url().toString();
 	}
 	reply->deleteLater();
 }
@@ -247,7 +258,8 @@ void TelescopeClientJsonRts2::telescopeGoto(const Vec3d &j2000Pos, StelObjectP s
 	QNetworkRequest setR;
 	setR.setUrl(set);
 
-	qCDebug(Telescopes) << "TelescopeRTS2(" << name << ")::telescopeGoto: request: " << set.toString();
+	qCDebug(Telescopes) << getLogPrefix() << "TelescopeRTS2(" << name
+	                    << ")::telescopeGoto: request: " << set.toString();
 
 	networkManager.get(setR);
 }
@@ -271,7 +283,7 @@ void TelescopeClientJsonRts2::timerEvent(QTimerEvent *event)
 {
 	if (event->timerId() == reconnectTimer)
 	{
-		qCDebug(Telescopes) << "Telescope reconnect";
+		qCDebug(Telescopes) << getLogPrefix() << "Telescope reconnect";
 		networkManager.get(cfgRequest);
 	}
 }
@@ -307,7 +319,8 @@ void TelescopeClientJsonRts2::getReadOnly()
 
 	request.setUrl(diurl);
 
-	qCDebug(Telescopes) << "TelescopeRTS2(" << name << ")::replyFinished: request url:" << diurl.toString();
+	qCDebug(Telescopes) << getLogPrefix() << "TelescopeRTS2(" << name
+	                    << ")::replyFinished: request url:" << diurl.toString();
 
 	networkManager.get(request);
 }
