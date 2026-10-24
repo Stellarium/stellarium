@@ -316,7 +316,7 @@ jobs:
         sync: rsync
         copyback: false
         prepare: |
-          pkgman install -y nlopt_devel md4c_devel exiv2_devel qxlsx_qt6_devel cmake qt6_tools_devel qt6_charts_devel qt6_base_devel qt6_multimedia_devel qt6_positioning_devel qt6_serialport_devel qt6_svg_devel qt6_speech_devel qt6_imageformats_devel qt6_declarative_devel
+          pkgman install -y nlopt_devel md4c_devel exiv2_devel expat_devel qxlsx_qt6_devel cmake qt6_tools_devel qt6_charts_devel qt6_base_devel qt6_multimedia_devel qt6_positioning_devel qt6_serialport_devel qt6_svg_devel qt6_speech_devel qt6_imageformats_devel qt6_declarative_devel
 
         run: |
           set -e -x
@@ -385,7 +385,7 @@ jobs:
         sync: rsync
         copyback: false
         prepare: |
-          pkg install -y cmake eigen glm exiv2 fast_float nlopt md4c perl5 xorg-vfbserver gettext indi qt6-webengine qt6-base qt6-speech qt6-tools qt6-serialport qt6-location qt6-positioning qt6-multimedia qt6-charts
+          pkg install -y cmake eigen glm exiv2 textproc/expat2 fast_float nlopt md4c perl5 xorg-vfbserver gettext indi qt6-webengine qt6-base qt6-speech qt6-tools qt6-serialport qt6-location qt6-positioning qt6-multimedia qt6-charts
 
         run: |
           set -e -x

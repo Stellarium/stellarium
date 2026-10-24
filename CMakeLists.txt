@@ -1,4 +1,4 @@
-CMAKE_MINIMUM_REQUIRED(VERSION 3.18)
+CMAKE_MINIMUM_REQUIRED(VERSION 3.24)
 # CMake 3.20+ is required if x-compiling for Windows on ARM
 MESSAGE(STATUS "Found CMake ${CMAKE_VERSION}")
 
@@ -879,6 +879,7 @@ ELSE()
      # https://github.com/cpm-cmake/CPM.cmake/issues/132).
      SET(MD4C_STEL_LIBRARIES md4c::md4c-html)
 ENDIF()
+
 
 ########### Set some global variables ###########
 IF(UNIX AND NOT WIN32)

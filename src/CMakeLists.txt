@@ -575,6 +575,127 @@ IF(ENABLE_XLSX)
      SET(STELMAIN_DEPS ${STELMAIN_DEPS} QXlsx::QXlsx)
 ENDIF()
 
+
+# ------------------------------------------------------------------
+# ZLIB Target Bridge for Exiv2 (Global Directory Property Fix)
+# ------------------------------------------------------------------
+set(ZLIB_INC_DIR "${CMAKE_SOURCE_DIR}/src/external/zlib")
+
+if(TARGET zlib_stel)
+    # 1. Create a true namespaced IMPORTED target so export validation succeeds natively
+    if(NOT TARGET ZLIB::ZLIB)
+        add_library(ZLIB::ZLIB INTERFACE IMPORTED GLOBAL)
+        set_target_properties(ZLIB::ZLIB PROPERTIES
+            INTERFACE_LINK_LIBRARIES "zlib_stel"
+            INTERFACE_INCLUDE_DIRECTORIES "${ZLIB_INC_DIR}"
+        )
+    endif()
+
+    # THE CRITICAL FIX FOR INTERNAL OBJECT TARGETS (exiv2lib_int):
+    # Instead of relying on Exiv2 to pass the include paths to its sub-targets,
+    # we append Stellarium's bundled zlib path to the directory-level properties.
+    # Because CPM adds packages down-tree, all downstream subdirectories inherit this.
+    include_directories("${ZLIB_INC_DIR}")
+
+    # Create our custom mock FindZLIB module as a safe fallback match
+    set(MOCK_ZLIB_DIR "${CMAKE_BINARY_DIR}/cmake_zlib_bridge")
+    file(MAKE_DIRECTORY "${MOCK_ZLIB_DIR}")
+
+    file(WRITE "${MOCK_ZLIB_DIR}/FindZLIB.cmake" "
+        set(ZLIB_FOUND TRUE)
+        set(ZLIB_INCLUDE_DIRS \"${ZLIB_INC_DIR}\")
+        set(ZLIB_LIBRARIES ZLIB::ZLIB)
+    ")
+
+    # Force search lookup tracking to prefer our custom bridge folder
+    list(INSERT CMAKE_MODULE_PATH 0 "${MOCK_ZLIB_DIR}")
+
+    # Fully drop sticky old cache variables that can break generation mapping
+    unset(ZLIB_LIBRARY CACHE)
+    unset(ZLIB_LIBRARIES CACHE)
+    unset(ZLIB_INCLUDE_DIR CACHE)
+    unset(ZLIB_INCLUDE_DIRS CACHE)
+    unset(ZLIB_FOUND CACHE)
+endif()
+
+# ==============================================================================
+# 1. EXPAT (Handled completely natively through CPM)
+# ==============================================================================
+# Disable internal expat tests and binaries to optimize compilation speeds
+set(EXPAT_BUILD_TOOLS OFF CACHE BOOL "Disable expat binaries" FORCE)
+set(EXPAT_BUILD_EXAMPLES OFF CACHE BOOL "Disable expat examples" FORCE)
+set(EXPAT_BUILD_TESTS OFF CACHE BOOL "Disable expat tests" FORCE)
+set(EXPAT_SHARED_LIBS OFF CACHE BOOL "Build expat statically" FORCE)
+set(EXPAT_MSVC_STATIC_CRT OFF CACHE BOOL "Use shared CRT (/MD) matching Stellarium" FORCE)
+
+CPMFindPackage(
+    NAME EXPAT
+    GITHUB_REPOSITORY libexpat/libexpat
+    GIT_TAG R_2_6_2
+    SOURCE_SUBDIR expat     # CRITICAL: Routes CMake directly to the inner source folder!
+)
+
+# Bridge modern targets globally
+if(TARGET expat AND NOT TARGET EXPAT::EXPAT)
+    add_library(EXPAT::EXPAT INTERFACE IMPORTED GLOBAL)
+    target_link_libraries(EXPAT::EXPAT INTERFACE expat)
+endif()
+
+# Fallback bindings for standard find modules probing variables
+if(TARGET expat)
+    set(EXPAT_FOUND TRUE CACHE BOOL "Force true" FORCE)
+
+    # Dynamically extract include directory directly from target properties
+    get_target_property(EXPAT_INC expat INTERFACE_INCLUDE_DIRECTORIES)
+    set(EXPAT_INCLUDE_DIRS "${EXPAT_INC}" CACHE PATH "Expat includes" FORCE)
+    set(EXPAT_INCLUDE_DIR "${EXPAT_INC}" CACHE PATH "Expat includes" FORCE)
+
+    # CRITICAL FIX: Pass the native target identifier 'expat' instead of a hardcoded string!
+    # CMake will track the 'MD' suffix variants perfectly behind the scenes.
+    set(EXPAT_LIBRARIES expat CACHE STRING "Expat target tracking" FORCE)
+    set(EXPAT_LIBRARY expat CACHE STRING "Expat target tracking" FORCE)
+endif()
+
+
+# ==============================================================================
+# 2. EXIV2 (Now automatically inherits EXPAT::EXPAT seamlessly)
+# ==============================================================================
+CPMFindPackage(NAME exiv2
+    GITHUB_REPOSITORY Exiv2/exiv2
+    GIT_TAG v0.28.3
+    FIND_PACKAGE_ARGUMENTS "NAMES exiv2 Exiv2"
+    OPTIONS
+        "ZLIB_INCLUDE_DIR=${ZLIB_INC_DIR}"
+        "ZLIB_INCLUDE_DIRS=${ZLIB_INC_DIR}"
+        "EXIV2_ENABLE_INSTALL OFF"      # Stops subproject installation collision
+        "EXIV2_ENABLE_XMP ON"           # Enabled for Adobe/GPano tags
+        "EXIV2_ENABLE_EXTERNAL_XMP OFF"  # Tells Exiv2 to use our compiled Expat
+        "EXIV2_USE_EXPAT ON"            # Use Expat instead of building text stub engines
+        "EXIV2_ENABLE_INIH OFF"
+        "EXIV2_ENABLE_BMFF OFF"
+        "EXIV2_ENABLE_BROTLI OFF"
+        "EXIV2_BUILD_SAMPLES OFF"
+        "EXIV2_BUILD_UNIT_TESTS OFF"
+        "EXIV2_BUILD_EXIV2_COMMAND OFF"
+        "EXIV2_ENABLE_VIDEO OFF"
+        "EXIV2_ENABLE_LENSDATA OFF"
+)
+
+if(exiv2_FOUND OR TARGET Exiv2::exiv2lib)
+     message(STATUS "Found/Built Exiv2 ${exiv2_VERSION}")
+     add_definitions("-DHAVE_EXIV2")
+     add_definitions("-DEXIV2_SHARED_LIBS")
+
+     if(TARGET Exiv2::exiv2lib)
+             set(STELMAIN_DEPS ${STELMAIN_DEPS} Exiv2::exiv2lib)
+     else()
+             set(STELMAIN_DEPS ${STELMAIN_DEPS} exiv2lib)
+     endif()
+else()
+     message(STATUS "Exiv2 library not found. No EXIF data in screenshots!")
+endif()
+
+
 IF(HAIKU)
      SET(STELMAIN_DEPS ${STELMAIN_DEPS} network)
 ENDIF()
@@ -630,6 +751,8 @@ ENDIF(ENABLE_PCH)
 IF(ENABLE_SHOWMYSKY)
      TARGET_INCLUDE_DIRECTORIES(stelMain PRIVATE "${ShowMySky_INCLUDE_DIRECTORIES}")
 ENDIF()
+
+
 TARGET_INCLUDE_DIRECTORIES(stelMain PRIVATE "${md4c_SOURCE_DIR}/src")
 
 IF(HAIKU)
