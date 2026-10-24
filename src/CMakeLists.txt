@@ -635,25 +635,20 @@ CPMFindPackage(
     SOURCE_SUBDIR expat     # CRITICAL: Routes CMake directly to the inner source folder!
 )
 
-# Bridge modern targets globally
+# Bridge modern target for compatibility with Exiv2 internally
 if(TARGET expat AND NOT TARGET EXPAT::EXPAT)
     add_library(EXPAT::EXPAT INTERFACE IMPORTED GLOBAL)
     target_link_libraries(EXPAT::EXPAT INTERFACE expat)
 endif()
 
-# Fallback bindings for standard find modules probing variables
+# We set the status flag so Exiv2 skips searching, but we completely
+# AVOID setting EXPAT_LIBRARIES or EXPAT_LIBRARY cache strings!
+# This forces CMake to use target propagation rather than raw text replacements.
+set(EXPAT_FOUND TRUE CACHE BOOL "Force true for Exiv2" FORCE)
 if(TARGET expat)
-    set(EXPAT_FOUND TRUE CACHE BOOL "Force true" FORCE)
-
-    # Dynamically extract include directory directly from target properties
     get_target_property(EXPAT_INC expat INTERFACE_INCLUDE_DIRECTORIES)
-    set(EXPAT_INCLUDE_DIRS "${EXPAT_INC}" CACHE PATH "Expat includes" FORCE)
-    set(EXPAT_INCLUDE_DIR "${EXPAT_INC}" CACHE PATH "Expat includes" FORCE)
-
-    # CRITICAL FIX: Pass the native target identifier 'expat' instead of a hardcoded string!
-    # CMake will track the 'MD' suffix variants perfectly behind the scenes.
-    set(EXPAT_LIBRARIES expat CACHE STRING "Expat target tracking" FORCE)
-    set(EXPAT_LIBRARY expat CACHE STRING "Expat target tracking" FORCE)
+    set(EXPAT_INCLUDE_DIRS "${EXPAT_INC}" CACHE PATH "Expat include directories" FORCE)
+    set(EXPAT_INCLUDE_DIR "${EXPAT_INC}" CACHE PATH "Expat include directory" FORCE)
 endif()
 
 
@@ -688,7 +683,6 @@ if(NOT exiv2_FOUND AND NOT TARGET Exiv2::exiv2lib AND NOT TARGET exiv2lib)
              "EXIV2_BUILD_EXIV2_COMMAND OFF"
              "EXIV2_ENABLE_VIDEO OFF"
              "EXIV2_ENABLE_LENSDATA OFF"
-             "EXIV2_ENABLE_ICONV OFF"        # Avoid iconv error on MacOS
      )
 endif(NOT exiv2_FOUND AND NOT TARGET Exiv2::exiv2lib AND NOT TARGET exiv2lib)
 
@@ -702,6 +696,17 @@ if(exiv2_FOUND OR TARGET Exiv2::exiv2lib OR TARGET exiv2lib)
      else()
           set(STELMAIN_DEPS ${STELMAIN_DEPS} exiv2lib)
      endif()
+
+     # MAC FIX: Inject the missing iconv library down to Exiv2
+     # This modifies the link properties *only* for the generated target on Apple systems.
+     # Windows/Linux skip this, maintaining a pristine environment.
+     if(APPLE)
+          if(TARGET Exiv2::exiv2lib)
+               target_link_libraries(Exiv2::exiv2lib INTERFACE iconv)
+          elseif(TARGET exiv2lib)
+               target_link_libraries(exiv2lib INTERFACE iconv)
+          endif()
+     endif(APPLE)
 else()
      message(STATUS "Exiv2 library not found. No EXIF data in screenshots!")
 endif()
