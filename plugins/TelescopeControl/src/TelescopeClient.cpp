@@ -80,7 +80,7 @@ TelescopeClient *TelescopeClient::create(const QString &url)
 
 	const TelescopeControl::Equinox eq = (equinox == "JNow" ? TelescopeControl::EquinoxJNow : TelescopeControl::EquinoxJ2000);
 
-	qInfo() << "Creating telescope" << url << "; name/type/equinox/params:" << name << type << ((eq == TelescopeControl::EquinoxJNow) ? "JNow" : "J2000") << params;
+	qCInfo(Telescopes) << "Creating telescope" << url << "; name/type/equinox/params:" << name << type << ((eq == TelescopeControl::EquinoxJNow) ? "JNow" : "J2000") << params;
 
 	TelescopeClient * newTelescope = nullptr;
 	
@@ -215,7 +215,7 @@ TelescopeTCP::TelescopeTCP(const QString &name, const QString &params, Telescope
 		return;
 	}
 
-	qInfo() << "TelescopeTCP parameters host, port, time_delay:" << host << port << time_delay;
+	qCInfo(Telescopes) << "TelescopeTCP parameters host, port, time_delay:" << host << port << time_delay;
 	
 	if (time_delay <= 0 || time_delay > 10000000)
 	{
