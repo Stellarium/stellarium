@@ -151,6 +151,11 @@ private:
 	void setIdFromName(QString &name);
 
 	/**
+	 * @brief Updates export availability and the inline message based on the current sky culture ID.
+	 */
+	void updateSkyCultureIdValidation();
+
+	/**
 	 * @brief Compiles the Constellations section from descriptions of all constellations.
 	 */
 	QString makeConstellationsSection() const;
