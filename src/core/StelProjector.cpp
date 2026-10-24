@@ -90,13 +90,13 @@ QByteArray StelProjector::Mat4dTransform::getForwardTransformShader() const
 {
 	return 1+R"(
 #line 1 104
-uniform mat4 PROJECTOR_vertexToAltAzPosMatrix;
-uniform mat4 PROJECTOR_modelViewMatrix;
-vec3 modelViewForwardTransform(highp vec3 v)
+uniform highp mat4 PROJECTOR_vertexToAltAzPosMatrix;
+uniform highp mat4 PROJECTOR_modelViewMatrix;
+highp vec3 modelViewForwardTransform(highp vec3 v)
 {
 	return (PROJECTOR_modelViewMatrix * vec4(v,1)).xyz;
 }
-vec3 vertexToAltAzPos(highp vec3 v)
+highp vec3 vertexToAltAzPos(highp vec3 v)
 {
 	return (PROJECTOR_vertexToAltAzPosMatrix * vec4(v,1)).xyz;
 }
@@ -114,13 +114,13 @@ QByteArray StelProjector::Mat4dTransform::getBackwardTransformShader() const
 {
 	return 1+R"(
 #line 1 105
-uniform mat4 PROJECTOR_modelViewMatrixInverse;
-uniform mat4 PROJECTOR_worldPosToAltAzPosMatrix;
-vec3 modelViewBackwardTransform(vec3 worldPos)
+uniform highp mat4 PROJECTOR_modelViewMatrixInverse;
+uniform highp mat4 PROJECTOR_worldPosToAltAzPosMatrix;
+highp vec3 modelViewBackwardTransform(highp vec3 worldPos)
 {
 	return (PROJECTOR_modelViewMatrixInverse * vec4(worldPos,1)).xyz;
 }
-vec3 worldPosToAltAzPos(vec3 worldPos)
+highp vec3 worldPosToAltAzPos(highp vec3 worldPos)
 {
 	return (PROJECTOR_worldPosToAltAzPosMatrix * vec4(worldPos,1)).xyz;
 }
