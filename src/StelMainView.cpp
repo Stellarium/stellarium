@@ -34,6 +34,7 @@
 #include "StelOpenGLArray.hpp"
 #include "StelProjector.hpp"
 #include "StelObjectMgr.hpp"
+#include "StelModuleMgr.hpp"
 #include "StelMovementMgr.hpp"
 #include "Landscape.hpp"
 #include "LandscapeMgr.hpp"
