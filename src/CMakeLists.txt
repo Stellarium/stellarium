@@ -664,6 +664,9 @@ if(NOT WIN32)
      if(CMAKE_SYSTEM_NAME STREQUAL "Haiku" OR CMAKE_SYSTEM_NAME STREQUAL "OpenBSD" OR CMAKE_SYSTEM_NAME STREQUAL "FreeBSD" OR BSD)
          # On Haiku and *BSD, try finding the system-installed package first without tight version limits. An older V0.27 should still be OK.
          find_package(exiv2 NAMES exiv2 Exiv2 QUIET)
+     elseif(APPLE)
+            # On macOS, find the built-in system SDK iconv engine
+            find_package(Iconv REQUIRED)
      endif()
 endif(NOT WIN32)
 
@@ -678,7 +681,7 @@ if(NOT exiv2_FOUND AND NOT TARGET Exiv2::exiv2lib AND NOT TARGET exiv2lib)
              "ZLIB_INCLUDE_DIRS=${ZLIB_INC_DIR}"
              "EXIV2_ENABLE_INSTALL OFF"      # Stops subproject installation collision
              "EXIV2_ENABLE_XMP ON"           # Enabled for Adobe/GPano tags
-             "EXIV2_ENABLE_EXTERNAL_XMP OFF"  # Tells Exiv2 to use our compiled Expat
+             "EXIV2_ENABLE_EXTERNAL_XMP OFF" # Tells Exiv2 to use our compiled Expat
              "EXIV2_USE_EXPAT ON"            # Use Expat instead of building text stub engines
              "EXIV2_ENABLE_INIH OFF"
              "EXIV2_ENABLE_BMFF OFF"
@@ -691,16 +694,22 @@ if(NOT exiv2_FOUND AND NOT TARGET Exiv2::exiv2lib AND NOT TARGET exiv2lib)
      )
 endif(NOT exiv2_FOUND AND NOT TARGET Exiv2::exiv2lib AND NOT TARGET exiv2lib)
 
-if(exiv2_FOUND OR TARGET Exiv2::exiv2lib)
+if(exiv2_FOUND OR TARGET Exiv2::exiv2lib OR TARGET exiv2lib)
      message(STATUS "Found/Built Exiv2 ${exiv2_VERSION}")
      add_definitions("-DHAVE_EXIV2")
      add_definitions("-DEXIV2_SHARED_LIBS")
 
      if(TARGET Exiv2::exiv2lib)
-             set(STELMAIN_DEPS ${STELMAIN_DEPS} Exiv2::exiv2lib)
+          set(STELMAIN_DEPS ${STELMAIN_DEPS} Exiv2::exiv2lib)
      else()
-             set(STELMAIN_DEPS ${STELMAIN_DEPS} exiv2lib)
+          set(STELMAIN_DEPS ${STELMAIN_DEPS} exiv2lib)
      endif()
+
+     if(APPLE AND TARGET Iconv::Iconv)
+          set(STELMAIN_DEPS ${STELMAIN_DEPS} Iconv::Iconv)
+     endif()
+
+
 else()
      message(STATUS "Exiv2 library not found. No EXIF data in screenshots!")
 endif()
