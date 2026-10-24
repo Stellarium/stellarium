@@ -124,16 +124,16 @@ define(["jquery", "./remotecontrol", "./updatequeue", "./trunc"], function($, rc
         if (isRealTimeSpeed()) {
             //the timerate is 1:1 with real time
             //console.log("realtime");
-            return timeData.jday + ($.now() - lastTimeSync) / ONE_OVER_JD_MILLISECOND;
+            return timeData.jday + (Date.now() - lastTimeSync) / ONE_OVER_JD_MILLISECOND;
         } else {
             //console.log("unrealtime");
-            return timeData.jday + (($.now() - lastTimeSync) / 1000.0) * timeData.timerate;
+            return timeData.jday + ((Date.now() - lastTimeSync) / 1000.0) * timeData.timerate;
         }
     }
 
     function resyncTime() {
         timeData.jday = getCurrentTime();
-        lastTimeSync = $.now();
+        lastTimeSync = Date.now();
     }
 
     function setTimeRate(timerate) {
@@ -289,7 +289,7 @@ define(["jquery", "./remotecontrol", "./updatequeue", "./trunc"], function($, rc
 
     $(rc).on("serverDataReceived", function(evt, data) {
         timeData = data.time;
-        lastTimeSync = $.now();
+        lastTimeSync = Date.now();
 
         $(publ).trigger("timeDataUpdated", timeData);
     });

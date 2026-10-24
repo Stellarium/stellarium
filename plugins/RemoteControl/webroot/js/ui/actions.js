@@ -256,9 +256,98 @@ define(["jquery", "api/remotecontrol", "api/actions"], function($, rc, actionApi
         if(option.length>0)
             option[0].textContent = data.text + " (" + (data.isChecked ? rc.tr("on") : rc.tr("off")) + ")";
 
+
         // Update checkboxes
         $("input[type='checkbox'][name='"+id+"'].stelaction").prop("checked",data.isChecked);
         $("input[type='button'][name='"+id+"'].stelaction, button[name='"+id+"'].stelaction").toggleClass("active",data.isChecked);
-    });
+				
+				// Update all stelaction buttons
+				$("button.stelaction[name='" + id + "'], input[type='button'].stelaction[name='" + id + "']").each(function() {
+						var $btn = $(this);
+						var isChecked = data.isChecked === true;
+						
+						// Update button classes, icons, and title
+						updateButtonVisuals($btn, isChecked);
+				});
+		});
 
+		// ============================================================
+		// UPDATE BUTTON VISUALS
+		// ============================================================
+		/**
+		 * Updates the visual appearance of a stelaction button based on its state.
+		 * 
+		 * This function handles the visual updates for stelaction buttons.
+		 * It respects custom button designs by checking for existing icon elements
+		 * and custom classes before making any changes.
+		 * 
+		 * Behavior:
+		 * - If button has custom icon classes (icon32, btFullScreen, etc.), skip icon updates
+		 * - If button has action-state-icon, update it with ✓/✗/\u25B6
+		 * - If button has no icon, just update active state
+		 * - Trigger buttons get \u25B6 if they have an icon element
+		 * - Updates title/tooltip and aria-label to reflect current state
+		 */
+		function updateButtonVisuals($btn, isChecked) {
+				if (!$btn || !$btn.length) return;
+
+				var isCheckable = $btn.data('ischeckable');
+				var name = $btn.attr('name');
+				var label = $btn.find('.action-text').text() || name || '';
+								
+				// Find existing icon - don't create if not exists
+				var $icon = $btn.find('.action-state-icon');
+				if (!$icon.length) {
+						// No icon element found - just update active state
+						if (isCheckable !== false) {
+								$btn.toggleClass('active', isChecked);
+								$btn.data('ischecked', isChecked);
+								
+								// Update title for toggleable buttons even without icon
+								if (name) {
+										var stateText = isChecked ? 'ON' : 'OFF';
+										$btn.attr('title', name + ' (Toggle: ' + stateText + ')');
+										$btn.attr('aria-label', label + ' (' + stateText + ')');
+								}
+						}
+						return;
+				}
+				
+				// Icon exists - update it
+				$icon.removeClass('icon-checked icon-unchecked icon-trigger');
+				
+				if (isCheckable === false) {
+						// TRIGGER BUTTON
+						$icon.text('\u25B6'); // ▶
+						$icon.addClass('icon-trigger');
+						$btn.removeClass('active');
+						$btn.data('ischecked', false);
+						
+						// Update title for trigger buttons
+						if (name) {
+								$btn.attr('title', name + ' (Trigger - Click to execute)');
+								$btn.attr('aria-label', label);
+						}
+				} else {
+						// TOGGLEABLE BUTTON
+						$btn.toggleClass('active', isChecked);
+						
+						if (isChecked) {
+								$icon.text('\u2713'); // ✓
+								$icon.addClass('icon-checked');
+						} else {
+								$icon.text('\u2717'); // ✗
+								$icon.addClass('icon-unchecked');
+						}
+						
+						$btn.data('ischecked', isChecked);
+						
+						// Update title and aria-label for toggleable buttons
+						if (name) {
+								var stateText = isChecked ? 'ON' : 'OFF';
+								$btn.attr('title', name + ' (Toggle: ' + stateText + ')');
+								$btn.attr('aria-label', label + ' (' + stateText + ')');
+						}
+				}
+		}
 });
