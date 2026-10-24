@@ -660,26 +660,33 @@ endif()
 # ==============================================================================
 # 2. EXIV2 (Now automatically inherits EXPAT::EXPAT seamlessly)
 # ==============================================================================
-CPMFindPackage(NAME exiv2
-    GITHUB_REPOSITORY Exiv2/exiv2
-    GIT_TAG v0.28.3
-    FIND_PACKAGE_ARGUMENTS "NAMES exiv2 Exiv2"
-    OPTIONS
-        "ZLIB_INCLUDE_DIR=${ZLIB_INC_DIR}"
-        "ZLIB_INCLUDE_DIRS=${ZLIB_INC_DIR}"
-        "EXIV2_ENABLE_INSTALL OFF"      # Stops subproject installation collision
-        "EXIV2_ENABLE_XMP ON"           # Enabled for Adobe/GPano tags
-        "EXIV2_ENABLE_EXTERNAL_XMP OFF"  # Tells Exiv2 to use our compiled Expat
-        "EXIV2_USE_EXPAT ON"            # Use Expat instead of building text stub engines
-        "EXIV2_ENABLE_INIH OFF"
-        "EXIV2_ENABLE_BMFF OFF"
-        "EXIV2_ENABLE_BROTLI OFF"
-        "EXIV2_BUILD_SAMPLES OFF"
-        "EXIV2_BUILD_UNIT_TESTS OFF"
-        "EXIV2_BUILD_EXIV2_COMMAND OFF"
-        "EXIV2_ENABLE_VIDEO OFF"
-        "EXIV2_ENABLE_LENSDATA OFF"
-)
+if(CMAKE_SYSTEM_NAME STREQUAL "Haiku" OR CMAKE_SYSTEM_NAME STREQUAL "OpenBSD" OR CMAKE_SYSTEM_NAME STREQUAL "FreeBSD" OR BSD)
+    # On Haiku and OpenBSD, try finding the system-installed package first without tight version limits. An older V0.27 should still be OK.
+    find_package(exiv2 NAMES exiv2 Exiv2 QUIET)
+endif()
+
+if(NOT exiv2_FOUND AND NOT TARGET Exiv2::exiv2lib)
+     CPMFindPackage(NAME exiv2
+         GITHUB_REPOSITORY Exiv2/exiv2
+         GIT_TAG v0.28.3
+         FIND_PACKAGE_ARGUMENTS "NAMES exiv2 Exiv2"
+         OPTIONS
+             "ZLIB_INCLUDE_DIR=${ZLIB_INC_DIR}"
+             "ZLIB_INCLUDE_DIRS=${ZLIB_INC_DIR}"
+             "EXIV2_ENABLE_INSTALL OFF"      # Stops subproject installation collision
+             "EXIV2_ENABLE_XMP ON"           # Enabled for Adobe/GPano tags
+             "EXIV2_ENABLE_EXTERNAL_XMP OFF"  # Tells Exiv2 to use our compiled Expat
+             "EXIV2_USE_EXPAT ON"            # Use Expat instead of building text stub engines
+             "EXIV2_ENABLE_INIH OFF"
+             "EXIV2_ENABLE_BMFF OFF"
+             "EXIV2_ENABLE_BROTLI OFF"
+             "EXIV2_BUILD_SAMPLES OFF"
+             "EXIV2_BUILD_UNIT_TESTS OFF"
+             "EXIV2_BUILD_EXIV2_COMMAND OFF"
+             "EXIV2_ENABLE_VIDEO OFF"
+             "EXIV2_ENABLE_LENSDATA OFF"
+     )
+endif(NOT exiv2_FOUND AND NOT TARGET Exiv2::exiv2lib)
 
 if(exiv2_FOUND OR TARGET Exiv2::exiv2lib)
      message(STATUS "Found/Built Exiv2 ${exiv2_VERSION}")
