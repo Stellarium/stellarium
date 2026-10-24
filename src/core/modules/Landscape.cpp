@@ -830,7 +830,7 @@ uniform bool calibrated;
 uniform bool tanMode;
 uniform vec4 brightness;
 
-vec4 sampleSideTexture(int sideIndex, const vec2 texc, const vec2 texDx, const vec2 texDy)
+vec4 sampleSideTexture(int sideIndex, const highp vec2 texc, const vec2 texDx, const vec2 texDy)
 {
 	sideIndex -= firstSideInBatch;
 	if(sideIndex==0 && (sidePresenceMask&  1)!=0) return textureGrad(sideTex0, texc, texDx, texDy);
@@ -846,21 +846,21 @@ vec4 sampleSideTexture(int sideIndex, const vec2 texc, const vec2 texDx, const v
 
 void main(void)
 {
-	const float PI = 3.14159265;
-	vec4 winPos = projectionMatrixInverse * vec4(ndcPos, 1);
+	const highp float PI = 3.14159265;
+	highp vec4 winPos = projectionMatrixInverse * vec4(ndcPos, 1);
 	bool unprojectSuccess = false;
-	vec3 modelPos = unProject(winPos.x, winPos.y, unprojectSuccess).xyz;
+	highp vec3 modelPos = unProject(winPos.x, winPos.y, unprojectSuccess).xyz;
 	// First we must compute the derivatives of texture coordinates, and only
 	// then decide whether we want to display the !unprojectSuccess case.
 
-	vec3 viewDir = normalize(modelPos);
+	highp vec3 viewDir = normalize(modelPos);
 
 	vec4 color;
 	if(whatToRender == -1) // ground
 	{
-		vec2 centeredTexCoords = viewDir.z!=0. ? vshift / viewDir.z * viewDir.xy
-											   : vec2(0);
-		vec2 texc = (centeredTexCoords + 1.) / 2.;
+		highp vec2 centeredTexCoords = viewDir.z!=0. ? vshift / viewDir.z * viewDir.xy
+		                                             : vec2(0);
+		highp vec2 texc = (centeredTexCoords + 1.) / 2.;
 		vec2 texDx = dFdx(texc);
 		vec2 texDy = dFdy(texc);
 
@@ -880,14 +880,14 @@ void main(void)
 	}
 	else if(whatToRender == -2) // fog
 	{
-		float azimuth = atan(viewDir.x, viewDir.y);
+		highp float azimuth = atan(viewDir.x, viewDir.y);
 		if(azimuth<0.) azimuth += 2.*PI;
-		float s = azimuth/(2.*PI);
+		highp float s = azimuth/(2.*PI);
 
-		float tanElevation = viewDir.z / sqrt(1. - viewDir.z*viewDir.z);
-		float t = (tanElevation - vshift) / fogCylinderHeight;
+		highp float tanElevation = viewDir.z / sqrt(1. - viewDir.z*viewDir.z);
+		highp float t = (tanElevation - vshift) / fogCylinderHeight;
 
-		vec2 texc = vec2(s,t);
+		highp vec2 texc = vec2(s,t);
 		vec2 texDx = dFdx(texc);
 		vec2 texDy = dFdy(texc);
 
@@ -906,27 +906,27 @@ void main(void)
 	}
 	else
 	{
-		float azimuth = atan(viewDir.x, viewDir.y);
+		highp float azimuth = atan(viewDir.x, viewDir.y);
 		if(azimuth<0.) azimuth += 2.*PI;
-		float sideAngularWidth = 2.*PI/float(totalNumberOfSides);
+		highp float sideAngularWidth = 2.*PI/float(totalNumberOfSides);
 		int currentSide = int(azimuth/sideAngularWidth);
 		int currentSideInBatch = currentSide%numberOfSidesInBatch;
-		float leftBorderAzimuth = float(currentSide)*sideAngularWidth;
-		float texCoordLeft  = perSideTexCoords[currentSideInBatch][0];
-		float texCoordRight = perSideTexCoords[currentSideInBatch][2];
-		float deltaS = texCoordRight - texCoordLeft;
-		float s = texCoordLeft + (azimuth-leftBorderAzimuth)/sideAngularWidth * deltaS;
+		highp float leftBorderAzimuth = float(currentSide)*sideAngularWidth;
+		highp float texCoordLeft  = perSideTexCoords[currentSideInBatch][0];
+		highp float texCoordRight = perSideTexCoords[currentSideInBatch][2];
+		highp float deltaS = texCoordRight - texCoordLeft;
+		highp float s = texCoordLeft + (azimuth-leftBorderAzimuth)/sideAngularWidth * deltaS;
 
-		float elevation = asin(viewDir.z);
-		float texCoordBottom  = perSideTexCoords[currentSideInBatch][1];
-		float texCoordTop     = perSideTexCoords[currentSideInBatch][3];
-		float deltaT = texCoordTop - texCoordBottom;
-		float texCoordInUnitRange;
+		highp float elevation = asin(viewDir.z);
+		highp float texCoordBottom  = perSideTexCoords[currentSideInBatch][1];
+		highp float texCoordTop     = perSideTexCoords[currentSideInBatch][3];
+		highp float deltaT = texCoordTop - texCoordBottom;
+		highp float texCoordInUnitRange;
 		if(calibrated)
 		{
 			if(tanMode)
 			{
-				float tanShift = tan(decorAngleShift);
+				highp float tanShift = tan(decorAngleShift);
 				texCoordInUnitRange = (tan(elevation)-tanShift)/(tan(decorAngleShift+sideAngularHeight)-tanShift);
 			}
 			else
@@ -945,7 +945,7 @@ void main(void)
 				texCoordInUnitRange = (tan(elevation)-sin(decorAngleShift))/sin(sideAngularHeight);
 			}
 		}
-		float t = texCoordBottom + texCoordInUnitRange * deltaT;
+		highp float t = texCoordBottom + texCoordInUnitRange * deltaT;
 
 		// The usual automatic computation of derivatives of texture coordinates
 		// breaks down at the discontinuity of atan, resulting in choosing the most
