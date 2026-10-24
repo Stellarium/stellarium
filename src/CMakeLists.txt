@@ -619,7 +619,7 @@ if(TARGET zlib_stel)
 endif()
 
 # ==============================================================================
-# 1. EXPAT (Handled completely natively through CPM)
+# EXPAT (for EXIV2; handled natively through CPM)
 # ==============================================================================
 # Disable internal expat tests and binaries to optimize compilation speeds
 set(EXPAT_BUILD_TOOLS OFF CACHE BOOL "Disable expat binaries" FORCE)
@@ -635,31 +635,28 @@ CPMFindPackage(
     SOURCE_SUBDIR expat     # CRITICAL: Routes CMake directly to the inner source folder!
 )
 
-# Bridge modern targets globally
+# Bridge modern target for compatibility with Exiv2 internally
 if(TARGET expat AND NOT TARGET EXPAT::EXPAT)
     add_library(EXPAT::EXPAT INTERFACE IMPORTED GLOBAL)
     target_link_libraries(EXPAT::EXPAT INTERFACE expat)
 endif()
 
-# Fallback bindings for standard find modules probing variables
+# We set the status flag so Exiv2 skips searching, but we completely
+# AVOID setting EXPAT_LIBRARIES or EXPAT_LIBRARY cache strings!
+# This forces CMake to use target propagation rather than raw text replacements.
+set(EXPAT_FOUND TRUE CACHE BOOL "Force true for Exiv2" FORCE)
 if(TARGET expat)
-    set(EXPAT_FOUND TRUE CACHE BOOL "Force true" FORCE)
-
-    # Dynamically extract include directory directly from target properties
     get_target_property(EXPAT_INC expat INTERFACE_INCLUDE_DIRECTORIES)
-    set(EXPAT_INCLUDE_DIRS "${EXPAT_INC}" CACHE PATH "Expat includes" FORCE)
-    set(EXPAT_INCLUDE_DIR "${EXPAT_INC}" CACHE PATH "Expat includes" FORCE)
-
-    # CRITICAL FIX: Pass the native target identifier 'expat' instead of a hardcoded string!
-    # CMake will track the 'MD' suffix variants perfectly behind the scenes.
-    set(EXPAT_LIBRARIES expat CACHE STRING "Expat target tracking" FORCE)
-    set(EXPAT_LIBRARY expat CACHE STRING "Expat target tracking" FORCE)
+    set(EXPAT_INCLUDE_DIRS "${EXPAT_INC}" CACHE PATH "Expat include directories" FORCE)
+    set(EXPAT_INCLUDE_DIR "${EXPAT_INC}" CACHE PATH "Expat include directory" FORCE)
 endif()
 
 
 # ==============================================================================
-# 2. EXIV2 (Now automatically inherits EXPAT::EXPAT seamlessly)
+# EXIV2 (automatically inherits EXPAT::EXPAT)
 # ==============================================================================
+
+# Protect Windows, and discover native packages on BSD/macOS environments
 if(NOT WIN32)
      if(CMAKE_SYSTEM_NAME STREQUAL "Haiku" OR CMAKE_SYSTEM_NAME STREQUAL "OpenBSD" OR CMAKE_SYSTEM_NAME STREQUAL "FreeBSD" OR BSD)
          # On Haiku and *BSD, try finding the system-installed package first without tight version limits. An older V0.27 should still be OK.
@@ -667,8 +664,17 @@ if(NOT WIN32)
      endif()
 endif(NOT WIN32)
 
-
 if(NOT exiv2_FOUND AND NOT TARGET Exiv2::exiv2lib AND NOT TARGET exiv2lib)
+
+     # Inject -liconv directly into the global cache string variables *only* on Apple
+     # systems right before CPM runs. This guarantees that when libexiv2.dylib builds
+     # from source, it natively resolves the iconv dependencies without crashing
+     # or violating immutable ALIAS targets.
+     if(APPLE)
+          set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -liconv" CACHE STRING "Forced Apple shared link symbols" FORCE)
+          set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -liconv" CACHE STRING "Forced Apple execution link symbols" FORCE)
+     endif()
+
      CPMFindPackage(NAME exiv2
          GITHUB_REPOSITORY Exiv2/exiv2
          GIT_TAG v0.28.3
@@ -678,7 +684,7 @@ if(NOT exiv2_FOUND AND NOT TARGET Exiv2::exiv2lib AND NOT TARGET exiv2lib)
              "ZLIB_INCLUDE_DIRS=${ZLIB_INC_DIR}"
              "EXIV2_ENABLE_INSTALL OFF"      # Stops subproject installation collision
              "EXIV2_ENABLE_XMP ON"           # Enabled for Adobe/GPano tags
-             "EXIV2_ENABLE_EXTERNAL_XMP OFF"  # Tells Exiv2 to use our compiled Expat
+             "EXIV2_ENABLE_EXTERNAL_XMP OFF" # Tells Exiv2 to use our compiled Expat
              "EXIV2_USE_EXPAT ON"            # Use Expat instead of building text stub engines
              "EXIV2_ENABLE_INIH OFF"
              "EXIV2_ENABLE_BMFF OFF"
@@ -691,20 +697,21 @@ if(NOT exiv2_FOUND AND NOT TARGET Exiv2::exiv2lib AND NOT TARGET exiv2lib)
      )
 endif(NOT exiv2_FOUND AND NOT TARGET Exiv2::exiv2lib AND NOT TARGET exiv2lib)
 
-if(exiv2_FOUND OR TARGET Exiv2::exiv2lib)
-     message(STATUS "Found/Built Exiv2 ${exiv2_VERSION}")
+if(exiv2_FOUND OR TARGET Exiv2::exiv2lib OR TARGET exiv2lib)
+     message(STATUS "Found/Built Exiv2")
      add_definitions("-DHAVE_EXIV2")
      add_definitions("-DEXIV2_SHARED_LIBS")
 
      if(TARGET Exiv2::exiv2lib)
-             set(STELMAIN_DEPS ${STELMAIN_DEPS} Exiv2::exiv2lib)
+          set(STELMAIN_DEPS ${STELMAIN_DEPS} Exiv2::exiv2lib)
      else()
-             set(STELMAIN_DEPS ${STELMAIN_DEPS} exiv2lib)
+          set(STELMAIN_DEPS ${STELMAIN_DEPS} exiv2lib)
      endif()
 else()
      message(STATUS "Exiv2 library not found. No EXIF data in screenshots!")
 endif()
 
+# ==============================================================================
 
 IF(HAIKU)
      SET(STELMAIN_DEPS ${STELMAIN_DEPS} network)
