@@ -687,7 +687,7 @@ if(NOT exiv2_FOUND AND NOT TARGET Exiv2::exiv2lib AND NOT TARGET exiv2lib)
 endif(NOT exiv2_FOUND AND NOT TARGET Exiv2::exiv2lib AND NOT TARGET exiv2lib)
 
 if(exiv2_FOUND OR TARGET Exiv2::exiv2lib OR TARGET exiv2lib)
-     message(STATUS "Found/Built Exiv2 ${exiv2_VERSION}")
+     message(STATUS "Found/Built Exiv2")
      add_definitions("-DHAVE_EXIV2")
      add_definitions("-DEXIV2_SHARED_LIBS")
 
@@ -697,20 +697,11 @@ if(exiv2_FOUND OR TARGET Exiv2::exiv2lib OR TARGET exiv2lib)
           set(STELMAIN_DEPS ${STELMAIN_DEPS} exiv2lib)
      endif()
 
-     # 2. FIXED MAC LINK INJECTION: catch alias targets using native CMake evaluation rules
+     # This tells the Apple linker to universally append iconv symbols to downstream targets.
+     # It leaves the Exiv2 ALIAS / IMPORTED properties completely alone (no configuration crash),
+     # but ensures that when libexiv2.dylib builds, the arm64 iconv definitions are satisfied.
      if(APPLE)
-          if(TARGET Exiv2::exiv2lib)
-               # Query if it's an alias target
-               get_target_property(IS_ALIAS_TARGET Exiv2::exiv2lib ALIASED_TARGET)
-               if(NOT IS_ALIAS_TARGET)
-                    target_link_libraries(Exiv2::exiv2lib INTERFACE iconv)
-               endif()
-          elseif(TARGET exiv2lib)
-               get_target_property(IS_ALIAS_TARGET exiv2lib ALIASED_TARGET)
-               if(NOT IS_ALIAS_TARGET)
-                    target_link_libraries(exiv2lib INTERFACE iconv)
-               endif()
-          endif()
+          link_libraries(iconv)
      endif(APPLE)
 else()
      message(STATUS "Exiv2 library not found. No EXIF data in screenshots!")
