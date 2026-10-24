@@ -261,7 +261,7 @@ void SlewDialog::getCurrentObjectInfo()
 		double dec_j2000 = 0;
 		double ra_j2000 = 0;
 		StelUtils::rectToSphe(&ra_j2000,&dec_j2000,selected[0]->getJ2000EquatorialPos(StelApp::getInstance().getCore()));
-		ui->spinBoxRA->setRadians(ra_j2000);
+		ui->spinBoxRA->setRadians(StelUtils::fmodpos(ra_j2000, 2*M_PI));
 		ui->spinBoxDec->setRadians(dec_j2000);
 	}
 }
@@ -276,7 +276,7 @@ void SlewDialog::getCenterInfo()
 	double dec_j2000 = 0;
 	double ra_j2000 = 0;
 	StelUtils::rectToSphe(&ra_j2000,&dec_j2000,core->equinoxEquToJ2000(centerPosition, StelCore::RefractionOff));
-	ui->spinBoxRA->setRadians(ra_j2000);
+	ui->spinBoxRA->setRadians(StelUtils::fmodpos(ra_j2000, 2*M_PI));
 	ui->spinBoxDec->setRadians(dec_j2000);
 }
 
