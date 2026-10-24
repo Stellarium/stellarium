@@ -660,12 +660,15 @@ endif()
 # ==============================================================================
 # 2. EXIV2 (Now automatically inherits EXPAT::EXPAT seamlessly)
 # ==============================================================================
-if(CMAKE_SYSTEM_NAME STREQUAL "Haiku" OR CMAKE_SYSTEM_NAME STREQUAL "OpenBSD" OR CMAKE_SYSTEM_NAME STREQUAL "FreeBSD" OR BSD)
-    # On Haiku and OpenBSD, try finding the system-installed package first without tight version limits. An older V0.27 should still be OK.
-    find_package(exiv2 NAMES exiv2 Exiv2 QUIET)
-endif()
+if(NOT WIN32)
+     if(CMAKE_SYSTEM_NAME STREQUAL "Haiku" OR CMAKE_SYSTEM_NAME STREQUAL "OpenBSD" OR CMAKE_SYSTEM_NAME STREQUAL "FreeBSD" OR BSD)
+         # On Haiku and *BSD, try finding the system-installed package first without tight version limits. An older V0.27 should still be OK.
+         find_package(exiv2 NAMES exiv2 Exiv2 QUIET)
+     endif()
+endif(NOT WIN32)
 
-if(NOT exiv2_FOUND AND NOT TARGET Exiv2::exiv2lib)
+
+if(NOT exiv2_FOUND AND NOT TARGET Exiv2::exiv2lib AND NOT TARGET exiv2lib)
      CPMFindPackage(NAME exiv2
          GITHUB_REPOSITORY Exiv2/exiv2
          GIT_TAG v0.28.3
@@ -686,7 +689,7 @@ if(NOT exiv2_FOUND AND NOT TARGET Exiv2::exiv2lib)
              "EXIV2_ENABLE_VIDEO OFF"
              "EXIV2_ENABLE_LENSDATA OFF"
      )
-endif(NOT exiv2_FOUND AND NOT TARGET Exiv2::exiv2lib)
+endif(NOT exiv2_FOUND AND NOT TARGET Exiv2::exiv2lib AND NOT TARGET exiv2lib)
 
 if(exiv2_FOUND OR TARGET Exiv2::exiv2lib)
      message(STATUS "Found/Built Exiv2 ${exiv2_VERSION}")
