@@ -223,7 +223,10 @@ void Quasar::draw(StelCore* core, StelPainter& painter)
 			core->j2000ToAltAzInPlaceNoRefraction(&altAz);
 			RCMag rcMag;
 			sd->preDrawPointSource(&painter);
-			sd->computeRCMag(mag, &rcMag);
+			if (sd->getFlagPsfStars())
+				sd->computePsfRCMag(mag, &rcMag);
+			else
+				sd->computeRCMag(mag, &rcMag);
 			// allow height-dependent twinkle and suppress twinkling in higher altitudes. Keep 0.1 twinkle amount in zenith.
 			sd->drawPointSource(&painter, vf.toVec3d(), rcMag, sd->indexToColor(BvToColorIndex(bV)), true, qMin(1.0f, 1.0f-0.9f*altAz[2]));
 			sd->postDrawPointSource(&painter);
