@@ -65,7 +65,7 @@ struct SpecialZoneData : public ZoneData
 	//! Get array of stars in this zone.
 	Star *getStars(void) const
 	{
-		return reinterpret_cast<Star*>(stars);
+		return static_cast<Star*>(stars);
 	}
 };
 

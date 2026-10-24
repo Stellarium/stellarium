@@ -596,7 +596,7 @@ private:
 								 const Vec3f &c2,
 								 void *context)
 	{
-		reinterpret_cast<StarMgr*>(context)->initTriangle(lev, index, c0, c1, c2);
+		static_cast<StarMgr*>(context)->initTriangle(lev, index, c0, c1, c2);
 	}
 
 	void initTriangle(int lev, int index,

@@ -269,7 +269,7 @@ SphericalRegionP StelProjector::getViewportConvexPolygon(float marginX, float ma
 	{
 		// Special case for handling degenerated cases, use full sky.
 		//qDebug() << "!ok";
-		return SphericalRegionP(reinterpret_cast<SphericalRegion*>(new AllSkySphericalRegion()));
+		return SphericalRegionP(new AllSkySphericalRegion());
 	}
 	e0.normalize();
 	e1.normalize();

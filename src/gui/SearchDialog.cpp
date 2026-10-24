@@ -1358,7 +1358,7 @@ void SearchDialog::onSimbadStatusChanged()
 
 void SearchDialog::greekLetterClicked()
 {
-	QPushButton *sender = reinterpret_cast<QPushButton *>(this->sender());
+	QPushButton *sender = qobject_cast<QPushButton *>(this->sender());
 	QLineEdit* sso = ui->lineEditSearchSkyObject;
 	QString text;
 	if (sender)
