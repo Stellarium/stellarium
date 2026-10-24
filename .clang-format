@@ -4,7 +4,7 @@ AccessModifierOffset: -8
 AlignAfterOpenBracket: Align
 AlignArrayOfStructures: Left
 AlignConsecutiveAssignments:
-  Enabled:         true
+  Enabled:         false
   AcrossEmptyLines: false
   AcrossComments:  false
   AlignCompound:   false
@@ -109,7 +109,7 @@ IncludeIsMainRegex: '(Test)?$'
 IncludeIsMainSourceRegex: ''
 IndentAccessModifiers: false
 IndentCaseBlocks: false
-IndentCaseLabels: false
+IndentCaseLabels: true
 IndentExternBlock: NoIndent
 IndentGotoLabels: true
 IndentPPDirectives: AfterHash
