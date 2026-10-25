@@ -67,6 +67,8 @@
 #include "StelMovementMgr.hpp"
 #include "Landscape.hpp"
 #include "LandscapeMgr.hpp"
+#include <QJsonDocument>
+#include <QJsonObject>
 #endif
 #ifdef Q_OS_WIN
 	#include <QPinchGesture>
@@ -1010,6 +1012,10 @@ void StelMainView::init()
 	customScreenshotWidth=configuration->value("main/screenshot_custom_width", 1024).toInt();
 	customScreenshotHeight=configuration->value("main/screenshot_custom_height", 768).toInt();
 	screenshotDpi=configuration->value("main/screenshot_dpi", 72).toInt();
+#ifdef HAVE_EXIV2
+	setScreenshotArtist(configuration->value("main/screenshot_artist", "").toString());
+	setScreenshotCopyright(configuration->value("main/screenshot_copyright", "").toString());
+#endif
 	setFlagCursorTimeout(configuration->value("gui/flag_mouse_cursor_timeout", false).toBool());
 	setCursorTimeout(configuration->value("gui/mouse_cursor_timeout", 10.f).toDouble());
 	setMaxFps(configuration->value("video/maximum_fps",10000.f).toFloat());
@@ -1683,6 +1689,22 @@ void StelMainView::setScreenshotFormat(const QString filetype)
 	}
 }
 
+#ifdef HAVE_EXIV2
+void StelMainView::setScreenshotArtist(const QString artistName)
+{
+	screenShotArtist = artistName;
+	StelApp::getInstance().getSettings()->setValue("main/screenshot_artist", artistName);
+	emit screenshotArtistChanged(artistName);
+}
+
+void StelMainView::setScreenshotCopyright(const QString copyrightName)
+{
+	screenShotArtist = copyrightName;
+	StelApp::getInstance().getSettings()->setValue("main/screenshot_copyright", copyrightName);
+	emit screenshotCopyrightChanged(copyrightName);
+}
+#endif
+
 void StelMainView::setFlagScreenshotDateFileName(bool b)
 {
 	flagScreenshotDateFileName=b;
@@ -2014,40 +2036,42 @@ void StelMainView::doScreenshot(void)
 		LandscapeMgr *landscapeMgr=dynamic_cast<LandscapeMgr*>(GETSTELMODULE(LandscapeMgr));
 		StelSkyDrawer *drawer=core->getSkyDrawer();
 
-		Exiv2::ExifData exifData;
-		Exiv2::XmpData xmpData;
+		std::unique_ptr<Exiv2::Image> image = Exiv2::ImageFactory::open(shotPath.filePath().toStdString());
+		Q_ASSERT(image.get() != 0);
+		Exiv2::ExifData &exifData = image->exifData();
+		Exiv2::XmpData  &xmpData  = image->xmpData();
 
 		// See https://exiv2.org/examples.html#example2, but we can use more modern syntax that reads/assigns respective data type automatically.
 		qDebug() << "WRITING EXIF ENTRIES";
 
 		// TECHNICALITIES
 
-		exifData["Exif.Image.Make"] =                   "Stellarium"; // Or CPU architecture?
-		exifData["Exif.Image.Model"] =                  StelUtils::getApplicationVersion().toLocal8Bit().constData();
-		exifData["Exif.Image.ImageWidth"] =             QString::number(im.width()).toLocal8Bit().constData();
-		exifData["Exif.Image.ImageLength"] =            QString::number(im.height()).toLocal8Bit().constData();
-		exifData["Exif.Image.XResolution"] =           QString("%1/1").arg(screenshotDpi).toStdString().c_str();
-		exifData["Exif.Image.YResolution"] =           QString("%1/1").arg(screenshotDpi).toStdString().c_str();
-		exifData["Exif.Image.ResolutionUnit"] =        "2"; // 2=inches
-		exifData["Exif.Image.Artist"]                = (QSysInfo::productType()=="windows" ? qgetenv("USERNAME") : qgetenv("USER")).constData();
-		exifData["Exif.Image.HostComputer"]          = QString("%1 (%2)").arg(QSysInfo::machineHostName(), StelUtils::getOperatingSystemInfo()).toStdString().c_str();
-		exifData["Exif.Image.Copyright"]             = QString("Copyright %1, %2. All rights reserved.").
-				arg(QString(QSysInfo::productType()=="windows" ? qgetenv("USERNAME") : qgetenv("USER")),
-				    QString::number(QDate::currentDate().year())).toStdString().c_str(); // TODO: Add a second null terminator!
-
+		exifData["Exif.Image.Make"]           = "Stellarium"; // Or CPU architecture?
+		exifData["Exif.Image.Model"]          = StelUtils::getApplicationVersion().toStdString().c_str();
+		exifData["Exif.Image.ImageWidth"]     = QString::number(im.width()).toStdString().c_str();
+		exifData["Exif.Image.ImageLength"]    = QString::number(im.height()).toStdString().c_str();
+		exifData["Exif.Image.XResolution"]    = QString("%1/1").arg(screenshotDpi).toStdString().c_str();
+		exifData["Exif.Image.YResolution"]    = QString("%1/1").arg(screenshotDpi).toStdString().c_str();
+		exifData["Exif.Image.ResolutionUnit"] = "2"; // 2=inches
+		exifData["Exif.Image.Artist"]         = screenShotArtist.toStdString().c_str();
+		exifData["Exif.Image.HostComputer"]   = QString("%1 (%2)").arg(QSysInfo::machineHostName(), StelUtils::getOperatingSystemInfo()).toStdString().c_str();
+		if (screenShotCopyright.length()>0)
+			exifData["Exif.Image.Copyright"] = QString("Copyright %1, %2. All rights reserved.").
+								arg(screenShotCopyright,
+							            QString::number(QDate::currentDate().year())).toStdString().c_str(); // TODO: Add a second null terminator!
 		// SIMULATION TIME
-		// TODO: Make sure we don't run into problems before 1970/1900/1AD?
-		// Add UTC simulation time as date of exposure
-		QString dateTimeStr=StelUtils::julianDayToExifString(core->getJD());
-		// Timezone format could be "Z", but we use only the long variants "+HH:MM" or "-HH:MM".
+		// No problems before 1970/1900! IrfanView even accepts negative and 5-digit years.
+		// Add Zone-based simulation time as date of exposure
 		const double tzOffset = core->getUTCOffset(core->getJD());
+		QString dateTimeStr=StelUtils::julianDayToExifString(core->getJD()+tzOffset/24.);
+		// Timezone format could be "Z", but we use only the long variants "+HH:MM" or "-HH:MM".
 		QTime tz = QTime(0, 0, 0).addSecs(static_cast<int>(3600*qAbs(tzOffset)));
 		QString timeZone = QString(tzOffset<0.0 ? "-%1" : "+%1").arg(tz.toString("hh:mm"));
 		qDebug() << "Timezone: " << timeZone;
-		exifData["Exif.Photo.DateTimeOriginal"]     = dateTimeStr.toStdString().c_str();
-		exifData["Exif.Photo.OffsetTimeOriginal"]   =  timeZone.toStdString().c_str();
-		//exifData["Exif.Image.TimeZoneOffset"]       =  timeZone.toStdString().c_str();// ? TBD: here as well?
-
+		exifData["Exif.Photo.DateTimeOriginal"]    = dateTimeStr.toStdString().c_str();
+		exifData["Exif.Photo.OffsetTimeOriginal"]  =  timeZone.toStdString().c_str();
+		//exifData["Exif.Image.TimeZoneOffset"]    =  timeZone.toStdString().c_str();// Ill-defined. Better don't use!
+		xmpData["Xmp.exif.TimeZoneName"]           =  loc.ianaTimeZone.toStdString().c_str(); // Use a customized XMP tag. Name is free!
 
 		// LOCATION
 		exifData["Exif.GPSInfo.GPSVersionID"]        = "2 2 0 0"; // mandatory. It should display as 2.0.0.0, though, not 128.0.0.0.
@@ -2266,49 +2290,54 @@ void StelMainView::doScreenshot(void)
 		// NOW, ADD SOME IMAGE DESCRIPTION
 		qDebug() << "EXIF: Image description...";
 
-		const QMap<StelMovementMgr::MountMode, QString>mountModeMap={
-			{ StelMovementMgr::MountAltAzimuthal      , "azimuthal view"},
-			{ StelMovementMgr::MountEquinoxEquatorial , "equatorial view"},
-			{ StelMovementMgr::MountGalactic          , "galactic view"},
-			{ StelMovementMgr::MountSupergalactic     , "supergalactic view"}
-		};
-		QString mountMode=mountModeMap.value(movMgr->getMountMode(), "unspecified view");
-
-		QString locName=loc.name;
-		QString locRegion=loc.region;
-		// If landscape sets location, prefer use of landscape name.
-		Landscape *landscape=landscapeMgr->getCurrentLandscape();
-		if (landscapeMgr->getFlagLandscapeSetsLocation() && landscape->hasLocation() && landscapeMgr->getFlagLandscape())
-		{
-			if (landscape->getLocation().name.length()>0)
-				locName=landscape->getLocation().name;
-			else
-				locName=landscape->getName();
-			if (landscape->getLocation().region.length()>0)
-				locName=landscape->getLocation().region;
-		}
-		QString circumstances=QString("%1 %2 from %3 (%4).").arg(core->getUseTopocentricCoordinates() ? "Topocentric" : "Planetocentric",
-									 mountMode,
-									 locName,
-									 locRegion);
+		// We can throw in some more image information into Exif.Photo.UserComment. This can be a packed JSON string as well!
+		QVariantMap infoMap;
 
 		StelObjectMgr *objMgr=&StelApp::getInstance().getStelObjectMgr();
 		auto sel=objMgr->getSelectedObject();
 		if (sel.length()>0)
 		{
-			exifData["Exif.Image.ImageDescription"] = QString("%1 (%2: %3°)").arg(sel[0]->getNameI18n(),
-											      qc_("FOV", "abbreviation"),
-											      QString::number(fov, 'g', 3)).toStdString().c_str();
-			QString infoString=sel[0]->getInfoString(core, (StelObject::DefaultInfo | StelObject::PlainText));
-			exifData["Exif.Photo.UserComment"]      = infoString.toStdString().c_str();
+			infoMap = sel[0]->getInfoMap(core);
 		}
-		else
+
+		const QMap<StelMovementMgr::MountMode, QString>mountModeMap={
+			{ StelMovementMgr::MountAltAzimuthal      , "azimuthal"},
+			{ StelMovementMgr::MountEquinoxEquatorial , "equatorial"},
+			{ StelMovementMgr::MountGalactic          , "galactic"},
+			{ StelMovementMgr::MountSupergalactic     , "supergalactic"}
+		};
+		infoMap["mount_mode"] = mountModeMap.value(movMgr->getMountMode(), "unspecified");
+
+		infoMap["location_name"]   = loc.name;
+		infoMap["location_region"] = loc.region;
+		infoMap["location_timezone_name"] = loc.ianaTimeZone;
+
+		// If landscape is displayed sets location, prefer use of landscape name.
+		Landscape *landscape=landscapeMgr->getCurrentLandscape();
+		if (landscapeMgr->getFlagLandscapeSetsLocation() && landscape->hasLocation() && landscapeMgr->getFlagLandscape())
 		{
-			exifData["Exif.Image.ImageDescription"] = QString("%1 (%2: %3°)").arg(qc_("Stellarium View", "Screenshot default title"),
-											      qc_("FOV", "abbreviation"),
-											      QString::number(fov, 'g', 3)).toStdString().c_str();
-			exifData["Exif.Photo.UserComment"]      = circumstances.toStdString().c_str();
+			if (landscape->getLocation().name.length()>0)
+				infoMap["location_name"]=landscape->getLocation().name;
+			else
+				infoMap["location_name"]=landscape->getName();
+			if (landscape->getLocation().region.length()>0)
+				infoMap["location_region"]=landscape->getLocation().region;
 		}
+
+		infoMap["topocentric_view"] = core->getUseTopocentricCoordinates();
+
+		// TODO: Other settings? Gridlines, Skyculture details?
+		// TODO: Ocular/Telescope details?
+
+		// Convert the QVariantMap to a JSON String
+		// Using QJsonDocument::Compact removes all whitespace/newlines to save EXIF space
+		QString jsonString = QJsonDocument(QJsonObject::fromVariantMap(infoMap)).toJson(QJsonDocument::Compact);
+		exifData["Exif.Photo.UserComment"] = jsonString.toStdString();
+
+		exifData["Exif.Image.ImageDescription"] = QString("%1 (%2: %3°)").arg(sel.length()>0 ?  sel[0]->getNameI18n() : qc_("Stellarium View", "Screenshot default title"),
+										      qc_("FOV", "abbreviation"),
+										      QString::number(fov, 'g', 3)).toStdString().c_str();
+
 		//exifData["Exif.Image.ExposureTime"]         = exposureTimeSeconds; // not meaningful
 		//exifData["Exif.Image.FNumber"]              = F_number;            // not meaningful
 
@@ -2317,8 +2346,6 @@ void StelMainView::doScreenshot(void)
 
 		// *************************************************************************
 		// Finally, write the remaining Exif data to the image file
-		std::unique_ptr<Exiv2::Image> image = Exiv2::ImageFactory::open(shotPath.filePath().toStdString());
-		Q_ASSERT(image.get() != 0);
 		image->setExifData(exifData);
 		image->setXmpData(xmpData);
 		image->writeMetadata();
