@@ -655,6 +655,13 @@ endif()
 # ==============================================================================
 # 2. EXIV2 (Now automatically inherits EXPAT::EXPAT seamlessly)
 # ==============================================================================
+# Define an isolated variable list for options so Windows remains untouched
+set(EXIV2_MAC_ARGS "")
+if(APPLE)
+    # Force the linker flags straight down into the Exiv2 sub-scope flags array
+    list(APPEND EXIV2_MAC_ARGS "CMAKE_SHARED_LINKER_FLAGS=-liconv")
+endif()
+
 # Protect Windows, and safely discover native packages on BSD/macOS environments
 if(NOT WIN32)
      if(CMAKE_SYSTEM_NAME STREQUAL "Haiku" OR CMAKE_SYSTEM_NAME STREQUAL "OpenBSD" OR CMAKE_SYSTEM_NAME STREQUAL "FreeBSD" OR BSD)
@@ -683,6 +690,7 @@ if(NOT exiv2_FOUND AND NOT TARGET Exiv2::exiv2lib AND NOT TARGET exiv2lib)
              "EXIV2_BUILD_EXIV2_COMMAND OFF"
              "EXIV2_ENABLE_VIDEO OFF"
              "EXIV2_ENABLE_LENSDATA OFF"
+             ${EXIV2_MAC_ARGS}
      )
 endif(NOT exiv2_FOUND AND NOT TARGET Exiv2::exiv2lib AND NOT TARGET exiv2lib)
 
@@ -697,12 +705,6 @@ if(exiv2_FOUND OR TARGET Exiv2::exiv2lib OR TARGET exiv2lib)
           set(STELMAIN_DEPS ${STELMAIN_DEPS} exiv2lib)
      endif()
 
-     # This tells the Apple linker to universally append iconv symbols to downstream targets.
-     # It leaves the Exiv2 ALIAS / IMPORTED properties completely alone (no configuration crash),
-     # but ensures that when libexiv2.dylib builds, the arm64 iconv definitions are satisfied.
-     if(APPLE)
-          link_libraries(iconv)
-     endif(APPLE)
 else()
      message(STATUS "Exiv2 library not found. No EXIF data in screenshots!")
 endif()
