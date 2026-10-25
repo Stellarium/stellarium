@@ -619,7 +619,7 @@ if(TARGET zlib_stel)
 endif()
 
 # ==============================================================================
-# 1. EXPAT (Handled completely natively through CPM)
+# EXPAT (for EXIV2; handled natively through CPM)
 # ==============================================================================
 # Disable internal expat tests and binaries to optimize compilation speeds
 set(EXPAT_BUILD_TOOLS OFF CACHE BOOL "Disable expat binaries" FORCE)
@@ -653,11 +653,10 @@ endif()
 
 
 # ==============================================================================
-# 2. EXIV2 (Now automatically inherits EXPAT::EXPAT seamlessly)
+# EXIV2 (automatically inherits EXPAT::EXPAT)
 # ==============================================================================
-# Define an isolated variable list for options so Windows remains untouched
 
-# Protect Windows, and safely discover native packages on BSD/macOS environments
+# Protect Windows, and discover native packages on BSD/macOS environments
 if(NOT WIN32)
      if(CMAKE_SYSTEM_NAME STREQUAL "Haiku" OR CMAKE_SYSTEM_NAME STREQUAL "OpenBSD" OR CMAKE_SYSTEM_NAME STREQUAL "FreeBSD" OR BSD)
          # On Haiku and *BSD, try finding the system-installed package first without tight version limits. An older V0.27 should still be OK.
@@ -667,7 +666,6 @@ endif(NOT WIN32)
 
 if(NOT exiv2_FOUND AND NOT TARGET Exiv2::exiv2lib AND NOT TARGET exiv2lib)
 
-     # --- FIXED GLOBAL APPLE COMPILE PROTECTION ---
      # Inject -liconv directly into the global cache string variables *only* on Apple
      # systems right before CPM runs. This guarantees that when libexiv2.dylib builds
      # from source, it natively resolves the iconv dependencies without crashing
@@ -713,6 +711,7 @@ else()
      message(STATUS "Exiv2 library not found. No EXIF data in screenshots!")
 endif()
 
+# ==============================================================================
 
 IF(HAIKU)
      SET(STELMAIN_DEPS ${STELMAIN_DEPS} network)
