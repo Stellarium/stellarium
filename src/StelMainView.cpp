@@ -2113,9 +2113,9 @@ void StelMainView::doScreenshot(void)
 				exifData["Exif.Photo.FocalLengthIn35mmFilm"] = QString::number(int(focalLengthEquiv)).toStdString().c_str();
 				//exifData["Exif.Image.FocalLength"]          =  focalLengthEquiv; // Maybe explicitly add this, or some f as diagonal relative to 35mm? (vFoV=24mm)
 
-			}
 				qDebug() << "EXIF: Done writing ProjectionPerspective data";
 				break;
+			}
 			case StelCore::ProjectionCylinderFill:
 				// Set the human-readable string descriptive name
 				exifData["Exif.Photo.LensModel"] = "360x180-degree Equirectangular Lens";
@@ -2178,9 +2178,9 @@ void StelMainView::doScreenshot(void)
 				xmpData["Xmp.GPano.PoseHeadingDegrees"] = std::to_string(gpanoHeading);
 				xmpData["Xmp.GPano.PosePitchDegrees"]   = std::to_string(gpanoPitch);
 				xmpData["Xmp.GPano.PoseRollDegrees"]    = "0";
-			}
 				qDebug() << "EXIF: Done writing ProjectionCylinder data";
 				break;
+			}
 			case StelCore::ProjectionMercator:
 			{
 				StelProjectorP proj=core->getProjection(StelCore::FrameAltAz); // This is a new projector. TBD: Not sure this works, esp. for custom screenshot size!
@@ -2209,9 +2209,9 @@ void StelMainView::doScreenshot(void)
 					xmpData["Xmp.GPano.CroppedAreaLeftPixels"]   = std::to_string(0);
 				else
 					xmpData["Xmp.GPano.CroppedAreaLeftPixels"]   = std::to_string(int(centerPixelPerRad-im.width()/2));
-			}
 				qDebug() << "EXIF: Done writing ProjectionMercator data";
 				break;
+			}
 			case StelCore::ProjectionFisheye:
 			{
 				// Set the human-readable string descriptive name
@@ -2245,9 +2245,9 @@ void StelMainView::doScreenshot(void)
 				// 3. Define the Mask Circle Properties
 				xmpData["Xmp.xmpCamera.FisheyeCircleRadius"] = std::to_string(radius_pixels);
 				xmpData["Xmp.xmpCamera.FisheyeCircleCenter"] = std::to_string(center_x) + " " + std::to_string(center_y);
-			}
 				qDebug() << "EXIF: Done writing ProjectionFisheye data";
 				break;
+			}
 			default:
 			{
 				const QMap<StelCore::ProjectionType, QString>pMap={
@@ -2259,7 +2259,7 @@ void StelMainView::doScreenshot(void)
 					{StelCore::ProjectionSinusoidal,    "Simusoidal"},
 					{StelCore::ProjectionMiller,        "Miller Cylindrical"}};
 				// Set the human-readable string descriptive name
-				exifData["Exif.Photo.LensModel"] = QString("%1-degree VFoV %2 Lens").arg(QString::number(fov, 'f', 1), pMap.value(projType, "Unknown-type")).toStdString().c_str();
+				exifData["Exif.Photo.LensModel"] = QString("%1-degree VFoV %2 Lens").arg(QString::number(fov, 'f', 1), pMap.value(projType, "unknown-type")).toStdString().c_str();
 			}
 		}
 
