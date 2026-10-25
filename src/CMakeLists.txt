@@ -662,14 +662,21 @@ if(NOT WIN32)
      if(CMAKE_SYSTEM_NAME STREQUAL "Haiku" OR CMAKE_SYSTEM_NAME STREQUAL "OpenBSD" OR CMAKE_SYSTEM_NAME STREQUAL "FreeBSD" OR BSD)
          # On Haiku and *BSD, try finding the system-installed package first without tight version limits. An older V0.27 should still be OK.
          find_package(exiv2 NAMES exiv2 Exiv2 QUIET)
-     elseif(APPLE)
-            # CRITICAL MACOS FIX: This creates the global "Iconv::Iconv" target interface.
-            # Exiv2's internal dependency checks will find it and bind it seamlessly!
-            find_package(Iconv REQUIRED)
      endif()
 endif(NOT WIN32)
 
 if(NOT exiv2_FOUND AND NOT TARGET Exiv2::exiv2lib AND NOT TARGET exiv2lib)
+
+     # --- FIXED GLOBAL APPLE COMPILE PROTECTION ---
+     # Inject -liconv directly into the global cache string variables *only* on Apple
+     # systems right before CPM runs. This guarantees that when libexiv2.dylib builds
+     # from source, it natively resolves the iconv dependencies without crashing
+     # or violating immutable ALIAS targets.
+     if(APPLE)
+          set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -liconv" CACHE STRING "Forced Apple shared link symbols" FORCE)
+          set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -liconv" CACHE STRING "Forced Apple execution link symbols" FORCE)
+     endif()
+
      CPMFindPackage(NAME exiv2
          GITHUB_REPOSITORY Exiv2/exiv2
          GIT_TAG v0.28.3
@@ -702,7 +709,6 @@ if(exiv2_FOUND OR TARGET Exiv2::exiv2lib OR TARGET exiv2lib)
      else()
           set(STELMAIN_DEPS ${STELMAIN_DEPS} exiv2lib)
      endif()
-
 else()
      message(STATUS "Exiv2 library not found. No EXIF data in screenshots!")
 endif()
