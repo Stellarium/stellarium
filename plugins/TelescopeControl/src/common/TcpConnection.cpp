@@ -92,7 +92,7 @@ TcpConnection::TcpConnection(Server &server, const char *host, int port)
 
 		if (SETNONBLOCK(sock) < 0)
 		{
-			close(sock);
+			closeSocket(sock);
 			continue;
 		}
 
@@ -133,7 +133,7 @@ TcpConnection::TcpConnection(Server &server, const char *host, int port)
 			break;
 		}
 
-		close(sock);
+		closeSocket(sock);
 	}
 
 	freeaddrinfo(address_list);

@@ -52,7 +52,6 @@ static inline int SetNonblocking(int s)
 }
 #define SETNONBLOCK(s) SetNonblocking(s)
 #define SOCKLEN_T int
-#define close closesocket
 #define IS_INVALID_SOCKET(fd) (fd==INVALID_SOCKET)
 #define STRERROR(x) x
 //  #define DEBUG5
@@ -97,6 +96,8 @@ public:
 	virtual void sendPosition(unsigned int ra_int, int dec_int, int status) {Q_UNUSED(ra_int) Q_UNUSED(dec_int) Q_UNUSED(status)}
 	
 protected:
+	//! Closes a native socket with the platform's socket API.
+	static void closeSocket(SOCKET socket);
 	Socket(Server &server, SOCKET fd) : server(server), fd(fd) {}
 	Server & server;
 	
