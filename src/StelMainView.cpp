@@ -1699,7 +1699,7 @@ void StelMainView::setScreenshotArtist(const QString artistName)
 
 void StelMainView::setScreenshotCopyright(const QString copyrightName)
 {
-	screenShotArtist = copyrightName;
+	screenShotCopyright = copyrightName;
 	StelApp::getInstance().getSettings()->setValue("main/screenshot_copyright", copyrightName);
 	emit screenshotCopyrightChanged(copyrightName);
 }
@@ -2056,9 +2056,9 @@ void StelMainView::doScreenshot(void)
 		exifData["Exif.Image.Artist"]         = screenShotArtist.toStdString().c_str();
 		exifData["Exif.Image.HostComputer"]   = QString("%1 (%2)").arg(QSysInfo::machineHostName(), StelUtils::getOperatingSystemInfo()).toStdString().c_str();
 		if (screenShotCopyright.length()>0)
-			exifData["Exif.Image.Copyright"] = QString("Copyright %1, %2. All rights reserved.").
+			exifData["Exif.Image.Copyright"] = QString("%1, %2. All rights reserved.").
 								arg(screenShotCopyright,
-							            QString::number(QDate::currentDate().year())).toStdString().c_str(); // TODO: Add a second null terminator!
+							            QString::number(QDate::currentDate().year())).toStdString().c_str();
 		// SIMULATION TIME
 		// No problems before 1970/1900! IrfanView even accepts negative and 5-digit years.
 		// Add Zone-based simulation time as date of exposure
