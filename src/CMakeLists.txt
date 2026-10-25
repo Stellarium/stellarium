@@ -656,17 +656,16 @@ endif()
 # 2. EXIV2 (Now automatically inherits EXPAT::EXPAT seamlessly)
 # ==============================================================================
 # Define an isolated variable list for options so Windows remains untouched
-set(EXIV2_MAC_ARGS "")
-if(APPLE)
-    # Force the linker flags straight down into the Exiv2 sub-scope flags array
-    list(APPEND EXIV2_MAC_ARGS "CMAKE_SHARED_LINKER_FLAGS=-liconv")
-endif()
 
 # Protect Windows, and safely discover native packages on BSD/macOS environments
 if(NOT WIN32)
      if(CMAKE_SYSTEM_NAME STREQUAL "Haiku" OR CMAKE_SYSTEM_NAME STREQUAL "OpenBSD" OR CMAKE_SYSTEM_NAME STREQUAL "FreeBSD" OR BSD)
          # On Haiku and *BSD, try finding the system-installed package first without tight version limits. An older V0.27 should still be OK.
          find_package(exiv2 NAMES exiv2 Exiv2 QUIET)
+     elseif(APPLE)
+            # CRITICAL MACOS FIX: This creates the global "Iconv::Iconv" target interface.
+            # Exiv2's internal dependency checks will find it and bind it seamlessly!
+            find_package(Iconv REQUIRED)
      endif()
 endif(NOT WIN32)
 
@@ -690,7 +689,6 @@ if(NOT exiv2_FOUND AND NOT TARGET Exiv2::exiv2lib AND NOT TARGET exiv2lib)
              "EXIV2_BUILD_EXIV2_COMMAND OFF"
              "EXIV2_ENABLE_VIDEO OFF"
              "EXIV2_ENABLE_LENSDATA OFF"
-             ${EXIV2_MAC_ARGS}
      )
 endif(NOT exiv2_FOUND AND NOT TARGET Exiv2::exiv2lib AND NOT TARGET exiv2lib)
 
