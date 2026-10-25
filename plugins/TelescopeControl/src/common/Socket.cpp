@@ -57,8 +57,16 @@ void Socket::hangup(void)
 {
 	if (!IS_INVALID_SOCKET(fd))
 	{
-		close(fd);
+		closeSocket(fd);
 		fd = INVALID_SOCKET;
 	}
 }
 
+void Socket::closeSocket(SOCKET socket)
+{
+#ifdef Q_OS_WIN
+	closesocket(socket);
+#else
+	close(socket);
+#endif
+}
