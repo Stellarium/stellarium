@@ -2075,15 +2075,18 @@ void StelMainView::doScreenshot(void)
 
 		// LOCATION
 		exifData["Exif.GPSInfo.GPSVersionID"]        = "2 2 0 0"; // mandatory. It should display as 2.0.0.0, though, not 128.0.0.0.
+		exifData["Exif.GPSInfo.GPSMapDatum"]         = "WGS-84"; // fixed for us
 		exifData["Exif.GPSInfo.GPSLatitudeRef"]      = (loc.getLatitude()>0.f ? "N" : "S");
 		exifData["Exif.GPSInfo.GPSLatitude"]         = convertToExifDms(loc.getLatitude()); // 3 rational numbers dd/1,mm/1,ss/1
 		exifData["Exif.GPSInfo.GPSLongitudeRef"]     = (loc.getLongitude()>0.f ? "E" : "W");
 		exifData["Exif.GPSInfo.GPSLongitude"]        = convertToExifDms(loc.getLongitude()); // 3 rational numbers dd/1,mm/1,ss/1
 		exifData["Exif.GPSInfo.GPSAltitudeRef"]      = "0"; // 0 indicates MASL.
 		exifData["Exif.GPSInfo.GPSAltitude"]         = QString("%1/1").arg(loc.altitude).toStdString().c_str(); // 1 rational number, meters
-		exifData["Exif.GPSInfo.GPSMapDatum"]         = "WGS-84"; // fixed for us
-		exifData["Exif.Photo.Temperature"]           = landscapeMgr->getFlagAtmosphere() ? QString("%1/100").arg(int(100.*drawer->getAtmosphereTemperature())).toStdString().c_str() : "0/1"; // Atmosphere temp, Celsius
-		exifData["Exif.Photo.Pressure"]              = landscapeMgr->getFlagAtmosphere() ? QString("%1/100").arg(int(100.*drawer->getAtmospherePressure())).toStdString().c_str()    : "0/1"; // Atmosphere pressure, hPa
+		if (landscapeMgr->getFlagAtmosphere())
+		{
+			exifData["Exif.Photo.Temperature"] = QString("%1/100").arg(int(100.*drawer->getAtmosphereTemperature())).toStdString().c_str(); // [Celsius]
+			exifData["Exif.Photo.Pressure"]    = QString("%1/100").arg(int(100.*drawer->getAtmospherePressure())).toStdString().c_str();    // [hPa]
+		}
 
 		// TARGET and view orientation?
 		Vec3d currentAim;
@@ -2109,7 +2112,9 @@ void StelMainView::doScreenshot(void)
 			exifData["Exif.GPSInfo.GPSImgDirection"]     = QString("%1/1000").arg(QString::number(int(round(ra*1000.0)))).toStdString().c_str(); // True azimuth, degrees [0..359.99]
 			exifData["Exif.Photo.CameraElevationAngle"]  = QString("%1/1000").arg(QString::number(int(round(dec*1000.0)))).toStdString().c_str(); // center orientation, degrees
 		}
+		exifData["Exif.GPSInfo.GPSImgDirectionRef"]  = "T"; // azimuth value is True (not magnetic) azimuth
 
+		// Not sure whether we should (ab)use those?
 		//exifData["Exif.GPSInfo.GPSDestLatitudeRef"]  = "N"); // "N"/"S" -- declination of target
 		//exifData["Exif.GPSInfo.GPSDestLatitude"]     = lat); // 3 rational numbers dd/1,mm/1,ss/1 -- declination of target
 		//exifData["Exif.GPSInfo.GPSDestLongitudeRef"] = "E"); // "E"/"W" -- RA of target
@@ -2117,9 +2122,6 @@ void StelMainView::doScreenshot(void)
 		//
 		//exifData["Exif.GPSInfo.GPSDateStamp"]        = "2026:10:11"); // String,  "YYYY:MM:DD"
 		//exifData["Exif.GPSInfo.GPSTimeStamp"]        = time); // 3 rational numbers, hh/1, mm/1, ss/1.
-		exifData["Exif.GPSInfo.GPSImgDirectionRef"]  = "T"; // azimuth value is True (not magnetic) azimuth
-		//exifData["Exif.GPSInfo.GPSImgDirection"]     = azi); // True azimuth, degrees [0..359.99]
-		//exifData["Exif.Photo.CameraElevationAngle"]  = Exiv2::unsignedRational, altitude); // center orientation, degrees
 
 
 		qDebug() << "EXIF: Projections...";
