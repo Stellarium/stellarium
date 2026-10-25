@@ -418,7 +418,7 @@ ENDIF()
 
 ########### Others ###########
 # Activate translation
-SET(ENABLE_NLS 0 CACHE BOOL "Define whether program translation should be supported.")
+SET(ENABLE_NLS 1 CACHE BOOL "Define whether program translation should be supported.")
 IF(ENABLE_NLS)
      ADD_DEFINITIONS(-DENABLE_NLS)
 ENDIF()
@@ -429,7 +429,7 @@ SET(ENABLE_PODIR 1 CACHE BOOL "Define whether processing of translation files sh
 SET(ENABLE_MEDIA 1 CACHE BOOL "Define whether media support should be activated.")
 
 # Activate media support
-SET(ENABLE_SPEECH 0 CACHE BOOL "Define whether speech output should be activated. Requires Qt6.4+ and ENABLE_MEDIA.")
+SET(ENABLE_SPEECH 1 CACHE BOOL "Define whether speech output should be activated. Requires Qt6.4+ and ENABLE_MEDIA.")
 
 # Activate QtWebEngine support
 SET(ENABLE_QTWEBENGINE 1 CACHE BOOL "Define whether QtWebEngine module should be supported if it installed.")
@@ -440,16 +440,16 @@ SET(ENABLE_QTWEBENGINE 1 CACHE BOOL "Define whether QtWebEngine module should be
 SET(ENABLE_GPS 1 CACHE BOOL "Define whether GPS queries should be supported.")
 
 # Activate support for ShowMySky atmosphere
-SET(ENABLE_SHOWMYSKY 0 CACHE BOOL "Define whether to support ShowMySky atmosphere model if installed")
+SET(ENABLE_SHOWMYSKY 1 CACHE BOOL "Define whether to support ShowMySky atmosphere model if installed")
 
 # Activate support for XLSX (Excel) files
-SET(ENABLE_XLSX 0 CACHE BOOL "Define whether to support XLSX (Excel) files")
+SET(ENABLE_XLSX 1 CACHE BOOL "Define whether to support XLSX (Excel) files")
 IF(ENABLE_XLSX)
      ADD_DEFINITIONS(-DENABLE_XLSX)
 ENDIF()
 
 # Activate support for INDI client in Telescope Control plugin
-SET(ENABLE_INDI 0 CACHE BOOL "Define whether to use INDI client in Telescope Control plugin.")
+SET(ENABLE_INDI 1 CACHE BOOL "Define whether to use INDI client in Telescope Control plugin.")
 IF(ENABLE_INDI)
      ADD_DEFINITIONS(-DENABLE_INDI)
 ENDIF()
@@ -566,43 +566,43 @@ ENDMACRO()
 ADD_PLUGIN(HelloStelModule 0)
 ADD_PLUGIN(SimpleDrawLine 0)
 #### work plugins ####
-ADD_PLUGIN(AngleMeasure 0)
-ADD_PLUGIN(ArchaeoLines 0)
-ADD_PLUGIN(Calendars 0)
-ADD_PLUGIN(Exoplanets 0)
-ADD_PLUGIN(EquationOfTime 0)
-ADD_PLUGIN(MeteorShowers 0)
-ADD_PLUGIN(MosaicCamera 0)
-ADD_PLUGIN(NavStars 0)
-ADD_PLUGIN(Novae 0)
-ADD_PLUGIN(Observability 0)
-ADD_PLUGIN(Oculars 0)
+ADD_PLUGIN(AngleMeasure 1)
+ADD_PLUGIN(ArchaeoLines 1)
+ADD_PLUGIN(Calendars 1)
+ADD_PLUGIN(Exoplanets 1)
+ADD_PLUGIN(EquationOfTime 1)
+ADD_PLUGIN(MeteorShowers 1)
+ADD_PLUGIN(MosaicCamera 1)
+ADD_PLUGIN(NavStars 1)
+ADD_PLUGIN(Novae 1)
+ADD_PLUGIN(Observability 1)
+ADD_PLUGIN(Oculars 1)
 ADD_PLUGIN(Oculus 0)
-ADD_PLUGIN(OnlineQueries 0)
-ADD_PLUGIN(Planes 0)
-ADD_PLUGIN(PointerCoordinates 0)
-ADD_PLUGIN(Pulsars 0)
-ADD_PLUGIN(Quasars 0)
+ADD_PLUGIN(OnlineQueries 1)
+ADD_PLUGIN(Planes 1)
+ADD_PLUGIN(PointerCoordinates 1)
+ADD_PLUGIN(Pulsars 1)
+ADD_PLUGIN(Quasars 1)
 IF(ENABLE_SCRIPTING)
      ADD_PLUGIN(RemoteControl 1)
 ELSE()
      ADD_PLUGIN(RemoteControl 0)
 ENDIF()
 ADD_PLUGIN(RemoteSync 1)
-ADD_PLUGIN(Satellites 0)
-ADD_PLUGIN(Scenery3d 0)
-ADD_PLUGIN(Supernovae 0)
+ADD_PLUGIN(Satellites 1)
+ADD_PLUGIN(Scenery3d 1)
+ADD_PLUGIN(Supernovae 1)
 # Candidate to removing as an archaic plugin
 ADD_PLUGIN(TextUserInterface 1)
-ADD_PLUGIN(TelescopeControl 0)
+ADD_PLUGIN(TelescopeControl 1)
 # These plugins are GUI heavy and just make no sense without:
 IF (STELLARIUM_GUI_MODE STREQUAL "Standard")
      ADD_PLUGIN(LensDistortionEstimator 1)
-     ADD_PLUGIN(NebulaTextures 0)
-     ADD_PLUGIN(SkyCultureMaker 0)
-     ADD_PLUGIN(SolarSystemEditor 0)
-     ADD_PLUGIN(TimeNavigator 0)
-     ADD_PLUGIN(ObjectVisibility 0)
+     ADD_PLUGIN(NebulaTextures 1)
+     ADD_PLUGIN(SkyCultureMaker 1)
+     ADD_PLUGIN(SolarSystemEditor 1)
+     ADD_PLUGIN(TimeNavigator 1)
+     ADD_PLUGIN(ObjectVisibility 1)
 ENDIF()
 ADD_PLUGIN(Vts 0)
 
@@ -879,7 +879,6 @@ ELSE()
      # https://github.com/cpm-cmake/CPM.cmake/issues/132).
      SET(MD4C_STEL_LIBRARIES md4c::md4c-html)
 ENDIF()
-
 
 ########### Set some global variables ###########
 IF(UNIX AND NOT WIN32)
