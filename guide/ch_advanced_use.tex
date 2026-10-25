@@ -708,6 +708,26 @@ QT_LOGGING_RULES=*.debug=false;stel.Media.debug=true;
 \end{configfile}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Screenshots}
+\label{sec:Screenshots}
+
+Stellarium's screenshots write metadata\newFeature{26.4} when file types are JPG, PNG or TIF. 
+Just like a digital camera, we record location, simulation date and time of the image.
+Additional data can be found in XMP tags, especially \texttt{Exif.Photo.UserComment} is a 
+packed JSON array which contains information of a selected object and additional information about image contents. 
+
+Some image tags can be understood by various image processing software. 
+Perspective images contain the equivalent focal length for a classical 35mm camera. 
+When Stellarium is set to \option{Equirectangular} projection, 
+you should make sure to also export in custom size that should be twice as wide as high. 
+Then these images can be processed by \texttt{GPano} aware panorama software (a standard defined by Google) like \program{Marzipano}.
+In \option{Cylinder} projection, every zoomed-in picture is just a crop of the full pano size, 
+and the metadata contain the respective \texttt{GPano} tags. 
+Likewise, \option{Mercator} maps to \texttt{GPano}'s \texttt{cylindrical} definition.
+In a similar way, screenshots with \option{Fish-eye} projection contain Adobe's \texttt{xmpCamera} tags. 
+The other projections only contain information about projection type and field of view. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{GUI Customizations}
 
 Some users have difficulties to read Stellarium's rather dark user
