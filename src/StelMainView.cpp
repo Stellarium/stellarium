@@ -33,11 +33,6 @@
 #include "StelOpenGL.hpp"
 #include "StelOpenGLArray.hpp"
 #include "StelProjector.hpp"
-#include "StelObjectMgr.hpp"
-#include "StelModuleMgr.hpp"
-#include "StelMovementMgr.hpp"
-#include "Landscape.hpp"
-#include "LandscapeMgr.hpp"
 
 #include <QDebug>
 #include <QDir>
@@ -67,6 +62,11 @@
 #ifdef HAVE_EXIV2
 // To write EXIF metadata in screenshots
 #include <exiv2/exiv2.hpp>
+#include "StelObjectMgr.hpp"
+#include "StelModuleMgr.hpp"
+#include "StelMovementMgr.hpp"
+#include "Landscape.hpp"
+#include "LandscapeMgr.hpp"
 #endif
 #ifdef Q_OS_WIN
 	#include <QPinchGesture>
