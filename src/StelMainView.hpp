@@ -60,6 +60,10 @@ class StelMainView : public QGraphicsView
 	Q_PROPERTY(int  customScreenshotHeight     READ getCustomScreenshotHeight     WRITE setCustomScreenshotHeight     NOTIFY customScreenshotHeightChanged)
 	Q_PROPERTY(int  screenshotDpi	           READ getScreenshotDpi              WRITE setScreenshotDpi              NOTIFY screenshotDpiChanged)
 	Q_PROPERTY(QString screenShotFormat        READ getScreenshotFormat           WRITE setScreenshotFormat           NOTIFY screenshotFormatChanged)
+#ifdef HAVE_EXIV2
+	Q_PROPERTY(QString screenShotArtist        READ getScreenshotArtist           WRITE setScreenshotArtist           NOTIFY screenshotArtistChanged)
+	Q_PROPERTY(QString screenShotCopyright     READ getScreenshotCopyright        WRITE setScreenshotCopyright        NOTIFY screenshotCopyrightChanged)
+#endif
 	Q_PROPERTY(bool flagCursorTimeout          READ getFlagCursorTimeout          WRITE setFlagCursorTimeout          NOTIFY flagCursorTimeoutChanged)
 	Q_PROPERTY(double cursorTimeout            READ getCursorTimeout              WRITE setCursorTimeout              NOTIFY cursorTimeoutChanged)
 	Q_PROPERTY(Vec3f skyBackgroundColor        READ getSkyBackgroundColor         WRITE setSkyBackgroundColor         NOTIFY skyBackgroundColorChanged)
@@ -158,6 +162,16 @@ public slots:
 	//! XBM (X Bitmap) and XPM (X Pixmap).
 	void setScreenshotFormat(const QString filetype);
 	QString getScreenshotFormat() const {return screenShotFormat;}
+
+#ifdef HAVE_EXIV2
+	//! @arg artistName Name of artist to be used in the EXIF information of a screenshot (TIF(F), JP(E)G, PNG only)
+	void setScreenshotArtist(const QString artistName);
+	QString getScreenshotArtist() const {return screenShotArtist;}
+
+	//! @arg copyrightName Name of copyright holder to be used in the EXIF information of a screenshot (TIF(F), JP(E)G, PNG only)
+	void setScreenshotCopyright(const QString copyrightName);
+	QString getScreenshotCopyright() const {return screenShotCopyright;}
+#endif
 
 	//! Get whether colors are inverted when saving screenshot
 	bool getFlagInvertScreenShotColors() const {return flagInvertScreenShotColors;}
@@ -274,7 +288,10 @@ signals:
 	void screenshotDpiChanged(int dpi);
 	void screenshotFormatChanged(QString format);
 	void screenshotFileMaskChanged(QString format);
-
+#ifdef HAVE_EXIV2
+	void screenshotArtistChanged(QString artist);
+	void screenshotCopyrightChanged(QString copyright);
+#endif
 	void skyBackgroundColorChanged(Vec3f color);
 
 	void flagCursorTimeoutChanged(bool b);
@@ -352,7 +369,10 @@ private:
 	QString screenShotFormat; //! file type like "png" or "jpg".
 	QString screenShotFileMask;
 	QString screenShotDir;
-
+#ifdef HAVE_EXIV2
+	QString screenShotArtist;
+	QString screenShotCopyright;
+#endif
 	bool flagCursorTimeout;
 	//! Timer that triggers with the cursor timeout.
 	QTimer* cursorTimeoutTimer;
