@@ -83,3 +83,33 @@ void TestStelMovementMgr::testUpVectorContinuousNearPole()
 		QVERIFY((upAtPole - upNearPole).norm() < 1e-5);
 	}
 }
+// Only directions exactly into the pole (up to rounding) have no longitude. Length does not matter.
+void TestStelMovementMgr::testIsInPole()
+{
+	Vec3d dir;
+	StelUtils::spheToRect(1.234, M_PI_2, dir);
+	QVERIFY(StelMovementMgr::isInPole(dir));
+	QVERIFY(StelMovementMgr::isInPole(dir*2.));
+	StelUtils::spheToRect(1.234, -M_PI_2, dir);
+	QVERIFY(StelMovementMgr::isInPole(dir));
+	StelUtils::spheToRect(1.234, M_PI_2 - 1e-6, dir);
+	QVERIFY(!StelMovementMgr::isInPole(dir));
+	StelUtils::spheToRect(1.234, 0., dir);
+	QVERIFY(!StelMovementMgr::isInPole(dir));
+}
+
+// In the pole, the longitude decoded from the up vector is the one used to build it.
+// Without a usable up vector the fallback is returned.
+void TestStelMovementMgr::testPoleLongitudeFromUp()
+{
+	for (int i = -11; i <= 12; ++i)
+	{
+		const double lon = i * 15. * M_PI_180; // in (-180°, 180°], the range returned by atan2
+		const double fromZenith = StelMovementMgr::poleLongitudeFromUp(StelMovementMgr::upVectorFromLonLat(lon, M_PI_2), true, 99.);
+		QVERIFY(qAbs(fromZenith - lon) < EPS);
+		const double fromNadir = StelMovementMgr::poleLongitudeFromUp(StelMovementMgr::upVectorFromLonLat(lon, -M_PI_2), false, 99.);
+		QVERIFY(qAbs(fromNadir - lon) < EPS);
+	}
+	QCOMPARE(StelMovementMgr::poleLongitudeFromUp(Vec3d(0., 0., 1.), true, 0.5), 0.5);
+	QCOMPARE(StelMovementMgr::poleLongitudeFromUp(Vec3d(0., 0., 0.), true, 0.5), 0.5);
+}

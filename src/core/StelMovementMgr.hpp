@@ -185,6 +185,12 @@ public:
 	//! so the view is never tilted. It is also defined when looking exactly into the pole, where the bottom of the screen
 	//! points towards the given longitude.
 	static Vec3d upVectorFromLonLat(double lon, double lat);
+	//! Return true if the direction (of any length) points exactly into the pole of its frame, where its longitude is undefined.
+	static bool isInPole(const Vec3d& dir);
+	//! Inverse of upVectorFromLonLat() for a view exactly into the pole: return the longitude (radians) at the bottom of the screen
+	//! for the given up vector when looking into the north (northPole=true) or south pole.
+	//! If the up vector has no component perpendicular to the pole, fallbackLon is returned.
+	static double poleLongitudeFromUp(const Vec3d& up, bool northPole, double fallbackLon);
 
 	void moveToObject(const StelObjectP& target, float moveDuration = 1., ZoomingMode zooming = ZoomNone);
 
@@ -565,8 +571,8 @@ private:
 		Vec3d start;
 		Vec3d aim;
 		Vec3d aimUp;   // The Up vector at end time of move
-		Vec3d aimUpCopy;   // The Up vector at end time of move. This gets initialized when the move is configured, never touched during move,
-				   // and ONLY read again when the move is finished and ends in the pole of the view frame.
+		double startLon; // Longitude (radians, mount frame) of the start direction. Exactly in the pole it is taken from the up vector.
+		double aimLon;   // Longitude (radians, mount frame) of the aim direction. Exactly in the pole it is taken from aimUp, or startLon is kept.
 		float speed;   // set to 1/duration[ms] during automove setup.
 		float coef;    // Set to 0 at begin of an automove, runs up to 1.
 		// If not null, move to the object instead of the aim.
@@ -580,6 +586,9 @@ private:
 	};
 
 	AutoMove move;          // Current auto movement. 2016-03: During setup, decide upon the frame for motion!
+	//! Set move.startLon and move.aimLon. Call after move.start, move.aim and move.mountMode are set.
+	//! aimUpMountFrame is the requested up vector at the end of the move, in the mount frame.
+	void initMoveLongitudes(const Vec3d& aimUpMountFrame);
 	bool flagAutoMove;       // Define if automove is on or off
 	ZoomingMode zoomingMode;
 
