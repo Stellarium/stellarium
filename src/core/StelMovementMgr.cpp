@@ -959,6 +959,11 @@ void StelMovementMgr::lookSouth(bool zero)
 	}
 }
 
+Vec3d StelMovementMgr::upVectorFromLonLat(double lon, double lat)
+{
+	return Vec3d(-cos(lon)*sin(lat), -sin(lon)*sin(lat), cos(lat));
+}
+
 // Look immediately towards Zenith, turning selected azimuth horizon to screen bottom.
 // @param azi bottom azimuth. (default 180=South, 90=East, etc.)
 void StelMovementMgr::lookZenith(double azi)

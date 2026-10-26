@@ -180,6 +180,12 @@ public:
 	Vec3d j2000ToMountFrame(const Vec3d& v) const;
 	Vec3d mountFrameToJ2000(const Vec3d& v) const;
 
+	//! Return the up vector for a view direction given by longitude and latitude (radians) in the mount frame.
+	//! The result is perpendicular to the view direction and lies in the plane of the view direction and the mount pole,
+	//! so the view is never tilted. It is also defined when looking exactly into the pole, where the bottom of the screen
+	//! points towards the given longitude.
+	static Vec3d upVectorFromLonLat(double lon, double lat);
+
 	void moveToObject(const StelObjectP& target, float moveDuration = 1., ZoomingMode zooming = ZoomNone);
 
 public slots:
