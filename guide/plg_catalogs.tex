@@ -92,6 +92,7 @@ magnitudes from the maximum value, where $N$ is 2, 3, 6 and 9. If a
 nova has no values for decay of magnitude then this plugin will use
 generalized values for it.
 
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
 
 \section{Historical Supernovae Plugin}
@@ -252,6 +253,7 @@ To add a new nova, open a new line after line 5 and paste the following, note co
 },
 \end{configfile}
 
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
 
 \section{Exoplanets Plugin}
@@ -716,7 +718,7 @@ To add a new exoplanet system, open a new line after line 5 and paste the follow
 },
 \end{configfile}
 
-
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
 
 \section{Pulsars Plugin}
@@ -808,6 +810,8 @@ To add a new pulsar, open a new line after line 5 and paste the following, note 
 },
 \end{configfile}
 
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \newpage
 \section{Quasars Plugin}
 \label{sec:plugins:Quasars}
@@ -895,6 +899,7 @@ they are important!):
 \end{configfile}
 
 
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \newpage
 
@@ -1105,6 +1110,7 @@ You can get more info about meteor showers here:
 This plugin was initially created as project of ESA Summer of Code in Space 2013\footnote{\url{http://sophia.estec.esa.int/socis2013/?q=about}}.
 
 
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
 
 \section{Navigational Stars Plugin}
@@ -1199,7 +1205,10 @@ file URLs.
 To calculate satellite positions, the plugin uses an implementation of
 the SGP4/SDP4 algorithms (J.L. Canales' \program{gsat} library), using
 as its input data in NORAD's two-line element set
-(\indexterm[TLE, two-line element]{TLE}\footnote{TLE: \url{https://en.wikipedia.org/wiki/Two-line_element_set}})
+(\indexterm[TLE, two-line element]{TLE}\footnote{TLE: \url{https://en.wikipedia.org/wiki/Two-line_element_set}. 
+Actually, in 2026 the traditional TLE file format had to be declared obsolete because the string space for the COSPAR ID was exhausted. 
+While a single new format has still to emerge, for the time being CSV files (comma-separated values) are used. 
+See also important note in \ref{sec:plugins:Satellites:Sources}})
 format. Lists with TLEs for hundreds of satellites are available
 online and are regularly updated. The plugin downloads the lists
 prepared by \url{https://celestrak.org} to keep itself up-to-date, but the users can
@@ -1236,6 +1245,7 @@ The height of the selected satellite is computed above the WGS84 ellipsoid,
 while the fixed (configurable) altitude from Earth's surface is computed over the sphere. 
 You may note these circles will deviate slightly from each other when displayed altitudes are equal.}
 
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Satellite Properties}
 \label{sec:plugins:Satellites:properties}
 
@@ -1452,6 +1462,7 @@ Anthony Mallama's formula\footnote{\url{http://www.satobs.org/seesat/Aug-2020/00
 for other satellites.
 
 \subsection{Sources for TLE data}
+\label{sec:plugins:Satellites:Sources}
 
 TLE sets have to be accessed online. Occasionally the source path changes, and configurations set up with previous versions may no longer be available. 
 Use the bottom right button in the Sources tab (Figure~\ref{fig:plugins:Satellites:Configuration:Sources}) to restore the installation defaults. 
@@ -1469,6 +1480,19 @@ Use the bottom right button in the Sources tab (Figure~\ref{fig:plugins:Satellit
 \item[Space Track]\footnote{\url{https://www.space-track.org/}} the definitive source, requires sign-up, operated by
   United States Department of Defense
 \end{description}
+
+\noindent
+\colorbox{light-gray}{\fbox{\parbox[t]{0.975\linewidth}{
+\begin{center}IMPORTANT!\end{center}
+
+In 2026, Celestrak operators had to implement some restrictions to lower their download traffic\footnote{%
+See \url{https://celestrak.org/NORAD/documentation/gp-data-formats.php}}. Elements are updated every 2 hours, 
+and accessing their sites for updating in smaller intervals can lead to access restrictions. If you see a warning panel on screen, 
+do not click away and continue pressing ``Update now''. Wait two hours to remain on the safe side, and use at least 2 hours as auto-update interval. \\
+
+}}}
+
+
 
 %\subsection{Iridium Flares prediction?}
 %\label{sec:plugins:Satellites:IridiumFlares}
