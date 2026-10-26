@@ -40,6 +40,7 @@
 #include "StelProgressController.hpp"
 #include "StelUtils.hpp"
 #include "StelActionMgr.hpp"
+#include "StelMainView.hpp"
 
 #if USE_BUNDLED_QTCOMPRESS
 #include "external/qtcompress/qzipreader.h"
@@ -49,6 +50,7 @@
 
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
+#include <QMessageBox>
 #include <QKeyEvent>
 #include <QDebug>
 #include <QFileInfo>
@@ -2151,7 +2153,23 @@ int Satellites::getSecondsToUpdate(void)
 
 void Satellites::setTleSources(const QStringList &tleSources)
 {
-	updateUrls = tleSources;
+	// Necessary 2026: Replace any Celestrak URL with TLE format to CSV format.
+	static const QRegularExpression celestrakURLre("https://celestrak.org/NORAD/elements/gp.php?GROUP=(.*)&FORMAT=TLE");
+	QStringList csvCleanedSources;
+	for (auto url: tleSources)
+	{
+		QRegularExpressionMatch match=celestrakURLre.match(url);
+
+		if (match.hasMatch())
+		{
+			qWarning() << "[Satellites]: You are using Celestrak URL with TLE argument: " << url <<  " This format is outdated. Consider updating/resetting source URLs. Auto-fixing to CSV.";
+			csvCleanedSources.append(QString("https://celestrak.org/NORAD/elements/gp.php?GROUP=%1&FORMAT=CSV").arg(match.captured(1)));
+		}
+		else
+			csvCleanedSources.append(url);
+	}
+
+	updateUrls = csvCleanedSources;
 	saveTleSources(updateUrls);
 }
 
@@ -2708,13 +2726,13 @@ void Satellites::saveDownloadedUpdate(QNetworkReply* reply)
 		if (tmpFile->open(QIODevice::WriteOnly | QIODevice::Text))
 		{
 			QByteArray fd = reply->readAll();
-			// qWarning() << "[Satellites] Processing an URL:" << reply->url().toString();
+			//qInfo() << "[Satellites] Processing an URL:" << reply->url().toString();
 			if (reply->url().toString().contains(".zip", Qt::CaseInsensitive))
 				fd = unzipData(fd);
 			tmpFile->write(fd);
 			tmpFile->close();
 			
-			// The reply URL can be different form the requested one...
+			// The reply URL can be different from the requested one...
 			QUrl url = reply->request().url();
 			for (int i = 0; i < updateSources.count(); i++)
 			{
@@ -2726,7 +2744,11 @@ void Satellites::saveDownloadedUpdate(QNetworkReply* reply)
 				}
 			}
 			if (tmpFile) // Something strange just happened...
+			{
+				// Sorry Bogdan. If something strange/unexpected happened, you cannot just silently delete. Fix whatever was strange. For now, show at least a warning.
+				qWarning() << "[Satellites] Cannot insert newly fetched file to updateSources. Ignoring this file.";
 				delete tmpFile; // ...so we have to clean.
+			}
 		}
 		else
 		{
@@ -2738,6 +2760,7 @@ void Satellites::saveDownloadedUpdate(QNetworkReply* reply)
 	else
 	{
 		qWarning().nospace() << "[Satellites] FAILED to download " << reply->url().toString(QUrl::RemoveUserInfo) << ". Error " << reply->error() << ": " << reply->errorString();
+		handleErrorReply(reply);
 		emit updateStateChanged(DownloadError);
 	}
 
@@ -2776,6 +2799,59 @@ void Satellites::saveDownloadedUpdate(QNetworkReply* reply)
 	else
 		emit updateStateChanged(OtherError);
 }
+
+// This is called from saveDownloadedUpdate() when a reply contains an error.
+// 2026: Celestrak is very picky and bans users who update too often. We must show their errors.
+// See https://celestrak.org/NORAD/documentation/gp-data-formats.php#update
+// When this is called, a qWarning including network error has already been written to logfile.
+void Satellites::handleErrorReply(QNetworkReply* reply)
+{
+	QString urlStr=reply->url().toDisplayString();
+	bool isCelestrak=urlStr.contains("celestrak", Qt::CaseInsensitive);
+	QString message;
+	switch (reply->error())
+	{
+		case QNetworkReply::ContentAccessDenied:     // 201, but equals HTTP 401
+		case QNetworkReply::ContentNotFoundError:    // 203, but equals HTTP error 404
+		case QNetworkReply::ServiceUnavailableError: // 403, ServiceUnavailable
+		case QNetworkReply::InternalServerError:     // 401, Internal server error, equals HTTP 500
+		{
+			QMap<QNetworkReply::NetworkError, QString> errMap={
+				{QNetworkReply::ContentAccessDenied,     qc_("401/Access denied.", "Satellites plugin URL warning")},
+				{QNetworkReply::ContentNotFoundError,    qc_("404/Not found.", "Satellites plugin URL warning")},
+				{QNetworkReply::ServiceUnavailableError, qc_("403/Service unavailable.", "Satellites plugin URL warning")},
+				{QNetworkReply::InternalServerError,     qc_("500/Internal server error", "Satellites plugin URL warning")}
+			};
+
+			if (isCelestrak)
+			{
+				message=QString(qc_("Celestrak, this source of satellite orbital elements, has replied:", "Satellites plugin URL warning") +
+						" " + errMap.value(reply->error()) +
+						" " +reply->url().toString(QUrl::RemoveUserInfo) + ". " + q_("Error") + QString(qt_getEnumName(reply->error())) + ": " + reply->errorString() +
+
+						" " +qc_("You must fix a bad URL (e.g. 'reset to defaults'), or wait 2 hours to retry. Else you may be banned from Celestrak!", "Satellites plugin URL warning") +
+						" " +qc_("See logfile for more details.", "Satellites plugin URL warning"));
+
+				qWarning() << "[Satellites] download problem. Please see https://celestrak.org/NORAD/documentation/gp-data-formats.php";
+			}
+			else
+				message=QString(qc_("This source of satellite orbital elements has replied:", "Satellites plugin URL warning") +
+						" " + errMap.value(reply->error()) + " " +
+						" " +reply->url().toString(QUrl::RemoveUserInfo) + ". " + q_("Error") + QString(qt_getEnumName(reply->error())) + ": " + reply->errorString() +
+
+						" " +qc_("You may fix a bad URL (e.g. 'reset to defaults').", "Satellites plugin URL warning"));
+			break;
+		}
+		default:
+		{
+			message=QString(qc_("This source of satellite orbital elements has replied:", "Satellites plugin URL warning") +
+					" " + reply->url().toString(QUrl::RemoveUserInfo) + ". " + q_("Error") + QString(qt_getEnumName(reply->error())) + ": " + reply->errorString() +
+					" " + qc_("You must fix or remove a bad URL (e.g. 'reset to defaults').", "Satellites plugin URL warning"));
+		}
+	}
+	QMessageBox::warning(&StelMainView::getInstance(), qc_("Please read carefully!", "Satellites plugin URL warning"), message, QMessageBox::Ok);
+}
+
 
 void Satellites::updateObserverLocation(const StelLocation &loc)
 {
