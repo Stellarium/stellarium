@@ -870,6 +870,14 @@ private:
 
 	void createSuperGroupsList();
 
+	//! In 2026, Celestrak has introduced a strict regiment of HTTP errors.
+	//! If saveDownloadedUpdate() hits an error, the reply is forwarded here.
+	//! Updating from Celestrak should wait for 2 hours.
+	//! Too frequent updating leads to user being blocked from Celestrak.
+	//! Currently we only show a warning panel.
+	//! Users can still ignore it and hit the consequences - but have been warned.
+	void handleErrorReply(QNetworkReply* reply);
+
 	//! Path to the satellite catalog file.
 	QString catalogPath;
 	//! Plug-in data directory.
