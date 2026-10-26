@@ -558,7 +558,6 @@ private:
 	{
 		Vec3d start;
 		Vec3d aim;
-		Vec3d startUp; // The Up vector at start time
 		Vec3d aimUp;   // The Up vector at end time of move
 		Vec3d aimUpCopy;   // The Up vector at end time of move. This gets initialized when the move is configured, never touched during move,
 				   // and ONLY read again when the move is finished and ends in the pole of the view frame.

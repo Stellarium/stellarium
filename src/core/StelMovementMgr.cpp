@@ -1160,14 +1160,12 @@ void StelMovementMgr::updateVisionVector(double deltaTime)
 			move.aim.normalize();
 			move.aim*=2.;
 			// For aiming at objects, we can assume simple up vector.
-			move.startUp=getViewUpVectorJ2000();
 			move.aimUp=mountFrameToJ2000(Vec3d(0., 0., 1.));
 			//move.aimUp=Vec3d(0., 0., 1.);
 			move.aimUpCopy=move.aimUp;
 		}
 		else // no targetObject:
 		{
-			move.startUp=getViewUpVectorJ2000();
 			move.aimUp=mountFrameToJ2000(Vec3d(0., 0., 1.));
 		}
 		move.coef+=move.speed*static_cast<float>(deltaTime)*1000;
@@ -1437,8 +1435,6 @@ void StelMovementMgr::moveToJ2000(const Vec3d& aim, const Vec3d& aimUp, float mo
 	move.aimUpCopy=move.aimUp;
 	move.start=viewDirectionJ2000;	
 	move.start.normalize();
-	move.startUp=getViewUpVectorJ2000();
-	move.startUp.normalize();
 	move.speed=1.f/(moveDuration*1000);
 	move.coef=0.;
 	move.targetObject.clear();
@@ -1458,8 +1454,6 @@ void StelMovementMgr::moveToObject(const StelObjectP& target, float moveDuration
 	move.aimUpCopy=move.aimUp;
 	move.start=viewDirectionJ2000;
 	move.start.normalize();
-	move.startUp=getViewUpVectorJ2000();
-	move.startUp.normalize();
 	move.speed=1.f/(moveDuration*1000);
 	move.coef=0.;
 	move.targetObject = target;
@@ -1519,7 +1513,6 @@ void StelMovementMgr::moveToAltAzi(const Vec3d& aim, const Vec3d &aimUp, float m
 		viewDirectionJ2000=core->altAzToJ2000(move.start, StelCore::RefractionOff);
 		upVectorMountFrame.set(0,0,1);
 	}
-	move.startUp=aimUp; // we must put this to the target up vector immediately.
 	move.speed=1.f/(moveDuration*1000);
 	move.coef=0.;
 	move.targetObject.clear();
