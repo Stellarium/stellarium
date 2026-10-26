@@ -111,6 +111,9 @@ public:
 	enum MountMode { MountAltAzimuthal, MountEquinoxEquatorial, MountGalactic, MountSupergalactic};
 	Q_ENUM(MountMode)
 
+	//! Reference frames for coordinates given to moveTo().
+	enum class ReferenceFrame { EquatorialJ2000, EquatorialOfDate, AltAzimuthal, Galactic, Supergalactic, EclipticJ2000, EclipticOfDate };
+	Q_ENUM(ReferenceFrame)
 	//! Named constants for zoom operations.
 	enum ZoomingMode { ZoomOut=-1, ZoomNone=0, ZoomIn=1};
 	Q_ENUM(ZoomingMode)

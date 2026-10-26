@@ -271,21 +271,30 @@ void SearchDialog::retranslate()
 	}
 }
 
+// Keys stored in the config file and used in the combo box. Kept unchanged for compatibility with existing settings.
+static const QMap<QString, StelMovementMgr::ReferenceFrame> coordinateSystemKeys = {
+	{ "equatorialJ2000", StelMovementMgr::ReferenceFrame::EquatorialJ2000 },
+	{ "equatorial",      StelMovementMgr::ReferenceFrame::EquatorialOfDate },
+	{ "horizontal",      StelMovementMgr::ReferenceFrame::AltAzimuthal },
+	{ "galactic",        StelMovementMgr::ReferenceFrame::Galactic },
+	{ "supergalactic",   StelMovementMgr::ReferenceFrame::Supergalactic },
+	{ "ecliptic",        StelMovementMgr::ReferenceFrame::EclipticOfDate },
+	{ "eclipticJ2000",   StelMovementMgr::ReferenceFrame::EclipticJ2000 }
+};
+
 void SearchDialog::setCurrentCoordinateSystemKey(QString key)
 {
-	const QMetaEnum& en = SearchDialog::metaObject()->enumerator(SearchDialog::metaObject()->indexOfEnumerator("CoordinateSystem"));
-	CoordinateSystem coordSystem = static_cast<CoordinateSystem>(en.keyToValue(key.toLatin1().data()));
-	if (coordSystem<0)
+	if (!coordinateSystemKeys.contains(key))
 	{
 		qWarning() << "[Search Tool] Unknown coordinate system: " << key << "setting \"equatorialJ2000\" instead";
-		coordSystem = equatorialJ2000;
+		key = "equatorialJ2000";
 	}
-	setCurrentCoordinateSystem(coordSystem);
+	setCurrentCoordinateSystem(coordinateSystemKeys.value(key));
 }
 
 QString SearchDialog::getCurrentCoordinateSystemKey() const
 {
-	return metaObject()->enumerator(metaObject()->indexOfEnumerator("CoordinateSystem")).key(currentCoordinateSystem);
+	return coordinateSystemKeys.key(currentCoordinateSystem);
 }
 
 void SearchDialog::populateCoordinateSystemsList()
@@ -340,8 +349,8 @@ void SearchDialog::populateCoordinateAxis()
 	ui->AxisYSpinBox->setWrapping(false);
 
 	switch (getCurrentCoordinateSystem()) {		
-		case equatorialJ2000:
-		case equatorial:
+		case StelMovementMgr::ReferenceFrame::EquatorialJ2000:
+		case StelMovementMgr::ReferenceFrame::EquatorialOfDate:
 		{
 			ui->AxisXLabel->setText(q_("Right ascension"));
 			ui->AxisXSpinBox->setDisplayFormat(AngleSpinBox::HMSLetters);
@@ -352,7 +361,7 @@ void SearchDialog::populateCoordinateAxis()
 			xnormal = true;
 			break;
 		}
-		case horizontal:
+		case StelMovementMgr::ReferenceFrame::AltAzimuthal:
 		{
 			ui->AxisXLabel->setText(q_("Azimuth"));
 			ui->AxisXSpinBox->setDisplayFormat(AngleSpinBox::DMSSymbolsUnsigned);
@@ -363,10 +372,10 @@ void SearchDialog::populateCoordinateAxis()
 			xnormal = false;
 			break;
 		}
-		case ecliptic:
-		case eclipticJ2000:
-		case galactic:
-		case supergalactic:
+		case StelMovementMgr::ReferenceFrame::EclipticOfDate:
+		case StelMovementMgr::ReferenceFrame::EclipticJ2000:
+		case StelMovementMgr::ReferenceFrame::Galactic:
+		case StelMovementMgr::ReferenceFrame::Supergalactic:
 		{
 			ui->AxisXLabel->setText(q_("Longitude"));
 			ui->AxisXSpinBox->setDisplayFormat(AngleSpinBox::DMSSymbolsUnsigned);
@@ -747,27 +756,27 @@ void SearchDialog::setCenterOfScreenCoordinates()
 	// Getting coordinates (in radians) of position of the center of the screen
 	switch (getCurrentCoordinateSystem())
 	{
-		case equatorialJ2000:
+		case StelMovementMgr::ReferenceFrame::EquatorialJ2000:
 		{
 			StelUtils::rectToSphe(&spinLong, &spinLat, centerPos);
 			if (usePolarDistance)
 				spinLat = M_PI_2 - spinLat;
 			break;
 		}
-		case equatorial:
+		case StelMovementMgr::ReferenceFrame::EquatorialOfDate:
 		{
 			StelUtils::rectToSphe(&spinLong, &spinLat, core->j2000ToEquinoxEqu(centerPos, StelCore::RefractionOff));
 			if (usePolarDistance)
 				spinLat = M_PI_2 - spinLat;
 			break;
 		}
-		case galactic:
+		case StelMovementMgr::ReferenceFrame::Galactic:
 			StelUtils::rectToSphe(&spinLong, &spinLat, core->j2000ToGalactic(centerPos));
 			break;
-		case supergalactic:
+		case StelMovementMgr::ReferenceFrame::Supergalactic:
 			StelUtils::rectToSphe(&spinLong, &spinLat, core->j2000ToSupergalactic(centerPos));
 			break;
-		case horizontal:
+		case StelMovementMgr::ReferenceFrame::AltAzimuthal:
 		{
 			StelUtils::rectToSphe(&spinLong, &spinLat, core->j2000ToAltAz(centerPos, StelCore::RefractionAuto));
 			spinLong = 3.*M_PI - spinLong; // N is zero, E is 90 degrees
@@ -776,7 +785,7 @@ void SearchDialog::setCenterOfScreenCoordinates()
 			spinLong=StelUtils::fmodpos(spinLong, 2.*M_PI);
 			break;
 		}
-		case eclipticJ2000:
+		case StelMovementMgr::ReferenceFrame::EclipticJ2000:
 		{
 			double lambda, beta;
 			StelUtils::rectToSphe(&spinLong, &spinLat, centerPos);
@@ -786,7 +795,7 @@ void SearchDialog::setCenterOfScreenCoordinates()
 			spinLat = beta;
 			break;
 		}
-		case ecliptic:
+		case StelMovementMgr::ReferenceFrame::EclipticOfDate:
 		{
 			double lambda, beta;
 			StelUtils::rectToSphe(&spinLong, &spinLat, core->j2000ToEquinoxEqu(centerPos, StelCore::RefractionOff));
@@ -826,7 +835,7 @@ void SearchDialog::manualPositionChanged()
 
 	switch (getCurrentCoordinateSystem())
 	{
-		case equatorialJ2000:
+		case StelMovementMgr::ReferenceFrame::EquatorialJ2000:
 		{
 			if (usePolarDistance)
 				spinLat = M_PI_2 - spinLat;
@@ -840,7 +849,7 @@ void SearchDialog::manualPositionChanged()
 			}
 			break;
 		}
-		case equatorial:
+		case StelMovementMgr::ReferenceFrame::EquatorialOfDate:
 		{
 			if (usePolarDistance)
 				spinLat = M_PI_2 - spinLat;
@@ -855,7 +864,7 @@ void SearchDialog::manualPositionChanged()
 			}
 			break;
 		}
-		case horizontal:
+		case StelMovementMgr::ReferenceFrame::AltAzimuthal:
 		{
 			double cx;
 			cx = 3.*M_PI - spinLong; // N is zero, E is 90 degrees
@@ -873,7 +882,7 @@ void SearchDialog::manualPositionChanged()
 			}
 			break;
 		}
-		case galactic:
+		case StelMovementMgr::ReferenceFrame::Galactic:
 		{
 			StelUtils::spheToRect(spinLong, spinLat, pos);
 			pos = core->galacticToJ2000(pos);
@@ -885,7 +894,7 @@ void SearchDialog::manualPositionChanged()
 			}
 			break;
 		}
-		case supergalactic:
+		case StelMovementMgr::ReferenceFrame::Supergalactic:
 		{
 			StelUtils::spheToRect(spinLong, spinLat, pos);
 			pos = core->supergalacticToJ2000(pos);
@@ -897,14 +906,14 @@ void SearchDialog::manualPositionChanged()
 			}
 			break;
 		}
-		case eclipticJ2000:
+		case StelMovementMgr::ReferenceFrame::EclipticJ2000:
 		{
 			double ra, dec;
 			StelUtils::eclToEqu(spinLong, spinLat, GETSTELMODULE(SolarSystem)->getEarth()->getRotObliquity(2451545.0), &ra, &dec);
 			StelUtils::spheToRect(ra, dec, pos);
 			break;
 		}
-		case ecliptic:
+		case StelMovementMgr::ReferenceFrame::EclipticOfDate:
 		{
 			double ra, dec;
 			StelUtils::eclToEqu(spinLong, spinLat, GETSTELMODULE(SolarSystem)->getEarth()->getRotObliquity(core->getJDE()), &ra, &dec);
