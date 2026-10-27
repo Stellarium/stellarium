@@ -1559,8 +1559,7 @@ Vec3d StelMovementMgr::frameToJ2000(const Vec3d& v, ReferenceFrame frame) const
 			return ofDate ? core->equinoxEquToJ2000(equ, StelCore::RefractionOff) : equ;
 		}
 	}
-	Q_UNREACHABLE();
-	return v;
+	return v; // not reached
 }
 
 void StelMovementMgr::moveTo(double lon, double lat, ReferenceFrame frame, float moveDuration, ZoomingMode zooming)

@@ -114,6 +114,7 @@ public:
 	//! Reference frames for coordinates given to moveTo().
 	enum class ReferenceFrame { EquatorialJ2000, EquatorialOfDate, AltAzimuthal, Galactic, Supergalactic, EclipticJ2000, EclipticOfDate };
 	Q_ENUM(ReferenceFrame)
+
 	//! Named constants for zoom operations.
 	enum ZoomingMode { ZoomOut=-1, ZoomNone=0, ZoomIn=1};
 	Q_ENUM(ZoomingMode)
@@ -182,8 +183,8 @@ public:
 
 	//! Return the up vector for a view direction given by longitude and latitude (radians) in the mount frame.
 	//! The result is perpendicular to the view direction and lies in the plane of the view direction and the mount pole,
-	//! so the view is never tilted. It is also defined when looking exactly into the pole, where the bottom of the screen
-	//! points towards the given longitude.
+	//! so the view is never tilted. It is also defined when looking exactly into the pole: there the given longitude
+	//! is at the bottom of the screen in the north pole (e.g. zenith) and at the top in the south pole (e.g. nadir).
 	static Vec3d upVectorFromLonLat(double lon, double lat);
 	//! Return true if the direction (of any length) points exactly into the pole of its frame, where its longitude is undefined.
 	static bool isInPole(const Vec3d& dir);
@@ -583,8 +584,8 @@ private:
 		Vec3d start;
 		Vec3d aim;
 		Vec3d aimUp;   // The Up vector at end time of move
-		double startLon; // Longitude (radians, mount frame) of the start direction. Exactly in the pole it is taken from the up vector.
-		double aimLon;   // Longitude (radians, mount frame) of the aim direction. Exactly in the pole it is taken from aimUp, or startLon is kept.
+		double startLon = 0.; // Longitude (radians, mount frame) of the start direction. Exactly in the pole it is taken from the up vector.
+		double aimLon = 0.;   // Longitude (radians, mount frame) of the aim direction. Exactly in the pole it is taken from aimUp, or startLon is kept.
 		float speed;   // set to 1/duration[ms] during automove setup.
 		float coef;    // Set to 0 at begin of an automove, runs up to 1.
 		// If not null, move to the object instead of the aim.

@@ -59,7 +59,8 @@ void TestStelMovementMgr::testUpVectorAtHorizon()
 	}
 }
 
-// Exactly in the pole the result is still defined: the bottom of the screen points to the given longitude.
+// Exactly in the pole the result is still defined: the given longitude is at the bottom of the screen
+// in the north pole and at the top in the south pole.
 void TestStelMovementMgr::testUpVectorAtPoles()
 {
 	for (int i = 0; i < 24; ++i)
@@ -83,6 +84,7 @@ void TestStelMovementMgr::testUpVectorContinuousNearPole()
 		QVERIFY((upAtPole - upNearPole).norm() < 1e-5);
 	}
 }
+
 // Only directions exactly into the pole (up to rounding) have no longitude. Length does not matter.
 void TestStelMovementMgr::testIsInPole()
 {
