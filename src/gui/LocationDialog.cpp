@@ -113,6 +113,7 @@ void LocationDialog::createDialogContent()
 	proxyModel->sort(0, Qt::AscendingOrder);
 	proxyModel->setFilterCaseSensitivity(Qt::CaseInsensitive);
 	ui->citiesListView->setModel(proxyModel);
+	connect(ui->showOnlyUserLocationsCheckBox, &QCheckBox::toggled, this, &LocationDialog::reloadLocations);
 
 	// Kinetic scrolling
 	kineticScrollingList << ui->citiesListView;
@@ -229,7 +230,14 @@ void LocationDialog::setDisplayFormatForSpins(bool flagDecimalDegrees)
 
 void LocationDialog::reloadLocations()
 {
-	allModel->setStringList(StelApp::getInstance().getLocationMgr().getAllMap().keys());
+	const LocationMap locations = StelApp::getInstance().getLocationMgr().getAllMap();
+	QStringList locationIds;
+	for (auto it = locations.cbegin(); it != locations.cend(); ++it)
+	{
+		if (!ui->showOnlyUserLocationsCheckBox->isChecked() || it.value().isUserLocation)
+			locationIds.append(it.key());
+	}
+	allModel->setStringList(locationIds);
 }
 
 void LocationDialog::populateTooltips()

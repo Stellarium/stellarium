@@ -172,6 +172,13 @@
              </widget>
             </item>
             <item>
+             <widget class="QCheckBox" name="showOnlyUserLocationsCheckBox">
+              <property name="text">
+               <string>Show only user locations</string>
+              </property>
+             </widget>
+            </item>
+            <item>
              <widget class="QPushButton" name="resetListPushButton">
               <property name="text">
                <string>Reset Location List</string>
@@ -601,6 +608,7 @@
  </customwidgets>
  <tabstops>
   <tabstop>citySearchLineEdit</tabstop>
+  <tabstop>showOnlyUserLocationsCheckBox</tabstop>
   <tabstop>resetListPushButton</tabstop>
   <tabstop>latitudeSpinBox</tabstop>
   <tabstop>longitudeSpinBox</tabstop>
