@@ -2080,8 +2080,8 @@ void StelMainView::doScreenshot(void)
 		exifData["Exif.GPSInfo.GPSLatitude"]         = convertToExifDms(loc.getLatitude()); // 3 rational numbers dd/1,mm/1,ss/1
 		exifData["Exif.GPSInfo.GPSLongitudeRef"]     = (loc.getLongitude()>0.f ? "E" : "W");
 		exifData["Exif.GPSInfo.GPSLongitude"]        = convertToExifDms(loc.getLongitude()); // 3 rational numbers dd/1,mm/1,ss/1
-		exifData["Exif.GPSInfo.GPSAltitudeRef"]      = "0"; // 0 indicates MASL.
-		exifData["Exif.GPSInfo.GPSAltitude"]         = QString("%1/1").arg(loc.altitude).toStdString().c_str(); // 1 rational number, meters
+		exifData["Exif.GPSInfo.GPSAltitudeRef"]      = loc.altitude >= 0 ? "0" : "1"; // 0 indicates positive MASL, 1 negative.
+		exifData["Exif.GPSInfo.GPSAltitude"]         = QString("%1/1").arg(abs(loc.altitude)).toStdString().c_str(); // 1 rational number, meters
 		if (landscapeMgr->getFlagAtmosphere())
 		{
 			exifData["Exif.Photo.Temperature"] = QString("%1/100").arg(int(100.*drawer->getAtmosphereTemperature())).toStdString().c_str(); // [Celsius]
