@@ -34,6 +34,7 @@
 #include "StelProjector.hpp"
 #include "LabelMgr.hpp"
 #include "Planet.hpp"
+#include "SolarSystem.hpp"
 #include "Orbit.hpp"
 #include "StelActionMgr.hpp"
 
@@ -1532,6 +1533,48 @@ void StelMovementMgr::moveToAltAzi(const Vec3d& aim, const Vec3d &aimUp, float m
 	//StelUtils::rectToSphe(&currAzi, &currAlt, move.start);
 	//StelUtils::rectToSphe(&newAzi, &newAlt, move.aim);
 	//qDebug() << "StelMovementMgr::moveToAltAzi() from alt:" << currAlt*(180./M_PI) << "/azi" << currAzi*(180./M_PI)  << "to alt:" << newAlt*(180./M_PI)  << "azi" << newAzi*(180./M_PI) ;
+}
+
+Vec3d StelMovementMgr::frameToJ2000(const Vec3d& v, ReferenceFrame frame) const
+{
+	switch (frame)
+	{
+		case ReferenceFrame::EquatorialJ2000:
+			return v;
+		case ReferenceFrame::EquatorialOfDate:
+			return core->equinoxEquToJ2000(v, StelCore::RefractionOff);
+		case ReferenceFrame::AltAzimuthal:
+			return core->altAzToJ2000(v, StelCore::RefractionOff);
+		case ReferenceFrame::Galactic:
+			return core->galacticToJ2000(v);
+		case ReferenceFrame::Supergalactic:
+			return core->supergalacticToJ2000(v);
+		case ReferenceFrame::EclipticJ2000:
+		case ReferenceFrame::EclipticOfDate:
+		{
+			const bool ofDate = (frame==ReferenceFrame::EclipticOfDate);
+			const double eps = GETSTELMODULE(SolarSystem)->getEarth()->getRotObliquity(ofDate ? core->getJDE() : 2451545.0);
+			// Rotate about the x axis (the equinox) from ecliptic to equatorial coordinates.
+			const Vec3d equ(v[0], v[1]*cos(eps) - v[2]*sin(eps), v[1]*sin(eps) + v[2]*cos(eps));
+			return ofDate ? core->equinoxEquToJ2000(equ, StelCore::RefractionOff) : equ;
+		}
+	}
+	Q_UNREACHABLE();
+	return v;
+}
+
+void StelMovementMgr::moveTo(double lon, double lat, ReferenceFrame frame, float moveDuration, ZoomingMode zooming)
+{
+	Vec3d aim;
+	StelUtils::spheToRect(lon, lat, aim);
+	// The up vector at the target, pointing towards the pole of the given frame. It is well defined
+	// even at the pole itself, where it carries the requested orientation (see upVectorFromLonLat()).
+	const Vec3d aimUp = upVectorFromLonLat(lon, lat);
+
+	if (frame==ReferenceFrame::AltAzimuthal && mountMode==MountAltAzimuthal)
+		moveToAltAzi(aim, aimUp, moveDuration, zooming);
+	else
+		moveToJ2000(frameToJ2000(aim, frame), frameToJ2000(aimUp, frame), moveDuration, zooming);
 }
 
 Vec3d StelMovementMgr::j2000ToMountFrame(const Vec3d& v) const

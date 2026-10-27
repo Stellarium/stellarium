@@ -300,6 +300,18 @@ public slots:
 	//! As of March 2016: This call does nothing when mount frame is not AltAzi!
 	void moveToAltAzi(const Vec3d& aim, const Vec3d &aimUp, float moveDuration = 1.f, StelMovementMgr::ZoomingMode zooming = ZoomNone);
 
+	//! Move the view to a position given by spherical coordinates in any reference frame.
+	//! The up vector during and after the move is computed automatically, so the caller does not need to provide one.
+	//! When the target lies at a pole of the mount frame (e.g. the zenith in alt-azimuthal mount), @p lon decides
+	//! how the view is rotated there: the meridian with longitude @p lon is shown vertically on screen.
+	//! @param lon Longitude [radians] in the internal convention of @p frame (as used by StelUtils::spheToRect).
+	//!        For ReferenceFrame::AltAzimuthal this is counted counter-clockwise from south, i.e. lon = pi - azimuth (from north).
+	//! @param lat Latitude [radians] in @p frame (declination, altitude, ...).
+	//! @param frame The reference frame of @p lon and @p lat.
+	//! @param moveDuration The time it takes for the move to complete [seconds].
+	//! @param zooming you want to zoom in, out or not (just center).
+	void moveTo(double lon, double lat, ReferenceFrame frame, float moveDuration = 1.f, StelMovementMgr::ZoomingMode zooming = ZoomNone);
+
 	//! Change the zoom level.
 	//! @param aimFov The desired field of view in degrees.
 	//! @param zoomDuration The time that the operation should take to complete. [seconds]
@@ -589,6 +601,8 @@ private:
 	//! Set move.startLon and move.aimLon. Call after move.start, move.aim and move.mountMode are set.
 	//! aimUpMountFrame is the requested up vector at the end of the move, in the mount frame.
 	void initMoveLongitudes(const Vec3d& aimUpMountFrame);
+	//! Convert a direction given in @p frame into the equatorial J2000 frame (without refraction).
+	Vec3d frameToJ2000(const Vec3d& v, ReferenceFrame frame) const;
 	bool flagAutoMove;       // Define if automove is on or off
 	ZoomingMode zoomingMode;
 
