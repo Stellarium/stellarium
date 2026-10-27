@@ -2222,16 +2222,16 @@ void StelMainView::doScreenshot(void)
 				// Define the full field of view dimensions in pixels
 				// The cylindrical projects the poles to infinity. We cut off somewhere near 80° unless viewport is also shifted.
 				// Esp., we must know width of a full 360° pano. The height remains unspecified, because it is always a crop.
-				// 2*pxPerRad should be 360° width! So simple?
+				// 2*pi*pxPerRad should be 360° width! So simple?
 
 				const double centerPixelPerRad=proj->getPixelPerRadAtCenter();
-				xmpData["Xmp.GPano.FullPanoImageWidthPixels"]  = QString::number(int(2*centerPixelPerRad)).toStdString().c_str();
+				xmpData["Xmp.GPano.FullPanoImageWidthPixels"]  = QString::number(int(2*M_PI*centerPixelPerRad)).toStdString().c_str();
 				xmpData["Xmp.GPano.CroppedAreaTopPixels"]    = std::to_string(int((-im.height())/2)); // TBD: Adjust for viewport shift.
 
 				// 4. Define the portion of the view your crop actually occupies
 				// We actually are zooming into the center of a much larger pano.
 				// The left edge depends on view size and view azimuth.
-				if (im.width()>=2*centerPixelPerRad) // fully zoomed out?
+				if (im.width()>=int(2*M_PI*centerPixelPerRad)) // fully zoomed out?
 					xmpData["Xmp.GPano.CroppedAreaLeftPixels"]   = std::to_string(0);
 				else
 					xmpData["Xmp.GPano.CroppedAreaLeftPixels"]   = std::to_string(int(centerPixelPerRad-im.width()/2));
@@ -2263,8 +2263,8 @@ void StelMainView::doScreenshot(void)
 
 				// 2. Off-Axis Center Shifting
 				// Replace 'centerOffsetOffsetX' and 'Y' with Stellarium's actual projection offset variables
-				double center_x = (im.width() / 2.0)  + core->getViewportHorizontalOffset()*im.width()/100.;
-				double center_y = (im.height() / 2.0) - core->getViewportVerticalOffset()*im.height()/100.; // VERIFY DIRECTION
+				double center_x = (im.width() / 2.0)  - core->getViewportHorizontalOffset()*im.width()/100.;
+				double center_y = (im.height() / 2.0) + core->getViewportVerticalOffset()*im.height()/100.; // VERIFY DIRECTION
 				xmpData["Xmp.xmpCamera.PrincipalPointX"] = std::to_string(center_x);
 				xmpData["Xmp.xmpCamera.PrincipalPointY"] = std::to_string(center_y);
 
@@ -2336,9 +2336,10 @@ void StelMainView::doScreenshot(void)
 		QString jsonString = QJsonDocument(QJsonObject::fromVariantMap(infoMap)).toJson(QJsonDocument::Compact);
 		exifData["Exif.Photo.UserComment"] = jsonString.toStdString();
 
-		exifData["Exif.Image.ImageDescription"] = QString("%1 (%2: %3°)").arg(sel.length()>0 ?  sel[0]->getNameI18n() : qc_("Stellarium View", "Screenshot default title"),
+		exifData["Exif.Image.ImageDescription"] = QString("%1 (%2: %3 %4)").arg(sel.length()>0 ?  sel[0]->getNameI18n() : qc_("Stellarium View", "Screenshot default title"),
 										      qc_("FOV", "abbreviation"),
-										      QString::number(fov, 'g', 3)).toStdString().c_str();
+										      QString::number(fov, 'g', 3)).toStdString().c_str(),
+										      q_("degrees");
 
 		//exifData["Exif.Image.ExposureTime"]         = exposureTimeSeconds; // not meaningful
 		//exifData["Exif.Image.FNumber"]              = F_number;            // not meaningful
