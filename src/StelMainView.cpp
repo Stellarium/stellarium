@@ -1689,22 +1689,6 @@ void StelMainView::setScreenshotFormat(const QString filetype)
 	}
 }
 
-#ifdef HAVE_EXIV2
-void StelMainView::setScreenshotArtist(const QString artistName)
-{
-	screenShotArtist = artistName;
-	StelApp::getInstance().getSettings()->setValue("main/screenshot_artist", artistName);
-	emit screenshotArtistChanged(artistName);
-}
-
-void StelMainView::setScreenshotCopyright(const QString copyrightName)
-{
-	screenShotCopyright = copyrightName;
-	StelApp::getInstance().getSettings()->setValue("main/screenshot_copyright", copyrightName);
-	emit screenshotCopyrightChanged(copyrightName);
-}
-#endif
-
 void StelMainView::setFlagScreenshotDateFileName(bool b)
 {
 	flagScreenshotDateFileName=b;
@@ -1737,6 +1721,20 @@ void StelMainView::saveScreenShot(const QString& filePrefix, const QString& save
 }
 
 #ifdef HAVE_EXIV2
+void StelMainView::setScreenshotArtist(const QString artistName)
+{
+	screenShotArtist = artistName;
+	StelApp::getInstance().getSettings()->setValue("main/screenshot_artist", artistName);
+	emit screenshotArtistChanged(artistName);
+}
+
+void StelMainView::setScreenshotCopyright(const QString copyrightName)
+{
+	screenShotCopyright = copyrightName;
+	StelApp::getInstance().getSettings()->setValue("main/screenshot_copyright", copyrightName);
+	emit screenshotCopyrightChanged(copyrightName);
+}
+
 // Helper to convert decimal degrees to EXIF GPS rational components (Degrees, Minutes, Seconds)
 std::string convertToExifDms(double decimalDegrees) {
 	double absolute = std::abs(decimalDegrees);
@@ -2075,7 +2073,8 @@ void StelMainView::doScreenshot(void)
 
 		// LOCATION
 		exifData["Exif.GPSInfo.GPSVersionID"]        = "2 2 0 0"; // mandatory. It should display as 2.0.0.0, though, not 128.0.0.0.
-		exifData["Exif.GPSInfo.GPSMapDatum"]         = "WGS-84"; // fixed for us
+		if (loc.planetName=="Earth")
+			exifData["Exif.GPSInfo.GPSMapDatum"] = "WGS-84"; // fixed for Earth, omit for other places.
 		exifData["Exif.GPSInfo.GPSLatitudeRef"]      = (loc.getLatitude()>0.f ? "N" : "S");
 		exifData["Exif.GPSInfo.GPSLatitude"]         = convertToExifDms(loc.getLatitude()); // 3 rational numbers dd/1,mm/1,ss/1
 		exifData["Exif.GPSInfo.GPSLongitudeRef"]     = (loc.getLongitude()>0.f ? "E" : "W");
@@ -2089,29 +2088,14 @@ void StelMainView::doScreenshot(void)
 		}
 
 		// TARGET and view orientation?
-		Vec3d currentAim;
 		double azimuth=0;
 		double altitude=0;
-		double ra=0;
-		double dec=0;
-		if (movMgr->getMountMode()==StelMovementMgr::MountAltAzimuthal)
-		{
-			currentAim=core->j2000ToAltAz(movMgr->getViewDirectionJ2000(), StelCore::RefractionOff);
-			StelUtils::rectToSphe(&azimuth, &altitude, currentAim);
-			azimuth= StelUtils::fmodpos(180.-azimuth*M_180_PI, 360.);
-			altitude *= M_180_PI;
-			exifData["Exif.GPSInfo.GPSImgDirection"]     = QString("%1/1000").arg(QString::number(int(round(azimuth*1000.0)))).toStdString().c_str(); // True azimuth, degrees [0..359.99]
-			exifData["Exif.Photo.CameraElevationAngle"]  = QString("%1/1000").arg(QString::number(int(round(altitude*1000.0)))).toStdString().c_str(); // center orientation, degrees
-		}
-		else
-		{
-			currentAim=core->j2000ToEquinoxEqu(movMgr->getViewDirectionJ2000(), StelCore::RefractionOff);
-			StelUtils::rectToSphe(&ra, &dec, currentAim);
-			ra   = StelUtils::fmodpos(ra*M_180_PI, 360.); // We use ra in degrees here.
-			dec *= M_180_PI;
-			exifData["Exif.GPSInfo.GPSImgDirection"]     = QString("%1/1000").arg(QString::number(int(round(ra*1000.0)))).toStdString().c_str(); // True azimuth, degrees [0..359.99]
-			exifData["Exif.Photo.CameraElevationAngle"]  = QString("%1/1000").arg(QString::number(int(round(dec*1000.0)))).toStdString().c_str(); // center orientation, degrees
-		}
+		Vec3d currentAim=core->j2000ToAltAz(movMgr->getViewDirectionJ2000(), StelCore::RefractionOff);
+		StelUtils::rectToSphe(&azimuth, &altitude, currentAim);
+		azimuth= StelUtils::fmodpos(180.-azimuth*M_180_PI, 360.);
+		altitude *= M_180_PI;
+		exifData["Exif.GPSInfo.GPSImgDirection"]     = QString("%1/1000").arg(QString::number(int(round(azimuth*1000.0)))).toStdString().c_str(); // True azimuth, degrees [0..359.99]
+		exifData["Exif.Photo.CameraElevationAngle"]  = QString("%1/1000").arg(QString::number(int(round(altitude*1000.0)))).toStdString().c_str(); // center orientation, degrees
 		exifData["Exif.GPSInfo.GPSImgDirectionRef"]  = "T"; // azimuth value is True (not magnetic) azimuth
 
 		// Not sure whether we should (ab)use those?
@@ -2196,6 +2180,13 @@ void StelMainView::doScreenshot(void)
 				}
 				else
 				{
+					double ra=0;
+					double dec=0;
+					Vec3d currentAim=core->j2000ToEquinoxEqu(movMgr->getViewDirectionJ2000(), StelCore::RefractionOff);
+					StelUtils::rectToSphe(&ra, &dec, currentAim);
+					ra   = StelUtils::fmodpos(ra*M_180_PI, 360.); // We use ra in degrees here.
+					dec *= M_180_PI;
+
 					gpanoHeading = 360.-ra; // we must obey azimuthal sense of rotation.
 					gpanoPitch   = dec; // Equator = 0, N.Pole = 90, S.Pole = -90
 				}
