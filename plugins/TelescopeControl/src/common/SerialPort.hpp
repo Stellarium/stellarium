@@ -43,6 +43,7 @@ public:
 	//! On Microsoft Windows systems, this should be something like "COM1:".
 	SerialPort(Server &server, const char *serial_device);
 	~SerialPort(void) override;
+	void hangup(void) override;
 	//! Returns true if the connection is closed.
 	//! This method has different platform-dependent implementations.
 	bool isClosed(void) const override

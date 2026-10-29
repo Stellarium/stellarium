@@ -86,7 +86,7 @@ class Socket
 {
 public:
 	virtual ~Socket() { hangup(); }
-	void hangup();
+	virtual void hangup();
 	virtual void prepareSelectFds(fd_set &read_fds, fd_set &write_fds, int &fd_max) = 0;
 	virtual void handleSelectFds(const fd_set &read_fds, const fd_set &write_fds) = 0;
 	virtual bool isClosed() const

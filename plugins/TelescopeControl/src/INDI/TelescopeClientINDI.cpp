@@ -50,9 +50,14 @@ TelescopeClientINDI::TelescopeClientINDI(const QString &name, const QString &par
 	mConnection.connectServer();
 }
 
-TelescopeClientINDI::~TelescopeClientINDI()
+void TelescopeClientINDI::closeConnection()
 {
 	mConnection.disconnectServer();
+}
+
+TelescopeClientINDI::~TelescopeClientINDI()
+{
+	closeConnection();
 }
 
 Vec3d TelescopeClientINDI::getJ2000EquatorialPos(const StelCore* core) const
