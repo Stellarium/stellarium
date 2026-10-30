@@ -390,6 +390,7 @@ Satellites::Satellites()
 	, autoRemoveEnabled(false)
 	, autoDisplayEnabled(true)
 	, updateFrequencyHours(0)
+	, showDownloadErrorWarningBox(true)
 	, flagUmbraVisible(false)
 	, flagUmbraAtFixedAltitude(false)
 	, umbraColor(1.0f, 0.0f, 0.0f)
@@ -2752,6 +2753,7 @@ void Satellites::saveDownloadedUpdate(QNetworkReply* reply)
 			}
 			if (tmpFile) // Something strange just happened...
 			{
+				Q_ASSERT(0); // Can we ever get here?
 				// Sorry Bogdan. If something strange/unexpected happened, you cannot just silently delete. Fix whatever was strange. For now, show at least a warning.
 				qWarning() << "[Satellites] Cannot insert newly fetched file to updateSources. Ignoring this file.";
 				delete tmpFile; // ...so we have to clean.
@@ -2805,6 +2807,8 @@ void Satellites::saveDownloadedUpdate(QNetworkReply* reply)
 		updateSatellites(newData);
 	else
 		emit updateStateChanged(OtherError);
+	// and re-arm the Celestrak warning panel
+	showDownloadErrorWarningBox=true;
 }
 
 // This is called from saveDownloadedUpdate() when a reply contains an error.
@@ -2833,7 +2837,13 @@ void Satellites::handleErrorReply(QNetworkReply* reply)
 
 		qWarning() << "[Satellites] download problem. Please see https://celestrak.org/NORAD/documentation/gp-data-formats.php";
 	}
-	QMessageBox::warning(&StelMainView::getInstance(), qc_("Please read carefully!", "Satellites plugin URL warning"), message, QMessageBox::Ok);
+	if (showDownloadErrorWarningBox)
+	{
+		QMessageBox::warning(&StelMainView::getInstance(), qc_("Please read carefully!", "Satellites plugin URL warning"), message, QMessageBox::Ok);
+		// deactivate this panel for this update cycle.
+		showDownloadErrorWarningBox=false;
+
+	}
 }
 
 void Satellites::updateObserverLocation(const StelLocation &loc)
