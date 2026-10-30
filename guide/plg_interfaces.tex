@@ -495,7 +495,7 @@ This plugin allows also interfacing other programs with Stellarium.
 \label{sec:plugins:RemoteControl:using}
 
 \begin{figure}[h]
-\centering\includegraphics[width=\columnwidth]{remote_web.png}
+\centering\includegraphics[width=\columnwidth]{Rc-web-main.png}
 \caption{The default remote control web interface}
 \label{fig:plugins:RemoteControl:using}
 \end{figure}
@@ -592,8 +592,13 @@ configured as a keyboard shortcut (\autoref{sec:gui:configuration}) here.
 \item[Location] Allows changing the location, like in 
 \autoref{sec:gui:location}. Custom location saving is currently not 
 supported.
+\item[Sky Culture] Allows exploring the constellations, asterisms, zodiac signs, lunar mansions, 
+and named stars of the current sky culture. 
+Provides filtering, multi-select, and a script generator for creating guided tours.
 \item[Projection] Switch the projection method used, like \autoref{sec:gui:view:markings}.
 \end{description}
+
+\input{plg_remotecontrol_skyculture}
 
 % Gamepad Controller
 \subsection{Gamepad Controller}
@@ -615,6 +620,11 @@ connected devices, but for security reasons, the browser only exposes the
 gamepad after the user performs an intentional input action---pressing a
 button or moving a joystick axis. Once this gesture is detected, the device
 information (name, model, vendor, and unique identifier) will be displayed.
+\begin{figure}[H]\centering
+\includegraphics[width=0.35\columnwidth]{Rc-gamepad-connected.png}
+\caption{PS4-DualShock Gamepad connected.}
+\label{fig:Gamepad:connected}
+\end{figure}
 
 Multiple controllers can be connected simultaneously. Use the \emph{Active
 Device} dropdown to switch between connected devices. Each device maintains
@@ -622,6 +632,12 @@ its own independent profile, including button mappings, calibration data, and
 settings, all stored locally in the browser's \texttt{localStorage}.
 
 \subsubsection{Button Customization}
+
+\begin{figure}[H]\centering
+\includegraphics[width=0.8\columnwidth]{Rc-gamepad-Button.png}
+\caption{The Button Customization panel populated with customized Buttons.}
+\label{fig:Gamepad:Buttons}
+\end{figure}
 
 The button customization system is dynamically populated from Stellarium's
 native action system via the \texttt{/api/stelaction/list} endpoint. This
@@ -653,6 +669,11 @@ The two analog sticks provide intuitive control:
 \item[Right Stick] Controls continuous zoom. The zoom speed can be adjusted,
   and the Y-axis can be inverted to match user preference (pull up to zoom in
   or out).
+\begin{figure}[H]\centering
+\includegraphics[width=0.35\columnwidth]{Rc-gamepad-joystic.png}
+\caption{Joystick Preview panel (Left stick/Right stick).}
+\label{fig:Gamepad:Joystic}
+\end{figure}
 \end{description}
 
 \subsubsection{Calibration}
@@ -674,6 +695,11 @@ If the connected gamepad supports vibration (works in Chrome and Edge
 browsers), vibration feedback can be enabled. The intensity can be adjusted
 with a slider, and a \button{Test Vibration} button allows manual
 verification.
+\begin{figure}[H]\centering
+\includegraphics[width=0.35\columnwidth]{Rc-gamepad-settings-sliders.png}
+\caption{Vibration, Sensitivity, Deadzone, Zoom Speed, Movement Speed settings.}
+\label{fig:Gamepad:settings-sliders}
+\end{figure}
 
 \subsubsection{Live Input Monitor}
 
@@ -684,6 +710,11 @@ Gamepad API, showing:
 \item Button states with numerical values (0.0 to 1.0) and visual indicators.
 \item Axis positions with visual meters (-1.0 to 1.0).
 \item Device information including button and axis counts.
+\begin{figure}[H]\centering
+\includegraphics[width=\textwidth]{Rc-gamepad-liveInput.png}
+\caption{Live Real-time raw values from the browser's Gamepad API (Buttons and Axis).}
+\label{fig:Gamepad:liveInput}
+\end{figure}
 \end{itemize}
 
 This panel is invaluable for debugging button mappings and understanding how
