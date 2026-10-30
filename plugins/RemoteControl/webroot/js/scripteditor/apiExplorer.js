@@ -37,7 +37,7 @@
  * - StelProperty Service (list, set)
  * - SIMBAD Service (lookup)
  * - View Service (listlandscape, landscapedescription/, listskyculture, skyculturedescription/, listprojection, projectiondescription)
- * - Scenery3D Service (plug-in) (/api/scenery3d/listscene, /api/scenery3d/loadscene, /api/scenery3d/scenedescription/) 
+ * - Scenery3D Service (plug-in) (/api/scenery3d/listscene, /api/scenery3d/loadscene, /api/scenery3d/scenedescription/, /api/scenery3d/move) 
  *
  * @module apiExplorer
  * @requires jquery
@@ -340,7 +340,7 @@ define(["jquery", "api/remotecontrol"],
 																			<li>
 																					<code>time</code> (optional, number): <strong>Julian Day (JD)</strong> value.<br>
 																					<span style="color: #d9534f;"><strong>Important:</strong> The server expects a numeric Julian Day (e.g., <code>2460050.5</code>).</span><br>
-																					<span style="color: #888;">Sending an ISO 8601 date string (e.g., "2025-01-01T00:00:00") will be rejected by the server (it will log a warning and ignore the parameter).</span>
+																					<span style="color: #d1d1d1;">Sending an ISO 8601 date string (e.g., "2025-01-01T00:00:00") will be rejected by the server (it will log a warning and ignore the parameter).</span>
 																			</li>
 																			<li>
 																					<code>timerate</code> (optional, number): Time flow multiplier.<br>
@@ -351,7 +351,7 @@ define(["jquery", "api/remotecontrol"],
 																							<li><code>86400.0</code> → 1 day of simulation per real second.</li>
 																							<li><code>-1.0</code> → Reverse time at normal speed.</li>
 																					</ul>
-																					<span style="color: #888;">If omitted, the current time rate remains unchanged.</span>
+																					<span style="color: #d1d1d1;">If omitted, the current time rate remains unchanged.</span>
 																			</li>
 																	</ul>
 															</div>
@@ -402,7 +402,7 @@ define(["jquery", "api/remotecontrol"],
 																							<li><strong>Maximum</strong>: 235° (fish-eye / wide-angle view).</li>
 																							<li><strong>Default</strong>: ~60° (standard view).</li>
 																					</ul>
-																					<span style="color: #888;">Values outside the min/max range are automatically clamped to the nearest valid limit.</span>
+																					<span style="color: #d1d1d1;">Values outside the min/max range are automatically clamped to the nearest valid limit.</span>
 																			</li>
 																	</ul>
 															</div>
@@ -438,7 +438,7 @@ define(["jquery", "api/remotecontrol"],
 																					<strong>Object Mode:</strong>
 																					<ul style="padding-left: 20px;">
 																							<li><code>target</code> (string): Name of the object (supports English and localized names).<br>
-																									<span style="color: #888;">Examples: "Mars", "M31", "Sirius", "Polaris".</span>
+																									<span style="color: #d1d1d1;">Examples: "Mars", "M31", "Sirius", "Polaris".</span>
 																							</li>
 																					</ul>
 																			</li>
@@ -446,7 +446,7 @@ define(["jquery", "api/remotecontrol"],
 																					<strong>Position Mode (J2000):</strong>
 																					<ul style="padding-left: 20px;">
 																							<li><code>position</code> (vector3): JSON array of 3 doubles <code>[x, y, z]</code> representing the J2000 direction vector.<br>
-																									<span style="color: #888;">If provided, <code>target</code> is ignored. This will also clear any selected object.</span>
+																									<span style="color: #d1d1d1;">If provided, <code>target</code> is ignored. This will also clear any selected object.</span>
 																							</li>
 																					</ul>
 																			</li>
@@ -487,7 +487,8 @@ define(["jquery", "api/remotecontrol"],
 												parameters: {
 														target: { required: true, type: 'string', description: 'Object name,  Examples: "Mars", "M31", "Sirius", "Polaris" ' },
 														position: { required: false, type: 'vector3', description: 'JSON array [x,y,z] to focus on (alternative to target)'},
-														mode: { required: false, type: 'string', description: 'Focus mode: center, zoom, mark' }
+														//mode: { required: false, type: 'string', description: 'Focus mode: center, zoom, mark' }
+														mode: { required: false, type: 'select', options: ['center', 'zoom', 'mark'], description: 'Focus mode: center, zoom, mark' }
 												}
 										},
 										move: {
@@ -499,11 +500,11 @@ define(["jquery", "api/remotecontrol"],
 														<ul style="margin-top: 5px; padding-left: 20px;">
 																<li>
 																		<code>x</code>: Horizontal speed. Range: <strong>-1.0</strong> to <strong>1.0</strong>.<br>
-																		<span style="color: #888;">Positive values move the view right (East), negative values move it left (West).</span>
+																		<span style="color: #d1d1d1;">Positive values move the view right (East), negative values move it left (West).</span>
 																</li>
 																<li>
 																		<code>y</code>: Vertical speed. Range: <strong>-1.0</strong> to <strong>1.0</strong>.<br>
-																		<span style="color: #888;">Positive values move the view up (North), negative values move it down (South).</span>
+																		<span style="color: #d1d1d1;">Positive values move the view up (North), negative values move it down (South).</span>
 																</li>
 														</ul>
 												</div>
@@ -573,7 +574,7 @@ define(["jquery", "api/remotecontrol"],
 																							<li><code>on</code> → Refraction is always applied.</li>
 																							<li><code>off</code> → Refraction is never applied.</li>
 																					</ul>
-																					<span style="color: #888;">Note: This parameter is only effective when <code>coord=jNow</code> is specified or if all three are returned.</span>
+																					<span style="color: #d1d1d1;">Note: This parameter is only effective when <code>coord=jNow</code> is specified or if all three are returned.</span>
 																			</li>
 																	</ul>
 															</div>
@@ -682,7 +683,7 @@ define(["jquery", "api/remotecontrol"],
 
 															<div style="margin-top: 10px;">
 																	<strong>Example Response (excerpt):</strong>
-<pre style="background: #888; padding: 10px; border-radius: 4px; font-size: 12px; overflow-x: auto;">
+<pre style="background: #d1d1d1; padding: 10px; border-radius: 4px; font-size: 12px; overflow-x: auto;">
 {
 "RemoteControl": {
 "info": {
@@ -722,11 +723,11 @@ define(["jquery", "api/remotecontrol"],
 																	<ul style="margin-top: 5px; padding-left: 20px;">
 																			<li>
 																					<code>w</code> (required, integer): Desired window width in <strong>pixels</strong>.<br>
-																					<span style="color: #888;">Must be a positive integer (e.g., 1920).</span>
+																					<span style="color: #d1d1d1;">Must be a positive integer (e.g., 1920).</span>
 																			</li>
 																			<li>
 																					<code>h</code> (required, integer): Desired window height in <strong>pixels</strong>.<br>
-																					<span style="color: #888;">Must be a positive integer (e.g., 1080).</span>
+																					<span style="color: #d1d1d1;">Must be a positive integer (e.g., 1080).</span>
 																			</li>
 																	</ul>
 															</div>
@@ -771,7 +772,7 @@ define(["jquery", "api/remotecontrol"],
 														<strong>Parameter:</strong>
 														<ul style="margin-top: 5px; padding-left: 20px;">
 																<li><code>str</code> (required, string): Search term (case-insensitive).<br>
-																<span style="color: #888;">Supports Greek letters (e.g., "α" for "Alpha").</span></li>
+																<span style="color: #d1d1d1;">Supports Greek letters (e.g., "α" for "Alpha").</span></li>
 														</ul>
 												</div>
 												<div style="margin-top: 10px;">
@@ -865,7 +866,7 @@ define(["jquery", "api/remotecontrol"],
 														<ul style="margin-top: 5px; padding-left: 20px;">
 																<li>
 																		<code>type</code> (required): Object type key from <code>listobjecttypes</code>.<br>
-																		<span style="color: #888;">Use the "Browse Types" button to select from available types.</span>
+																		<span style="color: #d1d1d1;">Use the "Browse Types" button to select from available types.</span>
 																</li>
 																<li style="margin-top: 5px;">
 																		<code>english</code> (optional): Name language preference.<br>
@@ -1046,7 +1047,7 @@ define(["jquery", "api/remotecontrol"],
 														<ul style="margin-top: 5px; padding-left: 20px;">
 																<li>
 																		<code>planet</code> (required, string): Name of the planet.<br>
-																		<span style="color: #888;">Use the names returned by <code>planetlist</code> (e.g., "Earth", "Mars", "Moon").</span>
+																		<span style="color: #d1d1d1;">Use the names returned by <code>planetlist</code> (e.g., "Earth", "Mars", "Moon").</span>
 																</li>
 														</ul>
 												</div>
@@ -1070,11 +1071,11 @@ define(["jquery", "api/remotecontrol"],
 														</ul>
 												</div>
 
-												<div style="margin-top: 10px; font-style: italic; color: #888;">
+												<div style="margin-top: 10px; font-style: italic; color: #d1d1d1;">
 														Note: This endpoint returns binary image data, not JSON. The response is displayed as an image preview.
 												</div>`,
 												parameters: {
-														planet: {	required: true, type: 'string', description: 'Planet name (Earth, Mars, Moon ...)'}
+														planet: {	required: true, type: 'string', description: 'Planet name (Earth, Mars, Moon ...)',  suggest: 'planets'}
 												},
 												responseType: 'image'
 										},
@@ -1089,7 +1090,7 @@ define(["jquery", "api/remotecontrol"],
 																					<strong>Method 1: Use Location ID (simplest)</strong>
 																					<ul style="padding-left: 20px; margin-top: 3px;">
 																							<li><code>id</code> (string): Predefined location name from Stellarium's database.</li>
-																							<li style="color: #888; font-style: italic;">If <code>id</code> is provided, all other parameters are ignored.</li>
+																							<li style="color: #d1d1d1; font-style: italic;">If <code>id</code> is provided, all other parameters are ignored.</li>
 																					</ul>
 																			</li>
 																			<li style="margin-top: 8px;">
@@ -1162,7 +1163,7 @@ define(["jquery", "api/remotecontrol"],
 
 															<div style="margin-top: 10px;">
 																	<strong>Example Response:</strong>
-													<pre style="background: #888; padding: 10px; border-radius: 4px; font-size: 12px; margin: 5px 0;">
+													<pre style="background: #d1d1d1; padding: 10px; border-radius: 4px; font-size: 12px; margin: 5px 0;">
 [
 {"name": "Mercury", "name_i18n": "Mercure"},
 {"name": "Venus", "name_i18n": "Vénus"},
@@ -1183,8 +1184,8 @@ define(["jquery", "api/remotecontrol"],
 														<ul style="margin-top: 5px; padding-left: 20px;">
 																<li>
 																		<code>planet</code> (optional, string): Planet name to filter regions.<br>
-																		<span style="color: #888;">If provided, only regions belonging to that planet are returned.</span><br>
-																		<span style="color: #888;">If omitted, all regions from all planets are returned (backward compatible).</span>
+																		<span style="color: #d1d1d1;">If provided, only regions belonging to that planet are returned.</span><br>
+																		<span style="color: #d1d1d1;">If omitted, all regions from all planets are returned (backward compatible).</span>
 																</li>
 														</ul>
 												</div>
@@ -1220,7 +1221,7 @@ define(["jquery", "api/remotecontrol"],
 												
 												<div style="margin-top: 10px;">
 														<strong>Example Response:</strong>
-<pre style="background: #888; padding: 10px; border-radius: 4px; font-size: 12px; margin: 5px 0;">
+<pre style="background: #d1d1d1; padding: 10px; border-radius: 4px; font-size: 12px; margin: 5px 0;">
 [
     {"name": "Northern Africa", "name_i18n": "Northern Africa"},
     {"name": "Northern America", "name_i18n": "Northern America"},
@@ -1251,7 +1252,7 @@ define(["jquery", "api/remotecontrol"],
 																	<ul style="margin-top: 5px; padding-left: 20px;">
 																			<li>
 																					<code>term</code> (required, string): Search term to match against location names.<br>
-																					<span style="color: #888;">Supports wildcards: use <code>*</code> as a placeholder for any characters.</span>
+																					<span style="color: #d1d1d1;">Supports wildcards: use <code>*</code> as a placeholder for any characters.</span>
 																			</li>
 																	</ul>
 															</div>
@@ -1277,7 +1278,7 @@ define(["jquery", "api/remotecontrol"],
 																	</ul>
 															</div>
 
-															<div style="margin-top: 10px; font-style: italic; color: #888;">
+															<div style="margin-top: 10px; font-style: italic; color: #d1d1d1;">
 																	Note: This endpoint is designed for autocomplete functionality and is optimized for quick searches.
 															</div>`,
 												parameters: {
@@ -1302,7 +1303,7 @@ define(["jquery", "api/remotecontrol"],
 																	<ul style="margin-top: 5px; padding-left: 20px;">
 																			<li>
 																					<code>radius</code> (number, optional): Search radius in degrees.<br>
-																					<span style="color: #888;">If not specified, a default radius is used.</span>
+																					<span style="color: #d1d1d1;">If not specified, a default radius is used.</span>
 																					<ul style="padding-left: 20px; margin-top: 3px;">
 																							<li>On Earth, 1° ≈ 111 km (great circle distance).</li>
 																							<li>Larger radius returns more results.</li>
@@ -1330,7 +1331,7 @@ define(["jquery", "api/remotecontrol"],
 																	</ul>
 															</div>
 
-															<div style="margin-top: 10px; font-style: italic; color: #888;">
+															<div style="margin-top: 10px; font-style: italic; color: #d1d1d1;">
 																	Note: The actual location database may have limited coverage on planets other than Earth. Use <code>planetlist</code> to see available planets.
 															</div>`,
 												parameters: {
@@ -1370,7 +1371,7 @@ define(["jquery", "api/remotecontrol"],
 												
 												<div style="margin-top: 10px;">
 														<strong>Example Response:</strong>
-<pre style="background: #888; padding: 10px; border-radius: 4px; font-size: 11px; margin: 5px 0;">
+<pre style="background: #d1d1d1; padding: 10px; border-radius: 4px; font-size: 11px; margin: 5px 0;">
 [
 "constellations_tour.ssc",
 "double_stars.ssc",
@@ -1390,7 +1391,7 @@ define(["jquery", "api/remotecontrol"],
 														<ul style="margin-top: 5px; padding-left: 20px;">
 																<li>
 																		<code>id</code> (required, string): Script identifier (filename).<br>
-																		<span style="color: #888;">Use the <code>list</code> operation to see all available script IDs.</span>
+																		<span style="color: #d1d1d1;">Use the <code>list</code> operation to see all available script IDs.</span>
 																</li>
 																<li style="margin-top: 5px;">
 																		<code>html</code> (optional): If present, returns HTML description instead of JSON.
@@ -1452,7 +1453,7 @@ define(["jquery", "api/remotecontrol"],
 														<ul style="margin-top: 5px; padding-left: 20px;">
 																<li>
 																		<code>id</code> (required, string): Script identifier (filename).<br>
-																		<span style="color: #888;">Use the <code>list</code> operation to see all available script IDs.</span>
+																		<span style="color: #d1d1d1;">Use the <code>list</code> operation to see all available script IDs.</span>
 																</li>
 														</ul>
 												</div>
@@ -1498,7 +1499,7 @@ define(["jquery", "api/remotecontrol"],
 														<ul style="margin-top: 5px; padding-left: 20px;">
 																<li>
 																		<code>code</code> (required, string): The Stellarium Script code to execute.<br>
-																		<span style="color: #888;">Supports all Stellarium Script commands (core.*, StelMovementMgr.*, etc.).</span>
+																		<span style="color: #d1d1d1;">Supports all Stellarium Script commands (core.*, StelMovementMgr.*, etc.).</span>
 																</li>
 																<li style="margin-top: 5px;">
 																		<code>useIncludes</code> (optional, boolean): Enable preprocessing with includes directory.<br>
@@ -1506,7 +1507,7 @@ define(["jquery", "api/remotecontrol"],
 																				<li><code>0</code> (default): No preprocessing.</li>
 																				<li><code>1</code> or <code>true</code>: Use includes directory for preprocessing.</li>
 																		</ul>
-																		<span style="color: #888;">When enabled, the code will be processed through Stellarium's include system, allowing the use of shared script libraries.</span>
+																		<span style="color: #d1d1d1;">When enabled, the code will be processed through Stellarium's include system, allowing the use of shared script libraries.</span>
 																</li>
 														</ul>
 												</div>
@@ -1555,7 +1556,7 @@ define(["jquery", "api/remotecontrol"],
 												
 												<div style="margin-top: 10px;">
 														<strong>Example Response:</strong>
-<pre style="background: #888; padding: 10px; border-radius: 4px; font-size: 11px; margin: 5px 0;">
+<pre style="background: #d1d1d1; padding: 10px; border-radius: 4px; font-size: 11px; margin: 5px 0;">
 {
 "scriptIsRunning": true,
 "runningScriptId": "double_stars.ssc"
@@ -1623,7 +1624,7 @@ define(["jquery", "api/remotecontrol"],
 														Returns a JSON object where each key is a <strong>category name</strong> (translated to the current Stellarium language), 
 														and each value is an array of actions belonging to that category.
 												</p>
-				<pre style="background: #888; padding: 10px; border-radius: 4px; font-size: 11px; margin: 5px 0; white-space: pre-wrap;">
+				<pre style="background: #d1d1d1; padding: 10px; border-radius: 4px; font-size: 11px; margin: 5px 0; white-space: pre-wrap;">
 {
 "Display Options": [
 {"id": "actionShow_Stars", "isCheckable": true, "isChecked": true, "text": "Stars"},
@@ -1715,7 +1716,7 @@ define(["jquery", "api/remotecontrol"],
 												<ul style="margin-top: 5px; padding-left: 20px;">
 														<li>
 																<code>id</code> (required, string): Action identifier.<br>
-																<span style="color: #888;">Use the <code>list</code> operation or the <strong>"Browse Actions"</strong> button to see all available action IDs.</span>
+																<span style="color: #d1d1d1;">Use the <code>list</code> operation or the <strong>"Browse Actions"</strong> button to see all available action IDs.</span>
 														</li>
 												</ul>
 										</div>
@@ -1821,7 +1822,7 @@ define(["jquery", "api/remotecontrol"],
 														<p style="color: #B4B7B0; font-size: 11px; margin: 5px 0;">
 																Returns a JSON object where each key is a property ID, and each value contains detailed property metadata.
 														</p>
-<pre style="background: #888; padding: 10px; border-radius: 4px; font-size: 11px; margin: 5px 0; white-space: pre-wrap;">
+<pre style="background: #d1d1d1; padding: 10px; border-radius: 4px; font-size: 11px; margin: 5px 0; white-space: pre-wrap;">
 {
 "MilkyWay.intensity": {
 		"value": 1.0,
@@ -1937,11 +1938,11 @@ define(["jquery", "api/remotecontrol"],
 														<ul style="margin-top: 5px; padding-left: 20px;">
 																<li>
 																		<code>id</code> (required, string): Property identifier.<br>
-																		<span style="color: #888;">Use the <code>list</code> operation or the <strong>"Browse Properties"</strong> button to see all available property IDs.</span>
+																		<span style="color: #d1d1d1;">Use the <code>list</code> operation or the <strong>"Browse Properties"</strong> button to see all available property IDs.</span>
 																</li>
 																<li style="margin-top: 5px;">
 																		<code>value</code> (required, string): New value for the property.<br>
-																		<span style="color: #888;">The value will be automatically converted to the property's data type.</span>
+																		<span style="color: #d1d1d1;">The value will be automatically converted to the property's data type.</span>
 																		<ul style="padding-left: 20px; margin-top: 3px;">
 																				<li><strong>Boolean:</strong> Use <code>true</code> or <code>false</code> (case-insensitive).</li>
 																				<li><strong>Number (int/double):</strong> Use numeric values (e.g., <code>5.0</code>, <code>10</code>).</li>
@@ -2037,14 +2038,14 @@ define(["jquery", "api/remotecontrol"],
 													<ul style="margin-top: 5px; padding-left: 20px;">
 															<li>
 																	<code>str</code> (required, string): Search term for SIMBAD query.<br>
-																	<span style="color: #888;">Supports object names, coordinates, and catalog designations.</span>
+																	<span style="color: #d1d1d1;">Supports object names, coordinates, and catalog designations.</span>
 															</li>
 													</ul>
 											</div>
 											
 											<div style="margin-top: 10px;">
 													<strong>Returned Data Structure:</strong>
-<pre style="background: #888; padding: 10px; border-radius: 4px; font-size: 11px; margin: 5px 0;">
+<pre style="background: #d1d1d1; padding: 10px; border-radius: 4px; font-size: 11px; margin: 5px 0;">
 {
 	"status": "found",                 // "found", "empty", "error", or "unknown"
 		"status_i18n": "Search completed successfully.",
@@ -2101,7 +2102,7 @@ define(["jquery", "api/remotecontrol"],
 												
 												<div style="margin-top: 10px;">
 														<strong>Using Results with focus:</strong>
-<pre style="background: #888; padding: 10px; border-radius: 4px; font-size: 11px; margin: 5px 0;">// Example: Focus on the first SIMBAD result using its position vector
+<pre style="background: #d1d1d1; padding: 10px; border-radius: 4px; font-size: 11px; margin: 5px 0;">// Example: Focus on the first SIMBAD result using its position vector
 // position = [0.12, 0.34, 0.56] (J2000 coordinates from SIMBAD response)
 curl -X POST -d "position=[0.12,0.34,0.56]" http://localhost:8090/api/main/focus</pre>
 												</div>`,
@@ -2158,30 +2159,87 @@ curl -X POST -d "position=[0.12,0.34,0.56]" http://localhost:8090/api/main/focus
 												method: 'GET',
 												desc: `<p>Get the HTML description of the current landscape, or access landscape resource files.</p>
 												
+												<div style="margin-top: 10px; background: rgba(102, 217, 239, 0.1); padding: 10px; border-radius: 4px;">
+														<strong style="color: #66D9EF;">Two Equivalent Ways to Access Files:</strong>
+														<ul style="margin-top: 8px; padding-left: 20px;">
+																<li style="margin-bottom: 6px;">
+																		<strong>Path Segment (URL)</strong> — Append the file path directly after the trailing slash.<br>
+																		<code style="background:rgba(0,0,0,0.3);padding:2px 6px;border-radius:3px;font-size:11px;">/api/view/landscapedescription/image.png</code>
+																</li>
+																<li>
+																		<strong>Query Parameter</strong> — Use the <code>path</code> parameter after the trailing slash.<br>
+																		<code style="background:rgba(0,0,0,0.3);padding:2px 6px;border-radius:3px;font-size:11px;">/api/view/landscapedescription/?path=image.png</code>
+																</li>
+														</ul>
+												</div>
+												
+												<div style="margin-top: 10px; background: rgba(249, 38, 114, 0.1); padding: 10px; border-radius: 4px;">
+														<strong style="color: #F92672;">Important:</strong>
+														<span style="color: #B4B7B0;">
+																Do <strong>not</strong> use both forms at the same time. Provide the file either as a path segment
+																<strong>or</strong> via the <code>path</code> parameter, but not both.
+														</span>
+												</div>
+												
 												<div style="margin-top: 10px;">
 														<strong>Behavior:</strong>
 														<ul style="margin-top: 5px; padding-left: 20px;">
-																<li><strong>Without path:</strong> Returns the HTML description of the currently active landscape.</li>
-																<li><strong>With path:</strong> Returns a specific file from the landscape directory (e.g., images, textures).</li>
+																<li><strong>No file specified:</strong> Returns the HTML description of the currently active landscape.</li>
+																<li><strong>File via path segment:</strong> Returns the specified file from the landscape directory.</li>
+																<li><strong>File via <code>path</code> parameter:</strong> Returns the same file.</li>
 														</ul>
 												</div>
 												
 												<div style="margin-top: 10px; background: rgba(253, 216, 134, 0.1); padding: 10px; border-radius: 4px;">
 														<strong style="color: #E6DB74;">Note:</strong>
 														<span style="color: #B4B7B0;">
-																This endpoint follows the pattern: <code>/api/view/landscapedescription/</code> (with trailing slash).
-																Adding a path after the slash will return the corresponding file from the landscape folder.
+																The trailing slash (<code>/</code>) is <strong>mandatory</strong> in both forms.
+																The <code>path</code> parameter is especially useful for OpenAPI/SwaggerUI clients
+																that cannot easily build dynamic path segments.
 														</span>
 												</div>
 												
 												<div style="margin-top: 10px;">
-														<strong>Examples:</strong>
+														<strong>Examples (equivalent pairs):</strong>
 														<ul style="margin-top: 5px; padding-left: 20px;">
-																<li><code>GET /api/view/landscapedescription/</code> → Returns HTML description of current landscape.</li>
-																<li><code>GET /api/view/landscapedescription/image.png</code> → Returns the image file from the current landscape folder(Example: guereins1.png, guereins2.png ..).</li>
+																<li>
+																		<code>GET /api/view/landscapedescription/</code><br>
+																		<span style="color:#8A8C8E;font-size:11px;">→ HTML description of the current landscape.</span>
+																</li>
+																<li>
+																		<code>GET /api/view/landscapedescription/guereins2.png</code><br>
+																		<span style="color:#8A8C8E;font-size:11px;">→ Image via path segment.</span>
+																</li>
+																<li>
+																		<code>GET /api/view/landscapedescription/?path=guereins2.png</code><br>
+																		<span style="color:#8A8C8E;font-size:11px;">→ Same image via <code>path</code> parameter.</span>
+																</li>
 														</ul>
+												</div>
+												
+												<div style="margin-top: 10px;">
+														<strong>Typical Files:</strong>
+														<ul style="margin-top: 5px; padding-left: 20px;">
+																<li><code>guereins1.png</code>, <code>guereins2.png</code>, ... → Landscape textures</li>
+																<li><code>description.md</code> → Full HTML description (if present)</li>
+																<li><code>landscape.ini</code> → Configuration file (if present)</li>
+														</ul>
+														<span style="color:#8A8C8E;font-size:11px;">
+																Available files depend on the currently active landscape.
+														</span>
 												</div>`,
-												parameters: {},
+												parameters: {
+														path: { 
+																required: false, 
+																type: 'string', 
+																description: 'File path inside the landscape directory (e.g., "guereins2.png"). Alternative to appending the path as a URL segment after the trailing slash. Do not use both forms at the same time. Leave empty to get the HTML description of the current landscape.'
+														},
+														file: {
+																required: false,
+																type: 'string',
+																description: 'Alias for "path", kept for backward compatibility. Prefer using "path". Do not send both.'
+														}														
+												},
 												trailingSlash: true
 										},
 										
@@ -2235,10 +2293,34 @@ curl -X POST -d "position=[0.12,0.34,0.56]" http://localhost:8090/api/main/focus
 												desc: `<p>Access files and resources from the current sky culture folder.</p>
 												
 												<div style="margin-top: 10px; background: rgba(102, 217, 239, 0.1); padding: 10px; border-radius: 4px;">
-														<strong style="color: #66D9EF;">📁 Available Files:</strong>
+														<strong style="color: #66D9EF;">Two Equivalent Ways to Access Files:</strong>
+														<ul style="margin-top: 8px; padding-left: 20px;">
+																<li style="margin-bottom: 6px;">
+																		<strong>Path Segment (URL)</strong> — Append the file path directly after the trailing slash.<br>
+																		<code style="background:rgba(0,0,0,0.3);padding:2px 6px;border-radius:3px;font-size:11px;">/api/view/skyculturedescription/illustrations/andromeda.png</code>
+																</li>
+																<li>
+																		<strong>Query Parameter</strong> — Use the <code>path</code> parameter after the trailing slash.<br>
+																		<code style="background:rgba(0,0,0,0.3);padding:2px 6px;border-radius:3px;font-size:11px;">/api/view/skyculturedescription/?path=illustrations/andromeda.png</code>
+																</li>
+														</ul>
+												</div>
+												
+												<div style="margin-top: 10px; background: rgba(249, 38, 114, 0.1); padding: 10px; border-radius: 4px;">
+														<strong style="color: #F92672;">Important:</strong>
+														<span style="color: #B4B7B0;">
+																Do <strong>not</strong> use both forms at the same time. Provide the file either as a path segment
+																<strong>or</strong> via the <code>path</code> parameter, but not both.
+																The <code>file</code> parameter (used in earlier versions of this API Explorer) is treated as an alias
+																for <code>path</code>, but you should prefer <code>path</code> for consistency.
+														</span>
+												</div>
+												
+												<div style="margin-top: 10px; background: rgba(102, 217, 239, 0.1); padding: 10px; border-radius: 4px;">
+														<strong style="color: #66D9EF;"><span class="ui-icon ui-icon-folder-open"></span> Typical Files:</strong>
 														<span style="color: #B4B7B0;">
 																<ul style="margin-top: 5px; padding-left: 20px; margin-bottom: 0;">
-																		<li><code>/</code> (empty) → Returns HTML description of the current sky culture.</li>
+																		<li><code>/</code> (empty) → HTML description of the current sky culture.</li>
 																		<li><code>index.json</code> → Complete cultural dataset (constellations, asterisms, star names).</li>
 																		<li><code>description.md</code> → Raw Markdown description of the culture.</li>
 																		<li><code>illustrations/*.png</code> → Constellation and asterism images.</li>
@@ -2248,11 +2330,32 @@ curl -X POST -d "position=[0.12,0.34,0.56]" http://localhost:8090/api/main/focus
 												</div>
 												
 												<div style="margin-top: 10px;">
-														<strong>Parameter:</strong>
+														<strong>Behavior:</strong>
+														<ul style="margin-top: 5px; padding-left: 20px;">
+																<li><strong>No file specified:</strong> Returns the HTML description of the current sky culture.</li>
+																<li><strong>File via path segment:</strong> Returns the specified file.</li>
+																<li><strong>File via <code>path</code> (or <code>file</code>):</strong> Returns the same file.</li>
+														</ul>
+												</div>
+												
+												<div style="margin-top: 10px;">
+														<strong>Examples (equivalent pairs):</strong>
 														<ul style="margin-top: 5px; padding-left: 20px;">
 																<li>
-																		<code>file</code> (optional, string): Path to a file within the sky culture folder.<br>
-																		<span style="color: #888;">Leave empty to get the HTML description. Use "index.json" for cultural data, "description.md" for raw description, or "illustrations/filename.png" for images.</span>
+																		<code>GET /api/view/skyculturedescription/</code><br>
+																		<span style="color:#8A8C8E;font-size:11px;">→ HTML description of the current sky culture.</span>
+																</li>
+																<li>
+																		<code>GET /api/view/skyculturedescription/index.json</code><br>
+																		<span style="color:#8A8C8E;font-size:11px;">→ Cultural dataset via path segment.</span>
+																</li>
+																<li>
+																		<code>GET /api/view/skyculturedescription/?path=index.json</code><br>
+																		<span style="color:#8A8C8E;font-size:11px;">→ Same dataset via <code>path</code> parameter.</span>
+																</li>
+																<li>
+																		<code>GET /api/view/skyculturedescription/?path=illustrations/andromeda.png</code><br>
+																		<span style="color:#8A8C8E;font-size:11px;">→ Illustration image via <code>path</code> parameter.</span>
 																</li>
 														</ul>
 												</div>
@@ -2260,16 +2363,21 @@ curl -X POST -d "position=[0.12,0.34,0.56]" http://localhost:8090/api/main/focus
 												<div style="margin-top: 10px; background: rgba(253, 216, 134, 0.1); padding: 10px; border-radius: 4px;">
 														<strong style="color: #E6DB74;">Tip:</strong>
 														<span style="color: #B4B7B0;">
-																Use the <strong>"Browse Files"</strong> button below to discover all available files and illustrations 
-																from the current sky culture. The button will analyze <code>index.json</code> to find all referenced images 
-																and list common files.
+																Use the <strong>"Browse Files"</strong> button below to discover all available files and illustrations
+																from the current sky culture. The button analyzes <code>index.json</code> to find all referenced images
+																and lists common files.
 														</span>
 												</div>`,
 												parameters: {
+														path: {
+																required: false,
+																type: 'string',
+																description: 'File path within the sky culture folder (e.g., "index.json", "description.md", "illustrations/andromeda.png"). Alternative to appending the path as a URL segment after the trailing slash. Do not use both forms at the same time.'
+														},
 														file: {
 																required: false,
 																type: 'string',
-																description: 'File path within the sky culture folder (e.g., "index.json", "description.md", "illustrations/andromeda.png")'
+																description: 'Alias for "path", kept for backward compatibility. Prefer using "path". Do not send both.'
 														}
 												},
 												trailingSlash: true
@@ -2318,7 +2426,7 @@ curl -X POST -d "position=[0.12,0.34,0.56]" http://localhost:8090/api/main/focus
 												
 												<div style="margin-top: 10px;">
 														<strong>Example Response:</strong>
-<pre style="background: #888; padding: 10px; border-radius: 4px; font-size: 11px; margin: 5px 0;">
+<pre style="background: #d1d1d1; padding: 10px; border-radius: 4px; font-size: 11px; margin: 5px 0;">
 {
 "ProjectionStereographic": "Stereographic",
 "ProjectionOrthographic": "Orthographic",
@@ -2366,7 +2474,7 @@ curl -X POST -d "position=[0.12,0.34,0.56]" http://localhost:8090/api/main/focus
 															<p>Returns a JSON object where each key is a scene ID and each value is the scene name (localized).</p>
 															<div style="margin-top:10px;background:rgba(102,217,239,0.1);padding:10px;border-radius:4px;">
 																	<strong style="color:#66D9EF;">Example Response:</strong>
-<code style="background:#888;padding:10px;border-radius:4px;font-size:12px;margin-top:5px;">
+<code style="background:#d1d1d1;padding:10px;border-radius:4px;font-size:12px;margin-top:5px;">
 {
 		"Sterngarten": "Vienna Sterngarten",
 		"Testscene": "Testscene"
@@ -2398,38 +2506,114 @@ curl -X POST -d "position=[0.12,0.34,0.56]" http://localhost:8090/api/main/focus
 										
 										scenedescription: {
 												method: 'GET',
-												desc: `<p>Access files and resources from a specific scene directory.</p>
-															<p>This endpoint follows the pattern: <code>/api/scenery3d/scenedescription/{id}/</code></p>
-															<ul style="margin-top:5px;padding-left:20px;">
-																	<li><strong>Without path:</strong> Returns the HTML description of the scene.</li>
-																	<li><strong>With path:</strong> Returns a specific file (e.g., <code>image.png</code>, <code>description.en.utf8</code>).</li>
-															</ul>
-															<div style="margin-top:10px;background:rgba(102,217,239,0.1);padding:10px;border-radius:4px;">
-																	<strong style="color:#66D9EF;">Example:</strong>
-																	<br>																	
-																	<code>/api/scenery3d/scenedescription/Sterngarten/</code> → HTML description
-																	<br>
-																	<code>/api/scenery3d/scenedescription/Sterngarten/image.png</code> → Image file
-																	<br>																	
-																	<code>/api/scenery3d/scenedescription/Sterngarten/description.en.utf8</code> → Description file																	
-															</div>`,
+												desc: `<p>Access files and resources from a specific 3D scenery directory.</p>
+												
+												<div style="margin-top: 10px; background: rgba(102, 217, 239, 0.1); padding: 10px; border-radius: 4px;">
+														<strong style="color: #66D9EF;">Two Equivalent Ways to Access Files:</strong>
+														<ul style="margin-top: 8px; padding-left: 20px;">
+																<li style="margin-bottom: 6px;">
+																		<strong>Path Segment (URL)</strong> — Append the scene ID and file path directly after the trailing slash.<br>
+																		<code style="background:rgba(0,0,0,0.3);padding:2px 6px;border-radius:3px;font-size:11px;">/api/scenery3d/scenedescription/Sterngarten/Sterngarten_20100320.png</code>
+																</li>
+																<li>
+																		<strong>Query Parameters</strong> — Use <code>id</code> and <code>path</code> after the trailing slash.<br>
+																		<code style="background:rgba(0,0,0,0.3);padding:2px 6px;border-radius:3px;font-size:11px;">/api/scenery3d/scenedescription/?id=Sterngarten&path=Sterngarten_20100320.png</code>
+																</li>
+														</ul>
+												</div>
+												
+												<div style="margin-top: 10px; background: rgba(249, 38, 114, 0.1); padding: 10px; border-radius: 4px;">
+														<strong style="color: #F92672;">Important:</strong>
+														<span style="color: #B4B7B0;">
+																Do <strong>not</strong> use both forms at the same time. Provide the scene ID and file
+																either as path segments <strong>or</strong> via the <code>id</code> and <code>path</code> parameters,
+																but not both.
+														</span>
+												</div>
+												
+												<div style="margin-top: 10px;">
+														<strong>Behavior:</strong>
+														<ul style="margin-top: 5px; padding-left: 20px;">
+																<li><strong>No scene ID:</strong> Returns the HTML description of the current scene (if any).</li>
+																<li><strong>Scene ID only:</strong> Returns the HTML description of the specified scene.</li>
+																<li><strong>Scene ID + file:</strong> Returns the specified file from the scene directory.</li>
+														</ul>
+												</div>
+												
+												<div style="margin-top: 10px; background: rgba(253, 216, 134, 0.1); padding: 10px; border-radius: 4px;">
+														<strong style="color: #E6DB74;">Note:</strong>
+														<span style="color: #B4B7B0;">
+																The trailing slash (<code>/</code>) is <strong>mandatory</strong>. The Scenery3D plugin must be
+																enabled and at least one scene must be available. Use <code>/api/scenery3d/listscene</code>
+																to retrieve valid scene IDs.
+														</span>
+												</div>
+												
+												<div style="margin-top: 10px;">
+														<strong>Examples (equivalent pairs):</strong>
+														<ul style="margin-top: 5px; padding-left: 20px;">
+																<li>
+																		<code>GET /api/scenery3d/scenedescription/Sterngarten/</code><br>
+																		<span style="color:#8A8C8E;font-size:11px;">→ HTML description of the "Sterngarten" scene.</span>
+																</li>
+																<li>
+																		<code>GET /api/scenery3d/scenedescription/?id=Sterngarten</code><br>
+																		<span style="color:#8A8C8E;font-size:11px;">→ Same description via <code>id</code> parameter.</span>
+																</li>
+																<li>
+																		<code>GET /api/scenery3d/scenedescription/Sterngarten/Sterngarten_20100320.png</code><br>
+																		<span style="color:#8A8C8E;font-size:11px;">→ Image via path segments.</span>
+																</li>
+																<li>
+																		<code>GET /api/scenery3d/scenedescription/?id=Sterngarten&path=Sterngarten_20100320.png</code><br>
+																		<span style="color:#8A8C8E;font-size:11px;">→ Same image via <code>id</code> + <code>path</code> parameters.</span>
+																</li>
+														</ul>
+												</div>
+												
+												<div style="margin-top: 10px;">
+														<strong>Typical Files Inside a Scene Directory:</strong>
+														<ul style="margin-top: 5px; padding-left: 20px;">
+																<li><code>description.en.utf8</code>, <code>description.de.utf8</code> → Localized descriptions</li>
+																<li><code>&lt;SceneName&gt;_YYYYMMDD.png</code> → Scene preview images</li>
+																<li><code>scene.ini</code> → Scene configuration (if present)</li>
+														</ul>
+														<span style="color:#8A8C8E;font-size:11px;">
+																Available files depend on the specific scene.
+														</span>
+												</div>`,
 												trailingSlash: true,
 												parameters: {
-														sceneId: {
+														id: {
+																required: true,
+																type: 'string',
+																description: 'Scene ID (e.g., "Sterngarten", "Testscene"). Use "/api/scenery3d/listscene" to retrieve valid IDs. Alternative to appending the scene ID as a URL segment after the trailing slash. Do not use both forms at the same time.',
+																suggest: 'scenes'
+														},
+														path: {
 																required: false,
 																type: 'string',
-																description: 'Scene ID (e.g., "Sterngarten"). If empty, may return description of current scene.',
-																suggest: 'scenes'
+																description: 'File path within the scene folder (e.g., "description.en.utf8", "Sterngarten_20100320.png"). Alternative to appending the file path as a URL segment after the scene ID. Do not use both forms at the same time.'
 														},
 														file: {
 																required: false,
 																type: 'string',
-																description: 'File path within the scene folder (e.g., "description.en.utf8", "Sterngarten_20100320.png")'
+																description: 'Alias for "path", kept for backward compatibility with the API Explorer. Prefer using "path". Do not send both.'
 														}
 												}
+										},
+										
+										move: {
+												method: 'POST',
+												desc: `<p>Continuous view movement in panning style (similar to using a joystick or arrow keys). The view will drift smoothly while speed values are active.</p>`,
+												parameters: {
+														x: { required: true, type: 'number', description: 'Horizontal speed (-1 to 1)' },
+														y: { required: true, type: 'number', description: 'Vertical speed (-1 to 1)' },
+														z: { required: true, type: 'number', description: 'Vertical speed (-1 to 1)' }
+												}
 										}
-								}
-						}						
+								}										
+						}
 		};
 
     // =====================================================================
@@ -2639,10 +2823,10 @@ curl -X POST -d "position=[0.12,0.34,0.56]" http://localhost:8090/api/main/focus
 				var commonFiles = [
 						'index.json',
 						'description.md',
-						//'description.html',
-						//'culture.json',
-						//'stars.json',
-						//'constellations.json'
+						'territory.geojson',
+						'names_dictionary.md',
+						'Transliteration.md'
+						// you can more virtual files here
 				];
 				
 				$.ajax({
@@ -2730,8 +2914,8 @@ curl -X POST -d "position=[0.12,0.34,0.56]" http://localhost:8090/api/main/focus
 				var html = '<div style="padding:10px;" data-culture="' + escapeAttr(cultureId) + '" data-cache-key="' + escapeAttr(cultureCacheKey) + '">';
 				
 				// Culture info with clear identification
-				html += '<div style="background:rgba(102,217,239,0.1);padding:10px;border-radius:4px;margin-bottom:15px;border-left:3px solid #66D9EF;">';
-				html += '<strong style="color:#66D9EF;">📁 Current Sky Culture:</strong> ';
+				html += '<div style="background:rgba(102,217,239,0.1);padding:10px;border-radius:4px;margin-bottom:15px;">';
+				html += '<strong style="color:#66D9EF;"><span class="ui-icon ui-icon-folder-open"></span> Current Sky Culture:</strong> ';
 				html += '<span style="color:#B4B7B0;font-weight:bold;">' + escapeHtml(cultureId) + '</span>';
 				html += ' <span style="color:#8A8C8E;font-size:10px;">(' + commonFiles.length + ' common files, ' + illustrations.length + ' illustrations)</span>';
 				html += '<span style="display:block;font-size:9px;color:#8A8C8E;margin-top:4px;">' + 
@@ -3357,35 +3541,28 @@ curl -X POST -d "position=[0.12,0.34,0.56]" http://localhost:8090/api/main/focus
      * @param {Object} [context] - Optional { url, headers, statusCode }.
      * @returns {string} Resolved type.
      */
-    function resolveResponseType(responseText, responseType, context) {
-        // 1. Explicit non-auto type wins
-        if (responseType && responseType !== 'auto') {
-            return responseType;
-        }
-        
-        // 2. Content-Type header (authoritative)
-        if (context && context.headers) {
-            var ct = (context.headers['content-type'] || context.headers['Content-Type'] || '').toLowerCase();
-            
-            if (ct) {
-                // Strip parameters (e.g., "application/json; charset=utf-8" → "application/json")
-                var mime = ct.split(';')[0].trim();
-                
-                // Explicit mapping from MIME to internal type
-                if (mime === 'application/json' || mime.endsWith('+json')) return 'json';
-                if (mime === 'text/html')                                 return 'html';
-                if (mime === 'image/svg+xml')                             return 'svg';
-                if (mime.indexOf('image/') === 0)                         return 'image';
-                if (mime === 'application/xml' || mime === 'text/xml' || mime.endsWith('+xml')) return 'xml';
-                if (mime === 'text/csv')                                  return 'csv';
-                if (mime === 'application/octet-stream' ||
-                    mime === 'application/pdf' ||
-                    mime.indexOf('audio/') === 0 ||
-                    mime.indexOf('video/') === 0)                         return 'binary';
-                if (mime === 'text/plain')                                return 'text';
-                // Unknown MIME → fall through to heuristics
-            }
-        }
+		function resolveResponseType(responseText, responseType, context) {
+				// Priority 1: Explicit non-auto declared type (developer override)
+				if (responseType && responseType !== 'auto') {
+						return responseType;
+				}
+				
+				// Priority 2: Content-Type header (authoritative for auto mode)
+				if (context && context.headers) {
+						var ct = (context.headers['content-type'] || '').toLowerCase();
+						if (ct) {
+								var mime = ct.split(';')[0].trim();
+								if (mime === 'application/json' || mime.endsWith('+json')) return 'json';
+								if (mime === 'text/html')                                 return 'html';
+								if (mime === 'image/svg+xml')                             return 'svg';
+								if (mime.indexOf('image/') === 0)                         return 'image';
+								if (mime === 'application/xml' || mime === 'text/xml' || mime.endsWith('+xml')) return 'xml';
+								if (mime === 'text/csv')                                  return 'csv';
+								if (mime === 'text/plain')                                return 'text';
+								if (mime === 'application/octet-stream')                  return 'binary';
+								// Unknown MIME → fall through
+						}
+				}
         
         // 3. Body heuristics (fallback)
         if (!responseText || responseText.trim() === '') {
@@ -3679,49 +3856,24 @@ curl -X POST -d "position=[0.12,0.34,0.56]" http://localhost:8090/api/main/focus
      * Detect response type and format appropriately.
      * 
      * @param {string} responseText - The raw response text
-     * @param {string} responseType - Optional type hint ('json', 'html', 'text')
+     * @param {string} responseType - Optional type hint ('json', 'html', 'text', 'image')
      * @returns {string} Formatted HTML
      */
-    function formatResponseByType(responseText, responseType) {
-        if (!responseText || responseText.trim() === '') {
-            return '<div class="response-empty">(empty response)</div>';
-        }
-        
-        var trimmed = responseText.trim();
-        
-        // Try to detect array of objects (like planetlist response)
-        if (trimmed.startsWith('[') && trimmed.endsWith(']')) {
-            try {
-                var parsed = JSON.parse(trimmed);
-                if (Array.isArray(parsed)) {
-                    // Use table format for arrays (will handle key property automatically)
-                    return formatArrayAsTable(parsed);
-                }
-                // Fallback to JSON viewer
-                return '<div class="json-viewer">' + formatJsonValue(parsed, 0) + '</div>';
-            } catch(e) {
-                // Not valid JSON, continue
-            }
-        }
-        
-        // Try to parse as JSON object (not array)
-        try {
-            var parsed = JSON.parse(trimmed);
-            if (typeof parsed === 'object' && !Array.isArray(parsed)) {
-                return '<div class="json-viewer">' + formatJsonValue(parsed, 0) + '</div>';
-            }
-        } catch(e) {
-            // Not valid JSON
-        }
-        
-        // Check if it's HTML
-        if (trimmed.startsWith('<') && trimmed.includes('>')) {
-            return '<div class="html-response">' + trimmed + '</div>';
-        }
-        
-        // Plain text - show as is
-        return '<pre class="plain-text-response">' + escapeHtml(trimmed) + '</pre>';
-    }
+		function formatResponseByType(responseText, responseType, context) {
+				var resolved = resolveResponseType(responseText, responseType, context);
+				
+				switch (resolved) {
+						case 'json':   return renderJson(responseText);
+						case 'html':   return renderHtml(responseText);
+						case 'xml':    return renderXml(responseText);
+						case 'csv':    return renderCsv(responseText);
+						case 'svg':    return renderSvg(responseText, context);
+						case 'image':  return renderImage(context && context.url ? context.url : '');
+						case 'binary': return renderBinary(responseText, context);
+						case 'text':
+						default:       return renderText(responseText);
+				}
+		}
 
     /**
      * Get a human-readable response type label.
@@ -3955,7 +4107,7 @@ curl -X POST -d "position=[0.12,0.34,0.56]" http://localhost:8090/api/main/focus
 				if (serviceKey === 'view' && operationKey === 'skyculturedescription') {
 						html += '<div style="margin: 15px 0; display: flex; gap: 10px; flex-wrap: wrap;">';
 						html += '<button class="jquerybutton" id="btn-browse-files" style="background:linear-gradient(#6B6E70, #4A4C4E);border-color:#FD971F;">';
-						html += '📂 Browse Files';
+						html += '<span class="ui-icon ui-icon-folder-open"></span> Browse Files';
 						html += '</button>';
 						html += '</div>';
 				}
@@ -3979,40 +4131,9 @@ curl -X POST -d "position=[0.12,0.34,0.56]" http://localhost:8090/api/main/focus
 				$panel.html(html);
 				
 				// ============================================================
-				// BIND ALL SUGGESTION BUTTONS DYNAMICALLY
+				// DYNAMIC BINDING FOR ALL SUGGESTION BUTTONS
 				// ============================================================
-				
-				// 1. BIND "Browse Types" Button (for objecttypes)
-				$('#explorer-browse-types-btn').on('click', function(e) {
-						e.preventDefault();
-						var $targetInput = $('#explorer-param-type');
-						if ($targetInput.length) {
-								createExplorerSuggestionDropdown($(this), $targetInput, 'objecttypes');
-						}
-				});
-				
-				// 2. BIND "Browse Actions" Button
-				$('#explorer-browse-actions-btn').on('click', function(e) {
-						e.preventDefault();
-						var $targetInput = $('#explorer-param-id');
-						if ($targetInput.length) {
-								createExplorerSuggestionDropdown($(this), $targetInput, 'actions');
-						}
-				});
-				
-				// 3. BIND "Browse Properties" Button
-				$('#explorer-browse-properties-btn').on('click', function(e) {
-						e.preventDefault();
-						var $targetInput = $('#explorer-param-id');
-						if ($targetInput.length) {
-								createExplorerSuggestionDropdown($(this), $targetInput, 'properties');
-						}
-				});
-				
-				// ============================================================
-				// NEW: DYNAMIC BINDING FOR ALL SUGGESTION BUTTONS
-				// ============================================================
-				// This handles: scripts, scenes, locations, and any future suggest types
+				// This handles: objecttypes, actions, properties, scripts, scenes, locations, planetlist and any future suggest types
 				
 				// Find all suggestion buttons that have data-suggest attribute
 				$('.suggestion-btn[data-suggest]').each(function() {
@@ -4130,9 +4251,9 @@ curl -X POST -d "position=[0.12,0.34,0.56]" http://localhost:8090/api/main/focus
 						if (currentService === 'view' && currentOperation === 'skyculturedescription') {
 								filePlaceholder = 'e.g., index.json, description.md, illustrations/andromeda.png';
 						} else if (currentService === 'view' && currentOperation === 'landscapedescription') {
-								filePlaceholder = 'e.g., landscape.png, textures/ground.jpg, description.html';
+								filePlaceholder = 'e.g., landscape.ini, textures/guereins1.png, guereins2.png, description.en.utf8 ...';
 						} else if (currentService === 'scenery3d' && currentOperation === 'scenedescription') {
-								filePlaceholder = 'e.g., description.en.utf8, Sterngarten_20100320.png';
+								filePlaceholder = 'e.g., description.en.utf8, Sterngarten_20100320.png, ...';
 						}
 						
 						html += '<input type="text" id="explorer-param-' + key + '" ';
@@ -4245,7 +4366,7 @@ curl -X POST -d "position=[0.12,0.34,0.56]" http://localhost:8090/api/main/focus
 				// Browse Types button for object type parameter (listobjectsbytype)
 				if (key === 'type' && param.suggest === 'objecttypes') {
 						html += '<div style="margin-top:5px;">';
-						html += '<button type="button" class="suggestion-btn jquerybutton" id="explorer-browse-types-btn" title="Browse available object types (catalogs)">';
+						html += '<button type="button" class="suggestion-btn jquerybutton" data-suggest="objecttypes" title="Browse available object types (catalogs)">';
 						html += '<span class="suggestion-btn-icon">T</span> Browse Types';
 						html += '</button>';
 						html += '</div>';
@@ -4254,7 +4375,7 @@ curl -X POST -d "position=[0.12,0.34,0.56]" http://localhost:8090/api/main/focus
 				// Browse Actions button for action ID parameter (stelaction/do)
 				if (key === 'id' && param.suggest === 'actions') {
 						html += '<div style="margin-top:5px;">';
-						html += '<button type="button" class="suggestion-btn jquerybutton" id="explorer-browse-actions-btn" title="Browse available StelActions (categorized from Stellarium)">';
+						html += '<button type="button" class="suggestion-btn jquerybutton" data-suggest="actions" title="Browse available StelActions (categorized from Stellarium)">';
 						html += '<span class="suggestion-btn-icon">A</span> Browse Actions';
 						html += '</button>';
 						html += '</div>';
@@ -4263,7 +4384,7 @@ curl -X POST -d "position=[0.12,0.34,0.56]" http://localhost:8090/api/main/focus
 				// Browse Properties button for property ID parameter (stelproperty/set)
 				if (key === 'id' && param.suggest === 'properties') {
 						html += '<div style="margin-top:5px;">';
-						html += '<button type="button" class="suggestion-btn jquerybutton" id="explorer-browse-properties-btn" title="Browse available StelProperties with current values and types">';
+						html += '<button type="button" class="suggestion-btn jquerybutton" data-suggest="properties" title="Browse available StelProperties with current values and types">';
 						html += '<span class="suggestion-btn-icon">P</span> Browse Properties';
 						html += '</button>';
 						html += '</div>';
@@ -4292,6 +4413,15 @@ curl -X POST -d "position=[0.12,0.34,0.56]" http://localhost:8090/api/main/focus
 						html += '<div style="margin-top:5px;">';
 						html += '<button type="button" class="suggestion-btn jquerybutton" data-suggest="locations" title="Browse available locations from Stellarium database">';
 						html += '<span class="suggestion-btn-icon">l</span> Browse Locations';
+						html += '</button>';
+						html += '</div>';
+				}
+
+				// Browse planetlist button for planets ID parameter (location/planetlist)
+				else if (param.suggest === 'planets') {
+						html += '<div style="margin-top:5px;">';
+						html += '<button type="button" class="suggestion-btn jquerybutton" data-suggest="planets" title="Browse available planets from Stellarium database">';
+						html += '<span class="suggestion-btn-icon">p</span> Browse planets';
 						html += '</button>';
 						html += '</div>';
 				}
@@ -4418,7 +4548,8 @@ curl -X POST -d "position=[0.12,0.34,0.56]" http://localhost:8090/api/main/focus
 						'scripts': '/api/scripts/list',
 						'properties': '/api/stelproperty/list',
 						'locations': '/api/location/list',
-						'scenes': '/api/scenery3d/listscene'
+						'scenes': '/api/scenery3d/listscene',
+						'planets': '/api/location/planetlist'
 				};
 				
 				var url = endpoints[type];
@@ -4594,6 +4725,26 @@ curl -X POST -d "position=[0.12,0.34,0.56]" http://localhost:8090/api/main/focus
 										});
 										items.sort(function(a, b) {
 												return a.text.localeCompare(b.text);
+										});
+								}
+						}
+
+						// ============================================================
+						// TYPE: planetlist - Sort alphabetically
+						// ============================================================
+						else if (type === 'planets') {
+								if (Array.isArray(data)) {
+										data.forEach(function(item) {
+												items.push({
+														id: item.name,
+														text: item.name + ' → ' + (item.name_i18n || item.name),
+														name: item.name,
+														name_i18n: item.name_i18n
+												});
+										});
+										// Sort by key
+										items.sort(function(a, b) {
+												return a.id.localeCompare(b.id);
 										});
 								}
 						}
@@ -4942,8 +5093,9 @@ curl -X POST -d "position=[0.12,0.34,0.56]" http://localhost:8090/api/main/focus
 				
 				// Check if this is a time operation that needs timerate conversion
 				var isTimeOperation = (currentOperation === 'time');
-				// Check if this is an image response (from planetimage etc.)
-				var isImageResponse = op.responseType === 'image';
+				
+				// Use the declared responseType as a HINT, but let Content-Type override it
+				var declaredResponseType = op.responseType || 'auto';
 				
 				// Check if html flag is present (for scripts/info endpoint)
 				var hasHtmlFlag = params.html === true;
@@ -4967,64 +5119,76 @@ curl -X POST -d "position=[0.12,0.34,0.56]" http://localhost:8090/api/main/focus
 				});
 				
 				// ============================================================
-				// BUILD FULL PATH - Special handling for file-based endpoints
+				// BUILD FULL PATH - Unified handling for trailingSlash endpoints
 				// ============================================================
 				var fullPath;
 				var isFileRequest = false;
 				var requestedFilePath = '';
 				var isImageFileRequest = false;
 
-				// Special handling: Scenery3D scenedescription endpoint
-				// Path pattern: /api/scenery3d/scenedescription/{sceneId}/{file}
-				if (currentService === 'scenery3d' && currentOperation === 'scenedescription') {
-						// Extract sceneId and file from params
-						var sceneId = serverParams.sceneId || '';
-						var filePath = serverParams.file || '';
-						
-						// Remove them from serverParams (they will be in the path)
-						delete serverParams.sceneId;
-						delete serverParams.file;
-						
-						// Build the path: /api/scenery3d/scenedescription/{sceneId}/{file}
-						fullPath = 'scenery3d/scenedescription/';
-						if (sceneId) {
-								fullPath += encodeURIComponent(sceneId) + '/';
-						}
-						if (filePath) {
-								fullPath += encodeURIComponent(filePath);
-						}
-						
-						// If no sceneId is provided, we still need the trailing slash
-						if (!sceneId && !filePath) {
-								fullPath += '/';
-						}
-						
-						console.log('[ApiExplorer] Scenery3D description path:', fullPath);
-				}
+				// Detect if this operation uses path segments after a trailing slash
+				// (i.e., it supports both `?path=` and `/path/` syntaxes)
+				var usesPathSegments = (
+						(currentService === 'scenery3d' && currentOperation === 'scenedescription') ||
+						(currentService === 'view' && (currentOperation === 'skyculturedescription' ||
+																						currentOperation === 'landscapedescription'))
+				);
 
-				// Special handling: Sky culture / landscape description endpoints
-				// Path pattern: /api/{service}/{operation}/{file}
-				else if (currentOperation === 'skyculturedescription' || currentOperation === 'landscapedescription') {
-						// Check if 'file' parameter exists and is not empty
-						if (serverParams.file && serverParams.file.trim() !== '') {
-								requestedFilePath = serverParams.file;
-								delete serverParams.file; // Remove from query params
-								isFileRequest = true;
-								// Build with file appended after trailing slash
-								fullPath = service.path + '/' + currentOperation + '/' + requestedFilePath;
+				if (usesPathSegments) {
+						// ============================================================
+						// SCENERY3D: Two dynamic segments (sceneId + file)
+						// ============================================================
+						if (currentService === 'scenery3d' && currentOperation === 'scenedescription') {
+								var sceneId = serverParams.id || serverParams.sceneId || '';
+								var filePath = serverParams.path || serverParams.file || '';
 								
-								// Check if this is an image file
-								var imageExtensions = ['.png', '.jpg', '.jpeg', '.gif', '.webp', '.svg', '.bmp', '.tiff'];
-								var fileLower = requestedFilePath.toLowerCase();
-								isImageFileRequest = imageExtensions.some(function(ext) {
-										return fileLower.endsWith(ext);
-								});
-						} else {
-								// No file → use the standard builder (respects trailingSlash: true)
-								fullPath = buildOperationPath(currentService, currentOperation, op);
+								// Remove from serverParams (they will be in the path)
+								delete serverParams.id;
+								delete serverParams.sceneId;
+								delete serverParams.path;
+								delete serverParams.file;
+								
+								// Build the path: /api/scenery3d/scenedescription/{sceneId}/{file}
+								fullPath = 'scenery3d/scenedescription/';
+								if (sceneId) {
+										fullPath += encodeURIComponent(sceneId) + '/';
+								}
+								if (filePath) {
+										fullPath += encodeURIComponent(filePath);
+								}
+								if (!sceneId && !filePath) {
+										fullPath += '/';
+								}
+								
+								console.log('[ApiExplorer] Scenery3D description path:', fullPath);
 						}
-				} 
-				
+						// ============================================================
+						// VIEW: Single dynamic segment (file)
+						// ============================================================
+						else {
+								var viewFile = serverParams.path || serverParams.file || '';
+								
+								// Remove from serverParams
+								delete serverParams.path;
+								delete serverParams.file;
+								
+								if (viewFile && viewFile.trim() !== '') {
+										requestedFilePath = viewFile;
+										isFileRequest = true;
+										fullPath = service.path + '/' + currentOperation + '/' + viewFile;
+										
+										// Check if this is an image file (for inline preview)
+										var imageExtensions = ['.png', '.jpg', '.jpeg', '.gif', '.webp', '.svg', '.bmp', '.tiff'];
+										var fileLower = viewFile.toLowerCase();
+										isImageFileRequest = imageExtensions.some(function(ext) {
+												return fileLower.endsWith(ext);
+										});
+								} else {
+										// No file → use the standard builder (respects trailingSlash: true)
+										fullPath = buildOperationPath(currentService, currentOperation, op);
+								}
+						}
+				}
 				// Default: use centralized path builder
 				else {
 						fullPath = buildOperationPath(currentService, currentOperation, op);
@@ -5090,173 +5254,177 @@ curl -X POST -d "position=[0.12,0.34,0.56]" http://localhost:8090/api/main/focus
 				}
 				
 				// ============================================================
-				// HANDLE IMAGE RESPONSES (planetimage with responseType: 'image')
+				// UNIFIED AJAX REQUEST — Content-Type driven dispatch
 				// ============================================================
-				if (isImageResponse) {
-								var imageUrl = baseUrl + fullPath;
-								var queryParams = [];
-								Object.keys(serverParams).forEach(function(key) {
-												queryParams.push(encodeURIComponent(key) + '=' + encodeURIComponent(String(serverParams[key])));
-								});
-								if (hasHtmlFlag) queryParams.push('html');
-								if (queryParams.length > 0) imageUrl += '?' + queryParams.join('&');
-								
-								$.ajax({
-												url: imageUrl,
-												method: op.method === 'GET' ? 'GET' : 'POST',
-												data: op.method === 'GET' ? null : (function() {
-																var d = {};
-																Object.keys(serverParams).forEach(function(k) { d[k] = serverParams[k]; });
-																if (hasHtmlFlag) d.html = '';
-																return d;
-												})(),
-												dataType: 'text',
-												success: function(probeData, ts, probeXhr) {
-																// Authoritative source: Content-Type
-																var ct = '';
-																try {
-																				ct = (probeXhr.getResponseHeader('Content-Type') || '').toLowerCase();
-																} catch (e) { /* ignore */ }
-																
-																var mime = ct.split(';')[0].trim();
-																var isImage = mime.indexOf('image/') === 0;
-																
-																if (!isImage) {
-																				// Mismatch: server did not return an image
-																				showTypeMismatch(
-																								$responseArea,
-																								$statusEl,
-																								probeData,
-																								'image',
-																								ct,
-																								'responseType is "image", but the server returned Content-Type "' + (ct || '(none)') + '".'
-																				);
-																				return;
-																}
-																
-																// Real image — render it
-																$statusEl.html('<span class="response-status success">HTTP 200 OK (Image)</span>');
-																currentRawResponse = 'Image: ' + imageUrl;
-																currentDisplayMode = 'formatted';
-																
-																var formattedContent = renderImage(imageUrl);
-																currentFormattedHtml = formattedContent;
-																
-																$responseArea.html(
-																				'<div class="response-toolbar">' +
-																				'<div class="response-toolbar-left">' +
-																				'<span class="response-type-badge">IMAGE</span>' +
-																				'<button class="toggle-display-btn jquerybutton" id="toggle-display-btn">[Show Raw URL]</button>' +
-																				'<button class="toggle-dir-btn jquerybutton" id="toggle-dir-btn" title="Toggle text direction for RTL languages">[Switch to RTL]</button>' +
-																				'</div>' +
-																				'<div class="response-toolbar-right">' +
-																				'<button class="copy-btn jquerybutton" id="copy-response-btn">Copy URL</button>' +
-																				'</div>' +
-																				'</div>' +
-																				'<div class="response-content-wrapper" style="direction:ltr;">' +
-																				formattedContent +
-																				'</div>'
-																);
-																
-																$('#toggle-display-btn').off('click').on('click', function() { toggleResponseDisplay(); });
-																$('#toggle-dir-btn').off('click').on('click', function() { toggleResponseDirection(); });
-																$('#copy-response-btn').off('click').on('click', function() { copyResponse(); });
-												},
-												error: function(xhr) {
-																var statusCode = xhr.status || 0;
-																$statusEl.html('<span class="response-status error">HTTP ' + statusCode + ' ' + (xhr.statusText || 'Error') + '</span>');
-																currentRawResponse = xhr.responseText || 'Image request failed';
-																var errorContent = '<div class="response-error"><div class="error-icon">!</div>' +
-																									 '<div class="error-message"><strong>Error:</strong> Image request failed.</div></div>';
-																currentFormattedHtml = errorContent;
-																$responseArea.html(
-																				'<div class="response-toolbar">' +
-																				'<div class="response-toolbar-left">' +
-																				'<span class="response-type-badge error">ERROR</span>' +
-																				'<button class="toggle-display-btn jquerybutton" id="toggle-display-btn">[Show Raw]</button>' +
-																				'</div>' +
-																				'<div class="response-toolbar-right">' +
-																				'<button class="copy-btn jquerybutton" id="copy-response-btn">Copy</button>' +
-																				'</div>' +
-																				'</div>' +
-																				'<div class="response-content-wrapper">' + errorContent + '</div>'
-																);
-																$('#toggle-display-btn').off('click').on('click', function() { toggleResponseDisplay(); });
-																$('#copy-response-btn').off('click').on('click', function() { copyResponse(); });
-												}
-								});
-								return;
-				}
-				
+				// We always fetch as text first, then inspect the Content-Type
+				// header to decide how to render. This makes 'responseType: auto'
+				// work correctly for images, SVGs, JSON, HTML, and binary data.
 				// ============================================================
-				// NORMAL AJAX REQUEST (JSON/HTML/TEXT)
-				// ============================================================
+
 				var ajaxOptions = {
 						url: url,
+						method: op.method === 'GET' ? 'GET' : 'POST',
 						dataType: 'text',
 						success: function(data, textStatus, xhr) {
-										var statusCode = xhr.status;
-										var statusText = statusCode === 200 ? 'OK' : (xhr.statusText || '');
-										$statusEl.html('<span class="response-status ' + (statusCode === 200 ? 'success' : 'error') + '">HTTP ' + statusCode + ' ' + statusText + '</span>');
-										
-										// RAW storage — always the unmodified body
-										currentRawResponse = data;
-										currentDisplayMode = 'formatted';
-										
-										// Build a minimal context (url + headers + status) for the renderer
-										var context = {
-														url: url,
-														statusCode: statusCode,
-														headers: parseResponseHeaders(xhr)
-										};
-										
-										// ============================================================
-										// VALIDATE: does the body match the declared responseType?
-										// ============================================================
-										var validation = validateResponseAgainstType(data, declaredResponseType, context);
-
-										if (!validation.valid) {
-														showTypeMismatch(
-																		$responseArea,
-																		$statusEl,
-																		data,
-																		declaredResponseType,
-																		validation.contentType || '',
-																		validation.reason
-														);
-														return;
-										}
-										
-										// ============================================================
-										// RENDER — passed validation
-										// ============================================================
-										var formattedContent = formatResponseByType(data, declaredResponseType, context);
-										currentFormattedHtml = formattedContent;
-										
-										var responseType = getResponseTypeLabel(data);
-										var responseSize = data ? data.length : 0;
-										var sizeInfo = responseSize > 0 ? ' (' + formatBytes(responseSize) + ')' : '';
-										
-										$responseArea.html(
+								var statusCode = xhr.status;
+								var statusText = statusCode === 200 ? 'OK' : (xhr.statusText || '');
+								$statusEl.html('<span class="response-status ' + (statusCode === 200 ? 'success' : 'error') + '">HTTP ' + statusCode + ' ' + statusText + '</span>');
+								
+								// Build the response context (headers are authoritative)
+								var context = {
+										url: url,
+										statusCode: statusCode,
+										headers: parseResponseHeaders(xhr),
+										xhr: xhr
+								};
+								
+								// ============================================================
+								// RESOLVE TYPE — declared responseType > Content-Type > heuristics
+								// ============================================================
+								var resolvedType = resolveResponseType(data, declaredResponseType, context);
+								console.log('[ApiExplorer] Resolved response type:', resolvedType, '(declared:', declaredResponseType + ')');
+								
+								// ============================================================
+								// VALIDATE — does the body match the declared type (if explicit)?
+								// ============================================================
+								var validation = validateResponseAgainstType(data, declaredResponseType, context);
+								if (!validation.valid) {
+										showTypeMismatch(
+												$responseArea, $statusEl, data,
+												declaredResponseType, validation.contentType || '',
+												validation.reason
+										);
+										return;
+								}
+								
+								// ============================================================
+								// RENDER BASED ON RESOLVED TYPE
+								// ============================================================
+								var formattedContent = '';
+								var badgeLabel = resolvedType.toUpperCase();
+								var rawForCopy = data;
+								
+								switch (resolvedType) {
+										case 'image': {
+												// ============================================================
+												// REBUILD URL WITH QUERY PARAMETERS
+												// ============================================================
+												// The `url` variable only contains the base path (e.g., /api/location/planetimage).
+												// We must append the query parameters (e.g., ?planet=earth) for the server
+												// to correctly serve the image. Without this, the server returns 400 Bad Request
+												// (e.g., "requires 'planet' parameter").
+												// ============================================================
+												var imageUrl = url;
+												
+												if (op.method === 'GET') {
+														var imgParams = [];
+														Object.keys(serverParams).forEach(function(key) {
+																imgParams.push(encodeURIComponent(key) + '=' + encodeURIComponent(String(serverParams[key])));
+														});
+														if (hasHtmlFlag) {
+																imgParams.push('html');
+														}
+														if (imgParams.length > 0) {
+																var connector = imageUrl.indexOf('?') >= 0 ? '&' : '?';
+																imageUrl += connector + imgParams.join('&');
+														}
+												}
+												
+												console.log('[ApiExplorer] Image URL with params:', imageUrl);
+												
+												// Content-Type is image/* → render as <img> preview
+												currentRawResponse = 'Image: ' + imageUrl;
+												formattedContent = renderImage(imageUrl);
+												badgeLabel = 'IMAGE';
+												// Special toolbar with "Show Raw URL"
+												currentFormattedHtml = formattedContent;
+												currentDisplayMode = 'formatted';
+												$responseArea.html(
 														'<div class="response-toolbar">' +
 														'<div class="response-toolbar-left">' +
-														'<span class="response-type-badge">' + escapeHtml(responseType) + sizeInfo + '</span>' +
-														'<button class="toggle-display-btn jquerybutton" id="toggle-display-btn">[Show Raw]</button>' +
-														'<button class="toggle-dir-btn jquerybutton" id="toggle-dir-btn" title="Toggle text direction for RTL languages (e.g., Arabic, Hebrew)">[Switch to RTL]</button>' +
+														'<span class="response-type-badge">IMAGE</span>' +
+														'<button class="toggle-display-btn jquerybutton" id="toggle-display-btn">[Show Raw URL]</button>' +
+														'<button class="toggle-dir-btn jquerybutton" id="toggle-dir-btn" title="Toggle text direction for RTL languages">[Switch to RTL]</button>' +
 														'</div>' +
 														'<div class="response-toolbar-right">' +
-														'<button class="copy-btn jquerybutton" id="copy-response-btn">Copy</button>' +
+														'<button class="copy-btn jquerybutton" id="copy-response-btn">Copy URL</button>' +
 														'</div>' +
 														'</div>' +
-														'<div class="response-content-wrapper" style="direction: ltr;">' +
+														'<div class="response-content-wrapper" style="direction:ltr;">' +
 														formattedContent +
 														'</div>'
-										);
+												);
+												$('#toggle-display-btn').off('click').on('click', function() { toggleResponseDisplay(); });
+												$('#toggle-dir-btn').off('click').on('click', function() { toggleResponseDirection(); });
+												$('#copy-response-btn').off('click').on('click', function() { copyResponse(); });
+												return;
+										}
 										
-										$('#toggle-display-btn').off('click').on('click', function() { toggleResponseDisplay(); });
-										$('#toggle-dir-btn').off('click').on('click', function() { toggleResponseDirection(); });
-										$('#copy-response-btn').off('click').on('click', function() { copyResponse(); });
+										case 'svg':
+												formattedContent = renderSvg(data, context);
+												badgeLabel = 'SVG';
+												break;
+										
+										case 'json':
+												formattedContent = renderJson(data);
+												badgeLabel = getResponseTypeLabel(data);
+												break;
+										
+										case 'html':
+												formattedContent = renderHtml(data);
+												badgeLabel = 'HTML';
+												break;
+										
+										case 'xml':
+												formattedContent = renderXml(data);
+												badgeLabel = 'XML';
+												break;
+										
+										case 'csv':
+												formattedContent = renderCsv(data);
+												badgeLabel = 'CSV';
+												break;
+										
+										case 'binary':
+												formattedContent = renderBinary(data, context);
+												badgeLabel = 'BINARY';
+												break;
+										
+										case 'text':
+										default:
+												formattedContent = renderText(data);
+												badgeLabel = getResponseTypeLabel(data);
+												break;
+								}								
+								// Store for the formatted/raw toggle
+								currentRawResponse = rawForCopy;
+								currentFormattedHtml = formattedContent;
+								currentDisplayMode = 'formatted';
+								
+								var responseSize = data ? data.length : 0;
+								var sizeInfo = responseSize > 0 ? ' (' + formatBytes(responseSize) + ')' : '';
+								
+								$responseArea.html(
+										'<div class="response-toolbar">' +
+										'<div class="response-toolbar-left">' +
+										'<span class="response-type-badge">' + escapeHtml(badgeLabel) + sizeInfo + '</span>' +
+										'<button class="toggle-display-btn jquerybutton" id="toggle-display-btn">[Show Raw]</button>' +
+										'<button class="toggle-dir-btn jquerybutton" id="toggle-dir-btn" title="Toggle text direction for RTL languages (e.g., Arabic, Hebrew)">[Switch to RTL]</button>' +
+										'</div>' +
+										'<div class="response-toolbar-right">' +
+										'<button class="copy-btn jquerybutton" id="copy-response-btn">Copy</button>' +
+										'</div>' +
+										'</div>' +
+										'<div class="response-content-wrapper" style="direction: ltr;">' +
+										formattedContent +
+										'</div>'
+								);
+								
+								$('#toggle-display-btn').off('click').on('click', function() { toggleResponseDisplay(); });
+								$('#toggle-dir-btn').off('click').on('click', function() { toggleResponseDirection(); });
+								$('#copy-response-btn').off('click').on('click', function() { copyResponse(); });
 						},
+
 						error: function(xhr, status, errorThrown) {
 								var statusCode = xhr.status || 0;
 								$statusEl.html('<span class="response-status error">HTTP ' + statusCode + ' ' + (xhr.statusText || 'Error') + '</span>');
