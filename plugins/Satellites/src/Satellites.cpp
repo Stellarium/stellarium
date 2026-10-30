@@ -2814,7 +2814,7 @@ void Satellites::handleErrorReply(QNetworkReply* reply)
 	// 500/Internal server error
 	const int httpCode = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
 	const QString urlStr = reply->url().toDisplayString();
-	const bool isCelestrak = urlStr.contains("celestrak", Qt::CaseInsensitive);
+	const bool isCelestrak = urlStr.contains("https://celestrak.org/NORAD/elements/gp.php", Qt::CaseInsensitive);
 	QString message = QString(qc_("This source of satellite orbital elements has replied:", "Satellites plugin URL warning") +
 			" " + reply->url().toString(QUrl::RemoveUserInfo) + ". " + q_("Error") +
 			" " + QString(qt_getEnumName(reply->error())) + ": " + reply->errorString() +
