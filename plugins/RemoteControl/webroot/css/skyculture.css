@@ -112,6 +112,7 @@
     max-height: 500px; /* Scrollable if many cultures */
     overflow-y: auto;
     overflow-x: hidden;
+		border: 1px solid rgba(190, 200, 200, 0.8);
 }
 
 /* 
@@ -198,8 +199,7 @@
  * Common grid container for all pattern types.
  * Scrollable with max-height to handle large datasets.
  */
-.patterns-buttons-grid,
-.constellations-buttons-grid {
+.patterns-buttons-grid {
     display: flex;
     flex-wrap: wrap;
     gap: clamp(1px, 0.1vw, 2px);
@@ -213,14 +213,14 @@
     overflow-x: hidden;
     width: 100%;
     box-sizing: border-box;
+		border: 1px solid rgba(190, 200, 200, 0.8);
 }
 
 /* 
  * Pattern button - shared styling with culture buttons.
  * Responsive sizing using clamp().
  */
-.pattern-btn,
-.constellation-btn {
+.pattern-btn {
     background: linear-gradient(#8C8C8C, #505050);
     color: #000000;
     border: 1px solid #2A2C2E;
@@ -235,20 +235,17 @@
     user-select: none;
 }
 
-.pattern-btn:hover,
-.constellation-btn:hover {
+.pattern-btn:hover {
     background: linear-gradient(#C4C4C7, #6D6F72);
     border-color: #B4B7B0;
     transform: translateY(-1px);
 }
 
-.pattern-btn:active,
-.constellation-btn:active {
+.pattern-btn:active {
     transform: translateY(1px);
 }
 
-.pattern-btn.active,
-.constellation-btn.active {
+.pattern-btn.active {
     background: linear-gradient(#DCDBDA, #FFE0C6);
     border-color: #000000;
     color: #000000;
@@ -284,33 +281,6 @@
     margin-left: 8px;
     vertical-align: middle;
     font-family: monospace;
-}
-
-/* ========================================================================
- * TOOLTIP FOR STAR BUTTONS (HIP IDs)
- * ======================================================================== */
-
-.pattern-btn[title] {
-    position: relative;
-}
-
-.pattern-btn[title]:hover:after {
-    content: attr(title);
-    position: absolute;
-    bottom: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    background: #2A2C2E;
-    color: #DCDBDA;
-    padding: 4px 8px;
-    border-radius: 4px;
-    font-size: clamp(8px, 1vw, 10px);
-    white-space: nowrap;
-    z-index: 1000;
-    pointer-events: none;
-    margin-bottom: 5px;
-    border: 1px solid #5D5F62;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 /* Hide tooltip on touch devices to prevent stuck tooltips */
@@ -468,11 +438,15 @@
     transition: all 0.15s ease;
 }
 
+.option-item.option-group h4 {
+  margin: inherit;
+}
+
 .option-item.option-group .option-label {
     min-width: 100px;
     max-width: 180px;
     flex: 0 1 auto;
-    font-size: clamp(10px, 1.2vw, 12px);
+    font-size: clamp(12px, 1.2vw, 14px);
     gap: 6px;
     white-space: nowrap;
 }
@@ -526,13 +500,6 @@
  * COLOR PICKER CONTROLS - Inside Grouped Options
  * ======================================================================== */
 
-.option-sub-control.color-control {
-    flex: 0 1 180px;
-    min-width: 140px;
-    max-width: 220px;
-    padding: 0;
-}
-
 .option-item.option-group .color-picker-wrapper {
     display: flex !important;
     align-items: center !important;
@@ -561,13 +528,15 @@
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2) !important;
 }
 
+/* Now we removed inputs from the ui and only color-swatch used for color picker
+if you want to inputs r,g,b use this style or remove it */
 .option-item.option-group .color-inputs {
     display: flex;
     align-items: center;
     gap: 2px;
     flex: 1;
     min-width: 60px;
-		display: none !important;/*Hide R G B input value boxes keep color-swatch*/
+		/*display: none !important;/*Hide R G B input value boxes keep color-swatch*/
 }
 
 .option-item.option-group .color-input {
@@ -581,7 +550,6 @@
     text-align: center;
     font-family: monospace;
     height: 20px;
-    display: none ! important;/* Hide color input panel*/
 }
 
 .option-item.option-group .color-input:focus {
@@ -643,7 +611,7 @@
     }
     
     .option-sub-control {
-        flex: 1 1 120px;
+        flex: 1 1 auto;
         min-width: 100px;
     }
     
@@ -760,7 +728,6 @@
     .option-item.option-group .option-label {
         min-width: 110px;
         max-width: 140px;
-        font-size: 14px;
     }
     
     .option-group-controls {
@@ -820,8 +787,7 @@
     }
     
     .skyculture-buttons-grid,
-    .patterns-buttons-grid,
-    .constellations-buttons-grid {
+    .patterns-buttons-grid {
         justify-content: center;
         max-height: 230px;
 				gap: clamp(1px, 1vw, 2px);
@@ -872,7 +838,6 @@
     .option-item.option-group .option-label {
         min-width: auto;
         max-width: none;
-        font-size: 14px;
         white-space: normal;
     }
     
@@ -892,7 +857,7 @@
     }
     
     .option-sub-control {
-        flex: 1 1 130px;
+        flex: 1 1 auto;
         min-width: 100px;
         padding: 2px;
     }
@@ -974,8 +939,7 @@
     }
     
     .skyculture-btn,
-    .pattern-btn,
-    .constellation-btn {
+    .pattern-btn {
         padding: 4px 8px;
         font-size: 9px;
     }
@@ -992,8 +956,7 @@
     }
     
     .skyculture-buttons-grid,
-    .patterns-buttons-grid,
-    .constellations-buttons-grid {
+    .patterns-buttons-grid {
         max-height: 180px;
         gap: 1px;
         padding: 6px;
@@ -1035,8 +998,7 @@
     }
     
     .option-sub-control {
-        flex: 1 1 auto;
-        min-width: auto;
+			  display: grid;
         width: 100%;
         padding: 2px 0;
     }
@@ -1091,8 +1053,7 @@
     }
     
     .skyculture-btn,
-    .pattern-btn,
-    .constellation-btn {
+    .pattern-btn {
         padding: 3px 6px;
         font-size: 8px;
     }
@@ -1130,29 +1091,25 @@
  * ======================================================================== */
 
 .skyculture-buttons-grid::-webkit-scrollbar,
-.patterns-buttons-grid::-webkit-scrollbar,
-.constellations-buttons-grid::-webkit-scrollbar {
+.patterns-buttons-grid::-webkit-scrollbar {
     width: 7px;
     height: 5px;
 }
 
 .skyculture-buttons-grid::-webkit-scrollbar-track,
-.patterns-buttons-grid::-webkit-scrollbar-track,
-.constellations-buttons-grid::-webkit-scrollbar-track {
+.patterns-buttons-grid::-webkit-scrollbar-track {
     background: rgba(0, 0, 0, 0.2);
     border-radius: 3px;
 }
 
 .skyculture-buttons-grid::-webkit-scrollbar-thumb,
-.patterns-buttons-grid::-webkit-scrollbar-thumb,
-.constellations-buttons-grid::-webkit-scrollbar-thumb {
+.patterns-buttons-grid::-webkit-scrollbar-thumb {
     background: #5D5F62;
     border-radius: 3px;
 }
 
 .skyculture-buttons-grid::-webkit-scrollbar-thumb:hover,
-.patterns-buttons-grid::-webkit-scrollbar-thumb:hover,
-.constellations-buttons-grid::-webkit-scrollbar-thumb:hover {
+.patterns-buttons-grid::-webkit-scrollbar-thumb:hover {
     background: #B4B7B0;
 }
 
@@ -1172,7 +1129,8 @@
     align-items: stretch;
 }
 
-.skyculture-patterns-tabs {
+.skyculture-patterns-tabs,
+.plugins-tabs {
     margin-top: 20px;
     border: 1px solid rgba(0, 0, 0, 0.15);
     border-radius: 6px;
@@ -1180,7 +1138,8 @@
     overflow: hidden;
 }
 
-.skyculture-patterns-tabs ul {
+.skyculture-patterns-tabs ul,
+.plugins-tabs ul {
     display: flex;
     flex-wrap: wrap;
     list-style: none;
@@ -1190,13 +1149,15 @@
     border-bottom: 1px solid rgba(0, 0, 0, 0.15);
 }
 
-.skyculture-patterns-tabs ul li {
+.skyculture-patterns-tabs ul li,
+.plugins-tabs ul li {
     margin: 0;
     padding: 0;
     flex: 0 1 auto;
 }
 
-.skyculture-patterns-tabs ul li a {
+.skyculture-patterns-tabs ul li a,
+.plugins-tabs ul li a {
     display: flex;
     padding: 8px 16px;
     /*font-size: clamp(10px, 1.3vw, 12px);*/
@@ -1209,16 +1170,19 @@
     white-space: nowrap;
 }
 
-.skyculture-patterns-tabs ul li:last-child a {
+.skyculture-patterns-tabs ul li:last-child a,
+.plugins-tabs ul li:last-child a {
     border-right: none;
 }
 
-.skyculture-patterns-tabs ul li a:hover {
+.skyculture-patterns-tabs ul li a:hover,
+.plugins-tabs ul li a:hover {
     background: rgba(100, 100, 100, 0.15);
     color: #000000;
 }
 
-.skyculture-patterns-tabs ul li.ui-tabs-active a {
+.skyculture-patterns-tabs ul li.ui-tabs-active a,
+.plugins-tabs ul li.ui-tabs-active a {
     /*background: linear-gradient(#6B6E70, #4A4C4E);*/
     color: #000000;
     border-bottom: 2px solid #B4B7B0;
@@ -1948,323 +1912,6 @@
 }
 
 /* ========================================================================
- * STAR GROUP HEADERS
- * ======================================================================== */
-
-.star-group-header {
-    display: flex;
-    align-items: center;
-    padding: 6px 10px;
-    margin-top: 10px;
-    margin-bottom: 6px;
-    background: rgba(0, 0, 0, 0.08);
-    border-radius: 4px;
-    border-left: 3px solid #B4B7B0;
-    font-size: 12px;
-    font-weight: bold;
-    color: #000000;
-    width: 100%;
-    box-sizing: border-box;
-}
-
-.star-group-header:first-of-type {
-    margin-top: 0;
-}
-
-.star-group-name {
-    color: #000000;
-}
-
-.star-group-count {
-    margin-left: 8px;
-    font-size: 10px;
-    font-weight: normal;
-    color: #5D5F62;
-    background: rgba(0, 0, 0, 0.1);
-    padding: 1px 8px;
-    border-radius: 10px;
-}
-
-.star-group-buttons {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 4px 8px;
-    padding: 4px 0 4px 10px;
-    margin-bottom: 4px;
-}
-
-.star-group-buttons .pattern-btn {
-    font-size: 10px;
-    padding: 2px 8px;
-}
-
-/* ========================================================================
- * STARS SORT CONTROLS
- * ======================================================================== */
-
-.stars-sort-controls {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 12px;
-    padding: 8px 12px;
-    margin-bottom: 12px;
-    background: rgba(0, 0, 0, 0.06);
-    border-radius: 6px;
-    border: 1px solid rgba(0, 0, 0, 0.08);
-}
-
-.sort-group {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: clamp(10px, 1.4vw, 12px);
-    color: #000000;
-}
-
-.sort-group label {
-    font-weight: bold;
-    white-space: nowrap;
-}
-
-.stars-sort-select {
-    background: #3A3C3E;
-    color: #DCDBDA;
-    border: 1px solid #5D5F62;
-    border-radius: 4px;
-    padding: 4px 8px;
-    font-size: 11px;
-    cursor: pointer;
-    min-width: 120px;
-}
-
-.stars-sort-select:focus {
-    outline: none;
-    border-color: #B4B7B0;
-}
-
-.filter-group {
-    margin-left: 4px;
-}
-
-.filter-group input[type="checkbox"] {
-    margin: 0;
-    cursor: pointer;
-    width: 14px;
-    height: 14px;
-}
-
-.filter-group input[type="checkbox"]:checked {
-    accent-color: #B4B7B0;
-}
-
-#stars-apply-sort {
-    background: linear-gradient(#5D5F62, #3A3C3E);
-    border: 1px solid #2A2C2E;
-    border-radius: 4px;
-    padding: 4px 14px;
-    font-size: 11px;
-    font-weight: bold;
-    color: #000000;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-#stars-apply-sort:hover {
-    background: linear-gradient(#C4C4C7, #6D6F72);
-    transform: translateY(-1px);
-}
-
-#stars-apply-sort:active {
-    transform: translateY(1px);
-}
-
-#stars-apply-sort:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-    transform: none;
-}
-
-.stars-sort-status {
-    font-size: 12px;
-    color: #B4C8C8;
-    font-style: italic;
-    min-width: 120px;
-    text-align: right;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-    .stars-sort-controls {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 8px;
-    }
-    
-    .sort-group {
-        flex-wrap: wrap;
-        justify-content: space-between;
-    }
-    
-    .stars-sort-select {
-        flex: 1;
-        min-width: 80px;
-    }
-    
-    .filter-group {
-        margin-left: 0;
-    }
-    
-    #stars-apply-sort {
-        width: 100%;
-        padding: 6px;
-    }
-    
-    .stars-sort-status {
-        text-align: center;
-    }
-    
-    .star-group-header {
-        font-size: 11px;
-        padding: 5px 8px;
-    }
-    
-    .star-group-buttons {
-        padding-left: 6px;
-    }
-    
-    .star-group-buttons .pattern-btn {
-        font-size: 9px;
-        padding: 2px 6px;
-    }
-}
-
-@media (max-width: 480px) {
-    .star-group-header {
-        font-size: 10px;
-        padding: 4px 6px;
-    }
-    
-    .star-group-buttons {
-        padding-left: 4px;
-        gap: 3px 6px;
-    }
-    
-    .star-group-buttons .pattern-btn {
-        font-size: 8px;
-        padding: 2px 5px;
-    }
-		
-		.stats-bar {
-			display: grid;
-		}
-}
-
-/* ========================================================================
- * NAME DISPLAY GROUP
- * ======================================================================== */
-
-.name-display-group {
-    margin-left: 4px;
-}
-
-.name-display-group select {
-    min-width: 140px;
-}
-
-@media (max-width: 768px) {
-    .name-display-group {
-        margin-left: 0;
-    }
-    
-    .name-display-group select {
-        min-width: 100px;
-        flex: 1;
-    }
-}
-
-/* ========================================================================
- * CONSTELLATION ASTERISMS LUNAR CONTROLS
- * ======================================================================== */
-
-.skyculture-constellation-controls,
-.asterisms-controls,
-.lunar-controls {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 16px;
-    padding: 10px 12px;
-    margin-bottom: 12px;
-    background: rgba(0, 0, 0, 0.08);
-    border-radius: 6px;
-    border: 1px solid rgba(0, 0, 0, 0.08);
-}
-
-.constellation-filter-group,
-.constellation-navigation-group,
-.constellation-name-display-group {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: clamp(10px, 1.4vw, 12px);
-    color: #000000;
-}
-
-.constellation-filter-group input[type="checkbox"],
-.constellation-navigation-group input[type="checkbox"],
-.asterisms-filter-group input[type="checkbox"],
-.lunar-filter-group input[type="checkbox"] {
-    margin: 0;
-    cursor: pointer;
-    width: 14px;
-    height: 14px;
-}
-
-.constellation-filter-group input[type="checkbox"]:checked,
-.constellation-navigation-group input[type="checkbox"]:checked,
-.asterisms-filter-group input[type="checkbox"]:checked,
-.lunar-filter-group input[type="checkbox"]:checked {
-    accent-color: #B4B7B0;
-}
-
-
-.constellation-name-display-group select {
-    background: #3A3C3E;
-    color: #B4B7B0;
-    border: 1px solid #5D5F62;
-    border-radius: 4px;
-    padding: 3px 8px;
-    font-size: 11px;
-    cursor: pointer;
-    min-width: 130px;
-}
-
-.constellation-name-display-group select:focus {
-    outline: none;
-    border-color: #B4B7B0;
-}
-
-@media (max-width: 768px) {
-    .skyculture-constellation-controls {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 10px;
-    }
-    
-    .constellation-filter-group,
-    .constellation-navigation-group,
-    .constellation-name-display-group {
-        justify-content: space-between;
-    }
-    
-    .constellation-name-display-group select {
-        flex: 1;
-        min-width: 80px;
-    }
-}
-
-/* ========================================================================
  * DESCRIPTION DIRECTION CONTROLS
  * ======================================================================== */
 
@@ -2301,42 +1948,6 @@
  * FOV CONTROLS - Navigation Field of View
  * ======================================================================== */
 
-.constellation-fov-group label,
-.asterisms-fov-group label,
-.lunar-fov-group label {
-    font-weight: bold;
-    white-space: nowrap;
-}
-
-.constellation-fov-group,
- .asterisms-filter-group,
-.asterisms-fov-group {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: clamp(10px, 1.4vw, 12px);
-    color: #000000;
-}
-
-.lunar-filter-group,
-.lunar-fov-group {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: clamp(10px, 1.4vw, 12px);
-    color: #000000;
-}
-
-/* Stars FOV Group */
-.stars-fov-group {
-    margin-left: 4px;
-}
-
-.stars-fov-group label {
-    font-weight: bold;
-    white-space: nowrap;
-}
-
 /* FOV Input Number */
 .fov-input-number {
     width: 55px;
@@ -2354,43 +1965,92 @@
 
 /* Responsive */
 @media (max-width: 768px) {
-    .constellation-fov-group,
-    .asterisms-fov-group,
-    .lunar-fov-group,
-    .stars-fov-group {
-        justify-content: space-between;
-        width: 100%;
-    }
-    
-    .constellation-fov-group label,
-    .asterisms-fov-group label,
-    .lunar-fov-group label,
-    .stars-fov-group label {
-        min-width: 80px;
-    }
     
     .fov-input-number {
         width: 50px;
     }
-    
-    .asterisms-controls,
-    .lunar-controls {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 10px;
-    }
-    
-    .asterisms-filter-group,
-    .asterisms-fov-group,
-    .lunar-filter-group,
-    .lunar-fov-group {
-        justify-content: space-between;
-    }
+       
+
 }
 
 @media (max-width: 480px) {
     .fov-input-number {
         width: 45px;
         font-size: 9px;
+    }
+}
+
+
+/* ========================================================================
+ * VISIBILITY SNAPSHOT GROUP — Location + Time + JDay
+ * ========================================================================
+ * 
+ * Displays the observer's location and the simulation time at which
+ * the current visibility data was captured. This makes the visibility
+ * filter's behavior transparent: the user can see exactly WHAT sky
+ * the filtered list represents.
+ * 
+ * The group is refreshed on the same cadence as the visibility data:
+ *   - On filter activation
+ *   - On every timer tick (60s / 180s / 420s)
+ *   - On every manual Refresh click
+ * ======================================================================== */
+
+.visibility-snapshot-group {
+    display: flex;
+		flex-direction: column;
+    flex-wrap: wrap;
+    /*align-items: center;*/
+    gap: 6px 14px;
+    margin-top: 6px;
+    padding: 5px 10px;
+    background: rgba(60, 90, 60, 0.15);
+    border: 1px solid rgba(100, 140, 100, 0.25);
+    border-radius: 4px;
+    font-size: 11px;
+    color: #DCDBDA;
+    font-family: monospace;
+}
+
+.visibility-snapshot-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    white-space: nowrap;
+}
+
+.visibility-snapshot-item .snapshot-icon {
+    font-size: 12px;
+    line-height: 1;
+		color: #B4B7B0;
+}
+
+.visibility-snapshot-item .snapshot-label {
+    font-weight: bold;
+    color: #B4B7B0;
+}
+
+.visibility-snapshot-item .snapshot-value {
+    color: #FFE0C6;
+    font-weight: bold;
+}
+
+/* Responsive: stack items on narrow screens */
+@media (max-width: 768px) {
+    .visibility-snapshot-group {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 3px;
+        padding: 4px 8px;
+        font-size: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .visibility-snapshot-group {
+        font-size: 9px;
+    }
+    .visibility-snapshot-item .snapshot-icon {
+        font-size: 10px;
     }
 }

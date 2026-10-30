@@ -36,8 +36,8 @@
  */
 .tour-controls-container {
     margin: 10px 0 15px 0;
-    padding: 8px 0;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 8px ;
+    border: 1px solid rgba(190, 200, 200, 0.8);
 }
 
 /**
@@ -46,7 +46,6 @@
  */
 .tour-section-title {
     margin-bottom: 8px;
-    font-size: 11px;
     font-weight: bold;
     color: #B4B7B0;
 }
@@ -223,6 +222,16 @@
     border-left: 3px solid #007F00;
 }
 
+.tour-section-rayhelpers {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 8px;
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 4px;
+    border-left: 3px solid #007F00;		
+}
+
 /**
  * Section with neutral style (for ARTWORK).
  * Used by: .tour-section-artwork
@@ -284,41 +293,10 @@
 
 /**
  * Primary generate button for all tour generators.
- * Used by: .tour-generate-btn (applied to buttons with class)
+ * Inherit .pattern-btn style
+ * Used by: .pattern-btn (applied to buttons with class)
  */
-.tour-generate-btn {
-    background: linear-gradient(#8C8C8C, #505050);
-    border: 1px solid #2A2C2E;
-    border-radius: 3px;
-    padding: 5px 10px;
-    font-size: 11px;
-    font-weight: bold;
-    color: #000000;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    white-space: nowrap;
-}
 
-.tour-generate-btn:hover {
-    background: linear-gradient(#C4C4C7, #6D6F72);
-    transform: translateY(-1px);
-}
-
-.tour-generate-btn:active {
-    transform: translateY(1px);
-}
-
-.tour-generate-btn:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-    transform: none;
-}
-
-.tour-generate-btn.active {
-    background: linear-gradient(#DCDBDA, #FFE0C6);
-    border-color: #000000;
-    color: #000000;
-}
 
 /* ========================================================================
  * 5. INPUT CONTROLS (Number, Range, Checkbox)
@@ -330,12 +308,10 @@
  */
 .tour-input-number {
     width: 50px;
-    background: #3A3C3E;
-    color: #DCDBDA;
     border: 1px solid #5D5F62;
     border-radius: 3px;
     padding: 3px 4px;
-    font-size: 11px;
+		text-align: center;
 }
 
 .tour-input-number:focus {
@@ -638,55 +614,10 @@
  * ======================================================================== */
 
 /**
- * Multi-select wrapper with gold accent (for Constellations).
- * Used by: .tour-multiselect-gold
+ * Multi-select wrapper
+ * Used by: .tour-multiselect-group
  */
-.tour-multiselect-gold {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 11px;
-    color: #000000;
-    background: rgba(253, 216, 134, 0.15);
-    padding: 4px 10px;
-    border-radius: 4px;
-}
-
-/**
- * Multi-select wrapper with purple accent (for Asterisms).
- * Used by: .tour-multiselect-purple
- */
-.tour-multiselect-purple {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 11px;
-    color: #000000;
-    background: rgba(155, 89, 182, 0.15);
-    padding: 4px 10px;
-    border-radius: 4px;
-}
-
-/**
- * Multi-select wrapper with green accent (for Lunar Mansions).
- * Used by: .tour-multiselect-green
- */
-.tour-multiselect-green {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 11px;
-    color: #000000;
-    background: rgba(129, 199, 132, 0.15);
-    padding: 4px 10px;
-    border-radius: 4px;
-}
-
-/**
- * Multi-select wrapper with orange accent (for Stars).
- * Used by: .tour-multiselect-orange
- */
-.tour-multiselect-orange {
+.tour-multiselect-group {
     display: flex;
     align-items: center;
     gap: 6px;
@@ -705,30 +636,29 @@
     background: rgba(0, 0, 0, 0.3);
     padding: 2px 8px;
     border-radius: 12px;
-    font-size: 9px;
     font-family: monospace;
     font-weight: bold;
 }
 
 /* Multi-select mode indicator for Constellations */
-#const-multi-select-mode {
+#constellation-multi-select-mode {
     cursor: pointer;
     width: 14px;
     height: 14px;
 }
 
-#const-multi-select-mode:checked {
+#constellation-multi-select-mode:checked {
     accent-color: #FD971F;
 }
 
 /* Multi-select mode indicator for Asterisms - soft purple theme */
-#aster-multi-select-mode {
+#asterisms-multi-select-mode {
     cursor: pointer;
     width: 14px;
     height: 14px;
 }
 
-#aster-multi-select-mode:checked {
+#asterisms-multi-select-mode:checked {
     accent-color: #9B59B6;
 }
 
@@ -816,17 +746,6 @@
 }
 
 /**
- * Alternative selected style for special lunar mansions.
- * Slightly darker green.
- */
-.pattern-btn.selected-lunar-special {
-    background: linear-gradient(#A5D6A7, #66BB6A) !important;
-    border: 1px solid #1B5E20 !important;
-    color: #FFFFFF !important;
-    text-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
-}
-
-/**
  * Selected star button style in multi-select mode.
  * Orange/gold theme.
  */
@@ -845,12 +764,12 @@
 /**
  * Selection count badges for specific types.
  */
-#const-selection-count {
+#constellation-selection-count {
     font-family: monospace;
     font-weight: bold;
 }
 
-#aster-selection-count {
+#asterisms-selection-count {
     font-family: monospace;
     font-weight: bold;
     background: rgba(155, 89, 182, 0.2);
@@ -877,7 +796,248 @@
     font-family: monospace;
     font-weight: bold;
     background: rgba(243, 156, 18, 0.2);
-    color: #D35400;
+    color: #D3B200;
+}
+
+/* ========================================================================
+ * MULTI-SELECT DISABLED DYNAMIC BUTTON
+ * ========================================================================
+ * 
+ * The Constellations dynamic-generate button is disabled while
+ * Multi-Select is active (because Multi-Select only applies to the
+ * Static Array script). This style makes the disabled state visually
+ * obvious, and shows a "not-allowed" cursor on hover.
+ * 
+ * The tooltip (title) is updated by skyculture-multiselect.js to
+ * explain WHY the button is disabled.
+ * ======================================================================== */
+
+.pattern-btn.multi-select-disabled,
+.pattern-btn:disabled.multi-select-disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+    filter: grayscale(0.7);
+    pointer-events: auto;   /* keep tooltip working */
+}
+
+.pattern-btn.multi-select-disabled:hover {
+    transform: none;
+    background: linear-gradient(#8C8C8C, #505050);   /* no hover change */
+    box-shadow: none;
+}
+
+/* Generic disabled state for any pattern-btn (fallback) */
+.pattern-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* ========================================================================
+ * STAR GROUP HEADERS (hidden)(works with IAU + object-type filtering)
+ * ======================================================================== */
+
+.star-group-header {
+    display: flex;
+    align-items: center;
+    padding: 6px 10px;
+    margin-top: 10px;
+    margin-bottom: 6px;
+    background: rgba(0, 0, 0, 0.08);
+    border-radius: 4px;
+    border-left: 3px solid #B4B7B0;
+    font-size: 12px;
+    font-weight: bold;
+    color: #000000;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.star-group-header:first-of-type {
+    margin-top: 0;
+}
+
+.star-group-name {
+    color: #000000;
+}
+
+.star-group-count {
+    margin-left: 8px;
+    font-size: 10px;
+    font-weight: normal;
+    color: #5D5F62;
+    background: rgba(0, 0, 0, 0.1);
+    padding: 1px 8px;
+    border-radius: 10px;
+}
+
+.star-group-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px 4px;
+    padding: 4px 0 4px 10px;
+    margin-bottom: 4px;
+}
+
+.star-group-buttons .pattern-btn {
+    font-size: 12px;
+    /*padding: 2px 8px;*/
+}
+
+/* ========================================================================
+ * STARS SORT CONTROLS (this is hidden until filtering activated)
+ * ======================================================================== */
+
+.stars-sort-controls {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 12px;
+    margin-bottom: 12px;
+    background: linear-gradient(#8C8C8C, #505050);
+    border-radius: 6px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.sort-group {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    color: #000000;
+}
+
+.sort-group label {
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.stars-sort-select {
+    background: #3A3C3E;
+    color: #DCDBDA;
+    border: 1px solid #5D5F62;
+    border-radius: 4px;
+    padding: 4px 8px;
+    font-size: 11px;
+    cursor: pointer;
+    min-width: 120px;
+}
+
+.stars-sort-select:focus {
+    outline: none;
+    border-color: #B4B7B0;
+}
+
+.filter-group {
+    margin-left: 4px;
+}
+
+.filter-group input[type="checkbox"] {
+    margin: 0;
+    cursor: pointer;
+    width: 14px;
+    height: 14px;
+}
+
+.filter-group input[type="checkbox"]:checked {
+    accent-color: #B4B7B0;
+}
+
+#stars-apply-sort {
+    background: linear-gradient(#8C8C8C, #505050);
+    border: 1px solid #2A2C2E;
+    border-radius: 4px;
+    padding: 4px 14px;
+    font-weight: bold;
+    color: #000000;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+#stars-apply-sort:hover {
+    background: linear-gradient(#C4C4C7, #6D6F72);
+    transform: translateY(-1px);
+}
+
+#stars-apply-sort:active {
+    transform: translateY(1px);
+}
+
+#stars-apply-sort:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.stars-sort-status {
+    font-size: 12px;
+    color: #B4C8C8;
+    font-style: italic;
+    min-width: 120px;
+    text-align: right;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .stars-sort-controls {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+    }
+    
+    .sort-group {
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+    
+    .stars-sort-select {
+        flex: 1;
+        min-width: 80px;
+    }
+    
+    .filter-group {
+        margin-left: 0;
+    }
+    
+    #stars-apply-sort {
+        width: 100%;
+        padding: 6px;
+    }
+    
+    .stars-sort-status {
+        text-align: center;
+    }
+    
+    .star-group-header {
+        font-size: 11px;
+        padding: 5px 8px;
+    }
+    
+    .star-group-buttons {
+        padding-left: 6px;
+    }
+    
+    .star-group-buttons .pattern-btn {
+        font-size: 9px;
+        padding: 2px 6px;
+    }
+}
+
+@media (max-width: 480px) {
+    .star-group-header {
+        font-size: 10px;
+        padding: 4px 6px;
+    }
+    
+    .star-group-buttons {
+        padding-left: 4px;
+        gap: 3px 6px;
+    }
+    
+    .star-group-buttons .pattern-btn {
+        font-size: 8px;
+        padding: 2px 5px;
+    }
 }
 
 /* ========================================================================
@@ -907,24 +1067,6 @@
     font-size: 10px;
     color: #FFE0C6;
     line-height: 1.5;
-}
-
-/**
- * Alternative info note (lunar-info-note - legacy, kept for compatibility).
- */
-.lunar-info-note {
-    background: rgba(129, 199, 132, 0.08);
-    border-radius: 6px;
-    padding: 10px;
-    margin-top: 10px;
-    border: 1px solid rgba(129, 199, 132, 0.2);
-}
-
-.lunar-info-note .info-title {
-    display: block;
-    font-weight: bold;
-    margin-bottom: 5px;
-    color: #81C784;
 }
 
 /* ========================================================================
@@ -1004,11 +1146,6 @@
         grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
         gap: 12px;
     }
-    
-    .tour-generate-btn {
-        padding: 5px 8px;
-        font-size: 10px;
-    }
 }
 
 /* Small screens (tablets, large phones) */
@@ -1042,13 +1179,6 @@
         padding: 3px 8px;
     }
     
-    .tour-generate-btn {
-        padding: 4px 8px;
-        font-size: 10px;
-        width: 100%;
-        text-align: center;
-    }
-    
     .tour-input-number {
         width: 45px;
         font-size: 10px;
@@ -1067,10 +1197,7 @@
         min-width: 55px;
     }
     
-    .tour-multiselect-gold,
-    .tour-multiselect-purple,
-    .tour-multiselect-green,
-    .tour-multiselect-orange {
+    .tour-multiselect-group {
         padding: 3px 8px;
         font-size: 10px;
         flex-wrap: wrap;
@@ -1127,11 +1254,6 @@
         gap: 4px;
     }
     
-    .tour-generate-btn {
-        padding: 3px 6px;
-        font-size: 9px;
-    }
-    
     .tour-input-number {
         width: 40px;
         font-size: 9px;
@@ -1165,10 +1287,7 @@
         margin-left: 4px;
     }
     
-    .tour-multiselect-gold,
-    .tour-multiselect-purple,
-    .tour-multiselect-green,
-    .tour-multiselect-orange {
+    .tour-multiselect-group {
         padding: 2px 6px;
         font-size: 9px;
         gap: 4px;
@@ -1330,5 +1449,411 @@
     .tour-color-slider::-moz-range-thumb {
         width: 10px;
         height: 10px;
+    }
+}
+
+/* ========================================================================
+ * SKY CULTURE CONTROL PANELS
+ * ========================================================================
+ * 
+ * These styles apply to the control panels that appear above the pattern
+ * buttons in each tab (Constellations, Asterisms, Lunar Mansions, Stars).
+ * ======================================================================== */
+
+.skyculture-controls {
+    display: flex;
+    flex-wrap: wrap;
+    /*align-items: center;*/
+    gap: 12px;
+    padding: 10px 12px;
+    margin-bottom: 12px;
+    background: rgba(0, 0, 0, 0.08);
+    border-radius: 6px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.skyculture-controls .control-group {
+    /*align-items: center;*/
+    font-size: clamp(10px, 1.4vw, 12px);
+}
+
+.skyculture-controls .control-group label {
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.skyculture-controls .control-group select {
+    background: #3A3C3E;
+    color: #DCDBDA;
+    border: 1px solid #5D5F62;
+    border-radius: 4px;
+    padding: 3px 8px;
+    font-size: 11px;
+    cursor: pointer;
+    min-width: 120px;
+		flex: fit-content;
+}
+
+.skyculture-controls .control-group select:focus {
+    outline: none;
+    border-color: #B4B7B0;
+}
+
+.skyculture-controls .control-group input[type="checkbox"] {
+    margin: 0;
+    cursor: pointer;
+    width: 14px;
+    height: 14px;
+}
+
+.skyculture-controls .control-group input[type="checkbox"]:checked {
+    accent-color: #B4B7B0;
+}
+
+.skyculture-controls .control-group button.jquerybutton {
+    background: linear-gradient(#8C8C8C, #505050);
+    border: 1px solid #2A2C2E;
+    border-radius: 4px;
+    padding: 4px 14px;
+    font-weight: bold;
+    color: #000000;
+    cursor: pointer;
+}
+
+.skyculture-controls .control-group button.jquerybutton:hover {
+    background: linear-gradient(#C4C4C7, #6D6F72);
+}
+
+.skyculture-controls .control-help-group {
+    margin-left: auto;
+}
+
+.skyculture-controls .multi-select-label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: bold;
+}
+
+.skyculture-controls .multi-select-label small {
+    font-size: 9px;
+    color: #FFE0C6;
+    font-weight: normal;
+}
+
+.skyculture-controls .tour-selection-count {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-family: monospace;
+    font-weight: bold;
+    color: #DCDBDA;
+}
+
+.control-help-btn {
+    padding: 2px 8px;
+    margin-left: 8px;
+    font-style: italic;
+    font-size: 10px;
+}
+
+.control-help-btn .ui-icon {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+/* ========================================================================
+ * VISIBILITY REFRESH GROUP (Radio + Manual Refresh Button)
+ * ========================================================================
+ * 
+ * The visibility refresh controls appear when the "Visible above horizon
+ * only" checkbox is enabled. They let the user choose how often the
+ * visibility data is refreshed (30s / 60s / 3min) or switch to manual.
+ * 
+ * Layout:
+ *   - A label ("Refresh visibility:")
+ *   - Four radio buttons (30s, 60s, 3min, Manual)
+ *   - A Refresh button (visible only in Manual mode)
+ * 
+ * All radios share the same `name` attribute across all tabs, so they
+ * behave as a single logical group. The visual state is synchronized
+ * via jQuery UI checkboxradio.
+ * ======================================================================== */
+
+.visibility-control-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.visibility-refresh-group {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-left: 20px;
+    margin-top: 4px;
+    font-size: 11px;
+}
+
+.control-group.visibility-control-group {
+  /*border: solid aliceblue 1px;*/
+  margin: 2px;
+  padding: inherit;
+	    border: 1px dashed rgba(240, 248, 255, 0.35);
+    border-radius: 3px;
+    /*padding: 2px 6px;*/
+    /*margin: 0;*/
+    background: transparent;
+}
+
+.visibility-refresh-label {
+    font-weight: bold;
+    margin-right: 4px;
+}
+
+.visibility-radio-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    cursor: pointer;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 10px;
+}
+
+.visibility-radio-label input[type="radio"] {
+    margin: 0;
+    cursor: pointer;
+}
+
+.visibility-radio-label span {
+    user-select: none;
+}
+
+/* jQuery UI checkboxradio overrides — keep compact */
+.visibility-radio-label.ui-checkboxradio-label {
+    padding: 2px 8px;
+    font-size: 10px;
+    border-radius: 3px;
+    background: linear-gradient(#4A4C4E, #2A2C2E);
+    border: 1px solid #1A1C1E;
+    color: #B0B0B0;
+}
+
+.visibility-radio-label.ui-checkboxradio-label:hover {
+    background: linear-gradient(#5A5C5E, #3A3C3E);
+    color: #DCDBDA;
+}
+
+.visibility-radio-label.ui-checkboxradio-label.ui-checkboxradio-checked {
+    background: linear-gradient(#DCDBDA, #FFE0C6);
+    border-color: #6B6E70;
+    color: #000;
+    font-weight: bold;
+}
+
+.visibility-radio-label.ui-checkboxradio-label:active {
+    background: linear-gradient(#3A3C3E, #2A2C2E);
+}
+
+.visibility-refresh-btn {
+    margin-left: 8px;
+    padding: 2px 8px;
+    font-size: 10px;
+    background: linear-gradient(#5D5F62, #3A3C3E);
+    border: 1px solid #2A2C2E;
+    border-radius: 3px;
+    color: #DCDBDA;
+    cursor: pointer;
+}
+
+.visibility-refresh-btn:hover {
+    background: linear-gradient(#6D6F72, #4A4C4E);
+}
+
+.visibility-refresh-btn:active {
+    background: linear-gradient(#4A4C4E, #3A3C3E);
+}
+
+/* ========================================================================
+ * VISIBILITY COUNTERS — Countdown + Item Count
+ * ========================================================================
+ * 
+ * Two small counters appear to the right of the Refresh button:
+ *   - .visibility-countdown    : "⏱ 45s" (time until next auto-refresh)
+ *   - .visibility-item-count   : "12/88" (visible items / total)
+ * 
+ * Both use a subtle monospace font to keep them aligned and stable
+ * as the numbers change.
+ * ======================================================================== */
+
+.visibility-countdown,
+.visibility-item-count {
+    display: inline-block;
+    padding: 2px 8px;
+    margin-left: 6px;
+    background: rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+    font-family: monospace;
+    font-size: 10px;
+    font-weight: bold;
+    color: #DCDBDA;
+    white-space: nowrap;
+    min-width: 44px;
+    text-align: center;
+}
+
+.visibility-countdown {
+    /* Distinct color for the countdown to draw attention */
+    background: rgba(60, 90, 60, 0.3);
+    border-color: rgba(100, 140, 100, 0.25);
+}
+
+.visibility-item-count {
+    /* Neutral color for the item count */
+    background: rgba(60, 60, 90, 0.3);
+    border-color: rgba(100, 100, 140, 0.25);
+}
+
+/* On small screens, keep counters on their own line */
+@media (max-width: 768px) {
+    .visibility-countdown,
+    .visibility-item-count {
+        margin-left: 4px;
+        font-size: 9px;
+        padding: 1px 6px;
+        min-width: 38px;
+    }
+}
+
+/* ========================================================================
+ * TOUR HELP BUTTON (in tour-section-title)
+ * ======================================================================== */
+
+.tour-section-title .tour-help-btn {
+    padding: 2px 6px;
+    margin-left: 8px;
+    font-style: italic;
+}
+
+.tour-section-title .tour-help-btn .ui-icon {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+/* ========================================================================
+ * TOUR HELP CONTENT (Modals)
+ * ========================================================================
+ * 
+ * Structure used in all help dialogs:
+ *   .tour-help-content
+ *     .tour-help-intro       — opening paragraph
+ *     h4                     — section titles
+ *     p, ul, ol              — body text
+ *     .tour-help-note        — call-out box for examples/tips
+ * 
+ * The note box uses a subtle left border to draw attention without
+ * introducing loud colors.
+ * ======================================================================== */
+
+.tour-help-content {
+    line-height: 1.6;
+    background: rgba(149, 150, 152, 0.8);
+    padding: 10px 15px;
+}
+
+.tour-help-content .tour-help-intro {
+    font-style: italic;
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.tour-help-content h4 {
+    font-size: 12px;
+    margin: 14px 0 6px 0;
+    padding-bottom: 3px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+.tour-help-content h4:first-child {
+    margin-top: 0;
+}
+
+.tour-help-content p {
+    margin: 6px 0;
+}
+
+.tour-help-content ul,
+.tour-help-content ol {
+    margin: 6px 0;
+    padding-left: 22px;
+}
+
+.tour-help-content li {
+    margin-bottom: 4px;
+}
+
+.tour-help-content strong {
+    font-weight: bold;
+}
+
+/* Call-out box for examples and tips */
+.tour-help-content .tour-help-note {
+    margin: 10px 0 6px 0;
+    padding: 6px 10px;
+    background: rgba(0, 0, 0, 0.08);
+    border-left: 3px solid rgba(0, 0, 0, 0.35);
+    font-size: 11px;
+    line-height: 1.5;
+}
+
+/* ========================================================================
+ * RESPONSIVE ADJUSTMENTS
+ * ======================================================================== */
+
+@media (max-width: 768px) {
+    .skyculture-controls {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+    }
+
+    .skyculture-controls .control-group {
+        justify-content: space-between;
+    }
+
+    .skyculture-controls .control-group select {
+        flex: 1;
+        min-width: 80px;
+    }
+
+    .skyculture-controls .control-help-group {
+        margin-left: 0;
+        justify-content: center;
+    }
+
+    /* Visibility refresh group — stack under checkbox on small screens */
+    .visibility-refresh-group {
+        margin-left: 0;
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 480px) {
+    .skyculture-controls .control-group {
+        font-size: 10px;
+    }
+
+    .skyculture-controls .control-group select {
+        font-size: 10px;
+        padding: 2px 6px;
+    }
+
+    .visibility-radio-label.ui-checkboxradio-label {
+        padding: 1px 6px;
+        font-size: 9px;
     }
 }
