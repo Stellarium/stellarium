@@ -1189,7 +1189,7 @@ current\_ns\_set            & string & Current set of navigational stars. Possib
 \bottomrule
 \end{tabularx}
 
-
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
 \section{Satellites Plugin}
 \label{sec:plugins:Satellites}
@@ -1207,7 +1207,7 @@ the SGP4/SDP4 algorithms (J.L. Canales' \program{gsat} library), using
 as its input data in NORAD's two-line element set
 (\indexterm[TLE, two-line element]{TLE}\footnote{TLE: \url{https://en.wikipedia.org/wiki/Two-line_element_set}. 
 Actually, in 2026 the traditional TLE file format had to be declared obsolete because the string space for the COSPAR ID was exhausted. 
-While a single new format has still to emerge, for the time being CSV files (comma-separated values) are used. 
+While a new XML-based format has been introduced, for the time being smaller CSV files (comma-separated values) are used. 
 See also important note in \ref{sec:plugins:Satellites:Sources}})
 format. Lists with TLEs for hundreds of satellites are available
 online and are regularly updated. The plugin downloads the lists
@@ -1245,7 +1245,6 @@ The height of the selected satellite is computed above the WGS84 ellipsoid,
 while the fixed (configurable) altitude from Earth's surface is computed over the sphere. 
 You may note these circles will deviate slightly from each other when displayed altitudes are equal.}
 
-% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Satellite Properties}
 \label{sec:plugins:Satellites:properties}
 
