@@ -981,7 +981,7 @@ void Satellites::restoreDefaultTleSources()
 	}
 	*/
 	// Instead, fetch just one group, all objects:
-	urls << "https://celestrak.org/NORAD/elements/gp.php?GROUP=active&FORMAT=CSV";
+	urls << "1,https://celestrak.org/NORAD/elements/gp.php?GROUP=active&FORMAT=CSV";
 
 	// Other sources and supplemental data from Celestrack
 	urls << "https://www.amsat.org/amsat/ftp/keps/current/nasabare.txt"
