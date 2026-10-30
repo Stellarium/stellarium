@@ -944,6 +944,10 @@ private:
 	bool autoDisplayEnabled;
 	QPair<QDateTime, double> lastUpdate; // Combines previous QDateTime (slow!) with efficient JD (to be checked each frame in isValidRangeDates()) of the same time.
 	int updateFrequencyHours;
+
+	//! This should usually be true. A download HTTP error should be forwarded to the user. But not 50 at an update event.
+	//! Show only the first, and suppress the rest in one update.
+	bool showDownloadErrorWarningBox;
 	//@}
 
 	//! @name Umbra/penumbra module
