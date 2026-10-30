@@ -186,12 +186,17 @@ public:
 	//! so the view is never tilted. It is also defined when looking exactly into the pole: there the given longitude
 	//! is at the bottom of the screen in the north pole (e.g. zenith) and at the top in the south pole (e.g. nadir).
 	static Vec3d upVectorFromLonLat(double lon, double lat);
-	//! Return true if the direction (of any length) points exactly into the pole of its frame, where its longitude is undefined.
+	//! Return true if the direction (of any length) points into the pole of its frame, where its longitude is undefined.
+	//! A deviation of up to about 1e-7 radians is accepted, which covers rounding errors of frame conversions.
 	static bool isInPole(const Vec3d& dir);
 	//! Inverse of upVectorFromLonLat() for a view exactly into the pole: return the longitude (radians) at the bottom of the screen
 	//! for the given up vector when looking into the north (northPole=true) or south pole.
 	//! If the up vector has no component perpendicular to the pole, fallbackLon is returned.
 	static double poleLongitudeFromUp(const Vec3d& up, bool northPole, double fallbackLon);
+	//! Return an up vector which keeps the view upright (not tilted against the pole) for the view direction @p dir,
+	//! both in the same frame. This is upVectorFromLonLat() for the direction of @p dir. Exactly in the pole,
+	//! the longitude is taken from @p currentUp, so the current rotation of the view is kept there.
+	static Vec3d uprightUpVector(const Vec3d& dir, const Vec3d& currentUp);
 
 	void moveToObject(const StelObjectP& target, float moveDuration = 1., ZoomingMode zooming = ZoomNone);
 
@@ -602,6 +607,9 @@ private:
 	//! Set move.startLon and move.aimLon. Call after move.start, move.aim and move.mountMode are set.
 	//! aimUpMountFrame is the requested up vector at the end of the move, in the mount frame.
 	void initMoveLongitudes(const Vec3d& aimUpMountFrame);
+	//! Set the view direction (J2000) and rebuild the up vector so that the view stays upright for it.
+	//! Use this when the direction changes without an explicit up vector, as a stored up vector may belong to the old direction.
+	void setViewDirectionUprightJ2000(const Vec3d& v);
 	//! Convert a direction given in @p frame into the equatorial J2000 frame (without refraction).
 	Vec3d frameToJ2000(const Vec3d& v, ReferenceFrame frame) const;
 	bool flagAutoMove;       // Define if automove is on or off

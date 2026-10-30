@@ -309,11 +309,12 @@ void StelMovementMgr::setEquatorialMount(bool b)
 
 void StelMovementMgr::setMountMode(MountMode m)
 {
+	const Vec3d upJ2000 = getViewUpVectorJ2000();
 	mountMode = m;
+	// The stored up vector belongs to the old mount frame. Rebuild it so that the view is upright in the new one.
+	// Looking exactly into the new pole, the current rotation of the view is kept.
+	setViewUpVector(uprightUpVector(j2000ToMountFrame(viewDirectionJ2000), j2000ToMountFrame(upJ2000)));
 	setViewDirectionJ2000(viewDirectionJ2000);
-	// TODO: Decide whether re-setting Up-vector is required here.
-	//setViewUpVector(Vec3d(0., 0., 1.));
-	//setViewUpVectorJ2000(Vec3d(0., 0., 1.)); // Looks wrong on start.
 	emit equatorialMountChanged(m==MountEquinoxEquatorial);
 }
 
@@ -861,7 +862,7 @@ void StelMovementMgr::lookEast(bool zero)
 	StelUtils::rectToSphe(&cy,&alt,core->j2000ToAltAz(getViewDirectionJ2000(), StelCore::RefractionOff));
 	cy = M_PI_2f;
 	StelUtils::spheToRect(cy, alt, dir);
-	setViewDirectionJ2000(core->altAzToJ2000(dir.toVec3d(), StelCore::RefractionOff));
+	setViewDirectionUprightJ2000(core->altAzToJ2000(dir.toVec3d(), StelCore::RefractionOff));
 	//qDebug() << "Setting East at Alt:" << alt*M_180_PIf;
 	if ((mountMode==MountAltAzimuthal) && (fabsf(alt)>M_PI_2f-0.0001f) && (fabs(upVectorMountFrame[2])<0.001))
 	{
@@ -890,7 +891,7 @@ void StelMovementMgr::lookWest(bool zero)
 	StelUtils::rectToSphe(&cy,&alt,core->j2000ToAltAz(getViewDirectionJ2000(), StelCore::RefractionOff));
 	cy = 3.f*M_PI_2f;
 	StelUtils::spheToRect(cy, alt, dir);
-	setViewDirectionJ2000(core->altAzToJ2000(dir.toVec3d(), StelCore::RefractionOff));
+	setViewDirectionUprightJ2000(core->altAzToJ2000(dir.toVec3d(), StelCore::RefractionOff));
 	//qDebug() << "Setting West at Alt:" << alt*M_180_PIf;
 	if ((mountMode==MountAltAzimuthal) &&  (fabsf(alt)>M_PI_2f-0.0001f) && (fabs(upVectorMountFrame[2])<0.001))
 	{
@@ -919,7 +920,7 @@ void StelMovementMgr::lookNorth(bool zero)
 	StelUtils::rectToSphe(&cy,&alt,core->j2000ToAltAz(getViewDirectionJ2000(), StelCore::RefractionOff));
 	cy = M_PIf;
 	StelUtils::spheToRect(cy, alt, dir);
-	setViewDirectionJ2000(core->altAzToJ2000(dir.toVec3d(), StelCore::RefractionOff));
+	setViewDirectionUprightJ2000(core->altAzToJ2000(dir.toVec3d(), StelCore::RefractionOff));
 
 	//qDebug() << "Setting North at Alt:" << alt*M_180_PIf;
 	if ((mountMode==MountAltAzimuthal) &&  (fabsf(alt)>M_PI_2f-0.0001f) && (fabs(upVectorMountFrame[2])<0.001))
@@ -949,7 +950,7 @@ void StelMovementMgr::lookSouth(bool zero)
 	StelUtils::rectToSphe(&cy,&alt,core->j2000ToAltAz(getViewDirectionJ2000(), StelCore::RefractionOff));
 	cy = 0.f;
 	StelUtils::spheToRect(cy, alt, dir);
-	setViewDirectionJ2000(core->altAzToJ2000(dir.toVec3d(), StelCore::RefractionOff));
+	setViewDirectionUprightJ2000(core->altAzToJ2000(dir.toVec3d(), StelCore::RefractionOff));
 
 	//qDebug() << "Setting South at Alt:" << alt*M_180_PIf;
 	if ((mountMode==MountAltAzimuthal) &&  (fabsf(alt)>M_PI_2f-0.0001f) && (fabs(upVectorMountFrame[2])<0.001))
@@ -967,7 +968,8 @@ Vec3d StelMovementMgr::upVectorFromLonLat(double lon, double lat)
 
 bool StelMovementMgr::isInPole(const Vec3d& dir)
 {
-	return dir[0]*dir[0] + dir[1]*dir[1] <= 1e-20*dir.normSquared();
+	// Conversions between frames (e.g. supergalactic -> J2000 -> supergalactic) leave errors of up to ~1e-8 radians.
+	return dir[0]*dir[0] + dir[1]*dir[1] <= 1e-14*dir.normSquared();
 }
 
 double StelMovementMgr::poleLongitudeFromUp(const Vec3d& up, bool northPole, double fallbackLon)
@@ -976,6 +978,15 @@ double StelMovementMgr::poleLongitudeFromUp(const Vec3d& up, bool northPole, dou
 		return fallbackLon;
 	const double s = northPole ? 1. : -1.;
 	return atan2(-s*up[1], -s*up[0]);
+}
+
+Vec3d StelMovementMgr::uprightUpVector(const Vec3d& dir, const Vec3d& currentUp)
+{
+	double lon, lat;
+	StelUtils::rectToSphe(&lon, &lat, dir);
+	if (isInPole(dir))
+		lon = poleLongitudeFromUp(currentUp, dir[2]>0., lon);
+	return upVectorFromLonLat(lon, lat);
 }
 
 void StelMovementMgr::initMoveLongitudes(const Vec3d& aimUpMountFrame)
@@ -1295,8 +1306,9 @@ void StelMovementMgr::updateVisionVector(double deltaTime)
 		{
 			if (flagLockEquPos) // Equatorial vision vector locked
 			{
-				// Recalc local vision vector
-				setViewDirectionJ2000(viewDirectionJ2000);
+				// Recalc local vision vector. Its direction in the mount frame changes with time,
+				// so the up vector must follow to keep the view upright.
+				setViewDirectionUprightJ2000(viewDirectionJ2000);
 			}
 			else
 			{
@@ -1615,6 +1627,12 @@ void StelMovementMgr::setViewDirectionJ2000(const Vec3d& v)
 	core->lookAtJ2000(v, getViewUpVectorJ2000());
 	viewDirectionJ2000 = v;
 	viewDirectionMountFrame = j2000ToMountFrame(v);
+}
+
+void StelMovementMgr::setViewDirectionUprightJ2000(const Vec3d& v)
+{
+	setViewUpVector(uprightUpVector(j2000ToMountFrame(v), upVectorMountFrame));
+	setViewDirectionJ2000(v);
 }
 
 void StelMovementMgr::panView(const double deltaAz, const double deltaAlt)

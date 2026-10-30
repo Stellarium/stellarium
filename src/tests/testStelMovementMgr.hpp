@@ -33,6 +33,10 @@ private slots:
 	void testUpVectorContinuousNearPole();
 	void testIsInPole();
 	void testPoleLongitudeFromUp();
+	void testPoleAfterFrameRoundTrip();
+	void testUprightUpVector();
+	void testUprightUpVectorInPole();
+	void testUprightUpVectorAfterMountChange();
 };
 
 #endif // TESTSTELMOVEMENTMGR_HPP
