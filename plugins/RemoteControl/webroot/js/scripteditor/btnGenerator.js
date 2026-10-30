@@ -1207,8 +1207,8 @@ define([
                 if (info) {
                     if (info.isWritable === false) {
                         var msg = tr("This property is read-only and cannot be modified.");
-                        $previewContainer.html('<div class="btn-gen-placeholder" >' + msg + '</div>');
-                        $codeContainer.html('<div class="btn-gen-placeholder">' + msg + '</div>');
+                        $previewContainer.html('<div class="btn-gen-placeholder" >' + escapeHtml(msg) + '</div>');
+                        $codeContainer.html('<div class="btn-gen-placeholder">' + escapeHtml(msg) + '</div>');
                         showPropertyInfo(val, info);
                         updateStatus("Read-only property selected", true);
                         return;
@@ -1573,7 +1573,7 @@ define([
 
         if (!isWritable) {
             var msg = tr("This property is read-only.");
-            $previewContainer.html('<div class="btn-gen-placeholder" >' + msg + '</div>');
+            $previewContainer.html('<div class="btn-gen-placeholder" >' + escapeHtml(msg) + '</div>');
             return;
         }
 
@@ -1978,95 +1978,102 @@ define([
         var htmlToggle = '';
         var htmlButton = '';
 
-				if (selectedType === 'action') {
-						var action = actionOrProp;
-						var isCheckable = action.isCheckable;
-						var isChecked = action.isChecked;
+        // ============================================================
+        // ACTION
+        // ============================================================
+        if (selectedType === 'action') {
+            var action = actionOrProp;
+            var isCheckable = action.isCheckable;
+            var isChecked = action.isChecked;
 
-						var versionsHtml = '';
-						var versionExplanations = [];
+            var versionsHtml = '';
+            var versionExplanations = [];
 
-						if (isCheckable) {
-								// ============================================================
-								// TOGGLEABLE ACTIONS - Generate Version 1 & 2 only
-								// ============================================================
-								
-								// VERSION 1: CHECKBOX (for toggleable actions)
-								var htmlCheckbox = '<!-- Checkbox for StelAction: ' + escapeHtml(action.id) + ' -->\n';
-								htmlCheckbox += '<label class="btn-gen-preview-toggle">\n';
-								htmlCheckbox += '    <input type="checkbox" class="stelaction" name="' + escapeAttr(action.id) + '" ' +
-																 (isChecked ? 'checked' : '') + ' />\n';
-								htmlCheckbox += '    ' + escapeHtml(action.text) + '\n';
-								htmlCheckbox += '</label>';
+            if (isCheckable) {
+                // ============================================================
+                // TOGGLEABLE ACTIONS - Generate Version 1 & 2 only
+                // ============================================================
 
-								// VERSION 2: TOGGLE BUTTON (using stelaction)
-								var htmlToggle = '<!-- Toggle Button for StelAction: ' + action.id + ' -->\n';
-								htmlToggle += unifiedButtons.createButton({
-										type: 'action',
-										name: action.id,
-										label: action.text,
-										isChecked: isChecked,
-										isCheckable: isCheckable  // true
-								});
+                // VERSION 1: CHECKBOX (for toggleable actions)
+                htmlCheckbox = '<!-- Checkbox for StelAction: ' + escapeHtml(action.id) + ' -->\n';
+                htmlCheckbox += '<label class="btn-toggle">\n';
+                htmlCheckbox += '    <input type="checkbox" class="stelaction" name="' + escapeAttr(action.id) + '"' +
+                                (isChecked ? ' checked' : '') + ' />\n';
+                htmlCheckbox += '    ' + escapeHtml(action.text) + '\n';
+                htmlCheckbox += '</label>';
 
-								// Build HTML with both versions
-								versionsHtml = '<!-- Two versions available for toggleable action -->\n\n' +
-															 '<!-- VERSION 1: Checkbox (toggleable actions only) -->\n' +
-															 htmlCheckbox + '\n\n' +
-															 '<!-- VERSION 2: Toggle Button (RECOMMENDED - uses stelaction) -->\n' +
-															 htmlToggle;
+                // VERSION 2: TOGGLE BUTTON (using stelaction)
+                htmlToggle = '<!-- Toggle Button for StelAction: ' + escapeHtml(action.id) + ' -->\n';
+                htmlToggle += unifiedButtons.createButton({
+                    type: 'action',
+                    name: action.id,
+                    label: action.text,
+                    isChecked: isChecked,
+                    isCheckable: isCheckable  // true
+                });
 
-								versionExplanations = [
-										'• <strong>Version 1 (Checkbox):</strong> Simple checkbox for toggling',
-										'• <strong>Version 2 (Toggle Button):</strong> Unified button with visual state indicator (RECOMMENDED)'
-								];
+                // Build HTML with both versions
+                versionsHtml = '<!-- Two versions available for toggleable action -->\n\n' +
+                               '<!-- VERSION 1: Checkbox (toggleable actions only) -->\n' +
+                               htmlCheckbox + '\n\n' +
+                               '<!-- VERSION 2: Toggle Button (RECOMMENDED - uses stelaction) -->\n' +
+                               htmlToggle;
 
-						} else {
-								// ============================================================
-								// TRIGGER ACTIONS - Generate Version 3 only
-								// ============================================================
-								
-								// VERSION 3: TRIGGER BUTTON (for all actions)
-								var htmlTrigger = '<!-- Trigger Button for StelAction: ' + escapeHtml(action.id) + ' -->\n';
-								htmlTrigger += unifiedButtons.createButton({
-										type: 'action',
-										name: action.id,
-										label: action.text,
-										isCheckable: false
-								});
+                versionExplanations = [
+                    '• <strong>Version 1 (Checkbox):</strong> Simple checkbox for toggling',
+                    '• <strong>Version 2 (Toggle Button):</strong> Unified button with visual state indicator (RECOMMENDED)'
+                ];
 
-								versionsHtml = '<!-- Trigger action - single version available -->\n\n' +
-															 '<!-- VERSION 3: Trigger Button -->\n' +
-															 htmlTrigger;
+            } else {
+                // ============================================================
+                // TRIGGER ACTIONS - Generate Version 3 only
+                // ============================================================
 
-								versionExplanations = [
-										'• <strong>Version 3 (Trigger Button):</strong> Click to execute the action (no state)'
-								];
-						}
+                // VERSION 3: TRIGGER BUTTON (for all actions)
+                var htmlTrigger = '<!-- Trigger Button for StelAction: ' + escapeHtml(action.id) + ' -->\n';
+                htmlTrigger += unifiedButtons.createButton({
+                    type: 'action',
+                    name: action.id,
+                    label: action.text,
+                    isCheckable: false
+                });
 
-						// Build final HTML
-						html = versionsHtml;
+                versionsHtml = '<!-- Trigger action - single version available -->\n\n' +
+                               '<!-- VERSION 3: Trigger Button -->\n' +
+                               htmlTrigger;
 
-						// Build explanation
-						explanation = '<p><strong>' + escapeHtml(action.text) + '</strong></p>';
-						explanation += '<p><strong>ID:</strong> <code>' + escapeHtml(action.id) + '</code></p>';
-						explanation += '<p><strong>Type:</strong> ' + (isCheckable ? 'Toggle (Checkable)' : 'Trigger (One-shot)') + '</p>';
-						if (isCheckable) {
-								explanation += '<p><strong>Current State:</strong> ' + (isChecked ? 'ON \u2713' : 'OFF \u2717') + '</p>';
-						}
-						explanation += '<p><strong>Available Versions:</strong></p>';
-						explanation += '<ul style="margin:5px 0; padding-left:20px;">';
-						versionExplanations.forEach(function(item) {
-								explanation += '<li>' + item + '</li>';
-						});
-						explanation += '</ul>';
-						if (isCheckable) {
-								explanation += '<p><strong>Note:</strong> Toggle buttons automatically sync with server state.</p>';
-						} else {
-								explanation += '<p><strong>Note:</strong> Trigger actions execute immediately on click.</p>';
-						}
-				} 
-					else if (selectedType === 'property') {
+                versionExplanations = [
+                    '• <strong>Version 3 (Trigger Button):</strong> Click to execute the action (no state)'
+                ];
+            }
+
+            // Build final HTML
+            html = versionsHtml;
+
+            // Build explanation
+            explanation = '<p><strong>' + escapeHtml(action.text) + '</strong></p>';
+            explanation += '<p><strong>ID:</strong> <code>' + escapeHtml(action.id) + '</code></p>';
+            explanation += '<p><strong>Type:</strong> ' + (isCheckable ? 'Toggle (Checkable)' : 'Trigger (One-shot)') + '</p>';
+            if (isCheckable) {
+                explanation += '<p><strong>Current State:</strong> ' + (isChecked ? 'ON \u2713' : 'OFF \u2717') + '</p>';
+            }
+            explanation += '<p><strong>Available Versions:</strong></p>';
+            explanation += '<ul style="margin:5px 0; padding-left:20px;">';
+            versionExplanations.forEach(function(item) {
+                explanation += '<li>' + escapeHtml(item) + '</li>';
+            });
+            explanation += '</ul>';
+            if (isCheckable) {
+                explanation += '<p><strong>Note:</strong> Toggle buttons automatically sync with server state.</p>';
+            } else {
+                explanation += '<p><strong>Note:</strong> Trigger actions execute immediately on click.</p>';
+            }
+        }
+
+        // ============================================================
+        // PROPERTY
+        // ============================================================
+        else if (selectedType === 'property') {
             var propName = selectedPropertyName;
             var infoData = info;
             var label = customLabel || propName;
@@ -2084,16 +2091,16 @@ define([
             if (isBool) {
                 var isChecked = (currentVal === true || currentVal === 'true' || currentVal === 1 || currentVal === '1');
 
-						// VERSION 1: Checkbox
-						htmlCheckbox = '<!-- Checkbox for StelProperty: ' + escapeHtml(propName) + ' -->\n';
-						htmlCheckbox += '<label class="btn-gen-preview-toggle">\n';
-						htmlCheckbox += '    <input type="checkbox" class="stelproperty" name="' + escapeAttr(propName) + '" ' +
-														 (isChecked ? 'checked' : '') + ' />\n';
-						htmlCheckbox += '    ' + escapeHtml(label) + '\n';
-						htmlCheckbox += '</label>';
+                // VERSION 1: Checkbox
+                htmlCheckbox = '<!-- Checkbox for StelProperty: ' + escapeHtml(propName) + ' -->\n';
+                htmlCheckbox += '<label class="btn-toggle">\n';
+                htmlCheckbox += '    <input type="checkbox" class="stelproperty" name="' + escapeAttr(propName) + '"' +
+                                (isChecked ? ' checked' : '') + ' />\n';
+                htmlCheckbox += '    ' + escapeHtml(label) + '\n';
+                htmlCheckbox += '</label>';
 
                 // VERSION 2: Toggle Button (using stelproperty-toggle)
-                htmlToggle = '<!-- Toggle Button for StelProperty: ' + propName + ' -->\n';
+                htmlToggle = '<!-- Toggle Button for StelProperty: ' + escapeHtml(propName) + ' -->\n';
                 htmlToggle += unifiedButtons.createButton({
                     type: 'property-toggle',
                     name: propName,
@@ -2102,12 +2109,10 @@ define([
                 });
 
                 // VERSION 3: ON/OFF Buttons
-                htmlButton = '<!-- ON/OFF Buttons for StelProperty: ' + propName + ' -->\n';
+                htmlButton = '<!-- ON/OFF Buttons for StelProperty: ' + escapeHtml(propName) + ' -->\n';
                 htmlButton += '<div style="display:flex; gap:4px;">\n';
-                htmlButton += '    <button class="stelproperty" name="' + escapeAttr(propName) + '" value="true" ' +
-                              (isChecked ? 'class="stelproperty active"' : 'class="stelproperty"') + '>ON</button>\n';
-                htmlButton += '    <button class="stelproperty" name="' + escapeAttr(propName) + '" value="false" ' +
-                              (!isChecked ? 'class="stelproperty active"' : 'class="stelproperty"') + '>OFF</button>\n';
+                htmlButton += '    <button class="stelproperty' + (isChecked ? ' active' : '') + '" name="' + escapeAttr(propName) + '" value="true">ON</button>\n';
+                htmlButton += '    <button class="stelproperty' + (!isChecked ? ' active' : '') + '" name="' + escapeAttr(propName) + '" value="false">OFF</button>\n';
                 htmlButton += '</div>';
 
                 html = '<!-- Three versions available -->\n\n' +
@@ -2120,42 +2125,42 @@ define([
             }
 
             // NUMERIC PROPERTY
-						else if (isNum) {
-								var numVals = getNumericValues(propName);
-								var min = numVals.min;
-								var max = numVals.max;
-								var step = numVals.step;
-								var value = currentVal !== undefined ? currentVal : 0;
-								
-								// Determine number format based on step precision
-								var numberFormat = getNumberFormat(step);
+            else if (isNum) {
+                var numVals = getNumericValues(propName);
+                var min = numVals.min;
+                var max = numVals.max;
+                var step = numVals.step;
+                var value = currentVal !== undefined ? currentVal : 0;
 
-								// VERSION 1: Slider
-								htmlCheckbox = '<!-- Slider for StelProperty: ' + escapeHtml(propName) + ' -->\n';
-								htmlCheckbox += '<div class="btn-gen-slider-wrap">\n';
-								htmlCheckbox += '    <div class="btn-gen-slider-header">\n';
-								htmlCheckbox += '        <label>' + escapeHtml(label) + '</label>\n';
-								htmlCheckbox += '        <span class="stelproperty" data-prop="' + escapeAttr(propName) + '" data-numberformat="' + escapeAttr(numberFormat) + '"></span>\n';
-								htmlCheckbox += '    </div>\n';
-								htmlCheckbox += '    <div class="slider stelproperty" data-prop="' + escapeAttr(propName) + '" ';
-								htmlCheckbox += 'data-min="' + Number(min) + '" data-max="' + Number(max) + '" data-step="' + Number(step) + '"></div>\n';
-								htmlCheckbox += '</div>';
+                // Determine number format based on step precision
+                var numberFormat = getNumberFormat(step);
 
-								// VERSION 2: Spinner
-								htmlButton = '<!-- Spinner for StelProperty: ' + escapeHtml(propName) + ' -->\n';
-								htmlButton += '<div class="btn-gen-slider-wrap">\n';
-								htmlButton += '    <label>' + escapeHtml(label) + '</label>\n';
-								htmlButton += '    <input class="spinner stelproperty" name="' + escapeAttr(propName) + '" ';
-								htmlButton += 'data-min="' + Number(min) + '" data-max="' + Number(max) + '" data-step="' + Number(step) + '" data-numberformat="' + escapeAttr(numberFormat) + '" />\n';
-								htmlButton += '</div>';
+                // VERSION 1: Slider
+                htmlCheckbox = '<!-- Slider for StelProperty: ' + escapeHtml(propName) + ' -->\n';
+                htmlCheckbox += '<div class="btn-gen-slider-wrap">\n';
+                htmlCheckbox += '    <div class="btn-gen-slider-header">\n';
+                htmlCheckbox += '        <label>' + escapeHtml(label) + '</label>\n';
+                htmlCheckbox += '        <span class="stelproperty" data-prop="' + escapeAttr(propName) + '" data-numberformat="' + escapeAttr(numberFormat) + '"></span>\n';
+                htmlCheckbox += '    </div>\n';
+                htmlCheckbox += '    <div class="slider stelproperty" data-prop="' + escapeAttr(propName) + '" ';
+                htmlCheckbox += 'data-min="' + Number(min) + '" data-max="' + Number(max) + '" data-step="' + Number(step) + '"></div>\n';
+                htmlCheckbox += '</div>';
 
-								html = '<!-- Two versions available -->\n\n' +
-											 '<!-- VERSION 1: Slider (RECOMMENDED) -->\n' +
-											 htmlCheckbox + '\n\n' +
-											 '<!-- VERSION 2: Spinner -->\n' +
-											 htmlButton + '\n\n' +
-											 '<!-- Range: min=' + min + ', max=' + max + ', step=' + step + ' -->';
-						}
+                // VERSION 2: Spinner
+                htmlButton = '<!-- Spinner for StelProperty: ' + escapeHtml(propName) + ' -->\n';
+                htmlButton += '<div class="btn-gen-slider-wrap">\n';
+                htmlButton += '    <label>' + escapeHtml(label) + '</label>\n';
+                htmlButton += '    <input class="spinner stelproperty" name="' + escapeAttr(propName) + '" ';
+                htmlButton += 'data-min="' + Number(min) + '" data-max="' + Number(max) + '" data-step="' + Number(step) + '" data-numberformat="' + escapeAttr(numberFormat) + '" />\n';
+                htmlButton += '</div>';
+
+                html = '<!-- Two versions available -->\n\n' +
+                       '<!-- VERSION 1: Slider (RECOMMENDED) -->\n' +
+                       htmlCheckbox + '\n\n' +
+                       '<!-- VERSION 2: Spinner -->\n' +
+                       htmlButton + '\n\n' +
+                       '<!-- Range: min=' + min + ', max=' + max + ', step=' + step + ' -->';
+            }
 
             // COLOR PROPERTY
             else if (isColor) {
@@ -2173,9 +2178,9 @@ define([
                 htmlColorPlain += '<div class="option-sub-control color-control">\n';
                 htmlColorPlain += '    <div class="color-picker-wrapper" data-prop="' + escapeAttr(propName) + '">\n';
                 htmlColorPlain += '        <div class="color-swatch" style="background-color: rgb(' +
-                                Math.round(rVal * 255) + ',' +
-                                Math.round(gVal * 255) + ',' +
-                                Math.round(bVal * 255) + ');"></div>\n';
+                                  Math.round(rVal * 255) + ',' +
+                                  Math.round(gVal * 255) + ',' +
+                                  Math.round(bVal * 255) + ');"></div>\n';
                 htmlColorPlain += '        <div class="color-inputs">\n';
                 htmlColorPlain += '            <input type="number" class="color-input color-r" min="0" max="1" step="0.01" value="' + rVal.toFixed(2) + '" />\n';
                 htmlColorPlain += '            <input type="number" class="color-input color-g" min="0" max="1" step="0.01" value="' + gVal.toFixed(2) + '" />\n';
@@ -2193,9 +2198,9 @@ define([
                 htmlColorSpinner += '<div class="option-sub-control color-control">\n';
                 htmlColorSpinner += '    <div class="color-picker-wrapper" data-prop="' + escapeAttr(propName) + '">\n';
                 htmlColorSpinner += '        <div class="color-swatch" style="background-color: rgb(' +
-                                Math.round(rVal * 255) + ',' +
-                                Math.round(gVal * 255) + ',' +
-                                Math.round(bVal * 255) + ');"></div>\n';
+                                    Math.round(rVal * 255) + ',' +
+                                    Math.round(gVal * 255) + ',' +
+                                    Math.round(bVal * 255) + ');"></div>\n';
                 htmlColorSpinner += '        <div class="color-inputs">\n';
                 htmlColorSpinner += '            <input class="spinner color-r" data-prop="' + escapeAttr(propName) + '" data-min="0" data-max="1" data-step="0.01" data-numberformat="n2" value="' + rVal.toFixed(2) + '" />\n';
                 htmlColorSpinner += '            <input class="spinner color-g" data-prop="' + escapeAttr(propName) + '" data-min="0" data-max="1" data-step="0.01" data-numberformat="n2" value="' + gVal.toFixed(2) + '" />\n';
@@ -2946,11 +2951,11 @@ define([
 						var html = '<div class="btn-gen-custom-slider-wrap" data-prop="' + escapeAttr(id) + '">';
 						html += '    <div class="btn-gen-slider-header">';
 						html += '        <label>' + escapeHtml(label) + '</label>';
-						html += '        <span class="stelproperty btn-gen-custom-numeric-badge" data-prop="' + escapeAttr(id) + '" data-numberformat="' + numberFormat + '">' + currentVal + '</span>'
-						//html += '        <span class="stelproperty" data-prop="' + escapeAttr(id) + '" data-numberformat="' + numberFormat + '"></span>';
+						html += '        <span class="stelproperty btn-gen-custom-numeric-badge" data-prop="' + escapeAttr(id) + '" data-numberformat="' + escapeAttr(numberFormat) + '">' + escapeHtml(String(currentVal)) + '</span>'
+						//html += '        <span class="stelproperty" data-prop="' + escapeAttr(id) + '" data-numberformat="' + escapeAttr(numberFormat) + '"></span>';
 						html += '    </div>';
 						html += '    <div class="slider stelproperty" data-prop="' + escapeAttr(id) + '" ';
-						html += '         data-min="' + min + '" data-max="' + max + '" data-step="' + step + '"></div>';
+						html += '         data-min="' + Number(min) + '" data-max="' + Number(max) + '" data-step="' + Number(step) + '"></div>';
 						html += '</div>';
 						return html;
 				}
