@@ -162,13 +162,13 @@
 }
 
 .btn-gen-label-input {
-    flex: 1;
     padding: 6px 10px;
     background: #2A2C2E;
     color: #DCDBDA;
     border: 1px solid #5D5F62;
     border-radius: 4px;
     font-size: 11px;
+		width: -webkit-fill-available;
 }
 
 .btn-gen-label-input:focus {
@@ -262,55 +262,56 @@
  * TOGGLE BUTTONS 
  * ============================================================ */
 
-.btn-gen-preview-btn {
+.btn-toggle {
     background: linear-gradient(#8C8C8C, #505050);
     border: 1px solid #2A2C2E;
     border-radius: 4px;
     padding: 6px 16px;
     color: #000000;
     font-weight: bold;
-    font-size: 11px;
+    /*font-size: 11px;*/
     cursor: pointer;
     transition: all 0.2s ease;
     display: inline-flex;
     align-items: center;
     gap: 6px;
     user-select: none;
+		/*width: -moz-available;*/
 }
 
-.btn-gen-preview-btn:hover {
+.btn-toggle:hover {
     background: linear-gradient(#C4C4C7, #6D6F72);
     transform: translateY(-1px);
 }
 
-.btn-gen-preview-btn:active {
+.btn-toggle:active {
     transform: translateY(1px);
 }
 
-.btn-gen-preview-btn.active {
+.btn-toggle.active {
     background: linear-gradient(#DCDBDA, #8A8C8E);
     border-color: #000000;
     color: #000000;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
-.btn-gen-preview-btn .action-state-icon {
+.btn-toggle .action-state-icon {
     font-size: 12px;
     width: 16px;
     text-align: center;
     flex-shrink: 0;
 }
 
-.btn-gen-preview-btn .action-state-icon.checked {
+.btn-toggle .action-state-icon.checked {
     color: #1a6e1a;
 }
 
-.btn-gen-preview-btn .action-state-icon.unchecked {
+.btn-toggle .action-state-icon.unchecked {
     color: #6e1a1a;
     opacity: 0.5;
 }
 
-.btn-gen-preview-btn.action-trigger {
+.btn-toggle.action-trigger {
     border-left: 3px solid #FD971F;
     padding-left: calc(16px - 3px);
 }
@@ -347,13 +348,16 @@
  * ============================================================ */
 
 .btn-gen-slider-wrap {
-    width: 100%;
-    padding: 4px 0;
+    /*width: 100%;*/
+    padding: 4px;
+		border: 1px dashed beige;
+		margin: 8px;
 }
 
 .btn-gen-slider-header {
     display: flex;
-    justify-content: space-between;
+    /*justify-content: space-between;*/
+		justify-content: space-evenly;
     align-items: center;
     margin-bottom: 6px;
 }
