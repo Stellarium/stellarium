@@ -800,7 +800,7 @@ Every help button uses the `data-help-target` attribute:
   tr("Visiting constellation") + " " + currentNum + "/" + total
   ```
   This lets the translator reorder words while keeping numeric placeholders.
-- The `tour-help-content` and `help-controls-*` modal bodies are inside `indexplugin.html` and are wrapped in `<?= tr(...) ?>` so they are picked up by `update_translationdata.py` automatically.
+- The `tour-help-content` and `help-controls-*` modal bodies are inside `index.html` and are wrapped in `<?= tr(...) ?>` so they are picked up by `update_translationdata.py` automatically.
 - `console.log` / `console.warn` messages are developer-only and are **not** translated.
 
 ### 16.2 Adding a translation
@@ -870,7 +870,7 @@ Grouping stars by constellation requires walking the sorted array once (O(n)) an
 2. Add a new `extract*()` function in `skyculture-data.js`.
 3. Add a new `TYPE_CONFIG` entry in `skyculture-multiselect.js`.
 4. Add a new `CONTROL_PANEL_CONFIG` entry in `skyculture-help.js`.
-5. Add a new tab in `indexplugin.html` with:
+5. Add a new tab in `index.html` with:
    - `<div id="patterns-tab-<type>">` container
    - `<div id="<type>-buttons-container">` inside it
    - Count badge `<span id="<type>-count">`
@@ -892,12 +892,12 @@ Grouping stars by constellation requires walking the sorted array once (O(n)) an
 1. Add a `generate<Type>Tour*` function in `skyculture-tours.js`.
 2. Add a `generate<Type>Tour*Async` wrapper using `withStatus()`.
 3. Add a `create<Type>TourToolbar()` function that calls `Tours.createToolbar({...})`.
-4. Add the modal `<div id="help-<type>">` to `indexplugin.html`.
+4. Add the modal `<div id="help-<type>">` to `index.html`.
 5. Call `create<Type>TourToolbar()` from `skyculture.js#init`.
 
 ### 19.4 Adding a new help modal
 
-Just add a `<div id="help-xxx" style="display:none;" title="…">` inside `indexplugin.html` (before `</body>`), wrap its content in `<div class="tour-help-content">`, and reference it with `data-help-target="help-xxx"` on a button. The JS handles it automatically.
+Just add a `<div id="help-xxx" style="display:none;" title="…">` inside `index.html` (before `</body>`), wrap its content in `<div class="tour-help-content">`, and reference it with `data-help-target="help-xxx"` on a button. The JS handles it automatically.
 
 ---
 
