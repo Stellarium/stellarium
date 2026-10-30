@@ -15,6 +15,7 @@
 	<link type="text/css" rel="stylesheet" href="/js/scripteditor/css/btngenerator.css" />
 	<link type="text/css" rel="stylesheet" href="/js/scripteditor/css/codeGenerator.css" />
 	<link type="text/css" rel="stylesheet" href="/js/scripteditor/css/apiExplorer.css" />
+	<link type="text/css" rel="stylesheet" href="/css/archaeolines.css" />
 		<!-- CodeMirror Themes -->
 	<link rel="stylesheet" href="/js/scripteditor/codemirror/theme/3024-day.css">
 	<link rel="stylesheet" href="/js/scripteditor/codemirror/theme/3024-night.css">
@@ -104,8 +105,8 @@
          instructions how to enable JavaScript in your web browser</a></p></noscript>
        </div>
      </div>
-   </div>
-   <div id="wrapper" class="ui-corner-all ui-widget-content">
+  </div>
+  <div id="wrapper" class="ui-corner-all ui-widget-content">
     <header>
       <img src="images/stellarium.png" alt="Stellarium logo"/>
       <h1><?= tr("Stellarium remote control")?></h1>
@@ -122,180 +123,180 @@
         <li><a href="#tab_actions"><?= tr("Actions and scripts")?></a></li>
         <li><a href="#tab_location"><?= tr("Location")?></a></li>
         <li><a href="#tab_projection"><?= tr("Projection")?></a></li>
-        <li class="stelplugin" data-plugin="Scenery3d"><a href="#tab_scenery3d"><?= tr("Scenery3d")?></a></li>
+				<li><a href="#tab_plugins"><?= tr("Plugins")?></a></li>
 				<li><a href="#tab_gamepad"><?= tr("Gamepad Controller")?></a></li>
       </ul>
      
 			<div id="tab_main">
-							<div class="flex flex-wrap">
-								<!-- part of ui/time.js -->
-								<section id="time" class="block flex-noshrink">
-									<header><h2><?= tr("Time")?></h2></header>
-									<div id="timewidget">
-										<ul>
-											<li><a href="#time_local"><?= tr("Date and Time")?></a></li>
-											<li><a href="#time_jday"><?= tr("Julian Day")?></a></li>
-										</ul>
-										<div id="time_local" class="timetab">
-											<p class="timedisplay">
-												<input id="date_year" class="spinner" data-type="date" data-field="year" data-min="-100000" data-max="100000"/>
-												-
-												<input id="date_month" class="spinner" data-type="date" data-field="month" data-min="0" data-max="13"/>
-												-
-												<input id="date_day" class="spinner" data-type="date" data-field="day" data-min="0" data-max="32"/>
-											</p>
-											<p class="timedisplay">
-												<input id="time_hour" class="spinner" data-type="time" data-field="hour" data-min="-1" data-max="24"/>
-												:
-												<input id="time_minute" class="spinner" data-type="time" data-field="minute" data-min="-1" data-max="60"/>
-												:
-												<input id="time_second" class="spinner" data-type="time" data-field="second" data-min="-1" data-max="60"/>
-											</p>
-										</div>
-										<div id="time_jday" class="timetab">
-											<div>
-												<p class="timedisplay"><label for="input_jd">JD: </label><input id="input_jd" class="spinner" data-min="-100000000" data-max="100000000" data-step="0.00001"/></p>
-												<p class="timedisplay"><label for="input_mjd">MJD: </label><input id="input_mjd" class="spinner" data-min="-100000000" data-max="100000000" data-step="0.00001"/></p>
-											</div>
-										</div>
-									</div>
-									<p class="textcenter">&Delta;T = <span id="deltat"></span></p>
-									<div id="mainbuttons">
-										<ul id="timecontrols" class="ui-corner-all ui-widget-content button32list">
-											<li title='<?= tr("Decrease time speed")?>'><button id="bt_timerewind" class="icon32 btTimeRewind"></button></li><li title='<?= tr("Pause")?>'><button id="bt_timeplaypause" class="icon32 btTimeRealtime"></button></li><li title='<?= tr("Set time to now")?>'><button id="bt_timenow" class="icon32 btTimeNow"></button></li><li title='<?= tr("Increase time speed")?>'><button id="bt_timeforward" class="icon32 btTimeForward"></button></li>
-										</ul>
-									</div>
-								</section>
-								<section id="timejump" class="block">
-									<header><h2><?= tr("Time jumps")?></h2></header>
-									<div id="timejumplist">
-										<!-- buttons get created using JS code -->
-										<ul>
-											<li data-next="actionAdd_Solar_Hour" data-prev="actionSubtract_Solar_Hour"><?= tr("Solar hour")?></li>
-											<li data-next="actionAdd_Solar_Day" data-prev="actionSubtract_Solar_Day"><?= tr("Solar day")?></li>
-											<li data-next="actionAdd_Solar_Week" data-prev="actionSubtract_Solar_Week"><?= tr("Solar week")?></li>
-
-											<li data-next="actionAdd_Calendar_Year"    data-prev="actionSubtract_Calendar_Year"><?= tr("Calendar year")?></li>
-											<li data-next="actionAdd_Calendar_Decade"  data-prev="actionSubtract_Calendar_Decade"><?= tr("10 Calendar years")?></li>
-											<li data-next="actionAdd_Calendar_Century" data-prev="actionSubtract_Calendar_Century"><?= tr("100 Calendar years")?></li>
-
-											<li data-next="actionAdd_Sidereal_Day" data-prev="actionSubtract_Sidereal_Day"><?= tr("Sidereal day")?></li>
-											<li data-next="actionAdd_Sidereal_Year" data-prev="actionSubtract_Sidereal_Year"><?= tr("Sidereal year")?></li>
-											<li data-next="actionAdd_Sidereal_Century" data-prev="actionSubtract_Sidereal_Century"><?= tr("Sidereal century")?></li>
-
-											<li data-next="actionAdd_Synodic_Month" data-prev="actionSubtract_Synodic_Month"><?= tr("Synodic month")?></li>
-											<li data-next="actionAdd_Draconic_Month" data-prev="actionSubtract_Draconic_Month"><?= tr("Draconic month")?></li>
-											<li data-next="actionAdd_Draconic_Year" data-prev="actionSubtract_Draconic_Year"><?= tr("Draconic year")?></li>
-										</ul>
-										<ul>
-											<li data-next="actionAdd_Anomalistic_Month" data-prev="actionSubtract_Anomalistic_Month"><?= tr("Anomalistic month")?></li>
-											<li data-next="actionAdd_Anomalistic_Year" data-prev="actionSubtract_Anomalistic_Year"><?= tr("Anomalistic year")?></li>
-											<li data-next="actionAdd_Anomalistic_Century" data-prev="actionSubtract_Anomalistic_Century"><?= tr("Anomalistic century")?></li>
-
-											<li data-next="actionAdd_Mean_Tropical_Month" data-prev="actionSubtract_Mean_Tropical_Month"><?= tr("Mean tropical month")?></li>
-											<li data-next="actionAdd_Mean_Tropical_Year" data-prev="actionSubtract_Mean_Tropical_Year"><?= tr("Mean tropical year")?></li>
-											<li data-next="actionAdd_Mean_Tropical_Century" data-prev="actionSubtract_Mean_Tropical_Century"><?= tr("Mean tropical century")?></li>
-
-											<li data-next="actionAdd_Tropical_Year" data-prev="actionSubtract_Tropical_Year"><?= tr("Tropical year")?></li>
-											<li data-next="actionAdd_Julian_Year" data-prev="actionSubtract_Julian_Year"><?= tr("Julian year")?></li>
-											<li data-next="actionAdd_Julian_Century" data-prev="actionSubtract_Julian_Century"><?= tr("Julian century")?></li>
-
-											<li data-next="actionAdd_Gaussian_Year" data-prev="actionSubtract_Gaussian_Year"><?= tr("Gaussian year")?></li>
-										</ul>
-									</div>
-								</section>
-								<!-- part of ui/viecontrol.js -->
-								<section id="view" class="block textcenter">
-								<header><h2><?= tr("View")?></h2></header>
-									<div class="joystickcontainer inline-block" data-zoom-speed="3">
-											<div class="joystickbutton joystickbutton-up"></div><div class="joystickbutton joystickbutton-left"></div><div class="joystickbutton joystickbutton-right"></div><div class="joystickbutton joystickbutton-down"></div><div class="joystick ui-draggable ui-draggable-handle" data-joyurl="/api/main/move" data-joymax="5" style="position: relative;"></div>
-									</div>
-									<!-- Zoom Speed Controls for Mouse Wheel -->
-									<div class="block" title="<?= tr("Mouse wheel over joystick then scroll up to zoom in scroll down to zoom out")?>">
-										<header><h2><?= tr("Zoom speed with mouse wheel")?></h2></header>
-										<div id="zoom-speed-controls">
-											<span><?= tr("Speed:")?></span>
-											<label data-speed="1"><input type="radio" name="zoomSpeed" value="1" /><span>1x</span></label>
-											<label data-speed="3"><input type="radio" name="zoomSpeed" value="3" checked="checked" /><span>3x</span></label>
-											<label data-speed="6"><input type="radio" name="zoomSpeed" value="6" /><span>6x</span></label>
-											<label data-speed="6"><input type="radio" name="zoomSpeed" value="12" /><span>12x</span></label>
-										</div>
-									</div>
-									<div class="block">									 
-										<header><h2><?= tr("View towards horizon at Azimuth")?></h2></header>
-										 <div>							 
-											 <button type="button" class="stelssc" value="core.moveToAltAzi(0., 0., 3.)">0&deg;</button>
-											 <button type="button" class="stelssc" value="core.moveToAltAzi(0., 30., 3.)">30&deg;</button>
-											 <button type="button" class="stelssc" value="core.moveToAltAzi(0., 60., 3.)">60&deg;</button>
-											 <button type="button" class="stelssc" value="core.moveToAltAzi(0., 90., 3.)">90&deg;</button>
-											 <button type="button" class="stelssc" value="core.moveToAltAzi(0., 120., 3.)">120&deg;</button>
-											 <button type="button" class="stelssc" value="core.moveToAltAzi(0., 150., 3.)">150&deg;</button>
-											 <button type="button" class="stelssc" value="core.moveToAltAzi(0., 180., 3.)">180&deg;</button>
-											 <button type="button" class="stelssc" value="core.moveToAltAzi(0., 210., 3.)">210&deg;</button>
-											 <button type="button" class="stelssc" value="core.moveToAltAzi(0., 240., 3.)">240&deg;</button>
-											 <button type="button" class="stelssc" value="core.moveToAltAzi(0., 270., 3.)">270&deg;</button>
-											 <button type="button" class="stelssc" value="core.moveToAltAzi(0., 300., 3.)">300&deg;</button>
-											 <button type="button" class="stelssc" value="core.moveToAltAzi(0., 330., 3.)">330&deg;</button>
-										 </div>
-									 
-									</div>
-								 <div id="offset_wrapper" class="block">
-									<!-- It would be more intuitive to have this slider in vertical orientation.  -->
-									<header><h2> <?= tr("Vertical View offset")?>: <span class="stelproperty" data-prop="StelMovementMgr.viewportVerticalOffsetTarget" data-numberformat="n0"></span></h2></header>
-									 <div id="view_offset" class="slider stelproperty flex-expand" data-prop="StelMovementMgr.viewportVerticalOffsetTarget" data-min="-50" data-max="50" data-step="1"></div>
-									 <!-- GZ Add a few buttons with defined values to set here -->
-									 <div id="view_offsetbuttons" class="ui-corner-all ui-widget-content">
-									 <button type="button" class="stelssc" value="StelMovementMgr.moveViewport(0.,-50., 3.)">-50%</button>
-									 <button type="button" class="stelssc" value="StelMovementMgr.moveViewport(0.,-40., 3.)">-40%</button>
-									 <button type="button" class="stelssc" value="StelMovementMgr.moveViewport(0.,-30., 3.)">-30%</button>
-									 <button type="button" class="stelssc" value="StelMovementMgr.moveViewport(0.,-20., 3.)">-20%</button>
-									 <button type="button" class="stelssc" value="StelMovementMgr.moveViewport(0.,-10., 3.)">-10%</button>
-									 <button type="button" class="stelssc" value="StelMovementMgr.moveViewport(0.,0., 3.)">0%</button>
-									 <button type="button" class="stelssc" value="StelMovementMgr.moveViewport(0.,20., 3.)">20%</button>
-									 <!--button type="button" class="stelproperty" title='Reset' name="StelMovementMgr.viewportVerticalOffsetTarget" value="0">Reset</button-->
-									 </div>
-								 </div>
-
-									<div id="view_wrapper" class="block">
-									<header><h2><?= tr("FOV")?>:<span id="view_fov_text" title='<?= tr("Field of view")?>'></span></h2></header>
-										<div id="view_fov"></div>
-										 <div id="view_fovbuttons" class="ui-corner-all ui-widget-content">
-										
-										 <!-- as a matter of taste: fovbutton is faster, but required special operation. stelssc can be configured more elegantly, but may be blocked during script execution!
-											<button type="button" class="fovbutton" value="0.1">0.1&deg;</button>
-											<button type="button" class="fovbutton" value="1">1&deg;</button>
-											<button type="button" class="fovbutton" value="5">5&deg;</button>
-											<button type="button" class="fovbutton" value="10">10&deg;</button>
-											<button type="button" class="fovbutton" value="20">20&deg;</button>
-											<button type="button" class="fovbutton" value="30">30&deg;</button>
-											<button type="button" class="stelssc" value="StelMovementMgr.zoomTo(40, 3)">40&deg;</button>
-											<button type="button" class="fovbutton" value="50">50&deg;</button>
-											<button type="button" class="fovbutton" value="60">60&deg;</button>
-											<button type="button" class="fovbutton" value="90">90&deg;</button>
-											<button type="button" class="fovbutton" value="120">120&deg;</button>
-											<button type="button" class="fovbutton" value="150">150&deg;</button>
-											<button type="button" class="fovbutton" value="180">180&deg;</button>
-											<button type="button" class="fovbutton" value="230">230&deg;</button> -->
-											<button type="button" class="stelssc" value="StelMovementMgr.zoomTo(0.1,3)">0.1&deg;</button>
-											<button type="button" class="stelssc" value="StelMovementMgr.zoomTo(1,3)">1&deg;</button>
-											<button type="button" class="stelssc" value="StelMovementMgr.zoomTo(5,3)">5&deg;</button>
-											<button type="button" class="stelssc" value="StelMovementMgr.zoomTo(10,3)">10&deg;</button>
-											<button type="button" class="stelssc" value="StelMovementMgr.zoomTo(20,3)">20&deg;</button>
-											<button type="button" class="stelssc" value="StelMovementMgr.zoomTo(30,3)">30&deg;</button>
-											<button type="button" class="stelssc" value="StelMovementMgr.zoomTo(40,3)">40&deg;</button>
-											<button type="button" class="stelssc" value="StelMovementMgr.zoomTo(50,3)">50&deg;</button>
-											<button type="button" class="stelssc" value="StelMovementMgr.zoomTo(60,3)">60&deg;</button>
-											<button type="button" class="stelssc" value="StelMovementMgr.zoomTo(90,3)">90&deg;</button>
-											<button type="button" class="stelssc" value="StelMovementMgr.zoomTo(120,3)">120&deg;</button>
-											<button type="button" class="stelssc" value="StelMovementMgr.zoomTo(150,3)">150&deg;</button>
-											<button type="button" class="stelssc" value="StelMovementMgr.zoomTo(180,3)">180&deg;</button>
-											<button type="button" class="stelssc" value="StelMovementMgr.zoomTo(230,4)">230&deg;</button>
-										</div>
-									</div>
-              <p><?= tr("Projection")?>: <span class="stelproperty" data-prop="StelCore.currentProjectionNameI18n"></span></p>
-								</section>
+				<div class="flex flex-wrap">
+					<!-- part of ui/time.js -->
+					<section id="time" class="block flex-noshrink">
+						<header><h2><?= tr("Time")?></h2></header>
+						<div id="timewidget">
+							<ul>
+								<li><a href="#time_local"><?= tr("Date and Time")?></a></li>
+								<li><a href="#time_jday"><?= tr("Julian Day")?></a></li>
+							</ul>
+							<div id="time_local" class="timetab">
+								<p class="timedisplay">
+									<input id="date_year" class="spinner" data-type="date" data-field="year" data-min="-100000" data-max="100000"/>
+									-
+									<input id="date_month" class="spinner" data-type="date" data-field="month" data-min="0" data-max="13"/>
+									-
+									<input id="date_day" class="spinner" data-type="date" data-field="day" data-min="0" data-max="32"/>
+								</p>
+								<p class="timedisplay">
+									<input id="time_hour" class="spinner" data-type="time" data-field="hour" data-min="-1" data-max="24"/>
+									:
+									<input id="time_minute" class="spinner" data-type="time" data-field="minute" data-min="-1" data-max="60"/>
+									:
+									<input id="time_second" class="spinner" data-type="time" data-field="second" data-min="-1" data-max="60"/>
+								</p>
+							</div>
+							<div id="time_jday" class="timetab">
+								<div>
+									<p class="timedisplay"><label for="input_jd">JD: </label><input id="input_jd" class="spinner" data-min="-100000000" data-max="100000000" data-step="0.00001"/></p>
+									<p class="timedisplay"><label for="input_mjd">MJD: </label><input id="input_mjd" class="spinner" data-min="-100000000" data-max="100000000" data-step="0.00001"/></p>
+								</div>
 							</div>
 						</div>
+						<p class="textcenter">&Delta;T = <span id="deltat"></span></p>
+						<div id="mainbuttons">
+							<ul id="timecontrols" class="ui-corner-all ui-widget-content button32list">
+								<li title='<?= tr("Decrease time speed")?>'><button id="bt_timerewind" class="icon32 btTimeRewind"></button></li><li title='<?= tr("Pause")?>'><button id="bt_timeplaypause" class="icon32 btTimeRealtime"></button></li><li title='<?= tr("Set time to now")?>'><button id="bt_timenow" class="icon32 btTimeNow"></button></li><li title='<?= tr("Increase time speed")?>'><button id="bt_timeforward" class="icon32 btTimeForward"></button></li>
+							</ul>
+						</div>
+					</section>
+					<section id="timejump" class="block">
+						<header><h2><?= tr("Time jumps")?></h2></header>
+						<div id="timejumplist">
+							<!-- buttons get created using JS code -->
+							<ul>
+								<li data-next="actionAdd_Solar_Hour" data-prev="actionSubtract_Solar_Hour"><?= tr("Solar hour")?></li>
+								<li data-next="actionAdd_Solar_Day" data-prev="actionSubtract_Solar_Day"><?= tr("Solar day")?></li>
+								<li data-next="actionAdd_Solar_Week" data-prev="actionSubtract_Solar_Week"><?= tr("Solar week")?></li>
+
+								<li data-next="actionAdd_Calendar_Year"    data-prev="actionSubtract_Calendar_Year"><?= tr("Calendar year")?></li>
+								<li data-next="actionAdd_Calendar_Decade"  data-prev="actionSubtract_Calendar_Decade"><?= tr("10 Calendar years")?></li>
+								<li data-next="actionAdd_Calendar_Century" data-prev="actionSubtract_Calendar_Century"><?= tr("100 Calendar years")?></li>
+
+								<li data-next="actionAdd_Sidereal_Day" data-prev="actionSubtract_Sidereal_Day"><?= tr("Sidereal day")?></li>
+								<li data-next="actionAdd_Sidereal_Year" data-prev="actionSubtract_Sidereal_Year"><?= tr("Sidereal year")?></li>
+								<li data-next="actionAdd_Sidereal_Century" data-prev="actionSubtract_Sidereal_Century"><?= tr("Sidereal century")?></li>
+
+								<li data-next="actionAdd_Synodic_Month" data-prev="actionSubtract_Synodic_Month"><?= tr("Synodic month")?></li>
+								<li data-next="actionAdd_Draconic_Month" data-prev="actionSubtract_Draconic_Month"><?= tr("Draconic month")?></li>
+								<li data-next="actionAdd_Draconic_Year" data-prev="actionSubtract_Draconic_Year"><?= tr("Draconic year")?></li>
+							</ul>
+							<ul>
+								<li data-next="actionAdd_Anomalistic_Month" data-prev="actionSubtract_Anomalistic_Month"><?= tr("Anomalistic month")?></li>
+								<li data-next="actionAdd_Anomalistic_Year" data-prev="actionSubtract_Anomalistic_Year"><?= tr("Anomalistic year")?></li>
+								<li data-next="actionAdd_Anomalistic_Century" data-prev="actionSubtract_Anomalistic_Century"><?= tr("Anomalistic century")?></li>
+
+								<li data-next="actionAdd_Mean_Tropical_Month" data-prev="actionSubtract_Mean_Tropical_Month"><?= tr("Mean tropical month")?></li>
+								<li data-next="actionAdd_Mean_Tropical_Year" data-prev="actionSubtract_Mean_Tropical_Year"><?= tr("Mean tropical year")?></li>
+								<li data-next="actionAdd_Mean_Tropical_Century" data-prev="actionSubtract_Mean_Tropical_Century"><?= tr("Mean tropical century")?></li>
+
+								<li data-next="actionAdd_Tropical_Year" data-prev="actionSubtract_Tropical_Year"><?= tr("Tropical year")?></li>
+								<li data-next="actionAdd_Julian_Year" data-prev="actionSubtract_Julian_Year"><?= tr("Julian year")?></li>
+								<li data-next="actionAdd_Julian_Century" data-prev="actionSubtract_Julian_Century"><?= tr("Julian century")?></li>
+
+								<li data-next="actionAdd_Gaussian_Year" data-prev="actionSubtract_Gaussian_Year"><?= tr("Gaussian year")?></li>
+							</ul>
+						</div>
+					</section>
+					<!-- part of ui/viecontrol.js -->
+					<section id="view" class="block textcenter">
+					<header><h2><?= tr("View")?></h2></header>
+						<div class="joystickcontainer inline-block" data-zoom-speed="3">
+								<div class="joystickbutton joystickbutton-up"></div><div class="joystickbutton joystickbutton-left"></div><div class="joystickbutton joystickbutton-right"></div><div class="joystickbutton joystickbutton-down"></div><div class="joystick ui-draggable ui-draggable-handle" data-joyurl="/api/main/move" data-joymax="5" style="position: relative;"></div>
+						</div>
+						<!-- Zoom Speed Controls for Mouse Wheel -->
+						<div class="block" title="<?= tr("Mouse wheel over joystick then scroll up to zoom in scroll down to zoom out")?>">
+							<header><h2><?= tr("Zoom speed with mouse wheel")?></h2></header>
+							<div id="zoom-speed-controls">
+								<span><?= tr("Speed:")?></span>
+								<label data-speed="1"><input type="radio" name="zoomSpeed" value="1" /><span>1x</span></label>
+								<label data-speed="3"><input type="radio" name="zoomSpeed" value="3" checked="checked" /><span>3x</span></label>
+								<label data-speed="6"><input type="radio" name="zoomSpeed" value="6" /><span>6x</span></label>
+								<label data-speed="6"><input type="radio" name="zoomSpeed" value="12" /><span>12x</span></label>
+							</div>
+						</div>
+						<div class="block">									 
+							<header><h2><?= tr("View towards horizon at Azimuth")?></h2></header>
+							 <div>							 
+								 <button type="button" class="stelssc" value="core.moveToAltAzi(0., 0., 3.)">0&deg;</button>
+								 <button type="button" class="stelssc" value="core.moveToAltAzi(0., 30., 3.)">30&deg;</button>
+								 <button type="button" class="stelssc" value="core.moveToAltAzi(0., 60., 3.)">60&deg;</button>
+								 <button type="button" class="stelssc" value="core.moveToAltAzi(0., 90., 3.)">90&deg;</button>
+								 <button type="button" class="stelssc" value="core.moveToAltAzi(0., 120., 3.)">120&deg;</button>
+								 <button type="button" class="stelssc" value="core.moveToAltAzi(0., 150., 3.)">150&deg;</button>
+								 <button type="button" class="stelssc" value="core.moveToAltAzi(0., 180., 3.)">180&deg;</button>
+								 <button type="button" class="stelssc" value="core.moveToAltAzi(0., 210., 3.)">210&deg;</button>
+								 <button type="button" class="stelssc" value="core.moveToAltAzi(0., 240., 3.)">240&deg;</button>
+								 <button type="button" class="stelssc" value="core.moveToAltAzi(0., 270., 3.)">270&deg;</button>
+								 <button type="button" class="stelssc" value="core.moveToAltAzi(0., 300., 3.)">300&deg;</button>
+								 <button type="button" class="stelssc" value="core.moveToAltAzi(0., 330., 3.)">330&deg;</button>
+							 </div>
+						 
+						</div>
+					 <div id="offset_wrapper" class="block">
+						<!-- It would be more intuitive to have this slider in vertical orientation.  -->
+						<header><h2> <?= tr("Vertical View offset")?>: <span class="stelproperty" data-prop="StelMovementMgr.viewportVerticalOffsetTarget" data-numberformat="n0"></span></h2></header>
+						 <div id="view_offset" class="slider stelproperty flex-expand" data-prop="StelMovementMgr.viewportVerticalOffsetTarget" data-min="-50" data-max="50" data-step="1"></div>
+						 <!-- GZ Add a few buttons with defined values to set here -->
+						 <div id="view_offsetbuttons" class="ui-corner-all ui-widget-content">
+						 <button type="button" class="stelssc" value="StelMovementMgr.moveViewport(0.,-50., 3.)">-50%</button>
+						 <button type="button" class="stelssc" value="StelMovementMgr.moveViewport(0.,-40., 3.)">-40%</button>
+						 <button type="button" class="stelssc" value="StelMovementMgr.moveViewport(0.,-30., 3.)">-30%</button>
+						 <button type="button" class="stelssc" value="StelMovementMgr.moveViewport(0.,-20., 3.)">-20%</button>
+						 <button type="button" class="stelssc" value="StelMovementMgr.moveViewport(0.,-10., 3.)">-10%</button>
+						 <button type="button" class="stelssc" value="StelMovementMgr.moveViewport(0.,0., 3.)">0%</button>
+						 <button type="button" class="stelssc" value="StelMovementMgr.moveViewport(0.,20., 3.)">20%</button>
+						 <!--button type="button" class="stelproperty" title='Reset' name="StelMovementMgr.viewportVerticalOffsetTarget" value="0">Reset</button-->
+						 </div>
+					 </div>
+
+						<div id="view_wrapper" class="block">
+						<header><h2><?= tr("FOV")?>:<span id="view_fov_text" title='<?= tr("Field of view")?>'></span></h2></header>
+							<div id="view_fov"></div>
+							 <div id="view_fovbuttons" class="ui-corner-all ui-widget-content">
+							
+							 <!-- as a matter of taste: fovbutton is faster, but required special operation. stelssc can be configured more elegantly, but may be blocked during script execution!
+								<button type="button" class="fovbutton" value="0.1">0.1&deg;</button>
+								<button type="button" class="fovbutton" value="1">1&deg;</button>
+								<button type="button" class="fovbutton" value="5">5&deg;</button>
+								<button type="button" class="fovbutton" value="10">10&deg;</button>
+								<button type="button" class="fovbutton" value="20">20&deg;</button>
+								<button type="button" class="fovbutton" value="30">30&deg;</button>
+								<button type="button" class="stelssc" value="StelMovementMgr.zoomTo(40, 3)">40&deg;</button>
+								<button type="button" class="fovbutton" value="50">50&deg;</button>
+								<button type="button" class="fovbutton" value="60">60&deg;</button>
+								<button type="button" class="fovbutton" value="90">90&deg;</button>
+								<button type="button" class="fovbutton" value="120">120&deg;</button>
+								<button type="button" class="fovbutton" value="150">150&deg;</button>
+								<button type="button" class="fovbutton" value="180">180&deg;</button>
+								<button type="button" class="fovbutton" value="230">230&deg;</button> -->
+								<button type="button" class="stelssc" value="StelMovementMgr.zoomTo(0.1,3)">0.1&deg;</button>
+								<button type="button" class="stelssc" value="StelMovementMgr.zoomTo(1,3)">1&deg;</button>
+								<button type="button" class="stelssc" value="StelMovementMgr.zoomTo(5,3)">5&deg;</button>
+								<button type="button" class="stelssc" value="StelMovementMgr.zoomTo(10,3)">10&deg;</button>
+								<button type="button" class="stelssc" value="StelMovementMgr.zoomTo(20,3)">20&deg;</button>
+								<button type="button" class="stelssc" value="StelMovementMgr.zoomTo(30,3)">30&deg;</button>
+								<button type="button" class="stelssc" value="StelMovementMgr.zoomTo(40,3)">40&deg;</button>
+								<button type="button" class="stelssc" value="StelMovementMgr.zoomTo(50,3)">50&deg;</button>
+								<button type="button" class="stelssc" value="StelMovementMgr.zoomTo(60,3)">60&deg;</button>
+								<button type="button" class="stelssc" value="StelMovementMgr.zoomTo(90,3)">90&deg;</button>
+								<button type="button" class="stelssc" value="StelMovementMgr.zoomTo(120,3)">120&deg;</button>
+								<button type="button" class="stelssc" value="StelMovementMgr.zoomTo(150,3)">150&deg;</button>
+								<button type="button" class="stelssc" value="StelMovementMgr.zoomTo(180,3)">180&deg;</button>
+								<button type="button" class="stelssc" value="StelMovementMgr.zoomTo(230,4)">230&deg;</button>
+							</div>
+						</div>
+				<p><?= tr("Projection")?>: <span class="stelproperty" data-prop="StelCore.currentProjectionNameI18n"></span></p>
+					</section>
+				</div>
+			</div>
       
 			<div id="tab_selection">
         <div class="flex flex-wrap">
@@ -389,15 +390,9 @@
 			
             <label><input class="stelproperty" name="ToastMgr.surveyDisplayed" type="checkbox"/><?= tr("Digitized Sky Survey")?></label>
             <label><input class="stelproperty" name="HipsMgr.flagShow" type="checkbox"/><?= tr("HiPS Survey")?></label>
-            <div class="stelplugin" data-plugin="NavStars">
-                   <label><input type="checkbox" class="stelaction" name="actionShow_NavStars"/><?= tr("Navigational Stars")?></label>
-            </div>
-            <div class="stelplugin" data-plugin="ExoPlanets">
-                   <label><input type="checkbox" class="stelaction" name="actionShow_Exoplanets"/><?= tr("Exoplanets")?></label>
-            </div>
 			
-			<label><input class="stelproperty" name="StelCore.flagUseTopocentricCoordinates" type="checkbox"/><?= tr("Topocentric coordinates")?></label>
-			<label><input class="stelproperty" name="StelCore.flagUseNutation" type="checkbox"/><?= tr("Include nutation")?></label>
+						<label><input class="stelproperty" name="StelCore.flagUseTopocentricCoordinates" type="checkbox"/><?= tr("Topocentric coordinates")?></label>
+						<label><input class="stelproperty" name="StelCore.flagUseNutation" type="checkbox"/><?= tr("Include nutation")?></label>
 			<div class="flex flex-baseline">
 			   <label><input class="stelproperty" name="StelCore.flagUseParallax" type="checkbox"/><?= tr("Include parallax")?></label>&nbsp;
 			   <span class="stelproperty" data-prop="StelCore.parallaxFactor" data-numberformat="n0"></span>
@@ -486,9 +481,7 @@
               <label><?= tr("ZHR:")?></label>
               <div class="slider stelproperty flex-expand" data-prop="SporadicMeteorMgr.zhr" data-min="0" data-max="240000" data-step="1"></div>
               <span class="stelproperty" style="margin-left: 5px; min-width: 48px;" data-prop="SporadicMeteorMgr.zhr"></span>
-              <div class="stelplugin" data-plugin="MeteorShowers">
-                   <label><input type="checkbox" class="stelaction" name="actionShow_MeteorShowers"/><?= tr("Meteor Showers")?></label>
-              </div>
+
             </div>
           </div>
           <div id="vo_markers_boxes" class="smallblock flex">
@@ -560,53 +553,6 @@
 		       <input id="FOV_box_angle"  class="spinner stelproperty" name="SpecialMarkersMgr.fovRectangularMarkerRotationAngle" data-min="-90" data-max="90" data-step="1" data-numberformat="n1"/></label>
             </div>
           </div>
-					<div id="vo_archaeolines" class="smallblock stelplugin" data-plugin="ArchaeoLines">
-						<h3><label><input type="checkbox" class="stelproperty valign-middle" name="ArchaeoLines.enabled"/><?= tr("ArchaeoLines")?></label></h3>
-              <div class="inline-block blocklabel">
-                <label><input type="checkbox" class="stelproperty" name="ArchaeoLines.flagShowEquinox"/><?= tr("Equinox")?></label>
-                <label><input type="checkbox" class="stelproperty" name="ArchaeoLines.flagShowSolstices"/><?= tr("Solstices")?></label>
-                <label><input type="checkbox" class="stelproperty" name="ArchaeoLines.flagShowCrossquarters"/><?= tr("Crossquarters")?></label>
-                <label><input type="checkbox" class="stelproperty" name="ArchaeoLines.flagShowMajorStandstills"/><?= tr("Major Standstill")?></label>
-                <label><input type="checkbox" class="stelproperty" name="ArchaeoLines.flagShowMinorStandstills"/><?= tr("Minor Standstill")?></label>
-                <label><input type="checkbox" class="stelproperty" name="ArchaeoLines.flagShowPolarCircles"/><?= tr("Polar Circles")?></label>
-                <label><input type="checkbox" class="stelproperty" name="ArchaeoLines.flagShowZenithPassage"/><?= tr("Zenith Passage")?></label>
-                <label><input type="checkbox" class="stelproperty" name="ArchaeoLines.flagShowNadirPassage"/><?= tr("Nadir Passage")?></label>
-								<label><?= tr("Line width:")?>
-								<span class="stelproperty" data-prop="ArchaeoLines.lineWidth" data-numberformat="n0"></span>
-								<!-- div class="slider stelproperty flex-expand" data-prop="ArchaeoLines.lineWidth" data-min="1" data-max="8" data-step="1" data-numberformat="n0"></div -->
-								</label>
-              </div>
-              <div class="inline-block blocklabel">
-                <label><input type="checkbox" class="stelproperty" name="ArchaeoLines.flagShowCurrentSun"/><?= tr("Current Sun")?></label>
-                <label><input type="checkbox" class="stelproperty" name="ArchaeoLines.flagShowCurrentMoon"/><?= tr("Current Moon")?></label>
-              <!-- automatic selectmenu generation and stelproperty binding -->
-              <!-- the selectmenu is styled in the css because we can't really add classes here -->
-								<label class="display-block" for="select_ArchaeoLines_enumShowCurrentPlanet"><?= tr("Current Planet:")?></label>
-              <select id="select_ArchaeoLines_enumShowCurrentPlanet" class="selectmenu stelproperty display-block" name="ArchaeoLines.enumShowCurrentPlanet">
-                <option value="0"><?= tr("None")?></option>
-                <option value="1"><?= tr("Mercury")?></option>
-                <option value="2"><?= tr("Venus")?></option>
-                <option value="3"><?= tr("Mars")?></option>
-                <option value="4"><?= tr("Jupiter")?></option>
-                <option value="5"><?= tr("Saturn")?></option>
-              </select>
-								<label><input type="checkbox" class="stelproperty" name="ArchaeoLines.flagShowSelectedObject"/><?= tr("Selected Object")?></label>
-								<label><input type="checkbox" class="stelproperty" name="ArchaeoLines.flagShowSelectedObjectAzimuth"/><?= tr("Selected Object Azimuth")?></label>
-								<label><input type="checkbox" class="stelproperty" name="ArchaeoLines.flagShowSelectedObjectHourAngle"/><?= tr("Selected Object Hour Angle")?></label>
-								<label><br/></label>
-								<label><div class="slider stelproperty flex-expand" data-prop="ArchaeoLines.lineWidth" data-min="1" data-max="8" data-step="1" data-numberformat="n0"></div></label>
-              </div>
-							<div class="inline-block blocklabel">
-                <label><input type="checkbox" class="stelproperty" name="ArchaeoLines.flagShowGeographicLocation1"/><?= tr("Geographic Location 1")?> (<span class="stelproperty" data-prop="ArchaeoLines.geographicLocation1Label"></span>)</label>
-                <label><input type="checkbox" class="stelproperty" name="ArchaeoLines.flagShowGeographicLocation2"/><?= tr("Geographic Location 2")?> (<span class="stelproperty" data-prop="ArchaeoLines.geographicLocation2Label"></span>)</label>
-                <label><input type="checkbox" class="stelproperty" name="ArchaeoLines.flagShowCustomAzimuth1"/><?= tr("Custom Azimuth 1")?> (<span class="stelproperty" data-prop="ArchaeoLines.customAzimuth1" data-numberformat="n1"></span>&deg;=<span class="stelproperty" data-prop="ArchaeoLines.customAzimuth1Label"></span>)</label>
-                <label><input type="checkbox" class="stelproperty" name="ArchaeoLines.flagShowCustomAzimuth2"/><?= tr("Custom Azimuth 2")?> (<span class="stelproperty" data-prop="ArchaeoLines.customAzimuth2" data-numberformat="n1"></span>&deg;=<span class="stelproperty" data-prop="ArchaeoLines.customAzimuth2Label"></span>)</label>
-                <label><input type="checkbox" class="stelproperty" name="ArchaeoLines.flagShowCustomAltitude1"/><?= tr("Custom Altitude 1")?> (<span class="stelproperty" data-prop="ArchaeoLines.customAltitude1" data-numberformat="n1"></span>&deg;=<span class="stelproperty" data-prop="ArchaeoLines.customAltitude1Label"></span>)</label>
-                <label><input type="checkbox" class="stelproperty" name="ArchaeoLines.flagShowCustomAltitude2"/><?= tr("Custom Altitude 2")?> (<span class="stelproperty" data-prop="ArchaeoLines.customAltitude2" data-numberformat="n1"></span>&deg;=<span class="stelproperty" data-prop="ArchaeoLines.customAltitude2Label"></span>)</label>
-                <label><input type="checkbox" class="stelproperty" name="ArchaeoLines.flagShowCustomDeclination1"/><?= tr("Custom Declination 1")?> (<span class="stelproperty" data-prop="ArchaeoLines.customDeclination1" data-numberformat="n1"></span>&deg;=<span class="stelproperty" data-prop="ArchaeoLines.customDeclination1Label"></span>)</label>
-                <label><input type="checkbox" class="stelproperty" name="ArchaeoLines.flagShowCustomDeclination2"/><?= tr("Custom Declination 2")?> (<span class="stelproperty" data-prop="ArchaeoLines.customDeclination2" data-numberformat="n1"></span>&deg;=<span class="stelproperty" data-prop="ArchaeoLines.customDeclination2Label"></span>)</label>
-              </div>
-					</div>        
 				</div>
       </div>
 
@@ -727,9 +673,7 @@
               <label><input type="checkbox" value="0x400"/><?= tr("Clusters of galaxies")?></label>
               <label><input type="checkbox" value="0x008"/><?= tr("Open Star clusters")?></label>
               <label><input type="checkbox" value="0x010"/><?= tr("Globular Star clusters")?></label>
-              <div class="stelplugin" data-plugin="Quasars">
-                   <label><input type="checkbox" class="stelaction" name="actionShow_Quasars"/><?= tr("Quasars")?></label>
-              </div>
+
             </div>
             <div class="inline-block blocklabel">
               <label><input type="checkbox" value="0x040"/><?= tr("Bright Nebulae")?></label>
@@ -737,9 +681,7 @@
               <label><input type="checkbox" value="0x100"/><?= tr("Planetary Nebulae")?></label>
               <label><input type="checkbox" value="0x200"/><?= tr("Supernova remnants")?></label>
               <label><input type="checkbox" value="0x020"/><?= tr("Hydrogen regions")?></label>
-              <div class="stelplugin" data-plugin="Pulsars">
-                   <label><input type="checkbox" class="stelaction" name="actionShow_Pulsars"/><?= tr("Pulsars")?></label>
-              </div>
+
               <label><input type="checkbox" value="0x800"/><?= tr("Other")?></label>
             </div>
           </div>
@@ -771,34 +713,33 @@
      
 			<!-- also handled by ui/viewoptions.js -->
       <div id="tab_landscape">
-			<div class="flex flex-wrap">
-        <div class="block">
-          <header><h3><?= tr("Options")?></h3></header>
-          <div class="inline-block blocklabel">
-            <p><label><input type="checkbox" class="stelaction" name="actionShow_Ground" /><?= tr("Show ground")?></label></p>
-            <p><label><input type="checkbox" class="stelproperty" name="LandscapeMgr.flagLandscapeSetsLocation"/><?= tr("Use associated planet and position")?></label></p>
-            <p><label><input type="checkbox" class="stelaction" name="actionShow_Fog" /><?= tr("Show fog")?></label></p>
-            <div class="flex flex-baseline">
-              <p><label><input type="checkbox" class="stelproperty" name="LandscapeMgr.flagLandscapeUseMinimalBrightness"/><?= tr("Minimal brightness:")?></label></p>
-              <input id="landscape_defaultMinimalBrightness" class="flex-expand spinner stelproperty" name="LandscapeMgr.defaultMinimalBrightness" data-min="0" data-max="1" data-step="0.01" data-numberformat="n2"/></p>
-            </div>
-            
-            <p><label><input type="checkbox" class="stelaction" name="actionShow_LandscapeLabels" /><?= tr("Show landscape labels")?></label></p>
-            <p><label><input type="checkbox" class="stelaction" name="actionShow_LandscapeIllumination" /><?= tr("Show illumination")?></label></p>
-            <p><label><input id="landscape_flagLandscapeSetsMinimalBrightness" type="checkbox" class="stelproperty" name="LandscapeMgr.flagLandscapeSetsMinimalBrightness"/><?= tr("from landscape, if given")?></label></p>
-            <div class="flex flex-baseline">
-							<p><label><input type="checkbox" class="stelproperty" name="LandscapeMgr.flagPolyLineDisplayedOnly" /><?= tr("Draw only polygon")?>
-							<input id="landscape_polyLineThickness" class="flex-expand spinner stelproperty" name="LandscapeMgr.polyLineThickness" data-min="1" data-max="5" data-step="1" data-numberformat="n0"/></label></p>
+				<div class="flex flex-wrap">
+					<div class="block">
+						<header><h3><?= tr("Options")?></h3></header>
+						<div class="inline-block blocklabel">
+							<label><input type="checkbox" class="stelaction" name="actionShow_Ground" /><?= tr("Show ground")?></label>
+							<label><input type="checkbox" class="stelproperty" name="LandscapeMgr.flagLandscapeSetsLocation"/><?= tr("Use associated planet and position")?></label>
+							<label><input type="checkbox" class="stelaction" name="actionShow_Fog" /><?= tr("Show fog")?></label>
+							<div class="flex flex-baseline">
+								<label><input type="checkbox" class="stelproperty" name="LandscapeMgr.flagLandscapeUseMinimalBrightness"/><?= tr("Minimal brightness:")?></label>
+								<input id="landscape_defaultMinimalBrightness" class="flex-expand spinner stelproperty" name="LandscapeMgr.defaultMinimalBrightness" data-min="0" data-max="1" data-step="0.01" data-numberformat="n2"/>
+							</div>							
+							<label><input type="checkbox" class="stelaction" name="actionShow_LandscapeLabels" /><?= tr("Show landscape labels")?></label>
+							<label><input type="checkbox" class="stelaction" name="actionShow_LandscapeIllumination" /><?= tr("Show illumination")?></label>
+							<label><input id="landscape_flagLandscapeSetsMinimalBrightness" type="checkbox" class="stelproperty" name="LandscapeMgr.flagLandscapeSetsMinimalBrightness"/><?= tr("from landscape, if given")?></label>
+							<div class="flex flex-baseline">
+								<label><input type="checkbox" class="stelproperty" name="LandscapeMgr.flagPolyLineDisplayedOnly" /><?= tr("Draw only polygon")?>
+								<input id="landscape_polyLineThickness" class="flex-expand spinner stelproperty" name="LandscapeMgr.polyLineThickness" data-min="1" data-max="5" data-step="1" data-numberformat="n0"/></label>
+							</div>
 						</div>
-          </div>
-        </div>			
-        <!-- div class="smallblock flex landscapeblock" -->
-				<div class="block flex flex-expand landscapeblock">
-          <header><h2><?= tr("Current landscape")?></h2></header>
-          <select id="vo_landscapelist" class="scrollselect stelproperty" name="LandscapeMgr.currentLandscapeID" size="5">
-          </select>
-          <iframe id="vo_landscapeinfo" class="flex-expand" src="/api/view/landscapedescription/"></iframe>
-        </div>
+					</div>			
+					<!-- div class="smallblock flex landscapeblock" -->
+					<div class="block flex flex-expand landscapeblock">
+						<header><h2><?= tr("Current landscape")?></h2></header>
+						<select id="vo_landscapelist" class="scrollselect stelproperty" name="LandscapeMgr.currentLandscapeID" size="5">
+						</select>
+						<iframe id="vo_landscapeinfo" class="flex-expand" src="/api/view/landscapedescription/"></iframe>
+					</div>
 				</div>
       </div>
       
@@ -832,65 +773,21 @@
 											<li><a href="#patterns-tab-description"><?= tr("Description")?></a></li>
 											<li><a href="#patterns-tab-artwork"><?= tr("Artwork")?> <span id="artwork-count" class="pattern-count"></span></a></li>
 									</ul>
-									
+									<!-- Sky Culture Description Direction Toggle Button Script
+											 Direction toggle is handled by stellarium-utils.js
+									  	 (initDescriptionDirection + toggleDescriptionDirection) -->
 									<!-- Constellations Tab -->
 									<div id="patterns-tab-constellations" class="patterns-tab-content">
 											<p class="patterns-note"><?= tr("Click on any constellation to highlight and isolate it")?></p>
-											<!-- Sort Controls -->
-											<div class="skyculture-constellation-controls">
-													<div class="constellation-filter-group">
-															<label class="option-label">
-																	<input type="checkbox" id="constellation-filter-visible" title="<?= tr("Show only constellations currently above horizon")?>"/>
-																	<span><?= tr("Visible above horizon only")?></span>
-															</label>																	
-													</div>
-													
-													<div class="constellation-navigation-group">
-															<label class="option-label">
-																	<input type="checkbox" id="highlight-no-isolation" title="<?= tr("Navigate to constellation without isolation")?>"/>
-																	<span><?= tr("Navigate without Isolation")?></span>
-															</label>
-													</div>
-													
-													<div class="constellation-fov-group">
-															<label for="constellation-nav-fov"><?= tr("Navigation FOV:")?></label>
-															<input id="constellation-nav-fov" class="spinner fov-input-number" value="40" data-min="5" data-max="120" data-step="1"/>
-															<span><?= tr("deg")?></span>
-													</div>
-													
-													<div class="constellation-name-display-group">
-															<label for="constellation-name-display"><?= tr("Show names as:")?></label>
-															<select id="constellation-name-display" class="stars-sort-select">
-																	<option value="default"><?= tr("Default")?></option>
-																	<option value="localized"><?= tr("Translated Names")?></option>
-															</select>
-													</div>
-											</div>
+
 											<div id="constellations-buttons-container" class="patterns-buttons-container">
 													<div class="loading-placeholder"><?= tr("Select a sky culture to view constellations")?></div>
 											</div>
 									</div>
-
 									
 									<!-- Asterisms Tab -->
 									<div id="patterns-tab-asterisms" class="patterns-tab-content">
-											<p class="patterns-note"><?= tr("Traditional star patterns within constellations")?></p>
-											
-											<div class="asterisms-controls">
-												<div class="asterisms-filter-group">
-														<label class="option-label">
-																<input type="checkbox" id="asterisms-filter-visible" title="<?= tr("Show only asterisms currently above horizon")?>"/>
-																<span><?= tr("Visible above horizon only")?></span>
-														</label>
-												</div>
-												
-												<div class="asterisms-fov-group">
-														<label for="asterisms-nav-fov"><?= tr("Navigation FOV:")?></label>
-														    <input id="asterisms-nav-fov" class="spinner fov-input-number" value="30" data-min="5" data-max="90" data-step="1"/>
-														<span><?= tr("deg")?></span>
-												</div>
-											</div>
-											
+											<p class="patterns-note"><?= tr("Traditional star patterns within constellations")?></p>											
 											<div id="asterisms-buttons-container" class="patterns-buttons-container">
 													<div class="loading-placeholder"><?= tr("No asterisms available")?></div>
 											</div>
@@ -898,7 +795,7 @@
 									
 									<!-- Zodiac Tab -->
 									<div id="patterns-tab-zodiac" class="patterns-tab-content">
-											<p class="patterns-note"><?= tr("The 12 signs of the zodiac")?></p>
+										<p class="patterns-note"><?= tr("The 12 signs of the zodiac")?></p>
 											<div id="zodiac-buttons-container" class="patterns-buttons-container">
 													<div class="loading-placeholder"><?= tr("No zodiac data available")?></div>
 											</div>
@@ -906,23 +803,8 @@
 									
 									<!-- Lunar Mansions Tab -->
 									<div id="patterns-tab-lunar" class="patterns-tab-content">
-											<p class="patterns-note"><?= tr("Traditional lunar stations (mansions)")?></p>
-											
-										<div class="lunar-controls">
-												<div class="lunar-filter-group">
-														<label class="option-label">
-																<input type="checkbox" id="lunar-filter-visible" title="<?= tr("Show only lunar mansions currently above horizon")?>"/>
-																<span><?= tr("Visible above horizon only")?></span>
-														</label>
-												</div>
-												
-												<div class="lunar-fov-group">
-														<label for="lunar-nav-fov"><?= tr("Navigation FOV:")?></label>
-														<input id="lunar-nav-fov" class="spinner fov-input-number" value="30" data-min="5" data-max="90" data-step="1"/>
-														<span><?= tr("deg")?></span>
-												</div>
-										</div>
-											
+										<p class="patterns-note"><?= tr("Traditional lunar stations (mansions)")?></p>											
+
 											<div id="lunar-buttons-container" class="patterns-buttons-container">
 													<div class="loading-placeholder"><?= tr("No lunar mansions data available")?></div>
 											</div>
@@ -930,57 +812,8 @@
 									
 									<!-- Notable Stars Tab -->
 									<div id="patterns-tab-stars" class="patterns-tab-content">
-											<p class="patterns-note"><?= tr("Named stars with cultural significance")?></p>
-											
-											<!-- Sort Controls -->
-											<div class="stars-sort-controls">
-													<div class="sort-group">
-															<label for="stars-sort-by"><?= tr("Sort by:")?></label>
-															<select id="stars-sort-by" class="stars-sort-select">
-																	<option value="name"><?= tr("Name (Alphabetical)")?></option>
-																	<option value="constellation">IAU <?= tr("Constellation")?></option>
-																	<option value="magnitude"><?= tr("Brightness (Magnitude)")?></option>
-																	<option value="type"><?= tr("Object Type")?></option>
-															</select>
-													</div>
-													
-													<div class="sort-group">
-															<label for="stars-sort-direction"><?= tr("Order:")?></label>
-															<select id="stars-sort-direction" class="stars-sort-select">
-																	<option value="asc"><?= tr("Ascending")?></option>
-																	<option value="desc"><?= tr("Descending")?></option>
-															</select>
-													</div>
+											<p class="patterns-note"><?= tr("Named stars with cultural significance")?></p>											
 
-													<div class="sort-group name-display-group">
-															<label for="stars-name-display"><?= tr("Show names as:")?></label>
-															<select id="stars-name-display" class="stars-sort-select">
-																	<option value="default"><?= tr("Default")?></option>
-																	<option value="cultural"><?= tr("Cultural Names")?></option>
-																	<option value="localized"><?= tr("Translated Names")?></option>
-															</select>
-													</div>
-													
-													<button id="stars-apply-sort" class="jquerybutton pattern-btn">
-															<?= tr("Apply")?>
-													</button>
-													
-													<div class="sort-group filter-group">
-															<label class="option-label">
-																	<input type="checkbox" id="stars-filter-visible" title="<?= tr("Show only objects currently above horizon")?>"/>
-																	<span><?= tr("Visible above horizon only")?></span>
-															</label>
-													</div>													
-													<span id="stars-sort-status" class="stars-sort-status"></span>
-													
-													<div class="sort-group stars-fov-group">
-															<label for="stars-nav-fov"><?= tr("Navigation FOV:")?></label>
-															<input id="stars-nav-fov" class="spinner fov-input-number" value="15" data-min="5" data-max="120" data-step="1"/>
-															<span><?= tr("deg")?></span>
-													</div>
-
-											</div>
-											
 											<div id="stars-buttons-container" class="patterns-buttons-container">
 													<div class="loading-placeholder"><?= tr("No star name data available")?></div>
 											</div>
@@ -1015,350 +848,306 @@
 							
 							<div class="options-grid">
 									
-									<!-- ============================================================
-											 CONSTELLATION LABELS - Size + Color
-											 ============================================================ -->
-									<div class="option-item option-group">
-									<h4><?= tr("Constellations")?></h4>
-									<div class="option-item option-group">									
-											<label class="option-label">
-													<input type="checkbox" class="stelproperty" name="ConstellationMgr.namesDisplayed" />
-													<span><?= tr("Label constellations with font size")?></span>
-											</label>
-											<div class="option-group-controls">
-													<div class="option-sub-control">
-															<span class="stelproperty" data-prop="ConstellationMgr.fontSize" data-numberformat="n0"></span>
-															<div id="constellation-fontsize" class="slider stelproperty" 
-																	 data-prop="ConstellationMgr.fontSize" data-min="8" data-max="40" 
-																	 data-step="1" data-numberformat="n0"></div>
-													</div>
-											</div>
-													<!-- Spinner for StelProperty: ConstellationMgr.namesFadeDuration -->
-													<div class="option-sub-control">
-													<label><?= tr("Fade duration")?></label>
-													<input class="spinner stelproperty" name="ConstellationMgr.namesFadeDuration" data-min="0.1" data-max="10" data-step="0.1" value="1" />											
-													<div class="color-control">
-															<div class="color-picker-wrapper" data-prop="ConstellationMgr.namesColor">
-																	<div class="color-swatch" style="background-color: rgb(255, 255, 255);"></div>
-																	<div class="color-inputs">
-																			<input type="number" class="color-input color-r" min="0" max="1" step="0.01" value="1.0" />
-																			<input type="number" class="color-input color-g" min="0" max="1" step="0.01" value="1.0" />
-																			<input type="number" class="color-input color-b" min="0" max="1" step="0.01" value="1.0" />
-																	</div>
-															</div>
-													</div>
-											</div>
-									</div>
-									
-									<!-- ============================================================
-											 CONSTELLATION LINES - Thickness + Color
-											 ============================================================ -->
-									<div class="option-item option-group">
-											<label class="option-label">
-													<input type="checkbox" class="stelproperty" name="ConstellationMgr.linesDisplayed" />
-													<span><?= tr("Show lines with thickness")?></span>
-											</label>
-											<div class="option-group-controls">
-													<div class="option-sub-control">
-															<span class="stelproperty" data-prop="ConstellationMgr.constellationLineThickness" data-numberformat="n0"></span>
-															<div id="constellation-linethickness" class="slider stelproperty" 
-																	 data-prop="ConstellationMgr.constellationLineThickness" data-min="1" data-max="5" 
-																	 data-step="1" data-numberformat="n0"></div>
-													</div>
-											</div>
-											<!-- Spinner for StelProperty: ConstellationMgr.linesFadeDuration -->
-											<div class="option-sub-control">
-													<label><?= tr("Fade duration")?></label>
-													<input class="spinner stelproperty" name="ConstellationMgr.linesFadeDuration" data-min="0.1" data-max="10" data-step="0.1" value="1" />
-													<div class="color-control">
-															<div class="color-picker-wrapper" data-prop="ConstellationMgr.linesColor">
-																	<div class="color-swatch" style="background-color: rgb(128, 128, 128);"></div>
-																	<div class="color-inputs">
-																			<input type="number" class="color-input color-r" min="0" max="1" step="0.01" value="0.5" />
-																			<input type="number" class="color-input color-g" min="0" max="1" step="0.01" value="0.5" />
-																			<input type="number" class="color-input color-b" min="0" max="1" step="0.01" value="0.5" />
-																	</div>
-															</div>
-													</div>													
-											</div>
-									</div>
-									
-									<!-- ============================================================
-											 CONSTELLATION BOUNDARIES - Thickness + Color
-											 ============================================================ -->
-									<div class="option-item option-group">
-											<label class="option-label">
-													<input type="checkbox" class="stelproperty" name="ConstellationMgr.boundariesDisplayed" />
-													<span><?= tr("Show boundaries with thickness")?></span>
-											</label>
-											<div class="option-group-controls">
-													<div class="option-sub-control">
-															<span class="stelproperty" data-prop="ConstellationMgr.boundariesThickness" data-numberformat="n0"></span>
-															<div id="boundaries-thickness" class="slider stelproperty" 
-																	 data-prop="ConstellationMgr.boundariesThickness" data-min="1" data-max="5" 
-																	 data-step="1" data-numberformat="n0"></div>
-													</div>
-											</div>
-											<!-- Spinner for StelProperty: ConstellationMgr.boundariesFadeDuration -->
-											<div class="option-sub-control">
-													<label><?= tr("Fade duration")?></label>
-													<input class="spinner stelproperty" name="ConstellationMgr.boundariesFadeDuration" data-min="0.1" data-max="10" data-step="0.1" value="1" />
-													<div class="color-control">
-															<div class="color-picker-wrapper" data-prop="ConstellationMgr.boundariesColor">
-																	<div class="color-swatch" style="background-color: rgb(200, 80, 80);"></div>
-																	<div class="color-inputs">
-																			<input type="number" class="color-input color-r" min="0" max="1" step="0.01" value="0.8" />
-																			<input type="number" class="color-input color-g" min="0" max="1" step="0.01" value="0.3" />
-																			<input type="number" class="color-input color-b" min="0" max="1" step="0.01" value="0.3" />
-																	</div>
-															</div>
-													</div>											
-											</div>
-									</div>
-									
-									<!-- ============================================================
-											 CONSTELLATION ART - Intensity Only (No Color)
-											 ============================================================ -->
-									<div class="option-item option-group">
-											<label class="option-label">
-													<input type="checkbox" class="stelproperty" name="ConstellationMgr.artDisplayed" />
-													<span><?= tr("Show art in brightness")?></span>
-											</label>
-											<div class="option-group-controls single-control">
-													<div class="option-sub-control">
-															<span class="stelproperty" data-prop="ConstellationMgr.artIntensity" data-numberformat="n2"></span>
-															<div id="art-intensity" class="slider stelproperty" 
-																	 data-prop="ConstellationMgr.artIntensity" data-min="0" data-max="1" 
-																	 data-step="0.05" data-numberformat="n2"></div>
-													</div>
-											</div>
-											<!-- Spinner for StelProperty: ConstellationMgr.artFadeDuration -->
-											<div class="option-sub-control">
-													<label><?= tr("Fade duration")?></label>
-													<input class="spinner stelproperty" name="ConstellationMgr.artFadeDuration" data-min="0.1" data-max="10" data-step="0.1" value="2" />
-											</div>
-									</div>
-									</div>
-									<!-- ============================================================
-											 ASTERISM LABELS - Size + Color
-											 ============================================================ -->
-									<div class="option-item option-group">
-									<h4><?= tr("Asterisms")?></h4>
-									<div class="option-item option-group">									
-											<label class="option-label">
-													<input type="checkbox" class="stelproperty" name="AsterismMgr.namesDisplayed" />
-													<span><?= tr("Label asterisms with font size")?></span>
-											</label>
-											<div class="option-group-controls">
-													<div class="option-sub-control">
-															<span class="stelproperty" data-prop="AsterismMgr.fontSize" data-numberformat="n0"></span>
-															<div id="asterism-fontsize" class="slider stelproperty" 
-																	 data-prop="AsterismMgr.fontSize" data-min="8" data-max="40" 
-																	 data-step="1" data-numberformat="n0"></div>
-													</div>																	 
-											</div>
-													<!-- Spinner for StelProperty: AsterismMgr.namesFadeDuration -->
+								<!-- ============================================================
+										 CONSTELLATION LABELS - Size + Color
+										 ============================================================ -->
+								<div class="option-item option-group">
+								<h4><?= tr("Constellations")?></h4>
+								<div class="option-item option-group">									
+										<label class="option-label">
+												<input type="checkbox" class="stelproperty" name="ConstellationMgr.namesDisplayed" />
+												<span><?= tr("Label constellations with font size")?></span>
+										</label>
+										<div class="option-group-controls">
 												<div class="option-sub-control">
-														<label><?= tr("Fade duration")?></label>
-														<input class="spinner stelproperty" name="AsterismMgr.namesFadeDuration" data-min="0.1" data-max="10" data-step="0.1" value="1"/>
-													<div class="color-control">
-															<div class="color-picker-wrapper" data-prop="AsterismMgr.namesColor">
-																	<div class="color-swatch" style="background-color: rgb(255, 255, 255);"></div>
-																	<div class="color-inputs">
-																			<input type="number" class="color-input color-r" min="0" max="1" step="0.01" value="1.0" data-numberformat="n2"/>
-																			<input type="number" class="color-input color-g" min="0" max="1" step="0.01" value="1.0" data-numberformat="n2"/>
-																			<input type="number" class="color-input color-b" min="0" max="1" step="0.01" value="1.0" data-numberformat="n2"/>
-																	</div>
-															</div>
-													</div>												
+														<span class="stelproperty" data-prop="ConstellationMgr.fontSize" data-numberformat="n0"></span>
+														<div id="constellation-fontsize" class="slider stelproperty" 
+																 data-prop="ConstellationMgr.fontSize" data-min="8" data-max="40" 
+																 data-step="1" data-numberformat="n0"></div>
 												</div>
-									</div>
-									
-									<!-- ============================================================
-											 ASTERISM LINES - Thickness + Color
-											 ============================================================ -->
-									<div class="option-item option-group">
-											<label class="option-label">
-													<input type="checkbox" class="stelproperty" name="AsterismMgr.linesDisplayed" />
-													<span><?= tr("Show asterisms with thickness")?></span>
-											</label>
-											<div class="option-group-controls">
-													<div class="option-sub-control">
-															<span class="stelproperty" data-prop="AsterismMgr.asterismLineThickness" data-numberformat="n0"></span>
-															<div id="asterism-linethickness" class="slider stelproperty" 
-																	 data-prop="AsterismMgr.asterismLineThickness" data-min="1" data-max="5" 
-																	 data-step="1" data-numberformat="n0"></div>
-													</div>
-											</div>
-											<!-- Spinner for StelProperty: AsterismMgr.linesFadeDuration -->
+										</div>
+												<!-- Spinner for StelProperty: ConstellationMgr.namesFadeDuration -->
+												<div class="option-sub-control">
+												<label><?= tr("Fade duration")?></label>
+												<input class="spinner stelproperty" name="ConstellationMgr.namesFadeDuration" data-min="0.1" data-max="10" data-step="0.1" value="1" />											
+												<div class="color-control">
+														<div class="color-picker-wrapper" data-prop="ConstellationMgr.namesColor">
+																<div class="color-swatch" style="background-color: rgb(255, 255, 255);"></div>
+														</div>
+												</div>
+										</div>
+								</div>
+								
+								<!-- ============================================================
+										 CONSTELLATION LINES - Thickness + Color
+										 ============================================================ -->
+								<div class="option-item option-group">
+										<label class="option-label">
+												<input type="checkbox" class="stelproperty" name="ConstellationMgr.linesDisplayed" />
+												<span><?= tr("Show lines with thickness")?></span>
+										</label>
+										<div class="option-group-controls">
+												<div class="option-sub-control">
+														<span class="stelproperty" data-prop="ConstellationMgr.constellationLineThickness" data-numberformat="n0"></span>
+														<div id="constellation-linethickness" class="slider stelproperty" 
+																 data-prop="ConstellationMgr.constellationLineThickness" data-min="1" data-max="5" 
+																 data-step="1" data-numberformat="n0"></div>
+												</div>
+										</div>
+										<!-- Spinner for StelProperty: ConstellationMgr.linesFadeDuration -->
 										<div class="option-sub-control">
 												<label><?= tr("Fade duration")?></label>
-												<input class="spinner stelproperty" name="AsterismMgr.linesFadeDuration" data-min="0.1" data-max="10" data-step="0.1" value="1" />
-													<div class="color-control">
-															<div class="color-picker-wrapper" data-prop="AsterismMgr.linesColor">
-																	<div class="color-swatch" style="background-color: rgb(200, 50, 50);"></div>
-																	<div class="color-inputs">
-																			<input type="number" class="color-input color-r" min="0" max="1" step="0.01" value="0.8" />
-																			<input type="number" class="color-input color-g" min="0" max="1" step="0.01" value="0.2" />
-																			<input type="number" class="color-input color-b" min="0" max="1" step="0.01" value="0.2" />
-																	</div>
-															</div>
-													</div>										
+												<input class="spinner stelproperty" name="ConstellationMgr.linesFadeDuration" data-min="0.1" data-max="10" data-step="0.1" value="1" />
+												<div class="color-control">
+														<div class="color-picker-wrapper" data-prop="ConstellationMgr.linesColor">
+																<div class="color-swatch" style="background-color: rgb(128, 128, 128);"></div>
+														</div>
+												</div>													
 										</div>
-									</div>
-									
-									<!-- ============================================================
-											 ASTERISM RAY HELPERS - Thickness + Color
-											 ============================================================ -->
-									<div class="option-item option-group">
-											<label class="option-label">
-													<input type="checkbox" class="stelproperty" name="AsterismMgr.rayHelpersDisplayed" />
-													<span><?= tr("Show ray helpers with thickness")?></span>
-											</label>
-											<div class="option-group-controls">
-													<div class="option-sub-control">
-															<span class="stelproperty" data-prop="AsterismMgr.rayHelperThickness" data-numberformat="n0"></span>
-															<div id="rayhelper-thickness" class="slider stelproperty" 
-																	 data-prop="AsterismMgr.rayHelperThickness" data-min="1" data-max="5" 
-																	 data-step="1" data-numberformat="n0"></div>
-													</div>
-											</div>
-											<!-- Spinner for StelProperty: AsterismMgr.rayHelpersFadeDuration -->
+								</div>
+								
+								<!-- ============================================================
+										 CONSTELLATION BOUNDARIES - Thickness + Color
+										 ============================================================ -->
+								<div class="option-item option-group">
+										<label class="option-label">
+												<input type="checkbox" class="stelproperty" name="ConstellationMgr.boundariesDisplayed" />
+												<span><?= tr("Show boundaries with thickness")?></span>
+										</label>
+										<div class="option-group-controls">
+												<div class="option-sub-control">
+														<span class="stelproperty" data-prop="ConstellationMgr.boundariesThickness" data-numberformat="n0"></span>
+														<div id="boundaries-thickness" class="slider stelproperty" 
+																 data-prop="ConstellationMgr.boundariesThickness" data-min="1" data-max="5" 
+																 data-step="1" data-numberformat="n0"></div>
+												</div>
+										</div>
+										<!-- Spinner for StelProperty: ConstellationMgr.boundariesFadeDuration -->
+										<div class="option-sub-control">
+												<label><?= tr("Fade duration")?></label>
+												<input class="spinner stelproperty" name="ConstellationMgr.boundariesFadeDuration" data-min="0.1" data-max="10" data-step="0.1" value="1" />
+										</div>
+										<div class="option-sub-control">
+												<div class="color-control">
+														<div class="color-picker-wrapper" data-prop="ConstellationMgr.boundariesColor">
+																<div class="color-swatch" style="background-color: rgb(200, 80, 80);"></div>
+														</div>
+												</div>											
+										</div>
+								</div>
+								
+								<!-- ============================================================
+										 CONSTELLATION ART - Intensity Only (No Color)
+										 ============================================================ -->
+								<div class="option-item option-group">
+										<label class="option-label">
+												<input type="checkbox" class="stelproperty" name="ConstellationMgr.artDisplayed" />
+												<span><?= tr("Show art in brightness")?></span>
+										</label>
+										<div class="option-group-controls single-control">
+												<div class="option-sub-control">
+														<span class="stelproperty" data-prop="ConstellationMgr.artIntensity" data-numberformat="n2"></span>
+														<div id="art-intensity" class="slider stelproperty" 
+																 data-prop="ConstellationMgr.artIntensity" data-min="0" data-max="1" 
+																 data-step="0.05" data-numberformat="n2"></div>
+												</div>
+										</div>
+										<!-- Spinner for StelProperty: ConstellationMgr.artFadeDuration -->
+										<div class="option-sub-control">
+												<label><?= tr("Fade duration")?></label>
+												<input class="spinner stelproperty" name="ConstellationMgr.artFadeDuration" data-min="0.1" data-max="10" data-step="0.1" value="2" />
+										</div>
+								</div>
+								</div>
+								<!-- ============================================================
+										 ASTERISM LABELS - Size + Color
+										 ============================================================ -->
+								<div class="option-item option-group">
+								<h4><?= tr("Asterisms")?></h4>
+								<div class="option-item option-group">									
+										<label class="option-label">
+												<input type="checkbox" class="stelproperty" name="AsterismMgr.namesDisplayed" />
+												<span><?= tr("Label asterisms with font size")?></span>
+										</label>
+										<div class="option-group-controls">
+												<div class="option-sub-control">
+														<span class="stelproperty" data-prop="AsterismMgr.fontSize" data-numberformat="n0"></span>
+														<div id="asterism-fontsize" class="slider stelproperty" 
+																 data-prop="AsterismMgr.fontSize" data-min="8" data-max="40" 
+																 data-step="1" data-numberformat="n0"></div>
+												</div>																	 
+										</div>
+												<!-- Spinner for StelProperty: AsterismMgr.namesFadeDuration -->
 											<div class="option-sub-control">
 													<label><?= tr("Fade duration")?></label>
-													<input class="spinner stelproperty" name="AsterismMgr.rayHelpersFadeDuration" data-min="0.1" data-max="10" data-step="0.1" value="1" />
-													<div class="color-control">
-															<div class="color-picker-wrapper" data-prop="AsterismMgr.rayHelpersColor">
-																	<div class="color-swatch" style="background-color: rgb(100, 200, 100);"></div>
-																	<div class="color-inputs">
-																			<input type="number" class="color-input color-r" min="0" max="1" step="0.01" value="0.4" />
-																			<input type="number" class="color-input color-g" min="0" max="1" step="0.01" value="0.8" />
-																			<input type="number" class="color-input color-b" min="0" max="1" step="0.01" value="0.4" />
-																	</div>
-															</div>
-													</div>											
+													<input class="spinner stelproperty" name="AsterismMgr.namesFadeDuration" data-min="0.1" data-max="10" data-step="0.1" value="1"/>
+												<div class="color-control">
+														<div class="color-picker-wrapper" data-prop="AsterismMgr.namesColor">
+																<div class="color-swatch" style="background-color: rgb(255, 255, 255);"></div>
+														</div>
+												</div>												
 											</div>
+								</div>
+								
+								<!-- ============================================================
+										 ASTERISM LINES - Thickness + Color
+										 ============================================================ -->
+								<div class="option-item option-group">
+										<label class="option-label">
+												<input type="checkbox" class="stelproperty" name="AsterismMgr.linesDisplayed" />
+												<span><?= tr("Show asterisms with thickness")?></span>
+										</label>
+										<div class="option-group-controls">
+												<div class="option-sub-control">
+														<span class="stelproperty" data-prop="AsterismMgr.asterismLineThickness" data-numberformat="n0"></span>
+														<div id="asterism-linethickness" class="slider stelproperty" 
+																 data-prop="AsterismMgr.asterismLineThickness" data-min="1" data-max="5" 
+																 data-step="1" data-numberformat="n0"></div>
+												</div>
+										</div>
+										<!-- Spinner for StelProperty: AsterismMgr.linesFadeDuration -->
+									<div class="option-sub-control">
+											<label><?= tr("Fade duration")?></label>
+											<input class="spinner stelproperty" name="AsterismMgr.linesFadeDuration" data-min="0.1" data-max="10" data-step="0.1" value="1" />
+												<div class="color-control">
+														<div class="color-picker-wrapper" data-prop="AsterismMgr.linesColor">
+																<div class="color-swatch" style="background-color: rgb(200, 50, 50);"></div>
+														</div>
+												</div>										
 									</div>
-									</div>
-									
-									<!-- ============================================================
-											 ZODIAC - Thickness + Color
-											 ============================================================ -->
-									<div class="option-item option-group">
-									<h4><?= tr("Zodiac")?> & <?= tr("Lunar Stations")?> & <?= tr("Hulls")?></h4>
-									<div class="option-item option-group">
-											<label class="option-label">
-													<input type="checkbox" class="stelproperty" name="ConstellationMgr.zodiacDisplayed" />
-													<span><?= tr("Show zodiac with thickness")?></span>
-											</label>
-											<div class="option-group-controls">
-													<div class="option-sub-control">
-															<span class="stelproperty" data-prop="ConstellationMgr.zodiacThickness" data-numberformat="n0"></span>
-															<div id="zodiac-thickness" class="slider stelproperty" 
-																	 data-prop="ConstellationMgr.zodiacThickness" data-min="1" data-max="5" 
-																	 data-step="1" data-numberformat="n0"></div>
-													</div>
-											</div>
-											<!-- Spinner for StelProperty: ConstellationMgr.zodiacFadeDuration -->
-											<div class="option-sub-control">
-													<label><?= tr("Fade duration")?></label>
-													<input class="spinner stelproperty" name="ConstellationMgr.zodiacFadeDuration" data-min="0.1" data-max="10" data-step="0.1" value="1" />
-													<div class="color-control">
-															<div class="color-picker-wrapper" data-prop="ConstellationMgr.zodiacColor">
-																	<div class="color-swatch" style="background-color: rgb(200, 100, 200);"></div>
-																	<div class="color-inputs">
-																			<input type="number" class="color-input color-r" min="0" max="1" step="0.01" value="0.8" />
-																			<input type="number" class="color-input color-g" min="0" max="1" step="0.01" value="0.4" />
-																			<input type="number" class="color-input color-b" min="0" max="1" step="0.01" value="0.8" />
-																	</div>
-															</div>
-													</div>											
-											</div>
-									</div>
-									
-									<!-- ============================================================
-											 LUNAR SYSTEM - Thickness + Color
-											 ============================================================ -->
-									<div class="option-item option-group">
-											<label class="option-label">
-													<input type="checkbox" class="stelproperty" name="ConstellationMgr.lunarSystemDisplayed" />
-													<span><?= tr("Show lunar stations/mansions with thickness")?></span>
-											</label>
-											<div class="option-group-controls">
-													<div class="option-sub-control">
-															<span class="stelproperty" data-prop="ConstellationMgr.lunarSystemThickness" data-numberformat="n0"></span>
-															<div id="lunar-thickness" class="slider stelproperty" 
-																	 data-prop="ConstellationMgr.lunarSystemThickness" data-min="1" data-max="5" 
-																	 data-step="1" data-numberformat="n0"></div>
-													</div>
-											</div>
-											<!-- Spinner for StelProperty: ConstellationMgr.lunarSystemFadeDuration -->
-											<div class="option-sub-control">
-													<label><?= tr("Fade duration")?></label>
-													<input class="spinner stelproperty" name="ConstellationMgr.lunarSystemFadeDuration" data-min="0.1" data-max="10" data-step="0.1" value="1" />
-													<div class="color-control">
-															<div class="color-picker-wrapper" data-prop="ConstellationMgr.lunarSystemColor">
-																	<div class="color-swatch" style="background-color: rgb(80, 200, 80);"></div>
-																	<div class="color-inputs">
-																			<input type="number" class="color-input color-r" min="0" max="1" step="0.01" value="0.3" />
-																			<input type="number" class="color-input color-g" min="0" max="1" step="0.01" value="0.8" />
-																			<input type="number" class="color-input color-b" min="0" max="1" step="0.01" value="0.3" />
-																	</div>
-															</div>
-													</div>											
-											</div>
-									</div>
-									
-									<!-- ============================================================
-											 CONSTELLATION HULLS - Thickness + Color
-											 ============================================================ -->
-									<div class="option-item option-group">
-											<label class="option-label">
-													<input type="checkbox" class="stelproperty" name="ConstellationMgr.hullsDisplayed" />
-													<span><?= tr("Show hulls with thickness")?></span>
-											</label>
-											<div class="option-group-controls">
-													<div class="option-sub-control">
-															<span class="stelproperty" data-prop="ConstellationMgr.hullsThickness" data-numberformat="n0"></span>
-															<div id="hulls-thickness" class="slider stelproperty" 
-																	 data-prop="ConstellationMgr.hullsThickness" data-min="1" data-max="5" 
-																	 data-step="1" data-numberformat="n0"></div>
-													</div>
-											</div>
-											<!-- Spinner for StelProperty: ConstellationMgr.hullsFadeDuration -->
-											<div class="option-sub-control">
-													<label><?= tr("Fade duration")?></label>
-													<input class="spinner stelproperty" name="ConstellationMgr.hullsFadeDuration" data-min="0.1" data-max="10" data-step="0.1" value="1" />
-													<div class="color-control">
-															<div class="color-picker-wrapper" data-prop="ConstellationMgr.hullsColor">
-																	<div class="color-swatch" style="background-color: rgb(200, 150, 80);"></div>
-																	<div class="color-inputs">
-																			<input type="number" class="color-input color-r" min="0" max="1" step="0.01" value="0.8" />
-																			<input type="number" class="color-input color-g" min="0" max="1" step="0.01" value="0.6" />
-																			<input type="number" class="color-input color-b" min="0" max="1" step="0.01" value="0.3" />
-																	</div>
-															</div>
-													</div>											
-											</div>
-									</div>
-									</div>
+								</div>
+								
+								<!-- ============================================================
+										 ASTERISM RAY HELPERS - Thickness + Color
+										 ============================================================ -->
+								<div class="option-item option-group">
+										<label class="option-label">
+												<input type="checkbox" class="stelproperty" name="AsterismMgr.rayHelpersDisplayed" />
+												<span><?= tr("Show ray helpers with thickness")?></span>
+										</label>
+										<div class="option-group-controls">
+												<div class="option-sub-control">
+														<span class="stelproperty" data-prop="AsterismMgr.rayHelperThickness" data-numberformat="n0"></span>
+														<div id="rayhelper-thickness" class="slider stelproperty" 
+																 data-prop="AsterismMgr.rayHelperThickness" data-min="1" data-max="5" 
+																 data-step="1" data-numberformat="n0"></div>
+												</div>
+										</div>
+										<!-- Spinner for StelProperty: AsterismMgr.rayHelpersFadeDuration -->
+										<div class="option-sub-control">
+												<label><?= tr("Fade duration")?></label>
+												<input class="spinner stelproperty" name="AsterismMgr.rayHelpersFadeDuration" data-min="0.1" data-max="10" data-step="0.1" value="1" />
+												<div class="color-control">
+														<div class="color-picker-wrapper" data-prop="AsterismMgr.rayHelpersColor">
+																<div class="color-swatch" style="background-color: rgb(100, 200, 100);"></div>
+														</div>
+												</div>											
+										</div>
+								</div>
+								</div>
+								<!-- ============================================================
+										 ZODIAC - Thickness + Color
+										 ============================================================ -->
+								<div class="option-item option-group">
+								<h4><?= tr("Zodiac")?> & <?= tr("Lunar Stations")?> & <?= tr("Hulls")?></h4>
+								<div class="option-item option-group">
+										<label class="option-label">
+												<input type="checkbox" class="stelproperty" name="ConstellationMgr.zodiacDisplayed" />
+												<span><?= tr("Show zodiac with thickness")?></span>
+										</label>
+										<div class="option-group-controls">
+												<div class="option-sub-control">
+														<span class="stelproperty" data-prop="ConstellationMgr.zodiacThickness" data-numberformat="n0"></span>
+														<div id="zodiac-thickness" class="slider stelproperty" 
+																 data-prop="ConstellationMgr.zodiacThickness" data-min="1" data-max="5" 
+																 data-step="1" data-numberformat="n0"></div>
+												</div>
+										</div>
+										<!-- Spinner for StelProperty: ConstellationMgr.zodiacFadeDuration -->
+										<div class="option-sub-control">
+												<label><?= tr("Fade duration")?></label>
+												<input class="spinner stelproperty" name="ConstellationMgr.zodiacFadeDuration" data-min="0.1" data-max="10" data-step="0.1" value="1" />
+												<div class="color-control">
+														<div class="color-picker-wrapper" data-prop="ConstellationMgr.zodiacColor">
+																<div class="color-swatch" style="background-color: rgb(200, 100, 200);"></div>
+														</div>
+												</div>											
+										</div>
+								</div>
+								
+								<!-- ============================================================
+										 LUNAR SYSTEM - Thickness + Color
+										 ============================================================ -->
+								<div class="option-item option-group">
+										<label class="option-label">
+												<input type="checkbox" class="stelproperty" name="ConstellationMgr.lunarSystemDisplayed" />
+												<span><?= tr("Show lunar stations/mansions with thickness")?></span>
+										</label>
+										<div class="option-group-controls">
+												<div class="option-sub-control">
+														<span class="stelproperty" data-prop="ConstellationMgr.lunarSystemThickness" data-numberformat="n0"></span>
+														<div id="lunar-thickness" class="slider stelproperty" 
+																 data-prop="ConstellationMgr.lunarSystemThickness" data-min="1" data-max="5" 
+																 data-step="1" data-numberformat="n0"></div>
+												</div>
+										</div>
+										<!-- Spinner for StelProperty: ConstellationMgr.lunarSystemFadeDuration -->
+										<div class="option-sub-control">
+												<label><?= tr("Fade duration")?></label>
+												<input class="spinner stelproperty" name="ConstellationMgr.lunarSystemFadeDuration" data-min="0.1" data-max="10" data-step="0.1" value="1" />
+												<div class="color-control">
+														<div class="color-picker-wrapper" data-prop="ConstellationMgr.lunarSystemColor">
+																<div class="color-swatch" style="background-color: rgb(80, 200, 80);"></div>
+														</div>
+												</div>											
+										</div>
+								</div>
+								
+								<!-- ============================================================
+										 CONSTELLATION HULLS - Thickness + Color
+										 ============================================================ -->
+								<div class="option-item option-group">
+										<label class="option-label">
+												<input type="checkbox" class="stelproperty" name="ConstellationMgr.hullsDisplayed" />
+												<span><?= tr("Show hulls with thickness")?></span>
+										</label>
+										<div class="option-group-controls">
+												<div class="option-sub-control">
+														<span class="stelproperty" data-prop="ConstellationMgr.hullsThickness" data-numberformat="n0"></span>
+														<div id="hulls-thickness" class="slider stelproperty" 
+																 data-prop="ConstellationMgr.hullsThickness" data-min="1" data-max="5" 
+																 data-step="1" data-numberformat="n0"></div>
+												</div>
+										</div>
+										<!-- Spinner for StelProperty: ConstellationMgr.hullsFadeDuration -->
+										<div class="option-sub-control">
+												<label><?= tr("Fade duration")?></label>
+												<input class="spinner stelproperty" name="ConstellationMgr.hullsFadeDuration" data-min="0.1" data-max="10" data-step="0.1" value="1" />
+												<div class="color-control">
+														<div class="color-picker-wrapper" data-prop="ConstellationMgr.hullsColor">
+																<div class="color-swatch" style="background-color: rgb(200, 150, 80);"></div>
+														</div>
+												</div>											
+										</div>
+								</div>
+								</div>
 																		
 							</div><!-- END .options-grid -->
 							
 							<!-- Additional Options -->
 							<div class="skyculture-additional-options">
 									
-									<label class="option-label">
+									<label class="btn-toggle">
 											<input type="checkbox" class="stelproperty" name="StelSkyCultureMgr.flagUseAbbreviatedNames" />
 											<span><?= tr("Short labels")?></span>
 									</label>
 									
-									<label class="option-label">
+									<label class="btn-toggle">
 											<input type="checkbox" class="stelproperty" name="ConstellationMgr.isolateSelected" />
 											<span><?= tr("Constellation selection isolated")?></span>
 									</label>
 									
-									<label class="option-label">
+									<label class="btn-toggle">
 											<input type="checkbox" class="stelproperty" name="ConstellationMgr.flagConstellationPick" />
 											<span><?= tr("Only last selected")?></span>
 									</label>
@@ -2474,7 +2263,7 @@
 												 id="loc_auto_land"
 												 class="stelproperty"
 												 name="LandscapeMgr.flagLandscapeAutoSelection"
-												 title="<?= tr("Automatic change of landscpe when planet or location is changed")?>"/>
+												 title="<?= tr("Automatic change of landscape when planet or location is changed")?>"/>
 									<?= tr("Auto-select landscapes")?>
 								</label>
 							</div>							
@@ -2528,47 +2317,1427 @@
         </div>		
       </div>
       
-			<div id="tab_scenery3d" class="stelplugin" data-plugin="Scenery3d" data-pluginjs="plugins/scenery3d">
-          <div class="flex">
-              <div class="smallblock">
-                  <h3><?= tr("Interaction")?></h3>
-                  <p class="margin-none"><?= tr("Current scene:")?></p>
-                  <p id="s3d_curscene" class="bold margin-none"><?= tr("-none-")?></p>
-                  <div class="innerblock inline-block">
-                      <h3><?= tr("View controls")?></h3>
-                      <div class="joystickcontainer">
-                          <div class="joystick" data-joyurl="/api/main/move" data-joymax="5"></div>
-                      </div>
-                  </div>
-                  <div class="innerblock inline-block">
-                      <h3><?= tr("Movement controls")?></h3>
-                      <div class="joystickcontainer">
-                          <div class="joystick" data-joyurl="/api/scenery3d/move" data-joymax="50"></div>
-                      </div>
-                  </div>
-              </div>
-              <div class="smallblock">
-                  <h3><?= tr("Options")?></h3>
-                  <div class="inline-block blocklabel">
-                      <label><input type="checkbox" class="stelproperty" name="Scenery3d.enableScene" /><?= tr("Toggle 3D landscape")?></label>
-                      <label><input type="checkbox" class="stelproperty" name="Scenery3d.enableLocationInfo" /><?= tr("Toggle location text")?></label>
-                      <label><input type="checkbox" class="stelproperty" name="Scenery3d.enableShadows"/><?= tr("Toggle shadows")?></label>
-                      <label><input type="checkbox" class="stelproperty" name="Scenery3d.enableTorchLight"/><?= tr("Torchlight")?></label>
-					  <p><div class="flex flex-baseline"><label><?= tr("Torch strength:")?></label><span class="stelproperty" data-prop="Scenery3d.torchStrength" data-numberformat="n2"></span><div class="slider stelproperty flex-expand" data-prop="Scenery3d.torchStrength" data-min="0.01" data-max="1" data-step="0.01"></div></div></p>
-					  <p><div class="flex flex-baseline"><label><?= tr("Torch range:")?></label><span class="stelproperty" data-prop="Scenery3d.torchRange"data-numberformat="n0"></span><div class="slider stelproperty flex-expand" data-prop="Scenery3d.torchRange" data-min="0" data-max="100" data-step="1"></div></div></p>
-                  </div>
-              </div>
-          </div>
-          <div class="smallblock flex landscapeblock">
-            <h3><?= tr("Scene selection")?></h3>
-            <div class="flex flex-column">
-            <select id="s3d_list" class="scrollselect flex-expand" size="5">
-            </select>
-            <button id="s3d_load" class="jquerybutton"><?= tr("Load selected scene")?></button>
+			<div id="tab_plugins">
+				<div class="plugins-tabs" >
+						<ul>
+								<li class="stelplugin" data-plugin="Scenery3d"><a href="#sub_tab_Scenery3d"><?= tr("Scenery3d")?></a></li>
+								<li class="stelplugin" data-plugin="MeteorShowers"><a href="#sub_tab_MeteorShowers"><?= tr("Meteor Showers")?></a></li>
+								<li class="stelplugin" data-plugin="ArchaeoLines"><a href="#sub_tab_ArchaeoLines"><?= tr("ArchaeoLines")?></a></li>
+								<li class="stelplugin" data-plugin="Quasars"><a href="#sub_tab_Quasars"><?= tr("Quasars")?></a></li>
+								<li class="stelplugin" data-plugin="Pulsars"><a href="#sub_tab_Pulsars"><?= tr("Pulsars")?></a></li>
+								<li class="stelplugin" data-plugin="NavStars"><a href="#sub_tab_NavStars"><?= tr("Navigational Stars")?></a></li>
+								<li class="stelplugin" data-plugin="Exoplanets"><a href="#sub_tab_Exoplanets"><?= tr("Exoplanets")?></a></li>
+								<li class="stelplugin" data-plugin="PointerCoordinates"><a href="#sub_tab_PointerCoord"><?= tr("Pointer Coordinates")?></a></li>
+								<li class="stelplugin" data-plugin="EquationOfTime"><a href="#sub_tab_EquationOfTime"><?= tr("Equation of Time")?></a></li>
+								<li class="stelplugin" data-plugin="AngleMeasure"><a href="#sub_tab_AngleMeasure"><?= tr("Angle Measure")?></a></li>
+								<li class="stelplugin" data-plugin="TimeNavigator"><a href="#sub_tab_TimeNavigator"><?= tr("Time Navigator")?></a></li>
+								<li class="stelplugin" data-plugin="LensDistortionEstimator"><a href="#sub_tab_LensDistortionEstimator"><?= tr("Lens Distortion Estimator")?></a></li>
+						</ul>
+
+			<div id="sub_tab_Scenery3d" class="stelplugin patterns-tab-content" data-plugin="Scenery3d" data-pluginjs="plugins/scenery3d">
+          <div class="flex flex-wrap">
+					
+						<section class="block">
+								<header><h3><?= tr("Interaction")?></h3></header>
+								<p class="margin-none textcenter"><?= tr("Current scene:")?></p>
+								<p id="s3d_curscene" class="bold margin-none  textcenter"><?= tr("-none-")?></p>
+								<div class="block inline-block">
+								<div class="innerblock inline-block">
+										<h3><?= tr("View controls")?></h3>
+										<div class="joystickcontainer">
+												<div class="joystick" data-joyurl="/api/main/move" data-joymax="5"></div>
+										</div>
+								</div>
+								<div class="innerblock inline-block">
+										<h3><?= tr("Movement controls")?></h3>
+										<div class="joystickcontainer">
+												<div class="joystick" data-joyurl="/api/scenery3d/move" data-joymax="50"></div>
+										</div>
+								</div>
+								</div>
+							<div class="block blocklabel">
+								<header><h3><?= tr("Settings")?></h3></header>
+
+									<!-- Checkbox for StelAction: actionShow_Scenery3d -->
+									<div class="block_row">
+									<label class="btn-toggle">
+											<input type="checkbox" class="stelaction" name="actionShow_Scenery3d"  />
+											<?= tr("Toggle 3D landscape")?>
+									</label>
+									</div>
+
+									<div class="block_row">
+									<!-- Checkbox for StelAction: actionShow_Scenery3d_dialog -->
+									<label class="btn-toggle">
+											<input type="checkbox" class="stelaction" name="actionShow_Scenery3d_dialog" />
+											<?= tr("Show settings dialog")?>
+									</label>
+									</div>
+
+									<!-- Checkbox for StelAction: actionShow_Scenery3d_storedViewDialog -->
+									<div class="block_row">
+									<label class="btn-toggle">
+											<input type="checkbox" class="stelaction" name="actionShow_Scenery3d_storedViewDialog"  />
+											<?= tr("Show viewpoint dialog")?>
+									</label>
+									</div>
+
+									<!-- Checkbox for StelAction: actionShow_Scenery3d_shadows -->
+									<div class="block_row">
+									<label class="btn-toggle">
+											<input type="checkbox" class="stelaction" name="actionShow_Scenery3d_shadows"  />
+											<?= tr("Toggle shadows")?>
+									</label>
+									</div>
+
+									<!-- Checkbox for StelAction: actionShow_Scenery3d_debuginfo -->
+									<div class="block_row">
+									<label class="btn-toggle">
+											<input type="checkbox" class="stelaction" name="actionShow_Scenery3d_debuginfo"  />
+											<?= tr("Toggle debug information")?>
+									</label>
+									</div>
+
+									<!-- Checkbox for StelAction: actionShow_Scenery3d_locationinfo -->
+									<div class="block_row">
+									<label class="btn-toggle">
+											<input type="checkbox" class="stelaction" name="actionShow_Scenery3d_locationinfo"  />
+											<?= tr("Toggle location text")?>
+									</label>
+									</div>
+
+									<!-- Checkbox for StelAction: actionShow_Scenery3d_torchlight -->
+									<div class="block_row">
+									<label class="btn-toggle">
+											<input type="checkbox" class="stelaction" name="actionShow_Scenery3d_torchlight"  />
+											<?= tr("Toggle torchlight")?>
+									</label>
+									</div>
+
+							</div>
+
+						</section>
+
+						<section class="block">
+								<header><h3><?= tr("Visual options")?></h3></header>
+								<div class="blocklabel">
+										<!-- label><input type="checkbox" class="stelproperty" name="Scenery3d.enableScene" /><?= tr("Toggle 3D landscape")?></label>
+										<label><input type="checkbox" class="stelproperty" name="Scenery3d.enableLocationInfo" /><?= tr("Toggle location text")?></label>
+										<label><input type="checkbox" class="stelproperty" name="Scenery3d.enableShadows"/><?= tr("Toggle shadows")?></label>
+										<label><input type="checkbox" class="stelproperty" name="Scenery3d.enableTorchLight"/><?= tr("Torchlight")?></label -->
+
+									<div class="block_row">									
+									<label class="btn-toggle">
+											<input type="checkbox" class="stelproperty" name="Scenery3d.enableTorchLight"/>
+											<?= tr("Torchlight")?>
+									</label>									
+									</div>
+
+									<div class="btn-gen-slider-wrap">
+											<div class="btn-gen-slider-header">
+													<label><?= tr("Torch strength:")?></label>
+													<span class="stelproperty" data-prop="Scenery3d.torchStrength" data-numberformat="n2"></span>
+											</div>
+											<div class="slider stelproperty" data-prop="Scenery3d.torchStrength" data-min="0.01" data-max="1" data-step="0.01"></div>
+									</div>
+
+
+									<div class="btn-gen-slider-wrap">
+											<div class="btn-gen-slider-header">
+													<label><?= tr("Torch range:")?></label>
+													<span class="stelproperty" data-prop="Scenery3d.torchRange"data-numberformat="n0"></span>
+											</div>
+											<div class="slider stelproperty" data-prop="Scenery3d.torchRange" data-min="0" data-max="100" data-step="1"></div>
+									</div>
+									
+										<!-- Slider for StelProperty: Scenery3d.directionalLightPush -->
+									<div class="btn-gen-slider-wrap">
+											<div class="btn-gen-slider-header">
+										<label><?= tr("Directional light enhancement")?></label>
+										<span class="stelproperty" data-prop="Scenery3d.directionalLightPush" data-numberformat="n2"></span>
+										</div>
+										<input class="spinner stelproperty" name="Scenery3d.directionalLightPush" data-min="0" data-max="100" data-step="1" data-numberformat="n2" />
+										</div>										
+										
+										<!-- Checkbox for StelProperty: Scenery3d.forceHorizonPolyline -->
+										<div class="block_row">
+										<label class="btn-toggle">
+												<input type="checkbox" class="stelproperty" name="Scenery3d.forceHorizonPolyline"  />
+												<?= tr("Draw horizon polyline in foreground")?>
+										</label>
+										</div>
+
+
+										<!-- Checkbox for StelProperty: Scenery3d.enableLocationInfo -->
+										<div class="block_row">									
+										<label class="btn-toggle">
+												<input type="checkbox" class="stelproperty" name="Scenery3d.enableLocationInfo"  />
+												<?= tr("Toggle location text")?>
+										</label>
+										</div>
+										<!-- This handeled by manui.js  -->
+										<fieldset>
+												<legend><?= tr("Position on screen")?></legend>
+												<input type="radio" class="stelproperty" name="Scenery3d.locationInfoStyle" id="s3d-locinfo-topright" value="LocationInfoTopRight" /><!-- accept value="0" -->
+												<label for="s3d-locinfo-topright"><?= tr("Top Right")?></label>
+												<input type="radio" class="stelproperty" name="Scenery3d.locationInfoStyle" id="s3d-locinfo-bottomcenter" value="LocationInfoBottomCenter" /><!-- accept value="1" -->
+												<label for="s3d-locinfo-bottomcenter"><?= tr("Bottom Center")?></label>
+										</fieldset>
+									
+								</div>								
+						</section>
+
+						<section class="block">
+						<header><h3><?= tr("Quality/Performance settings")?></h3></header>
+						
+									<div class="block_row">
+									<label><?= tr("Cubemapping mode:")?></label>
+									<select class="stelproperty" name="Scenery3d.cubemappingMode">
+									<option value="CM_CUBEMAP_GSACCEL"><?= tr("Geometry shader")?></option>
+									<option value="CM_TEXTURES"><?= tr("6 Textures")?></option>
+									<option value="CM_CUBEMAP"><?= tr("Cubemap")?></option>
+									</select>
+									</div>
+
+								<!-- Checkbox for StelProperty: Scenery3d.useFullCubemapShadows -->
+								<div class="block_row">
+								<label class="btn-toggle">
+										<input type="checkbox" class="stelproperty" name="Scenery3d.useFullCubemapShadows"  />
+										<?= tr("Full cubemap shadows")?>
+								</label>
+								</div>
+
+								
+									<!-- Checkbox for StelProperty: Scenery3d.enableLazyDrawing -->
+									<div class="block_row">									
+									<label class="btn-toggle">
+											<input type="checkbox" class="stelproperty" name="Scenery3d.enableLazyDrawing" />
+											<?= tr("Lazy cubemap re-rendering")?>
+									</label>
+									</div>
+
+									
+									<!-- Slider for StelProperty: Scenery3d.lazyDrawingInterval -->
+									<div class="btn-gen-slider-wrap">
+											<div class="btn-gen-slider-header">
+													<label><?= tr("Interval:")?></label>
+													<span class="stelproperty" data-prop="Scenery3d.lazyDrawingInterval" data-numberformat="n2"></span>
+											</div>
+											<div class="slider stelproperty" data-prop="Scenery3d.lazyDrawingInterval" data-min="0.1" data-max="600" data-step="0.1" data-numberformat="n2"></div>
+									</div>
+
+									<!-- Spinner for StelProperty: Scenery3d.lazyDrawingInterval -->
+									<div class="btn-gen-slider-wrap">
+											<div class="btn-gen-slider-header">
+													<label><?= tr("Interval:")?></label>
+													<span class="stelproperty" data-prop="Scenery3d.lazyDrawingInterval" data-numberformat="n2"></span>
+											</div>
+											<input class="spinner stelproperty" name="Scenery3d.lazyDrawingInterval" data-min="0.1" data-max="600" data-step="0.1" data-numberformat="n2" />
+									</div>
+									
+									<!-- Checkbox for StelProperty: Scenery3d.enablePixelLighting -->
+									<div class="block_row">
+									<label class="btn-toggle">
+											<input type="checkbox" class="stelproperty" name="Scenery3d.enablePixelLighting"  />
+											<?= tr("Per-Pixel lighting")?>
+									</label>
+									</div>
+
+
+									<!-- Checkbox for StelProperty: Scenery3d.enableShadows -->
+									<div class="block_row">									
+										<label class="btn-toggle">
+												<input type="checkbox" class="stelproperty" name="Scenery3d.enableShadows"  />
+												<?= tr("Shadows")?>
+										</label>
+									</div>
+
+
+									<!-- Checkbox for StelProperty: Scenery3d.useSimpleShadows -->
+									<div class="block_row">									
+									<label class="btn-toggle">
+											<input type="checkbox" class="stelproperty" name="Scenery3d.useSimpleShadows"  />
+											<?= tr("Simple shadows")?>
+									</label>
+									</div>								
+
+									<!-- Checkbox for StelProperty: Scenery3d.enableBumps -->
+									<div class="block_row">								
+									<label class="btn-toggle">
+											<input type="checkbox" class="stelproperty" name="Scenery3d.enableBumps"  />
+											<?= tr("Bump mapping")?>
+									</label>
+									</div>
+									
+									<!-- Cubemap size-->
+									<div class="block_row">
+									<label><?= tr("Cubemap size:")?></label>
+									<select class="stelproperty" name="Scenery3d.cubemapSize">
+									<option value="256">256</option>
+									<option value="512">512</option>
+									<option value="1024">1024</option>
+									<option value="2048">2048</option>
+									<option value="4096">4096</option>
+									<option value="8192">8192</option>
+									<option value="16384">16384</option>
+									</select>
+									</div>								
+
+									<div class="block_row">
+									<label><?= tr("Shadowmap size:")?></label>
+									<select class="stelproperty" name="Scenery3d.shadowmapSize">
+									<option value="256">256</option>
+									<option value="512">512</option>
+									<option value="1024">1024</option>
+									<option value="2048">2048</option>
+									<option value="4096">4096</option>
+									<option value="8192">8192</option>
+									<option value="16384">16384</option>
+									</select>
+									</div>
+
+									<div class="block_row">
+									<label><?= tr("Filtering Quality:")?></label>
+									<select class="stelproperty" name="Scenery3d.shadowFilterQuality">
+									<option value="SFQ_OFF"><?= tr("Off")?></option>
+									<option value="SFQ_HARDWARE"><?= tr("Hardware")?></option>
+									<option value="SFQ_LOW"><?= tr("Low")?></option>
+									<option value="SFQ_LOW_HARDWARE"><?= tr("Low + Hardware")?></option>
+									<option value="SFQ_HIGH"><?= tr("High (slow)")?></option>
+									<option value="SFQ_HIGH_HARDWARE"><?= tr("High + Hardware (slow)")?></option>
+									</select>
+									</div>
+								
+								<!-- Checkbox for StelProperty: Scenery3d.onlyDominantFaceWhenMoving -->
+								<div class="block_row">								
+								<label class="btn-toggle">
+										<input type="checkbox" class="stelproperty" name="Scenery3d.onlyDominantFaceWhenMoving"  />
+										<?= tr("Only update dominant face when moving")?>
+								</label>
+								</div>
+
+								<!-- Checkbox for StelProperty: Scenery3d.secondDominantFaceWhenMoving -->
+								<div class="block_row">
+								<label class="btn-toggle">
+										<input type="checkbox" class="stelproperty" name="Scenery3d.secondDominantFaceWhenMoving" />
+										<?= tr("Also update second-most dominant face")?>
+								</label>
+								</div>
+							
+								<!-- Checkbox for StelProperty: Scenery3d.enablePCSS -->
+								<div class="block_row">								
+								<label class="btn-toggle">
+										<input type="checkbox" class="stelproperty" name="Scenery3d.enablePCSS"  />
+										<?= tr("PCSS")?>
+								</label>
+								</div>
+								
+						</section>
+
+				</div>
+				
+					<div class="smallblock flex landscapeblock">
+						<h3><?= tr("Scene selection")?></h3>
+							<div class="flex flex-column">
+								<select id="s3d_list" class="scrollselect flex-expand" size="5"></select>
+								<button id="s3d_load" class="jquerybutton"><?= tr("Load selected scene")?></button>
+							</div>
+						<iframe id="s3d_info" class="flex-expand">No scene selected</iframe>
+					</div>
+			</div>
+
+			<div id="sub_tab_MeteorShowers" class="stelplugin patterns-tab-content" data-plugin="MeteorShowers">
+				<div class="flex flex-wrap">
+
+					<div class="smallblock">
+					<h3><?= tr("Set radiant color")?></h3>
+					
+						<div class="inline-block">
+						<h4><?= tr("Confirmed")?></h4>
+								<!-- COLOR PICKER (jQuery UI spinners) for StelProperty: MeteorShowers.colorARC -->
+								<div class="color-picker-wrapper" data-prop="MeteorShowers.colorARC">
+										<div class="color-swatch" style="background-color: rgb(255,240,0);"></div>
+								</div>
+						</div>
+
+						<div class="inline-block">
+						<h4><?= tr("Generic")?></h4>
+								<!-- COLOR PICKER (jQuery UI spinners) for StelProperty: MeteorShowers.colorARG -->
+								<div class="color-picker-wrapper" data-prop="MeteorShowers.colorARG">
+										<div class="color-swatch" style="background-color: rgb(0,255,240);"></div>
+								</div>
+						</div>
+
+						<div class="inline-block">
+						<h4><?= tr("Inactive")?></h4>						
+								<!-- COLOR PICKER (jQuery UI spinners) for StelProperty: MeteorShowers.colorIR -->
+								<div class="color-picker-wrapper" data-prop="MeteorShowers.colorIR">
+										<div class="color-swatch" style="background-color: rgb(255,255,255);"></div>
+								</div>
+						</div>
+					</div>
+
+					<div class="smallblock">
+					<h3><?= tr("Settings")?></h3>
+					
+					<div class="inline-block blocklabel">
+					<!-- Checkbox for StelAction: actionShow_MeteorShowers -->
+					<label class="btn-toggle">
+							<input type="checkbox" class="stelaction" name="actionShow_MeteorShowers" />
+							<?= tr("Toggle meteor showers")?>
+					</label>
+					
+					<!-- Checkbox for StelAction: actionShow_MeteorShowers_labels -->
+					<label class="btn-toggle">
+							<input type="checkbox" class="stelaction" name="actionShow_MeteorShowers_labels" />
+							<?= tr("Toggle radiant labels")?>
+					</label>
+
+					<!-- Checkbox for StelAction: actionShow_MeteorShowers_config_dialog -->
+					<label class="btn-toggle">
+							<input type="checkbox" class="stelaction" name="actionShow_MeteorShowers_config_dialog" />
+							<?= tr("Show settings dialog")?>
+					</label>
+
+					<!-- Checkbox for StelAction: actionShow_MeteorShowers_search_dialog -->
+					<label class="btn-toggle">
+							<input type="checkbox" class="stelaction" name="actionShow_MeteorShowers_search_dialog" />
+							<?= tr("Show meteor showers search dialog")?>
+					</label>
+					</div>
+					</div>
+				</div>
+			</div>
+
+			<div id="sub_tab_ArchaeoLines" class="stelplugin patterns-tab-content" data-plugin="ArchaeoLines" data-pluginjs="plugins/archaeolines" data-pluginjs="plugins/archaeolines">
+				<div class="flex flex-wrap">
+
+					<div class="smallblock">
+					<h3><?= tr("ArchaeoLines Plug-in Configuration")?></h3>
+						<!-- Checkbox for StelProperty: actionShow_ArchaeoLines -->
+						<label class="btn-toggle"><input type="checkbox" class="stelproperty" name="actionShow_ArchaeoLines" /><?= tr("ArchaeoLines")?></label>
+						<!-- Checkbox for StelProperty: actionShow_ArchaeoLines_dialog -->
+						<label class="btn-toggle"><input type="checkbox" class="stelproperty" name="actionShow_ArchaeoLines_dialog" /><?= tr("Show settings dialog")?></label>						
+
+						<div class="smallblock blocklabel">
+						<h3>Custom Geographic Location</h3>
+							<div class="smallblock">
+							<h3><?= tr("Geographic Location 1")?></h3>
+							<div class="block_row">
+									<!-- COLOR PICKER (jQuery UI spinners) for StelProperty: ArchaeoLines.geographicLocation1Color -->
+									<div class="color-picker-wrapper" data-prop="ArchaeoLines.geographicLocation1Color">					
+									<div class="color-swatch" style="background-color: rgb(64,255,64);"></div>
+									</div>
+									<!-- Checkbox for StelProperty: ArchaeoLines.flagShowGeographicLocation1 -->
+									<label class="btn-toggle">
+											<input type="checkbox" class="stelproperty" name="ArchaeoLines.flagShowGeographicLocation1" />
+											<?= tr("Geographic Location 1")?>
+									</label>
+
+									<div class="text-input-row">
+											<input type="text" class="stelproperty-text" name="ArchaeoLines.geographicLocation1Label"
+													value="Makkah"
+													placeholder="Enter value..." />
+									</div>
+							</div>
+									<!-- Slider for StelProperty: ArchaeoLines.geographicLocation1Latitude -->
+									<div class="btn-gen-slider-wrap">
+											<div class="btn-gen-slider-header">
+													<label><?= tr("Latitude")?></label>
+													<span><input class="spinner stelproperty" name="ArchaeoLines.geographicLocation1Latitude" data-min="-90" data-max="90" data-step="0.0001" data-numberformat="n3" /></span>
+											</div>
+									</div>
+									<!-- Slider for StelProperty: ArchaeoLines.geographicLocation1Longitude -->
+									<div class="btn-gen-slider-wrap">
+											<div class="btn-gen-slider-header">
+													<label><?= tr("Longitude")?></label>
+													<span><input class="spinner stelproperty" name="ArchaeoLines.geographicLocation1Longitude" data-min="-180" data-max="180" data-step="0.0001" data-numberformat="n3" /></span>
+											</div>
+									</div>	
+							</div>					
+	
+							<div class="smallblock">
+								<h3><?= tr("Geographic Location 2")?></h3>
+								<div class="block_row">
+									<!-- COLOR PICKER (jQuery UI spinners) for StelProperty: ArchaeoLines.geographicLocation2Color -->
+									<div class="color-picker-wrapper" data-prop="ArchaeoLines.geographicLocation2Color">					
+									<div class="color-swatch" style="background-color: rgb(64,64,255);"></div>
+									</div>
+									<!-- Checkbox for StelProperty: ArchaeoLines.flagShowGeographicLocation2 -->
+									<label class="btn-toggle">
+											<input type="checkbox" class="stelproperty" name="ArchaeoLines.flagShowGeographicLocation2" />
+											<?= tr("Geographic Location 2")?>
+									</label>
+									<div class="text-input-row">
+											<input type="text" class="stelproperty-text" name="ArchaeoLines.geographicLocation2Label"
+													value="Jerusalem"
+													placeholder="Enter value..." />
+									</div>
+								</div>
+
+								<!-- Slider for StelProperty: ArchaeoLines.geographicLocation2Latitude -->
+								<div class="btn-gen-slider-wrap">
+										<div class="btn-gen-slider-header">
+												<label><?= tr("Latitude")?></label>
+												<span><input class="spinner stelproperty" name="ArchaeoLines.geographicLocation2Latitude" data-min="-90" data-max="90" data-step="0.0001" data-numberformat="n3" /></span>
+										</div>
+								</div>
+
+								<!-- Slider for StelProperty: ArchaeoLines.geographicLocation2Longitude -->
+								<div class="btn-gen-slider-wrap">
+										<div class="btn-gen-slider-header">
+												<label><?= tr("Longitude")?></label>
+												<span><input class="spinner stelproperty" name="ArchaeoLines.geographicLocation2Longitude" data-min="-180" data-max="180" data-step="0.0001" data-numberformat="n3" /></span>
+										</div>
+								</div>
+							</div>
+						</div><!-- geographic location -->
+					</div>
+
+				<!-- CUSTOM LINES -->
+				<div class="smallblock">
+						<?= tr("Custom Lines")?>
+
+						<div class="archaeo-custom-lines">
+
+								<!-- Row 1: Custom Azimuth 1 -->
+								<div class="archaeo-line-row">
+										<div class="archaeo-col-color">
+												<div class="color-picker-wrapper" data-prop="ArchaeoLines.customAzimuth1Color">
+														<div class="color-swatch" style="background-color: rgb(255,0,0);"></div>
+												</div>
+										</div>
+										<div class="archaeo-col-flag">
+												<label class="btn-toggle" title="<?= tr("Enable this line")?>">
+														<input type="checkbox" class="stelproperty"
+																	 name="ArchaeoLines.flagShowCustomAzimuth1" />
+														<span><?= tr("Custom Azimuth 1")?></span>
+												</label>
+										</div>
+										<div class="archaeo-col-value">
+												<input class="spinner stelproperty"
+															 name="ArchaeoLines.customAzimuth1"
+															 data-min="0" data-max="359"
+															 data-step="0.0001" data-numberformat="n3"
+															 title="<?= tr("Azimuth (degrees)")?>" />
+										</div>
+										<div class="archaeo-col-label">
+												<input type="text" class="stelproperty-text"
+															 name="ArchaeoLines.customAzimuth1Label"
+															 value="Alnair"
+															 placeholder="<?= tr("Label")?>" />
+										</div>
+										<div class="archaeo-col-action">
+												<button type="button"
+																class="archaeo-target-btn"
+																data-coord-type="azimuth"
+																data-spinner-prop="ArchaeoLines.customAzimuth1"
+																data-label-prop="ArchaeoLines.customAzimuth1Label"
+																title="<?= tr("From selected object (if any)")?>">
+														<span class="ui-icon ui-icon-circle-plus"></span>
+												</button>
+										</div>
+								</div>
+
+								<!-- Row 2: Custom Azimuth 2 -->
+								<div class="archaeo-line-row">
+										<div class="archaeo-col-color">
+												<div class="color-picker-wrapper" data-prop="ArchaeoLines.customAzimuth2Color">
+														<div class="color-swatch" style="background-color: rgb(64,128,191);"></div>
+												</div>
+										</div>
+										<div class="archaeo-col-flag">
+												<label class="btn-toggle" title="<?= tr("Enable this line")?>">
+														<input type="checkbox" class="stelproperty"
+																	 name="ArchaeoLines.flagShowCustomAzimuth2" />
+														<span><?= tr("Custom Azimuth 2")?></span>
+												</label>
+										</div>
+										<div class="archaeo-col-value">
+												<input class="spinner stelproperty"
+															 name="ArchaeoLines.customAzimuth2"
+															 data-min="0" data-max="359"
+															 data-step="0.0001" data-numberformat="n3"
+															 title="<?= tr("Azimuth (degrees)")?>" />
+										</div>
+										<div class="archaeo-col-label">
+												<input type="text" class="stelproperty-text"
+															 name="ArchaeoLines.customAzimuth2Label"
+															 value="Peacock"
+															 placeholder="<?= tr("Label")?>" />
+										</div>
+										<div class="archaeo-col-action">
+												<button type="button"
+																class="archaeo-target-btn"
+																data-coord-type="azimuth"
+																data-spinner-prop="ArchaeoLines.customAzimuth2"
+																data-label-prop="ArchaeoLines.customAzimuth2Label"
+																title="<?= tr("From selected object (if any)")?>">
+														<span class="ui-icon ui-icon-circle-plus"></span>
+												</button>
+										</div>
+								</div>
+
+								<!-- Row 3: Custom Altitude 1 -->
+								<div class="archaeo-line-row">
+										<!-- Column 1: Color picker -->
+										<div class="archaeo-col-color">
+												<div class="color-picker-wrapper" data-prop="ArchaeoLines.customAltitude1Color">
+														<div class="color-swatch" style="background-color: rgb(255,170,255);"></div>
+												</div>
+										</div>
+
+										<!-- Column 2: Enable checkbox -->
+										<div class="archaeo-col-flag">
+												<label class="btn-toggle" title="<?= tr("Enable this line")?>">
+														<input type="checkbox" class="stelproperty"
+																	 name="ArchaeoLines.flagShowCustomAltitude1" />
+														<span><?= tr("Custom Altitude 1")?></span>
+												</label>
+										</div>
+
+										<!-- Column 3: Value spinner -->
+										<div class="archaeo-col-value">
+												<input class="spinner stelproperty"
+															 name="ArchaeoLines.customAltitude1"
+															 data-min="0" data-max="90"
+															 data-step="0.001" data-numberformat="n3"
+															 title="<?= tr("Altitude (degrees)")?>" />
+										</div>
+
+										<!-- Column 4: Label text -->
+										<div class="archaeo-col-label">
+												<input type="text" class="stelproperty-text"
+															 name="ArchaeoLines.customAltitude1Label"
+															 value="Aldhanab"
+															 placeholder="<?= tr("Label")?>"
+															 title="<?= tr("Custom label")?>" />
+										</div>
+
+										<!-- Column 5: Target button (FIXED in HTML) -->
+										<div class="archaeo-col-action">
+												<button type="button"
+																class="archaeo-target-btn"
+																data-coord-type="altitude"
+																data-spinner-prop="ArchaeoLines.customAltitude1"
+																data-label-prop="ArchaeoLines.customAltitude1Label"
+																title="<?= tr("From selected object (if any)")?>">
+														<span class="ui-icon ui-icon-circle-plus"></span>
+												</button>
+										</div>
+								</div>
+
+								<!-- Row 4: Custom Altitude 2 -->
+								<div class="archaeo-line-row">
+										<div class="archaeo-col-color">
+												<div class="color-picker-wrapper" data-prop="ArchaeoLines.customAltitude2Color">
+														<div class="color-swatch" style="background-color: rgb(150,173,77);"></div>
+												</div>
+										</div>
+										<div class="archaeo-col-flag">
+												<label class="btn-toggle" title="<?= tr("Enable this line")?>">
+														<input type="checkbox" class="stelproperty"
+																	 name="ArchaeoLines.flagShowCustomAltitude2" />
+														<span><?= tr("Custom Altitude 2")?></span>
+												</label>
+										</div>
+										<div class="archaeo-col-value">
+												<input class="spinner stelproperty"
+															 name="ArchaeoLines.customAltitude2"
+															 data-min="0" data-max="90"
+															 data-step="0.001" data-numberformat="n3"
+															 title="<?= tr("Altitude (degrees)")?>" />
+										</div>
+										<div class="archaeo-col-label">
+												<input type="text" class="stelproperty-text"
+															 name="ArchaeoLines.customAltitude2Label"
+															 value="Alnair"
+															 placeholder="<?= tr("Label")?>" />
+										</div>
+										<div class="archaeo-col-action">
+												<button type="button"
+																class="archaeo-target-btn"
+																data-coord-type="altitude"
+																data-spinner-prop="ArchaeoLines.customAltitude2"
+																data-label-prop="ArchaeoLines.customAltitude2Label"
+																title="<?= tr("From selected object (if any)")?>">
+														<span class="ui-icon ui-icon-circle-plus"></span>
+												</button>
+										</div>
+								</div>
+
+								<!-- Row 5: Custom Declination 1 -->
+								<div class="archaeo-line-row">
+										<div class="archaeo-col-color">
+												<div class="color-picker-wrapper" data-prop="ArchaeoLines.customDeclination1Color">
+														<div class="color-swatch" style="background-color: rgb(115,255,38);"></div>
+												</div>
+										</div>
+										<div class="archaeo-col-flag">
+												<label class="btn-toggle" title="<?= tr("Enable this line")?>">
+														<input type="checkbox" class="stelproperty"
+																	 name="ArchaeoLines.flagShowCustomDeclination1" />
+														<span><?= tr("Custom Declination 1")?></span>
+												</label>
+										</div>
+										<div class="archaeo-col-value">
+												<input class="spinner stelproperty"
+															 name="ArchaeoLines.customDeclination1"
+															 data-min="-90" data-max="90"
+															 data-step="0.0001" data-numberformat="n3"
+															 title="<?= tr("Declination (J2000 degrees)")?>" />
+										</div>
+										<div class="archaeo-col-label">
+												<input type="text" class="stelproperty-text"
+															 name="ArchaeoLines.customDeclination1Label"
+															 value="α Ind"
+															 placeholder="<?= tr("Label")?>" />
+										</div>
+										<div class="archaeo-col-action">
+												<button type="button"
+																class="archaeo-target-btn"
+																data-coord-type="declination"
+																data-spinner-prop="ArchaeoLines.customDeclination1"
+																data-label-prop="ArchaeoLines.customDeclination1Label"
+																title="<?= tr("From selected object (if any)")?>">
+														<span class="ui-icon ui-icon-circle-plus"></span>
+												</button>
+										</div>
+								</div>
+
+								<!-- Row 6: Custom Declination 2 -->
+								<div class="archaeo-line-row">
+										<div class="archaeo-col-color">
+												<div class="color-picker-wrapper" data-prop="ArchaeoLines.customDeclination2Color">
+														<div class="color-swatch" style="background-color: rgb(115,128,166);"></div>
+												</div>
+										</div>
+										<div class="archaeo-col-flag">
+												<label class="btn-toggle" title="<?= tr("Enable this line")?>">
+														<input type="checkbox" class="stelproperty"
+																	 name="ArchaeoLines.flagShowCustomDeclination2" />
+														<span><?= tr("Custom Declination 2")?></span>
+												</label>
+										</div>
+										<div class="archaeo-col-value">
+												<input class="spinner stelproperty"
+															 name="ArchaeoLines.customDeclination2"
+															 data-min="-90" data-max="90"
+															 data-step="0.0001" data-numberformat="n3"
+															 title="<?= tr("Declination (J2000 degrees)")?>" />
+										</div>
+										<div class="archaeo-col-label">
+												<input type="text" class="stelproperty-text"
+															 name="ArchaeoLines.customDeclination2Label"
+															 value="Deneb Algedi"
+															 placeholder="<?= tr("Label")?>" />
+										</div>
+										<div class="archaeo-col-action">
+												<button type="button"
+																class="archaeo-target-btn"
+																data-coord-type="declination"
+																data-spinner-prop="ArchaeoLines.customDeclination2"
+																data-label-prop="ArchaeoLines.customDeclination2Label"
+																title="<?= tr("From selected object (if any)")?>">
+														<span class="ui-icon ui-icon-circle-plus"></span>
+												</button>
+										</div>
+								</div>
+
+						</div><!-- .archaeo-custom-lines -->
+				</div><!-- .smallblock -->
+
+        <div class="smallblock">
+            <h3><?= tr("ArchaeoLines")?></h3>
+
+            <div class="inline-block blocklabel">
+
+                <div class="block_row">
+                    <div class="color-picker-wrapper" data-prop="ArchaeoLines.equinoxColor">
+                        <div class="color-swatch" style="background-color: rgb(255,255,128);"></div>
+                    </div>
+                    <label class="btn-toggle">
+                        <input type="checkbox" class="stelproperty" name="ArchaeoLines.flagShowEquinox" />
+                        <?= tr("Equinox line (Equator)")?>
+                    </label>
+                </div>
+
+                <div class="block_row">
+                    <div class="color-picker-wrapper" data-prop="ArchaeoLines.solsticesColor">
+                        <div class="color-swatch" style="background-color: rgb(255,38,38);"></div>
+                    </div>
+                    <label class="btn-toggle">
+                        <input type="checkbox" class="stelproperty" name="ArchaeoLines.flagShowSolstices" />
+                        <?= tr("Solstice Lines")?>
+                    </label>
+                </div>
+
+                <div class="block_row">
+                    <div class="color-picker-wrapper" data-prop="ArchaeoLines.crossquartersColor">
+                        <div class="color-swatch" style="background-color: rgb(255,191,64);"></div>
+                    </div>
+                    <label class="btn-toggle">
+                        <input type="checkbox" class="stelproperty" name="ArchaeoLines.flagShowCrossquarters" />
+                        <?= tr("Crossquarter Lines")?>
+                    </label>
+                </div>
+
+                <div class="block_row">
+                    <div class="color-picker-wrapper" data-prop="ArchaeoLines.majorStandstillColor">
+                        <div class="color-swatch" style="background-color: rgb(64,255,64);"></div>
+                    </div>
+                    <label class="btn-toggle">
+                        <input type="checkbox" class="stelproperty" name="ArchaeoLines.flagShowMajorStandstills" />
+                        <?= tr("Major Lunar Standstill lines")?>
+                    </label>
+                </div>
+
+                <div class="block_row">
+                    <div class="color-picker-wrapper" data-prop="ArchaeoLines.minorStandstillColor">
+                        <div class="color-swatch" style="background-color: rgb(51,191,51);"></div>
+                    </div>
+                    <label class="btn-toggle">
+                        <input type="checkbox" class="stelproperty" name="ArchaeoLines.flagShowMinorStandstills" />
+                        <?= tr("Minor Lunar Standstill lines")?>
+                    </label>
+                </div>
+
+                <div class="block_row">
+                    <div class="color-picker-wrapper" data-prop="ArchaeoLines.polarCirclesColor">
+                        <div class="color-swatch" style="background-color: rgb(64,64,191);"></div>
+                    </div>
+                    <label class="btn-toggle">
+                        <input type="checkbox" class="stelproperty" name="ArchaeoLines.flagShowPolarCircles" />
+                        <?= tr("Polar Circles")?>
+                    </label>
+                </div>
+
+                <div class="block_row">
+                    <div class="color-picker-wrapper" data-prop="ArchaeoLines.zenithPassageColor">
+                        <div class="color-swatch" style="background-color: rgb(191,191,191);"></div>
+                    </div>
+                    <label class="btn-toggle">
+                        <input type="checkbox" class="stelproperty" name="ArchaeoLines.flagShowZenithPassage" />
+                        <?= tr("Declination of Zenith passage")?>
+                    </label>
+                </div>
+
+                <div class="block_row">
+                    <div class="color-picker-wrapper" data-prop="ArchaeoLines.nadirPassageColor">
+                        <div class="color-swatch" style="background-color: rgb(64,64,64);"></div>
+                    </div>
+                    <label class="btn-toggle">
+                        <input type="checkbox" class="stelproperty" name="ArchaeoLines.flagShowNadirPassage" />
+                        <?= tr("Declination of Nadir passage")?>
+                    </label>
+                </div>
+
             </div>
-            <iframe id="s3d_info" class="flex-expand">No scene selected</iframe>
-          </div>
-      </div>		
+
+            <div class="inline-block blocklabel">
+
+                <div class="block_row">
+                    <div class="color-picker-wrapper" data-prop="ArchaeoLines.currentSunColor">
+                        <div class="color-swatch" style="background-color: rgb(255,255,191);"></div>
+                    </div>
+                    <label class="btn-toggle">
+                        <input type="checkbox" class="stelproperty" name="ArchaeoLines.flagShowCurrentSun" />
+                        <?= tr("Current Sun")?>
+                    </label>
+                </div>
+
+                <div class="block_row">
+                    <div class="color-picker-wrapper" data-prop="ArchaeoLines.currentMoonColor">
+                        <div class="color-swatch" style="background-color: rgb(128,255,128);"></div>
+                    </div>
+                    <label class="btn-toggle">
+                        <input type="checkbox" class="stelproperty" name="ArchaeoLines.flagShowCurrentMoon" />
+                        <?= tr("Current Moon")?>
+                    </label>
+                </div>
+
+                <div class="block_row">
+                    <div class="color-picker-wrapper" data-prop="ArchaeoLines.currentPlanetColor">
+                        <div class="color-swatch" style="background-color: rgb(64,204,255);"></div>
+                    </div>
+                    <select id="select_ArchaeoLines_enumShowCurrentPlanet"
+                            class="selectmenu stelproperty display-block"
+                            name="ArchaeoLines.enumShowCurrentPlanet">
+                        <option value="CurrentPlanetNone"><?= tr("Current Planet:")?> <?= tr("None")?></option>
+                        <option value="CurrentPlanetMercury"><?= tr("Current Planet:")?> <?= tr("Mercury")?></option>
+                        <option value="CurrentPlanetVenus"><?= tr("Current Planet:")?> <?= tr("Venus")?></option>
+                        <option value="CurrentPlanetMars"><?= tr("Current Planet:")?> <?= tr("Mars")?></option>
+                        <option value="CurrentPlanetJupiter"><?= tr("Current Planet:")?> <?= tr("Jupiter")?></option>
+                        <option value="CurrentPlanetSaturn"><?= tr("Current Planet:")?> <?= tr("Saturn")?></option>
+                    </select>
+                </div>
+
+                <div class="block_row">
+                    <div class="color-picker-wrapper" data-prop="ArchaeoLines.selectedObjectColor">
+                        <div class="color-swatch" style="background-color: rgb(15,228,228);"></div>
+                    </div>
+                    <label class="btn-toggle">
+                        <input type="checkbox" class="stelproperty" name="ArchaeoLines.flagShowSelectedObject" />
+                        <?= tr("Selected Object")?>
+                    </label>
+                </div>
+
+                <div class="block_row">
+                    <div class="color-picker-wrapper" data-prop="ArchaeoLines.selectedObjectAzimuthColor">
+                        <div class="color-swatch" style="background-color: rgb(255,255,255);"></div>
+                    </div>
+                    <label class="btn-toggle">
+                        <input type="checkbox" class="stelproperty" name="ArchaeoLines.flagShowSelectedObjectAzimuth" />
+                        <?= tr("Selected Object Azimuth")?>
+                    </label>
+                </div>
+
+                <div class="block_row">
+                    <div class="color-picker-wrapper" data-prop="ArchaeoLines.selectedObjectHourAngleColor">
+                        <div class="color-swatch" style="background-color: rgb(255,255,255);"></div>
+                    </div>
+                    <label class="btn-toggle">
+                        <input type="checkbox" class="stelproperty" name="ArchaeoLines.flagShowSelectedObjectHourAngle" />
+                        <?= tr("Selected Object Hour Angle")?>
+                    </label>
+                </div>
+
+                <br />
+
+                <div class="flex-wrap">
+                    <label><?= tr("Line width:")?></label>
+                    <input class="spinner stelproperty"
+                           name="ArchaeoLines.lineWidth"
+                           data-min="1" data-max="5"
+                           data-step="1" data-numberformat="n0" />
+                </div>
+
+            </div>
+        </div><!-- .block reference lines -->
+
+			</div><!-- .flex.flex-wrap -->
+		</div><!-- #sub_tab_ArchaeoLines -->
+
+			<div id="sub_tab_Quasars" class="stelplugin patterns-tab-content" data-plugin="Quasars">
+				<div class="flex flex-wrap">
+					<div class="smallblock">
+					 <h3><?= tr("Settings for quasars")?></h3>
+						<div class="inline-block blocklabel">
+
+							<!-- Checkbox for StelProperty: Quasars.quasarsVisible -->
+							<label class="btn-toggle">
+									<input type="checkbox" class="stelproperty" name="Quasars.quasarsVisible" />
+									<?= tr("Show quasars")?>
+							</label>
+						
+							<!-- Checkbox for StelProperty: Quasars.flagDisplayMode -->
+							<label class="btn-toggle">
+									<input type="checkbox" class="stelproperty" name="Quasars.flagDisplayMode" />
+									<?= tr("Enable display of distribution for quasars")?>
+							</label>
+
+							<!-- Checkbox for StelProperty: Quasars.flagMarkersMode -->
+							<label class="btn-toggle">
+									<input type="checkbox" class="stelproperty" name="Quasars.flagMarkersMode" />
+									<?= tr("Use markers for quasars")?>
+							</label>
+
+							<!-- Checkbox for StelProperty: actionShow_Quasars_dialog -->
+							<label class="btn-toggle">
+									<input type="checkbox" class="stelproperty" name="actionShow_Quasars_dialog" />
+									<?= tr("Show settings dialog")?>
+							</label>
+
+							<label class="color-picker-wrapper" data-prop="Quasars.quasarsColor" style="justify-content: left !important;">
+									<div class="color-swatch" style="background-color: rgb(255,128,102);"></div>
+									<?= tr("Quasars marker color")?>
+							</label>
+							
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div id="sub_tab_Pulsars" class="stelplugin patterns-tab-content" data-plugin="Pulsars">
+				<div class="flex flex-wrap">
+					<div class="smallblock">
+					 <h3><?= tr("Settings for pulsars")?></h3>
+						<div class="inline-block blocklabel">
+						
+							<!-- Checkbox for StelProperty: Pulsars.flagDisplayMode -->
+							<label class="btn-toggle">
+									<input type="checkbox" class="stelproperty" name="Pulsars.flagDisplayMode" />
+									<?= tr("Enable display of distribution for pulsars")?>
+							</label>
+
+							<!-- Checkbox for StelProperty: Pulsars.pulsarsVisible -->
+							<label class="btn-toggle">
+									<input type="checkbox" class="stelproperty" name="Pulsars.pulsarsVisible" />
+									<?= tr("Show pulsars")?>
+							</label>
+
+
+							<!-- Checkbox for StelProperty: actionShow_Pulsars_dialog -->
+							<label class="btn-toggle">
+									<input type="checkbox" class="stelproperty" name="actionShow_Pulsars_dialog" />
+									<?= tr("Show settings dialog")?>							
+							</label>
+							
+						<div class="block_row">
+							<div class="color-picker-wrapper" data-prop="Pulsars.glitchColor">
+									<div class="color-swatch" style="background-color: rgb(51,77,255);"></div>
+							</div>
+							<!-- Checkbox for StelProperty: Pulsars.flagGlitchMode -->
+							<label class="btn-toggle">
+									<input type="checkbox" class="stelproperty" name="Pulsars.flagGlitchMode" />
+									<?= tr("Use separate color for pulsars with glitches")?>
+							</label>
+						</div>
+						
+						<div class="block_row">
+							<label class="color-picker-wrapper" data-prop="Pulsars.markerColor"style="justify-content: left !important;">
+									<div class="color-swatch" style="background-color: rgb(102,128,255);"></div>
+									<?= tr("Pulsars marker color")?>
+							</label>
+						</div>
+						
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+			<div id="sub_tab_NavStars" class="stelplugin patterns-tab-content" data-plugin="NavStars">
+				<div class="flex flex-wrap">
+					<div class="smallblock">
+						<h3><?= tr("Settings")?></h3>
+						<div class="inline-block blocklabel">
+						<!-- Checkbox for StelAction: actionShow_NavStars -->
+						<label class="btn-toggle">
+							<input type="checkbox" class="stelaction" name="actionShow_NavStars"/>
+								<?= tr("Navigational Stars")?>
+						</label>
+
+						<!-- Checkbox for StelProperty: actionShow_NavStars_dialog -->
+						<label class="btn-toggle">
+								<input type="checkbox" class="stelproperty" name="actionShow_NavStars_dialog"  />
+								<?= tr("Show settings dialog")?>
+						</label>
+						
+						<!-- Checkbox for StelProperty: NavStars.displayAtStartup -->
+						<label class="btn-toggle">
+								<input type="checkbox" class="stelproperty" name="NavStars.displayAtStartup"  />
+								<?= tr("Enable display at startup")?>
+						</label>
+
+						<!-- Checkbox for StelProperty: NavStars.highlightWhenVisible -->
+						<label class="btn-toggle">
+								<input type="checkbox" class="stelproperty" name="NavStars.highlightWhenVisible"  />
+								<?= tr("Only highlight when visible")?>
+						</label>
+
+						<!-- Checkbox for StelProperty: NavStars.limitInfoToNavStars -->
+						<label class="btn-toggle">
+								<input type="checkbox" class="stelproperty" name="NavStars.limitInfoToNavStars"  />
+								<?= tr("Only show extra information for marked Navigation Stars")?>
+						</label>
+
+						<!-- Checkbox for StelProperty: NavStars.tabulatedDisplay -->
+						<label class="btn-toggle">
+								<input type="checkbox" class="stelproperty" name="NavStars.tabulatedDisplay"  />
+								<?= tr("Show information as a tabulated list")?>
+						</label>
+
+						<!-- Checkbox for StelProperty: NavStars.showExtraDecimals -->
+						<label class="btn-toggle">
+								<input type="checkbox" class="stelproperty" name="NavStars.showExtraDecimals"  />
+								<?= tr("Show extra decimals in info")?>
+						</label>
+
+						<!-- Checkbox for StelProperty: NavStars.upperLimb -->
+						<label class="btn-toggle">
+								<input type="checkbox" class="stelproperty" name="NavStars.upperLimb"  />
+								<?= tr("Use upper limb for Sun and Moon")?>
+						</label>
+
+						<!-- Checkbox for StelProperty: NavStars.useUTCTime -->
+						<label class="btn-toggle">
+								<input type="checkbox" class="stelproperty" name="NavStars.useUTCTime"  />
+								<?= tr("Use UTC time when navigational stars are displayed")?>
+						</label>
+						</div>
+
+					</div>
+				</div>				
+			</div>
+
+			<div id="sub_tab_Exoplanets" class="stelplugin patterns-tab-content" data-plugin="Exoplanets">
+				<div class="flex flex-wrap">
+					<div class="smallblock">
+					<h3><?= tr("Settings for exoplanets")?></h3>
+					
+						<div class="inline-block blocklabel">
+						<label class="btn-toggle">					
+						<input type="checkbox" class="stelaction" name="actionShow_Exoplanets"/>
+						<?= tr("Show exoplanets")?>
+						</label>
+
+						<!-- Checkbox for StelAction: actionShow_Exoplanets_ConfigDialog -->
+						<label class="btn-toggle">
+								<input type="checkbox" class="stelaction" name="actionShow_Exoplanets_ConfigDialog" />
+								<?= tr("Show settings dialog")?>
+						</label>
+
+						<!-- Checkbox for StelAction: actionShow_Exoplanets_Distribution -->
+						<label class="btn-toggle">
+								<input type="checkbox" class="stelaction" name="actionShow_Exoplanets_Distribution" />
+								<?= tr("Enable display of distribution for exoplanets")?>
+						</label>
+
+						<!-- Checkbox for StelAction: actionShow_Exoplanets_Timeline -->
+						<label class="btn-toggle">
+								<input type="checkbox" class="stelaction" name="actionShow_Exoplanets_Timeline" />
+								<?= tr("Enable timeline discovery of exoplanets")?>
+						</label>
+
+						<!-- Checkbox for StelAction: actionShow_Exoplanets_Habitable -->
+						<label class="btn-toggle">
+								<input type="checkbox" class="stelaction" name="actionShow_Exoplanets_Habitable" />
+								<?= tr("Enable display of the potential habitable exoplanets only")?>
+						</label>
+
+						<!-- Checkbox for StelAction: actionShow_Exoplanets_Designations -->
+						<label class="btn-toggle">
+								<input type="checkbox" class="stelaction" name="actionShow_Exoplanets_Designations" />
+								<?= tr("Enable display of designations for exoplanets")?>
+						</label>
+
+						<!-- Checkbox for StelAction: actionShow_Exoplanets_Numbers -->
+						<label class="btn-toggle">
+								<input type="checkbox" class="stelaction" name="actionShow_Exoplanets_Numbers" />
+								<?= tr("Enable display number of exoplanets in the system")?>
+						</label>
+						
+						<!-- COLOR PICKER (jQuery UI spinners) for StelProperty: Exoplanets.habitableColor -->
+						<label class="color-picker-wrapper" data-prop="Exoplanets.habitableColor" style="justify-content: left !important;">
+								<div class="color-swatch" style="background-color: rgb(255,128,0);"></div>
+								<?= tr("Marker color for potential habitable exoplanets")?>											
+						</label>
+
+						<!-- COLOR PICKER (jQuery UI spinners) for StelProperty: Exoplanets.markerColor -->
+						<label class="color-picker-wrapper" data-prop="Exoplanets.markerColor" style="justify-content: left !important;">
+								<div class="color-swatch" style="background-color: rgb(102,230,128);"></div>
+								<?= tr("Exoplanets marker color")?>											
+						</label>					
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div id="sub_tab_EquationOfTime" class="stelplugin patterns-tab-content" data-plugin="EquationOfTime">
+				<div class="flex flex-wrap">
+					<div class="smallblock">
+					<h3><?= tr("Equation of Time")?></h3>
+					
+						<div class="inline-block blocklabel">
+
+							<!-- Checkbox for StelProperty: EquationOfTime.showEOT -->
+							<label class="btn-toggle">
+									<input type="checkbox" class="stelproperty" name="EquationOfTime.showEOT" />
+									<?= tr("Show value of the equation of time")?>
+							</label>
+
+							<!-- Checkbox for StelProperty: actionShow_EquationOfTime_dialog -->
+							<label class="btn-toggle">
+									<input type="checkbox" class="stelproperty" name="actionShow_EquationOfTime_dialog" />
+									<?= tr("Show settings dialog")?>
+							</label>
+
+							<div class="color-picker-wrapper" data-prop="EquationOfTime.textColor" style="justify-content: left !important;">
+									<div class="color-swatch" style="background-color: rgb(0,128,255);"></div>
+							</div>
+		
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div id="sub_tab_PointerCoord" class="stelplugin patterns-tab-content" data-plugin="PointerCoordinates">
+				<div class="flex flex-wrap">
+					<div class="smallblock">
+					<h3><?= tr("Pointer Coordinates")?></h3>
+					
+						<div class="inline-block blocklabel">
+
+							<!-- Checkbox for StelProperty: PointerCoordinates.enableAtStartup -->
+							<label class="btn-toggle">
+									<input type="checkbox" class="stelproperty" name="PointerCoordinates.enableAtStartup" />
+									<?= tr("Enable display of coordinates at startup")?>
+							</label>
+
+							<!-- Checkbox for StelProperty: PointerCoordinates.enabled -->
+							<label class="btn-toggle">
+									<input type="checkbox" class="stelproperty" name="PointerCoordinates.enabled" />
+									<?= tr("Show coordinates of the mouse pointer")?>
+							</label>
+							
+							<!-- Checkbox for StelProperty: actionShow_MousePointer_Coordinates -->
+							<!-- label class="btn-toggle">
+									<input type="checkbox" class="stelproperty" name="actionShow_MousePointer_Coordinates" />
+									actionShow_MousePointer_Coordinates
+							</label -->
+							
+						<div class="block_row">
+							<div class="color-picker-wrapper" data-prop="PointerCoordinates.fontColor" style="justify-content: left !important;">
+									<div class="color-swatch" style="background-color: rgb(255,128,0);"></div>
+							</div>
+							<!-- Spinner for StelProperty: PointerCoordinates.fontSize -->
+							<div class="btn-gen-slider-wrap">
+									<label><?= tr("Font size")?></label>
+									<input class="spinner stelproperty" name="PointerCoordinates.fontSize" data-min="10" data-max="50" data-step="1" data-numberformat="n0" />
+							</div>	
+						</div>
+
+							<!-- Checkbox for StelProperty: PointerCoordinates.showConstellation -->
+							<label class="btn-toggle">
+									<input type="checkbox" class="stelproperty" name="PointerCoordinates.showConstellation" />
+									<?= tr("Show IAU constellation code")?>
+							</label>
+
+							<!-- Checkbox for StelProperty: PointerCoordinates.showCoordinatesButton -->
+							<label class="btn-toggle">
+									<input type="checkbox" class="stelproperty" name="PointerCoordinates.showCoordinatesButton" />
+									<?= tr("Show plug-in button on toolbar")?>
+							</label>
+
+							<!-- Checkbox for StelProperty: PointerCoordinates.showCrossedLines -->
+							<label class="btn-toggle">
+									<input type="checkbox" class="stelproperty" name="PointerCoordinates.showCrossedLines" />
+									<?= tr("Show crossed lines under mouse cursor")?>
+							</label>
+
+							<!-- Checkbox for StelProperty: PointerCoordinates.showElongation -->
+							<label class="btn-toggle">
+									<input type="checkbox" class="stelproperty" name="PointerCoordinates.showElongation" />
+									<?= tr("Show elongation from the Sun in ecliptic longitude")?>
+							</label>
+
+							<!-- Checkbox for StelProperty: actionShow_MousePointer_Coordinates_dialog -->
+							<label class="btn-toggle">
+									<input type="checkbox" class="stelproperty" name="actionShow_MousePointer_Coordinates_dialog" />
+									<?= tr("Show settings dialog")?>
+							</label>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div id="sub_tab_AngleMeasure" class="stelplugin patterns-tab-content" data-plugin="AngleMeasure">
+				<div class="flex flex-wrap">
+					<div class="smallblock flex flex-wrap">
+					<h3><?= tr("Angle Measure")?></h3>
+						<div class="smallblock">
+							<div class="inline-block blocklabel">
+								<!-- Checkbox for StelProperty: AngleMeasure.enabled -->
+								<label class="btn-toggle">
+										<input type="checkbox" class="stelproperty" name="AngleMeasure.enabled" />
+										<?= tr("Angle measure")?>
+								</label>
+								<!-- Checkbox for StelAction: actionShow_Angle_Measure_dialog -->
+								<label class="btn-toggle">
+										<input type="checkbox" class="stelaction" name="actionShow_Angle_Measure_dialog" />
+										<?= tr("Angle measure settings")?>
+								</label>
+							</div>
+						</div>
+						<div class="smallblock">
+							<div class="inline-block blocklabel">
+								<!-- Checkbox for StelProperty: AngleMeasure.flagShowEquatorial -->
+								<label class="btn-toggle">
+										<input type="checkbox" class="stelproperty" name="AngleMeasure.flagShowEquatorial" />
+										<?= tr("Show in Equatorial Coordinates")?>
+								</label>
+
+								<!-- Checkbox for StelProperty: AngleMeasure.flagShowEquatorialPA -->
+								<label class="btn-toggle">
+										<input type="checkbox" class="stelproperty" name="AngleMeasure.flagShowEquatorialPA" />
+										<?= tr("Display with position angle")?>
+								</label>
+
+								<div class="color-picker-wrapper" data-prop="AngleMeasure.equatorialLineColor">
+										<div class="color-swatch" style="background-color: rgb(0,128,255);"></div>
+										<label><?= tr("Line")?></label>
+								</div>
+
+								<div class="color-picker-wrapper" data-prop="AngleMeasure.equatorialTextColor">
+										<div class="color-swatch" style="background-color: rgb(0,128,255);"></div>
+										<label><?= tr("Text")?></label>
+								</div>
+							</div>
+						</div>
+						<div class="smallblock">
+							<div class="inline-block blocklabel">
+								<!-- Checkbox for StelProperty: AngleMeasure.flagShowHorizontal -->
+								<label class="btn-toggle">
+										<input type="checkbox" class="stelproperty" name="AngleMeasure.flagShowHorizontal" />
+										<?= tr("Show in Horizontal Coordinates")?>
+								</label>
+
+								<!-- Checkbox for StelProperty: AngleMeasure.flagShowHorizontalPA -->
+								<label class="btn-toggle">
+										<input type="checkbox" class="stelproperty" name="AngleMeasure.flagShowHorizontalPA" />
+										<?= tr("Display with position angle")?>
+								</label>
+
+								<!-- Checkbox for StelProperty: AngleMeasure.flagShowHorizontalStartSkylinked -->
+								<label class="btn-toggle">
+										<input type="checkbox" class="stelproperty" name="AngleMeasure.flagShowHorizontalStartSkylinked" />
+										<?= tr("Attach start point to rotating sky")?>
+								</label>
+
+								<!-- Checkbox for StelProperty: AngleMeasure.flagShowHorizontalEndSkylinked -->
+								<label class="btn-toggle">
+										<input type="checkbox" class="stelproperty" name="AngleMeasure.flagShowHorizontalEndSkylinked" />
+										<?= tr("Attach end point to rotating sky")?>
+								</label>
+
+								<div class="color-picker-wrapper" data-prop="AngleMeasure.horizontalLineColor">
+										<div class="color-swatch" style="background-color: rgb(230,153,102);"></div>
+										<?= tr("Line")?>
+								</div>
+
+								<div class="color-picker-wrapper" data-prop="AngleMeasure.horizontalTextColor">
+										<div class="color-swatch" style="background-color: rgb(230,153,102);"></div>
+										<?= tr("Text")?>
+								</div>
+
+							</div>						
+						</div>
+						<div class="smallblock">
+						<h3><?= tr("Options")?></h3>
+							<div class="inline-block blocklabel">
+								<!-- Checkbox for StelProperty: AngleMeasure.dmsFormat -->
+								<label class="btn-toggle">
+										<input type="checkbox" class="stelproperty" name="AngleMeasure.dmsFormat" />
+										<?= tr("Use dms format for angles")?>
+								</label>
+
+								<!-- Checkbox for StelProperty: AngleMeasure.flagFollowCursor -->
+								<label class="btn-toggle">
+										<input type="checkbox" class="stelproperty" name="AngleMeasure.flagFollowCursor" />
+										<?= tr("Show measurements near mouse")?>
+								</label>
+
+								<!-- Checkbox for StelProperty: AngleMeasure.flagPanAndSelect -->
+								<label class="btn-toggle">
+										<input type="checkbox" class="stelproperty" name="AngleMeasure.flagPanAndSelect" />
+										<?= tr("Allow snap to selected object")?>
+								</label>
+							</div>						
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div id="sub_tab_TimeNavigator" class="stelplugin patterns-tab-content" data-plugin="TimeNavigator">
+				<div class="flex flex-wrap">
+					<div class="smallblock flex flex-wrap">
+					<h3><?= tr("Time Navigator")?></h3>
+
+						<div class="smallblock">
+						<h3><?= tr("Settings")?></h3>
+							<div class="inline-block blocklabel">
+								<!-- Checkbox for StelProperty: actionShow_TimeNavigator_dialog -->
+								<label class="btn-toggle">
+										<input type="checkbox" class="stelproperty" name="actionShow_TimeNavigator_dialog" />
+										<?= tr("Show Time Navigator window")?>
+								</label>
+								<!-- Checkbox for StelProperty: TimeNavigator.flagShowButton -->
+								<label class="btn-toggle">
+										<input type="checkbox" class="stelproperty" name="TimeNavigator.flagShowButton" />
+										<?= tr("Show plug-in button on toolbar")?>
+								</label>
+								<!-- Checkbox for StelProperty: TimeNavigator.flagSelectObject -->
+								<label class="btn-toggle">
+										<input type="checkbox" class="stelproperty" name="TimeNavigator.flagSelectObject" />
+										<?= tr("Select object at event")?>
+								</label>
+								<!-- Checkbox for StelProperty: TimeNavigator.flagCenterView -->
+								<label class="btn-toggle">
+										<input type="checkbox" class="stelproperty" name="TimeNavigator.flagCenterView" />
+										<?= tr("Center view on object at event")?>
+								</label>
+							</div>						
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div id="sub_tab_LensDistortionEstimator" class="stelplugin patterns-tab-content" data-plugin="LensDistortionEstimator">
+				<div class="flex flex-wrap">
+					<div class="smallblock flex flex-wrap">
+					<h3><?= tr("Lens Distortion Estimator")?></h3>
+						<div class="smallblock">
+						<h3><?= tr("Settings")?></h3>
+							<div class="inline-block blocklabel">
+								<!-- Checkbox for StelProperty: LensDistortionEstimator.imageEnabled -->
+								<label class="btn-toggle">
+										<input type="checkbox" class="stelproperty" name="LensDistortionEstimator.imageEnabled" />
+										<?= tr("Show image")?>
+								</label>
+								<div class="block_row">
+									<div class="color-picker-wrapper" data-prop="LensDistortionEstimator.pointMarkerColor">
+											<div class="color-swatch" style="background-color: rgb(255,0,0);"></div>
+											<label><?= tr("normal")?></label>
+									</div>
+									<div class="color-picker-wrapper" data-prop="LensDistortionEstimator.selectedPointMarkerColor">
+											<div class="color-swatch" style="background-color: rgb(0,191,0);"></div>
+											<label><?= tr("selected")?></label>
+									</div>
+									<!-- Checkbox for StelProperty: LensDistortionEstimator.pointMarkersEnabled -->
+									<label class="btn-toggle">
+											<input type="checkbox" class="stelproperty" name="LensDistortionEstimator.pointMarkersEnabled" />
+											<?= tr("Mark picked points")?>
+									</label>
+								</div>								
+								<div class="block_row">
+									<div class="color-picker-wrapper" data-prop="LensDistortionEstimator.projectionCenterMarkerColor">
+											<div class="color-swatch" style="background-color: rgb(64,128,128);"></div>
+									</div>
+									<!-- Checkbox for StelProperty: LensDistortionEstimator.projectionCenterMarkerEnabled -->
+									<label class="btn-toggle">
+											<input type="checkbox" class="stelproperty" name="LensDistortionEstimator.projectionCenterMarkerEnabled" />
+											<?= tr("Mark center of projection")?>
+									</label>
+								</div>
+								<div class="block_row">
+									<div class="color-picker-wrapper" data-prop="LensDistortionEstimator.imageAxesColor">
+											<div class="color-swatch" style="background-color: rgb(255,128,0);"></div>
+									</div>
+									<!-- Checkbox for StelProperty: LensDistortionEstimator.imageAxesEnabled -->
+									<label class="btn-toggle">
+											<input type="checkbox" class="stelproperty" name="LensDistortionEstimator.imageAxesEnabled" />
+											<?= tr("Mark image axes")?>
+									</label>		
+								</div>
+								<!-- Checkbox for StelProperty: LensDistortionEstimator.imgPosResetOnLoadingEnabled -->
+								<label class="btn-toggle">
+										<input type="checkbox" class="stelproperty" name="LensDistortionEstimator.imgPosResetOnLoadingEnabled" />
+										<?= tr("Reset image position on loading")?>
+								</label>
+								<!-- Checkbox for StelProperty: LensDistortionEstimator.dialogVisible -->
+								<label class="btn-toggle">
+										<input type="checkbox" class="stelproperty" name="LensDistortionEstimator.dialogVisible" />
+												<?= tr("Show lens distortion estimator dialog")?>
+								</label>
+							</div>						
+						</div>
+					</div>
+				</div>
+			</div>
+
+				</div><!-- close plugins-patterns-tabs -->
+			</div><!-- close plugins_tab -->
 			
 			<!-- Gamepad Controller Section - Built on W3C Gamepad ui/gpcontroller.js module v2.6.0 -->
 			<div id="tab_gamepad">
@@ -2798,8 +3967,9 @@
 											</div>
 									</div>
 							</div>
-					</section>
-		</div>
+					</div>
+			
+		</div> <!-- id="tabs" -->
 		
     <ul class="ui-corner-all ui-widget-content button32list margin-vertical">
       <li title="<?= tr("Constellation lines")?>"><button class="stelaction icon32 btConstellationLines" name="actionShow_Constellation_Lines"></button></li>
@@ -2820,11 +3990,444 @@
       <li title="<?= tr("Go to home")?>"><button class="stelaction icon32 btGotoHome" name="actionGo_Home_Global"></button></li>
     </ul>
   </div>
-	
   <!-- handled by mainui.js -->
   <div id="noresponse" title='<?= tr("No response from server")?>'>
     <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span><?= tr("No response from server for %1 seconds. Is Stellarium still running?","<span id='noresponsetime'>0</span>")?></p>
   </div>
   <div id="loadindicator"></div>
+	
+	<!-- ============================================================ -->
+	<!-- Sky Culture Help Modals                                       -->
+	<!-- These are hidden by default and rendered as jQuery UI         -->
+	<!-- dialogs on first use. The IDs are referenced by the           -->
+	<!-- data-help-target attribute of the help buttons.               -->
+	<!-- ============================================================ -->
+
+	<!-- Control Panel Help: Constellations -->
+	<div id="help-controls-constellation" style="display:none;" title="<?= tr("Constellation Controls")?>">
+			<div class="tour-help-content">
+					<p class="tour-help-intro">
+							<?= tr("These controls filter, navigate, and select constellations. Settings are remembered while you work with the current culture.")?>
+					</p>
+
+					<h4><?= tr("1. Filter Constellations")?></h4>
+					<p>
+							<strong><?= tr("Visible above horizon only")?>:</strong>
+							<?= tr("Shows only constellations currently above your horizon. When enabled, you will immediately see:")?>
+					</p>
+					<ul>
+							<li><?= tr("A counter in the tab header showing 'visible / total' (e.g. 48 / 88).")?></li>
+							<li><?= tr("A snapshot below the controls showing the observer location, UTC time, and Julian Day at which the filter was applied.")?></li>
+							<li><?= tr("The counter and the snapshot are refreshed automatically on the selected interval, so they always match the sky you see now.")?></li>
+					</ul>
+					<p>
+							<strong><?= tr("Refresh visibility")?>:</strong>
+							<?= tr("Controls how often the snapshot and the filtered list are updated: 60s, 180s, 7min, or Manual. In Manual mode, click the Refresh button to fetch a new snapshot. The refresh interval is shared across all four tabs — changing it here affects Asterisms, Lunar Mansions, and Stars too.")?>
+					</p>
+					<p>
+							<strong><?= tr("Show names as")?>:</strong>
+							<?= tr("Default uses the name from index.json. Translated uses the name in your Stellarium language. Changing this is instant after the first fetch.")?>
+					</p>
+
+					<h4><?= tr("2. Navigate")?></h4>
+					<p>
+							<strong><?= tr("Navigation FOV")?>:</strong>
+							<?= tr("Zoom level applied when you click a constellation. Smaller values = more zoomed in. Useful for detailed views of small constellations.")?>
+					</p>
+					<p>
+							<strong><?= tr("Navigate without Isolation")?>:</strong>
+							<?= tr("Controls whether the constellation is isolated when you click it. When unchecked (default), the selected constellation is isolated: its own lines, boundaries, and artwork are shown, while OTHER constellations are hidden. The behavior of successive selections depends on two settings in the Options panel below:")?>
+					</p>
+					<ul>
+							<li>
+									<strong><?= tr("Constellation selection isolated")?>:</strong>
+									<?= tr("Each newly selected constellation is added to the isolated set. Previously isolated ones remain visible. This lets you build a custom group of constellations on screen.")?>
+							</li>
+							<li>
+									<strong><?= tr("Only last selected")?>:</strong>
+									<?= tr("Only the most recently selected constellation is isolated. Selecting another one automatically releases the previous, so isolation follows your current selection.")?>
+							</li>
+					</ul>
+					<p>
+							<?= tr("When 'Navigate without Isolation' is checked, clicking merely moves the view to the constellation without changing which constellations are isolated. Use this when you want to explore the sky while keeping a fixed set of constellations visible.")?>
+					</p>
+
+					<h4><?= tr("3. Multi-Select Workflow")?></h4>
+					<p>
+							<?= tr("Multi-Select lets you build a custom list of constellations for a tour:")?>
+					</p>
+					<ol>
+							<li><?= tr("(Optional) Enable 'Visible above horizon only' to narrow to tonight's sky.")?></li>
+							<li><?= tr("Enable Multi-Select. Navigation is temporarily disabled and buttons become toggleable.")?></li>
+							<li><?= tr("Click constellations to add/remove them. The counter shows how many are selected.")?></li>
+							<li><?= tr("Click 'Generate Static Array Constellation Tour Script'. Only the selected constellations will be included, in the order they currently appear on screen.")?></li>
+					</ol>
+					<p class="tour-help-note">
+							<?= tr("Note: the Dynamic variant of the tour script (the other Generate button) ignores Multi-Select and always includes every constellation. It is automatically disabled while Multi-Select is active to avoid confusion.")?>
+					</p>
+					<p class="tour-help-note">
+							<?= tr("Example: Enable Multi-Select and click a handful of constellations. The generated script will contain exactly those, in the current sort order.")?>
+					</p>
+			</div>
+	</div>
+
+	<!-- Control Panel Help: Asterisms -->
+	<div id="help-controls-asterism" style="display:none;" title="<?= tr("Asterism Controls")?>">
+			<div class="tour-help-content">
+					<p class="tour-help-intro">
+							<?= tr("These controls filter and navigate asterisms — informal star patterns within constellations (e.g. the Big Dipper, the Teapot).")?>
+					</p>
+
+					<h4><?= tr("1. Filter Asterisms")?></h4>
+					<p>
+							<strong><?= tr("Visible above horizon only")?>:</strong>
+							<?= tr("Shows only asterisms currently above your horizon. On first activation the list is fetched from Stellarium (may take a moment for large cultures). The counter and the location/time snapshot below the controls are refreshed automatically on the selected interval.")?>
+					</p>
+					<p>
+							<strong><?= tr("Refresh visibility")?>:</strong>
+							<?= tr("60s / 180s / 7min / Manual. In Manual mode, click the Refresh button to fetch a new snapshot. The interval is shared across all four tabs.")?>
+					</p>
+					<p>
+							<strong><?= tr("Show names as")?>:</strong>
+							<?= tr("Default (from index.json) or Translated (from your Stellarium language).")?>
+					</p>
+
+					<h4><?= tr("2. Navigate")?></h4>
+					<p>
+							<strong><?= tr("Navigation FOV")?>:</strong>
+							<?= tr("Zoom level applied when you click an asterism. Asterisms are usually smaller than constellations, so a smaller FOV may give a better view.")?>
+					</p>
+
+					<h4><?= tr("3. Multi-Select Workflow")?></h4>
+					<p>
+							<?= tr("Multi-Select builds a custom list of asterisms for a tour:")?>
+					</p>
+					<ol>
+							<li><?= tr("(Optional) Filter by visibility to see only what is up tonight.")?></li>
+							<li><?= tr("Enable Multi-Select. The counter shows how many you have picked.")?></li>
+							<li><?= tr("Click 'Generate Asterisms Tour Script'. Only the selected asterisms will be included, in the current display order.")?></li>
+					</ol>
+					<p class="tour-help-note">
+							<?= tr("Example: Select only the asterisms of one season (e.g. the Summer Triangle, the Teapot) for a themed tour.")?>
+					</p>
+			</div>
+	</div>
+
+	<!-- Control Panel Help: Lunar Mansions -->
+	<div id="help-controls-lunar" style="display:none;" title="<?= tr("Lunar Mansion Controls")?>">
+			<div class="tour-help-content">
+					<p class="tour-help-intro">
+							<?= tr("These controls filter and navigate lunar mansions — divisions of the Moon's path across the sky, used in many cultures (Arabic, Chinese, Indian).")?>
+					</p>
+
+					<h4><?= tr("1. Filter Mansions")?></h4>
+					<p>
+							<strong><?= tr("Visible above horizon only")?>:</strong>
+							<?= tr("Shows only mansions currently above your horizon. The counter and the location/time snapshot below the controls are refreshed automatically on the selected interval.")?>
+					</p>
+					<p>
+							<strong><?= tr("Refresh visibility")?>:</strong>
+							<?= tr("60s / 180s / 7min / Manual. In Manual mode, click the Refresh button to fetch a new snapshot. The interval is shared across all four tabs.")?>
+					</p>
+					<p>
+							<strong><?= tr("Show names as")?>:</strong>
+							<?= tr("Default (from index.json) or Translated (from your Stellarium language).")?>
+					</p>
+
+					<h4><?= tr("2. Navigate")?></h4>
+					<p>
+							<strong><?= tr("Navigation FOV")?>:</strong>
+							<?= tr("Zoom level applied when you click a mansion. Mansions are often large, so a wider FOV may show the full station.")?>
+					</p>
+
+					<h4><?= tr("3. Multi-Select Workflow")?></h4>
+					<p>
+							<?= tr("Multi-Select allows focusing on specific stations of the Moon:")?>
+					</p>
+					<ol>
+							<li><?= tr("(Optional) Filter by visibility to see only what is up tonight.")?></li>
+							<li><?= tr("Enable Multi-Select. Click mansions to select.")?></li>
+							<li><?= tr("Click 'Generate Lunar Mansions Tour Script'. Only the selected mansions will be included, in the current display order.")?></li>
+					</ol>
+					<p class="tour-help-note">
+							<?= tr("Example: Tour only the mansions of one season, or the mansions along the Moon's path for a specific month.")?>
+					</p>
+			</div>
+	</div>
+
+	<!-- Control Panel Help: Stars -->
+	<div id="help-controls-star" style="display:none;" title="<?= tr("Star Controls")?>">
+			<div class="tour-help-content">
+					<p class="tour-help-intro">
+							<?= tr("These controls filter, sort, and group stars. Combined with Multi-Select, they let you build precise star lists for custom tours.")?>
+					</p>
+
+					<h4><?= tr("1. Filter Stars")?></h4>
+					<p>
+							<strong><?= tr("Visible above horizon only")?>:</strong>
+							<?= tr("Shows only stars and celestial objects currently above your horizon. On first activation, data is fetched for every named object in the culture (may take a few seconds for large cultures such as Modern with ~660 entries). Once cached, subsequent toggles are instant.")?>
+					</p>
+					<p>
+							<?= tr("While the filter is active, a snapshot below the controls displays:")?>
+					</p>
+					<ul>
+							<li><?= tr("The observer location (name, latitude, longitude).")?></li>
+							<li><?= tr("The UTC time and the Julian Day of the current snapshot.")?></li>
+							<li><?= tr("The 'visible / total' counter (e.g. 408 / 660).")?></li>
+					</ul>
+					<p>
+							<?= tr("These values are refreshed automatically on the selected interval, so the numbers and the snapshot always refer to the SAME moment.")?>
+					</p>
+					<p>
+							<strong><?= tr("Refresh visibility")?>:</strong>
+							<?= tr("60s / 180s / 7min / Manual. In Manual mode, click the Refresh button to fetch a new snapshot. The interval is shared across all four tabs.")?>
+					</p>
+					<p>
+							<strong><?= tr("Show names as")?>:</strong>
+					</p>
+					<ul>
+							<li><strong><?= tr("Default")?>:</strong> <?= tr("Primary name from index.json.")?></li>
+							<li><strong><?= tr("Cultural Names")?>:</strong> <?= tr("Cultural name from the API when available. Example: 'Matariki' instead of 'HIP 25728'.")?></li>
+							<li><strong><?= tr("Translated Names")?>:</strong> <?= tr("Name translated into your Stellarium language. Example: 'الدبران' for Aldebaran in Arabic.")?></li>
+					</ul>
+
+					<h4><?= tr("2. Sort and Group")?></h4>
+					<p>
+							<strong><?= tr("Sort by")?>:</strong>
+					</p>
+					<ul>
+							<li><strong><?= tr("Name")?>:</strong> <?= tr("Alphabetical order.")?></li>
+							<li><strong><?= tr("Constellation")?>:</strong> <?= tr("Groups stars by their parent IAU constellation. Useful for building tours of specific constellations.")?></li>
+							<li><strong><?= tr("Magnitude")?>:</strong> <?= tr("Sorts by brightness. Ascending = brightest first.")?></li>
+							<li><strong><?= tr("Object Type")?>:</strong> <?= tr("Groups by type: double stars, variable stars, planets, etc.")?></li>
+					</ul>
+					<p>
+							<strong><?= tr("Order")?>:</strong> <?= tr("Ascending or Descending. Click Apply to re-render the list with the new sort. The current sort order is what Multi-Select uses when generating a tour script, so the script matches exactly what you see.")?>
+					</p>
+					<p>
+							<strong><?= tr("Star Type")?>:</strong> <?= tr("Filters by category: Regular stars, Double stars, or Variable stars (any variability type).")?>
+					</p>
+
+					<h4><?= tr("3. Multi-Select Workflow")?></h4>
+					<p>
+							<?= tr("Combine filters + sorting + Multi-Select for precise star tours:")?>
+					</p>
+					<ol>
+							<li><?= tr("Filter: enable 'Visible above horizon only' to limit to tonight's sky.")?></li>
+							<li><?= tr("Sort: choose a criterion (e.g. Magnitude ascending) and click Apply.")?></li>
+							<li><?= tr("Enable Multi-Select. Group headers (when sorting by Constellation or Type) show a 'Select All' button for the whole group.")?></li>
+							<li><?= tr("Click individual stars, or 'Select All' to pick an entire group.")?></li>
+							<li><?= tr("Click 'Generate Stars Tour Script'. The script contains exactly the selected stars, in the CURRENT on-screen order.")?></li>
+					</ol>
+					<p class="tour-help-note">
+							<?= tr("Example 1: Sort by Constellation, find the 'Ori' group, click 'Select All' — the tour will cover all named stars in Orion.")?>
+							<br>
+							<?= tr("Example 2: Sort by Magnitude ascending, select the first 20 — the tour will cover the brightest named objects.")?>
+							<br>
+							<?= tr("Example 3: Filter by visibility + Sort by magnitude — the tour covers tonight's brightest named objects, in brightness order.")?>
+					</p>
+
+					<h4><?= tr("4. Navigate")?></h4>
+					<p>
+							<strong><?= tr("Navigation FOV")?>:</strong>
+							<?= tr("Zoom level applied when you click a star. Smaller values are better for close-up views of individual stars.")?>
+					</p>
+
+					<h4><?= tr("5. Generated Script Metadata")?></h4>
+					<p>
+							<?= tr("When the visibility filter is active, the generated tour script includes extra documentation to make it self-explanatory:")?>
+					</p>
+					<ul>
+							<li><?= tr("A 'VISIBILITY FILTER ACTIVE' section listing the number of objects included (e.g. 408 / 660).")?></li>
+							<li><?= tr("The observer location (name, latitude, longitude, planet) at generation time.")?></li>
+							<li><?= tr("The UTC time and Julian Day of the snapshot.")?></li>
+							<li><?= tr("An optional 'LOCKED OBSERVER POSITION AND TIME' block that pins the script to that exact location and moment. This guarantees the same sky is reproduced when the script is run later or elsewhere. The block can be disabled by commenting out the two 'core.set…' calls.")?></li>
+							<li><?= tr("An optional 'SAVE / RESTORE ORIGINAL POSITION' pair of commented blocks that, if uncommented, return Stellarium to your original location and time after the tour.")?></li>
+					</ul>
+					<p>
+							<?= tr("If you intend to share the script or run it on another computer, keep the locking block enabled. If you prefer the script to use whatever location and time are current at run time, comment the locking block out.")?>
+					</p>
+			</div>
+	</div>
+
+	<!-- Tour Generator Help: Constellations -->
+	<div id="help-constellations" style="display:none;" title="<?= tr("Constellations Tour Generator")?>">
+			<div class="tour-help-content">
+					<p class="tour-help-intro">
+							<?= tr("Generate a Stellarium script that tours through constellations. Two variants are available.")?>
+					</p>
+
+					<h4><?= tr("Dynamic vs Static")?></h4>
+					<ul>
+							<li>
+									<strong><?= tr("Dynamic")?>:</strong>
+									<?= tr("Uses ConstellationMgr.getConstellationsEnglishNames() at runtime. Works with any culture, is portable, and always reflects the current sky culture.")?>
+									<br>
+									<em><?= tr("Note: This variant always includes ALL constellations of the current culture. It ignores Multi-Select.")?></em>
+							</li>
+							<li>
+									<strong><?= tr("Static")?>:</strong>
+									<?= tr("Embeds the constellation names as an array. Self-contained, useful for sharing or for large cultures where dynamic lookup is slow.")?>
+									<br>
+									<em><?= tr("Note: This variant respects Multi-Select. If Multi-Select is active, only the selected constellations are included, in the current display order.")?></em>
+							</li>
+					</ul>
+
+					<h4><?= tr("Multi-Select")?></h4>
+					<p>
+							<?= tr("When Multi-Select is active in the Constellations tab, the Dynamic button is disabled to avoid confusion — because the dynamic script would ignore your selection. Disable Multi-Select to use the dynamic variant, or keep it active and use the Static Array variant.")?>
+					</p>
+
+					<h4><?= tr("Save State")?></h4>
+					<p>
+							<?= tr("'Use save_state.inc' changes HOW the script saves and restores your Stellarium display state (which constellations are shown, which grids are on, the view direction, etc.).")?>
+					</p>
+					<ul>
+							<li>
+									<strong><?= tr("Checked")?>:</strong>
+									<?= tr("The script includes the standard Stellarium file 'save_state.inc' and calls its saveState() / restoreState() helpers. This preserves a much larger set of display options, including grids, nebulae, landscapes, projection, night mode, and the observer location — all in one call. Use this if you plan to share the script or run it on a different machine, where you cannot predict the initial state.")?>
+							</li>
+							<li>
+									<strong><?= tr("Unchecked")?>:</strong>
+									<?= tr("The script saves and restores only the options relevant to constellation lines, labels, boundaries, hulls, and artwork. It is self-contained (no external include file) and changes less of your Stellarium configuration. Use this if you are running the script on your own machine and prefer minimal side effects.")?>
+							</li>
+					</ul>
+					<p class="tour-help-note">
+							<?= tr("Note: 'save_state.inc' must be available in your Stellarium scripts folder. It ships with Stellarium, so this is normally not a problem.")?>
+					</p>
+
+					<h4><?= tr("Additional Options")?></h4>
+					<p>
+							<?= tr("Duration, FOV, line thickness, colors, artwork intensity, and fade effects are all customizable below. Changes are reflected in the generated script.")?>
+					</p>
+
+					<h4><?= tr("Visibility Filter Interaction")?></h4>
+					<p>
+							<?= tr("If the 'Visible above horizon only' filter is active when you generate the script, the script locks the observer location and time to the current snapshot, so the same sky is reproduced. See 'Controls Help' for details, and 'Stars Tour Generator Help' for the full metadata description.")?>
+					</p>
+			</div>
+	</div>
+
+	<!-- Tour Generator Help: Asterisms -->
+	<div id="help-asterisms" style="display:none;" title="<?= tr("Asterisms Tour Generator")?>">
+			<div class="tour-help-content">
+					<p class="tour-help-intro">
+							<?= tr("Generate a Stellarium script that tours through asterisms selected from the current culture.")?>
+					</p>
+
+					<h4><?= tr("Ray Helpers")?></h4>
+					<p>
+							<?= tr("Some asterisms include 'ray helpers' — auxiliary lines that radiate outward to indicate extent. The generated script can toggle these on or off.")?>
+					</p>
+
+					<h4><?= tr("Multi-Select")?></h4>
+					<p>
+							<?= tr("If Multi-Select is active, only selected asterisms are included. Otherwise all asterisms of the culture are used.")?>
+					</p>
+
+					<h4><?= tr("Save State")?></h4>
+					<p>
+							<?= tr("'Use save_state.inc' uses Stellarium's standard include file to save and restore a broader set of display options (grids, nebulae, landscape, projection, night mode, observer location). Unchecked limits the restore to asterism-related options only. See the Constellations Tour Generator Help for a full comparison.")?>
+					</p>
+
+					<h4><?= tr("Additional Options")?></h4>
+					<p>
+							<?= tr("Duration, zoom FOV, colors, line thickness, and fade effects can be customized below.")?>
+					</p>
+			</div>
+	</div>
+
+	<!-- Tour Generator Help: Lunar Mansions -->
+	<div id="help-lunar" style="display:none;" title="<?= tr("Lunar Mansions Tour Generator")?>">
+			<div class="tour-help-content">
+					<p class="tour-help-intro">
+							<?= tr("Generate a Stellarium script that tours through lunar mansions (stations) of the current culture.")?>
+					</p>
+
+					<h4><?= tr("About Lunar Mansions")?></h4>
+					<p>
+							<?= tr("Lunar mansions are divisions of the Moon's path across the sky. Different cultures use different systems: Arabic (28 mansions), Chinese (28 Xiu), Indian (28 Nakshatras).")?>
+					</p>
+
+					<h4><?= tr("Multi-Select")?></h4>
+					<p>
+							<?= tr("If Multi-Select is active, only selected mansions are included. Otherwise all mansions of the culture are used.")?>
+					</p>
+
+					<h4><?= tr("Save State")?></h4>
+					<p>
+							<?= tr("'Use save_state.inc' uses Stellarium's standard include file to save and restore a broader set of display options (grids, nebulae, landscape, projection, night mode, observer location). Unchecked limits the restore to asterism-related options only. See the Constellations Tour Generator Help for a full comparison.")?>
+					</p>
+					
+					<h4><?= tr("Additional Options")?></h4>
+					<p>
+							<?= tr("Duration, zoom FOV, lines color, screen labels, and fade effects can be customized below.")?>
+					</p>
+			</div>
+	</div>
+
+	<!-- Tour Generator Help: Stars -->
+	<div id="help-stars" style="display:none;" title="<?= tr("Stars Tour Generator")?>">
+			<div class="tour-help-content">
+					<p class="tour-help-intro">
+							<?= tr("Generate a Stellarium script that tours through selected stars and celestial objects from the current culture.")?>
+					</p>
+
+					<h4><?= tr("Object Types")?></h4>
+					<p>
+							<?= tr("The generated script can include: stars (HIP), double stars, variable stars, planets, and deep-sky objects (M, NGC, etc.) — whatever the current culture defines.")?>
+					</p>
+
+					<h4><?= tr("Visibility-Filtered Scripts")?></h4>
+					<p>
+							<?= tr("When the 'Visible above horizon only' filter is active, the generated script includes:")?>
+					</p>
+					<ul>
+							<li><?= tr("A header section listing 'Objects included: N / M'.")?></li>
+							<li><?= tr("The observer location, UTC time, and Julian Day at generation time.")?></li>
+							<li><?= tr("A 'LOCKED OBSERVER POSITION AND TIME' block that pins the script to that snapshot.")?></li>
+							<li><?= tr("Optional commented blocks to save and restore your original location and time.")?></li>
+					</ul>
+					<p>
+							<?= tr("This makes the script reproducible: running it later or on another computer produces the same sky. See 'Star Controls Help' section 5 for details.")?>
+					</p>
+
+					<h4><?= tr("Multi-Select Integration")?></h4>
+					<p>
+							<?= tr("Combine Multi-Select with filters and sorting for precise control:")?>
+					</p>
+					<ul>
+							<li><?= tr("Filter by visibility to limit to tonight's sky.")?></li>
+							<li><?= tr("Sort by constellation, then use 'Select All' on groups.")?></li>
+							<li><?= tr("Or select stars individually after sorting by magnitude.")?></li>
+					</ul>
+					<p><?= tr("See 'Controls Help' for the complete workflow.")?></p>
+
+					<h4><?= tr("Save State")?></h4>
+					<p>
+							<?= tr("'Use save_state.inc' saves and restores all display settings. Unchecked manages state manually within the script.")?>
+					</p>
+			</div>
+	</div>
+
+	<!-- Control Panel Help: Zodiac -->
+	<div id="help-controls-zodiac" style="display:none;" title="<?= tr("Zodiac Controls")?>">
+			<div class="tour-help-content">
+					<p class="tour-help-intro">
+							<?= tr("The zodiac signs are the twelve constellations along the ecliptic — the Sun's apparent path across the sky.")?>
+					</p>
+
+					<h4><?= tr("Navigate")?></h4>
+					<p>
+							<?= tr("Click any zodiac sign to center the view on its constellation. The FOV is fixed at 40° for a balanced view of the sign.")?>
+					</p>
+
+					<h4><?= tr("Zodiac Data")?></h4>
+					<p>
+							<?= tr("Zodiac signs are read directly from the culture's index.json file. Not all cultures define zodiac data — if this tab is empty, the current culture doesn't include it.")?>
+					</p>
+			</div>
+	</div>
+
 </body>
 </html>
