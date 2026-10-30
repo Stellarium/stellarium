@@ -944,6 +944,10 @@ void Satellites::restoreDefaults(void)
 
 void Satellites::restoreDefaultTleSources()
 {
+	QStringList urls;
+	/*
+	 * According to Celestrak's own docs, the 'active' group contains everything.
+	 * This older solution fetches all groups, but may increase downloads of just duplicates.
 	// Format: group name, auto-add flag
 	const QMap<QString, bool> celestrak = {
 	        // Special-Interest Satellites
@@ -965,7 +969,6 @@ void Satellites::restoreDefaultTleSources()
 	};
 	// Details: https://celestrak.org/NORAD/documentation/gp-data-formats.php
 	QString celestrackBaseURL = "https://celestrak.org/NORAD/elements/gp.php?GROUP=%1&FORMAT=CSV";
-	QStringList urls;
 	// TLE sources from Celestrak
 	for (auto group = celestrak.begin(); group != celestrak.end(); ++group)
 	{
@@ -975,6 +978,10 @@ void Satellites::restoreDefaultTleSources()
 		else
 			urls << url;
 	}
+	*/
+	// Instead, fetch just one group, all objects:
+	urls << "https://celestrak.org/NORAD/elements/gp.php?GROUP=active&FORMAT=CSV";
+
 	// Other sources and supplemental data from Celestrack
 	urls << "https://www.amsat.org/amsat/ftp/keps/current/nasabare.txt"
 	      << "https://mmccants.org/tles/classfd.zip";
