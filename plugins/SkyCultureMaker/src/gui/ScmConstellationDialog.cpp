@@ -570,8 +570,7 @@ void ScmConstellationDialog::handleDialogSizeChanged(QSizeF size)
 
 void ScmConstellationDialog::markRequiredFieldLabels()
 {
-	QLabel *const labels[] = {ui->enNameLbl, ui->idLbl};
-	for (QLabel *label : labels)
+	for (const auto label : {ui->enNameLbl, ui->idLbl})
 	{
 		label->setText(label->text() + QLatin1Char('*'));
 	}
