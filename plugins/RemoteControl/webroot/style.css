@@ -457,10 +457,10 @@ header img {
 }
 
 .timedisplay {
-	font-family: DejaVuSansMono,"Courier New",monospace;
+	/*font-family: DejaVuSansMono,"Courier New",monospace;*/
 	text-align: center;
 	font-weight: bold;
-	font-size: 14px;
+	font-size: 16px;
 }
 
 #time_jday .timedisplay {
@@ -1173,10 +1173,13 @@ button.button32:active {
 #offset_wrapper .ui-slider {
     margin-bottom: 12px;
 }
+
 #view_fovbuttons, #view_offsetbuttons {
   display: contents;
 }
-#tab_main > .flex > section {
+
+#tab_main > .flex > section,
+#tab_scenery3d > .flex > section {
     flex: 1;
     
 }
@@ -1670,12 +1673,12 @@ button.button32:active {
 .stelproperty-text {
     flex: 1;
     min-width: 120px;
-    padding: 4px 8px;
+    padding: 8px 8px;
     background: #2A2C2E;
     color: #DCDBDA;
     border: 1px solid #5D5F62;
     border-radius: 3px;
-    font-size: 11px;
+    font-size: 12px;
     font-family: 'DejaVuSans', Verdana, Helvetica, Arial, sans-serif;
     transition: border-color 0.2s ease;
 }
@@ -1895,7 +1898,11 @@ button.button32:active {
 		
 	 #loc_details_grid {
 			grid-template-columns: repeat(1, minmax(0, 1fr));
-		}		
+		}
+		
+		.scrollselect {
+			min-width: 120px;
+		}
 }
 
 @media (max-width: 600px) {
@@ -1971,11 +1978,7 @@ button.button32:active {
 	
 		#loc_searchlist {
 			min-width: 0%;
-		}
-	
-		.loc_row > label {
-			flex: 0 0 20px;
-		}		
+		}	
 
 		#loc_details_grid {
 			grid-template-columns: 1fr;
@@ -1990,15 +1993,18 @@ button.button32:active {
 			align-items: stretch;
 			gap: 2px;
 		}
+		
 		.loc_row > label {
 			flex: 0 0 auto;
 			text-align: left;
 			width: auto;
 		}
+		
 		.loc_row > input,
 		.loc_row > select {
 			width: 100%;
 		}
+		
 		.scrollselect {
 			min-width: fit-content;
 		}
@@ -2040,3 +2046,29 @@ button.button32:active {
         font-size: 9px;
     }
 }
+
+
+.block_row {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	margin: 4px 0;
+	min-width: 0;
+}
+
+.block_row > label {
+	flex: 1 0 90px;           /* fixed label column */
+	text-align: left;
+	color: #000;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.block_row > input,
+.block_row > select {
+	flex: 1 1 auto;
+	min-width: 0;             /* allow shrinking inside flex */
+	box-sizing: border-box;
+}
+
