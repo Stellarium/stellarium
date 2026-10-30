@@ -1117,5 +1117,9 @@ define(["jquery", "api/remotecontrol", "api/viewcontrol", "api/actions", "api/pr
 				initDescriptionDirection: initDescriptionDirection
     };
 
+		if (typeof window !== 'undefined') {
+				window._stelUtils = publ;
+		}
+
     return publ;
 });
