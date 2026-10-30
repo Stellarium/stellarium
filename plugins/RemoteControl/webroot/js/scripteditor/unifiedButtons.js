@@ -75,6 +75,24 @@ define(["jquery", "api/remotecontrol", "api/actions", "api/properties"],
     }
 
     // ============================================================
+    // INDENTATION HELPER
+    // ============================================================
+
+    /**
+     * Build an indentation string from a level number.
+     * @private
+     * @param {number} level - Number of indentation levels (each = 4 spaces)
+     * @returns {string} Indentation string
+     */
+    function indentStr(level) {
+        var n = parseInt(level, 10) || 0;
+        if (n < 0) n = 0;
+        var out = '';
+        for (var i = 0; i < n; i++) out += '    ';
+        return out;
+    }
+
+    // ============================================================
     // GENERATE UNIQUE UPDATE ID
     // ============================================================
 
@@ -135,6 +153,8 @@ define(["jquery", "api/remotecontrol", "api/actions", "api/properties"],
          * @param {Object} [config.attrs] - Additional data attributes
          * @param {string} [config.icon] - Custom icon (overrides default)
          * @param {boolean} [config.showIcon=true] - Whether to show the state icon
+         * @param {number} [config.indent=0] - Indentation level (each = 4 spaces)
+         * @param {boolean} [config.pretty=false] - Pretty-print attributes on separate lines
          * @returns {string} HTML string
          */
         createButton: function(config) {
@@ -147,6 +167,10 @@ define(["jquery", "api/remotecontrol", "api/actions", "api/properties"],
             var attrs = config.attrs || {};
             var customIcon = config.icon || null;
             var showIcon = config.showIcon !== undefined ? config.showIcon : true;
+            var indent = config.indent || 0;
+            var pretty = config.pretty || false;
+
+            var ind = indentStr(indent);
 
             if (!name) {
                 console.error('[ButtonSystem] createButton: Missing name');
@@ -222,29 +246,55 @@ define(["jquery", "api/remotecontrol", "api/actions", "api/properties"],
             }
 
             // Build the button HTML
-            var html = '<button type="button" ' +
-                       'class="' + cssClass + '" ' +
-                       'name="' + escapeAttr(name) + '" ' +
-                       'data-type="' + escapeAttr(type) + '" ' +
-                       'data-ischecked="' + isChecked + '" ' +
-                       'data-ischeckable="' + isCheckable + '" ' +
-                       'title="' + escapeAttr(title) + '" ' +
-                       'aria-label="' + escapeAttr(label) + '" ' +
-                       //'role="button"' +
-                       extraAttrs +
-                       '>';
+            var html = '';
 
-            // Add state icon
-            if (showIcon && stateIcon) {
-                html += stateIcon;
+            if (pretty) {
+                // Pretty-print: each attribute on its own line
+                var attrIndent = ind + '        ';
+                html += ind + '<button type="button"\n';
+                html += attrIndent + 'class="' + cssClass + '"\n';
+                html += attrIndent + 'name="' + escapeAttr(name) + '"\n';
+                html += attrIndent + 'data-type="' + escapeAttr(type) + '"\n';
+                html += attrIndent + 'data-ischecked="' + isChecked + '"\n';
+                html += attrIndent + 'data-ischeckable="' + isCheckable + '"\n';
+                html += attrIndent + 'title="' + escapeAttr(title) + '"\n';
+                html += attrIndent + 'aria-label="' + escapeAttr(label) + '"';
+                if (extraAttrs) html += '\n' + attrIndent + extraAttrs.trim().replace(/ /g, '\n' + attrIndent);
+                html += '>\n';
+
+                if (showIcon && stateIcon) {
+                    html += ind + '    ' + stateIcon + '\n';
+                }
+                if (label) {
+                    html += ind + '    <span class="action-text">' + escapeHtml(label) + '</span>\n';
+                }
+                html += ind + '</button>';
+            } else {
+                // Compact: single line (original behavior)
+                html += ind + '<button type="button" ' +
+                        'class="' + cssClass + '" ' +
+                        'name="' + escapeAttr(name) + '" ' +
+                        'data-type="' + escapeAttr(type) + '" ' +
+                        'data-ischecked="' + isChecked + '" ' +
+                        'data-ischeckable="' + isCheckable + '" ' +
+                        'title="' + escapeAttr(title) + '" ' +
+                        'aria-label="' + escapeAttr(label) + '" ' +
+                        extraAttrs +
+                        '>';
+
+                // Add state icon
+                if (showIcon && stateIcon) {
+                    html += stateIcon;
+                }
+
+                // Add label
+                if (label) {
+                    html += '<span class="action-text">' + escapeHtml(label) + '</span>';
+                }
+
+                html += '</button>';
             }
 
-            // Add label
-            if (label) {
-                html += '<span class="action-text">' + escapeHtml(label) + '</span>';
-            }
-
-            html += '</button>';
             return html;
         },
 
@@ -270,6 +320,7 @@ define(["jquery", "api/remotecontrol", "api/actions", "api/properties"],
          * @param {string} config.label - Display label
          * @param {string} config.value - Current value
          * @param {Object} [config.attrs] - Additional data attributes
+         * @param {number} [config.indent=0] - Indentation level (each = 4 spaces)
          * @returns {string} HTML string
          */
         createTextInput: function(config) {
@@ -277,6 +328,11 @@ define(["jquery", "api/remotecontrol", "api/actions", "api/properties"],
             var label = config.label || name || '';
             var value = config.value || '';
             var attrs = config.attrs || {};
+            var indent = config.indent || 0;
+
+            var ind = indentStr(indent);
+            var ind1 = indentStr(indent + 1);
+            var ind2 = indentStr(indent + 2);
 
             if (!name) {
                 console.error('[ButtonSystem] createTextInput: Missing name');
@@ -290,21 +346,20 @@ define(["jquery", "api/remotecontrol", "api/actions", "api/properties"],
                 }
             }
 
-            var html = '<div class="stelproperty-text-wrap" data-prop="' + escapeAttr(name) + '">';
-            html += '    <label>' + escapeHtml(label) + '</label>';
-            html += '    <div class="text-input-row">';
-            html += '        <input type="text" class="' + this.CLASSES.PROPERTY_TEXT + '" name="' + escapeAttr(name) + '" ';
-            html += '            value="' + escapeAttr(value) + '" ';
-            html += '            placeholder="' + escapeAttr(tr("Enter value...")) + '" ';
-            html += extraAttrs + ' />';
-            html += '        <button class="stelproperty-text-apply" title="' + escapeAttr(tr("Apply value")) + '">';
-            html += '            ' + escapeHtml(tr("Apply"));
-            html += '        </button>';
-            html += '        <button class="stelproperty-text-reset" title="' + escapeAttr(tr("Reset to server value")) + '">';
-            html += '            ' + escapeHtml(tr("Reset"));
-            html += '        </button>';
-            html += '    </div>';
-            html += '</div>';
+            var html = ind + '<div class="stelproperty-text-wrap" data-prop="' + escapeAttr(name) + '">\n';
+            html += ind1 + '<label>' + escapeHtml(label) + '</label>\n';
+            html += ind1 + '<div class="text-input-row">\n';
+            html += ind2 + '<input type="text" class="' + this.CLASSES.PROPERTY_TEXT + '" name="' + escapeAttr(name) + '"\n';
+            html += ind2 + '    value="' + escapeAttr(value) + '"\n';
+            html += ind2 + '    placeholder="' + escapeAttr(tr("Enter value...")) + '"' + extraAttrs + ' />\n';
+            html += ind2 + '<button class="stelproperty-text-apply" title="' + escapeAttr(tr("Apply value")) + '">\n';
+            html += ind2 + '    ' + escapeHtml(tr("Apply")) + '\n';
+            html += ind2 + '</button>\n';
+            html += ind2 + '<button class="stelproperty-text-reset" title="' + escapeAttr(tr("Reset to server value")) + '">\n';
+            html += ind2 + '    ' + escapeHtml(tr("Reset")) + '\n';
+            html += ind2 + '</button>\n';
+            html += ind1 + '</div>\n';
+            html += ind + '</div>';
 
             return html;
         },
