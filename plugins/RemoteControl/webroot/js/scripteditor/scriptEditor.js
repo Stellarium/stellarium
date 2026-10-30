@@ -16,7 +16,6 @@
  *   - GREEN = valid function
  *   - RED wavy underline = invalid function (does not exist)
  *   - ORANGE wavy underline = case error (function exists with different casing)
- *   - LIGHT GREEN italic = pending (reference not loaded yet)
  * - Real-time autocomplete with Ctrl+Space
  * - Namespace-aware autocomplete (after dot detection)
  * - Context-aware autocomplete inside parentheses (variables + literals)
@@ -35,9 +34,11 @@
  * - Revalidate button with full document case-sensitive checking
  * - Separate validation for namespace and function name
  * - Independent error detection for each part of "Namespace.function"
- * - Example: "ConstellAtionMgr.getFontSize" marks only "ConstellAtionMgr"
- * - Example: "ConstellationMgr.getFontsize" marks only "getFontsize"
- * - Example: "ConstellAtionMgr.getFontsize" marks both parts
+ * - Example: "ConstellAtionMgr.getFontSize" marks only "ConstellAtionMgr" (orange) case-error
+ * - Example: "ConstellationMgr.getFontsize" marks only "getFontsize" (orange) case-error
+ * - Example: "ConstellAtionMgr.getFontsize" marks both parts (orange) case-error all "Namespace.function"
+ * - Example: "Constellationgr.getFontSize"  marks only "ConstellAtiongr" (red) and marks "getFontSize"
+* - Example: "Constellationgr.getontSize"  marks only "Constellationgr" (red) invailed-error
  * 
  * Script Execution:
  * - Run entire script (Ctrl+Enter)
@@ -262,11 +263,10 @@ define([
     // ----------------------------------------------------------------
     "codemirror", "cm-mode-javascript", "cm-addon-continuelist", "cm-addon-foldcode", "cm-addon-foldgutter", "cm-addon-brace-fold",
 		"cm-addon-indent-fold", "cm-addon-active-line", "cm-addon-matchbrackets", "cm-addon-closebrackets", "cm-addon-show-hint",
-		"cm-addon-javascript-hint", "cm-addon-comment", "cm-addon-searchcursor", "cm-addon-search", "cm-addon-dialog", "cm-addon-placeholder"
-], function(
-    $, scriptApi, rc, propApi, scriptReference, stelUtils,
-    CodeMirror
-) {
+		"cm-addon-javascript-hint", "cm-addon-comment", "cm-addon-searchcursor", "cm-addon-search", "cm-addon-dialog", "cm-addon-placeholder"], 
+		function(
+    $, scriptApi, rc, propApi, scriptReference, stelUtils, CodeMirror)
+		{
     "use strict";
     
 		// Using "showNotification" function from stellarium-utils.js
@@ -1601,26 +1601,6 @@ define([
 				setupQuickReferenceSearch();
 		}
 
-    function buildSnippetsSection() {
-        var $sc = $('#ref-snippets');
-        if (!$sc || !$sc.length) return;
-
-        var sk = Object.keys(codeSnippets);
-        if (sk.length === 0) { $sc.html('<span style="color:rgb(150,150,150);font-size:10px;">No snippets available</span>'); return; }
-
-        var sh = '';
-        for (var k = 0; k < sk.length; k++) {
-            var key = sk[k];
-            var s = codeSnippets[key];
-            sh += '<div class="ref-item" data-snippet="' + key + '">';
-            sh += '<span class="ref-name">' + escapeHtml(s.name) + '</span>';
-            sh += '<span class="ref-desc">' + escapeHtml(s.desc) + '</span>';
-            sh += '</div>';
-        }
-        $sc.html(sh);
-    }
-
-
     function insertAtCursor(text) {
         if (codeMirrorInstance) { codeMirrorInstance.replaceSelection(text); codeMirrorInstance.focus(); }
         else {
@@ -2627,10 +2607,14 @@ define([
 				// STEP 2: DATA STRUCTURES FOR DYNAMIC MODULE NAMES
 				// =====================================================================
 				var moduleNames = [];
-				var builtinsMap = {};
-				var functionsMap = {};
+				var builtinsMap = {}; // Stores all valid namespace.function pairs
+				var functionsMap = {}; // Array of {namespace, function, fullName}
 				var allValidFunctions = [];
-				
+
+				/**
+				 * Build complete functions map from scriptReference
+				 * This is CRITICAL for case-sensitive validation
+				 */		
 				function buildFunctionsMap() {
 						functionsMap = {};
 						allValidFunctions = [];
@@ -2671,6 +2655,9 @@ define([
 						return true;
 				}
 				
+				/**
+				 * Update module names from scriptReference
+				 */				
 				function updateModuleNames() {
 						moduleNames = [];
 						builtinsMap = {};
@@ -2688,27 +2675,37 @@ define([
 								}
 						}
 						
+						// Always include core as fallback						
 						if (!builtinsMap['core']) {
 								builtinsMap['core'] = 'builtin';
 								moduleNames.push('core');
 						}
-						
+
+						// Build functions map after modules are loaded						
 						buildFunctionsMap();
 				}
 				
+				/**
+				 * Case-sensitive validation of function name
+				 * Returns true ONLY if the function exists with EXACT case matching
+				 */
 				function isValidFunctionCaseSensitive(funcName, namespace) {
+						// If scriptReference is not loaded yet, return false
 						if (!scriptReference || !scriptReference.isLoaded()) {
 								return false;
 						}
-						
+
+						// Check if functionsMap is populated						
 						if (Object.keys(functionsMap).length === 0) {
 								buildFunctionsMap();
 						}
 						
 						var key = namespace + '::' + funcName;
 						var isValid = functionsMap[key] === true;
-						
+
+						// Debug log for case errors (only log first few to avoid spam)						
 						if (!isValid && window._debugValidation) {
+								// Check if it's a case-insensitive match (to report case errors)							
 								for (var i = 0; i < allValidFunctions.length; i++) {
 										if (allValidFunctions[i].namespace.toLowerCase() === namespace.toLowerCase() &&
 														allValidFunctions[i].function.toLowerCase() === funcName.toLowerCase()) {
@@ -2729,7 +2726,7 @@ define([
 								updateModuleNames();
 								buildFunctionsMap();
 								if (codeMirrorInstance) {
-										// Dont use  refresh() 
+										// Don't use  refresh() 
 										console.log('[CodeMirror] Module names and functions map updated');
 								}
 						});
@@ -2882,7 +2879,6 @@ define([
 												 '\n' +
 												 '// Write your Stellarium script below...\n',
 						
-						//theme: 'material-darker',
 						theme: 'default',
 						extraKeys: {
 								'Ctrl-Enter': function(cm) { runScript(); },
@@ -2913,7 +2909,7 @@ define([
 										}
 								},
 								'Tab': function(cm) { cm.replaceSelection('    ', 'end'); },
-								'Ctrl-/': function(cm) { cm.execCommand('toggleComment'); },
+								'Ctrl-/': function(cm) { cm.execCommand('toggleComment'); }
 						},
 						
 						hintOptions: {
@@ -2922,29 +2918,7 @@ define([
 								alignWithWord: false
 						}
 				});
-				
-				// =====================================================================
-				// STEP 5: Force Code Folding for Stellarium Mode
-				// =====================================================================
-				/*if (typeof CodeMirror.fold !== 'undefined') {
-						var braceFold = CodeMirror.fold.brace;
-						var indentFold = CodeMirror.fold.indent;
-						
-						if (braceFold || indentFold) {
-								CodeMirror.registerHelper("fold", "stellarium", function(cm, start) {
-										if (braceFold) {
-												var result = braceFold(cm, start);
-												if (result) return result;
-										}
-										if (indentFold) {
-												return indentFold(cm, start);
-										}
-										return null;
-								});
-								console.log('[CodeMirror] Force fold helper registered for stellarium mode');
-						}
-				}*/
-				
+
 				// =====================================================================
 				// STEP 6: SMART BRACKET COMPLETION
 				// =====================================================================
@@ -3089,14 +3063,18 @@ define([
 				// =====================================================================
 				// STEP 9: LINE COUNTER (SCRIPT EDITOR UI)
 				// =====================================================================
+				
+				// Update line counter when content loads				
 				setTimeout(function() {
 						refreshLineCount();
 				}, 100);
 				
+				// Update when content changes				
 				codeMirrorInstance.on('change', function(cm) {
 						refreshLineCount();
 				});
-				
+
+				// Update when performing operations like swapping lines or adding/deleting				
 				codeMirrorInstance.on('swapLineUp', function(cm) {
 						refreshLineCount();
 				});
@@ -3104,15 +3082,24 @@ define([
 				codeMirrorInstance.on('swapLineDown', function(cm) {
 						refreshLineCount();
 				});
+
 				
 				codeMirrorInstance.on('deleteLine', function(cm) {
 						refreshLineCount();
 				});
 				
+				// Update on paste or cut operations
 				codeMirrorInstance.on('paste', function(cm) {
 						setTimeout(function() { refreshLineCount(); }, 10);
 				});
-				
+
+				// Update on delete operations (Ctrl+Shift+D or Ctrl+D)
+				codeMirrorInstance.on('keydown', function(cm, event) {
+						// Ensure that operations affecting line count are updated
+						setTimeout(function() { refreshLineCount(); }, 5);
+				});
+
+				// Update on focus (to ensure after any external operations)				
 				codeMirrorInstance.on('focus', function() {
 						refreshLineCount();
 				});
@@ -3138,6 +3125,8 @@ define([
 				// =====================================================================
 				// STEP 11: VALIDATION SYSTEM (CASE-SENSITIVE) (STELLARIUM MODE)
 				// =====================================================================
+				
+				// Auto-validation Toggle (OFF by default)
 				var autoValidationEnabled = false;
 				var validationTimeout = null;
 				
@@ -3169,6 +3158,7 @@ define([
 				
 				function shouldAutoValidate() { return autoValidationEnabled; }
 				
+				// Helper: Clear all validation marks
 				function clearAllValidationMarks(cm) {
 						if (!cm) return 0;
 						var marks = cm.getAllMarks();
@@ -3257,12 +3247,13 @@ define([
 				 *    (red + wavy underline) to keep the visual language simple.
 				 * 
 				 * Examples:
-				 * - "ConstellAtionMgr.getFontSize"  → marks "ConstellAtionMgr" (red)
-				 *                                      marks "getFontSize" (green)
-				 * - "ConstellationMgr.getFontsize"  → marks "getFontsize" (red)
-				 * - "ConstellAtionMgr.getFontsize"  → marks both parts (red)
-				 * - "ConstellationMgr.getFontSize"  → marks "getFontSize" (green)
-				 * 
+				 * - "ConstellAtionMgr.getFontSize"  → marks "ConstellAtionMgr" (orange) case-error
+				 *                                      marks "getFontSize" (green) valid
+				 * - "ConstellationMgr.getFontsize"  → marks "getFontsize" (orange) case-error
+				 * - "ConstellAtionMgr.getFontsize"  → marks both parts (orange) case-error
+				 * - "ConstellationMgr.getFontSize"  → marks "getFontSize" (green) valid
+				 * - "ConstelltionMgr.getFontSize"   → marks "ConstelltionMgr" (red) invailed
+																							 marks "getFonSize" (green) valid
 				 * @param {CodeMirror} cm - CodeMirror editor instance
 				 * @param {number} lineNum - Line number to validate (0-indexed)
 				 * @returns {Object} Statistics: { count, valid, invalid, caseErrors }
@@ -3358,7 +3349,8 @@ define([
 						
 						return stats;
 				}
-				
+
+				// Validate current line only (for auto-validation)				
 				function validateCurrentLine(cm) {
 						if (!cm) return;
 						var cursor = cm.getCursor();
@@ -3368,6 +3360,7 @@ define([
 						}
 				}
 				
+				// Perform full document validation (for Revalidate button)
 				function fullRevalidateAllFunctions() {
 						if (!codeMirrorInstance) {
 								console.warn('[Revalidate] No editor instance');
@@ -3385,9 +3378,11 @@ define([
 								showNotification(tr("Revalidating functions..."), "info");
 						}
 						
+						// Clear all existing marks and force refresh
 						clearAllValidationMarks(codeMirrorInstance);
 						codeMirrorInstance.refresh();
 						
+						// If scriptReference is not loaded yet, wait for it
 						if (!scriptReference || !scriptReference.isLoaded()) {
 								console.log('[Revalidate] Waiting for scriptReference to load...');
 								if (typeof addOutput === 'function') {
@@ -3446,10 +3441,11 @@ define([
 						}
 				}
 				
+				// Expose global functions for buttons and debugging
 				window.revalidateStelFunctions = fullRevalidateAllFunctions;
 				window._validateAll = fullRevalidateAllFunctions;
 				window._validateLine = function() { validateCurrentLine(codeMirrorInstance); };
-				window._debugValidation = true;// When true show messages in console logs
+				window._debugValidation = false;// When true show messages in console logs
 				
 				// =====================================================================
 				// STEP 12: REAL-TIME VALIDATION & EVENT HANDLERS
@@ -3465,6 +3461,7 @@ define([
 						
 						if (!shouldAutoValidate()) return;
 						
+						// Validate when a function name is likely completed
 						if (change.text && change.text.length === 1) {
 								var typedChar = change.text[0];
 								var isCompletionChar = ['(', ')', ' ', ';', ',', '\n'].includes(typedChar);
@@ -3474,6 +3471,7 @@ define([
 						}
 				});
 				
+				// Validate when cursor moves to a new line (only if auto-validation is enabled)
 				var lastValidatedLine = -1;
 				codeMirrorInstance.on('cursorActivity', function(cm) {
 						if (!shouldAutoValidate()) return;
@@ -3498,6 +3496,7 @@ define([
 						}, 1000);
 				});
 				
+				// Trigger autocomplete on dot (additional handler)
 				codeMirrorInstance.on('keyup', function(cm, event) {
 						if (event.key === '.' && (!cm.state.completionActive || !cm.state.completionActive.isOpen)) {
 								setTimeout(function() { CodeMirror.commands.autocomplete(cm); }, 10);
@@ -3513,6 +3512,8 @@ define([
 								codeMirrorInstance.setValue(savedCode);
 								setTimeout(function() {
 										refreshLineCount();
+										// Optional: auto-validate on load (disabled by default to save performance)
+										// fullRevalidateAllFunctions();										
 								}, 500);
 						}
 				} catch(e) {
@@ -3623,9 +3624,9 @@ define([
 				console.log('  - ✓ Revalidate button with full case checking');
 				console.log('  - ✓ Auto-validation toggle');
 				console.log('  - ✓ Valid function: GREEN bold');
-				console.log('  - ✓ Invalid function: RED underline (only the function name)');
-				console.log('  - ✓ Case error: ORANGE underline (only the function name)');
-				console.log('  - ✓ Pending function: LIGHT GREEN italic');
+				console.log('  - ✓ Invalid function: RED underline (namespace and function name)');
+				console.log('  - ✓ Case error: ORANGE underline (namespace and function name)');
+				console.log('  - ✓ Pending function: LIGHT GREEN');
 		}
 
     // =====================================================================
@@ -4290,15 +4291,20 @@ define([
     // PUBLIC API
     // =====================================================================
 
-    return {
-        init: init,
-        runScript: runScript,
-        runSelection: runSelection,
-        stopScript: stopScript,
-        clearOutput: clearOutput,
-        insertAtCursor: insertAtCursor,
-        loadInstalledScripts: loadInstalledScripts,
-        saveScriptToFile: saveScriptToFile,
-        openScriptFromFile: openScriptFromFile,
-    };
+		return {
+				init: init,
+				runScript: runScript,
+				runSelection: runSelection,
+				stopScript: stopScript,
+				clearOutput: clearOutput,
+				insertAtCursor: insertAtCursor,
+				loadInstalledScripts: loadInstalledScripts,
+				saveScriptToFile: saveScriptToFile,
+				openScriptFromFile: openScriptFromFile,
+				
+				// Editor content access (exposed for cross-module use)
+				setEditorContent: setEditorContent,
+				getEditorContent: getEditorContent,
+				copyToClipboard: copyToClipboard,
+		};
 });
