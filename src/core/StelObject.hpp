@@ -570,6 +570,8 @@ protected:
 
 	//! Format B-V color index information for InfoString (including trailing linebreak).
 	static QString getB_VInfoString(float b_v);
+	//! Format B-V color index information when the value is missing from the catalog.
+	static QString getB_VMissingInfoString();
 	//! Format B-V color index information for Narration (excluding trailing line stop to allow longer combinations).
 	static QString getB_VNarration(float b_v);
 
