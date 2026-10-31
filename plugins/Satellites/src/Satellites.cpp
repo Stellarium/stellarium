@@ -391,6 +391,7 @@ Satellites::Satellites()
 	, autoDisplayEnabled(true)
 	, updateFrequencyHours(0)
 	, showDownloadErrorWarningBox(true)
+	, noErrorDuringUpdate(true)
 	, flagUmbraVisible(false)
 	, flagUmbraAtFixedAltitude(false)
 	, umbraColor(1.0f, 0.0f, 0.0f)
@@ -2769,6 +2770,7 @@ void Satellites::saveDownloadedUpdate(QNetworkReply* reply)
 	else
 	{
 		qWarning().nospace() << "[Satellites] FAILED to download " << reply->url().toString(QUrl::RemoveUserInfo) << ". Error " << reply->error() << ": " << reply->errorString();
+		noErrorDuringUpdate=false;
 		handleErrorReply(reply);
 		emit updateStateChanged(DownloadError);
 	}
@@ -2978,7 +2980,7 @@ void Satellites::updateSatellites(TleDataHash& newTleSets)
 		}
 		else
 		{
-			if (autoRemoveEnabled)
+			if (autoRemoveEnabled && noErrorDuringUpdate)
 				toBeRemoved.append(sat->id);
 			else
 				qWarning() << "[Satellites]" << sat->id << sat->name
@@ -3009,14 +3011,14 @@ void Satellites::updateSatellites(TleDataHash& newTleSets)
 	if (addedCount)
 		std::sort(satellites.begin(), satellites.end());
 	
-	if (autoRemoveEnabled && !toBeRemoved.isEmpty())
+	if (autoRemoveEnabled && noErrorDuringUpdate && !toBeRemoved.isEmpty())
 	{
 		qWarning() << "[Satellites] purging objects that were not updated...";
 		removeWithoutModelReset(toBeRemoved);
 	}
 	
 	if (updatedCount > 0 ||
-	        (autoRemoveEnabled && missingCount > 0))
+	        (autoRemoveEnabled && noErrorDuringUpdate && missingCount > 0))
 	{
 		saveDataMap(createDataMap());
 		updateState = CompleteUpdates;
@@ -3035,6 +3037,7 @@ void Satellites::updateSatellites(TleDataHash& newTleSets)
 
 	emit updateStateChanged(updateState);
 	emit tleUpdateComplete(updatedCount, totalCount, addedCount, missingCount);
+	noErrorDuringUpdate=true; // reset for next update cycle
 }
 
 
