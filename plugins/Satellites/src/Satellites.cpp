@@ -946,19 +946,29 @@ void Satellites::restoreDefaults(void)
 
 void Satellites::restoreDefaultTleSources()
 {
-	QStringList urls;
 	/*
-	 * According to Celestrak's own docs, the 'active' group contains everything.
-	 * This older solution fetches all groups, but may increase downloads of just duplicates.
+	 * This list should contain all groups from https://celestrak.org/NORAD/elements/.
+	 * According to Celestrak's own docs, the 'active' group contains everything from starlink, so we should avoid fetching them twice.
+	 * Currently we cannot really deactivate satellites per file, the true/flag only controls whether new satellites in each file should be added.
+	 * Users could decide to delete 'active' and only keep e.g. the 100 brightest, a.k.a. 'visual'
+	 * which also include rocket boosters or bright defunct satellites not listed elsewhere.
+	 * An entirely different solution would be interfacing https://celestrak.org/satcat/
+	 */
 	// Format: group name, auto-add flag
 	const QMap<QString, bool> celestrak = {
 	        // Special-Interest Satellites
-	        { "last-30-days", false }, { "stations", true }, { "visual", true  }, { "active", false }, { "analyst", false },
+	        { "last-30-days", true }, // new
+		{ "stations", true },  // ISS, Tiangong, ...
+		{ "visual", true }, // 100 brightest
+		{ "active", true }, // all operational, but no dead rocket boosters or defunct satellites
+		{ "analyst", false }, // problematic
 	        // Weather & Earth Resources Satellites
 	        { "weather", false }, { "resource", false }, { "sarsat", false }, { "dmc", false }, { "tdrss", false },
 	        { "argos", false }, { "planet", false }, { "spire", false },
 	        // Communications Satellites
-	        { "geo", false }, { "intelsat", false }, { "eutelsat", false }, { "starlink", true  },  { "qianfan", false }, 
+	        { "geo", false }, { "intelsat", false }, { "eutelsat", false },
+		// { "starlink", true  },  // Taken out because already included in 'active'.
+		{ "qianfan", false },
 	        { "kuiper", false }, { "orbcomm", false }, { "amateur", true  }, { "x-comm", false }, { "ses", false }, 
 	        { "telesat", false }, { "oneweb", true  }, { "hulianwang", false }, { "iridium-NEXT", false }, { "globalstar", false }, 
 	        { "satnogs", false }, { "other-comm", false },
@@ -969,6 +979,7 @@ void Satellites::restoreDefaultTleSources()
 	        // Miscellaneous Satellites
 	        { "military", false }, { "radar", false }, { "cubesat", false }
 	};
+	QStringList urls;
 	// Details: https://celestrak.org/NORAD/documentation/gp-data-formats.php
 	QString celestrackBaseURL = "https://celestrak.org/NORAD/elements/gp.php?GROUP=%1&FORMAT=CSV";
 	// TLE sources from Celestrak
@@ -980,9 +991,6 @@ void Satellites::restoreDefaultTleSources()
 		else
 			urls << url;
 	}
-	*/
-	// Instead, fetch just one group, all objects:
-	urls << "1,https://celestrak.org/NORAD/elements/gp.php?GROUP=active&FORMAT=CSV";
 
 	// Other sources and supplemental data from Celestrack
 	urls << "https://www.amsat.org/amsat/ftp/keps/current/nasabare.txt"
