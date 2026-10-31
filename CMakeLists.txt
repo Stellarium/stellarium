@@ -152,6 +152,7 @@ IF(${CMAKE_BUILD_TYPE} MATCHES "Debug")
                     NAME coverage
                     EXECUTABLE ctest -j ${PROCESSOR_COUNT}
                     DEPENDENCIES buildTests
+                    LCOV_ARGS --demangle-cpp
                )
           ENDIF()
      ENDIF()
