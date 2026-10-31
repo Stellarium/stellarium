@@ -26,29 +26,13 @@
  * SECTION 1: GLOBAL CONTAINER STYLES
  * ======================================================================== */
 
-/* Ensure all elements use border-box for consistent sizing */
-*,
-*:before,
-*:after {
-    box-sizing: border-box;
-}
-
 /* Main container for gamepad section with proper overflow handling */
-#gp-controller,
-#tab_gamepad,
+/*#gp-controller,*/
+#tab_gamepad, #tab_main, #tab_main .block, #tab_main .flex,
 #tab_gamepad .block,
 #tab_gamepad .flex {
     max-width: 100%;
-    overflow-x: hidden;
-    box-sizing: border-box;
-}
-
-/* Flex container with proper gap and wrapping */
-.flex.flex-wrap {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    width: 100%;
+    /*overflow-x: hidden;*/
     box-sizing: border-box;
 }
 
@@ -64,7 +48,8 @@
     flex: 1;
     min-width: 280px;
     max-width: 420px;
-    background: rgba(0, 0, 0, 0.15);
+    background: rgba(149, 150, 152, 0.2);
+		border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     padding: 15px;
     margin-bottom: 15px;
@@ -83,7 +68,7 @@
 
 /* Device Information Card */
 .device-info-card {
-    background: rgba(0, 0, 0, 0.25);
+    background: rgba(0, 0, 0, 0.1);
     border-radius: 6px;
     padding: 12px;
     margin-bottom: 20px;
@@ -94,6 +79,7 @@
     display: flex;
     align-items: center;
     padding: 6px 0;
+		gap: 20px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
@@ -111,7 +97,7 @@
 .device-info-value {
     color: #DCDBDA;
     font-weight: bold;
-    font-size: 10px;
+    /*font-size: 10px;*/
     word-break: break-all;
     word-wrap: break-word;
     overflow-wrap: break-word;
@@ -119,7 +105,7 @@
 
 /* Device Selector */
 .device-selector-row {
-    background: rgba(0, 0, 0, 0.2);
+    background: rgba(0, 0, 0, 0.1);
     border-radius: 4px;
     padding: 8px;
     margin-bottom: 15px;
@@ -130,8 +116,6 @@
 }
 
 .device-selector-row label {
-    color: #000000;
-    font-size: 10px;
     font-weight: bold;
     flex-shrink: 0;
 }
@@ -184,27 +168,6 @@
     display: flex;
     gap: 8px;
     flex-wrap: wrap;
-}
-
-.calibration-btn {
-    background: linear-gradient(#5D5F62, #3A3C3E);
-    color: #000000;
-    border: 1px solid #2A2C2E;
-    padding: 5px 12px;
-    border-radius: 4px;
-    font-size: 12px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.2s;
-}
-
-.calibration-btn:hover {
-    background: linear-gradient(#6B6E70, #4A4C4E);
-    border-color: #B4B7B0;
-}
-
-.calibration-btn:active {
-    transform: translateY(1px);
 }
 
 .calibration-status {
@@ -355,38 +318,25 @@
     flex-wrap: wrap;
 }
 
-.option-item {
-    display: inline-flex;
+.stiick-item {
     align-items: center;
-    gap: 4px;
-    cursor: pointer;
-    font-size: 10px;
     color: #000000;
     font-weight: bold;
 }
 
-.option-item input[type="checkbox"] {
+.stiick-item input[type="checkbox"] {
     margin: 0;
     cursor: pointer;
     width: 12px;
     height: 12px;
 }
 
-.option-item input[type="checkbox"]:checked {
+.stiick-item input[type="checkbox"]:checked {
     accent-color: #4CAF50;
 }
 
-.option-item:hover {
+.stiick-item:hover {
     color: #DCDBDA;
-}
-
-/* Ensure the parent container doesn't restrict width */
-.controller-settings-panel .joystick-preview-wrapper {
-    width: calc(100% + 30px);
-    margin-left: -15px;
-    margin-right: -15px;
-    padding-left: 15px;
-    padding-right: 15px;
 }
 
 /* ========================================================================
@@ -398,7 +348,7 @@
 }
 
 .slider-row {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     margin: 10px 0;
     padding: 4px 0;
@@ -486,29 +436,6 @@
     pointer-events: none;
 }
 
-/* Test Vibration Button */
-.test-vibration-btn {
-    background: linear-gradient(#5D5F62, #3A3C3E);
-    color: #000000;
-    border: 1px solid #2A2C3E;
-    padding: 5px 12px;
-    border-radius: 4px;
-    font-size: 11px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-.test-vibration-btn:hover {
-    background: linear-gradient(#6B6E70, #4A4C4E);
-    border-color: #B4B7B0;
-    transform: translateY(-1px);
-}
-
-.test-vibration-btn:active {
-    transform: translateY(1px);
-}
-
 /* ========================================================================
  * SECTION 6: BUTTON CUSTOMIZATION PANEL
  * ======================================================================== */
@@ -520,8 +447,9 @@
 .button-customization-panel {
     flex: 2;
     min-width: 100px;
-    max-width: calc(80% - 100px);
-    background: rgba(0, 0, 0, 0.15);
+/*    max-width: calc(80% - 100px);*/
+		background: rgba(149, 150, 152, 0.2);
+		border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     padding: 15px;
     margin-bottom: 15px;
@@ -553,7 +481,7 @@
 .no-device-message {
     padding: 30px;
     text-align: center;
-    background: rgba(0, 0, 0, 0.2);
+    background: rgba(150, 150, 150, 0.2);
     border-radius: 6px;
     border: 1px dashed #B4B7B0;
 }
@@ -576,7 +504,7 @@
 
 /* Individual Button Group */
 .button-group {
-    background: rgba(0, 0, 0, 0.2);
+    background: rgba(150, 150, 150, 0.2);
     border-radius: 6px;
     padding: 12px;
     border: 1px solid rgba(255, 255, 255, 0.1);
@@ -674,84 +602,45 @@
     flex-wrap: wrap;
 }
 
-.action-btn {
-    padding: 5px 12px;
-    border: 1px solid #2A2C2E;
-    border-radius: 4px;
-    font-size: 11px;
+.action-btn,
+.test-vibration-btn,
+.calibration-btn,
+#gp-connect {
+    background: linear-gradient(#8C8C8C, #505050);
+    color: #000;
+    border: 1.5px solid #2A2C2E;
+    border-radius: clamp(3px, 0.5vw, 4px);
+    padding: clamp(3px, 0.8vw, 5px) clamp(7px, 1.5vw, 10px);
+    font-size: clamp(9px, 1.4vw, 11px);
     font-weight: bold;
+		font-style: italic;
     cursor: pointer;
-    transition: all 0.2s;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    touch-action: manipulation;  /* Improve touch response */
+    user-select: none;
 }
 
-.action-btn.reset {
-    background: linear-gradient(#5D5F62, #3A3C3E);
-    color: #000000;
-}
-
-.action-btn.reset:hover {
-    background: linear-gradient(#6B6E70, #4A4C4E);
+.action-btn:hover,
+.calibration-btn:hover,
+.test-vibration-btn:hover,
+#gp-connect:hover {
+    background: linear-gradient(#C4C4C7, #6D6F72);
     border-color: #B4B7B0;
+    transform: translateY(-1px);
 }
 
-.action-btn.save {
-    background: linear-gradient(#5D5F62, #3A3C3E);
-    color: #000000;
-}
-
-.action-btn.save:hover {
-    background: linear-gradient(#6B6E70, #4A4C4E);
-    border-color: #B4B7B0;
-}
-
-.action-btn.export {
-    background: linear-gradient(#5D5F62, #3A3C3E);
-    color: #000000;
-}
-
-.action-btn.export:hover {
-    background: linear-gradient(#6B6E70, #4A4C4E);
-    border-color: #B4B7B0;
-}
-
-.action-btn.import {
-    background: linear-gradient(#5D5F62, #3A3C3E);
-    color: #000000;
-}
-
-.action-btn.import:hover {
-    background: linear-gradient(#6B6E70, #4A4C4E);
-    border-color: #B4B7B0;
+.action-btn:active,
+.calibration-btn:active,
+.test-vibration-btn:active,
+#gp-connect:active {
+    transform: translateY(1px);
 }
 
 /* Connect Button */
 /* ========================================================================
  * Scan Button Animation
  * ======================================================================== */
-
-#gp-connect {
-    background: linear-gradient(#5D5F62, #3A3C3E);
-    color: #000000;
-    border: 1px solid #2A2C2E;
-    padding: 5px 10px;
-    border-radius: 4px;
-    font-size: 11px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    position: relative;
-    overflow: hidden;
-}
-
-#gp-connect:hover {
-    background: linear-gradient(#6B6E70, #4A4C4E);
-    border-color: #B4B7B0;
-    transform: translateY(-1px);
-}
-
-#gp-connect:active {
-    transform: translateY(1px);
-}
 
 #gp-connect:disabled {
     opacity: 0.6;
@@ -762,7 +651,7 @@
 /* Scanning animation */
 #gp-connect.scanning {
     position: relative;
-    background: linear-gradient(#3A6B3A, #2A4A2A);
+    background: linear-gradient(#C4C4C7, #6D6F72);
 }
 
 #gp-connect.scanning::before {
@@ -772,7 +661,7 @@
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    background: linear-gradient(90deg, transparent, #C4C4C7, transparent);
     animation: scan-pulse 0.8s ease-in-out infinite;
 }
 
@@ -857,11 +746,6 @@
         max-width: calc(100% - 320px);
     }
     
-    .button-select {
-        font-size: 10px;
-        padding: 5px;
-    }
-    
     .button-name {
         font-size: 11px;
         min-width: 95px;
@@ -888,15 +772,12 @@
         max-width: 380px;
     }
     
-    .button-select {
-        font-size: 10px;
-        padding: 4px;
-    }
-    
     .button-name {
         min-width: 85px;
         font-size: 10px;
         color: #000000;
+        width: 100%;
+        margin-bottom: 4px;
     }
     
     .button-item {
@@ -907,13 +788,10 @@
         margin-left: 0;
         margin-top: 4px;
         width: 100%;
+        font-size: 10px;
+        padding: 4px;
     }
-    
-    .button-name {
-        width: 100%;
-        margin-bottom: 4px;
-    }
-    
+      
     .slider-label {
         min-width: 85px;
         font-size: 11px;
@@ -929,7 +807,7 @@
     }
     
     .joystick-preview canvas {
-        width: 85px;
+        width: -webkit-fill-available;
         height: 85px;
     }
     
@@ -937,7 +815,7 @@
         gap: 8px;
     }
     
-    .option-item {
+    .stiick-item {
         font-size: 9px;
     }
     
@@ -975,36 +853,37 @@
  * 481px - 768px: Tablets portrait, large phones
  */
 @media (max-width: 768px) {
-    .controller-settings-panel,
+    
+		.controller-settings-panel {
+			min-width: -moz-available;
+			padding: 14px;
+		}
+		
     .button-customization-panel {
-        min-width: 100%;
-        max-width: 100%;
-        width: 100%;
-        padding: 12px;
+        min-width: fit-content;
+        width: fit-content;
+        padding: 14px;
     }
     
     .button-groups-container {
-        grid-template-columns: 1fr;
-        gap: 12px;
+        grid-template-columns: repeat(2,1fr);
+        gap: 10px;
     }
     
     .joystick-preview-container {
-        flex-direction: column;
+        flex-direction: row;
         align-items: center;
-        gap: 15px;
+        /*gap: 15px;*/
     }
     
     .joystick-preview {
-        width: 100%;
+        width: 50%;
         max-width: 280px;
     }
     
     .slider-row {
-        flex-direction: column;
-        align-items: flex-start;
-        width: 100%;
+				display: flex;
         margin: 8px 0;
-        gap: 5px;
     }
     
     .slider-label {
@@ -1036,8 +915,8 @@
     .button-item {
         flex-direction: column;
         align-items: flex-start;
-        width: 100%;
         padding: 5px;
+				gap: inherit;
     }
     
     .button-name {
@@ -1067,7 +946,6 @@
     .calibration-buttons .calibration-btn {
         flex: 1;
         text-align: center;
-        font-size: 10px;
         padding: 4px 8px;
     }
     
@@ -1112,15 +990,12 @@
     
     .device-info-row {
         padding: 4px 0;
+				gap:16px;
     }
     
     .device-info-label {
         font-size: 11px;
         min-width: 70px;
-    }
-    
-    .device-info-value {
-        font-size: 11px;
     }
     
     .customization-note {
@@ -1156,10 +1031,6 @@
     .stick-options {
         gap: 10px;
     }
-    
-    .option-item {
-        font-size: 9px;
-    }
 }
 
 /**
@@ -1169,6 +1040,7 @@
 @media (max-width: 480px) {
     .controller-settings-panel,
     .button-customization-panel {
+        width: fit-content;
         padding: 10px;
     }
     
@@ -1179,11 +1051,24 @@
         margin-bottom: 10px;
         padding-bottom: 6px;
     }
-    
+		
+		.button-groups-container {
+			grid-template-columns: repeat(1,1fr);
+			gap: 10px;
+		}
+		
+		.action-btn {
+			flex: 1;
+			min-width: 80px;
+			text-align: center;
+			font-size: 8px !important;
+			padding: 4px 8px;
+		}		
+	
     .device-info-row {
         flex-direction: column;
         align-items: flex-start;
-        gap: 2px;
+        gap: 10px;
         padding: 4px 0;
     }
     
@@ -1198,13 +1083,13 @@
     }
     
     .joystick-preview canvas {
-        width: 75px;
-        height: 75px;
+        width: -webkit-fill-available;
+        height: -webkit-fill-available;
     }
     
     .joystick-preview {
-        padding: 10px;
-        gap: 6px;
+        padding: 7px;
+        gap: 3px;
     }
     
     .stick-label strong {
@@ -1224,11 +1109,11 @@
         gap: 8px;
     }
     
-    .option-item {
+    .stiick-item {
         font-size: 8px;
     }
     
-    .option-item input[type="checkbox"] {
+    .stiick-item input[type="checkbox"] {
         width: 10px;
         height: 10px;
     }
@@ -1320,6 +1205,18 @@
     #gp-device-selector {
         font-size: 10px;
         padding: 4px;
+    }
+    
+		.button-item {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 5px;
+				gap: inherit;
+    }
+		
+		.slider-row {
+				display: flex;
+        margin: 0px;
     }
 }
 
@@ -1415,16 +1312,15 @@
  * ======================================================================== */
 
 .live-input-panel {
-    background: rgba(0, 0, 0, 0.15);
+		background: rgba(149, 150, 152, 0.2);
+		border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     padding: 0;
     margin-top: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
     overflow: hidden;
 }
 
 .live-input-header {
-    background: rgba(0, 0, 0, 0.15);
     padding: 10px 15px;
     border-bottom: 1px solid rgba(180, 183, 176, 0.3);
 }
@@ -1440,7 +1336,7 @@
 .live-input-header p {
     margin: 4px 0 0 0;
     font-size: 10px;
-    color: #8A8C8E;
+    color: #000;
 }
 
 .live-input-content {
@@ -1457,7 +1353,7 @@
 .live-input-column {
     flex: 1;
     min-width: 200px;
-    background: rgba(0, 0, 0, 0.15);
+    background: rgba(150, 150, 150, 0.15);
     border-radius: 6px;
     padding: 10px;
 }
@@ -1465,7 +1361,7 @@
 .live-input-column h5 {
     margin: 0 0 8px 0;
     padding-bottom: 5px;
-    color: #000000;
+    color: #000;
     font-size: 10px;
     font-weight: bold;
     border-bottom: 1px solid rgba(180, 183, 176, 0.3);
@@ -1487,7 +1383,6 @@
     flex-direction: column;
     gap: 8px;
     max-height: 350px;
-    overflow-y: auto;
     padding: 2px;
 }
 
@@ -1497,14 +1392,14 @@
     justify-content: space-between;
     align-items: center;
     padding: 4px 6px;
-    background: rgba(0, 0, 0, 0.25);
+    background: rgba(150, 150, 150, 0.25);
     border-radius: 4px;
     font-size: 8px;
     transition: background 0.1s ease;
 }
 
 .live-input-button .label {
-    color: #B4B7B0;
+    color: #000;
     font-family: 'DejaVuSans', sans-serif;
     white-space: nowrap;
     overflow: hidden;
@@ -1512,14 +1407,14 @@
 }
 
 .live-input-button .label .raw-id {
-    font-size: 7px;
-    color: #6A6C6E;
+    font-size: 9px;
+    color: #000;
     margin-left: 4px;
 }
 
 .live-input-button .value {
     font-family: 'DejaVuSansMono', monospace;
-    font-weight: bold;
+    /*font-weight: bold;*/
     padding: 2px 4px;
     border-radius: 3px;
     background: #2A2C2E;
@@ -1540,20 +1435,20 @@
     align-items: center;
     gap: 8px;
     padding: 5px 8px;
-    background: rgba(0, 0, 0, 0.25);
+    background: rgba(150, 150, 150, 0.25);
     border-radius: 4px;
 }
 
 .live-input-axis .label {
     min-width: 70px;
-    color: #B4B7B0;
+    color: #000;
     font-size: 9px;
     font-family: 'DejaVuSans', sans-serif;
 }
 
 .live-input-axis .label .raw-id {
     font-size: 7px;
-    color: #6A6C6E;
+    color: #000;
     margin-left: 4px;
 }
 
@@ -1595,7 +1490,7 @@
 
 /* Device Info Section */
 .live-info-section {
-    background: rgba(0, 0, 0, 0.15);
+    background: rgba(150, 150, 150, 0.15);
     border-radius: 6px;
     padding: 10px;
     margin-top: 12px;
@@ -1611,7 +1506,7 @@
 }
 
 #gp-device-info-live {
-    display: grid;
+    display: inline-flex;
     grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
     gap: 6px;
 }
@@ -1642,7 +1537,7 @@
     background: rgba(180, 183, 176, 0.08);
     padding: 8px 10px;
     font-size: 9px;
-    color: #8A8C8E;
+    color: #000;
     border-radius: 4px;
     margin-top: 10px;
     line-height: 1.4;
@@ -1713,8 +1608,7 @@
     }
     
     .live-input-grid-buttons {
-        grid-template-columns: repeat(2, 1fr);
-        max-height: 280px;
+        grid-template-columns: repeat(3, 1fr);
     }
     
     .live-input-header h4 {
@@ -1748,6 +1642,12 @@
         font-size: 8px;
         padding: 6px 8px;
     }
+		
+		#gp-device-info-live {
+			display: inline-flex;
+			grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+			gap: 6px;
+		}
 }
 
 @media (max-width: 480px) {
@@ -1776,8 +1676,8 @@
     }
     
     .live-input-grid-buttons {
-        grid-template-columns: 1fr;
-        max-height: 250px;
+        grid-template-columns: repeat(1, 1fr);
+        max-height: fit-content;
     }
     
     .live-input-axis {
@@ -1814,6 +1714,12 @@
     .device-info-live-row .value {
         font-size: 7px;
     }
+		
+		#gp-device-info-live {
+			display: inline-grid;
+			grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+			gap: 6px;
+		}		
 }
 
 /* ========================================================================

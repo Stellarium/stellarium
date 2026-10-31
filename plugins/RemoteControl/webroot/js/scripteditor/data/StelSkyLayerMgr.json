@@ -1,0 +1,430 @@
+[
+    {
+        "name": "setFlagShow",
+        "category": "Sky Layer Manager - Core",
+        "signature": "setFlagShow(bool visible)",
+        "description": "Shows or hides all sky background images (deep-sky textures, DSS images, etc.).",
+        "parameters": [
+            {
+                "name": "visible",
+                "type": "bool",
+                "description": "`true` to show sky layers, `false` to hide.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "alternative": "Use `core.getStelProperty('StelSkyLayerMgr.flagShow')` to read the current state.",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "// Enable deep-sky object textures\nStelSkyLayerMgr.setFlagShow(true);\n\n// Disable all sky layer images\nStelSkyLayerMgr.setFlagShow(false);\n\n// Read current state (alternative method)\nvar visible = core.getStelProperty('StelSkyLayerMgr.flagShow');"
+    },
+    {
+        "name": "getFlagShow",
+        "category": "Sky Layer Manager - Core",
+        "signature": "bool getFlagShow()",
+        "description": "⚠️ **WARNING:** This is a `public` method, not a `slot`. It may not work reliably in scripts. Use `core.getStelProperty('StelSkyLayerMgr.flagShow')` instead.\n\nReturns whether sky background images are currently displayed.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "`true` if sky layers are visible.",
+        "type": "method",
+        "alternative": "core.getStelProperty('StelSkyLayerMgr.flagShow')",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "This is a `public` method. Its reliability in scripts is not guaranteed."
+        },
+        "example": "// Alternative method (recommended):\nvar visible = core.getStelProperty('StelSkyLayerMgr.flagShow');\ncore.debug(\"Sky layers visible: \" + visible);"
+    },
+    {
+        "name": "insertSkyLayer",
+        "category": "Sky Layer Manager - Layer Management",
+        "signature": "QString insertSkyLayer(StelSkyLayerP layer, QString keyHint, bool show)",
+        "description": "⚠️ **WARNING:** This is a `public` method, not a `slot`. It is designed for C++ code and may not work reliably in scripts. For adding sky layers from scripts, use `insertSkyImage` or `loadSkyImage` instead.\n\nAdds a new sky layer to the manager.",
+        "parameters": [
+            {
+                "name": "layer",
+                "type": "StelSkyLayerP",
+                "description": "The sky layer object to insert.",
+                "required": true
+            },
+            {
+                "name": "keyHint",
+                "type": "QString",
+                "description": "Suggested key for referencing the layer later.",
+                "required": false,
+                "default": "\"\""
+            },
+            {
+                "name": "show",
+                "type": "bool",
+                "description": "Initial visibility state of the layer.",
+                "required": false,
+                "default": "true"
+            }
+        ],
+        "returnType": "QString",
+        "returnDescription": "Unique reference key for the inserted layer.",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "This is a `public` method. Its reliability in scripts is not guaranteed. Use `insertSkyImage` or `loadSkyImage` instead."
+        },
+        "example": "// Not recommended for scripts. Use insertSkyImage or loadSkyImage instead."
+    },
+    {
+        "name": "insertSkyImage",
+        "category": "Sky Layer Manager - Image Loading",
+        "signature": "QString insertSkyImage(QString uri, QString keyHint, bool show, int decimateBy)",
+        "description": "Loads and inserts a sky image from a URI (URL or local file). The URI should point to a JSON description file or a direct image URL. This is the preferred way to add sky layers from scripts.",
+        "parameters": [
+            {
+                "name": "uri",
+                "type": "QString",
+                "description": "URL or local file path to the image or JSON description.",
+                "required": true
+            },
+            {
+                "name": "keyHint",
+                "type": "QString",
+                "description": "Suggested key for referencing the image later.",
+                "required": false,
+                "default": "\"\""
+            },
+            {
+                "name": "show",
+                "type": "bool",
+                "description": "Initial visibility state.",
+                "required": false,
+                "default": "true"
+            },
+            {
+                "name": "decimateBy",
+                "type": "int",
+                "description": "Texture size reduction factor (2, 4, 8) for low-end hardware.",
+                "required": false,
+                "default": "1"
+            }
+        ],
+        "returnType": "QString",
+        "returnDescription": "Unique reference key for the inserted image layer.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "// Load a sky image from a JSON description file\nvar key = StelSkyLayerMgr.insertSkyImage(\"https://example.com/sky_image.json\", \"dss_layer\", true);\n\n// Load a local image with a custom key\nvar key2 = StelSkyLayerMgr.insertSkyImage(\"file:///path/to/image.json\", \"custom_layer\");\n\n// Load with texture reduction for performance\nvar key3 = StelSkyLayerMgr.insertSkyImage(\"https://example.com/high_res.json\", \"hd_layer\", true, 2);"
+    },
+    {
+        "name": "loadSkyImage",
+        "category": "Sky Layer Manager - Image Loading",
+        "signature": "bool loadSkyImage(QString id, QString filename, double lon0, double lat0, double lon1, double lat1, double lon2, double lat2, double lon3, double lat3, double minRes, double maxBright, bool visible, StelCore::FrameType frameType, bool withAberration, int decimateBy)",
+        "description": "Loads an image file and projects it onto a quadrilateral region of the sky defined by four corner coordinates. Useful for adding custom astronomical images or overlays.",
+        "parameters": [
+            {
+                "name": "id",
+                "type": "QString",
+                "description": "Unique identifier for the image.",
+                "required": true
+            },
+            {
+                "name": "filename",
+                "type": "QString",
+                "description": "Image file path (searched in Stellarium directories).",
+                "required": true
+            },
+            {
+                "name": "lon0",
+                "type": "double",
+                "description": "Longitude/RA/Azimuth of top-left corner in degrees.",
+                "required": true
+            },
+            {
+                "name": "lat0",
+                "type": "double",
+                "description": "Latitude/Dec/Altitude of top-left corner in degrees.",
+                "required": true
+            },
+            {
+                "name": "lon1",
+                "type": "double",
+                "description": "Longitude/RA/Azimuth of bottom-left corner in degrees.",
+                "required": true
+            },
+            {
+                "name": "lat1",
+                "type": "double",
+                "description": "Latitude/Dec/Altitude of bottom-left corner in degrees.",
+                "required": true
+            },
+            {
+                "name": "lon2",
+                "type": "double",
+                "description": "Longitude/RA/Azimuth of bottom-right corner in degrees.",
+                "required": true
+            },
+            {
+                "name": "lat2",
+                "type": "double",
+                "description": "Latitude/Dec/Altitude of bottom-right corner in degrees.",
+                "required": true
+            },
+            {
+                "name": "lon3",
+                "type": "double",
+                "description": "Longitude/RA/Azimuth of top-right corner in degrees.",
+                "required": true
+            },
+            {
+                "name": "lat3",
+                "type": "double",
+                "description": "Latitude/Dec/Altitude of top-right corner in degrees.",
+                "required": true
+            },
+            {
+                "name": "minRes",
+                "type": "double",
+                "description": "Minimum resolution for the image (pixels per degree).",
+                "required": true
+            },
+            {
+                "name": "maxBright",
+                "type": "double",
+                "description": "Maximum brightness for the image (apparent magnitude).",
+                "required": true
+            },
+            {
+                "name": "visible",
+                "type": "bool",
+                "description": "Initial visibility state.",
+                "required": true
+            },
+            {
+                "name": "frameType",
+                "type": "int",
+                "description": "Coordinate frame (`0` = FrameJ2000, `3` = FrameAltAz, etc.).",
+                "required": false,
+                "default": "0"
+            },
+            {
+                "name": "withAberration",
+                "type": "bool",
+                "description": "Apply aberration of light correction.",
+                "required": false,
+                "default": "true"
+            },
+            {
+                "name": "decimateBy",
+                "type": "int",
+                "description": "Texture size reduction factor.",
+                "required": false,
+                "default": "1"
+            }
+        ],
+        "returnType": "bool",
+        "returnDescription": "`true` if the image was loaded successfully, `false` otherwise.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "This is a `public slot` and is safe to use. For scripting, `core.loadSkyImage()` provides a simpler interface."
+        },
+        "example": "// Load an image in equatorial coordinates (J2000)\nStelSkyLayerMgr.loadSkyImage(\"myNebula\", \"nebula.png\",\n    83.5, -22.0,  // top-left\n    83.5, -23.0,  // bottom-left\n    84.5, -23.0,  // bottom-right\n    84.5, -22.0,  // top-right\n    2.5, 14, true, 0);\n\n// Load an image in Alt/Az coordinates (fixed to the horizon)\nStelSkyLayerMgr.loadSkyImage(\"horizonImg\", \"horizon.jpg\",\n    0, 0, 0, 30, 90, 30, 90, 0,\n    2.5, 14, true, 3);"
+    },
+    {
+        "name": "removeSkyLayer",
+        "category": "Sky Layer Manager - Layer Management",
+        "signature": "void removeSkyLayer(QString key)",
+        "description": "Removes a sky layer by its reference key. Use `'*'` to remove all script-added layers.",
+        "parameters": [
+            {
+                "name": "key",
+                "type": "QString",
+                "description": "Reference key of the layer to remove, or `'*'` to remove all removable layers.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "// Remove a specific layer\nStelSkyLayerMgr.removeSkyLayer(\"my_layer\");\n\n// Remove all script-added layers\nStelSkyLayerMgr.removeSkyLayer(\"*\");"
+    },
+    {
+        "name": "removeSkyLayer (by pointer)",
+        "category": "Sky Layer Manager - Layer Management",
+        "signature": "void removeSkyLayer(StelSkyLayerP layer)",
+        "description": "⚠️ **WARNING:** This is a `public` method, not a `slot`. It may not work reliably in scripts. Use `removeSkyLayer(QString key)` instead.\n\nRemoves a sky layer by its object pointer.",
+        "parameters": [
+            {
+                "name": "layer",
+                "type": "StelSkyLayerP",
+                "description": "Pointer to the sky layer to remove.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "This is a `public` method. Its reliability in scripts is not guaranteed. Use the string version instead."
+        },
+        "example": "// Not recommended for scripts. Use removeSkyLayer(key) instead."
+    },
+    {
+        "name": "showLayer",
+        "category": "Sky Layer Manager - Control",
+        "signature": "showLayer(QString id, bool visible)",
+        "description": "Shows or hides a specific sky layer by its identifier.",
+        "parameters": [
+            {
+                "name": "id",
+                "type": "QString",
+                "description": "Unique identifier of the layer.",
+                "required": true
+            },
+            {
+                "name": "visible",
+                "type": "bool",
+                "description": "`true` to show, `false` to hide.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "// Show a sky layer\nStelSkyLayerMgr.showLayer(\"my_layer\", true);\n\n// Hide a sky layer\nStelSkyLayerMgr.showLayer(\"dss_layer\", false);"
+    },
+    {
+        "name": "getShowLayer",
+        "category": "Sky Layer Manager - Information",
+        "signature": "bool getShowLayer(QString id)",
+        "description": "Returns whether a specific sky layer is currently visible.",
+        "parameters": [
+            {
+                "name": "id",
+                "type": "QString",
+                "description": "Unique identifier of the layer.",
+                "required": true
+            }
+        ],
+        "returnType": "bool",
+        "returnDescription": "`true` if the layer is visible, `false` otherwise.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "if (StelSkyLayerMgr.getShowLayer(\"my_layer\")) {\n    core.debug(\"Layer is visible\");\n} else {\n    StelSkyLayerMgr.showLayer(\"my_layer\", true);\n}"
+    },
+    {
+        "name": "getAllSkyLayers",
+        "category": "Sky Layer Manager - Information",
+        "signature": "QMap<QString, StelSkyLayerP> getAllSkyLayers()",
+        "description": "⚠️ **WARNING:** This is a `public` method, not a `slot`. It may not work reliably in scripts. Use `getAllKeys()` for a simpler interface.\n\nReturns a map of all currently loaded sky layers, keyed by their identifiers.",
+        "parameters": [],
+        "returnType": "QMap<QString, StelSkyLayerP>",
+        "returnDescription": "Map of layer keys to layer objects.",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "This is a `public` method. Its reliability in scripts is not guaranteed."
+        },
+        "example": "// Not recommended for scripts. Use getAllKeys() instead."
+    },
+    {
+        "name": "getSkyLayer",
+        "category": "Sky Layer Manager - Information",
+        "signature": "StelSkyLayerP getSkyLayer(QString key)",
+        "description": "⚠️ **WARNING:** This is a `public` method, not a `slot`. It may not work reliably in scripts.\n\nReturns a sky layer object by its reference key.",
+        "parameters": [
+            {
+                "name": "key",
+                "type": "QString",
+                "description": "Reference key of the layer.",
+                "required": true
+            }
+        ],
+        "returnType": "StelSkyLayerP",
+        "returnDescription": "Sky layer object, or null if not found.",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "This is a `public` method. Its reliability in scripts is not guaranteed."
+        },
+        "example": "// Not recommended for scripts. The returned object cannot be used reliably."
+    },
+    {
+        "name": "getAllKeys",
+        "category": "Sky Layer Manager - Information",
+        "signature": "QStringList getAllKeys()",
+        "description": "Returns a list of all currently loaded layer reference keys.",
+        "parameters": [],
+        "returnType": "QStringList",
+        "returnDescription": "List of layer keys.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "var keys = StelSkyLayerMgr.getAllKeys();\ncore.debug(\"Layer keys: \" + keys.join(\", \"));\n\n// Iterate through all layers\nfor (var i = 0; i < keys.length; i++) {\n    core.debug(\"Layer \" + i + \": \" + keys[i]);\n}"
+    },
+    {
+        "name": "loadCollection",
+        "category": "Sky Layer Manager - Utilities",
+        "signature": "loadCollection(int decimateBy)",
+        "description": "Loads the default deep-sky object texture collection (nebulae images). This is called automatically at startup.",
+        "parameters": [
+            {
+                "name": "decimateBy",
+                "type": "int",
+                "description": "Texture size reduction factor for low-end hardware (e.g., 2, 4, 8).",
+                "required": false,
+                "default": "1"
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "// Reload DSO textures (e.g., after changing settings)\nStelSkyLayerMgr.loadCollection();\n\n// Reload with reduced texture size for performance\nStelSkyLayerMgr.loadCollection(2);"
+    }
+]
