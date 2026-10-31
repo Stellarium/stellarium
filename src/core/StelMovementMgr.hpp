@@ -341,6 +341,8 @@ public slots:
 	//! See StelMovementMgr::moveToJ2000 for an explanation of the return value.
 	Vec3d getViewDirectionJ2000() const {return viewDirectionJ2000;}
 	//! Set the current viewing direction in the equatorial J2000 frame.
+	//! The up vector is rebuilt so that the view stays upright (see uprightUpVector()).
+	//! For a different orientation, call setViewUpVector() afterwards.
 	void setViewDirectionJ2000(const Vec3d& v);
 
 	//! Set the maximum field of View in degrees.
@@ -607,9 +609,8 @@ private:
 	//! Set move.startLon and move.aimLon. Call after move.start, move.aim and move.mountMode are set.
 	//! aimUpMountFrame is the requested up vector at the end of the move, in the mount frame.
 	void initMoveLongitudes(const Vec3d& aimUpMountFrame);
-	//! Set the view direction (J2000) and rebuild the up vector so that the view stays upright for it.
-	//! Use this when the direction changes without an explicit up vector, as a stored up vector may belong to the old direction.
-	void setViewDirectionUprightJ2000(const Vec3d& v);
+	//! Set the view direction (J2000) and keep the current up vector, which must fit the new direction.
+	void applyViewDirectionJ2000(const Vec3d& v);
 	//! Convert a direction given in @p frame into the equatorial J2000 frame (without refraction).
 	Vec3d frameToJ2000(const Vec3d& v, ReferenceFrame frame) const;
 	bool flagAutoMove;       // Define if automove is on or off

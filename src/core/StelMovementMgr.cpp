@@ -314,7 +314,7 @@ void StelMovementMgr::setMountMode(MountMode m)
 	// The stored up vector belongs to the old mount frame. Rebuild it so that the view is upright in the new one.
 	// Looking exactly into the new pole, the current rotation of the view is kept.
 	setViewUpVector(uprightUpVector(j2000ToMountFrame(viewDirectionJ2000), j2000ToMountFrame(upJ2000)));
-	setViewDirectionJ2000(viewDirectionJ2000);
+	applyViewDirectionJ2000(viewDirectionJ2000);
 	emit equatorialMountChanged(m==MountEquinoxEquatorial);
 }
 
@@ -862,7 +862,7 @@ void StelMovementMgr::lookEast(bool zero)
 	StelUtils::rectToSphe(&cy,&alt,core->j2000ToAltAz(getViewDirectionJ2000(), StelCore::RefractionOff));
 	cy = M_PI_2f;
 	StelUtils::spheToRect(cy, alt, dir);
-	setViewDirectionUprightJ2000(core->altAzToJ2000(dir.toVec3d(), StelCore::RefractionOff));
+	setViewDirectionJ2000(core->altAzToJ2000(dir.toVec3d(), StelCore::RefractionOff));
 	//qDebug() << "Setting East at Alt:" << alt*M_180_PIf;
 	if ((mountMode==MountAltAzimuthal) && (fabsf(alt)>M_PI_2f-0.0001f) && (fabs(upVectorMountFrame[2])<0.001))
 	{
@@ -891,7 +891,7 @@ void StelMovementMgr::lookWest(bool zero)
 	StelUtils::rectToSphe(&cy,&alt,core->j2000ToAltAz(getViewDirectionJ2000(), StelCore::RefractionOff));
 	cy = 3.f*M_PI_2f;
 	StelUtils::spheToRect(cy, alt, dir);
-	setViewDirectionUprightJ2000(core->altAzToJ2000(dir.toVec3d(), StelCore::RefractionOff));
+	setViewDirectionJ2000(core->altAzToJ2000(dir.toVec3d(), StelCore::RefractionOff));
 	//qDebug() << "Setting West at Alt:" << alt*M_180_PIf;
 	if ((mountMode==MountAltAzimuthal) &&  (fabsf(alt)>M_PI_2f-0.0001f) && (fabs(upVectorMountFrame[2])<0.001))
 	{
@@ -920,7 +920,7 @@ void StelMovementMgr::lookNorth(bool zero)
 	StelUtils::rectToSphe(&cy,&alt,core->j2000ToAltAz(getViewDirectionJ2000(), StelCore::RefractionOff));
 	cy = M_PIf;
 	StelUtils::spheToRect(cy, alt, dir);
-	setViewDirectionUprightJ2000(core->altAzToJ2000(dir.toVec3d(), StelCore::RefractionOff));
+	setViewDirectionJ2000(core->altAzToJ2000(dir.toVec3d(), StelCore::RefractionOff));
 
 	//qDebug() << "Setting North at Alt:" << alt*M_180_PIf;
 	if ((mountMode==MountAltAzimuthal) &&  (fabsf(alt)>M_PI_2f-0.0001f) && (fabs(upVectorMountFrame[2])<0.001))
@@ -950,7 +950,7 @@ void StelMovementMgr::lookSouth(bool zero)
 	StelUtils::rectToSphe(&cy,&alt,core->j2000ToAltAz(getViewDirectionJ2000(), StelCore::RefractionOff));
 	cy = 0.f;
 	StelUtils::spheToRect(cy, alt, dir);
-	setViewDirectionUprightJ2000(core->altAzToJ2000(dir.toVec3d(), StelCore::RefractionOff));
+	setViewDirectionJ2000(core->altAzToJ2000(dir.toVec3d(), StelCore::RefractionOff));
 
 	//qDebug() << "Setting South at Alt:" << alt*M_180_PIf;
 	if ((mountMode==MountAltAzimuthal) &&  (fabsf(alt)>M_PI_2f-0.0001f) && (fabs(upVectorMountFrame[2])<0.001))
@@ -1266,7 +1266,7 @@ void StelMovementMgr::updateVisionVector(double deltaTime)
 		StelUtils::spheToRect(ra_now, de_now, tmp);
 		// The up vector follows the interpolated direction. It never tilts the view and is also defined in the pole.
 		setViewUpVector(upVectorFromLonLat(ra_now, de_now));
-		setViewDirectionJ2000(mountFrameToJ2000(tmp));
+		applyViewDirectionJ2000(mountFrameToJ2000(tmp));
 	}
 	else // no autoMove
 	{
@@ -1307,13 +1307,13 @@ void StelMovementMgr::updateVisionVector(double deltaTime)
 			if (flagLockEquPos) // Equatorial vision vector locked
 			{
 				// Recalc local vision vector. Its direction in the mount frame changes with time,
-				// so the up vector must follow to keep the view upright.
-				setViewDirectionUprightJ2000(viewDirectionJ2000);
+				// and setViewDirectionJ2000() rebuilds the up vector to keep the view upright.
+				setViewDirectionJ2000(viewDirectionJ2000);
 			}
 			else
 			{
-				// Vision vector locked to its position in the mountFrame
-				setViewDirectionJ2000(mountFrameToJ2000(viewDirectionMountFrame));
+				// Vision vector locked to its position in the mountFrame. Keep the current (possibly customized) up vector.
+				applyViewDirectionJ2000(mountFrameToJ2000(viewDirectionMountFrame));
 				// After setting time, moveToAltAz broke the up vector without this:
 				// Make sure this does not now break zenith views!
 				// Or make sure to call moveToAltAz twice.
@@ -1624,15 +1624,16 @@ Vec3d StelMovementMgr::mountFrameToJ2000(const Vec3d& v) const
 
 void StelMovementMgr::setViewDirectionJ2000(const Vec3d& v)
 {
+	// A stored up vector may belong to the previous direction. Rebuild it so that the view stays upright.
+	setViewUpVector(uprightUpVector(j2000ToMountFrame(v), upVectorMountFrame));
+	applyViewDirectionJ2000(v);
+}
+
+void StelMovementMgr::applyViewDirectionJ2000(const Vec3d& v)
+{
 	core->lookAtJ2000(v, getViewUpVectorJ2000());
 	viewDirectionJ2000 = v;
 	viewDirectionMountFrame = j2000ToMountFrame(v);
-}
-
-void StelMovementMgr::setViewDirectionUprightJ2000(const Vec3d& v)
-{
-	setViewUpVector(uprightUpVector(j2000ToMountFrame(v), upVectorMountFrame));
-	setViewDirectionJ2000(v);
 }
 
 void StelMovementMgr::panView(const double deltaAz, const double deltaAlt)
