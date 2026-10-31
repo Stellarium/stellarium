@@ -32,6 +32,7 @@ private slots:
 	void testUpVectorAtPoles();
 	void testUpVectorContinuousNearPole();
 	void testIsInPole();
+	void testIsNearPole();
 	void testPoleLongitudeFromUp();
 	void testPoleAfterFrameRoundTrip();
 	void testUprightUpVector();

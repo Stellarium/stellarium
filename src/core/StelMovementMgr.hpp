@@ -189,6 +189,9 @@ public:
 	//! Return true if the direction (of any length) points into the pole of its frame, where its longitude is undefined.
 	//! A deviation of up to about 1e-7 radians is accepted, which covers rounding errors of frame conversions.
 	static bool isInPole(const Vec3d& dir);
+	//! Return true if the direction (of any length) is within 4.5 degrees of the pole of its frame (|latitude| > 0.95*90 degrees),
+	//! the same limit panView() uses for its special pole handling.
+	static bool isNearPole(const Vec3d& dir);
 	//! Inverse of upVectorFromLonLat() for a view exactly into the pole: return the longitude (radians) at the bottom of the screen
 	//! for the given up vector when looking into the north (northPole=true) or south pole.
 	//! If the up vector has no component perpendicular to the pole, fallbackLon is returned.

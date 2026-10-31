@@ -101,6 +101,23 @@ void TestStelMovementMgr::testIsInPole()
 	QVERIFY(!StelMovementMgr::isInPole(dir));
 }
 
+// Near the pole means |latitude| > 85.5 degrees, for both poles and any length.
+void TestStelMovementMgr::testIsNearPole()
+{
+	Vec3d dir;
+	for (const double lat : { 90., 86., -86., -90. })
+	{
+		StelUtils::spheToRect(0.7, lat * M_PI_180, dir);
+		QVERIFY(StelMovementMgr::isNearPole(dir));
+		QVERIFY(StelMovementMgr::isNearPole(dir*3.));
+	}
+	for (const double lat : { 85., 45., 0., -85. })
+	{
+		StelUtils::spheToRect(0.7, lat * M_PI_180, dir);
+		QVERIFY(!StelMovementMgr::isNearPole(dir));
+	}
+}
+
 // In the pole, the longitude decoded from the up vector is the one used to build it.
 // Without a usable up vector the fallback is returned.
 void TestStelMovementMgr::testPoleLongitudeFromUp()

@@ -972,6 +972,13 @@ bool StelMovementMgr::isInPole(const Vec3d& dir)
 	return dir[0]*dir[0] + dir[1]*dir[1] <= 1e-14*dir.normSquared();
 }
 
+bool StelMovementMgr::isNearPole(const Vec3d& dir)
+{
+	// Same limit as the special pole handling in panView(): |latitude| > 0.95*90 degrees.
+	static const double cosLimit = cos(0.95*M_PI_2);
+	return dir[0]*dir[0] + dir[1]*dir[1] < cosLimit*cosLimit*dir.normSquared();
+}
+
 double StelMovementMgr::poleLongitudeFromUp(const Vec3d& up, bool northPole, double fallbackLon)
 {
 	if (up[0]*up[0] + up[1]*up[1] <= 1e-20*up.normSquared())
@@ -1308,7 +1315,12 @@ void StelMovementMgr::updateVisionVector(double deltaTime)
 			{
 				// Recalc local vision vector. Its direction in the mount frame changes with time,
 				// and setViewDirectionJ2000() rebuilds the up vector to keep the view upright.
-				setViewDirectionJ2000(viewDirectionJ2000);
+				// Near the pole the azimuth of the drifting direction is meaningless (it would turn the view
+				// towards the drift direction), so keep the current rotation there.
+				if (isNearPole(j2000ToMountFrame(viewDirectionJ2000)))
+					applyViewDirectionJ2000(viewDirectionJ2000);
+				else
+					setViewDirectionJ2000(viewDirectionJ2000);
 			}
 			else
 			{
