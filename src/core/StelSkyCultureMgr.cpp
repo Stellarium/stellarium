@@ -210,8 +210,12 @@ void deriveTimeSpanFromTerritory(const QString& cultureDir, int& beginTime, int&
 void StelSkyCultureMgr::makeCulturesList()
 {
 	QSet<QString> cultureDirNames = StelFileMgr::listContents("skycultures",StelFileMgr::Directory);
+	static const QRegularExpression backupDirectoryPattern(R"(\.bak[0-9]*$)");
 	for (const auto& dir : std::as_const(cultureDirNames))
 	{
+		if (backupDirectoryPattern.match(dir).hasMatch())
+			continue;
+
 		constexpr char indexFileName[] = "/index.json";
 		const QString filePath = StelFileMgr::findFile("skycultures/" + dir + indexFileName);
 		if (filePath.isEmpty())
