@@ -30,6 +30,7 @@
 #include <QDir>
 #include <QUrl>
 #include <QVariantMap>
+#include <atomic>
 
 class StelButton;
 class Planet;
@@ -947,7 +948,7 @@ private:
 
 	//! This should usually be true. A download HTTP error should be forwarded to the user. But not 50 at an update event.
 	//! Show only the first, and suppress the rest in one update.
-	bool showDownloadErrorWarningBox;
+	std::atomic<bool> showDownloadErrorWarningBox;
 	//@}
 
 	//! @name Umbra/penumbra module

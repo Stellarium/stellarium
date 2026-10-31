@@ -2839,10 +2839,9 @@ void Satellites::handleErrorReply(QNetworkReply* reply)
 	}
 	if (showDownloadErrorWarningBox)
 	{
-		QMessageBox::warning(&StelMainView::getInstance(), qc_("Please read carefully!", "Satellites plugin URL warning"), message, QMessageBox::Ok);
 		// deactivate this panel for this update cycle.
 		showDownloadErrorWarningBox=false;
-
+		QMessageBox::warning(&StelMainView::getInstance(), qc_("Please read carefully!", "Satellites plugin URL warning"), message, QMessageBox::Ok);
 	}
 }
 
