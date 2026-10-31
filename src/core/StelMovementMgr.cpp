@@ -34,6 +34,7 @@
 #include "StelProjector.hpp"
 #include "LabelMgr.hpp"
 #include "Planet.hpp"
+#include "SolarSystem.hpp"
 #include "Orbit.hpp"
 #include "StelActionMgr.hpp"
 
@@ -308,11 +309,12 @@ void StelMovementMgr::setEquatorialMount(bool b)
 
 void StelMovementMgr::setMountMode(MountMode m)
 {
+	const Vec3d upJ2000 = getViewUpVectorJ2000();
 	mountMode = m;
-	setViewDirectionJ2000(viewDirectionJ2000);
-	// TODO: Decide whether re-setting Up-vector is required here.
-	//setViewUpVector(Vec3d(0., 0., 1.));
-	//setViewUpVectorJ2000(Vec3d(0., 0., 1.)); // Looks wrong on start.
+	// The stored up vector belongs to the old mount frame. Rebuild it so that the view is upright in the new one.
+	// Looking exactly into the new pole, the current rotation of the view is kept.
+	setViewUpVector(uprightUpVector(j2000ToMountFrame(viewDirectionJ2000), j2000ToMountFrame(upJ2000)));
+	applyViewDirectionJ2000(viewDirectionJ2000);
 	emit equatorialMountChanged(m==MountEquinoxEquatorial);
 }
 
@@ -959,6 +961,54 @@ void StelMovementMgr::lookSouth(bool zero)
 	}
 }
 
+Vec3d StelMovementMgr::upVectorFromLonLat(double lon, double lat)
+{
+	return Vec3d(-cos(lon)*sin(lat), -sin(lon)*sin(lat), cos(lat));
+}
+
+bool StelMovementMgr::isInPole(const Vec3d& dir)
+{
+	// Conversions between frames (e.g. supergalactic -> J2000 -> supergalactic) leave errors of up to ~1e-8 radians.
+	return dir[0]*dir[0] + dir[1]*dir[1] <= 1e-14*dir.normSquared();
+}
+
+bool StelMovementMgr::isNearPole(const Vec3d& dir)
+{
+	// Same limit as the special pole handling in panView(): |latitude| > 0.95*90 degrees.
+	static const double cosLimit = cos(0.95*M_PI_2);
+	return dir[0]*dir[0] + dir[1]*dir[1] < cosLimit*cosLimit*dir.normSquared();
+}
+
+double StelMovementMgr::poleLongitudeFromUp(const Vec3d& up, bool northPole, double fallbackLon)
+{
+	if (up[0]*up[0] + up[1]*up[1] <= 1e-20*up.normSquared())
+		return fallbackLon;
+	const double s = northPole ? 1. : -1.;
+	return atan2(-s*up[1], -s*up[0]);
+}
+
+Vec3d StelMovementMgr::uprightUpVector(const Vec3d& dir, const Vec3d& currentUp)
+{
+	double lon, lat;
+	StelUtils::rectToSphe(&lon, &lat, dir);
+	if (isInPole(dir))
+		lon = poleLongitudeFromUp(currentUp, dir[2]>0., lon);
+	return upVectorFromLonLat(lon, lat);
+}
+
+void StelMovementMgr::initMoveLongitudes(const Vec3d& aimUpMountFrame)
+{
+	const Vec3d startMountFrame = (move.mountMode==MountAltAzimuthal) ? move.start : j2000ToMountFrame(move.start);
+	const Vec3d aimMountFrame   = (move.mountMode==MountAltAzimuthal) ? move.aim   : j2000ToMountFrame(move.aim);
+	double lat;
+	StelUtils::rectToSphe(&move.startLon, &lat, startMountFrame);
+	if (isInPole(startMountFrame))
+		move.startLon = poleLongitudeFromUp(upVectorMountFrame, startMountFrame[2]>0., move.startLon);
+	StelUtils::rectToSphe(&move.aimLon, &lat, aimMountFrame);
+	if (isInPole(aimMountFrame))
+		move.aimLon = poleLongitudeFromUp(aimUpMountFrame, aimMountFrame[2]>0., move.startLon);
+}
+
 // Look immediately towards Zenith, turning selected azimuth horizon to screen bottom.
 // @param azi bottom azimuth. (default 180=South, 90=East, etc.)
 void StelMovementMgr::lookZenith(double azi)
@@ -1159,45 +1209,14 @@ void StelMovementMgr::updateVisionVector(double deltaTime)
 			move.aim=mountFrameToJ2000(v);
 			move.aim.normalize();
 			move.aim*=2.;
-			// For aiming at objects, we can assume simple up vector.
-			move.startUp=getViewUpVectorJ2000();
-			move.aimUp=mountFrameToJ2000(Vec3d(0., 0., 1.));
-			//move.aimUp=Vec3d(0., 0., 1.);
-			move.aimUpCopy=move.aimUp;
-		}
-		else // no targetObject:
-		{
-			move.startUp=getViewUpVectorJ2000();
-			move.aimUp=mountFrameToJ2000(Vec3d(0., 0., 1.));
 		}
 		move.coef+=move.speed*static_cast<float>(deltaTime)*1000;
-		//setViewUpVectorJ2000(mountFrameToJ2000(move.aimUp)); // Is this the little flicker? --> NO This would show tited view.
-		setViewUpVectorJ2000(move.aimUp);
-		//qDebug() << "transitional upVectorMountFrame=" << upVectorMountFrame;
 
 		if (move.coef>=1.f)
 		{
 			//qDebug() << "AutoMove finished. Setting Up vector (in mount frame) to " << upVectorMountFrame.v[0] << "/" << upVectorMountFrame.v[1] << "/" << upVectorMountFrame.v[2];
 			flagAutoMove=false;
 			move.coef=1.f;
-
-			//qDebug() << "Mount/Pole difference =" << fabs((fabs(viewDirectionMountFrame.v[2]) - 1.));
-			if (fabs((fabs(viewDirectionMountFrame.v[2]) - 1.)) < 0.00001 )
-			{
-				//qDebug() << "ATTENTION: View towards or near the pole of the mount frame. This would cause black screen or orientation jitter.";
-				//qDebug() << "\tviewDirectionMountFrame=" << viewDirectionMountFrame;
-				//qDebug() << "\tviewDirectionJ2000=" << viewDirectionJ2000;
-				//qDebug() << "\tupVectorMountFrame=" << upVectorMountFrame;
-				//qDebug() << "\tmove.aimUpCopy=" << move.aimUpCopy;
-
-				//qDebug() << "Recreating up vector from stored copy." << move.aimUpCopy;
-				setViewUpVector(move.aimUpCopy);
-
-				//qDebug() << "NEW VECTORS";
-				//qDebug() << "\tviewDirectionMountFrame=" << viewDirectionMountFrame;
-				//qDebug() << "\tviewDirectionJ2000=" << viewDirectionJ2000;
-				//qDebug() << "\tupVectorMountFrame=" << upVectorMountFrame;
-			}
 		}
 
 		// Use a smooth function
@@ -1231,6 +1250,11 @@ void StelMovementMgr::updateVisionVector(double deltaTime)
 		double ra_aim, de_aim, ra_start, de_start;
 		StelUtils::rectToSphe(&ra_start, &de_start, tmpStart);
 		StelUtils::rectToSphe(&ra_aim, &de_aim, tmpAim);
+		// Exactly in the pole the longitude is undefined. Use the one determined when the move was set up.
+		if (isInPole(tmpStart))
+			ra_start=move.startLon;
+		if (isInPole(tmpAim))
+			ra_aim=move.aimLon;
 
 		// Make sure the position of the object to be aimed at is defined...
 		Q_ASSERT(!qIsNaN(move.aim[0]) && !qIsNaN(move.aim[1]) && !qIsNaN(move.aim[2]));
@@ -1247,7 +1271,9 @@ void StelMovementMgr::updateVisionVector(double deltaTime)
 		const double ra_now = ra_aim*c + ra_start*(1.-c);
 		Vec3d tmp;
 		StelUtils::spheToRect(ra_now, de_now, tmp);
-		setViewDirectionJ2000(mountFrameToJ2000(tmp));
+		// The up vector follows the interpolated direction. It never tilts the view and is also defined in the pole.
+		setViewUpVector(upVectorFromLonLat(ra_now, de_now));
+		applyViewDirectionJ2000(mountFrameToJ2000(tmp));
 	}
 	else // no autoMove
 	{
@@ -1287,13 +1313,19 @@ void StelMovementMgr::updateVisionVector(double deltaTime)
 		{
 			if (flagLockEquPos) // Equatorial vision vector locked
 			{
-				// Recalc local vision vector
-				setViewDirectionJ2000(viewDirectionJ2000);
+				// Recalc local vision vector. Its direction in the mount frame changes with time,
+				// and setViewDirectionJ2000() rebuilds the up vector to keep the view upright.
+				// Near the pole the azimuth of the drifting direction is meaningless (it would turn the view
+				// towards the drift direction), so keep the current rotation there.
+				if (isNearPole(j2000ToMountFrame(viewDirectionJ2000)))
+					applyViewDirectionJ2000(viewDirectionJ2000);
+				else
+					setViewDirectionJ2000(viewDirectionJ2000);
 			}
 			else
 			{
-				// Vision vector locked to its position in the mountFrame
-				setViewDirectionJ2000(mountFrameToJ2000(viewDirectionMountFrame));
+				// Vision vector locked to its position in the mountFrame. Keep the current (possibly customized) up vector.
+				applyViewDirectionJ2000(mountFrameToJ2000(viewDirectionMountFrame));
 				// After setting time, moveToAltAz broke the up vector without this:
 				// Make sure this does not now break zenith views!
 				// Or make sure to call moveToAltAz twice.
@@ -1434,16 +1466,14 @@ void StelMovementMgr::moveToJ2000(const Vec3d& aim, const Vec3d& aimUp, float mo
 	move.aim*=2.;
 	move.aimUp=aimUp; // the new up vector. We cannot simply keep vertical axis, there may be the intention to look into the pole or so.
 	move.aimUp.normalize();
-	move.aimUpCopy=move.aimUp;
 	move.start=viewDirectionJ2000;	
 	move.start.normalize();
-	move.startUp=getViewUpVectorJ2000();
-	move.startUp.normalize();
 	move.speed=1.f/(moveDuration*1000);
 	move.coef=0.;
 	move.targetObject.clear();
 	//move.mountMode=mountMode; // Maybe better to have MountEquinoxEquatorial here? ==> YES, fixed orientation problem.
 	move.mountMode=MountEquinoxEquatorial;
+	initMoveLongitudes(j2000ToMountFrame(move.aimUp));
 	flagAutoMove = true;
 }
 
@@ -1455,16 +1485,14 @@ void StelMovementMgr::moveToObject(const StelObjectP& target, float moveDuration
 	move.aim=Vec3d(0.);
 	move.aimUp=mountFrameToJ2000(Vec3d(0., 0., 1.)); // the new up vector. We try simply vertical axis here. (Should be same as pre-0.15)
 	move.aimUp.normalize();
-	move.aimUpCopy=move.aimUp;
 	move.start=viewDirectionJ2000;
 	move.start.normalize();
-	move.startUp=getViewUpVectorJ2000();
-	move.startUp.normalize();
 	move.speed=1.f/(moveDuration*1000);
 	move.coef=0.;
 	move.targetObject = target;
 	//move.mountMode=mountMode;  // Maybe better to have MountEquinoxEquatorial here? ==> YES, fixed orientation problem.
 	move.mountMode=MountEquinoxEquatorial;
+	initMoveLongitudes(Vec3d(0., 0., 1.));
 	flagAutoMove = true;
 }
 
@@ -1486,7 +1514,6 @@ void StelMovementMgr::moveToAltAzi(const Vec3d& aim, const Vec3d &aimUp, float m
 	move.aim*=2.;
 	move.aimUp=aimUp; // the new up vector. We cannot simply keep vertical axis, there may be the intention to look into the zenith or so.
 	move.aimUp.normalize();
-	move.aimUpCopy=move.aimUp;
 	move.start=core->j2000ToAltAz(viewDirectionJ2000, StelCore::RefractionOff);
 	move.start.normalize();
 	//qDebug() << "move.start=" << move.start;
@@ -1519,17 +1546,58 @@ void StelMovementMgr::moveToAltAzi(const Vec3d& aim, const Vec3d &aimUp, float m
 		viewDirectionJ2000=core->altAzToJ2000(move.start, StelCore::RefractionOff);
 		upVectorMountFrame.set(0,0,1);
 	}
-	move.startUp=aimUp; // we must put this to the target up vector immediately.
 	move.speed=1.f/(moveDuration*1000);
 	move.coef=0.;
 	move.targetObject.clear();
 	move.mountMode=MountAltAzimuthal; // This signals: start and aim are given in AltAz coordinates.
+	initMoveLongitudes(move.aimUp);
 	flagAutoMove = true;
 	// debug output if required
 	//double currAlt, currAzi, newAlt, newAzi;
 	//StelUtils::rectToSphe(&currAzi, &currAlt, move.start);
 	//StelUtils::rectToSphe(&newAzi, &newAlt, move.aim);
 	//qDebug() << "StelMovementMgr::moveToAltAzi() from alt:" << currAlt*(180./M_PI) << "/azi" << currAzi*(180./M_PI)  << "to alt:" << newAlt*(180./M_PI)  << "azi" << newAzi*(180./M_PI) ;
+}
+
+Vec3d StelMovementMgr::frameToJ2000(const Vec3d& v, ReferenceFrame frame) const
+{
+	switch (frame)
+	{
+		case ReferenceFrame::EquatorialJ2000:
+			return v;
+		case ReferenceFrame::EquatorialOfDate:
+			return core->equinoxEquToJ2000(v, StelCore::RefractionOff);
+		case ReferenceFrame::AltAzimuthal:
+			return core->altAzToJ2000(v, StelCore::RefractionOff);
+		case ReferenceFrame::Galactic:
+			return core->galacticToJ2000(v);
+		case ReferenceFrame::Supergalactic:
+			return core->supergalacticToJ2000(v);
+		case ReferenceFrame::EclipticJ2000:
+		case ReferenceFrame::EclipticOfDate:
+		{
+			const bool ofDate = (frame==ReferenceFrame::EclipticOfDate);
+			const double eps = GETSTELMODULE(SolarSystem)->getEarth()->getRotObliquity(ofDate ? core->getJDE() : 2451545.0);
+			// Rotate about the x axis (the equinox) from ecliptic to equatorial coordinates.
+			const Vec3d equ(v[0], v[1]*cos(eps) - v[2]*sin(eps), v[1]*sin(eps) + v[2]*cos(eps));
+			return ofDate ? core->equinoxEquToJ2000(equ, StelCore::RefractionOff) : equ;
+		}
+	}
+	return v; // not reached
+}
+
+void StelMovementMgr::moveTo(double lon, double lat, ReferenceFrame frame, float moveDuration, ZoomingMode zooming)
+{
+	Vec3d aim;
+	StelUtils::spheToRect(lon, lat, aim);
+	// The up vector at the target, pointing towards the pole of the given frame. It is well defined
+	// even at the pole itself, where it carries the requested orientation (see upVectorFromLonLat()).
+	const Vec3d aimUp = upVectorFromLonLat(lon, lat);
+
+	if (frame==ReferenceFrame::AltAzimuthal && mountMode==MountAltAzimuthal)
+		moveToAltAzi(aim, aimUp, moveDuration, zooming);
+	else
+		moveToJ2000(frameToJ2000(aim, frame), frameToJ2000(aimUp, frame), moveDuration, zooming);
 }
 
 Vec3d StelMovementMgr::j2000ToMountFrame(const Vec3d& v) const
@@ -1567,6 +1635,13 @@ Vec3d StelMovementMgr::mountFrameToJ2000(const Vec3d& v) const
 }
 
 void StelMovementMgr::setViewDirectionJ2000(const Vec3d& v)
+{
+	// A stored up vector may belong to the previous direction. Rebuild it so that the view stays upright.
+	setViewUpVector(uprightUpVector(j2000ToMountFrame(v), upVectorMountFrame));
+	applyViewDirectionJ2000(v);
+}
+
+void StelMovementMgr::applyViewDirectionJ2000(const Vec3d& v)
 {
 	core->lookAtJ2000(v, getViewUpVectorJ2000());
 	viewDirectionJ2000 = v;

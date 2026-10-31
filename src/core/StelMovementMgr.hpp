@@ -111,6 +111,10 @@ public:
 	enum MountMode { MountAltAzimuthal, MountEquinoxEquatorial, MountGalactic, MountSupergalactic};
 	Q_ENUM(MountMode)
 
+	//! Reference frames for coordinates given to moveTo().
+	enum class ReferenceFrame { EquatorialJ2000, EquatorialOfDate, AltAzimuthal, Galactic, Supergalactic, EclipticJ2000, EclipticOfDate };
+	Q_ENUM(ReferenceFrame)
+
 	//! Named constants for zoom operations.
 	enum ZoomingMode { ZoomOut=-1, ZoomNone=0, ZoomIn=1};
 	Q_ENUM(ZoomingMode)
@@ -176,6 +180,26 @@ public:
 
 	Vec3d j2000ToMountFrame(const Vec3d& v) const;
 	Vec3d mountFrameToJ2000(const Vec3d& v) const;
+
+	//! Return the up vector for a view direction given by longitude and latitude (radians) in the mount frame.
+	//! The result is perpendicular to the view direction and lies in the plane of the view direction and the mount pole,
+	//! so the view is never tilted. It is also defined when looking exactly into the pole: there the given longitude
+	//! is at the bottom of the screen in the north pole (e.g. zenith) and at the top in the south pole (e.g. nadir).
+	static Vec3d upVectorFromLonLat(double lon, double lat);
+	//! Return true if the direction (of any length) points into the pole of its frame, where its longitude is undefined.
+	//! A deviation of up to about 1e-7 radians is accepted, which covers rounding errors of frame conversions.
+	static bool isInPole(const Vec3d& dir);
+	//! Return true if the direction (of any length) is within 4.5 degrees of the pole of its frame (|latitude| > 0.95*90 degrees),
+	//! the same limit panView() uses for its special pole handling.
+	static bool isNearPole(const Vec3d& dir);
+	//! Inverse of upVectorFromLonLat() for a view exactly into the pole: return the longitude (radians) at the bottom of the screen
+	//! for the given up vector when looking into the north (northPole=true) or south pole.
+	//! If the up vector has no component perpendicular to the pole, fallbackLon is returned.
+	static double poleLongitudeFromUp(const Vec3d& up, bool northPole, double fallbackLon);
+	//! Return an up vector which keeps the view upright (not tilted against the pole) for the view direction @p dir,
+	//! both in the same frame. This is upVectorFromLonLat() for the direction of @p dir. Exactly in the pole,
+	//! the longitude is taken from @p currentUp, so the current rotation of the view is kept there.
+	static Vec3d uprightUpVector(const Vec3d& dir, const Vec3d& currentUp);
 
 	void moveToObject(const StelObjectP& target, float moveDuration = 1., ZoomingMode zooming = ZoomNone);
 
@@ -285,6 +309,18 @@ public slots:
 	//! As of March 2016: This call does nothing when mount frame is not AltAzi!
 	void moveToAltAzi(const Vec3d& aim, const Vec3d &aimUp, float moveDuration = 1.f, StelMovementMgr::ZoomingMode zooming = ZoomNone);
 
+	//! Move the view to a position given by spherical coordinates in any reference frame.
+	//! The up vector during and after the move is computed automatically, so the caller does not need to provide one.
+	//! When the target lies at a pole of the mount frame (e.g. the zenith in alt-azimuthal mount), @p lon decides
+	//! how the view is rotated there: the meridian with longitude @p lon is shown vertically on screen.
+	//! @param lon Longitude [radians] in the internal convention of @p frame (as used by StelUtils::spheToRect).
+	//!        For ReferenceFrame::AltAzimuthal this is counted counter-clockwise from south, i.e. lon = pi - azimuth (from north).
+	//! @param lat Latitude [radians] in @p frame (declination, altitude, ...).
+	//! @param frame The reference frame of @p lon and @p lat.
+	//! @param moveDuration The time it takes for the move to complete [seconds].
+	//! @param zooming you want to zoom in, out or not (just center).
+	void moveTo(double lon, double lat, ReferenceFrame frame, float moveDuration = 1.f, StelMovementMgr::ZoomingMode zooming = ZoomNone);
+
 	//! Change the zoom level.
 	//! @param aimFov The desired field of view in degrees.
 	//! @param zoomDuration The time that the operation should take to complete. [seconds]
@@ -308,6 +344,8 @@ public slots:
 	//! See StelMovementMgr::moveToJ2000 for an explanation of the return value.
 	Vec3d getViewDirectionJ2000() const {return viewDirectionJ2000;}
 	//! Set the current viewing direction in the equatorial J2000 frame.
+	//! The up vector is rebuilt so that the view stays upright (see uprightUpVector()).
+	//! For a different orientation, call setViewUpVector() afterwards.
 	void setViewDirectionJ2000(const Vec3d& v);
 
 	//! Set the maximum field of View in degrees.
@@ -555,10 +593,9 @@ private:
 	{
 		Vec3d start;
 		Vec3d aim;
-		Vec3d startUp; // The Up vector at start time
 		Vec3d aimUp;   // The Up vector at end time of move
-		Vec3d aimUpCopy;   // The Up vector at end time of move. This gets initialized when the move is configured, never touched during move,
-				   // and ONLY read again when the move is finished and ends in the pole of the view frame.
+		double startLon = 0.; // Longitude (radians, mount frame) of the start direction. Exactly in the pole it is taken from the up vector.
+		double aimLon = 0.;   // Longitude (radians, mount frame) of the aim direction. Exactly in the pole it is taken from aimUp, or startLon is kept.
 		float speed;   // set to 1/duration[ms] during automove setup.
 		float coef;    // Set to 0 at begin of an automove, runs up to 1.
 		// If not null, move to the object instead of the aim.
@@ -572,6 +609,13 @@ private:
 	};
 
 	AutoMove move;          // Current auto movement. 2016-03: During setup, decide upon the frame for motion!
+	//! Set move.startLon and move.aimLon. Call after move.start, move.aim and move.mountMode are set.
+	//! aimUpMountFrame is the requested up vector at the end of the move, in the mount frame.
+	void initMoveLongitudes(const Vec3d& aimUpMountFrame);
+	//! Set the view direction (J2000) and keep the current up vector, which must fit the new direction.
+	void applyViewDirectionJ2000(const Vec3d& v);
+	//! Convert a direction given in @p frame into the equatorial J2000 frame (without refraction).
+	Vec3d frameToJ2000(const Vec3d& v, ReferenceFrame frame) const;
 	bool flagAutoMove;       // Define if automove is on or off
 	ZoomingMode zoomingMode;
 
