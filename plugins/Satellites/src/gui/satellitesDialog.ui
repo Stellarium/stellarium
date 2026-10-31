@@ -243,6 +243,9 @@
             <property name="text">
              <string>On update, remove the satellites that are no longer listed in the update sources</string>
             </property>
+	    <property name="toolTip">
+             <string>If one source update fails, nothing is removed.</string>
+            </property>
            </widget>
           </item>
           <item row="3" column="0">
