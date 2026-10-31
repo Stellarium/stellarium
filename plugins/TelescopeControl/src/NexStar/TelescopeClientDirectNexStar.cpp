@@ -288,6 +288,11 @@ bool TelescopeClientDirectNexStar::isInitialized(void) const
 	return (nexstar && !nexstar->isClosed());
 }
 
+void TelescopeClientDirectNexStar::closeConnection(void)
+{
+	closeAllConnections();
+}
+
 //Merged from Connection::sendPosition() and TelescopeTCP::performReading()
 void TelescopeClientDirectNexStar::sendPosition(unsigned int ra_int, int dec_int, int status)
 {

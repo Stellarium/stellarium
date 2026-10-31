@@ -544,9 +544,11 @@ void TelescopeControl::communicate(void)
 //
 void TelescopeControl::deleteAllTelescopes()
 {
-	//TODO: I really hope that this won't cause a memory leak...
-	//for (auto* telescope : telescopeClients)
-	//	delete telescope;
+	for (const auto& telescope : telescopeClients)
+	{
+		if (telescope)
+			telescope->closeConnection();
+	}
 	telescopeClients.clear();
 }
 
@@ -1484,14 +1486,24 @@ bool TelescopeControl::stopClientAtSlot(int slotNumber)
 	if(!telescopeClients.contains(slotNumber))
 		return true;
 
+	// Explicitly close the connection first so any underlying serial/TCP
+	// port or ASCOM/INDI device is released immediately, regardless of
+	// any remaining shared pointers.
+	telescopeClients[slotNumber]->closeConnection();
+
 	//If a telescope is selected, deselect it first.
 	//(Otherwise trying to delete a selected telescope client causes Stellarium to crash.)
-	//TODO: Find a way to deselect only the telescope client that is about to be deleted.
-	const QList<StelObjectP> newSelected = GETSTELMODULE(StelObjectMgr)->getSelectedObject("Telescope");
+	StelObjectMgr* objMgr = GETSTELMODULE(StelObjectMgr);
+	const QList<StelObjectP> newSelected = objMgr->getSelectedObject("Telescope");
 	if(!newSelected.isEmpty())
 	{
-		GETSTELMODULE(StelObjectMgr)->unSelect();
+		objMgr->unSelect();
 	}
+	else if(objMgr->getLastSelectedObject() && objMgr->getLastSelectedObject().data() == telescopeClients[slotNumber].data())
+	{
+		objMgr->unSelect();
+	}
+
 	telescopeClients.remove(slotNumber);
 
 	//This is not needed by every client

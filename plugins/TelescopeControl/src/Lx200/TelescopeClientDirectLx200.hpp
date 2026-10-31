@@ -48,8 +48,9 @@ public:
 	TelescopeClientDirectLx200(const QString &name, const QString &parameters, TelescopeControl::Equinox eq = TelescopeControl::EquinoxJ2000);
 	~TelescopeClientDirectLx200(void) override
 	{
-		//hangup();
+		closeConnection();
 	}
+	void closeConnection(void) override;
 	
 	//======================================================================
 	// Methods inherited from TelescopeClient
@@ -84,7 +85,6 @@ private:
 	void syncReceived(unsigned int ra_int, int dec_int) override;
 	
 private:
-	void hangup(void);
 	int time_delay;
 	
 	InterpolatedPosition interpolatedPosition;

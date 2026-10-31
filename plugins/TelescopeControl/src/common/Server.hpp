@@ -48,6 +48,7 @@ public:
 	Server(int port);
 	virtual ~Server(void) {}
 	virtual void step(long long int timeout_micros);
+	void closeAllConnections(void);
 	
 protected:
 	void sendPosition(unsigned int ra_int, int dec_int, int status);

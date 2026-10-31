@@ -146,14 +146,15 @@ SerialPort::SerialPort(Server &server, const char *serial_device)
 #endif //Q_OS_WIN
 }
 
-SerialPort::~SerialPort(void)
+void SerialPort::hangup(void)
 {
 #ifdef Q_OS_WIN
 	if (handle != INVALID_HANDLE_VALUE)
 	{
-		// restore original settings
-		SetCommState(handle, &dcb_original);
+		CancelIo(handle);
+		PurgeComm(handle, PURGE_TXABORT | PURGE_RXABORT | PURGE_TXCLEAR | PURGE_RXCLEAR);
 		CloseHandle(handle);
+		handle = INVALID_HANDLE_VALUE;
 	}
 #else
 	if (fd >= 0)
@@ -164,6 +165,11 @@ SerialPort::~SerialPort(void)
 		fd=INVALID_SOCKET; // fix Coverity 48939?
 	}
 #endif
+}
+
+SerialPort::~SerialPort(void)
+{
+	hangup();
 }
 
 

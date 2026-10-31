@@ -30,6 +30,7 @@ class TelescopeClientINDI : public TelescopeClient
 public:
 	TelescopeClientINDI(const QString &name = "INDI", const QString& params = QString());
 	~TelescopeClientINDI() override;
+	void closeConnection() override;
 
 	Vec3d getJ2000EquatorialPos(const StelCore *core) const override;
 	void move(double angle, double speed) override;

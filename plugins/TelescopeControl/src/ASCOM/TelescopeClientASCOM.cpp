@@ -51,10 +51,17 @@ TelescopeClientASCOM::TelescopeClientASCOM(const QString& name, const QString& p
 	mCoordinateType = mAscomDevice->getEquatorialCoordinateType();
 }
 
+void TelescopeClientASCOM::closeConnection()
+{
+	if (mAscomDevice)
+		mAscomDevice->disconnect();
+}
+
 TelescopeClientASCOM::~TelescopeClientASCOM()
 {
-	mAscomDevice->disconnect();
+	closeConnection();
 	delete mAscomDevice;
+	mAscomDevice = nullptr;
 }
 
 void TelescopeClientASCOM::performCommunication()
