@@ -408,6 +408,45 @@ void GenerateMarsSatToVSOP87(double t,double mat_mars_sat_to_vsop87[9]) {
   }
 }
 
+/* (SS) 2026-09-17 t_0/t_1/t_2, marssat_elem_0/1/2, marssat_jd0, marssat_elem[], and
+ * mars_sat_to_vsop87[] are shared, file-scope mutable state with no synchronization.
+ * Under Stellarium's multi-threaded position pipeline (extraThreads>0), concurrent calls
+ * to GetMarsSatOsculatingCoor() for different jd0 values (Phobos and Deimos share this
+ * same cache) can race - one thread's partial update interleaving with another's read -
+ * producing a torn/inconsistent elem[] (e.g. an effective eccentricity >=1), which can
+ * send EllipticToRectangular()'s Newton-Raphson loop into non-convergence and hang.
+ */
+#ifdef _WIN32
+# include <windows.h>
+static CRITICAL_SECTION marssat_cs;
+static INIT_ONCE marssat_init_once = INIT_ONCE_STATIC_INIT;
+static BOOL CALLBACK marssat_cs_init(PINIT_ONCE InitOnce, PVOID Parameter, PVOID *Context)
+{
+	InitializeCriticalSection(&marssat_cs);
+	return TRUE;
+}
+static void marssat_lock_acquire(void)
+{
+	InitOnceExecuteOnce(&marssat_init_once, marssat_cs_init, NULL, NULL);
+	EnterCriticalSection(&marssat_cs);
+}
+static void marssat_lock_release(void)
+{
+	LeaveCriticalSection(&marssat_cs);
+}
+#else
+# include <pthread.h>
+static pthread_mutex_t marssat_mutex = PTHREAD_MUTEX_INITIALIZER;
+static void marssat_lock_acquire(void)
+{
+	pthread_mutex_lock(&marssat_mutex);
+}
+static void marssat_lock_release(void)
+{
+	pthread_mutex_unlock(&marssat_mutex);
+}
+#endif
+
 // Duplicate memory for thread safety
 static double t_0[MARS_SAT_COUNT] = {-1e100, -1e100};
 static double t_1[MARS_SAT_COUNT] = {-1e100, -1e100};
@@ -436,6 +475,7 @@ void GetMarsSatCoor(double jd,int body,double *xyz, double *xyzdot) {
 	xyzdot[0]=xyz6[3]; xyzdot[1]=xyz6[4]; xyzdot[2]=xyz6[5];
 }
 
+/*
 void GetMarsSatOsculatingCoor(const double jd0,const double jd,
                               const int body,double *xyz) {
   double x[6];
@@ -470,8 +510,86 @@ void GetMarsSatOsculatingCoor(const double jd0,const double jd,
   xyz[5] = mars_sat_to_vsop87[body][6]*x[3]
 	 + mars_sat_to_vsop87[body][7]*x[4]
 	 + mars_sat_to_vsop87[body][8]*x[5];
-/*
-  printf("%d %18.9lf %15.12lf %15.12lf %15.12lf\n",
-         body,jd,xyz[0],xyz[1],xyz[2]);
+
+  // printf("%d %18.9lf %15.12lf %15.12lf %15.12lf\n",body,jd,xyz[0],xyz[1],xyz[2]);
+}
 */
+
+/*
+// (SS) 2026-09-17 Guard the shared marssat_jd0/marssat_elem/mars_sat_to_vsop87 cache (and the
+// t_0/t_1/t_2 interpolation state it drives via CalcInterpolatedElements()) with a lock, since
+// it's shared between Phobos and Deimos calls and was previously unsynchronized. Under
+// Stellarium's multi-threaded position pipeline this could race, handing EllipticToRectangular()
+// a torn/inconsistent elem[] and sending its Newton-Raphson solver into non-convergence - the
+// root cause of an intermittent hang. The cache check/update/copy happens under the lock; the
+// Kepler solve itself runs unlocked on a local copy, so lock hold time stays short.
+void GetMarsSatOsculatingCoor(const double jd0, const double jd, const int body, double *xyz)
+{
+	double x[6];
+	double local_elem[6];
+	double local_mat[9];
+
+	marssat_lock_acquire();
+	if (jd0 != marssat_jd0)
+	{
+		const double t0 = jd0 - 2451545.0 + 6491.5;
+		marssat_jd0     = jd0;
+		CalcInterpolatedElements(t0, marssat_elem, 12, &CalcAllMarsSatElem, DELTA_T, &t_0, marssat_elem_0, &t_1,
+		                         marssat_elem_1, &t_2, marssat_elem_2, NULL);
+		GenerateMarsSatToVSOP87(t0, mars_sat_to_vsop87);
+	}
+	memcpy(local_elem, marssat_elem + (body * 6), 6 * sizeof(double));
+	memcpy(local_mat, mars_sat_to_vsop87, 9 * sizeof(double));
+	marssat_lock_release();
+
+	EllipticToRectangularA(mars_sat_bodies[body].mu, local_elem, jd - jd0, x);
+	xyz[0] = local_mat[0] * x[0] + local_mat[1] * x[1] + local_mat[2] * x[2];
+	xyz[1] = local_mat[3] * x[0] + local_mat[4] * x[1] + local_mat[5] * x[2];
+	xyz[2] = local_mat[6] * x[0] + local_mat[7] * x[1] + local_mat[8] * x[2];
+	// GZ This is a guess, based on the structure of other operations...
+	xyz[3] = local_mat[0] * x[3] + local_mat[1] * x[4] + local_mat[2] * x[5];
+	xyz[4] = local_mat[3] * x[3] + local_mat[4] * x[4] + local_mat[5] * x[5];
+	xyz[5] = local_mat[6] * x[3] + local_mat[7] * x[4] + local_mat[8] * x[5];
+}
+*/
+
+// (SS) 2026-09-26 Stellarium 26.2 already separates this cache per body (t_0/t_1/t_2,
+// marssat_elem_0/1/2, marssat_jd0, marssat_elem, mars_sat_to_vsop87 are now arrays indexed
+// by `body`), which independently closes the CROSS-BODY race we diagnosed: Phobos and Deimos
+// no longer share one cache, so a Phobos-thread and a Deimos-thread can no longer tear each
+// other's elem[]/jd0, the root cause of the intermittent hang we traced to
+// EllipticToRectangular()'s Newton-Raphson loop failing to converge on a torn elem[].
+// We keep a lock around the per-body check/update/copy sequence as defense-in-depth against
+// a same-body race (e.g. orbit-line rendering on the render thread touching the same body's
+// cache concurrently with the background position-computation thread) - narrower and not
+// currently confirmed to occur, but the lock costs little now that the common cross-body
+// case is already closed off.
+void GetMarsSatOsculatingCoor(const double jd0, const double jd, const int body, double *xyz)
+{
+	double x[6];
+	double local_elem[6];
+	double local_mat[9];
+
+	marssat_lock_acquire();
+	if (jd0 != marssat_jd0[body])
+	{
+		const double t0   = jd0 - 2451545.0 + 6491.5;
+		marssat_jd0[body] = jd0;
+		CalcInterpolatedElements(t0, marssat_elem[body], 12, &CalcAllMarsSatElem, DELTA_T, &t_0[body],
+		                         marssat_elem_0[body], &t_1[body], marssat_elem_1[body], &t_2[body],
+		                         marssat_elem_2[body], NULL);
+		GenerateMarsSatToVSOP87(t0, mars_sat_to_vsop87[body]);
+	}
+	memcpy(local_elem, marssat_elem[body] + (body * 6), 6 * sizeof(double));
+	memcpy(local_mat, mars_sat_to_vsop87[body], 9 * sizeof(double));
+	marssat_lock_release();
+
+	EllipticToRectangularA(mars_sat_bodies[body].mu, local_elem, jd - jd0, x);
+	xyz[0] = local_mat[0] * x[0] + local_mat[1] * x[1] + local_mat[2] * x[2];
+	xyz[1] = local_mat[3] * x[0] + local_mat[4] * x[1] + local_mat[5] * x[2];
+	xyz[2] = local_mat[6] * x[0] + local_mat[7] * x[1] + local_mat[8] * x[2];
+	// GZ This is a guess, based on the structure of other operations...
+	xyz[3] = local_mat[0] * x[3] + local_mat[1] * x[4] + local_mat[2] * x[5];
+	xyz[4] = local_mat[3] * x[3] + local_mat[4] * x[4] + local_mat[5] * x[5];
+	xyz[5] = local_mat[6] * x[3] + local_mat[7] * x[4] + local_mat[8] * x[5];
 }

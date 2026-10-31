@@ -69,7 +69,6 @@ static const struct pluto_argument argument[PLUTO_COEFFS] = {
 	{3, 0, 0}
 };
 
-
 static const struct pluto_longitude longitude[PLUTO_COEFFS] = {
 	{-19799805, 19850055},
 	{897144, -4954829},
@@ -95,7 +94,7 @@ static const struct pluto_longitude longitude[PLUTO_COEFFS] = {
 	{120, -274},
 	{-60, -159},
 	{-82, -29},
-	{-36, -20},
+	{-36, -29}, // (SS) 2026-06-25 should be {-36, -29} instead of {-36, -20}
 	{-40, 7},
 	{-14, 22},
 	{4, 13},
@@ -107,7 +106,7 @@ static const struct pluto_longitude longitude[PLUTO_COEFFS] = {
 	{14, 24},
 	{-49, -34},
 	{163, -48},
-	{9, 24},
+	{9, -24}, // (SS) 2026-06-25  should be {9, -24} instead of {9, 24}
 	{-4, 1},
 	{-3,1},
 	{1,3},
@@ -205,7 +204,7 @@ static const struct pluto_radius radius[PLUTO_COEFFS] = {
 	{-8, 7},
 	{2, -10},
 	{19, 35},
-	{10, 2}
+	{10, 3}  // (SS) 2026-06-25 should be {10, 3} instead of {10, 2}
 };
 
 /* Transform spheric coordinate in rectangular */

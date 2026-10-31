@@ -88,6 +88,11 @@ class StelApp : public QObject
 	Q_PROPERTY(bool flagUseCCSDesignation   READ getFlagUseCCSDesignation   WRITE setFlagUseCCSDesignation   NOTIFY flagUseCCSDesignationChanged)
 	Q_PROPERTY(bool flagUseFormattingOutput READ getFlagUseFormattingOutput WRITE setFlagUseFormattingOutput NOTIFY flagUseFormattingOutputChanged)
 	Q_PROPERTY(bool flagOverwriteInfoColor  READ getFlagOverwriteInfoColor  WRITE setFlagOverwriteInfoColor  NOTIFY flagOverwriteInfoColorChanged)
+	
+	// (SS) 2026-09-13 Extra decimal-digit precision for coordinates in the object info panel
+	// (e.g. 6 digits RA / 5 digits Dec, matching JPL Horizons' Extra Precision output).
+	Q_PROPERTY(bool flagExtraPrecision READ getFlagExtraPrecision WRITE setFlagExtraPrecision NOTIFY flagExtraPrecisionChanged)
+	
 	Q_PROPERTY(Vec3f overwriteInfoColor	READ getOverwriteInfoColor	WRITE setOverwriteInfoColor	 NOTIFY overwriteInfoColorChanged)
 	Q_PROPERTY(Vec3f daylightInfoColor	READ getDaylightInfoColor	WRITE setDaylightInfoColor	 NOTIFY daylightInfoColorChanged)
 	Q_PROPERTY(int  screenFontSize          READ getScreenFontSize          WRITE setScreenFontSize          NOTIFY screenFontSizeChanged)
@@ -349,6 +354,11 @@ public slots:
 	//! Get flag for using designations for celestial coordinate systems
 	bool getFlagUseCCSDesignation() const {return flagUseCCSDesignation;}
 
+	//! (SS) 2026-09-13 Set flag for extra decimal-digit precision in coordinate display (object info panel).
+	void setFlagExtraPrecision(bool b);
+	//! (SS) 2026-09-13 Get flag for extra decimal-digit precision in coordinate display (object info panel).
+	bool getFlagExtraPrecision() const { return flagExtraPrecision; }
+
 	//! Define info text color for overwrites
 	void setOverwriteInfoColor(const Vec3f& color);
 	//! Get info text color
@@ -408,6 +418,10 @@ signals:
 	void flagUseCCSDesignationChanged(bool);
 	void flagUseFormattingOutputChanged(bool);
 	void flagOverwriteInfoColorChanged(bool);
+	
+	//! (SS) 2026-09-13 This signal indicates a switch in use of extra coordinate-display precision
+	void flagExtraPrecisionChanged(bool);
+	
 	void colorSchemeChanged(const QString&);
 	void languageChanged();
 	void screenFontSizeChanged(int);
@@ -586,6 +600,9 @@ private:
 	bool flagUseFormattingOutput;   //!< Use tabular coordinate format for infotext
 	bool flagUseCCSDesignation;     //!< Use symbols like alpha (RA), delta (declination) for coordinate system labels
 	bool flagOverwriteInfoColor;    //!< Overwrite and use color for text in info panel
+	
+	bool flagExtraPrecision;		//!< (SS) 2026-09-13 Extra decimal-digit precision for coordinates in object info panel
+	
 	Vec3f overwriteInfoColor;
 	Vec3f daylightInfoColor;
 	bool flagImmediateSave;         //!< set true to allow more immediate-mode settings. By default this is limited to detail settings, e.g. orbit or nomenclature details, DSO filter types, ...
