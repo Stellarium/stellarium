@@ -2753,9 +2753,9 @@ void Satellites::saveDownloadedUpdate(QNetworkReply* reply)
 			}
 			if (tmpFile) // Something strange just happened...
 			{
-				Q_ASSERT(0); // Can we ever get here?
 				// Sorry Bogdan. If something strange/unexpected happened, you cannot just silently delete. Fix whatever was strange. For now, show at least a warning.
-				qWarning() << "[Satellites] Cannot insert newly fetched file to updateSources. Ignoring this file.";
+				qWarning() << "[Satellites] Cannot insert newly fetched file to updateSources. Ignoring this file:" << tmpFile->fileName();
+				Q_ASSERT(0); // Can we even ever get here? Stop here to allow inspection of that file.
 				delete tmpFile; // ...so we have to clean.
 			}
 		}
