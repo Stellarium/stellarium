@@ -43,6 +43,25 @@
 #include <QStringListModel>
 #include <QTimeZone>
 
+namespace
+{
+	//! Filter a list of location IDs based on ShowOnlyUserLocations checkbox state.
+	QStringList applyUserLocationFilter(
+		const LocationMap& locations,
+		bool userOnly)
+	{
+		QStringList locationIds;
+
+		for (auto it = locations.cbegin(); it != locations.cend(); ++it)
+		{
+			if (!userOnly || it.value().isUserLocation)
+				locationIds.append(it.key());
+		}
+
+		return locationIds;
+	}
+}
+
 LocationDialog::LocationDialog(QObject* parent)
 	: StelDialog("Location", parent)
 	, isEditingNew(false)
@@ -113,7 +132,11 @@ void LocationDialog::createDialogContent()
 	proxyModel->sort(0, Qt::AscendingOrder);
 	proxyModel->setFilterCaseSensitivity(Qt::CaseInsensitive);
 	ui->citiesListView->setModel(proxyModel);
-	connect(ui->showOnlyUserLocationsCheckBox, &QCheckBox::toggled, this, &LocationDialog::reloadLocations);
+	connect(ui->showOnlyUserLocationsCheckBox, &QCheckBox::toggled, this, [this]()
+		{
+			reloadLocations();
+			resetLocationList();
+		});
 
 	// Kinetic scrolling
 	kineticScrollingList << ui->citiesListView;
@@ -231,13 +254,8 @@ void LocationDialog::setDisplayFormatForSpins(bool flagDecimalDegrees)
 void LocationDialog::reloadLocations()
 {
 	const LocationMap locations = StelApp::getInstance().getLocationMgr().getAllMap();
-	QStringList locationIds;
-	for (auto it = locations.cbegin(); it != locations.cend(); ++it)
-	{
-		if (!ui->showOnlyUserLocationsCheckBox->isChecked() || it.value().isUserLocation)
-			locationIds.append(it.key());
-	}
-	allModel->setStringList(locationIds);
+
+	allModel->setStringList(applyUserLocationFilter(locations, ui->showOnlyUserLocationsCheckBox->isChecked()));
 }
 
 void LocationDialog::populateTooltips()
@@ -649,7 +667,7 @@ void LocationDialog::setLocationFromMap(double longitude, double latitude, const
 	// Filter location list for nearby sites. I assume Earth locations are better known. With only few locations on other planets in the list, 30 degrees seem OK.
 	const auto searchRadius = loc.planetName=="Earth" ? 5.0f: 30.0f;
 	LocationMap results = StelApp::getInstance().getLocationMgr().pickLocationsNearby(loc.planetName, longitude, latitude, searchRadius);
-	pickedModel->setStringList(results.keys());
+	pickedModel->setStringList(applyUserLocationFilter(results, ui->showOnlyUserLocationsCheckBox->isChecked()));
 	proxyModel->setSourceModel(pickedModel);
 	proxyModel->sort(0, Qt::AscendingOrder);
 	ui->mapWidget->setLocationFilter(longitude, latitude, searchRadius);
@@ -1003,7 +1021,7 @@ void LocationDialog::resetLocationList()
 	else
 	{
 		LocationMap results = locMgr.pickLocationsNearby(loc.planetName, 0.0f, 0.0f, 180.0f);
-		pickedModel->setStringList(results.keys());
+		pickedModel->setStringList(applyUserLocationFilter(results, ui->showOnlyUserLocationsCheckBox->isChecked()));
 		proxyModel->setSourceModel(pickedModel);
 		ui->regionNameComboBox->setCurrentIndex(ui->regionNameComboBox->findData("", Qt::UserRole, Qt::MatchCaseSensitive));
 	}
@@ -1019,7 +1037,7 @@ void LocationDialog::filterSitesByRegion()
 	StelLocationMgr &locMgr=StelApp::getInstance().getLocationMgr();
 
 	LocationMap results = locMgr.pickLocationsInRegion(region);
-	pickedModel->setStringList(results.keys());
+	pickedModel->setStringList(applyUserLocationFilter(results, ui->showOnlyUserLocationsCheckBox->isChecked()));
 	proxyModel->setSourceModel(pickedModel);
 	proxyModel->sort(0, Qt::AscendingOrder);
 	ui->citySearchLineEdit->setText(""); // https://wiki.qt.io/Technical_FAQ#Why_does_the_memory_keep_increasing_when_repeatedly_pasting_text_and_calling_clear.28.29_in_a_QLineEdit.3F
