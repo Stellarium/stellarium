@@ -198,6 +198,12 @@ private:
 	scm::Description getDescriptionFromTextEdit() const;
 
 	/**
+	 * @brief Adds the required-field marker to all labels of required input fields.
+	 *        Must be called after every (re)translation of the UI.
+	 */
+	void markRequiredFieldLabels();
+
+	/**
 	 * @brief Populates the overview/description tab fields from a Description.
 	 * 
 	 * @param desc The Description to populate from.

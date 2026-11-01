@@ -46,7 +46,8 @@ class TelescopeClientDirectNexStar : public TelescopeClient, public Server
 {
 	Q_OBJECT
 public:
-	TelescopeClientDirectNexStar(const QString &name, const QString &parameters, TelescopeControl::Equinox eq = TelescopeControl::EquinoxJ2000);
+	TelescopeClientDirectNexStar(const QString &name, const QString &parameters,
+	                             TelescopeControl::Equinox eq = TelescopeControl::EquinoxJ2000, int slot = 0);
 	~TelescopeClientDirectNexStar(void) override
 	{
 		//hangup();

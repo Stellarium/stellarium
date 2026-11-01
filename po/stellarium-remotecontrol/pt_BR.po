@@ -4,10 +4,9 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Vinicius Oliveira <prof.vinic@gmail.com>, 2022
+# Tiago <tiago.henrique.cco@gmail.com>, 2022
 # Matheus Machado <correioimperial@mail.com>, 2022
 # cardinot <mcardinot@gmail.com>, 2024
-# Tiago <tiago.henrique.cco@gmail.com>, 2025
 # Djhodison, 2026
 # 
 #, fuzzy
@@ -914,7 +913,7 @@ msgstr "Rotular constelações com tamanho de fonte"
 
 #: index.html:812 tablet7in.html:878
 msgid "Show lines with thickness"
-msgstr "Mostrar linhas mais grossas"
+msgstr "Exibir linhas com espessura"
 
 #: index.html:826 tablet7in.html:892
 msgid "Label asterisms with font size"
@@ -922,15 +921,15 @@ msgstr "Rotular asterismos com tamanho de fonte"
 
 #: index.html:840 tablet7in.html:906
 msgid "Show asterisms with thickness"
-msgstr "Mostrar asterismos mais grosso"
+msgstr "Exibir asterismos com espessura"
 
 #: index.html:854 tablet7in.html:920
 msgid "Show ray helpers with thickness"
-msgstr "Mostrar ajudantes de raios com espessura"
+msgstr "Exibir linhas auxiliares com espessura"
 
 #: index.html:868 tablet7in.html:934
 msgid "Show art in brightness"
-msgstr "Exibir imagem com brilho"
+msgstr "Exibir arte com brilho"
 
 #: index.html:882 tablet7in.html:948
 msgid "Show boundaries with thickness"
@@ -950,15 +949,15 @@ msgstr "Rótulos curtos"
 
 #: index.html:932 tablet7in.html:998
 msgid "Constellation selection isolated"
-msgstr "Seleção de Constelação isolada"
+msgstr "Seleção de constelação isolada"
 
 #: index.html:937 tablet7in.html:1003
 msgid "Only last selected"
-msgstr "Apenas o último selecionado"
+msgstr "Somente a última selecionada"
 
 #: index.html:954 tablet7in.html:1019
 msgid "Culture Data Inspector"
-msgstr "Inspetor de Dados Culturais"
+msgstr "Inspetor de Dados da Cultura"
 
 #: index.html:956 tablet7in.html:1021
 msgid ""
@@ -975,8 +974,8 @@ msgstr "arquivo. Use esta visualização para:"
 #: index.html:960 tablet7in.html:1025
 msgid "Verify exact constellation and asterism counts (including ray helpers)"
 msgstr ""
-"Verificar contagens exatas de constelações e asterismos (incluindo "
-"auxiliares de traçado)"
+"Verificar as contagens exatas de constelações e asterismos (incluindo linhas"
+" auxiliares)"
 
 #: index.html:961 tablet7in.html:1026
 msgid "Inspect raw IDs, native names, pronunciations, and IPA values"
@@ -994,7 +993,7 @@ msgstr ""
 #: index.html:964 tablet7in.html:1029
 msgid "Search across all fields to quickly locate specific entries"
 msgstr ""
-"Pesquise em todos os campos para localizar rapidamente entradas específicas"
+"Pesquisar em todos os campos para localizar rapidamente entradas específicas"
 
 #: index.html:967 tablet7in.html:1032
 msgid ""
@@ -1006,11 +1005,11 @@ msgstr ""
 
 #: index.html:976 tablet7in.html:1041
 msgid "Select Sky Culture"
-msgstr "Selecionar Cultura Estelar"
+msgstr "Selecionar Cultura Celeste"
 
 #: index.html:994 tablet7in.html:1059
 msgid "Ray Helpers"
-msgstr "Auxiliares de traçado"
+msgstr "Linhas Auxiliares"
 
 #: index.html:1006 tablet7in.html:1071
 msgid "Named Objects"
@@ -1043,7 +1042,7 @@ msgstr "ID"
 #: index.html:1150 tablet7in.html:1108 tablet7in.html:1139 tablet7in.html:1160
 #: tablet7in.html:1182 tablet7in.html:1215
 msgid "English Name"
-msgstr "Nome em Inglês"
+msgstr "Nome em Português"
 
 #: index.html:1044 index.html:1075 index.html:1096 index.html:1118
 #: index.html:1151 tablet7in.html:1109 tablet7in.html:1140 tablet7in.html:1161
@@ -1066,7 +1065,7 @@ msgid ""
 "All asterisms from index.json (ray helpers are excluded from this list). "
 "Click any row to center view."
 msgstr ""
-"Todos os asterismos do index.json (os auxiliares de traçado estão excluídos "
+"Todos os asterismos do index.json (as linhas auxiliares estão excluídas "
 "desta lista). Clique em qualquer linha para centralizar a visualização."
 
 #: index.html:1104 tablet7in.html:1169
@@ -1095,8 +1094,8 @@ msgid ""
 "All named celestial objects (stars, planets, deep-sky) defined in this "
 "culture's common_names section."
 msgstr ""
-"Todos os objetos celestes nomeados (estrelas, planetas, céu profundo) "
-"definidos na seção common_names desta cultura."
+"Todos os objetos celestes nomeados (estrelas, planetas e objetos de céu "
+"profundo) definidos na seção common_names desta cultura."
 
 #: index.html:1147 tablet7in.html:1212
 msgid "Original ID"
@@ -1124,7 +1123,7 @@ msgstr "Ações"
 
 #: index.html:1203 tablet7in.html:1243
 msgid "Run/toggle action"
-msgstr "Executar/Selecionar ação"
+msgstr "Executar/alternar ação"
 
 #: index.html:1217 tablet7in.html:1294
 msgid "Planet map"
@@ -1132,11 +1131,11 @@ msgstr "Mapa planetário"
 
 #: index.html:1218 tablet7in.html:1295
 msgid "Planet map pointer"
-msgstr "Ponteiro do Mapa do Planeta"
+msgstr "Ponteiro do mapa planetário"
 
 #: index.html:1222 tablet7in.html:1299
 msgid "Type to search location"
-msgstr "Digite para pesquisar localização"
+msgstr "Digite para pesquisar um local"
 
 #: index.html:1258 tablet7in.html:1328
 msgid "Interaction"
@@ -1148,7 +1147,7 @@ msgstr "Cena atual:"
 
 #: index.html:1262 tablet7in.html:1332
 msgid "View controls"
-msgstr "Mostrar controles"
+msgstr "Controles de visualização"
 
 #: index.html:1268 tablet7in.html:1338
 msgid "Movement controls"
@@ -1156,19 +1155,19 @@ msgstr "Controles de movimento"
 
 #: index.html:1280 tablet7in.html:1350
 msgid "Torchlight"
-msgstr "Luz de Tocha"
+msgstr "Lanterna"
 
 #: index.html:1287 tablet7in.html:1357
 msgid "Scene selection"
-msgstr "Seleções de cena"
+msgstr "Seleção de cena"
 
 #: index.html:1291 tablet7in.html:1361
 msgid "Load selected scene"
-msgstr "Carregar cena selecionada"
+msgstr "Carregar a cena selecionada"
 
 #: index.html:1304 tablet7in.html:1373
 msgid "Scan"
-msgstr "Escanear"
+msgstr "Procurar"
 
 #: index.html:1311 tablet7in.html:1380
 msgid "Controller Settings"
@@ -1244,7 +1243,7 @@ msgstr ""
 
 #: index.html:1409 tablet7in.html:1478
 msgid "Test Vibration"
-msgstr "Teste de Vibração"
+msgstr "Testar Vibração"
 
 #: index.html:1410 tablet7in.html:1479
 msgid "Manual test (uses full intensity)"
@@ -1260,7 +1259,7 @@ msgstr "funciona no Chrome/Edge"
 
 #: index.html:1422 tablet7in.html:1491
 msgid "Vibration Intensity:"
-msgstr "Intensidade de vibração:"
+msgstr "Intensidade de Vibração:"
 
 #: index.html:1431 tablet7in.html:1500
 msgid "Sensitivity:"
@@ -1276,7 +1275,7 @@ msgstr "Velocidade de Zoom:"
 
 #: index.html:1458 tablet7in.html:1527
 msgid "Movement Speed:"
-msgstr "Velocidade do Movimento:"
+msgstr "Velocidade de Movimento:"
 
 #: index.html:1468 tablet7in.html:1537
 msgid "Button Customization"
@@ -1325,8 +1324,8 @@ msgid ""
 "mappings."
 msgstr ""
 "Valores brutos em tempo real da API do Gamepad do navegador. Os botões "
-"mostram o estado de pressão e os eixos mostram um indicador visual. Use este"
-" painel para verificar os mapeamentos de botões e eixos."
+"indicam se estão pressionados e os eixos exibem indicadores visuais. Use "
+"este painel para verificar os mapeamentos de botões e eixos."
 
 #: index.html:1499 tablet7in.html:1568
 msgid "Buttons"
@@ -1352,7 +1351,7 @@ msgstr "Entendendo os Valores Brutos"
 #: index.html:1520 tablet7in.html:1589
 msgid "Buttons: Range 0.0 (not pressed) to 1.0 (green = fully pressed)."
 msgstr ""
-"Botões: Faixa de 0.0 (não pressionado) a 1.0 (verde = totalmente "
+"Botões: faixa de 0,0 (não pressionado) a 1,0 (verde = totalmente "
 "pressionado)."
 
 #: index.html:1521 tablet7in.html:1590
@@ -1360,15 +1359,15 @@ msgid ""
 "Axes: -1.0 to 1.0 with visual meter Center position is 0.0. Triggers (L2/R2)"
 " show gradual values."
 msgstr ""
-"Eixos: -1.0 a 1.0 com indicador visual. A posição central é 0.0. Os gatilhos"
-" (L2/R2) mostram valores graduais."
+"Eixos: de -1,0 a 1,0 com indicador visual. A posição central é 0,0. Os "
+"gatilhos (L2/R2) apresentam valores graduais."
 
 #: index.html:1522 tablet7in.html:1591
 msgid ""
 "Note: Different browsers may report the same physical button on different "
 "indices. Use this panel to identify the correct mapping for your setup."
 msgstr ""
-"Nota: Navegadores diferentes podem reportar o mesmo botão físico em índices "
+"Nota: navegadores diferentes podem reportar o mesmo botão físico em índices "
 "diferentes. Use este painel para identificar o mapeamento correto para a sua"
 " configuração."
 
@@ -1379,16 +1378,16 @@ msgstr "Sem resposta do servidor"
 #: index.html:1553 tablet7in.html:1621
 msgid "No response from server for %1 seconds. Is Stellarium still running?"
 msgstr ""
-"Sem resposta do servidor a %1 segundos. O Stellarium ainda está sendo "
-"executado?"
+"Sem resposta do servidor há %1 segundos. O Stellarium ainda está em "
+"execução?"
 
 #: tablet7in.html:35
 msgid "Time Jump"
-msgstr "Pular o tempo"
+msgstr "Salto de Tempo"
 
 #: tablet7in.html:40
 msgid "Grids"
-msgstr "Grelhas"
+msgstr "Grades"
 
 #: tablet7in.html:102
 msgid "Up/Left"
@@ -1412,7 +1411,7 @@ msgstr "Focar no objeto selecionado"
 
 #: tablet7in.html:102
 msgid "Focus on selection"
-msgstr "Foca na seleção"
+msgstr "Focar na seleção"
 
 #: tablet7in.html:102
 msgid "Right"
@@ -1472,7 +1471,7 @@ msgstr "Nebulosa de Eta Carinae"
 
 #: tablet7in.html:289
 msgid "47 Tucanae Cluster"
-msgstr "Aglomerado de 47 Tucanae"
+msgstr "Aglomerado 47 Tucanae"
 
 #: tablet7in.html:290
 msgid "Aries"
@@ -1528,7 +1527,7 @@ msgstr "Favoritos"
 
 #: tablet7in.html:1281
 msgid "Show 1"
-msgstr "Mostrar 1"
+msgstr "Exibir 1"
 
 #: tablet7in.html:1282
 msgid "Remove Labels and Images"

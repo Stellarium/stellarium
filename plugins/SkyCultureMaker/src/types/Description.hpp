@@ -58,23 +58,6 @@ struct Description
 	scm::ClassificationType classification;  // classification code
 	scm::RegionType region;					 // region code (delete this when multiple regions are used)
 	//std::vector<scm::RegionType> region;	 // region code (uncomment this when multiple regions are used)
-
-
-	QStringList getIncompleteFieldsList() const
-	{
-		QStringList list;
-		if (name.trimmed().isEmpty())               list.append(q_("Name of the Sky Culture"));
-		if (introduction.trimmed().isEmpty())       list.append(qc_("Introduction", "Name of a section in sky culture description"));
-		if (cultureDescription.trimmed().isEmpty()) list.append(q_("Culture Description"));
-		if (references.trimmed().isEmpty())         list.append(qc_("References", "Name of a section in sky culture description"));
-		if (authors.trimmed().isEmpty())            list.append(qc_("Authors", "Name of a section in sky culture description"));
-		if (about.trimmed().isEmpty())              list.append(q_("About the sky culture"));
-		if (license == scm::LicenseType::NONE)      list.append(qc_("License", "Name of a section in sky culture description"));
-		if (classification == scm::ClassificationType::NONE) list.append(q_("Classification"));
-		if (region == scm::RegionType::NONE)		list.append(q_("Region of the Sky Culture")); // (delete this when multiple regions are used)
-		//if (region.empty())						list.append(q_("Region of the Sky Culture")); // (uncomment this when multiple regions are used)
-		return list;
-	}
 };
 } // namespace scm
 

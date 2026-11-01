@@ -32,6 +32,7 @@
 #include "StelLocaleMgr.hpp"
 #include "StelProjector.hpp"
 #include "StelActionMgr.hpp"
+#include "StelSkyCultureMgr.hpp"
 #include "StelProgressController.hpp"
 
 #include "StelUtils.hpp"
@@ -1400,8 +1401,8 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("landscape/temperature_C",			propMgr->getStelPropertyValue("StelSkyDrawer.atmosphereTemperature").toFloat());
 
 	// view dialog / sky culture tab
-	QObject* scmgr = reinterpret_cast<QObject*>(&StelApp::getInstance().getSkyCultureMgr());
-	scmgr->setProperty("defaultSkyCultureID", scmgr->property("currentSkyCultureID"));
+	auto& scmgr = StelApp::getInstance().getSkyCultureMgr();
+	scmgr.setProperty("defaultSkyCultureID", scmgr.property("currentSkyCultureID"));
 
 	// Save default location
 	core->setDefaultLocationID(core->getCurrentLocation().getID());
