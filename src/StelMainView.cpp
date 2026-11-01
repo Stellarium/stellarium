@@ -2331,51 +2331,52 @@ void StelMainView::doScreenshot(void)
 				qDebug() << "EXIF: Done writing ProjectionMercator data";
 				break;
 			}
-			case StelCore::ProjectionFisheye:
-			{
-				// Set the human-readable string descriptive name
-				exifData["Exif.Photo.LensModel"] = QString("%1-degree Equidistant Fisheye Lens").arg(QString::number(fov, 'f', 1)).toStdString();
-				// 1. Register the Adobe Camera namespace
-				Exiv2::XmpProperties::registerNs("http://pix4d.com", "Camera");
-				xmpData["Xmp.Camera.ModelType"] = "fisheye";
+			//case StelCore::ProjectionFisheye:
+			//{
+			//	// Set the human-readable string descriptive name
+			//	exifData["Exif.Photo.LensModel"] = QString("%1-degree Equidistant Fisheye Lens").arg(QString::number(fov, 'f', 1)).toStdString();
+			//	// 1. Register the Adobe Camera namespace
+			//	Exiv2::XmpProperties::registerNs("http://pix4d.com", "Camera");
+			//	xmpData["Xmp.Camera.ModelType"] = "fisheye";
 
-				// Optional: Define lens distortion coefficients if calculating polynomials
-				// Formatted as space-separated floats mapping radial distortion (e.g., k1, k2, k3)
-				//xmpData["Xmp.xmpCamera.PerspectiveModelRadialDistort"] = "0.124 -0.045 0.002";
+			//	// Optional: Define lens distortion coefficients if calculating polynomials
+			//	// Formatted as space-separated floats mapping radial distortion (e.g., k1, k2, k3)
+			//	//xmpData["Xmp.xmpCamera.PerspectiveModelRadialDistort"] = "0.124 -0.045 0.002";
 
-				// Focal Length Calculation: For an ideal azimuthal equidistant fisheye, the distance from the image center to a pixel is
-				// directly proportional to its angle of incidence (\(r = f \cdot \theta\)).
-				// If the height of the image bounds the vertical field of view (\(vFoV\) in radians):
-				const double f_pixels=im.height()/(fov*M_PI_180);
-				const double radius_pixels = f_pixels * ((fov * M_PI_180) / 2.0);
+			//	// Focal Length Calculation: For an ideal azimuthal equidistant fisheye, the distance from the image center to a pixel is
+			//	// directly proportional to its angle of incidence (\(r = f \cdot \theta\)).
+			//	// If the height of the image bounds the vertical field of view (\(vFoV\) in radians):
+			//	const double f_pixels=im.height()/(fov*M_PI_180);
+			//	const double radius_pixels = f_pixels * ((fov * M_PI_180) / 2.0);
 
-				// Add specific field of view parameters for geometric parsers.
-				//xmpData["Xmp.Camera.FocalLengthX"] = std::to_string(f_pixels);
-				//xmpData["Xmp.Camera.FocalLengthY"] = std::to_string(f_pixels);
-				//xmpData["Xmp.Camera.ImageWidth"]   = std::to_string(im.width());
-				//xmpData["Xmp.Camera.ImageHeight"]  = std::to_string(im.height());
-				// Pix4D uses a 2D affine matrix string for focal specs rather than FocalLengthX/Y
-				// Format: "C,D,E,F" where C and F represent horizontal/vertical focal length in pixels
-				xmpData["Xmp.Camera.FisheyeAffineMatrix"] = std::to_string(f_pixels) + ",0,0," + std::to_string(f_pixels);
+			//	// Add specific field of view parameters for geometric parsers.
+			//	//xmpData["Xmp.Camera.FocalLengthX"] = std::to_string(f_pixels);
+			//	//xmpData["Xmp.Camera.FocalLengthY"] = std::to_string(f_pixels);
+			//	//xmpData["Xmp.Camera.ImageWidth"]   = std::to_string(im.width());
+			//	//xmpData["Xmp.Camera.ImageHeight"]  = std::to_string(im.height());
+			//	// Pix4D uses a 2D affine matrix string for focal specs rather than FocalLengthX/Y
+			//	// Format: "C,D,E,F" where C and F represent horizontal/vertical focal length in pixels
+			//	xmpData["Xmp.Camera.FisheyeAffineMatrix"] = std::to_string(f_pixels) + ",0,0," + std::to_string(f_pixels);
 
-				// 2. Off-Axis Center Shifting
-				double center_x = (im.width() / 2.0)  - core->getViewportHorizontalOffset()*im.width()/100.;
-				double center_y = (im.height() / 2.0) + core->getViewportVerticalOffset()*im.height()/100.; // VERIFY DIRECTION
-				//xmpData["Xmp.Camera.PrincipalPointX"] = std::to_string(center_x);
-				//xmpData["Xmp.Camera.PrincipalPointY"] = std::to_string(center_y);
-				// Pix4D expects a comma-separated single string string: "cx,cy"
-				xmpData["Xmp.Camera.PrincipalPoint"] = std::to_string(center_x) + "," + std::to_string(center_y);
+			//	// 2. Off-Axis Center Shifting
+			//	double center_x = (im.width() / 2.0)  - core->getViewportHorizontalOffset()*im.width()/100.;
+			//	double center_y = (im.height() / 2.0) + core->getViewportVerticalOffset()*im.height()/100.; // VERIFY DIRECTION
+			//	//xmpData["Xmp.Camera.PrincipalPointX"] = std::to_string(center_x);
+			//	//xmpData["Xmp.Camera.PrincipalPointY"] = std::to_string(center_y);
+			//	// Pix4D expects a comma-separated single string string: "cx,cy"
+			//	xmpData["Xmp.Camera.PrincipalPoint"] = std::to_string(center_x) + "," + std::to_string(center_y);
 
-				//// 3. Define the Mask Circle Properties
-				//xmpData["Xmp.Camera.FisheyeCircleRadius"] = std::to_string(radius_pixels);
-				//xmpData["Xmp.Camera.FisheyeCircleCenter"] = std::to_string(center_x) + " " + std::to_string(center_y);
-				qDebug() << "EXIF: Done writing ProjectionFisheye data";
-				break;
-			}
+			//	//// 3. Define the Mask Circle Properties
+			//	//xmpData["Xmp.Camera.FisheyeCircleRadius"] = std::to_string(radius_pixels);
+			//	//xmpData["Xmp.Camera.FisheyeCircleCenter"] = std::to_string(center_x) + " " + std::to_string(center_y);
+			//	qDebug() << "EXIF: Done writing ProjectionFisheye data";
+			//	break;
+			//}
 			default:
 			{
 				const QMap<StelCore::ProjectionType, QString>pMap={
 					{StelCore::ProjectionStereographic, "Stereographic"},
+					{StelCore::ProjectionFisheye,       "Fisheye"},
 					{StelCore::ProjectionEqualArea,     "Equal-Area"},
 					{StelCore::ProjectionHammer,        "Hammer-Aitoff"},
 					{StelCore::ProjectionMollweide,     "Mollweide"},
