@@ -1864,6 +1864,8 @@ void StelMainView::doScreenshot(void)
 	                           0.0+(0.5+pParams.viewportCenterOffset.v[1])*virtImgHeight);
 	sParams.viewportFovDiameter = qMin(virtImgWidth,virtImgHeight);
 	core->setCurrentStelProjectorParams(sParams);
+	// Retrieve centerPixelPerRad (needed for some EXIF/XMP tags
+	const double centerPixelPerRadForMercator=0.5f * static_cast<float>(sParams.viewportFovDiameter * sParams.devicePixelsPerPixel) / (M_PIf/360.f * sParams.fov);
 
 	QPainter painter;
 	painter.begin(&fbObjPaintDev);
@@ -2273,7 +2275,7 @@ void StelMainView::doScreenshot(void)
 			}
 			case StelCore::ProjectionMercator:
 			{
-				StelProjectorP proj=core->getProjection(StelCore::FrameAltAz); // This is a new projector. TBD: Not sure this works, esp. for custom screenshot size!
+				//StelProjectorP proj=core->getProjection(StelCore::FrameAltAz); // This is a new projector. TBD: Not sure this works, esp. for custom screenshot size!
 				//StelProjectorP proj=painter.getProjector(); // This is a new projector. TBD: Not sure this works, esp. for custom screenshot size!
 				// Set the human-readable string descriptive name
 				exifData["Exif.Photo.LensModel"] = QString("%1-degree VFoV Mercator Lens").arg(QString::number(fov, 'f', 1)).toStdString();
@@ -2289,17 +2291,17 @@ void StelMainView::doScreenshot(void)
 				// Esp., we must know width of a full 360° pano. The height remains unspecified, because it is always a crop.
 				// 2*pi*pxPerRad should be 360° width! So simple?
 
-				const double centerPixelPerRad=proj->getPixelPerRadAtCenter();
-				xmpData["Xmp.GPano.FullPanoWidthPixels"]  = std::to_string(int(2*M_PI*centerPixelPerRad));
+				//const double centerPixelPerRad=proj->getPixelPerRadAtCenter();
+				xmpData["Xmp.GPano.FullPanoWidthPixels"]  = std::to_string(int(2*M_PI*centerPixelPerRadForMercator));
 				xmpData["Xmp.GPano.CroppedAreaTopPixels"] = std::to_string(int((-im.height())/2)); // TBD: Adjust for viewport shift.
 
 				// 4. Define the portion of the view your crop actually occupies
 				// We actually are zooming into the center of a much larger pano.
 				// The left edge depends on view size and view azimuth.
-				if (im.width()>=int(2*M_PI*centerPixelPerRad)) // fully zoomed out?
+				if (im.width()>=int(2*M_PI*centerPixelPerRadForMercator)) // fully zoomed out?
 					xmpData["Xmp.GPano.CroppedAreaLeftPixels"]   = std::to_string(0);
 				else
-					xmpData["Xmp.GPano.CroppedAreaLeftPixels"]   = std::to_string(int(centerPixelPerRad-im.width()/2));
+					xmpData["Xmp.GPano.CroppedAreaLeftPixels"]   = std::to_string(int(centerPixelPerRadForMercator-im.width()/2));
 
 				// Spatial Orientation (Pan/Tilt/Roll)
 				double gpanoHeading, gpanoPitch;
