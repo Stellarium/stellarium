@@ -1769,6 +1769,15 @@ std::string convertToExifDms(double decimalDegrees) {
 	    << static_cast<int>(std::round(seconds * 1000.0)) << "/1000";
 	return oss.str();
 }
+// Auxiliary function by Claude.ai.
+// Add an XMP ordered array (rdf:Seq) of values
+static void setSeq(Exiv2::XmpData& xmp, const std::string& key,
+		   const std::vector<std::string>& items)
+{
+	auto v = Exiv2::Value::create(Exiv2::xmpSeq);
+	for (const auto& s : items) v->read(s);   // each read() appends one item
+	xmp.add(Exiv2::XmpKey(key), v.get());
+}
 #endif
 
 void StelMainView::doScreenshot(void)
@@ -2045,6 +2054,10 @@ void StelMainView::doScreenshot(void)
 		return;
 
 	try {
+		// Claude.ai suggests 2 lines. XMP creation worked without, but maybe terminate is important?
+		Exiv2::XmpParser::initialize();           // needed for thread-safety / explicit setup
+		::atexit(Exiv2::XmpParser::terminate);
+
 		StelMovementMgr *movMgr=GETSTELMODULE(StelMovementMgr);
 		StelLocation loc=core->getCurrentLocation();
 		LandscapeMgr *landscapeMgr=dynamic_cast<LandscapeMgr*>(GETSTELMODULE(LandscapeMgr));
@@ -2126,6 +2139,15 @@ void StelMainView::doScreenshot(void)
 		StelUtils::rectToSphe(&azimuth, &altitude, currentAim);
 		azimuth= StelUtils::fmodpos(180.-azimuth*M_180_PI, 360.);
 		altitude *= M_180_PI;
+
+		// These can be written e.g. into Xmp.avm tags
+		double ra2000=0;
+		double dec2000=0;
+		Vec3d j2000Aim=movMgr->getViewDirectionJ2000();
+		StelUtils::rectToSphe(&ra2000, &dec2000, j2000Aim);
+		ra2000   = StelUtils::fmodpos(ra2000*M_180_PI, 360.); // We use ra2000 in degrees here.
+		dec2000 *= M_180_PI;
+
 		exifData["Exif.GPSInfo.GPSImgDirection"]     = QString("%1/1000").arg(QString::number(int(round(azimuth*1000.0)))).toStdString(); // True azimuth, degrees [0..359.99]
 		exifData["Exif.Photo.CameraElevationAngle"]  = QString("%1/1000").arg(QString::number(int(round(altitude*1000.0)))).toStdString(); // center orientation, degrees
 		exifData["Exif.GPSInfo.GPSImgDirectionRef"]  = "T"; // azimuth value is True (not magnetic) azimuth
@@ -2138,7 +2160,23 @@ void StelMainView::doScreenshot(void)
 		//
 		//exifData["Exif.GPSInfo.GPSDateStamp"]        = "2026:10:11"); // String,  "YYYY:MM:DD"
 		//exifData["Exif.GPSInfo.GPSTimeStamp"]        = time); // 3 rational numbers, hh/1, mm/1, ss/1.
-		// TBD: We may want to use Xmp.avm (Astronomy Visualization Metadata) to extend descriptions with astronomical coordinates.
+
+		// We may want to use Xmp.avm (Astronomy Visualization Metadata) to extend descriptions with astronomical coordinates.
+		// Following lines suggested by Claude.ai.
+		// Register the AVM namespace (once per process, before using the prefix)
+		Exiv2::XmpProperties::registerNs("http://www.communicatingastronomy.org/avm/1.0/", "avm");
+		xmpData["Xmp.avm.Type"]        = "Simulation";
+		xmpData["Xmp.avm.Spatial.CoordinateFrame"]        = "ICRS";
+		xmpData["Xmp.avm.Spatial.Equinox"]                = "J2000";
+		//xmpData["Xmp.avm.Spatial.CoordsystemProjection"]  = "TAN"; // GZ: Guessing: Tangential image? Then it's for Perspective only!
+		xmpData["Xmp.avm.Spatial.Rotation"]               = "0.0";
+		xmpData["Xmp.avm.Spatial.Quality"]                = "Full";
+
+		//// These may be correct only for Perspective!
+		//setSeq(xmpData, "Xmp.avm.Spatial.ReferenceValue",     {std::to_string(ra2000), std::to_string(dec2000)});
+		//setSeq(xmpData, "Xmp.avm.Spatial.ReferenceDimension", {std::to_string(im.width()),  std::to_string(im.height())});
+
+
 
 		qDebug() << "EXIF: Projections...";
 		// BIG TOPIC: Projections. A few non-perspective projections are standardized by Adobe and Google. But for some, we can only specify projection name and our VFoV.
@@ -2154,6 +2192,12 @@ void StelMainView::doScreenshot(void)
 				exifData["Exif.Photo.LensModel"] = QString("%1-mm (35mm equivalent) Perspective Lens").arg(QString::number(focalLengthEquiv, 'f', 1)).toStdString();
 				exifData["Exif.Photo.FocalLengthIn35mmFilm"] = QString::number(int(focalLengthEquiv)).toStdString();
 				//exifData["Exif.Image.FocalLength"]          =  focalLengthEquiv; // Maybe explicitly add this, or some f as diagonal relative to 35mm? (vFoV=24mm)
+
+				// Tentative first tags, suggested by Claude.
+				xmpData["Xmp.avm.Spatial.CoordsystemProjection"]  = "TAN"; // GZ: Guessing: Tangential image? Then it's for Perspective only!
+				setSeq(xmpData, "Xmp.avm.Spatial.ReferencePixel",     {std::to_string(im.width() / 2.0), std::to_string(im.height() / 2.0)});
+				const double scale=fov/im.height(); // simple approximation formula for perspective views.
+				setSeq(xmpData, "Xmp.avm.Spatial.Scale",              {std::to_string(-scale), std::to_string(scale)});
 
 				qDebug() << "EXIF: Done writing ProjectionPerspective data";
 				break;
@@ -2230,6 +2274,7 @@ void StelMainView::doScreenshot(void)
 			case StelCore::ProjectionMercator:
 			{
 				StelProjectorP proj=core->getProjection(StelCore::FrameAltAz); // This is a new projector. TBD: Not sure this works, esp. for custom screenshot size!
+				//StelProjectorP proj=painter.getProjector(); // This is a new projector. TBD: Not sure this works, esp. for custom screenshot size!
 				// Set the human-readable string descriptive name
 				exifData["Exif.Photo.LensModel"] = QString("%1-degree VFoV Mercator Lens").arg(QString::number(fov, 'f', 1)).toStdString();
 
