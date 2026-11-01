@@ -61,8 +61,10 @@ class StelMainView : public QGraphicsView
 	Q_PROPERTY(int  screenshotDpi	           READ getScreenshotDpi              WRITE setScreenshotDpi              NOTIFY screenshotDpiChanged)
 	Q_PROPERTY(QString screenShotFormat        READ getScreenshotFormat           WRITE setScreenshotFormat           NOTIFY screenshotFormatChanged)
 #ifdef HAVE_EXIV2
+	Q_PROPERTY(bool flagScreenShotWriteExif    READ getFlagScreenshotWriteExif    WRITE setFlagScreenshotWriteExif    NOTIFY flagScreenshotWriteExifChanged)
 	Q_PROPERTY(QString screenShotArtist        READ getScreenshotArtist           WRITE setScreenshotArtist           NOTIFY screenshotArtistChanged)
 	Q_PROPERTY(QString screenShotCopyright     READ getScreenshotCopyright        WRITE setScreenshotCopyright        NOTIFY screenshotCopyrightChanged)
+	Q_PROPERTY(QString screenShotTerms         READ getScreenshotTerms            WRITE setScreenshotTerms            NOTIFY screenshotTermsChanged)
 #endif
 	Q_PROPERTY(bool flagCursorTimeout          READ getFlagCursorTimeout          WRITE setFlagCursorTimeout          NOTIFY flagCursorTimeoutChanged)
 	Q_PROPERTY(double cursorTimeout            READ getCursorTimeout              WRITE setCursorTimeout              NOTIFY cursorTimeoutChanged)
@@ -165,12 +167,21 @@ public slots:
 
 #ifdef HAVE_EXIV2
 	//! @arg artistName Name of artist to be used in the EXIF information of a screenshot (TIF(F), JP(E)G, PNG only)
+	void setFlagScreenshotWriteExif(const bool writeExif);
+	bool getFlagScreenshotWriteExif() const {return flagScreenShotWriteExif;}
+
+	//! @arg artistName Name of artist to be used in the EXIF information of a screenshot (TIF(F), JP(E)G, PNG only)
 	void setScreenshotArtist(const QString artistName);
 	QString getScreenshotArtist() const {return screenShotArtist;}
 
 	//! @arg copyrightName Name of copyright holder to be used in the EXIF information of a screenshot (TIF(F), JP(E)G, PNG only)
 	void setScreenshotCopyright(const QString copyrightName);
 	QString getScreenshotCopyright() const {return screenShotCopyright;}
+
+	//! @arg copyrightTerms copyright terms to be used in the EXIF information of a screenshot (TIF(F), JP(E)G, PNG only)
+	//! Examples: All rights reserved. / Public domain.
+	void setScreenshotTerms(const QString terms);
+	QString getScreenshotTerms() const {return screenShotTerms;}
 #endif
 
 	//! Get whether colors are inverted when saving screenshot
@@ -289,8 +300,10 @@ signals:
 	void screenshotFormatChanged(QString format);
 	void screenshotFileMaskChanged(QString format);
 #ifdef HAVE_EXIV2
+	void flagScreenshotWriteExifChanged(bool writeExif);
 	void screenshotArtistChanged(QString artist);
 	void screenshotCopyrightChanged(QString copyright);
+	void screenshotTermsChanged(QString terms);
 #endif
 	void skyBackgroundColorChanged(Vec3f color);
 
@@ -370,8 +383,10 @@ private:
 	QString screenShotFileMask;
 	QString screenShotDir;
 #ifdef HAVE_EXIV2
+	bool flagScreenShotWriteExif; // Write metadata EXIF/XMP tags into screenshots, including anything of the following
 	QString screenShotArtist;
 	QString screenShotCopyright;
+	QString screenShotTerms;
 #endif
 	bool flagCursorTimeout;
 	//! Timer that triggers with the cursor timeout.

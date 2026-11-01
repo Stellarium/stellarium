@@ -646,6 +646,7 @@ StelMainView::StelMainView(QSettings* settings)
 	  screenShotFormat("png"),
 	  screenShotFileMask("yyyyMMdd-hhmmssz"),
 	  screenShotDir(""),
+	  flagScreenShotWriteExif(true),
 	  flagCursorTimeout(false),
 	  lastEventTimeSec(0.0),
 	  minfps(1.f),
@@ -1013,8 +1014,10 @@ void StelMainView::init()
 	customScreenshotHeight=configuration->value("main/screenshot_custom_height", 768).toInt();
 	screenshotDpi=configuration->value("main/screenshot_dpi", 72).toInt();
 #ifdef HAVE_EXIV2
+	setFlagScreenshotWriteExif(configuration->value("main/screenshot_exif", true).toBool());
 	setScreenshotArtist(configuration->value("main/screenshot_artist", "").toString());
 	setScreenshotCopyright(configuration->value("main/screenshot_copyright", "").toString());
+	setScreenshotTerms(configuration->value("main/screenshot_terms", "").toString());
 #endif
 	setFlagCursorTimeout(configuration->value("gui/flag_mouse_cursor_timeout", false).toBool());
 	setCursorTimeout(configuration->value("gui/mouse_cursor_timeout", 10.f).toDouble());
@@ -1721,6 +1724,13 @@ void StelMainView::saveScreenShot(const QString& filePrefix, const QString& save
 }
 
 #ifdef HAVE_EXIV2
+void StelMainView::setFlagScreenshotWriteExif(const bool writeExif)
+{
+	flagScreenShotWriteExif = writeExif;
+	StelApp::getInstance().getSettings()->setValue("main/screenshot_exif", flagScreenShotWriteExif);
+	emit flagScreenshotWriteExifChanged(flagScreenShotWriteExif);
+}
+
 void StelMainView::setScreenshotArtist(const QString artistName)
 {
 	screenShotArtist = artistName;
@@ -1733,6 +1743,13 @@ void StelMainView::setScreenshotCopyright(const QString copyrightName)
 	screenShotCopyright = copyrightName;
 	StelApp::getInstance().getSettings()->setValue("main/screenshot_copyright", copyrightName);
 	emit screenshotCopyrightChanged(copyrightName);
+}
+
+void StelMainView::setScreenshotTerms(const QString terms)
+{
+	screenShotTerms = terms;
+	StelApp::getInstance().getSettings()->setValue("main/screenshot_terms", terms);
+	emit screenshotTermsChanged(screenShotTerms);
 }
 
 // Helper to convert decimal degrees to EXIF GPS rational components (Degrees, Minutes, Seconds)
@@ -2002,7 +2019,6 @@ void StelMainView::doScreenshot(void)
 	im.setDotsPerMeterX(qRound(screenshotDpi*100./2.54));
 	im.setDotsPerMeterY(qRound(screenshotDpi*100./2.54));
 	qInfo() << "Saving screenshot to file: " << QDir::toNativeSeparators(shotPath.filePath());
-
 	{
 		// We need to scope the ImageWriter!
 		QImageWriter imageWriter(shotPath.filePath());
@@ -2025,7 +2041,7 @@ void StelMainView::doScreenshot(void)
 
 #ifdef HAVE_EXIV2
 	// Write EXIF metadata only to JPG, PNG or TIF:
-	if (! QStringList({"jpg", "jpeg", "png", "tif", "tiff"}).contains(screenShotFormat))
+	if (!flagScreenShotWriteExif || ! QStringList({"jpg", "jpeg", "png", "tif", "tiff"}).contains(screenShotFormat))
 		return;
 
 	try {
@@ -2062,9 +2078,10 @@ void StelMainView::doScreenshot(void)
 		exifData["Exif.Image.Artist"]         = screenShotArtist.toStdString();
 		exifData["Exif.Image.HostComputer"]   = QString("%1 (%2)").arg(QSysInfo::machineHostName(), StelUtils::getOperatingSystemInfo()).toStdString();
 		if (screenShotCopyright.length()>0)
-			exifData["Exif.Image.Copyright"] = QString("%1, %2. All rights reserved.").
-								arg(screenShotCopyright,
-							            QString::number(QDate::currentDate().year())).toStdString();
+			exifData["Exif.Image.Copyright"] = QString("%1, %2. %3").
+								arg(QString::number(QDate::currentDate().year()),
+								    screenShotCopyright,
+								    screenShotTerms).toStdString();
 		// SIMULATION TIME
 		const QDateTime now  = QDateTime::currentDateTime();
 		const QString nowStr = StelUtils::julianDayToExifString(now.date().toJulianDay() + StelUtils::qTimeToJDFraction(now.time()));
@@ -2121,7 +2138,7 @@ void StelMainView::doScreenshot(void)
 		//
 		//exifData["Exif.GPSInfo.GPSDateStamp"]        = "2026:10:11"); // String,  "YYYY:MM:DD"
 		//exifData["Exif.GPSInfo.GPSTimeStamp"]        = time); // 3 rational numbers, hh/1, mm/1, ss/1.
-
+		// TBD: We may want to use Xmp.avm (Astronomy Visualization Metadata) to extend descriptions with astronomical coordinates.
 
 		qDebug() << "EXIF: Projections...";
 		// BIG TOPIC: Projections. A few non-perspective projections are standardized by Adobe and Google. But for some, we can only specify projection name and our VFoV.
@@ -2163,7 +2180,6 @@ void StelMainView::doScreenshot(void)
 				exifData["Exif.Photo.LensModel"] = QString("%1-degree VFoV Equidistant Cylinder Lens").arg(QString::number(fov, 'f', 1)).toStdString();
 
 				// GPano tags
-				// TBD: Unfortunately, any cropped tags invalidate the screenshot for Marzipano. I have no tool to test these!
 				Exiv2::XmpProperties::registerNs("http://ns.google.com/photos/1.0/panorama/", "GPano");
 				xmpData["Xmp.GPano.ProjectionType"] = "equirectangular";
 				xmpData["Xmp.GPano.UsePanoramaViewer"]    = "True";
@@ -2273,8 +2289,8 @@ void StelMainView::doScreenshot(void)
 				// Set the human-readable string descriptive name
 				exifData["Exif.Photo.LensModel"] = QString("%1-degree Equidistant Fisheye Lens").arg(QString::number(fov, 'f', 1)).toStdString();
 				// 1. Register the Adobe Camera namespace
-				Exiv2::XmpProperties::registerNs("http://adobe.com", "xmpCamera");
-				xmpData["Xmp.xmpCamera.ModelType"] = "Fisheye";
+				Exiv2::XmpProperties::registerNs("http://pix4d.com", "Camera");
+				xmpData["Xmp.Camera.ModelType"] = "fisheye";
 
 				// Optional: Define lens distortion coefficients if calculating polynomials
 				// Formatted as space-separated floats mapping radial distortion (e.g., k1, k2, k3)
@@ -2285,22 +2301,27 @@ void StelMainView::doScreenshot(void)
 				// If the height of the image bounds the vertical field of view (\(vFoV\) in radians):
 				const double f_pixels=im.height()/(fov*M_PI_180);
 				const double radius_pixels = f_pixels * ((fov * M_PI_180) / 2.0);
+
 				// Add specific field of view parameters for geometric parsers.
-				xmpData["Xmp.xmpCamera.FocalLengthX"] = std::to_string(f_pixels);
-				xmpData["Xmp.xmpCamera.FocalLengthY"] = std::to_string(f_pixels);
-				xmpData["Xmp.xmpCamera.ImageWidth"]   = std::to_string(im.width());
-				xmpData["Xmp.xmpCamera.ImageHeight"]  = std::to_string(im.height());
+				//xmpData["Xmp.Camera.FocalLengthX"] = std::to_string(f_pixels);
+				//xmpData["Xmp.Camera.FocalLengthY"] = std::to_string(f_pixels);
+				//xmpData["Xmp.Camera.ImageWidth"]   = std::to_string(im.width());
+				//xmpData["Xmp.Camera.ImageHeight"]  = std::to_string(im.height());
+				// Pix4D uses a 2D affine matrix string for focal specs rather than FocalLengthX/Y
+				// Format: "C,D,E,F" where C and F represent horizontal/vertical focal length in pixels
+				xmpData["Xmp.Camera.FisheyeAffineMatrix"] = std::to_string(f_pixels) + ",0,0," + std::to_string(f_pixels);
 
 				// 2. Off-Axis Center Shifting
-				// Replace 'centerOffsetOffsetX' and 'Y' with Stellarium's actual projection offset variables
 				double center_x = (im.width() / 2.0)  - core->getViewportHorizontalOffset()*im.width()/100.;
 				double center_y = (im.height() / 2.0) + core->getViewportVerticalOffset()*im.height()/100.; // VERIFY DIRECTION
-				xmpData["Xmp.xmpCamera.PrincipalPointX"] = std::to_string(center_x);
-				xmpData["Xmp.xmpCamera.PrincipalPointY"] = std::to_string(center_y);
+				//xmpData["Xmp.Camera.PrincipalPointX"] = std::to_string(center_x);
+				//xmpData["Xmp.Camera.PrincipalPointY"] = std::to_string(center_y);
+				// Pix4D expects a comma-separated single string string: "cx,cy"
+				xmpData["Xmp.Camera.PrincipalPoint"] = std::to_string(center_x) + "," + std::to_string(center_y);
 
-				// 3. Define the Mask Circle Properties
-				xmpData["Xmp.xmpCamera.FisheyeCircleRadius"] = std::to_string(radius_pixels);
-				xmpData["Xmp.xmpCamera.FisheyeCircleCenter"] = std::to_string(center_x) + " " + std::to_string(center_y);
+				//// 3. Define the Mask Circle Properties
+				//xmpData["Xmp.Camera.FisheyeCircleRadius"] = std::to_string(radius_pixels);
+				//xmpData["Xmp.Camera.FisheyeCircleCenter"] = std::to_string(center_x) + " " + std::to_string(center_y);
 				qDebug() << "EXIF: Done writing ProjectionFisheye data";
 				break;
 			}
@@ -2358,10 +2379,9 @@ void StelMainView::doScreenshot(void)
 		QString jsonString = QJsonDocument(QJsonObject::fromVariantMap(infoMap)).toJson(QJsonDocument::Compact);
 		exifData["Exif.Photo.UserComment"] = jsonString.toStdString();
 
-		exifData["Exif.Image.ImageDescription"] = QString("%1 (%2: %3 %4)").arg(sel.length()>0 ?  sel[0]->getNameI18n() : qc_("Stellarium View", "Screenshot default title"),
+		exifData["Exif.Image.ImageDescription"] = QString("%1 (%2: %3°)").arg(sel.length()>0 ?  sel[0]->getNameI18n() : qc_("Stellarium View", "Screenshot default title"),
 										      qc_("FOV", "abbreviation"),
-										      QString::number(fov, 'g', 3),
-										      q_("degrees")).toStdString();
+										      QString::number(fov, 'g', 3)).toStdString();
 
 		//exifData["Exif.Image.ExposureTime"]         = exposureTimeSeconds; // not meaningful
 		//exifData["Exif.Image.FNumber"]              = F_number;            // not meaningful
