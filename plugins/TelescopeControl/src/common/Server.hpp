@@ -50,6 +50,7 @@ public:
 	int getLogSlot() const { return logSlot; }
 	virtual ~Server(void) {}
 	virtual void step(long long int timeout_micros);
+	void closeAllConnections(void);
 	
 protected:
 	void sendPosition(unsigned int ra_int, int dec_int, int status);

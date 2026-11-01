@@ -50,8 +50,9 @@ public:
 	                             TelescopeControl::Equinox eq = TelescopeControl::EquinoxJ2000, int slot = 0);
 	~TelescopeClientDirectNexStar(void) override
 	{
-		//hangup();
+		closeConnection();
 	}
+	void closeConnection(void) override;
 	
 	//======================================================================
 	// Methods inherited from TelescopeClient
@@ -85,7 +86,6 @@ private:
 	void syncReceived(unsigned int ra_int, int dec_int) override;
 	
 private:
-	void hangup(void);
 	int time_delay;
 	
 	InterpolatedPosition interpolatedPosition;

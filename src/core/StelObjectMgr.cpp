@@ -536,9 +536,10 @@ StelObjectP StelObjectMgr::cleverFind(const StelCore* core, int x, int y) const
 *************************************************************************/
 void StelObjectMgr::unSelect(void)
 {
-	if(!lastSelectedObjects.isEmpty())
+	if(!lastSelectedObjects.isEmpty() || lastSelectedObject)
 	{
 		lastSelectedObjects.clear();
+		lastSelectedObject.clear();
 		emit selectedObjectChanged(StelModule::RemoveFromSelection);
 	}
 }
@@ -567,9 +568,16 @@ bool StelObjectMgr::setSelectedObject(const StelObjectP obj, StelModule::StelMod
 bool StelObjectMgr::setSelectedObject(const QList<StelObjectP>& objs, StelModule::StelModuleSelectAction action)
 {
 	if (action==StelModule::AddToSelection)
+	{
 		lastSelectedObjects.append(objs);
+		if (!objs.isEmpty())
+			lastSelectedObject = objs.last();
+	}
 	else
+	{
 		lastSelectedObjects = objs;
+		lastSelectedObject = objs.isEmpty() ? StelObjectP() : objs.first();
+	}
 	emit selectedObjectChanged(action);
 	return true;
 }

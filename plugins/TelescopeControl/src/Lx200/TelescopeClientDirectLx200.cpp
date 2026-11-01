@@ -117,6 +117,8 @@ TelescopeClientDirectLx200::TelescopeClientDirectLx200(const QString &name, cons
 			qCWarning(Telescopes) << getLogPrefix()
 			                      << "ERROR creating TelescopeClientDirectLx200: cannot connect to"
 			                      << hostName << "port" << tcpPort;
+			delete connection;
+			lx200 = nullptr;
 			return;
 		}
 		// Server owns the connection and deletes it with its socket list in Server::SocketList::clear().
@@ -136,6 +138,8 @@ TelescopeClientDirectLx200::TelescopeClientDirectLx200(const QString &name, cons
 			qCWarning(Telescopes) << getLogPrefix()
 			                      << "ERROR creating TelescopeClientDirectLx200: cannot open serial device"
 			                      << serialDeviceName;
+			delete connection;
+			lx200 = nullptr;
 			return;
 		}
 		// Server owns the connection and deletes it with its socket list in Server::SocketList::clear().
@@ -312,6 +316,11 @@ bool TelescopeClientDirectLx200::isConnected(void) const
 bool TelescopeClientDirectLx200::isInitialized(void) const
 {
 	return (lx200 && !lx200->isClosed());
+}
+
+void TelescopeClientDirectLx200::closeConnection(void)
+{
+	closeAllConnections();
 }
 
 //Merged from Connection::sendPosition() and TelescopeTCP::performReading()

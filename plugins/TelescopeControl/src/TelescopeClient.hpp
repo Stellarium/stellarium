@@ -122,6 +122,8 @@ public:
 	
 	virtual bool prepareCommunication() {return false;}
 	virtual void performCommunication() {}
+	//! Closes the connection to the telescope device or server.
+	virtual void closeConnection() {}
 
 	//! Some telescope types may override this method to display additional user interface elements.
 	virtual QWidget* createControlWidget(QSharedPointer<TelescopeClient> telescope, QWidget* parent = nullptr) const { Q_UNUSED(telescope) Q_UNUSED(parent) return nullptr; }
@@ -217,6 +219,10 @@ public:
 	TelescopeTCP(const QString &name, const QString &params,
 	             TelescopeControl::Equinox eq = TelescopeControl::EquinoxJ2000, int slot = 0);
 	~TelescopeTCP(void) override
+	{
+		hangup();
+	}
+	void closeConnection(void) override
 	{
 		hangup();
 	}

@@ -96,4 +96,12 @@ void Server::closeAcceptedConnections(void)
 	}
 }
 
+void Server::closeAllConnections(void)
+{
+	for (auto* socket : socket_list)
+	{
+		socket->hangup();
+	}
+}
+
 
