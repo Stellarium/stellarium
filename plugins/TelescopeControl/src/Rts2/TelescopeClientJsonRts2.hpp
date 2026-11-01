@@ -36,7 +36,8 @@ class TelescopeClientJsonRts2 : public TelescopeClient
 {
 	Q_OBJECT
 public:
-	TelescopeClientJsonRts2(const QString &name, const QString &params, TelescopeControl::Equinox eq = TelescopeControl::EquinoxJ2000);
+	TelescopeClientJsonRts2(const QString &name, const QString &params,
+	                        TelescopeControl::Equinox eq = TelescopeControl::EquinoxJ2000, int slot = 0);
 	~TelescopeClientJsonRts2(void) override;
 	bool isConnected(void) const override;
 

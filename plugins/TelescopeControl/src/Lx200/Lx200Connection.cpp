@@ -27,8 +27,7 @@ Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 #include "Lx200Connection.hpp"
 #include "Lx200Command.hpp"
 #include "TelescopeClientDirectLx200.hpp"
-#include "common/LogFile.hpp"
-#include "StelUtils.hpp"
+#include "common/TelescopeLogging.hpp"
 
 #include <cmath>
 
@@ -56,9 +55,7 @@ void Lx200ConnectionImpl<Transport>::resetCommunication(void)
 
 	this->read_buff_end = this->read_buff;
 	this->write_buff_end = this->write_buff;
-	#ifdef DEBUG4
-	*log_file << Now() << "Lx200Connection::resetCommunication" << StelUtils::getEndLineChar();
-	#endif
+	qCDebug(Telescopes) << this->getLogPrefix() << "Lx200Connection::resetCommunication";
 	// wait 10 seconds before sending the next command in order to read
 	// and ignore data coming from the telescope:
 	next_send_time = GetNow() + 10000000;
@@ -97,9 +94,7 @@ void Lx200ConnectionImpl<Transport>::sendGoto(unsigned int ra_int, int dec_int)
 	}
 	else
 	{
-		#ifdef DEBUG4
-		*log_file << Now() << "Lx200Connection::sendGoto: ignoring command" << StelUtils::getEndLineChar();
-		#endif
+		qCDebug(Telescopes) << this->getLogPrefix() << "Lx200Connection::sendGoto: ignoring command";
 	}
 }
 
@@ -130,9 +125,7 @@ void Lx200ConnectionImpl<Transport>::sendSync(unsigned int ra_int, int dec_int)
 	}
 	else
 	{
-		#ifdef DEBUG4
-		*log_file << Now() << "Lx200Connection::sendGoto: ignoring command" << StelUtils::getEndLineChar();
-		#endif
+		qCDebug(Telescopes) << this->getLogPrefix() << "Lx200Connection::sendGoto: ignoring command";
 	}
 }
 
@@ -148,13 +141,10 @@ bool Lx200ConnectionImpl<Transport>::writeFrontCommandToBuffer(void)
 	const long long int now = GetNow();
 	if (now < next_send_time)
 	{
-#ifdef DEBUG4
 		/*
-		*log_file << Now() << "Lx200Connection::writeFrontCommandToBuffer("
-		                   << (*command_list.front()) << "): delayed for "
-				   << (next_send_time-now) << StelUtils::getEndLineChar();
+		qCDebug(Telescopes).nospace() << this->getLogPrefix() << "Lx200Connection::writeFrontCommandToBuffer("
+		                              << *command_list.front() << "): delayed for " << (next_send_time - now);
 		*/
-#endif
 		return false;
 	}
 
@@ -180,13 +170,8 @@ bool Lx200ConnectionImpl<Transport>::writeFrontCommandToBuffer(void)
 				read_timeout_endtime = now + 5000000;
 			}
 		}
-		#ifdef DEBUG4
-		*log_file << Now()
-		          << "Lx200Connection::writeFrontCommandToBuffer("
-		          << (*command_list.front())
-		          << "): queued"
-			  << StelUtils::getEndLineChar();
-		#endif
+		qCDebug(Telescopes).nospace() << this->getLogPrefix() << "Lx200Connection::writeFrontCommandToBuffer("
+		                              << (*command_list.front()) << "): queued";
 	}
 
 	return rval;
@@ -197,7 +182,7 @@ void Lx200ConnectionImpl<Transport>::dataReceived(const char *&p, const char *re
 {
 	if (this->isClosed())
 	{
-		*log_file << Now() << "Lx200Connection::dataReceived: strange: fd is closed" << StelUtils::getEndLineChar();
+		qCWarning(Telescopes) << this->getLogPrefix() << "Lx200Connection::dataReceived: strange: fd is closed";
 	}
 	else if (command_list.empty())
 	{
@@ -210,20 +195,15 @@ void Lx200ConnectionImpl<Transport>::dataReceived(const char *&p, const char *re
 		// for a networked LX200 server to hit its read timeout and close the
 		// connection. A genuine desync is still caught later, when the answer
 		// to an actual queued command fails to parse.
-		#ifdef DEBUG4
-		*log_file << Now()
-		          << "Lx200Connection::dataReceived: ignoring unexpected data (command_list is empty)"
-			  << StelUtils::getEndLineChar();
-		#endif
+		qCDebug(Telescopes) << this->getLogPrefix()
+		                    << "Lx200Connection::dataReceived: ignoring unexpected data (command_list is empty)";
 		p = read_buff_end;
 	}
 	else if (command_list.front()->needsNoAnswer())
 	{
-		*log_file << Now() << "Lx200Connection::dataReceived: "
-		                      "strange: command("
-		                   << *command_list.front()
-		                   << ") needs no answer"
-				   << StelUtils::getEndLineChar();
+		qCWarning(Telescopes).nospace() << this->getLogPrefix()
+		                                << "Lx200Connection::dataReceived: strange: command("
+		                                << *command_list.front() << ") needs no answer";
 		p = read_buff_end;
 	}
 	else
@@ -232,21 +212,15 @@ void Lx200ConnectionImpl<Transport>::dataReceived(const char *&p, const char *re
 		{
 			if (!command_list.front()->hasBeenWrittenToBuffer())
 			{
-				*log_file << Now()
-				          << "Lx200Connection::dataReceived: "
-				             "strange: no answer expected"
-					  << StelUtils::getEndLineChar();
+				qCWarning(Telescopes) << this->getLogPrefix()
+				                      << "Lx200Connection::dataReceived: strange: no answer expected";
 				p = read_buff_end;
 				break;
 			}
 			const int rc=command_list.front()->readAnswerFromBuffer(p, read_buff_end);
 			/*
-			*log_file << Now()
-			          << "Lx200Connection::dataReceived: "
-			          << *command_list.front()
-			          << "->readAnswerFromBuffer returned "
-			          << rc
-				  << StelUtils::getEndLineChar();
+			qCDebug(Telescopes).nospace() << this->getLogPrefix() << "Lx200Connection::dataReceived: "
+			                              << *command_list.front() << "->readAnswerFromBuffer returned " << rc;
 			*/
 			if (rc <= 0)
 			{
@@ -282,13 +256,9 @@ void Lx200ConnectionImpl<Transport>::prepareSelectFds(fd_set &read_fds,
 		{
 			// the lazy telescope, probably AutoStar 494
 			// has not sent the full answer
-			#ifdef DEBUG4
-			*log_file << Now() << "Lx200Connection::prepareSelectFds: "
-			                      "dequeueing command("
-			                   << *command_list.front()
-			                   << ") because of timeout"
-					   << StelUtils::getEndLineChar();
-			#endif
+			qCDebug(Telescopes).nospace() << this->getLogPrefix()
+			                              << "Lx200Connection::prepareSelectFds: dequeueing command("
+			                              << *command_list.front() << ") because of timeout";
 			if (command_list.front()->isCommandGotoSelected())
 			{
 				goto_commands_queued--;
@@ -314,11 +284,12 @@ void Lx200ConnectionImpl<Transport>::flushCommandList(void)
 		{
 			if (writeFrontCommandToBuffer())
 			{
-				//*log_file << Now()
-				//          << "Lx200Connection::flushCommandList: "
-				//          << (*command_list.front())
-				//          << "::writeFrontCommandToBuffer ok"
-				//          << StelUtils::getEndLineChar();
+				/*
+				qCDebug(Telescopes).nospace() << this->getLogPrefix()
+				                              << "Lx200Connection::flushCommandList: "
+				                              << *command_list.front()
+				                              << "::writeFrontCommandToBuffer ok";
+				*/
 				if (command_list.front()->needsNoAnswer())
 				{
 					delete command_list.front();
@@ -334,9 +305,12 @@ void Lx200ConnectionImpl<Transport>::flushCommandList(void)
 			}
 			else
 			{
-				//*log_file << Now() << "Lx200Connection::flushCommandList: "
-				//                   << (*command_list.front())
-				//                   << "::writeFrontCommandToBuffer failed/delayed" << StelUtils::getEndLineChar();
+				/*
+				qCDebug(Telescopes).nospace() << this->getLogPrefix()
+				                              << "Lx200Connection::flushCommandList: "
+				                              << *command_list.front()
+				                              << "::writeFrontCommandToBuffer failed/delayed";
+				*/
 				break;
 			}
 		}
@@ -348,28 +322,25 @@ void Lx200ConnectionImpl<Transport>::sendCommand(Lx200Command *command)
 {
 	if (command)
 	{
-		#ifdef DEBUG4
-		*log_file << Now()
-		          << "Lx200Connection::sendCommand("
-		          << *command
-		          << ")"
-			  << StelUtils::getEndLineChar();
-		#endif
+		qCDebug(Telescopes).nospace() << this->getLogPrefix() << "Lx200Connection::sendCommand(" << *command << ")";
+		/*
+		// Uncomment with the end diagnostic below: flushing may delete command.
+		QString commandDescription;
+		QDebug(&commandDescription).nospace() << *command;
+		*/
 		command_list.push_back(command);
 		flushCommandList();
-		//*log_file << Now() << "Lx200Connection::sendCommand(" << *command << ") end"
-		//          << StelUtils::getEndLineChar();
+		/*
+		qCDebug(Telescopes).nospace().noquote() << this->getLogPrefix() << "Lx200Connection::sendCommand("
+		                                        << commandDescription << ") end";
+		*/
 	}
 }
 
 template <class Transport>
 void Lx200ConnectionImpl<Transport>::sendAbort()
 {
-#ifdef DEBUG4
-	*log_file << Now()
-		  << "Lx200Connection::sendAbort()"
-		  << StelUtils::getEndLineChar();
-#endif
+	qCDebug(Telescopes) << this->getLogPrefix() << "Lx200Connection::sendAbort()";
 	// Remove queued commands (pointers, so delete their objects!)
 	while (!command_list.empty())
 	{
@@ -381,8 +352,9 @@ void Lx200ConnectionImpl<Transport>::sendAbort()
 	this->write_buff_end = this->write_buff;
 	command_list.push_back(new Lx200CommandStopSlew(this->server));
 	flushCommandList();
-	//*log_file << Now() << "Lx200Connection::sendAbort() end"
-	//          << StelUtils::getEndLineChar();
+	/*
+	qCDebug(Telescopes) << this->getLogPrefix() << "Lx200Connection::sendAbort() end";
+	*/
 }
 
 // Explicitly instantiate the two transports we support: serial and TCP/IP.

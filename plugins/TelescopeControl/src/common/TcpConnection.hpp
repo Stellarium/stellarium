@@ -46,7 +46,7 @@ public:
 
 private:
 	//! An ASCII protocol runs on top of this connection, so allow the
-	//! DEBUG5 logging in Connection to dump the traffic as text.
+	//! Debug logging in the stel.Telescopes category to dump the traffic as text.
 	bool isAsciiConnection(void) const override {return true;}
 };
 

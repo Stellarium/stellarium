@@ -11,8 +11,8 @@ IF(WIN32)
 ENDIF(WIN32)
 
 ADD_LIBRARY(TelescopeControl_common STATIC
-    LogFile.hpp
-    LogFile.cpp
+    TelescopeLogging.hpp
+    TelescopeLogging.cpp
     Socket.hpp
     Socket.cpp
     Server.hpp

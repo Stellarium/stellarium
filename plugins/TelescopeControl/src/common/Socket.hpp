@@ -26,6 +26,7 @@ Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 #define SOCKET_HPP
 
 #include <QtGlobal>
+#include "TelescopeLogging.hpp"
 
 #ifdef Q_OS_WIN
 #include <WinSock2.h>
@@ -52,10 +53,8 @@ static inline int SetNonblocking(int s)
 }
 #define SETNONBLOCK(s) SetNonblocking(s)
 #define SOCKLEN_T int
-#define close closesocket
 #define IS_INVALID_SOCKET(fd) (fd==INVALID_SOCKET)
 #define STRERROR(x) x
-//  #define DEBUG5
 
 #else
 
@@ -97,6 +96,12 @@ public:
 	virtual void sendPosition(unsigned int ra_int, int dec_int, int status) {Q_UNUSED(ra_int) Q_UNUSED(dec_int) Q_UNUSED(status)}
 	
 protected:
+	//! Closes a native socket with the platform's socket API.
+	static void closeSocket(SOCKET socket);
+
+	//! Prefix identifying the telescope that owns this transport.
+	TelescopeLogPrefix getLogPrefix() const;
+
 	Socket(Server &server, SOCKET fd) : server(server), fd(fd) {}
 	Server & server;
 	

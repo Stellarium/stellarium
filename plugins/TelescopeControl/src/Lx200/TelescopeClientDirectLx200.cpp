@@ -31,15 +31,13 @@
 
 #include "Lx200Connection.hpp"
 #include "Lx200Command.hpp"
-#include "common/LogFile.hpp"
+#include "common/TelescopeLogging.hpp"
 #include "StelCore.hpp"
-#ifndef QT_NO_DEBUG
-#include "StelUtils.hpp"
-#endif
 
-
-TelescopeClientDirectLx200::TelescopeClientDirectLx200 (const QString &name, const QString &parameters, TelescopeControl::Equinox eq)
-	: TelescopeClient(name)
+TelescopeClientDirectLx200::TelescopeClientDirectLx200(const QString &name, const QString &parameters,
+                                                       TelescopeControl::Equinox eq, int slot)
+	: TelescopeClient(name, slot)
+	, Server(0, slot)
 	, time_delay(0)
 	, equinox(eq)
 	, lx200(nullptr)
@@ -83,20 +81,27 @@ TelescopeClientDirectLx200::TelescopeClientDirectLx200 (const QString &name, con
 		}
 		else
 		{
-			qCWarning(Telescopes) << "ERROR creating TelescopeClientDirectLx200: invalid parameters.";
+			qCWarning(Telescopes) << getLogPrefix()
+			                      << "ERROR creating TelescopeClientDirectLx200: invalid parameters.";
 			return;
 		}
 	}
 
 	if (useNetwork)
-		qCDebug(Telescopes) << "TelescopeClientDirectLx200 parameters: host, port, time_delay:" << hostName << tcpPort << time_delay;
+		qCDebug(Telescopes) << getLogPrefix()
+		                    << "TelescopeClientDirectLx200 parameters: host, port, time_delay:" << hostName
+		                    << tcpPort << time_delay;
 	else
-		qCDebug(Telescopes) << "TelescopeClientDirectLx200 parameters: port, time_delay:" << serialDeviceName << time_delay;
+		qCDebug(Telescopes) << getLogPrefix()
+		                    << "TelescopeClientDirectLx200 parameters: port, time_delay:" << serialDeviceName
+		                    << time_delay;
 
 	//Validation: Time delay
 	if (time_delay <= 0 || time_delay > 10000000)
 	{
-		qCWarning(Telescopes) << "ERROR creating TelescopeClientDirectLx200: time_delay not valid (should be less than 10000000)";
+		qCWarning(Telescopes) << getLogPrefix()
+		                      << "ERROR creating TelescopeClientDirectLx200: time_delay not valid "
+		                         "(should be less than 10000000)";
 		return;
 	}
 
@@ -109,7 +114,9 @@ TelescopeClientDirectLx200::TelescopeClientDirectLx200 (const QString &name, con
 		lx200 = connection;
 		if (connection->isClosed())
 		{
-			qCWarning(Telescopes) << "ERROR creating TelescopeClientDirectLx200: cannot connect to" << hostName << "port" << tcpPort;
+			qCWarning(Telescopes) << getLogPrefix()
+			                      << "ERROR creating TelescopeClientDirectLx200: cannot connect to"
+			                      << hostName << "port" << tcpPort;
 			delete connection;
 			lx200 = nullptr;
 			return;
@@ -128,7 +135,9 @@ TelescopeClientDirectLx200::TelescopeClientDirectLx200 (const QString &name, con
 		lx200 = connection;
 		if (connection->isClosed())
 		{
-			qCWarning(Telescopes) << "ERROR creating TelescopeClientDirectLx200: cannot open serial device" << serialDeviceName;
+			qCWarning(Telescopes) << getLogPrefix()
+			                      << "ERROR creating TelescopeClientDirectLx200: cannot open serial device"
+			                      << serialDeviceName;
 			delete connection;
 			lx200 = nullptr;
 			return;
@@ -244,10 +253,8 @@ void TelescopeClientDirectLx200::communicationResetReceived(void)
 	long_format_used = false;
 	queue_get_position = true;
 	next_pos_time = -0x8000000000000000LL;
-	
-#ifndef QT_NO_DEBUG
-	*log_file << Now() << "TelescopeClientDirectLx200::communicationResetReceived" << StelUtils::getEndLineChar();
-#endif
+
+	qCDebug(Telescopes) << getLogPrefix() << "TelescopeClientDirectLx200::communicationResetReceived";
 
 	// A protocol-level reset (e.g. a timeout while waiting for an answer)
 	// must not tear down the transport itself: the serial path never did
@@ -272,9 +279,7 @@ void TelescopeClientDirectLx200::raReceived(unsigned int ra_int)
 {
 	answers_received = true;
 	last_ra = ra_int;
-#ifndef QT_NO_DEBUG
-	*log_file << Now() << "TelescopeClientDirectLx200::raReceived: " << ra_int << StelUtils::getEndLineChar();
-#endif
+	qCDebug(Telescopes) << getLogPrefix() << "TelescopeClientDirectLx200::raReceived:" << ra_int;
 }
 
 //! Called by Lx200CommandGetDec::readAnswerFromBuffer().
@@ -282,9 +287,7 @@ void TelescopeClientDirectLx200::raReceived(unsigned int ra_int)
 void TelescopeClientDirectLx200::decReceived(unsigned int dec_int)
 {
 	answers_received = true;
-#ifndef QT_NO_DEBUG
-	*log_file << Now() << "TelescopeClientDirectLx200::decReceived: " << dec_int << StelUtils::getEndLineChar();
-#endif
+	qCDebug(Telescopes) << getLogPrefix() << "TelescopeClientDirectLx200::decReceived:" << dec_int;
 	const int lx200_status = 0;
 	sendPosition(last_ra, static_cast<int>(dec_int), lx200_status);
 	queue_get_position = true;
