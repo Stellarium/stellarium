@@ -2416,8 +2416,13 @@ void StelMainView::doScreenshot(void)
 			if (landscape->getLocation().region.length()>0)
 				infoMap["location_region"]=landscape->getLocation().region;
 		}
+		infoMap["atmosphere"] = landscapeMgr->getFlagAtmosphere() ? landscapeMgr->getAtmosphereModel() : "off";
 
 		infoMap["topocentric_view"] = core->getUseTopocentricCoordinates();
+		infoMap["nutation"] = core->getUseNutation() ? "1" : "0";
+		infoMap["parallax"] = core->getUseParallax() ?  QString::number(core->getParallaxFactor(), 'f', 1) : "0";
+		infoMap["aberration"] = core->getUseAberration() ?  QString::number(core->getAberrationFactor(), 'f', 1) : "0";
+
 
 		// TODO: Other settings? Gridlines, Skyculture details?
 		// TODO: Ocular/Telescope details?
