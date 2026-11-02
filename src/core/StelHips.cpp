@@ -34,7 +34,7 @@
 #include <QNetworkReply>
 #include <QTimeLine>
 
-class HipsTile
+class HipsTile : public QObject
 {
 public:
 	int order;
@@ -594,17 +594,18 @@ void HipsSurvey::updateProgressBar(int nb, int total)
 void HipsSurvey::dropUnfinishedInvisibleTiles()
 {
 	QSet<qint64> tilesToEvict;
-	for (const auto uid : cachedTiles)
+	for (auto it = cachedTiles.cbegin(); it != cachedTiles.cend(); ++it)
 	{
-		if (visibleTiles.contains(uid)) continue;
-		const auto& tile = tiles[uid];
-		if (!tile) continue;
-		if (!tile->isLoading()) continue;
-		tilesToEvict.insert(uid);
+		const auto uid = it.key();
+		const auto& tile = it.value();
+		if (!tile || (!visibleTiles.contains(uid) && tile->isLoading()))
+			tilesToEvict.insert(uid);
 	}
 	for (const auto uid : tilesToEvict)
+	{
 		tiles.remove(uid);
-	cachedTiles -= tilesToEvict;
+		cachedTiles.remove(uid);
+	}
 }
 
 HipsTile* HipsSurvey::getTile(int order, int pix)
@@ -637,8 +638,9 @@ HipsTile* HipsSurvey::getTile(int order, int pix)
 			tile->allsky = texMgr.createTexture(image, texParams);
 		}
 		int tileWidth = getPropertyInt("hips_tile_width", 512);
-		tiles.insert(uid, tile, static_cast<qint64>(tileWidth) * tileWidth);
-		cachedTiles.insert(uid);
+		if (!tiles.insert(uid, tile, static_cast<qint64>(tileWidth) * tileWidth))
+			return nullptr;
+		cachedTiles[uid] = tile;
 	}
 
 	if (tile && normals && !tile->normalTexture)

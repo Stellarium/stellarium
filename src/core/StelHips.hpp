@@ -29,6 +29,7 @@
 #include <QUrl>
 #include <QSet>
 #include <QHash>
+#include <QPointer>
 #include <functional>
 
 #include "StelTexture.hpp"
@@ -177,8 +178,8 @@ private:
 	bool invertedColors = false;
 	bool planetarySurvey;
 	QCache<qint64, HipsTile> tiles;
-	//! Used for iterating over #tiles during eviction of unfinished invisible tiles
-	QSet<qint64> cachedTiles;
+	//! Non-owning tile registry for inspection without changing #tiles' eviction order.
+	QHash<qint64, QPointer<HipsTile>> cachedTiles;
 	QSet<qint64> visibleTiles;
 	// reply to the initial download of the properties file and to the
 	// allsky texture.
