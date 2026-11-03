@@ -238,27 +238,34 @@
 \DefineVerbatimEnvironment{script}{Verbatim}{numbers=left,frame=single}
 \else
 \lstnewenvironment{commands}[1][\small]{\lstset{language=sh,basicstyle=\ttfamily#1,showstringspaces=false,%
+                                     columns=fullflexible,keepspaces=true,%
                                      backgroundcolor=\color{black!5},frame=leftline,rulecolor=\color{blue},framerule=1pt}%
                              }{}%
 \lstnewenvironment{commandsScr}[1][\scriptsize]{\lstset{language=sh,basicstyle=\ttfamily#1,showstringspaces=false,%
+                                     columns=fullflexible,keepspaces=true,%
                                      backgroundcolor=\color{black!5},frame=leftline,rulecolor=\color{blue},framerule=1pt}%
                              }{}%
 \lstnewenvironment{configfile}[1][\small]{\lstset{language=sh,basicstyle=\ttfamily#1,showstringspaces=false,%
+                                   columns=fullflexible,keepspaces=true,%
                                    backgroundcolor=\color{black!5},frame=shadowbox,rulecolor=\color{blue},framerule=1pt}%
                              }{}%
 \lstnewenvironment{configfileScr}[1][\scriptsize]{\lstset{language=sh,basicstyle=\ttfamily#1,showstringspaces=false,%
+                                   columns=fullflexible,keepspaces=true,%
                                    backgroundcolor=\color{black!5},frame=shadowbox,rulecolor=\color{blue},framerule=1pt}%
                              }{}%
 % The solution for escaping accented characters is from https://tex.stackexchange.com/a/24532
 \lstnewenvironment{jsonfile}[1][\small]{\lstset{inputencoding=utf8,escapeinside={\%(*}{*)},language=json,basicstyle=\ttfamily#1,showstringspaces=false,%
+                                   columns=fullflexible,keepspaces=true,%
                                    backgroundcolor=\color{black!5},frame=shadowbox,rulecolor=\color{blue},framerule=1pt}%
                              }{}%
 % Shows an HTML one-liner
 \lstnewenvironment{htmlbit}[1][\small]{\lstset{inputencoding=utf8,language=html,basicstyle=\ttfamily#1,showstringspaces=false,%
+                                   columns=fullflexible,keepspaces=true,%
                                    backgroundcolor=\color{black!5}}%
                              }{}%
 \lstnewenvironment{script}{\lstset{language=JavaScript,                   
                                backgroundcolor=\color{black!5},%
+                               columns=fullflexible,keepspaces=true,%
                                frame=leftline,%
                                rulecolor=\color{blue},%
                                framerule=1pt}%
