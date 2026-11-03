@@ -440,8 +440,12 @@ SET(ENABLE_QTWEBENGINE 1 CACHE BOOL "Define whether QtWebEngine module should be
 # - Other systems: libgps if possible and NMEA emitter as fallback.
 SET(ENABLE_GPS 1 CACHE BOOL "Define whether GPS queries should be supported.")
 
-# Activate support for ShowMySky atmosphere
-SET(ENABLE_SHOWMYSKY 1 CACHE BOOL "Define whether to support ShowMySky atmosphere model if installed")
+IF(ANDROID)
+     SET(ENABLE_SHOWMYSKY 0)
+ELSE()
+     # Activate support for ShowMySky atmosphere
+     SET(ENABLE_SHOWMYSKY 1 CACHE BOOL "Define whether to support ShowMySky atmosphere model if installed")
+ENDIF()
 
 # Activate support for XLSX (Excel) files
 SET(ENABLE_XLSX 1 CACHE BOOL "Define whether to support XLSX (Excel) files")
