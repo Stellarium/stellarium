@@ -3400,6 +3400,30 @@
         },
         "example": "var color = core.vec3f(1.0, 0.0, 0.0); // Red color"
     },
+		{
+				"name": "color",
+				"category": "Miscellaneous Advanced",
+				"signature": "Vec3f color(QString cstr)",
+				"description": "Creates a color from a hex string or a named color definition (e.g. 'Crimson', '#ff0000'). On Qt6-based Stellarium versions (1.0 and later, including 26.x), the return value is a native Vec3f that cannot be inspected from JavaScript; use new Color(cstr) instead when you need to read or modify the color components.",
+				"parameters": [
+						{
+								"name": "cstr",
+								"type": "QString",
+								"description": "Color definition: either an HTML hex string like '#ff0000' or a color name like 'Crimson'",
+								"required": true
+						}
+				],
+				"returnType": "Vec3f",
+				"returnDescription": "A native Vec3f usable as an argument to functions that expect Vec3f, but not directly inspectable on Qt6",
+				"type": "static",
+				"compatibility": {
+						"qt5": true,
+						"qt6": true,
+						"minVersion": "0.19.0",
+						"notes": "On Qt6 builds the returned Vec3f is opaque to scripts. For inspecting or modifying the color, use new Color(cstr) instead, which provides toHex(), toRGBString(), getR(), getG(), getB(), and toVec3f()."
+				},
+				"example": "// On Qt6, core.color() returns a native Vec3f which cannot be inspected.\n// Use new Color(...) whenever you need to read or modify the color:\nvar crimson = new Color('Crimson');\ncore.debug('Crimson hex: ' + crimson.toHex());\ncore.debug('Crimson RGB: ' + crimson.toRGBString());\n\nvar red = new Color('#ff0000');\ncore.debug('Red hex: ' + red.toHex());\n\nvar r = crimson.getR();\nvar g = crimson.getG();\nvar b = crimson.getB();\ncore.debug('R: ' + r + ', G: ' + g + ', B: ' + b);\n\n// core.color() is still fine when you only need to pass the result\n// straight to a function that expects Vec3f:\nHighlightMgr.setColor(core.color('#aaff33'));\n\n// Equivalent and safer: build the Color, then convert it explicitly.\nvar myColor = new Color('#aaff33');\nHighlightMgr.setColor(myColor.toVec3f());"
+		},		
     {
         "name": "useQtScript",
         "category": "Miscellaneous Advanced",
