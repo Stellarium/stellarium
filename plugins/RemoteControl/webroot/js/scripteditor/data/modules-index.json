@@ -123,19 +123,11 @@
             "description": "Core star display controls and settings, Star names (common, cultural, scientific) and designations, double star, and binary orbit data, Search functions for stars by catalog number, Lists of Hipparcos stars (double, variable, carbon, etc.)"
         },
         {
-            "id": "StelActionMgr",
-            "name": "Actions Manager",
-            "file": "StelActionMgr.json",
-            "category": "Core",
-            "order": 16,
-            "description": "Keyboard shortcuts and actions management - create, find, and trigger actions, manage shortcuts"
-        },
-        {
             "id": "StelAudioMgr",
             "name": "Audio Manager",
             "file": "StelAudioMgr.json",
             "category": "Multimedia",
-            "order": 17,
+            "order": 16,
             "description": "Audio playback management - load, play, pause, stop, and unload sound files (MP3, WAV, OGG, FLAC) with position and duration queries"
         },
         {
@@ -143,7 +135,7 @@
             "name": "Video Manager",
             "file": "StelVideoMgr.json",
             "category": "Multimedia",
-            "order": 18,
+            "order": 17,
             "description": "Video playback management - load, play, pause, stop, seek, resize, and control video files with support for popout effects and audio control"
         },
         {
@@ -151,7 +143,7 @@
             "name": "Movement Manager",
             "file": "StelMovementMgr.json",
             "category": "Core",
-            "order": 19,
+            "order": 18,
             "description": "Camera and view movement management - pan, zoom, tracking, mount modes, and viewport control"
         },
         {
@@ -159,7 +151,7 @@
             "name": "Sky Drawer",
             "file": "StelSkyDrawer.json",
             "category": "Core",
-            "order": 20,
+            "order": 19,
             "description": "Sky rendering control - star appearance, twinkling, light pollution, magnitude limits, eye adaptation, atmospheric refraction and extinction"
         },
         {
@@ -167,7 +159,7 @@
             "name": "Sky Layer Manager",
             "file": "StelSkyLayerMgr.json",
             "category": "Core",
-            "order": 21,
+            "order": 20,
             "description": "Sky background image management - load, display, and control deep-sky object textures, DSS images, and custom sky overlays"
         },
         {
@@ -175,7 +167,7 @@
             "name": "Special Markers Manager",
             "file": "SpecialMarkersMgr.json",
             "category": "Display",
-            "order": 22,
+            "order": 21,
             "description": "Special markers management - FOV center crosshair, circular FOV marker, rectangular FOV marker (for camera framing), and compass marks around the horizon"
         },
         {
@@ -183,7 +175,7 @@
             "name": "Milky Way",
             "file": "MilkyWay.json",
             "category": "Astronomy",
-            "order": 23,
+            "order": 22,
             "description": "Milky Way galaxy rendering - control visibility, intensity, saturation, and color tint of our galaxy's appearance across the night sky"
         },
         {
@@ -191,7 +183,7 @@
             "name": "Zodiacal Light",
             "file": "ZodiacalLight.json",
             "category": "Astronomy",
-            "order": 24,
+            "order": 23,
             "description": "Zodiacal Light rendering - control visibility, intensity, and color of the faint diffuse glow caused by sunlight scattering off interplanetary dust along the ecliptic plane"
         },
         {
@@ -199,7 +191,7 @@
             "name": "HiPS Manager",
             "file": "HipsMgr.json",
             "category": "Deep Sky",
-            "order": 25,
+            "order": 24,
             "description": "Hierarchical Progressive Surveys (HiPS) management - load and display all-sky survey images from professional observatories (DSS, SDSS, GALEX, etc.)"
         },
         {
@@ -207,7 +199,7 @@
             "name": "Nomenclature Manager",
             "file": "NomenclatureMgr.json",
             "category": "Solar System",
-            "order": 26,
+            "order": 25,
             "description": "Planetary surface nomenclature management - display names of craters, mountains, valleys, and other geological features on planets and moons"
         },
         {
@@ -215,7 +207,7 @@
             "name": "Satellites Plugin",
             "file": "Satellites.json",
             "category": "Plugins",
-            "order": 27,
+            "order": 26,
             "description": "Artificial satellites tracking - display positions of Earth-orbiting satellites based on NORAD TLE data with automatic updates, orbit lines, and customizable markers"
         },
         {
@@ -223,7 +215,7 @@
             "name": "Quasars Plugin",
             "file": "Quasars.json",
             "category": "Plugins",
-            "order": 28,
+            "order": 27,
             "description": "Quasars visualization - plot positions of quasars brighter than magnitude 18, with distribution mode and customizable marker colors"
         },
         {
@@ -231,7 +223,7 @@
             "name": "Pulsars Plugin",
             "file": "Pulsars.json",
             "category": "Plugins",
-            "order": 29,
+            "order": 28,
             "description": "Pulsars visualization - plot positions of pulsars from the ATNF catalog, with DM filtering, glitch indicators, and customizable colors"
         },
         {
@@ -239,7 +231,7 @@
             "name": "Exoplanets Plugin",
             "file": "Exoplanets.json",
             "category": "Plugins",
-            "order": 30,
+            "order": 29,
             "description": "Exoplanets visualization - plot stars with known exoplanets, habitable zone filtering, timeline mode, and customizable colors"
         },
         {
@@ -247,7 +239,7 @@
             "name": "Observability Plugin",
             "file": "Observability.json",
             "category": "Plugins",
-            "order": 31,
+            "order": 30,
             "description": "Observability analysis - displays rise/set/transit times, opposition dates, and observability periods for celestial objects"
         },
         {
@@ -255,7 +247,7 @@
             "name": "Oculars Plugin",
             "file": "Oculars.json",
             "category": "Plugins",
-            "order": 32,
+            "order": 31,
             "description": "Oculars plugin - simulate view through telescope eyepieces, CCD sensor framing, Telrad finder, and astrophotography planning"
         },
         {
@@ -263,7 +255,7 @@
             "name": "Equation of Time Plugin",
             "file": "EquationOfTime.json",
             "category": "Plugins",
-            "order": 33,
+            "order": 32,
             "description": "Equation of Time display - shows the difference between apparent solar time (sundial) and mean solar time (clock) in minutes"
         },
         {
@@ -271,7 +263,7 @@
             "name": "Navigational Stars Plugin",
             "file": "NavStars.json",
             "category": "Plugins",
-            "order": 34,
+            "order": 33,
             "description": "Navigational stars marking - displays markers and navigational data (SHA, GHA, altitude, azimuth) for celestial navigation stars from various catalogs (Nautical Almanac, Apollo, Meade, etc.)"
         },
         {
@@ -279,7 +271,7 @@
             "name": "Meteor Showers Plugin",
             "file": "MeteorShowers.json",
             "category": "Plugins",
-            "order": 35,
+            "order": 34,
             "description": "Meteor showers simulation - displays radiants, ZHR values, and simulated meteors for active showers based on IMO and IAU data"
         },
         {
@@ -287,7 +279,7 @@
             "name": "ArchaeoLines Plugin",
             "file": "ArchaeoLines.json",
             "category": "Plugins",
-            "order": 36,
+            "order": 35,
             "description": "Archaeoastronomy tool - displays declination circles, solstice/equinox lines, lunar standstill lines, and custom azimuth/altitude lines for cultural astronomy studies"
         },
         {
@@ -295,7 +287,7 @@
             "name": "Telescope Control Plugin",
             "file": "TelescopeControl.json",
             "category": "Plugins",
-            "order": 37,
+            "order": 36,
             "description": "Control GoTo telescopes via TCP/IP (Stellarium protocol), serial connection (LX200, NexStar), INDI, ASCOM (Windows), or RTS2. Shows telescope positions with reticles, labels, and FOV circles"
         },
         {
@@ -303,7 +295,7 @@
             "name": "Calendars Plugin",
             "file": "Calendars.json",
             "category": "Plugins",
-            "order": 38,
+            "order": 37,
             "description": "World calendars display and scripting - Gregorian, Julian, Islamic, Hebrew, Chinese, Japanese, Korean, Vietnamese, Maya (Long Count, Haab, Tzolkin), Hindu (Solar/Lunar), Tibetan, Aztec, Persian, Baháʼí, French Revolutionary, and many more with astronomical calculations (sunrise, sunset, moon phases, etc.)"
         },
         {
@@ -311,7 +303,7 @@
             "name": "Object Manager",
             "file": "StelObjectMgr.json",
             "category": "Core",
-            "order": 39,
+            "order": 38,
             "description": "Object selection and extra information management - control selection pointer visibility, add custom text to information panel for debugging and script output (Script and DebugAid flags)"
         }
     ]
