@@ -231,7 +231,7 @@ Johannes Gajdosik, Nigel Kerr, Andras Mohari, Bogdan Marinov,
 Timothy Reaves, Mike Storm, Diego Marcos, Guillaume Chereau, 
 Alexander V. Wolf, Georg Zotti, Ruslan Kabatsayev, Worachate 
 Boonplod, Henry Leung, Susanne M. Hoffmann, Florian Schaukowitsch,
-Ferdinand Majerech, Joerg Mueller, Martín Bernardi
+Ferdinand Majerech, Joerg Mueller, Martin Bernardi
 
 =cut
 
