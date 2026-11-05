@@ -279,7 +279,8 @@ define([
 
     var codeMirrorInstance = null;
     // Expose for debugging
-    window._cm = codeMirrorInstance;		
+//    window._cm = codeMirrorInstance;
+		
     var isRunning = false;
     var currentRunningScriptId = null;
     var executionHistory = [];
@@ -971,7 +972,7 @@ define([
 				isRunning = false; 
 				currentRunningScriptId = null; 
 				refreshAllUIStates();
-				startScriptPolling();
+				stopScriptPolling();
 		}
 
     function runInstalledScript(scriptId) {
@@ -2403,17 +2404,6 @@ define([
     // PINNABLE INFO PANEL WITH FIXED COPY FUNCTIONALITY
     // =====================================================================
 
-    /**
-     * Global cache for storing example code to avoid HTML attribute encoding issues.
-     * This solves the problem where long examples with special characters
-     * would break when stored in data attributes.
-     * 
-     * @type {Object}
-     */
-    var exampleCodeCache = {};
-    var exampleCounter = 0;
-
-	
 		/**
 		 * Insert example code at a specific line number.
 		 * 
@@ -3113,7 +3103,7 @@ define([
 						style.textContent = `
 								/* Stellarium color mode for valid Invalid pending case-error*/
 								.cm-builtin { color: #00CBFF !important; font-weight: bold; }
-								.cm-function-valid { color: #A6E22E !important; font-weight: bold; }
+								.cm-function-valid { color: #A6E22E !important; font-weight: bold; font-style: italic; }
 								.cm-function-invalid { color: #F92672 !important; text-decoration: underline wavy #F92672; }
 								.cm-function-pending { color: #8AD500 !important; font-style: italic; }
 								.cm-function-case-error { color: #FF9D00 !important; text-decoration: underline wavy #FF9D00; }

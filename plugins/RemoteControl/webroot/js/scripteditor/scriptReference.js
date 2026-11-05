@@ -6,32 +6,204 @@
  * and provides them for autocomplete, quick reference, syntax validation,
  * and code generation across the Remote Control interface.
  * 
- * Features:
+ * ========================================================================
+ * FEATURES
+ * ========================================================================
+ * 
+ * Data Loading:
  * - Loads module index from modules-index.json
  * - Dynamically loads function definitions from module JSON files
- * - Supports both old and new JSON formats (backward compatible)
+ * - Supports both old (direct array) and new (wrapped object) JSON formats
  * - Provides unified autocomplete items for all modules
- * - Case-sensitive function validation (isValidFunction)
- * - Case error detection (isCaseError)
- * - Categorized quick reference data
- * - Snippet loading and management
- * - Search functions by name, description, or tags
- * - Module-specific function queries
- * - Built-in fallback functions when JSON unavailable
+ * - Built-in fallback functions when JSON files unavailable
+ * - Parallel loading of all modules for performance
+ * - Snippet loading from snippets.json
  * 
- * Technical Implementation:
- * - Promise-based module loading with parallel fetching
- * - Caching system for performance (autocompleteCache, quickReferenceCache)
+ * Validation (Case-Sensitive):
+ * - isValidFunction(funcName, namespace)  - Check exact function match
+ * - isCaseError(funcName, namespace)       - Detect case errors
+ * - isValidNamespace(namespace)            - Check exact namespace match
+ * - isCaseErrorNamespace(namespace)        - Detect namespace case errors
+ * - findCorrectNamespace(namespace)        - Get correct namespace casing
+ * - getAllNamespaces()                     - List all unique namespaces
+ * - isValidFunctionName(funcName, ns)      - Validate within a namespace
+ * 
+ * Search and Query:
+ * - searchFunctions(query)                 - Search by name/desc/tags
+ * - getAutocompleteItems(forceRefresh)     - Get all items (cached)
+ * - getCategorizedReference(forceRefresh)  - Get items by category
+ * - getModuleFunctions(moduleId)           - Get functions for a module
+ * - getSnippets()                          - Get all code snippets
+ * - getSnippetsByCategory(category)        - Get snippets by category
+ * 
+ * ========================================================================
+ * TECHNICAL IMPLEMENTATION
+ * ========================================================================
+ * 
+ * Loading Strategy:
+ * - Promise-based module loading with Promise.all() for parallel fetching
+ * - Caching system for performance:
+ *   - autocompleteCache      : transformed autocomplete items
+ *   - quickReferenceCache    : categorized quick reference data
+ *   - autocompleteItemsCache : raw autocomplete items from all modules
+ * - Cache invalidation on new module load
  * - Dynamic module name extraction from index
- * - Parameter and return type transformation
- * - Support for example extraction from multiple formats
- * - Strict case-sensitive function matching for validation
- * - Error handling with graceful fallback to built-in functions
+ * - Parameter and return type transformation to uniform format
+ * - Support for example extraction from multiple formats:
+ *   - fn.example (singular string)
+ *   - fn.examples (array of strings)
  * 
- * Data Sources:
- * - modules-index.json: Index of all available modules
- * - {moduleId}.json: Function definitions for each module
- * - snippets.json: Code snippet definitions
+ * Validation Strategy (Case-Sensitive):
+ * - Strict case-sensitive matching (NO case-insensitive fallback)
+ * - All validation functions check isLoaded first
+ * - Two validation modes for isValidFunction:
+ *   1. Full check: isValidFunction("setDate", "core") → "core.setDate"
+ *   2. Name-only check: isValidFunction("setDate", null) → any namespace
+ * - Namespace validation checks exact string match against allFunctions
+ * - Case error detection via lowercase comparison + exact inequality
+ * - findCorrectNamespace returns the correctly-cased namespace from data
+ * - All validation functions are designed for the syntax highlighter
+ * 
+ * Data Transformation:
+ * - transformParameter: normalizes parameter objects
+ * - transformReturnType: normalizes return type (string or object)
+ * - functionToAutocompleteItem: full transformation for display
+ * - snippetToQuickReferenceItem: snippet normalization
+ * - getFirstExample: extracts first example from various formats
+ * 
+ * ========================================================================
+ * DATA STRUCTURES
+ * ========================================================================
+ * 
+ * Loaded Module Structure:
+ * {
+ *   moduleId: string,           // e.g., "ConstellationMgr"
+ *   moduleName: string,         // e.g., "Constellation Manager"
+ *   namespace: string,          // usually same as moduleId
+ *   name: string,               // function name
+ *   description: string,        // full description
+ *   signature: string,          // e.g., "setFontSize(size)"
+ *   fullSignature: string,      // e.g., "ConstellationMgr.setFontSize(int size)"
+ *   parameters: [               // array of parameter objects
+ *     {
+ *       name: string,
+ *       type: string,
+ *       description: string,
+ *       required: boolean,
+ *       defaultValue: any
+ *     }
+ *   ],
+ *   returnType: { type: string, description: string },
+ *   examples: [string],         // array of code examples
+ *   firstExample: string,       // convenience: first example
+ *   category: string,           // for grouping
+ *   tags: [string],             // search tags
+ *   since: string,              // version when added
+ *   deprecated: boolean
+ * }
+ * 
+ * Autocomplete Item Structure:
+ * {
+ *   prefix: string,             // e.g., "core.setDate"
+ *   name: string,               // e.g., "setDate"
+ *   fullName: string,           // e.g., "core.setDate"
+ *   signature: string,          // e.g., "setDate(date, timezone)"
+ *   fullSignature: string,      // e.g., "core.setDate(string date, string timezone)"
+ *   desc: string,               // short description
+ *   category: string,           // for grouping
+ *   moduleId: string,           // module identifier
+ *   moduleName: string,         // human-readable module name
+ *   parameters: [Object],       // normalized parameters
+ *   returnType: Object,         // { type, description }
+ *   examples: [string],         // example code
+ *   firstExample: string,       // convenience
+ *   type: string                // 'method', 'function', 'snippet'
+ * }
+ * 
+ * ========================================================================
+ * REQUIRED MODULES (AMD DEPENDENCIES)
+ * ========================================================================
+ * 
+ * - jquery: AJAX requests for loading JSON files
+ * 
+ * ========================================================================
+ * DATA SOURCES
+ * ========================================================================
+ * 
+ * - js/scripteditor/data/modules-index.json: Index of all modules
+ * - js/scripteditor/data/{moduleId}.json: Function definitions
+ * - js/scripteditor/data/snippets.json: Code snippet definitions
+ * 
+ * ========================================================================
+ * PUBLIC API
+ * ========================================================================
+ * 
+ * Lifecycle:
+ * - init()                    - Load all modules and snippets
+ * - isLoaded()                - Check if data is loaded
+ * - refresh()                 - Clear all caches
+ * 
+ * Data Access:
+ * - getAllFunctions()         - Get raw function definitions
+ * - getAllSnippets()          - Get raw snippet definitions
+ * - getSnippets()             - Get normalized snippets
+ * - getSnippetsByCategory(cat)- Get snippets filtered by category
+ * - getAutocompleteItems()    - Get all items (cached, transformed)
+ * - getCategorizedReference() - Get items grouped by category
+ * - getModuleFunctions(id)    - Get functions for a specific module
+ * - getModuleIndex()          - Get the raw module index
+ * 
+ * Search:
+ * - searchFunctions(query)    - Search by name, description, or tags
+ * 
+ * Validation (Case-Sensitive):
+ * - isValidFunction(name, ns)       - Check exact function match
+ * - isCaseError(name, ns)           - Detect function case errors
+ * - isValidNamespace(ns)            - Check exact namespace match
+ * - isCaseErrorNamespace(ns)        - Detect namespace case errors
+ * - findCorrectNamespace(ns)        - Get correct namespace casing
+ * - getAllNamespaces()              - List all unique namespaces
+ * - isValidFunctionName(name, ns)   - Validate function within a namespace
+ * 
+ * ========================================================================
+ * VALIDATION EXAMPLES
+ * ========================================================================
+ * 
+ * Namespace Validation:
+ *   isValidNamespace("core")              // true  (core exists)
+ *   isValidNamespace("Core")              // false (case error)
+ *   isValidNamespace("ConstellationMgr")  // true  (exists)
+ *   isValidNamespace("ConstellAtionMgr")  // false (case error)
+ *   isValidNamespace("NonExistent")       // false (does not exist)
+ * 
+ * Case Error Detection:
+ *   isCaseErrorNamespace("Core")              // true  (should be "core")
+ *   isCaseErrorNamespace("CORE")              // true  (should be "core")
+ *   isCaseErrorNamespace("ConstellAtionMgr")  // true  (should be "ConstellationMgr")
+ *   isCaseErrorNamespace("core")              // false (correct case)
+ *   isCaseErrorNamespace("NonExistent")       // false (not a case error)
+ * 
+ * Namespace Correction:
+ *   findCorrectNamespace("Core")              // "core"
+ *   findCorrectNamespace("ConstellAtionMgr")  // "ConstellationMgr"
+ *   findCorrectNamespace("core")              // "core"
+ *   findCorrectNamespace("NonExistent")       // null
+ * 
+ * Function Validation:
+ *   isValidFunctionName("setDate", "core")       // true
+ *   isValidFunctionName("setdate", "core")       // false (case error)
+ *   isValidFunctionName("getFontSize", "ConstellationMgr") // true
+ *   isValidFunctionName("getFontsize", "ConstellationMgr") // false
+ * 
+ * Full Function Validation:
+ *   isValidFunction("setDate", "core")     // true
+ *   isValidFunction("setdate", "core")     // false (case error)
+ *   isValidFunction("debug", null)         // true (exists in core)
+ *   isValidFunction("Debug", null)         // false (case error)
+ * 
+ * ========================================================================
+ * MODULE METADATA
+ * ========================================================================
  * 
  * @module scriptReference
  * @requires jquery
@@ -39,7 +211,32 @@
  * @author kutaibaa akraa (GitHub: @kutaibaa-akraa)
  * @date 2026-06-06
  * @license GPLv2+
- * @version 1.0.0
+ * @version 2.0.0
+ * 
+ * ========================================================================
+ * CHANGELOG
+ * ========================================================================
+ * 
+ * Version 2.0.0 (Current):
+ * - Added independent namespace validation functions:
+ *   - isValidNamespace(namespace)
+ *   - isCaseErrorNamespace(namespace)
+ *   - findCorrectNamespace(namespace)
+ *   - getAllNamespaces()
+ * - Added isValidFunctionName(funcName, namespace)
+ * - Enhanced isValidFunction to support two modes:
+ *   - Full check (with namespace)
+ *   - Name-only check (namespace = null)
+ * - These additions enable independent validation of namespace and
+ *   function name parts in the syntax highlighter, allowing errors
+ *   to be marked on the correct part of "Namespace.function"
+ * 
+ * Version 1.0.0:
+ * - Initial release with case-sensitive function validation
+ * - JSON loading with caching and parallel fetching
+ * - Autocomplete item generation
+ * - Quick reference data
+ * - Snippet loading
  * 
  * ======================================================================== */
 
@@ -440,7 +637,7 @@ define(["jquery"], function($) {
         loadPromise = loadModuleIndex().then(function(index) {
             if (!index || !index.modules || index.modules.length === 0) {
                 console.warn("[ScriptReference] No module index or empty, using built-in functions");
-               // builtInFunctions = getBuiltInFunctions();
+                builtInFunctions = getBuiltInFunctions();
                 allFunctions = builtInFunctions.slice();
                 isLoading = false;
                 isLoaded = true;
@@ -460,7 +657,7 @@ define(["jquery"], function($) {
                 // If no functions were loaded from JSON, use built-in
                 if (allFunctions.length === 0) {
                     console.warn("[ScriptReference] No functions loaded from JSON, using built-in fallback");
-                   // builtInFunctions = getBuiltInFunctions();
+                    builtInFunctions = getBuiltInFunctions();
                     allFunctions = builtInFunctions.slice();
                 }
                 
@@ -479,7 +676,7 @@ define(["jquery"], function($) {
                 isLoading = false;
                 console.error("[ScriptReference] Error loading modules:", err);
                 // Fallback to built-in functions
-               // builtInFunctions = getBuiltInFunctions();
+                builtInFunctions = getBuiltInFunctions();
                 allFunctions = builtInFunctions.slice();
                 isLoaded = true;
                 return allFunctions;
