@@ -698,7 +698,7 @@ SsoElements SolarSystemEditor::readMpcOneLineCometElements(const QString &oneLin
 						  "(\\d{2})\\s+"                                   //   20 -  21  i2     5. Month of perihelion passage
 						  "(\\d{1,2}(?:\\.\\d{1,4})?)\\s+"                 //   23 -  29  f7.4   6. Day of perihelion passage (TT)
 						  "(\\d{1,2}\\.\\d{2,6})\\s+"                      //   31 -  39  f9.6   7. Perihelion distance (AU)
-						  "(\\d\\.\\d{2,6})\\s+"                           //   42 -  49  f8.6   8. Orbital eccentricity
+						  "(\\d{1,2}\\.\\d{2,6})\\s+"                      //   42 -  49  f8.6   8. Orbital eccentricity
 						  "(\\d{1,3}(?:\\.\\d{1,4})?)\\s+"                 //   52 -  59  f8.4   9. Argument of perihelion, J2000.0 (degrees)
 						  "(\\d{1,3}(?:\\.\\d{1,4})?)\\s+"                 //   62 -  69  f8.4  10. Longitude of the ascending node, J2000.0 (degrees)
 						  "(\\d{1,3}(?:\\.\\d{1,4})?)\\s+"                 //   72 -  79  f8.4  11. Inclination in degrees, J2000.0 (degrees)
