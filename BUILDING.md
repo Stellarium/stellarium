@@ -614,6 +614,47 @@ Upon completion of the build process for all three configurations, you can close
 the same way as it is described for VS 2022 above.
 
 
+### For Android (not officially supported; developers only)
+
+Android is not officially supported, primarily because Stellarium does not yet have a mobile-friendly interface. Developers interested in improving Android support can follow the instructions below to build an Android APK.
+
+These instructions use Qt Creator on Ubuntu 26.04. Adjust the example paths and version numbers to match your installation.
+
+1. In QtCreator choose *Edit* → *Preferences* → *SDKs*
+2. If the JDK location field text is red, hover mouse cursor over it to find out what's wrong. In my case `bin/javac` was missing in the automatically chosen path `/usr/lib/jvm/java-21-openjdk-amd64`, so I had to install `openjdk-21-jdk-headless`.
+3. Choose a location for Android SDK and press *Set Up SDK* to automatically install all the necessary packages (may need to accept a bunch of package licenses in the process).
+4. If you're using QtCreator older than 20.0.2, it isn't compatible with cmdline-tools version 23, so after you install the SDK via the *Set Up SDK*, you have to install version 22 manually and present it to QtCreator as latest:
+   ```bash
+   # NOTE: replace ~/opt/android with the SDK path configured in Qt Creator
+   cd ~/opt/android/
+   ./cmdline-tools/latest/bin/sdkmanager "cmdline-tools;22.0"
+   mv -vi cmdline-tools/latest{,.bak} # back up the actual latest version
+   ln -sv 22.0 cmdline-tools/latest
+   ```
+   Restart Qt Creator afterwards so that it can find the installed tools.
+5. Click *SDK Manager*, in the new dialog expand your Android platform entry (e.g. 'Android 9.0 ("Pie")') and check *SDK Platform*.
+6. In the same dialog, under *Tools* check Android SDK Build-Tools 37 (or whatever you have).
+7. Also under *Tools* check NDK (Side by side) 27.x.y (whatever the *x*≥2 and *y* you have).
+8. Press Apply.
+9. Install aqtinstall (via pip3 or pipx). You may need to add `~/.local/bin` to your `PATH`, so that `aqt` executable can be found.
+10. Install Qt for Android and the corresponding desktop tools (replace the Qt version and installation path as needed).
+    ```bash
+    aqt install-qt all_os android 6.10.2 android_arm64_v8a \
+        -O ~/opt/qt-android --autodesktop \
+        -m qtcharts qtpositioning qtserialport qtmultimedia qtimageformats
+    ```
+11. Add the installed Qt version under *Kits* → *Qt Versions* in Qt Creator's preferences.
+12. Open Stellarium's top-level `CMakeLists.txt` using *Open File or Project...* in Qt Creator and select the Android kit.
+13. In Qt Creator's CMake parameters, set `Qt6LinguistTools_DIR` to `$HOME/opt/qt-android/6.10.2/gcc_64/lib/cmake/Qt6LinguistTools`. Replace `$HOME` manually with your home directory, and adjust the prefix and version to match your Qt installation.
+14. Run CMake and build the project as usual.
+15. After a successful debug build, you'll get an APK file in `src/android-build-stellarium/build/outputs/apk/debug/android-build-stellarium-debug.apk` relative to the build directory.
+16. After you install the APK, don't forget to also copy Stellarium's data to the device. The assets are not included in the APK to make updates easier, so the app requires file management permissions.
+
+    One way to collect all the necessary assets is to build Stellarium for the host machine, install somewhere (e.g. in `~/opt/stellarium`), and use `adb`:
+    ```bash
+    adb push ~/opt/stellarium/share/stellarium /storage/emulated/0/
+    ```
+
 ### Supported CMake parameters
 
 List of supported parameters (passed as `-DPARAMETER=VALUE`):
