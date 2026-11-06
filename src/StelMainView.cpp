@@ -43,7 +43,6 @@
 #include <QGraphicsAnchorLayout>
 #include <QGraphicsWidget>
 #include <QGraphicsEffect>
-#include <QFileInfo>
 #include <QIcon>
 #include <QImageWriter>
 #include <QMoveEvent>
@@ -67,6 +66,7 @@
 #include "StelMovementMgr.hpp"
 #include "Landscape.hpp"
 #include "LandscapeMgr.hpp"
+#include "StelPropertyMgr.hpp"
 #include <QJsonDocument>
 #include <QJsonObject>
 #endif
@@ -2053,8 +2053,13 @@ void StelMainView::doScreenshot(void)
 #ifdef HAVE_EXIV2
 	// Write EXIF metadata only to JPG, PNG or TIF:
 	if (!flagScreenShotWriteExif || ! QStringList({"jpg", "jpeg", "png", "tif", "tiff"}).contains(screenShotFormat))
-		return;
+		writeExif(core, shotPath, im.width(), im.height(), centerPixelPerRadForMercator);
+#endif
+}
 
+#ifdef HAVE_EXIV2
+void StelMainView::writeExif(StelCore *core, QFileInfo shotPath, const int imWidth, const int imHeight, const double centerPixelPerRadForMercator)
+{
 	try {
 		// Claude.ai suggests 2 lines. XMP creation worked without, but maybe terminate is important?
 		Exiv2::XmpParser::initialize();           // needed for thread-safety / explicit setup
@@ -2063,6 +2068,8 @@ void StelMainView::doScreenshot(void)
 		StelMovementMgr *movMgr=GETSTELMODULE(StelMovementMgr);
 		StelLocation loc=core->getCurrentLocation();
 		LandscapeMgr *landscapeMgr=dynamic_cast<LandscapeMgr*>(GETSTELMODULE(LandscapeMgr));
+		//GridLinesMgr *gridlinesMgr=dynamic_cast<GridLinesMgr*>(GETSTELMODULE(GridLinesMgr));
+		StelPropertyMgr *propMgr=dynamic_cast<StelPropertyMgr*>(GETSTELMODULE(StelPropertyMgr));
 		StelSkyDrawer *drawer=core->getSkyDrawer();
 
 		std::unique_ptr<Exiv2::Image> image = Exiv2::ImageFactory::open(shotPath.filePath().toStdString());
@@ -2085,8 +2092,8 @@ void StelMainView::doScreenshot(void)
 
 		exifData["Exif.Image.Make"]           = "Stellarium"; // Or CPU architecture?
 		exifData["Exif.Image.Model"]          = StelUtils::getApplicationVersion().toStdString();
-		exifData["Exif.Image.ImageWidth"]     = std::to_string(im.width());
-		exifData["Exif.Image.ImageLength"]    = std::to_string(im.height());
+		exifData["Exif.Image.ImageWidth"]     = std::to_string(imWidth);
+		exifData["Exif.Image.ImageLength"]    = std::to_string(imHeight);
 		exifData["Exif.Image.XResolution"]    = QString("%1/1").arg(screenshotDpi).toStdString();
 		exifData["Exif.Image.YResolution"]    = QString("%1/1").arg(screenshotDpi).toStdString();
 		exifData["Exif.Image.ResolutionUnit"] = "2"; // 2=inches
@@ -2178,10 +2185,8 @@ void StelMainView::doScreenshot(void)
 		//setSeq(xmpData, "Xmp.avm.Spatial.ReferenceValue",     {std::to_string(ra2000), std::to_string(dec2000)});
 		//setSeq(xmpData, "Xmp.avm.Spatial.ReferenceDimension", {std::to_string(im.width()),  std::to_string(im.height())});
 
-
-
 		qDebug() << "EXIF: Projections...";
-		// BIG TOPIC: Projections. A few non-perspective projections are standardized by Adobe and Google. But for some, we can only specify projection name and our VFoV.
+		// BIG TOPIC: Projections. A few non-perspective projections are defined as panorama formats by Google. But for some, we can only specify projection name and our VFoV.
 		const double fov=core->getMovementMgr()->getCurrentFov();
 
 		const StelCore::ProjectionType projType=core->getCurrentProjectionType();
@@ -2197,8 +2202,8 @@ void StelMainView::doScreenshot(void)
 
 				// Tentative first tags, suggested by Claude.
 				xmpData["Xmp.avm.Spatial.CoordsystemProjection"]  = "TAN"; // GZ: Guessing: Tangential image? Then it's for Perspective only!
-				setSeq(xmpData, "Xmp.avm.Spatial.ReferencePixel",     {std::to_string(im.width() / 2.0), std::to_string(im.height() / 2.0)});
-				const double scale=fov/im.height(); // simple approximation formula for perspective views.
+				setSeq(xmpData, "Xmp.avm.Spatial.ReferencePixel",     {std::to_string(imWidth / 2.0), std::to_string(imHeight / 2.0)});
+				const double scale=fov/imHeight; // simple approximation formula for perspective views.
 				setSeq(xmpData, "Xmp.avm.Spatial.Scale",              {std::to_string(-scale), std::to_string(scale)});
 
 				qDebug() << "EXIF: Done writing ProjectionPerspective data";
@@ -2212,10 +2217,10 @@ void StelMainView::doScreenshot(void)
 				Exiv2::XmpProperties::registerNs("http://ns.google.com/photos/1.0/panorama/", "GPano");
 				xmpData["Xmp.GPano.ProjectionType"] = "equirectangular";
 				xmpData["Xmp.GPano.UsePanoramaViewer"] = "True";
-				xmpData["Xmp.GPano.FullPanoWidthPixels"]  = std::to_string(im.width());
-				xmpData["Xmp.GPano.FullPanoHeightPixels"] = std::to_string(im.height());
+				xmpData["Xmp.GPano.FullPanoWidthPixels"]  = std::to_string(imWidth);
+				xmpData["Xmp.GPano.FullPanoHeightPixels"] = std::to_string(imHeight);
 				// Unfortunately, if not 2:1 sized, GPano viewers will still not show it. So this requires custom screenshot sizes.
-				if (im.width() != 2*im.height())
+				if (imWidth != 2*imHeight)
 					qInfo() << "EXIF Info: Image dimension skewed. This will not load as panorama in GPano aware viewers. Use custom size if needed.";
 				// TBD: We can offset viewport centre also here, but it may not be meaningful in XMP terms.
 				qDebug() << "EXIF: Done writing ProjectionCylinderFill data";
@@ -2229,23 +2234,23 @@ void StelMainView::doScreenshot(void)
 				Exiv2::XmpProperties::registerNs("http://ns.google.com/photos/1.0/panorama/", "GPano");
 				xmpData["Xmp.GPano.ProjectionType"] = "equirectangular";
 				xmpData["Xmp.GPano.UsePanoramaViewer"]    = "True";
-				xmpData["Xmp.GPano.CroppedAreaImageWidthPixels"]  = std::to_string(im.width());
-				xmpData["Xmp.GPano.CroppedAreaImageHeightPixels"] = std::to_string(im.height());
+				xmpData["Xmp.GPano.CroppedAreaImageWidthPixels"]  = std::to_string(imWidth);
+				xmpData["Xmp.GPano.CroppedAreaImageHeightPixels"] = std::to_string(imHeight);
 
 				// Define the full field of view dimensions in pixels
-				const int hFull=im.height()*(180./fov);
+				const int hFull=imHeight*(180./fov);
 				xmpData["Xmp.GPano.FullPanoHeightPixels"] = std::to_string(hFull);
 				xmpData["Xmp.GPano.FullPanoWidthPixels"]  = std::to_string(2*hFull);
 
 				// Deal with Stellarium's projection offset variables
-				const double centerOffset_x =  core->getViewportHorizontalOffset()*im.width()/100.;
-				const double centerOffset_y = -core->getViewportVerticalOffset()*im.height()/100.; // VERIFY DIRECTION
+				const double centerOffset_x =  core->getViewportHorizontalOffset()*imWidth/100.;
+				const double centerOffset_y = -core->getViewportVerticalOffset()*imHeight/100.; // VERIFY DIRECTION
 
 				// Define the portion of the view our crop actually occupies
 				// We actually are zooming into the center of a much larger pano.
 				// TBD: check viewport offset handling!
-				xmpData["Xmp.GPano.CroppedAreaLeftPixels"]   = std::to_string(int((2*hFull-im.width())/2  + centerOffset_x));
-				xmpData["Xmp.GPano.CroppedAreaTopPixels"]    = std::to_string(int((  hFull-im.height())/2 + centerOffset_y));
+				xmpData["Xmp.GPano.CroppedAreaLeftPixels"]   = std::to_string(int((2*hFull-imWidth)/2  + centerOffset_x));
+				xmpData["Xmp.GPano.CroppedAreaTopPixels"]    = std::to_string(int((  hFull-imHeight)/2 + centerOffset_y));
 
 				// Spatial Orientation (Pan/Tilt/Roll)
 				double gpanoHeading, gpanoPitch;
@@ -2282,8 +2287,8 @@ void StelMainView::doScreenshot(void)
 
 				Exiv2::XmpProperties::registerNs("http://ns.google.com/photos/1.0/panorama/", "GPano");
 				xmpData["Xmp.GPano.ProjectionType"] = "cylindrical";
-				xmpData["Xmp.GPano.CroppedAreaImageWidthPixels"]  = std::to_string(im.width());
-				xmpData["Xmp.GPano.CroppedAreaImageHeightPixels"] = std::to_string(im.height());
+				xmpData["Xmp.GPano.CroppedAreaImageWidthPixels"]  = std::to_string(imWidth);
+				xmpData["Xmp.GPano.CroppedAreaImageHeightPixels"] = std::to_string(imHeight);
 
 				// All the remaining are rather hypothetical: I have no software to test the results.
 				// Define the full field of view dimensions in pixels
@@ -2293,15 +2298,15 @@ void StelMainView::doScreenshot(void)
 
 				//const double centerPixelPerRad=proj->getPixelPerRadAtCenter();
 				xmpData["Xmp.GPano.FullPanoWidthPixels"]  = std::to_string(int(2*M_PI*centerPixelPerRadForMercator));
-				xmpData["Xmp.GPano.CroppedAreaTopPixels"] = std::to_string(int((-im.height())/2)); // TBD: Adjust for viewport shift.
+				xmpData["Xmp.GPano.CroppedAreaTopPixels"] = std::to_string(int((-imHeight)/2)); // TBD: Adjust for viewport shift.
 
 				// 4. Define the portion of the view your crop actually occupies
 				// We actually are zooming into the center of a much larger pano.
 				// The left edge depends on view size and view azimuth.
-				if (im.width()>=int(2*M_PI*centerPixelPerRadForMercator)) // fully zoomed out?
+				if (imWidth>=int(2*M_PI*centerPixelPerRadForMercator)) // fully zoomed out?
 					xmpData["Xmp.GPano.CroppedAreaLeftPixels"]   = std::to_string(0);
 				else
-					xmpData["Xmp.GPano.CroppedAreaLeftPixels"]   = std::to_string(int(centerPixelPerRadForMercator-im.width()/2));
+					xmpData["Xmp.GPano.CroppedAreaLeftPixels"]   = std::to_string(int(centerPixelPerRadForMercator-imWidth/2));
 
 				// Spatial Orientation (Pan/Tilt/Roll)
 				double gpanoHeading, gpanoPitch;
@@ -2416,20 +2421,31 @@ void StelMainView::doScreenshot(void)
 			if (landscape->getLocation().region.length()>0)
 				infoMap["location_region"]=landscape->getLocation().region;
 		}
-		infoMap["atmosphere"] = landscapeMgr->getFlagAtmosphere() ? landscapeMgr->getAtmosphereModel() : "off";
+		infoMap["atmosphere"]       = landscapeMgr->getFlagAtmosphere() ? landscapeMgr->getAtmosphereModel() : "off";
 
 		infoMap["topocentric_view"] = core->getUseTopocentricCoordinates();
-		infoMap["nutation"] = core->getUseNutation() ? "1" : "0";
-		infoMap["parallax"] = core->getUseParallax() ?  QString::number(core->getParallaxFactor(), 'f', 1) : "0";
-		infoMap["aberration"] = core->getUseAberration() ?  QString::number(core->getAberrationFactor(), 'f', 1) : "0";
+		infoMap["nutation"]         = core->getUseNutation() ? "1" : "0";
+		infoMap["parallax"]         = core->getUseParallax() ?  QString::number(core->getParallaxFactor(), 'f', 1) : "0";
+		infoMap["aberration"]       = core->getUseAberration() ?  QString::number(core->getAberrationFactor(), 'f', 1) : "0";
 
+		// Gridlines. For now, only the full grids
+		infoMap["grid_azimuthal"] = propMgr->getStelPropertyValue("GridlinesMgr.azimuthalGridDisplayed").toBool();
+		infoMap["grid_eqJNow"]    = propMgr->getStelPropertyValue("GridlinesMgr.equatorGridDisplayed").toBool();
+		infoMap["grid_eqJ2000"]   = propMgr->getStelPropertyValue("GridlinesMgr.equatorJ2000GridDisplayed").toBool();
+		infoMap["grid_eqFixed"]   = propMgr->getStelPropertyValue("GridlinesMgr.fixedEquatorGridDisplayed").toBool();
+		infoMap["grid_eclJ2000"]  = propMgr->getStelPropertyValue("GridlinesMgr.eclipticJ2000GridDisplayed").toBool();
+		infoMap["grid_eclJNow"]   = propMgr->getStelPropertyValue("GridlinesMgr.eclipticGridDisplayed").toBool();
+		infoMap["grid_gal"]       = propMgr->getStelPropertyValue("GridlinesMgr.galacticGridDisplayed").toBool();
+		infoMap["grid_supergal"]  = propMgr->getStelPropertyValue("GridlinesMgr.supergalacticGridDisplayed").toBool();
+		// TBD: More Skyculture details?
+		infoMap["SC_id"]          = propMgr->getStelPropertyValue("StelSkyCultureMgr.currentSkyCultureID").toString();
 
-		// TODO: Other settings? Gridlines, Skyculture details?
-		// TODO: Ocular/Telescope details?
+		// TBD: Ocular/Telescope details?
+		// TBD: Other settings?
 
 		// Convert the QVariantMap to a JSON String
 		// Using QJsonDocument::Compact removes all whitespace/newlines to save EXIF space
-		QString jsonString = QJsonDocument(QJsonObject::fromVariantMap(infoMap)).toJson(QJsonDocument::Compact);
+		QByteArray jsonString = QJsonDocument(QJsonObject::fromVariantMap(infoMap)).toJson(QJsonDocument::Compact);
 		exifData["Exif.Photo.UserComment"] = jsonString.toStdString();
 
 		exifData["Exif.Image.ImageDescription"] = QString("%1 (%2: %3°)").arg(sel.length()>0 ?  sel[0]->getNameI18n() : qc_("Stellarium View", "Screenshot default title"),
@@ -2453,8 +2469,8 @@ void StelMainView::doScreenshot(void)
 		qCritical() << "Caught Exiv2 exception '" << e.what() << "' -- EXIF data not stored into" << shotPath.filePath();
 		//return -1;
 	}
-#endif
 }
+#endif
 
 QPoint StelMainView::getMousePos() const
 {

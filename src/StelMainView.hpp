@@ -25,6 +25,7 @@
 #include <QEventLoop>
 #include <QOpenGLContext>
 #include <QTimer>
+#include <QFileInfo>
 #ifdef OPENGL_DEBUG_LOGGING
 class QOpenGLDebugLogger;
 class QOpenGLDebugMessage;
@@ -383,6 +384,15 @@ private:
 	QString screenShotFileMask;
 	QString screenShotDir;
 #ifdef HAVE_EXIV2
+	//! Write EXIF and other (XMP-based) metadata into screenshots
+	//! These are
+	//! - EXIF Image
+	//! - EXIF GPSInfo location
+	//! - EXIF Photo DateTimeOriginal (simulation date), DateTimeDigitized (file creation time)
+	//! - XMP GPano for equirectangular panoramas
+	//! - XMP AVM (Astronomical Visualization Metadata)
+	//! - Exif.Photo.UserComment other data in JSON format. If an object is selected, its infoMap is integrated into the JSON.
+	void writeExif(StelCore *core, QFileInfo shotPath, const int imWidth, const int imHeight, const double centerPixelPerRadForMercator);
 	bool flagScreenShotWriteExif; // Write metadata EXIF/XMP tags into screenshots, including anything of the following
 	QString screenShotArtist;
 	QString screenShotCopyright;
