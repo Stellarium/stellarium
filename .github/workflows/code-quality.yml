@@ -14,7 +14,7 @@ jobs:
   #
   coveralls:
     name: "Coveralls"
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     if: "!contains(github.actor, 'transifex')"
     steps:
     - name: Install dependencies
@@ -29,7 +29,7 @@ jobs:
 
 
     - name: Checkout repository
-      uses: actions/checkout@v6
+      uses: actions/checkout@v7
       with:
         persist-credentials: false
 
@@ -71,7 +71,7 @@ jobs:
       run: lcov --gcov-tool "/usr/bin/gcov" --ignore-errors unused --remove coverage.info '*_autogen/*' '*/ui_*.h' '*/qrc_*.cpp' '*/build/*' '*/qt5/*' '*/qt6/*' '/usr/*' '*gmock*' --output-file coverage.info
 
     - name: Coveralls
-      uses: coverallsapp/github-action@648a8eb78e6d50909eff900e4ec85cab4524a45b # v2.3.6
+      uses: coverallsapp/github-action@8d6379e14d29928660c4ba802d8e85393440b329 # v2.3.8
       with:
         format: lcov
         file: ${{ github.workspace }}/build/coverage.info
