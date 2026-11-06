@@ -657,12 +657,12 @@ endif()
 # ==============================================================================
 
 # Protect Windows, and discover native packages on BSD/macOS environments
-if(NOT WIN32)
-     if(CMAKE_SYSTEM_NAME STREQUAL "Haiku" OR CMAKE_SYSTEM_NAME STREQUAL "OpenBSD" OR CMAKE_SYSTEM_NAME STREQUAL "FreeBSD" OR BSD)
+#if(NOT WIN32)
+     #if(CMAKE_SYSTEM_NAME STREQUAL "Haiku" OR CMAKE_SYSTEM_NAME STREQUAL "OpenBSD" OR CMAKE_SYSTEM_NAME STREQUAL "FreeBSD" OR BSD)
          # On Haiku and *BSD, try finding the system-installed package first without tight version limits. An older V0.27 should still be OK.
          find_package(exiv2 NAMES exiv2 Exiv2 QUIET)
-     endif()
-endif(NOT WIN32)
+     #endif()
+#endif(NOT WIN32)
 
 if(NOT exiv2_FOUND AND NOT TARGET Exiv2::exiv2lib AND NOT TARGET exiv2lib)
 
