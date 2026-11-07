@@ -2180,7 +2180,7 @@ void StelMainView::writeExif(StelCore *core, QFileInfo shotPath, const int imWid
 		xmpData["Xmp.avm.Spatial.Equinox"]         = "J2000";
 		xmpData["Xmp.avm.Spatial.Rotation"]        = "0.0";
 		xmpData["Xmp.avm.Spatial.Quality"]         = "Full";
-		xmpData["Xmp.avm.MetadataDate"]            = StelUtils::julianDayToISO8601String(now.date().toJulianDay() + StelUtils::qTimeToJDFraction(now.time()));
+		xmpData["Xmp.avm.MetadataDate"]            = StelUtils::julianDayToISO8601String(now.date().toJulianDay() + StelUtils::qTimeToJDFraction(now.time())).toStdString();
 
 		//// These may be correct only for Perspective!
 		//setSeq(xmpData, "Xmp.avm.Spatial.ReferenceValue",     {std::to_string(ra2000), std::to_string(dec2000)});
