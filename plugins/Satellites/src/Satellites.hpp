@@ -30,6 +30,7 @@
 #include <QDir>
 #include <QUrl>
 #include <QVariantMap>
+#include <atomic>
 
 class StelButton;
 class Planet;
@@ -870,6 +871,14 @@ private:
 
 	void createSuperGroupsList();
 
+	//! In 2026, Celestrak has introduced a strict regiment of HTTP errors.
+	//! If saveDownloadedUpdate() hits an error, the reply is forwarded here.
+	//! Updating from Celestrak should wait for 2 hours.
+	//! Too frequent updating leads to user being blocked from Celestrak.
+	//! Currently we only show a warning panel.
+	//! Users can still ignore it and hit the consequences - but have been warned.
+	void handleErrorReply(QNetworkReply* reply);
+
 	//! Path to the satellite catalog file.
 	QString catalogPath;
 	//! Plug-in data directory.
@@ -936,6 +945,12 @@ private:
 	bool autoDisplayEnabled;
 	QPair<QDateTime, double> lastUpdate; // Combines previous QDateTime (slow!) with efficient JD (to be checked each frame in isValidRangeDates()) of the same time.
 	int updateFrequencyHours;
+
+	//! This should usually be true. A download HTTP error should be forwarded to the user. But not 50 at an update event.
+	//! Show only the first, and suppress the rest in one update.
+	std::atomic<bool> showDownloadErrorWarningBox;
+	//! This should be usually true. If an online element update failed, this is set to true to prevent auto-deleting satellites.
+	std::atomic<bool> noErrorDuringUpdate;
 	//@}
 
 	//! @name Umbra/penumbra module

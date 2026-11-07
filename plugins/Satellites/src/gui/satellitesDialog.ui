@@ -155,13 +155,13 @@
                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                 </property>
                 <property name="minimum">
-                 <number>1</number>
+                 <number>2</number>
                 </property>
                 <property name="maximum">
                  <number>9999</number>
                 </property>
                 <property name="value">
-                 <number>1</number>
+                 <number>72</number>
                 </property>
                </widget>
               </item>
@@ -242,6 +242,9 @@
            <widget class="QCheckBox" name="checkBoxAutoRemove">
             <property name="text">
              <string>On update, remove the satellites that are no longer listed in the update sources</string>
+            </property>
+	    <property name="toolTip">
+             <string>If one source update fails, nothing is removed.</string>
             </property>
            </widget>
           </item>
