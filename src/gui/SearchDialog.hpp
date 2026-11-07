@@ -32,6 +32,7 @@
 #include "StelObjectType.hpp"
 #include "SimbadSearcher.hpp"
 #include "VecMath.hpp"
+#include "StelMovementMgr.hpp"
 
 // pre declaration of the ui class
 class Ui_searchDialogForm;
@@ -144,19 +145,6 @@ class SearchDialog : public StelDialog
 	Q_PROPERTY(bool simbadGetDims   READ getSimbadGetsDims   WRITE setSimbadGetsDims   NOTIFY simbadGetsDimsChanged)
 
 public:
-	//! Available coordinate systems
-	enum CoordinateSystem
-	{
-		equatorialJ2000,
-		equatorial,
-		horizontal,
-		galactic,
-		supergalactic,
-		ecliptic,
-		eclipticJ2000
-	};
-	Q_ENUM(CoordinateSystem)
-
 	SearchDialog(QObject* parent);
 	~SearchDialog() override;
 	bool eventFilter(QObject *object, QEvent *event) override;
@@ -183,7 +171,7 @@ public slots:
 	void setSimpleStyle();
 
 	//! Set the current coordinate system
-	void setCurrentCoordinateSystem(SearchDialog::CoordinateSystem cs)
+	void setCurrentCoordinateSystem(StelMovementMgr::ReferenceFrame cs)
 	{
 		currentCoordinateSystem = cs;
 	}
@@ -200,7 +188,7 @@ public slots:
 
 public:
 	//! Get the current coordinate system
-	SearchDialog::CoordinateSystem getCurrentCoordinateSystem() const
+	StelMovementMgr::ReferenceFrame getCurrentCoordinateSystem() const
 	{
 	    return currentCoordinateSystem;
 	}
@@ -335,7 +323,7 @@ private:
 	void populateSimbadServerList();
 
 	// The current coordinate system
-	CoordinateSystem currentCoordinateSystem;
+	StelMovementMgr::ReferenceFrame currentCoordinateSystem;
 
 	// Properties for "recent object searches"
 	CompletionListModel* searchListModel;

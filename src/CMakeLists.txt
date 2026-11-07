@@ -958,6 +958,16 @@ IF(ENABLE_TESTING)
      ADD_TEST(testStelProjector testStelProjector)
      SET_TARGET_PROPERTIES(testStelProjector PROPERTIES FOLDER "src/tests")
 
+     SET(tests_testStelMovementMgr_SRCS
+          tests/testStelMovementMgr.hpp
+          tests/testStelMovementMgr.cpp
+     )
+     ADD_EXECUTABLE(testStelMovementMgr ${tests_testStelMovementMgr_SRCS})
+     TARGET_LINK_LIBRARIES(testStelMovementMgr ${TESTS_LIBRARIES})
+     ADD_DEPENDENCIES(buildTests testStelMovementMgr)
+     ADD_TEST(testStelMovementMgr testStelMovementMgr)
+     SET_TARGET_PROPERTIES(testStelMovementMgr PROPERTIES FOLDER "src/tests")
+
      SET(tests_testPrecession_SRCS
           tests/testPrecession.hpp
           tests/testPrecession.cpp
