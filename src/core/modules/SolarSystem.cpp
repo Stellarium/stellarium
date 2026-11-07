@@ -81,6 +81,52 @@
 #include <QJsonArray>
 #include <cmath>
 
+#include <erfa.h>   // (SS) 2026-09-11 Needed to allow call to eraAb() and eraLd()
+#include <erfam.h>
+
+namespace
+{
+// (SS) 2026-09-11 Relativistic constants and helper for gravitational light deflection and
+// special-relativistic aberration by/around the Sun, following Explanatory Supplement to the
+// Astronomical Almanac (2013), 7.62-7.65 (deflection) and 7.55-7.58 (aberration)
+
+// Between Elongation 178.00 and 180.00 degrees we may have differences with JPL Horizons.
+// Beyond an Elongation of 179.69 degrees our program disable light deflection by the sun.
+// Although JPL Horizons also disable light deflection he may do it at elongation somewhre 
+// between 178 and 180 degrees, and this seems to be dependant on the target solar system body.
+// In our case I pick 179.69 degrees as a threshold to disable light deflection by the Sun.
+// While we won't fully agree with JPL Horizons when the elongation is very close to 180 degrees,
+// it was clear during post-processing of the data that that enabling (or disabling) 
+// light deflection restored the agreement. Actually when these specific target date disagree
+// I change their status 'Invalid' when post-processing the data. This remove them from the 
+// final output/graph. The threshold of 179.69 degrees was chosen by trials and errors to minimize 
+// the number of mismatchesThe real issue here is really that the I do not
+// know exactly how JPL Horizons apply light deflection when the elongation is very close
+// to 180 degrees. However it should not be a big deal since the SSO is then very close
+// to the Sun and it is not observable anyway.
+#define ELONGATION_LIMIT 179.69
+const double cosElongationLimit = -cos((180.0 - ELONGATION_LIMIT) * M_PI / 180.0);
+
+// (SS) 2026-09-11 Thin const-correct wrappers around ERFA's eraLd()/eraAb(), whose C prototypes
+// take non-const double[3] even for pure inputs. Both functions only read pnat/v/p/q/e; the
+// const_cast is safe.
+inline Vec3d eraLdW(double bm, const Vec3d& p, const Vec3d& q, const Vec3d& e, double em, double dlim)
+{
+	Vec3d p1;
+	eraLd(bm, const_cast<double*>(p.data()), const_cast<double*>(q.data()), const_cast<double*>(e.data()), em, dlim,
+	      p1.data());
+	return p1;
+}
+
+inline Vec3d eraAbW(const Vec3d& pnat, const Vec3d& v, double s, double bm1)
+{
+	Vec3d ppr;
+	eraAb(const_cast<double*>(pnat.data()), const_cast<double*>(v.data()), s, bm1, ppr.data());
+	return ppr;
+}
+
+}
+
 
 SolarSystem::SolarSystem() : StelObjectModule()
 	, conf(StelApp::getInstance().getSettings())
@@ -1550,6 +1596,11 @@ void SolarSystem::computePositions(StelCore *core, double dateJDE, PlanetP obser
 {
 	const StelObserver *obs=core->getCurrentObserver();
 	const bool withAberration=core->getUseAberration();
+	
+	// (SS) 2026-09-13 GUI toggle/factor for gravitational light deflection by the Sun
+	const bool withDeflection     = core->getUseDeflection();
+	const double deflectionFactor = core->getDeflectionFactor();
+
 	// We distribute computing over a few threads from the current threadpool, but also compute one block in the main thread so that this does not starve.
 	// Given the comparably low impact of planetary positions on the overall frame time, we usually don't need more than about 4 extra threads. (Profiled with 12.000 objects.)
 	static bool threadMessage=true;
@@ -1701,22 +1752,33 @@ void SolarSystem::computePositions(StelCore *core, double dateJDE, PlanetP obser
 			//         element corrections for the major bodies that have
 			//         them.
 
+			// (SS) 2026-09-26 Adding extra code to compute a sunShift variable to achieve mas precision for selected solar system objects.
+			// Because solar system object positions are computed using heliocentric positions, the Sun position is not evaluated
+			// at the same time for the object and for the earth, that is
+			//
+			//    Qh(t-tau2) - Eh(t) = [Qb(t-tau2) - Sb(t-tau2)] - [Eb(t) - Sb(t)] = [Qb(t-tau2) - Eb(t)] + [Sb(t) - Sb(t-tau2)]
+			//
+			// The additional term, Sb(t) - Sb(t-tau2), compared to pure barycentric differences Qb(t-tau2) - Eb(t) (the standard approach)
+			// must be removed to achieve mas precision level in positions. The displacement of the Sun (or sunShift) must be
+			// subtracted from heliocentric differences to remove this additional term and improve object position.
+			//
+			// Although this correction should also be applied for computing the lightTimeDays variable, it has been
+			// found unnecessary to do it in order to achieve mas position precision.
+
 			// Defensive: rebuild the level cache if it has fallen out of
 			// sync with systemPlanets (the Solar System Editor plugin can
 			// mutate systemPlanets at runtime).
 			int cachedCount = 0;
 			for (const auto& lvl : std::as_const(systemPlanetsByLevel))
 				cachedCount += lvl.size();
-			if (cachedCount != systemPlanets.size())
-				rebuildDependencyLevels();
+			if (cachedCount != systemPlanets.size()) rebuildDependencyLevels();
 
 			const int totalThreads = extraThreads + 1;
-			const int extras = extraThreads;
+			const int extras       = extraThreads;
 
 			// Run `bodyOp` on every body of `level` in parallel and return
 			// only once all workers have finished.
-			const auto runLevelParallel = [totalThreads, extras]
-				(const QVector<PlanetP>& level, auto bodyOp)
+			const auto runLevelParallel = [totalThreads, extras](const QVector<PlanetP>& level, auto bodyOp)
 			{
 				if (level.isEmpty()) return;
 				const auto stripe = [&level, totalThreads, &bodyOp](int offset)
@@ -1728,17 +1790,16 @@ void SolarSystem::computePositions(StelCore *core, double dateJDE, PlanetP obser
 				futures.reserve(extras);
 				for (int t = 0; t < extras; ++t)
 					futures.append(QtConcurrent::run(stripe, t));
-				stripe(extras);                            // main thread's share
-				for (auto& f : futures) f.waitForFinished();
+				stripe(extras); // main thread's share
+				for (auto& f : futures)
+					f.waitForFinished();
 			};
 
 			// ---- Pass 1: first approximation at dateJDE -----------------
 			for (const auto& level : std::as_const(systemPlanetsByLevel))
 			{
 				runLevelParallel(level, [obs, dateJDE](const PlanetP& p)
-				{
-					p->computePosition(obs, dateJDE, Vec3d(0.));
-				});
+				                 { p->computePosition(obs, dateJDE, Vec3d(0.)); });
 			}
 
 			// Snapshot the observer's heliocentric state *by value* (NOT by
@@ -1746,9 +1807,23 @@ void SolarSystem::computePositions(StelCore *core, double dateJDE, PlanetP obser
 			// planet is itself one of the bodies recomputed in passes 2 and
 			// 3, so a reference into its members would shift under our feet
 			// halfway through those passes.
-			const Vec3d obsPosJDE           = observerPlanet->getHeliocentricEclipticPos();
-			const Vec3d aberrationPushSpeed = observerPlanet->getHeliocentricEclipticVelocity()
-			                                  * core->getAberrationFactor();
+			const Vec3d obsPosJDE = observerPlanet->getHeliocentricEclipticPos();
+			const Vec3d obsVelJDE = observerPlanet->getHeliocentricEclipticVelocity();
+
+			// (SS) 2026-09-26 get Sun position & velocity at time JDE as barycentric coordinates but translated in the
+			// VSOP87 reference frame. Note that this make sense only if DE files are used. If VSOP87 ephemeris
+			// are used, all three components of these two vectors will be set to 0.0
+			Vec3d sunPosJDE;
+			Vec3d sunVelJDE;
+			get_sun_barycentric_coordsv(dateJDE, &sunPosJDE[0], &sunVelJDE[0], Q_NULLPTR);
+
+			// (SS) 2026-09-26 Aberration is a special-relativistic effect and needs the observer's velocity in the
+			// same barycentric (BCRS) frame as the direction vector p, not the observer's heliocentric velocity.
+			// getHeliocentricEclipticVelocity() gives dEh/dt = d(Eb-Sb)/dt = (true barycentric Earth velocity) -
+			// (Sun's own barycentric velocity). The Sun's barycentric velocity (a few to ~15 m/s, mostly from
+			// Jupiter) is exactly the same size as the multi-mas aberration discrepancy seen against the reference
+			// IAU code, so it must be added back in - the velocity analogue of the sunShift position correction above.
+			const Vec3d aberrationPushSpeed = (obsVelJDE + sunVelJDE) * core->getAberrationFactor();
 
 			// For higher accuracy, we now make two iterations of light time
 			// and aberration correction.  May fix sub-arcsecond inaccuracies,
@@ -1757,13 +1832,12 @@ void SolarSystem::computePositions(StelCore *core, double dateJDE, PlanetP obser
 			// discussion in GH:#1626) we do not add anything for the Moon
 			// when observed from Earth -- presumably the used ephemerides
 			// already provide aberration-corrected positions for the Moon.
-			const auto lightTimeStep =
-				[obs, dateJDE, obsPosJDE, aberrationPushSpeed,
-				 withAberration, observerPlanetIsEarth, this](const PlanetP& p)
+			const auto lightTimeStep = [obs, dateJDE, obsPosJDE, aberrationPushSpeed, withAberration,
+			                            observerPlanetIsEarth, this](const PlanetP& p)
 			{
 				const Vec3d planetPos      = p->getHeliocentricEclipticPos();
-				const double lightTimeDays = (planetPos - obsPosJDE).norm()
-				                             * (AU / (SPEED_OF_LIGHT * 86400.));
+				const double lightTimeDays = (planetPos - obsPosJDE).norm() *
+				                             (AU / (SPEED_OF_LIGHT * 86400.));
 				Vec3d aberrationPush(0.);
 				if (withAberration && (!observerPlanetIsEarth || p != getMoon()))
 					aberrationPush = lightTimeDays * aberrationPushSpeed;
@@ -1777,26 +1851,122 @@ void SolarSystem::computePositions(StelCore *core, double dateJDE, PlanetP obser
 			// ---- Pass 3: refinement (and rotation element corrections) --
 			// The next call may already do nothing if the time difference to
 			// the previous round is not large enough.
-			const auto lightTimeStepWithRotation =
-				[obs, dateJDE, obsPosJDE, aberrationPushSpeed,
-				 withAberration, observerPlanetIsEarth, this](const PlanetP& p)
+			// (SS) 2026-09-26 modifications to add gravitational light deflection by the Sun and relativistic aberration corrections.
+			// These modifications are based on the code of the ERFA library. They are applied only to the major planets, Pluto, Sun and the Moon.
+			// (SS) 2026-09-26 Note: unlike the classical push in Pass 2 above, which still skips the Moon observed from Earth, 
+			// the ERFA-based block below applies gravitational deflection and relativistic aberration to the Moon as well. 
+			// The DE440/DE441 Moon vectors are purely geometric (not aberration-corrected), so the original assumption behind that exclusion
+			// does not hold for them.
+			const auto lightTimeStepWithRotation = [obs, dateJDE, obsPosJDE, obsVelJDE, sunPosJDE, sunVelJDE,
+			                                        aberrationPushSpeed, withAberration, 
+													withDeflection, deflectionFactor, observerPlanetIsEarth, this](const PlanetP& p)
 			{
 				const Vec3d planetPos      = p->getHeliocentricEclipticPos();
-				const double lightTimeDays = (planetPos - obsPosJDE).norm()
-				                             * (AU / (SPEED_OF_LIGHT * 86400.));
+				const double lightTimeDays = (planetPos - obsPosJDE).norm() *
+				                             (AU / (SPEED_OF_LIGHT * 86400.));
 				Vec3d aberrationPush(0.);
 				if (withAberration && (!observerPlanetIsEarth || p != getMoon()))
 					aberrationPush = lightTimeDays * aberrationPushSpeed;
+
+				// (SS) 2026-09-26 Compute and Set sunShift/earthShift variables to achieve mas precision.
+				const auto type = p->getPlanetType();
+				const auto name = p->getEnglishName();
+
+				if (type == Planet::isPlanet || name == "Pluto" || name == "Sun" || name == "Moon")
+				{
+					if (type == Planet::isPlanet || name == "Pluto" || name == "Sun")
+					{
+						Vec3d sunPosTau2;
+						Vec3d dummySunVelTau2;
+						get_sun_barycentric_coordsv(dateJDE - lightTimeDays, &sunPosTau2[0],
+						                            &dummySunVelTau2[0], Q_NULLPTR);
+						p->setSunShift(sunPosJDE - sunPosTau2);
+					}
+					else
+					{
+						p->setSunShift(Vec3d(0.));
+					}
+
+					// (SS) 2026-09-26 earthShift = Eb(to) - Eb(te), Moon-from-Earth only.
+					if (observerPlanetIsEarth && name == "Moon")
+					{
+						double earthHelioTau2xyz[3], earthHelioTau2dot[3];
+						get_earth_helio_coordsv(dateJDE - lightTimeDays, earthHelioTau2xyz,
+						                        earthHelioTau2dot, Q_NULLPTR);
+						const Vec3d earthHelioTau2(earthHelioTau2xyz[0], earthHelioTau2xyz[1],
+						                           earthHelioTau2xyz[2]);
+
+						Vec3d sunPosTau2b, dummySunVelTau2b;
+						get_sun_barycentric_coordsv(dateJDE - lightTimeDays, &sunPosTau2b[0],
+						                            &dummySunVelTau2b[0], Q_NULLPTR);
+						const Vec3d earthBaryTau2 = earthHelioTau2 + sunPosTau2b;
+						const Vec3d earthBaryJDE  = obsPosJDE + sunPosJDE;
+						p->setEarthShift(earthBaryJDE - earthBaryTau2);
+					}
+					else
+					{
+						p->setEarthShift(Vec3d(0.));
+					}
+				}
+
+				// (SS) Unified p -> p1 -> p2 pipeline: gravitational deflection then relativistic aberration.
+				if (type == Planet::isPlanet || name == "Pluto" || name == "Sun" || name == "Moon")
+				{
+					const Vec3d& Qh   = p->getHeliocentricEclipticPos();
+					const Vec3d& Eh   = obsPosJDE;
+					const Vec3d P     = Qh - Eh - p->getSunShift() - p->getEarthShift();
+					const double Pmod = P.norm();
+					const double Emod = Eh.norm();
+
+					if (Pmod > 0. && Emod > 0.)
+					{
+						const Vec3d pDir = P / Pmod;
+
+						Vec3d p1          = pDir;
+						const double Qmod = Qh.norm();
+						if (withDeflection && Qmod > 0.)
+						{
+							const Vec3d q      = Qh / Qmod;
+							const Vec3d e      = Eh / Emod;
+							const double qDotE = q[0] * e[0] + q[1] * e[1] + q[2] * e[2];
+							if (qDotE >= cosElongationLimit)
+								p1 = eraLdW(deflectionFactor, pDir, q, e, Emod, 1e-6);
+						}
+						p->setLightDeflection(Pmod * (p1 - pDir));
+
+						if (withAberration)
+						{
+							const double cAUday = SPEED_OF_LIGHT * 86400. / AU;
+							const Vec3d Vc = (obsVelJDE + sunVelJDE) / cAUday;
+							const double bm1 = std::sqrt(
+								std::max(0., 1.0 - Vc.normSquared()));
+							const Vec3d p2 = eraAbW(p1, Vc, Emod, bm1);
+							aberrationPush = Pmod * (p2 - p1);
+						}
+					}
+					else
+					{
+						p->setLightDeflection(Vec3d(0.));
+					}
+				}
+
 				p->computePosition(obs, dateJDE - lightTimeDays, aberrationPush);
 
 				const auto update = &RotationElements::updatePlanetCorrections;
-				if      (p->englishName==L1S("Moon"))    update(dateJDE-lightTimeDays, RotationElements::EarthMoon);
-				else if (p->englishName==L1S("Mars"))    update(dateJDE-lightTimeDays, RotationElements::Mars);
-				else if (p->englishName==L1S("Jupiter")) update(dateJDE-lightTimeDays, RotationElements::Jupiter);
-				else if (p->englishName==L1S("Saturn"))  update(dateJDE-lightTimeDays, RotationElements::Saturn);
-				else if (p->englishName==L1S("Uranus"))  update(dateJDE-lightTimeDays, RotationElements::Uranus);
-				else if (p->englishName==L1S("Neptune")) update(dateJDE-lightTimeDays, RotationElements::Neptune);
+				if (p->englishName == L1S("Moon"))
+					update(dateJDE - lightTimeDays, RotationElements::EarthMoon);
+				else if (p->englishName == L1S("Mars"))
+					update(dateJDE - lightTimeDays, RotationElements::Mars);
+				else if (p->englishName == L1S("Jupiter"))
+					update(dateJDE - lightTimeDays, RotationElements::Jupiter);
+				else if (p->englishName == L1S("Saturn"))
+					update(dateJDE - lightTimeDays, RotationElements::Saturn);
+				else if (p->englishName == L1S("Uranus"))
+					update(dateJDE - lightTimeDays, RotationElements::Uranus);
+				else if (p->englishName == L1S("Neptune"))
+					update(dateJDE - lightTimeDays, RotationElements::Neptune);
 			};
+
 			for (const auto& level : std::as_const(systemPlanetsByLevel))
 				runLevelParallel(level, lightTimeStepWithRotation);
 
@@ -1939,7 +2109,10 @@ void SolarSystem::computePositions(StelCore *core, double dateJDE, PlanetP obser
 // The elements have to be ordered hierarchically, eg. it's important to compute earth before moon.
 void SolarSystem::computeTransMatrices(double dateJDE, const Vec3d& observerPos)
 {
-	const double dateJD=dateJDE - (StelApp::getInstance().getCore()->computeDeltaT(dateJDE))/86400.0;
+	// (SS) 2026-10-01 One fixed-point iteration so that Delta-T is evaluated at JD(UT), not JDE.
+	const double jdFirstGuess = dateJDE - StelApp::getInstance().getCore()->computeDeltaT(dateJDE) / 86400.0;
+	const double dateJD       = dateJDE - StelApp::getInstance().getCore()->computeDeltaT(jdFirstGuess) / 86400.0;
+	//const double dateJD=dateJDE - (StelApp::getInstance().getCore()->computeDeltaT(dateJDE))/86400.0;
 
 	if (flagLightTravelTime)
 	{

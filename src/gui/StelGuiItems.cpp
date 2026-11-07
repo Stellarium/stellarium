@@ -949,15 +949,27 @@ void BottomStelBar::updateText(bool updatePos, bool updateTopocentric)
 			sigmaInfo = QString("; %1(%2T) = %3s").arg(QChar(0x03c3)).arg(QChar(0x0394)).arg(sigma, 3, 'f', 1);
 
 		QString deltaTInfo;
-		if (qAbs(deltaT)>60.)
-			deltaTInfo = QString("%1 (%2s)%3").arg(StelUtils::hoursToHmsStr(deltaT/3600.)).arg(deltaT, 5, 'f', 2).arg(validRangeMarker);
+		if (qAbs(deltaT) > 60.)
+			deltaTInfo =
+				QString("%1 (%2s)%3")
+					.arg(StelUtils::hoursToHmsStr(deltaT / 3600.))
+					.arg(deltaT, 5, 'f', (StelApp::getInstance().getFlagExtraPrecision() ? 6 : 2))
+					.arg(validRangeMarker); // (SS) 2026-09-13 increase # of digit for %2 from 2 to 6
 		else
-			deltaTInfo = QString("%1s%2").arg(deltaT, 3, 'f', 3).arg(validRangeMarker);
+			deltaTInfo =
+				QString("%1s%2")
+					.arg(deltaT, 3, 'f', (StelApp::getInstance().getFlagExtraPrecision() ? 6 : 3))
+					.arg(validRangeMarker); // (SS) 2026-09-13 increase # of digit for %2 from 3 to 6
 
-		// the corrective ndot to be displayed could be set according to the currently used DeltaT algorithm.
-		//float ndot=core->getDeltaTnDot();
-		// or just to the used ephemeris. This has to be read as "Selected DeltaT formula used, but with the ephemeris's nDot applied it corrects DeltaT to..."
-		const double ndot=( (EphemWrapper::use_de430(jd) || EphemWrapper::use_de431(jd) || EphemWrapper::use_de440(jd) || EphemWrapper::use_de441(jd)) ? -25.8 : -23.8946 );
+		// (SS) 2025-11-27: update ndot values according to DE430/431 and DE440/441 values provided by JPL:
+		double ndot;
+
+		if (EphemWrapper::use_de430(jd) || EphemWrapper::use_de431(jd))
+			ndot = -25.82;
+		else if (EphemWrapper::use_de440(jd) || EphemWrapper::use_de441(jd))
+			ndot = -25.936;
+		else
+			ndot = -23.8946;
 
 		datetime->setToolTip(QString("<p style='white-space:pre'>%1T = %2 [n%8 @ %3\"/cy%4%5]<br>%6<br>%7<br>%9</p>").arg(QChar(0x0394), deltaTInfo, QString::number(ndot, 'f', 4), QChar(0x00B2), sigmaInfo, newDateAppx, currTZ, QChar(0x2032), timeRateInfo));
 	}
