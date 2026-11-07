@@ -313,7 +313,8 @@ void StelMovementMgr::setMountMode(MountMode m)
 	mountMode = m;
 	// The stored up vector belongs to the old mount frame. Rebuild it so that the view is upright in the new one.
 	// Looking exactly into the new pole, the current rotation of the view is kept.
-	setViewUpVector(uprightUpVector(j2000ToMountFrame(viewDirectionJ2000), j2000ToMountFrame(upJ2000)));
+	const Vec3d dirMountFrame = j2000ToMountFrame(viewDirectionJ2000);
+	setViewUpVector(stableUpVector(dirMountFrame, uprightUpVector(dirMountFrame, j2000ToMountFrame(upJ2000))));
 	applyViewDirectionJ2000(viewDirectionJ2000);
 	emit equatorialMountChanged(m==MountEquinoxEquatorial);
 }
@@ -996,6 +997,11 @@ Vec3d StelMovementMgr::uprightUpVector(const Vec3d& dir, const Vec3d& currentUp)
 	return upVectorFromLonLat(lon, lat);
 }
 
+Vec3d StelMovementMgr::stableUpVector(const Vec3d& dir, const Vec3d& uprightUp)
+{
+	return isNearPole(dir) ? uprightUp : Vec3d(0., 0., 1.);
+}
+
 void StelMovementMgr::initMoveLongitudes(const Vec3d& aimUpMountFrame)
 {
 	const Vec3d startMountFrame = (move.mountMode==MountAltAzimuthal) ? move.start : j2000ToMountFrame(move.start);
@@ -1272,7 +1278,7 @@ void StelMovementMgr::updateVisionVector(double deltaTime)
 		Vec3d tmp;
 		StelUtils::spheToRect(ra_now, de_now, tmp);
 		// The up vector follows the interpolated direction. It never tilts the view and is also defined in the pole.
-		setViewUpVector(upVectorFromLonLat(ra_now, de_now));
+		setViewUpVector(stableUpVector(tmp, upVectorFromLonLat(ra_now, de_now)));
 		applyViewDirectionJ2000(mountFrameToJ2000(tmp));
 	}
 	else // no autoMove
@@ -1313,14 +1319,10 @@ void StelMovementMgr::updateVisionVector(double deltaTime)
 		{
 			if (flagLockEquPos) // Equatorial vision vector locked
 			{
-				// Recalc local vision vector. Its direction in the mount frame changes with time,
-				// and setViewDirectionJ2000() rebuilds the up vector to keep the view upright.
-				// Near the pole the azimuth of the drifting direction is meaningless (it would turn the view
-				// towards the drift direction), so keep the current rotation there.
-				if (isNearPole(j2000ToMountFrame(viewDirectionJ2000)))
-					applyViewDirectionJ2000(viewDirectionJ2000);
-				else
-					setViewDirectionJ2000(viewDirectionJ2000);
+				// Recalc local vision vector. Its direction in the mount frame changes with time. The stored up vector
+				// is the vertical axis except near the pole (see stableUpVector()), so the view stays upright,
+				// and near the pole its rotation is kept. Both change continuously while the direction drifts.
+				applyViewDirectionJ2000(viewDirectionJ2000);
 			}
 			else
 			{
@@ -1518,34 +1520,7 @@ void StelMovementMgr::moveToAltAzi(const Vec3d& aim, const Vec3d &aimUp, float m
 	move.start.normalize();
 	//qDebug() << "move.start=" << move.start;
 
-	// In the rare case that we currently sit in the zenith, the current up vector cannot be 0/0/1.
-	// The only way to come here would have been a previously programmed moveToAltAzi(zenith), and optional move around zenith/nadir by left/right keys.
-	// We decode view azimuth from the current up vector and set our move.start direction to the same azimuth, just off the zenith/nadir.
-	Vec3d currentUp=upVectorMountFrame; // j2000ToMountFrame(getViewUpVectorJ2000());
-	if (fabs(currentUp[2]) < 1.e-12)
-	{
-		//qDebug() << "Start a programmed move out of the zenith! Decode azimuth from the up vector." << currentUp;
-		// CurrentUp reported as -1/0/0 when looking towards zenith/south
-		double az=StelUtils::fmodpos(-atan2(currentUp[1], currentUp[0]), 2.*M_PI); // or some permutation! 0/1 seems wrong.
-		double alt=acos(qBound(-1.,currentUp[2],1.)); // Ambiguous - One of the poles! We still need info from the view vector.
-		Vec3d currentAim=core->j2000ToAltAz(viewDirectionJ2000, StelCore::RefractionOff);
-		//qDebug() << "current pre-move view vector is" << currentAim;
-		if (currentAim[2]<0)
-		{
-			alt*=-1;
-			az+=M_PI;
-		}
-		//qDebug() << "current pre-move view decoded as az=" << az*M_180_PI << " alt=" << alt*M_180_PI;
-		// Compare with current view direction. Take this (presumably looking into 0/0/1 or 0/0/-1), reduce by 1e-4 degrees
-		// reduce altitude, build new view vector, set move.start.
-		Vec3d safeAltAz;
-		alt-=1e-4*M_PI_180*StelUtils::sign(alt);
-		StelUtils::spheToRect(M_PI-az, alt, safeAltAz);
-		//qDebug() << "pre-move view vector reduced to az=" << az*M_180_PI << "alt=" << alt*M_180_PI << "-->" << safeAltAz;
-		move.start=safeAltAz; //core->altAzToJ2000(safeAltAz, StelCore::RefractionOff);
-		viewDirectionJ2000=core->altAzToJ2000(move.start, StelCore::RefractionOff);
-		upVectorMountFrame.set(0,0,1);
-	}
+	// Starting exactly in the zenith/nadir is handled by initMoveLongitudes(), which takes the azimuth from the up vector.
 	move.speed=1.f/(moveDuration*1000);
 	move.coef=0.;
 	move.targetObject.clear();
@@ -1637,7 +1612,8 @@ Vec3d StelMovementMgr::mountFrameToJ2000(const Vec3d& v) const
 void StelMovementMgr::setViewDirectionJ2000(const Vec3d& v)
 {
 	// A stored up vector may belong to the previous direction. Rebuild it so that the view stays upright.
-	setViewUpVector(uprightUpVector(j2000ToMountFrame(v), upVectorMountFrame));
+	const Vec3d dirMountFrame = j2000ToMountFrame(v);
+	setViewUpVector(stableUpVector(dirMountFrame, uprightUpVector(dirMountFrame, upVectorMountFrame)));
 	applyViewDirectionJ2000(v);
 }
 

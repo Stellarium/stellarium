@@ -118,6 +118,42 @@ void TestStelMovementMgr::testIsNearPole()
 	}
 }
 
+// Away from the pole the stored up vector is the vertical axis. Made perpendicular to the view direction
+// (as StelCore::lookAtJ2000() does), it gives exactly the upright up vector, so the view looks the same.
+// Near the pole, the upright up vector itself is kept.
+void TestStelMovementMgr::testStableUpVector()
+{
+	for (int i = 0; i < 24; ++i)
+	{
+		const double lon = i * 15. * M_PI_180;
+		for (int j = -17; j <= 17; ++j)
+		{
+			const double lat = j * 5. * M_PI_180;
+			Vec3d dir;
+			StelUtils::spheToRect(lon, lat, dir);
+			const Vec3d upright = StelMovementMgr::upVectorFromLonLat(lon, lat);
+			const Vec3d stored = StelMovementMgr::stableUpVector(dir, upright);
+			if (StelMovementMgr::isNearPole(dir))
+				QVERIFY((stored - upright).norm() < EPS);
+			else
+			{
+				QVERIFY((stored - Vec3d(0., 0., 1.)).norm() < EPS);
+				Vec3d rendered = stored - dir * stored.dot(dir);
+				rendered.normalize();
+				QVERIFY((rendered - upright).norm() < 1e-9);
+			}
+		}
+	}
+	// The poles themselves
+	for (const double lat : { M_PI_2, -M_PI_2 })
+	{
+		Vec3d dir;
+		StelUtils::spheToRect(0.3, lat, dir);
+		const Vec3d upright = StelMovementMgr::upVectorFromLonLat(0.3, lat);
+		QVERIFY((StelMovementMgr::stableUpVector(dir, upright) - upright).norm() < EPS);
+	}
+}
+
 // In the pole, the longitude decoded from the up vector is the one used to build it.
 // Without a usable up vector the fallback is returned.
 void TestStelMovementMgr::testPoleLongitudeFromUp()

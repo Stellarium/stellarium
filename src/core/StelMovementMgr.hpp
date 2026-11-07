@@ -190,7 +190,7 @@ public:
 	//! A deviation of up to about 1e-7 radians is accepted, which covers rounding errors of frame conversions.
 	static bool isInPole(const Vec3d& dir);
 	//! Return true if the direction (of any length) is within 4.5 degrees of the pole of its frame (|latitude| > 0.95*90 degrees),
-	//! the same limit panView() uses for its special pole handling.
+	//! the same limit panView() uses for its special pole handling. Beyond that, the stored up vector is the vertical axis.
 	static bool isNearPole(const Vec3d& dir);
 	//! Inverse of upVectorFromLonLat() for a view exactly into the pole: return the longitude (radians) at the bottom of the screen
 	//! for the given up vector when looking into the north (northPole=true) or south pole.
@@ -200,6 +200,11 @@ public:
 	//! both in the same frame. This is upVectorFromLonLat() for the direction of @p dir. Exactly in the pole,
 	//! the longitude is taken from @p currentUp, so the current rotation of the view is kept there.
 	static Vec3d uprightUpVector(const Vec3d& dir, const Vec3d& currentUp);
+	//! Return the up vector to store for the view direction @p dir, given its upright up vector @p uprightUp (all in the mount frame).
+	//! Away from the pole this is the vertical axis (0,0,1): it gives the same upright view, but stays valid when the direction
+	//! changes later without a new up vector (e.g. with position lock or after a mount change). Near the pole (see isNearPole()),
+	//! where the vertical axis would be almost parallel to the view, @p uprightUp is returned, which also keeps the rotation of the view.
+	static Vec3d stableUpVector(const Vec3d& dir, const Vec3d& uprightUp);
 
 	void moveToObject(const StelObjectP& target, float moveDuration = 1., ZoomingMode zooming = ZoomNone);
 
