@@ -2171,15 +2171,16 @@ void StelMainView::writeExif(StelCore *core, QFileInfo shotPath, const int imWid
 		//exifData["Exif.GPSInfo.GPSTimeStamp"]        = time); // 3 rational numbers, hh/1, mm/1, ss/1.
 
 		// We may want to use Xmp.avm (Astronomy Visualization Metadata) to extend descriptions with astronomical coordinates.
+		// A full table is at https://noirlab.edu/public/media/archives/techdocs/pdf/techdoc115.pdf
 		// Following lines suggested by Claude.ai.
 		// Register the AVM namespace (once per process, before using the prefix)
 		Exiv2::XmpProperties::registerNs("http://www.communicatingastronomy.org/avm/1.0/", "avm");
-		xmpData["Xmp.avm.Type"]        = "Simulation";
-		xmpData["Xmp.avm.Spatial.CoordinateFrame"]        = "ICRS";
-		xmpData["Xmp.avm.Spatial.Equinox"]                = "J2000";
-		//xmpData["Xmp.avm.Spatial.CoordsystemProjection"]  = "TAN"; // GZ: Guessing: Tangential image? Then it's for Perspective only!
-		xmpData["Xmp.avm.Spatial.Rotation"]               = "0.0";
-		xmpData["Xmp.avm.Spatial.Quality"]                = "Full";
+		xmpData["Xmp.avm.Type"]                    = "Simulation";
+		xmpData["Xmp.avm.Spatial.CoordinateFrame"] = "ICRS";
+		xmpData["Xmp.avm.Spatial.Equinox"]         = "J2000";
+		xmpData["Xmp.avm.Spatial.Rotation"]        = "0.0";
+		xmpData["Xmp.avm.Spatial.Quality"]         = "Full";
+		xmpData["Xmp.avm.MetadataDate"]            = StelUtils::julianDayToISO8601String(now.date().toJulianDay() + StelUtils::qTimeToJDFraction(now.time()));
 
 		//// These may be correct only for Perspective!
 		//setSeq(xmpData, "Xmp.avm.Spatial.ReferenceValue",     {std::to_string(ra2000), std::to_string(dec2000)});
@@ -2201,7 +2202,7 @@ void StelMainView::writeExif(StelCore *core, QFileInfo shotPath, const int imWid
 				//exifData["Exif.Image.FocalLength"]          =  focalLengthEquiv; // Maybe explicitly add this, or some f as diagonal relative to 35mm? (vFoV=24mm)
 
 				// Tentative first tags, suggested by Claude.
-				xmpData["Xmp.avm.Spatial.CoordsystemProjection"]  = "TAN"; // GZ: Guessing: Tangential image? Then it's for Perspective only!
+				xmpData["Xmp.avm.Spatial.CoordsystemProjection"] = "TAN";
 				setSeq(xmpData, "Xmp.avm.Spatial.ReferencePixel",     {std::to_string(imWidth / 2.0), std::to_string(imHeight / 2.0)});
 				const double scale=fov/imHeight; // simple approximation formula for perspective views.
 				setSeq(xmpData, "Xmp.avm.Spatial.Scale",              {std::to_string(-scale), std::to_string(scale)});
@@ -2210,8 +2211,14 @@ void StelMainView::writeExif(StelCore *core, QFileInfo shotPath, const int imWid
 				break;
 			}
 			case StelCore::ProjectionCylinderFill:
+			{
 				// Set the human-readable string descriptive name
 				exifData["Exif.Photo.LensModel"] = "360x180-degree Equirectangular Lens";
+
+				// AVM
+				xmpData["Xmp.avm.Spatial.CoordsystemProjection"] = "CAR"; // Plate Carrée
+				setSeq(xmpData, "Xmp.avm.Spatial.ReferencePixel",  {std::to_string(imWidth / 2.0), std::to_string(imHeight / 2.0)});
+				setSeq(xmpData, "Xmp.avm.Spatial.Scale",           {std::to_string(-360./imWidth), std::to_string(180./imHeight)});
 
 				// GPano tags. These describe a full-size equirectangular.
 				Exiv2::XmpProperties::registerNs("http://ns.google.com/photos/1.0/panorama/", "GPano");
@@ -2225,6 +2232,7 @@ void StelMainView::writeExif(StelCore *core, QFileInfo shotPath, const int imWid
 				// TBD: We can offset viewport centre also here, but it may not be meaningful in XMP terms.
 				qDebug() << "EXIF: Done writing ProjectionCylinderFill data";
 				break;
+			}
 			case StelCore::ProjectionCylinder:
 			{
 				// Set the human-readable string descriptive name
@@ -2275,6 +2283,12 @@ void StelMainView::writeExif(StelCore *core, QFileInfo shotPath, const int imWid
 				xmpData["Xmp.GPano.PoseHeadingDegrees"] = std::to_string(gpanoHeading);
 				xmpData["Xmp.GPano.PosePitchDegrees"]   = std::to_string(gpanoPitch);
 				xmpData["Xmp.GPano.PoseRollDegrees"]    = "0";
+
+				// AVM
+				xmpData["Xmp.avm.Spatial.CoordsystemProjection"] = "CAR"; // Plate Carrée
+				setSeq(xmpData, "Xmp.avm.Spatial.ReferencePixel", {std::to_string(imWidth / 2.0), std::to_string(imHeight / 2.0)});
+				setSeq(xmpData, "Xmp.avm.Spatial.Scale",          {std::to_string(-360./(2.*hFull)), std::to_string(180./hFull)});
+
 				qDebug() << "EXIF: Done writing ProjectionCylinder data";
 				break;
 			}

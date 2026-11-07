@@ -390,7 +390,8 @@ private:
 	//! - EXIF GPSInfo location
 	//! - EXIF Photo DateTimeOriginal (simulation date), DateTimeDigitized (file creation time)
 	//! - XMP GPano for equirectangular panoramas
-	//! - XMP AVM (Astronomical Visualization Metadata)
+	//! - XMP AVM (Astronomical Visualization Metadata) https://noirlab.edu/public/education/avm/
+	//!           A full table is at https://noirlab.edu/public/media/archives/techdocs/pdf/techdoc115.pdf
 	//! - Exif.Photo.UserComment other data in JSON format. If an object is selected, its infoMap is integrated into the JSON.
 	void writeExif(StelCore *core, QFileInfo shotPath, const int imWidth, const int imHeight, const double centerPixelPerRadForMercator);
 	bool flagScreenShotWriteExif; // Write metadata EXIF/XMP tags into screenshots, including anything of the following
