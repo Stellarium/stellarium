@@ -25,6 +25,7 @@
 
 #include <QMap>
 #include <QString>
+#include "StelMainExport.hpp"
 
 //! @def q_(str)
 //! Return the gettext translated english text @a str using the current global translator.
@@ -51,7 +52,7 @@
 //! All its operations do not modify the global locale.
 //! The purpose of this class is to remove all non-OO C locale functions from stellarium.
 //! @author Fabien Chereau
-class StelTranslator
+class STELMAIN_EXPORT StelTranslator
 {
 public:
 	//! Create a translator from a language name.
@@ -168,4 +169,3 @@ private:
 };
 
 #endif // STELTRANSLATOR_HPP
-
