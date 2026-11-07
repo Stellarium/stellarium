@@ -43,7 +43,6 @@
 #include <QGraphicsAnchorLayout>
 #include <QGraphicsWidget>
 #include <QGraphicsEffect>
-#include <QFileInfo>
 #include <QIcon>
 #include <QImageWriter>
 #include <QMoveEvent>
@@ -59,6 +58,18 @@
 #include <QMessageBox>
 #include <QStandardPaths>
 #include <QStorageInfo>
+#ifdef HAVE_EXIV2
+// To write EXIF metadata in screenshots
+#include <exiv2/exiv2.hpp>
+#include "StelObjectMgr.hpp"
+#include "StelModuleMgr.hpp"
+#include "StelMovementMgr.hpp"
+#include "Landscape.hpp"
+#include "LandscapeMgr.hpp"
+#include "StelPropertyMgr.hpp"
+#include <QJsonDocument>
+#include <QJsonObject>
+#endif
 #ifdef Q_OS_WIN
 	#include <QPinchGesture>
 	#include <Windows.h>
@@ -635,6 +646,7 @@ StelMainView::StelMainView(QSettings* settings)
 	  screenShotFormat("png"),
 	  screenShotFileMask("yyyyMMdd-hhmmssz"),
 	  screenShotDir(""),
+	  flagScreenShotWriteExif(true),
 	  flagCursorTimeout(false),
 	  lastEventTimeSec(0.0),
 	  minfps(1.f),
@@ -1001,6 +1013,12 @@ void StelMainView::init()
 	customScreenshotWidth=configuration->value("main/screenshot_custom_width", 1024).toInt();
 	customScreenshotHeight=configuration->value("main/screenshot_custom_height", 768).toInt();
 	screenshotDpi=configuration->value("main/screenshot_dpi", 72).toInt();
+#ifdef HAVE_EXIV2
+	setFlagScreenshotWriteExif(configuration->value("main/screenshot_exif", true).toBool());
+	setScreenshotArtist(configuration->value("main/screenshot_artist", "").toString());
+	setScreenshotCopyright(configuration->value("main/screenshot_copyright", "").toString());
+	setScreenshotTerms(configuration->value("main/screenshot_terms", "").toString());
+#endif
 	setFlagCursorTimeout(configuration->value("gui/flag_mouse_cursor_timeout", false).toBool());
 	setCursorTimeout(configuration->value("gui/mouse_cursor_timeout", 10.f).toDouble());
 	setMaxFps(configuration->value("video/maximum_fps",10000.f).toFloat());
@@ -1705,6 +1723,63 @@ void StelMainView::saveScreenShot(const QString& filePrefix, const QString& save
 	emit screenshotRequested();
 }
 
+#ifdef HAVE_EXIV2
+void StelMainView::setFlagScreenshotWriteExif(const bool writeExif)
+{
+	flagScreenShotWriteExif = writeExif;
+	StelApp::getInstance().getSettings()->setValue("main/screenshot_exif", flagScreenShotWriteExif);
+	emit flagScreenshotWriteExifChanged(flagScreenShotWriteExif);
+}
+
+void StelMainView::setScreenshotArtist(const QString artistName)
+{
+	screenShotArtist = artistName;
+	StelApp::getInstance().getSettings()->setValue("main/screenshot_artist", artistName);
+	emit screenshotArtistChanged(artistName);
+}
+
+void StelMainView::setScreenshotCopyright(const QString copyrightName)
+{
+	screenShotCopyright = copyrightName;
+	StelApp::getInstance().getSettings()->setValue("main/screenshot_copyright", copyrightName);
+	emit screenshotCopyrightChanged(copyrightName);
+}
+
+void StelMainView::setScreenshotTerms(const QString terms)
+{
+	screenShotTerms = terms;
+	StelApp::getInstance().getSettings()->setValue("main/screenshot_terms", terms);
+	emit screenshotTermsChanged(screenShotTerms);
+}
+
+// Helper to convert decimal degrees to EXIF GPS rational components (Degrees, Minutes, Seconds)
+std::string convertToExifDms(double decimalDegrees) {
+	double absolute = std::abs(decimalDegrees);
+	int degrees = static_cast<int>(absolute);
+
+	double minutesRaw = (absolute - degrees) * 60.0;
+	int minutes = static_cast<int>(minutesRaw);
+
+	double seconds = (minutesRaw - minutes) * 60.0;
+
+	// EXIF rational structures accept strings formatted as "deg/1 min/1 sec/1000"
+	// We scale seconds by 1000 to preserve precision up to 3 decimal places
+	std::ostringstream oss;
+	oss << degrees << "/1 " << minutes << "/1 "
+	    << static_cast<int>(std::round(seconds * 1000.0)) << "/1000";
+	return oss.str();
+}
+// Auxiliary function by Claude.ai.
+// Add an XMP ordered array (rdf:Seq) of values
+static void setSeq(Exiv2::XmpData& xmp, const std::string& key,
+		   const std::vector<std::string>& items)
+{
+	auto v = Exiv2::Value::create(Exiv2::xmpSeq);
+	for (const auto& s : items) v->read(s);   // each read() appends one item
+	xmp.add(Exiv2::XmpKey(key), v.get());
+}
+#endif
+
 void StelMainView::doScreenshot(void)
 {
 	QFileInfo shotDir;
@@ -1789,6 +1864,8 @@ void StelMainView::doScreenshot(void)
 	                           0.0+(0.5+pParams.viewportCenterOffset.v[1])*virtImgHeight);
 	sParams.viewportFovDiameter = qMin(virtImgWidth,virtImgHeight);
 	core->setCurrentStelProjectorParams(sParams);
+	// Retrieve centerPixelPerRad (needed for some EXIF/XMP tags
+	const double centerPixelPerRadForMercator=0.5f * static_cast<float>(sParams.viewportFovDiameter * sParams.devicePixelsPerPixel) / (M_PIf/360.f * sParams.fov);
 
 	QPainter painter;
 	painter.begin(&fbObjPaintDev);
@@ -1953,23 +2030,461 @@ void StelMainView::doScreenshot(void)
 	im.setDotsPerMeterX(qRound(screenshotDpi*100./2.54));
 	im.setDotsPerMeterY(qRound(screenshotDpi*100./2.54));
 	qInfo() << "Saving screenshot to file: " << QDir::toNativeSeparators(shotPath.filePath());
+	{
+		// We need to scope the ImageWriter!
+		QImageWriter imageWriter(shotPath.filePath());
+		if (screenShotFormat=="tif")
+			imageWriter.setCompression(1); // use LZW
+		if (screenShotFormat=="jpg")
+		{
+			imageWriter.setQuality(75); // This is actually default
+		}
+		if (screenShotFormat=="jpeg")
+		{
+			imageWriter.setQuality(100);
+		}
+		if (!imageWriter.write(im))
+		{
+			qCritical() << "Failed to write screenshot to:" << QDir::toNativeSeparators(shotPath.filePath());
+		}
+		imageWriter.device()->close();
+	}
 
-	QImageWriter imageWriter(shotPath.filePath());
-	if (screenShotFormat=="tif")
-		imageWriter.setCompression(1); // use LZW
-	if (screenShotFormat=="jpg")
-	{
-		imageWriter.setQuality(75); // This is actually default
+#ifdef HAVE_EXIV2
+	// Write EXIF metadata only to JPG, PNG or TIF:
+	if (!flagScreenShotWriteExif || ! QStringList({"jpg", "jpeg", "png", "tif", "tiff"}).contains(screenShotFormat))
+		writeExif(core, shotPath, im.width(), im.height(), centerPixelPerRadForMercator);
+#endif
+}
+
+#ifdef HAVE_EXIV2
+void StelMainView::writeExif(StelCore *core, QFileInfo shotPath, const int imWidth, const int imHeight, const double centerPixelPerRadForMercator)
+{
+	try {
+		// Claude.ai suggests 2 lines. XMP creation worked without, but maybe terminate is important?
+		Exiv2::XmpParser::initialize();           // needed for thread-safety / explicit setup
+		::atexit(Exiv2::XmpParser::terminate);
+
+		StelMovementMgr *movMgr=GETSTELMODULE(StelMovementMgr);
+		StelLocation loc=core->getCurrentLocation();
+		LandscapeMgr *landscapeMgr=dynamic_cast<LandscapeMgr*>(GETSTELMODULE(LandscapeMgr));
+		//GridLinesMgr *gridlinesMgr=dynamic_cast<GridLinesMgr*>(GETSTELMODULE(GridLinesMgr));
+		StelPropertyMgr *propMgr=dynamic_cast<StelPropertyMgr*>(GETSTELMODULE(StelPropertyMgr));
+		StelSkyDrawer *drawer=core->getSkyDrawer();
+
+		std::unique_ptr<Exiv2::Image> image = Exiv2::ImageFactory::open(shotPath.filePath().toStdString());
+		Q_ASSERT(image.get() != 0);
+		Exiv2::ExifData &exifData = image->exifData();
+		Exiv2::XmpData  &xmpData  = image->xmpData();
+
+		QVariantMap infoMap;
+		StelObjectMgr *objMgr=&StelApp::getInstance().getStelObjectMgr();
+		const auto sel=objMgr->getSelectedObject();
+		if (sel.length()>0)
+		{
+			infoMap = sel[0]->getInfoMap(core);
+		}
+
+		// See https://exiv2.org/examples.html#example2, but we can use more modern syntax that reads/assigns respective data type automatically.
+		qDebug() << "WRITING EXIF ENTRIES";
+
+		// TECHNICALITIES
+
+		exifData["Exif.Image.Make"]           = "Stellarium"; // Or CPU architecture?
+		exifData["Exif.Image.Model"]          = StelUtils::getApplicationVersion().toStdString();
+		exifData["Exif.Image.ImageWidth"]     = std::to_string(imWidth);
+		exifData["Exif.Image.ImageLength"]    = std::to_string(imHeight);
+		exifData["Exif.Image.XResolution"]    = QString("%1/1").arg(screenshotDpi).toStdString();
+		exifData["Exif.Image.YResolution"]    = QString("%1/1").arg(screenshotDpi).toStdString();
+		exifData["Exif.Image.ResolutionUnit"] = "2"; // 2=inches
+		exifData["Exif.Image.Artist"]         = screenShotArtist.toStdString();
+		exifData["Exif.Image.HostComputer"]   = QString("%1 (%2)").arg(QSysInfo::machineHostName(), StelUtils::getOperatingSystemInfo()).toStdString();
+		if (screenShotCopyright.length()>0)
+			exifData["Exif.Image.Copyright"] = QString("%1, %2. %3").
+								arg(QString::number(QDate::currentDate().year()),
+								    screenShotCopyright,
+								    screenShotTerms).toStdString();
+		// SIMULATION TIME
+		const QDateTime now  = QDateTime::currentDateTime();
+		const QString nowStr = StelUtils::julianDayToExifString(now.date().toJulianDay() + StelUtils::qTimeToJDFraction(now.time()));
+
+		// No problems before 1970/1900! IrfanView even accepts negative and 5-digit years.
+		// Add Zone-based simulation time as date of exposure
+		const double tzOffset = core->getUTCOffset(core->getJD());
+		QString dateTimeStr=StelUtils::julianDayToExifString(core->getJD()+tzOffset/24.);
+		// Timezone format could be "Z", but we use only the long variants "+HH:MM" or "-HH:MM".
+		QTime tz = QTime(0, 0, 0).addSecs(static_cast<int>(3600*qAbs(tzOffset)));
+		QString timeZone = QString(tzOffset<0.0 ? "-%1" : "+%1").arg(tz.toString("hh:mm"));
+		qDebug() << "Timezone: " << timeZone;
+		// DateTimeOriginal is officially specified with 4-digit years only. At least one viewer can work with 6-digit and/or negative years.
+		// I propose we start with being generous. If a user reports a problem, we can return to 4-digit positive-only later.
+		exifData["Exif.Photo.DateTimeOriginal"]    = dateTimeStr.toStdString(); // simulation time.
+		infoMap["date_time"]                       = StelUtils::julianDayToISO8601String(core->getJD()+tzOffset/24.);
+		exifData["Exif.Photo.DateTimeDigitized"]   = nowStr.toStdString();      // image creation time
+		exifData["Exif.Photo.OffsetTimeOriginal"]  = timeZone.toStdString();
+		//exifData["Exif.Image.TimeZoneOffset"]    = timeZone.toStdString();// Ill-defined. Better don't use!
+		xmpData["Xmp.exif.TimeZoneName"]           = loc.ianaTimeZone.toStdString(); // Use a customized XMP tag. Name is free!
+
+		// LOCATION
+		exifData["Exif.GPSInfo.GPSVersionID"]        = "2 2 0 0"; // mandatory.
+		if (loc.planetName=="Earth")
+			exifData["Exif.GPSInfo.GPSMapDatum"] = "WGS-84"; // fixed for Earth, omit for other places.
+		exifData["Exif.GPSInfo.GPSLatitudeRef"]      = (loc.getLatitude()>0.f ? "N" : "S");
+		exifData["Exif.GPSInfo.GPSLatitude"]         = convertToExifDms(loc.getLatitude()); // 3 rational numbers dd/1,mm/1,ss/1
+		exifData["Exif.GPSInfo.GPSLongitudeRef"]     = (loc.getLongitude()>0.f ? "E" : "W");
+		exifData["Exif.GPSInfo.GPSLongitude"]        = convertToExifDms(loc.getLongitude()); // 3 rational numbers dd/1,mm/1,ss/1
+		exifData["Exif.GPSInfo.GPSAltitudeRef"]      = loc.altitude >= 0 ? "0" : "1"; // 0 indicates positive MASL, 1 negative.
+		exifData["Exif.GPSInfo.GPSAltitude"]         = QString("%1/1").arg(abs(loc.altitude)).toStdString(); // 1 rational number, meters
+		if (landscapeMgr->getFlagAtmosphere())
+		{
+			exifData["Exif.Photo.Temperature"] = QString("%1/100").arg(int(100.*drawer->getAtmosphereTemperature())).toStdString(); // [Celsius]
+			exifData["Exif.Photo.Pressure"]    = QString("%1/100").arg(int(100.*drawer->getAtmospherePressure())).toStdString();    // [hPa]
+		}
+
+		// TARGET and view orientation?
+		double azimuth=0;
+		double altitude=0;
+		Vec3d currentAim=core->j2000ToAltAz(movMgr->getViewDirectionJ2000(), StelCore::RefractionOff);
+		StelUtils::rectToSphe(&azimuth, &altitude, currentAim);
+		azimuth= StelUtils::fmodpos(180.-azimuth*M_180_PI, 360.);
+		altitude *= M_180_PI;
+
+		// These can be written e.g. into Xmp.avm tags
+		double ra2000=0;
+		double dec2000=0;
+		Vec3d j2000Aim=movMgr->getViewDirectionJ2000();
+		StelUtils::rectToSphe(&ra2000, &dec2000, j2000Aim);
+		ra2000   = StelUtils::fmodpos(ra2000*M_180_PI, 360.); // We use ra2000 in degrees here.
+		dec2000 *= M_180_PI;
+
+		exifData["Exif.GPSInfo.GPSImgDirection"]     = QString("%1/1000").arg(QString::number(int(round(azimuth*1000.0)))).toStdString(); // True azimuth, degrees [0..359.99]
+		exifData["Exif.Photo.CameraElevationAngle"]  = QString("%1/1000").arg(QString::number(int(round(altitude*1000.0)))).toStdString(); // center orientation, degrees
+		exifData["Exif.GPSInfo.GPSImgDirectionRef"]  = "T"; // azimuth value is True (not magnetic) azimuth
+
+		// Not sure whether we should (ab)use those?
+		//exifData["Exif.GPSInfo.GPSDestLatitudeRef"]  = "N"); // "N"/"S" -- declination of target
+		//exifData["Exif.GPSInfo.GPSDestLatitude"]     = lat); // 3 rational numbers dd/1,mm/1,ss/1 -- declination of target
+		//exifData["Exif.GPSInfo.GPSDestLongitudeRef"] = "E"); // "E"/"W" -- RA of target
+		//exifData["Exif.GPSInfo.GPSDestLongitude"]    = lng); // 3 rational numbers dd/1,mm/1,ss/1 -- RA of target
+		//
+		//exifData["Exif.GPSInfo.GPSDateStamp"]        = "2026:10:11"); // String,  "YYYY:MM:DD"
+		//exifData["Exif.GPSInfo.GPSTimeStamp"]        = time); // 3 rational numbers, hh/1, mm/1, ss/1.
+
+		// We may want to use Xmp.avm (Astronomy Visualization Metadata) to extend descriptions with astronomical coordinates.
+		// A full table is at https://noirlab.edu/public/media/archives/techdocs/pdf/techdoc115.pdf
+		// Following lines suggested by Claude.ai.
+		// Register the AVM namespace (once per process, before using the prefix)
+		Exiv2::XmpProperties::registerNs("http://www.communicatingastronomy.org/avm/1.0/", "avm");
+		xmpData["Xmp.avm.Type"]                    = "Simulation";
+		xmpData["Xmp.avm.Spatial.CoordinateFrame"] = "ICRS";
+		xmpData["Xmp.avm.Spatial.Equinox"]         = "J2000";
+		xmpData["Xmp.avm.Spatial.Rotation"]        = "0.0";
+		xmpData["Xmp.avm.Spatial.Quality"]         = "Full";
+		xmpData["Xmp.avm.MetadataDate"]            = StelUtils::julianDayToISO8601String(now.date().toJulianDay() + StelUtils::qTimeToJDFraction(now.time())).toStdString();
+
+		//// These may be correct only for Perspective!
+		//setSeq(xmpData, "Xmp.avm.Spatial.ReferenceValue",     {std::to_string(ra2000), std::to_string(dec2000)});
+		//setSeq(xmpData, "Xmp.avm.Spatial.ReferenceDimension", {std::to_string(im.width()),  std::to_string(im.height())});
+
+		qDebug() << "EXIF: Projections...";
+		// BIG TOPIC: Projections. A few non-perspective projections are defined as panorama formats by Google. But for some, we can only specify projection name and our VFoV.
+		const double fov=core->getMovementMgr()->getCurrentFov();
+
+		const StelCore::ProjectionType projType=core->getCurrentProjectionType();
+		switch (projType)
+		{
+			case StelCore::ProjectionPerspective:
+			{
+				const double focalLengthEquiv=24.0/(2*tan(fov*M_PI_180*0.5));
+				// Set the human-readable string descriptive name
+				exifData["Exif.Photo.LensModel"] = QString("%1-mm (35mm equivalent) Perspective Lens").arg(QString::number(focalLengthEquiv, 'f', 1)).toStdString();
+				exifData["Exif.Photo.FocalLengthIn35mmFilm"] = QString::number(int(focalLengthEquiv)).toStdString();
+				//exifData["Exif.Image.FocalLength"]          =  focalLengthEquiv; // Maybe explicitly add this, or some f as diagonal relative to 35mm? (vFoV=24mm)
+
+				// Tentative first tags, suggested by Claude.
+				xmpData["Xmp.avm.Spatial.CoordsystemProjection"] = "TAN";
+				setSeq(xmpData, "Xmp.avm.Spatial.ReferencePixel",     {std::to_string(imWidth / 2.0), std::to_string(imHeight / 2.0)});
+				const double scale=fov/imHeight; // simple approximation formula for perspective views.
+				setSeq(xmpData, "Xmp.avm.Spatial.Scale",              {std::to_string(-scale), std::to_string(scale)});
+
+				qDebug() << "EXIF: Done writing ProjectionPerspective data";
+				break;
+			}
+			case StelCore::ProjectionCylinderFill:
+			{
+				// Set the human-readable string descriptive name
+				exifData["Exif.Photo.LensModel"] = "360x180-degree Equirectangular Lens";
+
+				// AVM
+				xmpData["Xmp.avm.Spatial.CoordsystemProjection"] = "CAR"; // Plate Carrée
+				setSeq(xmpData, "Xmp.avm.Spatial.ReferencePixel",  {std::to_string(imWidth / 2.0), std::to_string(imHeight / 2.0)});
+				setSeq(xmpData, "Xmp.avm.Spatial.Scale",           {std::to_string(-360./imWidth), std::to_string(180./imHeight)});
+
+				// GPano tags. These describe a full-size equirectangular.
+				Exiv2::XmpProperties::registerNs("http://ns.google.com/photos/1.0/panorama/", "GPano");
+				xmpData["Xmp.GPano.ProjectionType"] = "equirectangular";
+				xmpData["Xmp.GPano.UsePanoramaViewer"] = "True";
+				xmpData["Xmp.GPano.FullPanoWidthPixels"]  = std::to_string(imWidth);
+				xmpData["Xmp.GPano.FullPanoHeightPixels"] = std::to_string(imHeight);
+				// Unfortunately, if not 2:1 sized, GPano viewers will still not show it. So this requires custom screenshot sizes.
+				if (imWidth != 2*imHeight)
+					qInfo() << "EXIF Info: Image dimension skewed. This will not load as panorama in GPano aware viewers. Use custom size if needed.";
+				// TBD: We can offset viewport centre also here, but it may not be meaningful in XMP terms.
+				qDebug() << "EXIF: Done writing ProjectionCylinderFill data";
+				break;
+			}
+			case StelCore::ProjectionCylinder:
+			{
+				// Set the human-readable string descriptive name
+				exifData["Exif.Photo.LensModel"] = QString("%1-degree VFoV Equidistant Cylinder Lens").arg(QString::number(fov, 'f', 1)).toStdString();
+
+				// GPano tags
+				Exiv2::XmpProperties::registerNs("http://ns.google.com/photos/1.0/panorama/", "GPano");
+				xmpData["Xmp.GPano.ProjectionType"] = "equirectangular";
+				xmpData["Xmp.GPano.UsePanoramaViewer"]    = "True";
+				xmpData["Xmp.GPano.CroppedAreaImageWidthPixels"]  = std::to_string(imWidth);
+				xmpData["Xmp.GPano.CroppedAreaImageHeightPixels"] = std::to_string(imHeight);
+
+				// Define the full field of view dimensions in pixels
+				const int hFull=imHeight*(180./fov);
+				xmpData["Xmp.GPano.FullPanoHeightPixels"] = std::to_string(hFull);
+				xmpData["Xmp.GPano.FullPanoWidthPixels"]  = std::to_string(2*hFull);
+
+				// Deal with Stellarium's projection offset variables
+				const double centerOffset_x =  core->getViewportHorizontalOffset()*imWidth/100.;
+				const double centerOffset_y = -core->getViewportVerticalOffset()*imHeight/100.; // VERIFY DIRECTION
+
+				// Define the portion of the view our crop actually occupies
+				// We actually are zooming into the center of a much larger pano.
+				// TBD: check viewport offset handling!
+				xmpData["Xmp.GPano.CroppedAreaLeftPixels"]   = std::to_string(int((2*hFull-imWidth)/2  + centerOffset_x));
+				xmpData["Xmp.GPano.CroppedAreaTopPixels"]    = std::to_string(int((  hFull-imHeight)/2 + centerOffset_y));
+
+				// Spatial Orientation (Pan/Tilt/Roll)
+				double gpanoHeading, gpanoPitch;
+				// Convert Stellarium's active viewport center coordinates to match the GPano definitions:
+				if (movMgr->getMountMode()==StelMovementMgr::MountAltAzimuthal)
+				{
+					gpanoHeading = azimuth; // Ensure 0 = North, 90 = East
+					gpanoPitch   = altitude; // Horizon = 0, Zenith = 90, Nadir = -90
+				}
+				else
+				{
+					double ra=0;
+					double dec=0;
+					Vec3d currentAim=core->j2000ToEquinoxEqu(movMgr->getViewDirectionJ2000(), StelCore::RefractionOff);
+					StelUtils::rectToSphe(&ra, &dec, currentAim);
+					ra   = StelUtils::fmodpos(ra*M_180_PI, 360.); // We use ra in degrees here.
+					dec *= M_180_PI;
+
+					gpanoHeading = 360.-ra; // we must obey azimuthal sense of rotation.
+					gpanoPitch   = dec; // Equator = 0, N.Pole = 90, S.Pole = -90
+				}
+				xmpData["Xmp.GPano.PoseHeadingDegrees"] = std::to_string(gpanoHeading);
+				xmpData["Xmp.GPano.PosePitchDegrees"]   = std::to_string(gpanoPitch);
+				xmpData["Xmp.GPano.PoseRollDegrees"]    = "0";
+
+				// AVM
+				xmpData["Xmp.avm.Spatial.CoordsystemProjection"] = "CAR"; // Plate Carrée
+				setSeq(xmpData, "Xmp.avm.Spatial.ReferencePixel", {std::to_string(imWidth / 2.0), std::to_string(imHeight / 2.0)});
+				setSeq(xmpData, "Xmp.avm.Spatial.Scale",          {std::to_string(-360./(2.*hFull)), std::to_string(180./hFull)});
+
+				qDebug() << "EXIF: Done writing ProjectionCylinder data";
+				break;
+			}
+			case StelCore::ProjectionMercator:
+			{
+				//StelProjectorP proj=core->getProjection(StelCore::FrameAltAz); // This is a new projector. TBD: Not sure this works, esp. for custom screenshot size!
+				//StelProjectorP proj=painter.getProjector(); // This is a new projector. TBD: Not sure this works, esp. for custom screenshot size!
+				// Set the human-readable string descriptive name
+				exifData["Exif.Photo.LensModel"] = QString("%1-degree VFoV Mercator Lens").arg(QString::number(fov, 'f', 1)).toStdString();
+
+				Exiv2::XmpProperties::registerNs("http://ns.google.com/photos/1.0/panorama/", "GPano");
+				xmpData["Xmp.GPano.ProjectionType"] = "cylindrical";
+				xmpData["Xmp.GPano.CroppedAreaImageWidthPixels"]  = std::to_string(imWidth);
+				xmpData["Xmp.GPano.CroppedAreaImageHeightPixels"] = std::to_string(imHeight);
+
+				// All the remaining are rather hypothetical: I have no software to test the results.
+				// Define the full field of view dimensions in pixels
+				// The cylindrical projects the poles to infinity. We cut off somewhere near 80° unless viewport is also shifted.
+				// Esp., we must know width of a full 360° pano. The height remains unspecified, because it is always a crop.
+				// 2*pi*pxPerRad should be 360° width! So simple?
+
+				//const double centerPixelPerRad=proj->getPixelPerRadAtCenter();
+				xmpData["Xmp.GPano.FullPanoWidthPixels"]  = std::to_string(int(2*M_PI*centerPixelPerRadForMercator));
+				xmpData["Xmp.GPano.CroppedAreaTopPixels"] = std::to_string(int((-imHeight)/2)); // TBD: Adjust for viewport shift.
+
+				// 4. Define the portion of the view your crop actually occupies
+				// We actually are zooming into the center of a much larger pano.
+				// The left edge depends on view size and view azimuth.
+				if (imWidth>=int(2*M_PI*centerPixelPerRadForMercator)) // fully zoomed out?
+					xmpData["Xmp.GPano.CroppedAreaLeftPixels"]   = std::to_string(0);
+				else
+					xmpData["Xmp.GPano.CroppedAreaLeftPixels"]   = std::to_string(int(centerPixelPerRadForMercator-imWidth/2));
+
+				// Spatial Orientation (Pan/Tilt/Roll)
+				double gpanoHeading, gpanoPitch;
+				// Convert Stellarium's active viewport center coordinates to match the GPano definitions:
+				if (movMgr->getMountMode()==StelMovementMgr::MountAltAzimuthal)
+				{
+					gpanoHeading = azimuth; // Ensure 0 = North, 90 = East
+					gpanoPitch   = altitude; // Horizon = 0, Zenith = 90, Nadir = -90
+				}
+				else
+				{
+					double ra=0;
+					double dec=0;
+					Vec3d currentAim=core->j2000ToEquinoxEqu(movMgr->getViewDirectionJ2000(), StelCore::RefractionOff);
+					StelUtils::rectToSphe(&ra, &dec, currentAim);
+					ra   = StelUtils::fmodpos(ra*M_180_PI, 360.); // We use ra in degrees here.
+					dec *= M_180_PI;
+
+					gpanoHeading = 360.-ra; // we must obey azimuthal sense of rotation.
+					gpanoPitch   = dec; // Equator = 0, N.Pole = 90, S.Pole = -90
+				}
+
+				xmpData["Xmp.GPano.PoseHeadingDegrees"] = std::to_string(gpanoHeading);
+				xmpData["Xmp.GPano.PosePitchDegrees"]   = std::to_string(gpanoPitch);
+				xmpData["Xmp.GPano.PoseRollDegrees"]    = "0";
+
+				qDebug() << "EXIF: Done writing ProjectionMercator data";
+				break;
+			}
+			//case StelCore::ProjectionFisheye:
+			//{
+			//	// Set the human-readable string descriptive name
+			//	exifData["Exif.Photo.LensModel"] = QString("%1-degree Equidistant Fisheye Lens").arg(QString::number(fov, 'f', 1)).toStdString();
+			//	// 1. Register the Adobe Camera namespace
+			//	Exiv2::XmpProperties::registerNs("http://pix4d.com", "Camera");
+			//	xmpData["Xmp.Camera.ModelType"] = "fisheye";
+
+			//	// Optional: Define lens distortion coefficients if calculating polynomials
+			//	// Formatted as space-separated floats mapping radial distortion (e.g., k1, k2, k3)
+			//	//xmpData["Xmp.xmpCamera.PerspectiveModelRadialDistort"] = "0.124 -0.045 0.002";
+
+			//	// Focal Length Calculation: For an ideal azimuthal equidistant fisheye, the distance from the image center to a pixel is
+			//	// directly proportional to its angle of incidence (\(r = f \cdot \theta\)).
+			//	// If the height of the image bounds the vertical field of view (\(vFoV\) in radians):
+			//	const double f_pixels=im.height()/(fov*M_PI_180);
+			//	const double radius_pixels = f_pixels * ((fov * M_PI_180) / 2.0);
+
+			//	// Add specific field of view parameters for geometric parsers.
+			//	//xmpData["Xmp.Camera.FocalLengthX"] = std::to_string(f_pixels);
+			//	//xmpData["Xmp.Camera.FocalLengthY"] = std::to_string(f_pixels);
+			//	//xmpData["Xmp.Camera.ImageWidth"]   = std::to_string(im.width());
+			//	//xmpData["Xmp.Camera.ImageHeight"]  = std::to_string(im.height());
+			//	// Pix4D uses a 2D affine matrix string for focal specs rather than FocalLengthX/Y
+			//	// Format: "C,D,E,F" where C and F represent horizontal/vertical focal length in pixels
+			//	xmpData["Xmp.Camera.FisheyeAffineMatrix"] = std::to_string(f_pixels) + ",0,0," + std::to_string(f_pixels);
+
+			//	// 2. Off-Axis Center Shifting
+			//	double center_x = (im.width() / 2.0)  - core->getViewportHorizontalOffset()*im.width()/100.;
+			//	double center_y = (im.height() / 2.0) + core->getViewportVerticalOffset()*im.height()/100.; // VERIFY DIRECTION
+			//	//xmpData["Xmp.Camera.PrincipalPointX"] = std::to_string(center_x);
+			//	//xmpData["Xmp.Camera.PrincipalPointY"] = std::to_string(center_y);
+			//	// Pix4D expects a comma-separated single string string: "cx,cy"
+			//	xmpData["Xmp.Camera.PrincipalPoint"] = std::to_string(center_x) + "," + std::to_string(center_y);
+
+			//	//// 3. Define the Mask Circle Properties
+			//	//xmpData["Xmp.Camera.FisheyeCircleRadius"] = std::to_string(radius_pixels);
+			//	//xmpData["Xmp.Camera.FisheyeCircleCenter"] = std::to_string(center_x) + " " + std::to_string(center_y);
+			//	qDebug() << "EXIF: Done writing ProjectionFisheye data";
+			//	break;
+			//}
+			default:
+			{
+				const QMap<StelCore::ProjectionType, QString>pMap={
+					{StelCore::ProjectionStereographic, "Stereographic"},
+					{StelCore::ProjectionFisheye,       "Fisheye"},
+					{StelCore::ProjectionEqualArea,     "Equal-Area"},
+					{StelCore::ProjectionHammer,        "Hammer-Aitoff"},
+					{StelCore::ProjectionMollweide,     "Mollweide"},
+					{StelCore::ProjectionOrthographic,  "Orthographic"},
+					{StelCore::ProjectionSinusoidal,    "Simusoidal"},
+					{StelCore::ProjectionMiller,        "Miller Cylindrical"}};
+				// Set the human-readable string descriptive name
+				exifData["Exif.Photo.LensModel"] = QString("%1-degree VFoV %2 Lens").arg(QString::number(fov, 'f', 1), pMap.value(projType, "unknown-type")).toStdString();
+			}
+		}
+
+		// NOW, ADD SOME IMAGE DESCRIPTION
+		qDebug() << "EXIF: Image description...";
+
+		// We can throw in some more image information into Exif.Photo.UserComment. This can be a packed JSON string as well!
+
+		const QMap<StelMovementMgr::MountMode, QString>mountModeMap={
+			{ StelMovementMgr::MountAltAzimuthal      , "azimuthal"},
+			{ StelMovementMgr::MountEquinoxEquatorial , "equatorial"},
+			{ StelMovementMgr::MountGalactic          , "galactic"},
+			{ StelMovementMgr::MountSupergalactic     , "supergalactic"}
+		};
+		infoMap["mount_mode"] = mountModeMap.value(movMgr->getMountMode(), "unspecified");
+
+		infoMap["location_name"]   = loc.name;
+		infoMap["location_region"] = loc.region;
+		infoMap["location_timezone_name"] = loc.ianaTimeZone;
+
+		// If landscape is displayed sets location, prefer use of landscape name.
+		Landscape *landscape=landscapeMgr->getCurrentLandscape();
+		if (landscapeMgr->getFlagLandscapeSetsLocation() && landscape->hasLocation() && landscapeMgr->getFlagLandscape())
+		{
+			if (landscape->getLocation().name.length()>0)
+				infoMap["location_name"]=landscape->getLocation().name;
+			else
+				infoMap["location_name"]=landscape->getName();
+			if (landscape->getLocation().region.length()>0)
+				infoMap["location_region"]=landscape->getLocation().region;
+		}
+		infoMap["atmosphere"]       = landscapeMgr->getFlagAtmosphere() ? landscapeMgr->getAtmosphereModel() : "off";
+
+		infoMap["topocentric_view"] = core->getUseTopocentricCoordinates();
+		infoMap["nutation"]         = core->getUseNutation() ? "1" : "0";
+		infoMap["parallax"]         = core->getUseParallax() ?  QString::number(core->getParallaxFactor(), 'f', 1) : "0";
+		infoMap["aberration"]       = core->getUseAberration() ?  QString::number(core->getAberrationFactor(), 'f', 1) : "0";
+
+		// Gridlines. For now, only the full grids
+		infoMap["grid_azimuthal"] = propMgr->getStelPropertyValue("GridlinesMgr.azimuthalGridDisplayed").toBool();
+		infoMap["grid_eqJNow"]    = propMgr->getStelPropertyValue("GridlinesMgr.equatorGridDisplayed").toBool();
+		infoMap["grid_eqJ2000"]   = propMgr->getStelPropertyValue("GridlinesMgr.equatorJ2000GridDisplayed").toBool();
+		infoMap["grid_eqFixed"]   = propMgr->getStelPropertyValue("GridlinesMgr.fixedEquatorGridDisplayed").toBool();
+		infoMap["grid_eclJ2000"]  = propMgr->getStelPropertyValue("GridlinesMgr.eclipticJ2000GridDisplayed").toBool();
+		infoMap["grid_eclJNow"]   = propMgr->getStelPropertyValue("GridlinesMgr.eclipticGridDisplayed").toBool();
+		infoMap["grid_gal"]       = propMgr->getStelPropertyValue("GridlinesMgr.galacticGridDisplayed").toBool();
+		infoMap["grid_supergal"]  = propMgr->getStelPropertyValue("GridlinesMgr.supergalacticGridDisplayed").toBool();
+		// TBD: More Skyculture details?
+		infoMap["SC_id"]          = propMgr->getStelPropertyValue("StelSkyCultureMgr.currentSkyCultureID").toString();
+
+		// TBD: Ocular/Telescope details?
+		// TBD: Other settings?
+
+		// Convert the QVariantMap to a JSON String
+		// Using QJsonDocument::Compact removes all whitespace/newlines to save EXIF space
+		QByteArray jsonString = QJsonDocument(QJsonObject::fromVariantMap(infoMap)).toJson(QJsonDocument::Compact);
+		exifData["Exif.Photo.UserComment"] = jsonString.toStdString();
+
+		exifData["Exif.Image.ImageDescription"] = QString("%1 (%2: %3°)").arg(sel.length()>0 ?  sel[0]->getNameI18n() : qc_("Stellarium View", "Screenshot default title"),
+										      qc_("FOV", "abbreviation"),
+										      QString::number(fov, 'g', 3)).toStdString();
+
+		//exifData["Exif.Image.ExposureTime"]         = exposureTimeSeconds; // not meaningful
+		//exifData["Exif.Image.FNumber"]              = F_number;            // not meaningful
+
+		qDebug() << "EXIF: Image description...done";
+		qDebug() << "WRITING EXIF ENTRIES DONE";
+
+		// *************************************************************************
+		// Finally, write the remaining Exif data to the image file
+		image->setExifData(exifData);
+		image->setXmpData(xmpData);
+		image->writeMetadata();
+		//return 0;
 	}
-	if (screenShotFormat=="jpeg")
-	{
-		imageWriter.setQuality(100);
-	}
-	if (!imageWriter.write(im))
-	{
-		qCritical() << "Failed to write screenshot to:" << QDir::toNativeSeparators(shotPath.filePath());
+	catch (Exiv2::Error& e) {
+		qCritical() << "Caught Exiv2 exception '" << e.what() << "' -- EXIF data not stored into" << shotPath.filePath();
+		//return -1;
 	}
 }
+#endif
 
 QPoint StelMainView::getMousePos() const
 {
