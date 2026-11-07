@@ -53,7 +53,7 @@ QString StarWrapperBase::getInfoString(const StelCore *core, const InfoStringGro
 	oss << getMagnitudeInfoString(core, flags, 2);
 
 	if (flags&Extra)
-		oss << getB_VInfoString(getBV()) << "<br />";
+		oss << (hasBV() ? getB_VInfoString(getBV()) : getB_VMissingInfoString()) << "<br />";
 	
 	oss << getCommonInfoString(core, flags);
 	oss << getSolarLunarInfoString(core, flags);
@@ -266,7 +266,7 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 
 	if (flags&Extra) // B-V, variable range
 	{
-		oss << getB_VInfoString(getBV());
+		oss << (hasBV() ? getB_VInfoString(getBV()) : getB_VMissingInfoString());
 		oss << getVariabilityRangeInfoString(core, flags);
 	}
 
@@ -453,7 +453,7 @@ QString StarWrapper1::getNarration(const StelCore *core, const InfoStringGroup& 
 
 	if (flags&Extra)
 	{
-		oss << getB_VNarration(getBV()) << ". ";
+		if (hasBV()) oss << getB_VNarration(getBV()) << ". ";
 		oss << getVariabilityRangeNarration(core, flags);
 	}
 
@@ -598,7 +598,7 @@ QString StarWrapper2::getInfoString(const StelCore *core, const InfoStringGroup&
 
 	if (flags&Extra)
 	{
-		oss << getB_VInfoString(getBV());
+		oss << (hasBV() ? getB_VInfoString(getBV()) : getB_VMissingInfoString());
 		oss << getVariabilityRangeInfoString(core, flags);
 	}
 	
@@ -687,7 +687,7 @@ QString StarWrapper2::getNarration(const StelCore *core, const InfoStringGroup& 
 
 	if (flags&Extra)
 	{
-		oss << getB_VNarration(getBV()) << ". ";
+		if (hasBV()) oss << getB_VNarration(getBV()) << ". ";
 		oss << getVariabilityRangeNarration(core, flags);
 	}
 
@@ -744,7 +744,7 @@ QString StarWrapper3::getInfoString(const StelCore *core, const InfoStringGroup&
 
 	if (flags&Extra) // B-V, variable range
 	{
-		oss << getB_VInfoString(getBV());
+		oss << (hasBV() ? getB_VInfoString(getBV()) : getB_VMissingInfoString());
 		oss << getVariabilityRangeInfoString(core, flags);
 	}
 
@@ -797,7 +797,7 @@ QString StarWrapper3::getNarration(const StelCore *core, const InfoStringGroup& 
 
 	if (flags&Extra) // B-V, variable range
 	{
-		oss << getB_VNarration(getBV()) << ". ";
+		if (hasBV()) oss << getB_VNarration(getBV()) << ". ";
 		oss << getVariabilityRangeNarration(core, flags);
 	}
 	

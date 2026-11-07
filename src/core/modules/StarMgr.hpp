@@ -312,6 +312,11 @@ public:
 	//! one was not found.
 	StelObjectP searchGaia(StarId source_id) const;
 
+private:
+	//! Phase 2 of Gaia search: search a small region around the HEALPix pixel center.
+	StelObjectP searchGaiaPhase2(StarId source_id, const Vec3d& v, int& matched, int maxSearchLevel) const;
+
+public:
 	//! Get the scientific (Bayer/Flamsteed) name for a star with a specified
 	//! Hipparcos or Gaia catalogue number.
 	//! @param hip The Hipparcos/Gaia number of star
