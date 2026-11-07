@@ -391,7 +391,7 @@ Satellites::Satellites()
 	, autoDisplayEnabled(true)
 	, updateFrequencyHours(0)
 	, showDownloadErrorWarningBox(true)
-	, noErrorDuringUpdate(true)
+	, weHadAnErrorDuringLastUpdate(false)
 	, flagUmbraVisible(false)
 	, flagUmbraAtFixedAltitude(false)
 	, umbraColor(1.0f, 0.0f, 0.0f)
@@ -2171,7 +2171,7 @@ int Satellites::getSecondsToUpdate(void)
 void Satellites::setTleSources(const QStringList &tleSources)
 {
 	// Necessary 2026: Replace any Celestrak URL with TLE format to CSV format.
-	static const QRegularExpression celestrakURLre("https://celestrak.org/NORAD/elements/gp.php?GROUP=(.*)&FORMAT=TLE");
+	static const QRegularExpression celestrakURLre("https://celestrak.org/NORAD/elements/gp.php\?GROUP=(.*)&FORMAT=TLE");
 	QStringList csvCleanedSources;
 	for (auto url: tleSources)
 	{
@@ -2778,7 +2778,7 @@ void Satellites::saveDownloadedUpdate(QNetworkReply* reply)
 	else
 	{
 		qWarning().nospace() << "[Satellites] FAILED to download " << reply->url().toString(QUrl::RemoveUserInfo) << ". Error " << reply->error() << ": " << reply->errorString();
-		noErrorDuringUpdate=false;
+		weHadAnErrorDuringLastUpdate=true;
 		handleErrorReply(reply);
 		emit updateStateChanged(DownloadError);
 	}
@@ -2988,7 +2988,7 @@ void Satellites::updateSatellites(TleDataHash& newTleSets)
 		}
 		else
 		{
-			if (autoRemoveEnabled && noErrorDuringUpdate)
+			if (autoRemoveEnabled && !weHadAnErrorDuringLastUpdate)
 				toBeRemoved.append(sat->id);
 			else
 				qWarning() << "[Satellites]" << sat->id << sat->name
@@ -3019,14 +3019,14 @@ void Satellites::updateSatellites(TleDataHash& newTleSets)
 	if (addedCount)
 		std::sort(satellites.begin(), satellites.end());
 	
-	if (autoRemoveEnabled && noErrorDuringUpdate && !toBeRemoved.isEmpty())
+	if (autoRemoveEnabled && !weHadAnErrorDuringLastUpdate && !toBeRemoved.isEmpty())
 	{
 		qWarning() << "[Satellites] purging objects that were not updated...";
 		removeWithoutModelReset(toBeRemoved);
 	}
 	
 	if (updatedCount > 0 ||
-	        (autoRemoveEnabled && noErrorDuringUpdate && missingCount > 0))
+	        (autoRemoveEnabled && !weHadAnErrorDuringLastUpdate && missingCount > 0))
 	{
 		saveDataMap(createDataMap());
 		updateState = CompleteUpdates;
@@ -3045,7 +3045,7 @@ void Satellites::updateSatellites(TleDataHash& newTleSets)
 
 	emit updateStateChanged(updateState);
 	emit tleUpdateComplete(updatedCount, totalCount, addedCount, missingCount);
-	noErrorDuringUpdate=true; // reset for next update cycle
+	weHadAnErrorDuringLastUpdate=false; // reset for next update cycle
 }
 
 
