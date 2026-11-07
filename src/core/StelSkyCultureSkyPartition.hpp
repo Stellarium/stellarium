@@ -164,6 +164,7 @@ private:
 	StelCore::FrameType frameType;         //!< Useful seem only: FrameObservercentricEclipticOfDate (e.g. Zodiac), FrameEquinoxEqu (e.g. Chin. Lunar Mansions)
 	QList<int> partitions;                 //!< A partition into [0] large parts of [1] smaller parts of [2] smaller parts... Currently only 2-part zodiacs [12, 30] or nakshatras [27, 4] are in use.
 	StelObject::CulturalName name;         //!< Full culture-sensitive naming support: name of the system.
+	QString nameContext;                   //!< Translation context for the name of the system
 	QList<StelObject::CulturalName> names; //!< Full culture-sensitive naming support: names of the first-grade partition.
 	QStringList symbols;                   //!< A list of very short or optimally 1-char Unicode strings with representative symbols usable as abbreviations.	
 	QList<double> extent;                  //!< (degrees) If only one element (usual case), the displayed partition zone runs so far north and south of the center line.
