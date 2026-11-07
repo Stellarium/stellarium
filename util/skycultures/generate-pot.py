@@ -445,10 +445,13 @@ def update_cultures_pot(sclist, pot):
                         pot.append(entry)
 
     def process_extra_names(objects, pot, sc_name):
-        context = objects.get('context')
+        names_context = objects.get('context')
         ecomment = objects.get('comment')
 
-        for name in objects["names"]:
+        names_with_ctx = [(n, names_context) for n in objects['names']]
+        if sys_name := objects.get('name'):
+            names_with_ctx.append( (sys_name, sys_name.get('context')) )
+        for name, context in names_with_ctx:
             english = name.get('english')
             if not english or len(english) == 0:
                 continue
