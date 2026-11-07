@@ -50,6 +50,7 @@ public:
 					  const StelLocation& location, float temperature, float relativeHumidity,
 					  float extinctionCoefficient, bool noScatter) override;
 	void draw(StelCore* core) override;
+	bool getLocalLuminance(const Vec2f& screenPos, float& luminance) override;
 	void update(double deltaTime) {fader.update(static_cast<int>(deltaTime*1000));}
 	bool isLoading() const override { return false; }
 	bool isReadyToRender() const override { return true; }

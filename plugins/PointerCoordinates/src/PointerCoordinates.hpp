@@ -23,6 +23,7 @@
 #include "StelGui.hpp"
 #include "StelModule.hpp"
 
+#include <QElapsedTimer>
 #include <QString>
 #include <QPair>
 
@@ -55,6 +56,7 @@ class PointerCoordinates : public StelModule
 	Q_PROPERTY(bool showConstellation	READ getFlagShowConstellation		WRITE setFlagShowConstellation		NOTIFY flagShowConstellationChanged)
 	Q_PROPERTY(bool showCrossedLines	READ getFlagShowCrossedLines		WRITE setFlagShowCrossedLines		NOTIFY flagShowCrossedLinesChanged)
 	Q_PROPERTY(bool showElongation	READ getFlagShowElongation	WRITE setFlagShowElongation	NOTIFY flagShowElongationChanged)
+	Q_PROPERTY(bool showSkyLuminance READ getFlagShowSkyLuminance WRITE setFlagShowSkyLuminance NOTIFY flagShowSkyLuminanceChanged)
 	Q_PROPERTY(int fontSize		READ getFontSize		WRITE setFontSize		NOTIFY fontSizeChanged)
 	Q_PROPERTY(Vec3f fontColor	READ getFontColor		WRITE setFontColor		NOTIFY fontColorChanged)
 
@@ -113,6 +115,7 @@ public:
 	bool getFlagEnableAtStartup(void) { return flagEnableAtStartup;	}
 	bool getFlagShowCoordinatesButton(void)	{ return flagShowCoordinatesButton; }
 	bool getFlagShowCrossedLines(void) { return flagShowCrossedLines; }
+	bool getFlagShowSkyLuminance() const { return flagShowSkyLuminance; }
 	bool getFlagShowElongation(void) const { return flagShowElongation; }
 	bool getFlagShowConstellation(void) const { return flagShowConstellation; }
 
@@ -126,6 +129,7 @@ signals:
 	void flagShowConstellationChanged(bool b);
 	void flagShowCrossedLinesChanged(bool b);
 	void flagShowElongationChanged(bool b);
+	void flagShowSkyLuminanceChanged(bool b);
 	void fontSizeChanged(int i);
 	void fontColorChanged(Vec3f);
 
@@ -167,6 +171,7 @@ public slots:
 
 	void setFlagShowConstellation(bool b){ flagShowConstellation=b; }
 	void setFlagShowElongation(bool b){ flagShowElongation=b; }
+	void setFlagShowSkyLuminance(bool b);
 
 	//! Get color for text
 	//! @return color
@@ -199,6 +204,10 @@ private:
 	bool flagShowConstellation;
 	bool flagShowCrossedLines;
 	bool flagShowElongation;
+	bool flagShowSkyLuminance = false;
+	QElapsedTimer luminanceSampleTimer;
+	float skyLuminance = 0.f;
+	bool skyLuminanceAvailable = false;
 	Vec3f textColor;
 	Vec3d coordinatesPoint;
 	int fontSize;

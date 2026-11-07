@@ -27,6 +27,7 @@
 #include "StelPainter.hpp"
 #include "Skylight.hpp"
 
+#include <array>
 #include <QFile>
 #include <QDebug>
 #include <QSettings>
@@ -154,6 +155,7 @@ void AtmospherePreetham::computeColor(StelCore* core, const double JD, const Pla
 				      const Planet*const moon, const StelLocation& location, const float temperature,
 				      const float relativeHumidity, const float extinctionCoefficient, const bool noScatter)
 {
+	localLuminanceValid = false;
 	const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
 	if (viewport != prj->getViewport())
 	{
@@ -382,6 +384,8 @@ void AtmospherePreetham::computeColor(StelCore* core, const double JD, const Pla
 	colorGridBuffer.write(0, colorGrid.constData(), static_cast<int>((1+skyResolutionX)*(1+skyResolutionY)*4*4));
 	colorGridBuffer.release();
 	
+	localLuminanceValid = core->getFlagClearSky();
+
 	// Update average luminance
 	if (!overrideAverageLuminance)
 		averageLuminance = sum_lum/static_cast<float>((1+skyResolutionX)*(1+skyResolutionY));
@@ -455,4 +459,43 @@ void AtmospherePreetham::draw(StelCore* core)
 	// sPainter.setColor(0.7f, 0.7f, 0.7f);
 	// sPainter.drawText(83, 108, QString("Tonemapper::worldAdaptationLuminance(): %1" ).arg(eye->getWorldAdaptationLuminance()));
 	// sPainter.drawText(83, 120, QString("AtmospherePreetham::getAverageLuminance(): %1" ).arg(getAverageLuminance()));
+}
+
+// Interpolate input Y on the same staggered triangle strips as draw(). Tone mapping
+// happens at vertices, so this is intentionally not interpolation of the screen RGB.
+bool AtmospherePreetham::getLocalLuminance(const Vec2f& screenPos, float& luminance)
+{
+	if (!std::isfinite(screenPos[0]) || !std::isfinite(screenPos[1]) || !isLocalLuminanceAvailable() || !skyResolutionX || !skyResolutionY ||
+	    screenPos[0] < viewport[0] || screenPos[0] >= viewport[0]+viewport[2] ||
+	    screenPos[1] < viewport[1] || screenPos[1] >= viewport[1]+viewport[3])
+		return false;
+
+	const unsigned row = std::min(static_cast<unsigned>((screenPos[1]-viewport[1])*skyResolutionY/viewport[3]), skyResolutionY-1);
+	const unsigned stride = skyResolutionX+1;
+	const float rowFraction = (screenPos[1]-posGrid[row*stride][1]) /
+	                          (posGrid[(row+1)*stride][1]-posGrid[row*stride][1]);
+	// Interior column edges shift by half a grid step on odd rows. Interpolate
+	// that shift at this height to locate the cell directly, including clipped
+	// first/last columns. Only its two triangles need testing, independent of resolution.
+	const float column = (screenPos[0]-viewport[0])*(skyResolutionX-0.5f)/viewport[2]
+	                   + 0.5f*((row&1) ? 1.f-rowFraction : rowFraction);
+	const unsigned x = std::min(static_cast<unsigned>(column), skyResolutionX-1);
+	const unsigned a = row*stride+x, b = a+stride;
+	for (const auto& triangle : {std::array<unsigned,3>{a,b,a+1}, {b,a+1,b+1}})
+	{
+		const auto& p = posGrid[triangle[0]];
+		const auto u = posGrid[triangle[1]]-p;
+		const auto v = posGrid[triangle[2]]-p;
+		const auto w = screenPos-p;
+		const float det = u[0]*v[1]-u[1]*v[0];
+		const float s = (w[0]*v[1]-w[1]*v[0])/det;
+		const float t = (u[0]*w[1]-u[1]*w[0])/det;
+		if (s >= -1e-5f && t >= -1e-5f && s+t <= 1.f+1e-5f)
+		{
+			luminance = (1.f-s-t)*colorGrid[triangle[0]][3]
+			          + s*colorGrid[triangle[1]][3] + t*colorGrid[triangle[2]][3];
+			return std::isfinite(luminance) && luminance >= 0.f;
+		}
+	}
+	return false;
 }

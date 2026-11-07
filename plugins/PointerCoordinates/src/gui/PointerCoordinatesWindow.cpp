@@ -67,6 +67,7 @@ void PointerCoordinatesWindow::createDialogContent()
 	connectBoolProperty(ui->checkBoxConstellation,   "PointerCoordinates.showConstellation");
 	connectBoolProperty(ui->checkBoxCrossedLines,    "PointerCoordinates.showCrossedLines");
 	connectBoolProperty(ui->checkBoxElongation,      "PointerCoordinates.showElongation");
+	connectBoolProperty(ui->checkBoxSkyLuminance,    "PointerCoordinates.showSkyLuminance");
 	connectIntProperty(ui->spinBoxFontSize,          "PointerCoordinates.fontSize");
 	ui->textColorButton->setup("PointerCoordinates.fontColor", "PointerCoordinates/text_color");
 
