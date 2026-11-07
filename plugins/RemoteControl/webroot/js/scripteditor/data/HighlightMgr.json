@@ -1,0 +1,137 @@
+[
+    {
+        "name": "setColor",
+        "category": "Highlight Manager - Appearance",
+        "signature": "setColor(Vec3f color)",
+        "description": "Sets the color of highlight markers. Markers are displayed as rotating cross symbols that draw attention to specific points on the sky.",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color created with core.vec3f(r, g, b) where r,g,b range 0.0-1.0",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "var red = core.vec3f(1.0, 0.0, 0.0);\nHighlightMgr.setColor(red);\ncore.debug('Highlight color changed to red');\n\nvar cyan = core.vec3f(0.0, 1.0, 1.0);\nHighlightMgr.setColor(cyan);\ncore.debug('Highlight color changed to cyan');"
+    },
+    {
+        "name": "getColor",
+        "category": "Highlight Manager - Appearance",
+        "signature": "Vec3f getColor()",
+        "description": "Returns the current color of highlight markers as an RGB array [R, G, B].",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "returnDescription": "RGB color array [R, G, B] where each component ranges 0.0-1.0",
+        "type": "slot",
+        "example": "// Qt5/Qt6-compatible way: wrap the returned Vec3f in a Color object\nvar color = new Color(HighlightMgr.getColor());\n\n// Display the color in formatted RGB form\ncore.debug('Current highlight color: ' + color.toRGBString());\ncore.debug('Hex: ' + color.toHex());\n\n// Access the components through getter functions (compatible with both Qt5 and Qt6)\nvar r = color.getR();\nvar g = color.getG();\nvar b = color.getB();\ncore.debug('R: ' + r + ', G: ' + g + ', B: ' + b);\n\n// Logical check: is the color red?\nif (r > 0.8 && g < 0.2 && b < 0.2) {\n    core.debug('Highlights are red');\n}\n\n// Short alternative for display only\ncore.debug('Current color: ' + new Color(HighlightMgr.getColor()).toHex());"
+    },
+    {
+        "name": "setMarkersSize",
+        "category": "Highlight Manager - Appearance",
+        "signature": "setMarkersSize(float size)",
+        "description": "Sets the size of highlight markers in pixels. Larger markers are more visible, smaller markers are more subtle.",
+        "parameters": [
+            {
+                "name": "size",
+                "type": "float",
+                "description": "Marker size in pixels (default: 11.0, recommended range: 5-25)",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "HighlightMgr.setMarkersSize(15.0);\ncore.debug('Highlight marker size set to 15 pixels');\n\nHighlightMgr.setMarkersSize(11.0);\ncore.debug('Highlight marker size reset to default (11 pixels)');"
+    },
+    {
+        "name": "getMarkersSize",
+        "category": "Highlight Manager - Appearance",
+        "signature": "float getMarkersSize()",
+        "description": "Returns the current size of highlight markers in pixels.",
+        "parameters": [],
+        "returnType": "float",
+        "returnDescription": "Marker size in pixels",
+        "type": "slot",
+        "example": "var size = HighlightMgr.getMarkersSize();\ncore.debug('Current marker size: ' + size + ' pixels');"
+    },
+    {
+        "name": "addPoint",
+        "category": "Highlight Manager - Point Management",
+        "signature": "addPoint(QString ra, QString dec)",
+        "description": "Adds a highlight marker at the specified J2000 equatorial coordinates. Markers are visual indicators used to draw attention to specific points on the celestial sphere.",
+        "parameters": [
+            {
+                "name": "ra",
+                "type": "QString",
+                "description": "Right Ascension in J2000 frame (e.g., '5h 35m 17.3s', '2h10m15s')",
+                "required": true
+            },
+            {
+                "name": "dec",
+                "type": "QString",
+                "description": "Declination in J2000 frame (e.g., '-5° 23′ 28″', '60d01m15s')",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "// Add a highlight at Orion Nebula\nHighlightMgr.addPoint('5h 35m 17.3s', '-5° 23′ 28″');\ncore.debug('Highlight added at Orion Nebula');\n\n// Add multiple highlights\nHighlightMgr.addPoint('5h 35m 17.3s', '-5° 23′ 28″');\nHighlightMgr.addPoint('5h 35m 20.0s', '-5° 25′ 00″');\ncore.debug('Added multiple highlights');"
+    },
+    {
+        "name": "addPointRaDec",
+        "category": "Highlight Manager - Point Management",
+        "signature": "addPointRaDec(QString ra, QString dec)",
+        "description": "Adds a highlight marker using Right Ascension and Declination coordinates for the current date (not J2000). The coordinates are automatically converted to the J2000 reference frame.",
+        "parameters": [
+            {
+                "name": "ra",
+                "type": "QString",
+                "description": "Right Ascension for the current date (e.g., '5h 35m 17.3s')",
+                "required": true
+            },
+            {
+                "name": "dec",
+                "type": "QString",
+                "description": "Declination for the current date (e.g., '-5° 23′ 28″')",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "// Add a highlight at current date coordinates\nHighlightMgr.addPointRaDec('2h 10m 15s', '60d 01m 15s');\ncore.debug('Highlight added using current date coordinates');\n\n// Add a highlight at the Sun's current position\nvar sunInfo = core.getObjectInfo('Sun');\nif(sunInfo) {\n    HighlightMgr.addPointRaDec(sunInfo['ra'], sunInfo['dec']);\n    core.debug('Highlight added at Sun\\'s current position');\n}"
+    },
+    {
+        "name": "addPointAltAzi",
+        "category": "Highlight Manager - Point Management",
+        "signature": "addPointAltAzi(QString alt, QString azi)",
+        "description": "Adds a highlight marker using Altitude and Azimuth coordinates (horizon-based). The coordinates are automatically converted to the J2000 equatorial reference frame.",
+        "parameters": [
+            {
+                "name": "alt",
+                "type": "QString",
+                "description": "Altitude angle (e.g., '45°', '90°' for zenith, '0°' for horizon)",
+                "required": true
+            },
+            {
+                "name": "azi",
+                "type": "QString",
+                "description": "Azimuth angle (e.g., '0°' for North, '90°' for East, '180°' for South)",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "// Add a highlight at zenith (directly overhead)\nHighlightMgr.addPointAltAzi('90°', '0°');\ncore.debug('Highlight added at zenith');\n\n// Add a highlight on the eastern horizon\nHighlightMgr.addPointAltAzi('0°', '90°');\ncore.debug('Highlight added on eastern horizon');\n\n// Add a highlight on the southern meridian at 45° altitude\nHighlightMgr.addPointAltAzi('45d', '180d');\ncore.debug('Highlight added at 45° altitude, south direction');"
+    },
+    {
+        "name": "cleanHighlightList",
+        "category": "Highlight Manager - Point Management",
+        "signature": "cleanHighlightList()",
+        "description": "Removes all highlight markers from the sky. Clears the entire highlight list.",
+        "parameters": [],
+        "returnType": "void",
+        "type": "slot",
+        "example": "// Clear all highlight markers\nHighlightMgr.cleanHighlightList();\ncore.debug('All highlight markers removed');\n\n// Add markers then clear them\nHighlightMgr.addPoint('2h 10m 15s', '60d 01m 15s');\nHighlightMgr.addPoint('4h 20m 30s', '30d 15m 00s');\ncore.debug('Added two highlights');\ncore.wait(3);\nHighlightMgr.cleanHighlightList();\ncore.debug('Highlights cleared after 3 seconds');"
+    }
+]

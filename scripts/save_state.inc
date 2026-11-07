@@ -7,6 +7,7 @@
 //              Georg Zotti (gzotti)
 //              Brian W. Mulligan (astrobit)
 //              Nicolas Martignoni (martignoni)
+//							kutaibaa akraa (kutaibaa)
 // Description: Provide functions for saving and restoring state (view settings etc.)
 //              for use in other scripts via the include feature.  A state is 
 //              associated with some string identifier.  This is arbitrary.  You can 
@@ -32,6 +33,9 @@
 //    * Add change log, version, and author list to header
 // 2026-06-29   Nicolas Martignoni (martignoni)
 //    * Remove reference to core.getSkyLanguage and core.setSkyLanguage (removed in Stellarium 25.3)
+// 2026-11-05  kutaibaa akraa (kutaibaa)
+//    * Fix to work with RC auto generated culture tour scripts
+//    * Add more saveState references (Constellations, Asterismis, Lunar, Stars additional, StelSkyDrawer additional SETTINGS)
 
 // declare a global variable to store saved state
 var savedStates = new Array();
@@ -108,6 +112,55 @@ function saveState(stateName)
 	savedStates[stateName]["AppLanguage"] = core.getAppLanguage();
 
 	core.debug("saveState() - state saved with ID: " + stateName);
+	
+	// CONSTELLATION SETTINGS
+	savedStates[stateName]["ConstellationMgrFlagHulls"] = ConstellationMgr.getFlagHulls();
+	savedStates[stateName]["ConstellationMgrFlagConstellationPick"] = ConstellationMgr.getFlagConstellationPick();
+	savedStates[stateName]["ConstellationMgrFontSize"] = ConstellationMgr.getFontSize();
+	savedStates[stateName]["ConstellationMgrConstellationLineThickness"] = ConstellationMgr.getConstellationLineThickness();
+	savedStates[stateName]["ConstellationMgrBoundariesThickness"] = ConstellationMgr.getBoundariesThickness();
+	savedStates[stateName]["ConstellationMgrHullsThickness"] = ConstellationMgr.getHullsThickness();
+	savedStates[stateName]["ConstellationMgrLinesColor"] = ConstellationMgr.getLinesColor();
+	savedStates[stateName]["ConstellationMgrLabelsColor"] = ConstellationMgr.getLabelsColor();
+	savedStates[stateName]["ConstellationMgrBoundariesColor"] = ConstellationMgr.getBoundariesColor();
+	savedStates[stateName]["ConstellationMgrHullsColor"] = ConstellationMgr.getHullsColor();
+	savedStates[stateName]["ConstellationMgrLinesFadeDuration"] = ConstellationMgr.getLinesFadeDuration();
+	savedStates[stateName]["ConstellationMgrLabelsFadeDuration"] = ConstellationMgr.getLabelsFadeDuration();
+	savedStates[stateName]["ConstellationMgrBoundariesFadeDuration"] = ConstellationMgr.getBoundariesFadeDuration();
+	savedStates[stateName]["ConstellationMgrHullsFadeDuration"] = ConstellationMgr.getHullsFadeDuration();
+	savedStates[stateName]["ConstellationMgrArtFadeDuration"] = ConstellationMgr.getArtFadeDuration();
+		
+	// ASTERISMS SETTINGS
+	savedStates[stateName]["AsterismMgrFlagLines"] = AsterismMgr.getFlagLines();
+	savedStates[stateName]["AsterismMgrFlagLabels"] = AsterismMgr.getFlagLabels();
+	savedStates[stateName]["AsterismMgrFlagRayHelpers"] = AsterismMgr.getFlagRayHelpers();
+	savedStates[stateName]["AsterismMgrFlagIsolateAsterismSelected"] = AsterismMgr.getFlagIsolateAsterismSelected();
+	savedStates[stateName]["AsterismMgrAsterismLineThickness"] = AsterismMgr.getAsterismLineThickness();
+	savedStates[stateName]["AsterismMgrRayHelperThickness"] = AsterismMgr.getRayHelperThickness();
+	savedStates[stateName]["AsterismMgrFontSize"] = AsterismMgr.getFontSize();
+	savedStates[stateName]["AsterismMgrLinesColor"] = AsterismMgr.getLinesColor();
+	savedStates[stateName]["AsterismMgrLabelsColor"] = AsterismMgr.getLabelsColor();
+	savedStates[stateName]["AsterismMgrRayHelpersColor"] = AsterismMgr.getRayHelpersColor();
+	savedStates[stateName]["AsterismMgrLinesFadeDuration"] = AsterismMgr.getLinesFadeDuration();
+	savedStates[stateName]["AsterismMgrLabelsFadeDuration"] = AsterismMgr.getLabelsFadeDuration();
+	savedStates[stateName]["AsterismMgrRayHelpersFadeDuration"] = AsterismMgr.getRayHelpersFadeDuration();
+	
+	// LUNAR SYSTEM SETTINGS
+	savedStates[stateName]["ConstellationMgrFlagLunarSystem"] = ConstellationMgr.getFlagLunarSystem();
+	savedStates[stateName]["ConstellationMgrLunarSystemColor"] = ConstellationMgr.getLunarSystemColor();
+	savedStates[stateName]["ConstellationMgrLunarSystemThickness"] = ConstellationMgr.getLunarSystemThickness();
+	
+	// STARS ADDITIONAL SETTINGS 
+	savedStates[stateName]["StarMgrFlagAdditionalNames"] = StarMgr.getFlagAdditionalNames();
+	savedStates[stateName]["StarMgrFlagDblStarsDesignation"] = StarMgr.getFlagDblStarsDesignation();
+	savedStates[stateName]["StarMgrFlagVarStarsDesignation"] = StarMgr.getFlagVarStarsDesignation();
+	savedStates[stateName]["StarMgrFlagHIPDesignation"] = StarMgr.getFlagHIPDesignation();
+
+	// STELSKYDRAWER ADDITIONAL SETTINGS
+	savedStates[stateName]["StelSkyDrawerFlagStarSpiky"] = StelSkyDrawer.getFlagStarSpiky();
+	savedStates[stateName]["StelSkyDrawerFlagDrawBigStarHalo"] = StelSkyDrawer.getFlagDrawBigStarHalo();
+	savedStates[stateName]["StelSkyDrawerFlagStarMagnitudeLimit"] = StelSkyDrawer.getFlagStarMagnitudeLimit();
+	savedStates[stateName]["StelSkyDrawerCustomStarMagnitudeLimit"] = StelSkyDrawer.getCustomStarMagnitudeLimit();
 }
 
 // The options parameter is a hash of option values. Supported options:
@@ -199,6 +252,55 @@ function restoreState(stateName, options)
 	core.setObserverLocation(savedStates[stateName]["ObserverLocation"]);
 	core.setAppLanguage(savedStates[stateName]["AppLanguage"]);
 
+	// RESTORE CONSTELLATION ADDITIONAL SETTINGS
+	ConstellationMgr.setFlagHulls(savedStates[stateName]["ConstellationMgrFlagHulls"]);
+	ConstellationMgr.setFlagConstellationPick(savedStates[stateName]["ConstellationMgrFlagConstellationPick"]);
+	ConstellationMgr.setFontSize(savedStates[stateName]["ConstellationMgrFontSize"]);
+	ConstellationMgr.setConstellationLineThickness(savedStates[stateName]["ConstellationMgrConstellationLineThickness"]);
+	ConstellationMgr.setBoundariesThickness(savedStates[stateName]["ConstellationMgrBoundariesThickness"]);
+	ConstellationMgr.setHullsThickness(savedStates[stateName]["ConstellationMgrHullsThickness"]);
+	ConstellationMgr.setLinesColor(savedStates[stateName]["ConstellationMgrLinesColor"]);
+	ConstellationMgr.setLabelsColor(savedStates[stateName]["ConstellationMgrLabelsColor"]);
+	ConstellationMgr.setBoundariesColor(savedStates[stateName]["ConstellationMgrBoundariesColor"]);
+	ConstellationMgr.setHullsColor(savedStates[stateName]["ConstellationMgrHullsColor"]);
+	ConstellationMgr.setLinesFadeDuration(savedStates[stateName]["ConstellationMgrLinesFadeDuration"]);
+	ConstellationMgr.setLabelsFadeDuration(savedStates[stateName]["ConstellationMgrLabelsFadeDuration"]);
+	ConstellationMgr.setBoundariesFadeDuration(savedStates[stateName]["ConstellationMgrBoundariesFadeDuration"]);
+	ConstellationMgr.setHullsFadeDuration(savedStates[stateName]["ConstellationMgrHullsFadeDuration"]);
+	ConstellationMgr.setArtFadeDuration(savedStates[stateName]["ConstellationMgrArtFadeDuration"]);
+
+	// RESTORE ASTERISMS SETTINGS
+	AsterismMgr.setFlagLines(savedStates[stateName]["AsterismMgrFlagLines"]);
+	AsterismMgr.setFlagLabels(savedStates[stateName]["AsterismMgrFlagLabels"]);
+	AsterismMgr.setFlagRayHelpers(savedStates[stateName]["AsterismMgrFlagRayHelpers"]);
+	AsterismMgr.setFlagIsolateAsterismSelected(savedStates[stateName]["AsterismMgrFlagIsolateAsterismSelected"]);
+	AsterismMgr.setAsterismLineThickness(savedStates[stateName]["AsterismMgrAsterismLineThickness"]);
+	AsterismMgr.setRayHelperThickness(savedStates[stateName]["AsterismMgrRayHelperThickness"]);
+	AsterismMgr.setFontSize(savedStates[stateName]["AsterismMgrFontSize"]);
+	AsterismMgr.setLinesColor(savedStates[stateName]["AsterismMgrLinesColor"]);
+	AsterismMgr.setLabelsColor(savedStates[stateName]["AsterismMgrLabelsColor"]);
+	AsterismMgr.setRayHelpersColor(savedStates[stateName]["AsterismMgrRayHelpersColor"]);
+	AsterismMgr.setLinesFadeDuration(savedStates[stateName]["AsterismMgrLinesFadeDuration"]);
+	AsterismMgr.setLabelsFadeDuration(savedStates[stateName]["AsterismMgrLabelsFadeDuration"]);
+	AsterismMgr.setRayHelpersFadeDuration(savedStates[stateName]["AsterismMgrRayHelpersFadeDuration"]);
+	
+	// RESTORE LUNAR SYSTEM SETTINGS
+	ConstellationMgr.setFlagLunarSystem(savedStates[stateName]["ConstellationMgrFlagLunarSystem"]);
+	ConstellationMgr.setLunarSystemColor(savedStates[stateName]["ConstellationMgrLunarSystemColor"]);
+	ConstellationMgr.setLunarSystemThickness(savedStates[stateName]["ConstellationMgrLunarSystemThickness"]);
+	
+	// RESTORE STARS ADDITIONAL SETTINGS
+	StarMgr.setFlagAdditionalNames(savedStates[stateName]["StarMgrFlagAdditionalNames"]);
+	StarMgr.setFlagDblStarsDesignation(savedStates[stateName]["StarMgrFlagDblStarsDesignation"]);
+	StarMgr.setFlagVarStarsDesignation(savedStates[stateName]["StarMgrFlagVarStarsDesignation"]);
+	StarMgr.setFlagHIPDesignation(savedStates[stateName]["StarMgrFlagHIPDesignation"]);
+
+	// RESTORE STELSKYDRAWER ADDITIONAL SETTINGS
+	StelSkyDrawer.setFlagStarSpiky(savedStates[stateName]["StelSkyDrawerFlagStarSpiky"]);
+	StelSkyDrawer.setFlagDrawBigStarHalo(savedStates[stateName]["StelSkyDrawerFlagDrawBigStarHalo"]);
+	StelSkyDrawer.setFlagStarMagnitudeLimit(savedStates[stateName]["StelSkyDrawerFlagStarMagnitudeLimit"]);
+	StelSkyDrawer.setCustomStarMagnitudeLimit(savedStates[stateName]["StelSkyDrawerCustomStarMagnitudeLimit"]);
+	
 	// optional restoration options...
 	if (!options["time"])
 	{
