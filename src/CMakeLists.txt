@@ -16,6 +16,8 @@ SET(stellarium_lib_SRCS
      core/Dithering.hpp
      core/Dithering.cpp
      core/SaturationShader.hpp
+     core/TopMost.hpp
+     core/TopMost.cpp
      core/StelAudioMgr.hpp
      core/StelAudioMgr.cpp
      core/StelVideoMgr.hpp
