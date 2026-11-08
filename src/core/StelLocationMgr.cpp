@@ -973,7 +973,7 @@ void StelLocationMgr::doGetLocationFromIP()
 void StelLocationMgr::locationFromIP()
 {
 	// TODO: Find out how to properly setup geoclue2 on Linux, then reactivate.
-#ifdef Q_OS_WIN
+#if (defined Q_OS_WIN || defined Q_OS_ANDROID)
 
 # if QT_VERSION>=QT_VERSION_CHECK(6,6,0) // Qt<6.6 handles permissions by itself; since 6.6 user code is responsible for this
 	QLocationPermission locationPermission;
