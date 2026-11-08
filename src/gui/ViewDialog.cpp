@@ -1039,7 +1039,8 @@ void ViewDialog::updateHips()
 	// Update survey list.
 	auto*const l = ui->surveysTreeWidget;
 
-	if (!hipsmgr->property("loaded").toBool())
+	const auto hipslist = hipsmgr->property("surveys").value<QList<HipsSurveyP>>();
+	if (hipslist.isEmpty() && !hipsmgr->property("loaded").toBool())
 	{
 		clearHips();
 		new QTreeWidgetItem(l, {q_("Loading...")});
@@ -1052,7 +1053,6 @@ void ViewDialog::updateHips()
 		clearHips();
 		selectedSurveyType = selectedType;
 	}
-	const QList<HipsSurveyP> hipslist = hipsmgr->property("surveys").value<QList<HipsSurveyP>>();
 
 	const bool selectedIsPlanetary = selectedType == "sol";
 	l->setRootIsDecorated(selectedIsPlanetary);
