@@ -2434,6 +2434,322 @@ define([
         return withStatus(generateStarsTour);
     }
 		
+    // =====================================================================
+    // UNIFIED OBJECT-TYPE TOUR GENERATOR
+    // =====================================================================
+    // 
+    // This function is the core of the "Scripts Generator" tab. It builds
+    // a complete SSC script for ANY object type exposed by Stellarium's
+    // /api/objects/listobjecttypes endpoint (88 types as of this writing).
+    // 
+    // Instead of writing 88 separate generators, this single function
+    // produces a valid script by parameterizing:
+    //   - the object array (embedded as a static list)
+    //   - the tour loop (using generic core.selectObjectByName)
+    //   - the optional observer lock (location + time)
+    //   - the optional save_state.inc include
+    // 
+    // The output structure is identical to the other tour generators in
+    // this module (constellations, asterisms, etc.), which means all the
+    // existing infrastructure (Tours.outputScript, Script Editor, etc.)
+    // works transparently.
+    // 
+    // USAGE:
+    //   var script = Tours.generateObjectTypeTour({
+    //       typeKey:     "NebulaMgr:100",
+    //       typeName:    "Messier Catalogue",
+    //       typeNameI18n:"دليل ميسييه",
+    //       objects:     ["M1", "M2", ...],
+    //       options: {
+    //           duration:      4,
+    //           zoomFov:       15,
+    //           overviewFov:   90,
+    //           fontSize:      16,
+    //           showLabels:    true,
+    //           showMarkers:   true,
+    //           useSaveState:  false,
+    //           lockObserver:  false
+    //       },
+    //       status: {                     // optional — from Api.fetchStatus()
+    //           location: { name, latitude, longitude, altitude, planet },
+    //           time:     { jday, utc, isTimeNow }
+    //       }
+    //   });
+    // 
+    // @param {Object} opts - Options (see above)
+    // @returns {string|null} Generated SSC script, or null on error
+    // =====================================================================
+    function generateObjectTypeTour(opts) {
+        // -----------------------------------------------------------------
+        // 1. Validate inputs
+        // -----------------------------------------------------------------
+        if (!opts || !opts.objects || !opts.objects.length) {
+            console.warn('[Tours] generateObjectTypeTour: no objects provided');
+            return null;
+        }
+
+        var objects      = opts.objects;
+        var options      = opts.options || {};
+        var status       = opts.status  || null;
+        var typeKey      = opts.typeKey      || 'unknown';
+        var typeName     = opts.typeName     || typeKey;
+        var typeNameI18n = opts.typeNameI18n || typeName;
+
+        // Read options with sane defaults
+        var duration      = (typeof options.duration    === 'number') ? options.duration    : 4;
+        var zoomFov       = (typeof options.zoomFov     === 'number') ? options.zoomFov     : 15;
+        var overviewFov   = (typeof options.overviewFov === 'number') ? options.overviewFov : 90;
+        var fontSize      = (typeof options.fontSize    === 'number') ? options.fontSize    : 16;
+        var showLabels    = (options.showLabels    !== false);
+        var showMarkers   = (options.showMarkers   !== false);
+        var useSaveState  = (options.useSaveState  === true);
+        var lockObserver  = (options.lockObserver  === true) && !!status;
+
+        // Sanitize the type key for use in SSC comments / variable names
+        // (e.g. "NebulaMgr:100" → "NebulaMgr_100")
+        var safeTypeKey = String(typeKey).replace(/[^A-Za-z0-9_]/g, '_');
+
+        // Sanitize type name for header comments (strip newlines)
+        var safeTypeName = String(typeName).replace(/[\r\n]+/g, ' ').trim();
+
+        // -----------------------------------------------------------------
+        // 2. Build the script
+        // -----------------------------------------------------------------
+        var s = '';
+
+        // ================================================================
+        // 2.1 HEADER
+        // ================================================================
+        s += '//\n';
+        s += '// ============================================================\n';
+        s += '// Name: ' + safeTypeName + ' Tour\n';
+        s += '// ============================================================\n';
+        s += '// Version: 1.0\n';
+        s += '// Author: Stellarium Remote Control (Scripts Generator)\n';
+        s += '// License: Public Domain\n';
+        s += '// Type Key: ' + typeKey + '\n';
+        s += '// Objects in this script: ' + objects.length + '\n';
+        s += '// Duration per object: ' + duration + ' seconds\n';
+        s += '// Zoom FOV: ' + zoomFov + ' degrees\n';
+        s += '// Overview FOV: ' + overviewFov + ' degrees\n';
+        s += '// Font size: ' + fontSize + ' pixels\n';
+        s += '// Show labels: ' + (showLabels  ? 'YES' : 'NO') + '\n';
+        s += '// Show markers: ' + (showMarkers ? 'YES' : 'NO') + '\n';
+        s += '// Use save_state.inc: ' + (useSaveState ? 'YES' : 'NO') + '\n';
+        s += '// Lock observer/time: ' + (lockObserver ? 'YES' : 'NO') + '\n';
+        s += '// Generated: ' + new Date().toLocaleString() + '\n';
+        s += '// ============================================================\n';
+        s += '//\n';
+
+        // ================================================================
+        // 2.2 TRANSLATION SUPPORT
+        // ================================================================
+        s += '// ============================================================\n';
+        s += '// TRANSLATION SUPPORT\n';
+        s += '// ============================================================\n';
+        s += 'include("i18n.inc");\n\n';
+
+        // ================================================================
+        // 2.3 INITIAL SETUP
+        // ================================================================
+        s += '// ============================================================\n';
+        s += '// INITIAL SETUP\n';
+        s += '// ============================================================\n';
+        s += 'core.clear("starchart");\n';
+        s += 'GridLinesMgr.setFlagGridlines(false);\n';
+        s += 'core.setGuiVisible(false);\n';
+        s += 'StelMovementMgr.setFlagTracking(false);\n\n';
+
+        // ================================================================
+        // 2.4 OPTIONAL: LOCK OBSERVER LOCATION AND TIME
+        // ================================================================
+        if (lockObserver) {
+            s += '// ============================================================\n';
+            s += '// LOCKED OBSERVER LOCATION AND TIME\n';
+            s += '// ------------------------------------------------------------\n';
+            s += '// Reproducible sky: the script pins the observer position and\n';
+            s += '// time to a snapshot captured at generation time.\n';
+            s += '// Comment out the "core.set…" calls below to use the current\n';
+            s += '// location/time instead.\n';
+            s += '// ============================================================\n';
+
+            var loc = status.location || {};
+            var t   = status.time     || {};
+
+            var lat     = (typeof loc.latitude  === 'number') ? loc.latitude  : 0;
+            var lon     = (typeof loc.longitude === 'number') ? loc.longitude : 0;
+            var alt     = (typeof loc.altitude  === 'number') ? loc.altitude  : 0;
+            var locName = String(loc.name   || 'Unknown').replace(/"/g, '\\"');
+            var planet  = String(loc.planet || 'Earth').replace(/"/g, '\\"');
+            var jday    = (typeof t.jday    === 'number') ? t.jday : 0;
+
+            s += '// Snapshot: ' + locName + ' (' + planet + ')\n';
+            s += '// Coordinates: ' + lat.toFixed(6) + '°, ' + lon.toFixed(6) + '°, ' + alt.toFixed(1) + ' m\n';
+            if (t.utc) {
+                s += '// UTC time: ' + String(t.utc) + '\n';
+            }
+            s += 'core.setObserverLocation(\n';
+            s += '    ' + lon.toFixed(8) + ',   // longitude (°E)\n';
+            s += '    ' + lat.toFixed(8) + ',   // latitude (°N)\n';
+            s += '    ' + alt.toFixed(1) + ',         // altitude (m)\n';
+            s += '    0,                 // transition duration (s)\n';
+            s += '    "' + locName + '",\n';
+            s += '    "' + planet + '"\n';
+            s += ');\n';
+            s += 'core.wait(0.5);\n';
+            s += 'core.setJDay(' + jday.toFixed(10) + ');\n';
+            s += 'core.wait(0.5);\n\n';
+        }
+
+        // ================================================================
+        // 2.5 OPTIONAL: SAVE STATE
+        // ================================================================
+        if (useSaveState) {
+            s += '// ============================================================\n';
+            s += '// SAVE_STATE.INC - Preserve and restore display state\n';
+            s += '// ============================================================\n';
+            s += 'include("save_state.inc");\n\n';
+            s += 'saveState("scriptsgenerator_' + safeTypeKey + '_state");\n\n';
+        } else {
+            // Minimal manual save: only the options that the script will change
+            s += '// ============================================================\n';
+            s += '// SAVE ORIGINAL SETTINGS (MANUALLY)\n';
+            s += '// ============================================================\n';
+            s += 'var __sg_oldGridFlag   = GridLinesMgr.getFlagGridlines();\n';
+            s += 'var __sg_oldTracking   = StelMovementMgr.getFlagTracking();\n';
+            s += 'var __sg_oldFov        = StelMovementMgr.getCurrentFov();\n\n';
+        }
+
+        // ================================================================
+        // 2.6 WELCOME MESSAGE
+        // ================================================================
+        s += '// ============================================================\n';
+        s += '// WELCOME MESSAGE\n';
+        s += '// ============================================================\n';
+        s += 'var msg1 = tr("Welcome to the ") + tr("' + safeTypeName + '") + tr(" tour!");\n';
+        s += 'var msg2 = tr("Objects in this tour: ") + ' + objects.length + ';\n';
+        s += 'var msg3 = tr("Press Ctrl+T to show toolbar at any time.");\n\n';
+        s += 'var __sg_lbl1 = LabelMgr.labelScreen(msg1, 100, 100, false, 16, "#ffaa66");\n';
+        s += 'var __sg_lbl2 = LabelMgr.labelScreen(msg2, 100, 125, false, 16, "#ffaa66");\n';
+        s += 'var __sg_lbl3 = LabelMgr.labelScreen(msg3, 100, 150, false, 16, "#ffaa66");\n';
+        s += 'LabelMgr.setLabelShow(__sg_lbl1, true);\n';
+        s += 'LabelMgr.setLabelShow(__sg_lbl2, true);\n';
+        s += 'LabelMgr.setLabelShow(__sg_lbl3, true);\n';
+        s += 'core.wait(5);\n';
+        s += 'LabelMgr.deleteAllLabels();\n\n';
+
+        // ================================================================
+        // 2.7 OBJECT ARRAY
+        // ================================================================
+        s += '// ============================================================\n';
+        s += '// OBJECT LIST (Static Array)\n';
+        s += '// ------------------------------------------------------------\n';
+        s += '// This array contains ' + objects.length + ' object names\n';
+        s += '// of type "' + safeTypeName + '" (key: ' + typeKey + ').\n';
+        s += '// ============================================================\n';
+        s += 'var objects = [\n';
+
+        for (var i = 0; i < objects.length; i++) {
+            var rawName = String(objects[i]);
+            // Escape backslashes and double quotes for SSC string literal
+            var escName = rawName
+                .replace(/\\/g, '\\\\')
+                .replace(/"/g, '\\"')
+                .replace(/[\r\n]+/g, ' ');
+            //s += '    "' + escName + '"' + (i < objects.length - 1 ? ',' : '') + '\n'; // multiple lines array
+						s += '"' + escName + '"' + (i < objects.length - 1 ? ',' : ''); // One line array
+        }
+        s += '];\n\n';
+
+        // ================================================================
+        // 2.8 TOUR CONFIGURATION
+        // ================================================================
+        s += '// ============================================================\n';
+        s += '// TOUR CONFIGURATION\n';
+        s += '// ============================================================\n';
+        s += 'var DURATION     = ' + duration + ';\n';
+        s += 'var ZOOM_FOV     = ' + zoomFov + ';\n';
+        s += 'var OVERVIEW_FOV = ' + overviewFov + ';\n';
+        s += 'var FONT_SIZE    = ' + fontSize + ';\n';
+        s += 'var SHOW_LABELS  = ' + (showLabels  ? 'true' : 'false') + ';\n';
+        s += 'var SHOW_MARKERS = ' + (showMarkers ? 'true' : 'false') + ';\n\n';
+
+        // ================================================================
+        // 2.9 TOUR EXECUTION LOOP
+        // ================================================================
+        s += '// ============================================================\n';
+        s += '// TOUR EXECUTION\n';
+        s += '// ============================================================\n';
+        s += 'core.debug(tr("Starting tour..."));\n';
+        s += 'core.debug(tr("Total objects in array: ") + objects.length);\n\n';
+        s += 'for (var i = 0; i < objects.length; i++) {\n';
+        s += '    var objName = objects[i];\n';
+        s += '    var currentNum = i + 1;\n';
+        s += '    \n';
+        s += '    core.debug(tr("Visiting object") + " " + currentNum + "/" + objects.length + ": " + objName);\n';
+        s += '    \n';
+        s += '    // Select (if markers are enabled) and center on the object\n';
+        if (showMarkers) {
+            s += '    core.selectObjectByName(objName, true);\n';
+        }
+        s += '    core.moveToObject(objName, 2);\n';
+        s += '    core.wait(1);\n';
+        s += '    \n';
+        s += '    // Zoom to the tour FOV\n';
+        s += '    StelMovementMgr.zoomTo(ZOOM_FOV, 2);\n';
+        s += '    core.wait(1);\n';
+        s += '    \n';
+        s += '    // Optional on-screen label\n';
+        s += '    var nameLabel = null;\n';
+        s += '    if (SHOW_LABELS) {\n';
+        s += '        nameLabel = LabelMgr.labelScreen(objName, 50, 50, false, FONT_SIZE, "#ffaa66");\n';
+        s += '        LabelMgr.setLabelShow(nameLabel, true);\n';
+        s += '    }\n';
+        s += '    core.wait(DURATION);\n';
+        s += '    if (nameLabel !== null) {\n';
+        s += '        LabelMgr.deleteLabel(nameLabel);\n';
+        s += '    }\n';
+        s += '    \n';
+        s += '    // Clear selection\n';
+        if (showMarkers) {
+            s += '    core.selectObjectByName("", false);\n';
+            s += '    \n';
+        }
+        s += '    // Return to overview FOV\n';
+        s += '    StelMovementMgr.zoomTo(OVERVIEW_FOV, 2);\n';
+        s += '    core.wait(1);\n';
+        s += '}\n\n';
+
+        // ================================================================
+        // 2.10 RESET AND CLEANUP
+        // ================================================================
+        s += '// ============================================================\n';
+        s += '// RESET AND CLEANUP\n';
+        s += '// ============================================================\n';
+        s += 'core.debug(tr("Tour completed! Restoring original settings..."));\n\n';
+
+        if (useSaveState) {
+            s += 'restoreState("scriptsgenerator_' + safeTypeKey + '_state");\n\n';
+        } else {
+            s += '// Restore manual state\n';
+            if (showMarkers) {
+                s += 'core.selectObjectByName("", false);\n';
+            }
+            s += 'core.setGuiVisible(true);\n';
+            s += 'GridLinesMgr.setFlagGridlines(true);\n';
+            s += 'StelMovementMgr.setFlagTracking(__sg_oldTracking);\n';
+            s += 'StelMovementMgr.zoomTo(__sg_oldFov, 2);\n\n';
+        }
+
+        s += '// «natural» Clear the display options\n';
+        s += 'core.clear("natural");\n\n';
+        s += '// Reset view position to Fov 100, Look South, Horizon 40 deg\n';
+        s += 'StelMovementMgr.zoomTo(100, 3);\n';
+        s += 'core.moveToAltAzi(40.0, 180.0, 3.0);\n\n';
+        s += 'core.debug(tr("Tour completed successfully!"));\n';
+
+        return s;
+    }
 		
     // =====================================================================
     // PUBLIC API
@@ -2447,6 +2763,8 @@ define([
         generateAsterismsTour:      generateAsterismsTour,
         generateLunarTour:          generateLunarTour,
         generateStarsTour:          generateStarsTour,
+        // NEW: Unified generator for ANY object type (Scripts Generator tab)
+        generateObjectTypeTour:     generateObjectTypeTour,
         
 				// Async generators (preferred — enrich with status)
         generateConstellationsTourStaticAsync,

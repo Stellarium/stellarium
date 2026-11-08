@@ -91,7 +91,8 @@
  * BUTTONS CONTAINER (Culture Selection)
  * ======================================================================== */
 
-.skyculture-buttons-container {
+.skyculture-buttons-container,
+.scriptsgenerator-buttons-container {
     width: 100%;
     margin-bottom: 15px;
 }
@@ -100,6 +101,7 @@
  * Flexible button grid that wraps naturally.
  * No fixed heights - uses max-height with overflow for very long lists.
  */
+.skyculture-buttons-grid,
 .skyculture-buttons-grid {
     display: flex;
     flex-wrap: wrap;
@@ -119,7 +121,8 @@
  * Culture buttons - responsive sizing with clamp().
  * white-space: nowrap prevents text wrapping inside buttons.
  */
-.skyculture-btn {
+.skyculture-btn,
+.scriptsgenerator-btn {
     background: linear-gradient(#8C8C8C, #505050);
     color: #000;
     border: 1.5px solid #2A2C2E;
@@ -135,17 +138,20 @@
     user-select: none;
 }
 
-.skyculture-btn:hover {
+.skyculture-btn:hover,
+.scriptsgenerator-btn:hover {
     background: linear-gradient(#C4C4C7, #6D6F72);
     border-color: #B4B7B0;
     transform: translateY(-1px);
 }
 
-.skyculture-btn:active {
+.skyculture-btn:active,
+.scriptsgenerator-btn:active {
     transform: translateY(1px);
 }
 
-.skyculture-btn.active {
+.skyculture-btn.active,
+.scriptsgenerator-btn.active {
     background: linear-gradient(#DCDBDA, #FFE0C6);
     border-color: #000;
     color: #000;
@@ -1091,25 +1097,29 @@ if you want to inputs r,g,b use this style or remove it */
  * ======================================================================== */
 
 .skyculture-buttons-grid::-webkit-scrollbar,
-.patterns-buttons-grid::-webkit-scrollbar {
+.patterns-buttons-grid::-webkit-scrollbar 
+.scriptsgenerator-buttons-grid::-webkit-scrollbar {
     width: 7px;
     height: 5px;
 }
 
 .skyculture-buttons-grid::-webkit-scrollbar-track,
-.patterns-buttons-grid::-webkit-scrollbar-track {
+.patterns-buttons-grid::-webkit-scrollbar-track,
+.scriptsgenerator-buttons-grid::-webkit-scrollbar-track {
     background: rgba(0, 0, 0, 0.2);
     border-radius: 3px;
 }
 
 .skyculture-buttons-grid::-webkit-scrollbar-thumb,
-.patterns-buttons-grid::-webkit-scrollbar-thumb {
+.patterns-buttons-grid::-webkit-scrollbar-thumb,
+.scriptsgenerator-buttons-grid::-webkit-scrollbar-thumb {
     background: #5D5F62;
     border-radius: 3px;
 }
 
 .skyculture-buttons-grid::-webkit-scrollbar-thumb:hover,
-.patterns-buttons-grid::-webkit-scrollbar-thumb:hover {
+.patterns-buttons-grid::-webkit-scrollbar-thumb:hover,
+.scriptsgenerator-buttons-grid::-webkit-scrollbar-thumb:hover {
     background: #B4B7B0;
 }
 
@@ -2053,4 +2063,122 @@ if you want to inputs r,g,b use this style or remove it */
     .visibility-snapshot-item .snapshot-icon {
         font-size: 10px;
     }
+}
+
+/* ========================================================================
+ * SCRIPTS GENERATOR (New sub-tab in Actions panel)
+ * ========================================================================
+ * 
+ * This section provides the specific styles for the Scripts Generator tab.
+ * It reuses the existing generic classes wherever possible (via the 
+ * selectors .scriptsgenerator-buttons-container / -grid / -btn that are
+ * aliased to the skyculture-* equivalents above).
+ * 
+ * Only the elements that are UNIQUE to this tab are styled here:
+ *   - .scriptsgenerator-section       (a logical section wrapper)
+ *   - .scriptsgenerator-preview       (live preview block)
+ *   - .scriptsgenerator-preview-wrapper (preview container)
+ *   - .scriptsgenerator-sidebar
+ * Everything else (buttons, grids, notes, counters, options fieldset)
+ * uses the existing shared classes from the Sky Culture tab.
+ * ======================================================================== */
+
+/* Section wrapper for each of the 4 logical blocks */
+.scriptsgenerator-section {
+    margin-bottom: 15px;
+}
+
+.scriptsgenerator-sidebar {
+	display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 0;
+}
+
+.scriptsgenerator-section h3 {
+    font-size: clamp(12px, 1.6vw, 14px);
+    color: #FFE0C6;
+    margin: 0 0 8px 0;
+    padding: 4px 8px;
+    background: rgba(0, 0, 0, 0.08);
+    border-radius: 3px;
+}
+
+/* Live preview block */
+.scriptsgenerator-preview-wrapper {
+    margin-top: 15px;
+    padding: 8px;
+    background: rgba(0, 0, 0, 0.08);
+    border-radius: 6px;
+    border: 1px solid rgba(190, 200, 200, 0.4);
+}
+
+.scriptsgenerator-preview {
+    display: block;
+    width: 100%;
+    max-height: 400px;
+    overflow-y: auto;
+    padding: 10px;
+    margin: 0;
+    background: #1E1F22;
+    color: #DCDBDA;
+    border: 1px solid #2A2C2E;
+    border-radius: 4px;
+    font-family: 'DejaVuSansMono', Consolas, monospace;
+    font-size: 11px;
+    line-height: 1.5;
+    white-space: pre;
+    box-sizing: border-box;
+    text-align: left;
+    direction: ltr;
+}
+
+/* Preview when empty (placeholder text) */
+.scriptsgenerator-preview:empty::before {
+    content: attr(data-placeholder);
+    color: #5D5F62;
+    font-style: italic;
+}
+
+/* Responsive: smaller preview on mobile */
+@media (max-width: 768px) {
+    .scriptsgenerator-preview {
+        max-height: 250px;
+        font-size: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .scriptsgenerator-preview {
+        max-height: 200px;
+        font-size: 9px;
+    }
+}
+
+/* ========================================================================
+ * SCRIPTS GENERATOR LAYOUT (Main Panel + Sidebar)
+ * ========================================================================
+ * Uses CSS Grid to ensure the main panel and sidebar sit side-by-side
+ * on desktop, and stack vertically on smaller screens.
+ * ======================================================================== */
+
+.scriptsgenerator-layout {
+    display: grid;
+    grid-template-columns: 1fr 320px; /* Main takes remaining space, sidebar 320px */
+    gap: 15px;
+    width: 100%;
+    align-items: start;
+}
+
+/* Responsive: stack them vertically on tablets and mobile */
+@media (max-width: 1024px) {
+    .scriptsgenerator-layout {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Remove default max-width from main if inherited */
+.scriptsgenerator-layout #scripts-generator-main {
+    min-width: 0; /* Prevents grid blowout */
+    box-sizing: border-box;
 }

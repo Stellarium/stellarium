@@ -1383,12 +1383,13 @@
 					</div>
 			</div><!-- END #tab_skyculture_stats -->
 
-			<!-- handled by ui/actions.js + scripteditor/apiExplorer.js codeGenerator.js scriptEditor.js scriptReference.js  -->
+			<!-- handled by ui/actions.js + scripteditor/apiExplorer.js codeGenerator.js scriptEditor.js scriptReference.js buttonGenerator.js scriptsGenerator.js -->
 			<div id="tab_actions">
 				<!-- Horizontal subTabs -->
 				<div id="actions-sub-tabs" class="stel-sub-tabs">
 						<ul>
 								<li><a href="#sub-tab-scripts-editor"><?= tr("Script Editor")?></a></li>
+								<li><a href="#sub-tab-scripts-generator"><?= tr("Scripts Generator")?></a></li>
 								<li><a href="#sub-tab-actions-legacy"><?= tr("Actions")?></a></li>
 								<li><a href="#sub-tab-scripts-legacy"><?= tr("Scripts")?></a></li>
 								<li><a href="#sub-tab-code-generator"><?= tr("Code Generator")?></a></li>
@@ -1403,7 +1404,7 @@
 								<div class="flex flex-wrap">
 
 										<!-- Script Editor subtab -->
-										<section id="script-editor-section" class="block flex flex-column flex-expand">
+										<section id="script-editor-section" class="block flex flex-column">
 												<header><h2><?= tr("Script Editor")?></h2></header>
 												
 												<!-- Tool Bar -->
@@ -1412,16 +1413,16 @@
 														<!-- GROUP 1: File Operations (Open, Save, Clear, Copy)           -->
 														<!-- ============================================================ -->
 														<div class="toolbar-group">
-																<button id="btn-editor-open" class="skyculture-btn pattern-btn" title="Open script from file (Ctrl+O)">
+																<button id="btn-editor-open" class="pattern-btn" title="Open script from file (Ctrl+O)">
 																		<span class="ui-icon ui-icon-folder-open"></span> <?= tr("Open")?>
 																</button>
-																<button id="btn-editor-save" class="skyculture-btn pattern-btn" title="Save script to file (Ctrl+S)">
+																<button id="btn-editor-save" class="pattern-btn" title="Save script to file (Ctrl+S)">
 																		<span class="ui-icon ui-icon-disk"></span> <?= tr("Save")?>
 																</button>
-																<button id="btn-editor-clear" class="skyculture-btn pattern-btn" title="Clear editor">
+																<button id="btn-editor-clear" class="pattern-btn" title="Clear editor">
 																		<span class="ui-icon ui-icon-trash"></span> <?= tr("Clear")?>
 																</button>
-																<button id="btn-editor-copy" class="skyculture-btn pattern-btn" title="Copy entire script to clipboard">
+																<button id="btn-editor-copy" class="pattern-btn" title="Copy entire script to clipboard">
 																		<span class="ui-icon ui-icon-copy"></span> <?= tr("Copy")?>
 																</button>
 														</div>
@@ -1430,13 +1431,13 @@
 														<!-- GROUP 2: Script Control (Run, Stop, script status)        -->
 														<!-- ============================================================ -->
 														<div class="toolbar-group">
-																<button id="btn-editor-run" class="skyculture-btn pattern-btn" title="Run script (Ctrl+Enter)">
+																<button id="btn-editor-run" class="pattern-btn" title="Run script (Ctrl+Enter)">
 																		<span class="ui-icon ui-icon-play"></span> <?= tr("Run")?>
 																</button>
-																<button id="btn-editor-run-selection" class="skyculture-btn pattern-btn" title="Run selected code (Ctrl+Shift+Enter)">
+																<button id="btn-editor-run-selection" class="pattern-btn" title="Run selected code (Ctrl+Shift+Enter)">
 																		<span class="ui-icon ui-icon-play"></span> <?= tr("Run Selection")?>
 																</button>
-																<button id="btn-editor-stop" class="skyculture-btn pattern-btn" title="Stop script" disabled>
+																<button id="btn-editor-stop" class="pattern-btn" title="Stop script" disabled>
 																		<span class="ui-icon ui-icon-stop"></span> <?= tr("Stop")?>
 																</button>
 																<span id="script-status-indicator" class="script-status">
@@ -1448,16 +1449,16 @@
 														<!-- GROUP 3: Additional Tools (Metadata, Go to Line, Examples)   -->
 														<!-- ============================================================ -->
 														<div class="toolbar-group">
-																<button id="btn-editor-gotoline" class="skyculture-btn pattern-btn" title="Go to line (Ctrl+G)">
+																<button id="btn-editor-gotoline" class="pattern-btn" title="Go to line (Ctrl+G)">
 																		<span class="ui-icon ui-icon-arrowstop-1-s"></span> <?= tr("Go to Line")?>
 																</button>
-																<button id="btn-editor-metadata" class="skyculture-btn pattern-btn" title="Add script header/metadata">
+																<button id="btn-editor-metadata" class="pattern-btn" title="Add script header/metadata">
 																		<span class="ui-icon ui-icon-document"></span> <?= tr("Header")?>
 																</button>
-																<button id="btn-collect-examples" class="skyculture-btn pattern-btn" title="Load examples from module JSON files">
+																<button id="btn-collect-examples" class="pattern-btn" title="Load examples from module JSON files">
 																		<span class="ui-icon ui-icon-copy"></span> <?= tr("Load Examples")?>
 																</button>
-																<button id="btn-show-all-shortcuts" class="skyculture-btn pattern-btn" title="Show all keyboard shortcuts">
+																<button id="btn-show-all-shortcuts" class="pattern-btn" title="Show all keyboard shortcuts">
 																		<span class="ui-icon ui-icon-help"></span>
 																</button>
 														</div>
@@ -1466,16 +1467,16 @@
 														<!-- GROUP 4: Edit Operations (Undo, Redo, Find, Replace)         -->
 														<!-- ============================================================ -->
 														<div class="toolbar-group">
-																<button id="btn-editor-undo" class="skyculture-btn pattern-btn" title="Undo (Ctrl+Z)">
+																<button id="btn-editor-undo" class="pattern-btn" title="Undo (Ctrl+Z)">
 																		<span class="ui-icon ui-icon-arrowreturnthick-1-w"></span> <?= tr("Undo")?>
 																</button>
-																<button id="btn-editor-redo" class="skyculture-btn pattern-btn" title="Redo (Ctrl+Y)">
+																<button id="btn-editor-redo" class="pattern-btn" title="Redo (Ctrl+Y)">
 																		<span class="ui-icon ui-icon-arrowreturnthick-1-e"></span> <?= tr("Redo")?>
 																</button>
-																<button id="btn-editor-find" class="skyculture-btn pattern-btn" title="Find (Ctrl+F)">
+																<button id="btn-editor-find" class="pattern-btn" title="Find (Ctrl+F)">
 																		<span class="ui-icon ui-icon-search"></span> <?= tr("Find")?>
 																</button>
-																<button id="btn-editor-replace" class="skyculture-btn pattern-btn" title="Replace (Ctrl+H)">
+																<button id="btn-editor-replace" class="pattern-btn" title="Replace (Ctrl+H)">
 																		<span class="ui-icon ui-icon-transfer-e-w"></span> <?= tr("Replace")?>
 																</button>
 														</div>
@@ -1484,16 +1485,16 @@
 														<!-- GROUP 5: Format Operations (Comment, Indent, Outdent, Format)-->
 														<!-- ============================================================ -->
 														<div class="toolbar-group">
-																<button id="btn-editor-comment" class="skyculture-btn pattern-btn" title="Toggle Comment (Ctrl+/)">
+																<button id="btn-editor-comment" class="pattern-btn" title="Toggle Comment (Ctrl+/)">
 																		<span class="ui-icon ui-icon-comment"></span> <?= tr("Comment")?>
 																</button>
-																<button id="btn-editor-indent" class="skyculture-btn pattern-btn" title="Indent (Tab)">
+																<button id="btn-editor-indent" class="pattern-btn" title="Indent (Tab)">
 																		<span class="ui-icon ui-icon-arrowthick-1-e"></span> <?= tr("Indent")?>
 																</button>
-																<button id="btn-editor-outdent" class="skyculture-btn pattern-btn" title="Outdent (Shift+Tab)">
+																<button id="btn-editor-outdent" class="pattern-btn" title="Outdent (Shift+Tab)">
 																		<span class="ui-icon ui-icon-arrowthick-1-w"></span> <?= tr("Outdent")?>
 																</button>
-																<button id="btn-editor-autoformat" class="skyculture-btn pattern-btn" title="Auto Format">
+																<button id="btn-editor-autoformat" class="pattern-btn" title="Auto Format">
 																		<span class="ui-icon ui-icon-magic"></span> <?= tr("Format")?>
 																</button>
 														</div>
@@ -1502,10 +1503,10 @@
 														<!-- GROUP 6: Code Folding (Fold All, Unfold All)                 -->
 														<!-- ============================================================ -->
 														<div class="toolbar-group">
-																<button id="btn-editor-foldall" class="skyculture-btn pattern-btn" title="Fold All (Ctrl+Shift+Q)">
+																<button id="btn-editor-foldall" class="pattern-btn" title="Fold All (Ctrl+Shift+Q)">
 																		<span class="ui-icon ui-icon-minus"></span> <?= tr("Fold All")?>
 																</button>
-																<button id="btn-editor-unfoldall" class="skyculture-btn pattern-btn" title="Unfold All (Ctrl+Alt+Q)">
+																<button id="btn-editor-unfoldall" class="pattern-btn" title="Unfold All (Ctrl+Alt+Q)">
 																		<span class="ui-icon ui-icon-plus"></span> <?= tr("Unfold All")?>
 																</button>
 														</div>
@@ -1593,7 +1594,7 @@
 														<!-- GROUP 8: Validation & Examples                               -->
 														<!-- ============================================================ -->
 														<div class="toolbar-group">
-																<button id="btn-editor-revalidate" class="skyculture-btn pattern-btn" title="Revalidate all functions (refresh colors)">
+																<button id="btn-editor-revalidate" class="pattern-btn" title="Revalidate all functions (refresh colors)">
 																		<span class="ui-icon ui-icon-refresh"></span> <?= tr("Revalidate")?>
 																</button>
 																<label id="auto-validation-toggle" class="auto-validation-label pattern-btn" title="Automatically validate functions while typing">
@@ -2162,7 +2163,285 @@
 										</section>
 								</div>
 						</div>
-						
+
+						<!-- ========================================== -->
+						<!-- Tab : Scripts Generator (Object Types)     -->
+						<!-- ========================================== -->
+						<div id="sub-tab-scripts-generator">
+							<div class="scriptsgenerator-layout">
+
+							<!-- ============================================================ -->
+							<!-- MAIN PANEL: Types + Objects + Options + Preview             -->
+							<!-- ============================================================ -->
+							<section id="scripts-generator-main" class="block flex flex-column">
+											<header>
+															<h2><?= tr("Scripts Generator")?></h2>
+															<span class="patterns-note" style="margin-left:15px;">
+																			<?= tr("Generate tour scripts for any object type loaded by Stellarium")?>
+															</span>
+											</header>
+
+											<!-- ============================================================ -->
+											<!-- SECTION 1: Object Types (from /api/objects/listobjecttypes)  -->
+											<!-- ============================================================ -->
+											<div class="scriptsgenerator-section">
+															<div class="tour-section-title">
+																			<h3 style="display:inline-block;margin:0;">
+																							<?= tr("1. Select Object Type")?>
+																							<span class="pattern-count" id="scriptsgenerator-types-count">0</span>
+																			</h3>
+
+																			<!-- Language toggle: i18n names vs English names -->
+																			<label style="margin-left:15px;cursor:pointer;">
+																							<input type="checkbox" id="scriptsgenerator-use-i18n" checked />
+																							<span class="tour-control-label">
+																											<?= tr("Use translated names (i18n)")?>
+																							</span>
+																							<small>
+																											(<?= tr("uses current UI language")?>)
+																							</small>
+																			</label>
+															</div>
+
+															<!-- Types buttons container (populated by JS) -->
+															<div id="scriptsgenerator-types-container"
+																	 class="scriptsgenerator-buttons-container">
+																			<div class="loading-placeholder">
+																							<?= tr("Loading object types from Stellarium...")?>
+																			</div>
+															</div>
+											</div>
+
+											<!-- ============================================================ -->
+											<!-- SECTION 2: Objects of Selected Type                          -->
+											<!-- ============================================================ -->
+											<div class="scriptsgenerator-section">
+															<div class="tour-section-title">
+																			<h3 style="display:inline-block;margin:0;">
+																							<span class="pattern-count" id="scriptsgenerator-objects-count">0</span>
+																							<?= tr("2. Select Objects")?>
+																							<small id="scriptsgenerator-selected-type-label"
+																										 class="tour-multiselect-hint"
+																										 style="font-weight:normal;">
+																							</small>
+																			</h3>
+
+
+															<div class="control-group tour-multiselect-group">
+																	<label class="option-label multi-select-label" for="constellation-multi-select-mode">
+																		<input type="checkbox" id="scriptsgenerator-multi-select" title="Enable to select custom array for tour generation">
+																			<span style="font-weight:bold;cursor:pointer;"><strong><?= tr("Multi-Select")?></strong></span>
+																		<small>(<?= tr("pick specific objects")?>)</small>
+																	</label>
+																	<!-- Selection counter -->
+																	<span class="tour-selection-count" id="scriptsgenerator-selection-count">0 <?= tr("selected")?></span>
+
+																			<!-- Select All / Clear buttons (visible in multi-select mode) -->
+																			<button id="scriptsgenerator-select-all" class="pattern-btn jquerybutton"	style="margin-left:8px;display:none;">
+																							<?= tr("Select All")?>
+																			</button>
+																			<button id="scriptsgenerator-clear-selection"	class="pattern-btn jquerybutton" style="margin-left:4px;display:none;">
+																							<?= tr("Clear")?>
+																			</button>
+															</div>
+															</div>
+
+															<!-- Objects buttons container (populated by JS) -->
+															<div id="scriptsgenerator-objects-container"
+																	 class="scriptsgenerator-buttons-container">
+																			<div class="loading-placeholder">
+																							<?= tr("Select an object type above to load its objects")?>
+																			</div>
+															</div>
+											</div>
+
+											<!-- ============================================================ -->
+											<!-- SECTION 3: Script Options                                     -->
+											<!-- ============================================================ -->
+											<fieldset class="control-group visibility-control-group"
+																style="margin-top:15px;">
+															<legend><?= tr("3. Script Options")?></legend>
+
+															<div class="tour-row">
+																			<div class="tour-control-group">
+																							<label class="tour-control-label-bold" for="scriptsgenerator-duration">
+																											<?= tr("Duration:")?>
+																							</label>
+																							<input id="scriptsgenerator-duration"
+																										 class="tour-input-number spinner"
+																										 value="4"
+																										 data-min="1" data-max="30" data-step="0.5"
+																										 data-numberformat="n1"/>
+																							<span><?= tr("sec")?></span>
+																			</div>
+
+																			<div class="tour-control-group">
+																							<label class="tour-control-label-bold" for="scriptsgenerator-zoom-fov">
+																											<?= tr("Zoom FOV:")?>
+																							</label>
+																							<input id="scriptsgenerator-zoom-fov"
+																										 class="tour-input-number spinner"
+																										 value="15"
+																										 data-min="1" data-max="120" data-step="1"
+																										 data-numberformat="n0"/>
+																							<span><?= tr("deg")?></span>
+																			</div>
+
+																			<div class="tour-control-group">
+																							<label class="tour-control-label-bold" for="scriptsgenerator-overview-fov">
+																											<?= tr("Overview FOV:")?>
+																							</label>
+																							<input id="scriptsgenerator-overview-fov"
+																										 class="tour-input-number spinner"
+																										 value="90"
+																										 data-min="20" data-max="180" data-step="1"
+																										 data-numberformat="n0"/>
+																							<span><?= tr("deg")?></span>
+																			</div>
+
+																			<div class="tour-control-group">
+																							<label class="tour-control-label-bold" for="scriptsgenerator-font-size">
+																											<?= tr("Font Size:")?>
+																							</label>
+																							<input id="scriptsgenerator-font-size"
+																										 class="tour-input-number spinner"
+																										 value="16"
+																										 data-min="10" data-max="40" data-step="1"
+																										 data-numberformat="n0"/>
+																							<span>px</span>
+																			</div>
+															</div>
+
+															<div class="tour-row">
+																			<label class="tour-control-group" style="cursor:pointer;">
+																							<input type="checkbox" id="scriptsgenerator-show-labels" checked />
+																							<span class="tour-control-label">
+																											<?= tr("Show object name labels on screen")?>
+																							</span>
+																			</label>
+
+																			<label class="tour-control-group" style="cursor:pointer;">
+																							<input type="checkbox" id="scriptsgenerator-show-markers" checked />
+																							<span class="tour-control-label">
+																											<?= tr("Show selection markers")?>
+																							</span>
+																			</label>
+
+																			<label class="tour-control-group" style="cursor:pointer;">
+																							<input type="checkbox" id="scriptsgenerator-use-savestate" />
+																							<span class="tour-control-label" style="font-weight:bold;color:#A6E22E;">
+																											<?= tr("Use save_state.inc")?>
+																											<small class="tour-multiselect-hint">
+																															(<?= tr("save/restore full display state")?>)
+																											</small>
+																							</span>
+																			</label>
+															</div>
+
+															<!-- Optional: Lock observer location/time if available -->
+															<div class="tour-row">
+																			<label class="tour-control-group" style="cursor:pointer;">
+																							<input type="checkbox" id="scriptsgenerator-lock-observer" />
+																							<span class="tour-control-label">
+																											<?= tr("Lock current observer location and time")?>
+																											<small class="tour-multiselect-hint">
+																															(<?= tr("reproducible sky")?>)
+																											</small>
+																							</span>
+																			</label>
+																			<span id="scriptsgenerator-lock-observer-info"
+																						class="tour-multiselect-hint"
+																						style="color:#FFE0C6;font-style:italic;">
+																			</span>
+															</div>
+											</fieldset>
+
+											<!-- ============================================================ -->
+											<!-- SECTION 4: Generate + Preview                                 -->
+											<!-- ============================================================ -->
+											<div class="tour-row-separator" style="margin-top:15px;">
+															<button id="scriptsgenerator-generate"
+																			class="pattern-btn jquerybutton"
+																			style="font-size:14px;padding:8px 20px;">
+																			<span class="ui-icon ui-icon-script"></span>
+																			<?= tr("Generate Script")?>
+															</button>
+															<button id="scriptsgenerator-copy"
+																			class="pattern-btn jquerybutton">
+																			<?= tr("Copy")?>
+															</button>
+															<button id="scriptsgenerator-send-to-editor"
+																			class="pattern-btn jquerybutton">
+																			<span class="ui-icon ui-icon-pencil"></span>
+																			<?= tr("Send to Script Editor")?>
+															</button>
+															<span id="scriptsgenerator-status"
+																		class="tour-multiselect-hint"
+																		style="margin-left:10px;font-style:italic;">
+															</span>
+											</div>
+
+											<!-- Live preview area -->
+											<div class="scriptsgenerator-preview-wrapper">
+															<label class="tour-control-label-bold" style="display:block;margin-bottom:4px;">
+																			<?= tr("Preview (read-only):")?>
+															</label>
+															<pre id="scriptsgenerator-preview"
+																	 class="scriptsgenerator-preview"><?= tr("Generated script will appear here.")?></pre>
+											</div>
+
+							</section>
+
+							<!-- ============================================================ -->
+							<!-- SIDEBAR: Status & Help                                       -->
+							<!-- ============================================================ -->
+							<aside id="scriptsgenerator-sidebar" class="scriptsgenerator-sidebar">
+
+											<!-- API Status -->
+											<div class="block">
+															<header><h3><?= tr("API Status")?></h3></header>
+															<div id="scriptsgenerator-api-status">
+																			<div class="loading-placeholder">
+																							<?= tr("Checking connection...")?>
+																			</div>
+															</div>
+											</div>
+
+											<!-- Selection Summary -->
+											<div class="block">
+															<header><h3><?= tr("Current Selection")?></h3></header>
+															<div id="scriptsgenerator-summary">
+																			<div class="loading-placeholder">
+																							<?= tr("Nothing selected yet")?>
+																			</div>
+															</div>
+											</div>
+
+											<!-- Help -->
+											<div class="block">
+															<header><h3><?= tr("Quick Help")?></h3></header>
+															<div class="tour-help-content" style="font-size:11px;">
+																			<p><strong><?= tr("How it works:")?></strong></p>
+																			<ol style="padding-left:18px;margin:6px 0;">
+																							<li><?= tr("Select an object type from panel 1 (e.g. Nebulae, Messier Catalogue).")?></li>
+																							<li><?= tr("The objects of that type load automatically in panel 2.")?></li>
+																							<li><?= tr("Either include ALL objects, or enable Multi-Select to pick specific ones.")?></li>
+																							<li><?= tr("Adjust options in panel 3 (duration, FOV, labels...).")?></li>
+																							<li><?= tr("Click Generate Script — the result appears in the preview.")?></li>
+																							<li><?= tr("Use 'Send to Script Editor' to open it in the editor and run it.")?></li>
+																			</ol>
+																			<p class="tour-help-note">
+																							<strong><?= tr("Tip:")?></strong>
+																							<?= tr("The i18n checkbox controls whether names appear in your UI language or in English. This affects both the generated script content and the preview.")?>
+																			</p>
+															</div>
+											</div>
+
+							</aside>
+
+							</div><!-- .flex.flex-wrap -->
+						</div><!-- #sub-tab-scripts-generator -->						
+
 				</div><!-- End #actions-sub-tabs -->
 			</div><!-- End #tab_actions -->
 			
@@ -4429,5 +4708,42 @@
 			</div>
 	</div>
 
+	<!-- Control Panel Help: Scripts Generator -->
+	<div id="help-controls-scriptsgenerator" style="display:none;" title="<?= tr("Scripts Generator Controls")?>">
+			<div class="tour-help-content">
+					<p class="tour-help-intro">
+							<?= tr("These controls filter and organize objects loaded from Stellarium for the selected object type.")?>
+					</p>
+
+					<h4><?= tr("1. Filter Objects")?></h4>
+					<p>
+							<strong><?= tr("Visible above horizon only")?>:</strong>
+							<?= tr("Shows only objects currently above your horizon. When enabled, you will immediately see a counter in the tab header showing 'visible / total'.")?>
+					</p>
+					<p>
+							<strong><?= tr("Sort by")?>:</strong>
+							<?= tr("Allows sorting the objects by Name, Constellation, Brightness (Magnitude), or Object Type. Click 'Apply' to re-render the list with the new sort order.")?>
+					</p>
+					<p>
+							<strong><?= tr("Order")?>:</strong>
+							<?= tr("Ascending or Descending order.")?>
+					</p>
+
+					<h4><?= tr("2. Multi-Select Workflow")?></h4>
+					<p>
+							<?= tr("Multi-Select lets you build a custom list of objects for a tour:")?>
+					</p>
+					<ol>
+							<li><?= tr("(Optional) Enable 'Visible above horizon only' to narrow to tonight's sky.")?></li>
+							<li><?= tr("Enable Multi-Select. Navigation is temporarily disabled and buttons become toggleable.")?></li>
+							<li><?= tr("Click objects to add/remove them. The counter shows how many are selected. Use 'Select All' or 'Clear' for quick actions.")?></li>
+							<li><?= tr("Click 'Generate Script'. Only the selected objects will be included, in the order they currently appear on screen.")?></li>
+					</ol>
+					<p class="tour-help-note">
+							<?= tr("Note: If Multi-Select is OFF, all visible objects (after filters) are included in the generated script.")?>
+					</p>
+			</div>
+	</div>
+	
 </body>
 </html>

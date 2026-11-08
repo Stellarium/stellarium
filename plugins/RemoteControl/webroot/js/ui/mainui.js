@@ -5,11 +5,11 @@ define(["jquery", "settings", "globalize", "api/remotecontrol", "api/actions",
     "./scripts", "./viewcontrol", "./location", "./search", "./skyculture/skyculture", 
     "./skyculture-stats", "./gpcontroller", 
     "scripteditor/scriptEditor", "scripteditor/codeGenerator",
-		"scripteditor/apiExplorer", "scripteditor/actionsCategorized", "scripteditor/btnGenerator", "scripteditor/unifiedButtons", "jquery-ui"
+		"scripteditor/apiExplorer", "scripteditor/actionsCategorized", "scripteditor/btnGenerator", "scripteditor/unifiedButtons", "scripteditor/scriptsGenerator", "jquery-ui"
 ], function($, settings, globalize, rc, actionApi, propApi, timeui,
     JoystickQueue, actionsui, viewoptionsui, scriptsui, viewcontrolui, locationui,
     searchui, skyculture, skycultureStats, gpcontroller,
-    scriptEditor, codeGenerator, apiExplorer, actionsCategorized, btnGenerator, unifiedButtons) {
+    scriptEditor, codeGenerator, apiExplorer, actionsCategorized, btnGenerator, unifiedButtons, scriptsGenerator) {
     "use strict";
 
 	var animationSupported = (window.requestAnimationFrame !== undefined);
@@ -1375,6 +1375,35 @@ define(["jquery", "settings", "globalize", "api/remotecontrol", "api/actions",
 				console.warn("[MainUI] Actions Categorized module not available");
 		}
 
+		// =====================================================================
+		// INITIALIZE SCRIPTS GENERATOR MODULE (sub-tab in Actions)
+		// =====================================================================
+		// This module powers the "Scripts Generator" sub-tab which can
+		// generate SSC tour scripts for any object type exposed by Stellarium
+		// (constellations, nebulae, Messier catalogue, planets, etc.).
+		// 
+		// It reuses the same API endpoints, styling, and tour generation
+		// infrastructure as the Sky Culture tab.
+		// =====================================================================
+		if (typeof scriptsGenerator !== 'undefined' && scriptsGenerator &&
+				typeof scriptsGenerator.init === 'function') {
+
+				// Delay init slightly to ensure:
+				//   1. The sub-tabs widget (#actions-sub-tabs) has been built
+				//   2. The DOM elements inside #sub-tab-scripts-generator exist
+				//   3. jQuery UI spinners are available
+				setTimeout(function() {
+						if ($('#sub-tab-scripts-generator').length) {
+								scriptsGenerator.init();
+								console.log("[MainUI] Scripts Generator module initialized");
+						} else {
+								console.warn("[MainUI] Scripts Generator container not found — skipped");
+						}
+				}, 300);
+		} else {
+				console.warn("[MainUI] Scripts Generator module not available or missing init()");
+		}
+		
 		// =====================================================================
 		// INITIALIZE PLUGINS SUB-TABS (inside #plugins_tab)
 		// =====================================================================
