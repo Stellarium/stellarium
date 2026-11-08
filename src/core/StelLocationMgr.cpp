@@ -952,44 +952,13 @@ void StelLocationMgr::locationFromIpOldMethod()
 	connect(networkReply, &QNetworkReply::finished, this, &StelLocationMgr::changeLocationFromNetworkLookup);
 }
 
-// lookup location from OS location service or IP address.
-void StelLocationMgr::locationFromIP()
+void StelLocationMgr::doGetLocationFromIP()
 {
-	// TODO: Find out how to properly setup geoclue2 on Linux, then reactivate.
-#ifdef Q_OS_WIN
-
-# if (QT_VERSION>=QT_VERSION_CHECK(6,6,0))
-	QLocationPermission locationPermission;
-	// Try to get high-precision location first
-	locationPermission.setAccuracy(QLocationPermission::Precise);
-	qApp->requestPermission(locationPermission, [&locationPermission](const QPermission &permission) {
-		if (permission.status() == Qt::PermissionStatus::Denied)
-		{
-			// Fall back to configure low-precision
-			locationPermission.setAccuracy(QLocationPermission::Approximate);
-		}
-	});
-	qApp->requestPermission(locationPermission, [this](const QPermission &permission) {
-		if (permission.status() == Qt::PermissionStatus::Granted && qGeoPositionInfoSource &&
-		    (qGeoPositionInfoSource->supportedPositioningMethods() & QGeoPositionInfoSource::AllPositioningMethods))
-		{
-			qCDebug(LocIP) << "permission granted, doing OS service lookup for location...";
-			qCDebug(LocIP) << "Location provider:" << qGeoPositionInfoSource->sourceName();
-			qCDebug(LocIP) << "Location provider supported caps:" << qGeoPositionInfoSource->supportedPositioningMethods();
-
-			// Trigger the actual Qt Location lookup from OS
-			qGeoPositionInfoSource->requestUpdate();
-			qCDebug(LocIP) << "permission granted, doing OS service lookup for location... postRequest ";
-		}
-		else
-		{
-			locationFromIpOldMethod();
-		}
-	});
-# else
 	if (qGeoPositionInfoSource && (qGeoPositionInfoSource->supportedPositioningMethods() & QGeoPositionInfoSource::AllPositioningMethods))
 	{
 		qCDebug(LocIP) << "Doing OS service lookup for location...";
+		qCDebug(LocIP) << "Location provider:" << qGeoPositionInfoSource->sourceName();
+		qCDebug(LocIP) << "Location provider supported caps:" << qGeoPositionInfoSource->supportedPositioningMethods();
 		// Trigger the actual Qt Location lookup from OS
 		qGeoPositionInfoSource->requestUpdate();
 		qCDebug(LocIP) << "Doing OS service lookup for location... postRequest ";
@@ -998,6 +967,47 @@ void StelLocationMgr::locationFromIP()
 	{
 		locationFromIpOldMethod();
 	}
+}
+
+// lookup location from OS location service or IP address.
+void StelLocationMgr::locationFromIP()
+{
+	// TODO: Find out how to properly setup geoclue2 on Linux, then reactivate.
+#ifdef Q_OS_WIN
+
+# if QT_VERSION>=QT_VERSION_CHECK(6,6,0) // Qt<6.6 handles permissions by itself; since 6.6 user code is responsible for this
+	QLocationPermission locationPermission;
+	// Try to get high-precision location first
+	locationPermission.setAccuracy(QLocationPermission::Precise);
+	qCDebug(LocIP) << "Requesting permission to access precise location...";
+	qApp->requestPermission(locationPermission, [this](const QPermission &permission)
+	{
+		if (permission.status() == Qt::PermissionStatus::Granted)
+		{
+			qCDebug(LocIP) << "Precise location permission GRANTED";
+			doGetLocationFromIP();
+			return;
+		}
+
+		// Fall back to configure low-precision
+		qCDebug(LocIP) << "Precise location permission DENIED, trying coarse location...";
+		QLocationPermission locationPermission;
+		locationPermission.setAccuracy(QLocationPermission::Approximate);
+		qApp->requestPermission(locationPermission, [this](const QPermission &permission)
+		{
+			if (permission.status() == Qt::PermissionStatus::Granted)
+			{
+				qCDebug(LocIP) << "Coarse location permission GRANTED";
+				doGetLocationFromIP();
+			}
+			else
+			{
+				locationFromIpOldMethod();
+			}
+		});
+	});
+# else
+	doGetLocationFromIP();
 # endif
 
 #else
