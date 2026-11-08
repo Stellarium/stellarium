@@ -496,16 +496,6 @@ StelLocationMgr::StelLocationMgr()
 	planetSurfaceMap=QImage(":/graphicGui/miscWorldMap.jpg");
 	connect(StelApp::getInstance().getCore(), &StelCore::locationChanged, this, &StelLocationMgr::changePlanetMapForLocation);
 
-	// configure the QGeoPositionInfoSource which can be queried from OS
-	qGeoPositionInfoSource = QGeoPositionInfoSource::createDefaultSource(this);
-	if (qGeoPositionInfoSource && (qGeoPositionInfoSource->supportedPositioningMethods() & QGeoPositionInfoSource::AllPositioningMethods))
-		connect(qGeoPositionInfoSource, &QGeoPositionInfoSource::positionUpdated, this, &StelLocationMgr::positionUpdatedFromOS);
-	else
-	{
-		qWarning() << "No valid QPositionInfoSource. Old IP queries should still work.";
-		delete qGeoPositionInfoSource;
-		qGeoPositionInfoSource=nullptr;
-	}
 }
 
 StelLocationMgr::~StelLocationMgr()
@@ -954,8 +944,15 @@ void StelLocationMgr::locationFromIpOldMethod()
 
 void StelLocationMgr::doGetLocationFromIP()
 {
-	if (qGeoPositionInfoSource && (qGeoPositionInfoSource->supportedPositioningMethods() & QGeoPositionInfoSource::AllPositioningMethods))
+	if (!qGeoPositionInfoSource)
 	{
+		qGeoPositionInfoSource = QGeoPositionInfoSource::createDefaultSource(this);
+		connect(qGeoPositionInfoSource, &QGeoPositionInfoSource::positionUpdated, this, &StelLocationMgr::positionUpdatedFromOS);
+	}
+
+	if (qGeoPositionInfoSource && qGeoPositionInfoSource->supportedPositioningMethods())
+	{
+
 		qCDebug(LocIP) << "Doing OS service lookup for location...";
 		qCDebug(LocIP) << "Location provider:" << qGeoPositionInfoSource->sourceName();
 		qCDebug(LocIP) << "Location provider supported caps:" << qGeoPositionInfoSource->supportedPositioningMethods();
@@ -965,8 +962,13 @@ void StelLocationMgr::doGetLocationFromIP()
 	}
 	else
 	{
+		qWarning() << "No valid QPositionInfoSource. Old IP queries should still work.";
+		delete qGeoPositionInfoSource;
+		qGeoPositionInfoSource=nullptr;
+
 		locationFromIpOldMethod();
 	}
+
 }
 
 // lookup location from OS location service or IP address.
