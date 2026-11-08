@@ -1002,6 +1002,30 @@ Vec3d StelMovementMgr::stableUpVector(const Vec3d& dir, const Vec3d& uprightUp)
 	return isNearPole(dir) ? uprightUp : Vec3d(0., 0., 1.);
 }
 
+Vec3d StelMovementMgr::lockedUpVector(const Vec3d& dir, const Vec3d& storedUp)
+{
+	double lon, lat;
+	StelUtils::rectToSphe(&lon, &lat, dir);
+	// The rotation to keep, as the longitude shown vertically at the pole. For the vertical axis this is just lon (upright).
+	const double keepLon = poleLongitudeFromUp(storedUp, lat>0., lon);
+	const double diff = StelUtils::fmodpos(keepLon - lon + M_PI, 2.*M_PI) - M_PI;
+	return upVectorFromLonLat(lon + lockedRotationWeight(lat)*diff, lat);
+}
+
+double StelMovementMgr::lockedRotationWeight(double lat)
+{
+	// 1 in the pole region (as isNearPole()), 0 below 84 degrees, smooth in between.
+	static const double hi = 0.95*M_PI_2;
+	static const double lo = 84.*M_PI_180;
+	const double absLat = fabs(lat);
+	if (absLat >= hi)
+		return 1.;
+	if (absLat <= lo)
+		return 0.;
+	const double x = (absLat-lo)/(hi-lo);
+	return x*x*(3.-2.*x);
+}
+
 void StelMovementMgr::initMoveLongitudes(const Vec3d& aimUpMountFrame)
 {
 	const Vec3d startMountFrame = (move.mountMode==MountAltAzimuthal) ? move.start : j2000ToMountFrame(move.start);
@@ -1319,10 +1343,16 @@ void StelMovementMgr::updateVisionVector(double deltaTime)
 		{
 			if (flagLockEquPos) // Equatorial vision vector locked
 			{
-				// Recalc local vision vector. Its direction in the mount frame changes with time. The stored up vector
-				// is the vertical axis except near the pole (see stableUpVector()), so the view stays upright,
-				// and near the pole its rotation is kept. Both change continuously while the direction drifts.
-				applyViewDirectionJ2000(viewDirectionJ2000);
+				// Recalc local vision vector. Its direction in the mount frame changes with time.
+				// The stored up vector is left unchanged, and the view is drawn with lockedUpVector(), which keeps
+				// the rotation near the pole and returns smoothly to an upright view when the direction leaves it.
+				viewDirectionMountFrame = j2000ToMountFrame(viewDirectionJ2000);
+				core->lookAtJ2000(viewDirectionJ2000, mountFrameToJ2000(lockedUpVector(viewDirectionMountFrame, upVectorMountFrame)));
+				// Once the view is upright again, store that, so it also stays upright when the lock is released.
+				double lon, lat;
+				StelUtils::rectToSphe(&lon, &lat, viewDirectionMountFrame);
+				if (lockedRotationWeight(lat) == 0.)
+					upVectorMountFrame.set(0., 0., 1.);
 			}
 			else
 			{

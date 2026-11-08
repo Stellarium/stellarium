@@ -154,6 +154,44 @@ void TestStelMovementMgr::testStableUpVector()
 	}
 }
 
+// Position lock: the angle between the drawn up vector and the upright one, around the view direction (degrees).
+static double rollDeg(const Vec3d& dir, const Vec3d& up)
+{
+	double lon, lat;
+	StelUtils::rectToSphe(&lon, &lat, dir);
+	const Vec3d upright = StelMovementMgr::upVectorFromLonLat(lon, lat);
+	Vec3d drawn = up - dir * up.dot(dir);
+	drawn.normalize();
+	return atan2((upright ^ drawn).dot(dir), upright.dot(drawn)) * M_180_PI;
+}
+
+// A view locked inside the pole region keeps its rotation there, is upright again below 84 degrees,
+// and the rotation changes continuously in between. A stored vertical axis always gives an upright view.
+void TestStelMovementMgr::testLockedUpVector()
+{
+	const Vec3d vertical(0., 0., 1.);
+	const double keepLon = 1.2;
+	const Vec3d storedUp = StelMovementMgr::upVectorFromLonLat(keepLon, 87. * M_PI_180);
+	const double lon = keepLon + 1.; // the direction has drifted to another azimuth
+	double prevRoll = 0.;
+	for (int i = 0; i <= 900; ++i)
+	{
+		const double latDeg = 89. - i * 0.01; // 89 ... 80 degrees
+		Vec3d dir;
+		StelUtils::spheToRect(lon, latDeg * M_PI_180, dir);
+		const Vec3d up = StelMovementMgr::lockedUpVector(dir, storedUp);
+		QVERIFY(qAbs(rollDeg(dir, StelMovementMgr::lockedUpVector(dir, vertical))) < 1e-6);
+		const double roll = rollDeg(dir, up);
+		if (latDeg >= 85.5)
+			QVERIFY(qAbs(StelMovementMgr::poleLongitudeFromUp(up, true, 99.) - keepLon) < 1e-9);
+		if (latDeg <= 84.)
+			QVERIFY(qAbs(roll) < 1e-6);
+		if (i > 0)
+			QVERIFY(qAbs(roll - prevRoll) < 1.); // no jumps for a 0.01 degree step
+		prevRoll = roll;
+	}
+}
+
 // In the pole, the longitude decoded from the up vector is the one used to build it.
 // Without a usable up vector the fallback is returned.
 void TestStelMovementMgr::testPoleLongitudeFromUp()

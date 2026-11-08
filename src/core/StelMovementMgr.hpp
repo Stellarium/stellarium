@@ -205,6 +205,14 @@ public:
 	//! changes later without a new up vector (e.g. with position lock or after a mount change). Near the pole (see isNearPole()),
 	//! where the vertical axis would be almost parallel to the view, @p uprightUp is returned, which also keeps the rotation of the view.
 	static Vec3d stableUpVector(const Vec3d& dir, const Vec3d& uprightUp);
+	//! Return the up vector to draw a view with position lock, whose direction @p dir drifts in the mount frame,
+	//! from the stored up vector @p storedUp (both in the mount frame). In the pole region (see isNearPole()) the rotation
+	//! given by @p storedUp is kept; below 84 degrees the view is upright; in between it changes smoothly. For a stored
+	//! vertical axis the view is always upright. Unlike keeping @p storedUp, this does not leave a roll after leaving the pole region.
+	static Vec3d lockedUpVector(const Vec3d& dir, const Vec3d& storedUp);
+	//! The weight of the kept rotation in lockedUpVector() for latitude @p lat [radians]:
+	//! 1 for |lat| > 85.5 degrees (pole region), 0 below 84 degrees, smooth in between.
+	static double lockedRotationWeight(double lat);
 
 	void moveToObject(const StelObjectP& target, float moveDuration = 1., ZoomingMode zooming = ZoomNone);
 
