@@ -158,7 +158,7 @@ void ViewDialog::retranslate()
 
 		populateHipsGroups();
 		clearHips();
-		updateHips();
+		scheduleHipsUpdate();
 
 		//Hack to shrink the tabs to optimal size after language change
 		//by causing the list items to be laid out again.
@@ -745,11 +745,10 @@ void ViewDialog::createDialogContent()
 	hipsUpdateTimer.setInterval(50);
 	hipsUpdateTimer.setSingleShot(true);
 	connect(&hipsUpdateTimer, &QTimer::timeout, this, &ViewDialog::updateHips);
-	connect(qobject_cast<HipsMgr*>(hipsmgr), &HipsMgr::surveysChanged, this,
-	        [this]{ if(!hipsUpdateTimer.isActive()) hipsUpdateTimer.start(); });
+	connect(qobject_cast<HipsMgr*>(hipsmgr), &HipsMgr::surveysChanged, this, &ViewDialog::scheduleHipsUpdate);
 
-	connect(ui->surveyTypeComboBox, qOverload<int>(&QComboBox::currentIndexChanged), this, &ViewDialog::updateHips);
-	connect(ui->stackListWidget, &QListWidget::currentItemChanged, this, &ViewDialog::updateHips);
+	connect(ui->surveyTypeComboBox, qOverload<int>(&QComboBox::currentIndexChanged), this, &ViewDialog::scheduleHipsUpdate);
+	connect(ui->stackListWidget, &QListWidget::currentItemChanged, this, &ViewDialog::scheduleHipsUpdate);
 	connect(ui->surveysTreeWidget, &QTreeWidget::currentItemChanged, this, &ViewDialog::updateHipsText, Qt::QueuedConnection);
 	connect(ui->surveysTreeWidget, &QTreeWidget::currentItemChanged, this, &ViewDialog::updateHipsControls, Qt::QueuedConnection);
 	connect(ui->surveysTreeWidget, &QTreeWidget::itemChanged, this, &ViewDialog::hipsListItemChanged);
@@ -771,7 +770,7 @@ void ViewDialog::createDialogContent()
 	connect(ui->hipsResetPushButton, &QPushButton::clicked, this, &ViewDialog::resetSelectedHipsDisplaySettings);
 	connect(ui->hipsResetAllPushButton, &QPushButton::clicked, this, &ViewDialog::resetAllHipsDisplaySettings);
 	connectBoolProperty(ui->hipsAtmosphericExtinctionCheckBox, "HipsMgr.flagShowAtmosphericExtinction");
-	updateHips();
+	scheduleHipsUpdate();
 
 	updateTabBarListWidgetWidth();
 
@@ -1023,6 +1022,17 @@ void ViewDialog::clearHips()
 	surveysInTheList.clear();
 	selectedSurveyType.clear();
 	updateHipsControls();
+}
+
+void ViewDialog::scheduleHipsUpdate()
+{
+	if(hipsUpdateTimer.isActive())
+	{
+		// Already scheduled
+		return;
+	}
+
+	hipsUpdateTimer.start();
 }
 
 void ViewDialog::updateHips()
@@ -2125,6 +2135,9 @@ void ViewDialog::handleVisibleChanged(bool visible)
 {
 	if (!visible)
 		return;
+
+	scheduleHipsUpdate();
+
 	const int currentYear = QDateTime::currentDateTime().date().year();
 	if (currentYear == lastKnownYear)
 		return;
