@@ -1038,8 +1038,12 @@ void StelLocationMgr::positionUpdatedFromOS(const QGeoPositionInfo &info)
 	//loc.population = 0;
 	// TODO: Consider LP map lookup?
 	//loc.lightPollutionLuminance = StelLocation::DEFAULT_LIGHT_POLLUTION_LUMINANCE;
-	// TODO: Find IANA timezone name from OS!
-	//loc.ianaTimeZone = ...
+
+	// The location we got reflects the location of the machine to the best knowledge of the OS. So it makes sense to use the system TZ.
+	// We try to find the actual TZ name rather than "System default" just to make it explicit in the UI; otherwise simply "system_default" would work too.
+	const QString tz = QString::fromUtf8(QTimeZone::systemTimeZoneId());
+	loc.ianaTimeZone = !tz.isEmpty() && getAllTimezoneNames().contains(tz) ? tz : QStringLiteral("system_default");
+
 	loc.planetName = "Earth";
 	loc.landscapeKey = "";
 
