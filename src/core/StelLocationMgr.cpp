@@ -1004,9 +1004,6 @@ void StelLocationMgr::doGetLocationFromIP()
 // lookup location from OS location service or IP address.
 void StelLocationMgr::locationFromIP()
 {
-	// TODO: Find out how to properly setup geoclue2 on Linux, then reactivate.
-#if (defined Q_OS_WIN || defined Q_OS_ANDROID)
-
 # if QT_VERSION>=QT_VERSION_CHECK(6,6,0) // Qt<6.6 handles permissions by itself; since 6.6 user code is responsible for this
 	QLocationPermission locationPermission;
 	// Try to get high-precision location first
@@ -1041,10 +1038,6 @@ void StelLocationMgr::locationFromIP()
 # else
 	doGetLocationFromIP();
 # endif
-
-#else
-	locationFromIpOldMethod();
-#endif
 }
 
 // Private slot that is called when position info arrives
