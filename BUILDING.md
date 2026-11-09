@@ -646,9 +646,10 @@ These instructions use Qt Creator on Ubuntu 26.04. Adjust the example paths and 
 11. Add the installed Qt version under *Kits* → *Qt Versions* in Qt Creator's preferences.
 12. Open Stellarium's top-level `CMakeLists.txt` using *Open File or Project...* in Qt Creator and select the Android kit.
 13. In Qt Creator's CMake parameters, set `Qt6LinguistTools_DIR` to `$HOME/opt/qt-android/6.10.2/gcc_64/lib/cmake/Qt6LinguistTools`. Replace `$HOME` manually with your home directory, and adjust the prefix and version to match your Qt installation.
-14. Run CMake and build the project as usual.
-15. After a successful debug build, you'll get an APK file in `src/android-build-stellarium/build/outputs/apk/debug/android-build-stellarium-debug.apk` relative to the build directory.
-16. After you install the APK, don't forget to also copy Stellarium's data to the device. The assets are not included in the APK to make updates easier, so the app requires file management permissions.
+14. If you've configured the OpenSSL path in Qt Creator under *SDKs* → *Android* → *Android OpenSSL Settings* → *OpenSSL binaries location*, set the CMake parameter `ANDROID_SSL_PATH` to the directory shown in the GUI. This reuses Qt Creator's OpenSSL installation; leaving `ANDROID_SSL_PATH` empty makes CMake download it using CPM instead.
+15. Run CMake and build the project as usual.
+16. After a successful debug build, you'll get an APK file in `src/android-build-stellarium/build/outputs/apk/debug/android-build-stellarium-debug.apk` relative to the build directory.
+17. After you install the APK, don't forget to also copy Stellarium's data to the device. The assets are not included in the APK to make updates easier, so the app requires file management permissions.
 
     One way to collect all the necessary assets is to build Stellarium for the host machine, install somewhere (e.g. in `~/opt/stellarium`), and use `adb`:
     ```bash
