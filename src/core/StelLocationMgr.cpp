@@ -1020,28 +1020,28 @@ void StelLocationMgr::locationFromIP()
 // Private slot that is called when position info arrives
 void StelLocationMgr::positionUpdatedFromOS(const QGeoPositionInfo &info)
 {
-        static StelCore *core=StelApp::getInstance().getCore();
-        qDebug() << "Position received from OS query:" << info;
-        QGeoCoordinate gCoord=info.coordinate();
-        if (!gCoord.isValid())
-                return;
+	static StelCore *core=StelApp::getInstance().getCore();
+	qDebug() << "Position received from OS query:" << info;
+	QGeoCoordinate gCoord=info.coordinate();
+	if (!gCoord.isValid())
+		return;
 
-        // Assuming we are moving only around a bit, we can take the current location (providing timezone, population, lightPollutionLuminance, ...)
-        // and only update available fields.
-        StelLocation loc=core->getCurrentLocation();
-        loc.setLatitude  (static_cast<float>(gCoord.latitude()));
-        loc.setLongitude (static_cast<float>(gCoord.longitude()));
-        loc.altitude = gCoord.type() == QGeoCoordinate::Coordinate3D ? int(gCoord.altitude()) : 0;
-        loc.name    = (QString("%1%2, %3%4").arg(gCoord.latitude() <0 ? "S" : "N", QString::number(gCoord.latitude(), 'g', 6),
-                                                 gCoord.longitude()<0 ? "W" : "E", QString::number(fabs(gCoord.longitude()), 'g', 6)));
-        loc.role    = 'X'; // User-defined
-        //loc.population = 0;
-        // TODO: Consider LP map lookup?
-        //loc.lightPollutionLuminance = StelLocation::DEFAULT_LIGHT_POLLUTION_LUMINANCE;
-        // TODO: Find IANA timezone name from OS!
-        //loc.ianaTimeZone = ...
-        loc.planetName = "Earth";
-        loc.landscapeKey = "";
+	// Assuming we are moving only around a bit, we can take the current location (providing timezone, population, lightPollutionLuminance, ...)
+	// and only update available fields.
+	StelLocation loc=core->getCurrentLocation();
+	loc.setLatitude  (static_cast<float>(gCoord.latitude()));
+	loc.setLongitude (static_cast<float>(gCoord.longitude()));
+	loc.altitude = gCoord.type() == QGeoCoordinate::Coordinate3D ? int(gCoord.altitude()) : 0;
+	loc.name = QString("%1%2, %3%4").arg(gCoord.latitude() <0 ? "S" : "N", QString::number(gCoord.latitude(), 'g', 6),
+	                                     gCoord.longitude()<0 ? "W" : "E", QString::number(fabs(gCoord.longitude()), 'g', 6));
+	loc.role = 'X'; // User-defined
+	//loc.population = 0;
+	// TODO: Consider LP map lookup?
+	//loc.lightPollutionLuminance = StelLocation::DEFAULT_LIGHT_POLLUTION_LUMINANCE;
+	// TODO: Find IANA timezone name from OS!
+	//loc.ianaTimeZone = ...
+	loc.planetName = "Earth";
+	loc.landscapeKey = "";
 
 	LandscapeMgr *lMgr=GETSTELMODULE_SILENT(LandscapeMgr); // This may fail during StelApp:init() (GH:#3550)
 	QString landscapeAutoName;
