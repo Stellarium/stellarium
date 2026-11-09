@@ -948,6 +948,36 @@ void StelLocationMgr::doGetLocationFromIP()
 	{
 		qGeoPositionInfoSource = QGeoPositionInfoSource::createDefaultSource(this);
 		connect(qGeoPositionInfoSource, &QGeoPositionInfoSource::positionUpdated, this, &StelLocationMgr::positionUpdatedFromOS);
+#if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
+		connect(qGeoPositionInfoSource, &QGeoPositionInfoSource::errorOccurred, this,
+#else
+		connect(qGeoPositionInfoSource, qOverload<QGeoPositionInfoSource::Error>(&QGeoPositionInfoSource::error), this,
+#endif
+			[this](QGeoPositionInfoSource::Error error)
+			{
+				qCWarning(LocIP) << "Failed to get location from the OS:" << error;
+				if (qGeoPositionInfoSource)
+				{
+					qGeoPositionInfoSource->deleteLater();
+					qGeoPositionInfoSource=nullptr;
+				}
+				locationFromIpOldMethod();
+			});
+
+#if QT_VERSION < QT_VERSION_CHECK(6,0,0)
+		// Qt5 also emits a separate timeout error (Qt6 uses QGeoPositionInfoSource::Error::UpdateTimeoutError)
+		connect(qGeoPositionInfoSource, &QGeoPositionInfoSource::updateTimeout, this,
+			[this]()
+			{
+				qCWarning(LocIP) << "Failed to get location from the OS: update timeout";
+				if (qGeoPositionInfoSource)
+				{
+					qGeoPositionInfoSource->deleteLater();
+					qGeoPositionInfoSource=nullptr;
+				}
+				locationFromIpOldMethod();
+			});
+#endif
 	}
 
 	if (qGeoPositionInfoSource && qGeoPositionInfoSource->supportedPositioningMethods())
