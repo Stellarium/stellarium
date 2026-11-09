@@ -29,7 +29,8 @@ class TelescopeClientASCOM : public TelescopeClient
 	Q_OBJECT
 
 public:
-	TelescopeClientASCOM(const QString& name = "ASCOM", const QString& params = QString(), TelescopeControl::Equinox eq = TelescopeControl::EquinoxJ2000);
+	TelescopeClientASCOM(const QString& name = "ASCOM", const QString& params = QString(),
+	                     TelescopeControl::Equinox eq = TelescopeControl::EquinoxJ2000, int slot = 0);
 	~TelescopeClientASCOM() override;
 
 	Vec3d getJ2000EquatorialPos(const StelCore *core) const override;

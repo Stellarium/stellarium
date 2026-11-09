@@ -22,6 +22,7 @@
 #include "StelUtils.hpp"
 
 #include <QApplication>
+#include <QSslSocket>
 #include <QDateTime>
 #include <QDebug>
 #include <QFile>
@@ -83,6 +84,11 @@ void printSystemInfo()
 
 	// write ABI
 	log(QString("Build ABI: %1").arg(QSysInfo::buildAbi()));
+
+	// write SSL
+	log(QString("SSL available: %1").arg(QSslSocket::supportsSsl() ? "yes" : "no"));
+	log(QString("SSL build: %1").arg(QSslSocket::sslLibraryBuildVersionString()));
+	log(QString("SSL runtime: %1").arg(QSslSocket::sslLibraryVersionString()));
 
 	// write addressing mode
 	log(QString("Addressing mode: %1").arg(StelUtils::getAddressingMode()));

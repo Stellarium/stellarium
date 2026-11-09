@@ -9,7 +9,7 @@ stellarium [B<OPTIONS>]
 =head1 DESCRIPTION
 
 Stellarium is a free GPL software which renders realistic skies in real
-time with OpenGL. It is available for Linux/Unix, Windows and MacOSX.
+time with OpenGL. It is available for Linux/Unix, Windows, macOS and Haiku.
 With Stellarium, you really see what you can see with your eyes, 
 binoculars or a small telescope.
 
@@ -29,10 +29,30 @@ Print a brief synopsis of program options and exit.
 
 Use I<file> for the config filename instead of the default F<config.ini>.
 
+=item B<-l, --log-file> I<file>
+
+Use I<file> for the log filename instead of the default F<log.txt>.
+
 =item B<-u, --user-dir> I<dir>
 
 Use I<dir> instead of the default user data directory (F<$HOME/.stellarium/>
 on *nix operating systems).
+
+=item B<--single-buffer>
+
+Use single buffer swap (avoid screen blanking on Intel UHD).
+
+=item B<-C, --opengl-compat>
+
+Request OpenGL Compatibility profile. May help for certain driver configurations.
+
+=item B<-L, --low-graphics>
+
+Force low-graphics mode.
+
+=item B<-G, --gui-css> I<file>
+
+Use customized I<file>.css stylesheet for GUI colors.
 
 =item B<--verbose>
 
@@ -46,6 +66,10 @@ Scaling the GUI according to scale factor.
 
 Dump information about OpenGL support to logfile. Use this is you have 
 graphics problems and want to send a bug report.
+
+=item B<--dump-fontinfo>
+
+Output lots of data from the QFontInfo database (debugging aid).
 
 =item B<-f, --full-screen> I<yes|no>
 
@@ -116,6 +140,10 @@ stereographic, fisheye, cylinder, mercator, perspective, and orthographic.
 
 Delete existing config.ini and use defaults.
 
+=item B<--multires-image> I<filename|URL>
+
+With filename / URL argument, specify a multi-resolution image to load.
+
 =back
 
 =head1 RETURN VALUE
@@ -175,21 +203,19 @@ Sources of more information:
 
 =item Websites
 
-Main website: L<http://stellarium.org/>
+Main website: L<https://stellarium.org/>
 
-Wiki: L<http://stellarium.org/wiki/>
+Wiki: L<https://github.com/Stellarium/stellarium/wiki>
 
-Forums: L<http://sourceforge.net/projects/stellarium/forums>
+Forums: L<https://github.com/Stellarium/stellarium/discussions>
 
-Downloads: L<http://sourceforge.net/projects/stellarium/files/>
+Downloads: L<https://github.com/Stellarium/stellarium/releases>
 
-Support Requests: L<https://answers.launchpad.net/stellarium>
-
-Bug Tracker: L<https://bugs.launchpad.net/stellarium>
+Support Requests and Bug Tracker: L<https://github.com/Stellarium/stellarium/issues>
 
 =item The Stellarium User Guide
 
-Visit the downloads page to get a PDF copy of the Stellarium User Guide.
+Visit the main website or downloads page to get a PDF copy of the Stellarium User Guide.
 
 =back
 
@@ -203,9 +229,9 @@ of this page.
 Fabien Chereau, Rob Spearman, Johan Meuris, Matthew Gates, 
 Johannes Gajdosik, Nigel Kerr, Andras Mohari, Bogdan Marinov, 
 Timothy Reaves, Mike Storm, Diego Marcos, Guillaume Chereau, 
-Alexander Wolf, Georg Zotti
-
-x14817
+Alexander V. Wolf, Georg Zotti, Ruslan Kabatsayev, Worachate 
+Boonplod, Henry Leung, Susanne M. Hoffmann, Florian Schaukowitsch,
+Ferdinand Majerech, Joerg Mueller, Martin Bernardi
 
 =cut
 

@@ -2012,7 +2012,7 @@ void ConstellationMgr::starsInHullOf(const QString &englishName, const bool hipO
 
 	// Add the actual hull-defining stars, but only if they are not already included. Unfortunately, we need to test via IDs!
 	// Results are prepended, so that usually hull-defining HIP stars are in the beginning of the list.
-	Constellation* constel=reinterpret_cast<Constellation*>(constell.data());
+	Constellation* constel=static_cast<Constellation*>(constell.data());
 	foreach(auto &star, constel->constellation)
 	{
 		QString id=star->getID();

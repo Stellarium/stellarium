@@ -252,32 +252,42 @@ public:
 		QString byname;           //!< explanatory byname. In tradition of al-Sufi (Andromeda=Chained Woman), but useful for other SCs as well. Currently only ever used for constellations.
 		QString bynameI18n;       //!< explanatory byname translated to user language.
 		StelObject::CulturalNameSpecial special;          //!< any particular extra application?
-		CulturalName(): special(StelObject::CulturalNameSpecial::None){};
+		CulturalName():
+			special(StelObject::CulturalNameSpecial::None)
+		{
+		}
 		CulturalName(const QString &nat, const QString &pr, const QString &prI18n, const QString &trl,
-			     const QString &tra, const QString &traI18n, const QString &ipa, const QString &by = "", const QString &byI18n = "", StelObject::CulturalNameSpecial sp = StelObject::CulturalNameSpecial::None):
+		             const QString &tra, const QString &traI18n, const QString &ipa, const QString &by = "",
+		             const QString &byI18n = "", StelObject::CulturalNameSpecial sp = StelObject::CulturalNameSpecial::None):
 			native(nat), pronounce(pr), pronounceI18n(prI18n), transliteration(trl),
 			translated(tra), translatedI18n(traI18n), IPA(ipa), byname(by), bynameI18n(byI18n),
-			special(sp){};
+			special(sp)
+		{
+		}
 		//! Return just one identifier to keep things short
-		QString getOneIdentifier(bool narrate)const {
+		QString getOneIdentifier(bool narrate) const
+		{
 			QStringList list;
 			if (narrate)
 				list = QStringList({pronounceI18n, translatedI18n, pronounce, translated, native});
 			else
 				list = QStringList({translatedI18n, pronounceI18n, translated, pronounce, native});
 			list.removeAll("");
-			return list.first();}
+			return list.first();
+		}
 	};
 
 	//! A pre-defined "all available" set of specifiers for the getInfoString flags argument to getInfoString
-	static constexpr InfoStringGroup AllInfo = static_cast<InfoStringGroup>(Name|CatalogNumber|Magnitude|RaDecJ2000|RaDecOfDate|AltAzi|
-									   Distance|Elongation|Size|Velocity|ProperMotion|Extra|HourAngle|AbsoluteMagnitude|
-									   GalacticCoord|SupergalacticCoord|OtherCoord|ObjectType|EclipticCoordJ2000|
-	                                                                   EclipticCoordOfDate|IAUConstellation|CulturalConstellation|SiderealTime|RTSTime|SolarLunarPosition);
+	static constexpr InfoStringGroup AllInfo =
+		static_cast<InfoStringGroup>(Name|CatalogNumber|Magnitude|RaDecJ2000|RaDecOfDate|AltAzi|Distance|Elongation|
+		                             Size|Velocity|ProperMotion|Extra|HourAngle|AbsoluteMagnitude| GalacticCoord|
+		                             SupergalacticCoord|OtherCoord|ObjectType|EclipticCoordJ2000|EclipticCoordOfDate|
+		                             IAUConstellation|CulturalConstellation|SiderealTime|RTSTime|SolarLunarPosition);
 	//! A pre-defined "default" set of specifiers for the getInfoString flags argument to getInfoString
 	//! It appears useful to propose this set as post-install settings and let users configure more on demand.
-	static constexpr InfoStringGroup DefaultInfo = static_cast<InfoStringGroup>(Name|CatalogNumber|Magnitude|RaDecOfDate|HourAngle|AltAzi|OtherCoord|
-	                                                                                  Distance|Elongation|Size|Velocity|Extra|IAUConstellation|CulturalConstellation|SiderealTime|RTSTime);
+	static constexpr InfoStringGroup DefaultInfo =
+		static_cast<InfoStringGroup>(Name|CatalogNumber|Magnitude|RaDecOfDate|HourAngle|AltAzi|OtherCoord|Distance|Elongation|
+		                             Size|Velocity|Extra|IAUConstellation|CulturalConstellation|SiderealTime|RTSTime);
 	//! A pre-defined "shortest useful" set of specifiers for the getInfoString flags argument to getInfoString
 	static constexpr InfoStringGroup ShortInfo = static_cast<InfoStringGroup>(Name|CatalogNumber|Magnitude|RaDecJ2000);
 

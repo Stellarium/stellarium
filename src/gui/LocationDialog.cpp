@@ -890,7 +890,7 @@ void LocationDialog::ipQueryLocation(bool state)
 	disconnectEditSignals();
 	resetLocationList(); // in case we are on Moon/Mars, we must get list back to show all (earth) locations...
 	StelLocationMgr &locMgr=StelApp::getInstance().getLocationMgr();
-	locMgr.locationFromIP(); // This just triggers asynchronous lookup.
+	if (state) locMgr.locationFromIP(); // This just triggers asynchronous lookup.
 	// NOTE: These steps seem to assume IP lookup is successful!
 	ui->useAsDefaultLocationCheckBox->setChecked(false);
 	ui->useAsDefaultLocationCheckBox->setEnabled(!state);

@@ -18,6 +18,7 @@
  */
 
 #include <QDebug>
+#include <QWindow>
 
 #include "Dialog.hpp"
 #include <QHBoxLayout>
@@ -49,11 +50,25 @@ void TitleBar::mousePressEvent(QMouseEvent *event)
 {
 	mousePos = event->pos();
 	moving = true;
+
+#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
+	const auto parent = parentWidget();
+	if (parent->inherits("CustomDialog"))
+	{
+		if (const auto win = parent->windowHandle())
+			systemMoveStarted = win->startSystemMove();
+	}
+#endif
 }
 
 void TitleBar::mouseReleaseEvent(QMouseEvent *)
 {
+	const auto parent = parentWidget();
+	Q_ASSERT(parent);
+
 	moving = false;
+	systemMoveStarted = false;
+
 	QWidget* p = dynamic_cast<QWidget*>(QFrame::parent());
 	emit movedTo(p->pos());
 }
@@ -61,6 +76,8 @@ void TitleBar::mouseReleaseEvent(QMouseEvent *)
 void TitleBar::mouseMoveEvent(QMouseEvent *event)
 {
 	if (!moving) return;
+	if (systemMoveStarted) return;
+
 	QPoint dpos = event->pos() - mousePos;
 	QWidget* p = dynamic_cast<QWidget*>(QFrame::parent());
 	QPoint targetPos = p->pos() + dpos;

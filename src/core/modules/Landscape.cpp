@@ -21,6 +21,7 @@
 
 #include "Landscape.hpp"
 #include "StelApp.hpp"
+#include "StelSRGB.hpp"
 #include "StelTextureMgr.hpp"
 #include "StelFileMgr.hpp"
 #include "StelLocation.hpp"
@@ -830,7 +831,7 @@ uniform bool calibrated;
 uniform bool tanMode;
 uniform vec4 brightness;
 
-vec4 sampleSideTexture(int sideIndex, const vec2 texc, const vec2 texDx, const vec2 texDy)
+vec4 sampleSideTexture(int sideIndex, const highp vec2 texc, const vec2 texDx, const vec2 texDy)
 {
 	sideIndex -= firstSideInBatch;
 	if(sideIndex==0 && (sidePresenceMask&  1)!=0) return textureGrad(sideTex0, texc, texDx, texDy);
@@ -846,21 +847,21 @@ vec4 sampleSideTexture(int sideIndex, const vec2 texc, const vec2 texDx, const v
 
 void main(void)
 {
-	const float PI = 3.14159265;
-	vec4 winPos = projectionMatrixInverse * vec4(ndcPos, 1);
+	const highp float PI = 3.14159265;
+	highp vec4 winPos = projectionMatrixInverse * vec4(ndcPos, 1);
 	bool unprojectSuccess = false;
-	vec3 modelPos = unProject(winPos.x, winPos.y, unprojectSuccess).xyz;
+	highp vec3 modelPos = unProject(winPos.x, winPos.y, unprojectSuccess).xyz;
 	// First we must compute the derivatives of texture coordinates, and only
 	// then decide whether we want to display the !unprojectSuccess case.
 
-	vec3 viewDir = normalize(modelPos);
+	highp vec3 viewDir = normalize(modelPos);
 
 	vec4 color;
 	if(whatToRender == -1) // ground
 	{
-		vec2 centeredTexCoords = viewDir.z!=0. ? vshift / viewDir.z * viewDir.xy
-											   : vec2(0);
-		vec2 texc = (centeredTexCoords + 1.) / 2.;
+		highp vec2 centeredTexCoords = viewDir.z!=0. ? vshift / viewDir.z * viewDir.xy
+		                                             : vec2(0);
+		highp vec2 texc = (centeredTexCoords + 1.) / 2.;
 		vec2 texDx = dFdx(texc);
 		vec2 texDy = dFdy(texc);
 
@@ -880,14 +881,14 @@ void main(void)
 	}
 	else if(whatToRender == -2) // fog
 	{
-		float azimuth = atan(viewDir.x, viewDir.y);
+		highp float azimuth = atan(viewDir.x, viewDir.y);
 		if(azimuth<0.) azimuth += 2.*PI;
-		float s = azimuth/(2.*PI);
+		highp float s = azimuth/(2.*PI);
 
-		float tanElevation = viewDir.z / sqrt(1. - viewDir.z*viewDir.z);
-		float t = (tanElevation - vshift) / fogCylinderHeight;
+		highp float tanElevation = viewDir.z / sqrt(1. - viewDir.z*viewDir.z);
+		highp float t = (tanElevation - vshift) / fogCylinderHeight;
 
-		vec2 texc = vec2(s,t);
+		highp vec2 texc = vec2(s,t);
 		vec2 texDx = dFdx(texc);
 		vec2 texDy = dFdy(texc);
 
@@ -906,27 +907,27 @@ void main(void)
 	}
 	else
 	{
-		float azimuth = atan(viewDir.x, viewDir.y);
+		highp float azimuth = atan(viewDir.x, viewDir.y);
 		if(azimuth<0.) azimuth += 2.*PI;
-		float sideAngularWidth = 2.*PI/float(totalNumberOfSides);
+		highp float sideAngularWidth = 2.*PI/float(totalNumberOfSides);
 		int currentSide = int(azimuth/sideAngularWidth);
 		int currentSideInBatch = currentSide%numberOfSidesInBatch;
-		float leftBorderAzimuth = float(currentSide)*sideAngularWidth;
-		float texCoordLeft  = perSideTexCoords[currentSideInBatch][0];
-		float texCoordRight = perSideTexCoords[currentSideInBatch][2];
-		float deltaS = texCoordRight - texCoordLeft;
-		float s = texCoordLeft + (azimuth-leftBorderAzimuth)/sideAngularWidth * deltaS;
+		highp float leftBorderAzimuth = float(currentSide)*sideAngularWidth;
+		highp float texCoordLeft  = perSideTexCoords[currentSideInBatch][0];
+		highp float texCoordRight = perSideTexCoords[currentSideInBatch][2];
+		highp float deltaS = texCoordRight - texCoordLeft;
+		highp float s = texCoordLeft + (azimuth-leftBorderAzimuth)/sideAngularWidth * deltaS;
 
-		float elevation = asin(viewDir.z);
-		float texCoordBottom  = perSideTexCoords[currentSideInBatch][1];
-		float texCoordTop     = perSideTexCoords[currentSideInBatch][3];
-		float deltaT = texCoordTop - texCoordBottom;
-		float texCoordInUnitRange;
+		highp float elevation = asin(viewDir.z);
+		highp float texCoordBottom  = perSideTexCoords[currentSideInBatch][1];
+		highp float texCoordTop     = perSideTexCoords[currentSideInBatch][3];
+		highp float deltaT = texCoordTop - texCoordBottom;
+		highp float texCoordInUnitRange;
 		if(calibrated)
 		{
 			if(tanMode)
 			{
-				float tanShift = tan(decorAngleShift);
+				highp float tanShift = tan(decorAngleShift);
 				texCoordInUnitRange = (tan(elevation)-tanShift)/(tan(decorAngleShift+sideAngularHeight)-tanShift);
 			}
 			else
@@ -945,7 +946,7 @@ void main(void)
 				texCoordInUnitRange = (tan(elevation)-sin(decorAngleShift))/sin(sideAngularHeight);
 			}
 		}
-		float t = texCoordBottom + texCoordInUnitRange * deltaT;
+		highp float t = texCoordBottom + texCoordInUnitRange * deltaT;
 
 		// The usual automatic computation of derivatives of texture coordinates
 		// breaks down at the discontinuity of atan, resulting in choosing the most
@@ -1093,7 +1094,8 @@ void LandscapeOldStyle::drawFog(StelCore*const core, const int firstFreeTexSampl
 	renderProgram->setUniformValue(shaderVars.fogCylinderHeight, height);
 	renderProgram->setUniformValue(shaderVars.vshift, vpos);
 
-	const float brightness = landFader.getInterstate()*fogFader.getInterstate()*(0.1f+0.1f*landscapeBrightness);
+	const float brightness =
+		colorToShader(landFader.getInterstate()*fogFader.getInterstate()*(0.1f+0.1f*landscapeBrightness));
 	renderProgram->setUniformValue(shaderVars.brightness, brightness, brightness, brightness,
 				       (1.f-landscapeTransparency)*landFader.getInterstate());
 	renderProgram->setUniformValue(shaderVars.projectionMatrixInverse, prj->getProjectionMatrix().toQMatrix().inverted());
@@ -1116,7 +1118,7 @@ void LandscapeOldStyle::drawDecor(StelCore*const core, const int firstFreeTexSam
 
 	if (drawLight)
 	{
-		const auto brightness = illumFader.getInterstate()*lightScapeBrightness;
+		const auto brightness = colorToShader(illumFader.getInterstate()*lightScapeBrightness);
 		renderProgram->setUniformValue(shaderVars.brightness,
 					       brightness, brightness, brightness,
 					       (1.f-landscapeTransparency)*landFader.getInterstate());
@@ -1126,9 +1128,9 @@ void LandscapeOldStyle::drawDecor(StelCore*const core, const int firstFreeTexSam
 		if (core->getFlagClearSky())
 		{
 			renderProgram->setUniformValue(shaderVars.brightness,
-			                               landscapeBrightness*landscapeTint[0],
-			                               landscapeBrightness*landscapeTint[1],
-			                               landscapeBrightness*landscapeTint[2],
+			                               colorToShader(landscapeBrightness*landscapeTint[0]),
+			                               colorToShader(landscapeBrightness*landscapeTint[1]),
+			                               colorToShader(landscapeBrightness*landscapeTint[2]),
 			                               (1.f-landscapeTransparency)*landFader.getInterstate());
 		}
 		else
@@ -1232,9 +1234,9 @@ void LandscapeOldStyle::drawGround(StelCore*const core, const int firstFreeTexSa
 	if (core->getFlagClearSky())
 	{
 		renderProgram->setUniformValue(shaderVars.brightness,
-		                               landscapeBrightness*landscapeTint[0],
-		                               landscapeBrightness*landscapeTint[1],
-		                               landscapeBrightness*landscapeTint[2],
+		                               colorToShader(landscapeBrightness*landscapeTint[0]),
+		                               colorToShader(landscapeBrightness*landscapeTint[1]),
+		                               colorToShader(landscapeBrightness*landscapeTint[2]),
 		                               (1.f-landscapeTransparency)*landFader.getInterstate());
 	}
 	else
@@ -1733,9 +1735,9 @@ void main(void)
 		if (core->getFlagClearSky())
 		{
 			renderProgram->setUniformValue(shaderVars.brightness,
-			                               landscapeBrightness*landscapeTint[0],
-			                               landscapeBrightness*landscapeTint[1],
-			                               landscapeBrightness*landscapeTint[2],
+			                               colorToShader(landscapeBrightness*landscapeTint[0]),
+			                               colorToShader(landscapeBrightness*landscapeTint[1]),
+			                               colorToShader(landscapeBrightness*landscapeTint[2]),
 			                               landFader.getInterstate());
 		}
 		else
@@ -1761,7 +1763,8 @@ void main(void)
 		if ((mapTexFog) && (core->getSkyDrawer()->getFlagHasAtmosphere()) && core->getFlagClearSky())
 		{
 			gl.glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_COLOR);
-			const float brightness = landFader.getInterstate()*fogFader.getInterstate()*(0.1f+0.1f*landscapeBrightness);
+			const float brightness =
+				colorToShader(landFader.getInterstate()*fogFader.getInterstate()*(0.1f+0.1f*landscapeBrightness));
 
 			renderProgram->setUniformValue(shaderVars.brightness, brightness, brightness, brightness,
 						       landFader.getInterstate());
@@ -1772,7 +1775,7 @@ void main(void)
 		if (mapTexIllum && lightScapeBrightness>0.0f && (illumFader.getInterstate()>0.f) && core->getFlagClearSky())
 		{
 			gl.glBlendFunc(GL_SRC_ALPHA, GL_ONE);
-			const float brightness = lightScapeBrightness*illumFader.getInterstate();
+			const float brightness = colorToShader(lightScapeBrightness*illumFader.getInterstate());
 			renderProgram->setUniformValue(shaderVars.brightness, brightness, brightness, brightness,
 						       landFader.getInterstate());
 			mapTexIllum->bind();
@@ -2095,15 +2098,15 @@ void main(void)
 		renderProgram->bind();
 		const float brightness=core->getFlagClearSky() ? landscapeBrightness : 0.0f;
 		renderProgram->setUniformValue(shaderVars.bottomCapColor,
-		                               brightness*bottomCapColor[0],
-		                               brightness*bottomCapColor[1],
-		                               brightness*bottomCapColor[2],
+		                               colorToShader(brightness*bottomCapColor[0]),
+		                               colorToShader(brightness*bottomCapColor[1]),
+		                               colorToShader(brightness*bottomCapColor[2]),
 		                               bottomCapColor[0] < 0 ? 0 : landFader.getInterstate());
 
                 renderProgram->setUniformValue(shaderVars.brightness,
-                                               brightness*landscapeTint[0],
-                                               brightness*landscapeTint[1],
-                                               brightness*landscapeTint[2],
+                                               colorToShader(brightness*landscapeTint[0]),
+                                               colorToShader(brightness*landscapeTint[1]),
+                                               colorToShader(brightness*landscapeTint[2]),
                                                (1.f-landscapeTransparency)*landFader.getInterstate());
 		const int mainTexSampler = 0;
 		mapTex->bind(mainTexSampler);
@@ -2126,7 +2129,7 @@ void main(void)
 		{
 			gl.glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_COLOR);
 			const float brightness =
-				landFader.getInterstate()*fogFader.getInterstate()*(0.1f+0.1f*landscapeBrightness);
+				colorToShader(landFader.getInterstate()*fogFader.getInterstate()*(0.1f+0.1f*landscapeBrightness));
 
 			renderProgram->setUniformValue(shaderVars.bottomCapColor, 0.f, 0.f, 0.f, 0.f);
 			renderProgram->setUniformValue(shaderVars.brightness,
@@ -2142,7 +2145,7 @@ void main(void)
 		if (mapTexIllum && (lightScapeBrightness>0.0f) && (illumFader.getInterstate()>0.0f) && core->getFlagClearSky())
 		{
 			gl.glBlendFunc(GL_SRC_ALPHA, GL_ONE);
-			const float brightness = lightScapeBrightness*illumFader.getInterstate();
+			const float brightness = colorToShader(lightScapeBrightness*illumFader.getInterstate());
 			renderProgram->setUniformValue(shaderVars.bottomCapColor, 0.f, 0.f, 0.f, 0.f);
 			renderProgram->setUniformValue(shaderVars.brightness,
 						       brightness, brightness, brightness,

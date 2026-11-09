@@ -20,10 +20,12 @@
  */
 
 #include "MilkyWay.hpp"
+#include "StelSRGB.hpp"
 #include "StelFader.hpp"
 #include "StelTexture.hpp"
 #include "StelUtils.hpp"
 #include "StelFileMgr.hpp"
+#include "StelMainView.hpp"
 
 #include "StelProjector.hpp"
 #include "StelToneReproducer.hpp"
@@ -365,6 +367,9 @@ void main(void)
 	//omgr->addToExtraInfoString(StelObject::DebugAid, QString("AtmFactor: %1<br/>").arg(QString::number(atmFactor, 'f', 4)));
 	c*=atmFactor*atmFactor;
 
+	if (StelMainView::getInstance().getGLInformation().isHighGraphicsMode)
+		c *= 1.1f;
+
 	if (c[0]<0) c[0]=0;
 	if (c[1]<0) c[1]=0;
 	if (c[2]<0) c[2]=0;
@@ -379,7 +384,7 @@ void main(void)
 	renderProgram->setUniformValue(shaderVars.mainTex, mainTexSampler);
 
 	renderProgram->setUniformValue(shaderVars.projectionMatrixInverse, projector->getProjectionMatrix().toQMatrix().inverted());
-	renderProgram->setUniformValue(shaderVars.brightness, c.toQVector());
+	renderProgram->setUniformValue(shaderVars.brightness, colorToShader(c));
 	renderProgram->setUniformValue(shaderVars.saturation, GLfloat(saturation));
 
 	core->setAberrationUniforms(*renderProgram);

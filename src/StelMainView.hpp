@@ -134,7 +134,7 @@ public:
 
 public slots:
 
-	//! Set whether fullscreen is activated or not
+	//! Set whether fullscreen is activated or not, and shows the window if it's invisible
 	void setFullScreen(bool);
 
 	//! Return focus to the sky item.  To be used when we close a dialog.

@@ -148,6 +148,7 @@ void ScmConstellationDialog::retranslate()
 	if (dialog)
 	{
 		ui->retranslateUi(dialog);
+		markRequiredFieldLabels();
 		updateTranslatableStrings();
 	}
 }
@@ -169,6 +170,7 @@ void ScmConstellationDialog::createDialogContent()
 {
 	isDialogInitialized = true;
 	ui->setupUi(dialog);
+	markRequiredFieldLabels();
 	imageItem->hide();
 	ui->artwork_image->setScene(imageItem->scene());
 	ui->bind_star->setEnabled(false);
@@ -564,6 +566,14 @@ void ScmConstellationDialog::handleDialogSizeChanged(QSizeF size)
 	StelDialog::handleDialogSizeChanged(size);
 
 	ui->artwork_image->fitInView(imageItem, Qt::KeepAspectRatio);
+}
+
+void ScmConstellationDialog::markRequiredFieldLabels()
+{
+	for (const auto label : {ui->enNameLbl, ui->idLbl})
+	{
+		label->setText(label->text() + QLatin1Char('*'));
+	}
 }
 
 void ScmConstellationDialog::updateTranslatableStrings()

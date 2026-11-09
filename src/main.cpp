@@ -148,11 +148,16 @@ void clearCache()
 // Main stellarium procedure
 int main(int argc, char **argv)
 {
+#ifdef Q_OS_ANDROID
+	// adb logcat output already contains timestamps and log level, no need to add them to our emitted string
+	qSetMessagePattern("%{if-category}[%{category}] %{endif}%{message}");
+#else
 	qSetMessagePattern("[%{time process}][%{if-debug}DBG %{endif}"
 	                                     "%{if-info}INFO%{endif}"
 	                                     "%{if-warning}WARN%{endif}"
 	                                     "%{if-critical}CRIT%{endif}"
-	                                     "%{if-fatal}FATAL%{endif}] %{message}");
+	                                     "%{if-fatal}FATAL%{endif}]%{if-category} [%{category}]%{endif} %{message}");
+#endif
 	Q_INIT_RESOURCE(mainRes);
 #ifndef NO_GUI
 	Q_INIT_RESOURCE(guiRes);
@@ -492,6 +497,12 @@ int main(int argc, char **argv)
 		// the normal window. Therefore we crop the normal window to the
 		// screen area to ensure that the majority is not on another screen.
 		mainWin.setGeometry(mainWin.geometry() & screenGeom);
+		// This shows the window. Don't call mainWin.show() after this, or
+		// it will replace fullscreen with the platform default, which is
+		// "maximized" on Android, not "fullscreen".
+		// A notable difference is that in maximized state the notification
+		// bar overlap the app screen, absorbing taps and making it impossible
+		// to drag windows from there or select stars.
 		mainWin.setFullScreen(true);
 	}
 	else
@@ -500,9 +511,9 @@ int main(int argc, char **argv)
 		const int y = confSettings->value("video/screen_y", 0).toInt();
 		mainWin.move(screenGeom.x() + x/pixelRatio,
 			     screenGeom.y() + y/pixelRatio);
+		mainWin.show();
 	}
 
-	mainWin.show();
 	SplashScreen::finish(&mainWin);
 	qDebug() << "Max thread count (Global Pool): " << QThreadPool::globalInstance()->maxThreadCount();
 	// Share available cores with the TextureLoader and other jobs

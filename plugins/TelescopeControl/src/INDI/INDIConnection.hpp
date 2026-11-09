@@ -20,6 +20,7 @@
 #define INDICONNECTION_HPP
 
 #include <QObject>
+#include "common/TelescopeLogging.hpp"
 #include <libindi/baseclient.h>
 #include <libindi/basedevice.h>
 
@@ -45,7 +46,8 @@ public:
 		bool operator!=(const Coordinates &other) const;
 	};
 
-	INDIConnection(QObject* parent = nullptr);
+	//! The slot identifies this connection in diagnostics; zero omits the prefix.
+	INDIConnection(QObject* parent = nullptr, int slot = 0);
 	INDIConnection(const INDIConnection& that) = delete;
 
 	Coordinates position() const;
@@ -68,6 +70,7 @@ signals:
 private:
 	void setSpeed(int speed);
 
+	const TelescopeLogPrefix logPrefix;
 	mutable std::mutex mMutex;
 	INDI::BaseDevice mTelescope;
 	QStringList mDevices;

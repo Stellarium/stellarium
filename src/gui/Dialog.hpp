@@ -57,6 +57,7 @@ signals:
 	void movedTo(QPoint newPosition);
 protected:
 	bool moving = false;
+	bool systemMoveStarted = false;
 	QLabel* label;
 };
 

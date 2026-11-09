@@ -151,6 +151,11 @@ private:
 	void setIdFromName(QString &name);
 
 	/**
+	 * @brief Updates export availability and the inline message based on the current sky culture ID.
+	 */
+	void updateSkyCultureIdValidation();
+
+	/**
 	 * @brief Compiles the Constellations section from descriptions of all constellations.
 	 */
 	QString makeConstellationsSection() const;
@@ -196,6 +201,12 @@ private:
 	 * @return The description from the text edit.
 	 */
 	scm::Description getDescriptionFromTextEdit() const;
+
+	/**
+	 * @brief Adds the required-field marker to all labels of required input fields.
+	 *        Must be called after every (re)translation of the UI.
+	 */
+	void markRequiredFieldLabels();
 
 	/**
 	 * @brief Populates the overview/description tab fields from a Description.

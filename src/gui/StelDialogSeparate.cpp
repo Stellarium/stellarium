@@ -42,7 +42,7 @@ protected:
 	void paintEvent(QPaintEvent *event) override
 	{
 		Q_UNUSED(event)
-		QRect parentRect=reinterpret_cast<QWidget*>(parent())->geometry();
+		QRect parentRect=parentWidget()->geometry();
 		setGeometry(0, 0, parentRect.width(), parentRect.height());
 		QPainter painter(this);
 		painter.setRenderHint(QPainter::Antialiasing);
@@ -82,8 +82,9 @@ void StelDialogSeparate::setVisible(bool v)
 		}
 		else
 		{
-			dialog = new CustomDialog(&StelMainView::getInstance(), Qt::Tool | Qt::FramelessWindowHint);
-			connect(static_cast<CustomDialog*>(dialog), &CustomDialog::rejected, this, &StelDialogSeparate::close);
+			const auto dialog = new CustomDialog(&StelMainView::getInstance(), Qt::Tool | Qt::FramelessWindowHint);
+			this->dialog = dialog;
+			connect(dialog, &CustomDialog::rejected, this, &StelDialogSeparate::close);
 			createDialogContent();
 			if (gui)
 				dialog->setStyleSheet(gui->getStelStyle().qtStyleSheet);
@@ -91,9 +92,9 @@ void StelDialogSeparate::setVisible(bool v)
 			connect(&StelApp::getInstance(), &StelApp::visionNightModeChanged, this, &StelDialogSeparate::updateNightModeProperty);
 			updateNightModeProperty(StelApp::getInstance().getVisionModeNight());
 
-			reinterpret_cast<CustomDialog*>(dialog)->setSizeGripEnabled(true);
+			dialog->setSizeGripEnabled(true);
 			QSizeF size = dialog->size();
-			connect(reinterpret_cast<CustomDialog*>(dialog), &CustomDialog::sizeChanged, this, &StelDialogSeparate::handleDialogSizeChanged);
+			connect(dialog, &CustomDialog::sizeChanged, this, &StelDialogSeparate::handleDialogSizeChanged);
 
 			int newX, newY;
 			// Retrieve panel locations from config.ini, but shift if required to a visible position.

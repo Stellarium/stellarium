@@ -24,6 +24,7 @@
 #include "ScmSkyCultureDialog.hpp"
 #include "NebulaMgr.hpp"
 #include "ScmPolygonInfoTreeItem.hpp"
+#include "ScmSkyCulture.hpp"
 #include "StarMgr.hpp"
 #include "StelMovementMgr.hpp"
 #include "StelObjectMgr.hpp"
@@ -102,6 +103,20 @@ void ScmSkyCultureDialog::retranslate()
 	if (dialog)
 	{
 		ui->retranslateUi(dialog);
+		markRequiredFieldLabels();
+	}
+}
+
+void ScmSkyCultureDialog::markRequiredFieldLabels()
+{
+	QLabel *const labels[] = {
+		ui->currentSCNameLbl, ui->selectLicenseLbl,      ui->classificationLbl, ui->introLbl,
+		ui->regionLabel,      ui->cultureDescriptionLbl, ui->referencesLbl,     ui->authorsLbl,
+		ui->aboutLbl,         ui->cnObjectTypeLbl,       ui->cnObjectIdLbl,     ui->cnEnglishLbl,
+	};
+	for (QLabel *label : labels)
+	{
+		label->setText(label->text() + QLatin1Char('*'));
 	}
 }
 
@@ -129,6 +144,7 @@ void ScmSkyCultureDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
 	dialog->installEventFilter(this);
+	markRequiredFieldLabels();
 
 	connect(&StelApp::getInstance(), &StelApp::languageChanged, this, &ScmSkyCultureDialog::retranslate);
 	connect(ui->titleBar, &TitleBar::movedTo, this, &ScmSkyCultureDialog::handleMovedTo);
@@ -139,18 +155,12 @@ void ScmSkyCultureDialog::createDialogContent()
 	        [this]()
 	        {
 			name = ui->skyCultureNameLE->text();
-			if (name.isEmpty())
-			{
-				ui->ExportSkyCultureBtn->setEnabled(false);
-			}
-			else
-			{
-				ui->ExportSkyCultureBtn->setEnabled(true);
-			}
 			setIdFromName(name);
+			updateSkyCultureIdValidation();
 		});
 
 	ui->ExportSkyCultureBtn->setEnabled(false);
+	updateSkyCultureIdValidation();
 	ui->RemoveConstellationBtn->setEnabled(false);
 	ui->EditConstellationBtn->setEnabled(false);
 
@@ -348,20 +358,34 @@ void ScmSkyCultureDialog::saveSkyCulture()
 {
 	scm::Description desc = getDescriptionFromTextEdit();
 
-	// check if license is set
-	if (desc.license == scm::LicenseType::NONE)
+	const auto isBlank = [](const QString &text) { return text.trimmed().isEmpty(); };
+	const struct
 	{
-		maker->showUserWarningMessage(ui->titleBar->title(), q_("Please select a license for the sky culture."));
-		return;
+		bool isMissing;
+		QString name;
+	} requiredFields[] = {
+		{isBlank(desc.name), q_("Name of the Sky Culture")},
+		{isBlank(desc.introduction), qc_("Introduction", "Name of a section in sky culture description")},
+		{isBlank(desc.cultureDescription), qc_("Culture Description", "Name of a section in sky culture description")},
+		{isBlank(desc.references), qc_("References", "Name of a section in sky culture description")},
+		{isBlank(desc.authors), qc_("Authors", "Name of a section in sky culture description")},
+		{isBlank(desc.about), q_("About the sky culture")},
+		{desc.license == scm::LicenseType::NONE, q_("License of the Sky Culture")},
+		{desc.classification == scm::ClassificationType::NONE, q_("Classification of the Sky Culture")},
+		{desc.region == scm::RegionType::NONE, q_("Region of the Sky Culture")},
+	};
+
+	QString missingFieldsList;
+	for (const auto &field : requiredFields)
+	{
+		if (field.isMissing) missingFieldsList += QStringLiteral(" \u2022 ") + field.name + QLatin1Char('\n');
 	}
-	// check if description is complete
-	const auto incompFieldsList = desc.getIncompleteFieldsList();
-	if (!incompFieldsList.isEmpty())
+	if (!missingFieldsList.isEmpty())
 	{
-		auto msg = q_("The sky culture description is not complete. The following fields are not filled correctly:\n");
-		for (const auto& field : incompFieldsList)
-			msg += QString(" \u2022 ") + field + "\n";
-		maker->showUserWarningMessage(ui->titleBar->title(), msg);
+		maker->showUserErrorMessage(ui->titleBar->title(),
+		                            q_("The sky culture description is not complete. The following fields are "
+		                               "not filled correctly:\n") +
+		                                    missingFieldsList);
 		return;
 	}
 
@@ -467,9 +491,21 @@ void ScmSkyCultureDialog::setIdFromName(QString &name)
 	maker->getCurrentSkyCulture()->setId(id);
 }
 
+void ScmSkyCultureDialog::updateSkyCultureIdValidation()
+{
+	if (!ui || !dialog) return;
+
+	const auto *currentSkyCulture = maker != nullptr ? maker->getCurrentSkyCulture() : nullptr;
+	const bool hasName            = !name.isEmpty();
+	const bool hasValidId         = currentSkyCulture != nullptr &&
+	                                scm::ScmSkyCulture::isValidId(currentSkyCulture->getId());
+	ui->ExportSkyCultureBtn->setEnabled(hasName && hasValidId);
+	ui->skyCultureIdErrorLbl->setVisible(hasName && !hasValidId);
+}
+
 void ScmSkyCultureDialog::updateAddConstellationButtons(bool enabled)
 {
-	if(ui && dialog)
+	if (ui && dialog)
 	{
 		ui->AddConstellationBtn->setEnabled(enabled);
 		ui->AddDarkConstellationBtn->setEnabled(enabled);
@@ -695,7 +731,7 @@ void ScmSkyCultureDialog::populateDescriptionTab(const scm::Description &desc)
 	ui->skyCultureNameLE->setText(desc.name);
 	ui->skyCultureNameLE->blockSignals(false);
 	name = desc.name;
-	ui->ExportSkyCultureBtn->setEnabled(!desc.name.isEmpty());
+	updateSkyCultureIdValidation();
 
 	// Description text fields
 	ui->introTE->setPlainText(desc.introduction);
@@ -866,6 +902,7 @@ void ScmSkyCultureDialog::resetDialog()
 
 		name.clear();
 		setIdFromName(name);
+		updateSkyCultureIdValidation();
 		resetConstellations();
 		maker->setSkyCultureDescription(getDescriptionFromTextEdit());
 

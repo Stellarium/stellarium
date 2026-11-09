@@ -77,9 +77,9 @@ QStringList* TelescopeConfigurationDialog::listSerialPorts()
 #else
 		plist->append(serialPortInfo.systemLocation());
 #endif
-		qCDebug(Telescopes) << "[TelescopeControl] port name:" << serialPortInfo.portName()
-				 << "; vendor identifier:" << serialPortInfo.vendorIdentifier()
-				 << "; product identifier:" << serialPortInfo.productIdentifier();
+		qCDebug(Telescopes) << "Port name:" << serialPortInfo.portName()
+		                    << "; vendor identifier:" << serialPortInfo.vendorIdentifier()
+		                    << "; product identifier:" << serialPortInfo.productIdentifier();
 	}
 
 // on linux find some virtual ports

@@ -483,14 +483,35 @@ bool StelTexture::glLoad(const GLData& data)
 	}
 
 	//do pixel transfer
-	gl->glTexImage2D(GL_TEXTURE_2D, 0, data.format, width, height, 0, static_cast<GLenum>(data.format),
+
+	GLenum format = data.format;
+	GLenum internalFormat = data.format;
+	if(StelMainView::getInstance().getGLInformation().isHighGraphicsMode &&
+	   loadParams.colorSpace == ColorSpace::sRGB)
+	{
+		if(data.format == GL_RGB)
+		{
+			format = GL_RGB;
+			internalFormat = GL_SRGB8;
+		}
+		else if(data.format == GL_RGBA)
+		{
+			format = GL_RGBA;
+			internalFormat = GL_SRGB8_ALPHA8;
+		}
+		else
+		{
+			qCritical() << "Bad data format for sRGB color space:" << format;
+			assert(!"sRGB data format must be either RGB or RGBA");
+		}
+	}
+	StelOpenGL::checkGLErrors(__FILE__, __LINE__);
+	gl->glTexImage2D(GL_TEXTURE_2D, 0, internalFormat, width, height, 0, format,
 	                 static_cast<GLenum>(data.type), data.data.constData());
+	StelOpenGL::checkGLErrors(__FILE__, __LINE__);
 
 	//for now, assume full sized 8 bit GL formats used internally
 	glSize = static_cast<uint>(data.data.size());
-
-	//restore old value
-	gl->glPixelStorei(GL_UNPACK_ALIGNMENT, oldalignment);
 
 	gl->glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, loadParams.wrapMode);
 	gl->glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, loadParams.wrapMode);
@@ -517,8 +538,43 @@ bool StelTexture::glLoad(const GLData& data)
 		{
 			glSize = glSize + glSize/3; //mipmaps require 1/3 more mem
 		}
-		gl->glGenerateMipmap(GL_TEXTURE_2D);
+
+		StelOpenGL::checkGLErrors(__FILE__, __LINE__);
+		if(internalFormat == GL_SRGB8 && StelMainView::getInstance().getGLInformation().isGLES)
+		{
+			// This format isn't color renderable in GLES, so we have to generate mipmaps manually.
+			// For simplicity we ignore the fact that QImage::scaled does a gamma-incorrect resampling.
+			QImage mip(reinterpret_cast<const uchar*>(data.data.constData()),
+			           width, height, width * 3, QImage::Format_RGB888);
+			auto mipWidth = mip.width(), mipHeight = mip.height();
+			gl->glPixelStorei(GL_UNPACK_ALIGNMENT, 4);
+			for(int mipLevel = 1; mipWidth > 1 || mipHeight > 1; ++mipLevel)
+			{
+				mipWidth  = std::max(1, mipWidth / 2);
+				mipHeight = std::max(1, mipHeight / 2);
+				mip = mip.scaled(mipWidth, mipHeight, Qt::IgnoreAspectRatio,
+				                 Qt::SmoothTransformation).convertToFormat(QImage::Format_RGB888);
+				if(mip.isNull())
+				{
+					qCritical() << "Failed to resize image to generate mip level" << mipLevel
+					            << "with dimensions" << mipWidth << "x" << mipHeight
+					            << " - the texture will sample as black";
+					break;
+				}
+				gl->glTexImage2D(GL_TEXTURE_2D, mipLevel, internalFormat, mipWidth, mipHeight, 0, format,
+				                 static_cast<GLenum>(data.type), mip.constBits());
+				StelOpenGL::checkGLErrors(__FILE__, __LINE__);
+			}
+		}
+		else
+		{
+			gl->glGenerateMipmap(GL_TEXTURE_2D);
+			StelOpenGL::checkGLErrors(__FILE__, __LINE__);
+		}
 	}
+
+	//restore old value
+	gl->glPixelStorei(GL_UNPACK_ALIGNMENT, oldalignment);
 
 	//register ID with textureMgr and increment size
 	textureMgr->glMemoryUsage += glSize;
