@@ -442,6 +442,7 @@ SET(ENABLE_GPS 1 CACHE BOOL "Define whether GPS queries should be supported.")
 
 IF(ANDROID)
      SET(ENABLE_SHOWMYSKY 0)
+     SET(ANDROID_SSL_PATH "" CACHE STRING "Path to KDAB/android_openssl clone, or NONE to disable SSL support. Empty means download using CPM.")
 ELSE()
      # Activate support for ShowMySky atmosphere
      SET(ENABLE_SHOWMYSKY 1 CACHE BOOL "Define whether to support ShowMySky atmosphere model if installed")
