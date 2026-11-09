@@ -19,9 +19,12 @@
 
 #include "EOPReader.hpp"
 
+#include <QDate>
 #include <QFile>
+#include <QRegularExpression>
 #include <algorithm>
 #include <cmath>
+#include <erfa.h>	// (SS) 2026-11-05 eraJd2cal() and eraDat() for the TAI-UTC used by interpolate()
 
 namespace
 {
@@ -34,6 +37,18 @@ bool number(const QString& s, double& v)
 	bool ok = false;
 	v = t.toDouble(&ok);
 	return ok;
+}
+
+// (SS) 2026-11-05 TAI-UTC (seconds) at a UTC instant given as MJD(UTC), as in the standalone program (TaiMinusUtc()).
+// eraDat() returns 1 for a "dubious year" (before 1960 it gives 0, after the last year of its table the last value) and a negative
+// value on error. Only an invalid date or an error of eraDat() makes this function fail.
+bool taiMinusUtc(double mjdUtc, double& dat)
+{
+	int iy = 0, im = 0, id = 0;
+	double fd = 0.;
+	if (eraJd2cal(2400000.5, mjdUtc, &iy, &im, &id, &fd) != 0)
+		return false;
+	return eraDat(iy, im, id, fd, &dat) >= 0;
 }
 
 EOPReader::Status status(const QString& s)
@@ -153,6 +168,64 @@ bool parseCSV(const QStringList& lines, EOPReader::Format fmt, QVector<EOPReader
 	}
 	return true;
 }
+
+// (SS) 2026-11-06 JPL Horizons UT1-UTC (file written by horizons_ut1utc.py): lines starting with #, the header MJD;Date;JD;UT1-UTC,
+// then MJD;1962-Jan-20;2437684.5;0.02340 (UT1-UTC in seconds). The comment
+// "# EOP coverage: DATA-BASED 1962-JAN-20 TO 2026-NOV-05. PREDICTS-> 2027-JAN-31" gives the last day of the Horizons data: the values
+// up to that day are final, the later ones predictions (all final if the comment is missing).
+bool parseHorizons(const QStringList& lines, QVector<EOPReader::Record>& out, QString& error)
+{
+	static const QRegularExpression coverage(QStringLiteral("DATA-BASED\\s+\\S+\\s+TO\\s+(\\d{4})-([A-Za-z]{3})-(\\d{2})"));
+	static const QStringList months = QStringLiteral("JAN FEB MAR APR MAY JUN JUL AUG SEP OCT NOV DEC").split(' ');
+	double dataEnd = 1e30;
+	bool header = false;
+	for (int i = 0; i < lines.size(); ++i)
+	{
+		const QString line = lines.at(i).trimmed();
+		if (line.isEmpty())
+			continue;
+		if (line.startsWith('#'))
+		{
+			const QRegularExpressionMatch m = coverage.match(line);
+			if (m.hasMatch())
+			{
+				const int mon = months.indexOf(m.captured(2).toUpper()) + 1;
+				const QDate d(m.captured(1).toInt(), mon, m.captured(3).toInt());
+				if (d.isValid())
+					dataEnd = double(d.toJulianDay() - 2400001);
+			}
+			continue;
+		}
+		if (!header)
+		{
+			header = true;     // MJD;Date;JD;UT1-UTC
+			continue;
+		}
+		const QStringList f = line.split(';');
+		if (f.size() < 4)
+			continue;
+		bool ok1, ok2;
+		const double mjd = f.at(0).trimmed().toDouble(&ok1);
+		const double ut = f.at(3).trimmed().toDouble(&ok2);
+		if (!(ok1 && ok2))
+		{
+			error = QString("bad MJD or UT1-UTC on line %1").arg(i + 1);
+			return false;
+		}
+		EOPReader::Record r;
+		r.source = EOPReader::Format::HorizonsUT;
+		r.mjd = mjd;
+		const QDate d = QDate::fromJulianDay(qint64(std::floor(mjd)) + 2400001);
+		r.year = d.year();
+		r.month = d.month();
+		r.day = d.day();
+		r.hasUT = true;
+		r.ut1utc = ut;
+		r.utStatus = (mjd <= dataEnd + 1e-9) ? EOPReader::Status::Final : EOPReader::Status::Prediction;
+		out.append(r);
+	}
+	return true;
+}
 }
 
 EOPReader::Format EOPReader::detectFormat(const QString& firstLine)
@@ -163,6 +236,9 @@ EOPReader::Format EOPReader::detectFormat(const QString& firstLine)
 	s = s.trimmed();
 	if (!s.startsWith(QStringLiteral("MJD;")))
 		return Format::Unknown;
+	// (SS) 2026-11-06 UT1-UTC of JPL Horizons: MJD;Date;JD;UT1-UTC (the IERS files have x_pole etc. in their header)
+	if (s.startsWith(QStringLiteral("MJD;Date;JD;UT1-UTC")))
+		return Format::HorizonsUT;
 	// the finals files (standard series) have the Bulletin B columns, the C04 files (long term series) do not
 	return s.contains(QStringLiteral("bulB/")) ? Format::Finals : Format::C04;
 }
@@ -173,6 +249,7 @@ QString EOPReader::formatName(Format f)
 	{
 		case Format::Finals: return QStringLiteral("IERS standard series (finals CSV)");
 		case Format::C04:    return QStringLiteral("IERS long term series (EOP C04 CSV)");
+		case Format::HorizonsUT: return QStringLiteral("JPL Horizons UT1-UTC");
 		default:             return QStringLiteral("unknown");
 	}
 }
@@ -195,13 +272,18 @@ bool EOPReader::parseText(const QString& text, QVector<Record>& records, Format&
 	QStringList lines = text.split('\n');
 	if (!lines.isEmpty() && lines.first().startsWith(QChar(0xFEFF)))
 		lines[0].remove(0, 1);
-	format = detectFormat(lines.value(0));
+	// (SS) 2026-11-06 the first lines may be comments starting with # (file of the Horizons UT1-UTC)
+	int hdr = 0;
+	while (hdr < lines.size() && lines.at(hdr).trimmed().startsWith('#'))
+		++hdr;
+	format = detectFormat(lines.value(hdr));
 
 	bool ok = false;
 	switch (format)
 	{
 		case Format::Finals:
-		case Format::C04:        ok = parseCSV(lines, format, records, error); break;
+		case Format::C04:        ok = parseCSV(hdr > 0 ? lines.mid(hdr) : lines, format, records, error); break;
+		case Format::HorizonsUT: ok = parseHorizons(lines, records, error); break;
 		default:
 			error = QStringLiteral("unrecognized EOP file layout");
 			return false;
@@ -329,6 +411,29 @@ const EOPReader::Record& EOPReader::lastRecord(Group g) const
 	return recs.at(prevValid[static_cast<int>(g)].last());
 }
 
+int EOPReader::dropAfter(Group g, double mjd)
+{
+	int n = 0;
+	for (int i = 0; i < recs.size(); ++i)
+	{
+		Record& r = recs[i];
+		if (r.mjd <= mjd + 1e-9 || !has(r, g))
+			continue;
+		switch (g)
+		{
+			case Group::Pole:     r.hasPole = false; r.xp = r.yp = r.xpErr = r.ypErr = 0.; r.poleStatus = Status::Missing; break;
+			case Group::UT:       r.hasUT = false; r.ut1utc = r.ut1utcErr = 0.; r.utStatus = Status::Missing; break;
+			case Group::LOD:      r.hasLOD = false; r.lod = r.lodErr = 0.; r.lodStatus = Status::Missing; break;
+			case Group::Nutation: r.hasNutation = false; r.dpsi = r.deps = r.dpsiErr = r.depsErr = 0.; r.nutationStatus = Status::Missing; break;
+			case Group::DXDY:     r.hasDXDY = false; r.dx = r.dy = r.dxErr = r.dyErr = 0.; r.dxdyStatus = Status::Missing; break;
+		}
+		++n;
+	}
+	if (n > 0)
+		updateDerived();
+	return n;
+}
+
 void EOPReader::dropNutation(QVector<Record>& records)
 {
 	for (int i = 0; i < records.size(); ++i)
@@ -389,6 +494,10 @@ EOPReader::Record combine(const EOPReader::Record& old, const EOPReader::Record&
 	{
 		r.hasDXDY = true; r.dx = old.dx; r.dy = old.dy; r.dxErr = old.dxErr; r.dyErr = old.dyErr; r.dxdyStatus = old.dxdyStatus;
 	}
+	// (SS) 2026-11-08 The UT1-UTC of JPL Horizons has no sigma: where it replaces a value of the IERS, the sigma of the IERS is kept (it is not used
+	// by any computation; it stays as an example of the uncertainty of the IERS value, which is not that of the value of Horizons)
+	if (nw.source == EOPReader::Format::HorizonsUT && nw.hasUT && old.hasUT)
+		r.ut1utcErr = old.ut1utcErr;
 	return r;
 }
 
@@ -543,13 +652,26 @@ bool EOPReader::interpolate(double jdUTC, Interpolated& out) const
 		out.utHeld = (m == Mode::Held);
 		if (m == Mode::Interp)
 		{
-			// UTC steps between the two days (leap second of 1 s since 1972; steps of 0.05 s or 0.1 s in 1961-1972):
-			// UT1-UTC changes by only a few ms per day, so a larger change is a step, a multiple of 0.05 s, to remove first
-			double u1 = r1->ut1utc;
-			const double d = u1 - r0.ut1utc;
-			if (std::fabs(d) > 0.025)
-				u1 -= 0.05 * std::round(d / 0.05);
-			o.ut1utc = lerp(r0.ut1utc, u1);
+			// (SS) 2026-11-05 Same logic as InterpolateEOP() of the standalone program. UT1-UTC is discontinuous wherever UTC itself
+			// is stepped (1 s leap seconds since 1972, steps of 0.1 s and 0.05 s in 1962-1972), so interpolating it linearly across
+			// such a day is wrong for the whole day before the step. UT1-TAI is continuous: it is interpolated and TAI-UTC is added back
+			// at the requested UTC instant, so the step falls exactly at 0h UTC, as in JPL Horizons. The drift of UTC of 1962-1972 is
+			// included in eraDat().
+			double dat0 = 0., dat1 = 0., datT = 0.;
+			if (taiMinusUtc(r0.mjd, dat0) && taiMinusUtc(r1->mjd, dat1) && taiMinusUtc(mjd, datT))
+			{
+				o.ut1utc = lerp(r0.ut1utc - dat0, r1->ut1utc - dat1) + datT;
+			}
+			else
+			{
+				// TAI-UTC not available (invalid date, error of eraDat()): previous behaviour. A change larger than 0.025 s between two days is a step,
+				// a multiple of 0.05 s, to remove first.
+				double u1 = r1->ut1utc;
+				const double d = u1 - r0.ut1utc;
+				if (std::fabs(d) > 0.025)
+					u1 -= 0.05 * std::round(d / 0.05);
+				o.ut1utc = lerp(r0.ut1utc, u1);
+			}
 			o.ut1utcErr = lerp(r0.ut1utcErr, r1->ut1utcErr);
 			o.utStatus = r0.utStatus;
 		}

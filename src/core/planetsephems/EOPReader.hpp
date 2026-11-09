@@ -43,7 +43,11 @@ public:
 	//! Finals: standard series from datacenter.iers.org (finals.all.csv for IAU 1980 dPsi/dEps, finals2000A.all.csv for IAU 2000 dX/dY),
 	//!         from 1973 on, with final values and one year of predictions.
 	//! C04:    long term series (eopc04_*.csv), from 1962 on, consolidated final values only.
-	enum class Format { Unknown, Finals, C04 };
+	//! HorizonsUT: (SS) 2026-11-06 UT1-UTC of JPL Horizons written by the script horizons_ut1utc.py (horizons_ut1utc_YYMMDD.csv):
+	//!         comment lines starting with #, the header MJD;Date;JD;UT1-UTC, then one row per day with UT1-UTC in seconds.
+	//!         It has UT1-UTC only. Values up to the end of the Horizons data (comment "DATA-BASED ... TO yyyy-MON-dd") are final,
+	//!         the later ones are predictions.
+	enum class Format { Unknown, Finals, C04, HorizonsUT };
 	enum class Status { Unknown, Final, Prediction, Missing };
 	enum class Coverage { Inside, AfterEnd };
 	//! Groups of values that are tracked separately. Status (final or prediction) of Pole, UT and Nutation come from the file;
@@ -96,6 +100,11 @@ public:
 	//! Last record that has values of a group: those values are kept for all later dates
 	bool hasLast(Group g) const;
 	const Record& lastRecord(Group g) const;
+
+	//! (SS) 2026-11-06 Remove the values of a group (pole, UT1-UTC...) of the records after @p mjd. The group is then held at its last
+	//! earlier value (see interpolate()). Used for the Horizons UT1-UTC: after its last distinct value JPL keeps that value, so the
+	//! UT1-UTC predictions of the standard files after that date must not be used. @return number of values removed
+	int dropAfter(Group g, double mjd);
 
 	//! Remove dPsi and dEps from records (files that give them relative to IAU 2000A: dX and dY carry the same information)
 	static void dropNutation(QVector<Record>& records);
@@ -157,7 +166,8 @@ public:
 
 	//! Values at JD(UTC), linear interpolation between the daily records.
 	//!  - Each group (pole, UT1-UTC, LOD, nutation, dX/dY) is handled separately.
-	//!  - A group with values at both neighbouring days is interpolated; UT1-UTC across a leap second (the 1 s step is removed first).
+	//!  - A group with values at both neighbouring days is interpolated. UT1-UTC is interpolated as UT1-TAI and TAI-UTC (eraDat()) is
+	//!    added back at the requested instant, so the steps of UTC (leap seconds, 1962-1972 steps) fall exactly at 0h UTC (as in the standalone program).
 	//!  - Otherwise the last earlier value of the group is returned and its xxxHeld flag is set. This is the rule used after the
 	//!    last predicted value (JPL Horizons keeps the last dPsi and dEps). It is up to the caller to decide whether a held
 	//!    value is meaningful (a held UT1-UTC drifts away from the real one, for example).

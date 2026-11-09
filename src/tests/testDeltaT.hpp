@@ -50,6 +50,7 @@ private slots:
 	void testDeltaTByMontenbruckPfleger();
 	void testDeltaTByReingoldDershowitzWideDates();
 	void testDeltaTByJPLHorizons();
+	void testDeltaTByJPLHorizonsContinuity();	// (SS) 2026-11-05 Self-consistency (continuity) of the JPL Horizons algorithm, no data files needed
 	void testDeltaTByBorkowski();
 	void testDeltaTByIAU();
 	void testDeltaTByAstronomicalEphemeris();

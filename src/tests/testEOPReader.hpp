@@ -34,6 +34,8 @@ private slots:
 	void testFinalsMerge();
 	void testNutationHold();
 	void testLeapSecond();
+	void testUT1TAIInterpolation();	// (SS) 2026-11-05
+	void testHorizonsOverlay();	// (SS) 2026-11-06 UT1-UTC of JPL Horizons
 	void testFinals2000A();
 	void testC04IAU2000();
 	void testMergeKeepsOldValues();
@@ -41,6 +43,7 @@ private slots:
 	void testDropNutationAndLast();
 	void testRecordsBetween();
 	void testUpdaterHelpers();
+	void testHorizonsDownload();	// (SS) 2026-11-06 request and answer of the Horizons API
 	void testBadInput();
 };
 

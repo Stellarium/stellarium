@@ -52,6 +52,17 @@ double HorizonsPrecNut::dpsiOffsetMas(HorizonsZones::Zone z, bool forMoon)
 	}
 }
 
+double HorizonsPrecNut::depsOffsetMas(HorizonsZones::Zone z)
+{
+	// (SS) 2026-11-07 empirical, as JPL_DEPS_OFFSET_MAS_Z1_Z2 of the standalone program ("to be refined with the thousands of dates in Excel")
+	switch (z)
+	{
+		case HorizonsZones::Zone::Zone1:
+		case HorizonsZones::Zone::Zone2: return 6.0;
+		default:                         return 0.;
+	}
+}
+
 HorizonsPrecNut::Result HorizonsPrecNut::compute(const Params& p)
 {
 	Result res;
@@ -100,6 +111,7 @@ HorizonsPrecNut::Result HorizonsPrecNut::compute(const Params& p)
 		case HorizonsZones::Zone::Zone1:
 		case HorizonsZones::Zone::Zone2:
 			dpsi += offset * ARCSEC2RAD;
+			deps += depsOffsetMas(res.zone) / 1000. * ARCSEC2RAD;	// (SS) 2026-11-07 missing so far: the standalone program has it
 			break;
 		case HorizonsZones::Zone::Zone3:
 			dpsi += p.eopDpsi * ARCSEC2RAD;

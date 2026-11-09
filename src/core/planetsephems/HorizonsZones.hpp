@@ -30,7 +30,8 @@
 //!  - Zone 1: from 9999 BC to 1799-01-01 12h, dates in UT1.
 //!  - Zone 2: from 1799-01-01 12h to 1962-01-20, dates in UT1.
 //!  - Zone 3: from 1962-01-20 (start of UTC) to the start of the "constant EOP" regime, dates in UTC. The EOP are interpolated.
-//!  - Zone 4: from the start of the constant EOP regime (about 80 days after today) to 2202-01-01 12h TT. The last EOP is kept.
+//!  - Zone 4: from the start of the constant EOP regime (the last day of the Horizons UT1-UTC when known, else about 80 days after today)
+//!    to 2202-01-01 12h TT. The last EOP is kept.
 //!  - Zone 5: from 2202-01-01 12h TT to 9999-12-30.
 //! The names of the time scales (UT, UTC, UT1, TT) are those of the JPL Horizons documentation. In Stellarium, JD(UT or UTC) is
 //! StelCore::getJD(), JD(TDB) is StelCore::getJDE() when the Delta-T algorithm is JPL Horizons, and JD(TT) is StelCore::getJDTT().

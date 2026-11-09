@@ -230,15 +230,17 @@ void TestEOPReader::testNutationHold()
 
 void TestEOPReader::testLeapSecond()
 {
-	// UT1-UTC drops by about 1 s when a leap second is inserted
+	// (SS) 2026-11-05 UT1-UTC rises by 1 s when a leap second is inserted (TAI-UTC goes from 36 s to 37 s on 2017-01-01, MJD 57754)
+	// while UT1-TAI stays continuous: here -0.600 s the day before and 0.399 s on the day of the leap second (UT1-TAI changes
+	// by -0.001 s in the day). The first version of this test had the 1 s step with the wrong sign.
 	EOPReader r;
 	QString s = c04Header();
-	s += c04Row(57753, 0.1, 0.30, 0.001, "0.0", "0.0");
-	s += c04Row(57754, 0.1, -0.69, 0.001, "0.0", "0.0");
+	s += c04Row(57753, 0.1, -0.600, 0.001, "0.0", "0.0");
+	s += c04Row(57754, 0.1, 0.399, 0.001, "0.0", "0.0");
 	QVERIFY(mergeText(r, s));
 	EOPReader::Interpolated v;
 	QVERIFY(r.interpolate(57753.5 + JD_OFFSET, v));
-	QVERIFY(close(v.rec.ut1utc, 0.305));
+	QVERIFY(close(v.rec.ut1utc, -0.6005, 1e-9));
 
 	// 1961-1972: UTC was stepped by 0.1 s (as in EOP 14 C04 at MJD 38334, from -0.1264278 s to -0.0283989 s)
 	EOPReader r2;
@@ -256,6 +258,164 @@ void TestEOPReader::testLeapSecond()
 	QVERIFY(mergeText(r3, s3));
 	QVERIFY(r3.interpolate(60000.5 + JD_OFFSET, v));
 	QVERIFY(close(v.rec.ut1utc, 0.101));
+}
+
+// (SS) 2026-11-05 UT1-UTC is interpolated as UT1-TAI with TAI-UTC (eraDat()) added back at the requested instant, as in the
+// InterpolateEOP() of the standalone program: the steps of UTC fall exactly at 0h UTC and the drift of UTC of 1962-1972 is followed.
+void TestEOPReader::testUT1TAIInterpolation()
+{
+	EOPReader::Interpolated v;
+
+	// 1. Leap second of 2017-01-01 (MJD 57754): just before 0h UTC the value is the one of the next day minus the 1 s step,
+	// at 0h UTC it is the value of the record (exact record)
+	EOPReader r;
+	QString s = c04Header();
+	s += c04Row(57753, 0.1, -0.600, 0.001, "0.0", "0.0");
+	s += c04Row(57754, 0.1, 0.399, 0.001, "0.0", "0.0");
+	QVERIFY(mergeText(r, s));
+	QVERIFY(r.interpolate(57754. - 1e-7 + JD_OFFSET, v));
+	QVERIFY(close(v.rec.ut1utc, 0.399 - 1.0, 1e-6));
+	QVERIFY(r.interpolate(57754. + JD_OFFSET, v));
+	QVERIFY(close(v.rec.ut1utc, 0.399));
+
+	// 2. Step of 0.1 s of 1968-02-01 (MJD 39887): TAI-UTC goes from 4.3131700 + (MJD - 39126) x 0.002592 s to
+	// 4.2131700 + (MJD - 39126) x 0.002592 s (rubber second of 1966-1968, as in the ERFA table). UT1-UTC drops by 0.1 s + the
+	// drift of a day. Here UT1-TAI changes by -0.0005 s between the two days.
+	auto datBefore = [](double mjd) { return 4.3131700 + (mjd - 39126.) * 0.002592; };
+	auto datAfter  = [](double mjd) { return 4.2131700 + (mjd - 39126.) * 0.002592; };
+	const double u0 = 0.100;
+	const double u1 = u0 + (datAfter(39887.) - datBefore(39886.)) - 0.0005;
+	EOPReader r2;
+	QString s2 = c04Header();
+	s2 += c04Row(39886, 0.1, u0, 0.001, "0.0", "0.0");
+	s2 += c04Row(39887, 0.1, u1, 0.001, "0.0", "0.0");
+	QVERIFY(mergeText(r2, s2));
+	// middle of the day before the step: UT1-TAI interpolated, TAI-UTC of that instant added back
+	QVERIFY(r2.interpolate(39886.5 + JD_OFFSET, v));
+	const double expectedMid = (u0 - datBefore(39886.) + 0.5 * ((u1 - datAfter(39887.)) - (u0 - datBefore(39886.)))) + datBefore(39886.5);
+	QVERIFY(close(v.rec.ut1utc, expectedMid, 1e-9));
+	// same formula at 1/4 of the day (UT1-TAI interpolated, TAI-UTC of the instant added back)
+	QVERIFY(r2.interpolate(39886.25 + JD_OFFSET, v));
+	const double expectedQuarter = (u0 - datBefore(39886.) + 0.25 * ((u1 - datAfter(39887.)) - (u0 - datBefore(39886.)))) + datBefore(39886.25);
+	QVERIFY(close(v.rec.ut1utc, expectedQuarter, 1e-9));
+	// the step falls at 0h UTC: just before, the value is the one of the record plus the 0.1 s step
+	QVERIFY(r2.interpolate(39887. - 1e-7 + JD_OFFSET, v));
+	QVERIFY(close(v.rec.ut1utc, u1 + 0.1, 1e-6));
+
+	// 3. No step, no drift (since 1972 TAI-UTC is constant between leap seconds): plain linear interpolation, also at 1/4 of a day
+	EOPReader r3;
+	QString s3 = c04Header();
+	s3 += c04Row(60000, 0.1, 0.100, 0.001, "0.0", "0.0");
+	s3 += c04Row(60001, 0.1, 0.102, 0.001, "0.0", "0.0");
+	QVERIFY(mergeText(r3, s3));
+	QVERIFY(r3.interpolate(60000.25 + JD_OFFSET, v));
+	QVERIFY(close(v.rec.ut1utc, 0.1005));
+}
+
+// (SS) 2026-11-06 UT1-UTC of JPL Horizons (file of horizons_ut1utc.py): comment lines, header MJD;Date;JD;UT1-UTC, one row per day.
+// The values up to the end of the Horizons data are final, the later ones predictions. Merged after the IERS files it replaces
+// UT1-UTC only; dropAfter() removes the UT1-UTC values after the last day of the file so that the last value is held.
+void TestEOPReader::testHorizonsOverlay()
+{
+	const QString comments = QStringLiteral("# JPL Horizons UT1-UTC (quantity 49), target Sun, geocentric\n"
+	                                        "# EOP coverage: DATA-BASED 1962-JAN-20 TO 2023-MAR-01. PREDICTS-> 2023-MAR-03\n");
+	const QString body = QStringLiteral("MJD;Date;JD;UT1-UTC\n"
+	                                    "60000;2023-Feb-25;2460000.5;0.10000\n"
+	                                    "60001;2023-Feb-26;2460001.5;0.10100\n"
+	                                    "60002;2023-Feb-27;2460002.5;0.10200\n"
+	                                    "60003;2023-Feb-28;2460003.5;0.10300\n"
+	                                    "60004;2023-Mar-01;2460004.5;0.10400\n"
+	                                    "60005;2023-Mar-02;2460005.5;0.10500\n"
+	                                    "60006;2023-Mar-03;2460006.5;0.10600\n");
+	QCOMPARE(EOPReader::detectFormat("MJD;Date;JD;UT1-UTC"), EOPReader::Format::HorizonsUT);
+	QCOMPARE(EOPReader::detectFormat(c04Header()), EOPReader::Format::C04);
+
+	QVector<EOPReader::Record> recs;
+	EOPReader::Format fmt;
+	QString err;
+	QVERIFY2(EOPReader::parseText(comments + body, recs, fmt, err), qPrintable(err));
+	QCOMPARE(fmt, EOPReader::Format::HorizonsUT);
+	QCOMPARE(int(recs.size()), 7);
+	QVERIFY(recs[0].hasUT && !recs[0].hasPole && !recs[0].hasLOD && !recs[0].hasNutation && !recs[0].hasDXDY);
+	QCOMPARE(recs[0].year, 2023);
+	QCOMPARE(recs[0].month, 2);
+	QCOMPARE(recs[0].day, 25);
+	QVERIFY(close(recs[2].ut1utc, 0.102));
+	QCOMPARE(recs[4].utStatus, EOPReader::Status::Final);        // 2023-03-01, last day of the Horizons data
+	QCOMPARE(recs[5].utStatus, EOPReader::Status::Prediction);
+	QCOMPARE(recs[6].source, EOPReader::Format::HorizonsUT);
+
+	// without the coverage comment all the values are final
+	QVERIFY(EOPReader::parseText(body, recs, fmt, err));
+	QCOMPARE(recs[6].utStatus, EOPReader::Status::Final);
+	// a row that is not a number
+	QVERIFY(!EOPReader::parseText("MJD;Date;JD;UT1-UTC\n60000;2023-Feb-25;2460000.5;abc\n", recs, fmt, err));
+
+	// merged after C04 (60000..60004) and finals (60005 final, 60006 and 60007 predicted)
+	EOPReader r = loadC04();
+	QVERIFY(mergeText(r, finalsTail()));
+	EOPReader::Interpolated before, v;
+	QVERIFY(r.interpolate(60002. + JD_OFFSET, before));
+	QVERIFY(r.interpolate(60007. + JD_OFFSET, v));
+	QVERIFY(close(v.rec.ut1utc, 0.0530));                      // UT1-UTC of the finals file, predicted
+	EOPReader::LoadResult res;
+	QVERIFY(mergeText(r, comments + body, &res));
+	QCOMPARE(res.format, EOPReader::Format::HorizonsUT);
+	QCOMPARE(res.nReplaced, 7);
+	QCOMPARE(res.nAdded, 0);
+	QVERIFY(r.interpolate(60002. + JD_OFFSET, v));
+	QVERIFY(close(v.rec.ut1utc, 0.102));                       // replaced, although C04 has a final value
+	QVERIFY(close(v.rec.xp, before.rec.xp) && close(v.rec.yp, before.rec.yp));   // the other groups are not touched
+	QVERIFY(close(v.rec.lod, before.rec.lod));
+	QVERIFY(close(v.rec.dpsi, before.rec.dpsi) && close(v.rec.deps, before.rec.deps));
+	QVERIFY(r.interpolate(60005. + JD_OFFSET, v));
+	QVERIFY(close(v.rec.ut1utc, 0.105));
+	QCOMPARE(v.rec.utStatus, EOPReader::Status::Prediction);
+
+	// the UT1-UTC value of the finals file after the last day of the overlay is removed: the last Horizons value is held
+	QCOMPARE(r.dropAfter(EOPReader::Group::UT, 60006.), 1);
+	QCOMPARE(r.dropAfter(EOPReader::Group::UT, 60006.), 0);
+	QVERIFY(r.interpolate(60007. + JD_OFFSET, v));
+	QVERIFY(v.utHeld && v.rec.hasUT);
+	QVERIFY(close(v.rec.ut1utc, 0.106));
+	QVERIFY(!v.poleHeld && close(v.rec.xp, 0.130));            // pole of the finals file is still there
+	QVERIFY(r.interpolate(60020.5 + JD_OFFSET, v));
+	QVERIFY(v.utHeld && close(v.rec.ut1utc, 0.106));
+
+	const EOPReader::Span sp = r.span(EOPReader::Group::UT);
+	QVERIFY(sp.valid && sp.hasFinal && sp.hasPrediction());
+	QVERIFY(close(sp.firstMJD, 60000.));
+	QVERIFY(close(sp.lastFinalMJD, 60004.));
+	QVERIFY(close(sp.lastMJD, 60006.));
+
+	// (SS) 2026-11-08 the sigma of UT1-UTC of the IERS is kept where the overlay replaces the value (the overlay has no sigma); a day that is
+	// only in the overlay has none
+	EOPReader r2;
+	QVector<EOPReader::Record> iers;
+	for (int d = 0; d < 2; ++d)
+	{
+		EOPReader::Record a;
+		a.mjd = 60000. + d;
+		a.hasUT = true;
+		a.ut1utc = 0.2;
+		a.ut1utcErr = 0.00003 + d * 1e-5;
+		a.utStatus = EOPReader::Status::Final;
+		a.source = EOPReader::Format::C04;
+		iers.append(a);
+	}
+	r2.merge(iers, EOPReader::Format::C04);
+	QVector<EOPReader::Record> hz;
+	EOPReader::Format fmtHz;
+	QString errHz;
+	QVERIFY(EOPReader::parseText("MJD;Date;JD;UT1-UTC\n60000;a;b;0.10000\n60001;a;b;0.10100\n60002;a;b;0.10200\n", hz, fmtHz, errHz));
+	r2.merge(hz, fmtHz);
+	EOPReader::Interpolated w;
+	QVERIFY(r2.interpolate(60000. + JD_OFFSET, w));
+	QVERIFY(close(w.rec.ut1utc, 0.10000) && close(w.rec.ut1utcErr, 0.00003));
+	QVERIFY(r2.interpolate(60001. + JD_OFFSET, w));
+	QVERIFY(close(w.rec.ut1utc, 0.10100) && close(w.rec.ut1utcErr, 0.00004));
+	QVERIFY(r2.interpolate(60002. + JD_OFFSET, w));
+	QVERIFY(close(w.rec.ut1utc, 0.10200) && close(w.rec.ut1utcErr, 0.));
 }
 
 void TestEOPReader::testFinals2000A()
@@ -402,7 +562,107 @@ void TestEOPReader::testUpdaterHelpers()
 	QVERIFY(!EOPUpdater::defaultSources().isEmpty());
 	QCOMPARE(EOPUpdater::defaultSources().first().fileName, QString("finals.all.csv"));
 	QCOMPARE(EOPUpdater::defaultSources().first().refreshDays, 7);
-	QCOMPARE(int(EOPUpdater::defaultSources().size()), 4);
+	// (SS) 2026-11-05 only the IAU 1980 set is downloaded by default (finals.all, EOP 14 C04); the IAU 2000A files are optional
+	QCOMPARE(int(EOPUpdater::defaultSources().size()), 2);
+	QCOMPARE(EOPUpdater::defaultSources().at(1).fileName, QString("eopc04_14.62-now.csv"));
+	QCOMPARE(EOPUpdater::defaultSources().at(1).refreshDays, 365);
+	QCOMPARE(int(EOPUpdater::optionalSources().size()), 2);
+	for (const EOPUpdater::Source& src : EOPUpdater::optionalSources())
+		QVERIFY(!src.isDefault);
+}
+
+// (SS) 2026-11-06 UT1-UTC of JPL Horizons asked to the Horizons API by EOPUpdater: the request, and the transformation of the text table
+// of the answer (layout of a real answer of 2026-11-06) into an overlay file that EOPReader reads.
+void TestEOPReader::testHorizonsDownload()
+{
+	const EOPUpdater::Source src = EOPUpdater::horizonsSource();
+	QCOMPARE(src.fileName, QString("horizons_ut1utc.csv"));
+	QCOMPARE(src.url.host(), QString("ssd.jpl.nasa.gov"));
+	QCOMPARE(src.refreshDays, 1);
+	QVERIFY(src.kind == EOPUpdater::Source::Kind::HorizonsUT1UTC);
+	QCOMPARE(EOPUpdater::fileNameFor(src.fileName, QDate(2026, 11, 6)), QString("horizons_ut1utc_261106.csv"));
+	// the IERS sources are files
+	for (const EOPUpdater::Source& s : EOPUpdater::defaultSources())
+		QVERIFY(s.kind == EOPUpdater::Source::Kind::File);
+
+	const QString request = EOPUpdater::horizonsRequest(QDate(2027, 4, 5));
+	QVERIFY(request.startsWith("!$$SOF\n"));
+	QVERIFY(request.contains("START_TIME='1962-01-01'\n"));
+	QVERIFY(request.contains("STOP_TIME='2027-04-05'\n"));
+	QVERIFY(request.contains("QUANTITIES='49'\n"));
+	QVERIFY(request.contains("CENTER='@399'\n"));
+
+	const QString answer = QStringLiteral(
+	    "API VERSION: 1.0\n"
+	    "API SOURCE: NASA/JPL Horizons API\n"
+	    "\n"
+	    "*******************************************************************************\n"
+	    " Revised: July 31, 2013                  Sun                                 10\n"
+	    "\n"
+	    "*******************************************************************************\n"
+	    "Ephemeris / WWW_USER Fri Nov  6 04:52:09 2026 Pasadena, USA      / Horizons    \n"
+	    "*******************************************************************************\n"
+	    "Target body name: Sun (10)                        {source: DE441}\n"
+	    "Center body name: Earth (399)                     {source: DE441}\n"
+	    "EOP file        : eop.261105.p270201                                           \n"
+	    "EOP coverage    : DATA-BASED 1962-JAN-20 TO 2026-NOV-05. PREDICTS-> 2027-JAN-31\n"
+	    "Table format    : Comma Separated Values (spreadsheet)\n"
+	    "*******************************************************************************\n"
+	    " Date__(UT)__HR:MN:SC.fff, Date_________JDUT, , ,  UT1-UTC,\n"
+	    "***********************************************************\n"
+	    "$$SOE\n"
+	    " 1962-Jan-18 00:00:00.000, 2437682.500000000, , ,     n.a.,\n"
+	    " 1962-Jan-19 00:00:00.000, 2437683.500000000, , ,     n.a.,\n"
+	    " 1962-Jan-20 00:00:00.000, 2437684.500000000, , ,  0.02340,\n"
+	    " 1962-Jan-21 00:00:00.000, 2437685.500000000, , ,  0.02377,\n"
+	    " 2027-Jan-28 00:00:00.000, 2461433.500000000, , , -0.13870,\n"
+	    " 2027-Jan-29 00:00:00.000, 2461434.500000000, , , -0.13971,\n"
+	    " 2027-Jan-30 00:00:00.000, 2461435.500000000, , , -0.14049,\n"
+	    " 2027-Jan-31 00:00:00.000, 2461436.500000000, , , -0.14107,\n"
+	    " 2027-Feb-01 00:00:00.000, 2461437.500000000, , , -0.14107,\n"
+	    " 2027-Feb-02 00:00:00.000, 2461438.500000000, , , -0.14107,\n"
+	    " 2027-Feb-03 00:00:00.000, 2461439.500000000, , , -0.14107,\n"
+	    "$$EOE\n"
+	    "*******************************************************************************\n"
+	    "  API            https://ssd-api.jpl.nasa.gov/doc/horizons.html\n");
+
+	QString csv, err;
+	int n = 0;
+	QVERIFY2(EOPUpdater::horizonsToOverlayCSV(answer, csv, &err, &n, 3), qPrintable(err));
+	QCOMPARE(n, 6);        // 2 n.a. days dropped, 3 days after the last distinct value dropped
+	QVERIFY(csv.contains("# Horizons run: 2026-11-06\n"));
+	QVERIFY(csv.contains("# EOP file used by Horizons: eop.261105.p270201\n"));
+	QVERIFY(csv.contains("# EOP coverage: DATA-BASED 1962-JAN-20 TO 2026-NOV-05. PREDICTS-> 2027-JAN-31\n"));
+	QVERIFY(csv.contains("MJD;Date;JD;UT1-UTC\n37684;1962-Jan-20;2437684.500000000;0.02340\n"));
+	QVERIFY(csv.endsWith("61436;2027-Jan-31;2461436.500000000;-0.14107\n"));
+	// the data rows only (the comment lines say that the first days are n.a.)
+	const QString dataRows = csv.mid(csv.indexOf("MJD;Date;JD;UT1-UTC\n"));
+	QVERIFY(!dataRows.contains("2027-Feb") && !dataRows.contains("n.a."));
+	// the same answer with Windows line ends
+	QString csv2;
+	QVERIFY(EOPUpdater::horizonsToOverlayCSV(QString(answer).replace("\n", "\r\n"), csv2, &err, &n, 3));
+	QCOMPARE(csv2, csv);
+
+	// EOPReader reads the file: final up to the end of the Horizons data, predictions after
+	QVector<EOPReader::Record> recs;
+	EOPReader::Format fmt;
+	QVERIFY2(EOPReader::parseText(csv, recs, fmt, err), qPrintable(err));
+	QCOMPARE(fmt, EOPReader::Format::HorizonsUT);
+	QCOMPARE(int(recs.size()), 6);
+	QVERIFY(close(recs[0].mjd, 37684.) && close(recs[0].ut1utc, 0.02340));
+	QCOMPARE(recs[1].utStatus, EOPReader::Status::Final);
+	QCOMPARE(recs[2].utStatus, EOPReader::Status::Prediction);
+	QVERIFY(close(recs[5].mjd, 61436.) && close(recs[5].ut1utc, -0.14107));
+
+	// answers that are not usable: nothing is written by the updater
+	QVERIFY(!EOPUpdater::horizonsToOverlayCSV("ERROR: Cannot interpret date. Type: 'Date' in the batch file", csv, &err, &n, 3));
+	QVERIFY(err.contains("no table of UT1-UTC") && err.contains("Cannot interpret date"));
+	QVERIFY(!EOPUpdater::horizonsToOverlayCSV(answer, csv, &err, &n, 10));      // 9 days with a value only
+	QVERIFY(err.contains("only 9 days"));
+	QVERIFY(!EOPUpdater::horizonsToOverlayCSV(QString(answer).replace(" 2027-Jan-29 00:00:00.000, 2461434.500000000, , , -0.13971,",
+	                                                                  " 2027-Jan-29 something went wrong"), csv, &err, &n, 3));
+	QVERIFY(err.contains("row not understood"));
+	QVERIFY(csv.isEmpty());
 }
 
 void TestEOPReader::testBadInput()

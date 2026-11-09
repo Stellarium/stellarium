@@ -35,6 +35,7 @@ private slots:
 	void testZone3FollowsErfa();
 	void testOwenZoneSanity();
 	void testEopAndOffsets();
+	void testDepsOffset();	// (SS) 2026-11-08 dEps offset of zones 1 and 2
 	void testMoonOffset();
 	void testOutOfRange();
 	void testTiming();

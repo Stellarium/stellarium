@@ -34,6 +34,10 @@ private slots:
 	void testExplicitSelection();
 	void testModels();
 	void testKeysAndOrder();
+	void testFinalsDoNotReplaceLongTerm();	// (SS) 2026-11-05 rule A and its option
+	void testDefaultSelectionByModel();	// (SS) 2026-11-05 default selection: files of one nutation model
+	void testHorizonsOverlay();	// (SS) 2026-11-06 UT1-UTC of JPL Horizons
+	void testRemoveOldVersions();	// (SS) 2026-11-07 older versions of the files just downloaded
 	void testUpdateAge();
 	void testLastValidReport();
 	void testQueries();

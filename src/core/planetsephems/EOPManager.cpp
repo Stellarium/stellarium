@@ -20,6 +20,8 @@
 #include "EOPManager.hpp"
 
 #include <QDir>
+#include <QSet>
+#include <QFile>
 #include <QFileInfo>
 #include <QRegularExpression>
 #include <algorithm>
@@ -161,10 +163,13 @@ namespace
 {
 // merge order: long term (C04) files first, then the standard ones; in each group the files of the preferred model last
 // (their values win), then from the oldest to the newest download, ties by name
+// (SS) 2026-11-06 the Horizons UT1-UTC is merged after all the IERS files
+int mergeRank(const EOPManager::FileInfo& f) { return f.isLongTerm() ? 0 : (f.isOverlay() ? 2 : 1); }
+
 bool mergeBefore(const EOPManager::FileInfo& a, const EOPManager::FileInfo& b, EOPManager::Model preferred)
 {
-	if (a.isLongTerm() != b.isLongTerm())
-		return a.isLongTerm();
+	if (mergeRank(a) != mergeRank(b))
+		return mergeRank(a) < mergeRank(b);
 	const bool pa = (a.model == preferred), pb = (b.model == preferred);
 	if (pa != pb)
 		return pb;
@@ -172,15 +177,70 @@ bool mergeBefore(const EOPManager::FileInfo& a, const EOPManager::FileInfo& b, E
 }
 }
 
+namespace
+{
+//! (SS) 2026-11-06 UT1-UTC of the last record of a file (the last value of the Horizons UT1-UTC, held afterwards)
+double recsLastUT(const QVector<EOPReader::Record>& recs)
+{
+	return recs.isEmpty() ? 0. : recs.last().ut1utc;
+}
+
+//! (SS) 2026-11-05 Number of values of each group (EOPReader::Group order) taken out of a standard file by filterLongTerm()
+struct FilterStats
+{
+	int n[5] = {0, 0, 0, 0, 0};
+	int droppedRecords = 0;     //!< records left with no value at all
+	int total() const { return n[0] + n[1] + n[2] + n[3] + n[4]; }
+};
+
+//! (SS) 2026-11-05 Rule A: take out of the records of a standard file the values of days up to the last final value of the same group
+//! in the long term files (cutoff[group], in MJD). A group has its own cutoff (pole and UT1-UTC can go further than the others).
+FilterStats filterLongTerm(QVector<EOPReader::Record>& recs, const double cutoff[5])
+{
+	FilterStats st;
+	QVector<EOPReader::Record> kept;
+	kept.reserve(recs.size());
+	for (EOPReader::Record r : recs)
+	{
+		const double mjd = r.mjd - 1e-9;   // tolerance: a record on the cutoff day itself is protected too
+		if (r.hasPole && mjd <= cutoff[int(EOPReader::Group::Pole)])      { r.hasPole = false;      ++st.n[int(EOPReader::Group::Pole)]; }
+		if (r.hasUT && mjd <= cutoff[int(EOPReader::Group::UT)])          { r.hasUT = false;        ++st.n[int(EOPReader::Group::UT)]; }
+		if (r.hasLOD && mjd <= cutoff[int(EOPReader::Group::LOD)])        { r.hasLOD = false;       ++st.n[int(EOPReader::Group::LOD)]; }
+		if (r.hasNutation && mjd <= cutoff[int(EOPReader::Group::Nutation)]) { r.hasNutation = false; ++st.n[int(EOPReader::Group::Nutation)]; }
+		if (r.hasDXDY && mjd <= cutoff[int(EOPReader::Group::DXDY)])      { r.hasDXDY = false;      ++st.n[int(EOPReader::Group::DXDY)]; }
+		if (r.hasPole || r.hasUT || r.hasLOD || r.hasNutation || r.hasDXDY)
+			kept.append(r);
+		else
+			++st.droppedRecords;
+	}
+	recs = kept;
+	return st;
+}
+
+QString describeFilter(const FilterStats& st)
+{
+	const EOPReader::Group groups[] = {EOPReader::Group::Pole, EOPReader::Group::UT, EOPReader::Group::LOD,
+	                                   EOPReader::Group::Nutation, EOPReader::Group::DXDY};
+	QStringList parts;
+	for (EOPReader::Group g : groups)
+		if (st.n[int(g)] > 0)
+			parts << QString("%1 %2").arg(EOPReader::groupName(g)).arg(st.n[int(g)]);
+	return QString("  Values not used, the final values of the long term series are kept: %1 (%2)\n")
+	        .arg(st.total()).arg(parts.join(", "));
+}
+}
+
 QStringList EOPManager::defaultSelection() const
 {
-	QList<FileInfo> chosen;
-
-	// long term files: for each model the file that reaches the latest date and has the offsets of that model
-	// (dPsi, dEps for IAU 1980, dX, dY for IAU 2000A). A newer series thus replaces an older one as soon as it goes further.
-	const Model models[] = {Model::IAU1980, Model::IAU2000A};
-	for (Model m : models)
+	// (SS) 2026-11-05 Only the files of one nutation model are merged by default: the preferred one (IAU 1980, as JPL Horizons, unless
+	// the user chose IAU 2000A in the EOP dialog). Files of the other model are only used when selected explicitly, or when the folder
+	// has no valid file of the preferred model (so that some EOP are available anyway).
+	auto pick = [this](Model m)
 	{
+		QList<FileInfo> chosen;
+
+		// long term file of that model: the one that reaches the latest date and has the offsets of that model
+		// (dPsi, dEps for IAU 1980, dX, dY for IAU 2000A). A newer series thus replaces an older one as soon as it goes further.
 		const FileInfo* best = nullptr;
 		for (const FileInfo& fi : infos)
 		{
@@ -192,18 +252,38 @@ QStringList EOPManager::defaultSelection() const
 		}
 		if (best)
 			chosen << *best;
-	}
 
-	// standard files: the newest download of each series (finals.all, finals2000A.all)
-	QHash<QString, FileInfo> newest;
-	for (const FileInfo& fi : infos)
+		// standard files of that model: the newest download of each series
+		QHash<QString, FileInfo> newest;
+		for (const FileInfo& fi : infos)
+		{
+			if (!fi.valid || fi.isLongTerm() || fi.model != m)
+				continue;
+			if (!newest.contains(fi.key) || mergeBefore(newest.value(fi.key), fi, preferred))
+				newest.insert(fi.key, fi);
+		}
+		chosen << newest.values();
+		return chosen;
+	};
+
+	Model used = (preferred == Model::IAU2000A) ? Model::IAU2000A : Model::IAU1980;
+	QList<FileInfo> chosen = pick(used);
+	if (chosen.isEmpty())
 	{
-		if (!fi.valid || fi.isLongTerm() || fi.model == Model::Unknown)
-			continue;
-		if (!newest.contains(fi.key) || mergeBefore(newest.value(fi.key), fi, preferred))
-			newest.insert(fi.key, fi);
+		used = (used == Model::IAU2000A) ? Model::IAU1980 : Model::IAU2000A;
+		chosen = pick(used);
 	}
-	chosen << newest.values();
+	// (SS) 2026-11-06 The UT1-UTC of JPL Horizons goes with the IAU 1980 files (Horizons uses the IAU 1980 nutation): the newest
+	// file is added. It is not in the default selection of the IAU 2000A model; it can be selected in the Files table.
+	if (used == Model::IAU1980)
+	{
+		const FileInfo* overlay = nullptr;
+		for (const FileInfo& fi : infos)
+			if (fi.valid && fi.isOverlay() && (!overlay || mergeBefore(*overlay, fi, preferred)))
+				overlay = &fi;
+		if (overlay)
+			chosen << *overlay;
+	}
 
 	std::sort(chosen.begin(), chosen.end(), [this](const FileInfo& a, const FileInfo& b) { return mergeBefore(a, b, preferred); });
 	QStringList res;
@@ -250,10 +330,14 @@ QString diffLine(const QString& name, const QString& unit, const EOPReader::Diff
 }
 
 // Summary of one merged file, in the style of the standalone program log
-QString EOPManager::describeMerge(const FileInfo& fi, const EOPReader::LoadResult& r) const
+QString EOPManager::describeMerge(const FileInfo& fi, const EOPReader::LoadResult& r, int nInFile) const
 {
-	QString s = QString("Using EOP file: %1 [%2, %3]\n  %4 EOP records read\n")
-	            .arg(fi.fileName, EOPReader::formatName(fi.format), modelName(fi.model)).arg(r.nRecords);
+	// (SS) 2026-11-06 records of the file, and how many were used when values were taken out (rule A)
+	const QString model = fi.isOverlay() ? QStringLiteral("UT1-UTC only") : modelName(fi.model);
+	QString s = QString("Using EOP file: %1 [%2, %3]\n  %4 EOP records read").arg(fi.fileName, EOPReader::formatName(fi.format), model).arg(nInFile);
+	if (r.nRecords != nInFile)
+		s += QString(", %1 used").arg(r.nRecords);
+	s += "\n";
 	s += QString("  Existing records replaced : %1\n  Final records added       : %2\n  Prediction records added  : %3\n")
 	     .arg(r.nReplaced).arg(r.nFinalAdded).arg(r.nPredictionAdded);
 	if (r.nReplaced > 0)
@@ -343,10 +427,57 @@ QString EOPManager::describeLastValues() const
 	return s;
 }
 
+QStringList EOPManager::removeOldVersions(const QStringList& justWritten, int keep)
+{
+	QStringList removed;
+	if (keep < 1)
+		return removed;
+
+	// series (names without the date) of the files just written
+	QSet<QString> keys;
+	for (const QString& n : justWritten)
+		if (generationDateFromName(n).isValid())
+			keys.insert(keyFromName(n));
+
+	struct Item { QString name; QDate date; };
+	QHash<QString, QList<Item>> bySeries;
+	const QDir d(dirPath);
+	const QFileInfoList entries = d.entryInfoList(QStringList() << "*.csv", QDir::Files);
+	for (const QFileInfo& e : entries)
+	{
+		const QDate g = generationDateFromName(e.fileName());
+		if (!g.isValid())
+			continue;                       // no date in the name: not ours
+		const QString key = keyFromName(e.fileName());
+		if (keys.contains(key))
+			bySeries[key].append(Item{e.fileName(), g});
+	}
+
+	for (auto it = bySeries.begin(); it != bySeries.end(); ++it)
+	{
+		QList<Item>& items = it.value();
+		std::sort(items.begin(), items.end(), [](const Item& a, const Item& b)
+		{
+			return a.date != b.date ? a.date > b.date : a.name > b.name;      // newest first
+		});
+		for (int i = keep; i < items.size(); ++i)
+		{
+			const QString& name = items.at(i).name;
+			if (justWritten.contains(name) || (explicitSelection && selection.contains(name)))
+				continue;
+			if (QFile::remove(d.filePath(name)))
+				removed << name;
+		}
+	}
+	removed.sort();
+	return removed;
+}
+
 bool EOPManager::reload()
 {
 	eop.clear();
 	report.clear();
+	horizonsLastMJD = -1.;
 
 	// merge order: long term files first, then by download date (oldest first), so the newest data replace the older ones
 	QList<FileInfo> todo;
@@ -358,10 +489,51 @@ bool EOPManager::reload()
 	}
 	std::stable_sort(todo.begin(), todo.end(), [this](const FileInfo& a, const FileInfo& b) { return mergeBefore(a, b, preferred); });
 
+	// (SS) 2026-11-05 Rule A (see finalsOverrideLongTerm()): the long term files are merged first (see mergeBefore()); after each of them the
+	// last final MJD of every group is the cutoff up to which the standard files do not replace values.
+	double cutoff[5];
+	for (double& c : cutoff)
+		c = -1e30;
 	for (const FileInfo& fi : todo)
 	{
-		const EOPReader::LoadResult r = eop.merge(parsed.value(fi.fileName), fi.format, false);
-		report += describeMerge(fi, r);
+		QVector<EOPReader::Record> recs = parsed.value(fi.fileName);
+		const int nInFile = recs.size();
+		FilterStats fs;
+		if (!finalsOverride && !fi.isLongTerm() && !fi.isOverlay())
+			fs = filterLongTerm(recs, cutoff);
+		if (recs.isEmpty())
+		{
+			report += QString("Using EOP file: %1 [%2, %3]\n  No value used: all its values are in the period of the final values of the long term series\n\n")
+			          .arg(fi.fileName, EOPReader::formatName(fi.format), modelName(fi.model));
+			continue;
+		}
+		const EOPReader::LoadResult r = eop.merge(recs, fi.format, false);
+		report += describeMerge(fi, r, nInFile);
+		if (fs.total() > 0)
+			report.insert(report.size() - 1, describeFilter(fs));   // before the empty line that ends the block of the file
+		if (fi.isOverlay())
+		{
+			// (SS) 2026-11-06 Horizons keeps its last UT1-UTC for all later dates: the UT1-UTC predictions of the other files after the
+			// last day of the overlay are removed, so that the last value of the overlay is the one held
+			const int removed = eop.dropAfter(EOPReader::Group::UT, fi.lastMJD);
+			horizonsLastMJD = fi.lastMJD;
+			auto day = [](double mjd) { return QDate::fromJulianDay(qint64(std::floor(mjd)) + 2400001).toString("yyyy-MM-dd"); };
+			report.insert(report.size() - 1,
+			              QString("  UT1-UTC of every day from %1 to %2 comes from this file; %3 UT1-UTC value(s) of other files after %2 removed,\n"
+			                      "  the last value (%4 s) is held for all later dates\n")
+			              .arg(day(fi.firstMJD), day(fi.lastMJD)).arg(removed).arg(recsLastUT(parsed.value(fi.fileName)), 0, 'f', 5));
+		}
+		if (fi.isLongTerm())
+		{
+			const EOPReader::Group groups[] = {EOPReader::Group::Pole, EOPReader::Group::UT, EOPReader::Group::LOD,
+			                                   EOPReader::Group::Nutation, EOPReader::Group::DXDY};
+			for (EOPReader::Group g : groups)
+			{
+				const EOPReader::Span sp = eop.span(g);
+				if (sp.hasFinal && sp.lastFinalMJD > cutoff[int(g)])
+					cutoff[int(g)] = sp.lastFinalMJD;
+			}
+		}
 	}
 	if (todo.isEmpty())
 		report = QStringLiteral("No EOP file selected\n");

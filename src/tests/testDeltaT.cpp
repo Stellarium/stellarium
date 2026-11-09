@@ -1233,46 +1233,59 @@ void TestDeltaT::testDeltaTByJPLHorizons()
 	const bool useDE43x     = false;
 	const bool useDE44x     = true;
 
-	// Pass/Fail criteria +/- 0.1 seconds from 9999BC to 1962-01-20
-	const double acceptableError_before_1962 = 0.1;
-	// Pass/Fail criteria +/- 10 microseconds from 1962-01-20 to 2650-01-25
-	const double acceptableError_1962_to_2650 = 0.00001;
+	// (SS) 2026-11-05 Pass/Fail criteria after the 2026-11-03 revision of getDeltaTByJPLHorizons() (uniform JD time scale for the
+	// parabola, linear interpolation in JD between the 1 January knots of the Stephenson/Morrison spline rows, and a year fraction
+	// based on JD in getMoonSecularAcceleration()). The criteria do not depend on any ephemeris file up to 1962-01-20, so
+	// that part of the test is always performed (also on a CI server without kernels):
+	//  - 9999BC to 721BC: +/- 10 microseconds. The JPL Horizons values above are printed with 5 decimals (10 microseconds);
+	//    the largest difference measured on these points is 4.6 microseconds;
+	//  - 721BC to 1962-01-20: +/- 5 microseconds (JPL values with 6 decimals, largest difference measured 0.5 microsecond).
+	// From 1962-01-20 on the result depends on where TT - TDB comes from (see verifyAll() below):
+	//  - TT - TDB available from the source: +/- 10 microseconds up to about 7000AD. Beyond that the difference with JPL Horizons
+	//    grows with the distance from J2000 (about 10 microseconds at 7151, 25 to 27 microseconds at 9998, probably because Horizons
+	//    gets TT - TDB from a longer-term model than the DE431T time ephemeris), so the criterion is +/- 30 microseconds;
+	//  - TT - TDB not available from the source (TT - TDB = 0): +/- 2 milliseconds.
+	const double acceptableError_before_721BC       = 0.00001;  // 10 us
+	const double acceptableError_721BC_to_1962      = 0.000005; // 5 us
+	const double acceptableError_covered_to_7000    = 0.00001;  // 10 us
+	const double acceptableError_covered_after_7000 = 0.00003;  // 30 us
+	const double acceptableError_not_covered        = 0.002;    // 2 ms
 
-	// (SS) 2026-10-03 TT - TDB can come from two sources, and each one that is available is tested:
-	//  - the SPK kernel de431t.bsp (see initTestCase()), valid over the full range: the criterion is +/- 10 microseconds
-	//    from 2650-01-25 to about 7000AD. Beyond that the difference with JPL Horizons grows with the distance from J2000
-	//    (about 10 microseconds at 7151, 25 microseconds at 9998, probably because Horizons gets TT - TDB from a longer-term
-	//    model than the DE431T time ephemeris), so the criterion is +/- 30 microseconds from about 7000AD to 9999AD;
-	//  - the DE440T Linux file, valid from 1550 to 2650 only (TT - TDB = 0 afterwards): +/- 2 milliseconds from 2650-01-25 to 9999AD.
+	constexpr double JD_721BC      = 1458077.5; // 721BC-01-01 00:00 (start of the Stephenson/Morrison splines)
+	constexpr double JD_1962       = 2437684.5; // 1962-01-20 00:00
+	constexpr double JD_7000AD     = 4277757.5; // about 7000-01-01
+	constexpr double JD_DE440T_END = 2688976.5; // 2650-01-25: end of the DE440T Linux file
 
-	if (de440FilePath.isEmpty() && !useBspTT)
-	{
-		qWarning() << "JPL Horizons test has been marked as 'passed' (It cannot be passed, because neither the DE440 file nor an SPK kernel with TT-TDB has been found)!";
-		return;
-	}
-
+	// verifyAll() tests every data point against one TT - TDB source. 'covered' tells whether that source provides TT - TDB for a
+	// given JD (null: no source). All data points are evaluated (the test does not stop at the first failure) so that the pattern
+	// of the errors is visible.
 	const QVariantList allData = data;
-	auto verifyAll = [&](const QString& source, double acceptableError_2650_to_7000, double acceptableError_after_7000)
+	auto verifyAll = [&](const QString& source, const std::function<bool(double)>& covered, bool onlyBefore1962 = false)
 	{
-		// All data points are evaluated (the test does not stop at the first failure) so that the pattern of the errors is visible.
 		QVariantList d = allData;
 		QStringList failures;
 		while (d.count() >= 2)
 		{
 			const double JD = d.takeFirst().toDouble();
 			const double expectedResult = d.takeFirst().toDouble();
+			if (onlyBefore1962 && JD >= JD_1962)
+				continue;
 			double result = StelUtils::getDeltaTByJPLHorizons(JD);
 			result += StelUtils::getMoonSecularAcceleration(JD, deltaTnDot, useDE43x, useDE44x); // Correction is done only up to 1955.5
 			const double actualError = qAbs(qAbs(expectedResult) - qAbs(result));
 
-			double acceptableError = (JD < 4277757.5) ? acceptableError_2650_to_7000 : acceptableError_after_7000; // 4277757.5 = about 7000-01-01
-			if (JD < 2437684.5)        // less than 1962-01-20
-				acceptableError = acceptableError_before_1962;
-			else if (JD < 2688976.5)   // between 1962-01-20 and 2650-01-25
-				acceptableError = acceptableError_1962_to_2650;
+			double acceptableError;
+			if (JD < JD_721BC)
+				acceptableError = acceptableError_before_721BC;
+			else if (JD < JD_1962)
+				acceptableError = acceptableError_721BC_to_1962;
+			else if (covered && covered(JD))
+				acceptableError = (JD < JD_7000AD) ? acceptableError_covered_to_7000 : acceptableError_covered_after_7000;
+			else
+				acceptableError = acceptableError_not_covered;
 
 			const QString dateTime = StelUtils::julianDayToISO8601String(JD, true);
-			if (JD >= 2688976.5)
+			if (JD >= JD_DE440T_END)
 				qInfo().noquote() << QString("[%1] %2 JD=%3 error=%4 us (acceptable %5 us)")
 					.arg(source, dateTime).arg(JD, 0, 'f', 5).arg(actualError * 1e6, 0, 'f', 2).arg(acceptableError * 1e6, 0, 'f', 1);
 			if (actualError > acceptableError)
@@ -1287,20 +1300,116 @@ void TestDeltaT::testDeltaTByJPLHorizons()
 		QVERIFY2(failures.isEmpty(), qPrintable(QString("[%1] %2 failure(s): %3").arg(source).arg(failures.size()).arg(failures.join("; "))));
 	};
 
+	if (!useBspTT && de440FilePath.isEmpty())
+	{
+		// No TT - TDB source at all (e.g. on a CI server): only the part of the test that does not depend on TT - TDB is performed,
+		// i.e. 9999BC to 1962-01-20, with the full strictness. The points after 1962-01-20 are skipped.
+		qWarning() << "JPL Horizons test: neither the DE440 file nor an SPK kernel with TT-TDB has been found: only 9999BC to 1962-01-20 is verified";
+		StelUtils::setTTminusTDBProvider(nullptr);
+		verifyAll(QString("no TT-TDB source, 9999BC to 1962-01-20 only"), nullptr, true);
+		return;
+	}
+
+	// Source 1: TT - TDB from SPK kernels. The default kernel (de431t.bsp) covers the full range; de440t.bsp, if present, covers
+	// only 1550 to 2650-03-20 (outside TT - TDB then comes from the DE440T Linux file, if it is loaded, or is 0). Whether a data
+	// point is "covered" is asked to the active kernel itself, so the criterion follows the coverage of each kernel.
 	if (useBspTT)
 	{
 		StelUtils::setTTminusTDBProvider(bspProvider);
-		verifyAll(QString("TT-TDB from SPK kernel"), 0.00001, 0.00003);
-		if (QTest::currentTestFailed())
-			return;
+		const QString savedKernel = bspMgr->ttMinusTDBKernel();
+		QStringList kernels;
+		kernels << savedKernel << QString("de440t.bsp");
+		kernels.removeDuplicates();
+		const std::function<bool(double)> bspCovered = [this](double jd) { return bspMgr->ttMinusTDBAvailable(jd); };
+
+		for (const QString& kernel : std::as_const(kernels))
+		{
+			if (kernel != savedKernel)
+			{
+				bspMgr->setTTminusTDBKernel(kernel);
+				// The kernel may not be installed: only test it when it has really been selected and provides TT - TDB at J2000
+				if (!bspMgr->ttMinusTDBKernel().endsWith(kernel, Qt::CaseInsensitive) || !bspMgr->ttMinusTDBAvailable(2451545.0))
+				{
+					qInfo() << "JPL Horizons test: kernel" << kernel << "not available, skipped";
+					continue;
+				}
+			}
+			verifyAll(QString("TT-TDB from SPK kernel %1").arg(kernel), bspCovered);
+			if (QTest::currentTestFailed())
+			{
+				bspMgr->setTTminusTDBKernel(savedKernel);
+				return;
+			}
+		}
+		bspMgr->setTTminusTDBKernel(savedKernel);
 	}
+
+	// Source 2: no provider, the DE440T Linux file (valid 1550 to 2650-01-25; TT - TDB = 0 afterwards)
 	if (!de440FilePath.isEmpty())
 	{
-		StelUtils::setTTminusTDBProvider(nullptr); // old path: DE440T Linux file, zero outside 1550..2650
-		verifyAll(QString("TT-TDB from DE440T file"), 0.002, 0.002);
+		StelUtils::setTTminusTDBProvider(nullptr);
+		verifyAll(QString("TT-TDB from DE440T file"), [=](double jd) { return jd < JD_DE440T_END; });
 		if (useBspTT)
 			StelUtils::setTTminusTDBProvider(bspProvider);
 	}
+}
+
+// (SS) 2026-11-05 Self-consistency of the JPL Horizons Delta-T algorithm. This test needs no external data and no ephemeris file:
+// it checks the continuity of the algorithm, where the 2026-11-03 revision changed the way the time argument is built.
+//  1. The joint between the parabola and the first spline row at 721BC-01-01 (JPL smoothed it by adjusting the two coefficients).
+//  2. The joints between the spline rows at 1 January of the K_i years of Table S15 (the jump is limited by the rounding of the
+//     table to 3 decimals, i.e. 1 ms).
+//  3. No jump of Delta-T and of the Moon secular acceleration correction through the Julian/Gregorian reform year 1582, where the
+//     previous year fraction (calendar year based) was discontinuous.
+//  4. No jump of Delta-T from 9999BC to 1962-01-20 (day-to-day change below the maximum slope of the algorithm).
+void TestDeltaT::testDeltaTByJPLHorizonsContinuity()
+{
+	// 1. Parabola <-> first spline row
+	constexpr double JD_721BC = 1458077.5;
+	const double jumpParabola = StelUtils::getDeltaTByJPLHorizons(JD_721BC) - StelUtils::getDeltaTByJPLHorizons(JD_721BC - 1e-6);
+	QVERIFY2(qAbs(jumpParabola) < 1e-5, qPrintable(QString("jump at 721BC-01-01: %1 s").arg(jumpParabola, 0, 'g', 6)));
+
+	// 2. Joints between the spline rows (K_i years of Table S15; the first one, -720, is checked above)
+	static const int knotYears[] = { -100, 400, 1000, 1150, 1300, 1500, 1600, 1650, 1720, 1800, 1810, 1820, 1830, 1840, 1850,
+	                                 1855, 1860, 1865, 1870, 1875, 1880, 1885, 1890, 1895, 1900, 1905, 1910, 1915, 1920, 1925,
+	                                 1930, 1935, 1940, 1945, 1950, 1953, 1956, 1959, 1962 };
+	for (const int y : knotYears)
+	{
+		double jd;
+		StelUtils::getJDFromDate(&jd, y, 1, 1, 0, 0, 0.f);
+		const double jump = StelUtils::getDeltaTByJPLHorizons(jd) - StelUtils::getDeltaTByJPLHorizons(jd - 1e-6);
+		QVERIFY2(qAbs(jump) < 0.002, qPrintable(QString("jump at %1-01-01: %2 s").arg(y).arg(jump, 0, 'g', 6)));
+	}
+
+	// 3. Year 1582, 1 day steps (the JD is continuous through the 1582-10-04 to 1582-10-15 calendar gap, so must be Delta-T;
+	// the largest daily change of Delta-T there is about 0.005 s)
+	double jd1582, jd1583;
+	StelUtils::getJDFromDate(&jd1582, 1582, 1, 1, 0, 0, 0.f);
+	StelUtils::getJDFromDate(&jd1583, 1583, 1, 1, 0, 0, 0.f);
+	for (double jd = jd1582; jd < jd1583; jd += 1.0)
+	{
+		const double dDeltaT = StelUtils::getDeltaTByJPLHorizons(jd + 1.0) - StelUtils::getDeltaTByJPLHorizons(jd);
+		QVERIFY2(qAbs(dDeltaT) < 0.01, qPrintable(QString("Delta-T step at JD %1: %2 s").arg(jd, 0, 'f', 1).arg(dDeltaT, 0, 'g', 6)));
+		const double dMoon = StelUtils::getMoonSecularAcceleration(jd + 1.0, -25.82, false, true) - StelUtils::getMoonSecularAcceleration(jd, -25.82, false, true);
+		QVERIFY2(qAbs(dMoon) < 1e-4, qPrintable(QString("Moon secular acceleration step at JD %1: %2 s").arg(jd, 0, 'f', 1).arg(dMoon, 0, 'g', 6)));
+	}
+
+	// 4. Day-to-day change from 9999BC to 1962-01-20: the largest slope of the algorithm is about 0.20 s/day at 9999BC (parabola)
+	// and about 0.044 s/day at the start of the first spline row. The tolerance is proportional to the step.
+	auto scan = [](double jdFrom, double jdTo, double step, double maxSlopePerDay)
+	{
+		double previous = StelUtils::getDeltaTByJPLHorizons(jdFrom);
+		for (double jd = jdFrom + step; jd < jdTo; jd += step)
+		{
+			const double current = StelUtils::getDeltaTByJPLHorizons(jd);
+			QVERIFY2(qAbs(current - previous) < maxSlopePerDay * step,
+			         qPrintable(QString("Delta-T change %1 s between JD %2 and JD %3").arg(current - previous, 0, 'g', 6).arg(jd - step, 0, 'f', 1).arg(jd, 0, 'f', 1)));
+			previous = current;
+		}
+	};
+	scan(-1930633.5, JD_721BC, 10.0, 0.25);
+	if (QTest::currentTestFailed()) return;
+	scan(JD_721BC, 2437684.0, 3.0, 0.06);
 }
 
 void TestDeltaT::testDeltaTByBorkowski()

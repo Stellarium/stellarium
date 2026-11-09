@@ -147,6 +147,7 @@ void TestHorizonsPrecNut::testZone3FollowsErfa()
 	eraPmat76(J2000, q.jdTDB - J2000, rp);
 	eraNut80(J2000, q.jdTDB - J2000, &dp, &de);
 	dp += HPN::dpsiOffsetMas(Zone::Zone2, false) / 1000. * HPN::ARCSEC2RAD;
+	de += HPN::depsOffsetMas(Zone::Zone2) / 1000. * HPN::ARCSEC2RAD;	// (SS) 2026-11-08 empirical dEps offset of zones 1 and 2
 	const double eps2 = eraObl80(J2000, q.jdTDB - J2000);
 	eraNumat(eps2, dp, de, rn);
 	eraRxr(rn, rp, expected);
@@ -186,8 +187,9 @@ void TestHorizonsPrecNut::testEopAndOffsets()
 		p.eopDeps = 0.05;
 		const HPN::Result withEop = HPN::compute(p);
 		const double offset = HPN::dpsiOffsetMas(ZONES[k], false) / 1000.;
+		const double depsOffset = HPN::depsOffsetMas(ZONES[k]) / 1000.;	// (SS) 2026-11-08 6.0 mas in zones 1 and 2, none elsewhere
 		QVERIFY2(std::fabs(noEop.dpsi - (dp80 + offset * as)) < 1e-15, qPrintable(QString("zone %1 without EOP").arg(k + 1)));
-		QVERIFY(std::fabs(noEop.deps - de80) < 1e-15);
+		QVERIFY2(std::fabs(noEop.deps - (de80 + depsOffset * as)) < 1e-15, qPrintable(QString("zone %1 dEps without EOP").arg(k + 1)));
 		if (k < 2)
 		{
 			// zones 1 and 2: the EOP are not used
@@ -208,6 +210,43 @@ void TestHorizonsPrecNut::testEopAndOffsets()
 	QCOMPARE(HPN::dpsiOffsetMas(Zone::Zone4, true), 0.5);
 	QCOMPARE(HPN::dpsiOffsetMas(Zone::Zone5, true), 0.5);
 	QCOMPARE(HPN::dpsiOffsetMas(Zone::Zone3, true), 0.);
+}
+
+// (SS) 2026-11-08 Zones 1 and 2 have an empirical offset of 6.0 mas in dEps (JPL_DEPS_OFFSET_MAS_Z1_Z2 of the standalone program, which gave
+// differences of up to 6 mas in RA/Dec between the two programs when it was missing). It tilts the true equator of date about the equinox
+// axis by that angle, and it is included in the true obliquity of the ecliptic of date, so the ecliptic coordinates do not change.
+void TestHorizonsPrecNut::testDepsOffset()
+{
+	QCOMPARE(HPN::depsOffsetMas(Zone::Zone1), 6.0);
+	QCOMPARE(HPN::depsOffsetMas(Zone::Zone2), 6.0);
+	QCOMPARE(HPN::depsOffsetMas(Zone::Zone3), 0.);
+	QCOMPARE(HPN::depsOffsetMas(Zone::Zone4), 0.);
+	QCOMPARE(HPN::depsOffsetMas(Zone::Zone5), 0.);
+
+	// Zone 2: the matrix without the offset is rebuilt with ERFA; the two differ by a rotation of 6 mas about the x axis: |R - I|_F = sqrt(2) theta
+	HPN::Params p = params(DATES[1]);
+	const HPN::Result res = HPN::compute(p);
+	double rp[3][3], rn[3][3], without[3][3], dp, de;
+	eraPmat76(J2000, p.jdTDB - J2000, rp);
+	eraNut80(J2000, p.jdTDB - J2000, &dp, &de);
+	dp += HPN::dpsiOffsetMas(Zone::Zone2, false) / 1000. * HPN::ARCSEC2RAD;
+	eraNumat(eraObl80(J2000, p.jdTDB - J2000), dp, de, rn);
+	eraRxr(rn, rp, without);
+	const double expected = std::sqrt(2.) * 0.006 * HPN::ARCSEC2RAD;
+	const double diff = frobenius(res.r, without);
+	QVERIFY2(std::fabs(diff - expected) < 0.01 * expected, qPrintable(QString("%1 vs %2").arg(diff).arg(expected)));
+	// without nutation there is no offset
+	p.useNutation = false;
+	double rpOnly[3][3];
+	eraPmat76(J2000, p.jdTDB - J2000, rpOnly);
+	QVERIFY(frobenius(HPN::compute(p).r, rpOnly) < 1e-15);
+
+	// the true obliquity of every zone includes the nutation in obliquity, offset included
+	for (int k = 0; k < 5; ++k)
+	{
+		const HPN::Result r = HPN::compute(params(DATES[k]));
+		QVERIFY2(std::fabs(r.epsTrue - (r.epsMean + r.deps)) < 1e-15, qPrintable(QString("zone %1").arg(k + 1)));
+	}
 }
 
 void TestHorizonsPrecNut::testMoonOffset()

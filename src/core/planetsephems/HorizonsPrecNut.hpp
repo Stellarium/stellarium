@@ -31,6 +31,7 @@
 //!  - zones 2, 3 and 4: IAU 1976 precession, IAU 1980 nutation and mean obliquity
 //! Zone 1 and 2 use JD(TDB), zones 3, 4 and 5 use JD(TT). The IAU 1980 nutation is corrected by the EOP (dPsi, dEps) in zones 3
 //! (interpolated), 4 and 5 (last value) and by the empirical offsets in dPsi that match JPL Horizons (see dpsiOffsetMas()).
+//! (SS) 2026-11-07 Zones 1 and 2 also have an empirical offset in dEps (see depsOffsetMas()), as the standalone program.
 //!
 //! Conventions. The matrices computed here are ERFA matrices: row-major r[3][3], used as p3 = r * p2 on column vectors, and the
 //! rotations are those of ERFA (eraRx(a) rotates the frame by a). Stellarium's Mat4d is a column-major 4x4 that is also
@@ -73,6 +74,11 @@ public:
 
 	//! Offset added to dPsi (milliarcseconds) in a zone, to match JPL Horizons. Depends on the object in zones 4 and 5.
 	static double dpsiOffsetMas(HorizonsZones::Zone z, bool forMoon);
+	//! (SS) 2026-11-07 Offset added to dEps (milliarcseconds) in a zone, to match JPL Horizons: 6.0 mas in zones 1 and 2, none elsewhere
+	//! (JPL_DEPS_OFFSET_MAS_Z1_Z2 of the standalone program, an empirical value). It tilts the true equator of date about the equinox:
+	//! it changes RA and Dec of an object away from the equinox (up to the full 6 mas in Dec, for the Sun in winter or summer) but not
+	//! its ecliptic coordinates, because the true obliquity of the ecliptic of date (Result::epsTrue) includes it.
+	static double depsOffsetMas(HorizonsZones::Zone z);
 
 	//! Copy an ERFA matrix to a Mat4d (same mathematical matrix, column-major storage)
 	static Mat4d toMat4d(const double r[3][3])

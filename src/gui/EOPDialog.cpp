@@ -223,7 +223,7 @@ void EOPDialog::setDescriptions()
 	ui->titleBar->setTitle(q_("Earth Orientation Parameters (EOP)"));
 	ui->labelFilesHelp->setText(q_("Tick the files to merge. They are merged in the order of the Merge column: where several files have a value for "
 				       "a day, the last one wins. The files of the selected model come last. Series: Long term = EOP C04 (from 1962), "
-				       "Standard = finals (from 1973, with predictions)."));
+				       "Standard = finals (from 1973, with predictions), JPL UT1-UTC = UT1-UTC of JPL Horizons (replaces UT1-UTC only)."));
 	ui->labelFieldsHelp->setText(q_("The fields chosen here are used by the Values tab, the Table tab and the .csv file. In the Values tab, "
 					"dates and types are shown in the heading and in the Status column."));
 }
@@ -307,6 +307,9 @@ void EOPDialog::createDialogContent()
 	connect(ui->pushButtonDefaultFiles, &QPushButton::clicked, this, &EOPDialog::defaultFilesClicked);
 	connect(ui->pushButtonUpdate,       &QPushButton::clicked, this, &EOPDialog::updateClicked);
 	connect(ui->checkBoxAutoUpdate,     &QCheckBox::toggled,   this, &EOPDialog::autoUpdateToggled);
+	// (SS) 2026-11-05 Merge rule: may the finals files replace the final values of the long term files (default no)
+	ui->finalsOverrideCheckBox->setChecked(core->getEOPFinalsOverride());
+	connect(ui->finalsOverrideCheckBox, &QCheckBox::toggled,   this, [this](bool on) { core->setEOPFinalsOverride(on); });
 	connect(ui->filesTable, &QTableWidget::itemChanged, this, &EOPDialog::fileItemChanged);
 
 	connect(ui->radioAll,     &QRadioButton::clicked, this, [this]() { presetClicked("all"); });
@@ -350,6 +353,10 @@ void EOPDialog::refreshAll()
 	ui->labelFolder->setText(q_("Folder: %1").arg(mgr ? QDir::toNativeSeparators(mgr->directory()) : QString()));
 	populateFilesTable();
 	syncModel();
+	{	// (SS) 2026-11-05 keep the check box in step with the core (no signal: the merge was just done)
+		const QSignalBlocker blocker(ui->finalsOverrideCheckBox);
+		ui->finalsOverrideCheckBox->setChecked(core->getEOPFinalsOverride());
+	}
 	updateSummary();
 	updateDateRanges();
 	showTable();
@@ -401,8 +408,9 @@ void EOPDialog::populateFilesTable()
 		t->setItem(row, 2, name);
 		if (fi.valid)
 		{
-			t->setItem(row, 3, cell(fi.isLongTerm() ? q_("Long term") : q_("Standard")));
-			t->setItem(row, 4, cell(shortModelName(fi.model)));
+			// (SS) 2026-11-06 the UT1-UTC of JPL Horizons (overlay) has its own series and no nutation model
+			t->setItem(row, 3, cell(fi.isOverlay() ? q_("JPL UT1-UTC") : (fi.isLongTerm() ? q_("Long term") : q_("Standard"))));
+			t->setItem(row, 4, cell(fi.isOverlay() ? q_("any") : shortModelName(fi.model)));
 			t->setItem(row, 5, cell(fi.generated.isValid() ? fi.generated.toString("yyyy-MM-dd") : QStringLiteral("-")));
 			t->setItem(row, 6, cell(QString("%1 %2 %3").arg(dateText(fi.firstMJD), q_("to"), dateText(fi.lastMJD))));
 			t->setItem(row, 7, cell(QString::number(fi.nRecords), Qt::AlignRight | Qt::AlignVCenter));
@@ -493,7 +501,7 @@ void EOPDialog::updateClicked()
 	ui->pushButtonUpdate->setEnabled(false);
 	ui->progressBar->setRange(0, 0);
 	ui->progressBar->setVisible(true);
-	lastUpdateMessage = q_("Downloading the EOP files from the IERS...");
+	lastUpdateMessage = q_("Downloading the EOP files from the IERS and JPL Horizons...");
 	updateUpdateStatus();
 	core->updateEOPFiles(true);
 }
@@ -540,7 +548,7 @@ void EOPDialog::updateUpdateStatus()
 			newest = fi.generated;
 	QString s = newest.isValid() ? q_("Newest download: %1").arg(newest.toString("yyyy-MM-dd")) : q_("No dated file in the folder.");
 	if (mgr->isEmpty() && lastUpdateMessage.isEmpty())
-		s += "\n" + q_("No EOP data is loaded: all EOP values are taken as 0. Click Update from IERS to download the files.");
+		s += "\n" + q_("No EOP data is loaded: all EOP values are taken as 0. Click Update to download the files.");
 	if (!lastUpdateMessage.isEmpty())
 		s += "\n" + lastUpdateMessage;
 	ui->labelUpdateStatus->setText(s);

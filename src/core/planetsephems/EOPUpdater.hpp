@@ -47,11 +47,31 @@ public:
 		QString description;
 		bool isDefault = true; //!< downloaded by defaultSources()
 		int refreshDays = 7;   //!< a local copy younger than this many days is considered up to date
+		//! (SS) 2026-11-06 File: a CSV file of the IERS downloaded as it is. HorizonsUT1UTC: the UT1-UTC of JPL Horizons, asked to the Horizons
+		//! API (POST of a batch file, the answer is a text table) and saved as an overlay file (see horizonsToOverlayCSV()).
+		enum class Kind { File, HorizonsUT1UTC };
+		Kind kind = Kind::File;
 	};
 
-	//! IAU 1980 set: finals.all.csv and eopc04_14.62-now.csv; IAU 2000A set: finals2000A.all.csv and eopc04_20u24.1962-now.csv.
-	//! All four files are in https://datacenter.iers.org/data/csv/
+	//! IAU 1980 set (JPL Horizons): finals.all.csv and eopc04_14.62-now.csv, in https://datacenter.iers.org/data/csv/
 	static QList<Source> defaultSources();
+	//! (SS) 2026-11-05 IAU 2000A set: finals2000A.all.csv and eopc04_20u24.1962-now.csv (isDefault false), for the IAU 2000A model only
+	static QList<Source> optionalSources();
+
+	//! (SS) 2026-11-06 UT1-UTC of JPL Horizons (quantity 49), saved as horizons_ut1utc_YYMMDD.csv in the eop folder. Only for the
+	//! IAU 1980 model (Horizons uses the IAU 1980 nutation). The predictions of Horizons change with every update of its EOP file
+	//! (a few ms in a few days), so a copy is considered up to date for one day only.
+	static Source horizonsSource();
+	//! Batch file sent to the Horizons API (same request as the curl command of the author): quantity 49 for the Sun seen from the
+	//! geocenter, one day step, from 1962-01-01 to @p stop.
+	static QString horizonsRequest(const QDate& stop);
+	//! Turn the answer of the Horizons API into the text of an overlay file: "n.a." days dropped (UT1-UTC does not exist before 1962-Jan-20),
+	//! rows after the last distinct value dropped (Horizons keeps its last prediction constant), comment lines giving the Horizons run,
+	//! its EOP file and its coverage, then MJD;Date;JD;UT1-UTC. Same as the script horizons_ut1utc.py.
+	//! @param minRows fewer rows with a value than this makes the answer unusable
+	//! @return false if the answer is not a Horizons table (error describes what was received)
+	static bool horizonsToOverlayCSV(const QString& answer, QString& csv, QString* error = Q_NULLPTR, int* nRows = Q_NULLPTR,
+	                                 int minRows = 1000);
 
 	//! @param nam network manager (not owned)
 	//! @param dir folder where the files are written (the eop folder)

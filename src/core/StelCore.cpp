@@ -306,6 +306,8 @@ void StelCore::init()
 		if (eopModel != EOPManager::Model::Unknown)
 			eopMgr->setPreferredModel(eopModel);
 	}
+	// (SS) 2026-11-05 By default the final values of the long term (C04) files are kept where the finals files overlap them
+	eopMgr->setFinalsOverrideLongTerm(conf->value("astro/eop_finals_override", false).toBool());
 	const QString eopSelection = conf->value("astro/eop_files", "").toString();
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)) // (SS) 2026-10-15 Added to handle different Qt versions
 	eopMgr->setSelectedFiles(eopSelection.isEmpty() ? QStringList() : eopSelection.split('|', Qt::SkipEmptyParts));
@@ -1480,7 +1482,12 @@ void StelCore::updateEOPFiles(bool force)
 
 	const QDate today = QDate::currentDate();
 	QList<EOPUpdater::Source> todo;
-	const QList<EOPUpdater::Source> sources = EOPUpdater::defaultSources();
+	QList<EOPUpdater::Source> sources = EOPUpdater::defaultSources();
+	// (SS) 2026-11-05 the IAU 2000A files (dX, dY) are only needed when that model is selected
+	if (eopMgr->preferredModel() == EOPManager::Model::IAU2000A)
+		sources << EOPUpdater::optionalSources();
+	else
+		sources << EOPUpdater::horizonsSource();	// (SS) 2026-11-06 UT1-UTC of JPL Horizons, with the IAU 1980 files (see EOPManager)
 	for (const EOPUpdater::Source& src : sources)
 		if (force || eopMgr->isOlderThan(EOPManager::keyFromName(src.fileName), today, src.refreshDays))
 			todo << src;
@@ -1507,6 +1514,12 @@ void StelCore::updateEOPFiles(bool force)
 		{
 			if (!written.isEmpty())
 			{
+				// (SS) 2026-11-07 remove the older versions of the files just downloaded; astro/eop_keep_versions = number of versions of
+				// each series that are kept (default 2: the new one and the previous one), 0 = keep all
+				const int keep = StelApp::getInstance().getSettings()->value("astro/eop_keep_versions", 2).toInt();
+				const QStringList removed = eopMgr->removeOldVersions(written, keep);
+				if (!removed.isEmpty())
+					qInfo().noquote() << "EOP update: older files removed:" << removed.join(", ");
 				// new files: scan the folder again; without an explicit selection the newest files are merged
 				qInfo().noquote() << "EOP files found:" << eopMgr->rescan().join(", ");
 				eopMgr->reload();
@@ -1520,7 +1533,7 @@ void StelCore::updateEOPFiles(bool force)
 			emit eopUpdateFinished(ok, written, message);
 		});
 	}
-	qInfo().noquote() << "EOP update: downloading" << todo.size() << "file(s) from the IERS data center";
+	qInfo().noquote() << "EOP update: downloading" << todo.size() << "file(s) from the IERS data center and JPL Horizons";
 	eopUpdater->start(todo, today);
 }
 
@@ -1605,6 +1618,25 @@ void StelCore::setEOPModel(const QString& key)
 	qInfo().noquote() << "EOP model:" << EOPManager::modelKey(model) << "- merged files:" << eopMgr->mergeOrder().join(", ");
 	logEOPReport();
 	emit eopModelChanged(EOPManager::modelKey(model));
+	emit eopFilesChanged(eopMgr->selectedFiles());
+}
+
+bool StelCore::getEOPFinalsOverride() const
+{
+	return eopMgr && eopMgr->finalsOverrideLongTerm();
+}
+
+// (SS) 2026-11-05 Merge rule of the EOP files, see EOPManager::finalsOverrideLongTerm()
+void StelCore::setEOPFinalsOverride(bool on)
+{
+	if (!eopMgr || eopMgr->finalsOverrideLongTerm() == on)
+		return;
+	eopMgr->setFinalsOverrideLongTerm(on);
+	eopMgr->reload();
+	horizonsPNDirty = true;
+	StelApp::immediateSave("astro/eop_finals_override", on);
+	qInfo().noquote() << "EOP finals files may replace the final values of the long term files:" << (on ? "yes" : "no");
+	logEOPReport();
 	emit eopFilesChanged(eopMgr->selectedFiles());
 }
 
@@ -1744,6 +1776,11 @@ double StelCore::getJDUTCNow() const
 // (SS) 2026-10-09 Where TIME ZONE 3 ends and TIME ZONE 4 starts
 double StelCore::getHorizonsZone4Start() const
 {
+	// (SS) 2026-11-07 JPL Horizons keeps all its EOP constant after the end of its predictions, which is the last distinct day of its
+	// UT1-UTC (file horizons_ut1utc_YYMMDD.csv, merged by EOPManager): the limit of zone 3 is then known exactly, instead of a number of days
+	// after today (the standalone program found it two days off).
+	if (flagUseEOP && eopMgr && eopMgr->hasHorizonsUT())
+		return eopMgr->horizonsUTLastMJD() + 2400000.5;
 	if (horizonsZone4FromEOP && eopMgr)
 	{
 		const EOPReader::Span sp = eopMgr->reader().span(EOPReader::Group::Nutation);

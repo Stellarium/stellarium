@@ -429,6 +429,11 @@ public:
 	//! or "IAU2000A". Their pole, UT1-UTC and LOD values then win.
 	QString getEOPModel() const;
 	void setEOPModel(const QString& key);
+	//! (SS) 2026-11-05 Whether the standard (finals) EOP files may replace the final values of the long term (C04) files where both have
+	//! a value (default false: the C04 final values are kept, the finals files give the later days and the predictions).
+	//! Saved in astro/eop_finals_override. The merge is done again when it changes.
+	bool getEOPFinalsOverride() const;
+	void setEOPFinalsOverride(bool on);
 	//! (SS) 2026-10-07 Scan the eop folder again, merge the selected files and update the log
 	void rescanEOPFiles();
 	//! (SS) 2026-10-10 Whether the EOP files are downloaded a few seconds after start-up. Default false: they are only
@@ -469,9 +474,11 @@ public:
 	double getJDUT1() const;
 	//! (SS) 2026-10-09 JD of 0h UTC of today, from the clock of the computer (not the simulated date). Used to place the limit of zone 3.
 	double getJDUTCNow() const;
-	//! (SS) 2026-10-09 JD(UTC) at which TIME ZONE 3 ends and TIME ZONE 4 (last EOP kept constant) starts. Either 0h UTC of today +
-	//! getHorizonsZone4Days() (default) or, when setHorizonsZone4FromEOP(true) and EOP data with nutation corrections is loaded,
-	//! the last date of those corrections (after it the EOP are held constant, as in zone 4).
+	//! (SS) 2026-10-09 JD(UTC) at which TIME ZONE 3 ends and TIME ZONE 4 (last EOP kept constant) starts. In order:
+	//!  - (SS) 2026-11-07 the last day of the UT1-UTC of JPL Horizons when that file is merged and the EOP are on (EOPManager::hasHorizonsUT()):
+	//!    after that day Horizons holds all its EOP constant, so this is exactly where its constant regime starts;
+	//!  - when setHorizonsZone4FromEOP(true) and EOP data with nutation corrections is loaded, the last date of those corrections;
+	//!  - otherwise 0h UTC of today + getHorizonsZone4Days() (default).
 	double getHorizonsZone4Start() const;
 	//! (SS) 2026-10-09 TIME ZONE of the current date (see HorizonsZones), using getJD(), getJDTT() and getHorizonsZone4Start()
 	HorizonsZones::Zone getHorizonsZone() const;

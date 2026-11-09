@@ -34,6 +34,9 @@
 //! Files are never selected by hard-coded names: each one is parsed, its layout, coverage and (when the name ends with
 //! _YYMMDD before the extension, e.g. finals.all_261007.csv) its download date are recorded. The selected files are merged in this order:
 //! long term (C04) files first, then the standard (finals) files, each group from the oldest to the newest date, so that the newest data win.
+//! (SS) 2026-11-06 The UT1-UTC of JPL Horizons (horizons_ut1utc_YYMMDD.csv, made by the script horizons_ut1utc.py) comes last: it replaces
+//! the UT1-UTC of every day it covers, whatever the other files say, and the UT1-UTC values after its last day are removed so that its last
+//! value is held for all later dates, as JPL Horizons does. It is part of the default selection of the IAU 1980 model (JPL Horizons) only.
 //! Like BSPManager, this class does not use StelApp: StelCore owns it and stores the selection in the configuration.
 class EOPManager : public QObject
 {
@@ -59,6 +62,8 @@ public:
 		bool hasDXDY = false;            //!< some records have dX, dY (IAU 2000 file)
 		//! long term series (EOP C04): merged first, the standard series (finals) then replace its values
 		bool isLongTerm() const { return format == EOPReader::Format::C04; }
+		//! (SS) 2026-11-06 UT1-UTC of JPL Horizons (horizons_ut1utc_YYMMDD.csv): merged last, it replaces UT1-UTC only (see reload())
+		bool isOverlay() const { return format == EOPReader::Format::HorizonsUT; }
 	};
 
 	//! @param dir folder holding the EOP files (created by the caller)
@@ -73,8 +78,10 @@ public:
 	//! @return the file info or an invalid one when the name is unknown
 	FileInfo fileInfo(const QString& fileName) const;
 
-	//! Default files: of the long term (C04) files, the one reaching the latest date for IAU 1980 (dPsi, dEps) and the one for
-	//! IAU 2000 (dX, dY); of the standard (finals) files, the newest download of each series. Empty if no valid file.
+	//! Default files: those of the preferred nutation model (IAU 1980 unless changed, see preferredModel()): the long term (C04) file
+	//! reaching the latest date, and the newest download of each standard (finals) series. The files of the other model are not used
+	//! unless selected explicitly, except when the folder has no valid file of the preferred model. With the IAU 1980 files, the newest
+	//! Horizons UT1-UTC file (if any) is added. Empty if no valid file.
 	QStringList defaultSelection() const;
 	//! Names of the files to merge. An empty list means defaultSelection(). Unknown names are ignored.
 	void setSelectedFiles(const QStringList& names);
@@ -82,9 +89,31 @@ public:
 	QStringList selectedFiles() const;
 	bool isUsingDefaultSelection() const { return !explicitSelection; }
 
-	//! Model whose files are merged last, so that their pole, UT1-UTC and LOD values win. Default IAU 1980 (JPL Horizons).
+	//! Nutation model of the default selection (see defaultSelection()), and the one whose files are merged last, so that their pole,
+	//! UT1-UTC and LOD values win. Default IAU 1980 (JPL Horizons).
 	Model preferredModel() const { return preferred; }
 	void setPreferredModel(Model m) { preferred = m; }
+
+	//! (SS) 2026-11-05 Rule A of the merge: the final values of the long term (C04) files are never replaced by the standard (finals)
+	//! files. Per group of values (pole, UT1-UTC, LOD, nutation, dX/dY) the standard files only give the days after the last final
+	//! value of the long term files, with their predictions. This is what was done by hand with the standalone program (finals file
+	//! cut at the end of the historic file). Default false. When true the standard files replace the long term values wherever they
+	//! have a value (merge order of the previous versions). Takes effect at the next reload().
+	bool finalsOverrideLongTerm() const { return finalsOverride; }
+	void setFinalsOverrideLongTerm(bool on) { finalsOverride = on; }
+
+	//! (SS) 2026-11-07 True when the last reload() merged a Horizons UT1-UTC file (see FileInfo::isOverlay()). After its last day the UT1-UTC
+	//! of Horizons is constant, as every other EOP of Horizons: this is where the "constant EOP" regime of JPL Horizons starts.
+	bool hasHorizonsUT() const { return horizonsLastMJD >= 0.; }
+	//! MJD (UTC) of the last distinct day of the merged Horizons UT1-UTC file. Only valid if hasHorizonsUT().
+	double horizonsUTLastMJD() const { return horizonsLastMJD; }
+
+	//! (SS) 2026-11-07 Delete the older versions of the files that have just been downloaded (named series_YYMMDD.csv): of each such series
+	//! the @p keep newest files (by the date in the name) are kept and the others removed. Never removed: the files in @p justWritten,
+	//! the files of an explicit selection, the files of other series, and the files without a date in their name (the files made by hand,
+	//! like my_finals.all_261104_mod.csv, are not touched). @p keep < 1 removes nothing. Call rescan() afterwards.
+	//! @return names of the files removed
+	QStringList removeOldVersions(const QStringList& justWritten, int keep = 2);
 
 	//! Merge the selected files into the in-memory EOP table.
 	//! @return true if at least one record is available afterwards
@@ -133,7 +162,7 @@ signals:
 	void reloaded();
 
 private:
-	QString describeMerge(const FileInfo& fi, const EOPReader::LoadResult& r) const;
+	QString describeMerge(const FileInfo& fi, const EOPReader::LoadResult& r, int nInFile) const;
 	QString describeLastValues() const;
 	QString describeCoverage() const;
 
@@ -143,6 +172,8 @@ private:
 	QStringList selection;
 	bool explicitSelection = false;
 	Model preferred = Model::IAU1980;
+	bool finalsOverride = false;	//!< see finalsOverrideLongTerm()
+	double horizonsLastMJD = -1.;	//!< see horizonsUTLastMJD(), negative without Horizons UT1-UTC
 	EOPReader eop;
 	QString report;
 };

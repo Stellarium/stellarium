@@ -40,6 +40,8 @@
 #include <de440.hpp>	// (SS) 2025-11-27 Needed to allow call to getDe440Coor() function in StelUtils::getDeltaTJPLHorizons()
 #include "StelApp.hpp"	// (SS) 2026-09-13 Needed to allow call to StelApp::getInstance().getFlagExtraPrecision()
 #include <atomic>		// (SS) 2026-09-30 Needed to fix somme errors related to flagExtraPrecsion during unit tests
+#include <array>		// (SS) 2026-11-03 Added for std::array in the revised version of the JPL Horizons algorithm for DeltaT
+#include <cstddef>		// (SS) 2026-11-03 Added for std::size_t in the revised version of the JPL Horizons algorithm for DeltaT
 
 #ifdef CYGWIN
 #include <malloc.h>
@@ -2198,7 +2200,6 @@ double getDeltaTByChaprontTouze(const double jDay)
 	return deltaT;
 }
 
-// (SS) 2025-11-27 JPL Horizons algorithm for DeltaT - REVISED
 static const double StephensonMorrisonHohenkerkZawilski2020DeltaTtableS15[40][6] = {
 	// Partial Table S15: The Polynomial Coefficients for DT -720.0 to 1965.0   v. 2020
 	// Source: https://rs.figshare.com/collections/Supplementary_material_from_Addendum_2020_to_Measurement_of_the_Earth_s_rotation_720_BC_to_AD_2015_/5300925
@@ -2257,25 +2258,20 @@ void setTTminusTDBProvider(const TTminusTDBProvider& provider)
 	ttMinusTdbProvider = provider;
 }
 
+// (SS) 2025-11-27 JPL Horizons algorithm for DeltaT - REVISED
+// (SS) 2026-11-03 NEW REVISION of the JPL Horizons algorithm for DeltaT
+// This new revision is based on refining how year fraction is computed, and how the polynomial
+// coefficients are interpolated between the two end years of each spline row. The new revision has
+// eliminated the +/- 70 msec (max) discrepancy between the two algorithms for the time range of 9999BC to 721BC,
+// and the +/- 40 msec (max) discrepancy between the two algorithms for the time range of 721BC to 1962-01-20.
 double getDeltaTByJPLHorizons(const double jDay)
 { 
 	int year, month, day;
-	double u;
-	double deltaT = 0.;
 
 	getDateFromJulianDay(jDay, &year, &month, &day);
-
-	// Get year fraction with day fraction included
 	double fractionDay     = jDay + 0.5 - std::floor(jDay + 0.5);
-	double dayWithFraction = day - 1 + fractionDay;
-	double y               = yearFraction(year, month, dayWithFraction);
 
-	// (SS) 2026-09-18 Special case for yearFraction: Gregorian reform year 1582.
-	// This is required to avoid a discontinuity in the year fraction for year 1582.
-	constexpr double JD_1582_START = 2298883.5; // 1582-01-01 00:00:00.000 Julian
-	constexpr double JD_1583_START = 2299238.5; // 1583-01-01 00:00:00.000 Gregorian
-	if (jDay >= JD_1582_START && jDay < JD_1583_START)
-		y = 1582.0 + (jDay - JD_1582_START) / (JD_1583_START - JD_1582_START);
+	double deltaT = 0.;
 
 	// Limited years!
 	year = qBound(-9998, year, 9999);
@@ -2289,55 +2285,67 @@ double getDeltaTByJPLHorizons(const double jDay)
 	// In order to smooth the transition at 721BC-01-01 00:00 which is the beginning of
 	// Stephenson/Morrison cubic splines, JPL have adjusted the two coefficients slightly.
 	// and the formula becomes (-10.0 - CNST) + COEF * u^2 with the following values:
-	// 
+	//
 	// CNST = -75.620819624176
 	// COEF =  31.351922681896
 	//
-	// In addition to this adjustment, I have determined from excel study that we also need
-	// to adjust the nominal value of 1825.0 to further reduce discrepancies between this
-	// algorithm and values obtained direclty from the JPL Horizons app. The value of 1825.0
-	// need to be changed to 1824.968046255. By doing so, we achieve differences less than 0.1s
-	// between Stellarium and JPL Horizons app as verified by several test dates in this range.
-	//
-	// Note that JPL Horizons app compute DeltaT = TDB - UT1, while Stellarium compute 
-	// DeltaT = TT - UT1. The difference between TDB and TT is negligible in this historical 
+	// Note that JPL Horizons app compute DeltaT = TDB - UT1, while Stellarium compute
+	// DeltaT = TT - UT1. The difference between TDB and TT is negligible in this historical
 	// time interval (less than 2 msec), and could be ignored.
 	//
 	// Finally, this algorithm is based on n_dot = -25.82"/cy/cy.
-	// However JPL Horizons app provides DeltaT values using DE441 Ephemerides, which has a 
-	// slightly different estimate for n_dot, -25.936"/cy/cy. A first order correction for 
-	// this difference is taken care by the getMoonSecularAcceleration() itself called 
-	// within compueDeltaT() in the StelCore.cpp file.
+	// However JPL Horizons app provides DeltaT values using DE441 Ephemerides, which has a
+	// slightly different estimate for n_dot, -25.936"/cy/cy. A first order correction for
+	// this difference is taken care by the getMoonSecularAcceleration() itself called
+	// within computeDeltaT() in the StelCore.cpp file.
 
-	const double CNST      = -75.620819624176;
-	const double COEF      = 31.351922681896;
-	const double BASE_YEAR = 1824.968046255;
+	// (SS) 2026-11-02 JPL Horizons works in uniform time, not calendar years. The previous BASE_YEAR (1824.968046255,
+	// an empirical adjustment of the nominal 1825.0) is replaced by the nominal epoch 1825-01-01 00:00 (JD 2387627.5)
+	// with a uniform time scale. This approach is more consistent with the JPL Horizons app and the DE441 Ephemerides.
+	// It has eliminated the +/- 70 msec (max) discrepancy between the two algorithms for the time range of 9999BC to 721BC,
+	// the match is now within few microseconds. The new approach is also more consistent with the DE441 Ephemerides,
+	// which uses a nominal year of 1825.0.
+
+	const double CNST                = -75.620819624176;
+	const double COEF                = 31.351922681896;
+	constexpr double JD_NOMINAL_1825 = 2387627.5; // 1825-01-01 00:00 Gregorian
 
 	// JD_UT >= -1930633.5 or 9999BC-03-20 00:00
 	// JD_UT <   1458077.5 or  721BC-01-01 00:00
 	// deltaT values correspond to DeltaT = TDB - UT1 in this time range.
 	if (-1930633.5 <= jDay && jDay < 1458077.5)
 	{
-		u      = (y - BASE_YEAR) / 100.0;
-		deltaT = (-10.0 - CNST) + COEF * u * u;
+		const double u = (jDay - JD_NOMINAL_1825) / 36525.0;
+		deltaT         = (-10.0 - CNST) + COEF * u * u;
 	}
 
 	// In this second time range from 721BC to 1962-01-20 the algorithm is based
 	// on the cubic spline polynomials as given by Stephenson, Morrison, Hohenkerk & Zawilski (2020).
 	// JD_UT >= 1458077.5 or 721BC-01-01 00:00
-	// JD_UT <  2437684.0 or  1962-01-19 12:00 <-- See note below dated 2026-Apr-15
+	// JD_UT <  2437684.0 or  1962-01-19 12:00
 	// deltaT values correspond to DeltaT = TDB - UT1 in this time range.
-	// (SS) 2026-Apr-15 Change upper limit from 2437684.5 to 2437684.0 to be consistent with JPL Horizons app.
-	else if (1458077.5 <= jDay && jDay < 2437684.0) 
+	else if (1458077.5 <= jDay && jDay < 2437684.0) // (SS) 2026-Apr-04 : Adjusted upper bound to 2437684.0 to better match JPL Horizons app
 	{
-		int i = 0;
-		while (StephensonMorrisonHohenkerkZawilski2020DeltaTtableS15[i][1] < y)	i++;
+		// (SS) 2026-11-03 Horizons interpolates linearly in JD between 1 January 00:00 of the
+		// first and last year of each spline row (Julian calendar to 1582, Gregorian after).
+		// These findings has eliminated the +/- 40 msec (max) discrepancy between the two algorithms
+		// for the time range of 721BC to 1962-01-20. The match is now within few microseconds.
+		static constexpr std::size_t nRows = sizeof(StephensonMorrisonHohenkerkZawilski2020DeltaTtableS15) /
+		                              sizeof(StephensonMorrisonHohenkerkZawilski2020DeltaTtableS15[0]);
+		static const std::array<double, nRows + 1> knotJD = []()
+		{
+			std::array<double, nRows + 1> k{};
+			for (std::size_t r = 0; r < nRows; ++r)
+				getJDFromDate(&k[r], static_cast<int>(StephensonMorrisonHohenkerkZawilski2020DeltaTtableS15[r][0]), 1, 1, 0, 0, 0.f);
+			getJDFromDate(&k[nRows], static_cast<int>(StephensonMorrisonHohenkerkZawilski2020DeltaTtableS15[nRows - 1][1]), 1, 1, 0, 0, 0.f);
+			return k;
+		}();
 
-		Q_ASSERT(i < 40);
-
-		double t = (y - StephensonMorrisonHohenkerkZawilski2020DeltaTtableS15[i][0]) /
-		               (StephensonMorrisonHohenkerkZawilski2020DeltaTtableS15[i][1] -
-		                StephensonMorrisonHohenkerkZawilski2020DeltaTtableS15[i][0]);
+		std::size_t i = 0;
+		while (i + 1 < nRows && jDay >= knotJD[i + 1]) ++i;
+		const double jdStart = knotJD[i];
+		const double jdEnd   = knotJD[i + 1];
+		const double t       = (jDay - jdStart) / (jdEnd - jdStart);
 
 		deltaT = ((StephensonMorrisonHohenkerkZawilski2020DeltaTtableS15[i][5]  * t +
 		           StephensonMorrisonHohenkerkZawilski2020DeltaTtableS15[i][4]) * t +
@@ -2347,36 +2355,39 @@ double getDeltaTByJPLHorizons(const double jDay)
 
 	// In this last time range from 1962-01-20 to 9999-12-30 the algorithm computes
 	// TDB - UTC = (TDB - TAI) + (TAI - UTC) =  (TDB - TT) + 32.184s + (TAI - UTC).
-	// TT  - TDB is extracted from "linux_p1550p2650.440t" available from the JPL FTP website.
+	// TT  - TDB is extracted from "de431t.bsp" available from the JPL FTP website.
 	// TAI - UTC is the leap seconds. It is obtained from a call to eraDat() of the ERFA library.
 	//
+	// Note: Actually the code takes TT-TDB from the provider first (de431t.bsp by default)
+	// then the DE440T Linux file "linux_p1550p2650.440t" if the .bsp file is not available, and 
+	// finally fall back to 0, when none of the above are available.
+	// 
 	// Note : The linux_p1550p2650.440t file is valid from 1549 DEC 31 to 2650 JAN 25. That is
-	// TT - TDB values are only available within this limited time range. Unfortunately, there are no
-	// JPL files such as lnxm13000p17000.431t and lnxm13000p17000.441t that would cover the range
-	// up to year 9999. The JPL website carry only files such as lnxm13000p17000.431 and
-	// lnxm13000p17000.441, which provide positions and velocities of solar system bodies, but not
-	// TT - TDB values. Therefore, for dates outside the valid range of the DE440T file, we fallback
-	// to TT - TDB = 0.0s. This is not ideal, but the error is only of the order 2 milliseconds or less.
+	// TT - TDB values are only available within this limited time range. Fortunately, we could
+	// now use JPL file de431t.bsp which covers a time range up to year AD9999, and this way avoid to
+	// fall back to a default value of 0.0s. This ephemeris file, however, seems to
+	// import a slightly different series of TT - TDB values compared to JPL Horizons resulting
+	// in differences up to 30 microseconds at AD9999. Such a difference is negligible for Stellarium,
+	// but it is worth noting.
 	//
 	// Note: The leap seconds are only defined for dates after 1960-01-01 (JD 2436934.5) and
-	// before 5 years after the release year of the ERFA library. Since the current release is 2023
-	// the maximum year of this time range is effectively 2028.0. However eraDat() allows us to enter
+	// before 5 years after the release year of the SOFA library. Since the current release is 2023
+	// the maximum year of this time range is effectively 2028.0. However iauDat() allows us to enter
 	// dates up to 9999-12-30 00:00 if so desired. For date beyond 2028 we simply clamp the leap seconds
 	// to the last known value of 37s (as of 2025-11-27). This is consistent with the behavior of
 	// the JPL Horizons app.
 	//
-	// source: https://github.com/liberfa/erfa
-	// source: https://ssd.jpl.nasa.gov/ftp/eph/planets/Linux/
+	// source: https://www.iausofa.org/2023-10-11c
+	// source: https://ssd.jpl.nasa.gov/ftp/eph/planets/bsp/
 	//
-	// JD_UT >= 2437684.5 or 1962-01-20 00:00
+	// JD_UT >= 2437684.0 or 1962-01-19 12:00
 	// JD_UT <  5373482.5 or 9999-12-30 00:00 <-- though see limitation above....
 	//
 	// DeltaT values correspond to DeltaT = TDB - UTC for the valid time range. To get
 	// TDB - UT1 we need to subtract DUT1 = (UT1 - UTC). The DUT1 values are typically provided by
 	// IERS bulletins and is of the order of +/- one second. JPL Horizons app do not
 	// apply this correction, and we won't do it here neither.
-	// (SS) 2026-Apr-15 Change lower limit from 2437684.5 to 2437684.0 to be consistent with JPL Horizons app.
-	else if (2437684.0 <= jDay && jDay <= 5373482.5)
+	else if (2437684.0 <= jDay && jDay <= 5373482.5) // (SS) 2026-Apr-15 Change lower limit from 2437684.5 to 2437684.0 to be consistent with JPL Horizons app.
 	{
 		const int TTmTDB_id = 17; // TT - TDB (JPL ID)
 		double xyz[6];
@@ -2892,35 +2903,26 @@ double getDeltaTByStephensonMorrisonHohenkerk2016(const double jDay)
 		+ StephensonMorrisonHohenkerk2016DeltaTtableS15[i][3])*t + StephensonMorrisonHohenkerk2016DeltaTtableS15[i][2];
 }
 
-// (SS) 2026-10-03	Add Special case for yearFractionValue: Gregorian reform year 1582.
-//					Use linear interpolation between Julian and Gregorian calendar.
 // (SS) 2025-11-27 Implementation of secular acceleration of the Moon - REVISED
 // Note: useDE43x and useDE44x are mutually exclusive; if both are true, useDE44x takes precedence.
-// Note: added day fraction to year fraction calculation to achieve higher accuracy for JPL Horizons algorithm.
 // IMPORTANT NOTE: The secular acceleration formula is not valid after 1955.5 (start of atomic time).
-//                 It must return 0.0 in that case. TODO: Evaluate impact on previous DeltaT calculations!
+//                 It must return 0.0 in that case.
+// TODO: Evaluate impact on previous DeltaT calculations!
+//
+// (SS) 2026-11-03 NEW REVISION: yearFractionValue is computed directly from jDay. There is no need to
+// compute year, month, day and fractionDay anymore.
+//
+// Adressing the TODO of 2025-11-27: The change shifts the argument of this correction by up to
+// about 12 days for dates in the Julian era, for every caller. My earlier estimate of “about 8 ms
+// at ±10,000 years” assumed nd differs from DE441 by 0.116 (the DE431 case). For other algorithms the
+// gap in nd (the lunar secular acceleration they assume) can be up to about 2 (for example, ELP2000
+// at −23.89 against DE441 at −25.936). The shift in ΔT then scales up to roughly 0.1 s at ±10,000 years
+// and a few ms at ±3,000 years. That is still negligible compared with the minutes of uncertainty
+// those algorithms have there.
 double getMoonSecularAcceleration(const double jDay, const double nd, const bool useDE43x, const bool useDE44x)
 {
-	int year, month, day;
-	double fractionDay;
-	double dayWithFraction;
 	double yearFractionValue;
-
-	// Special case for yearFractionValue: Gregorian reform year 1582.
-	constexpr double JD_1582_START = 2298883.5; // 1582-01-01 00:00:00.000 Julian
-	constexpr double JD_1583_START = 2299238.5; // 1583-01-01 00:00:00.000 Gregorian
-
-	if (jDay >= JD_1582_START && jDay < JD_1583_START)
-	{
-		yearFractionValue = 1582.0 + (jDay - JD_1582_START) / (JD_1583_START - JD_1582_START);
-	}
-	else
-	{
-		getDateFromJulianDay(jDay, &year, &month, &day);
-		fractionDay       = jDay + 0.5 - std::floor(jDay + 0.5);
-		dayWithFraction   = day - 1 + fractionDay;
-		yearFractionValue = yearFraction(year, month, dayWithFraction);
-	}
+	yearFractionValue = 2000.0 + (jDay - 2451545.0) / 365.25; // uniform Julian years from J2000
 
 	// Secular acceleration formula is not valid after 1955.5 (start of atomic time)
 	if (yearFractionValue > 1955.5) return 0.0;
