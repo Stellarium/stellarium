@@ -582,6 +582,7 @@ private:
 
 	// Mouse control options
 	bool isDragging, hasDragged;
+	bool touchMouseClickCancelled; //!< Suppress selection on release after a pinch.
 	int previousX, previousY;
 
 	// Contains the last N real time / JD times pairs associated with the last N mouse move events at screen coordinates x/y
