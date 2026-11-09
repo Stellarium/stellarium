@@ -980,12 +980,12 @@ void StelLocationMgr::doGetLocationFromIP()
 #endif
 	}
 
-	if (qGeoPositionInfoSource && qGeoPositionInfoSource->supportedPositioningMethods())
+	if (qGeoPositionInfoSource)
 	{
-
 		qCDebug(LocIP) << "Doing OS service lookup for location...";
 		qCDebug(LocIP) << "Location provider:" << qGeoPositionInfoSource->sourceName();
-		qCDebug(LocIP) << "Location provider supported caps:" << qGeoPositionInfoSource->supportedPositioningMethods();
+		qCDebug(LocIP) << "Location provider supported caps (may be none initially for geoclue):"
+		               << qGeoPositionInfoSource->supportedPositioningMethods();
 		// Trigger the actual Qt Location lookup from OS
 		qGeoPositionInfoSource->requestUpdate();
 		qCDebug(LocIP) << "Doing OS service lookup for location... postRequest ";
