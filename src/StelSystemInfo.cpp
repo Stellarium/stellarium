@@ -82,12 +82,13 @@ void printSystemInfo()
 	log(QString("Qt runtime version: %1").arg(qVersion()));
 	log(QString("Qt compilation version: %1").arg(QT_VERSION_STR));
 
+	// write ABI
+	log(QString("Build ABI: %1").arg(QSysInfo::buildAbi()));
+
+	// write SSL
 	log(QString("SSL available: %1").arg(QSslSocket::supportsSsl() ? "yes" : "no"));
 	log(QString("SSL build: %1").arg(QSslSocket::sslLibraryBuildVersionString()));
 	log(QString("SSL runtime: %1").arg(QSslSocket::sslLibraryVersionString()));
-
-	// write ABI
-	log(QString("Build ABI: %1").arg(QSysInfo::buildAbi()));
 
 	// write addressing mode
 	log(QString("Addressing mode: %1").arg(StelUtils::getAddressingMode()));
