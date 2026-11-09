@@ -237,6 +237,8 @@ public slots:
 	Vec3f getSkyBackgroundColor() const;
 
 protected:
+	//! Handle touchscreen pinch gestures.
+	bool event(QEvent* event) override;
 	//! Hack to determine current monitor pixel ratio
 	//! @todo Find a better way to handle this
 	void moveEvent(QMoveEvent* event) override;
