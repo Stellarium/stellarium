@@ -148,11 +148,16 @@ void clearCache()
 // Main stellarium procedure
 int main(int argc, char **argv)
 {
+#ifdef Q_OS_ANDROID
+	// adb logcat output already contains timestamps and log level, no need to add them to our emitted string
+	qSetMessagePattern("%{if-category}[%{category}] %{endif}%{message}");
+#else
 	qSetMessagePattern("[%{time process}][%{if-debug}DBG %{endif}"
 	                                     "%{if-info}INFO%{endif}"
 	                                     "%{if-warning}WARN%{endif}"
 	                                     "%{if-critical}CRIT%{endif}"
 	                                     "%{if-fatal}FATAL%{endif}]%{if-category} [%{category}]%{endif} %{message}");
+#endif
 	Q_INIT_RESOURCE(mainRes);
 #ifndef NO_GUI
 	Q_INIT_RESOURCE(guiRes);
