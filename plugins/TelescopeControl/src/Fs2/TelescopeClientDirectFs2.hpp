@@ -47,7 +47,8 @@ class TelescopeClientDirectFs2 : public TelescopeClient, public Server
 {
 	Q_OBJECT
 public:
-	TelescopeClientDirectFs2(const QString &name, const QString &parameters, TelescopeControl::Equinox eq = TelescopeControl::EquinoxJ2000);
+	TelescopeClientDirectFs2(const QString &name, const QString &parameters,
+	                         TelescopeControl::Equinox eq = TelescopeControl::EquinoxJ2000, int slot = 0);
 	~TelescopeClientDirectFs2(void) override
 	{
 		//hangup();

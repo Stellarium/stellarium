@@ -28,7 +28,7 @@ Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 #ifndef FS2COMMAND_HPP
 #define FS2COMMAND_HPP
 
-#include <QTextStream>
+#include <QDebug>
 
 class Server;
 class TelescopeClientDirectFs2;
@@ -42,7 +42,7 @@ public:
 	bool hasBeenWrittenToBuffer(void) const {return has_been_written_to_buffer;}
 	virtual int readAnswerFromBuffer(const char *&buff, const char *end) = 0;
 	virtual bool needsNoAnswer(void) const {return false;}
-	virtual void print(QTextStream &o) const = 0;
+	virtual void print(QDebug &o) const = 0;
 	virtual bool isCommandGotoSelected(void) const {return false;}
 	virtual bool shortAnswerReceived(void) const {return false;}
 	//returns true when reading is finished
@@ -53,7 +53,7 @@ protected:
 	bool has_been_written_to_buffer;
 };
 
-inline QTextStream &operator<<(QTextStream &o, const Fs2Command &c)
+inline QDebug operator<<(QDebug o, const Fs2Command &c)
 {
 	c.print(o);
 	return o;
@@ -70,7 +70,7 @@ private:
 	bool writeCommandToBuffer(char *&buff, char *end) override;
 	int readAnswerFromBuffer(const char*&, const char*) override {return 1;}
 	bool needsNoAnswer(void) const override {return true;}
-	void print(QTextStream &o) const override;
+	void print(QDebug &o) const override;
 };
 
 //! Astro Electronic FS2 command: Stop the current slew.
@@ -84,7 +84,7 @@ private:
 	bool writeCommandToBuffer(char *&buff, char *end) override;
 	int readAnswerFromBuffer(const char*&, const char*) override {return 1;}
 	bool needsNoAnswer(void) const override {return true;}
-	void print(QTextStream &o) const override;
+	void print(QDebug &o) const override;
 };
 
 //! Astro Electronic FS2 command: Set right ascension. LONG FORMAT ONLY!
@@ -94,7 +94,7 @@ public:
 	Fs2CommandSetSelectedRa(Server &server, int ra) : Fs2Command(server), ra(ra) {}
 	bool writeCommandToBuffer(char *&buff, char *end) override;
 	int readAnswerFromBuffer(const char *&buff, const char *end) override;
-	void print(QTextStream &o) const override;
+	void print(QDebug &o) const override;
 
 private:
 	const int ra;
@@ -107,7 +107,7 @@ public:
 	Fs2CommandSetSelectedDec(Server &server,int dec) : Fs2Command(server), dec(dec) {}
 	bool writeCommandToBuffer(char *&buff, char *end) override;
 	int readAnswerFromBuffer(const char *&buff, const char *end) override;
-	void print(QTextStream &o) const override;
+	void print(QDebug &o) const override;
 
 private:
 	const int dec;
@@ -120,7 +120,7 @@ public:
 	Fs2CommandGotoSelected(Server &server) : Fs2Command(server), first_byte(256) {}
 	bool writeCommandToBuffer(char *&buff, char *end) override;
 	int readAnswerFromBuffer(const char *&buff, const char *end) override;
-	void print(QTextStream &o) const override;
+	void print(QDebug &o) const override;
 	bool isCommandGotoSelected(void) const override {return true;}
 	bool shortAnswerReceived(void) const override {return (first_byte != 256);}
 
@@ -134,7 +134,7 @@ public:
 	Fs2CommandSyncSelected(Server &server) : Fs2Command(server), first_byte(256) {}
 	bool writeCommandToBuffer(char *&buff, char *end) override;
 	int readAnswerFromBuffer(const char *&buff, const char *end) override;
-	void print(QTextStream &o) const override;
+	void print(QDebug &o) const override;
 	bool isCommandGotoSelected(void) const override {return true;}
 	bool shortAnswerReceived(void) const override {return (first_byte != 256);}
 
@@ -149,7 +149,7 @@ public:
 	Fs2CommandGetRa(Server &server) : Fs2Command(server) {}
 	bool writeCommandToBuffer(char *&buff, char *end) override;
 	int readAnswerFromBuffer(const char *&buff, const char *end) override;
-	void print(QTextStream &o) const override;
+	void print(QDebug &o) const override;
 };
 
 //! Astro Electronic FS2 command: Get the current declination.
@@ -159,7 +159,7 @@ public:
 	Fs2CommandGetDec(Server &server) : Fs2Command(server) {}
 	bool writeCommandToBuffer(char *&buff, char *end) override;
 	int readAnswerFromBuffer(const char *&buff, const char *end) override;
-	void print(QTextStream &o) const override;
+	void print(QDebug &o) const override;
 };
 
 #endif // FS2COMMAND_HPP

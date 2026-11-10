@@ -26,8 +26,7 @@ Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 
 #include "Fs2Command.hpp"
 #include "TelescopeClientDirectFs2.hpp"
-#include "common/LogFile.hpp"
-#include "StelUtils.hpp"
+#include "common/TelescopeLogging.hpp"
 
 #include <cmath>
 
@@ -52,7 +51,7 @@ bool Fs2CommandToggleFormat::writeCommandToBuffer(char *&p, char *end)
 	return true;
 }
 
-void Fs2CommandToggleFormat::print(QTextStream &o) const
+void Fs2CommandToggleFormat::print(QDebug &o) const
 {
 	o << "Fs2CommandToggleFormat";
 }
@@ -70,7 +69,8 @@ bool Fs2CommandStopSlew::writeCommandToBuffer(char *&p, char *end)
 	return true;
 }
 
-void Fs2CommandStopSlew::print(QTextStream &o) const {
+void Fs2CommandStopSlew::print(QDebug &o) const
+{
 	o << "Fs2CommandStopSlew";
 }
 
@@ -110,39 +110,27 @@ int Fs2CommandSetSelectedRa::readAnswerFromBuffer(const char *&buff,
 	switch (buff[0])
 	{
 		case '0':
-			#ifdef DEBUG4
-			*log_file << Now()
-			          << "Fs2CommandSetSelectedRa::readAnswerFromBuffer:"
-			             "ra invalid"
-				  << StelUtils::getEndLineChar();
-			#endif
+			qCWarning(Telescopes) << server.getLogPrefix()
+			                      << "Fs2CommandSetSelectedRa::readAnswerFromBuffer: ra invalid";
 			buff++;
 			break;
 
 		case '1':
-			#ifdef DEBUG4
-			*log_file << Now()
-			          << "Fs2CommandSetSelectedRa::readAnswerFromBuffer:"
-			             "ra valid"
-				  << StelUtils::getEndLineChar();
-			#endif
+			qCDebug(Telescopes) << server.getLogPrefix()
+			                    << "Fs2CommandSetSelectedRa::readAnswerFromBuffer: ra valid";
 			buff++;
 			break;
 
 		default:
-			#ifdef DEBUG4
-			*log_file << Now()
-			          << "Fs2CommandSetSelectedRa::readAnswerFromBuffer:"
-			             "strange: unexpected char"
-				  << StelUtils::getEndLineChar();
-			#endif
+			qCWarning(Telescopes) << server.getLogPrefix()
+			                      << "Fs2CommandSetSelectedRa::readAnswerFromBuffer: strange: unexpected char";
 			break;
 	}
 
 	return 1;
 }
 
-void Fs2CommandSetSelectedRa::print(QTextStream &o) const
+void Fs2CommandSetSelectedRa::print(QDebug &o) const
 {
 	o << "Fs2CommandSetSelectedRa("
 	  << (ra/3600) << ':' << ((ra/60)%60) << ':' << (ra%60) << ')';
@@ -195,39 +183,27 @@ int Fs2CommandSetSelectedDec::readAnswerFromBuffer(const char *&buff,
 	switch (buff[0])
 	{
 		case '0':
-			#ifdef DEBUG4
-			*log_file << Now()
-			          << "Fs2CommandSetSelectedDec::readAnswerFromBuffer:"
-			             "dec invalid"
-				  << StelUtils::getEndLineChar();
-			#endif
+			qCWarning(Telescopes) << server.getLogPrefix()
+			                      << "Fs2CommandSetSelectedDec::readAnswerFromBuffer: dec invalid";
 			buff++;
 			break;
 
 		case '1':
-			#ifdef DEBUG4
-			*log_file << Now()
-			          << "Fs2CommandSetSelectedDec::readAnswerFromBuffer:"
-			             "dec valid"
-				  << StelUtils::getEndLineChar();
-			#endif
+			qCDebug(Telescopes) << server.getLogPrefix()
+			                    << "Fs2CommandSetSelectedDec::readAnswerFromBuffer: dec valid";
 			buff++;
 			break;
 
 		default:
-			#ifdef DEBUG4
-			*log_file << Now()
-			          << "Fs2CommandSetSelectedDec::readAnswerFromBuffer:"
-			             "strange: unexpected char"
-				  << StelUtils::getEndLineChar();
-			#endif
+			qCWarning(Telescopes) << server.getLogPrefix()
+			                      << "Fs2CommandSetSelectedDec::readAnswerFromBuffer: strange: unexpected char";
 			break;
 	}
 
 	return 1;
 }
 
-void Fs2CommandSetSelectedDec::print(QTextStream &o) const
+void Fs2CommandSetSelectedDec::print(QDebug &o) const
 {
 	const int d = abs(dec);
 	o << "Fs2CommandSetSelectedDec("
@@ -269,12 +245,8 @@ int Fs2CommandGotoSelected::readAnswerFromBuffer(const char *&buff,
 	switch (first_byte)
 	{
 		case '0':
-			#ifdef DEBUG4
-			*log_file << Now()
-			          << "Fs2CommandGotoSelected::readAnswerFromBuffer: "
-			             "slew ok"
-				  << StelUtils::getEndLineChar();
-			#endif
+			qCDebug(Telescopes) << server.getLogPrefix()
+			                    << "Fs2CommandGotoSelected::readAnswerFromBuffer: slew ok";
 			buff++;
 			return 1;
 
@@ -284,15 +256,9 @@ int Fs2CommandGotoSelected::readAnswerFromBuffer(const char *&buff,
 			if (p == end)
 			{
 				// the AutoStar 494 returns just '1', nothing else
-				#ifdef DEBUG4
-				*log_file << Now()
-				          << "Fs2CommandGotoSelected::readAnswerFromBuffer: "
-				             "slew failed ("
-					  << (static_cast<char>(first_byte))
-				          << "), "
-				             "but no complete answer yet"
-					  << StelUtils::getEndLineChar();
-				#endif
+				qCWarning(Telescopes).nospace() << server.getLogPrefix()
+				                                << "Fs2CommandGotoSelected::readAnswerFromBuffer: slew failed ("
+				                                << static_cast<char>(first_byte) << "), but no complete answer yet";
 				buff++;
 				return 0;
 			}
@@ -306,34 +272,24 @@ int Fs2CommandGotoSelected::readAnswerFromBuffer(const char *&buff,
 				if (*p == '#')
 					break;
 			}
-			#ifdef DEBUG4
-			*log_file << Now()
-			<< "Fs2CommandGotoSelected::readAnswerFromBuffer: "
-			   "slew failed ("
-			<< (static_cast<char>(first_byte))
-			<< "): '"
-			<< QByteArray(buff + 1, static_cast<int>(p - buff - 1))
-			<< '\''
-			<< StelUtils::getEndLineChar();
-			#endif
+			qCWarning(Telescopes).nospace() << server.getLogPrefix()
+			                                << "Fs2CommandGotoSelected::readAnswerFromBuffer: slew failed ("
+			                                << static_cast<char>(first_byte) << "): "
+			                                << QByteArray(buff + 1, static_cast<int>(p - buff - 1));
 			buff = p+1;
 			return 1;
 		}
 
 		default:
-			#ifdef DEBUG4
-			*log_file << Now()
-			          << "Fs2CommandGotoSelected::readAnswerFromBuffer: "
-			             "slew returns something weird"
-				  << StelUtils::getEndLineChar();
-			#endif
+			qCDebug(Telescopes) << server.getLogPrefix()
+			                    << "Fs2CommandGotoSelected::readAnswerFromBuffer: slew returns something weird";
 			break;
 	}
 
 	return -1;
 }
 
-void Fs2CommandGotoSelected::print(QTextStream &o) const
+void Fs2CommandGotoSelected::print(QDebug &o) const
 {
 	o << "Fs2CommandGotoSelected";
 }
@@ -377,11 +333,8 @@ int Fs2CommandSyncSelected::readAnswerFromBuffer(const char *&buff,
 	// as a single-byte answer.
 	if (first_byte == '0')
 	{
-		#ifdef DEBUG4
-		*log_file << Now()
-			  << "Fs2CommandSyncSelected::readAnswerFromBuffer: sync ok"
-			  << StelUtils::getEndLineChar();
-		#endif
+		qCDebug(Telescopes) << server.getLogPrefix()
+		                    << "Fs2CommandSyncSelected::readAnswerFromBuffer: sync ok";
 		buff++;
 		return 1;
 	}
@@ -393,18 +346,14 @@ int Fs2CommandSyncSelected::readAnswerFromBuffer(const char *&buff,
 		if (*p == '#')
 			break;
 	}
-	#ifdef DEBUG4
-	*log_file << Now()
-	<< "Fs2CommandSyncSelected::readAnswerFromBuffer: sync acknowledged: '"
-	<< QByteArray(buff, static_cast<int>(p - buff))
-	<< '\''
-	<< StelUtils::getEndLineChar();
-	#endif
+	qCDebug(Telescopes) << server.getLogPrefix()
+	                    << "Fs2CommandSyncSelected::readAnswerFromBuffer: sync acknowledged:"
+	                    << QByteArray(buff, static_cast<int>(p - buff));
 	buff = p+1;
 	return 1;
 }
 
-void Fs2CommandSyncSelected::print(QTextStream &o) const
+void Fs2CommandSyncSelected::print(QDebug &o) const
 {
 	o << "Fs2CommandSyncSelected";
 }
@@ -442,12 +391,8 @@ int Fs2CommandGetRa::readAnswerFromBuffer(const char *&buff,
 	ra += ((*p++) - '0');
 	if (*p++ != ':')
 	{
-		#ifdef DEBUG4
-		*log_file << Now()
-		          << "Fs2CommandGetRa::readAnswerFromBuffer: "
-		             "error: ':' expected"
-			  << StelUtils::getEndLineChar();
-		#endif
+		qCWarning(Telescopes) << server.getLogPrefix()
+		                      << "Fs2CommandGetRa::readAnswerFromBuffer: error: ':' expected";
 		return -1;
 	}
 
@@ -469,35 +414,24 @@ int Fs2CommandGetRa::readAnswerFromBuffer(const char *&buff,
 			break;
 
 		default:
-			*log_file << Now()
-			          << "Fs2CommandGetRa::readAnswerFromBuffer: "
-			             "error: '.' or ':' expected"
-				  << StelUtils::getEndLineChar();
+			qCWarning(Telescopes) << server.getLogPrefix()
+			                      << "Fs2CommandGetRa::readAnswerFromBuffer: error: '.' or ':' expected";
 			return -1;
 	}
 
 	if (*p++ != '#')
 	{
-		*log_file << Now()
-		          << "Fs2CommandGetRa::readAnswerFromBuffer: "
-		             "error: '#' expected"
-			  << StelUtils::getEndLineChar();
+		qCWarning(Telescopes) << server.getLogPrefix()
+		                      << "Fs2CommandGetRa::readAnswerFromBuffer: error: '#' expected";
 		return -1;
 	}
 
-	#ifdef DEBUG4
-	*log_file << Now()
-	          << "Fs2CommandGetRa::readAnswerFromBuffer: "
-	          << "RA = "
-	          << qSetPadChar('0')
-	          << qSetFieldWidth(2)  << (ra/3600)
-	          << qSetFieldWidth(0) << ':'
-	          << qSetFieldWidth(2) << ((ra/60)%60)
-	          << qSetFieldWidth(0) << ':'
-	          << qSetFieldWidth(2) << (ra%60)
-	          << qSetFieldWidth(0) << qSetPadChar(' ')
-		  << StelUtils::getEndLineChar();
-	#endif
+	qCDebug(Telescopes).noquote() << server.getLogPrefix()
+	                              << "Fs2CommandGetRa::readAnswerFromBuffer: RA ="
+	                              << QStringLiteral("%1:%2:%3")
+	                                        .arg(ra / 3600, 2, 10, QLatin1Char('0'))
+	                                        .arg((ra / 60) % 60, 2, 10, QLatin1Char('0'))
+	                                        .arg(ra % 60, 2, 10, QLatin1Char('0'));
 
 	buff = p;
 	server.longFormatUsedReceived(long_format);
@@ -505,7 +439,7 @@ int Fs2CommandGetRa::readAnswerFromBuffer(const char *&buff,
 	return 1;
 }
 
-void Fs2CommandGetRa::print(QTextStream &o) const
+void Fs2CommandGetRa::print(QDebug &o) const
 {
 	o << "Fs2CommandGetRa";
 }
@@ -551,12 +485,8 @@ int Fs2CommandGetDec::readAnswerFromBuffer(const char *&buff,
 			break;
 
 		default:
-			#ifdef DEBUG4
-			*log_file << Now()
-			          << "Fs2CommandGetDec::readAnswerFromBuffer: "
-			             "error: '+' or '-' expected"
-				  << StelUtils::getEndLineChar();
-			#endif
+			qCWarning(Telescopes) << server.getLogPrefix()
+			                      << "Fs2CommandGetDec::readAnswerFromBuffer: error: '+' or '-' expected";
 			return -1;
 	}
 
@@ -564,10 +494,8 @@ int Fs2CommandGetDec::readAnswerFromBuffer(const char *&buff,
 	dec *= 10; dec += ((*p++) - '0');
 	if (*p++ != (static_cast<char>(223)))
 	{
-		*log_file << Now()
-		          << "Fs2CommandGetDec::readAnswerFromBuffer: "
-			     "error: degree sign expected" // not a star, really 0xDF
-			  << StelUtils::getEndLineChar();
+		qCWarning(Telescopes) << server.getLogPrefix()
+		                      << "Fs2CommandGetDec::readAnswerFromBuffer: error: degree sign expected"; // not a star, really 0xDF
 	}
 
 	dec *=  6; dec += ((*p++) - '0');
@@ -591,34 +519,24 @@ int Fs2CommandGetDec::readAnswerFromBuffer(const char *&buff,
 			dec *= 10; dec += ((*p++) - '0');
 			if (*p++ != '#')
 			{
-				*log_file << Now()
-				          << "Fs2CommandGetDec::readAnswerFromBuffer: "
-				             "error: '#' expected"
-					  << StelUtils::getEndLineChar();
+				qCWarning(Telescopes) << server.getLogPrefix()
+				                      << "Fs2CommandGetDec::readAnswerFromBuffer: error: '#' expected";
 				return -1;
 			}
 			break;
 
 		default:
-			*log_file << Now()
-			          << "Fs2CommandGetDec::readAnswerFromBuffer: "
-			             "error: '#', ':' or ''' expected"
-				  << StelUtils::getEndLineChar();
+			qCWarning(Telescopes) << server.getLogPrefix()
+			                      << "Fs2CommandGetDec::readAnswerFromBuffer: error: '#', ':' or ''' expected";
 			return -1;
 	}
-	#ifdef DEBUG4
-	*log_file << Now()
-	          << "Fs2CommandGetDec::readAnswerFromBuffer: "
-	          << "Dec = " << (sign_dec?'-':'+')
-	          << qSetPadChar('0')
-	          << qSetFieldWidth(2) << (dec/3600)
-	          << qSetFieldWidth(0) << ':'
-	          << qSetFieldWidth(2) << ((dec/60)%60)
-	          << qSetFieldWidth(0) << ':'
-	          << qSetFieldWidth(2) << (dec%60)
-	          << qSetFieldWidth(0) << qSetPadChar(' ')
-		  << StelUtils::getEndLineChar();
-	#endif
+	qCDebug(Telescopes).noquote() << server.getLogPrefix()
+	                              << "Fs2CommandGetDec::readAnswerFromBuffer: Dec ="
+	                              << QStringLiteral("%1%2:%3:%4")
+	                                        .arg(QLatin1Char(sign_dec ? '-' : '+'))
+	                                        .arg(dec / 3600, 2, 10, QLatin1Char('0'))
+	                                        .arg((dec / 60) % 60, 2, 10, QLatin1Char('0'))
+	                                        .arg(dec % 60, 2, 10, QLatin1Char('0'));
 
 	if (sign_dec)
 		dec = -dec;
@@ -628,7 +546,7 @@ int Fs2CommandGetDec::readAnswerFromBuffer(const char *&buff,
 	return 1;
 }
 
-void Fs2CommandGetDec::print(QTextStream &o) const
+void Fs2CommandGetDec::print(QDebug &o) const
 {
 	o << "Fs2CommandGetDec";
 }

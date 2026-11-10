@@ -109,7 +109,7 @@ TelescopeClient* TelescopeClient::create(const QString& url, int slot)
 	}
 	else if (type == "TelescopeServerFs2")
 	{
-		newTelescope= new TelescopeClientDirectFs2(name, params, eq);
+		newTelescope = new TelescopeClientDirectFs2(name, params, eq, slot);
 	}
 	#ifdef ENABLE_INDI
 	else if (type == "INDI")

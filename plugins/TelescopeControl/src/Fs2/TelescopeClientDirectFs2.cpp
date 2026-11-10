@@ -33,15 +33,13 @@
 
 #include "Fs2Connection.hpp"
 #include "Fs2Command.hpp"
-#include "common/LogFile.hpp"
+#include "common/TelescopeLogging.hpp"
 #include "StelCore.hpp"
-#ifndef QT_NO_DEBUG
-#include "StelUtils.hpp"
-#endif
 
-
-TelescopeClientDirectFs2::TelescopeClientDirectFs2 (const QString &name, const QString &parameters, TelescopeControl::Equinox eq)
-	: TelescopeClient(name)
+TelescopeClientDirectFs2::TelescopeClientDirectFs2(const QString &name, const QString &parameters,
+                                                   TelescopeControl::Equinox eq, int slot)
+	: TelescopeClient(name, slot)
+	, Server(0, slot)
 	, time_delay(0)
 	, equinox(eq)
 	, fs2(nullptr)
@@ -66,16 +64,21 @@ TelescopeClientDirectFs2::TelescopeClientDirectFs2 (const QString &name, const Q
 	}
 	else
 	{
-		qCWarning(Telescopes) << "ERROR creating TelescopeClientDirectFs2: invalid parameters.";
+		qCWarning(Telescopes) << getLogPrefix()
+		                      << "ERROR creating TelescopeClientDirectFs2: invalid parameters.";
 		return;
 	}
 
-	qCDebug(Telescopes) << "TelescopeClientDirectFs2 parameters: port, time_delay:" << serialDeviceName << time_delay;
+	qCDebug(Telescopes) << getLogPrefix()
+	                    << "TelescopeClientDirectFs2 parameters: port, time_delay:" << serialDeviceName
+	                    << time_delay;
 
 	//Validation: Time delay
 	if (time_delay <= 0 || time_delay > 10000000)
 	{
-		qCWarning(Telescopes) << "ERROR creating TelescopeClientDirectFs2: time_delay not valid (should be less than 10000000)";
+		qCWarning(Telescopes) << getLogPrefix()
+		                      << "ERROR creating TelescopeClientDirectFs2: time_delay not valid "
+		                         "(should be less than 10000000)";
 		return;
 	}
 
@@ -90,7 +93,9 @@ TelescopeClientDirectFs2::TelescopeClientDirectFs2 (const QString &name, const Q
 	Fs2SerialConnection *connection = new Fs2SerialConnection(*this, qPrintable(serialDeviceName));
 	if (connection->isClosed())
 	{
-		qCWarning(Telescopes) << "ERROR creating TelescopeClientDirectFs2: cannot open serial device" << serialDeviceName;
+		qCWarning(Telescopes) << getLogPrefix()
+		                      << "ERROR creating TelescopeClientDirectFs2: cannot open serial device"
+		                      << serialDeviceName;
 		delete connection;
 		return;
 	}
@@ -205,9 +210,7 @@ void TelescopeClientDirectFs2::communicationResetReceived(void)
 	queue_get_position = true;
 	next_pos_time = -0x8000000000000000LL;
 
-#ifndef QT_NO_DEBUG
-	*log_file << Now() << "TelescopeClientDirectFs2::communicationResetReceived" << StelUtils::getEndLineChar();
-#endif
+	qCDebug(Telescopes) << getLogPrefix() << "TelescopeClientDirectFs2::communicationResetReceived";
 
 	// A protocol-level reset (e.g. a timeout while waiting for an answer)
 	// must not tear down the serial port itself. We simply re-synchronise
@@ -231,9 +234,7 @@ void TelescopeClientDirectFs2::raReceived(unsigned int ra_int)
 {
 	answers_received = true;
 	last_ra = ra_int;
-#ifndef QT_NO_DEBUG
-	*log_file << Now() << "TelescopeClientDirectFs2::raReceived: " << ra_int << StelUtils::getEndLineChar();
-#endif
+	qCDebug(Telescopes) << getLogPrefix() << "TelescopeClientDirectFs2::raReceived:" << ra_int;
 }
 
 //! Called by Fs2CommandGetDec::readAnswerFromBuffer().
@@ -241,9 +242,7 @@ void TelescopeClientDirectFs2::raReceived(unsigned int ra_int)
 void TelescopeClientDirectFs2::decReceived(unsigned int dec_int)
 {
 	answers_received = true;
-#ifndef QT_NO_DEBUG
-	*log_file << Now() << "TelescopeClientDirectFs2::decReceived: " << dec_int << StelUtils::getEndLineChar();
-#endif
+	qCDebug(Telescopes) << getLogPrefix() << "TelescopeClientDirectFs2::decReceived:" << dec_int;
 	const int fs2_status = 0;
 	sendPosition(last_ra, static_cast<int>(dec_int), fs2_status);
 	queue_get_position = true;
