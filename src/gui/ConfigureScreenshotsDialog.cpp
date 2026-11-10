@@ -21,8 +21,6 @@
 
 #include "Dialog.hpp"
 #include "StelApp.hpp"
-#include "StelTranslator.hpp"
-#include "StelObjectMgr.hpp"
 
 ConfigureScreenshotsDialog::ConfigureScreenshotsDialog() : StelDialog("ConfigureScreenshotsDialog")
 {
@@ -54,5 +52,16 @@ void ConfigureScreenshotsDialog::createDialogContent()
 
 	connectBoolProperty(ui->useDateTimeFileMask, "MainView.flagScreenshotDateFileName");
 	connectStringProperty(ui->maskLineEdit, "MainView.screenShotFileMask");
+#ifdef HAVE_EXIV2
+	connectBoolProperty(ui->exifGroupBox, "MainView.flagScreenShotWriteExif");
+	connectStringProperty(ui->artistLineEdit, "MainView.screenShotArtist");
+	connectStringProperty(ui->copyrightLineEdit, "MainView.screenShotCopyright");
+	connectStringProperty(ui->copyrightTermsLineEdit, "MainView.screenShotTerms");
+#else
+	ui->artistLabel->hide();
+	ui->artistLineEdit->hide();
+	ui->copyrightLabel->hide();
+	ui->copyrightLineEdit->hide();
+#endif
 }
 
