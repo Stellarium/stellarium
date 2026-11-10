@@ -22,10 +22,12 @@
 
 #include <QObject>
 #include <QDateTime>
+#include <QPointer>
 #include "StelDialog.hpp"
 #include "SolarSystem.hpp"
 
 class Ui_GreatRedSpotDialogForm;
+class QNetworkReply;
 
 class GreatRedSpotDialog : public StelDialog
 {
@@ -41,11 +43,21 @@ public slots:
 private slots:
 	void setGrsJD(QDateTime dt);
 	void openRecentGrsMeasurement(); //! Opens a website in the system web browser where GRS data can be found.
+	//! Fetch GRS longitude and drift for the current simulation time from IMCCE.
+	void updateGrsParameters();
 
 protected:
         //! Initialize the dialog widgets and connect the signals/slots.
 	void createDialogContent() override;
 	Ui_GreatRedSpotDialogForm *ui;
+
+private:
+	enum class UpdateError { None, Network, Timeout, Service, InvalidData };
+	void setUpdateError(UpdateError error, const QString& details = QString());
+	QPointer<QNetworkReply> updateReply;
+	UpdateError updateError = UpdateError::None;
+	QString updateErrorDetails;
+	bool updateTimedOut = false;
 };
 
 #endif // GREATREDSPOTDIALOG_HPP
