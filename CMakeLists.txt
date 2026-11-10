@@ -152,6 +152,7 @@ IF(${CMAKE_BUILD_TYPE} MATCHES "Debug")
                     NAME coverage
                     EXECUTABLE ctest -j ${PROCESSOR_COUNT}
                     DEPENDENCIES buildTests
+                    LCOV_ARGS --demangle-cpp
                )
           ENDIF()
      ENDIF()
@@ -439,8 +440,13 @@ SET(ENABLE_QTWEBENGINE 1 CACHE BOOL "Define whether QtWebEngine module should be
 # - Other systems: libgps if possible and NMEA emitter as fallback.
 SET(ENABLE_GPS 1 CACHE BOOL "Define whether GPS queries should be supported.")
 
-# Activate support for ShowMySky atmosphere
-SET(ENABLE_SHOWMYSKY 1 CACHE BOOL "Define whether to support ShowMySky atmosphere model if installed")
+IF(ANDROID)
+     SET(ENABLE_SHOWMYSKY 0)
+     SET(ANDROID_SSL_PATH "" CACHE STRING "Path to KDAB/android_openssl clone, or NONE to disable SSL support. Empty means download using CPM.")
+ELSE()
+     # Activate support for ShowMySky atmosphere
+     SET(ENABLE_SHOWMYSKY 1 CACHE BOOL "Define whether to support ShowMySky atmosphere model if installed")
+ENDIF()
 
 # Activate support for XLSX (Excel) files
 SET(ENABLE_XLSX 1 CACHE BOOL "Define whether to support XLSX (Excel) files")

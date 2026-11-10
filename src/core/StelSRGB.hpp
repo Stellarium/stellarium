@@ -48,4 +48,8 @@ Vector3<F> srgbToLinear(const Vector3<F>& srgb)
 
 QByteArray makeSRGBUtilsShader();
 
+float colorToShader(float c);
+QVector3D colorToShader(const Vec3f& c);
+QVector4D colorToShader(const Vec4f& c);
+
 #endif

@@ -20,9 +20,30 @@
 #include "StelSRGB.hpp"
 #include "StelMainView.hpp"
 
+float colorToShader(const float c)
+{
+	if (StelMainView::getInstance().getGLInformation().isHighGraphicsMode)
+		return srgbToLinear(c);
+	return c;
+}
+
+QVector3D colorToShader(const Vec3f& c)
+{
+	if (StelMainView::getInstance().getGLInformation().isHighGraphicsMode)
+		return srgbToLinear(c).toQVector();
+	return c.toQVector();
+}
+
+QVector4D colorToShader(const Vec4f& c)
+{
+	if (StelMainView::getInstance().getGLInformation().isHighGraphicsMode)
+		return srgbToLinear(c).toQVector();
+	return c.toQVector();
+}
+
 QByteArray makeSRGBUtilsShader()
 {
-	static const QByteArray src = 1+R"(
+	static const QByteArray srcLinAndSRGB = 1+R"(
 #line 1 108
 float srgbToLinear(float srgb)
 {
@@ -58,5 +79,49 @@ vec3 linearToSRGB(vec3 lin)
 #line 1 0
 )";
 
-	return src;
+	static const QByteArray srcTexConv =
+		StelMainView::getInstance().getGLInformation().isHighGraphicsMode
+			? 1+R"(
+#line 1 109
+vec3 texSampleToLinear(vec3 tex)
+{
+	// In high graphics mode texture samples are already in linear color
+	return tex;
+}
+vec3 linearColorToFramebuffer(vec3 c)
+{
+	// In high graphics mode the framebuffer has linear colors
+	return c;
+}
+
+vec3 srgbToFramebuffer(vec3 c)
+{
+	// In high graphics mode the framebuffer has linear colors
+	return srgbToLinear(c);
+}
+#line 1 0
+)"
+			: 1+R"(
+#line 1 109
+vec3 texSampleToLinear(vec3 tex)
+{
+	// In low graphics mode texture samples are in sRGB
+	return srgbToLinear(tex);
+}
+
+vec3 linearColorToFramebuffer(vec3 c)
+{
+	// In low graphics mode the framebuffer has sRGB colors
+	return linearToSRGB(c);
+}
+
+vec3 srgbToFramebuffer(vec3 c)
+{
+	// In low graphics mode the framebuffer has sRGB colors
+	return c;
+}
+#line 1 0
+)";
+
+	return srcLinAndSRGB + srcTexConv;
 }

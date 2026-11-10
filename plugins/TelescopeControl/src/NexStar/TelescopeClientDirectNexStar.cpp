@@ -31,14 +31,13 @@
 
 #include "NexStarConnection.hpp"
 #include "NexStarCommand.hpp"
-#include "common/LogFile.hpp"
+#include "common/TelescopeLogging.hpp"
 #include "StelCore.hpp"
-#ifndef QT_NO_DEBUG
-#include "StelUtils.hpp"
-#endif
 
-TelescopeClientDirectNexStar::TelescopeClientDirectNexStar(const QString &name, const QString &parameters, TelescopeControl::Equinox eq)
-	: TelescopeClient(name)
+TelescopeClientDirectNexStar::TelescopeClientDirectNexStar(const QString &name, const QString &parameters,
+                                                           TelescopeControl::Equinox eq, int slot)
+	: TelescopeClient(name, slot)
+	, Server(0, slot)
 	, time_delay(0)
 	, equinox(eq)
 	, nexstar(nullptr)
@@ -65,7 +64,8 @@ TelescopeClientDirectNexStar::TelescopeClientDirectNexStar(const QString &name, 
 		time_delay = tcpMatch.captured(3).toInt();
 		if (hostName.isEmpty() || tcpPort <= 0 || tcpPort > 65535)
 		{
-			qCWarning(Telescopes) << "ERROR creating TelescopeClientDirectNexStar: invalid host or port.";
+			qCWarning(Telescopes) << getLogPrefix()
+			                      << "ERROR creating TelescopeClientDirectNexStar: invalid host or port.";
 			return;
 		}
 	}
@@ -79,22 +79,27 @@ TelescopeClientDirectNexStar::TelescopeClientDirectNexStar(const QString &name, 
 		}
 		else
 		{
-			qCWarning(Telescopes) << "ERROR creating TelescopeClientDirectNexStar: invalid parameters.";
+			qCWarning(Telescopes) << getLogPrefix()
+			                      << "ERROR creating TelescopeClientDirectNexStar: invalid parameters.";
 			return;
 		}
 	}
 	
 	if (useNetwork)
-		qCDebug(Telescopes) << "TelescopeClientDirectNexStar parameters: host, port, time_delay:"
-		                    << hostName << tcpPort << time_delay;
+		qCDebug(Telescopes) << getLogPrefix()
+		                    << "TelescopeClientDirectNexStar parameters: host, port, time_delay:" << hostName
+		                    << tcpPort << time_delay;
 	else
-		qCDebug(Telescopes) << "TelescopeClientDirectNexStar parameters: port, time_delay:"
-		                    << serialDeviceName << time_delay;
+		qCDebug(Telescopes) << getLogPrefix()
+		                    << "TelescopeClientDirectNexStar parameters: port, time_delay:" << serialDeviceName
+		                    << time_delay;
 	
 	//Validation: Time delay
 	if (time_delay <= 0 || time_delay > 10000000)
 	{
-		qCWarning(Telescopes) << "ERROR creating TelescopeClientDirectNexStar: time_delay not valid (should be less than 10000000)";
+		qCWarning(Telescopes) << getLogPrefix()
+		                      << "ERROR creating TelescopeClientDirectNexStar: "
+		                         "time_delay not valid (should be less than 10000000)";
 		return;
 	}
 	
@@ -106,7 +111,8 @@ TelescopeClientDirectNexStar::TelescopeClientDirectNexStar(const QString &name, 
 		NexStarTcpConnection *connection = new NexStarTcpConnection(*this, qPrintable(hostName), tcpPort);
 		if (connection->isClosed())
 		{
-			qCWarning(Telescopes) << "ERROR creating TelescopeClientDirectNexStar: cannot connect to"
+			qCWarning(Telescopes) << getLogPrefix()
+			                      << "ERROR creating TelescopeClientDirectNexStar: cannot connect to"
 			                      << hostName << "port" << tcpPort;
 			delete connection;
 			return;
@@ -125,7 +131,9 @@ TelescopeClientDirectNexStar::TelescopeClientDirectNexStar(const QString &name, 
 		NexStarSerialConnection *connection = new NexStarSerialConnection(*this, qPrintable(serialDeviceName));
 		if (connection->isClosed())
 		{
-			qCWarning(Telescopes) << "ERROR creating TelescopeClientDirectNexStar: cannot open serial device"
+			qCWarning(Telescopes) << getLogPrefix()
+			                      << "ERROR creating TelescopeClientDirectNexStar: "
+			                         "cannot open serial device"
 			                      << serialDeviceName;
 			delete connection;
 			return;
@@ -237,28 +245,22 @@ void TelescopeClientDirectNexStar::communicationResetReceived(void)
 {
 	queue_get_position = true;
 	next_pos_time = -0x8000000000000000LL;
-	
-#ifndef QT_NO_DEBUG
-	*log_file << Now() << "TelescopeClientDirectNexStar::communicationResetReceived" << StelUtils::getEndLineChar();
-#endif
+
+	qCDebug(Telescopes) << getLogPrefix() << "TelescopeClientDirectNexStar::communicationResetReceived";
 }
 
 //! Called by NexStarCommandGetRaDec::readAnswerFromBuffer().
 void TelescopeClientDirectNexStar::raReceived(unsigned int ra_int)
 {
 	last_ra = ra_int;
-#ifndef QT_NO_DEBUG
-	*log_file << Now() << "TelescopeClientDirectNexStar::raReceived: " << ra_int << StelUtils::getEndLineChar();
-#endif
+	qCDebug(Telescopes) << getLogPrefix() << "TelescopeClientDirectNexStar::raReceived:" << ra_int;
 }
 
 //! Called by NexStarCommandGetRaDec::readAnswerFromBuffer().
 //! Should be called after raReceived(), as it contains a call to sendPosition().
 void TelescopeClientDirectNexStar::decReceived(unsigned int dec_int)
 {
-#ifndef QT_NO_DEBUG
-	*log_file << Now() << "TelescopeClientDirectNexStar::decReceived: " << dec_int << StelUtils::getEndLineChar();
-#endif
+	qCDebug(Telescopes) << getLogPrefix() << "TelescopeClientDirectNexStar::decReceived:" << dec_int;
 	const int nexstar_status = 0;
 	sendPosition(last_ra, static_cast<int>(dec_int), nexstar_status);
 	queue_get_position = true;

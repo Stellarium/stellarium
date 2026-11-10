@@ -103,6 +103,12 @@ private:
 	bool isDarkConstellation = false;
 
 	/**
+	 * @brief Adds the required-field marker to all labels of required input fields.
+	 *        Must be called after every (re)translation of the UI.
+	 */
+	void markRequiredFieldLabels();
+
+	/**
 	 * @brief Checks whether the current data is enough for the constellation to be saved.
 	 */
 	bool canConstellationBeSaved() const;

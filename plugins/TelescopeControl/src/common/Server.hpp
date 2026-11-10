@@ -45,7 +45,9 @@ class Server
 {
 public:
 	Server(void) {}
-	Server(int port);
+	Server(int port, int slot = 0);
+	//! Telescope slot associated with this server, or zero for a standalone server.
+	int getLogSlot() const { return logSlot; }
 	virtual ~Server(void) {}
 	virtual void step(long long int timeout_micros);
 	
@@ -65,6 +67,7 @@ protected:
 	friend class Listener;
 	
 private:
+	const int logSlot = 0;
 	  // called by Connection:
 	virtual void gotoReceived(unsigned int ra_int, int dec_int) = 0;
 	virtual void syncReceived(unsigned int ra_int, int dec_int) = 0;

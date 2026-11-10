@@ -136,6 +136,7 @@ StelSkyCultureSkyPartition::StelSkyCultureSkyPartition(const QJsonObject &json):
 		name.pronounce = nameObj["pronounce"].toString();
 		name.transliteration = nameObj["transliteration"].toString();
 		name.translated = nameObj["english"].toString();
+		nameContext = nameObj["context"].toString();
 	}
 	else
 	{
@@ -477,21 +478,21 @@ void StelSkyCultureSkyPartition::updateI18n()
 	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
 
 	// The name of the system
-	name.translatedI18n = trans.tryQtranslate(name.translated, context);
+	name.translatedI18n = trans.tryQtranslate(name.translated, nameContext);
 	if (name.translatedI18n.isEmpty())
 	{
-		if (context.isEmpty())
+		if (nameContext.isEmpty())
 			name.translatedI18n = q_(name.translated);
 		else
-			name.translatedI18n = qc_(name.translated, context);
+			name.translatedI18n = qc_(name.translated, nameContext);
 	}
-	name.pronounceI18n = trans.tryQtranslate(name.pronounce, context);
+	name.pronounceI18n = trans.tryQtranslate(name.pronounce, nameContext);
 	if (name.pronounceI18n.isEmpty())
 	{
-		if (context.isEmpty())
+		if (nameContext.isEmpty())
 			name.pronounceI18n = q_(name.pronounce);
 		else
-			name.pronounceI18n = qc_(name.pronounce, context);
+			name.pronounceI18n = qc_(name.pronounce, nameContext);
 	}
 
 	// names array

@@ -24,6 +24,7 @@
 #include "RefractionExtinction.hpp"
 #include "LandscapeMgr.hpp"
 #include "StelPainter.hpp"
+#include "StelMainView.hpp"
 #include "StelSkyDrawer.hpp"
 #include "StelTextureMgr.hpp"
 #include "StelToneReproducer.hpp"
@@ -34,7 +35,7 @@
 #include <QNetworkReply>
 #include <QTimeLine>
 
-class HipsTile
+class HipsTile : public QObject
 {
 public:
 	int order;
@@ -463,6 +464,8 @@ void HipsSurvey::draw(StelPainter* sPainter, double angle, HipsSurvey::DrawCallb
 			const float modelFactor = smsLikeAtmosphere ? 0.2f : 1.f;
 			const float atmFactor = qMax(0.35f, 50.0f * (0.02f - modelFactor * atmLum));
 			extinctionColor *= atmFactor * atmFactor;
+			if (StelMainView::getInstance().getGLInformation().isHighGraphicsMode)
+				extinctionColor *= 1.1f;
 		}
 	}
 
@@ -594,20 +597,21 @@ void HipsSurvey::updateProgressBar(int nb, int total)
 void HipsSurvey::dropUnfinishedInvisibleTiles()
 {
 	QSet<qint64> tilesToEvict;
-	for (const auto uid : cachedTiles)
+	for (auto it = cachedTiles.cbegin(); it != cachedTiles.cend(); ++it)
 	{
-		if (visibleTiles.contains(uid)) continue;
-		const auto& tile = tiles[uid];
-		if (!tile) continue;
-		if (!tile->isLoading()) continue;
-		tilesToEvict.insert(uid);
+		const auto uid = it.key();
+		const auto& tile = it.value();
+		if (!tile || (!visibleTiles.contains(uid) && tile->isLoading()))
+			tilesToEvict.insert(uid);
 	}
 	for (const auto uid : tilesToEvict)
+	{
 		tiles.remove(uid);
-	cachedTiles -= tilesToEvict;
+		cachedTiles.remove(uid);
+	}
 }
 
-HipsTile* HipsSurvey::getTile(int order, int pix)
+HipsTile* HipsSurvey::getTile(int order, int pix, bool linearColor)
 {
 	int nside = 1 << order;
 	const auto uid = pix + qint64(4) * nside * nside;
@@ -623,7 +627,9 @@ HipsTile* HipsSurvey::getTile(int order, int pix)
 		const bool isShifted = planetarySurvey && properties["type"].toString().isEmpty();
 		const int texturePix = isShifted ? shiftPix180deg(order, pix) : pix;
 		QUrl path = getUrlFor(QString("Norder%1/Dir%2/Npix%3.%4").arg(order).arg((texturePix / 10000) * 10000).arg(texturePix).arg(ext));
-		const auto texParams = StelTexture::Params().enableMipmapGen().enableMipmapFilter().disallowHttp2();
+		auto texParams = StelTexture::Params().enableMipmapGen().enableMipmapFilter().disallowHttp2();
+		if (linearColor)
+			texParams.useLinearSRGB();
 		tile->texture = texMgr.createTextureThread(path.url(), texParams, false);
 
 		// Use the allsky image until we load the full texture.
@@ -637,13 +643,14 @@ HipsTile* HipsSurvey::getTile(int order, int pix)
 			tile->allsky = texMgr.createTexture(image, texParams);
 		}
 		int tileWidth = getPropertyInt("hips_tile_width", 512);
-		tiles.insert(uid, tile, static_cast<qint64>(tileWidth) * tileWidth);
-		cachedTiles.insert(uid);
+		if (!tiles.insert(uid, tile, static_cast<qint64>(tileWidth) * tileWidth))
+			return nullptr;
+		cachedTiles[uid] = tile;
 	}
 
 	if (tile && normals && !tile->normalTexture)
 	{
-		const auto normalsTile = normals->getTile(order, pix);
+		const auto normalsTile = normals->getTile(order, pix, true);
 		if (normalsTile && (normalsTile->texture || normalsTile->allsky))
 		{
 			tile->normalTexture = normalsTile->texture;
@@ -653,7 +660,7 @@ HipsTile* HipsSurvey::getTile(int order, int pix)
 
 	if (tile && horizons && !tile->horizonTexture)
 	{
-		const auto horizonsTile = horizons->getTile(order, pix);
+		const auto horizonsTile = horizons->getTile(order, pix, true);
 		if (horizonsTile && (horizonsTile->texture || horizonsTile->allsky))
 		{
 			tile->horizonTexture = horizonsTile->texture;

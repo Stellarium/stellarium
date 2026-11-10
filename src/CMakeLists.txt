@@ -575,6 +575,10 @@ IF(ENABLE_XLSX)
      SET(STELMAIN_DEPS ${STELMAIN_DEPS} QXlsx::QXlsx)
 ENDIF()
 
+IF(CMAKE_HOST_SOLARIS)
+     SET(STELMAIN_DEPS ${STELMAIN_DEPS} kstat)
+ENDIF()
+
 IF(HAIKU)
      SET(STELMAIN_DEPS ${STELMAIN_DEPS} network)
 ENDIF()
@@ -619,6 +623,20 @@ ELSE()
      ENDIF()
 ENDIF()
 SET_TARGET_PROPERTIES(stellarium PROPERTIES QT_ANDROID_PACKAGE_SOURCE_DIR "${CMAKE_SOURCE_DIR}/android")
+
+IF(ANDROID AND NOT ("${ANDROID_SSL_PATH}" STREQUAL "NONE"))
+     IF(ANDROID_SSL_PATH)
+          INCLUDE("${ANDROID_SSL_PATH}/android_openssl.cmake")
+     ELSE()
+          CPMAddPackage(NAME android_openssl
+                        URL https://github.com/KDAB/android_openssl/archive/b71f1470962019bd89534a2919f5925f93bc5779.tar.gz
+                        URL_HASH SHA256=6c1dfff0af367bba2f2c2a27f1c2061019537524dc7892ee8efbdc8e1c6224fa
+                        DOWNLOAD_ONLY yes)
+          INCLUDE("${android_openssl_SOURCE_DIR}/android_openssl.cmake")
+     ENDIF()
+     add_android_openssl_libraries(stellarium)
+ENDIF()
+
 IF(ENABLE_PCH)
      # prepend an include to each cpp file which itself includes the most frequently used includes.
      target_precompile_headers(stelMain PRIVATE

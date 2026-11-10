@@ -188,7 +188,7 @@ void main()
     {
         // We are drawing the Sun
         vec4 texColor = texture2D(tex, texc);
-        texColor.rgb = srgbToLinear(texColor.rgb * sunInfo.rgb);
+        texColor.rgb = texSampleToLinear(texColor.rgb * sunInfo.rgb);
         // Reference: chapter 14.7 "Limb Darkening" in "Allen’s Astrophysical Quantities",
         //            A.N.Cox (ed.), 4th edition, New York: Springer-Verlag, 2002.
         //            DOI 10.1007/978-1-4612-1186-0
@@ -204,7 +204,7 @@ void main()
         float cosTheta2 = cosTheta*cosTheta;
         vec3 limbDarkeningCoef = a0 + a1*cosTheta + a2*cosTheta2;
         vec3 color = texColor.rgb * limbDarkeningCoef;
-        FRAG_COLOR = vec4(linearToSRGB(color), texColor.a);
+        FRAG_COLOR = vec4(linearColorToFramebuffer(color), texColor.a);
         return;
     }
 #endif
@@ -448,7 +448,7 @@ void main()
     }
 #endif // IS_MOON
 
-    texColor.rgb = srgbToLinear(texColor.rgb);
+    texColor.rgb = texSampleToLinear(texColor.rgb);
 
     mediump vec4 finalColor = texColor;
     // apply (currently only Martian) pole caps. texc.t=0 at south pole, 1 at north pole. 
@@ -474,6 +474,7 @@ void main()
         // FIXME: this should be calculated properly in linear space as
         // extinction of sunlight, and with subsequent tone mapping.
         // Current implementation is a legacy from older times.
+        // shadowColor is passed as a GL_RGBA texture, so the sample is sRGB-encoded
         lowp vec4 color = vec4(linearToSRGB(finalColor.rgb), finalColor.a);
         lowp float alpha = clamp(shadowColor.a, 0.0, 0.7); // clamp alpha to allow some maria detail
         finalColor = eclipsePush * (1.0-0.75*shadowColor.a) * mix(color, shadowColor, alpha);
@@ -484,7 +485,7 @@ void main()
     //apply white rimlight
     finalColor.xyz = clamp( finalColor.xyz + vec3(outgas), 0.0, 1.0);
 
-    FRAG_COLOR = vec4(linearToSRGB(finalColor.rgb), finalColor.a);
+    FRAG_COLOR = vec4(linearColorToFramebuffer(finalColor.rgb), finalColor.a);
     //to debug texture issues, uncomment and reload shader
     //FRAG_COLOR = texColor;
 }

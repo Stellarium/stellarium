@@ -236,39 +236,18 @@ def update_cultures_pot(sclist, pot):
             if 'common_name' in obj:
                 name = obj['common_name']
 
-                if 'english' in name:
-                    english = name['english']
-                    if len(english) == 0:
-                        english = None
-                else:
-                    english = None
+                english = name.get('english') or None
 
                 if english and obj_name == '':
                     obj_name = english
 
-                if 'native' in name:
-                    native = name['native']
-                    if len(native) == 0:
-                        native = None
-                else:
-                    native = None
+                native = name.get('native') or None
 
                 if native and obj_name == '':
                     obj_name = native
 
-                if 'pronounce' in name:
-                    pronounce = name['pronounce']
-                    if len(pronounce) == 0:
-                        pronounce = None
-                else:
-                    pronounce = None
-
-                if 'byname' in name:
-                    byname = name['byname']
-                    if len(byname) == 0:
-                        byname = None
-                else:
-                    byname = None
+                pronounce = name.get('pronounce') or None
+                byname = name.get('byname') or None
 
                 def get_comment(what_to_skip):
                     comment = f'{sc_name} {obj_type}'
@@ -288,9 +267,7 @@ def update_cultures_pot(sclist, pot):
                         comment += '\n' + name['translators_comments']
                     return comment
 
-                context = None
-                if 'context' in name:
-                    context = name['context']
+                context = name.get('context')
 
                 # Extract 'english' string for translation (with context for uniqueness)
                 if english:
@@ -382,26 +359,10 @@ def update_cultures_pot(sclist, pot):
     def process_names(objects, pot, sc_name):
         for obj_id in objects:
             for name in objects[obj_id]:
-                if 'english' in name:
-                    english = name['english']
-                    if len(english) == 0:
-                        english = None
-                else:
-                    english = None
+                english = name.get('english') or None
+                native = name.get('native') or None
 
-                if 'native' in name:
-                    native = name['native']
-                    if len(native) == 0:
-                        native = None
-                else:
-                    native = None
-
-                if 'pronounce' in name:
-                    pronounce = name['pronounce']
-                    if len(pronounce) == 0:
-                        pronounce = None
-                else:
-                    pronounce = None
+                pronounce = name.get('pronounce') or None
 
                 if not english:
                     print(f'{sky_culture}: warning: common_name property in object "{obj_id}" has no English name', file=sys.stderr)
@@ -457,9 +418,7 @@ def update_cultures_pot(sclist, pot):
                     else:
                         comment += '\n' + name['translators_comments']
 
-                context = None
-                if 'context' in name:
-                    context = name['context']
+                context = name.get('context')
 
                 entry = polib.POEntry(comment = comment, msgid = english, msgstr = "", msgctxt = context)
                 if entry in pot:
@@ -486,34 +445,19 @@ def update_cultures_pot(sclist, pot):
                         pot.append(entry)
 
     def process_extra_names(objects, pot, sc_name):
-        if 'context' in objects:
-            context = objects["context"]
-        else:
-            context = None
+        names_context = objects.get('context')
+        ecomment = objects.get('comment')
 
-        if 'comment' in objects:
-            ecomment = objects["comment"]
-        else:
-            ecomment = None
-
-        for name in objects["names"]:
-            if 'english' in name:
-                english = name['english']
-                if len(english) == 0:
-                    english = None
-            else:
-                english = None
-
-            if not english:
+        names_with_ctx = [(n, names_context) for n in objects['names']]
+        if sys_name := objects.get('name'):
+            names_with_ctx.append( (sys_name, sys_name.get('context')) )
+        for name, context in names_with_ctx:
+            english = name.get('english')
+            if not english or len(english) == 0:
                 continue
 
             # pronounce is language dependent! The element is optional.
-            if 'pronounce' in name:
-                pronounce = name['pronounce']
-                if len(pronounce) == 0:
-                    pronounce = None
-            else:
-                pronounce = None
+            pronounce = name.get('pronounce') or None
 
             def get_comment(for_what):
                 comment = ''

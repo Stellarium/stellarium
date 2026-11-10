@@ -22,6 +22,7 @@
 #include "StelUtils.hpp"
 
 #include <QApplication>
+#include <QSslSocket>
 #include <QDateTime>
 #include <QDebug>
 #include <QFile>
@@ -56,6 +57,8 @@
 #ifdef Q_OS_SOLARIS
 #include <sys/types.h>
 #include <sys/processor.h>
+#include <sys/systeminfo.h>
+#include <kstat.h>
 #include <unistd.h>
 #endif
 
@@ -83,6 +86,11 @@ void printSystemInfo()
 
 	// write ABI
 	log(QString("Build ABI: %1").arg(QSysInfo::buildAbi()));
+
+	// write SSL
+	log(QString("SSL available: %1").arg(QSslSocket::supportsSsl() ? "yes" : "no"));
+	log(QString("SSL build: %1").arg(QSslSocket::sslLibraryBuildVersionString()));
+	log(QString("SSL runtime: %1").arg(QSslSocket::sslLibraryVersionString()));
 
 	// write addressing mode
 	log(QString("Addressing mode: %1").arg(StelUtils::getAddressingMode()));
@@ -461,15 +469,37 @@ void printSystemInfo()
 	len = 1024;
 	sysctl(mib, 2, machine.data(), &len, NULL, 0);
 	machine.resize(len);
-	QString sMachine= QString("%1").arg(machine.data()).trimmed();
+	QString sMachine = QString("%1").arg(machine.data()).trimmed();
 	if (!sMachine.isEmpty())
 		log(QString("Machine: %1").arg(sMachine));
 #endif
 
 #ifdef Q_OS_SOLARIS
+	std::string cpu_brand = "Unknown";
+	kstat_ctl_t* kc = kstat_open();
+	// Finding first CPU (instance 0) in module cpu_info
+	kstat_t* ksp = kstat_lookup(kc, const_cast<char*>("cpu_info"), 0, nullptr);
+	if (ksp && kstat_read(kc, ksp, nullptr) != -1)
+	{
+		kstat_named_t* knp = static_cast<kstat_named_t*>(ksp->ks_data);
+		for (size_t i = 0; i < ksp->ks_ndata; ++i)
+		{
+			if (std::string(knp[i].name) == "brand")
+			{
+				if (knp[i].data_type == KSTAT_DATA_STRING) {
+					cpu_brand = KSTAT_NAMED_STR_PTR(&knp[i]);
+				} else if (knp[i].data_type == KSTAT_DATA_CHAR) {
+					cpu_brand = knp[i].value.c;
+				}
+				break;
+			}
+		}
+	}
+	kstat_close(kc);
+	log(QString("CPU name: %1").arg(cpu_brand.data()));
+
 	processor_info_t pinfo;
 	processor_info(0, &pinfo);
-	//log(QString("CPU name: %1").arg(pinfo.pi_processor_type));
 	log(QString("CPU speed: %1 MHz").arg(pinfo.pi_clock));
 
 	int ncpu = sysconf( _SC_NPROCESSORS_ONLN );
@@ -478,6 +508,14 @@ void printSystemInfo()
 	// memory info
 	uint64_t totalRAM = (size_t)sysconf( _SC_PHYS_PAGES ) * (size_t)sysconf( _SC_PAGESIZE );
 	log(QString("Total physical memory: %1 MB").arg(totalRAM/(1024<<10)));
+	
+	// extra info
+	long len = 256;
+	std::string platform;
+	platform.resize(len);
+	sysinfo(SI_PLATFORM, const_cast<char *>(platform.data()), len);
+	platform.resize(len);
+	log(QString("Platform: %1").arg(platform.data()));
 #endif
 
 #ifdef Q_OS_HAIKU

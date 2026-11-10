@@ -496,16 +496,6 @@ StelLocationMgr::StelLocationMgr()
 	planetSurfaceMap=QImage(":/graphicGui/miscWorldMap.jpg");
 	connect(StelApp::getInstance().getCore(), &StelCore::locationChanged, this, &StelLocationMgr::changePlanetMapForLocation);
 
-	// configure the QGeoPositionInfoSource which can be queried from OS
-	qGeoPositionInfoSource = QGeoPositionInfoSource::createDefaultSource(this);
-	if (qGeoPositionInfoSource && (qGeoPositionInfoSource->supportedPositioningMethods() & QGeoPositionInfoSource::AllPositioningMethods))
-		connect(qGeoPositionInfoSource, &QGeoPositionInfoSource::positionUpdated, this, &StelLocationMgr::positionUpdatedFromOS);
-	else
-	{
-		qWarning() << "No valid QPositionInfoSource. Old IP queries should still work.";
-		delete qGeoPositionInfoSource;
-		qGeoPositionInfoSource=nullptr;
-	}
 }
 
 StelLocationMgr::~StelLocationMgr()
@@ -940,89 +930,145 @@ bool StelLocationMgr::deleteUserLocation(const QString& id)
 	return true;
 }
 
-// lookup location from OS location service or IP address.
-void StelLocationMgr::locationFromIP()
+void StelLocationMgr::locationFromIpOldMethod()
 {
-	// TODO: Find out how to properly setup geoclue2 on Linux, then reactivate.
-#ifdef Q_OS_WIN
-#if (QT_VERSION>=QT_VERSION_CHECK(6,6,0))
-	QLocationPermission locationPermission;
-	// Try to get high-precision location first
-	locationPermission.setAccuracy(QLocationPermission::Precise);
-	qApp->requestPermission(locationPermission, [&locationPermission](const QPermission &permission) {
-		if (permission.status() == Qt::PermissionStatus::Denied)
-		{
-			// Fall back to configure low-precision
-			locationPermission.setAccuracy(QLocationPermission::Approximate);
-		}
-	});
-	qApp->requestPermission(locationPermission, [this](const QPermission &permission) {
-		if ((permission.status() == Qt::PermissionStatus::Granted)
-				&& qGeoPositionInfoSource
-				&& (qGeoPositionInfoSource->supportedPositioningMethods() & QGeoPositionInfoSource::AllPositioningMethods))
-		{
-			qCDebug(LocIP) << "permission granted, doing OS service lookup for location...";
-			qCDebug(LocIP) << "Location provider:" << qGeoPositionInfoSource->sourceName();
-			qCDebug(LocIP) << "Location provider supported caps:" << qGeoPositionInfoSource->supportedPositioningMethods();
+	qCDebug(LocIP) << "permission not granted or no QGeoPositionInfoSource, doing freegeoIP service lookup for location";
 
-			// Trigger the actual Qt Location lookup from OS
-			qGeoPositionInfoSource->requestUpdate();
-			qCDebug(LocIP) << "permission granted, doing OS service lookup for location... postRequest ";
-		}
+	QSettings* conf = StelApp::getInstance().getSettings();
+	QNetworkRequest req( QUrl( conf->value("main/geoip_api_url", "https://freegeoip.stellarium.org/json/").toString() ) );
+	req.setAttribute(QNetworkRequest::CacheLoadControlAttribute, QNetworkRequest::PreferCache);
+	req.setRawHeader("User-Agent", StelUtils::getUserAgentString().toLatin1());
+	QNetworkReply* networkReply=StelApp::getInstance().getNetworkAccessManager()->get(req);
+	connect(networkReply, &QNetworkReply::finished, this, &StelLocationMgr::changeLocationFromNetworkLookup);
+}
+
+void StelLocationMgr::doGetLocationFromIP()
+{
+	if (!qGeoPositionInfoSource)
+	{
+		qGeoPositionInfoSource = QGeoPositionInfoSource::createDefaultSource(this);
+		connect(qGeoPositionInfoSource, &QGeoPositionInfoSource::positionUpdated, this, &StelLocationMgr::positionUpdatedFromOS);
+#if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
+		connect(qGeoPositionInfoSource, &QGeoPositionInfoSource::errorOccurred, this,
 #else
-	if (qGeoPositionInfoSource  && (qGeoPositionInfoSource->supportedPositioningMethods() & QGeoPositionInfoSource::AllPositioningMethods))
+		connect(qGeoPositionInfoSource, qOverload<QGeoPositionInfoSource::Error>(&QGeoPositionInfoSource::error), this,
+#endif
+			[this](QGeoPositionInfoSource::Error error)
+			{
+				qCWarning(LocIP) << "Failed to get location from the OS:" << error;
+				if (qGeoPositionInfoSource)
+				{
+					qGeoPositionInfoSource->deleteLater();
+					qGeoPositionInfoSource=nullptr;
+				}
+				locationFromIpOldMethod();
+			});
+
+#if QT_VERSION < QT_VERSION_CHECK(6,0,0)
+		// Qt5 also emits a separate timeout error (Qt6 uses QGeoPositionInfoSource::Error::UpdateTimeoutError)
+		connect(qGeoPositionInfoSource, &QGeoPositionInfoSource::updateTimeout, this,
+			[this]()
+			{
+				qCWarning(LocIP) << "Failed to get location from the OS: update timeout";
+				if (qGeoPositionInfoSource)
+				{
+					qGeoPositionInfoSource->deleteLater();
+					qGeoPositionInfoSource=nullptr;
+				}
+				locationFromIpOldMethod();
+			});
+#endif
+	}
+
+	if (qGeoPositionInfoSource)
 	{
 		qCDebug(LocIP) << "Doing OS service lookup for location...";
+		qCDebug(LocIP) << "Location provider:" << qGeoPositionInfoSource->sourceName();
+		qCDebug(LocIP) << "Location provider supported caps (may be none initially for geoclue):"
+		               << qGeoPositionInfoSource->supportedPositioningMethods();
 		// Trigger the actual Qt Location lookup from OS
 		qGeoPositionInfoSource->requestUpdate();
 		qCDebug(LocIP) << "Doing OS service lookup for location... postRequest ";
 	}
-#endif
 	else
 	{
-#endif
-		// OLD METHOD
-		qCDebug(LocIP) << "permission not granted or no QGeoPositionInfoSource, doing freegeoIP service lookup for location";
+		qWarning() << "No valid QPositionInfoSource. Old IP queries should still work.";
+		delete qGeoPositionInfoSource;
+		qGeoPositionInfoSource=nullptr;
 
-		QSettings* conf = StelApp::getInstance().getSettings();
-		QNetworkRequest req( QUrl( conf->value("main/geoip_api_url", "https://freegeoip.stellarium.org/json/").toString() ) );
-		req.setAttribute(QNetworkRequest::CacheLoadControlAttribute, QNetworkRequest::PreferCache);
-		req.setRawHeader("User-Agent", StelUtils::getUserAgentString().toLatin1());
-		QNetworkReply* networkReply=StelApp::getInstance().getNetworkAccessManager()->get(req);
-		connect(networkReply, &QNetworkReply::finished, this, &StelLocationMgr::changeLocationFromNetworkLookup);
-#ifdef Q_OS_WIN
+		locationFromIpOldMethod();
 	}
-#if (QT_VERSION>=QT_VERSION_CHECK(6,6,0))
-});
-#endif
-#endif
+
+}
+
+// lookup location from OS location service or IP address.
+void StelLocationMgr::locationFromIP()
+{
+# if QT_VERSION>=QT_VERSION_CHECK(6,6,0) // Qt<6.6 handles permissions by itself; since 6.6 user code is responsible for this
+	QLocationPermission locationPermission;
+	// Try to get high-precision location first
+	locationPermission.setAccuracy(QLocationPermission::Precise);
+	qCDebug(LocIP) << "Requesting permission to access precise location...";
+	qApp->requestPermission(locationPermission, [this](const QPermission &permission)
+	{
+		if (permission.status() == Qt::PermissionStatus::Granted)
+		{
+			qCDebug(LocIP) << "Precise location permission GRANTED";
+			doGetLocationFromIP();
+			return;
+		}
+
+		// Fall back to configure low-precision
+		qCDebug(LocIP) << "Precise location permission DENIED, trying coarse location...";
+		QLocationPermission locationPermission;
+		locationPermission.setAccuracy(QLocationPermission::Approximate);
+		qApp->requestPermission(locationPermission, [this](const QPermission &permission)
+		{
+			if (permission.status() == Qt::PermissionStatus::Granted)
+			{
+				qCDebug(LocIP) << "Coarse location permission GRANTED";
+				doGetLocationFromIP();
+			}
+			else
+			{
+				locationFromIpOldMethod();
+			}
+		});
+	});
+# else
+	doGetLocationFromIP();
+# endif
 }
 
 // Private slot that is called when position info arrives
 void StelLocationMgr::positionUpdatedFromOS(const QGeoPositionInfo &info)
 {
-        static StelCore *core=StelApp::getInstance().getCore();
-        qDebug() << "Position received from OS query:" << info;
-        QGeoCoordinate gCoord=info.coordinate();
-        if (!gCoord.isValid())
-                return;
+	static StelCore *core=StelApp::getInstance().getCore();
+	qDebug() << "Position received from OS query:" << info;
+	QGeoCoordinate gCoord=info.coordinate();
+	if (!gCoord.isValid())
+		return;
 
-        // Assuming we are moving only around a bit, we can take the current location (providing timezone, population, lightPollutionLuminance, ...)
-        // and only update available fields.
-        StelLocation loc=core->getCurrentLocation();
-        loc.setLatitude  (static_cast<float>(gCoord.latitude()));
-        loc.setLongitude (static_cast<float>(gCoord.longitude()));
-        loc.altitude = gCoord.type() == QGeoCoordinate::Coordinate3D ? int(gCoord.altitude()) : 0;
-        loc.name    = (QString("%1%2, %3%4").arg(gCoord.latitude() <0 ? "S" : "N", QString::number(gCoord.latitude(), 'g', 6),
-                                                 gCoord.longitude()<0 ? "W" : "E", QString::number(fabs(gCoord.longitude()), 'g', 6)));
-        loc.role    = 'X'; // User-defined
-        //loc.population = 0;
-        // TODO: Consider LP map lookup?
-        //loc.lightPollutionLuminance = StelLocation::DEFAULT_LIGHT_POLLUTION_LUMINANCE;
-        // TODO: Find IANA timezone name from OS!
-        //loc.ianaTimeZone = ...
-        loc.planetName = "Earth";
-        loc.landscapeKey = "";
+	// Assuming we are moving only around a bit, we can take the current location (providing timezone, population, lightPollutionLuminance, ...)
+	// and only update available fields.
+	StelLocation loc=core->getCurrentLocation();
+	loc.setLatitude  (static_cast<float>(gCoord.latitude()));
+	loc.setLongitude (static_cast<float>(gCoord.longitude()));
+	loc.altitude = gCoord.type() == QGeoCoordinate::Coordinate3D ? int(gCoord.altitude()) : 0;
+	loc.name = QString("%1%2, %3%4").arg(gCoord.latitude() <0 ? "S" : "N", QString::number(gCoord.latitude(), 'g', 6),
+	                                     gCoord.longitude()<0 ? "W" : "E", QString::number(fabs(gCoord.longitude()), 'g', 6));
+	loc.role = 'X'; // User-defined
+	//loc.population = 0;
+	// TODO: Consider LP map lookup?
+	//loc.lightPollutionLuminance = StelLocation::DEFAULT_LIGHT_POLLUTION_LUMINANCE;
+
+	// The location we got reflects the location of the machine to the best knowledge of the OS. So it makes sense to use the system TZ.
+	// We try to find the actual TZ name rather than "System default" just to make it explicit in the UI; otherwise simply "system_default" would work too.
+	const QString tz = QString::fromUtf8(QTimeZone::systemTimeZoneId());
+	loc.ianaTimeZone = !tz.isEmpty() && getAllTimezoneNames().contains(tz) ? tz : QStringLiteral("system_default");
+
+	loc.planetName = "Earth";
+	loc.landscapeKey = "";
 
 	LandscapeMgr *lMgr=GETSTELMODULE_SILENT(LandscapeMgr); // This may fail during StelApp:init() (GH:#3550)
 	QString landscapeAutoName;

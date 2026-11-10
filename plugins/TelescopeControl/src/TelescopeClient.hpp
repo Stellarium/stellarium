@@ -50,6 +50,8 @@ class TelescopeClient : public QObject, public StelObject
 	Q_OBJECT
 public:
 	static const QString TELESCOPECLIENT_TYPE;
+	//! Slot prefix for all diagnostics associated with this client.
+	TelescopeLogPrefix getLogPrefix() const { return logPrefix; }
 	//! example url: My_first_telescope:TCP:J2000:localhost:10000:500000
 	//! split to:
 	//! name    = My_first_telescope
@@ -58,7 +60,9 @@ public:
 	//! params  = localhost:10000:500000
 	//!
 	//! The params part is optional.  We use QRegularExpression to validate the url and extract the components.
-	static TelescopeClient *create(const QString &url);
+	//! @param url Telescope definition in the format shown above.
+	//! @param slot Telescope slot for diagnostics, or zero to omit the slot prefix.
+	static TelescopeClient *create(const QString &url, int slot = 0);
 	~TelescopeClient(void) override {}
 	
 	// Methods inherited from StelObject
@@ -123,7 +127,7 @@ public:
 	virtual QWidget* createControlWidget(QSharedPointer<TelescopeClient> telescope, QWidget* parent = nullptr) const { Q_UNUSED(telescope) Q_UNUSED(parent) return nullptr; }
 
 protected:
-	TelescopeClient(const QString &name);
+	TelescopeClient(const QString &name, int slot = 0);
 	QString nameI18n;
 	const QString name;
 
@@ -140,6 +144,7 @@ private:
 	virtual bool isInitialized(void) const {return true;}
 	float getSelectPriority(const StelCore* core) const override {Q_UNUSED(core) return -10.f;}
 private:
+	const TelescopeLogPrefix logPrefix;
 	QList<double> ocularFovs; // fov of the oculars
 };
 
@@ -152,7 +157,8 @@ private:
 class TelescopeClientDummy : public TelescopeClient
 {
 public:
-	TelescopeClientDummy(const QString &name, const QString &) : TelescopeClient(name)
+	TelescopeClientDummy(const QString &name, const QString &, int slot = 0)
+		: TelescopeClient(name, slot)
 	{
 		desired_pos[0] = XYZ[0] = 1.0;
 		desired_pos[1] = XYZ[1] = 0.0;
@@ -182,7 +188,7 @@ public:
 	void telescopeAbortSlew() override
 	{
 		desired_pos=XYZ;
-		qCInfo(Telescopes) << "Telescope" << getID() << "Slew aborted";
+		qCInfo(Telescopes) << getLogPrefix() << "Telescope" << getID() << "Slew aborted";
 	}
 	bool isAbortSlewSupported() const override {return true;}
 	bool hasKnownPosition(void) const override
@@ -208,7 +214,8 @@ class TelescopeTCP : public TelescopeClient
 {
 	Q_OBJECT
 public:
-	TelescopeTCP(const QString &name, const QString &params, TelescopeControl::Equinox eq = TelescopeControl::EquinoxJ2000);
+	TelescopeTCP(const QString &name, const QString &params,
+	             TelescopeControl::Equinox eq = TelescopeControl::EquinoxJ2000, int slot = 0);
 	~TelescopeTCP(void) override
 	{
 		hangup();
