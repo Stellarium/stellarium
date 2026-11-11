@@ -52,7 +52,15 @@ protected:
 
 private:
 	void updateRecentGrsMeasurementLink();
-	enum class UpdateError { None, Network, Timeout, Service, InvalidData };
+	enum class UpdateError
+	{
+		None,
+		UnsupportedDate,
+		Network,
+		Timeout,
+		Service,
+		InvalidData,
+	};
 	void setUpdateError(UpdateError error, const QString& details = QString());
 	QPointer<QNetworkReply> updateReply;
 	UpdateError updateError = UpdateError::None;

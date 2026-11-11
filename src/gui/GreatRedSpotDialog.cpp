@@ -116,6 +116,9 @@ void GreatRedSpotDialog::setUpdateError(UpdateError error, const QString& detail
 	{
 		case UpdateError::None:
 			break;
+		case UpdateError::UnsupportedDate:
+			text = q_("The simulation date is not supported by this dialog. No request was sent.");
+			break;
 		case UpdateError::Network:
 			text = q_("Could not contact the GRS service: %1").arg(details);
 			break;
@@ -146,7 +149,7 @@ void GreatRedSpotDialog::updateGrsParameters()
 	const double maximumJD = StelUtils::qDateTimeToJd(ui->jdDateTimeEdit->maximumDateTime());
 	if (!std::isfinite(jd) || jd < minimumJD || jd > maximumJD)
 	{
-		setUpdateError(UpdateError::InvalidData);
+		setUpdateError(UpdateError::UnsupportedDate);
 		return;
 	}
 	const QDateTime epoch = StelUtils::jdToQDateTime(jd, Qt::UTC);
