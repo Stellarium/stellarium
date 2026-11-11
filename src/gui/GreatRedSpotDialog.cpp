@@ -129,7 +129,8 @@ void GreatRedSpotDialog::setUpdateError(UpdateError error, const QString& detail
 			text = q_("The GRS service could not provide data for the requested date: %1").arg(details);
 			break;
 		case UpdateError::InvalidData:
-			text = q_("The GRS service returned invalid or incomplete parameters for the requested date.");
+			text = q_("The GRS service returned invalid or incomplete parameters: %1")
+				.arg(details);
 			break;
 	}
 	ui->updateErrorLabel->setText(text);
@@ -191,7 +192,8 @@ void GreatRedSpotDialog::updateGrsParameters()
 			return;
 		}
 
-		const QJsonDocument document = QJsonDocument::fromJson(reply->readAll());
+		QJsonParseError parseError;
+		const QJsonDocument document = QJsonDocument::fromJson(reply->readAll(), &parseError);
 		const QJsonObject response = document.object();
 		// IMCCE may return an error document together with an HTTP error status.
 		if ((response.contains("flag") && response.value("flag").toInt() != 1) ||
@@ -205,11 +207,29 @@ void GreatRedSpotDialog::updateGrsParameters()
 			setUpdateError(UpdateError::Network, reply->errorString());
 			return;
 		}
+		if (parseError.error != QJsonParseError::NoError)
+		{
+			setUpdateError(UpdateError::InvalidData,
+			               q_("Could not parse the response as JSON: %1").arg(parseError.errorString()));
+			return;
+		}
+		if (!document.isObject())
+		{
+			setUpdateError(UpdateError::InvalidData, q_("Expected a JSON object."));
+			return;
+		}
+		if (!response.value("data").isArray())
+		{
+			setUpdateError(UpdateError::InvalidData,
+			               q_("The response does not contain an ephemeris data array."));
+			return;
+		}
 
 		const QJsonArray data = response.value("data").toArray();
 		if (data.size() != 5)
 		{
-			setUpdateError(UpdateError::InvalidData);
+			setUpdateError(UpdateError::InvalidData,
+			               q_("Expected 5 ephemeris samples, received %1.").arg(data.size()));
 			return;
 		}
 		const QJsonObject first = data.at(0).toObject();
@@ -227,10 +247,31 @@ void GreatRedSpotDialog::updateGrsParameters()
 			const QJsonObject sample = data.at(i).toObject();
 			const double sampleJD = sample.value("Date").toDouble(invalid);
 			const double sampleLongitude = sample.value("GRS long").toDouble(invalid);
-			if (!std::isfinite(sampleJD) || std::abs(sampleJD - (jd - 365.25 + i * 91.3125)) > 1e-6 ||
-			    !std::isfinite(sampleLongitude) || sampleLongitude < 0.0 || sampleLongitude >= 360.0)
+			if (!std::isfinite(sampleJD))
 			{
-				setUpdateError(UpdateError::InvalidData);
+				setUpdateError(UpdateError::InvalidData,
+				               q_("Sample %1 has a missing or invalid date.").arg(i + 1));
+				return;
+			}
+			const double expectedJD = jd - 365.25 + i * 91.3125;
+			if (std::abs(sampleJD - expectedJD) > 1e-6)
+			{
+				setUpdateError(UpdateError::InvalidData,
+				               q_("Sample %1 has Julian date %2; expected %3.")
+				                   .arg(i + 1).arg(sampleJD, 0, 'f', 8).arg(expectedJD, 0, 'f', 8));
+				return;
+			}
+			if (!std::isfinite(sampleLongitude))
+			{
+				setUpdateError(UpdateError::InvalidData,
+				               q_("Sample %1 has a missing or invalid GRS longitude.").arg(i + 1));
+				return;
+			}
+			if (sampleLongitude < 0.0 || sampleLongitude >= 360.0)
+			{
+				setUpdateError(UpdateError::InvalidData,
+				               q_("Sample %1 has GRS longitude %2 degrees, outside [0, 360).")
+				                   .arg(i + 1).arg(sampleLongitude));
 				return;
 			}
 			drift += std::remainder(sampleLongitude - previousLongitude, 360.0);
@@ -239,7 +280,10 @@ void GreatRedSpotDialog::updateGrsParameters()
 		if (!std::isfinite(drift) || drift < ui->driftDoubleSpinBox->minimum() ||
 		    drift > ui->driftDoubleSpinBox->maximum())
 		{
-			setUpdateError(UpdateError::InvalidData);
+			setUpdateError(UpdateError::InvalidData,
+			               q_("Computed annual drift is %1 degrees/year; the supported range is %2 to %3.")
+			                   .arg(drift).arg(ui->driftDoubleSpinBox->minimum())
+			                   .arg(ui->driftDoubleSpinBox->maximum()));
 			return;
 		}
 
