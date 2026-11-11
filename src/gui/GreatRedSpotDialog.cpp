@@ -141,13 +141,15 @@ void GreatRedSpotDialog::updateGrsParameters()
 	setUpdateError(UpdateError::None);
 	// Capture UT once: the simulation may continue running while the request is in flight.
 	const double jd = StelApp::getInstance().getCore()->getJD();
-	const QDateTime epoch = StelUtils::jdToQDateTime(jd, Qt::UTC);
-	if (!epoch.isValid() || epoch < ui->jdDateTimeEdit->minimumDateTime() ||
-	    epoch > ui->jdDateTimeEdit->maximumDateTime())
+	// Check the range before converting: jdToQDateTime() asserts for dates such as year zero.
+	const double minimumJD = StelUtils::qDateTimeToJd(ui->jdDateTimeEdit->minimumDateTime());
+	const double maximumJD = StelUtils::qDateTimeToJd(ui->jdDateTimeEdit->maximumDateTime());
+	if (!std::isfinite(jd) || jd < minimumJD || jd > maximumJD)
 	{
 		setUpdateError(UpdateError::InvalidData);
 		return;
 	}
+	const QDateTime epoch = StelUtils::jdToQDateTime(jd, Qt::UTC);
 
 	QUrl url("https://ssp.imcce.fr/webservices/vo-tools/jgrs/");
 	QUrlQuery query;
