@@ -16,7 +16,6 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 */
 
-#include <QDesktopServices>
 #include <QUrl>
 #include <QSettings>
 #include <QJsonArray>
@@ -60,6 +59,7 @@ void GreatRedSpotDialog::retranslate()
 	if (dialog)
 	{
 		ui->retranslateUi(dialog);
+		updateRecentGrsMeasurementLink();
 		setUpdateError(updateError, updateErrorDetails);
 	}
 }
@@ -67,6 +67,12 @@ void GreatRedSpotDialog::retranslate()
 void GreatRedSpotDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
+
+	// Accept link-label presses so the graphics proxy delivers the release that activates the link.
+	const auto link = ui->recentGrsMeasurementLabel;
+	link->setTextInteractionFlags(link->textInteractionFlags() | Qt::TextSelectableByMouse);
+
+	updateRecentGrsMeasurementLink();
 	ui->updateErrorLabel->hide();
 	
 	//Signals and slots
@@ -85,7 +91,6 @@ void GreatRedSpotDialog::createDialogContent()
 	ui->jdDateTimeEdit->setDateTime(StelUtils::jdToQDateTime(ss->getGrsJD(), Qt::UTC));
 	connect(ui->jdDateTimeEdit, &QDateTimeEdit::dateTimeChanged, this, &GreatRedSpotDialog::setGrsJD);
 
-	connect(ui->recentGrsMeasurementPushButton, &QPushButton::clicked, this, &GreatRedSpotDialog::openRecentGrsMeasurement);
 	connect(ui->updateGrsPushButton, &QPushButton::clicked, this, &GreatRedSpotDialog::updateGrsParameters);
 }
 
@@ -94,10 +99,12 @@ void GreatRedSpotDialog::setGrsJD(QDateTime dt)
 	GETSTELMODULE(SolarSystem)->setGrsJD(StelUtils::qDateTimeToJd(dt));
 }
 
-void GreatRedSpotDialog::openRecentGrsMeasurement()
+void GreatRedSpotDialog::updateRecentGrsMeasurementLink()
 {
 	QSettings* conf = StelApp::getInstance().getSettings();
-	QDesktopServices::openUrl(QUrl(conf->value("astro/grs_measurements_url", "https://jupos.hier-im-netz.de/rGrs.htm").toString()));
+	const QString url = conf->value("astro/grs_measurements_url", "https://jupos.hier-im-netz.de/rGrs.htm").toString();
+	ui->recentGrsMeasurementLabel->setText(QString("<a href=\"%1\">%2</a>")
+		.arg(url.toHtmlEscaped(), q_("View recent GRS measurements").toHtmlEscaped()));
 }
 
 void GreatRedSpotDialog::setUpdateError(UpdateError error, const QString& details)

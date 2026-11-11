@@ -172,15 +172,30 @@
        </widget>
       </item>
       <item row="5" column="0" colspan="2">
-       <widget class="QPushButton" name="recentGrsMeasurementPushButton">
+       <widget class="QLabel" name="recentGrsMeasurementLabel">
+        <property name="focusPolicy">
+         <enum>Qt::StrongFocus</enum>
+        </property>
         <property name="toolTip">
          <string>Open JUPOS website</string>
         </property>
         <property name="text">
          <string>View recent GRS measurements</string>
         </property>
-        <property name="flat">
-         <bool>false</bool>
+        <property name="textFormat">
+         <enum>Qt::RichText</enum>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+        <property name="openExternalLinks">
+         <bool>true</bool>
+        </property>
+        <property name="textInteractionFlags">
+         <set>Qt::LinksAccessibleByMouse|Qt::LinksAccessibleByKeyboard</set>
         </property>
        </widget>
       </item>
@@ -207,7 +222,7 @@
   <tabstop>driftDoubleSpinBox</tabstop>
   <tabstop>jdDateTimeEdit</tabstop>
   <tabstop>updateGrsPushButton</tabstop>
-  <tabstop>recentGrsMeasurementPushButton</tabstop>
+  <tabstop>recentGrsMeasurementLabel</tabstop>
  </tabstops>
  <resources/>
  <connections/>
