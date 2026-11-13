@@ -238,8 +238,7 @@ private:
 	QString planetName;
 
 	GPSLookupHelper *nmeaHelper,*libGpsHelper;
-	QGeoPositionInfoSource *positionSource; // Used in the "Location from GPS or OS" query button action that may update.
-	// Used in the Location from Network query. Not sure if we really need two.
+	// Used in the Location from Network query
 	QGeoPositionInfoSource *qGeoPositionInfoSource;
 };
 
