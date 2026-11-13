@@ -229,7 +229,7 @@ SimbadLookupReply* SimbadSearcher::lookupCoords(const QString& serverUrl, const 
 
 	// Create the Simbad query
 	QString url(serverUrl);
-	// The query format could be enriched! http://simbad.u-strasbg.fr/simbad/sim-help?Page=sim-fscript#Formats
+	// The query format could be enriched! https://simbad.cds.unistra.fr/simbad/sim-help?Page=sim-fscript#Formats
 	// NOTE: Newlines and other specials must be coded with double-backslash!
 	QString query = "format object \""
 			"At coords (J2000.0) %-20COO(s:;A D):\\n"

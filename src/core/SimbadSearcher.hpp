@@ -31,7 +31,7 @@ class SimbadLookupReply;
 
 //! @class SimbadSearcher
 //! Provides lookup features into the online Simbad service from CDS.
-//! See http://simbad.u-strasbg.fr for more info.
+//! See https://simbad.cds.unistra.fr/ for more info.
 class SimbadSearcher : public QObject
 {
 	Q_OBJECT
