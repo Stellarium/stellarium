@@ -84,14 +84,30 @@ EllipticToRectangular(const double a,const double n,
         x_{j+1} = x_j - f(x_j)/f'(x_j)
     */
   double Le = L - elem[2]*sin(L) + elem[3]*cos(L);
+  /*
   for (;;) {
     const double cLe = cos(Le);
     const double sLe = sin(Le);
-      /* for eccentricity < 1 we have denominator > 0 */
+      // for eccentricity < 1 we have denominator > 0
     const double dLe = (L - Le + elem[2]*sLe - elem[3]*cLe)
                      / (1.0    - elem[2]*cLe - elem[3]*sLe);
     Le += dLe;
-    if (fabs(dLe) <= 1e-14) break; /* L1: <1e-12 */
+    if (fabs(dLe) <= 1e-14) break; // L1: <1e-12
+  }
+  */
+
+  /* (SS) 2026-09-17 Hard iteration cap: an unbounded loop here can hang forever given a
+   * pathological/corrupted elem[] (e.g. effective eccentricity >=1). 50 iterations is far
+   * more than the handful normally needed for any physically sane eccentricity - this only
+   * acts as a safety net, not a change in behavior for valid inputs. */
+  int iter;
+  for (iter = 0; iter < 50; iter++)
+  {
+	  const double cLe = cos(Le);
+	  const double sLe = sin(Le);
+	  const double dLe = (L - Le + elem[2] * sLe - elem[3] * cLe) / (1.0 - elem[2] * cLe - elem[3] * sLe);
+	  Le += dLe;
+	  if (fabs(dLe) <= 1e-14) break; /* L1: <1e-12 */
   }
 
   {

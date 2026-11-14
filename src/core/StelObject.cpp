@@ -42,19 +42,30 @@
 
 int StelObject::stelObjectPMetaTypeID = qRegisterMetaType<StelObjectP>();
 
+// (SS) 2026-10-09 With the JPL Horizons precession-nutation path, the offset in dPsi that matches JPL Horizons in zones 4 and 5 is not
+// the same for the Moon: a rotation of about 1 mas is applied to the position of the Moon (only when core->getHorizonsMoonCorrectionActive()).
 Vec3d StelObject::getEquinoxEquatorialPos(const StelCore* core) const
 {
-	return core->j2000ToEquinoxEqu(getJ2000EquatorialPos(core), StelCore::RefractionOff);
+	const Vec3d v = core->j2000ToEquinoxEqu(getJ2000EquatorialPos(core), StelCore::RefractionOff);
+	if (core->getHorizonsMoonCorrectionActive() && getEnglishName() == QLatin1String("Moon"))
+		return core->horizonsMoonCorrection(v);
+	return v;
 }
 
 Vec3d StelObject::getEquinoxEquatorialPosApparent(const StelCore* core) const
 {
-	return core->j2000ToEquinoxEqu(getJ2000EquatorialPos(core), StelCore::RefractionOn);
+	const Vec3d v = core->j2000ToEquinoxEqu(getJ2000EquatorialPos(core), StelCore::RefractionOn);
+	if (core->getHorizonsMoonCorrectionActive() && getEnglishName() == QLatin1String("Moon"))
+		return core->horizonsMoonCorrection(v);
+	return v;
 }
 
 Vec3d StelObject::getEquinoxEquatorialPosAuto(const StelCore* core) const
 {
-	return core->j2000ToEquinoxEqu(getJ2000EquatorialPos(core), StelCore::RefractionAuto);
+	const Vec3d v = core->j2000ToEquinoxEqu(getJ2000EquatorialPos(core), StelCore::RefractionAuto);
+	if (core->getHorizonsMoonCorrectionActive() && getEnglishName() == QLatin1String("Moon"))
+		return core->horizonsMoonCorrection(v);
+	return v;
 }
 
 
@@ -727,7 +738,8 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 
 	if (flags&EclipticCoordJ2000)
 	{
-		const double eclJ2000=GETSTELMODULE(SolarSystem)->getEarth()->getRotObliquity(2451545.0);
+		// (SS) 2026-10-09 The JPL Horizons path uses the obliquity of J2000 of Owen (1990) and IAU 1980: 84381.448"
+		const double eclJ2000 = core->getUseHorizonsPrecNut() ? HorizonsPrecNut::EPS0_RAD : GETSTELMODULE(SolarSystem)->getEarth()->getRotObliquity(2451545.0);
 		double ra_equ, dec_equ, lambda, beta;
 		StelUtils::rectToSphe(&ra_equ,&dec_equ,getJ2000EquatorialPos(core));
 		StelUtils::equToEcl(ra_equ, dec_equ, eclJ2000, &lambda, &beta);
@@ -754,6 +766,8 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 	{
 		const double jde=core->getJDE();
 		double eclJDE = GETSTELMODULE(SolarSystem)->getEarth()->getRotObliquity(jde);
+		if (core->getHorizonsPrecNutActive())	// (SS) 2026-10-09 true obliquity of the TIME ZONE for the apparent ecliptic of date
+			eclJDE = core->getHorizonsEpsTrue();
 		double ra_equ, dec_equ, lambdaJDE, betaJDE;
 
 		StelUtils::rectToSphe(&ra_equ,&dec_equ,eqNow);
@@ -1344,7 +1358,9 @@ QString StelObject::getCommonNarration(const StelCore *core, const InfoStringGro
 	// As quick test you can observe if in any "Ecliptic coordinate" as seen from e.g. Mars or Jupiter the Sun was ever close to beta=0 (except if crossing the node...).
 	if (flags&EclipticCoordJ2000)
 	{
-		static const double eclJ2000=GETSTELMODULE(SolarSystem)->getEarth()->getRotObliquity(2451545.0);
+		static const double eclJ2000Vondrak=GETSTELMODULE(SolarSystem)->getEarth()->getRotObliquity(2451545.0);
+		// (SS) 2026-10-09 The JPL Horizons path uses the obliquity of J2000 of Owen (1990) and IAU 1980: 84381.448"
+		const double eclJ2000 = core->getUseHorizonsPrecNut() ? HorizonsPrecNut::EPS0_RAD : eclJ2000Vondrak;
 		double ra_equ, dec_equ, lambda, beta;
 		StelUtils::rectToSphe(&ra_equ,&dec_equ,getJ2000EquatorialPos(core));
 		StelUtils::equToEcl(ra_equ, dec_equ, eclJ2000, &lambda, &beta);
@@ -1369,6 +1385,8 @@ QString StelObject::getCommonNarration(const StelCore *core, const InfoStringGro
 	{
 		const double jde=core->getJDE();
 		double eclJDE = GETSTELMODULE(SolarSystem)->getEarth()->getRotObliquity(jde);
+		if (core->getHorizonsPrecNutActive())	// (SS) 2026-10-09 true obliquity of the TIME ZONE for the apparent ecliptic of date
+			eclJDE = core->getHorizonsEpsTrue();
 		double ra_equ, dec_equ, lambdaJDE, betaJDE;
 
 		StelUtils::rectToSphe(&ra_equ,&dec_equ,eqNow);
@@ -1819,6 +1837,11 @@ QVariantMap StelObject::getInfoMap(const StelCore *core) const
 	// J2000
 	double eclJ2000 = ssmgr->getEarth()->getRotObliquity(2451545.0);
 	double ecl = ssmgr->getEarth()->getRotObliquity(core->getJDE());
+	// (SS) 2026-10-09 JPL Horizons path: obliquity of J2000 of Owen (1990), true obliquity of date of the TIME ZONE
+	if (core->getUseHorizonsPrecNut())
+		eclJ2000 = HorizonsPrecNut::EPS0_RAD;
+	if (core->getHorizonsPrecNutActive())
+		ecl = core->getHorizonsEpsTrue();
 	map.insert("ecliptic-obliquity", ecl*M_180_PI);
 
 	// ecliptic longitude/latitude (J2000 frame)
