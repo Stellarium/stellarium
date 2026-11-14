@@ -362,6 +362,13 @@ public slots:
 	//! return average luminance [cd/m^2] of atmosphere. Expect 10 at sunset, 6400 in daylight, >0 in dark night.
 	float getAtmosphereAverageLuminance() const;
 
+	//! Whether local atmosphere luminance is available (no GPU readback).
+	bool isAtmosphereLocalLuminanceAvailable() const;
+	//! Sample input Y before tone mapping, in cd/m², at physical screen pixels,
+	//! with bottom-left origin. See Atmosphere::getLocalLuminance() for semantics
+	//! and render-context requirements. Returns false if unavailable or outside the sky viewport.
+	bool getAtmosphereLocalLuminance(const Vec2f& screenPos, float& luminance) const;
+
 	//! Override autocomputed value and set average luminance [cd/m^2] of atmosphere.  This is around 10 at sunset, 6400 in daylight, >0 in dark night.
 	//! Usually there is no need to call this, the luminance is properly computed. This is a function which can be
 	//! useful in rare cases, e.g. in scripts when you want to create images of adjacent sky regions with the same brightness setting,
