@@ -1,0 +1,365 @@
+/* ========================================================================
+ * ARCHAEOLINES - Custom Lines Grid Layout
+ * ========================================================================
+ * 
+ * A responsive 5-column grid for each Custom Line row:
+ * 
+ *   ┌──────┬────────┬─────────┬───────────┬────────┐
+ *   │ Color│ Flag   │ Value   │ Label     │ Target │
+ *   │ 36px │ 1fr    │ 110px   │ 1fr       │ 40px   │
+ *   └──────┴────────┴─────────┴───────────┴────────┘
+ * 
+ * Responsive breakpoints:
+ *   > 768px  → single row, 5 columns
+ *   481-768  → two rows: color+flag+value+action / label spans
+ *   ≤ 480px  → stacked: each column becomes a full row
+ * ======================================================================== */
+
+.archaeo-custom-lines {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: 8px;
+}
+
+.archaeo-line-row {
+    display: grid;
+    grid-template-columns: 
+        36px                          /* color swatch */
+        minmax(120px, 1.2fr)          /* flag + label text */
+        110px                         /* value spinner */
+        minmax(100px, 1fr)            /* custom label input */
+        34px;                         /* target button */
+    gap: 6px 8px;
+    align-items: center;
+    padding: 6px 8px;
+    background: rgba(0, 0, 0, 0.08);
+    border-radius: 5px;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    transition: background 0.15s ease;
+    min-width: 0;
+}
+
+.archaeo-line-row:hover {
+    background: rgba(0, 0, 0, 0.12);
+}
+
+/* ---- Column 1: Color swatch ---- */
+.archaeo-col-color {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
+}
+
+.archaeo-col-color .color-picker-wrapper {
+    padding: 0 !important;
+    background: transparent !important;
+    border: none !important;
+    min-width: auto !important;
+    width: auto !important;
+    height: auto !important;
+    gap: 0 !important;
+}
+
+.archaeo-col-color .color-swatch {
+    width: 28px !important;
+    height: 28px !important;
+    border-radius: 4px;
+    border: 2px solid #2A2C2E;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    flex-shrink: 0;
+}
+
+.archaeo-col-color .color-swatch:hover {
+    transform: scale(1.08) !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* ---- Column 2: Enable checkbox ---- */
+.archaeo-col-flag {
+    display: flex;
+    align-items: center;
+    min-width: 0;
+}
+
+.archaeo-col-flag .btn-gen-preview-toggle {
+    display: flex !important;
+    align-items: center;
+    gap: 5px;
+    /*padding: 4px 10px !important;*/
+    margin: 0;
+    width: 100%;
+    min-width: 0;
+    /*font-size: 11px !important;*/
+    font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: pointer;
+    transition: background 0.15s ease;
+}
+
+.archaeo-col-flag .btn-gen-preview-toggle input[type="checkbox"] {
+    margin: 0;
+    flex-shrink: 0;
+    cursor: pointer;
+}
+
+.archaeo-col-flag .btn-gen-preview-toggle span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* ---- Column 3: Value spinner ---- */
+.archaeo-col-value {
+    display: flex;
+    align-items: center;
+    min-width: 0;
+}
+
+.archaeo-col-value .ui-spinner,
+.archaeo-col-value input.spinner {
+    width: 100%;
+    min-width: 80px;
+}
+
+.archaeo-col-value .ui-spinner-input {
+    width: 100%;
+    text-align: center;
+    font-family: 'DejaVuSansMono', monospace;
+    /*font-size: 11px;*/
+}
+
+/* ---- Column 4: Custom label input ---- */
+.archaeo-col-label {
+    display: flex;
+    align-items: center;
+    min-width: 0;
+}
+
+.archaeo-col-label .stelproperty-text {
+    width: 100%;
+    padding: 4px 8px;
+    background: #2A2C2E;
+    color: #DCDBDA;
+    border: 1px solid #5D5F62;
+    border-radius: 3px;
+    /*font-size: 11px;*/
+    min-width: 0;
+    box-sizing: border-box;
+}
+
+.archaeo-col-label .stelproperty-text:focus {
+    outline: none;
+    border-color: #FD971F;
+    box-shadow: 0 0 0 2px rgba(253, 151, 31, 0.15);
+}
+
+/* ---- Column 5: Target button ---- */
+.archaeo-col-action {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
+}
+
+.archaeo-target-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    min-width: 30px;
+    padding: 0;
+    margin: 0;
+    background: linear-gradient(#8C8C8C, #505050);
+    border: 1px solid #2A2C2E;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    user-select: none;
+    -webkit-user-select: none;
+    position: relative;
+}
+
+.archaeo-target-btn .ui-icon {
+    margin: 0;
+    /* Tint the icon for better visibility */
+    filter: brightness(1.15);
+}
+
+.archaeo-target-btn:hover {
+    background: linear-gradient(#C4C4C7, #6D6F72);
+    border-color: #FD971F;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.archaeo-target-btn:hover .ui-icon {
+    filter: brightness(1.3) drop-shadow(0 0 2px rgba(253, 151, 31, 0.6));
+}
+
+.archaeo-target-btn:active {
+    transform: translateY(1px);
+    box-shadow: none;
+    background: linear-gradient(#505050, #8C8C8C);
+}
+
+.archaeo-target-btn:disabled,
+.archaeo-target-btn.loading {
+    opacity: 0.65;
+    cursor: wait;
+    transform: none;
+}
+
+/* Loading state - spinning icon */
+.archaeo-target-btn.loading .ui-icon {
+    animation: archaeo-spin 0.9s linear infinite;
+}
+
+@keyframes archaeo-spin {
+    from { transform: rotate(0deg);   }
+    to   { transform: rotate(360deg); }
+}
+
+/* Success flash */
+.archaeo-target-btn.archaeo-target-success {
+    animation: archaeo-flash 0.7s ease;
+}
+
+@keyframes archaeo-flash {
+    0%   { background: #4CAF50;   border-color: #4CAF50; }
+    40%  { background: #66BB6A;   border-color: #66BB6A; transform: scale(1.12); }
+    100% { background: linear-gradient(#8C8C8C, #505050); border-color: #2A2C2E; transform: scale(1); }
+}
+
+/* ========================================================================
+ * RESPONSIVE - Tablet (769-1024px)
+ * ======================================================================== */
+@media (max-width: 1024px) {
+    .archaeo-line-row {
+        grid-template-columns:
+            34px
+            minmax(110px, 1.2fr)
+            100px
+            minmax(90px, 1fr)
+            32px;
+        gap: 5px 6px;
+        padding: 5px 6px;
+    }
+
+    .archaeo-col-color .color-swatch {
+        width: 26px !important;
+        height: 26px !important;
+    }
+
+    .archaeo-target-btn {
+        width: 28px;
+        height: 28px;
+        min-width: 28px;
+    }
+}
+
+/* ========================================================================
+ * RESPONSIVE - Small Tablet / Large Phone (481-768px)
+ * ========================================================================
+ * Two rows per line:
+ *   Row 1: [color] [flag]  [value]  [action]
+ *   Row 2: [label spans entire width]
+ * ======================================================================== */
+@media (max-width: 768px) {
+    .archaeo-line-row {
+        grid-template-columns:
+            32px
+            1fr
+            100px
+            32px;
+        grid-template-areas:
+            "color flag   value action"
+            "label label  label label";
+        gap: 5px;
+        padding: 6px 8px;
+    }
+
+    .archaeo-col-color  { grid-area: color;  }
+    .archaeo-col-flag   { grid-area: flag;   }
+    .archaeo-col-value  { grid-area: value;  }
+    .archaeo-col-label  { grid-area: label;  }
+    .archaeo-col-action { grid-area: action; }
+
+    .archaeo-col-label {
+        margin-top: 2px;
+    }
+
+    .archaeo-col-label .stelproperty-text {
+        font-size: 10px;
+        padding: 3px 6px;
+    }
+}
+
+/* ========================================================================
+ * RESPONSIVE - Phone (≤ 480px)
+ * ========================================================================
+ * Each column becomes its own row. The whole line stacks vertically.
+ * ======================================================================== */
+@media (max-width: 480px) {
+    .archaeo-line-row {
+        grid-template-columns: 1fr 32px;
+        grid-template-areas:
+            "color  action"
+            "flag   flag"
+            "value  value"
+            "label  label";
+        gap: 4px;
+        padding: 6px;
+    }
+
+    .archaeo-col-color {
+        justify-content: flex-start;
+    }
+
+    .archaeo-col-flag .btn-gen-preview-toggle {
+        padding: 5px 8px !important;
+        font-size: 10px !important;
+    }
+
+    .archaeo-col-value .ui-spinner-input {
+        font-size: 11px;
+        padding: 4px 6px;
+    }
+
+    .archaeo-col-label .stelproperty-text {
+        font-size: 10px;
+        padding: 4px 6px;
+    }
+
+    .archaeo-target-btn {
+        width: 30px;
+        height: 30px;
+        min-width: 30px;
+    }
+}
+
+/* ========================================================================
+ * Very narrow screens - tiny phones
+ * ======================================================================== */
+@media (max-width: 360px) {
+    .archaeo-line-row {
+        grid-template-columns: 1fr 28px;
+        padding: 4px;
+    }
+
+    .archaeo-target-btn {
+        width: 26px;
+        height: 26px;
+        min-width: 26px;
+    }
+
+    .archaeo-col-color .color-swatch {
+        width: 24px !important;
+        height: 24px !important;
+    }
+}

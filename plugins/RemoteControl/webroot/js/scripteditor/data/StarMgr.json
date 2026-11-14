@@ -1,0 +1,440 @@
+[
+    {
+        "name": "setFlagStars",
+        "category": "Stars Manager - Core",
+        "signature": "setFlagStars(bool visible)",
+        "description": "Shows or hides all stars in the sky.",
+        "parameters": [
+            {
+                "name": "visible",
+                "type": "bool",
+                "description": "true to show stars, false to hide them",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0"
+        },
+        "example": "StarMgr.setFlagStars(false);\nStarMgr.setFlagStars(true);"
+    },
+    {
+        "name": "getFlagStars",
+        "category": "Stars Manager - Core",
+        "signature": "bool getFlagStars()",
+        "description": "Returns whether stars are currently displayed. Use var show = StarMgr.getFlagStars(); directly .",
+        "parameters": [],
+        "returnType": "bool",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0"
+        },
+        "example": "var visible = StarMgr.getFlagStars();\ncore.debug(\"Stars visible: \" + visible);"
+    },
+    {
+        "name": "setFlagLabels",
+        "category": "Stars Manager - Core",
+        "signature": "setFlagLabels(bool visible)",
+        "description": "Shows or hides star labels (names).",
+        "parameters": [
+            {
+                "name": "visible",
+                "type": "bool",
+                "description": "true to show star labels, false to hide them",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0"
+        },
+        "example": "StarMgr.setFlagLabels(false);\nStarMgr.setFlagLabels(true);"
+    },
+    {
+        "name": "getFlagLabels",
+        "category": "Stars Manager - Core",
+        "signature": "bool getFlagLabels()",
+        "description": "Returns whether star labels are displayed.",
+        "parameters": [],
+        "returnType": "bool",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0"
+        },
+        "example": "var visible = StarMgr.getFlagLabels();"
+    },
+    {
+        "name": "setLabelsAmount",
+        "category": "Stars Manager - Core",
+        "signature": "setLabelsAmount(double amount)",
+        "description": "Sets the amount of star labels displayed. Higher values show labels for fainter stars.",
+        "parameters": [
+            {
+                "name": "amount",
+                "type": "double",
+                "description": "Labels amount between 0.0 (no labels) and 10.0 (maximum labels)",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0"
+        },
+        "example": "StarMgr.setLabelsAmount(2.0);\nStarMgr.setLabelsAmount(8.0);"
+    },
+    {
+        "name": "getLabelsAmount",
+        "category": "Stars Manager - Core",
+        "signature": "double getLabelsAmount()",
+        "description": "Returns the amount of star labels.",
+        "parameters": [],
+        "returnType": "double",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0"
+        },
+        "example": "var amount = StarMgr.labelsAmount();"
+    },
+    {
+        "name": "setDesignationUsage",
+        "category": "Stars Manager - Labels",
+        "signature": "setDesignationUsage(bool useDesignations)",
+        "description": "Sets whether scientific catalog designations (e.g., Bayer/Flamsteed letters) are preferred over common names for star labels.",
+        "parameters": [
+            {
+                "name": "useDesignations",
+                "type": "bool",
+                "description": "true to prefer catalog designations, false to prefer common names",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0"
+        },
+        "example": "StarMgr.setDesignationUsage(true);\nStarMgr.setDesignationUsage(false);"
+    },
+    {
+        "name": "getDesignationUsage",
+        "category": "Stars Manager - Labels",
+        "signature": "bool getDesignationUsage()",
+        "description": "Returns whether scientific catalog designations are preferred.",
+        "parameters": [],
+        "returnType": "bool",
+        "type": "static method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0"
+        },
+        "example": "var useDes = StarMgr.flagDesignationLabels();"
+    },
+    {
+        "name": "setFlagDblStarsDesignation",
+        "category": "Stars Manager - Labels",
+        "signature": "setFlagDblStarsDesignation(bool show)",
+        "description": "Shows or hides traditional designations (e.g., 'α1', 'α2') for double stars.",
+        "parameters": [
+            {
+                "name": "show",
+                "type": "bool",
+                "description": "true to show double star designations, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0"
+        },
+        "example": "StarMgr.setFlagDblStarsDesignation(true);"
+    },
+    {
+        "name": "getFlagDblStarsDesignation",
+        "category": "Stars Manager - Labels",
+        "signature": "bool getFlagDblStarsDesignation()",
+        "description": "Returns whether double star designations are shown.",
+        "parameters": [],
+        "returnType": "bool",
+        "type": "static method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0"
+        },
+        "example": "var show = StarMgr.flagDblStarsDesignation();"
+    },
+    {
+        "name": "setFlagVarStarsDesignation",
+        "category": "Stars Manager - Labels",
+        "signature": "setFlagVarStarsDesignation(bool show)",
+        "description": "Shows or hides variable star designations (e.g., 'R And', 'δ Cep') for star labels.",
+        "parameters": [
+            {
+                "name": "show",
+                "type": "bool",
+                "description": "true to show variable star designations, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0"
+        },
+        "example": "StarMgr.setFlagVarStarsDesignation(true);"
+    },
+    {
+        "name": "getFlagVarStarsDesignation",
+        "category": "Stars Manager - Labels",
+        "signature": "bool getFlagVarStarsDesignation()",
+        "description": "Returns whether variable star designations are shown.",
+        "parameters": [],
+        "returnType": "bool",
+        "type": "static method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0"
+        },
+        "example": "var show = StarMgr.getFlagVarStarsDesignation();"
+    },
+    {
+        "name": "setFlagHIPDesignation",
+        "category": "Stars Manager - Labels",
+        "signature": "setFlagHIPDesignation(bool show)",
+        "description": "Shows or hides Hipparcos catalog numbers (e.g., 'HIP 12345') as star labels.",
+        "parameters": [
+            {
+                "name": "show",
+                "type": "bool",
+                "description": "true to show HIP numbers, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0"
+        },
+        "example": "StarMgr.setFlagHIPDesignation(true);"
+    },
+    {
+        "name": "getFlagHIPDesignation",
+        "category": "Stars Manager - Labels",
+        "signature": "bool getFlagHIPDesignation()",
+        "description": "Returns whether Hipparcos numbers are shown. Use core.getStelProperty('StarMgr.flagHIPDesignation') for reliable access.",
+        "parameters": [],
+        "returnType": "bool",
+        "type": "static method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0"
+        },
+        "example": "var show = core.getStelProperty('StarMgr.flagHIPDesignation');"
+    },
+    {
+        "name": "setFlagAdditionalNames",
+        "category": "Stars Manager - Labels",
+        "signature": "setFlagAdditionalNames(bool show)",
+        "description": "Shows or hides additional star names (cultural/alternative names) when available.",
+        "parameters": [
+            {
+                "name": "show",
+                "type": "bool",
+                "description": "true to show additional names, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0"
+        },
+        "example": "StarMgr.setFlagAdditionalNames(true);\nStarMgr.setFlagAdditionalNames(false);"
+    },
+    {
+        "name": "getFlagAdditionalNames",
+        "category": "Stars Manager - Labels",
+        "signature": "bool getFlagAdditionalNames()",
+        "description": "Returns whether additional star names are shown.",
+        "parameters": [],
+        "returnType": "bool",
+        "type": "static method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0"
+        },
+        "example": "var show = var show2 = StarMgr.getFlagAdditionalNames();\ncore.debug('Flaged :' + show);\n"
+    },
+    {
+        "name": "flagStarsDisplayed",
+        "category": "Stars Manager - Properties",
+        "signature": "bool flagStarsDisplayed",
+        "description": "Property that controls whether stars are displayed. Read/write via core.getStelProperty() / core.setStelProperty().",
+        "parameters": [],
+        "returnType": "bool",
+        "type": "property",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0"
+        },
+        "example": "var visible = core.getStelProperty('StarMgr.flagStarsDisplayed');\ncore.setStelProperty('StarMgr.flagStarsDisplayed', true);"
+    },
+    {
+        "name": "flagLabelsDisplayed",
+        "category": "Stars Manager - Properties",
+        "signature": "bool flagLabelsDisplayed",
+        "description": "Property that controls whether star labels are displayed. Read/write via core.getStelProperty() / core.setStelProperty().",
+        "parameters": [],
+        "returnType": "bool",
+        "type": "property",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0"
+        },
+        "example": "var visible = core.getStelProperty('StarMgr.flagLabelsDisplayed');\ncore.setStelProperty('StarMgr.flagLabelsDisplayed', true);"
+    },
+    {
+        "name": "labelsAmount",
+        "category": "Stars Manager - Properties",
+        "signature": "double labelsAmount",
+        "description": "Property that controls the amount of star labels (0.0 to 10.0). Read/write via core.getStelProperty() / core.setStelProperty().",
+        "parameters": [],
+        "returnType": "double",
+        "type": "property",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0"
+        },
+        "example": "var amount = core.getStelProperty('StarMgr.labelsAmount');\ncore.setStelProperty('StarMgr.labelsAmount', 5.0);"
+    },
+    {
+        "name": "flagAdditionalNamesDisplayed",
+        "category": "Stars Manager - Properties",
+        "signature": "bool flagAdditionalNamesDisplayed",
+        "description": "Property that controls whether additional star names are shown. Read/write via core.getStelProperty() / core.setStelProperty().",
+        "parameters": [],
+        "returnType": "bool",
+        "type": "property",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0"
+        },
+        "example": "var show = core.getStelProperty('StarMgr.flagAdditionalNamesDisplayed');\ncore.setStelProperty('StarMgr.flagAdditionalNamesDisplayed', true);"
+    },
+    {
+        "name": "flagDesignationLabels",
+        "category": "Stars Manager - Properties",
+        "signature": "bool flagDesignationLabels",
+        "description": "Property that controls whether scientific designations are preferred. Read/write via core.getStelProperty() / core.setStelProperty().",
+        "parameters": [],
+        "returnType": "bool",
+        "type": "property",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0"
+        },
+        "example": "var use = core.getStelProperty('StarMgr.flagDesignationLabels');\ncore.setStelProperty('StarMgr.flagDesignationLabels', true);"
+    },
+    {
+        "name": "flagDblStarsDesignation",
+        "category": "Stars Manager - Properties",
+        "signature": "bool flagDblStarsDesignation",
+        "description": "Property that controls whether double star designations are shown. Read/write via core.getStelProperty() / core.setStelProperty().",
+        "parameters": [],
+        "returnType": "bool",
+        "type": "property",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0"
+        },
+        "example": "var show = core.getStelProperty('StarMgr.flagDblStarsDesignation');\ncore.setStelProperty('StarMgr.flagDblStarsDesignation', true);"
+    },
+    {
+        "name": "flagVarStarsDesignation",
+        "category": "Stars Manager - Properties",
+        "signature": "bool flagVarStarsDesignation",
+        "description": "Property that controls whether variable star designations are shown. Read/write via core.getStelProperty() / core.setStelProperty().",
+        "parameters": [],
+        "returnType": "bool",
+        "type": "property",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0"
+        },
+        "example": "var show = core.getStelProperty('StarMgr.flagVarStarsDesignation');\ncore.setStelProperty('StarMgr.flagVarStarsDesignation', true);"
+    },
+    {
+        "name": "flagHIPDesignation",
+        "category": "Stars Manager - Properties",
+        "signature": "bool flagHIPDesignation",
+        "description": "Property that controls whether Hipparcos numbers are shown. Read/write via core.getStelProperty() / core.setStelProperty().",
+        "parameters": [],
+        "returnType": "bool",
+        "type": "property",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0"
+        },
+        "example": "var show = core.getStelProperty('StarMgr.flagHIPDesignation');\ncore.setStelProperty('StarMgr.flagHIPDesignation', true);"
+    },
+    {
+        "name": "setFontSize",
+        "category": "Stars Manager - Appearance",
+        "signature": "setFontSize(int newFontSize)",
+        "description": "Sets the font size for star labels in pixels.",
+        "parameters": [
+            {
+                "name": "newFontSize",
+                "type": "int",
+                "description": "Font size in pixels",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0"
+        },
+        "example": "StarMgr.setFontSize(16);"
+    }
+]

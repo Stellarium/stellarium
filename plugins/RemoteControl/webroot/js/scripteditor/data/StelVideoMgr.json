@@ -1,0 +1,636 @@
+[
+    {
+        "name": "loadVideo",
+        "category": "Video Manager - Loading",
+        "signature": "loadVideo(QString filename, QString id, float x, float y, bool show, float alpha)",
+        "description": "Loads a video file from disk and associates it with a unique identifier. Supported formats depend on the system's multimedia backend and installed codecs (MP4, WMV, MOV, AVI, etc.).",
+        "parameters": [
+            {
+                "name": "filename",
+                "type": "QString",
+                "description": "Path to the video file. An absolute path is recommended.",
+                "required": true
+            },
+            {
+                "name": "id",
+                "type": "QString",
+                "description": "Unique identifier for the video (e.g., 'intro', 'presentation').",
+                "required": true
+            },
+            {
+                "name": "x",
+                "type": "float",
+                "description": "X-coordinate from the left edge of the screen. If >1, it's absolute pixels; if between 0 and 1, it's relative to screen width.",
+                "required": true
+            },
+            {
+                "name": "y",
+                "type": "float",
+                "description": "Y-coordinate from the top edge of the screen. If >1, it's absolute pixels; if between 0 and 1, it's relative to screen height.",
+                "required": true
+            },
+            {
+                "name": "show",
+                "type": "bool",
+                "description": "If `true`, the video starts playing immediately. If `false`, it loads but does not play.",
+                "required": true
+            },
+            {
+                "name": "alpha",
+                "type": "float",
+                "description": "Opacity of the video (0.0 = fully transparent, 1.0 = fully opaque).",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "⚠️ Requires Qt Multimedia module (`ENABLE_MEDIA`). If Stellarium was built without media support, these functions will have no effect. Video format support varies by platform."
+        },
+        "example": "// Load a video at the top-left corner, start playing immediately\nStelVideoMgr.loadVideo(\"/path/to/video.mp4\", \"intro\", 0, 0, true, 1.0);\n\n// Load a video centered on screen (relative positioning), but don't play yet\nStelVideoMgr.loadVideo(\"/path/to/video.mp4\", \"centered\", 0.5, 0.5, false, 1.0);\n\n// Load a video at absolute pixel coordinates\nStelVideoMgr.loadVideo(\"/path/to/video.mp4\", \"topRight\", 1280, 0, false, 0.8);"
+    },
+    {
+        "name": "playVideo",
+        "category": "Video Manager - Playback",
+        "signature": "playVideo(QString id, bool keepVisibleAtEnd)",
+        "description": "Plays a previously loaded video. Can optionally keep the last frame visible after playback ends.",
+        "parameters": [
+            {
+                "name": "id",
+                "type": "QString",
+                "description": "Unique identifier of the video.",
+                "required": true
+            },
+            {
+                "name": "keepVisibleAtEnd",
+                "type": "bool",
+                "description": "If `true`, the video pauses at the last frame instead of hiding the video window.",
+                "required": false,
+                "default": "false"
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "⚠️ Requires Qt Multimedia module (`ENABLE_MEDIA`)."
+        },
+        "example": "// Play a video normally\nStelVideoMgr.playVideo(\"intro\");\n\n// Play a video and keep the last frame visible on screen\nStelVideoMgr.playVideo(\"intro\", true);\n\n// Resume a paused video\nStelVideoMgr.playVideo(\"intro\");"
+    },
+    {
+        "name": "playVideoPopout",
+        "category": "Video Manager - Special Effects",
+        "signature": "playVideoPopout(QString id, float fromX, float fromY, float atCenterX, float atCenterY, float finalSizeX, float finalSizeY, float popupDuration, bool frozenInTransition)",
+        "description": "Plays a video with a 'popout' effect: it appears to grow from a starting point (`fromX`, `fromY`), expands to a target center and size, and then shrinks back. Useful for interactive presentations and guided tours.",
+        "parameters": [
+            {
+                "name": "id",
+                "type": "QString",
+                "description": "Unique identifier of the video.",
+                "required": true
+            },
+            {
+                "name": "fromX",
+                "type": "float",
+                "description": "Start X position. If >1, absolute pixels; if between 0 and 1, relative to screen width.",
+                "required": true
+            },
+            {
+                "name": "fromY",
+                "type": "float",
+                "description": "Start Y position. If >1, absolute pixels; if between 0 and 1, relative to screen height.",
+                "required": true
+            },
+            {
+                "name": "atCenterX",
+                "type": "float",
+                "description": "Target center X position. If >1, absolute pixels; if between 0 and 1, relative to screen width.",
+                "required": true
+            },
+            {
+                "name": "atCenterY",
+                "type": "float",
+                "description": "Target center Y position. If >1, absolute pixels; if between 0 and 1, relative to screen height.",
+                "required": true
+            },
+            {
+                "name": "finalSizeX",
+                "type": "float",
+                "description": "Final width. `-1` = auto from aspect ratio, `>1` = absolute pixels, `0-1` = relative to screen width.",
+                "required": true
+            },
+            {
+                "name": "finalSizeY",
+                "type": "float",
+                "description": "Final height. `-1` = auto from aspect ratio, `>1` = absolute pixels, `0-1` = relative to screen height.",
+                "required": true
+            },
+            {
+                "name": "popupDuration",
+                "type": "float",
+                "description": "Duration of the grow (start) and shrink (end) transitions in seconds.",
+                "required": true
+            },
+            {
+                "name": "frozenInTransition",
+                "type": "bool",
+                "description": "If `true`, the video pauses during the growing/shrinking transitions; if `false`, it plays while animating.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "⚠️ Requires Qt Multimedia module (`ENABLE_MEDIA`). This is an advanced feature."
+        },
+        "example": "// Popout from the center of the screen to full size\nvar screenW = core.getScreenWidth();\nvar screenH = core.getScreenHeight();\nStelVideoMgr.playVideoPopout(\"intro\", screenW/2, screenH/2, screenW/2, screenH/2, screenW, screenH, 1.5, false);\n\n// Popout from a corner, grow to a specific size, and freeze during transition\nStelVideoMgr.playVideoPopout(\"intro\", 0, 0, 0.5, 0.5, 800, 600, 2.0, true);\n\n// Popout with relative positioning and auto-scaling\nStelVideoMgr.playVideoPopout(\"intro\", 0.1, 0.1, 0.5, 0.5, -1, 0.6, 1.5, false);"
+    },
+    {
+        "name": "pauseVideo",
+        "category": "Video Manager - Playback",
+        "signature": "pauseVideo(QString id)",
+        "description": "Pauses video playback. The video remains visible on screen and can be resumed with `playVideo()`.",
+        "parameters": [
+            {
+                "name": "id",
+                "type": "QString",
+                "description": "Unique identifier of the video.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "⚠️ Requires Qt Multimedia module (`ENABLE_MEDIA`)."
+        },
+        "example": "// Pause the video\nStelVideoMgr.pauseVideo(\"intro\");\n\n// Resume playback later\nStelVideoMgr.playVideo(\"intro\");"
+    },
+    {
+        "name": "stopVideo",
+        "category": "Video Manager - Playback",
+        "signature": "stopVideo(QString id)",
+        "description": "Stops video playback completely and hides the video window. The video will restart from the beginning when `playVideo()` is called.",
+        "parameters": [
+            {
+                "name": "id",
+                "type": "QString",
+                "description": "Unique identifier of the video.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "⚠️ Requires Qt Multimedia module (`ENABLE_MEDIA`)."
+        },
+        "example": "// Stop the video (window closes)\nStelVideoMgr.stopVideo(\"intro\");\n\n// Play from the beginning\nStelVideoMgr.playVideo(\"intro\");"
+    },
+    {
+        "name": "dropVideo",
+        "category": "Video Manager - Memory Management",
+        "signature": "dropVideo(QString id)",
+        "description": "Unloads a video from memory and releases all associated resources. The video can no longer be played unless loaded again with `loadVideo()`.",
+        "parameters": [
+            {
+                "name": "id",
+                "type": "QString",
+                "description": "Unique identifier of the video.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "⚠️ Requires Qt Multimedia module (`ENABLE_MEDIA`)."
+        },
+        "example": "// Unload the video to free memory\nStelVideoMgr.dropVideo(\"intro\");"
+    },
+    {
+        "name": "seekVideo",
+        "category": "Video Manager - Navigation",
+        "signature": "seekVideo(QString id, qint64 milliseconds, bool pause)",
+        "description": "Jumps to a specific position in the video. Can optionally pause after seeking. Useful for skipping to key scenes.",
+        "parameters": [
+            {
+                "name": "id",
+                "type": "QString",
+                "description": "Unique identifier of the video.",
+                "required": true
+            },
+            {
+                "name": "milliseconds",
+                "type": "qint64",
+                "description": "Position in milliseconds from the start of the video.",
+                "required": true
+            },
+            {
+                "name": "pause",
+                "type": "bool",
+                "description": "If `true`, pauses the video after seeking. If `false`, it continues playing.",
+                "required": false,
+                "default": "false"
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "⚠️ Requires Qt Multimedia module (`ENABLE_MEDIA`). May not work with all codecs or platforms (e.g., WMV on Windows)."
+        },
+        "example": "// Jump to 30 seconds and pause\nStelVideoMgr.seekVideo(\"intro\", 30000, true);\n\n// Jump to 1 minute and continue playing\nStelVideoMgr.seekVideo(\"intro\", 60000, false);"
+    },
+    {
+        "name": "setVideoXY",
+        "category": "Video Manager - Positioning",
+        "signature": "setVideoXY(QString id, float x, float y, bool relative)",
+        "description": "Moves the video to a new position on the screen. Can use absolute pixel coordinates or relative offsets.",
+        "parameters": [
+            {
+                "name": "id",
+                "type": "QString",
+                "description": "Unique identifier of the video.",
+                "required": true
+            },
+            {
+                "name": "x",
+                "type": "float",
+                "description": "X position or offset. If `relative` is false, behaves like `loadVideo()`; if true, it adds to the current X position.",
+                "required": true
+            },
+            {
+                "name": "y",
+                "type": "float",
+                "description": "Y position or offset. If `relative` is false, behaves like `loadVideo()`; if true, it adds to the current Y position.",
+                "required": true
+            },
+            {
+                "name": "relative",
+                "type": "bool",
+                "description": "If `true`, the `x` and `y` values are added to the current position. If `false`, they are set as absolute positions.",
+                "required": false,
+                "default": "false"
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "⚠️ Requires Qt Multimedia module (`ENABLE_MEDIA`)."
+        },
+        "example": "// Move to absolute pixel coordinates\nStelVideoMgr.setVideoXY(\"intro\", 100, 100, false);\n\n// Move 50 pixels right and 20 pixels up from the current position\nStelVideoMgr.setVideoXY(\"intro\", 50, -20, true);\n\n// Center the video on the screen\nvar screenW = core.getScreenWidth();\nvar videoW = StelVideoMgr.getVideoWidth(\"intro\");\nStelVideoMgr.setVideoXY(\"intro\", (screenW - videoW) / 2, 0, false);"
+    },
+    {
+        "name": "setVideoAlpha",
+        "category": "Video Manager - Appearance",
+        "signature": "setVideoAlpha(QString id, float alpha)",
+        "description": "Sets the opacity (transparency) of the video. `0` = fully transparent, `1` = fully opaque.",
+        "parameters": [
+            {
+                "name": "id",
+                "type": "QString",
+                "description": "Unique identifier of the video.",
+                "required": true
+            },
+            {
+                "name": "alpha",
+                "type": "float",
+                "description": "Opacity value (0.0 to 1.0).",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "⚠️ Requires Qt Multimedia module (`ENABLE_MEDIA`). **Note:** On Qt5, only `0` (transparent) and `1` (opaque) may work. Qt6 supports semi-transparency well."
+        },
+        "example": "// Make the video semi-transparent (Qt6 only)\nStelVideoMgr.setVideoAlpha(\"intro\", 0.5);\n\n// Fully opaque\nStelVideoMgr.setVideoAlpha(\"intro\", 1.0);\n\n// Fully transparent (invisible)\nStelVideoMgr.setVideoAlpha(\"intro\", 0.0);"
+    },
+    {
+        "name": "resizeVideo",
+        "category": "Video Manager - Sizing",
+        "signature": "resizeVideo(QString id, float width, float height)",
+        "description": "Changes the size of the video frame. Supports absolute pixels, relative to screen, or auto-scaling based on aspect ratio.",
+        "parameters": [
+            {
+                "name": "id",
+                "type": "QString",
+                "description": "Unique identifier of the video.",
+                "required": true
+            },
+            {
+                "name": "width",
+                "type": "float",
+                "description": "New width. `-1` = auto from aspect ratio, `>1` = absolute pixels, `0-1` = relative to screen width.",
+                "required": true
+            },
+            {
+                "name": "height",
+                "type": "float",
+                "description": "New height. `-1` = auto from aspect ratio, `>1` = absolute pixels, `0-1` = relative to screen height.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "⚠️ Requires Qt Multimedia module (`ENABLE_MEDIA`). Auto-scaling preserves the video's aspect ratio."
+        },
+        "example": "// Resize to full screen (relative)\nStelVideoMgr.resizeVideo(\"intro\", 1.0, 1.0);\n\n// Resize to half the screen size\nStelVideoMgr.resizeVideo(\"intro\", 0.5, 0.5);\n\n// Resize to specific pixel dimensions (may distort)\nStelVideoMgr.resizeVideo(\"intro\", 640, 480);\n\n// Auto-scale to a width of 800 pixels, maintaining aspect ratio\nStelVideoMgr.resizeVideo(\"intro\", 800, -1);\n\n// Auto-scale to a height of 600 pixels, maintaining aspect ratio\nStelVideoMgr.resizeVideo(\"intro\", -1, 600);"
+    },
+    {
+        "name": "showVideo",
+        "category": "Video Manager - Visibility",
+        "signature": "showVideo(QString id, bool visible)",
+        "description": "Shows or hides the video window without unloading it. Hidden videos are still loaded and can be shown again instantly.",
+        "parameters": [
+            {
+                "name": "id",
+                "type": "QString",
+                "description": "Unique identifier of the video.",
+                "required": true
+            },
+            {
+                "name": "visible",
+                "type": "bool",
+                "description": "`true` to show the video window, `false` to hide it.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "⚠️ Requires Qt Multimedia module (`ENABLE_MEDIA`)."
+        },
+        "example": "// Hide the video window\nStelVideoMgr.showVideo(\"intro\", false);\n\n// Show it again\nStelVideoMgr.showVideo(\"intro\", true);"
+    },
+    {
+        "name": "getVideoDuration",
+        "category": "Video Manager - Information",
+        "signature": "qint64 getVideoDuration(QString id)",
+        "description": "Returns the total duration of the video in milliseconds. May return `-1` if the video has not been fully loaded or analyzed yet.",
+        "parameters": [
+            {
+                "name": "id",
+                "type": "QString",
+                "description": "Unique identifier of the video.",
+                "required": true
+            }
+        ],
+        "returnType": "qint64",
+        "returnDescription": "Duration in milliseconds, or `-1` if the duration is not yet known or an error occurred.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "⚠️ Requires Qt Multimedia module (`ENABLE_MEDIA`). Duration may only be available after playback has started (`playVideo()` or `pauseVideo()`)."
+        },
+        "example": "// Play the video first, then get its duration\nStelVideoMgr.playVideo(\"intro\");\nvar duration = StelVideoMgr.getVideoDuration(\"intro\");\nif (duration > 0) {\n    core.debug(\"Video duration: \" + (duration / 1000).toFixed(1) + \" seconds\");\n} else {\n    core.debug(\"Duration not yet available.\");\n}"
+    },
+    {
+        "name": "getVideoPosition",
+        "category": "Video Manager - Information",
+        "signature": "qint64 getVideoPosition(QString id)",
+        "description": "Returns the current playback position of the video in milliseconds.",
+        "parameters": [
+            {
+                "name": "id",
+                "type": "QString",
+                "description": "Unique identifier of the video.",
+                "required": true
+            }
+        ],
+        "returnType": "qint64",
+        "returnDescription": "Current position in milliseconds, or `-1` if an error occurred.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "⚠️ Requires Qt Multimedia module (`ENABLE_MEDIA`)."
+        },
+        "example": "var pos = StelVideoMgr.getVideoPosition(\"intro\");\nif (pos >= 0) {\n    core.debug(\"Current position: \" + (pos / 1000).toFixed(1) + \" seconds\");\n}"
+    },
+    {
+        "name": "getVideoResolution",
+        "category": "Video Manager - Information",
+        "signature": "QSize getVideoResolution(QString id)",
+        "description": "Returns the native resolution of the video in pixels. May return an invalid `QSize` (`.isValid() == false`) if the video has not been fully loaded.",
+        "parameters": [
+            {
+                "name": "id",
+                "type": "QString",
+                "description": "Unique identifier of the video.",
+                "required": true
+            }
+        ],
+        "returnType": "QSize",
+        "returnDescription": "Video resolution as `QSize(width, height)`, or an invalid size if not yet known.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "⚠️ Requires Qt Multimedia module (`ENABLE_MEDIA`). Resolution may only be available after playback has started."
+        },
+        "example": "StelVideoMgr.playVideo(\"intro\");\nvar resolution = StelVideoMgr.getVideoResolution(\"intro\");\nif (resolution.isValid()) {\n    core.debug(\"Native resolution: \" + resolution.width() + \"x\" + resolution.height());\n}"
+    },
+    {
+        "name": "getVideoWidth",
+        "category": "Video Manager - Information",
+        "signature": "int getVideoWidth(QString id)",
+        "description": "Returns the native width of the video in pixels. Returns `-1` if the video has not been fully loaded.",
+        "parameters": [
+            {
+                "name": "id",
+                "type": "QString",
+                "description": "Unique identifier of the video.",
+                "required": true
+            }
+        ],
+        "returnType": "int",
+        "returnDescription": "Video width in pixels, or `-1` on error.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "⚠️ Requires Qt Multimedia module (`ENABLE_MEDIA`)."
+        },
+        "example": "var width = StelVideoMgr.getVideoWidth(\"intro\");\nif (width > 0) {\n    core.debug(\"Video width: \" + width);\n}"
+    },
+    {
+        "name": "getVideoHeight",
+        "category": "Video Manager - Information",
+        "signature": "int getVideoHeight(QString id)",
+        "description": "Returns the native height of the video in pixels. Returns `-1` if the video has not been fully loaded.",
+        "parameters": [
+            {
+                "name": "id",
+                "type": "QString",
+                "description": "Unique identifier of the video.",
+                "required": true
+            }
+        ],
+        "returnType": "int",
+        "returnDescription": "Video height in pixels, or `-1` on error.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "⚠️ Requires Qt Multimedia module (`ENABLE_MEDIA`)."
+        },
+        "example": "var height = StelVideoMgr.getVideoHeight(\"intro\");\ncore.debug(\"Video height: \" + height);"
+    },
+    {
+        "name": "muteVideo",
+        "category": "Video Manager - Audio Control",
+        "signature": "muteVideo(QString id, bool mute)",
+        "description": "Mutes or unmutes the audio track of the video.",
+        "parameters": [
+            {
+                "name": "id",
+                "type": "QString",
+                "description": "Unique identifier of the video.",
+                "required": true
+            },
+            {
+                "name": "mute",
+                "type": "bool",
+                "description": "`true` to mute, `false` to unmute.",
+                "required": false,
+                "default": "true"
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "⚠️ Requires Qt Multimedia module (`ENABLE_MEDIA`). Only effective if audio is enabled and the video has an audio track."
+        },
+        "example": "// Mute the video's sound\nStelVideoMgr.muteVideo(\"intro\", true);\n\n// Unmute\nStelVideoMgr.muteVideo(\"intro\", false);"
+    },
+    {
+        "name": "setVideoVolume",
+        "category": "Video Manager - Audio Control",
+        "signature": "setVideoVolume(QString id, int volume)",
+        "description": "Sets the audio volume level of the video. Values outside the 0-100 range are clamped.",
+        "parameters": [
+            {
+                "name": "id",
+                "type": "QString",
+                "description": "Unique identifier of the video.",
+                "required": true
+            },
+            {
+                "name": "volume",
+                "type": "int",
+                "description": "Volume level (0 = mute, 100 = maximum).",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "⚠️ Requires Qt Multimedia module (`ENABLE_MEDIA`). Only effective if audio is enabled."
+        },
+        "example": "// Set volume to 75%\nStelVideoMgr.setVideoVolume(\"intro\", 75);\n\n// Mute the audio\nStelVideoMgr.setVideoVolume(\"intro\", 0);\n\n// Maximum volume\nStelVideoMgr.setVideoVolume(\"intro\", 100);"
+    },
+    {
+        "name": "getVideoVolume",
+        "category": "Video Manager - Audio Control",
+        "signature": "int getVideoVolume(QString id)",
+        "description": "Returns the current audio volume level of the video (0-100). Returns `-1` if the video is not found or audio is disabled.",
+        "parameters": [
+            {
+                "name": "id",
+                "type": "QString",
+                "description": "Unique identifier of the video.",
+                "required": true
+            }
+        ],
+        "returnType": "int",
+        "returnDescription": "Volume level (0-100), or `-1` on error.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "⚠️ Requires Qt Multimedia module (`ENABLE_MEDIA`)."
+        },
+        "example": "var volume = StelVideoMgr.getVideoVolume(\"intro\");\nif (volume >= 0) {\n    core.debug(\"Current volume: \" + volume + \"%\");\n}"
+    },
+    {
+        "name": "isVideoPlaying",
+        "category": "Video Manager - Information",
+        "signature": "bool isVideoPlaying(QString id)",
+        "description": "Returns whether a video is currently playing.",
+        "parameters": [
+            {
+                "name": "id",
+                "type": "QString",
+                "description": "Unique identifier of the video.",
+                "required": true
+            }
+        ],
+        "returnType": "bool",
+        "returnDescription": "`true` if the video is playing, `false` if it is paused, stopped, or not loaded.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "⚠️ Requires Qt Multimedia module (`ENABLE_MEDIA`)."
+        },
+        "example": "if (StelVideoMgr.isVideoPlaying(\"intro\")) {\n    core.debug(\"The video is currently playing.\");\n} else {\n    core.debug(\"The video is not playing (paused, stopped, or not loaded).\");\n}"
+    }
+]

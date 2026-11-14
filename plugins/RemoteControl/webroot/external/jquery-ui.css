@@ -1,4 +1,4 @@
-/*! jQuery UI - v1.14.0 - 2024-08-05
+/*! jQuery UI - v1.14.2 - 2026-01-29
 * https://jqueryui.com
 * Includes: core.css, accordion.css, autocomplete.css, menu.css, button.css, controlgroup.css, checkboxradio.css, datepicker.css, dialog.css, draggable.css, resizable.css, progressbar.css, selectable.css, selectmenu.css, slider.css, sortable.css, spinner.css, tabs.css, tooltip.css, theme.css
 * To view and modify this theme, visit https://jqueryui.com/themeroller/?bgColorDefault=%23f6f6f6&borderColorDefault=%23c5c5c5&fcDefault=%23454545&bgColorHover=%23ededed&borderColorHover=%23cccccc&fcHover=%232b2b2b&bgColorActive=%23007fff&borderColorActive=%23003eff&fcActive=%23ffffff&bgColorHeader=%23e9e9e9&borderColorHeader=%23dddddd&fcHeader=%23333333&bgColorContent=%23ffffff&borderColorContent=%23dddddd&fcContent=%23333333&bgColorHighlight=%23fffa90&borderColorHighlight=%23dad55e&fcHighlight=%23777620&bgColorError=%23fddfdf&borderColorError=%23f1a899&fcError=%235f3f3f&bgColorOverlay=%23aaaaaa&opacityOverlay=.3&bgColorShadow=%23666666&opacityShadow=.3&offsetTopShadow=0px&offsetLeftShadow=0px&thicknessShadow=5px&cornerRadiusShadow=8px&fsDefault=1em&ffDefault=Arial%2CHelvetica%2Csans-serif&fwDefault=normal&cornerRadius=3px&bgTextureDefault=flat&bgTextureHover=flat&bgTextureActive=flat&bgTextureHeader=flat&bgTextureContent=flat&bgTextureHighlight=flat&bgTextureError=flat&bgTextureOverlay=flat&bgTextureShadow=flat&bgImgOpacityDefault=75&bgImgOpacityHover=75&bgImgOpacityActive=65&bgImgOpacityHeader=75&bgImgOpacityContent=75&bgImgOpacityHighlight=55&bgImgOpacityError=95&bgImgOpacityOverlay=0&bgImgOpacityShadow=0&iconColorActive=%23ffffff&iconColorContent=%23444444&iconColorDefault=%23777777&iconColorError=%23cc0000&iconColorHeader=%23444444&iconColorHighlight=%23777620&iconColorHover=%23555555&opacityOverlayPerc=30&opacityShadowPerc=30&bgImgUrlActive=&bgImgUrlContent=&bgImgUrlDefault=&bgImgUrlError=&bgImgUrlHeader=&bgImgUrlHighlight=&bgImgUrlHover=&bgImgUrlOverlay=&bgImgUrlShadow=&iconsActive=url(%22images%2Fui-icons_ffffff_256x240.png%22)&iconsContent=url(%22images%2Fui-icons_444444_256x240.png%22)&iconsDefault=url(%22images%2Fui-icons_777777_256x240.png%22)&iconsError=url(%22images%2Fui-icons_cc0000_256x240.png%22)&iconsHeader=url(%22images%2Fui-icons_444444_256x240.png%22)&iconsHighlight=url(%22images%2Fui-icons_777620_256x240.png%22)&iconsHover=url(%22images%2Fui-icons_555555_256x240.png%22)&bgDefaultRepeat=&bgHoverRepeat=&bgActiveRepeat=&bgHeaderRepeat=&bgContentRepeat=&bgHighlightRepeat=&bgErrorRepeat=&bgOverlayRepeat=&bgShadowRepeat=&bgDefaultYPos=&bgHoverYPos=&bgActiveYPos=&bgHeaderYPos=&bgContentYPos=&bgHighlightYPos=&bgErrorYPos=&bgOverlayYPos=&bgShadowYPos=&bgDefaultXPos=&bgHoverXPos=&bgActiveXPos=&bgHeaderXPos=&bgContentXPos=&bgHighlightXPos=&bgErrorXPos=&bgOverlayXPos=&bgShadowXPos=
@@ -70,8 +70,6 @@
 	text-indent: -99999px;
 	overflow: hidden;
 	background-repeat: no-repeat;
-	width: 16px;
-	height: 16px;
 }
 
 .ui-widget-icon-block {
@@ -90,10 +88,7 @@
 	left: 0;
 	width: 100%;
 	height: 100%;
-	background: #aaaaaa;
-	opacity: .3;
 }
-
 .ui-accordion .ui-accordion-header {
 	display: block;
 	cursor: pointer;
@@ -1036,6 +1031,10 @@ a.ui-button:active,
 ----------------------------------*/
 
 /* states and images */
+.ui-icon {
+	width: 16px;
+	height: 16px;
+}
 .ui-icon,
 .ui-widget-content .ui-icon {
 	background-image: url("images/ui-icons_444444_256x240.png");
@@ -1277,6 +1276,10 @@ a.ui-button:active,
 }
 
 /* Overlays */
+.ui-widget-overlay {
+	background: #aaaaaa;
+	opacity: .3;
+}
 .ui-widget-shadow {
 	box-shadow: 0px 0px 5px #666666;
 }

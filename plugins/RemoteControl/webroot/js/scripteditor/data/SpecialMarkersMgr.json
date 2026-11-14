@@ -1,0 +1,495 @@
+[
+    {
+        "name": "setFlagFOVCenterMarker",
+        "category": "Special Markers - FOV Center",
+        "signature": "void setFlagFOVCenterMarker(bool displayed)",
+        "description": "Shows or hides the Field of View center marker (crosshair) at the center of the screen. Useful for precise pointing and astrophotography framing.",
+        "parameters": [
+            {
+                "name": "displayed",
+                "type": "bool",
+                "description": "`true` to show the FOV center marker, `false` to hide it.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "alternative": "Use `core.getStelProperty('SpecialMarkersMgr.fovCenterMarkerDisplayed')` to read the current state.",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.19.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "// Show center marker for precise centering\nSpecialMarkersMgr.setFlagFOVCenterMarker(true);\n\n// Hide center marker\nSpecialMarkersMgr.setFlagFOVCenterMarker(false);\n\n// Read current state (alternative method)\nvar visible = core.getStelProperty('SpecialMarkersMgr.fovCenterMarkerDisplayed');"
+    },
+    {
+        "name": "getFlagFOVCenterMarker",
+        "category": "Special Markers - FOV Center",
+        "signature": "bool getFlagFOVCenterMarker()",
+        "description": "Returns whether the Field of View center marker (crosshair) is displayed at the center of the screen.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "`true` if the FOV center marker is visible.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.19.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "if (SpecialMarkersMgr.getFlagFOVCenterMarker()) {\n    core.debug(\"FOV center crosshair is visible\");\n}"
+    },
+    {
+        "name": "setColorFOVCenterMarker",
+        "category": "Special Markers - FOV Center",
+        "signature": "void setColorFOVCenterMarker(Vec3f color)",
+        "description": "Sets the color of the Field of View center marker (crosshair).",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector with values between 0.0 and 1.0.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.19.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "// Set FOV center marker to red\nvar red = core.vec3f(1.0, 0.0, 0.0);\nSpecialMarkersMgr.setColorFOVCenterMarker(red);\n\n// Set to cyan\nvar cyan = core.vec3f(0.0, 0.8, 0.9);\nSpecialMarkersMgr.setColorFOVCenterMarker(cyan);"
+    },
+    {
+        "name": "getColorFOVCenterMarker",
+        "category": "Special Markers - FOV Center",
+        "signature": "Vec3f getColorFOVCenterMarker()",
+        "description": "Returns the current color of the Field of View center marker.",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "returnDescription": "RGB color vector.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.19.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "var color = SpecialMarkersMgr.getColorFOVCenterMarker();\ncore.debug(\"FOV center color: RGB(\" + color[0] + \", \" + color[1] + \", \" + color[2] + \")\");"
+    },
+    {
+        "name": "setFlagFOVCircularMarker",
+        "category": "Special Markers - Circular FOV",
+        "signature": "void setFlagFOVCircularMarker(bool displayed)",
+        "description": "Shows or hides the circular Field of View marker. Useful for visualizing eyepiece fields, camera fields, or telescope FOVs.",
+        "parameters": [
+            {
+                "name": "displayed",
+                "type": "bool",
+                "description": "`true` to show the circular FOV marker, `false` to hide it.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.19.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "// Show circular FOV marker for eyepiece simulation\nSpecialMarkersMgr.setFlagFOVCircularMarker(true);\nSpecialMarkersMgr.setFOVCircularMarkerSize(1.0);\n\n// Hide circular marker\nSpecialMarkersMgr.setFlagFOVCircularMarker(false);"
+    },
+    {
+        "name": "getFlagFOVCircularMarker",
+        "category": "Special Markers - Circular FOV",
+        "signature": "bool getFlagFOVCircularMarker()",
+        "description": "Returns whether the circular Field of View marker is displayed. This shows a circle representing a specific angular size on the sky.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "`true` if the circular FOV marker is visible.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.19.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "if (SpecialMarkersMgr.getFlagFOVCircularMarker()) {\n    core.debug(\"Circular FOV marker is visible\");\n}"
+    },
+    {
+        "name": "setFOVCircularMarkerSize",
+        "category": "Special Markers - Circular FOV",
+        "signature": "void setFOVCircularMarkerSize(double size)",
+        "description": "Sets the angular size of the circular Field of View marker in degrees.",
+        "parameters": [
+            {
+                "name": "size",
+                "type": "double",
+                "description": "Angular size in degrees (e.g., 0.5°, 1.0°, 2.0°).",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.19.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "// Set circular marker to 1 degree (typical eyepiece)\nSpecialMarkersMgr.setFOVCircularMarkerSize(1.0);\n\n// Set to 30 arcminutes for a finder scope\nSpecialMarkersMgr.setFOVCircularMarkerSize(0.5);\n\n// Enable the marker\nSpecialMarkersMgr.setFlagFOVCircularMarker(true);"
+    },
+    {
+        "name": "getFOVCircularMarkerSize",
+        "category": "Special Markers - Circular FOV",
+        "signature": "double getFOVCircularMarkerSize()",
+        "description": "Returns the angular size of the circular Field of View marker in degrees.",
+        "parameters": [],
+        "returnType": "double",
+        "returnDescription": "Circular marker size in degrees.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.19.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "var size = SpecialMarkersMgr.getFOVCircularMarkerSize();\ncore.debug(\"Circular FOV marker size: \" + size + \"°\");"
+    },
+    {
+        "name": "setColorFOVCircularMarker",
+        "category": "Special Markers - Circular FOV",
+        "signature": "void setColorFOVCircularMarker(Vec3f color)",
+        "description": "Sets the color of the circular Field of View marker.",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.19.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "// Set circular FOV marker to green\nvar green = core.vec3f(0.2, 0.8, 0.2);\nSpecialMarkersMgr.setColorFOVCircularMarker(green);"
+    },
+    {
+        "name": "getColorFOVCircularMarker",
+        "category": "Special Markers - Circular FOV",
+        "signature": "Vec3f getColorFOVCircularMarker()",
+        "description": "Returns the current color of the circular Field of View marker.",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "returnDescription": "RGB color vector.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.19.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "var color = SpecialMarkersMgr.getColorFOVCircularMarker();\ncore.debug(\"Circular FOV color: RGB(\" + color[0] + \", \" + color[1] + \", \" + color[2] + \")\");"
+    },
+    {
+        "name": "setFlagFOVRectangularMarker",
+        "category": "Special Markers - Rectangular FOV",
+        "signature": "void setFlagFOVRectangularMarker(bool displayed)",
+        "description": "Shows or hides the rectangular Field of View marker. Useful for camera framing, sensor size simulation, or rectangular eyepieces.",
+        "parameters": [
+            {
+                "name": "displayed",
+                "type": "bool",
+                "description": "`true` to show the rectangular FOV marker, `false` to hide it.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.19.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "// Show rectangular FOV marker for camera framing\nSpecialMarkersMgr.setFlagFOVRectangularMarker(true);\nSpecialMarkersMgr.setFOVRectangularMarkerWidth(2.0);\nSpecialMarkersMgr.setFOVRectangularMarkerHeight(1.5);"
+    },
+    {
+        "name": "getFlagFOVRectangularMarker",
+        "category": "Special Markers - Rectangular FOV",
+        "signature": "bool getFlagFOVRectangularMarker()",
+        "description": "Returns whether the rectangular Field of View marker is displayed.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "`true` if the rectangular FOV marker is visible.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.19.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "if (SpecialMarkersMgr.getFlagFOVRectangularMarker()) {\n    core.debug(\"Rectangular FOV marker is visible\");\n}"
+    },
+    {
+        "name": "setFOVRectangularMarkerWidth",
+        "category": "Special Markers - Rectangular FOV",
+        "signature": "void setFOVRectangularMarkerWidth(double width)",
+        "description": "Sets the width (horizontal angular size) of the rectangular Field of View marker in degrees.",
+        "parameters": [
+            {
+                "name": "width",
+                "type": "double",
+                "description": "Width in degrees (e.g., 2.0 for 2° horizontal).",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.19.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "// Set rectangular marker to 2° x 1.5°\nSpecialMarkersMgr.setFOVRectangularMarkerWidth(2.0);\nSpecialMarkersMgr.setFOVRectangularMarkerHeight(1.5);\nSpecialMarkersMgr.setFlagFOVRectangularMarker(true);"
+    },
+    {
+        "name": "getFOVRectangularMarkerWidth",
+        "category": "Special Markers - Rectangular FOV",
+        "signature": "double getFOVRectangularMarkerWidth()",
+        "description": "Returns the width (horizontal angular size) of the rectangular Field of View marker in degrees.",
+        "parameters": [],
+        "returnType": "double",
+        "returnDescription": "Rectangular marker width in degrees.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.19.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "var width = SpecialMarkersMgr.getFOVRectangularMarkerWidth();\ncore.debug(\"Rectangular FOV width: \" + width + \"°\");"
+    },
+    {
+        "name": "setFOVRectangularMarkerHeight",
+        "category": "Special Markers - Rectangular FOV",
+        "signature": "void setFOVRectangularMarkerHeight(double height)",
+        "description": "Sets the height (vertical angular size) of the rectangular Field of View marker in degrees.",
+        "parameters": [
+            {
+                "name": "height",
+                "type": "double",
+                "description": "Height in degrees (e.g., 1.5 for 1.5° vertical).",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.19.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "SpecialMarkersMgr.setFOVRectangularMarkerHeight(1.5);"
+    },
+    {
+        "name": "getFOVRectangularMarkerHeight",
+        "category": "Special Markers - Rectangular FOV",
+        "signature": "double getFOVRectangularMarkerHeight()",
+        "description": "Returns the height (vertical angular size) of the rectangular Field of View marker in degrees.",
+        "parameters": [],
+        "returnType": "double",
+        "returnDescription": "Rectangular marker height in degrees.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.19.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "var height = SpecialMarkersMgr.getFOVRectangularMarkerHeight();\ncore.debug(\"Rectangular FOV height: \" + height + \"°\");"
+    },
+    {
+        "name": "setFOVRectangularMarkerRotationAngle",
+        "category": "Special Markers - Rectangular FOV",
+        "signature": "void setFOVRectangularMarkerRotationAngle(double angle)",
+        "description": "Sets the rotation angle of the rectangular Field of View marker in degrees. Rotates the rectangle clockwise.",
+        "parameters": [
+            {
+                "name": "angle",
+                "type": "double",
+                "description": "Rotation angle in degrees (0 = no rotation).",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.19.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "// Rotate the marker 45 degrees\nSpecialMarkersMgr.setFOVRectangularMarkerRotationAngle(45.0);\n\n// Reset rotation\nSpecialMarkersMgr.setFOVRectangularMarkerRotationAngle(0.0);"
+    },
+    {
+        "name": "getFOVRectangularMarkerRotationAngle",
+        "category": "Special Markers - Rectangular FOV",
+        "signature": "double getFOVRectangularMarkerRotationAngle()",
+        "description": "Returns the rotation angle of the rectangular Field of View marker in degrees.",
+        "parameters": [],
+        "returnType": "double",
+        "returnDescription": "Rotation angle in degrees.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.19.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "var angle = SpecialMarkersMgr.getFOVRectangularMarkerRotationAngle();\ncore.debug(\"Rectangular FOV rotation: \" + angle + \"°\");"
+    },
+    {
+        "name": "setColorFOVRectangularMarker",
+        "category": "Special Markers - Rectangular FOV",
+        "signature": "void setColorFOVRectangularMarker(Vec3f color)",
+        "description": "Sets the color of the rectangular Field of View marker.",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.19.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "// Set rectangular FOV marker to yellow\nvar yellow = core.vec3f(1.0, 1.0, 0.2);\nSpecialMarkersMgr.setColorFOVRectangularMarker(yellow);"
+    },
+    {
+        "name": "getColorFOVRectangularMarker",
+        "category": "Special Markers - Rectangular FOV",
+        "signature": "Vec3f getColorFOVRectangularMarker()",
+        "description": "Returns the current color of the rectangular Field of View marker.",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "returnDescription": "RGB color vector.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.19.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "var color = SpecialMarkersMgr.getColorFOVRectangularMarker();\ncore.debug(\"Rectangular FOV color: RGB(\" + color[0] + \", \" + color[1] + \", \" + color[2] + \")\");"
+    },
+    {
+        "name": "setFlagCompassMarks",
+        "category": "Special Markers - Compass Marks",
+        "signature": "void setFlagCompassMarks(bool displayed)",
+        "description": "Shows or hides compass marks (azimuth tick marks) around the horizon. Includes degree labels every 15 degrees.",
+        "parameters": [
+            {
+                "name": "displayed",
+                "type": "bool",
+                "description": "`true` to show compass marks, `false` to hide them.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.19.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "// Show compass marks for orientation\nSpecialMarkersMgr.setFlagCompassMarks(true);\n\n// Hide compass marks\nSpecialMarkersMgr.setFlagCompassMarks(false);"
+    },
+    {
+        "name": "getFlagCompassMarks",
+        "category": "Special Markers - Compass Marks",
+        "signature": "bool getFlagCompassMarks()",
+        "description": "Returns whether compass marks (azimuth tick marks around the horizon) are displayed.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "`true` if compass marks are visible.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.19.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "if (SpecialMarkersMgr.getFlagCompassMarks()) {\n    core.debug(\"Compass marks are visible\");\n}"
+    },
+    {
+        "name": "setColorCompassMarks",
+        "category": "Special Markers - Compass Marks",
+        "signature": "void setColorCompassMarks(Vec3f color)",
+        "description": "Sets the color of the compass marks.",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.19.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "// Set compass marks to light blue\nvar lightBlue = core.vec3f(0.5, 0.7, 1.0);\nSpecialMarkersMgr.setColorCompassMarks(lightBlue);"
+    },
+    {
+        "name": "getColorCompassMarks",
+        "category": "Special Markers - Compass Marks",
+        "signature": "Vec3f getColorCompassMarks()",
+        "description": "Returns the current color of the compass marks.",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "returnDescription": "RGB color vector.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.19.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "var color = SpecialMarkersMgr.getColorCompassMarks();\ncore.debug(\"Compass marks color: RGB(\" + color[0] + \", \" + color[1] + \", \" + color[2] + \")\");"
+    }
+]
