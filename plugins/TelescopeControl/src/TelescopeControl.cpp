@@ -1589,6 +1589,31 @@ void TelescopeControl::loadDeviceModels()
 		return;
 	}
 
+	//Add embedded device models missing from the user's copy, so that models
+	//added in newer versions appear without discarding the user's edits.
+	if (!useDefaultList)
+	{
+		QSet<QString> userModelNames;
+		for (const auto &model : std::as_const(deviceModelsList))
+			userModelNames.insert(model.toMap().value("name").toString());
+
+		QFile defaultFile(":/telescopeControl/device_models.json");
+		if (defaultFile.open(QFile::ReadOnly))
+		{
+			const QVariantList defaultList = StelJsonParser::parse(&defaultFile).toMap().value("list").toList();
+			defaultFile.close();
+			for (const auto &model : defaultList)
+			{
+				const QString name = model.toMap().value("name").toString();
+				if (!name.isEmpty() && !userModelNames.contains(name))
+				{
+					qCDebug(Telescopes) << "[TelescopeControl] Adding embedded device model:" << name;
+					deviceModelsList.append(model);
+				}
+			}
+		}
+	}
+
 	//Compile a list of the available telescope server executables
 	loadTelescopeServerExecutables();
 	if(telescopeServers.isEmpty())
@@ -1812,7 +1837,8 @@ const QString TelescopeControl::TELESCOPE_SERVER_PATH = QString("/%1");
 const QStringList TelescopeControl::EMBEDDED_TELESCOPE_SERVERS = {
 	"TelescopeServerDummy",
 	"TelescopeServerLx200",
-	"TelescopeServerNexStar"};
+	"TelescopeServerNexStar",
+	"TelescopeServerFs2"};
 
 void TelescopeControl::translations()
 {

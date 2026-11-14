@@ -49,6 +49,12 @@
             "description" : "The Sky-Watcher SynScan AZ GOTO mount used in a number of telescope models.",
             "server" : "TelescopeServerNexStar",
             "default_delay" : 500000
+        },
+        {
+            "name" : "Astro Electronic FS2",
+            "description" : "Astro Electronic FS2 control system.",
+            "server" : "TelescopeServerFs2",
+            "default_delay" : 500000
         }
     ]
 }

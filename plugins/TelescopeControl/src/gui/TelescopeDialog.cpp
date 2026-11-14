@@ -278,10 +278,11 @@ void TelescopeDialog::setAboutText()
 	aboutPage += "<tr><td>Gion Kunz &lt;gion.kunz@gmail.com&gt; (" + q_("ASCOM Telescope Client") + ")</td></tr>";
 	aboutPage += "<tr><td>Petr Kubánek (" + q_("RTS2 support") + ")</td></tr>";
 	aboutPage += "<tr><td>Alessandro Siniscalchi &lt;asiniscalchi@gmail.com&gt; (" + q_("INDI Telescope Client") + ")</td></tr>";
-	aboutPage += "<tr><td rowspan=4><strong>" + q_("Contributors") + ":</strong></td><td>Alexander Wolf</td></tr>";
+	aboutPage += "<tr><td rowspan=5><strong>" + q_("Contributors") + ":</strong></td><td>Alexander Wolf</td></tr>";
 	aboutPage += "<tr><td>Michael Heinz</td></tr>";
 	aboutPage += "<tr><td>Alexandros Kosiaris</td></tr>";
 	aboutPage += "<tr><td>Rumen Bogdanovski &lt;rumenastro@gmail.com&gt; (" + q_("LX200 telescope control over TCP/IP") + ")</td></tr>";
+	aboutPage += "<tr><td>Michael Butti (" + q_("Astro Electronic FS2 telescope control") + ")</td></tr>";
 	aboutPage += "</table>";
 
 	aboutPage += "<p>" + q_("This plug-in is based on and reuses a lot of code under the GNU General Public License:") + "</p><ul>";
@@ -290,6 +291,7 @@ void TelescopeDialog::setAboutText()
 	aboutPage += "<li>" + q_("the TelescopeServerLx200 telescope server core code (originally licensed under the LGPL)");
 	aboutPage += "<br/>" + q_("Author of all of the above - the client, the server core, and the LX200 server, along with the Stellarium telescope control network protocol (over TCP/IP), is <b>Johannes Gajdosik</b>.") + "</li>";
 	aboutPage += "<li>" + q_("the TelescopeServerNexStar telescope server core code (originally licensed under the LGPL, based on TelescopeServerLx200) by <b>Michael Heinz</b>.") + "</li>";
+	aboutPage += "<li>" + q_("the TelescopeServerFs2 telescope server code (based on TelescopeServerLx200) by <b>Michael Butti</b>.") + "</li>";
 	aboutPage += "<li>" + q_("INDI by <b>Alessandro Siniscalchi</b>.") + "</li></ul>";
 
 	aboutPage += StelApp::getInstance().getModuleMgr().getStandardSupportLinksInfo("Telescope Control plugin");
