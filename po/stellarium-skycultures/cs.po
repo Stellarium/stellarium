@@ -1,16 +1,16 @@
 # Translators:
-# Zdeněk Moravec <moravec@hapteplice.cz>, 2025
 # Alexander V. Wolf <alex.v.wolf@gmail.com>, 2025
 # J Nezbeda, 2026
 # Ruslan Kabatsaev, 2026
-# cardinot <mcardinot@gmail.com>, 2026
 # Pavel Sem, 2026
+# cardinot <mcardinot@gmail.com>, 2026
+# Zdeněk Moravec <moravec@hapteplice.cz>, 2026
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"Last-Translator: Pavel Sem, 2026\n"
+"Last-Translator: Zdeněk Moravec <moravec@hapteplice.cz>, 2026\n"
 "Language-Team: Czech (https://app.transifex.com/stellarium/teams/80998/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -5177,6 +5177,24 @@ msgid "al-Samakatān"
 msgstr ""
 
 #. Name of a zodiac sign or a lunar mansion in Arabic (Al-Sufi) sky culture,
+#. native: البروج, pronounce: al-Burūj
+#. Name of a zodiac sign or a lunar mansion in Babylonian (Seleucid) sky
+#. culture, native: Zodiac
+#. Name of a zodiac sign or a lunar mansion in Greek (Dante) sky culture,
+#. native: Zodiacus
+#. Name of a zodiac sign or a lunar mansion in Greek (Leiden Aratea +
+#. Almagest) sky culture, native: Zodiacus
+#. Name of a zodiac sign or a lunar mansion in Modern sky culture, native:
+#. Zodiacus
+msgid "Zodiac"
+msgstr "Zvěrokruh"
+
+#. Pronounce entry for a zodiac sign or a lunar mansion in Arabic (Al-Sufi)
+#. sky culture, native: البروج, English: Zodiac
+msgid "al-Burūj"
+msgstr ""
+
+#. Name of a zodiac sign or a lunar mansion in Arabic (Al-Sufi) sky culture,
 #. native: الشرطان, pronounce: al-Sharatān
 #. Name of a zodiac sign or a lunar mansion in Arabic (Indigenous) sky
 #. culture, native: الشرطان, pronounce: al-Sharatān
@@ -5706,6 +5724,24 @@ msgstr "Lano vědra"
 #. sky culture, native: الرشاء, English: The Bucket Rope
 msgctxt "arabian lunar stations"
 msgid "al-Rishā'"
+msgstr ""
+
+#. Name of a zodiac sign or a lunar mansion in Arabic (Al-Sufi) sky culture,
+#. native: منازل القمر, pronounce: Manazil alQamar
+#. Name of a zodiac sign or a lunar mansion in Arabic (Arabian Peninsula) sky
+#. culture, native: منازل القمر, pronounce: Manazil alQamar
+#. Name of a zodiac sign or a lunar mansion in Arabic (Indigenous) sky
+#. culture, native: منازل القمر, pronounce: Manazil alQamar
+msgid "Lunar Stations"
+msgstr "Lunární domy"
+
+#. Pronounce entry for a zodiac sign or a lunar mansion in Arabic (Al-Sufi)
+#. sky culture, native: منازل القمر, English: Lunar Stations
+#. Pronounce entry for a zodiac sign or a lunar mansion in Arabic (Arabian
+#. Peninsula) sky culture, native: منازل القمر, English: Lunar Stations
+#. Pronounce entry for a zodiac sign or a lunar mansion in Arabic (Indigenous)
+#. sky culture, native: منازل القمر, English: Lunar Stations
+msgid "Manazil alQamar"
 msgstr ""
 
 #. Arabic (Al-Sufi) name for HIP 145, native: حوت_خ_٠٢
@@ -9876,7 +9912,7 @@ msgstr ""
 #. Arabic (Al-Sufi) name for HIP 44816, native: الذي تحت الثلاثة التربيشات
 #. التالية
 msgid "The star below the three rear little shield"
-msgstr "Hvězda pod třetím zadním malým štítem"
+msgstr "Hvězda pod třemi zadními malými štíty"
 
 #. Arabic (Al-Sufi) name for HIP 44901, native: دبك_١٥
 msgid "UMa_15"
@@ -15799,11 +15835,11 @@ msgstr ""
 
 #. Arabic (Arabian Peninsula) name for HIP 677, native: الموخر 2
 msgid "The Rear 2"
-msgstr ""
+msgstr "Zadní část 2"
 
 #. Arabic (Arabian Peninsula) name for HIP 1067, native: الموخر 1
 msgid "The Rear 1"
-msgstr ""
+msgstr "Zadní část 1"
 
 #. Arabic (Arabian Peninsula) name for HIP 7588, native: محلف
 msgid "The Oath Star"
@@ -15895,7 +15931,7 @@ msgstr ""
 #. Arabic (Arabian Peninsula) name for HIP 24436, native: زابن الجوزا الجنوبي
 #. Al-Jawza is a proper name
 msgid "Southern Claw Of Al-Jawza"
-msgstr "Jižní dráp Al-Džawzy"
+msgstr "Jižní dráp Al-Jawzy"
 
 #. Pronounce entry for Arabic (Arabian Peninsula) name for HIP 24436
 #. Arabic (Arabian Peninsula) name for HIP 24436, native: زابن الجوزا الجنوبي
@@ -16067,7 +16103,7 @@ msgstr ""
 #. Arabic (Arabian Peninsula) name for HIP 53910, native: الخلج الاولات 2
 #. Al-Khilj is a proper name
 msgid "The first Khilj 2"
-msgstr "Druhý Khilj 2"
+msgstr "První Khilj 2"
 
 #. Pronounce entry for Arabic (Arabian Peninsula) name for HIP 53910
 #. Arabic (Arabian Peninsula) name for HIP 53910, native: الخلج الاولات 2
@@ -16077,7 +16113,7 @@ msgstr ""
 
 #. Arabic (Arabian Peninsula) name for HIP 53910, native: الاولتين 2
 msgid "The first two 2"
-msgstr ""
+msgstr "První dvě 2"
 
 #. Pronounce entry for Arabic (Arabian Peninsula) name for HIP 53910
 #. Arabic (Arabian Peninsula) name for HIP 53910, native: الاولتين 2
@@ -16110,7 +16146,7 @@ msgstr ""
 
 #. Arabic (Arabian Peninsula) name for HIP 54061, native: الاولتين 1
 msgid "The first two 1"
-msgstr ""
+msgstr "První dvě 1"
 
 #. Arabic (Arabian Peninsula) name for HIP 58001, native: الخلج التوالي 1
 #. Al-Khilj is a proper name
@@ -16306,11 +16342,11 @@ msgstr ""
 
 #. Arabic (Arabian Peninsula) name for HIP 113881, native: المقدم 2
 msgid "The Front 2"
-msgstr ""
+msgstr "Předek 2"
 
 #. Arabic (Arabian Peninsula) name for HIP 113963, native: المقدم 1
 msgid "The Front 1"
-msgstr ""
+msgstr "Předek 1"
 
 #. Arabic (Arabian Peninsula) name for M 45, native: الثريا
 #. al-Thurayya is a proper name
@@ -17164,7 +17200,7 @@ msgstr ""
 
 #. Arabic (Indigenous) name for HIP 677, native: العرقوة السفلى 2
 msgid "The Lower Cross Beam 2"
-msgstr ""
+msgstr "Dolní příčka 2"
 
 #. Pronounce entry for Arabic (Indigenous) name for HIP 677
 #. Arabic (Indigenous) name for HIP 677, native: العرقوة السفلى 2
@@ -17182,7 +17218,7 @@ msgstr ""
 
 #. Arabic (Indigenous) name for HIP 1067, native: العرقوة السفلى 1
 msgid "The Lower Cross Beam 1"
-msgstr ""
+msgstr "Dolní příčka 1"
 
 #. Pronounce entry for Arabic (Indigenous) name for HIP 1067
 #. Arabic (Indigenous) name for HIP 1067, native: العرقوة السفلى 1
@@ -17191,7 +17227,7 @@ msgstr ""
 
 #. Arabic (Indigenous) name for HIP 3419, native: الظليمان 2
 msgid "The Two Male Ostriches 2"
-msgstr ""
+msgstr "Dva pštrosi samci 2"
 
 #. Pronounce entry for Arabic (Indigenous) name for HIP 3419
 #. Arabic (Indigenous) name for HIP 3419, native: الظليمان 2
@@ -17200,11 +17236,11 @@ msgstr ""
 
 #. Arabic (Indigenous) name for HIP 5447, native: بطن السمكة
 msgid "Abdomen Of The Fish"
-msgstr ""
+msgstr "Břicho ryby"
 
 #. Arabic (Indigenous) name for HIP 5447, native: بطن الحوت
 msgid "Abdomen Of The Whale"
-msgstr ""
+msgstr "Břicho velryby"
 
 #. Pronounce entry for Arabic (Indigenous) name for HIP 5447
 #. Arabic (Indigenous) name for HIP 5447, native: بطن الحوت
@@ -17213,7 +17249,7 @@ msgstr ""
 
 #. Arabic (Indigenous) name for HIP 7588, native: المحلف
 msgid "Oath Star"
-msgstr ""
+msgstr "Hvězda přísahy"
 
 #. Pronounce entry for Arabic (Indigenous) name for HIP 7588
 #. Arabic (Indigenous) name for HIP 7588, native: المحلف
@@ -17222,7 +17258,7 @@ msgstr ""
 
 #. Arabic (Indigenous) name for HIP 8796, native: الأيبسان 1
 msgid "The Two Forelegs 1"
-msgstr ""
+msgstr "Dvě přední nohy 1"
 
 #. Pronounce entry for Arabic (Indigenous) name for HIP 8796
 #. Arabic (Indigenous) name for HIP 8796, native: الأيبسان 1
@@ -17231,7 +17267,7 @@ msgstr ""
 
 #. Arabic (Indigenous) name for HIP 10064, native: الأيبسان 2
 msgid "The Two Forelegs 2"
-msgstr ""
+msgstr "Dvě přední nohy 2"
 
 #. Pronounce entry for Arabic (Indigenous) name for HIP 10064
 #. Arabic (Indigenous) name for HIP 10064, native: الأيبسان 2
@@ -17240,23 +17276,23 @@ msgstr ""
 
 #. Arabic (Indigenous) name for HIP 14328, native: الساعد
 msgid "The Forearm"
-msgstr ""
+msgstr "Předloktí"
 
 #. Arabic (Indigenous) name for HIP 15863, native: المرفق
 msgid "The Elbow"
-msgstr ""
+msgstr "Loket"
 
 #. Arabic (Indigenous) name for HIP 16335, native: المأبض
 msgid "Bend Of The Hand"
-msgstr ""
+msgstr "Ohyb ruky"
 
 #. Arabic (Indigenous) name for HIP 17358, native: إبرة المرفق
 msgid "Tip Of The Elbow"
-msgstr ""
+msgstr "Špička lokte"
 
 #. Arabic (Indigenous) name for HIP 18246, native: العاتق
 msgid "The Shoulder Blade"
-msgstr ""
+msgstr "Lopatka"
 
 #. Pronounce entry for Arabic (Indigenous) name for HIP 18246
 #. Arabic (Indigenous) name for HIP 18246, native: العاتق
@@ -17265,19 +17301,19 @@ msgstr ""
 
 #. Arabic (Indigenous) name for HIP 18614, native: المنكب
 msgid "The Shoulder"
-msgstr ""
+msgstr "Rameno"
 
 #. Arabic (Indigenous) name for HIP 21421, native: الفنيق
 msgid "The Male Camel"
-msgstr ""
+msgstr "Velbloudí samec"
 
 #. Arabic (Indigenous) name for HIP 21421, native: المجدح
 msgid "The Wood Stirring Rod"
-msgstr ""
+msgstr "Dřevěná míchací tyč"
 
 #. Arabic (Indigenous) name for HIP 21421, native: حادي النجم
 msgid "The Camel Herder"
-msgstr ""
+msgstr "Pohůnek velbloudů"
 
 #. Pronounce entry for Arabic (Indigenous) name for HIP 21421
 #. Arabic (Indigenous) name for HIP 21421, native: حادي النجم
@@ -17287,7 +17323,7 @@ msgstr ""
 #. Arabic (Indigenous) name for HIP 23015, native: رجل العيوق
 #. Al-Ayyuq is a proper name meaning the obstructor
 msgid "Foot Of Al-Ayyuq"
-msgstr ""
+msgstr "Noha Al-Ayyuqa"
 
 #. Pronounce entry for Arabic (Indigenous) name for HIP 23015
 #. Arabic (Indigenous) name for HIP 23015, native: رجل العيوق
@@ -17309,11 +17345,11 @@ msgstr ""
 #. Arabic (Indigenous) name for HIP 24608, native: رقيب الثريا
 #. Al-Thurayya is a proper name
 msgid "Al-Thurayya watcher"
-msgstr ""
+msgstr "Strážce Al-Thurayya"
 
 #. Arabic (Indigenous) name for HIP 25428, native: الأعلام 3
 msgid "The Posts 3"
-msgstr ""
+msgstr "Sloupy 3"
 
 #. Pronounce entry for Arabic (Indigenous) name for HIP 25428
 #. Arabic (Indigenous) name for HIP 25428, native: الأعلام 3
@@ -17322,7 +17358,7 @@ msgstr ""
 
 #. Arabic (Indigenous) name for HIP 25428, native: التوابع 3
 msgid "The Associates Of Al-Ayyuq 3"
-msgstr ""
+msgstr "Průvodci Al-Ayyuqa 3"
 
 #. Pronounce entry for Arabic (Indigenous) name for HIP 25428
 #. Arabic (Indigenous) name for HIP 25428, native: التوابع 3
@@ -17332,11 +17368,11 @@ msgstr ""
 #. Arabic (Indigenous) name for HIP 27989, native: منكب الجوزاء
 #. Al-Jawza is a proper Arabic name of orion
 msgid "Shoulder Of Al-Jawza"
-msgstr ""
+msgstr "Rameno Al-Jawzy"
 
 #. Arabic (Indigenous) name for HIP 28360, native: الأعلام 1
 msgid "The Posts 1"
-msgstr ""
+msgstr "Sloupy 1"
 
 #. Pronounce entry for Arabic (Indigenous) name for HIP 28360
 #. Arabic (Indigenous) name for HIP 28360, native: الأعلام 1
@@ -17345,7 +17381,7 @@ msgstr ""
 
 #. Arabic (Indigenous) name for HIP 28360, native: التوابع 1
 msgid "The Associates Of Al-Ayyuq 1"
-msgstr ""
+msgstr "Průvodci Al-Ayyuqa 1"
 
 #. Pronounce entry for Arabic (Indigenous) name for HIP 28360
 #. Arabic (Indigenous) name for HIP 28360, native: التوابع 1
@@ -17354,7 +17390,7 @@ msgstr ""
 
 #. Arabic (Indigenous) name for HIP 28380, native: الأعلام 2
 msgid "The Posts 2"
-msgstr ""
+msgstr "Sloupy 2"
 
 #. Pronounce entry for Arabic (Indigenous) name for HIP 28380
 #. Arabic (Indigenous) name for HIP 28380, native: الأعلام 2
@@ -17363,7 +17399,7 @@ msgstr ""
 
 #. Arabic (Indigenous) name for HIP 28380, native: التوابع 2
 msgid "The Associates Of Al-Ayyuq 2"
-msgstr ""
+msgstr "Průvodci Al-Ayyuqa 2"
 
 #. Pronounce entry for Arabic (Indigenous) name for HIP 28380
 #. Arabic (Indigenous) name for HIP 28380, native: التوابع 2
@@ -17372,7 +17408,7 @@ msgstr ""
 
 #. Arabic (Indigenous) name for HIP 29655, native: التحايي 1
 msgid "Stars Of Abundant Rain 1"
-msgstr ""
+msgstr "Hvězdy vydatného deště 1"
 
 #. Pronounce entry for Arabic (Indigenous) name for HIP 29655
 #. Arabic (Indigenous) name for HIP 29655, native: التحايي 1
@@ -17383,17 +17419,17 @@ msgstr ""
 #. Mirzam is an associate star of the crossing Shi'ra which is a proper Arabic
 #. name of Sirius
 msgid "Mirzam Of The Crossing Shi'ra"
-msgstr ""
+msgstr "Mirzam přecházející Shi'ry"
 
 #. Arabic (Indigenous) name for HIP 30324, native: مرزم الشعرى
 #. Mirzam is an associate star of Al-Shi'ra which is a proper Arabic name of
 #. Sirius
 msgid "Mirzam Of Al-Shi'ra"
-msgstr ""
+msgstr "Mirzam Al-Shi'ry"
 
 #. Arabic (Indigenous) name for HIP 30343, native: التحايي 2
 msgid "Stars Of Abundant Rain 2"
-msgstr ""
+msgstr "Hvězdy vydatného deště 2"
 
 #. Pronounce entry for Arabic (Indigenous) name for HIP 30343
 #. Arabic (Indigenous) name for HIP 30343, native: التحايي 2
@@ -17402,7 +17438,7 @@ msgstr ""
 
 #. Arabic (Indigenous) name for HIP 30883, native: التحايي 3
 msgid "Stars Of Abundant Rain 3"
-msgstr ""
+msgstr "Hvězdy vydatného deště 3"
 
 #. Pronounce entry for Arabic (Indigenous) name for HIP 30883
 #. Arabic (Indigenous) name for HIP 30883, native: التحايي 3
@@ -17423,7 +17459,7 @@ msgstr ""
 #. Arabic (Indigenous) name for HIP 32349, native: الشعرى اليمانية
 #. The southern Shi'ra is a proper Arabic name of Sirius
 msgid "The Southern Shi'ra"
-msgstr ""
+msgstr "Jižní Shi'ra"
 
 #. Pronounce entry for Arabic (Indigenous) name for HIP 32349
 #. Arabic (Indigenous) name for HIP 32349, native: الشعرى اليمانية
@@ -17434,7 +17470,7 @@ msgstr ""
 #. Arabic (Indigenous) name for HIP 32349, native: الشعرى العبور
 #. The crossing Shi'ra is a proper Arabic name of Sirius
 msgid "The Crossing Shi'ra"
-msgstr ""
+msgstr "Přecházející Shi'ra"
 
 #. Pronounce entry for Arabic (Indigenous) name for HIP 32349
 #. Arabic (Indigenous) name for HIP 32349, native: الشعرى العبور
@@ -17465,7 +17501,7 @@ msgstr ""
 #. Mirzam is an associate star of the tearful Shi'ra, which is a proper Arabic
 #. name of Procyon. The two stars together are called the Arm.
 msgid "Mirzam of The Arm"
-msgstr ""
+msgstr "Mirzam paže"
 
 #. Pronounce entry for Arabic (Indigenous) name for HIP 36188
 #. Arabic (Indigenous) name for HIP 36188, native: مرزم الذراع
@@ -17477,7 +17513,7 @@ msgstr ""
 #. Arabic (Indigenous) name for HIP 37279, native: الشعرى الشامية
 #. The northern Shi'ra is a proper Arabic name of Procyon
 msgid "The Northern Shi'ra"
-msgstr ""
+msgstr "Severní Shi'ra"
 
 #. Pronounce entry for Arabic (Indigenous) name for HIP 37279
 #. Arabic (Indigenous) name for HIP 37279, native: الشعرى الشامية
@@ -17488,7 +17524,7 @@ msgstr ""
 #. Arabic (Indigenous) name for HIP 37279, native: الشعرى الغميصاء
 #. The tearful Shi'ra is a proper Arabic name of Procyon
 msgid "The Tearful Shi'ra"
-msgstr ""
+msgstr "Uslzená Shi'ra"
 
 #. Pronounce entry for Arabic (Indigenous) name for HIP 37279
 #. Arabic (Indigenous) name for HIP 37279, native: الشعرى الغميصاء
@@ -17531,7 +17567,7 @@ msgstr ""
 
 #. Arabic (Indigenous) name for HIP 46390, native: الفرد
 msgid "The Sole One"
-msgstr ""
+msgstr "Osamocená"
 
 #. Pronounce entry for Arabic (Indigenous) name for HIP 46390
 #. Arabic (Indigenous) name for HIP 46390, native: الفرد
@@ -17540,7 +17576,7 @@ msgstr ""
 
 #. Arabic (Indigenous) name for HIP 46733, native: الفارطان 1
 msgid "The Two Preceding To The Water 1"
-msgstr ""
+msgstr "Dva jdoucí první k vodě 1"
 
 #. Pronounce entry for Arabic (Indigenous) name for HIP 46733
 #. Arabic (Indigenous) name for HIP 46733, native: الفارطان 1
@@ -17549,7 +17585,7 @@ msgstr ""
 
 #. Arabic (Indigenous) name for HIP 46750, native: الأشفار 1
 msgid "The Eyelashes 1"
-msgstr ""
+msgstr "Řasy 1"
 
 #. Pronounce entry for Arabic (Indigenous) name for HIP 46750
 #. Arabic (Indigenous) name for HIP 46750, native: الأشفار 1
@@ -17558,7 +17594,7 @@ msgstr ""
 
 #. Arabic (Indigenous) name for HIP 46771, native: الأشفار 3
 msgid "The Eyelashes 3"
-msgstr ""
+msgstr "Řasy 3"
 
 #. Pronounce entry for Arabic (Indigenous) name for HIP 46771
 #. Arabic (Indigenous) name for HIP 46771, native: الأشفار 3
@@ -17567,7 +17603,7 @@ msgstr ""
 
 #. Arabic (Indigenous) name for HIP 46774, native: الأشفار 4
 msgid "The Eyelashes 4"
-msgstr ""
+msgstr "Řasy 4"
 
 #. Pronounce entry for Arabic (Indigenous) name for HIP 46774
 #. Arabic (Indigenous) name for HIP 46774, native: الأشفار 4
@@ -17576,7 +17612,7 @@ msgstr ""
 
 #. Arabic (Indigenous) name for HIP 48319, native: الفارطان 2
 msgid "The Two Preceding To The Water 2"
-msgstr ""
+msgstr "Dva jdoucí první k vodě 2"
 
 #. Pronounce entry for Arabic (Indigenous) name for HIP 48319
 #. Arabic (Indigenous) name for HIP 48319, native: الفارطان 2
@@ -17585,7 +17621,7 @@ msgstr ""
 
 #. Arabic (Indigenous) name for HIP 48455, native: الأشفار 2
 msgid "The Eyelashes 2"
-msgstr ""
+msgstr "Řasy 2"
 
 #. Pronounce entry for Arabic (Indigenous) name for HIP 48455
 #. Arabic (Indigenous) name for HIP 48455, native: الأشفار 2
@@ -17594,11 +17630,11 @@ msgstr ""
 
 #. Arabic (Indigenous) name for HIP 62956, native: الجون
 msgid "The Dark Camel"
-msgstr ""
+msgstr "Tmavý velbloud"
 
 #. Arabic (Indigenous) name for HIP 63125, native: كبد الأسد
 msgid "Liver Of The Lion"
-msgstr ""
+msgstr "Játra lva"
 
 #. Pronounce entry for Arabic (Indigenous) name for HIP 63125
 #. Arabic (Indigenous) name for HIP 63125, native: كبد الأسد
@@ -17607,11 +17643,11 @@ msgstr ""
 
 #. Arabic (Indigenous) name for HIP 65378, native: العناق
 msgid "The Little Goat"
-msgstr ""
+msgstr "Kůzle"
 
 #. Arabic (Indigenous) name for HIP 65474, native: السماك الأعزل
 msgid "The Unarmed High One"
-msgstr ""
+msgstr "Neozbrojený Vznešený"
 
 #. Arabic (Indigenous) name for HIP 65477, native: أسلم
 #. Aslam is a proper name
@@ -17628,11 +17664,11 @@ msgstr "As-Saydaq"
 
 #. Arabic (Indigenous) name for HIP 67301, native: القائد
 msgid "The Leader"
-msgstr ""
+msgstr "Vůdce"
 
 #. Arabic (Indigenous) name for HIP 67459, native: عذبة الرمح الثانية
 msgid "The Rear Spear Tassel"
-msgstr ""
+msgstr "Zadní třapec kopí"
 
 #. Pronounce entry for Arabic (Indigenous) name for HIP 67459
 #. Arabic (Indigenous) name for HIP 67459, native: عذبة الرمح الثانية
@@ -17641,11 +17677,11 @@ msgstr ""
 
 #. Arabic (Indigenous) name for HIP 67459, native: راية السماك
 msgid "Flag Of The High One"
-msgstr ""
+msgstr "Prapor Vznešeného"
 
 #. Arabic (Indigenous) name for HIP 67927, native: الرمح 1
 msgid "The Spear 1"
-msgstr ""
+msgstr "Kopí 1"
 
 #. Pronounce entry for Arabic (Indigenous) name for HIP 67927
 #. Arabic (Indigenous) name for HIP 67927, native: الرمح 1
@@ -17654,7 +17690,7 @@ msgstr ""
 
 #. Arabic (Indigenous) name for HIP 69673, native: السماك الرامح
 msgid "The High One With The Spear"
-msgstr ""
+msgstr "Vznešený s kopím"
 
 #. Pronounce entry for Arabic (Indigenous) name for HIP 69673
 #. Arabic (Indigenous) name for HIP 69673, native: السماك الرامح
@@ -17668,11 +17704,11 @@ msgstr ""
 
 #. Arabic (Indigenous) name for HIP 71053, native: عذبة الرمح الأولى
 msgid "The Front Spear Tassel"
-msgstr ""
+msgstr "Přední třapec kopí"
 
 #. Arabic (Indigenous) name for HIP 72105, native: الرمح 2
 msgid "The Spear 2"
-msgstr ""
+msgstr "Kopí 2"
 
 #. Pronounce entry for Arabic (Indigenous) name for HIP 72105
 #. Arabic (Indigenous) name for HIP 72105, native: الرمح 2
@@ -17681,7 +17717,7 @@ msgstr ""
 
 #. Arabic (Indigenous) name for HIP 72607, native: الفرقدان 1
 msgid "The Two Calves 1"
-msgstr ""
+msgstr "Dvě telata 1"
 
 #. Pronounce entry for Arabic (Indigenous) name for HIP 72607
 #. Arabic (Indigenous) name for HIP 72607, native: الفرقدان 1
@@ -17690,7 +17726,7 @@ msgstr ""
 
 #. Arabic (Indigenous) name for HIP 75097, native: الفرقدان 2
 msgid "The Two Calves 2"
-msgstr ""
+msgstr "Dvě telata 2"
 
 #. Pronounce entry for Arabic (Indigenous) name for HIP 75097
 #. Arabic (Indigenous) name for HIP 75097, native: الفرقدان 2
@@ -17699,16 +17735,16 @@ msgstr ""
 
 #. Arabic (Indigenous) name for HIP 75458, native: الذيخ
 msgid "The Male Hyena"
-msgstr ""
+msgstr "Hyení samec"
 
 #. Arabic (Indigenous) name for HIP 76267, native: منير الفكة
 #. Al-Fakkah is an incomlete circle
 msgid "The Bright Star Of Al-Fakkah"
-msgstr ""
+msgstr "Jasná hvězda Al-Fakkah"
 
 #. Arabic (Indigenous) name for HIP 80112, native: النياط 1
 msgid "Veins Of The Heart 1"
-msgstr ""
+msgstr "Žíly srdce 1"
 
 #. Pronounce entry for Arabic (Indigenous) name for HIP 80112
 #. Arabic (Indigenous) name for HIP 80112, native: النياط 1
@@ -17717,7 +17753,7 @@ msgstr ""
 
 #. Arabic (Indigenous) name for HIP 80331, native: الذئبان 2
 msgid "The Two Wolves 2"
-msgstr ""
+msgstr "Dva vlci 2"
 
 #. Pronounce entry for Arabic (Indigenous) name for HIP 80331
 #. Arabic (Indigenous) name for HIP 80331, native: الذئبان 2
@@ -17726,7 +17762,7 @@ msgstr ""
 
 #. Arabic (Indigenous) name for HIP 80331, native: العوهقان 2
 msgid "The Two Black Birds 2"
-msgstr ""
+msgstr "Dva černí ptáci 2"
 
 #. Pronounce entry for Arabic (Indigenous) name for HIP 80331
 #. Arabic (Indigenous) name for HIP 80331, native: العوهقان 2
@@ -17735,7 +17771,7 @@ msgstr ""
 
 #. Arabic (Indigenous) name for HIP 80331, native: الحران 2
 msgid "The Two Falcons 2"
-msgstr ""
+msgstr "Dva sokoli 2"
 
 #. Pronounce entry for Arabic (Indigenous) name for HIP 80331
 #. Arabic (Indigenous) name for HIP 80331, native: الحران 2
@@ -17744,7 +17780,7 @@ msgstr ""
 
 #. Arabic (Indigenous) name for HIP 81266, native: النياط 2
 msgid "Veins Of The Heart 2"
-msgstr ""
+msgstr "Žíly srdce 2"
 
 #. Pronounce entry for Arabic (Indigenous) name for HIP 81266
 #. Arabic (Indigenous) name for HIP 81266, native: النياط 2
@@ -17753,7 +17789,7 @@ msgstr ""
 
 #. Arabic (Indigenous) name for HIP 82396, native: الفقرات 1
 msgid "Tail Segments Of The Scorpion 1"
-msgstr ""
+msgstr "Články ocasu Štíra 1"
 
 #. Pronounce entry for Arabic (Indigenous) name for HIP 82396
 #. Arabic (Indigenous) name for HIP 82396, native: الفقرات 1
@@ -17762,7 +17798,7 @@ msgstr ""
 
 #. Arabic (Indigenous) name for HIP 82514, native: الفقرات 2
 msgid "Tail Segments Of The Scorpion 2"
-msgstr ""
+msgstr "Články ocasu Štíra 2"
 
 #. Pronounce entry for Arabic (Indigenous) name for HIP 82514
 #. Arabic (Indigenous) name for HIP 82514, native: الفقرات 2
@@ -17771,7 +17807,7 @@ msgstr ""
 
 #. Arabic (Indigenous) name for HIP 82729, native: الفقرات 3
 msgid "Tail Segments Of The Scorpion 3"
-msgstr ""
+msgstr "Články ocasu Štíra 3"
 
 #. Pronounce entry for Arabic (Indigenous) name for HIP 82729
 #. Arabic (Indigenous) name for HIP 82729, native: الفقرات 3
@@ -17780,11 +17816,11 @@ msgstr ""
 
 #. Arabic (Indigenous) name for HIP 83608, native: الراقص
 msgid "The Trotting Camel"
-msgstr ""
+msgstr "Klusající velbloud"
 
 #. Arabic (Indigenous) name for HIP 83895, native: الذئبان 1
 msgid "The Two Wolves 1"
-msgstr ""
+msgstr "Dva vlci 1"
 
 #. Pronounce entry for Arabic (Indigenous) name for HIP 83895
 #. Arabic (Indigenous) name for HIP 83895, native: الذئبان 1
@@ -17793,7 +17829,7 @@ msgstr ""
 
 #. Arabic (Indigenous) name for HIP 83895, native: العوهقان 1
 msgid "The Two Black Birds 1"
-msgstr ""
+msgstr "Dva černí ptáci 1"
 
 #. Pronounce entry for Arabic (Indigenous) name for HIP 83895
 #. Arabic (Indigenous) name for HIP 83895, native: العوهقان 1
@@ -17802,7 +17838,7 @@ msgstr ""
 
 #. Arabic (Indigenous) name for HIP 83895, native: الحران 1
 msgid "The Two Falcons 1"
-msgstr ""
+msgstr "Dva sokoli 1"
 
 #. Pronounce entry for Arabic (Indigenous) name for HIP 83895
 #. Arabic (Indigenous) name for HIP 83895, native: الحران 1
@@ -17811,7 +17847,7 @@ msgstr ""
 
 #. Arabic (Indigenous) name for HIP 84143, native: الفقرات 4
 msgid "Tail Segments Of The Scorpion 4"
-msgstr ""
+msgstr "Články ocasu Štíra 4"
 
 #. Pronounce entry for Arabic (Indigenous) name for HIP 84143
 #. Arabic (Indigenous) name for HIP 84143, native: الفقرات 4
@@ -17820,15 +17856,15 @@ msgstr ""
 
 #. Arabic (Indigenous) name for HIP 84345, native: كلب الراعي الجنوبي الأول
 msgid "First Dog Of The [Southern] Shepherd"
-msgstr ""
+msgstr "První pes [jižního] pastýře"
 
 #. Arabic (Indigenous) name for HIP 86032, native: الراعي الجنوبي
 msgid "The [Southern] Shepherd"
-msgstr ""
+msgstr "[Jižní] pastýř"
 
 #. Arabic (Indigenous) name for HIP 86228, native: الفقرات 5
 msgid "Tail Segments Of The Scorpion 5"
-msgstr ""
+msgstr "Články ocasu Štíra 5"
 
 #. Pronounce entry for Arabic (Indigenous) name for HIP 86228
 #. Arabic (Indigenous) name for HIP 86228, native: الفقرات 5
@@ -17837,7 +17873,7 @@ msgstr ""
 
 #. Arabic (Indigenous) name for HIP 86670, native: الفقرات 7
 msgid "Tail Segments Of The Scorpion 7"
-msgstr ""
+msgstr "Články ocasu Štíra 7"
 
 #. Pronounce entry for Arabic (Indigenous) name for HIP 86670
 #. Arabic (Indigenous) name for HIP 86670, native: الفقرات 7
@@ -17846,15 +17882,15 @@ msgstr ""
 
 #. Arabic (Indigenous) name for HIP 86742, native: كلب الراعي الجنوبي الثاني
 msgid "Second Dog Of The [Southern] Shepherd"
-msgstr ""
+msgstr "Druhý pes [jižního] pastýře"
 
 #. Arabic (Indigenous) name for HIP 86782, native: الربع
 msgid "The Baby Camel"
-msgstr ""
+msgstr "Velbloudí mládě"
 
 #. Arabic (Indigenous) name for HIP 87073, native: الفقرات 6
 msgid "Tail Segments Of The Scorpion 6"
-msgstr ""
+msgstr "Články ocasu Štíra 6"
 
 #. Pronounce entry for Arabic (Indigenous) name for HIP 87073
 #. Arabic (Indigenous) name for HIP 87073, native: الفقرات 6
@@ -17867,7 +17903,7 @@ msgstr "Následovník"
 
 #. Arabic (Indigenous) name for HIP 89826, native: أظفار النسر الواقع 1
 msgid "The Landing Eagle Claws 1"
-msgstr ""
+msgstr "Drápy usedajícího orla 1"
 
 #. Pronounce entry for Arabic (Indigenous) name for HIP 89826
 #. Arabic (Indigenous) name for HIP 89826, native: أظفار النسر الواقع 1
@@ -17876,7 +17912,7 @@ msgstr ""
 
 #. Arabic (Indigenous) name for HIP 89937, native: الأثافي 3
 msgid "The Three Stone Support 3"
-msgstr ""
+msgstr "Podpěra ze tří kamenů 3"
 
 #. Pronounce entry for Arabic (Indigenous) name for HIP 89937
 #. Arabic (Indigenous) name for HIP 89937, native: الأثافي 3
@@ -17885,7 +17921,7 @@ msgstr ""
 
 #. Arabic (Indigenous) name for HIP 90191, native: أظفار النسر الواقع 2
 msgid "The Landing Eagle Claws 2"
-msgstr ""
+msgstr "Drápy usedajícího orla 2"
 
 #. Pronounce entry for Arabic (Indigenous) name for HIP 90191
 #. Arabic (Indigenous) name for HIP 90191, native: أظفار النسر الواقع 2
@@ -17894,7 +17930,7 @@ msgstr ""
 
 #. Arabic (Indigenous) name for HIP 94376, native: الأثافي 1
 msgid "The Three Stone Support 1"
-msgstr ""
+msgstr "Podpěra ze tří kamenů 1"
 
 #. Pronounce entry for Arabic (Indigenous) name for HIP 94376
 #. Arabic (Indigenous) name for HIP 94376, native: الأثافي 1
@@ -17903,7 +17939,7 @@ msgstr ""
 
 #. Arabic (Indigenous) name for HIP 94779, native: الفوارس 1
 msgid "The Knights 1"
-msgstr ""
+msgstr "Jezdci 1"
 
 #. Pronounce entry for Arabic (Indigenous) name for HIP 94779
 #. Arabic (Indigenous) name for HIP 94779, native: الفوارس 1
@@ -17912,7 +17948,7 @@ msgstr ""
 
 #. Arabic (Indigenous) name for HIP 97165, native: الفوارس 2
 msgid "The Knights 2"
-msgstr ""
+msgstr "Jezdci 2"
 
 #. Pronounce entry for Arabic (Indigenous) name for HIP 97165
 #. Arabic (Indigenous) name for HIP 97165, native: الفوارس 2
@@ -17921,7 +17957,7 @@ msgstr ""
 
 #. Arabic (Indigenous) name for HIP 97433, native: الأثافي 2
 msgid "The Three Stone Support 2"
-msgstr ""
+msgstr "Podpěra ze tří kamenů 2"
 
 #. Pronounce entry for Arabic (Indigenous) name for HIP 97433
 #. Arabic (Indigenous) name for HIP 97433, native: الأثافي 2
@@ -17935,11 +17971,11 @@ msgstr ""
 
 #. Arabic (Indigenous) name for HIP 100310, native: الشاة
 msgid "The Sheep"
-msgstr ""
+msgstr "Ovce"
 
 #. Arabic (Indigenous) name for HIP 100453, native: الفوارس 3
 msgid "The Knights 3"
-msgstr ""
+msgstr "Jezdci 3"
 
 #. Pronounce entry for Arabic (Indigenous) name for HIP 100453
 #. Arabic (Indigenous) name for HIP 100453, native: الفوارس 3
@@ -17948,7 +17984,7 @@ msgstr ""
 
 #. Arabic (Indigenous) name for HIP 100751, native: الصردان 2
 msgid "The Two Shrikes 2"
-msgstr ""
+msgstr "Dva ťuhýci 2"
 
 #. Pronounce entry for Arabic (Indigenous) name for HIP 100751
 #. Arabic (Indigenous) name for HIP 100751, native: الصردان 2
@@ -17957,7 +17993,7 @@ msgstr ""
 
 #. Arabic (Indigenous) name for HIP 101421, native: عمود الصليب
 msgid "The Post Of The Cross"
-msgstr ""
+msgstr "Kůl kříže"
 
 #. Pronounce entry for Arabic (Indigenous) name for HIP 101421
 #. Arabic (Indigenous) name for HIP 101421, native: عمود الصليب
@@ -17966,7 +18002,7 @@ msgstr ""
 
 #. Arabic (Indigenous) name for HIP 101772, native: الصردان 1
 msgid "The Two Shrikes 1"
-msgstr ""
+msgstr "Dva ťuhýci 1"
 
 #. Pronounce entry for Arabic (Indigenous) name for HIP 101772
 #. Arabic (Indigenous) name for HIP 101772, native: الصردان 1
@@ -17975,11 +18011,11 @@ msgstr ""
 
 #. Arabic (Indigenous) name for HIP 102098, native: الردف
 msgid "The Rear Knight"
-msgstr ""
+msgstr "Zadní jezdec"
 
 #. Arabic (Indigenous) name for HIP 102488, native: الفوارس 4
 msgid "The Knights 4"
-msgstr ""
+msgstr "Jezdci 4"
 
 #. Pronounce entry for Arabic (Indigenous) name for HIP 102488
 #. Arabic (Indigenous) name for HIP 102488, native: الفوارس 4
@@ -17988,7 +18024,7 @@ msgstr ""
 
 #. Arabic (Indigenous) name for HIP 104732, native: الفوارس 5
 msgid "The Knights 5"
-msgstr ""
+msgstr "Jezdci 5"
 
 #. Pronounce entry for Arabic (Indigenous) name for HIP 104732
 #. Arabic (Indigenous) name for HIP 104732, native: الفوارس 5
@@ -17997,7 +18033,7 @@ msgstr ""
 
 #. Arabic (Indigenous) name for HIP 105199, native: كوكبا الفرق 1
 msgid "The Two Stars Of Separation 1"
-msgstr ""
+msgstr "Dvě hvězdy odloučení 1"
 
 #. Pronounce entry for Arabic (Indigenous) name for HIP 105199
 #. Arabic (Indigenous) name for HIP 105199, native: كوكبا الفرق 1
@@ -18006,7 +18042,7 @@ msgstr ""
 
 #. Arabic (Indigenous) name for HIP 106032, native: كوكبا الفرق 2
 msgid "The Two Stars Of Separation 2"
-msgstr ""
+msgstr "Dvě hvězdy odloučení 2"
 
 #. Pronounce entry for Arabic (Indigenous) name for HIP 106032
 #. Arabic (Indigenous) name for HIP 106032, native: كوكبا الفرق 2
@@ -18015,7 +18051,7 @@ msgstr ""
 
 #. Arabic (Indigenous) name for HIP 109268, native: اليمامتان 1
 msgid "The Two Doves 1"
-msgstr ""
+msgstr "Dvě holubice 1"
 
 #. Pronounce entry for Arabic (Indigenous) name for HIP 109268
 #. Arabic (Indigenous) name for HIP 109268, native: اليمامتان 1
@@ -18024,7 +18060,7 @@ msgstr ""
 
 #. Arabic (Indigenous) name for HIP 109492, native: الأبيض
 msgid "The White One"
-msgstr ""
+msgstr "Bílá"
 
 #. Pronounce entry for Arabic (Indigenous) name for HIP 109492
 #. Arabic (Indigenous) name for HIP 109492, native: الأبيض
@@ -18033,7 +18069,7 @@ msgstr ""
 
 #. Arabic (Indigenous) name for HIP 112122, native: اليمامتان 2
 msgid "The Two Doves 2"
-msgstr ""
+msgstr "Dvě holubice 2"
 
 #. Pronounce entry for Arabic (Indigenous) name for HIP 112122
 #. Arabic (Indigenous) name for HIP 112122, native: اليمامتان 2
@@ -18042,11 +18078,11 @@ msgstr ""
 
 #. Arabic (Indigenous) name for HIP 112724, native: القرحة
 msgid "The Horse Forehead Star"
-msgstr ""
+msgstr "Hvězda na koňském čele"
 
 #. Arabic (Indigenous) name for HIP 113368, native: الظليمان 1
 msgid "The Two Male Ostriches 1"
-msgstr ""
+msgstr "Dva pštrosi samci 1"
 
 #. Pronounce entry for Arabic (Indigenous) name for HIP 113368
 #. Arabic (Indigenous) name for HIP 113368, native: الظليمان 1
@@ -18064,7 +18100,7 @@ msgstr ""
 
 #. Arabic (Indigenous) name for HIP 113881, native: العرقوة العليا 2
 msgid "The Upper Cross Beam 2"
-msgstr ""
+msgstr "Horní příčka 2"
 
 #. Pronounce entry for Arabic (Indigenous) name for HIP 113881
 #. Arabic (Indigenous) name for HIP 113881, native: العرقوة العليا 2
@@ -18082,7 +18118,7 @@ msgstr ""
 
 #. Arabic (Indigenous) name for HIP 113963, native: العرقوة العليا 1
 msgid "The Upper Cross Beam 1"
-msgstr ""
+msgstr "Horní příčka 1"
 
 #. Pronounce entry for Arabic (Indigenous) name for HIP 113963
 #. Arabic (Indigenous) name for HIP 113963, native: العرقوة العليا 1
@@ -18091,11 +18127,11 @@ msgstr ""
 
 #. Arabic (Indigenous) name for HIP 114222, native: كلب الراعي الشمالي
 msgid "The [Northern] Shepherd Dog"
-msgstr ""
+msgstr "Pes [severního] pastýře"
 
 #. Arabic (Indigenous) name for HIP 116727, native: الراعي الشمالي
 msgid "The [Northern] Shepherd"
-msgstr ""
+msgstr "[Severní] pastýř"
 
 #. Arabic (Indigenous) name for M 7, native: الحمة
 msgid "The Scorpion's Poison"
@@ -19708,7 +19744,7 @@ msgstr ""
 
 #. Babylonian (MUL.APIN) name for HIP 49669, native: 𒈗
 msgid "Sharru (King)"
-msgstr ""
+msgstr "Sharru (Král)"
 
 #. Pronounce entry for Babylonian (MUL.APIN) name for HIP 49669
 #. Babylonian (MUL.APIN) name for HIP 49669, native: 𒈗
@@ -19720,7 +19756,7 @@ msgstr ""
 #. Egyptian (Dendera) name for HIP 65474
 #. Greek (Almagest) name for HIP 65474, native: στάχυς
 msgid "Ear of Grain"
-msgstr ""
+msgstr "Klas"
 
 #. Pronounce entry for Babylonian (MUL.APIN) name for HIP 65474
 #. Babylonian (MUL.APIN) name for HIP 65474, native:
@@ -19735,7 +19771,7 @@ msgstr ""
 #. Babylonian (MUL.APIN) name for HIP 80763, native: 𒃮
 #. Babylonian (Seleucid) name for HIP 80763
 msgid "Scorpion's Heart, Lisi"
-msgstr ""
+msgstr "Srdce Štíra, Lisi"
 
 #. Pronounce entry for Babylonian (MUL.APIN) name for HIP 80763
 #. Babylonian (MUL.APIN) name for HIP 80763, native: 𒃮
@@ -19764,7 +19800,7 @@ msgstr ""
 
 #. Babylonian (MUL.APIN) name for HIP 91262
 msgid "Goddess Lamssatu"
-msgstr ""
+msgstr "Bohyně Lamssatu"
 
 #. Pronounce entry for Babylonian (MUL.APIN) name for HIP 91262
 #. Babylonian (MUL.APIN) name for HIP 91262
@@ -19773,7 +19809,7 @@ msgstr ""
 
 #. Babylonian (MUL.APIN) name for HIP 100453
 msgid "Shoulder of the U.KA.DU.A demon"
-msgstr ""
+msgstr "Rameno démona U.KA.DU.A"
 
 #. Pronounce entry for Babylonian (MUL.APIN) name for HIP 100453
 #. Babylonian (MUL.APIN) name for HIP 100453
@@ -19783,7 +19819,7 @@ msgstr ""
 #. Babylonian (MUL.APIN) name for HIP 102098
 #. Babylonian (Seleucid) name for HIP 102098
 msgid "Breast of the U.KA.DU.A demon"
-msgstr ""
+msgstr "Hruď démona U.KA.DU.A"
 
 #. Pronounce entry for Babylonian (MUL.APIN) name for HIP 102098
 #. Babylonian (MUL.APIN) name for HIP 102098
@@ -19795,7 +19831,7 @@ msgstr ""
 #. Babylonian (MUL.APIN) name for HIP 113726
 #. Babylonian (Seleucid) name for HIP 111169
 msgid "Knee of the U.KA.DU.A demon"
-msgstr ""
+msgstr "Koleno démona U.KA.DU.A"
 
 #. Pronounce entry for Babylonian (MUL.APIN) name for HIP 110538
 #. Babylonian (MUL.APIN) name for HIP 110538
@@ -19809,7 +19845,7 @@ msgstr ""
 #. Babylonian (MUL.APIN) name for HIP 116584
 #. Babylonian (Seleucid) name for HIP 116584
 msgid "Heel of the U.KA.DU.A demon"
-msgstr ""
+msgstr "Pata démona U.KA.DU.A"
 
 #. Pronounce entry for Babylonian (MUL.APIN) name for HIP 116584
 #. Babylonian (MUL.APIN) name for HIP 116584
@@ -20445,115 +20481,115 @@ msgstr "Vlk"
 
 #. Babylonian (Seleucid) name for HIP 7097
 msgid "The brightest star of the Ribbon of the Fishes"
-msgstr ""
+msgstr "Nejjasnější hvězda Stuhy Ryb"
 
 #. Babylonian (Seleucid) name for HIP 8903
 msgid "The front star of the head of the Hired Man"
-msgstr ""
+msgstr "Přední hvězda hlavy Nádeníka"
 
 #. Babylonian (Seleucid) name for HIP 9884
 msgid "The rear star of the head of the Hired Man"
-msgstr ""
+msgstr "Zadní hvězda hlavy Nádeníka"
 
 #. Babylonian (Seleucid) name for HIP 11767
 msgid "Heir of the Sublime Temple, the first-ranking son of Anu"
-msgstr ""
+msgstr "Dědic Vznešeného chrámu, nejpřednější syn Anuův"
 
 #. Babylonian (Seleucid) name for HIP 17702
 msgid "The Bristle"
-msgstr ""
+msgstr "Štětina"
 
 #. Babylonian (Seleucid) name for HIP 21421
 msgid "The Jaw of the Bull"
-msgstr ""
+msgstr "Býčí čelist"
 
 #. Babylonian (Seleucid) name for HIP 25428
 msgid "The northern star of the Chariot"
-msgstr ""
+msgstr "Severní hvězda Vozu"
 
 #. Babylonian (Seleucid) name for HIP 25985
 msgid "the middle of the Rooster"
-msgstr ""
+msgstr "střed Kohouta"
 
 #. Babylonian (Seleucid) name for HIP 26451
 msgid "The southern star of the Chariot"
-msgstr ""
+msgstr "Jižní hvězda Vozu"
 
 #. Babylonian (Seleucid) name for HIP 27366
 msgid "The rear heel of the True Shepherd of Anu"
-msgstr ""
+msgstr "Zadní pata Věrného pastýře Anuova"
 
 #. Babylonian (Seleucid) name for HIP 27366
 msgid "the rear heel of the True Shepherd of Anu"
-msgstr ""
+msgstr "zadní pata Věrného pastýře Anuova"
 
 #. Babylonian (Seleucid) name for HIP 28380
 msgid "Hand of the Crook"
-msgstr ""
+msgstr "Ruka Pastýřské hole"
 
 #. Babylonian (Seleucid) name for HIP 29426
 msgid "the right hand of the True Shepherd of Anu"
-msgstr ""
+msgstr "pravá ruka Věrného pastýře Anuova"
 
 #. Babylonian (Seleucid) name for HIP 29655
 msgid "The front star of the Twin's feet"
-msgstr ""
+msgstr "Přední hvězda nohou Blíženců"
 
 #. Babylonian (Seleucid) name for HIP 30343
 msgid "The rear star of the Twin's feet"
-msgstr ""
+msgstr "Zadní hvězda nohou Blíženců"
 
 #. Babylonian (Seleucid) name for HIP 30343
 msgid "the front feet of the Great Twins"
-msgstr ""
+msgstr "přední nohy Velkých dvojčat"
 
 #. Babylonian (Seleucid) name for HIP 31681
 msgid "The Twin's star near the Shepherd"
-msgstr ""
+msgstr "Hvězda Blíženců blízko Pastýře"
 
 #. Babylonian (Seleucid) name for HIP 33018
 msgid "the front feet and hands of the Great Twins"
-msgstr ""
+msgstr "přední nohy a ruce Velkých dvojčat"
 
 #. Babylonian (Seleucid) name for HIP 33018
 msgid "the hands of the Great Twins"
-msgstr ""
+msgstr "ruce Velkých dvojčat"
 
 #. Babylonian (Seleucid) name for HIP 35264
 msgid "the left foot of the constellation of the Arrow"
-msgstr ""
+msgstr "levá noha souhvězdí Šípu"
 
 #. Babylonian (Seleucid) name for HIP 36850
 msgid "The front Twin star"
-msgstr ""
+msgstr "Přední hvězda Blíženců"
 
 #. Babylonian (Seleucid) name for HIP 37826
 msgid "The rear Twin star"
-msgstr ""
+msgstr "Zadní hvězda Blíženců"
 
 #. Babylonian (Seleucid) name for HIP 37826
 msgid "the rear foot of the Great Twins"
-msgstr ""
+msgstr "zadní noha Velkých dvojčat"
 
 #. Babylonian (Seleucid) name for HIP 39953
 msgid "the hands of Nunki"
-msgstr ""
+msgstr "ruce Nunki"
 
 #. Babylonian (Seleucid) name for HIP 41822
 msgid "The front star of the Crab to the south"
-msgstr ""
+msgstr "Přední hvězda Raka na jihu"
 
 #. Babylonian (Seleucid) name for HIP 41909
 msgid "The front star of the Crab to the north"
-msgstr ""
+msgstr "Přední hvězda Raka na severu"
 
 #. Babylonian (Seleucid) name for HIP 42806
 msgid "The rear star of the Crab to the north"
-msgstr ""
+msgstr "Zadní hvězda Raka na severu"
 
 #. Babylonian (Seleucid) name for HIP 42911
 msgid "The rear star of the Crab to the south"
-msgstr ""
+msgstr "Zadní hvězda Raka na jihu"
 
 #. Babylonian (Seleucid) name for HIP 44816
 msgid "Nunki (Eridu)"
@@ -20561,84 +20597,84 @@ msgstr ""
 
 #. Babylonian (Seleucid) name for HIP 47452
 msgid "the middle of the Snake"
-msgstr ""
+msgstr "střed Hada"
 
 #. Babylonian (Seleucid) name for HIP 47908
 msgid "The head of the Lion"
-msgstr ""
+msgstr "Hlava Lva"
 
 #. Babylonian (Seleucid) name for HIP 47908
 #. Babylonian (Seleucid) name for HIP 48455
 msgid "two stars in the head of the Lion"
-msgstr ""
+msgstr "dvě hvězdy v hlavě Lva"
 
 #. Babylonian (Seleucid) name for HIP 48774
 msgid "the hand of Ninmah which is on the knot"
-msgstr ""
+msgstr "ruka Ninmah, která je na uzlu"
 
 #. Babylonian (Seleucid) name for HIP 49029
 msgid "front right foot of the Lion"
-msgstr ""
+msgstr "přední pravá noha Lva"
 
 #. Babylonian (Seleucid) name for HIP 49583
 #. Babylonian (Seleucid) name for HIP 49669
 #. Babylonian (Seleucid) name for HIP 50335
 #. Babylonian (Seleucid) name for HIP 50583
 msgid "four stars of the chest of the Lion"
-msgstr ""
+msgstr "čtyři hvězdy na hrudi Lva"
 
 #. Babylonian (Seleucid) name for HIP 51624
 msgid "The small star which is 4 cubits behind the King"
-msgstr ""
+msgstr "Malá hvězda, jež je 4 lokty za Králem"
 
 #. Babylonian (Seleucid) name for HIP 51624
 msgid "the foot in the middle of the Lion"
-msgstr ""
+msgstr "noha uprostřed Lva"
 
 #. Babylonian (Seleucid) name for HIP 52727
 msgid "bite of the Harrow"
-msgstr ""
+msgstr "hrot Bran"
 
 #. Babylonian (Seleucid) name for HIP 53740
 msgid "the tail of the Raven"
-msgstr ""
+msgstr "ocas Havrana"
 
 #. Babylonian (Seleucid) name for HIP 54872
 #. Babylonian (Seleucid) name for HIP 54879
 msgid "the two stars in the rump of the Lion"
-msgstr ""
+msgstr "dvě hvězdy v zadnici Lva"
 
 #. Babylonian (Seleucid) name for HIP 54879
 msgid "The Rump of the Lion"
-msgstr ""
+msgstr "Zadnice Lva"
 
 #. Babylonian (Seleucid) name for HIP 57632
 msgid "The single (star) of the tail of the Lion"
-msgstr ""
+msgstr "Jediná (hvězda) ocasu Lva"
 
 #. Babylonian (Seleucid) name for HIP 57757
 msgid "The rear foot of the Lion"
-msgstr ""
+msgstr "Zadní noha Lva"
 
 #. Babylonian (Seleucid) name for HIP 59196
 msgid "the hand of the Mouse"
-msgstr ""
+msgstr "ruka Myši"
 
 #. Babylonian (Seleucid) name for HIP 59803
 msgid "the middle of the Raven"
-msgstr ""
+msgstr "střed Havrana"
 
 #. Babylonian (Seleucid) name for HIP 61941
 msgid "The Single star in front of the Furrow"
-msgstr ""
+msgstr "Jediná hvězda před Brázdou"
 
 #. Babylonian (Seleucid) name for HIP 65474
 msgid "The bright star of the Furrow"
-msgstr ""
+msgstr "Jasná hvězda Brázdy"
 
 #. Babylonian (Seleucid) name for HIP 67927
 msgid "Harness"
-msgstr ""
+msgstr "Postroj"
 
 #. Babylonian (Seleucid) name for HIP 69673
 #. Macedonian constellation, native: јарем, pronounce: Jarem
@@ -20647,124 +20683,124 @@ msgstr "Jho"
 
 #. Babylonian (Seleucid) name for HIP 72105
 msgid "Rear Harness"
-msgstr ""
+msgstr "Zadní postroj"
 
 #. Babylonian (Seleucid) name for HIP 72105
 msgid "the second star of the Harness"
-msgstr ""
+msgstr "druhá hvězda Postroje"
 
 #. Babylonian (Seleucid) name for HIP 72603
 msgid "The southern part of the Scales"
-msgstr ""
+msgstr "Jižní část Vah"
 
 #. Babylonian (Seleucid) name for HIP 72603
 msgid "the front pan of the Balance"
-msgstr ""
+msgstr "přední miska Vah"
 
 #. Babylonian (Seleucid) name for HIP 74785
 msgid "The northern part of the Scales"
-msgstr ""
+msgstr "Severní část Vah"
 
 #. Babylonian (Seleucid) name for HIP 74785
 #. Babylonian (Seleucid) name for HIP 76333
 msgid "the middle of the Balance"
-msgstr ""
+msgstr "střed Vah"
 
 #. Babylonian (Seleucid) name for HIP 76297
 msgid "the eye of the Wolf [Mad Dog]"
-msgstr ""
+msgstr "oko Vlka [Vzteklého psa]"
 
 #. Babylonian (Seleucid) name for HIP 78323
 msgid "[the midd]le of the Wolf [Mad Dog]"
-msgstr ""
+msgstr "[stř]ed Vlka [Vzteklého psa]"
 
 #. Babylonian (Seleucid) name for HIP 78401
 msgid "The middle star of the head of the Scorpion"
-msgstr ""
+msgstr "Prostřední hvězda hlavy Štíra"
 
 #. Babylonian (Seleucid) name for HIP 78401
 msgid "the stars of the head of the Scorpion"
-msgstr ""
+msgstr "hvězdy hlavy Štíra"
 
 #. Babylonian (Seleucid) name for HIP 78820
 msgid "The upper star of the head of the Scorpion"
-msgstr ""
+msgstr "Horní hvězda hlavy Štíra"
 
 #. Babylonian (Seleucid) name for HIP 80763
 msgid "(the god) Lisi"
-msgstr ""
+msgstr "(bůh) Lisi"
 
 #. Babylonian (Seleucid) name for HIP 80763
 msgid "the star of the chest of the Scorpion"
-msgstr ""
+msgstr "hvězda na hrudi Štíra"
 
 #. Babylonian (Seleucid) name for HIP 82514
 msgid "the upraised tail of the Scorpion"
-msgstr ""
+msgstr "zvednutý ocas Štíra"
 
 #. Babylonian (Seleucid) name for HIP 82671
 msgid "the rear foot of the Wolf"
-msgstr ""
+msgstr "zadní noha Vlka"
 
 #. Babylonian (Seleucid) name for HIP 84012
 msgid "the eye of Zababa"
-msgstr ""
+msgstr "oko Zababy"
 
 #. Babylonian (Seleucid) name for HIP 84970
 msgid "The bright star on the tip of Pabilsang's arrow"
-msgstr ""
+msgstr "Jasná hvězda na špičce Pabilsagova šípu"
 
 #. Babylonian (Seleucid) name for HIP 86974
 msgid "the single star of the knee of the She-Goat"
-msgstr ""
+msgstr "jediná hvězda na koleni Kozy"
 
 #. Babylonian (Seleucid) name for HIP 88048
 msgid "the middle of Zababa"
-msgstr ""
+msgstr "střed Zababy"
 
 #. Babylonian (Seleucid) name for HIP 89931
 msgid "the left hand of Pabilsag which is on the bow"
-msgstr ""
+msgstr "levá ruka Pabilsaga, která je na luku"
 
 #. Babylonian (Seleucid) name for HIP 89962
 msgid "the shin of Zababa"
-msgstr ""
+msgstr "holeň Zababy"
 
 #. Babylonian (Seleucid) name for HIP 91262
 msgid "Lady of Life"
-msgstr ""
+msgstr "Paní života"
 
 #. Babylonian (Seleucid) name for HIP 91262
 msgid "the Crook of the Goat"
-msgstr ""
+msgstr "pastýřská hůl Kozy"
 
 #. Babylonian (Seleucid) name for HIP 92041
 msgid "[the right hand of Pabi]lsag which is on the arrow"
-msgstr ""
+msgstr "[pravá ruka Pabi]lsaga, která je na šípu"
 
 #. Babylonian (Seleucid) name for HIP 93805
 msgid "the foot of Zababa"
-msgstr ""
+msgstr "noha Zababy"
 
 #. Babylonian (Seleucid) name for HIP 97649
 msgid "the bright star of the Eagle"
-msgstr ""
+msgstr "jasná hvězda Orla"
 
 #. Babylonian (Seleucid) name for HIP 98032
 msgid "(the star of) Pabilsag which is above the Barge"
-msgstr ""
+msgstr "(hvězda) Pabilsaga, jež je nad Bárkou"
 
 #. Babylonian (Seleucid) name for HIP 100345
 msgid "The Horn of the Goat-Fish"
-msgstr ""
+msgstr "Roh Kozoryby"
 
 #. Babylonian (Seleucid) name for HIP 106985
 msgid "The front star of the Goat-fish"
-msgstr ""
+msgstr "Přední hvězda Kozoryby"
 
 #. Babylonian (Seleucid) name for HIP 107556
 msgid "The rear star of the Goat-fish"
-msgstr ""
+msgstr "Zadní hvězda Kozoryby"
 
 #. Babylonian (Seleucid) name for NAME Jupiter, native: mul.SAĜ.ME.GAR
 msgid "MUL.SANGMEGAR"
@@ -21504,7 +21540,7 @@ msgstr ""
 
 #. Boorong constellation, native: Kourt-chin
 msgid "Male and female brolga"
-msgstr "Jeřáb obecný a jeho samice"
+msgstr "Jeřáb australský a jeho samice"
 
 #. Abbreviation of constellation in Boorong sky culture, name: Male and female
 #. brolga
@@ -22520,7 +22556,7 @@ msgstr ""
 #. Chinese Manchu asterism, native: 太微右垣, pronounce: Tài Wēi Yòu Yuán
 #. Modern (Chinese) asterism
 msgid "Supreme Palace Right Wall"
-msgstr "Pravá zeď Vrchního paláce"
+msgstr "Pravá zeď Nejvyššího paláce"
 
 #. Pronounce entry for Chinese constellation, native: 太微右垣, English: Supreme
 #. Palace Right Wall
@@ -22538,7 +22574,7 @@ msgstr ""
 #. Chinese Manchu asterism, native: 太微左垣, pronounce: Tài Wēi Zuǒ Yuán
 #. Modern (Chinese) asterism
 msgid "Supreme Palace Left Wall"
-msgstr "Levá zeď Vrchního paláce"
+msgstr "Levá zeď Nejvyššího paláce"
 
 #. Pronounce entry for Chinese constellation, native: 太微左垣, English: Supreme
 #. Palace Left Wall
@@ -22915,7 +22951,7 @@ msgstr ""
 #. Chinese Manchu asterism, native: 紫微右垣, pronounce: Zǐ Wēi Yòu Yuán
 #. Modern (Chinese) asterism
 msgid "Purple Forbidden Right Wall"
-msgstr "Pravá zeď Zakázaného města"
+msgstr "Pravá zeď Purpurové zapovězené ohrady"
 
 #. Pronounce entry for Chinese constellation, native: 紫微右垣, English: Purple
 #. Forbidden Right Wall
@@ -22934,7 +22970,7 @@ msgstr ""
 #. Chinese Manchu asterism, native: 紫微左垣, pronounce: Zǐ Wēi Zuǒ Yuán
 #. Modern (Chinese) asterism
 msgid "Purple Forbidden Left Wall"
-msgstr "Levá zeď Zakázaného města"
+msgstr "Levá zeď Purpurové zapovězené ohrady"
 
 #. Pronounce entry for Chinese constellation, native: 紫微左垣, English: Purple
 #. Forbidden Left Wall
@@ -23755,7 +23791,7 @@ msgstr ""
 #. Modern (Chinese) asterism
 #. Modern (Chinese) name for HIP 56975
 msgid "Retinue (In Supreme Palace Enclosure)"
-msgstr "Dvořané (ve Vrchním paláci)"
+msgstr "Dvořané (v ohradě Nejvyššího paláce)"
 
 #. Pronounce entry for Chinese constellation, native: 从官(太微垣), English:
 #. Retinue (In Supreme Palace Enclosure)
@@ -24180,7 +24216,7 @@ msgstr ""
 #. Korean constellation, native: 분묘(墳墓), pronounce: Bunmyo
 #. Modern (Chinese) asterism
 msgid "Tomb (Vassal of Rooftop)"
-msgstr "Hrobka (vazal Střechy)"
+msgstr "Hrobka (podřízená Střeše)"
 
 #. Pronounce entry for Chinese constellation, native: 坟墓(附危宿), English: Tomb
 #. (Vassal of Rooftop)
@@ -24514,7 +24550,7 @@ msgstr ""
 #. Korean constellation, native: 각도(閣道), pronounce: Gakdo
 #. Modern (Chinese) asterism
 msgid "Flying Corridor"
-msgstr "Letecký koridor"
+msgstr "Visutá chodba"
 
 #. Pronounce entry for Chinese constellation, native: 阁道, English: Flying
 #. Corridor
@@ -25771,7 +25807,7 @@ msgstr ""
 #. Modern (Chinese) asterism
 #. Modern (Chinese) name for HIP 63414
 msgid "Recommending Virtuous Men"
-msgstr "Doporučující čestný muž"
+msgstr "Doporučování ctnostných mužů"
 
 #. Pronounce entry for Chinese constellation, native: 进贤, English:
 #. Recommending Virtuous Men
@@ -25933,7 +25969,7 @@ msgstr ""
 #. Korean constellation, native: 구유(九斿), pronounce: Guyu
 #. Modern (Chinese) asterism
 msgid "Imperial Military Flag"
-msgstr "Císařská váleční vlajka"
+msgstr "Císařská válečná vlajka"
 
 #. Pronounce entry for Chinese constellation, native: 九斿, English: Imperial
 #. Military Flag
@@ -27982,7 +28018,7 @@ msgstr ""
 #. Japanese Yasui Map constellation, native: 三公(太微垣) (さんこう), pronounce: Sankō
 #. Modern (Chinese) asterism
 msgid "Three Excellencies (In Supreme Palace Enclosure)"
-msgstr "Tři Excelence (ve Vrchním paláci)"
+msgstr "Tři Excelence (v ohradě Nejvyššího paláce)"
 
 #. Pronounce entry for Chinese constellation, native: 三公(太微垣), English: Three
 #. Excellencies (In Supreme Palace Enclosure)
@@ -28016,7 +28052,7 @@ msgstr ""
 #. Japanese Yasui Map constellation, native: 三公(紫微垣) (さんこう), pronounce: San Kō
 #. Modern (Chinese) asterism
 msgid "Three Excellencies (In Purple Forbidden Enclosure)"
-msgstr "Tři Excelence (v Zakázaném městě)"
+msgstr "Tři Excelence (v Purpurové zapovězené ohradě)"
 
 #. Pronounce entry for Chinese constellation, native: 三公(紫微垣), English: Three
 #. Excellencies (In Purple Forbidden Enclosure)
@@ -28688,7 +28724,7 @@ msgstr ""
 #. Korean constellation, native: 사괴(司恠), pronounce: Sagwae
 #. Modern (Chinese) asterism
 msgid "Deity in Charge of Monsters"
-msgstr "Božstvo ve službách monster"
+msgstr "Božstvo vládnoucí netvorům"
 
 #. Pronounce entry for Chinese constellation, native: 司怪, English: Deity in
 #. Charge of Monsters
@@ -31163,7 +31199,7 @@ msgstr ""
 #. Korean constellation, native: 천연(天淵), pronounce: Cheonyeon
 #. Modern (Chinese) asterism
 msgid "Celestial Spring"
-msgstr "Nebeský potok"
+msgstr "Nebeský pramen"
 
 #. Pronounce entry for Chinese constellation, native: 天渊, English: Celestial
 #. Spring
@@ -32555,7 +32591,7 @@ msgstr ""
 #. Modern (Chinese) asterism
 #. Modern (Chinese) name for HIP 60172
 msgid "Usher to the Court"
-msgstr "Uvaděč k soudu"
+msgstr "Dvorní uvaděč"
 
 #. Pronounce entry for Chinese constellation, native: 谒者, English: Usher to
 #. the Court
@@ -33246,7 +33282,7 @@ msgstr ""
 #. Korean name for HIP  65477, native: 보(輔)
 #. Modern (Chinese) asterism
 msgid "Assistant (Vassal of Northern Dipper)"
-msgstr "Pomocník (podřízený Severní naběračky)"
+msgstr "Pomocník (podřízený Severní naběračce)"
 
 #. Pronounce entry for Chinese constellation, native: 辅(附北斗), English:
 #. Assistant (Vassal of Northern Dipper)
@@ -35126,6 +35162,51 @@ msgstr "Válečný vůz"
 #. Dynasty (14th Century) sky culture, native: 轸, English: Chariot
 msgctxt "chinese lunar mansion"
 msgid "Zhěn"
+msgstr ""
+
+#. Name of a zodiac sign or a lunar mansion in Chinese sky culture, native:
+#. 二十八宿, pronounce: Xiù
+#. Needs confirmation, then remove edges (edges_type=none)
+#. Name of a zodiac sign or a lunar mansion in Chinese Chenzhuo Sky (3rd
+#. Century) sky culture, native: 二十八宿, pronounce: Xiù
+#. Needs confirmation, then remove edges (edges_type=none)
+#. Name of a zodiac sign or a lunar mansion in Chinese Manchu sky culture,
+#. native: 二十八宿, pronounce: Xiù
+#. Needs confirmation, then remove edges (edges_type=none)
+#. Name of a zodiac sign or a lunar mansion in Chinese Song Dynasty Sky sky
+#. culture, native: 二十八宿, pronounce: Xiù
+#. Needs confirmation, then remove edges (edges_type=none)
+#. Name of a zodiac sign or a lunar mansion in Chinese Xianglin Star Chart sky
+#. culture, native: 二十八宿, pronounce: Xiù
+#. Needs confirmation, then remove edges (edges_type=none)
+#. Name of a zodiac sign or a lunar mansion in Chinese Yuan Dynasty (14th
+#. Century) sky culture, native: 二十八宿, pronounce: Xiù
+#. Name of a zodiac sign or a lunar mansion in Japanese Yasui Map sky culture,
+#. native: 二十八宿, pronounce: Nijū Hasshuku
+#. Needs confirmation, then remove edges (edges_type=none)
+#. Name of a zodiac sign or a lunar mansion in Korean sky culture, native:
+#. 이십팔수(二十八宿), pronounce: Isipalsu
+msgid "Lunar Mansion"
+msgstr ""
+
+#. Pronounce entry for a zodiac sign or a lunar mansion in Chinese sky
+#. culture, native: 二十八宿, English: Lunar Mansion
+#. Needs confirmation, then remove edges (edges_type=none)
+#. Pronounce entry for a zodiac sign or a lunar mansion in Chinese Chenzhuo
+#. Sky (3rd Century) sky culture, native: 二十八宿, English: Lunar Mansion
+#. Needs confirmation, then remove edges (edges_type=none)
+#. Pronounce entry for a zodiac sign or a lunar mansion in Chinese Manchu sky
+#. culture, native: 二十八宿, English: Lunar Mansion
+#. Needs confirmation, then remove edges (edges_type=none)
+#. Pronounce entry for a zodiac sign or a lunar mansion in Chinese Song
+#. Dynasty Sky sky culture, native: 二十八宿, English: Lunar Mansion
+#. Needs confirmation, then remove edges (edges_type=none)
+#. Pronounce entry for a zodiac sign or a lunar mansion in Chinese Xianglin
+#. Star Chart sky culture, native: 二十八宿, English: Lunar Mansion
+#. Needs confirmation, then remove edges (edges_type=none)
+#. Pronounce entry for a zodiac sign or a lunar mansion in Chinese Yuan
+#. Dynasty (14th Century) sky culture, native: 二十八宿, English: Lunar Mansion
+msgid "Xiù"
 msgstr ""
 
 #. This word is used in Chinese star names, e.g. "Wang Liang Added IX"
@@ -40264,7 +40345,7 @@ msgstr "Dōngshàngxiàng"
 #. Chinese name for HIP 61968, native: 三公二[太微垣]
 #. Modern (Chinese) name for HIP 61968
 msgid "Three Excellencies II (In Supreme Palace Enclosure)"
-msgstr "Tři Excelence II (ve Vrchním paláci)"
+msgstr "Tři Excelence II (v ohradě Nejvyššího paláce)"
 
 #. Pronounce entry for Chinese name for HIP 61968
 #. Chinese name for HIP 61968, native: 三公二[太微垣]
@@ -40291,7 +40372,7 @@ msgstr ""
 #. Pinyin transliteration
 #. Modern (Chinese) name for HIP 62443
 msgid "Three Excellencies III (In Supreme Palace Enclosure)"
-msgstr "Tři Excelence III (ve Vrchním paláci)"
+msgstr "Tři Excelence III (v ohradě Nejvyššího paláce)"
 
 #. Pronounce entry for Chinese name for HIP 62572
 #. Pinyin transliteration
@@ -40566,7 +40647,7 @@ msgstr ""
 #. Pinyin transliteration
 #. Modern (Chinese) name for HIP 64906
 msgid "Three Excellencies III (In Purple Forbidden Enclosure)"
-msgstr "Tři Excelence III (v Zakázaném městě)"
+msgstr "Tři Excelence III (v Purpurové zapovězené ohradě)"
 
 #. Chinese name for HIP 65109, native: 柱十一[角宿]
 #. Pinyin transliteration
@@ -40687,7 +40768,7 @@ msgstr ""
 #. Chinese name for HIP 66234, native: 三公二[紫微垣]
 #. Modern (Chinese) name for HIP 66234
 msgid "Three Excellencies II (In Purple Forbidden Enclosure)"
-msgstr "Tři Excelence II (v Zakázaném městě)"
+msgstr "Tři Excelence II (v Purpurové zapovězené ohradě)"
 
 #. Pronounce entry for Chinese name for HIP 66657
 #. Pronounce entry for Chinese name for HIP 71683
@@ -51848,7 +51929,7 @@ msgstr ""
 #. Doshikū
 #. Korean constellation, native: 토사공(土司空), pronounce: Tosagong
 msgid "Master of Constructions (In Chariot Mansion)"
-msgstr "Vedoucí staveb (v domě Válečného vozu)"
+msgstr "Vedoucí staveb (v domu Válečného vozu)"
 
 #. Pronounce entry for Chinese Chenzhuo Sky (3rd Century) constellation,
 #. native: 土司空(轸宿), English: Master of Constructions (In Chariot Mansion)
@@ -55869,7 +55950,7 @@ msgstr ""
 #. Korean constellation, native: 적시(積尸), pronounce: Jeoksi
 #. Korean name for HIP  13879, native: 적시(積尸)
 msgid "Heap of Corpses (In Stomach Mansion)"
-msgstr "Kupa mrtvol (v domě Žaludku)"
+msgstr "Kupa mrtvol (v domu Žaludku)"
 
 #. Chinese Xianglin Star Chart constellation, native: 积水(胃宿), pronounce: Jī
 #. Shuǐ(Wèi Xiù)
@@ -55879,7 +55960,7 @@ msgstr "Kupa mrtvol (v domě Žaludku)"
 #. Korean constellation, native: 적수(積水), pronounce: Jeoksu
 #. Korean name for HIP  19167, native: 적수(積水)
 msgid "Stored water (In Stomach Mansion)"
-msgstr "Uskladněná voda (v domě Žaludku)"
+msgstr "Uskladněná voda (v domu Žaludku)"
 
 #. Chinese Xianglin Star Chart constellation, native: 积水(井宿), pronounce: Jī
 #. Shuǐ(Jǐng Xiù)
@@ -55889,7 +55970,7 @@ msgstr "Uskladněná voda (v domě Žaludku)"
 #. Korean constellation, native: 적수(積水), pronounce: Jeoksu
 #. Korean name for HIP  36145, native: 적수(積水)
 msgid "Accumulated Water (In Well Mansion)"
-msgstr "Nahromaděná voda (v domě Studny)"
+msgstr "Nahromaděná voda (v domu Studny)"
 
 #. Chinese Xianglin Star Chart name for NAME Jupiter, native: 岁星
 #. Native name of Jupiter in Chinese culture
@@ -56174,7 +56255,7 @@ msgstr "Přívoz"
 
 #. Egyptian constellation
 msgid "Boat"
-msgstr "loďka"
+msgstr "Loďka"
 
 #. Egyptian constellation
 #. Indian Vedic constellation, native: मकरराशिः, pronounce: Makara Rāśi
@@ -56244,11 +56325,11 @@ msgstr "Vodní hvězdy"
 
 #. Egyptian name for NAME Jupiter, native: Hor-tash-tawy
 msgid "Horus Who Binds the Two Lands"
-msgstr "Horus, jenž spojuje Obě země"
+msgstr "Hór, jenž spojuje Obě země"
 
 #. Egyptian name for NAME Mars, native: Horus-Desher
 msgid "Red Horus"
-msgstr "Rudý Horus"
+msgstr "Rudý Hór"
 
 #. Egyptian name for NAME Mercury, native: Sebeg
 msgid "Unknown"
@@ -56260,7 +56341,7 @@ msgstr "Poutník"
 
 #. Egyptian name for NAME Saturn, native: Hor-ka-Pet
 msgid "Horus, the Bull of Heaven"
-msgstr "Horus, nebeský býk"
+msgstr "Hór, nebeský býk"
 
 #. Egyptian name for NAME Sun, native: Amon-Ra
 msgid "God of Sun"
@@ -56598,15 +56679,15 @@ msgstr ""
 
 #. Egyptian (Dendera) name for HIP 69673
 msgid "The Guard"
-msgstr ""
+msgstr "Strážce"
 
 #. Egyptian (Dendera) name for HIP 80763
 msgid "Scorpion's Heart"
-msgstr ""
+msgstr "Srdce Štíra"
 
 #. Egyptian (Dendera) name for NAME Jupiter
 msgid "Horus the merchant"
-msgstr "Horus obchodník"
+msgstr "Hór obchodník"
 
 #. Pronounce entry for Egyptian (Dendera) name for NAME Jupiter
 #. Egyptian (Dendera) name for NAME Jupiter
@@ -56615,7 +56696,7 @@ msgstr ""
 
 #. Egyptian (Dendera) name for NAME Mars
 msgid "Horus the red one"
-msgstr "Horus rudý"
+msgstr "Hór rudý"
 
 #. Pronounce entry for Egyptian (Dendera) name for NAME Mars
 #. Egyptian (Dendera) name for NAME Mars
@@ -56642,7 +56723,7 @@ msgstr ""
 
 #. Egyptian (Dendera) name for NAME Saturn
 msgid "Horus the bull"
-msgstr "Horus býk"
+msgstr "Hór býk"
 
 #. Egyptian (Dendera) name for NAME Sun
 #. Pronounce entry for Egyptian (Dendera) name for NAME Sun
@@ -57334,6 +57415,21 @@ msgstr "Ryba"
 #. Almagest) sky culture, native: ʾΙχθύες, English: Fish
 msgctxt "Greek zodiacal sign"
 msgid "Ichthyes"
+msgstr ""
+
+#. Name of a zodiac sign or a lunar mansion in Greek (Almagest) sky culture,
+#. native: ζῳδιακός, pronounce: zodiakos
+#. Name of a zodiac sign or a lunar mansion in Greek (Farnese + Almagest) sky
+#. culture, native: ζῳδιακός, pronounce: zodiakos
+msgid "Circle of Living Creatures"
+msgstr ""
+
+#. Pronounce entry for a zodiac sign or a lunar mansion in Greek (Almagest)
+#. sky culture, native: ζῳδιακός, English: Circle of Living Creatures
+#. Pronounce entry for a zodiac sign or a lunar mansion in Greek (Farnese +
+#. Almagest) sky culture, native: ζῳδιακός, English: Circle of Living
+#. Creatures
+msgid "zodiakos"
 msgstr ""
 
 #. Greek (Almagest) name for HIP 145
@@ -63249,43 +63345,48 @@ msgstr "Ryby"
 
 #. Greek (Dante) name for HIP 13847
 msgid "Eridanus: The last star of the river, the bright one"
-msgstr ""
+msgstr "Eridanus: Poslední hvězda řeky, ta jasná"
 
 #. Greek (Dante) name for HIP 21421
 msgid ""
 "[The stars in the face, called 'Hyades':] the bright star of the Hyades, the"
 " reddish one on the southern eye"
 msgstr ""
+"[Hvězdy v obličeji zvané ‚Hyády‘:] jasná hvězda Hyád, načervenalá na jižním "
+"oku"
 
 #. Greek (Dante) name for HIP 24436
 msgid ""
 "Orion: The bright star in the left foot, which is [applied in] common to the"
 " water [of Eridanus]"
 msgstr ""
+"Orion: Jasná hvězda v levé noze, která [náleží] společně i k vodě [Eridanu]"
 
 #. Greek (Dante) name for HIP 27989
 msgid "Orion: The bright, reddish star on the right shoulder"
-msgstr ""
+msgstr "Orion: Jasná načervenalá hvězda na pravém rameni"
 
 #. Greek (Dante) name for HIP 30438
 msgid ""
 "Argo: The more advanced of the 2 stars in the other [southern, rear] "
 "steeringoar, called Canopus"
 msgstr ""
+"Argo: Přednější ze 2 hvězd v druhém [jižním, zadním] kormidelním vesle, "
+"zvaná Canopus"
 
 #. Greek (Dante) name for HIP 32349
 msgid ""
 "The star in the mouth, the brightest, which is called 'the Dog' and is "
 "sparkeling"
-msgstr ""
+msgstr "Hvězda v tlamě, nejjasnější, která se nazývá ‚Pes‘ a jiskří"
 
 #. Greek (Dante) name for HIP 57632
 msgid "The star on the end of the tail [of the Lion]"
-msgstr ""
+msgstr "Hvězda na konci ocasu [Lva]"
 
 #. Greek (Dante) name for HIP 71683
 msgid "Centaurus: The star on the end of the right front leg"
-msgstr ""
+msgstr "Kentaur: Hvězda na konci pravé přední nohy"
 
 #. Greek (Dante) name for HIP 113368
 msgid ""
@@ -63293,6 +63394,8 @@ msgid ""
 "and on the mouth of & PsA: The star in the mouth, which is the same as the "
 "beginning of the water"
 msgstr ""
+"Aqr: [Hvězdy v proudu vody:] Hvězda na konci vody a v tlamě & PsA: Hvězda v "
+"tlamě, jež je totožná s počátkem vody"
 
 #. Pronounce entry for Greek (Farnese + Almagest) constellation, native:
 #. Βοώτης, English: Ploughman
@@ -63515,11 +63618,11 @@ msgstr ""
 
 #. Hawaiian Starlines name for HIP 11767, native: Hokupa‘a
 msgid "North Star"
-msgstr ""
+msgstr "Polárka"
 
 #. Hawaiian Starlines name for HIP 69673, native: Hokule‘a
 msgid "Star of gladness"
-msgstr ""
+msgstr "Hvězda radosti"
 
 #. Indian Vedic constellation, native: अश्विनी, pronounce: Aśvinī
 msgid "With Horses"
@@ -64555,6 +64658,20 @@ msgid "Mīna"
 msgstr ""
 
 #. Name of a zodiac sign or a lunar mansion in Indian Vedic sky culture,
+#. native: राशि-चक्रम्, pronounce: Rāśi
+#. Please replace by Indian names, and remove symbols if not used
+#. traditionally!
+msgid "Indian Zodiac"
+msgstr ""
+
+#. Pronounce entry for a zodiac sign or a lunar mansion in Indian Vedic sky
+#. culture, native: राशि-चक्रम्, English: Indian Zodiac
+#. Please replace by Indian names, and remove symbols if not used
+#. traditionally!
+msgid "Rāśi"
+msgstr ""
+
+#. Name of a zodiac sign or a lunar mansion in Indian Vedic sky culture,
 #. native: अश्विनी, pronounce: Aśvinī
 #. Name of a zodiac sign or a lunar mansion in Indian (Nakshatras) sky
 #. culture, native: अश्विनी, pronounce: Aśvinī
@@ -65002,19 +65119,33 @@ msgctxt "indian lunar mansion"
 msgid "Abhijit"
 msgstr ""
 
+#. Name of a zodiac sign or a lunar mansion in Indian Vedic sky culture,
+#. native: नक्षत्र-चक्रम्, pronounce: Naksatra
+#. Name of a zodiac sign or a lunar mansion in Indian (Nakshatras) sky
+#. culture, native: नक्षत्र-चक्रम्, pronounce: Naksatra
+msgid "Nakshatras"
+msgstr ""
+
+#. Pronounce entry for a zodiac sign or a lunar mansion in Indian Vedic sky
+#. culture, native: नक्षत्र-चक्रम्, English: Nakshatras
+#. Pronounce entry for a zodiac sign or a lunar mansion in Indian (Nakshatras)
+#. sky culture, native: नक्षत्र-चक्रम्, English: Nakshatras
+msgid "Naksatra"
+msgstr ""
+
 #. Indian Vedic name for HIP 746, native: जमदग्निः
 #. Pronounce entry for Indian Vedic name for HIP 746
 #. Indian Vedic name for HIP 746, native: जमदग्निः
 msgid "Jamadagni"
-msgstr ""
+msgstr "Džamadagni"
 
 #. Indian Vedic name for HIP 5737, native: रेवती
 msgid "Wealthy"
-msgstr ""
+msgstr "Bohatá"
 
 #. Indian Vedic name for HIP 11767, native: ध्रुवः
 msgid "Steadfast"
-msgstr ""
+msgstr "Stálá"
 
 #. Pronounce entry for Indian Vedic name for HIP 11767
 #. Indian Vedic name for HIP 11767, native: ध्रुवः
@@ -65023,7 +65154,7 @@ msgstr ""
 
 #. Indian Vedic name for HIP 24436, native: Vānrājā
 msgid "Monarch"
-msgstr ""
+msgstr "Panovník"
 
 #. Pronounce entry for Indian Vedic name for HIP 24436
 #. Indian Vedic name for HIP 24436, native: Vānrājā
@@ -65032,7 +65163,7 @@ msgstr ""
 
 #. Indian Vedic name for HIP 24608, native: ब्रह्महृदयम्
 msgid "Creator's heart"
-msgstr ""
+msgstr "Stvořitelovo srdce"
 
 #. Pronounce entry for Indian Vedic name for HIP 24608
 #. Indian Vedic name for HIP 24608, native: ब्रह्महृदयम्
@@ -65041,7 +65172,7 @@ msgstr ""
 
 #. Indian Vedic name for HIP 25336, native: कार्त्तिकेयः
 msgid "Kr̥ttikās' son"
-msgstr ""
+msgstr "Syn Krttik"
 
 #. Pronounce entry for Indian Vedic name for HIP 25336
 #. Indian Vedic name for HIP 25336, native: कार्त्तिकेयः
@@ -65051,7 +65182,7 @@ msgstr ""
 #. Indian Vedic name for HIP 25428, native: अग्निः
 #. Indian Vedic name for HIP 31681, native: अनलः
 msgid "Fire"
-msgstr ""
+msgstr "Oheň"
 
 #. Pronounce entry for Indian Vedic name for HIP 25428
 #. Indian Vedic name for HIP 25428, native: अग्निः
@@ -65060,7 +65191,7 @@ msgstr ""
 
 #. Indian Vedic name for HIP 25930, native: चित्रलेखा
 msgid "Picturesque"
-msgstr ""
+msgstr "Malebná"
 
 #. Pronounce entry for Indian Vedic name for HIP 25930
 #. Indian Vedic name for HIP 25930, native: चित्रलेखा
@@ -65069,7 +65200,7 @@ msgstr ""
 
 #. Indian Vedic name for HIP 26311, native: अनिरुद्धः
 msgid "Unbounded"
-msgstr ""
+msgstr "Nespoutaný"
 
 #. Pronounce entry for Indian Vedic name for HIP 26311
 #. Indian Vedic name for HIP 26311, native: अनिरुद्धः
@@ -65087,7 +65218,7 @@ msgstr ""
 
 #. Indian Vedic name for HIP 27366, native: कार्त्तवीर्यः
 msgid "Kartavirya"
-msgstr ""
+msgstr "Kártavírja"
 
 #. Pronounce entry for Indian Vedic name for HIP 27366
 #. Indian Vedic name for HIP 27366, native: कार्त्तवीर्यः
@@ -65098,7 +65229,7 @@ msgstr ""
 #. Pronounce entry for Indian Vedic name for HIP 30438
 #. Indian Vedic name for HIP 30438, native: अगस्त्यः
 msgid "Agastya"
-msgstr ""
+msgstr "Agastja"
 
 #. Pronounce entry for Indian Vedic name for HIP 31681
 #. Indian Vedic name for HIP 31681, native: अनलः
@@ -65117,7 +65248,7 @@ msgstr ""
 
 #. Indian Vedic name for HIP 36850, native: अदितिः
 msgid "Uncut (Kashyapa's wife)"
-msgstr ""
+msgstr "Nerozdělená (Kašjapova manželka)"
 
 #. Pronounce entry for Indian Vedic name for HIP 36850
 #. Indian Vedic name for HIP 36850, native: अदितिः
@@ -65126,7 +65257,7 @@ msgstr ""
 
 #. Indian Vedic name for HIP 37826, native: दितिः
 msgid "Cut (Kashyapa's wife)"
-msgstr ""
+msgstr "Rozdělená (Kašjapova manželka)"
 
 #. Pronounce entry for Indian Vedic name for HIP 37826
 #. Indian Vedic name for HIP 37826, native: दितिः
@@ -65135,7 +65266,7 @@ msgstr ""
 
 #. Indian Vedic name for HIP 49669, native: मघा
 msgid "Bountiful one"
-msgstr ""
+msgstr "Hojná"
 
 #. Indian Vedic name for HIP 53910, native: पुलहः
 #. Pronounce entry for Indian Vedic name for HIP 53910
@@ -65174,23 +65305,23 @@ msgstr ""
 #. Pronounce entry for Indian Vedic name for HIP 65378
 #. Indian Vedic name for HIP 65378, native: वसिष्ठः
 msgid "Vaśisṭha"
-msgstr ""
+msgstr "Vasištha"
 
 #. Indian Vedic name for HIP 65477, native: अरुन्धती
 #. Pronounce entry for Indian Vedic name for HIP 65477
 #. Indian Vedic name for HIP 65477, native: अरुन्धती
 msgid "Arundhatī"
-msgstr ""
+msgstr "Arundhatí"
 
 #. Indian Vedic name for HIP 67301, native: मरीचिः
 #. Pronounce entry for Indian Vedic name for HIP 67301
 #. Indian Vedic name for HIP 67301, native: मरीचिः
 msgid "Mārīchi"
-msgstr ""
+msgstr "Maríči"
 
 #. Indian Vedic name for HIP 69673, native: स्वातिः
 msgid "Honest one"
-msgstr ""
+msgstr "Pravdomluvná"
 
 #. Pronounce entry for Indian Vedic name for HIP 69673
 #. Indian Vedic name for HIP 69673, native: स्वातिः
@@ -65204,11 +65335,11 @@ msgstr ""
 
 #. Indian Vedic name for HIP 91262, native: अभिजित्
 msgid "Invincible"
-msgstr ""
+msgstr "Nepřemožitelná"
 
 #. Indian Vedic name for HIP 110395, native: शतभिषक्
 msgid "Satabhisak"
-msgstr ""
+msgstr "Šatabhišak"
 
 #. Indian Vedic name for NAME Jupiter, native: गुरुः
 #. Jupiter
@@ -65632,7 +65763,7 @@ msgstr ""
 
 #. Inuit constellation, native: Aagjuuk
 msgid "Two Sunbeams"
-msgstr "Dva slunečné paprsky"
+msgstr "Dva sluneční paprsky"
 
 #. Inuit constellation, native: Akkuttujuuk
 msgid "Two Placed Far Apart"
@@ -65656,12 +65787,12 @@ msgstr "Caribou"
 
 #. Inuit constellation, native: Sivulliik
 msgid "Two in Front"
-msgstr "Dva v předu"
+msgstr "Dva vpředu"
 
 #. Inuit constellation, native: Sakiattiak
 #. Inuit name for M45, native: Sakiattiak
 msgid "Breastbone"
-msgstr "prsní kost"
+msgstr "Prsní kost"
 
 #. Inuit constellation, native: Ullaktut
 msgid "Runners"
@@ -65689,7 +65820,7 @@ msgstr "Nikdy se nehýbající"
 #. Inuit constellation, native: Sikuliaqsiujuittuq
 #. Inuit name for HIP 37279, native: Sikuliaqsiujuittuq
 msgid "Name of a Murdered Man"
-msgstr "Jméno zavraždéného člověka"
+msgstr "Jméno zavražděného člověka"
 
 #. Inuit name for HIP 21421
 msgid "Spirit of a Polar Bear"
@@ -66432,7 +66563,7 @@ msgstr ""
 
 #. Japanese Yasui Map constellation, native: 天狗(斗宿) (てんこう), pronounce: Tenkō
 msgid "Celestial Dog (In Dipper Mansion)"
-msgstr "Nebeský pes (v domě Naběračky)"
+msgstr "Nebeský pes (v domu Naběračky)"
 
 #. Pronounce entry for Japanese Yasui Map constellation, native: 農丈人(のうじょうにん),
 #. English: Peasant
@@ -67027,7 +67158,7 @@ msgstr ""
 #. Shokō
 #. Korean constellation, native: 오제후(五諸侯), pronounce: Ojehu
 msgid "Five Feudal Kings (In Well Mansion)"
-msgstr "Pět lenních králů (v domě Studny)"
+msgstr "Pět feudálních králů (v domu Studny)"
 
 #. Pronounce entry for Japanese Yasui Map constellation, native: 積薪(せきしん),
 #. English: Pile of Firewood
@@ -67096,7 +67227,7 @@ msgstr ""
 
 #. Japanese Yasui Map constellation, native: 天狗(鬼宿) (てんこう), pronounce: Tenkō
 msgid "Celestial Dog (In Ghosts Mansion)"
-msgstr "Nebeský pes (v domě Duchů)"
+msgstr "Nebeský pes (v domu Duchů)"
 
 #. Pronounce entry for Japanese Yasui Map constellation, native: 外厨(がいちゅう),
 #. English: Outer Kitchen
@@ -68502,6 +68633,12 @@ msgstr "Válečný vůz"
 #. Needs confirmation, then remove edges (edges_type=none)
 msgctxt "japanese lunar mansion"
 msgid "Shinshuku/MitsukakeBoshi"
+msgstr ""
+
+#. Pronounce entry for a zodiac sign or a lunar mansion in Japanese Yasui Map
+#. sky culture, native: 二十八宿, English: Lunar Mansion
+#. Needs confirmation, then remove edges (edges_type=none)
+msgid "Nijū Hasshuku"
 msgstr ""
 
 #. Pronounce entry for Japanese Yasui Map name for HIP 70692
@@ -70402,7 +70539,7 @@ msgstr ""
 #. Korean constellation, native: 적시(積尸), pronounce: Jeoksi
 #. Korean name for M 44, native: 적시(積尸)
 msgid "Cumulative Corpse Gas (In Ghosts Mansion)"
-msgstr "Výpary z nahromaděných mrtvol (v domě Duchů)"
+msgstr "Výpary z nahromaděných mrtvol (v domu Duchů)"
 
 #. Pronounce entry for Korean constellation, native: 관(爟), English: Beacon
 #. Fire
@@ -70842,6 +70979,11 @@ msgstr "Válečný vůz"
 #. native: 진(軫), English: Chariot
 msgctxt "korean lunar mansion"
 msgid "Jin"
+msgstr ""
+
+#. Pronounce entry for a zodiac sign or a lunar mansion in Korean sky culture,
+#. native: 이십팔수(二十八宿), English: Lunar Mansion
+msgid "Isipalsu"
 msgstr ""
 
 #. Pronounce entry for Korean name for HIP  70692
@@ -71510,7 +71652,7 @@ msgstr "Část pluhu"
 
 #. Macedonian name for HIP 11767
 msgid "Mediterranean star"
-msgstr ""
+msgstr "Středomořská hvězda"
 
 #. Macedonian name for M31
 msgid "Threshing floor"
@@ -71726,15 +71868,15 @@ msgstr "Ropucha"
 #. Maya name for HIP 36850
 #. Maya name for HIP 37826
 msgid "Two brilliant ones"
-msgstr ""
+msgstr "Dvě zářící"
 
 #. Maya name for HIP 49669
 msgid "Single Star"
-msgstr ""
+msgstr "Osamocená hvězda"
 
 #. Maya name for HIP 71683
 msgid "Corner Star"
-msgstr ""
+msgstr "Rohová hvězda"
 
 #. Maya name for NAME Venus, native: Chac 'Ek
 msgid "Bright Star"
@@ -75423,7 +75565,7 @@ msgstr ""
 
 #. Modern name for HIP 70497, native: Asellus Primus
 msgid "First Donkey"
-msgstr ""
+msgstr "První osel"
 
 #. Modern name for HIP 70755, native: Algafar II
 #. Modern (Sternenkarten) name for HIP 70755, native: Algafar II
@@ -76336,7 +76478,7 @@ msgstr ""
 #. Modern name for HIP 100044, native: Revenant of the Swan
 #. Modern (Sternenkarten) name for HIP 100044, native: Revenant of the Swan
 msgid "Revenant of the Swan"
-msgstr "Zmrtvýchvstání Labutě"
+msgstr "Přízrak Labutě"
 
 #. Modern name for HIP 100044, native: Permanent nova
 #. Modern (Sternenkarten) name for HIP 100044, native: Permanent nova
@@ -78011,7 +78153,7 @@ msgstr ""
 
 #. Modern (IAU) name for PNG064.7+05.0, native: Campbell's Hydrogen Star
 msgid "Campbell's Hydrogen Star"
-msgstr ""
+msgstr "Campbellova vodíková hvězda"
 
 #. Modern (IAU) name for UGC10822, native: Draco Dwarf
 msgid "Draco Dwarf"
@@ -78088,7 +78230,7 @@ msgstr ""
 #. Modern (Journey to the West) constellation, native: 羊力大仙, pronounce: Yáng
 #. Lì Dà Xiān, byname: Aries
 msgid "Great Immortal Antelope"
-msgstr "Velký nesmrtelný antilop"
+msgstr "Velká nesmrtelná antilopa"
 
 #. Pronounce entry for Modern (Journey to the West) constellation, native:
 #. 羊力大仙, English: Great Immortal Antelope, byname: Aries
@@ -79053,7 +79195,7 @@ msgstr ""
 
 #. Modern (H.A. Rey) constellation, native: outstretched neck
 msgid "outstretched neck"
-msgstr "krk"
+msgstr "natažený krk"
 
 #. Abbreviation of constellation in Modern (H.A. Rey) sky culture, name:
 #. outstretched neck
@@ -79261,7 +79403,7 @@ msgstr ""
 
 #. Modern (H.A. Rey) constellation, native: cat's eyes
 msgid "cat's eyes"
-msgstr "kočičí oko"
+msgstr "kočičí oči"
 
 #. Abbreviation of constellation in Modern (H.A. Rey) sky culture, name: cat's
 #. eyes
@@ -79479,7 +79621,7 @@ msgstr ""
 
 #. Modern (H.A. Rey) constellation, native: ears
 msgid "ears"
-msgstr "oči"
+msgstr "uši"
 
 #. Abbreviation of constellation in Modern (H.A. Rey) sky culture, name: ears
 msgctxt "abbreviation"
@@ -81130,39 +81272,39 @@ msgstr "Tři jeleni"
 
 #. Mongolian name for HIP 11767, native: Altan Hadaas
 msgid "Golden Nail"
-msgstr ""
+msgstr "Zlatý hřeb"
 
 #. Mongolian name for HIP 53910
 msgid "2.Ox / 9.Monkey"
-msgstr ""
+msgstr "2. Býk / 9. Opice"
 
 #. Mongolian name for HIP 54061
 msgid "1.Rat / 8.Sheep/Goat"
-msgstr ""
+msgstr "1. Krysa / 8. Ovce/Koza"
 
 #. Mongolian name for HIP 58001
 msgid "3.Tiger / 10.Rooster"
-msgstr ""
+msgstr "3. Tygr / 10. Kohout"
 
 #. Mongolian name for HIP 59774
 msgid "4.Rabbit / 11.Dog"
-msgstr ""
+msgstr "4. Králík / 11. Pes"
 
 #. Mongolian name for HIP 62956
 msgid "5.Dragon / 12.Pig"
-msgstr ""
+msgstr "5. Drak / 12. Vepř"
 
 #. Mongolian name for HIP 65378
 msgid "6.Snake"
-msgstr ""
+msgstr "6. Had"
 
 #. Mongolian name for HIP 65477
 msgid "Recovery Star"
-msgstr ""
+msgstr "Hvězda uzdravení"
 
 #. Mongolian name for HIP 67301
 msgid "7.Horse"
-msgstr ""
+msgstr "7. Kůň"
 
 #. Mongolian name for NAME Jupiter, native: Barhasbadi
 msgid "Jupiter"
@@ -81694,7 +81836,7 @@ msgstr ""
 
 #. Romanian constellation, native: Closca cu pui
 msgid "The Hatching Hen with Her Chicks"
-msgstr "Snášející slepice se svými kuřaty"
+msgstr "Kvočna se svými kuřaty"
 
 #. Abbreviation of constellation in Romanian sky culture, name: The Hatching
 #. Hen with Her Chicks
@@ -81814,7 +81956,7 @@ msgstr ""
 
 #. Romanian constellation, native: Varsatorul
 msgid "He Who Pours Out the Water"
-msgstr "Ten kdo vylévá vodu"
+msgstr "Ten, kdo vylévá vodu"
 
 #. Abbreviation of constellation in Romanian sky culture, name: He Who Pours
 #. Out the Water
@@ -81922,11 +82064,11 @@ msgstr "Van Maanen 2"
 
 #. Romanian name for HIP 11767
 msgid "The Sky's Votive Light"
-msgstr ""
+msgstr "Votivní světlo nebes"
 
 #. Romanian name for HIP 21421
 msgid "The Bright Star of the Pig (The Alarm Clock)"
-msgstr ""
+msgstr "Jasná hvězda Prasete (Budík)"
 
 #. Romanian name for HIP 25428
 msgid "Alnath"
@@ -81942,11 +82084,11 @@ msgstr ""
 
 #. Romanian name for HIP 65477
 msgid "The Little Bitch"
-msgstr ""
+msgstr "Fenečka"
 
 #. Romanian name for HIP 91262
 msgid "The Shepherd (The Stars Queen)"
-msgstr ""
+msgstr "Ovčák (Královna hvězd)"
 
 #. Ruanui sky: Tahiti and Society islands constellation, native: Tau-hā
 msgid "Cluster of four"
@@ -81979,7 +82121,7 @@ msgstr "Množství nebeských ryb"
 
 #. Ruanui sky: Tahiti and Society islands constellation, native: Pira'e-tea
 msgid "White sea swallow"
-msgstr "Bílá rybka mořská"
+msgstr "Bílý rybák"
 
 #. Ruanui sky: Tahiti and Society islands constellation, native: Metua-'ai-
 #. papa
@@ -82102,7 +82244,7 @@ msgstr ""
 
 #. Russian (Siberian) name for HIP 11767, native: Золотой кол
 msgid "Golden stake"
-msgstr ""
+msgstr "Zlatý kůl"
 
 #. Pronounce entry for Russian (Siberian) name for HIP 11767
 #. Russian (Siberian) name for HIP 11767, native: Золотой кол
@@ -82128,7 +82270,7 @@ msgstr "Favdna's Bow and Arrow"
 
 #. Sami constellation
 msgid "Galla's Sons"
-msgstr "Synové Galvy"
+msgstr "Synové Gally"
 
 #. Sami constellation
 msgid "Sky Support"
@@ -82209,7 +82351,7 @@ msgstr "Velká teslice"
 
 #. Samoan name for HIP 32349, native: Fētūsolonuʻu
 msgid "Gliding Star"
-msgstr ""
+msgstr "Klouzavá hvězda"
 
 #. Samoan name for HIP 68702, native: Mea
 msgid "Mea"
@@ -82297,19 +82439,19 @@ msgstr "Tři Marie"
 
 #. Sardinian name for HIP 11767
 msgid "Polar Star"
-msgstr ""
+msgstr "Polárka"
 
 #. Sardinian name for HIP 21421
 msgid "The Bunch's Driver"
-msgstr ""
+msgstr "Pohůnek Hroznu"
 
 #. Sardinian name for HIP 32349
 msgid "Steel Star"
-msgstr ""
+msgstr "Ocelová hvězda"
 
 #. Sardinian name for HIP 69673
 msgid "The Seven Brother's Driver"
-msgstr ""
+msgstr "Pohůnek Sedmi bratrů"
 
 #. Seri constellation, native: Cohamc
 msgid "The wife and husband"
@@ -82998,6 +83140,26 @@ msgstr "Ryby"
 #. needed!
 msgctxt "tibetan zodiac sign"
 msgid "nya"
+msgstr ""
+
+#. Name of a zodiac sign or a lunar mansion in Tibetan sky culture
+#. Shaped after the Indian zodiac. Please enhance by Tibetan names and fix if
+#. needed!
+msgid "Tibetan Zodiac"
+msgstr ""
+
+#. Name of a zodiac sign or a lunar mansion in Tibetan sky culture, native:
+#. རྒྱུ་སྐར, pronounce: gyu gar
+#. Shaped after the Indian nakshatras. Please enhance by Tibetan names and fix
+#. if needed!
+msgid "Tib. Nakshatras"
+msgstr ""
+
+#. Pronounce entry for a zodiac sign or a lunar mansion in Tibetan sky
+#. culture, native: རྒྱུ་སྐར, English: Tib. Nakshatras
+#. Shaped after the Indian nakshatras. Please enhance by Tibetan names and fix
+#. if needed!
+msgid "gyu gar"
 msgstr ""
 
 #. Tikuna constellation, native: Baweta
