@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2026-11-08 21:03+0700\n"
+"POT-Creation-Date: 2026-11-14 17:21+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Gediminas Tauras, 2026\n"
 "Language-Team: Lithuanian (https://app.transifex.com/stellarium/teams/80998/lt/)\n"
@@ -7628,7 +7628,7 @@ msgid "Custom equation of %1T"
 msgstr "Vartotojo lygtis %1T"
 
 #: src/gui/ConfigurationDialog.cpp:2347 src/gui/ConfigurationDialog.cpp:2386
-#: src/gui/StelGuiItems.cpp:902 src/gui/LocationDialog.cpp:556
+#: src/gui/StelGuiItems.cpp:902 src/gui/LocationDialog.cpp:548
 msgid "System default"
 msgstr "Sistemos numatytasis"
 
@@ -8242,11 +8242,11 @@ msgstr "Tarpas"
 msgid "Time zone"
 msgstr "Laiko juosta"
 
-#: src/gui/StelGuiItems.cpp:907 src/gui/LocationDialog.cpp:554
+#: src/gui/StelGuiItems.cpp:907 src/gui/LocationDialog.cpp:546
 msgid "Local Mean Solar Time"
 msgstr "Vietinis vidutinis saulės laikas"
 
-#: src/gui/StelGuiItems.cpp:910 src/gui/LocationDialog.cpp:555
+#: src/gui/StelGuiItems.cpp:910 src/gui/LocationDialog.cpp:547
 msgid "Local True Solar Time"
 msgstr "Vietinis tikras saulės laikas"
 
@@ -8542,30 +8542,16 @@ msgstr ""
 msgid "Visual magnitude based on phase angle and albedo."
 msgstr "Vizualinis ryškis pagal fazinį kampą ir albedą."
 
-#: src/gui/LocationDialog.cpp:172 src/gui/LocationDialog.cpp:973
-msgid "Get location from GPS or system service"
-msgstr "Gauti vietą iš GPS arba sistemos "
-
-#: src/gui/LocationDialog.cpp:174 src/gui/LocationDialog.cpp:975
+#: src/gui/LocationDialog.cpp:171 src/gui/LocationDialog.cpp:964
 #: src/ui_locationDialogGui.h:432
-msgid "Get location from GPS"
-msgstr "Gauti vietą iš GPS"
+msgid "Get location from the GPS receiver"
+msgstr "Gauti vietovės koordinates iš GPS imtuvo"
 
-#: src/gui/LocationDialog.cpp:237
+#: src/gui/LocationDialog.cpp:233
 msgid "Reset location list to show all known locations"
 msgstr "Atkurti vietų sąrašą, kad būtų rodomos visos žinomos vietos"
 
-#: src/gui/LocationDialog.cpp:239
-msgid ""
-"Toggle fetching location from GPS or system location service. (Does not "
-"change time zone!) When satisfied, toggle off to let other programs access "
-"the GPS device."
-msgstr ""
-"Perjungti vietos gavimą iš GPS arba sistemos vietos paslaugos. (Nepakeičia "
-"laiko juostos!) Kai esate patenkinti, išjunkite, kad kitos programos galėtų "
-"pasiekti GPS įrenginį."
-
-#: src/gui/LocationDialog.cpp:241
+#: src/gui/LocationDialog.cpp:234
 msgid ""
 "Toggle fetching GPS location. (Does not change time zone!) When satisfied, "
 "toggle off to let other programs access the GPS device."
@@ -8573,23 +8559,23 @@ msgstr ""
 "Perjungti vietos gavimą iš GPS. (Nepakeičia laiko juostos!) Kai esate "
 "patenkinti, išjunkite, kad kitos programos galėtų pasiekti GPS įrenginį."
 
-#: src/gui/LocationDialog.cpp:917
+#: src/gui/LocationDialog.cpp:909
 msgid "GPS listening..."
 msgstr "GPS klausoma..."
 
-#: src/gui/LocationDialog.cpp:924
+#: src/gui/LocationDialog.cpp:916
 msgid "GPS disconnecting..."
 msgstr "GPS atsijungia..."
 
-#: src/gui/LocationDialog.cpp:946
+#: src/gui/LocationDialog.cpp:938
 msgid "2D location fix"
 msgstr "2D vietos fiksavimas"
 
-#: src/gui/LocationDialog.cpp:951
+#: src/gui/LocationDialog.cpp:943
 msgid "3D location fix"
 msgstr "3D vietos fiksavimas"
 
-#: src/gui/LocationDialog.cpp:960
+#: src/gui/LocationDialog.cpp:952
 msgid "GPS:FAILED"
 msgstr "GPS:NEPAVYKO"
 
@@ -8880,16 +8866,16 @@ msgid "Simbad Lookup"
 msgstr "Simbad Paieška"
 
 #: src/gui/SearchDialog.cpp:1582
-msgid "University of Strasbourg (France)"
-msgstr "Strasbūro Universitetas (Prancūzija)"
+msgid "Strasbourg Astronomical Data Center (France)"
+msgstr "Strasbūro astronominių duomenų centras (Prancūzija)"
 
 #: src/gui/SearchDialog.cpp:1583
 msgid "Harvard-Smithsonian Center for Astrophysics (USA)"
 msgstr "Harvardo-Smitsono astrofizikos centras (JAV)"
 
 #: src/gui/SearchDialog.cpp:1584
-msgid "Strasbourg astronomical Data Center (France)"
-msgstr "Strasbūro astronominių duomenų centras (Prancūzija)"
+msgid "The Institute for Data Intensive Astronomy (South Africa)"
+msgstr "Gausių duomenų astronomijos institutas (Pietų Afrika)"
 
 #: src/gui/SearchDialog.cpp:1670
 msgid "Paste and Search"
@@ -30905,7 +30891,7 @@ msgstr "neaktyvus"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:569
 msgid "IAU shower number"
-msgstr "IAU meteorų lietaus numeris"
+msgstr "TAS meteorų lietaus numeris"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:570
 msgid "Radiant drift (per solar longitude)"
@@ -30980,12 +30966,12 @@ msgstr "α-Kentauridai"
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:39
 msgid "γ-Normids"
-msgstr "γ-Matuoklės"
+msgstr "γ-Normidai"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:41
 msgid "η-Aquariids"
-msgstr "η-Aquariidai"
+msgstr "η-Akvaridai"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:43
@@ -31195,7 +31181,7 @@ msgstr "π-Cetidai"
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:125
 msgid "δ-Cancrids"
-msgstr "δ-Cancridai"
+msgstr "δ-Kancridai"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:127
@@ -31210,7 +31196,7 @@ msgstr "ρ-Geminidai"
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:131
 msgid "η-Carinids"
-msgstr "η-Carinidai"
+msgstr "η-Karinidai"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:133
@@ -31255,7 +31241,7 @@ msgstr "Šiauriniai ι-Akvaridai"
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:149
 msgid "γ-Aquariids"
-msgstr "γ-Aquariidai"
+msgstr "γ-Akvaridai"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:151
@@ -31340,32 +31326,32 @@ msgstr "Kometa 1P/Halio"
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:185
 msgid "Comet 7P/Pons-Winnecke"
-msgstr "Kometa 7P/Pons-Winnecke"
+msgstr "Kometa 7P/Ponso-Vineckės"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:187
 msgid "Comet 55P/Tempel-Tuttle"
-msgstr "Kometa 55P/Tempel-Tuttle"
+msgstr "Kometa 55P/Tempelio-Tutlio"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:189
 msgid "Comet 96P/Machholz"
-msgstr "Kometa 96P/Machholz"
+msgstr "Kometa 96P/Machholco"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:191
 msgid "Comet 109P/Swift-Tuttle"
-msgstr "Kometa 109P/Swift-Tuttle"
+msgstr "Kometa 109P/Svifto-Tutlio"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:193
 msgid "Comet C/1861 G1 (Thatcher)"
-msgstr "Kometa C/1861 G1 (Thatcher)"
+msgstr "Kometa C/1861 G1 (Tečer)"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:195
 msgid "Comet 26P/Grigg-Skjellerup"
-msgstr "Kometa 26P/Grigg-Skjellerup"
+msgstr "Kometa 26P/Grigo-Skjelerupo"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:197
@@ -31516,7 +31502,7 @@ msgid ""
 " are taken into account. Moonlight can also reduce the hourly rate, but it "
 "doesn't take into account."
 msgstr ""
-"Šis įskiepis naudoja dvi modelius, kad apskaičiuotų ZHR, priimdamas, kad "
+"Šis įskiepis naudoja du modelius, kad apskaičiuotų ZHR, priimdamas, kad "
 "meteorų lietaus aktyvumo profilis turi dvigubos eksponentės formą. Norint "
 "numatyti vietinį valandinį dažnį, atsižvelgiama į radianto altitudę ir "
 "dangaus ribinį ryškumą. Mėnulio šviesa taip pat gali sumažinti valandinį "
