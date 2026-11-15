@@ -262,7 +262,8 @@
  * TOGGLE BUTTONS 
  * ============================================================ */
 
-.btn-toggle {
+.btn-toggle,
+.btn-toggle-plain {
     background: linear-gradient(#8C8C8C, #505050);
     border: 1px solid #2A2C2E;
     border-radius: 4px;
@@ -279,16 +280,19 @@
 		/*width: -moz-available;*/
 }
 
-.btn-toggle:hover {
+.btn-toggle:hover,
+.btn-toggle-plain:hover {
     background: linear-gradient(#C4C4C7, #6D6F72);
     transform: translateY(-1px);
 }
 
-.btn-toggle:active {
+.btn-toggle:active,
+.btn-toggle-plain:active {
     transform: translateY(1px);
 }
 
-.btn-toggle.active {
+.btn-toggle.active,
+.btn-toggle-plain.active {
     background: linear-gradient(#DCDBDA, #8A8C8E);
     border-color: #000000;
     color: #000000;

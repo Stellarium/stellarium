@@ -2165,7 +2165,7 @@
 						</div>
 
 						<!-- ========================================== -->
-						<!-- Tab : Scripts Generator (Object Types)     -->
+						<!-- Tab 7: Scripts Generator (Object Types)     -->
 						<!-- ========================================== -->
 						<div id="sub-tab-scripts-generator">
 							<div class="scriptsgenerator-layout">
@@ -2174,221 +2174,222 @@
 							<!-- MAIN PANEL: Types + Objects + Options + Preview             -->
 							<!-- ============================================================ -->
 							<section id="scripts-generator-main" class="block flex flex-column">
-											<header>
-															<h2><?= tr("Scripts Generator")?></h2>
-															<span class="patterns-note" style="margin-left:15px;">
-																			<?= tr("Generate tour scripts for any object type loaded by Stellarium")?>
-															</span>
-											</header>
+								<header>
+									<h2><?= tr("Scripts Generator")?></h2>
+										<span class="patterns-note" style="margin-left:15px;">
+											<?= tr("Generate tour scripts for any object type loaded by Stellarium")?>
+										</span>
+								</header>
 
-											<!-- ============================================================ -->
-											<!-- SECTION 1: Object Types (from /api/objects/listobjecttypes)  -->
-											<!-- ============================================================ -->
-											<div class="scriptsgenerator-section">
-															<div class="tour-section-title">
-																			<h3 style="display:inline-block;margin:0;">
-																							<?= tr("1. Select Object Type")?>
-																							<span class="pattern-count" id="scriptsgenerator-types-count">0</span>
-																			</h3>
+								<!-- ============================================================ -->
+								<!-- SECTION 1: Object Types (from /api/objects/listobjecttypes)  -->
+								<!-- ============================================================ -->
+								<div class="scriptsgenerator-section">
+									<div class="tour-section-title">
+										<h3 style="display:inline-block;margin:0;">
+											<?= tr("1. Select Object Type")?>
+											<span class="pattern-count" id="scriptsgenerator-types-count">0</span>
+										</h3>
 
-																			<!-- Language toggle: i18n names vs English names -->
-																			<label style="margin-left:15px;cursor:pointer;">
-																							<input type="checkbox" id="scriptsgenerator-use-i18n" checked />
-																							<span class="tour-control-label">
-																											<?= tr("Use translated names (i18n)")?>
-																							</span>
-																							<small>
-																											(<?= tr("uses current UI language")?>)
-																							</small>
-																			</label>
-															</div>
+										<!-- Language toggle: i18n names vs English names -->
+										<label class="btn-toggle-plain" style="margin-left:15px;cursor:pointer;">
+											<input type="checkbox" id="scriptsgenerator-use-i18n" checked />
+												<span class="tour-control-label"><?= tr("Use translated names (i18n)")?></span>
+										</label>
+											<small>(<?= tr("uses current UI language")?>)</small>
+									</div>
 
-															<!-- Types buttons container (populated by JS) -->
-															<div id="scriptsgenerator-types-container"
-																	 class="scriptsgenerator-buttons-container">
-																			<div class="loading-placeholder">
-																							<?= tr("Loading object types from Stellarium...")?>
-																			</div>
-															</div>
+										<!-- Types buttons container (populated by JS) -->
+									<div id="scriptsgenerator-types-container" class="scriptsgenerator-buttons-container">
+										<div class="loading-placeholder">
+											<?= tr("Loading object types from Stellarium...")?>
+										</div>
+									</div>
+								</div>
+
+								<!-- ============================================================ -->
+								<!-- SECTION 2: Objects of Selected Type                          -->
+								<!-- ============================================================ -->
+								<div class="scriptsgenerator-section">
+										<div class="tour-section-title">
+												<h3 style="display:inline-block;margin:0;">
+													<?= tr("2. Select Objects")?>
+													<span class="pattern-count" id="scriptsgenerator-objects-count">0</span>
+													<small id="scriptsgenerator-selected-type-label" class="tour-multiselect-hint" style="font-weight:normal;"></small>
+												</h3>
+
+
+											<div class="control-group tour-multiselect-group">
+													<label class="option-label multi-select-label" for="constellation-multi-select-mode">
+															<input type="checkbox" id="scriptsgenerator-multi-select" title="Enable to select custom array for tour generation">
+															<span style="font-weight:bold;cursor:pointer;"><strong><?= tr("Multi-Select")?></strong></span>
+															<small>(<?= tr("pick specific objects")?>)</small>
+													</label>
+															<!-- Selection counter -->
+													<span class="tour-selection-count" id="scriptsgenerator-selection-count">0 <?= tr("selected")?></span>
+
+													<!-- Select All / Clear buttons (visible in multi-select mode) -->
+													<button id="scriptsgenerator-select-all" class="pattern-btn jquerybutton"	style="margin-left:8px;display:none;">
+															<?= tr("Select All")?>
+													</button>
+													<button id="scriptsgenerator-clear-selection"	class="pattern-btn jquerybutton" style="margin-left:4px;display:none;">
+															<?= tr("Clear")?>
+													</button>
 											</div>
+										</div>
 
-											<!-- ============================================================ -->
-											<!-- SECTION 2: Objects of Selected Type                          -->
-											<!-- ============================================================ -->
-											<div class="scriptsgenerator-section">
-															<div class="tour-section-title">
-																			<h3 style="display:inline-block;margin:0;">
-																							<span class="pattern-count" id="scriptsgenerator-objects-count">0</span>
-																							<?= tr("2. Select Objects")?>
-																							<small id="scriptsgenerator-selected-type-label"
-																										 class="tour-multiselect-hint"
-																										 style="font-weight:normal;">
-																							</small>
-																			</h3>
+										<!-- Objects buttons container (populated by JS) -->
+										<div id="scriptsgenerator-objects-container" class="scriptsgenerator-buttons-container">
+												<div class="loading-placeholder">
+														<?= tr("Select an object type above to load its objects")?>
+												</div>
+										</div>
+								</div>
 
+								<!-- ============================================================ -->
+								<!-- SECTION 3: Script Options                                     -->
+								<!-- ============================================================ -->
+								<fieldset class="control-group visibility-control-group" style="margin-top:15px;">
+									<legend><?= tr("3. Script Options")?></legend>
 
-															<div class="control-group tour-multiselect-group">
-																	<label class="option-label multi-select-label" for="constellation-multi-select-mode">
-																		<input type="checkbox" id="scriptsgenerator-multi-select" title="Enable to select custom array for tour generation">
-																			<span style="font-weight:bold;cursor:pointer;"><strong><?= tr("Multi-Select")?></strong></span>
-																		<small>(<?= tr("pick specific objects")?>)</small>
-																	</label>
-																	<!-- Selection counter -->
-																	<span class="tour-selection-count" id="scriptsgenerator-selection-count">0 <?= tr("selected")?></span>
+									<div class="tour-row">
+										<div class="tour-control-group">
+											<label class="tour-control-label-bold" for="scriptsgenerator-duration"><?= tr("Duration:")?></label>
+											<input id="scriptsgenerator-duration" class="tour-input-number spinner" value="4" data-min="1" data-max="30" data-step="0.5" data-numberformat="n1"/>
+											<span><?= tr("sec")?></span>
+										</div>
 
-																			<!-- Select All / Clear buttons (visible in multi-select mode) -->
-																			<button id="scriptsgenerator-select-all" class="pattern-btn jquerybutton"	style="margin-left:8px;display:none;">
-																							<?= tr("Select All")?>
-																			</button>
-																			<button id="scriptsgenerator-clear-selection"	class="pattern-btn jquerybutton" style="margin-left:4px;display:none;">
-																							<?= tr("Clear")?>
-																			</button>
-															</div>
-															</div>
+										<div class="tour-control-group">
+											<label class="tour-control-label-bold" for="scriptsgenerator-zoom-fov"><?= tr("Zoom FOV:")?></label>
+											<input id="scriptsgenerator-zoom-fov" class="tour-input-number spinner" value="15" data-min="1" data-max="120" data-step="1" data-numberformat="n0"/>
+											<span><?= tr("deg")?></span>
+										</div>
 
-															<!-- Objects buttons container (populated by JS) -->
-															<div id="scriptsgenerator-objects-container"
-																	 class="scriptsgenerator-buttons-container">
-																			<div class="loading-placeholder">
-																							<?= tr("Select an object type above to load its objects")?>
-																			</div>
-															</div>
-											</div>
+										<div class="tour-control-group">
+											<label class="tour-control-label-bold" for="scriptsgenerator-overview-fov"><?= tr("Overview FOV:")?></label>
+											<input id="scriptsgenerator-overview-fov" class="tour-input-number spinner" value="90" data-min="20" data-max="180" data-step="1" data-numberformat="n0"/>
+											<span><?= tr("deg")?></span>
+										</div>
 
-											<!-- ============================================================ -->
-											<!-- SECTION 3: Script Options                                     -->
-											<!-- ============================================================ -->
-											<fieldset class="control-group visibility-control-group"
-																style="margin-top:15px;">
-															<legend><?= tr("3. Script Options")?></legend>
+										<div class="tour-control-group">
+											<label class="tour-control-label-bold" for="scriptsgenerator-font-size"><?= tr("Font Size:")?></label>
+											<input id="scriptsgenerator-font-size" class="tour-input-number spinner" value="16" data-min="10" data-max="40" data-step="1" data-numberformat="n0"/>
+											<span>px</span>
+										</div>
+									</div>
 
-															<div class="tour-row">
-																			<div class="tour-control-group">
-																							<label class="tour-control-label-bold" for="scriptsgenerator-duration">
-																											<?= tr("Duration:")?>
-																							</label>
-																							<input id="scriptsgenerator-duration"
-																										 class="tour-input-number spinner"
-																										 value="4"
-																										 data-min="1" data-max="30" data-step="0.5"
-																										 data-numberformat="n1"/>
-																							<span><?= tr("sec")?></span>
-																			</div>
+									<div class="tour-row">
+										<label class="btn-toggle-plain tour-control-group" style="cursor:pointer;">
+										 <input type="checkbox" id="scriptsgenerator-show-labels" checked />
+										 <span class="tour-control-label"><?= tr("Show object name labels on screen")?></span>
+										</label>
 
-																			<div class="tour-control-group">
-																							<label class="tour-control-label-bold" for="scriptsgenerator-zoom-fov">
-																											<?= tr("Zoom FOV:")?>
-																							</label>
-																							<input id="scriptsgenerator-zoom-fov"
-																										 class="tour-input-number spinner"
-																										 value="15"
-																										 data-min="1" data-max="120" data-step="1"
-																										 data-numberformat="n0"/>
-																							<span><?= tr("deg")?></span>
-																			</div>
+										<label class="btn-toggle-plain tour-control-group" style="cursor:pointer;">
+											<input type="checkbox" id="scriptsgenerator-show-markers" checked />
+											<span class="tour-control-label"><?= tr("Show selection markers")?></span>
+										</label>
 
-																			<div class="tour-control-group">
-																							<label class="tour-control-label-bold" for="scriptsgenerator-overview-fov">
-																											<?= tr("Overview FOV:")?>
-																							</label>
-																							<input id="scriptsgenerator-overview-fov"
-																										 class="tour-input-number spinner"
-																										 value="90"
-																										 data-min="20" data-max="180" data-step="1"
-																										 data-numberformat="n0"/>
-																							<span><?= tr("deg")?></span>
-																			</div>
+										<label class="btn-toggle-plain tour-control-group" style="cursor:pointer;">
+											<input type="checkbox" id="scriptsgenerator-use-savestate" />
+											<span class="tour-control-label" style="font-weight:bold;color:#A6E22E;"><?= tr("Use save_state.inc")?></span>
+										</label>
+										<small class="tour-multiselect-hint">(<?= tr("save/restore full display state")?>)</small>																
+									</div>
 
-																			<div class="tour-control-group">
-																							<label class="tour-control-label-bold" for="scriptsgenerator-font-size">
-																											<?= tr("Font Size:")?>
-																							</label>
-																							<input id="scriptsgenerator-font-size"
-																										 class="tour-input-number spinner"
-																										 value="16"
-																										 data-min="10" data-max="40" data-step="1"
-																										 data-numberformat="n0"/>
-																							<span>px</span>
-																			</div>
-															</div>
+									<!-- Optional: Lock observer location/time if available -->
+									<div class="tour-row">
+										<label class="btn-toggle-plain tour-control-group" style="cursor:pointer;">
+											<input type="checkbox" id="scriptsgenerator-lock-observer" />
+											<span class="tour-control-label"><?= tr("Lock current observer location and time")?></span>
+										</label>
+										<small class="tour-multiselect-hint">(<?= tr("reproducible sky")?>)</small>																
+										<span id="scriptsgenerator-lock-observer-info" class="tour-multiselect-hint" style="color:#FFE0C6;font-style:italic;"></span>
+									</div>
 
-															<div class="tour-row">
-																			<label class="tour-control-group" style="cursor:pointer;">
-																							<input type="checkbox" id="scriptsgenerator-show-labels" checked />
-																							<span class="tour-control-label">
-																											<?= tr("Show object name labels on screen")?>
-																							</span>
-																			</label>
+								<!-- ============================================================ -->
+								<!-- SECTION 3b: Deep Sky Options (conditional — DSO types only)  -->
+								<!-- ============================================================ -->
+								<!-- Visible only when the selected type belongs to NebulaMgr,     -->
+								<!-- Supernovae, or Novae. Otherwise kept hidden via JS.           -->
+								<fieldset id="scriptsgenerator-dso-options"	class="control-group visibility-control-group" style="margin-top:15px; display:none;">
+									<legend><?= tr("Deep Sky Options")?></legend>
 
-																			<label class="tour-control-group" style="cursor:pointer;">
-																							<input type="checkbox" id="scriptsgenerator-show-markers" checked />
-																							<span class="tour-control-label">
-																											<?= tr("Show selection markers")?>
-																							</span>
-																			</label>
+									<!-- Row 1: Hints and labels configuration -->
+									<div class="tour-row">
+										<label class="btn-toggle-plain tour-control-group" style="cursor:pointer;">
+											<input type="checkbox" id="scriptsgenerator-show-hints" checked />
+											<span class="tour-control-label"><?= tr("Show DSO hints (markers)")?></span>
+										</label>
+										<small class="tour-multiselect-hint">(<?= tr("NebulaMgr.setFlagHints")?>)</small>											
 
-																			<label class="tour-control-group" style="cursor:pointer;">
-																							<input type="checkbox" id="scriptsgenerator-use-savestate" />
-																							<span class="tour-control-label" style="font-weight:bold;color:#A6E22E;">
-																											<?= tr("Use save_state.inc")?>
-																											<small class="tour-multiselect-hint">
-																															(<?= tr("save/restore full display state")?>)
-																											</small>
-																							</span>
-																			</label>
-															</div>
+										<div class="tour-control-group">
+											<label class="tour-control-label-bold" for="scriptsgenerator-hints-amount"><?= tr("Hints amount:")?></label>
+											<input id="scriptsgenerator-hints-amount" class="tour-input-number spinner" value="8" data-min="0" data-max="10" data-step="0.5" data-numberformat="n1"/>
+											<span class="tour-multiselect-hint">(0–10)</span>
+										</div>
 
-															<!-- Optional: Lock observer location/time if available -->
-															<div class="tour-row">
-																			<label class="tour-control-group" style="cursor:pointer;">
-																							<input type="checkbox" id="scriptsgenerator-lock-observer" />
-																							<span class="tour-control-label">
-																											<?= tr("Lock current observer location and time")?>
-																											<small class="tour-multiselect-hint">
-																															(<?= tr("reproducible sky")?>)
-																											</small>
-																							</span>
-																			</label>
-																			<span id="scriptsgenerator-lock-observer-info"
-																						class="tour-multiselect-hint"
-																						style="color:#FFE0C6;font-style:italic;">
-																			</span>
-															</div>
-											</fieldset>
+										<div class="tour-control-group">
+											<label class="tour-control-label-bold" for="scriptsgenerator-labels-amount"><?= tr("Labels amount:")?></label>
+											<input id="scriptsgenerator-labels-amount" class="tour-input-number spinner" value="7" data-min="0" data-max="10" data-step="0.5" data-numberformat="n1"/>
+											<span class="tour-multiselect-hint">(0–10)</span>
+										</div>
+									</div>
 
-											<!-- ============================================================ -->
-											<!-- SECTION 4: Generate + Preview                                 -->
-											<!-- ============================================================ -->
-											<div class="tour-row-separator" style="margin-top:15px;">
-															<button id="scriptsgenerator-generate"
-																			class="pattern-btn jquerybutton"
-																			style="font-size:14px;padding:8px 20px;">
-																			<span class="ui-icon ui-icon-script"></span>
-																			<?= tr("Generate Script")?>
-															</button>
-															<button id="scriptsgenerator-copy"
-																			class="pattern-btn jquerybutton">
-																			<?= tr("Copy")?>
-															</button>
-															<button id="scriptsgenerator-send-to-editor"
-																			class="pattern-btn jquerybutton">
-																			<span class="ui-icon ui-icon-pencil"></span>
-																			<?= tr("Send to Script Editor")?>
-															</button>
-															<span id="scriptsgenerator-status"
-																		class="tour-multiselect-hint"
-																		style="margin-left:10px;font-style:italic;">
-															</span>
-											</div>
+									<!-- Row 2: DSS background survey -->
+									<div class="tour-row">
+										<label class="btn-toggle-plain tour-control-group" style="cursor:pointer;">
+											<input type="checkbox" id="scriptsgenerator-use-dss" />
+											<span class="tour-control-label"><strong><?= tr("Enable DSS background survey")?></strong></span>
+										</label>
+										<small class="tour-multiselect-hint">(<?= tr("real photographic sky background via ToastMgr")?>)</small>
+															
+										<div class="tour-control-group" id="scriptsgenerator-dss-delay-group" style="display:none;">
+											<label class="tour-control-label-bold" for="scriptsgenerator-dss-delay"><?= tr("DSS visibility time:")?></label>
+												<input id="scriptsgenerator-dss-delay" class="tour-input-number spinner" value="8" data-min="1" data-max="30" data-step="1" data-numberformat="n0"/>
+												<span><?= tr("sec")?></span>
+										</div>
+									</div>
 
-											<!-- Live preview area -->
-											<div class="scriptsgenerator-preview-wrapper">
-															<label class="tour-control-label-bold" style="display:block;margin-bottom:4px;">
-																			<?= tr("Preview (read-only):")?>
-															</label>
-															<pre id="scriptsgenerator-preview"
-																	 class="scriptsgenerator-preview"><?= tr("Generated script will appear here.")?></pre>
-											</div>
+									<!-- Row 3: Outlines and proportional hints -->
+									<div class="tour-row">
+										<label class="btn-toggle-plain tour-control-group" style="cursor:pointer;">
+											<input type="checkbox" id="scriptsgenerator-show-outlines" />
+											<span class="tour-control-label"><?= tr("Show outlines for large DSOs")?></span>
+										</label>
+										<small class="tour-multiselect-hint">(<?= tr("NebulaMgr.setFlagOutlines")?>)</small>										
+
+										<label class="btn-toggle-plain tour-control-group" style="cursor:pointer;">
+											<input type="checkbox" id="scriptsgenerator-proportional-hints" />
+											<span class="tour-control-label"><?= tr("Proportional hints (size = real angular size)")?></span>
+										</label>
+										<small class="tour-multiselect-hint">(<?= tr("NebulaMgr.setHintsProportional")?>)</small>										
+									</div>
+
+								</fieldset>
+								</fieldset>								
+
+								<!-- ============================================================ -->
+								<!-- SECTION 4: Generate + Preview                                 -->
+								<!-- ============================================================ -->
+								<div class="tour-row-separator" style="margin-top:15px;">
+									<button id="scriptsgenerator-generate" class="pattern-btn jquerybutton"	style="font-size:14px;padding:8px 20px;">
+										<span class="ui-icon ui-icon-script"></span><?= tr("Generate Script")?>
+									</button>
+									<button id="scriptsgenerator-copy" class="pattern-btn jquerybutton">
+									<?= tr("Copy")?>
+									</button>
+									<button id="scriptsgenerator-send-to-editor"	class="pattern-btn jquerybutton">
+										<span class="ui-icon ui-icon-pencil"></span>
+										<?= tr("Send to Script Editor")?>
+									</button>
+									<span id="scriptsgenerator-status"	class="tour-multiselect-hint"	style="margin-left:10px;font-style:italic;"></span>
+								</div>
+
+								<!-- Live preview area -->
+								<div class="scriptsgenerator-preview-wrapper">
+									<label class="tour-control-label-bold" style="display:block;margin-bottom:4px;"><?= tr("Preview (read-only):")?></label>
+									<pre id="scriptsgenerator-preview"	class="scriptsgenerator-preview"><?= tr("Generated script will appear here.")?></pre>
+								</div>
 
 							</section>
 

@@ -2435,50 +2435,192 @@ define([
     }
 		
     // =====================================================================
-    // UNIFIED OBJECT-TYPE TOUR GENERATOR
+    // UNIFIED OBJECT-TYPE TOUR GENERATOR (v2 — Enhanced with DSO support)
     // =====================================================================
-    // 
-    // This function is the core of the "Scripts Generator" tab. It builds
-    // a complete SSC script for ANY object type exposed by Stellarium's
-    // /api/objects/listobjecttypes endpoint (88 types as of this writing).
-    // 
-    // Instead of writing 88 separate generators, this single function
-    // produces a valid script by parameterizing:
-    //   - the object array (embedded as a static list)
-    //   - the tour loop (using generic core.selectObjectByName)
-    //   - the optional observer lock (location + time)
-    //   - the optional save_state.inc include
-    // 
-    // The output structure is identical to the other tour generators in
-    // this module (constellations, asterisms, etc.), which means all the
-    // existing infrastructure (Tours.outputScript, Script Editor, etc.)
-    // works transparently.
-    // 
-    // USAGE:
-    //   var script = Tours.generateObjectTypeTour({
-    //       typeKey:     "NebulaMgr:100",
-    //       typeName:    "Messier Catalogue",
-    //       typeNameI18n:"دليل ميسييه",
-    //       objects:     ["M1", "M2", ...],
-    //       options: {
-    //           duration:      4,
-    //           zoomFov:       15,
-    //           overviewFov:   90,
-    //           fontSize:      16,
-    //           showLabels:    true,
-    //           showMarkers:   true,
-    //           useSaveState:  false,
-    //           lockObserver:  false
-    //       },
-    //       status: {                     // optional — from Api.fetchStatus()
-    //           location: { name, latitude, longitude, altitude, planet },
-    //           time:     { jday, utc, isTimeNow }
-    //       }
-    //   });
-    // 
-    // @param {Object} opts - Options (see above)
-    // @returns {string|null} Generated SSC script, or null on error
-    // =====================================================================
+
+    /**
+     * Detect the "family" of a type key to decide which SSC features to use.
+     *
+     * Families:
+     *   - "dso"           → NebulaMgr:*, Supernovae, Novae
+     *   - "star"          → StarMgr:*
+     *   - "constellation" → ConstellationMgr
+     *   - "solar"         → SolarSystem:*
+     *   - "other"         → anything else
+     *
+     * @function detectTypeFamily
+     * @param {string} typeKey
+     * @returns {string}
+     */
+    function detectTypeFamily(typeKey) {
+        if (!typeKey) return 'other';
+        if (typeKey.indexOf('NebulaMgr') === 0) return 'dso';
+        if (typeKey === 'Supernovae' || typeKey === 'Novae') return 'dso';
+        if (typeKey.indexOf('StarMgr') === 0) return 'star';
+        if (typeKey === 'ConstellationMgr') return 'constellation';
+        if (typeKey.indexOf('SolarSystem') === 0) return 'solar';
+        return 'other';
+    }
+
+    /**
+     * Pick the appropriate `core.clear()` preset based on the type family.
+     *
+     * Presets (from StelMainScriptAPI.hpp):
+     *   - "natural"     : azimuthal, atmosphere, landscape, no lines/labels
+     *   - "starchart"   : equatorial, lines, labels, no landscape/atmosphere
+     *   - "deepspace"   : like starchart but no planets, no lines, no markers
+     *   - "galactic"    : like deepspace but in galactic coord
+     *   - "supergalactic": like deepspace but in supergalactic coord
+     *
+     * @function pickClearPreset
+     * @param {string} typeFamily
+     * @returns {string}
+     */
+    function pickClearPreset(typeFamily) {
+        switch (typeFamily) {
+            case 'dso':           return 'deepspace';
+            case 'star':          return 'deepspace';
+            case 'constellation': return 'starchart';
+            case 'solar':         return 'natural';
+            default:              return 'starchart';
+        }
+    }
+
+    /**
+     * Build the deep-sky configuration block for SSC scripts.
+     *
+     * Only emitted when the type family is "dso" AND the user has
+     * enabled at least one DSO option.
+     *
+     * @function buildDeepSkySetup
+     * @param {Object} deepSky - Deep sky options
+     * @param {boolean} deepSky.showHints
+     * @param {number}  deepSky.hintsAmount
+     * @param {number}  deepSky.labelsAmount
+     * @param {boolean} deepSky.showOutlines
+     * @param {boolean} deepSky.proportionalHints
+     * @param {boolean} deepSky.catalogMessier
+     * @param {boolean} deepSky.catalogStandard
+     * @returns {string}
+     */
+    function buildDeepSkySetup(deepSky) {
+        if (!deepSky) return '';
+
+        var s = '';
+        s += '// ============================================================\n';
+        s += '// DEEP SKY CONFIGURATION (NebulaMgr)\n';
+        s += '// ============================================================\n';
+
+        // Show DSO objects
+        s += 'NebulaMgr.setFlagShow(true);\n';
+
+        // Hints (markers)
+        if (deepSky.showHints) {
+            s += 'NebulaMgr.setFlagHints(true);\n';
+            s += 'NebulaMgr.setHintsAmount(' + 
+                 Number(deepSky.hintsAmount || 8.0).toFixed(1) + ');\n';
+        } else {
+            s += 'NebulaMgr.setFlagHints(false);\n';
+        }
+
+        // Labels
+        s += 'NebulaMgr.setLabelsAmount(' + 
+             Number(deepSky.labelsAmount || 7.0).toFixed(1) + ');\n';
+
+        // Outlines
+        if (deepSky.showOutlines) {
+            s += 'NebulaMgr.setFlagOutlines(true);\n';
+        } else {
+            s += 'NebulaMgr.setFlagOutlines(false);\n';
+        }
+
+        // Proportional hints
+        if (deepSky.proportionalHints) {
+            s += 'NebulaMgr.setHintsProportional(true);\n';
+        } else {
+            s += 'NebulaMgr.setHintsProportional(false);\n';
+        }
+
+        // Catalog filters
+        // NOTE: These two options are mutually exclusive.
+        //       If both are checked (shouldn't happen due to UI logic),
+        //       "Messier only" wins because it's more specific.
+        if (deepSky.catalogMessier) {
+            s += '// Catalog filter: Messier only\n';
+            s += 'NebulaMgr.setCatalogFilters(4);   // CatM (4)\n';
+        } else if (deepSky.catalogStandard) {
+            s += '// Catalog filter: Standard (M, NGC, IC)\n';
+            s += 'NebulaMgr.selectStandardCatalogs();\n';
+        }
+
+        s += '\n';
+        return s;
+    }
+
+    /**
+     * Build the DSS (Digitized Sky Survey) setup block for SSC scripts.
+     *
+     * Only emitted when the type family is "dso" AND the user has
+     * enabled the DSS option.
+     *
+     * @function buildDssSetup
+     * @param {boolean} useDss
+     * @returns {string}
+     */
+    function buildDssSetup(useDss) {
+        if (!useDss) return '';
+
+        var s = '';
+        s += '// ============================================================\n';
+        s += '// DSS BACKGROUND SURVEY (ToastMgr)\n';
+        s += '// ============================================================\n';
+        s += '// Save original DSS state\n';
+        s += 'var __oldDssState = ToastMgr.getFlagShow();\n\n';
+        s += '// Enable DSS\n';
+        s += 'ToastMgr.setFlagShow(true);\n\n';
+        return s;
+    }
+
+    /**
+     * Build the landscape (horizon) setup block.
+     *
+     * Only emitted when the user has enabled "Show horizon".
+     * This is typically used together with the visibility filter,
+     * so the user can see the object actually above the horizon.
+     *
+     * @function buildLandscapeSetup
+     * @param {boolean} showLandscape
+     * @returns {string}
+     */
+    function buildLandscapeSetup(showLandscape) {
+        if (!showLandscape) return '';
+
+        var s = '';
+        s += '// ============================================================\n';
+        s += '// LANDSCAPE (HORIZON) VISIBILITY\n';
+        s += '// ============================================================\n';
+        s += '// Wait for clear() to settle, then enable landscape\n';
+        s += 'core.wait(1);\n';
+        s += 'LandscapeMgr.setFlagLandscape(true);\n';
+        s += 'LandscapeMgr.setFlagAtmosphere(true);\n\n';
+        return s;
+    }
+
+    /**
+     * Unified tour script generator for ANY object type.
+     *
+     * @function generateObjectTypeTour
+     * @param {Object} opts
+     * @param {string} opts.typeKey
+     * @param {string} opts.typeName
+     * @param {string} opts.typeNameI18n
+     * @param {Array<string>} opts.objects
+     * @param {Object} opts.options - { duration, zoomFov, overviewFov, fontSize,
+     *                                  showLabels, showMarkers, useSaveState,
+     *                                  lockObserver, showLandscape, deepSky: {...} }
+     * @param {Object} [opts.status] - Observer status (from Api.fetchStatus)
+     * @returns {string|null} Generated SSC script, or null on error
+     */
     function generateObjectTypeTour(opts) {
         // -----------------------------------------------------------------
         // 1. Validate inputs
@@ -2493,7 +2635,6 @@ define([
         var status       = opts.status  || null;
         var typeKey      = opts.typeKey      || 'unknown';
         var typeName     = opts.typeName     || typeKey;
-        var typeNameI18n = opts.typeNameI18n || typeName;
 
         // Read options with sane defaults
         var duration      = (typeof options.duration    === 'number') ? options.duration    : 4;
@@ -2504,22 +2645,28 @@ define([
         var showMarkers   = (options.showMarkers   !== false);
         var useSaveState  = (options.useSaveState  === true);
         var lockObserver  = (options.lockObserver  === true) && !!status;
+        var showLandscape = (options.showLandscape === true);
 
-        // Sanitize the type key for use in SSC comments / variable names
-        // (e.g. "NebulaMgr:100" → "NebulaMgr_100")
-        var safeTypeKey = String(typeKey).replace(/[^A-Za-z0-9_]/g, '_');
+        // Deep sky options (only meaningful for DSO types)
+        var deepSky = options.deepSky || {};
+        var useDss  = (deepSky.useDss === true);
+        var dssDelay = (typeof deepSky.dssDelay === 'number') ? deepSky.dssDelay : 8;
+
+        // Detect type family → affects clear() preset and DSO setup
+        var typeFamily = detectTypeFamily(typeKey);
+        var clearPreset = pickClearPreset(typeFamily);
+        var isDso = (typeFamily === 'dso');
 
         // Sanitize type name for header comments (strip newlines)
+        var safeTypeKey = String(typeKey).replace(/[^A-Za-z0-9_]/g, '_');
         var safeTypeName = String(typeName).replace(/[\r\n]+/g, ' ').trim();
 
         // -----------------------------------------------------------------
-        // 2. Build the script
+        // 2. Build script
         // -----------------------------------------------------------------
         var s = '';
 
-        // ================================================================
-        // 2.1 HEADER
-        // ================================================================
+        // ─── 2.1 Header ────────────────────────────────────────
         s += '//\n';
         s += '// ============================================================\n';
         s += '// Name: ' + safeTypeName + ' Tour\n';
@@ -2528,41 +2675,44 @@ define([
         s += '// Author: Stellarium Remote Control (Scripts Generator)\n';
         s += '// License: Public Domain\n';
         s += '// Type Key: ' + typeKey + '\n';
+        s += '// Type Family: ' + typeFamily + '\n';
         s += '// Objects in this script: ' + objects.length + '\n';
         s += '// Duration per object: ' + duration + ' seconds\n';
         s += '// Zoom FOV: ' + zoomFov + ' degrees\n';
         s += '// Overview FOV: ' + overviewFov + ' degrees\n';
         s += '// Font size: ' + fontSize + ' pixels\n';
+        s += '// Clear preset: ' + clearPreset + '\n';
         s += '// Show labels: ' + (showLabels  ? 'YES' : 'NO') + '\n';
         s += '// Show markers: ' + (showMarkers ? 'YES' : 'NO') + '\n';
         s += '// Use save_state.inc: ' + (useSaveState ? 'YES' : 'NO') + '\n';
         s += '// Lock observer/time: ' + (lockObserver ? 'YES' : 'NO') + '\n';
+        s += '// Show landscape: ' + (showLandscape ? 'YES' : 'NO') + '\n';
+        if (isDso) {
+            s += '// Deep sky: hints=' + (deepSky.showHints ? 'ON' : 'OFF') +
+                 ', hintsAmount=' + (deepSky.hintsAmount || 8) +
+                 ', labelsAmount=' + (deepSky.labelsAmount || 7) + '\n';
+            s += '// DSS background: ' + (useDss ? 'YES' : 'NO') + '\n';
+        }
         s += '// Generated: ' + new Date().toLocaleString() + '\n';
         s += '// ============================================================\n';
         s += '//\n';
 
-        // ================================================================
-        // 2.2 TRANSLATION SUPPORT
-        // ================================================================
+        // ─── 2.2 Translation ───────────────────────────────────
         s += '// ============================================================\n';
         s += '// TRANSLATION SUPPORT\n';
         s += '// ============================================================\n';
         s += 'include("i18n.inc");\n\n';
 
-        // ================================================================
-        // 2.3 INITIAL SETUP
-        // ================================================================
+        // ─── 2.3 Initial setup ─────────────────────────────────
         s += '// ============================================================\n';
         s += '// INITIAL SETUP\n';
         s += '// ============================================================\n';
-        s += 'core.clear("starchart");\n';
+        s += 'core.clear("' + clearPreset + '");\n';
         s += 'GridLinesMgr.setFlagGridlines(false);\n';
         s += 'core.setGuiVisible(false);\n';
         s += 'StelMovementMgr.setFlagTracking(false);\n\n';
 
-        // ================================================================
-        // 2.4 OPTIONAL: LOCK OBSERVER LOCATION AND TIME
-        // ================================================================
+        // ─── 2.4 Optional: Lock observer ────────────────────────
         if (lockObserver) {
             s += '// ============================================================\n';
             s += '// LOCKED OBSERVER LOCATION AND TIME\n';
@@ -2572,10 +2722,8 @@ define([
             s += '// Comment out the "core.set…" calls below to use the current\n';
             s += '// location/time instead.\n';
             s += '// ============================================================\n';
-
             var loc = status.location || {};
             var t   = status.time     || {};
-
             var lat     = (typeof loc.latitude  === 'number') ? loc.latitude  : 0;
             var lon     = (typeof loc.longitude === 'number') ? loc.longitude : 0;
             var alt     = (typeof loc.altitude  === 'number') ? loc.altitude  : 0;
@@ -2585,25 +2733,24 @@ define([
 
             s += '// Snapshot: ' + locName + ' (' + planet + ')\n';
             s += '// Coordinates: ' + lat.toFixed(6) + '°, ' + lon.toFixed(6) + '°, ' + alt.toFixed(1) + ' m\n';
-            if (t.utc) {
-                s += '// UTC time: ' + String(t.utc) + '\n';
-            }
-            s += 'core.setObserverLocation(\n';
-            s += '    ' + lon.toFixed(8) + ',   // longitude (°E)\n';
-            s += '    ' + lat.toFixed(8) + ',   // latitude (°N)\n';
-            s += '    ' + alt.toFixed(1) + ',         // altitude (m)\n';
-            s += '    0,                 // transition duration (s)\n';
-            s += '    "' + locName + '",\n';
-            s += '    "' + planet + '"\n';
-            s += ');\n';
+            if (t.utc) s += '// UTC time: ' + String(t.utc) + '\n';
+            s += 'core.setObserverLocation(' + lon.toFixed(8) + ', ' + lat.toFixed(8) + ', ' +
+                 alt.toFixed(1) + ', 0, "' + locName + '", "' + planet + '");\n';
             s += 'core.wait(0.5);\n';
             s += 'core.setJDay(' + jday.toFixed(10) + ');\n';
             s += 'core.wait(0.5);\n\n';
         }
 
-        // ================================================================
-        // 2.5 OPTIONAL: SAVE STATE
-        // ================================================================
+        // ─── 2.5 Landscape (horizon) ───────────────────────────
+        s += buildLandscapeSetup(showLandscape);
+
+        // ─── 2.6 Deep sky setup ─────────────────────────────────
+        if (isDso) {
+            s += buildDeepSkySetup(deepSky);
+            s += buildDssSetup(useDss);
+        }
+
+        // ─── 2.7 Save state ─────────────────────────────────────
         if (useSaveState) {
             s += '// ============================================================\n';
             s += '// SAVE_STATE.INC - Preserve and restore display state\n';
@@ -2617,12 +2764,15 @@ define([
             s += '// ============================================================\n';
             s += 'var __sg_oldGridFlag   = GridLinesMgr.getFlagGridlines();\n';
             s += 'var __sg_oldTracking   = StelMovementMgr.getFlagTracking();\n';
-            s += 'var __sg_oldFov        = StelMovementMgr.getCurrentFov();\n\n';
+            s += 'var __sg_oldFov        = StelMovementMgr.getCurrentFov();\n';
+            if (showLandscape) {
+                s += 'var __sg_oldLandscape = LandscapeMgr.getFlagLandscape();\n';
+                s += 'var __sg_oldAtmosphere = LandscapeMgr.getFlagAtmosphere();\n';
+            }
+            s += '\n';
         }
 
-        // ================================================================
-        // 2.6 WELCOME MESSAGE
-        // ================================================================
+        // ─── 2.8 Welcome message ────────────────────────────────
         s += '// ============================================================\n';
         s += '// WELCOME MESSAGE\n';
         s += '// ============================================================\n';
@@ -2638,9 +2788,7 @@ define([
         s += 'core.wait(5);\n';
         s += 'LabelMgr.deleteAllLabels();\n\n';
 
-        // ================================================================
-        // 2.7 OBJECT ARRAY
-        // ================================================================
+        // ─── 2.9 Objects array ──────────────────────────────────
         s += '// ============================================================\n';
         s += '// OBJECT LIST (Static Array)\n';
         s += '// ------------------------------------------------------------\n';
@@ -2648,7 +2796,6 @@ define([
         s += '// of type "' + safeTypeName + '" (key: ' + typeKey + ').\n';
         s += '// ============================================================\n';
         s += 'var objects = [\n';
-
         for (var i = 0; i < objects.length; i++) {
             var rawName = String(objects[i]);
             // Escape backslashes and double quotes for SSC string literal
@@ -2656,14 +2803,11 @@ define([
                 .replace(/\\/g, '\\\\')
                 .replace(/"/g, '\\"')
                 .replace(/[\r\n]+/g, ' ');
-            //s += '    "' + escName + '"' + (i < objects.length - 1 ? ',' : '') + '\n'; // multiple lines array
-						s += '"' + escName + '"' + (i < objects.length - 1 ? ',' : ''); // One line array
+            s += '"' + escName + '"' + (i < objects.length - 1 ? ',' : '');
         }
         s += '];\n\n';
 
-        // ================================================================
-        // 2.8 TOUR CONFIGURATION
-        // ================================================================
+        // ─── 2.10 Tour configuration ────────────────────────────
         s += '// ============================================================\n';
         s += '// TOUR CONFIGURATION\n';
         s += '// ============================================================\n';
@@ -2672,11 +2816,13 @@ define([
         s += 'var OVERVIEW_FOV = ' + overviewFov + ';\n';
         s += 'var FONT_SIZE    = ' + fontSize + ';\n';
         s += 'var SHOW_LABELS  = ' + (showLabels  ? 'true' : 'false') + ';\n';
-        s += 'var SHOW_MARKERS = ' + (showMarkers ? 'true' : 'false') + ';\n\n';
+        s += 'var SHOW_MARKERS = ' + (showMarkers ? 'true' : 'false') + ';\n';
+        if (isDso && useDss) {
+            s += 'var DSS_DELAY    = ' + dssDelay + ';   // seconds of DSS visibility\n';
+        }
+        s += '\n';
 
-        // ================================================================
-        // 2.9 TOUR EXECUTION LOOP
-        // ================================================================
+        // ─── 2.11 Tour loop ─────────────────────────────────────
         s += '// ============================================================\n';
         s += '// TOUR EXECUTION\n';
         s += '// ============================================================\n';
@@ -2699,6 +2845,15 @@ define([
         s += '    StelMovementMgr.zoomTo(ZOOM_FOV, 2);\n';
         s += '    core.wait(1);\n';
         s += '    \n';
+
+        // DSS delay (only for DSO types with DSS enabled)
+        if (isDso && useDss) {
+            s += '    // Wait for DSS image to load and render\n';
+            s += '    core.wait(DSS_DELAY);\n';
+            s += '    \n';
+        }
+
+        // Label
         s += '    // Optional on-screen label\n';
         s += '    var nameLabel = null;\n';
         s += '    if (SHOW_LABELS) {\n';
@@ -2711,18 +2866,20 @@ define([
         s += '    }\n';
         s += '    \n';
         s += '    // Clear selection\n';
+
+        // Clear selection
         if (showMarkers) {
             s += '    core.selectObjectByName("", false);\n';
             s += '    \n';
         }
         s += '    // Return to overview FOV\n';
+
+        // Return to overview FOV
         s += '    StelMovementMgr.zoomTo(OVERVIEW_FOV, 2);\n';
         s += '    core.wait(1);\n';
         s += '}\n\n';
 
-        // ================================================================
-        // 2.10 RESET AND CLEANUP
-        // ================================================================
+        // ─── 2.12 Reset and cleanup ─────────────────────────────
         s += '// ============================================================\n';
         s += '// RESET AND CLEANUP\n';
         s += '// ============================================================\n';
@@ -2734,6 +2891,15 @@ define([
             s += '// Restore manual state\n';
             if (showMarkers) {
                 s += 'core.selectObjectByName("", false);\n';
+            }
+            if (isDso && useDss) {
+                s += '// Restore DSS state\n';
+                s += 'ToastMgr.setFlagShow(__oldDssState);\n';
+            }
+            if (showLandscape) {
+                s += '// Restore landscape\n';
+                s += 'LandscapeMgr.setFlagLandscape(__sg_oldLandscape);\n';
+                s += 'LandscapeMgr.setFlagAtmosphere(__sg_oldAtmosphere);\n';
             }
             s += 'core.setGuiVisible(true);\n';
             s += 'GridLinesMgr.setFlagGridlines(true);\n';

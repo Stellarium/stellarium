@@ -6,12 +6,13 @@
  *          Powers the "Scripts Generator" sub-tab inside the Actions panel,
  *          allowing users to generate SSC tour scripts for ANY object type
  *          exposed by Stellarium's /api/objects/listobjecttypes endpoint
- *          (currently 88 types).
+ *          (currently 88+ types).
  *
  * @module  scripteditor/scriptsGenerator
- * @version 3.0.0
+ * @version 4.0.0
  * @license GPLv2+
- * @author  Stellarium Remote Control contributors
+ * @author kutaibaa akraa (GitHub: @kutaibaa-akraa)
+ * @license GPLv2+
  *
  * @requires jquery
  * @requires api/remotecontrol
@@ -21,7 +22,26 @@
  * @requires ui/skyculture/skyculture-tours
  * @requires ui/skyculture/skyculture-help
  * @requires ui/skyculture/skyculture-filters
- * @requires ui/skyculture/skyculture-config
+ *
+ * ========================================================================
+ * WHAT'S NEW IN v4.0.0 (relative to v3.0.0)
+ * ========================================================================
+ *
+ *   - DSO-specific options (hints, labels, outlines, catalog filters)
+ *     shown conditionally for NebulaMgr/Supernovae/Novae types.
+ *   - DSS background survey via ToastMgr (optional).
+ *   - Landscape/horizon visibility (auto-enabled for Solar System types,
+ *     manual for others, only when visibility filter is active).
+ *   - Adaptive `core.clear()` preset per type family.
+ *   - Catalog filter toggle (Messier only OR Standard M/NGC/IC — mutually
+ *     exclusive, enforced in JS).
+ *   - `state.currentTypeFamily` field tracks the family of the currently
+ *     selected type (dso / star / constellation / solar / other).
+ *   - `updateDsoVisibility()` shows/hides the DSO fieldset based on family.
+ *   - `autoEnableLandscapeIfSolar()` enables the horizon checkbox for
+ *     Solar System types automatically.
+ *   - `bindDsoOptionEvents()` manages DSS-delay visibility + catalog
+ *     mutual-exclusion.
  *
  * ========================================================================
  * ARCHITECTURE
@@ -33,7 +53,8 @@
  *                              │ (user clicks a type)
  *                              ▼
  *   ┌─────────────────────────────────────────────────────────────┐
- *   │ 2. Fetch objects via /api/objects/listobjectsbytype         │
+ *   │ 2. Detect type family → show/hide DSO options               │
+ *   │    Fetch objects via /api/objects/listobjectsbytype         │
  *   │    → state.currentObjects = ["M1", "M2", ...]               │
  *   └──────────────────────────┬──────────────────────────────────┘
  *                              │
@@ -53,8 +74,8 @@
  *   ┌─────────────────────────────────────────────────────────────┐
  *   │ 5. Render:
  *   │    • If sortBy === "constellation" → grouped by IAU const.  │
- *   │      Uses Render.renderGroupedStars with per-group "Select  │
- *   │      All" button when Multi-Select is active.               │
+ *   │      Uses local `renderGroupedWithSelectAll` with per-group │
+ *   │      "Select All" button when Multi-Select is active.       │
  *   │    • Otherwise → flat grid via Render.renderPatternGrid.    │
  *   └──────────────────────────┬──────────────────────────────────┘
  *                              │
@@ -95,16 +116,14 @@ define([
     "ui/skyculture/skyculture-render",
     "ui/skyculture/skyculture-tours",
     "ui/skyculture/skyculture-help",
-    "ui/skyculture/skyculture-filters",
-    "ui/skyculture/skyculture-config"
+    "ui/skyculture/skyculture-filters"
 ], function(
     $, rc, stelUtils,
     Api,
     Render,
     Tours,
     Help,
-    Filters,
-    Config
+    Filters
 ) {
     "use strict";
 
@@ -193,7 +212,19 @@ define([
         apiReady: false,
 
         /** @type {number} */
-        visibilityTimerTTL: 0
+        visibilityTimerTTL: 0,
+
+        /**
+         * Family of the currently selected type.
+         * One of: 'dso' | 'star' | 'constellation' | 'solar' | 'other'.
+         *
+         * Set by `onTypeSelected()` and read by `updateDsoVisibility()`,
+         * `autoEnableLandscapeIfSolar()`, and `generateScript()`.
+         *
+         * @type {string}
+         * @since 4.0.0
+         */
+        currentTypeFamily: 'other'
     };
 
     // =====================================================================
@@ -201,13 +232,13 @@ define([
     // =====================================================================
 
     /** @type {number|null} */
-    var visibilityTimer = null;
+		var visibilityTimer = null;
 
     /** @type {number|null} */
-    var countdownTimer = null;
+		var countdownTimer = null;
 
     /** @type {number} */
-    var lastVisibilityTick = 0;
+		var lastVisibilityTick = 0;
 
     // =====================================================================
     // DOM CACHE
@@ -225,9 +256,12 @@ define([
      */
     function cacheDom() {
         $dom = {
+            // Types
             typesContainer:   $("#scriptsgenerator-types-container"),
             typesCount:       $("#scriptsgenerator-types-count"),
             useI18nCheckbox:  $("#scriptsgenerator-use-i18n"),
+
+            // Objects
             objectsContainer: $("#scriptsgenerator-objects-container"),
             objectsCount:     $("#scriptsgenerator-objects-count"),
             selectedTypeLabel:$("#scriptsgenerator-selected-type-label"),
@@ -235,6 +269,8 @@ define([
             selectionCount:   $("#scriptsgenerator-selection-count"),
             selectAllBtn:     $("#scriptsgenerator-select-all"),
             clearBtn:         $("#scriptsgenerator-clear-selection"),
+
+            // Script options
             duration:         $("#scriptsgenerator-duration"),
             zoomFov:          $("#scriptsgenerator-zoom-fov"),
             overviewFov:      $("#scriptsgenerator-overview-fov"),
@@ -244,19 +280,42 @@ define([
             useSaveState:     $("#scriptsgenerator-use-savestate"),
             lockObserver:     $("#scriptsgenerator-lock-observer"),
             lockObserverInfo: $("#scriptsgenerator-lock-observer-info"),
+
+            // Output
             generateBtn:      $("#scriptsgenerator-generate"),
             copyBtn:          $("#scriptsgenerator-copy"),
             sendToEditorBtn:  $("#scriptsgenerator-send-to-editor"),
             status:           $("#scriptsgenerator-status"),
             preview:          $("#scriptsgenerator-preview"),
+
+            // Sidebar
             apiStatus:        $("#scriptsgenerator-api-status"),
             summary:          $("#scriptsgenerator-summary"),
+
+            // Control panel (built dynamically in initControlPanel)
             filterVisible:    $("#sg-filter-visible"),
             visibilityCount:  $("#sg-visibility-count"),
             visSnapLocation:  $("#sg-vis-location"),
             visSnapTime:      $("#sg-vis-time"),
             visSnapJday:      $("#sg-vis-jday"),
-            countdown:        $("#sg-countdown")
+            countdown:        $("#sg-countdown"),
+
+            // Landscape checkbox (added dynamically)
+            showLandscape:    $("#sg-show-landscape"),
+            showLandscapeWrap: $("#sg-show-landscape-wrapper"),
+
+            // DSO options (present in HTML — populated by initDsoSpinners)
+            dsoFieldset:       $("#scriptsgenerator-dso-options"),
+            showHints:         $("#scriptsgenerator-show-hints"),
+            hintsAmount:       $("#scriptsgenerator-hints-amount"),
+            labelsAmount:      $("#scriptsgenerator-labels-amount"),
+            useDss:            $("#scriptsgenerator-use-dss"),
+            dssDelayGroup:     $("#scriptsgenerator-dss-delay-group"),
+            dssDelay:          $("#scriptsgenerator-dss-delay"),
+            showOutlines:      $("#scriptsgenerator-show-outlines"),
+            proportionalHints: $("#scriptsgenerator-proportional-hints"),
+            catalogMessier:    $("#scriptsgenerator-catalog-messier"),
+            catalogStandard:   $("#scriptsgenerator-catalog-standard")
         };
     }
 
@@ -373,6 +432,34 @@ define([
             : DEFAULT_VISIBILITY_TTL;
     }
 
+    /**
+     * Detect the "family" of a type key.
+     *
+     * Mirrors the SSC-side `detectTypeFamily()` in `skyculture-tours.js` so
+     * that UI options and generated script content stay synchronized.
+     *
+     * Families:
+     *   - "dso"           → NebulaMgr:*, Supernovae, Novae
+     *   - "star"          → StarMgr:*
+     *   - "constellation" → ConstellationMgr
+     *   - "solar"         → SolarSystem:*
+     *   - "other"         → anything else
+     *
+     * @function detectTypeFamily
+     * @param {string} typeKey
+     * @returns {string}
+     * @since 4.0.0
+     */
+    function detectTypeFamily(typeKey) {
+        if (!typeKey) return 'other';
+        if (typeKey.indexOf('NebulaMgr') === 0) return 'dso';
+        if (typeKey === 'Supernovae' || typeKey === 'Novae') return 'dso';
+        if (typeKey.indexOf('StarMgr') === 0) return 'star';
+        if (typeKey === 'ConstellationMgr') return 'constellation';
+        if (typeKey.indexOf('SolarSystem') === 0) return 'solar';
+        return 'other';
+    }
+
     // =====================================================================
     // API LAYER
     // =====================================================================
@@ -484,7 +571,8 @@ define([
 
     /**
      * Called when the user clicks a type button.
-     * Fetches the type's object list, resets caches, and renders.
+     * Fetches the type's object list, resets caches, detects family,
+     * updates UI visibility (DSO options, landscape checkbox) and renders.
      *
      * @function onTypeSelected
      * @param {string} typeKey
@@ -508,6 +596,9 @@ define([
         state.multiSelectActive = false;
         state.lastStatus = null;
 
+        // v4.0.0: detect family
+        state.currentTypeFamily = detectTypeFamily(typeKey);
+
         stopVisibilityTimer();
 
         // Reset UI
@@ -518,6 +609,10 @@ define([
         updateSelectionCount();
         updateControlPanel();
         clearVisibilitySnapshot();
+
+        // v4.0.0: show/hide DSO options, auto-enable landscape for solar
+        updateDsoVisibility();
+        autoEnableLandscapeIfSolar();
 
         var useI18n = readBool($dom.useI18nCheckbox, true);
         var displayName = pickTypeName(typeObj, useI18n);
@@ -550,6 +645,41 @@ define([
             });
     }
 
+    /**
+     * Show/hide the DSO options fieldset based on current type family.
+     *
+     * DSO options (hints amount, DSS, catalog filters, etc.) only make
+     * sense for NebulaMgr:* and Supernovae/Novae types. For everything else
+     * the fieldset is hidden to avoid confusion.
+     *
+     * @function updateDsoVisibility
+     * @returns {void}
+     * @since 4.0.0
+     */
+    function updateDsoVisibility() {
+        if (!$dom.dsoFieldset || !$dom.dsoFieldset.length) return;
+        var show = (state.currentTypeFamily === 'dso');
+        $dom.dsoFieldset.toggle(show);
+    }
+
+    /**
+     * Auto-enable the "Show horizon" checkbox when type is SolarSystem:*.
+     *
+     * Solar system objects are always visible above the horizon by nature,
+     * so showing the horizon makes sense regardless of the visibility
+     * filter. This is a UX convenience, not a hard requirement.
+     *
+     * @function autoEnableLandscapeIfSolar
+     * @returns {void}
+     * @since 4.0.0
+     */
+    function autoEnableLandscapeIfSolar() {
+        if (!$dom.showLandscape || !$dom.showLandscape.length) return;
+        if (state.currentTypeFamily === 'solar') {
+            $dom.showLandscape.prop("checked", true);
+        }
+    }
+
     // =====================================================================
     // CONTROL PANEL
     // =====================================================================
@@ -557,6 +687,9 @@ define([
     /**
      * Build and install the control panel (visibility, sort, nav-FOV, help).
      * Mirrors the layout of `skyculture-help.js` for stars.
+     *
+     * Also injects a "Show horizon" checkbox that appears only when the
+     * visibility filter is active.
      *
      * @function initControlPanel
      * @returns {void}
@@ -568,7 +701,7 @@ define([
         html += '<fieldset class="control-group visibility-control-group">';
         html += '<legend>Visibility control</legend>';
         html += '<div class="block_row">';
-        html += '<label class="option-label" for="sg-filter-visible">';
+        html += '<label class="btn-toggle-plain option-label" for="sg-filter-visible">';
         html += '<input type="checkbox" id="sg-filter-visible" title="' +
                 tr('Show only objects currently above horizon') + '"/>';
         html += '<span>' + tr('Visible above horizon only') + '</span></label>';
@@ -586,6 +719,17 @@ define([
         html += '<label class="visibility-radio-label"><input type="radio" name="sg-visibility-refresh-mode" value="420s"/><span>7min</span></label>';
         html += '<label class="visibility-radio-label"><input type="radio" name="sg-visibility-refresh-mode" value="manual"/><span>' + tr('Manual') + '</span></label>';
         html += '<button type="button" class="jquerybutton visibility-refresh-btn" id="sg-visibility-refresh" title="' + tr('Refresh visibility data now') + '"><span class="ui-icon ui-icon-refresh"></span> ' + tr('Refresh') + '</button>';
+        html += '</div>';
+
+        // v4.0.0: Landscape checkbox (hidden until visibility is active)
+        html += '<div class="block_row" id="sg-show-landscape-wrapper" style="display:none;">';
+        html += '<label class="btn-toggle-plain option-label" for="sg-show-landscape">';
+        html += '<input type="checkbox" id="sg-show-landscape" title="' +
+                tr('Show horizon line in generated script') + '"/>';
+        html += '<span>' + tr('Show horizon in generated script') + '</span>';
+        html += '<small class="tour-multiselect-hint">(' +
+                tr('recommended when visibility filter is active') + ')</small>';
+        html += '</label>';
         html += '</div>';
 
         // Snapshot group
@@ -617,9 +761,8 @@ define([
         html += '<fieldset class="control-group visibility-control-group">';
         html += '<legend>Navigation Control</legend>';
         html += '<div class="control-group"><label for="sg-nav-fov">' + tr('Navigation FOV:') + '</label>';
-        html += '<input id="sg-nav-fov" class="fov-input-number" value="10" data-min="0.1" data-max="120" data-step="0.1"/>';
+        html += '<input id="sg-nav-fov" class="spinner fov-input-number" value="10" data-min="0.1" data-max="120" data-step="0.1"/>';
         html += '<span>' + tr('deg') + '</span></div>';
-        html += '</fieldset>';
 
         // ─── Help button ────────────────────────────────────────────
         html += '<div class="control-group control-help-group">';
@@ -627,24 +770,27 @@ define([
                 'data-help-target="help-controls-scriptsgenerator" title="' + tr('How to use the controls') + '">' +
                 '<span class="ui-icon ui-icon-help"></span> ' + tr('Controls Help') + '</button>';
         html += '</div>';
-
+        html += '</fieldset>';
+				
         html += '</div>';   // end #scriptsgenerator-controls
 
         if ($dom.objectsContainer && $dom.objectsContainer.length) {
             $dom.objectsContainer.before(html);
         }
 
-        // Re-cache
-        $dom.filterVisible   = $("#sg-filter-visible");
-        $dom.visibilityCount = $("#sg-visibility-count");
-        $dom.visSnapLocation = $("#sg-vis-location");
-        $dom.visSnapTime     = $("#sg-vis-time");
-        $dom.visSnapJday     = $("#sg-vis-jday");
-        $dom.countdown       = $("#sg-countdown");
+        // Re-cache the dynamically created elements
+        $dom.filterVisible     = $("#sg-filter-visible");
+        $dom.visibilityCount   = $("#sg-visibility-count");
+        $dom.visSnapLocation   = $("#sg-vis-location");
+        $dom.visSnapTime       = $("#sg-vis-time");
+        $dom.visSnapJday       = $("#sg-vis-jday");
+        $dom.countdown         = $("#sg-countdown");
+        $dom.showLandscape     = $("#sg-show-landscape");
+        $dom.showLandscapeWrap = $("#sg-show-landscape-wrapper");
 
         bindControlPanelEvents();
 
-        // Init checkboxradio for radios
+        // Init jQuery UI checkboxradio for radios
         $('input[name="sg-visibility-refresh-mode"]').each(function() {
             var $r = $(this);
             if (!$r.checkboxradio("instance")) $r.checkboxradio({ icon: false });
@@ -654,6 +800,54 @@ define([
 
         if ($.fn.spinner) {
             $("#sg-nav-fov").spinner({ min: 0.1, max: 120, step: 0.1 });
+        }
+
+        // v4.0.0: bind DSO-option events
+        bindDsoOptionEvents();
+    }
+
+    /**
+     * Bind DSO-options events.
+     *
+     * Handles two behaviours:
+     *   1. Show/hide the "DSS visibility time" input based on the state
+     *      of the "Enable DSS background survey" checkbox.
+     *   2. Enforce mutual exclusion between the two catalog filters
+     *      (`catalog-messier` and `catalog-standard`) so the user cannot
+     *      accidentally check both.
+     *
+     * @function bindDsoOptionEvents
+     * @returns {void}
+     * @since 4.0.0
+     */
+    function bindDsoOptionEvents() {
+        if (!$dom.useDss || !$dom.useDss.length) return;
+
+        // DSS delay group visibility
+        $dom.useDss.off("change.sgDss").on("change.sgDss", function() {
+            var on = $(this).is(":checked");
+            if ($dom.dssDelayGroup && $dom.dssDelayGroup.length) {
+                $dom.dssDelayGroup.toggle(on);
+            }
+        });
+        if ($dom.dssDelayGroup && $dom.dssDelayGroup.length) {
+            $dom.dssDelayGroup.toggle($dom.useDss.is(":checked"));
+        }
+
+        // Catalog filters: mutually exclusive
+        if ($dom.catalogMessier && $dom.catalogMessier.length) {
+            $dom.catalogMessier.off("change.sgCatM").on("change.sgCatM", function() {
+                if ($(this).is(":checked") && $dom.catalogStandard && $dom.catalogStandard.length) {
+                    $dom.catalogStandard.prop("checked", false);
+                }
+            });
+        }
+        if ($dom.catalogStandard && $dom.catalogStandard.length) {
+            $dom.catalogStandard.off("change.sgCatStd").on("change.sgCatStd", function() {
+                if ($(this).is(":checked") && $dom.catalogMessier && $dom.catalogMessier.length) {
+                    $dom.catalogMessier.prop("checked", false);
+                }
+            });
         }
     }
 
@@ -667,6 +861,12 @@ define([
         // Visibility checkbox
         $dom.filterVisible.off("change.sgVis").on("change.sgVis", function() {
             state.filterState.visible = $(this).is(":checked");
+
+            // v4.0.0: show/hide landscape checkbox
+            if ($dom.showLandscapeWrap && $dom.showLandscapeWrap.length) {
+                $dom.showLandscapeWrap.toggle(state.filterState.visible);
+            }
+
             if (state.filterState.visible) refreshSnapshot();
             else clearVisibilitySnapshot();
             syncVisibilityTimer();
@@ -738,6 +938,9 @@ define([
 
         if ($dom.filterVisible && $dom.filterVisible.length) {
             $dom.filterVisible.prop("checked", false);
+        }
+        if ($dom.showLandscapeWrap && $dom.showLandscapeWrap.length) {
+            $dom.showLandscapeWrap.hide();
         }
         $("#sg-sort-by").val("name");
         $("#sg-sort-direction").val("asc");
@@ -1006,7 +1209,7 @@ define([
 
     /**
      * Render the object buttons for the currently selected type.
-     * 
+     *
      * Flow:
      *   1. If filter needs `_info` and cache is stale → fetch first.
      *   2. Apply Filters.applyAll.
@@ -1070,38 +1273,60 @@ define([
         var useMultiSelect = state.multiSelectActive;
 
         // Shared click handler
-        var clickHandler = function(data) {
-            var name = data.id;
-            var $btn = data.$button;
-            if (!name) return;
+				var clickHandler = function(data) {
+						var name = data.id;
+						var $btn = data.$button;
+						if (!name) return;
 
-            if (!useMultiSelect) {
-                // Single-select: clear all other actives
-                $c.find(".pattern-btn").removeClass("active").css({
-                    "background": "", "border-color": "", "color": ""
-                });
-                $c.data("active-name", null);
-            }
+						// ═══════════════════════════════════════════════════════════
+						// 1) Read state BEFORE any modification
+						// ═══════════════════════════════════════════════════════════
+						var wasActive = $btn.hasClass("active");
 
-            var wasActive = $btn.hasClass("active");
+						// ─── Multi-select path (early return) ───────────────────
+						if (useMultiSelect) {
+								toggleObjectSelection(name, $btn);
+								return;
+						}
 
-            if (wasActive && !useMultiSelect) {
-                stelUtils.clearSelection();
-            } else {
-                $btn.addClass("active").css({
-                    "background": "linear-gradient(#DCDBDA, #8A8C8E)",
-                    "border-color": "#000000",
-                    "color": "#000000"
-                });
-                if (!useMultiSelect) $c.data("active-name", name);
+						// ═══════════════════════════════════════════════════════════
+						// 2) Single-select: Toggle OFF (deselect)
+						// ═══════════════════════════════════════════════════════════
+						if (wasActive) {
+								// Visual: remove active from THIS button only
+								$btn.removeClass("active").css({
+										"background": "", "border-color": "", "color": ""
+								});
+								$c.data("active-name", null);
 
-                if (useMultiSelect) {
-                    toggleObjectSelection(name, $btn);
-                } else {
-                    navigateToObject(name);
-                }
-            }
-        };
+								// Notify any listeners that selection is cleared
+								// (before clearSelection, so UI updates run first)
+								stelUtils.emitObjectSelected('', '', 'none');
+
+								// Clear selection in Stellarium (mode: "zoom" → zoom out)
+								stelUtils.clearSelection();
+								return;
+						}
+
+						// ═══════════════════════════════════════════════════════════
+						// 3) Single-select: Toggle ON (select)
+						// ═══════════════════════════════════════════════════════════
+						// Deactivate OTHER buttons only (do NOT touch this one → no flicker)
+						$c.find(".pattern-btn").not($btn).removeClass("active").css({
+								"background": "", "border-color": "", "color": ""
+						});
+
+						// Activate this button
+						$btn.addClass("active").css({
+								"background": "linear-gradient(#DCDBDA, #8A8C8E)",
+								"border-color": "#000000",
+								"color": "#000000"
+						});
+						$c.data("active-name", name);
+
+						// Navigate
+						navigateToObject(name);
+				};
 
         if (isGrouped && result.grouped) {
             // ─── Grouped rendering (built manually to include Select All) ───
@@ -1195,7 +1420,6 @@ define([
                         'border:1px solid #2A2C2E;border-radius:3px;color:#000;cursor:pointer;">' +
                         esc(btnLabel) + '</button>';
             }
-
             html += '</div>';
 
             // ─── Group buttons ─────────────────────────────────────
@@ -1222,8 +1446,7 @@ define([
                     'data-display-name="' + esc(text) + '" ' +
                     'data-group="' + esc(groupName) + '"' +
                     ' title="' + esc(p.id) + '"' +
-                    style + '>' +
-                    esc(text) + '</button>';
+                    style + '>' + esc(text) + '</button>';
             }
             html += '</div>';
         }
@@ -1255,15 +1478,14 @@ define([
                 );
 
                 // Determine current state
-                var allSelected = true;
+                var allSel = true;
                 $groupButtons.each(function() {
                     if (!state.selectedObjects.has($(this).attr("data-pattern-id"))) {
-                        allSelected = false;
+                        allSel = false;
                     }
                 });
 
-                if (allSelected) {
-                    // Deselect all
+                if (allSel) {
                     $groupButtons.each(function() {
                         var name = $(this).attr("data-pattern-id");
                         state.selectedObjects.delete(name);
@@ -1273,7 +1495,6 @@ define([
                     });
                     $groupBtn.text(tr("Select All"));
                 } else {
-                    // Select all
                     $groupButtons.each(function() {
                         var name = $(this).attr("data-pattern-id");
                         state.selectedObjects.add(name);
@@ -1290,79 +1511,6 @@ define([
                 updateSummary();
             });
         }
-    }
-
-    /**
-     * Attach "Select All / Deselect All" click handlers to group headers.
-     * Called after `Render.renderGroupedStars` when multi-select is active.
-     *
-     * Each group header has:
-     *   <button class="star-group-select-all" data-group="Ori">Select All</button>
-     *
-     * Clicking toggles every object within the group.
-     *
-     * @function attachGroupSelectAllHandlers
-     * @param {jQuery} $c - The objects container
-     * @returns {void}
-     */
-    function attachGroupSelectAllHandlers($c) {
-        $c.find(".star-group-select-all").each(function() {
-            var $groupBtn = $(this);
-            var groupName = $groupBtn.data("group");
-            var $groupButtons = $c.find('.star-group-buttons[data-group="' + groupName + '"] .pattern-btn');
-
-            // Check if all are selected → set button text accordingly
-            var totalInGroup = $groupButtons.length;
-            var selectedInGroup = 0;
-            $groupButtons.each(function() {
-                if (state.selectedObjects.has($(this).attr("data-pattern-id"))) {
-                    selectedInGroup++;
-                }
-            });
-            $groupBtn.text(selectedInGroup === totalInGroup && totalInGroup > 0
-                ? "Deselect All"
-                : "Select All");
-
-            // Bind click
-            $groupBtn.off("click.sgGroupAll").on("click.sgGroupAll", function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-
-                var allSelected = true;
-                $groupButtons.each(function() {
-                    if (!state.selectedObjects.has($(this).attr("data-pattern-id"))) {
-                        allSelected = false;
-                    }
-                });
-
-                if (allSelected) {
-                    // Deselect all
-                    $groupButtons.each(function() {
-                        var name = $(this).attr("data-pattern-id");
-                        state.selectedObjects.delete(name);
-                        $(this).removeClass("active").css({
-                            "background": "", "border-color": "", "color": ""
-                        });
-                    });
-                    $groupBtn.text("Select All");
-                } else {
-                    // Select all
-                    $groupButtons.each(function() {
-                        var name = $(this).attr("data-pattern-id");
-                        state.selectedObjects.add(name);
-                        $(this).addClass("active").css({
-                            "background": "linear-gradient(#DCDBDA, #8A8C8E)",
-                            "border-color": "#000000",
-                            "color": "#000000"
-                        });
-                    });
-                    $groupBtn.text("Deselect All");
-                }
-
-                updateSelectionCount();
-                updateSummary();
-            });
-        });
     }
 
     /**
@@ -1456,14 +1604,13 @@ define([
         if (!enabled) clearObjectSelection();
         updateSelectionCount();
         updateSummary();
-        // Re-render to attach/detach handlers
         if (state.patterns && state.patterns.length) {
             applyFiltersAndRender($dom.objectsContainer);
         }
     }
 
     /**
-     * Show/hide Select All / Clear buttons.
+     * Show/hide the multi-select bulk buttons (Select All / Clear).
      *
      * @function toggleMultiSelectButtons
      * @param {boolean} show
@@ -1578,6 +1725,7 @@ define([
 
         var html = '<div style="font-size:11px;line-height:1.6;">';
         html += '<div><strong>' + esc(tr("Type:")) + '</strong> ' + esc(typeDisplay) + '</div>';
+        html += '<div><strong>' + esc(tr("Family:")) + '</strong> ' + esc(state.currentTypeFamily) + '</div>';
         html += '<div><strong>' + esc(tr("Total objects:")) + '</strong> ' + totalObjects + '</div>';
         html += '<div><strong>' + esc(tr("Visible (filtered):")) + '</strong> ' + visibleButtons + '</div>';
         if (state.multiSelectActive) {
@@ -1596,6 +1744,11 @@ define([
 
     /**
      * Generate the SSC script from the current state.
+     *
+     * Collects all UI option values (base + DSO-specific), then delegates
+     * to `Tours.generateObjectTypeTour()` which handles family detection,
+     * `core.clear()` preset selection, DSO setup, DSS setup, landscape
+     * setup, and the tour loop.
      *
      * @function generateScript
      * @returns {void}
@@ -1624,16 +1777,33 @@ define([
             }
         }
 
+        // Base options
         var opts = {
-            duration:     readNum($dom.duration, 4),
-            zoomFov:      readNum($("#sg-nav-fov"), 15),
-            overviewFov:  readNum($dom.overviewFov, 90),
-            fontSize:     readNum($dom.fontSize, 16),
-            showLabels:   readBool($dom.showLabels, true),
-            showMarkers:  readBool($dom.showMarkers, true),
-            useSaveState: readBool($dom.useSaveState, false),
-            lockObserver: readBool($dom.lockObserver, false)
+            duration:      readNum($dom.duration, 4),
+            zoomFov:       readNum($("#sg-nav-fov"), 15),
+            overviewFov:   readNum($dom.overviewFov, 90),
+            fontSize:      readNum($dom.fontSize, 16),
+            showLabels:    readBool($dom.showLabels, true),
+            showMarkers:   readBool($dom.showMarkers, true),
+            useSaveState:  readBool($dom.useSaveState, false),
+            lockObserver:  readBool($dom.lockObserver, false),
+            showLandscape: readBool($dom.showLandscape, false)
         };
+
+        // v4.0.0: DSO-specific options (only read if DSO family)
+        if (state.currentTypeFamily === 'dso') {
+            opts.deepSky = {
+                showHints:         readBool($dom.showHints, true),
+                hintsAmount:       readNum($dom.hintsAmount, 8),
+                labelsAmount:      readNum($dom.labelsAmount, 7),
+                showOutlines:      readBool($dom.showOutlines, false),
+                proportionalHints: readBool($dom.proportionalHints, false),
+                catalogMessier:    readBool($dom.catalogMessier, false),
+                catalogStandard:   readBool($dom.catalogStandard, false),
+                useDss:            readBool($dom.useDss, false),
+                dssDelay:          readNum($dom.dssDelay, 8)
+            };
+        }
 
         var proceed = function(status) {
             state.lastStatus = status || null;
@@ -1739,11 +1909,20 @@ define([
             return;
         }
 
+        // Init base spinners
         if ($.fn.spinner) {
             $dom.duration.spinner({ min: 1, max: 30, step: 0.5 });
             $dom.zoomFov.spinner({ min: 1, max: 120, step: 1 });
             $dom.overviewFov.spinner({ min: 20, max: 180, step: 1 });
             $dom.fontSize.spinner({ min: 10, max: 40, step: 1 });
+
+            // v4.0.0: DSO spinners
+            if ($dom.hintsAmount && $dom.hintsAmount.length)
+                $dom.hintsAmount.spinner({ min: 0, max: 10, step: 0.5 });
+            if ($dom.labelsAmount && $dom.labelsAmount.length)
+                $dom.labelsAmount.spinner({ min: 0, max: 10, step: 0.5 });
+            if ($dom.dssDelay && $dom.dssDelay.length)
+                $dom.dssDelay.spinner({ min: 1, max: 30, step: 1 });
         }
 
         initControlPanel();
@@ -1767,11 +1946,11 @@ define([
                 setStatus(tr("Error: ") + err.message, true);
             });
 
-        console.log("[ScriptsGen] Module initialized v3.0.0");
+        console.log("[ScriptsGen] Module initialized v4.0.0");
     }
 
     /**
-     * Bind top-level UI events.
+     * Bind top-level UI events (types, multi-select, options, generate, etc.).
      *
      * @function bindUiEvents
      * @returns {void}
