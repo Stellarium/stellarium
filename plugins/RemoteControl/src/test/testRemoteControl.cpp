@@ -78,7 +78,7 @@ void TestRemoteControl::testPaths()
     QTcpSocket client;
     client.connectToHost(QHostAddress::LocalHost, server.serverPort());
     QVERIFY(client.waitForConnected());
-    QVERIFY(server.waitForNewConnection());
+    QVERIFY(server.waitForNewConnection(2000));
     QScopedPointer<QTcpSocket> peer(server.nextPendingConnection());
     QVERIFY(peer);
 
@@ -133,7 +133,7 @@ void TestRemoteControl::testMultipartFile()
     QTcpSocket client;
     client.connectToHost(QHostAddress::LocalHost, server.serverPort());
     QVERIFY(client.waitForConnected());
-    QVERIFY(server.waitForNewConnection());
+    QVERIFY(server.waitForNewConnection(2000));
     QScopedPointer<QTcpSocket> peer(server.nextPendingConnection());
     QVERIFY(peer);
 
