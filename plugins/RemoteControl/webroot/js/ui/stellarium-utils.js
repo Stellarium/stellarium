@@ -152,7 +152,7 @@ define(["jquery", "api/remotecontrol", "api/viewcontrol", "api/actions", "api/pr
      * that the view doesn't snap back to a previously selected object.
      */
     function clearSelection() {
-        rc.postCmd("/api/main/focus", { target: "", mode: "mark" }, null, function() {});
+        rc.postCmd("/api/main/focus", { target: "", mode: "zoom" }, null, function() {});
     }
 
     /**
@@ -858,7 +858,7 @@ define(["jquery", "api/remotecontrol", "api/viewcontrol", "api/actions", "api/pr
 										propApi.setStelProp("ConstellationMgr.isolateSelected", true);
 								}
 								
-								rc.postCmd("/api/main/focus", { target: searchTerm, mode: "mark" }, null, function() {});
+								rc.postCmd("/api/main/focus", { target: searchTerm, mode: "zoom" }, null, function() {});
 								currentIsolatedConstellation = searchTerm;
 								
 								setTimeout(function() {
