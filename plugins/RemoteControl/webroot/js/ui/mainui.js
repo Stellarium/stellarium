@@ -575,6 +575,26 @@ define(["jquery", "settings", "globalize", "api/remotecontrol", "api/actions",
 		}
 
 		// ============================================================
+		// Plain checkboxes inside .btn-toggle-plain labels
+		// No API binding - purely visual sync between checkbox and label
+		// ============================================================
+		function bindPlainToggleCheckboxes() {
+				$("label.btn-toggle-plain > input[type='checkbox']").each(function() {
+						var $cb = $(this);
+						var $lbl = $cb.closest("label.btn-toggle-plain");
+						if (!$lbl.length) return;
+
+						// Initial sync
+						$lbl.toggleClass("active", this.checked === true);
+
+						// UI -> Visual only
+						$cb.on("change", function() {
+								$lbl.toggleClass("active", this.checked === true);
+						});
+				});
+		}
+
+		// ============================================================
 		// COLOR SPINNER CONTROLS WITH DEBOUNCING
 		// ============================================================
 		/**
@@ -1086,6 +1106,7 @@ define(["jquery", "settings", "globalize", "api/remotecontrol", "api/actions",
 		createAutomaticGUIElements();
 		connectStelProperties();
 		bindLabelToggleCheckboxes();
+		bindPlainToggleCheckboxes();
 		
 		// CONNECT COLOR PICKER CONTROLS
 		connectColorSpinners();
