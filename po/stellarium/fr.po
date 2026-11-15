@@ -28,7 +28,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2026-11-08 21:03+0700\n"
+"POT-Creation-Date: 2026-11-14 17:21+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Nicolas Martignoni, 2026\n"
 "Language-Team: French (https://app.transifex.com/stellarium/teams/80998/fr/)\n"
@@ -7659,7 +7659,7 @@ msgid "Custom equation of %1T"
 msgstr "Équation personnalisée de %1T"
 
 #: src/gui/ConfigurationDialog.cpp:2347 src/gui/ConfigurationDialog.cpp:2386
-#: src/gui/StelGuiItems.cpp:902 src/gui/LocationDialog.cpp:556
+#: src/gui/StelGuiItems.cpp:902 src/gui/LocationDialog.cpp:548
 msgid "System default"
 msgstr "Valeur par défaut du système"
 
@@ -8279,11 +8279,11 @@ msgstr "Espace"
 msgid "Time zone"
 msgstr "Fuseau horaire"
 
-#: src/gui/StelGuiItems.cpp:907 src/gui/LocationDialog.cpp:554
+#: src/gui/StelGuiItems.cpp:907 src/gui/LocationDialog.cpp:546
 msgid "Local Mean Solar Time"
 msgstr "Temps solaire local moyen"
 
-#: src/gui/StelGuiItems.cpp:910 src/gui/LocationDialog.cpp:555
+#: src/gui/StelGuiItems.cpp:910 src/gui/LocationDialog.cpp:547
 msgid "Local True Solar Time"
 msgstr "Temps solaire local vrai"
 
@@ -8583,30 +8583,16 @@ msgstr ""
 msgid "Visual magnitude based on phase angle and albedo."
 msgstr "Magnitude visuelle en fonction de l'angle de phase et de l'albédo."
 
-#: src/gui/LocationDialog.cpp:172 src/gui/LocationDialog.cpp:973
-msgid "Get location from GPS or system service"
-msgstr "Obtenir la position avec un GPS ou un service système"
-
-#: src/gui/LocationDialog.cpp:174 src/gui/LocationDialog.cpp:975
+#: src/gui/LocationDialog.cpp:171 src/gui/LocationDialog.cpp:964
 #: src/ui_locationDialogGui.h:432
-msgid "Get location from GPS"
-msgstr "Obtenir la position avec un GPS"
+msgid "Get location from the GPS receiver"
+msgstr "Obtenir la position à partir d'un récepteur GPS"
 
-#: src/gui/LocationDialog.cpp:237
+#: src/gui/LocationDialog.cpp:233
 msgid "Reset location list to show all known locations"
 msgstr "Réinitialiser la liste pour afficher tous les lieux connus"
 
-#: src/gui/LocationDialog.cpp:239
-msgid ""
-"Toggle fetching location from GPS or system location service. (Does not "
-"change time zone!) When satisfied, toggle off to let other programs access "
-"the GPS device."
-msgstr ""
-"Activer l'acquisition de la position par GPS ou par un service système (ne "
-"modifie pas le fuseau horaire). Après usage, désactiver cette fonction pour "
-"permettre aux autres programmes d'accéder à l'appareil GPS."
-
-#: src/gui/LocationDialog.cpp:241
+#: src/gui/LocationDialog.cpp:234
 msgid ""
 "Toggle fetching GPS location. (Does not change time zone!) When satisfied, "
 "toggle off to let other programs access the GPS device."
@@ -8615,23 +8601,23 @@ msgstr ""
 "horaire). Après usage, désactiver cette fonction pour permettre aux autres "
 "programmes d'accéder à l'appareil GPS."
 
-#: src/gui/LocationDialog.cpp:917
+#: src/gui/LocationDialog.cpp:909
 msgid "GPS listening..."
 msgstr "Écoute GPS..."
 
-#: src/gui/LocationDialog.cpp:924
+#: src/gui/LocationDialog.cpp:916
 msgid "GPS disconnecting..."
 msgstr "Déconnexion GPS..."
 
-#: src/gui/LocationDialog.cpp:946
+#: src/gui/LocationDialog.cpp:938
 msgid "2D location fix"
 msgstr "Correction de position 2D"
 
-#: src/gui/LocationDialog.cpp:951
+#: src/gui/LocationDialog.cpp:943
 msgid "3D location fix"
 msgstr "Correction de position 3D"
 
-#: src/gui/LocationDialog.cpp:960
+#: src/gui/LocationDialog.cpp:952
 msgid "GPS:FAILED"
 msgstr "GPS:FAILED"
 
@@ -8925,16 +8911,16 @@ msgid "Simbad Lookup"
 msgstr "Recherche Simbad"
 
 #: src/gui/SearchDialog.cpp:1582
-msgid "University of Strasbourg (France)"
-msgstr "Université de Strasbourg (France)"
+msgid "Strasbourg Astronomical Data Center (France)"
+msgstr "Centre de Données astronomiques de Strasbourg (France)"
 
 #: src/gui/SearchDialog.cpp:1583
 msgid "Harvard-Smithsonian Center for Astrophysics (USA)"
 msgstr "Harvard-Smithsonian Center for Astrophysics (USA)"
 
 #: src/gui/SearchDialog.cpp:1584
-msgid "Strasbourg astronomical Data Center (France)"
-msgstr "Centre de données astronomiques de Strasbourg (France)"
+msgid "The Institute for Data Intensive Astronomy (South Africa)"
+msgstr "The Institute for Data Intensive Astronomy (Afrique du Sud)"
 
 #: src/gui/SearchDialog.cpp:1670
 msgid "Paste and Search"
