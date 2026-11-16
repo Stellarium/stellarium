@@ -30,6 +30,7 @@
 #include "Dithering.hpp"
 #include "HorizonsZones.hpp"	// (SS) 2026-10-09 TIME ZONES of the JPL Horizons precession-nutation path
 #include "HorizonsPrecNut.hpp"	// (SS) 2026-10-09 precession and nutation of the JPL Horizons path
+#include "HorizonsSite.hpp"	// (SS) 2026-11-09 site of a topocentric observer (ITRS, EOP) of the JPL Horizons path
 #include <QString>
 #include <QStringList>
 #include <QTime>
@@ -64,6 +65,13 @@ class StelCore : public QObject
 	// (SS) 2026-10-09 Master switch of the precession-nutation path: off (default) = Vondrak (2011/2012) precession and IAU 2000B nutation,
 	// on = precession and nutation models of JPL Horizons, selected by TIME ZONE (see HorizonsZones). Independent of the Delta-T algorithm and of the ephemerides.
 	Q_PROPERTY(bool flagUseHorizonsPrecNut READ getUseHorizonsPrecNut WRITE setUseHorizonsPrecNut NOTIFY flagUseHorizonsPrecNutChanged)
+	// (SS) 2026-11-09 Only with flagUseHorizonsPrecNut on and an observer on Earth: the site of the observer is oriented as JPL Horizons does it (ITRS, UT1-UTC, polar motion,
+	// GAST of the IAU 1980 nutation) instead of the sidereal time of Stellarium and a spherical offset. Off: the site is the one of Stellarium.
+	Q_PROPERTY(bool flagUseHorizonsSite READ getUseHorizonsSite WRITE setUseHorizonsSite NOTIFY flagUseHorizonsSiteChanged)
+	// (SS) 2026-11-12 Only effective with flagUseHorizonsSite: also use the Horizons orientation of the site (UT1-UTC, polar motion, GAST) for the stars, the sky grids,
+	// the constellations and the landscape (default off). Off: only the Sun, the planets and the Moon (their positions and their Alt-Az and hour angle in the
+	// information panel) use it, the rest of the sky keeps the sidereal time of Stellarium.
+	Q_PROPERTY(bool flagUseHorizonsSiteForSky READ getUseHorizonsSiteForSky WRITE setUseHorizonsSiteForSky NOTIFY flagUseHorizonsSiteForSkyChanged)
 	// (SS) 2026-10-03 File name (in the user's ephemBSP folder) of the SPK kernel providing TT-TDB, e.g. "de431t.bsp"
 	Q_PROPERTY(QString ttMinusTdbKernel READ getTTminusTDBKernel WRITE setTTminusTDBKernel NOTIFY ttMinusTdbKernelChanged)
 	Q_PROPERTY(bool flagUseAberration READ getUseAberration WRITE setUseAberration NOTIFY flagUseAberrationChanged)
@@ -263,6 +271,9 @@ public:
 	Vec3d equinoxEquToAltAz(const Vec3d& v, RefractionMode refMode=RefractionAuto) const;
 	Vec3d altAzToJ2000(const Vec3d& v, RefractionMode refMode=RefractionAuto) const;
 	Vec3d j2000ToAltAz(const Vec3d& v, RefractionMode refMode=RefractionAuto) const;
+	//! (SS) 2026-11-12 Same as j2000ToAltAz() and altAzToEquinoxEqu() for the Sun, the planets and the Moon (see flagUseHorizonsSiteForSky)
+	Vec3d j2000ToAltAzSSO(const Vec3d& v, RefractionMode refMode=RefractionAuto) const;
+	Vec3d altAzToEquinoxEquSSO(const Vec3d& v, RefractionMode refMode=RefractionAuto) const;
 	void j2000ToAltAzInPlaceNoRefraction(Vec3f* v) const {v->transfo4d(matJ2000ToAltAz);}
 	void j2000ToAltAzInPlaceNoRefraction(Vec3d* v) const {v->transfo4d(matJ2000ToAltAz);}
 	Vec3d galacticToJ2000(const Vec3d& v) const;
@@ -372,6 +383,8 @@ public:
 	//! Get the sidereal time shifted by the observer longitude
 	//! @return the local sidereal time in radian
 	double getLocalSiderealTime() const;
+	//! (SS) 2026-11-12 Same as getLocalSiderealTime() for the Sun, the planets and the Moon: the LAST with polar motion of the Horizons site when it is active.
+	double getLocalSiderealTimeSSO() const;
 
 	//! Get the duration of a sidereal day for the current observer in day.
 	double getLocalSiderealDayLength() const;
@@ -511,6 +524,25 @@ public:
 	//! (SS) 2026-10-09 Choose the precession-nutation path: false = Vondrak (2011/2012) and IAU 2000B (as before), true = JPL Horizons models by TIME ZONE.
 	//! Nutation can be switched off in both paths with setUseNutation().
 	void setUseHorizonsPrecNut(bool use);
+	//! (SS) 2026-11-09 @return whether the site of the observer is oriented as JPL Horizons does it (default true, used only when getHorizonsSiteActive())
+	bool getUseHorizonsSite() const;
+	//! (SS) 2026-11-09 Choose the orientation of the site of a topocentric observer on Earth: true = ITRS + EOP (UT1-UTC, polar motion) as JPL Horizons,
+	//! false = sidereal time and spherical offset of Stellarium. Only effective when the JPL Horizons precession-nutation is active.
+	void setUseHorizonsSite(bool use);
+	//! (SS) 2026-11-12 @return whether the stars, grids, constellations and landscape also use the Horizons orientation of the site (default false)
+	bool getUseHorizonsSiteForSky() const;
+	//! (SS) 2026-11-12 Choose whether the stars, grids, constellations and landscape use the Horizons orientation of the site (see flagUseHorizonsSiteForSky).
+	void setUseHorizonsSiteForSky(bool use);
+	//! (SS) 2026-11-09 True when the site comes from HorizonsSite: master switch of the precession-nutation on, flagUseHorizonsSite on, observer on Earth,
+	//! date inside the range of Horizons. Then getHorizonsSite() is valid and getLocalSiderealTime() is the local apparent sidereal time with polar motion.
+	bool getHorizonsSiteActive() const { return horizonsSiteActive; }
+	//! (SS) 2026-11-09 Site of the observer (see HorizonsSite::Result), valid when getHorizonsSiteActive(). Computed in updateTransformMatrices().
+	const HorizonsSite::Result& getHorizonsSite() const { return horizonsSite; }
+	//! (SS) 2026-11-11 Local sidereal times of the JPL Horizons site, in degrees [0, 360), for the "Mean Sidereal Time" and "Apparent Sidereal Time" of the
+	//! information panel. Only valid when getHorizonsSiteActive(). Mean: GMST 1982 with UT1 (= UTC + UT1-UTC) plus the longitude. Apparent: GAST of the standalone
+	//! programs (IAU 1980 nutation + EOP dPsi) plus the longitude, without polar motion unless @p withPolarMotion (then it is the LASTpm of the hour angles).
+	double getHorizonsLocalMeanSiderealTimeDeg() const;
+	double getHorizonsLocalApparentSiderealTimeDeg(bool withPolarMotion=false) const;
 
 
 	//! Checks for altitude of the Sun - is it night or day?
@@ -1084,6 +1116,10 @@ signals:
 	void flagUseEOPChanged(bool b);
 	//! (SS) 2026-10-09 This signal indicates a change of the precession-nutation path (JPL Horizons models or Vondrak 2011/2012 and IAU 2000B)
 	void flagUseHorizonsPrecNutChanged(bool b);
+	//! (SS) 2026-11-09 This signal indicates a change of the orientation of the site of the observer (JPL Horizons ITRS + EOP or Stellarium)
+	void flagUseHorizonsSiteChanged(bool b);
+	//! (SS) 2026-11-12 This signal indicates a change of the use of the Horizons orientation of the site for stars, grids, constellations and landscape
+	void flagUseHorizonsSiteForSkyChanged(bool b);
 	//! (SS) 2026-10-07 This signal indicates that another Nutation model ("IAU1980" or "IAU2000A") was selected for the EOP
 	void eopModelChanged(const QString& key);
 	//! (SS) 2026-10-03 This signal indicates that another SPK kernel was selected for TT-TDB
@@ -1204,6 +1240,23 @@ private:
 	bool flagUseEOP;
 	// (SS) 2026-10-09 master switch: precession-nutation models of JPL Horizons (true) or Vondrak (2011/2012) with IAU 2000B (false)
 	bool flagUseHorizonsPrecNut;
+	// (SS) 2026-11-09 site of the observer as JPL Horizons computes it (ITRS, UT1-UTC, polar motion), used with the master switch above
+	bool flagUseHorizonsSite;
+	// (SS) 2026-11-12 see flagUseHorizonsSiteForSky
+	bool flagUseHorizonsSiteForSky;
+	// (SS) 2026-11-12 Alt-Az matrices of the solar system bodies (Sun, planets, Moon): always those of the Horizons site when it is active. The members
+	// matAltAzToEquinoxEqu, matEquinoxEquToAltAz, matJ2000ToAltAz and matAltAzToJ2000 are those of the sky (stars, grids, ...), which are the same unless
+	// the Horizons site is active and flagUseHorizonsSiteForSky is off.
+	Mat4d matAltAzToEquinoxEquSSO;
+	Mat4d matEquinoxEquToAltAzSSO;
+	Mat4d matJ2000ToAltAzSSO;
+	Mat4d matAltAzToJ2000SSO;
+	// (SS) 2026-11-09 Compute horizonsSite for the current date and location. Called by updateTransformMatrices(); cheap, so it is not cached.
+	void updateHorizonsSite();
+	// (SS) 2026-11-09 helper of updateHorizonsSite(): UT1-UTC, pole and LOD of the TIME ZONE (interpolated in zone 3, last values in zones 4 and 5)
+	void setHorizonsEOPSite(HorizonsSite::Params& p, HorizonsZones::Zone zone) const;
+	HorizonsSite::Result horizonsSite;
+	bool horizonsSiteActive = false;
 	// (SS) 2026-10-09 result of the JPL Horizons precession-nutation of the current date, see updateHorizonsPrecNut()
 	void updateHorizonsPrecNut();
 	// (SS) 2026-10-15 helpers of updateHorizonsPrecNut(), split off to reduce its complexity (CodeFactor)

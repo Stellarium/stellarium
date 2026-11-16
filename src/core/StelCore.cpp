@@ -99,6 +99,8 @@ StelCore::StelCore()
 	, flagUseNutation(true)
 	, flagUseEOP(true)
 	, flagUseHorizonsPrecNut(false)
+	, flagUseHorizonsSite(true)
+	, flagUseHorizonsSiteForSky(false)
 	, horizonsZone4Days(HorizonsZones::DEFAULT_ZONE4_DAYS)
 	, horizonsZone4FromEOP(false)
 	, flagUseAberration(true)
@@ -170,6 +172,8 @@ StelCore::StelCore()
 	flagUseNutation=conf->value("astro/flag_nutation", true).toBool();
 	flagUseEOP=conf->value("astro/flag_eop", true).toBool();	// (SS) 2026-10-07
 	flagUseHorizonsPrecNut=conf->value("astro/flag_horizons_precnut", false).toBool();	// (SS) 2026-10-09
+	flagUseHorizonsSite=conf->value("astro/flag_horizons_site", true).toBool();	// (SS) 2026-11-09
+	flagUseHorizonsSiteForSky=conf->value("astro/flag_horizons_site_sky", false).toBool();	// (SS) 2026-11-12
 	horizonsZone4Days=qBound(0, conf->value("astro/horizons_zone4_days", HorizonsZones::DEFAULT_ZONE4_DAYS).toInt(), 365);	// (SS) 2026-10-09
 	horizonsZone4FromEOP=conf->value("astro/horizons_zone4_from_eop", false).toBool();	// (SS) 2026-10-09
 	flagUseAberration=conf->value("astro/flag_aberration", true).toBool();
@@ -954,6 +958,27 @@ Vec3d StelCore::j2000ToAltAz(const Vec3d& v, RefractionMode refMode) const
 	return r;
 }
 
+// (SS) 2026-11-12 Same as altAzToEquinoxEqu() and j2000ToAltAz() with the Alt-Az matrices of the solar system bodies
+Vec3d StelCore::altAzToEquinoxEquSSO(const Vec3d& v, RefractionMode refMode) const
+{
+	if (refMode==RefractionOff || skyDrawer==Q_NULLPTR || (refMode==RefractionAuto && skyDrawer->getFlagHasAtmosphere()==false))
+		return matAltAzToEquinoxEquSSO*v;
+	Vec3d r(v);
+	skyDrawer->getRefraction().backward(r);
+	r.transfo4d(matAltAzToEquinoxEquSSO);
+	return r;
+}
+
+Vec3d StelCore::j2000ToAltAzSSO(const Vec3d& v, RefractionMode refMode) const
+{
+	if (refMode==RefractionOff || skyDrawer==Q_NULLPTR || (refMode==RefractionAuto && skyDrawer->getFlagHasAtmosphere()==false))
+		return matJ2000ToAltAzSSO*v;
+	Vec3d r(v);
+	r.transfo4d(matJ2000ToAltAzSSO);
+	skyDrawer->getRefraction().forward(r);
+	return r;
+}
+
 Vec3d StelCore::galacticToJ2000(const Vec3d& v) const
 {
 	return matGalacticToJ2000*v;
@@ -1220,12 +1245,128 @@ void StelCore::updateHorizonsPrecNut()
 	horizonsMoonCorrActive = horizonsPNActive && horizonsMoonCorrValid;
 }
 
+// (SS) 2026-11-09 Part of updateHorizonsSite(): UT1-UTC, polar motion and LOD, chosen by TIME ZONE as the standalone program does. Zones 1 and 2 have no EOP
+// (HorizonsSite ignores the values there). Zone 3: interpolated at JD(UTC). Zones 4 and 5: the last value of each group is kept (constant EOP regime of Horizons).
+// All values stay 0 when the EOP are off or when there is no data. dPsi and dEps come from setHorizonsEOPNutation().
+void StelCore::setHorizonsEOPSite(HorizonsSite::Params& p, HorizonsZones::Zone zone) const
+{
+	HorizonsPrecNut::Params pn;
+	setHorizonsEOPNutation(pn, zone);
+	p.eopDpsi = pn.eopDpsi;
+	p.eopDeps = pn.eopDeps;
+
+	if (!flagUseEOP)
+		return;
+
+	if (zone == HorizonsZones::Zone::Zone3)
+	{
+		EOPValues v;
+		if (getEOPValues(JD.first, v))
+		{
+			p.ut1utc = v.ut1utc;
+			p.xp = v.xp;
+			p.yp = v.yp;
+			p.lod = v.lod;
+		}
+	}
+	else if ((zone == HorizonsZones::Zone::Zone4 || zone == HorizonsZones::Zone::Zone5) && eopMgr)
+	{
+		const EOPReader& rd = eopMgr->reader();
+		if (rd.hasLast(EOPReader::Group::UT))
+			p.ut1utc = rd.lastRecord(EOPReader::Group::UT).ut1utc;
+		if (rd.hasLast(EOPReader::Group::Pole))
+		{
+			p.xp = rd.lastRecord(EOPReader::Group::Pole).xp;
+			p.yp = rd.lastRecord(EOPReader::Group::Pole).yp;
+		}
+		if (rd.hasLast(EOPReader::Group::LOD))
+			p.lod = rd.lastRecord(EOPReader::Group::LOD).lod;
+	}
+}
+
+// (SS) 2026-11-09 Site of the observer as JPL Horizons computes it (ITRS -> polar motion -> GAST -> true equator of date -> J2000), for the current date and location.
+// Only when the precession-nutation of JPL Horizons is active (master switch, observer on Earth, date inside the range of Horizons) and flagUseHorizonsSite is on.
+// It must be called after updateHorizonsPrecNut(). Not cached: a few ERFA calls per frame.
+void StelCore::updateHorizonsSite()
+{
+	horizonsSiteActive = false;
+	if (!flagUseHorizonsSite || !horizonsPNActive || position->isTraveling())
+		return;
+
+	const StelLocation& loc = position->getCurrentLocation();
+	HorizonsSite::Params p;
+	p.jdUT = JD.first;
+	p.jdTDB = getJDE();
+	p.jdTT = getJDTT();
+	p.zone4Start = getHorizonsZone4Start();
+	p.useNutation = flagUseNutation;
+	p.lonRad = static_cast<double>(loc.getLongitude()) * M_PI_180;
+	p.latRad = static_cast<double>(loc.getLatitude()) * M_PI_180;
+	p.heightM = static_cast<double>(loc.altitude);
+	const HorizonsZones::Zone zone = HorizonsZones::zoneFor(p.jdUT, p.jdTT, p.zone4Start);
+	setHorizonsEOPSite(p, zone);
+	horizonsSite = HorizonsSite::compute(p);
+	horizonsSiteActive = horizonsSite.ok;
+	if (!horizonsSiteActive)
+		return;
+
+	// (SS) 2026-11-11 The position and the velocity of the site that feed the J2000 coordinates (matAltAzToHeliocentricEclipticJ2000, SolarSystem::computePositions())
+	// are physical: always computed with the full nutation and the EOP of the files, whatever the check boxes Nutation and EOP say. Those boxes only choose
+	// the corrections of the of-date frame: sidereal times, hour angle, Az/Alt (horizonsSite) and p3. The J2000 position and velocity of the physical site
+	// replace rJ2000 and vJ2000 of horizonsSite (its rTod, vTod, sidereal times and matrices are those of the frame, so they are not consistent with them
+	// when a box is unchecked). With both boxes checked the two computations are the same and the second one is skipped.
+	if (!(flagUseNutation && flagUseEOP))
+	{
+		HorizonsSite::Params q = p;
+		q.useNutation = true;
+		q.eopDpsi = q.eopDeps = q.ut1utc = q.xp = q.yp = q.lod = 0.;
+		// dPsi, dEps, UT1-UTC, pole and LOD from the EOP files whatever the boxes say: interpolated in zone 3, the last value of each group in zones 4 and 5
+		if (eopMgr)
+		{
+			const EOPReader& rd = eopMgr->reader();
+			EOPReader::Interpolated e;
+			const EOPReader::Record* pole = Q_NULLPTR;
+			const EOPReader::Record* ut = Q_NULLPTR;
+			const EOPReader::Record* lod = Q_NULLPTR;
+			const EOPReader::Record* nut = Q_NULLPTR;
+			if (zone == HorizonsZones::Zone::Zone3 && eopMgr->getEOP(JD.first, e))
+			{
+				pole = e.rec.hasPole ? &e.rec : Q_NULLPTR;
+				ut = e.rec.hasUT ? &e.rec : Q_NULLPTR;
+				lod = e.rec.hasLOD ? &e.rec : Q_NULLPTR;
+				nut = e.rec.hasNutation ? &e.rec : Q_NULLPTR;
+			}
+			else if (zone == HorizonsZones::Zone::Zone4 || zone == HorizonsZones::Zone::Zone5)
+			{
+				pole = rd.hasLast(EOPReader::Group::Pole) ? &rd.lastRecord(EOPReader::Group::Pole) : Q_NULLPTR;
+				ut = rd.hasLast(EOPReader::Group::UT) ? &rd.lastRecord(EOPReader::Group::UT) : Q_NULLPTR;
+				lod = rd.hasLast(EOPReader::Group::LOD) ? &rd.lastRecord(EOPReader::Group::LOD) : Q_NULLPTR;
+				nut = rd.hasLast(EOPReader::Group::Nutation) ? &rd.lastRecord(EOPReader::Group::Nutation) : Q_NULLPTR;
+			}
+			if (pole) { q.xp = pole->xp; q.yp = pole->yp; }
+			if (ut) q.ut1utc = ut->ut1utc;
+			if (lod) q.lod = lod->lod;
+			if (nut) { q.eopDpsi = nut->dpsi; q.eopDeps = nut->deps; }
+		}
+		const HorizonsSite::Result phys = HorizonsSite::compute(q);
+		if (phys.ok)
+		{
+			for (int i = 0; i < 3; ++i)
+			{
+				horizonsSite.rJ2000[i] = phys.rJ2000[i];
+				horizonsSite.vJ2000[i] = phys.vJ2000[i];
+			}
+		}
+	}
+}
+
 // GZ: One of the most important functions, totally void of doc. :-(
 // called in update() (for every frame)
 void StelCore::updateTransformMatrices()
 {
 	matAltAzToEquinoxEqu = position->getRotAltAzToEquatorial(getJD(), getJDE());
 	matEquinoxEquToAltAz = matAltAzToEquinoxEqu.transpose();
+	const Mat4d matAltAzToEquinoxEquStellarium = matAltAzToEquinoxEqu;	// (SS) 2026-11-12 sidereal time of Stellarium, kept for the sky when the Horizons site is not used for it
 
 	// multiply static J2000 earth axis tilt (eclipticalJ2000<->equatorialJ2000)
 	// in effect, this matrix transforms from VSOP87 ecliptical J2000 to planet-based equatorial coordinates.
@@ -1237,6 +1378,15 @@ void StelCore::updateTransformMatrices()
 	updateHorizonsPrecNut();
 	if (horizonsPNActive)
 		matEquinoxEquDateToJ2000 = HorizonsPrecNut::toMat4dTransposed(horizonsPN.r);
+	// (SS) 2026-11-09 Site of the observer as JPL Horizons computes it: the meridian of the Alt-Az frame is at the local apparent sidereal time of the site WITH polar motion
+	// (LASTpm of the standalone program, which uses UT1-UTC and IAU 1980 nutation + EOP dPsi), and the latitude is the geodetic one, as in STEP 7 of the standalone program.
+	updateHorizonsSite();
+	if (horizonsSiteActive)
+	{
+		const double lat = qBound(-90.0, static_cast<double>(position->getCurrentLocation().getLatitude()), 90.0);
+		matAltAzToEquinoxEqu = Mat4d::zrotation(horizonsSite.lastPM) * Mat4d::yrotation((90.-lat)*M_PI/180.);
+		matEquinoxEquToAltAz = matAltAzToEquinoxEqu.transpose();
+	}
 	matJ2000ToEquinoxEqu = matEquinoxEquDateToJ2000.transpose();
 	matJ2000ToAltAz = matEquinoxEquToAltAz*matJ2000ToEquinoxEqu;
 	matAltAzToJ2000 = matJ2000ToAltAz.transpose();
@@ -1251,7 +1401,17 @@ void StelCore::updateTransformMatrices()
 	// In series 0.14 and 0.15, this was erroneous: offset by distance rho, but in the wrong direction.
 	// Attempt to fix LP:1275092. This improves the situation, but is still not perfect.
 	// Please keep the commented stuff until situation is really solved.
-	if (flagUseTopocentricCoordinates)
+	if (flagUseTopocentricCoordinates && horizonsSiteActive)
+	{
+		// (SS) 2026-11-09 The site is the vector of HorizonsSite (WGS84 geodetic -> ITRS -> polar motion -> true equator of date -> J2000 by rnpSite), converted to the
+		// heliocentric ecliptic J2000 frame in AU of Stellarium. It replaces the spherical offset (rho sin(sigma), 0, rho cos(sigma)) of the Alt-Az frame below.
+		const Vec3d siteJ2000(horizonsSite.rJ2000[0], horizonsSite.rJ2000[1], horizonsSite.rJ2000[2]);
+		const Vec3d siteVsop87 = matJ2000ToVsop87 * (siteJ2000 / (1000.0 * AU));
+		const Vec3d obsVsop87 = position->getCenterVsop87Pos() + siteVsop87;
+		matAltAzToHeliocentricEclipticJ2000 = Mat4d::translation(obsVsop87) * matAltAzToVsop87;
+		matHeliocentricEclipticJ2000ToAltAz = matAltAzToVsop87.transpose() * Mat4d::translation(-obsVsop87);
+	}
+	else if (flagUseTopocentricCoordinates)
 	{
 		const Vec4d offset=position->getTopographicOffsetFromCenter(); // [rho cosPhi', rho sinPhi', phi'_rad, rho]
 		const double sigma=static_cast<double>(position->getCurrentLocation().getLatitude())*M_PI/180.0 - offset.v[2];
@@ -1284,6 +1444,30 @@ void StelCore::updateTransformMatrices()
 	{
 		matAltAzToHeliocentricEclipticJ2000 =  Mat4d::translation(position->getCenterVsop87Pos()) * matAltAzToVsop87;
 		matHeliocentricEclipticJ2000ToAltAz =  matAltAzToVsop87.transpose() * Mat4d::translation(-position->getCenterVsop87Pos());
+	}
+
+	// (SS) 2026-11-12 Matrices of the solar system bodies (Sun, planets, Moon) and of the sky (stars, grids, constellations, landscape). The heliocentric matrices
+	// above, which draw the planets and give the observer position, always use the frame of the Horizons site when it is active. The sky keeps the sidereal
+	// time of Stellarium unless flagUseHorizonsSiteForSky is on (the precession-nutation matrix of the master switch is the same for both).
+	matAltAzToEquinoxEquSSO = matAltAzToEquinoxEqu;
+	matEquinoxEquToAltAzSSO = matEquinoxEquToAltAz;
+	matJ2000ToAltAzSSO = matJ2000ToAltAz;
+	matAltAzToJ2000SSO = matAltAzToJ2000;
+	if (horizonsSiteActive && !flagUseHorizonsSiteForSky)
+	{
+		matAltAzToEquinoxEqu = matAltAzToEquinoxEquStellarium;
+		matEquinoxEquToAltAz = matAltAzToEquinoxEqu.transpose();
+		matJ2000ToAltAz = matEquinoxEquToAltAz*matJ2000ToEquinoxEqu;
+		matAltAzToJ2000 = matJ2000ToAltAz.transpose();
+
+		// (SS) 2026-11-12 The planets are DRAWN through the heliocentric matrices, but their halo is positioned in FrameJ2000, i.e. in the frame of the sky: with the
+		// frame of the Horizons site in the heliocentric matrices the halo of a body was off centre from its disk (and the body off its place among the stars)
+		// by the difference of the two frames (up to a few arcsec). The Alt-Az rotation of the heliocentric matrices is therefore the one of the sky here; the
+		// observer position (the translation, which is the Horizons site) is unchanged. The numbers of the information panel use the SSO matrices above.
+		const Mat4d matAltAzToVsop87Sky = matJ2000ToVsop87 * matEquinoxEquDateToJ2000 * matAltAzToEquinoxEquStellarium;
+		const Vec3d obsHelio = getObserverHeliocentricEclipticPos();
+		matAltAzToHeliocentricEclipticJ2000 = Mat4d::translation(obsHelio) * matAltAzToVsop87Sky;
+		matHeliocentricEclipticJ2000ToAltAz = matAltAzToVsop87Sky.transpose() * Mat4d::translation(-obsHelio);
 	}
 }
 
@@ -1830,6 +2014,38 @@ void StelCore::setUseHorizonsPrecNut(bool use)
 		horizonsPNDirty = true;
 		StelApp::immediateSave("astro/flag_horizons_precnut", use);
 		emit flagUseHorizonsPrecNutChanged(use);
+	}
+}
+
+// (SS) 2026-11-09 Orientation of the site of the observer as JPL Horizons does it. Saved immediately like the master switch.
+bool StelCore::getUseHorizonsSite() const
+{
+	return flagUseHorizonsSite;
+}
+
+void StelCore::setUseHorizonsSite(bool use)
+{
+	if (flagUseHorizonsSite != use)
+	{
+		flagUseHorizonsSite = use;
+		StelApp::immediateSave("astro/flag_horizons_site", use);
+		emit flagUseHorizonsSiteChanged(use);
+	}
+}
+
+// (SS) 2026-11-12 Use the Horizons orientation of the site also for stars, grids, constellations and landscape
+bool StelCore::getUseHorizonsSiteForSky() const
+{
+	return flagUseHorizonsSiteForSky;
+}
+
+void StelCore::setUseHorizonsSiteForSky(bool use)
+{
+	if (flagUseHorizonsSiteForSky != use)
+	{
+		flagUseHorizonsSiteForSky = use;
+		StelApp::immediateSave("astro/flag_horizons_site_sky", use);
+		emit flagUseHorizonsSiteForSkyChanged(use);
 	}
 }
 
@@ -2804,8 +3020,35 @@ void StelCore::addSiderealDays(double d)
 // Get the sidereal time of the prime meridian (i.e. Rotation Angle) shifted by the observer longitude
 double StelCore::getLocalSiderealTime() const
 {
+	// (SS) 2026-11-09 JPL Horizons site: local apparent sidereal time of the site with polar motion (LASTpm), the one that gives the hour angles of Horizons
+	// (SS) 2026-11-12 for the sky only when flagUseHorizonsSiteForSky is on (see getLocalSiderealTimeSSO() for the solar system bodies)
+	if (horizonsSiteActive && flagUseHorizonsSiteForSky)
+		return horizonsSite.lastPM;
 	// On Earth, this requires UT deliberately with all its faults, on other planets we use the more regular TT.
 	return (getCurrentPlanet()->getSiderealTime(getJD(), getJDE())+static_cast<double>(position->getCurrentLocation().getLongitude()))*M_PI/180.;
+}
+
+// (SS) 2026-11-12 Local sidereal time for the Sun, the planets and the Moon: LAST with polar motion of the Horizons site when it is active
+double StelCore::getLocalSiderealTimeSSO() const
+{
+	if (horizonsSiteActive)
+		return horizonsSite.lastPM;
+	return getLocalSiderealTime();
+}
+
+// (SS) 2026-11-11 Sidereal times of the information panel when the JPL Horizons site is active (see the header).
+double StelCore::getHorizonsLocalMeanSiderealTimeDeg() const
+{
+	const double lon = static_cast<double>(position->getCurrentLocation().getLongitude());
+	return StelUtils::fmodpos(horizonsSite.gmst * M_180_PI + lon, 360.);
+}
+
+double StelCore::getHorizonsLocalApparentSiderealTimeDeg(bool withPolarMotion) const
+{
+	if (withPolarMotion)
+		return StelUtils::fmodpos(horizonsSite.lastPM * M_180_PI, 360.);
+	const double lon = static_cast<double>(position->getCurrentLocation().getLongitude());
+	return StelUtils::fmodpos(horizonsSite.gast * M_180_PI + lon, 360.);
 }
 
 //! Get the duration of a sidereal day for the current observer in day.
@@ -2926,6 +3169,14 @@ void StelCore::updateTime(double deltaTime)
 	// Position of sun and all the satellites (ie planets)
 	// GZ maybe setting this static can speedup a bit?
 	static SolarSystem* solsystem = static_cast<SolarSystem*>(StelApp::getInstance().getModuleMgr().getModule("SolarSystem"));
+	// (SS) 2026-11-10 SolarSystem::computePositions() needs the site of a topocentric observer (position and velocity of HorizonsSite) for the light time,
+	// the light deflection and the aberration (diurnal aberration). updateTransformMatrices() runs only after this function, so compute it here for the
+	// date that has just been set. updateHorizonsPrecNut() is cached by date: the call in updateTransformMatrices() will find it ready.
+	if (position)
+	{
+		updateHorizonsPrecNut();
+		updateHorizonsSite();
+	}
 	// Likely the most important location where we need JDE:
 	solsystem->computePositions(this, getJDE(), getCurrentPlanet());
 }

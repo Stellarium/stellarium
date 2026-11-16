@@ -37,6 +37,7 @@ private slots:
 	void testEopAndOffsets();
 	void testDepsOffset();	// (SS) 2026-11-08 dEps offset of zones 1 and 2
 	void testMoonOffset();
+	void testSiteMatrix();	// (SS) 2026-11-09 rSite and dpsiST for the site of a topocentric observer
 	void testOutOfRange();
 	void testTiming();
 };

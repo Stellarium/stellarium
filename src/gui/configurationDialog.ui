@@ -2383,7 +2383,7 @@
 			   <item row="2" column="0">
 					  <widget class="QCheckBox" name="lunarFigureCorrectionCheckBox">
 						  <property name="toolTip">
-							  <string>Offset the Moon's position from its center of mass to an approximation of its visible-disk center (+0.5 arcsec ecliptic longitude, -0.25 arcsec ecliptic latitude - USNO/HMNAO standard correction). Useful for eclipse and occultation work.</string>
+							  <string>Draw the Moon's disk, halo and label at an approximation of its visible-disk center (center of figure) instead of its center of mass: +0.5 arcsec in ecliptic longitude and -0.25 arcsec in ecliptic latitude (mean USNO/HMNAO correction). Display only: the coordinates and all the values of the information panel stay those of the center of mass, as in JPL Horizons.</string>
 						  </property>
 						  <property name="text">
 							  <string>Lunar figure correction</string>
@@ -2469,6 +2469,16 @@
                  </property>
                  <property name="text">
                   <string>JPL Horizons precession and nutation</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="4" column="0" colspan="4">
+                <widget class="QCheckBox" name="horizonsSiteSkyCheckBox">
+                 <property name="toolTip">
+                  <string>With the JPL Horizons precession and nutation, the Sun, the planets and the Moon always use the Horizons orientation of the observer on Earth (UT1-UTC and polar motion of the EOP, sidereal time of the IAU 1980 nutation, WGS84 site). Activate to use it also for the stars, the grids, the constellations and the landscape. When off, they keep the sidereal time of Stellarium.</string>
+                 </property>
+                 <property name="text">
+                  <string>JPL Horizons Earth orientation for stars and grids</string>
                  </property>
                 </widget>
                </item>
@@ -3625,6 +3635,7 @@
   <tabstop>nutationCheckBox</tabstop>
   <tabstop>eopCheckBox</tabstop>
   <tabstop>horizonsPrecNutCheckBox</tabstop>
+  <tabstop>horizonsSiteSkyCheckBox</tabstop>
   <tabstop>eopToolButton</tabstop>
   <tabstop>aberrationCheckBox</tabstop>
   <tabstop>aberrationSpinBox</tabstop>

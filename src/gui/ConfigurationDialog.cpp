@@ -220,6 +220,10 @@ void ConfigurationDialog::createDialogContent()
 	connectBoolProperty(ui->horizonsPrecNutCheckBox, "StelCore.flagUseHorizonsPrecNut");
 	connect(core, &StelCore::flagUseHorizonsPrecNutChanged, ui->eopCheckBox, &QCheckBox::setEnabled);
 	ui->eopCheckBox->setEnabled(core->getUseHorizonsPrecNut());
+	// (SS) 2026-11-12 Horizons orientation of the site (UT1-UTC, polar motion) also for stars, grids, constellations and landscape: only with the master switch
+	connectBoolProperty(ui->horizonsSiteSkyCheckBox, "StelCore.flagUseHorizonsSiteForSky");
+	connect(core, &StelCore::flagUseHorizonsPrecNutChanged, ui->horizonsSiteSkyCheckBox, &QCheckBox::setEnabled);
+	ui->horizonsSiteSkyCheckBox->setEnabled(core->getUseHorizonsPrecNut());
 	connectBoolProperty(ui->aberrationCheckBox,  "StelCore.flagUseAberration");
 	connectDoubleProperty(ui->aberrationSpinBox, "StelCore.aberrationFactor");
 	connectBoolProperty(ui->parallaxCheckBox,    "StelCore.flagUseParallax");
@@ -1386,6 +1390,7 @@ void ConfigurationDialog::saveAllSettings()
         conf->setValue("astro/flag_nutation",                           core->getUseNutation());
         conf->setValue("astro/flag_eop",                                core->getUseEOP());	// (SS) 2026-10-07
         conf->setValue("astro/flag_horizons_precnut",                   core->getUseHorizonsPrecNut());	// (SS) 2026-10-09
+        conf->setValue("astro/flag_horizons_site_sky",                  core->getUseHorizonsSiteForSky());	// (SS) 2026-11-12
         conf->setValue("astro/eop_model",                               core->getEOPModel());	// (SS) 2026-10-07
         conf->setValue("astro/eop_auto_update",                         core->getEOPAutoUpdate());	// (SS) 2026-10-10
         conf->setValue("astro/flag_aberration",                         core->getUseAberration());

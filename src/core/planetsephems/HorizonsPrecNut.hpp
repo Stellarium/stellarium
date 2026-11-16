@@ -68,6 +68,15 @@ public:
 		double epsMean = 0.;                          //!< mean obliquity of date [rad], Owen (zones 1, 5) or IAU 1980
 		double dpsi = 0., deps = 0.;                  //!< nutation including EOP and offset [rad]
 		double epsTrue = 0.;                          //!< epsMean + deps [rad]: obliquity for the apparent ecliptic of date
+		//! (SS) 2026-11-09 Matrix that orients the SITE of a topocentric observer (true equator of date -> J2000 is its transpose), as
+		//! rnpSite of the standalone program: IAU 1976 precession + IAU 1980 nutation in every zone. It is NOT the same as r in zones
+		//! 1 and 5 (Owen angles, and no offset) and it is r itself in zones 2, 3 and 4 (offsets included, as the standalone program does).
+		//! With useNutation false it is the precession matrix r.
+		double rSite[3][3] = {{1,0,0},{0,1,0},{0,0,1}};
+		//! (SS) 2026-11-09 Nutation in longitude used for the sidereal time [rad]: IAU 1980 + EOP dPsi (zones 3, 4, 5), WITHOUT the empirical
+		//! JPL offsets of dpsiOffsetMas() (dpsiST of the standalone program). 0 when useNutation is false.
+		double dpsiST = 0.;
+		double tCy = 0.;                              //!< (SS) 2026-11-09 Julian centuries from J2000 of the time argument of the zone (TDB in zones 1 and 2, TT after)
 	};
 
 	static Result compute(const Params& p);

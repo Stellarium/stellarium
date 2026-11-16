@@ -70,34 +70,50 @@ Vec3d StelObject::getEquinoxEquatorialPosAuto(const StelCore* core) const
 
 
 // Get observer-centered hour angle + declination (at current equinox)
+// (SS) 2026-11-12 The Sun, the planets and the Moon use the Alt-Az frame and the local sidereal time of the Horizons site when it is active; the other objects
+// (stars, DSO, ...) only when StelCore::getUseHorizonsSiteForSky() is on (see StelCore::flagUseHorizonsSiteForSky).
+static bool usesSolarSystemFrame(const StelObject* o)
+{
+	return o->getType() == QLatin1String("Planet");
+}
+
 Vec3d StelObject::getSiderealPosGeometric(const StelCore* core) const
 {
-	return Mat4d::zrotation(-core->getLocalSiderealTime())* getEquinoxEquatorialPos(core);
+	const double lst = usesSolarSystemFrame(this) ? core->getLocalSiderealTimeSSO() : core->getLocalSiderealTime();
+	return Mat4d::zrotation(-lst)* getEquinoxEquatorialPos(core);
 }
 
 // Get observer-centered hour angle + declination (at current equinox), deflected by refraction
 Vec3d StelObject::getSiderealPosApparent(const StelCore* core) const
 {
 	Vec3d v=getAltAzPosApparent(core); // These already come with refraction!
+	if (usesSolarSystemFrame(this))
+	{
+		v = core->altAzToEquinoxEquSSO(v, StelCore::RefractionOff);
+		return Mat4d::zrotation(-core->getLocalSiderealTimeSSO())*v;
+	}
 	v = core->altAzToEquinoxEqu(v, StelCore::RefractionOff);
 	return Mat4d::zrotation(-core->getLocalSiderealTime())*v;
 }
 
 Vec3d StelObject::getAltAzPosGeometric(const StelCore* core) const
 {
-	return core->j2000ToAltAz(getJ2000EquatorialPos(core), StelCore::RefractionOff);
+	return usesSolarSystemFrame(this) ? core->j2000ToAltAzSSO(getJ2000EquatorialPos(core), StelCore::RefractionOff)
+	                                  : core->j2000ToAltAz(getJ2000EquatorialPos(core), StelCore::RefractionOff);
 }
 
 // Get observer-centered alt/az position
 Vec3d StelObject::getAltAzPosApparent(const StelCore* core) const
 {
-	return core->j2000ToAltAz(getJ2000EquatorialPos(core), StelCore::RefractionOn);
+	return usesSolarSystemFrame(this) ? core->j2000ToAltAzSSO(getJ2000EquatorialPos(core), StelCore::RefractionOn)
+	                                  : core->j2000ToAltAz(getJ2000EquatorialPos(core), StelCore::RefractionOn);
 }
 
 // Get observer-centered alt/az position
 Vec3d StelObject::getAltAzPosAuto(const StelCore* core) const
 {
-	return core->j2000ToAltAz(getJ2000EquatorialPos(core), StelCore::RefractionAuto);
+	return usesSolarSystemFrame(this) ? core->j2000ToAltAzSSO(getJ2000EquatorialPos(core), StelCore::RefractionAuto)
+	                                  : core->j2000ToAltAz(getJ2000EquatorialPos(core), StelCore::RefractionAuto);
 }
 
 // Get observer-centered galactic position
@@ -823,9 +839,14 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 	if ((flags&SiderealTime) && (currentPlanet==L1S("Earth")))
 	{
 		const double longitude=static_cast<double>(core->getCurrentLocation().getLongitude());
-		double sidereal=(get_mean_sidereal_time(core->getJD(), core->getJDE())  + longitude) / 15.;
+		// (SS) 2026-11-11 JPL Horizons site: GMST 1982 with UT1 and GAST of the IAU 1980 nutation + EOP, as the standalone programs (see StelCore)
+		// (SS) 2026-11-12 with the JPL Horizons site: Greenwich mean and apparent sidereal times (GMST 1982 with UT1, GAST of the IAU 1980 nutation + EOP) and the
+		// local apparent sidereal time with polar motion (LAST), the one of the hour angle, as the standalone programs
+		const bool hSite = core->getHorizonsSiteActive();
+		double sidereal=hSite ? StelUtils::fmodpos(core->getHorizonsSite().gmst * M_180_PI, 360.) / 15.
+		                      : (get_mean_sidereal_time(core->getJD(), core->getJDE())  + longitude) / 15.;
 		sidereal=StelUtils::fmodpos(sidereal, 24.);
-		QString STc = q_("Mean Sidereal Time");
+		QString STc = hSite ? q_("Mean Sidereal Time (GMST)") : q_("Mean Sidereal Time");
 		QString STd = StelUtils::hoursToHmsStr(sidereal);
 
 		if (withTables)
@@ -838,9 +859,42 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 
 		if (core->getUseNutation())
 		{
-			sidereal=(get_apparent_sidereal_time(core->getJD(), core->getJDE()) + longitude) / 15.;
+			sidereal=hSite ? StelUtils::fmodpos(core->getHorizonsSite().gast * M_180_PI, 360.) / 15.
+			               : (get_apparent_sidereal_time(core->getJD(), core->getJDE()) + longitude) / 15.;
 			sidereal=StelUtils::fmodpos(sidereal, 24.);
-			STc = q_("Apparent Sidereal Time");
+			STc = hSite ? q_("Apparent Sidereal Time (GAST)") : q_("Apparent Sidereal Time");
+			STd = StelUtils::hoursToHmsStr(sidereal);
+			if (withTables)
+				res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2</td></tr>").arg(STc, STd);
+			else
+				res += QString("%1: %2<br/>").arg(STc, STd);
+			if (hSite)
+			{
+				// (SS) 2026-11-12 local mean sidereal time: GMST + longitude, between GAST and LAST
+				sidereal=StelUtils::fmodpos(core->getHorizonsSite().gmst * M_180_PI + longitude, 360.) / 15.;
+				STc = q_("Local Mean Sidereal Time (LMST)");
+				STd = StelUtils::hoursToHmsStr(sidereal);
+				if (withTables)
+					res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2</td></tr>").arg(STc, STd);
+				else
+					res += QString("%1: %2<br/>").arg(STc, STd);
+			}
+			if (hSite)
+			{
+				sidereal=StelUtils::fmodpos(core->getHorizonsSite().lastPM * M_180_PI, 360.) / 15.;
+				STc = q_("Local Apparent Sidereal Time (LAST)");
+				STd = StelUtils::hoursToHmsStr(sidereal);
+				if (withTables)
+					res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2</td></tr>").arg(STc, STd);
+				else
+					res += QString("%1: %2<br/>").arg(STc, STd);
+			}
+		}
+		else if (hSite)
+		{
+			// (SS) 2026-11-12 without nutation GAST and LAST are not shown, the local mean sidereal time is
+			sidereal=StelUtils::fmodpos(core->getHorizonsSite().gmst * M_180_PI + longitude, 360.) / 15.;
+			STc = q_("Local Mean Sidereal Time (LMST)");
 			STd = StelUtils::hoursToHmsStr(sidereal);
 			if (withTables)
 				res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2</td></tr>").arg(STc, STd);
@@ -1422,20 +1476,37 @@ QString StelObject::getCommonNarration(const StelCore *core, const InfoStringGro
 	if ((flags&SiderealTime) && (currentPlanetName==L1S("Earth")))
 	{
 		const double longitude=static_cast<double>(core->getCurrentLocation().getLongitude());
-		double sidereal=(get_mean_sidereal_time(core->getJD(), core->getJDE())  + longitude) / 15.;
+		const bool hSite = core->getHorizonsSiteActive();	// (SS) 2026-11-12 Greenwich GMST and GAST and local LAST of the Horizons site
+		double sidereal=hSite ? StelUtils::fmodpos(core->getHorizonsSite().gmst * M_180_PI, 360.) / 15.
+		                      : (get_mean_sidereal_time(core->getJD(), core->getJDE())  + longitude) / 15.;
 		sidereal=StelUtils::fmodpos(sidereal, 24.);
-		QString STc = qc_("The Mean Sidereal Time is", "object narration");
+		QString STc = hSite ? qc_("The Greenwich Mean Sidereal Time (GMST) is", "object narration") : qc_("The Mean Sidereal Time is", "object narration");
 		QString STd = StelUtils::hoursToHmsNarration(sidereal);
 
 		res += QString("%1: %2. ").arg(STc, STd);
 
 		if (core->getUseNutation())
 		{
-			sidereal=(get_apparent_sidereal_time(core->getJD(), core->getJDE()) + longitude) / 15.;
+			sidereal=hSite ? StelUtils::fmodpos(core->getHorizonsSite().gast * M_180_PI, 360.) / 15.
+			               : (get_apparent_sidereal_time(core->getJD(), core->getJDE()) + longitude) / 15.;
 			sidereal=StelUtils::fmodpos(sidereal, 24.);
-			STc = qc_("The Apparent Sidereal Time is", "object narration");
+			STc = hSite ? qc_("The Greenwich Apparent Sidereal Time (GAST) is", "object narration") : qc_("The Apparent Sidereal Time is", "object narration");
 			STd = StelUtils::hoursToHmsNarration(sidereal);
 			res += QString("%1: %2. ").arg(STc, STd);
+			if (hSite)
+			{
+				sidereal=StelUtils::fmodpos(core->getHorizonsSite().gmst * M_180_PI + longitude, 360.) / 15.;	// (SS) 2026-11-12 LMST
+				STc = qc_("The Local Mean Sidereal Time (LMST) is", "object narration");
+				STd = StelUtils::hoursToHmsNarration(sidereal);
+				res += QString("%1: %2. ").arg(STc, STd);
+			}
+			if (hSite)
+			{
+				sidereal=StelUtils::fmodpos(core->getHorizonsSite().lastPM * M_180_PI, 360.) / 15.;
+				STc = qc_("The Local Apparent Sidereal Time (LAST) is", "object narration");
+				STd = StelUtils::hoursToHmsNarration(sidereal);
+				res += QString("%1: %2. ").arg(STc, STd);
+			}
 		}
 		//res += getExtraInfoStrings(flags&SiderealTime).join("");
 		//res += omgr->getExtraInfoStrings(flags&SiderealTime).join("");
@@ -1765,17 +1836,33 @@ QVariantMap StelObject::getInfoMap(const StelCore *core) const
 	if (core->getCurrentLocation().planetName==L1S("Earth"))
 	{
 		const double longitude=static_cast<double>(core->getCurrentLocation().getLongitude());
-		double sidereal=(get_mean_sidereal_time(core->getJD(), core->getJDE())  + longitude) / 15.;
+		// (SS) 2026-11-12 with the JPL Horizons site meanSidTm and appSidTm are the Greenwich GMST and GAST, and lastSidTm is the local apparent sidereal time with polar motion
+		const bool hSite = core->getHorizonsSiteActive();
+		double sidereal=hSite ? StelUtils::fmodpos(core->getHorizonsSite().gmst * M_180_PI, 360.) / 15.
+		                      : (get_mean_sidereal_time(core->getJD(), core->getJDE())  + longitude) / 15.;
 		sidereal=StelUtils::fmodpos(sidereal, 24.);
 		map.insert("meanSidTm", StelUtils::hoursToHmsStr(sidereal));
 		map.insert("meanSidTm-dd", sidereal * 15.);
 
-		sidereal=(get_apparent_sidereal_time(core->getJD(), core->getJDE()) + longitude) / 15.;
+		sidereal=hSite ? StelUtils::fmodpos(core->getHorizonsSite().gast * M_180_PI, 360.) / 15.
+		               : (get_apparent_sidereal_time(core->getJD(), core->getJDE()) + longitude) / 15.;
 		sidereal=StelUtils::fmodpos(sidereal, 24.);
 		map.insert("appSidTm", StelUtils::hoursToHmsStr(sidereal));
 		map.insert("appSidTm-dd", sidereal * 15.);
+		if (hSite)
+		{
+			// (SS) 2026-11-12 local mean sidereal time (GMST + longitude)
+			const double lmstH = StelUtils::fmodpos(core->getHorizonsSite().gmst * M_180_PI + longitude, 360.) / 15.;
+			map.insert("lmstSidTm", StelUtils::hoursToHmsStr(lmstH));
+			map.insert("lmstSidTm-dd", lmstH * 15.);
+			const double lastH = StelUtils::fmodpos(core->getHorizonsSite().lastPM * M_180_PI, 360.) / 15.;
+			map.insert("lastSidTm", StelUtils::hoursToHmsStr(lastH));
+			map.insert("lastSidTm-dd", lastH * 15.);
+		}
 
-		double ha = sidereal * 15.0 - ra * M_180_PI;
+		// (SS) 2026-11-11 with the JPL Horizons site the hour angle uses LASTpm (polar motion included), as the HA/Dec line of the information panel
+		const double lstDeg = hSite ? (usesSolarSystemFrame(this) ? core->getLocalSiderealTimeSSO() : core->getLocalSiderealTime()) * M_180_PI : sidereal * 15.0;
+		double ha = lstDeg - ra * M_180_PI;
 		ha=StelUtils::fmodpos(ha, 360.0);
 		if (StelApp::getInstance().getFlagUseNegativeHourAngles() && ha>180.)
 			ha-=360.;

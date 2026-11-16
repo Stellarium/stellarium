@@ -190,6 +190,8 @@ SET(stellarium_lib_SRCS
      core/planetsephems/HorizonsZones.hpp
      core/planetsephems/HorizonsPrecNut.cpp
      core/planetsephems/HorizonsPrecNut.hpp
+     core/planetsephems/HorizonsSite.cpp
+     core/planetsephems/HorizonsSite.hpp
      core/planetsephems/htc20b.c
      core/planetsephems/htc20b.h
      core/modules/AtmosphereLightweight.cpp
@@ -901,6 +903,16 @@ IF(ENABLE_TESTING)
      ADD_DEPENDENCIES(buildTests testHorizonsPrecNut)
      ADD_TEST(testHorizonsPrecNut testHorizonsPrecNut)
      SET_TARGET_PROPERTIES(testHorizonsPrecNut PROPERTIES FOLDER "src/tests")
+
+     SET(tests_testHorizonsSite_SRCS
+          tests/testHorizonsSite.hpp
+          tests/testHorizonsSite.cpp
+     )
+     ADD_EXECUTABLE(testHorizonsSite ${tests_testHorizonsSite_SRCS})
+     TARGET_LINK_LIBRARIES(testHorizonsSite ${TESTS_LIBRARIES})
+     ADD_DEPENDENCIES(buildTests testHorizonsSite)
+     ADD_TEST(testHorizonsSite testHorizonsSite)
+     SET_TARGET_PROPERTIES(testHorizonsSite PROPERTIES FOLDER "src/tests")
 
      SET(tests_testConversions_SRCS
           tests/testConversions.hpp

@@ -73,6 +73,7 @@ HorizonsPrecNut::Result HorizonsPrecNut::compute(const Params& p)
 	const bool owen = (res.zone == HorizonsZones::Zone::Zone1 || res.zone == HorizonsZones::Zone::Zone5);
 	const double jd = (res.zone == HorizonsZones::Zone::Zone1 || res.zone == HorizonsZones::Zone::Zone2) ? p.jdTDB : p.jdTT;
 
+	res.tCy = (jd - J2000) / 36525.;	// (SS) 2026-11-09 needed by the equation of the equinoxes of the sidereal time (HorizonsSite)
 	double rp[3][3];	// precession (zones 2 to 4) or ecliptic of J2000 + Owen precession (zones 1 and 5)
 	if (owen)
 	{
@@ -96,7 +97,10 @@ HorizonsPrecNut::Result HorizonsPrecNut::compute(const Params& p)
 	{
 		for (int i = 0; i < 3; ++i)
 			for (int j = 0; j < 3; ++j)
+			{
 				res.r[i][j] = rp[i][j];
+				res.rSite[i][j] = rp[i][j];	// (SS) 2026-11-09
+			}
 		res.epsTrue = res.epsMean;
 		res.ok = true;
 		return res;
@@ -125,6 +129,27 @@ HorizonsPrecNut::Result HorizonsPrecNut::compute(const Params& p)
 	double rn[3][3];
 	eraNumat(res.epsMean, dpsi, deps, rn);
 	eraRxr(rn, rp, res.r);	// P3 = N * P
+
+	// (SS) 2026-11-09 Orientation of the site of a topocentric observer: rnpSite and dpsiST of the standalone program (getEarthOrientation()).
+	// Zones 2, 3 and 4 use the matrix of the object itself (with its offsets in zones 2 and 4). Zones 1 and 5 use the plain IAU 1976
+	// precession + IAU 1980 nutation (zone 5: last EOP, no offset; zone 1: no EOP, no offset). The sidereal time never gets the offsets.
+	const bool useEop = (res.zone == HorizonsZones::Zone::Zone3 || res.zone == HorizonsZones::Zone::Zone4 || res.zone == HorizonsZones::Zone::Zone5);
+	res.dpsiST = dp80 + (useEop ? p.eopDpsi * ARCSEC2RAD : 0.);
+	if (res.zone == HorizonsZones::Zone::Zone1 || res.zone == HorizonsZones::Zone::Zone5)
+	{
+		double rpS[3][3], rnS[3][3];
+		eraPmat76(J2000, jd - J2000, rpS);
+		const double dpS = dp80 + (res.zone == HorizonsZones::Zone::Zone5 ? p.eopDpsi * ARCSEC2RAD : 0.);
+		const double deS = de80 + (res.zone == HorizonsZones::Zone::Zone5 ? p.eopDeps * ARCSEC2RAD : 0.);
+		eraNumat(eraObl80(J2000, jd - J2000), dpS, deS, rnS);
+		eraRxr(rnS, rpS, res.rSite);
+	}
+	else
+	{
+		for (int i = 0; i < 3; ++i)
+			for (int j = 0; j < 3; ++j)
+				res.rSite[i][j] = res.r[i][j];
+	}
 	res.dpsi = dpsi;
 	res.deps = deps;
 	res.epsTrue = res.epsMean + deps;

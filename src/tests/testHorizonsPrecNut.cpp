@@ -275,6 +275,56 @@ void TestHorizonsPrecNut::testMoonOffset()
 	}
 }
 
+// (SS) 2026-11-09 Matrix and nutation in longitude of the SITE of a topocentric observer (rnpSite and dpsiST of the standalone program):
+// zones 2, 3 and 4 use the matrix of the object (offsets of zones 2 and 4 included), zones 1 and 5 the plain IAU 1976 precession + IAU 1980
+// nutation (zone 1: no EOP, zone 5: last EOP), and the nutation of the sidereal time never has the empirical offsets.
+void TestHorizonsPrecNut::testSiteMatrix()
+{
+	const double as = HPN::ARCSEC2RAD;
+	for (int k = 0; k < 5; ++k)
+	{
+		HPN::Params p = params(DATES[k]);
+		p.eopDpsi = 0.1;
+		p.eopDeps = 0.05;
+		const HPN::Result res = HPN::compute(p);
+		const double jd = (k < 2) ? p.jdTDB : p.jdTT;
+		double dp80, de80;
+		eraNut80(J2000, jd - J2000, &dp80, &de80);
+		QVERIFY2(std::fabs(res.tCy - (jd - J2000) / 36525.) < 1e-15, qPrintable(QString("zone %1 tCy").arg(k + 1)));
+		const double dpsiST = dp80 + ((k < 2) ? 0. : 0.1 * as);
+		QVERIFY2(std::fabs(res.dpsiST - dpsiST) < 1e-15, qPrintable(QString("zone %1 dpsiST").arg(k + 1)));
+
+		double rp[3][3], rn[3][3], expected[3][3];
+		if (k == 0 || k == 4)
+		{
+			eraPmat76(J2000, jd - J2000, rp);
+			const double dp = dp80 + ((k == 4) ? 0.1 * as : 0.);
+			const double de = de80 + ((k == 4) ? 0.05 * as : 0.);
+			eraNumat(eraObl80(J2000, jd - J2000), dp, de, rn);
+			eraRxr(rn, rp, expected);
+			QVERIFY2(frobenius(res.rSite, expected) < 1e-15, qPrintable(QString("zone %1 rSite").arg(k + 1)));
+			// zones 1 and 5 use Owen for the object: the two matrices differ but stay within seconds of arc plus the offsets
+			QVERIFY(frobenius(res.rSite, res.r) > 0.);
+			QVERIFY(frobenius(res.rSite, res.r) < 10. * as);
+		}
+		else
+			QVERIFY2(frobenius(res.rSite, res.r) == 0., qPrintable(QString("zone %1 rSite = r").arg(k + 1)));
+	}
+	// zone 4: the Moon offset is part of rSite, as in the standalone program, but not of dpsiST
+	HPN::Params p = params(DATES[3]);
+	const HPN::Result gen = HPN::compute(p);
+	p.forMoon = true;
+	const HPN::Result moon = HPN::compute(p);
+	QCOMPARE(gen.dpsiST, moon.dpsiST);
+	QVERIFY(frobenius(gen.rSite, moon.rSite) > 0.);
+	// without nutation: precession only, sidereal time without nutation
+	p = params(DATES[2]);
+	p.useNutation = false;
+	const HPN::Result prec = HPN::compute(p);
+	QCOMPARE(prec.dpsiST, 0.);
+	QVERIFY(frobenius(prec.rSite, prec.r) == 0.);
+}
+
 void TestHorizonsPrecNut::testOutOfRange()
 {
 	HPN::Params p = params(-3000000.);

@@ -1821,13 +1821,37 @@ void SolarSystem::computePositions(StelCore *core, double dateJDE, PlanetP obser
 			Vec3d sunVelJDE;
 			get_sun_barycentric_coordsv(dateJDE, &sunPosJDE[0], &sunVelJDE[0], Q_NULLPTR);
 
+			// (SS) 2026-11-10 Topocentric observer on Earth (JPL Horizons mode): the observer is the SITE, not the geocentre, in the light time, in the
+			// gravitational deflection (E = Ob - Sb), in the direction of the object and in the aberration, whose velocity must include the rotation
+			// of the Earth (diurnal aberration, up to 0.32 arcsec), as the standalone programs do (p_obs_b = Earth + site, v_obs_b = Earth + omega x r).
+			// StelCore computed the site (HorizonsSite) just before this call (see StelCore::updateTime()); it is in J2000 equatorial metres and m/s,
+			// converted here to the heliocentric ecliptic frame of VSOP87 in AU and AU/day. All the offsets stay 0 for a geocentric observer, for an
+			// observer that is not on Earth, with the JPL Horizons precession-nutation off or with the site of Horizons off: nothing changes then.
+			Vec3d obsSiteJDE(0.);
+			Vec3d obsSiteVelJDE(0.);
+			if (observerPlanetIsEarth && core->getUseTopocentricCoordinates() && core->getHorizonsSiteActive())
+			{
+				const HorizonsSite::Result& hs = core->getHorizonsSite();
+				const Vec3d siteJ2000(hs.rJ2000[0], hs.rJ2000[1], hs.rJ2000[2]);
+				const Vec3d siteVelJ2000(hs.vJ2000[0], hs.vJ2000[1], hs.vJ2000[2]);
+				obsSiteJDE    = StelCore::matJ2000ToVsop87.multiplyWithoutTranslation(siteJ2000 / (1000.0 * AU));
+				obsSiteVelJDE = StelCore::matJ2000ToVsop87.multiplyWithoutTranslation(siteVelJ2000 * (86400.0 / (1000.0 * AU)));
+			}
+			const Vec3d obsPosTopoJDE = obsPosJDE + obsSiteJDE;
+			const Vec3d obsVelTopoJDE = obsVelJDE + obsSiteVelJDE;
+			// (SS) 2026-11-15 The observer's own planet (the Earth) must keep a light time of 0: its position is the one of the date, whatever the site is. With the
+			// site in obsPosTopoJDE the light time of the Earth to the site is |site|/c = 21 ms, and the Earth was moved to its position at JDE - 21 ms (640 m), which
+			// moved the observer by the same amount in getObserverHeliocentricEclipticPos(): errors of up to 640 m in the range of the planets, and the sun
+			// (the Moon is not affected: it follows its parent). So the observer's planet uses the geocentric obsPosJDE in the light time and in the direction.
+			const Planet* const observerPlanetPtr = observerPlanet.data();
+
 			// (SS) 2026-09-26 Aberration is a special-relativistic effect and needs the observer's velocity in the
 			// same barycentric (BCRS) frame as the direction vector p, not the observer's heliocentric velocity.
 			// getHeliocentricEclipticVelocity() gives dEh/dt = d(Eb-Sb)/dt = (true barycentric Earth velocity) -
 			// (Sun's own barycentric velocity). The Sun's barycentric velocity (a few to ~15 m/s, mostly from
 			// Jupiter) is exactly the same size as the multi-mas aberration discrepancy seen against the reference
 			// IAU code, so it must be added back in - the velocity analogue of the sunShift position correction above.
-			const Vec3d aberrationPushSpeed = (obsVelJDE + sunVelJDE) * core->getAberrationFactor();
+			const Vec3d aberrationPushSpeed = (obsVelTopoJDE + sunVelJDE) * core->getAberrationFactor();	// (SS) 2026-11-10 was obsVelJDE (geocentric)
 
 			// For higher accuracy, we now make two iterations of light time
 			// and aberration correction.  May fix sub-arcsecond inaccuracies,
@@ -1836,11 +1860,12 @@ void SolarSystem::computePositions(StelCore *core, double dateJDE, PlanetP obser
 			// discussion in GH:#1626) we do not add anything for the Moon
 			// when observed from Earth -- presumably the used ephemerides
 			// already provide aberration-corrected positions for the Moon.
-			const auto lightTimeStep = [obs, dateJDE, obsPosJDE, aberrationPushSpeed, withAberration,
+			const auto lightTimeStep = [obs, dateJDE, obsPosJDE, obsPosTopoJDE, observerPlanetPtr, aberrationPushSpeed, withAberration,
 			                            observerPlanetIsEarth, this](const PlanetP& p)
 			{
 				const Vec3d planetPos      = p->getHeliocentricEclipticPos();
-				const double lightTimeDays = (planetPos - obsPosJDE).norm() *
+				const Vec3d& obsForLT      = (p.data() == observerPlanetPtr) ? obsPosJDE : obsPosTopoJDE;	// (SS) 2026-11-15 the observer's planet: light time 0
+				const double lightTimeDays = (planetPos - obsForLT).norm() *	// (SS) 2026-11-10 was obsPosJDE (geocentric)
 				                             (AU / (SPEED_OF_LIGHT * 86400.));
 				Vec3d aberrationPush(0.);
 				if (withAberration && (!observerPlanetIsEarth || p != getMoon()))
@@ -1861,12 +1886,14 @@ void SolarSystem::computePositions(StelCore *core, double dateJDE, PlanetP obser
 			// the ERFA-based block below applies gravitational deflection and relativistic aberration to the Moon as well. 
 			// The DE440/DE441 Moon vectors are purely geometric (not aberration-corrected), so the original assumption behind that exclusion
 			// does not hold for them.
-			const auto lightTimeStepWithRotation = [obs, dateJDE, obsPosJDE, obsVelJDE, sunPosJDE, sunVelJDE,
+			const auto lightTimeStepWithRotation = [obs, dateJDE, obsPosJDE, obsPosTopoJDE, observerPlanetPtr, obsVelTopoJDE, sunPosJDE, sunVelJDE,
 			                                        aberrationPushSpeed, withAberration, 
 													withDeflection, deflectionFactor, observerPlanetIsEarth, this](const PlanetP& p)
 			{
 				const Vec3d planetPos      = p->getHeliocentricEclipticPos();
-				const double lightTimeDays = (planetPos - obsPosJDE).norm() *
+				const bool isObserverPlanet = (p.data() == observerPlanetPtr);	// (SS) 2026-11-15 the Earth for an observer on Earth: light time 0 and no pipeline
+				const Vec3d& obsForLT      = isObserverPlanet ? obsPosJDE : obsPosTopoJDE;
+				const double lightTimeDays = (planetPos - obsForLT).norm() *	// (SS) 2026-11-10 was obsPosJDE (geocentric)
 				                             (AU / (SPEED_OF_LIGHT * 86400.));
 				Vec3d aberrationPush(0.);
 				if (withAberration && (!observerPlanetIsEarth || p != getMoon()))
@@ -1917,7 +1944,7 @@ void SolarSystem::computePositions(StelCore *core, double dateJDE, PlanetP obser
 				if (type == Planet::isPlanet || name == "Pluto" || name == "Sun" || name == "Moon")
 				{
 					const Vec3d& Qh   = p->getHeliocentricEclipticPos();
-					const Vec3d& Eh   = obsPosJDE;
+					const Vec3d& Eh   = isObserverPlanet ? obsPosJDE : obsPosTopoJDE;	// (SS) 2026-11-10 observer = site (geocentre if not topocentric; always for the observer's planet itself, P = 0 then); earthShift below keeps the geocentric obsPosJDE
 					const Vec3d P     = Qh - Eh - p->getSunShift() - p->getEarthShift();
 					const double Pmod = P.norm();
 					const double Emod = Eh.norm();
@@ -1941,7 +1968,7 @@ void SolarSystem::computePositions(StelCore *core, double dateJDE, PlanetP obser
 						if (withAberration)
 						{
 							const double cAUday = SPEED_OF_LIGHT * 86400. / AU;
-							const Vec3d Vc = (obsVelJDE + sunVelJDE) / cAUday;
+							const Vec3d Vc = (obsVelTopoJDE + sunVelJDE) / cAUday;	// (SS) 2026-11-10 includes the rotation of the Earth (diurnal aberration)
 							const double bm1 = std::sqrt(
 								std::max(0., 1.0 - Vc.normSquared()));
 							const Vec3d p2 = eraAbW(p1, Vc, Emod, bm1);

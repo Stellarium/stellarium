@@ -287,9 +287,10 @@ public:
 	//! The positional computation is called by SolarSystem. If the core's aberration setting is active, the J2000 position will then include it.
 	Vec3d getJ2000EquatorialPos(const StelCore *core) const override;
 
-	//! (SS) 2026-09-15 Return the Moon's visible-disk-center position (center of figure), offset from
-	//! the center-of-mass position by the standard USNO/HMNAO correction. Provisional - see .cpp comment.
-	//! Identical to getJ2000EquatorialPos() for every body other than the Moon.
+	//! (SS) 2026-11-13 Return the Moon's visible-disk-center position (center of figure), offset from the center-of-mass position by the mean USNO/HMNAO
+	//! correction (+0.5" ecliptic longitude, -0.25" latitude, evaluated in the apparent ecliptic of date), when the lunar figure correction is on.
+	//! FOR DISPLAY ONLY (disk, halo and label of the Moon): it is not part of the pipeline and the positions that must agree with JPL Horizons
+	//! (center of mass) do not use it. Identical to getJ2000EquatorialPos() for every body other than the Moon. See the .cpp comment.
 	Vec3d getApparentLimbCenterPos(const StelCore* core) const;
 
 	QString getEnglishName(void) const override {return englishName;}
