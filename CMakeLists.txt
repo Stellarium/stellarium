@@ -435,15 +435,22 @@ SET(ENABLE_SPEECH 1 CACHE BOOL "Define whether speech output should be activated
 # Activate QtWebEngine support
 SET(ENABLE_QTWEBENGINE 1 CACHE BOOL "Define whether QtWebEngine module should be supported if it installed.")
 
-# Activate GPS support. Solution depends on operating system:
-# - Windows: Only directly-attached serial NMEA emitter.
-# - Other systems: libgps if possible and NMEA emitter as fallback.
-SET(ENABLE_GPS 1 CACHE BOOL "Define whether GPS queries should be supported.")
-
 IF(ANDROID)
+     # On Android devices a GPS receiver is normally built in, and the OS provides access to it, which we can use via
+     # QGeoPositionInfoSource. And the external USB receivers are not only useless in this case, but also require a
+     # USB OTG cable or other converters to attach, which makes this use case even rarer.
+     SET(ENABLE_GPS 0 CACHE BOOL "Define whether queries to external GPS receivers should be supported.")
+
+     # ShowMySky requires desktop OpenGL 3.3, while Android only supports GLES
      SET(ENABLE_SHOWMYSKY 0)
+
      SET(ANDROID_SSL_PATH "" CACHE STRING "Path to KDAB/android_openssl clone, or NONE to disable SSL support. Empty means download using CPM.")
 ELSE()
+     # Activate GPS support. Solution depends on operating system:
+     # - Windows: Only directly-attached serial NMEA emitter.
+     # - Other systems: libgps if possible and NMEA emitter as fallback.
+     SET(ENABLE_GPS 1 CACHE BOOL "Define whether GPS queries should be supported.")
+
      # Activate support for ShowMySky atmosphere
      SET(ENABLE_SHOWMYSKY 1 CACHE BOOL "Define whether to support ShowMySky atmosphere model if installed")
 ENDIF()

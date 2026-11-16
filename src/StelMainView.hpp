@@ -237,6 +237,8 @@ public slots:
 	Vec3f getSkyBackgroundColor() const;
 
 protected:
+	//! Handle touchscreen pinch gestures.
+	bool event(QEvent* event) override;
 	//! Hack to determine current monitor pixel ratio
 	//! @todo Find a better way to handle this
 	void moveEvent(QMoveEvent* event) override;
@@ -310,6 +312,11 @@ private slots:
 	void reloadShaders();
 
 private:
+#ifdef Q_OS_ANDROID
+	//! Handle Android Back by closing a window, deselecting an object, or backgrounding the app.
+	void handleAndroidBack();
+#endif
+
 	//! The graphics scene notifies us when a draw finished, so that we can queue the next one
 	void drawEnded();
 	//! provide extended OpenGL diagnostics in logfile.

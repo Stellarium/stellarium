@@ -400,7 +400,7 @@ void NMEALookupHelper::nmeaTimeout()
 #endif
 
 StelLocationMgr::StelLocationMgr()
-	: nmeaHelper(nullptr), libGpsHelper(nullptr), positionSource(nullptr), qGeoPositionInfoSource(nullptr)
+	: nmeaHelper(nullptr), libGpsHelper(nullptr), qGeoPositionInfoSource(nullptr)
 {
 	// initialize the static QMap first if necessary.
 	// The first entry is the DB name, the second is as we display it in the program.
@@ -515,15 +515,10 @@ StelLocationMgr::~StelLocationMgr()
 		delete qGeoPositionInfoSource;
 		qGeoPositionInfoSource=nullptr;
 	}
-	if (positionSource)
-	{
-		delete positionSource;
-		positionSource=nullptr;
-	}
 }
 
 StelLocationMgr::StelLocationMgr(const LocationList &locations)
-	: nmeaHelper(nullptr), libGpsHelper(nullptr), positionSource(nullptr), qGeoPositionInfoSource(nullptr)
+	: nmeaHelper(nullptr), libGpsHelper(nullptr), qGeoPositionInfoSource(nullptr)
 {
 	setLocations(locations);
 
@@ -1123,8 +1118,7 @@ void StelLocationMgr::locationFromGPS(int interval)
 		libGpsHelper=nullptr;
 	}
 #endif
-	//If positionSource is working and we are switching off, don't create a nmeaHelper. (Not critical, just no need to handle one failed lookup.)
-	if(!nmeaHelper && !positionSource)
+	if(!nmeaHelper)
 	{
 		qCDebug(GPS) << "Creating new NMEAhelper...";
 		nmeaHelper = new NMEALookupHelper(this);
@@ -1160,39 +1154,8 @@ void StelLocationMgr::locationFromGPS(int interval)
 			nmeaHelper=nullptr;
 		}
 	}
-	qCDebug(GPS) << "Neither GPSD nor NMEAhelper. Try QGeoPositionInfoSource, one of";
-	qCDebug(GPS) << QGeoPositionInfoSource::availableSources();
-	// TBD: Here we may later load a particular preferred source (OS dependent!) configured in config.ini.
-	if (!positionSource && (QGeoPositionInfoSource::availableSources().length()>0))
-		positionSource = QGeoPositionInfoSource::createDefaultSource(this);
-	if (positionSource && (positionSource->supportedPositioningMethods() & QGeoPositionInfoSource::AllPositioningMethods))
-	{
-		qCDebug(GPS) << "Our QGeoPositionInfoSource is:" << positionSource->sourceName();
-		if (interval)
-		{
-			qCDebug(GPS) << "Setting up new positionSource...";
-			qCDebug(GPS) << positionSource->supportedPositioningMethods();
-			positionSource->setUpdateInterval(interval);
-			connect(positionSource, &QGeoPositionInfoSource::positionUpdated, this, &StelLocationMgr::positionUpdated);
-			positionSource->startUpdates();
-			qCDebug(GPS) << "Setting up new positionSource...done";
-		}
-		else
-		{
-			qCDebug(GPS) << "Deactivating and deleting positionSource...";
-			positionSource->stopUpdates();
-			delete positionSource;
-			positionSource=nullptr;
-		}
-		emit gpsQueryFinished(true); // signal "successful operation", avoid showing any error in GUI.
-	}
-	else
-	{
-		if (positionSource)
-			qCWarning(GPS) << "positionSource" << positionSource->sourceName() << "does not provide data. Giving up.";
-
-		emit gpsQueryFinished(false);
-	}
+	emit gpsQueryFinished(false);
+	qCDebug(GPS) << "Neither GPSD nor NMEAhelper";
 }
 
 //#ifdef Q_OS_WIN
@@ -1211,11 +1174,7 @@ void StelLocationMgr::positionUpdated(QGeoPositionInfo info)
 	}
 	else
 	{
-		// something went wrong. However, a dysfunctional positionSource may still exist, better delete it.
 		qCWarning(GPS) << "GPS not ready. Something went wrong.";
-		positionSource->stopUpdates();
-		delete positionSource;
-		positionSource=nullptr;
 		emit gpsQueryFinished(false);
 	}
 }

@@ -95,7 +95,7 @@ Vec3f CustomObject::getInfoColor(void) const
 
 Vec3d CustomObject::getJ2000EquatorialPos(const StelCore* core) const
 {
-	if (getEnglishName()=="NCP") // regions: https://simbad.u-strasbg.fr/simbad/sim-basic?Ident=NCP&submit=SIMBAD+search
+	if (getEnglishName()=="NCP") // regions: https://simbad.cds.unistra.fr/simbad/sim-basic?Ident=NCP&submit=SIMBAD+search
 		return XYZ;
 
 	if  (!isMarker && (core && core->getUseAberration() && core->getCurrentPlanet()))

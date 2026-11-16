@@ -93,3 +93,7 @@ SET_TARGET_PROPERTIES(RemoteControl-static PROPERTIES COMPILE_FLAGS "-DQT_STATIC
 ADD_DEPENDENCIES(AllStaticPlugins RemoteControl-static)
 
 SET_TARGET_PROPERTIES(RemoteControl-static PROPERTIES FOLDER "plugins/RemoteControl")
+
+IF(ENABLE_TESTING)
+     ADD_SUBDIRECTORY(test)
+ENDIF()

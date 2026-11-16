@@ -125,7 +125,7 @@ void HipsMgr::loadSources()
 	// Use alasky (all pixelate surveys from MocServer) & data.stellarium.org if there are not values:
 	if (sources.isEmpty())
 	{
-		sources << "http://alasky.u-strasbg.fr/MocServer/query?*/P/*&get=record"
+		sources << "https://alasky.cds.unistra.fr/MocServer/query?*/P/*&get=record"
 			<< "https://data.stellarium.org/surveys/hipslist";
 	}
 
