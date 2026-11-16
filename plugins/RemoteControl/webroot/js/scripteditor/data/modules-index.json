@@ -305,6 +305,14 @@
             "category": "Core",
             "order": 38,
             "description": "Object selection and extra information management - control selection pointer visibility, add custom text to information panel for debugging and script output (Script and DebugAid flags)"
-        }
+        },
+        {
+            "id": "ToastMgr",
+            "name": "Toast Manager",
+            "file": "ToastMgr.json",
+            "category": "Deep Sky",
+            "order": 39,
+            "description": "Digitized Sky Survey (DSS) background management - load and display real photographic sky backgrounds behind stars and deep-sky objects, with automatic loading of TOAST survey tiles"
+        }				
     ]
 }
