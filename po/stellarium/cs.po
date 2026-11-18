@@ -25416,13 +25416,13 @@ msgstr "Soubory"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:415
 msgid "Log external telescope server messages to files"
-msgstr "Zapisovat hlášky ze serveru externího dalekohledu do souborů"
+msgstr "Zapisovat externí hlášky ze serveru dalekohledu do souborů"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:417
 msgid "Internal telescope driver messages use Stellarium's standard logging."
 msgstr ""
-"Hlášky ovladače interního dalekohledu používají standardní logování programu"
-" Stellarium."
+"Interní hlášky ovladače dalekohledu používají standardní logování programu "
+"Stellarium."
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:419
 msgid "Use telescope server executables (override built-in drivers)"
@@ -33009,7 +33009,7 @@ msgstr "Nebeská kultura s tímto ID již existuje. Chcete ji přepsat?"
 
 #: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:166
 msgid "Keep a backup of the original sky culture"
-msgstr ""
+msgstr "Uchovejte zálohu původní nebeské kultury"
 
 #: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:190
 msgid "Failed to create sky culture directory."
@@ -33029,7 +33029,7 @@ msgstr "Nepodařilo se otevřít soubor index.json pro zápis."
 
 #: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:241
 msgid "Failed to write index.json."
-msgstr ""
+msgstr "Zápis souboru index.json se nezdařil."
 
 #: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:251
 msgid "Failed to create GeoJSON document for sky culture."
@@ -33041,7 +33041,7 @@ msgstr "Nepodařilo se otevřít soubor territory.geojson pro zápis."
 
 #: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:252
 msgid "Failed to write territory.geojson."
-msgstr ""
+msgstr "Zápis souboru territory.geojson se nezdařil."
 
 #: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:262
 msgid "Failed to export sky culture description."
@@ -33053,12 +33053,13 @@ msgstr "Nepodařilo se vyexportovat soubor CMakeLists.txt."
 
 #: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:289
 msgid "Failed to back up the existing sky culture. It was left unchanged."
-msgstr ""
+msgstr "Zálohování stávající nebeské kultury selhalo. Zůstala nezměněna."
 
 #: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:305
 msgid ""
 "Failed to replace the existing sky culture. It was restored from backup."
 msgstr ""
+"Nahrazení stávající nebeské kultury se nezdařilo. Byla obnovena ze zálohy."
 
 #: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:314
 #, qt-format
@@ -33066,16 +33067,18 @@ msgid ""
 "Failed to replace the existing sky culture and could not restore it. The "
 "original sky culture is at %1, the new export is at %2."
 msgstr ""
+"Nepodařilo se nahradit stávající kulturu oblohy a nebylo možné ji obnovit. "
+"Původní kultura oblohy se nachází na %1, nový export na %2."
 
 #: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:330
 #, qt-format
 msgid "Sky culture exported successfully to %1"
-msgstr ""
+msgstr "Nebeská kultura byla úspěšně exportována do %1"
 
 #: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:333
 #, qt-format
 msgid "The original sky culture was backed up to %1"
-msgstr ""
+msgstr "Původní nebeská kultura byla zálohována do %1"
 
 #: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:348
 msgid "Choose Export Directory"
