@@ -99,8 +99,8 @@ void NebulaTextures::init()
 		if (gui != Q_NULLPTR)
 		{
 			StelButton* nebulaTexturesButton = new StelButton(Q_NULLPTR,
-				QPixmap(":/NebulaTextures/btNebulaTextures-on.png"),
-				QPixmap(":/NebulaTextures/btNebulaTextures-off.png"),
+				QPixmap(":/NebulaTextures/bt_NebulaTextures_On.png"),
+				QPixmap(":/NebulaTextures/bt_NebulaTextures_Off.png"),
 				QPixmap(":/graphicGui/miscGlow32x32.png"),
 				"actionShow_NebulaTextures",
 				false,
