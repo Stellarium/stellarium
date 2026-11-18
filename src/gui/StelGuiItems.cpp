@@ -1265,10 +1265,13 @@ QRectF StelProgressBarMgr::boundingRect() const
 
 void StelProgressBarMgr::addProgressBar(const StelProgressController* p)
 {
-	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+	const auto& app = StelApp::getInstance();
+	StelGui* gui = dynamic_cast<StelGui*>(app.getGui());
 	QProgressBar* pb = new QProgressBar();
-	pb->setFixedHeight(25);
-	pb->setFixedWidth(200);
+	// Although this progress bar is part of the scene, it's a QProgressBar, so it uses GUI font settings
+	const auto ratio = app.guiFontSizeRatio();
+	pb->setFixedHeight(25 * ratio);
+	pb->setFixedWidth(200 * ratio);
 	pb->setTextVisible(true);
 	pb->setValue(p->getValue());
 	pb->setMinimum(p->getMin());
