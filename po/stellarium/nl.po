@@ -17,9 +17,9 @@
 # Filip Questier, 2025
 # Alexander V. Wolf <alex.v.wolf@gmail.com>, 2026
 # cardinot <mcardinot@gmail.com>, 2026
-# Alex Rijckaert, 2026
 # alex <alex.a.nder.duy.tschaever@gmail.com>, 2026
 # Harry Mensch, 2026
+# Alex Rijckaert, 2026
 # 
 #, fuzzy
 msgid ""
@@ -28,7 +28,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
 "POT-Creation-Date: 2026-11-14 17:21+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
-"Last-Translator: Harry Mensch, 2026\n"
+"Last-Translator: Alex Rijckaert, 2026\n"
 "Language-Team: Dutch (https://app.transifex.com/stellarium/teams/80998/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -8577,7 +8577,7 @@ msgstr "Zichtbare magnitude gebaseerd op fasehoek en albedo."
 #: src/gui/LocationDialog.cpp:171 src/gui/LocationDialog.cpp:964
 #: src/ui_locationDialogGui.h:432
 msgid "Get location from the GPS receiver"
-msgstr ""
+msgstr "Locatie ophalen via de GPS-ontvanger"
 
 #: src/gui/LocationDialog.cpp:233
 msgid "Reset location list to show all known locations"
@@ -8902,7 +8902,7 @@ msgstr "Simbad zoeken"
 
 #: src/gui/SearchDialog.cpp:1582
 msgid "Strasbourg Astronomical Data Center (France)"
-msgstr ""
+msgstr "Strasbourg Astronomical Data Center (Frankrijk)"
 
 #: src/gui/SearchDialog.cpp:1583
 msgid "Harvard-Smithsonian Center for Astrophysics (USA)"
@@ -8910,7 +8910,7 @@ msgstr "Harvard-Smithsonian Center for Astrophysics (VS)"
 
 #: src/gui/SearchDialog.cpp:1584
 msgid "The Institute for Data Intensive Astronomy (South Africa)"
-msgstr ""
+msgstr "Instituut voor Data-intensieve Astronomie (Zuid-Afrika)"
 
 #: src/gui/SearchDialog.cpp:1670
 msgid "Paste and Search"
@@ -24587,6 +24587,10 @@ msgid ""
 "LX200-compatible and NexStar-compatible mounts can be connected either "
 "through a serial port or over a TCP/IP network (see {Device settings})."
 msgstr ""
+"<b>Stellarium, rechtstreeks (seriële poort of netwerk)</b> s het DIRECT-"
+"scenario. LX200-compatibele en NexStar-compatibele monturen kunnen zowel via"
+" een seriële poort als via een TCP/IP-netwerk worden aangesloten (zie "
+"{Apparaatinstellingen})."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:386
 msgid "<b>External software or a remote computer</b> is the INDIRECT case"
@@ -24663,6 +24667,13 @@ msgid ""
 "Wi-Fi/Ethernet adapter or a software bridge that exposes the Meade LX200 or "
 "Celestron NexStar protocol on a network port."
 msgstr ""
+"<b>Verbinding</b> bepaalt hoe Stellarium verbinding maakt met de telescoop. "
+"Kies <b>Seriële poort</b> voor een apparaat dat via een seriële of USB-kabel"
+" is aangesloten. Voor LX200-compatibele en NexStar-compatibele monturen kunt"
+" u in plaats daarvan <b>Netwerk (TCP)</b> kiezen om via TCP/IP met de "
+"telescoop te communiceren – bijvoorbeeld via een Wi-Fi/Ethernet-adapter of "
+"een softwarebrug die het Meade LX200- of Celestron NexStar-protocol "
+"beschikbaar maakt op een netwerkpoort."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:410
 msgid "<b>Serial port</b> sets the serial port used by the telescope."
@@ -24729,6 +24740,12 @@ msgid ""
 " the TCP port it is listening on. The <b>Network (TCP)</b> option is "
 "available for LX200-compatible and NexStar-compatible device models."
 msgstr ""
+"Wanneer <b>Netwerk (TCP)</b> is geselecteerd, wordt het veld <b>Seriële "
+"poort</b> vervangen door de velden <b>Host</b> en <b>Poort</b>: voer de "
+"hostnaam of het IP-adres van de telescoop (of van de computer waarop de "
+"netwerkbrug draait) in, evenals de TCP-poort waarop deze luistert. De optie "
+"<b>Netwerk (TCP)</b> is beschikbaar voor LX200-compatibele en NexStar-"
+"compatibele apparaatmodellen."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:428
@@ -24976,6 +24993,9 @@ msgid ""
 "Devices using the Meade LX200 or Celestron NexStar interface can be "
 "connected either through a serial/USB port or over a TCP/IP network."
 msgstr ""
+"Apparaten die gebruikmaken van de Meade LX200- of Celestron NexStar-"
+"interface kunnen worden aangesloten via een seriële/USB-poort of via een "
+"TCP/IP-netwerk."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:490
 msgid "The device list contains the following:"
@@ -25397,6 +25417,8 @@ msgid ""
 "Communicate with the telescope using the LX200 or NexStar protocol over a "
 "TCP/IP network connection"
 msgstr ""
+"Communiceer met de telescoop via het LX200- of NexStar-protocol via een "
+"TCP/IP-netwerkverbinding"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:647
 msgid "Network (TCP)"
@@ -25516,11 +25538,13 @@ msgstr "Bestanden"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:415
 msgid "Log external telescope server messages to files"
-msgstr ""
+msgstr "Log externe telescoopserverberichten op in bestanden"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:417
 msgid "Internal telescope driver messages use Stellarium's standard logging."
 msgstr ""
+"Interne berichten van de telescoopdriver maken gebruik van de "
+"standaardlogboekfunctie van Stellarium."
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:419
 msgid "Use telescope server executables (override built-in drivers)"
@@ -33023,16 +33047,16 @@ msgstr "Naam van de Hemelcultuur"
 #: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp:368
 msgctxt "Name of a section in sky culture description"
 msgid "Introduction"
-msgstr ""
+msgstr "Inleiding"
 
 #: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp:369
 msgctxt "Name of a section in sky culture description"
 msgid "Culture Description"
-msgstr ""
+msgstr "Beschrijving van de cultuur"
 
 #: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp:372
 msgid "About the sky culture"
-msgstr ""
+msgstr "Over de hemelcultuur"
 
 #: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp:373
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1029
@@ -33042,12 +33066,12 @@ msgstr "Licentie van de Hemelcultuur"
 #: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp:374
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1035
 msgid "Classification of the Sky Culture"
-msgstr ""
+msgstr "Classificatie van de Hemelcultuur"
 
 #: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp:375
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1038
 msgid "Region of the Sky Culture"
-msgstr ""
+msgstr "De regio van de Hemelcultuur"
 
 #: plugins/SkyCultureMaker/src/gui/ScmSkyCultureDialog.cpp:386
 msgid ""
@@ -33165,12 +33189,17 @@ msgstr "Er is geen sterrenbeeld ingesteld."
 msgid ""
 "The sky culture ID must not be empty, '.', '..', or contain path separators."
 msgstr ""
+"Hemelcultuur-ID mag niet leeg zijn, mag niet bestaan uit ‘.’, ‘..’ en mag "
+"geen padscheidtekens bevatten."
 
 #: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:148
 msgid ""
 "The sky culture directory is a symbolic link. Exporting to symbolic links is"
 " not supported. Resolve the link before exporting."
 msgstr ""
+"De Hemelcultuur map is een symbolische koppeling. Exporteren naar "
+"symbolische koppelingen wordt niet ondersteund. Maak de koppeling eerst "
+"zichtbaar voordat u gaat exporteren."
 
 #: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:163
 msgid ""
@@ -33179,7 +33208,7 @@ msgstr "Er bestaat al een hemelcultuur met dit ID. Wil je deze overschrijven?"
 
 #: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:166
 msgid "Keep a backup of the original sky culture"
-msgstr ""
+msgstr "Bewaar een back-up van de originele hemelcultuur"
 
 #: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:190
 msgid "Failed to create sky culture directory."
@@ -33199,7 +33228,7 @@ msgstr "Kan index.json niet openen om te schrijven."
 
 #: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:241
 msgid "Failed to write index.json."
-msgstr ""
+msgstr "Schrijven van index.json is mislukt."
 
 #: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:251
 msgid "Failed to create GeoJSON document for sky culture."
@@ -33212,7 +33241,7 @@ msgstr "Niet gelukt om territory.geojson te openen om naar te schrijven."
 
 #: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:252
 msgid "Failed to write territory.geojson."
-msgstr ""
+msgstr "Schrijven van territory.geojson is mislukt."
 
 #: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:262
 msgid "Failed to export sky culture description."
@@ -33224,12 +33253,13 @@ msgstr "Het exporteren van CMakeLists.txt is mislukt."
 
 #: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:289
 msgid "Failed to back up the existing sky culture. It was left unchanged."
-msgstr ""
+msgstr "Back-up van bestaande hemelcultuur mislukt. Ongewijzigd laten."
 
 #: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:305
 msgid ""
 "Failed to replace the existing sky culture. It was restored from backup."
 msgstr ""
+"Vervangen van bestaande hemelcultuur mislukt. Hersteld vanuit back-up."
 
 #: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:314
 #, qt-format
@@ -33237,16 +33267,18 @@ msgid ""
 "Failed to replace the existing sky culture and could not restore it. The "
 "original sky culture is at %1, the new export is at %2."
 msgstr ""
+"Vervangen en herstellen van bestaande hemelcultuur mislukt. De originele "
+"staat op %1, de nieuwe export op %2."
 
 #: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:330
 #, qt-format
 msgid "Sky culture exported successfully to %1"
-msgstr ""
+msgstr "Hemelcultuur succesvol geëxporteerd naar %1"
 
 #: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:333
 #, qt-format
 msgid "The original sky culture was backed up to %1"
-msgstr ""
+msgstr "Back-up van originele hemelcultuur opgeslagen op %1"
 
 #: plugins/SkyCultureMaker/src/gui/ScmSkyCultureExportDialog.cpp:348
 msgid "Choose Export Directory"
@@ -33441,7 +33473,7 @@ msgstr "Verplichte velden zijn gemarkeerd met een asterisk (*)."
 
 #: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:374
 msgid "English name:"
-msgstr ""
+msgstr "Engelse naam:"
 
 #: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:375
 msgid ""
@@ -33452,7 +33484,7 @@ msgstr ""
 
 #: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:376
 msgid "ID:"
-msgstr ""
+msgstr "ID:"
 
 #: plugins/SkyCultureMaker/src/ui_scmConstellationDialog.h:377
 msgid ""
@@ -33570,7 +33602,7 @@ msgstr "Algemene Informatie"
 
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1036
 msgid "Introduction:"
-msgstr ""
+msgstr "Inleiding:"
 
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1037
 msgid " A summary that could ideally be shown on a small screen entirely."
@@ -33583,7 +33615,7 @@ msgstr "Beschrijving (Wat kan de gebruiker hier zien?)"
 
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1040
 msgid "Culture Description:"
-msgstr ""
+msgstr "Beschrijving cultuur:"
 
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1041
 msgid ""
@@ -33706,7 +33738,7 @@ msgstr ""
 
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1062
 msgid "About the sky culture:"
-msgstr ""
+msgstr "Over de hemelcultuur:"
 
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1063
 msgid ""
@@ -33752,7 +33784,7 @@ msgstr "Invoervelden"
 
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1077
 msgid "Type:"
-msgstr ""
+msgstr "Type:"
 
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1078
 msgid "Star"
@@ -33764,7 +33796,7 @@ msgstr "Deepsky object"
 
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1082
 msgid "Identifier:"
-msgstr ""
+msgstr "Identificatie:"
 
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1083
 msgid "HIP number (e.g. 1234)"
@@ -33783,7 +33815,7 @@ msgstr ""
 
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1088
 msgid "English:"
-msgstr ""
+msgstr "Engels:"
 
 #: plugins/SkyCultureMaker/src/ui_scmSkyCultureDialog.h:1089
 msgid "Name translated to English"
