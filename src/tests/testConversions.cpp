@@ -468,6 +468,11 @@ void TestConversions::testRadToDMSPStr()
 	data << -M_PI			<< "-180d00'00.000\""	<< 3	<< true;
 	data << -10*M_PI/648		<< "-2d46'40.000\""	<< 3	<< true;
 
+	// seconds that round up at the shown precision carry over, and are not cut off before that
+	data << (10.+59./60.+59.7/3600.)*M_PI/180.	<< "+11°00'00\""	<< 0	<< false;
+	data << (10.+59./60.+59.95/3600.)*M_PI/180.	<< "+10°59'59.95\""	<< 2	<< false;
+	data << -(10.+59./60.+59.7/3600.)*M_PI/180.	<< "-11°00'00\""	<< 0	<< false;
+
 	while (data.count()>=4)
 	{
 		double rad	= data.takeFirst().toDouble();
