@@ -1032,9 +1032,7 @@ void StarMgr::loadSciDesignations(const QString& sciNameFile, QHash<StarId, QStr
 			sci_name.replace('_',' ');
 			// Don't set the main sci name if it's already set - it's additional sci name
 			if (map.contains(hip))
-			{
 				map[hip].append(" - " + sci_name);
-			}
 			else
 				map.insert(hip, sci_name);
 			index[sci_name] = hip;
@@ -1132,49 +1130,72 @@ void StarMgr::loadWds(const QString& WdsFileName)
 	wdsStarsIndex.clear();
 
 	qInfo().noquote() << "Loading double stars from" << QDir::toNativeSeparators(WdsFileName);
+	
 	QFile dsFile(WdsFileName);
-	if (!dsFile.open(QIODevice::ReadOnly | QIODevice::Text))
+	if (!dsFile.open(QIODevice::ReadOnly))
 	{
-		qWarning().noquote() << "Could not open" << QDir::toNativeSeparators(WdsFileName);
+		qWarning().noquote() << "Cannot open file" << QDir::toNativeSeparators(WdsFileName);
 		return;
 	}
-	const QStringList& allRecords = QString::fromUtf8(dsFile.readAll()).split('\n');
+	QByteArray data = StelUtils::uncompress(dsFile);
 	dsFile.close();
+	//check if decompressing was successful
+	if(data.isEmpty())
+	{
+		qWarning().noquote() << "Could not decompress file" << QDir::toNativeSeparators(WdsFileName);
+		return;
+	}
+	//create and open a QBuffer for reading
+	QBuffer buf(&data);
+	buf.open(QIODevice::ReadOnly);
 
 	int readOk=0;
 	int totalRecords=0;
 	int lineNumber=0;
-
+	// Version of WDS catalog
+	static const QRegularExpression versionRx("\\s*Version:\\s*([\\d\\-\\.]+)\\s*");
+	
 	// record structure is delimited with a tab character.
-	for (const auto& record : allRecords)
+	while (!buf.atEnd())
 	{
 		++lineNumber;
+		QString record = QString::fromUtf8(buf.readLine());
+
 		// skip comments and empty lines
 		if (record.startsWith("//") || record.startsWith("#") || record.isEmpty())
-			continue;
-
-		++totalRecords;
-		const QStringList& fields = record.split('\t');
-
-		bool ok;
-		StarId hip = fields.at(0).toLongLong(&ok);
-		if (!ok)
 		{
-			qWarning() << "Parse error at line" << lineNumber << "in" << QDir::toNativeSeparators(WdsFileName)
-				   << " - failed to convert " << fields.at(0) << "to a number";
+			QRegularExpressionMatch versionMatch=versionRx.match(record);
+			if (versionMatch.hasMatch())
+				qInfo().noquote() << "[...]" << QString("WDS %1").arg(versionMatch.captured(1).trimmed());
 			continue;
 		}
 
-		// Don't set the star if it's already set
-		if (wdsStarsMap.contains(hip))
+		totalRecords++;
+		const QStringList& fields = record.split('\t');
+
+		bool ok;
+		StarId star_id = fields.at(0).toLongLong(&ok);
+		
+		// We must ignore lines without HIP or Gaia DR3 entry
+		if (!ok)
 		{
-			qWarning() << "HIP" << hip << "already processed. Ignoring record:" << record;
+			qWarning().noquote() << "Parse error at line" << lineNumber << "in" << QDir::toNativeSeparators(WdsFileName)   << " - failed to convert " << fields.at(0) << "to a number";
+			continue;
+		}
+		
+		// Don't set the star if it's already set
+		if (wdsStarsMap.contains(star_id))
+		{
+			if (star_id > NR_OF_HIP)
+				qWarning().noquote() << "Gaia DR3" << star_id << "already processed. Ignoring record:" << record;
+			else
+				qWarning().noquote() << "HIP" << star_id << "already processed. Ignoring record:" << record;
 			continue;
 		}
 
 		wds doubleStar = {fields.at(1).trimmed(), fields.at(2).toInt(), fields.at(3).toFloat(),fields.at(4).toFloat()};
-		wdsStarsMap[hip] = doubleStar;
-		wdsStarsIndex[QString("WDS J%1").arg(doubleStar.designation.toUpper())] = hip;
+		wdsStarsMap[star_id] = doubleStar;
+		wdsStarsIndex[QString("WDS J%1").arg(doubleStar.designation.toUpper())] = star_id;
 		++readOk;
 	}
 
@@ -2028,66 +2049,26 @@ QVector<QPair<QString,StelObjectP>> StarMgr::listMatchingObjects(const QString& 
 	while (ite.hasNext())
 	{
 		ite.next();
-		if (ite.key().indexOf(bayerRegEx)==0 || ite.key().indexOf(objPrefix)==0)
+		if (maxNbItem<=0)
+			break;
+		const StarId id = ite.value();
+		QStringList names = getSciExtraDesignation(id).split(" - ");
+		for (const auto &name : std::as_const(names))
 		{
-			if (maxNbItem<=0)
-				break;
-			const StarId id = ite.value();
-			QStringList names = getSciExtraDesignation(id).split(" - ");
-			for (const auto &name : std::as_const(names))
+			found = (!useStartOfWords && (name==objPrefix || name==objPrefixUpper));
+
+			if (!found) continue;
+
+			const auto star = id <= NR_OF_HIP ? searchHP(id) : searchGaia(id);
+			assert(star);
+			if(star)
 			{
-				if (useStartOfWords && name.startsWith(objPrefix, Qt::CaseInsensitive))
-					found = true;
-				else found = (!useStartOfWords && name.contains(objPrefix, Qt::CaseInsensitive));
-
-				if (!found) continue;
-
-				const auto star = id <= NR_OF_HIP ? searchHP(id) : searchGaia(id);
-				assert(star);
-				if(star)
-				{
-					if (maxNbItem<=0)
-						break;
-					result.append({name, star});
-					--maxNbItem;
-				}
+				if (maxNbItem<=0)
+					break;
+				result.append({name, star});
+				--maxNbItem;
 			}
 		}
-		else if (ite.key().at(0) != objPrefix.at(0))
-			break;
-	}
-
-	ite.toFront(); // reset
-	while (ite.hasNext())
-	{
-		ite.next();
-		if (ite.key().indexOf(bayerRegExCI)==0 || ite.key().indexOf(objPrefixUpper)==0)
-		{
-			if (maxNbItem<=0)
-				break;
-			const StarId id = ite.value();
-			QStringList names = getSciExtraDesignation(id).split(" - ");
-			for (const auto &name : std::as_const(names))
-			{
-				if (useStartOfWords && name.startsWith(objPrefix, Qt::CaseInsensitive))
-					found = true;
-				else found = (!useStartOfWords && name.contains(objPrefix, Qt::CaseInsensitive));
-
-				if (!found) continue;
-
-				const auto star = id <= NR_OF_HIP ? searchHP(id) : searchGaia(id);
-				assert(star);
-				if(star)
-				{
-					if (maxNbItem<=0)
-						break;
-					result.append({name, star});
-					--maxNbItem;
-				}
-			}
-		}
-		else if (ite.key().at(0) != objPrefixUpper.at(0))
-			break;
 	}
 
 	// Search for sci names for var stars
@@ -2433,9 +2414,9 @@ void StarMgr::populateStarsDesignations()
 	else
 		loadGcvs(filePath);
 
-	filePath = StelFileMgr::findFile("stars/hip_gaia3/wds_hip_part.dat");
+	filePath = StelFileMgr::findFile("stars/hip_gaia3/wds.cat");
 	if (filePath.isEmpty())
-		qWarning() << "Could not load double stars file: stars/hip_gaia3/wds_hip_part.dat";
+		qWarning() << "Could not load double stars file: stars/hip_gaia3/wds.cat";
 	else
 		loadWds(filePath);
 
