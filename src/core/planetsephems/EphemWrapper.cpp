@@ -306,6 +306,7 @@ void get_mercury_helio_coordsv(double jd,double xyz[3], double xyzdot[3], void* 
 	Q_UNUSED(unused)
 	get_planet_helio_coordsv(jd, xyz, xyzdot, EPHEM_MERCURY_ID);
 }
+
 void get_venus_helio_coordsv(double jd,double xyz[3], double xyzdot[3], void* unused)
 {
 	Q_UNUSED(unused)
@@ -461,6 +462,13 @@ void get_lunar_parent_coordsv(double jde, double xyz[3], double xyzdot[3], void*
 		const double factor=8640.; // 86400/10 seconds
 		xyzdot[0]*=factor; xyzdot[1]*=factor; xyzdot[2]*=factor;
 	}
+	
+	//! (SS) 2026-09-15 This section of the code has been commented out and moved into Planet::getApparentLimbCenterPos()
+	//! Performing such correction at this stage of the position pipeline (p1 and p2) does not seem to be the proper place.
+	//! A new checkbox was added in the configuration panel to allow the user to choose whether or not to apply this correction eventually.
+	//! However, as of today, the checkbox has no effect. It remains to be determined when the correction should be applied.
+	//! That is after p3 or maybe p4... but certainly not for p1 and p2 positions vectors.
+	/*
 	// Apply a tiny sub-arcsecond correction to compensate for the difference between figure centre (visible) and centre of gravity (ephemeris position).
 	// This is important for eclipse and occultation observations.
 	// See note in "Astronomical Phenomena for the year 2017", Naut.Alm.Office, USNO and HM Naut. Alm. Office, UK Hydrographic Office, 2014, p.69
@@ -472,6 +480,7 @@ void get_lunar_parent_coordsv(double jde, double xyz[3], double xyzdot[3], void*
 	lat+=-0.25/3600. * M_PI_180;
 	StelUtils::spheToRect(lng, lat, r, XYZ);
 	xyz[0]=XYZ.v[0]; xyz[1]=XYZ.v[1]; xyz[2]=XYZ.v[2];
+	*/
 }
 
 void get_phobos_parent_coordsv(double jd, double xyz[3], double xyzdot[3], void* unused)

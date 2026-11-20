@@ -42,51 +42,78 @@
 
 int StelObject::stelObjectPMetaTypeID = qRegisterMetaType<StelObjectP>();
 
+// (SS) 2026-10-09 With the JPL Horizons precession-nutation path, the offset in dPsi that matches JPL Horizons in zones 4 and 5 is not
+// the same for the Moon: a rotation of about 1 mas is applied to the position of the Moon (only when core->getHorizonsMoonCorrectionActive()).
 Vec3d StelObject::getEquinoxEquatorialPos(const StelCore* core) const
 {
-	return core->j2000ToEquinoxEqu(getJ2000EquatorialPos(core), StelCore::RefractionOff);
+	const Vec3d v = core->j2000ToEquinoxEqu(getJ2000EquatorialPos(core), StelCore::RefractionOff);
+	if (core->getHorizonsMoonCorrectionActive() && getEnglishName() == QLatin1String("Moon"))
+		return core->horizonsMoonCorrection(v);
+	return v;
 }
 
 Vec3d StelObject::getEquinoxEquatorialPosApparent(const StelCore* core) const
 {
-	return core->j2000ToEquinoxEqu(getJ2000EquatorialPos(core), StelCore::RefractionOn);
+	const Vec3d v = core->j2000ToEquinoxEqu(getJ2000EquatorialPos(core), StelCore::RefractionOn);
+	if (core->getHorizonsMoonCorrectionActive() && getEnglishName() == QLatin1String("Moon"))
+		return core->horizonsMoonCorrection(v);
+	return v;
 }
 
 Vec3d StelObject::getEquinoxEquatorialPosAuto(const StelCore* core) const
 {
-	return core->j2000ToEquinoxEqu(getJ2000EquatorialPos(core), StelCore::RefractionAuto);
+	const Vec3d v = core->j2000ToEquinoxEqu(getJ2000EquatorialPos(core), StelCore::RefractionAuto);
+	if (core->getHorizonsMoonCorrectionActive() && getEnglishName() == QLatin1String("Moon"))
+		return core->horizonsMoonCorrection(v);
+	return v;
 }
 
 
 // Get observer-centered hour angle + declination (at current equinox)
+// (SS) 2026-11-12 The Sun, the planets and the Moon use the Alt-Az frame and the local sidereal time of the Horizons site when it is active; the other objects
+// (stars, DSO, ...) only when StelCore::getUseHorizonsSiteForSky() is on (see StelCore::flagUseHorizonsSiteForSky).
+static bool usesSolarSystemFrame(const StelObject* o)
+{
+	return o->getType() == QLatin1String("Planet");
+}
+
 Vec3d StelObject::getSiderealPosGeometric(const StelCore* core) const
 {
-	return Mat4d::zrotation(-core->getLocalSiderealTime())* getEquinoxEquatorialPos(core);
+	const double lst = usesSolarSystemFrame(this) ? core->getLocalSiderealTimeSSO() : core->getLocalSiderealTime();
+	return Mat4d::zrotation(-lst)* getEquinoxEquatorialPos(core);
 }
 
 // Get observer-centered hour angle + declination (at current equinox), deflected by refraction
 Vec3d StelObject::getSiderealPosApparent(const StelCore* core) const
 {
 	Vec3d v=getAltAzPosApparent(core); // These already come with refraction!
+	if (usesSolarSystemFrame(this))
+	{
+		v = core->altAzToEquinoxEquSSO(v, StelCore::RefractionOff);
+		return Mat4d::zrotation(-core->getLocalSiderealTimeSSO())*v;
+	}
 	v = core->altAzToEquinoxEqu(v, StelCore::RefractionOff);
 	return Mat4d::zrotation(-core->getLocalSiderealTime())*v;
 }
 
 Vec3d StelObject::getAltAzPosGeometric(const StelCore* core) const
 {
-	return core->j2000ToAltAz(getJ2000EquatorialPos(core), StelCore::RefractionOff);
+	return usesSolarSystemFrame(this) ? core->j2000ToAltAzSSO(getJ2000EquatorialPos(core), StelCore::RefractionOff)
+	                                  : core->j2000ToAltAz(getJ2000EquatorialPos(core), StelCore::RefractionOff);
 }
 
 // Get observer-centered alt/az position
 Vec3d StelObject::getAltAzPosApparent(const StelCore* core) const
 {
-	return core->j2000ToAltAz(getJ2000EquatorialPos(core), StelCore::RefractionOn);
+	return usesSolarSystemFrame(this) ? core->j2000ToAltAzSSO(getJ2000EquatorialPos(core), StelCore::RefractionOn)
+	                                  : core->j2000ToAltAz(getJ2000EquatorialPos(core), StelCore::RefractionOn);
 }
 
 // Get observer-centered alt/az position
 Vec3d StelObject::getAltAzPosAuto(const StelCore* core) const
 {
-	return core->j2000ToAltAz(getJ2000EquatorialPos(core), StelCore::RefractionAuto);
+	return usesSolarSystemFrame(this) ? core->j2000ToAltAzSSO(getJ2000EquatorialPos(core), StelCore::RefractionAuto)
+	                                  : core->j2000ToAltAz(getJ2000EquatorialPos(core), StelCore::RefractionAuto);
 }
 
 // Get observer-centered galactic position
@@ -727,7 +754,8 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 
 	if (flags&EclipticCoordJ2000)
 	{
-		const double eclJ2000=GETSTELMODULE(SolarSystem)->getEarth()->getRotObliquity(2451545.0);
+		// (SS) 2026-10-09 The JPL Horizons path uses the obliquity of J2000 of Owen (1990) and IAU 1980: 84381.448"
+		const double eclJ2000 = core->getUseHorizonsPrecNut() ? HorizonsPrecNut::EPS0_RAD : GETSTELMODULE(SolarSystem)->getEarth()->getRotObliquity(2451545.0);
 		double ra_equ, dec_equ, lambda, beta;
 		StelUtils::rectToSphe(&ra_equ,&dec_equ,getJ2000EquatorialPos(core));
 		StelUtils::equToEcl(ra_equ, dec_equ, eclJ2000, &lambda, &beta);
@@ -754,6 +782,8 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 	{
 		const double jde=core->getJDE();
 		double eclJDE = GETSTELMODULE(SolarSystem)->getEarth()->getRotObliquity(jde);
+		if (core->getHorizonsPrecNutActive())	// (SS) 2026-10-09 true obliquity of the TIME ZONE for the apparent ecliptic of date
+			eclJDE = core->getHorizonsEpsTrue();
 		double ra_equ, dec_equ, lambdaJDE, betaJDE;
 
 		StelUtils::rectToSphe(&ra_equ,&dec_equ,eqNow);
@@ -809,9 +839,14 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 	if ((flags&SiderealTime) && (currentPlanet==L1S("Earth")))
 	{
 		const double longitude=static_cast<double>(core->getCurrentLocation().getLongitude());
-		double sidereal=(get_mean_sidereal_time(core->getJD(), core->getJDE())  + longitude) / 15.;
+		// (SS) 2026-11-11 JPL Horizons site: GMST 1982 with UT1 and GAST of the IAU 1980 nutation + EOP, as the standalone programs (see StelCore)
+		// (SS) 2026-11-12 with the JPL Horizons site: Greenwich mean and apparent sidereal times (GMST 1982 with UT1, GAST of the IAU 1980 nutation + EOP) and the
+		// local apparent sidereal time with polar motion (LAST), the one of the hour angle, as the standalone programs
+		const bool hSite = core->getHorizonsSiteActive();
+		double sidereal=hSite ? StelUtils::fmodpos(core->getHorizonsSite().gmst * M_180_PI, 360.) / 15.
+		                      : (get_mean_sidereal_time(core->getJD(), core->getJDE())  + longitude) / 15.;
 		sidereal=StelUtils::fmodpos(sidereal, 24.);
-		QString STc = q_("Mean Sidereal Time");
+		QString STc = hSite ? q_("Mean Sidereal Time (GMST)") : q_("Mean Sidereal Time");
 		QString STd = StelUtils::hoursToHmsStr(sidereal);
 
 		if (withTables)
@@ -824,9 +859,42 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 
 		if (core->getUseNutation())
 		{
-			sidereal=(get_apparent_sidereal_time(core->getJD(), core->getJDE()) + longitude) / 15.;
+			sidereal=hSite ? StelUtils::fmodpos(core->getHorizonsSite().gast * M_180_PI, 360.) / 15.
+			               : (get_apparent_sidereal_time(core->getJD(), core->getJDE()) + longitude) / 15.;
 			sidereal=StelUtils::fmodpos(sidereal, 24.);
-			STc = q_("Apparent Sidereal Time");
+			STc = hSite ? q_("Apparent Sidereal Time (GAST)") : q_("Apparent Sidereal Time");
+			STd = StelUtils::hoursToHmsStr(sidereal);
+			if (withTables)
+				res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2</td></tr>").arg(STc, STd);
+			else
+				res += QString("%1: %2<br/>").arg(STc, STd);
+			if (hSite)
+			{
+				// (SS) 2026-11-12 local mean sidereal time: GMST + longitude, between GAST and LAST
+				sidereal=StelUtils::fmodpos(core->getHorizonsSite().gmst * M_180_PI + longitude, 360.) / 15.;
+				STc = q_("Local Mean Sidereal Time (LMST)");
+				STd = StelUtils::hoursToHmsStr(sidereal);
+				if (withTables)
+					res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2</td></tr>").arg(STc, STd);
+				else
+					res += QString("%1: %2<br/>").arg(STc, STd);
+			}
+			if (hSite)
+			{
+				sidereal=StelUtils::fmodpos(core->getHorizonsSite().lastPM * M_180_PI, 360.) / 15.;
+				STc = q_("Local Apparent Sidereal Time (LAST)");
+				STd = StelUtils::hoursToHmsStr(sidereal);
+				if (withTables)
+					res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2</td></tr>").arg(STc, STd);
+				else
+					res += QString("%1: %2<br/>").arg(STc, STd);
+			}
+		}
+		else if (hSite)
+		{
+			// (SS) 2026-11-12 without nutation GAST and LAST are not shown, the local mean sidereal time is
+			sidereal=StelUtils::fmodpos(core->getHorizonsSite().gmst * M_180_PI + longitude, 360.) / 15.;
+			STc = q_("Local Mean Sidereal Time (LMST)");
 			STd = StelUtils::hoursToHmsStr(sidereal);
 			if (withTables)
 				res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2</td></tr>").arg(STc, STd);
@@ -1344,7 +1412,9 @@ QString StelObject::getCommonNarration(const StelCore *core, const InfoStringGro
 	// As quick test you can observe if in any "Ecliptic coordinate" as seen from e.g. Mars or Jupiter the Sun was ever close to beta=0 (except if crossing the node...).
 	if (flags&EclipticCoordJ2000)
 	{
-		static const double eclJ2000=GETSTELMODULE(SolarSystem)->getEarth()->getRotObliquity(2451545.0);
+		static const double eclJ2000Vondrak=GETSTELMODULE(SolarSystem)->getEarth()->getRotObliquity(2451545.0);
+		// (SS) 2026-10-09 The JPL Horizons path uses the obliquity of J2000 of Owen (1990) and IAU 1980: 84381.448"
+		const double eclJ2000 = core->getUseHorizonsPrecNut() ? HorizonsPrecNut::EPS0_RAD : eclJ2000Vondrak;
 		double ra_equ, dec_equ, lambda, beta;
 		StelUtils::rectToSphe(&ra_equ,&dec_equ,getJ2000EquatorialPos(core));
 		StelUtils::equToEcl(ra_equ, dec_equ, eclJ2000, &lambda, &beta);
@@ -1369,6 +1439,8 @@ QString StelObject::getCommonNarration(const StelCore *core, const InfoStringGro
 	{
 		const double jde=core->getJDE();
 		double eclJDE = GETSTELMODULE(SolarSystem)->getEarth()->getRotObliquity(jde);
+		if (core->getHorizonsPrecNutActive())	// (SS) 2026-10-09 true obliquity of the TIME ZONE for the apparent ecliptic of date
+			eclJDE = core->getHorizonsEpsTrue();
 		double ra_equ, dec_equ, lambdaJDE, betaJDE;
 
 		StelUtils::rectToSphe(&ra_equ,&dec_equ,eqNow);
@@ -1404,20 +1476,37 @@ QString StelObject::getCommonNarration(const StelCore *core, const InfoStringGro
 	if ((flags&SiderealTime) && (currentPlanetName==L1S("Earth")))
 	{
 		const double longitude=static_cast<double>(core->getCurrentLocation().getLongitude());
-		double sidereal=(get_mean_sidereal_time(core->getJD(), core->getJDE())  + longitude) / 15.;
+		const bool hSite = core->getHorizonsSiteActive();	// (SS) 2026-11-12 Greenwich GMST and GAST and local LAST of the Horizons site
+		double sidereal=hSite ? StelUtils::fmodpos(core->getHorizonsSite().gmst * M_180_PI, 360.) / 15.
+		                      : (get_mean_sidereal_time(core->getJD(), core->getJDE())  + longitude) / 15.;
 		sidereal=StelUtils::fmodpos(sidereal, 24.);
-		QString STc = qc_("The Mean Sidereal Time is", "object narration");
+		QString STc = hSite ? qc_("The Greenwich Mean Sidereal Time (GMST) is", "object narration") : qc_("The Mean Sidereal Time is", "object narration");
 		QString STd = StelUtils::hoursToHmsNarration(sidereal);
 
 		res += QString("%1: %2. ").arg(STc, STd);
 
 		if (core->getUseNutation())
 		{
-			sidereal=(get_apparent_sidereal_time(core->getJD(), core->getJDE()) + longitude) / 15.;
+			sidereal=hSite ? StelUtils::fmodpos(core->getHorizonsSite().gast * M_180_PI, 360.) / 15.
+			               : (get_apparent_sidereal_time(core->getJD(), core->getJDE()) + longitude) / 15.;
 			sidereal=StelUtils::fmodpos(sidereal, 24.);
-			STc = qc_("The Apparent Sidereal Time is", "object narration");
+			STc = hSite ? qc_("The Greenwich Apparent Sidereal Time (GAST) is", "object narration") : qc_("The Apparent Sidereal Time is", "object narration");
 			STd = StelUtils::hoursToHmsNarration(sidereal);
 			res += QString("%1: %2. ").arg(STc, STd);
+			if (hSite)
+			{
+				sidereal=StelUtils::fmodpos(core->getHorizonsSite().gmst * M_180_PI + longitude, 360.) / 15.;	// (SS) 2026-11-12 LMST
+				STc = qc_("The Local Mean Sidereal Time (LMST) is", "object narration");
+				STd = StelUtils::hoursToHmsNarration(sidereal);
+				res += QString("%1: %2. ").arg(STc, STd);
+			}
+			if (hSite)
+			{
+				sidereal=StelUtils::fmodpos(core->getHorizonsSite().lastPM * M_180_PI, 360.) / 15.;
+				STc = qc_("The Local Apparent Sidereal Time (LAST) is", "object narration");
+				STd = StelUtils::hoursToHmsNarration(sidereal);
+				res += QString("%1: %2. ").arg(STc, STd);
+			}
 		}
 		//res += getExtraInfoStrings(flags&SiderealTime).join("");
 		//res += omgr->getExtraInfoStrings(flags&SiderealTime).join("");
@@ -1747,17 +1836,33 @@ QVariantMap StelObject::getInfoMap(const StelCore *core) const
 	if (core->getCurrentLocation().planetName==L1S("Earth"))
 	{
 		const double longitude=static_cast<double>(core->getCurrentLocation().getLongitude());
-		double sidereal=(get_mean_sidereal_time(core->getJD(), core->getJDE())  + longitude) / 15.;
+		// (SS) 2026-11-12 with the JPL Horizons site meanSidTm and appSidTm are the Greenwich GMST and GAST, and lastSidTm is the local apparent sidereal time with polar motion
+		const bool hSite = core->getHorizonsSiteActive();
+		double sidereal=hSite ? StelUtils::fmodpos(core->getHorizonsSite().gmst * M_180_PI, 360.) / 15.
+		                      : (get_mean_sidereal_time(core->getJD(), core->getJDE())  + longitude) / 15.;
 		sidereal=StelUtils::fmodpos(sidereal, 24.);
 		map.insert("meanSidTm", StelUtils::hoursToHmsStr(sidereal));
 		map.insert("meanSidTm-dd", sidereal * 15.);
 
-		sidereal=(get_apparent_sidereal_time(core->getJD(), core->getJDE()) + longitude) / 15.;
+		sidereal=hSite ? StelUtils::fmodpos(core->getHorizonsSite().gast * M_180_PI, 360.) / 15.
+		               : (get_apparent_sidereal_time(core->getJD(), core->getJDE()) + longitude) / 15.;
 		sidereal=StelUtils::fmodpos(sidereal, 24.);
 		map.insert("appSidTm", StelUtils::hoursToHmsStr(sidereal));
 		map.insert("appSidTm-dd", sidereal * 15.);
+		if (hSite)
+		{
+			// (SS) 2026-11-12 local mean sidereal time (GMST + longitude)
+			const double lmstH = StelUtils::fmodpos(core->getHorizonsSite().gmst * M_180_PI + longitude, 360.) / 15.;
+			map.insert("lmstSidTm", StelUtils::hoursToHmsStr(lmstH));
+			map.insert("lmstSidTm-dd", lmstH * 15.);
+			const double lastH = StelUtils::fmodpos(core->getHorizonsSite().lastPM * M_180_PI, 360.) / 15.;
+			map.insert("lastSidTm", StelUtils::hoursToHmsStr(lastH));
+			map.insert("lastSidTm-dd", lastH * 15.);
+		}
 
-		double ha = sidereal * 15.0 - ra * M_180_PI;
+		// (SS) 2026-11-11 with the JPL Horizons site the hour angle uses LASTpm (polar motion included), as the HA/Dec line of the information panel
+		const double lstDeg = hSite ? (usesSolarSystemFrame(this) ? core->getLocalSiderealTimeSSO() : core->getLocalSiderealTime()) * M_180_PI : sidereal * 15.0;
+		double ha = lstDeg - ra * M_180_PI;
 		ha=StelUtils::fmodpos(ha, 360.0);
 		if (StelApp::getInstance().getFlagUseNegativeHourAngles() && ha>180.)
 			ha-=360.;
@@ -1819,6 +1924,11 @@ QVariantMap StelObject::getInfoMap(const StelCore *core) const
 	// J2000
 	double eclJ2000 = ssmgr->getEarth()->getRotObliquity(2451545.0);
 	double ecl = ssmgr->getEarth()->getRotObliquity(core->getJDE());
+	// (SS) 2026-10-09 JPL Horizons path: obliquity of J2000 of Owen (1990), true obliquity of date of the TIME ZONE
+	if (core->getUseHorizonsPrecNut())
+		eclJ2000 = HorizonsPrecNut::EPS0_RAD;
+	if (core->getHorizonsPrecNutActive())
+		ecl = core->getHorizonsEpsTrue();
 	map.insert("ecliptic-obliquity", ecl*M_180_PI);
 
 	// ecliptic longitude/latitude (J2000 frame)
