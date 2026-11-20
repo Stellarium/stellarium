@@ -35,6 +35,8 @@ public:
 
 	virtual void init(QGraphicsWidget *atopLevelGraphicsWidget);
 
+	virtual void showToolTip(const QPoint& scenePos, const QString& text) = 0;
+
 	//! Load color scheme matching the section name.
 	virtual void setStelStyle(const QString& section) =0;
 

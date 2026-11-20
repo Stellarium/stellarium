@@ -236,6 +236,8 @@ public slots:
 	//! Get the sky background color. (Actually retrieves from the StelRootItem.)  Everything else than black creates a work of art!
 	Vec3f getSkyBackgroundColor() const;
 
+	void showToolTip(const QPoint& scenePos, const QString& text);
+
 protected:
 	//! Handle touchscreen pinch gestures.
 	bool event(QEvent* event) override;
