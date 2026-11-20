@@ -104,9 +104,61 @@ There are also an example of simple \b dynamic plugin:
 
 <a href="http://archive.eso.org/cms/virgo/">VirGO</a> is a fully featured extension to Stellarium sponsored by ESO. VirGO is used by professional astronomers to display and analyse data from the ESO archive. Follow the link for more information.
 
+@section windowsDynamicPlugins Windows Dynamic Plugins
+
+Qt 6 builds made with Microsoft Visual C++ can provide a companion plug-in SDK
+when Stellarium is configured with @c GENERATE_STELMAINLIB=ON. This splits the
+small launcher from @c stelMain.dll and creates the
+@c stellarium-plugin-sdk-archive build target. The regular Windows installer
+includes @c stelMain.dll; the companion SDK archive contains the matching
+import library, minimal headers, CMake package, build metadata, and license.
+
+The initial SDK supports only implementing @c StelModule and
+@c StelPluginInterface. Other declarations which happen to be exported from
+@c stelMain.dll remain internal and are not implicitly a supported plug-in API.
+
+Use the @c Stellarium::stelMain imported CMake target from the SDK. A minimal
+external project contains:
+
+@verbatim
+cmake_minimum_required(VERSION 3.18)
+project(MyPlugin LANGUAGES CXX)
+
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_MSVC_RUNTIME_LIBRARY MultiThreadedDLL)
+
+find_package(Stellarium CONFIG REQUIRED)
+add_library(MyPlugin MODULE MyPlugin.cpp MyPlugin.hpp)
+target_link_libraries(MyPlugin PRIVATE Stellarium::stelMain)
+set_target_properties(MyPlugin PROPERTIES PREFIX "lib")
+@endverbatim
+
+Configure and build the plug-in in Release mode with the MSVC toolset and exact
+Qt version recorded by the SDK. Point @c Stellarium_DIR at the extracted
+archive's @c lib/cmake/Stellarium directory. Do not define @c STELMAIN_BUILD or
+@c STELMAIN_USE_DLL yourself.
+
+@subsection windowsPluginCompatibility API and ABI Compatibility
+
+A third-party binary plug-in is supported only by the exact Stellarium package
+build and SDK for which it was compiled. The Stellarium release, architecture,
+MSVC toolset, exact Qt version, build configuration, and MSVC runtime must all
+match. ABI compatibility across Stellarium releases or separately rebuilt
+packages is not guaranteed. Build and distribute a separate plug-in binary for
+each supported package.
+
+The machine-readable compatibility tuple is stored in
+@c share/stellarium/plugin-sdk/StellariumPluginBuildInfo.json. Mixing a DLL,
+import library, headers, or CMake files from different Stellarium packages is
+unsupported.
+
 @section buildingPlugins Building Plugins
 
-\b Note: The following section is mostly out of date. It applies to \b dynamic plugins.
+\b Note: The following section is legacy information for source-tree builds.
+For Qt 6/MSVC package builds, use the companion Windows plug-in SDK described
+above.
 
 The following instructions can be used to build the Angle Measure plugin and the Compass Marks plugin.
 

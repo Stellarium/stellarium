@@ -56,6 +56,7 @@ UpdateUninstallLogAppName=no
 
 [Files]
 Source: "@CMAKE_INSTALL_PREFIX@\bin\stellarium.exe"; DestDir: "{app}"; Flags: ignoreversion
+@ISS_PATCH_STELMAIN@
 
 ; Some of these may need to be updated
 ;Source: "@CMAKE_SOURCE_DIR@\*.md"; DestDir: "{app}"; Flags: ignoreversion
