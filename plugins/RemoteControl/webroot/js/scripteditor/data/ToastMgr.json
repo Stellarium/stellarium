@@ -1,0 +1,43 @@
+[
+    {
+        "name": "getFlagShow",
+        "category": "Toast Manager - DSS",
+        "signature": "bool getFlagShow()",
+        "description": "Returns whether the Digitized Sky Survey (DSS) background textures are currently displayed. When enabled, Stellarium shows real photographic survey images behind the stars and deep-sky objects.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if DSS textures are visible, false if hidden",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Introduced in early Stellarium versions; stable since 0.10.0"
+        },
+        "example": "if (ToastMgr.getFlagShow()) {\n    core.debug(\"DSS background is visible\");\n} else {\n    ToastMgr.setFlagShow(true);\n}"
+    },
+    {
+        "name": "setFlagShow",
+        "category": "Toast Manager - DSS",
+        "signature": "void setFlagShow(bool displayed)",
+        "description": "Enables or disables the Digitized Sky Survey (DSS) background. When enabled, real photographic textures (TOAST format) are displayed behind the stars and deep-sky objects, providing a realistic view of the sky.",
+        "parameters": [
+            {
+                "name": "displayed",
+                "type": "bool",
+                "description": "true to show DSS background, false to hide it",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Introduced in early Stellarium versions; stable since 0.10"
+        },
+        "example": "// Save current DSS state before modifying\nvar dssState = ToastMgr.getFlagShow();\n\n// Enable DSS background\nToastMgr.setFlagShow(true);\ncore.wait(5);\n\n// Restore original state\nToastMgr.setFlagShow(dssState);"
+    }
+]

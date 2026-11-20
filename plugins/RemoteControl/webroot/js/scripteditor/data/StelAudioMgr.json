@@ -1,0 +1,176 @@
+[
+    {
+        "name": "loadSound",
+        "category": "Audio Manager - Loading",
+        "signature": "loadSound(QString filename, QString id)",
+        "description": "Loads an audio file from disk and associates it with a unique identifier. Supported formats depend on the system's multimedia backend (typically MP3, WAV, OGG, FLAC). If the ID already exists, the old sound is replaced.",
+        "parameters": [
+            {
+                "name": "filename",
+                "type": "QString",
+                "description": "Path to the audio file. Absolute path is recommended, or a path relative to Stellarium's working directory.",
+                "required": true
+            },
+            {
+                "name": "id",
+                "type": "QString",
+                "description": "Unique identifier for the sound object (e.g., 'background_music', 'alert_sound').",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "⚠️ Requires Qt Multimedia module. If Stellarium was built without media support, these functions will have no effect. Audio format support varies by platform."
+        },
+        "example": "// Load a background music file\nStelAudioMgr.loadSound(\"/path/to/background.mp3\", \"bgMusic\");\n\n// Load a sound effect\nStelAudioMgr.loadSound(\"/path/to/click.wav\", \"click\");\n\n// Reloading will replace the existing sound\nStelAudioMgr.loadSound(\"/path/to/new_background.mp3\", \"bgMusic\");"
+    },
+    {
+        "name": "playSound",
+        "category": "Audio Manager - Playback",
+        "signature": "playSound(QString id)",
+        "description": "Plays a previously loaded sound. If the sound is already playing, it restarts from the beginning. If the sound was paused, it resumes playback.",
+        "parameters": [
+            {
+                "name": "id",
+                "type": "QString",
+                "description": "Unique identifier of the sound to play.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "⚠️ Requires Qt Multimedia module. If Stellarium was built without media support, these functions will have no effect."
+        },
+        "example": "// Play background music\nStelAudioMgr.playSound(\"bgMusic\");\n\n// Play a sound effect\nStelAudioMgr.playSound(\"click\");\n\n// Restart from beginning if already playing\nStelAudioMgr.playSound(\"alert\");\n\n// Check if sound exists before playing\nvar pos = StelAudioMgr.position(\"bgMusic\");\nif(pos >= 0) {\n    StelAudioMgr.playSound(\"bgMusic\");\n}"
+    },
+    {
+        "name": "pauseSound",
+        "category": "Audio Manager - Playback",
+        "signature": "pauseSound(QString id)",
+        "description": "Pauses the playback of a sound. The sound can be resumed later with `playSound()`.",
+        "parameters": [
+            {
+                "name": "id",
+                "type": "QString",
+                "description": "Unique identifier of the sound to pause.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "⚠️ Requires Qt Multimedia module. If Stellarium was built without media support, these functions will have no effect."
+        },
+        "example": "// Pause background music\nStelAudioMgr.pauseSound(\"bgMusic\");\n\n// Later, resume playback\nStelAudioMgr.playSound(\"bgMusic\");"
+    },
+    {
+        "name": "stopSound",
+        "category": "Audio Manager - Playback",
+        "signature": "stopSound(QString id)",
+        "description": "Stops the playback of a sound completely. When `playSound()` is called next, the sound will restart from the beginning.",
+        "parameters": [
+            {
+                "name": "id",
+                "type": "QString",
+                "description": "Unique identifier of the sound to stop.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "⚠️ Requires Qt Multimedia module. If Stellarium was built without media support, these functions will have no effect."
+        },
+        "example": "// Stop background music\nStelAudioMgr.stopSound(\"bgMusic\");\n\n// Will restart from the beginning\nStelAudioMgr.playSound(\"bgMusic\");"
+    },
+    {
+        "name": "dropSound",
+        "category": "Audio Manager - Memory Management",
+        "signature": "dropSound(QString id)",
+        "description": "Unloads a sound from memory and releases its resources. The sound can no longer be played unless it is loaded again with `loadSound()`.",
+        "parameters": [
+            {
+                "name": "id",
+                "type": "QString",
+                "description": "Unique identifier of the sound to remove.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "⚠️ Requires Qt Multimedia module. If Stellarium was built without media support, these functions will have no effect."
+        },
+        "example": "// Unload background music to free memory\nStelAudioMgr.dropSound(\"bgMusic\");\n\n// Unload multiple sounds\nStelAudioMgr.dropSound(\"click\");\nStelAudioMgr.dropSound(\"alert\");"
+    },
+    {
+        "name": "position",
+        "category": "Audio Manager - Information",
+        "signature": "qint64 position(QString id)",
+        "description": "Returns the current playback position of a sound in milliseconds. Returns `-1` if the sound is not loaded or the position cannot be determined.",
+        "parameters": [
+            {
+                "name": "id",
+                "type": "QString",
+                "description": "Unique identifier of the sound.",
+                "required": true
+            }
+        ],
+        "returnType": "qint64",
+        "returnDescription": "Current position in milliseconds, or -1 on error.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "⚠️ Requires Qt Multimedia module. If Stellarium was built without media support, these functions will have no effect."
+        },
+        "example": "// Get and display current playback position\nvar pos = StelAudioMgr.position(\"bgMusic\");\nif(pos >= 0) {\n    core.debug(\"Position: \" + (pos/1000).toFixed(1) + \" seconds\");\n} else {\n    core.debug(\"Sound not loaded or cannot get position\");\n}"
+    },
+    {
+        "name": "duration",
+        "category": "Audio Manager - Information",
+        "signature": "qint64 duration(QString id)",
+        "description": "Returns the total duration of a sound in milliseconds. **Note:** The duration may only be available after playback has started (e.g., call it a second after `playSound()`). Returns `0` if unknown, or `-1` if the duration cannot be determined.",
+        "parameters": [
+            {
+                "name": "id",
+                "type": "QString",
+                "description": "Unique identifier of the sound.",
+                "required": true
+            }
+        ],
+        "returnType": "qint64",
+        "returnDescription": "Total duration in milliseconds, 0 if unknown, -1 on error.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "⚠️ Requires Qt Multimedia module. If Stellarium was built without media support, these functions will have no effect. Duration may be unknown until playback starts."
+        },
+        "example": "// Start playback, then get duration after a moment\nStelAudioMgr.playSound(\"bgMusic\");\n\n// Wait a bit using a timer or delay\n// ... \n\nvar dur = StelAudioMgr.duration(\"bgMusic\");\nif(dur > 0) {\n    core.debug(\"Total duration: \" + (dur/1000).toFixed(1) + \" seconds\");\n} else {\n    core.debug(\"Duration unknown or sound not loaded\");\n}"
+    }
+]

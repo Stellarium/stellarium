@@ -1,0 +1,684 @@
+[
+    {
+        "name": "enabled",
+        "category": "Calendars - Core",
+        "signature": "bool enabled",
+        "type": "property",
+        "access": "read-write",
+        "description": "Enable or disable the Calendars plugin display overlay.",
+        "example": "// Enable calendars overlay\ncore.setStelProperty(\"Calendars.enabled\", true);\n\n// Check if enabled\nvar isEnabled = core.getStelProperty(\"Calendars.enabled\");\ncore.debug(\"Calendars enabled: \" + isEnabled);"
+    },
+    {
+        "name": "flagTextColorOverride",
+        "category": "Calendars - Appearance",
+        "signature": "bool flagTextColorOverride",
+        "type": "property",
+        "access": "read-write",
+        "description": "Override the default text color with a custom color set by textColor property.",
+        "example": "// Enable custom text color\ncore.setStelProperty(\"Calendars.flagTextColorOverride\", true);\n\n// Set custom color\ncore.setStelProperty(\"Calendars.textColor\", core.vec3f(1.0, 0.8, 0.5));"
+    },
+    {
+        "name": "textColor",
+        "category": "Calendars - Appearance",
+        "signature": "Vec3f textColor",
+        "type": "property",
+        "access": "read-write",
+        "description": "Custom text color for calendars overlay (used when flagTextColorOverride is true).",
+        "example": "// Set text color to gold\ncore.setStelProperty(\"Calendars.textColor\", core.vec3f(1.0, 0.84, 0.0));"
+    },
+    {
+        "name": "flagShowGregorian",
+        "category": "Calendars - Display",
+        "signature": "bool flagShowGregorian",
+        "type": "property",
+        "access": "read-write",
+        "description": "Show or hide Gregorian calendar in the overlay display.",
+        "example": "// Show Gregorian calendar\ncore.setStelProperty(\"Calendars.flagShowGregorian\", true);"
+    },
+    {
+        "name": "flagShowJulian",
+        "category": "Calendars - Display",
+        "signature": "bool flagShowJulian",
+        "type": "property",
+        "access": "read-write",
+        "description": "Show or hide Julian calendar in the overlay display.",
+        "example": "// Show Julian calendar\ncore.setStelProperty(\"Calendars.flagShowJulian\", true);"
+    },
+    {
+        "name": "flagShowIslamic",
+        "category": "Calendars - Display",
+        "signature": "bool flagShowIslamic",
+        "type": "property",
+        "access": "read-write",
+        "description": "Show or hide Islamic (Hijri) calendar in the overlay display.",
+        "example": "// Show Islamic calendar\ncore.setStelProperty(\"Calendars.flagShowIslamic\", true);"
+    },
+    {
+        "name": "flagShowHebrew",
+        "category": "Calendars - Display",
+        "signature": "bool flagShowHebrew",
+        "type": "property",
+        "access": "read-write",
+        "description": "Show or hide Hebrew calendar in the overlay display.",
+        "example": "// Show Hebrew calendar\ncore.setStelProperty(\"Calendars.flagShowHebrew\", true);"
+    },
+    {
+        "name": "flagShowChinese",
+        "category": "Calendars - Display",
+        "signature": "bool flagShowChinese",
+        "type": "property",
+        "access": "read-write",
+        "description": "Show or hide Chinese calendar in the overlay display.",
+        "example": "// Show Chinese calendar\ncore.setStelProperty(\"Calendars.flagShowChinese\", true);"
+    },
+    {
+        "name": "flagShowJapanese",
+        "category": "Calendars - Display",
+        "signature": "bool flagShowJapanese",
+        "type": "property",
+        "access": "read-write",
+        "description": "Show or hide Japanese calendar in the overlay display.",
+        "example": "// Show Japanese calendar\ncore.setStelProperty(\"Calendars.flagShowJapanese\", true);"
+    },
+    {
+        "name": "flagShowKorean",
+        "category": "Calendars - Display",
+        "signature": "bool flagShowKorean",
+        "type": "property",
+        "access": "read-write",
+        "description": "Show or hide Korean calendar in the overlay display.",
+        "example": "// Show Korean calendar\ncore.setStelProperty(\"Calendars.flagShowKorean\", true);"
+    },
+    {
+        "name": "flagShowVietnamese",
+        "category": "Calendars - Display",
+        "signature": "bool flagShowVietnamese",
+        "type": "property",
+        "access": "read-write",
+        "description": "Show or hide Vietnamese calendar in the overlay display.",
+        "example": "// Show Vietnamese calendar\ncore.setStelProperty(\"Calendars.flagShowVietnamese\", true);"
+    },
+    {
+        "name": "flagShowMayaLongCount",
+        "category": "Calendars - Display",
+        "signature": "bool flagShowMayaLongCount",
+        "type": "property",
+        "access": "read-write",
+        "description": "Show or hide Maya Long Count calendar in the overlay display.",
+        "example": "// Show Maya Long Count\ncore.setStelProperty(\"Calendars.flagShowMayaLongCount\", true);"
+    },
+    {
+        "name": "flagShowNewHinduSolar",
+        "category": "Calendars - Display",
+        "signature": "bool flagShowNewHinduSolar",
+        "type": "property",
+        "access": "read-write",
+        "description": "Show or hide New Hindu Solar calendar in the overlay display.",
+        "example": "// Show New Hindu Solar calendar\ncore.setStelProperty(\"Calendars.flagShowNewHinduSolar\", true);"
+    },
+    {
+        "name": "flagShowNewHinduLunar",
+        "category": "Calendars - Display",
+        "signature": "bool flagShowNewHinduLunar",
+        "type": "property",
+        "access": "read-write",
+        "description": "Show or hide New Hindu Lunar (Panchang) calendar in the overlay display.",
+        "example": "// Show New Hindu Lunar calendar\ncore.setStelProperty(\"Calendars.flagShowNewHinduLunar\", true);"
+    },
+    {
+        "name": "flagShowTibetan",
+        "category": "Calendars - Display",
+        "signature": "bool flagShowTibetan",
+        "type": "property",
+        "access": "read-write",
+        "description": "Show or hide Tibetan (Phuglugs) calendar in the overlay display.",
+        "example": "// Show Tibetan calendar\ncore.setStelProperty(\"Calendars.flagShowTibetan\", true);"
+    },
+    {
+        "name": "enable",
+        "category": "Calendars - Core",
+        "signature": "void enable(bool b)",
+        "type": "slot",
+        "description": "Enable or disable the Calendars plugin display. Equivalent to setting the 'enabled' property.",
+        "parameters": [
+            {
+                "name": "b",
+                "type": "bool",
+                "description": "true to enable, false to disable",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "example": "// Enable calendars overlay\nCalendars.enable(true);"
+    },
+    {
+        "name": "isEnabled",
+        "category": "Calendars - Core",
+        "signature": "bool isEnabled()",
+        "type": "slot",
+        "description": "Returns whether the Calendars plugin overlay is enabled.",
+        "parameters": [],
+        "returnType": "bool",
+        "example": "if (Calendars.isEnabled()) {\n    core.debug(\"Calendars overlay is visible\");\n}"
+    },
+    {
+        "name": "exportCalendars",
+        "category": "Calendars - Export",
+        "signature": "void exportCalendars()",
+        "type": "slot",
+        "description": "Exports the currently displayed calendar data to an HTML file saved as 'Calendars.html' in Stellarium's user data directory.",
+        "parameters": [],
+        "returnType": "void",
+        "example": "// Export current calendar data to HTML\nCalendars.exportCalendars();\ncore.debug(\"Calendar data exported to Calendars.html\");"
+    },
+    {
+        "name": "showGregorian",
+        "category": "Calendars - Control",
+        "signature": "void showGregorian(bool b)",
+        "type": "slot",
+        "description": "Shows or hides the Gregorian calendar in the overlay.",
+        "parameters": [
+            {
+                "name": "b",
+                "type": "bool",
+                "description": "true to show, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "example": "// Show Gregorian calendar\nCalendars.showGregorian(true);"
+    },
+    {
+        "name": "isGregorianDisplayed",
+        "category": "Calendars - Control",
+        "signature": "bool isGregorianDisplayed()",
+        "type": "slot",
+        "description": "Returns whether the Gregorian calendar is currently displayed.",
+        "parameters": [],
+        "returnType": "bool",
+        "example": "if (Calendars.isGregorianDisplayed()) {\n    core.debug(\"Gregorian calendar is visible\");\n}"
+    },
+    {
+        "name": "showJulian",
+        "category": "Calendars - Control",
+        "signature": "void showJulian(bool b)",
+        "type": "slot",
+        "description": "Shows or hides the Julian calendar in the overlay.",
+        "parameters": [
+            {
+                "name": "b",
+                "type": "bool",
+                "description": "true to show, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "example": "// Show Julian calendar\nCalendars.showJulian(true);"
+    },
+    {
+        "name": "showIslamic",
+        "category": "Calendars - Control",
+        "signature": "void showIslamic(bool b)",
+        "type": "slot",
+        "description": "Shows or hides the Islamic (Hijri) calendar in the overlay.",
+        "parameters": [
+            {
+                "name": "b",
+                "type": "bool",
+                "description": "true to show, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "example": "// Show Islamic calendar\nCalendars.showIslamic(true);"
+    },
+    {
+        "name": "showHebrew",
+        "category": "Calendars - Control",
+        "signature": "void showHebrew(bool b)",
+        "type": "slot",
+        "description": "Shows or hides the Hebrew calendar in the overlay.",
+        "parameters": [
+            {
+                "name": "b",
+                "type": "bool",
+                "description": "true to show, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "example": "// Show Hebrew calendar\nCalendars.showHebrew(true);"
+    },
+    {
+        "name": "showChinese",
+        "category": "Calendars - Control",
+        "signature": "void showChinese(bool b)",
+        "type": "slot",
+        "description": "Shows or hides the Chinese calendar in the overlay.",
+        "parameters": [
+            {
+                "name": "b",
+                "type": "bool",
+                "description": "true to show, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "example": "// Show Chinese calendar with solar terms\nCalendars.showChinese(true);"
+    },
+    {
+        "name": "showJapanese",
+        "category": "Calendars - Control",
+        "signature": "void showJapanese(bool b)",
+        "type": "slot",
+        "description": "Shows or hides the Japanese calendar in the overlay (based on Chinese calendar with Tokyo location).",
+        "parameters": [
+            {
+                "name": "b",
+                "type": "bool",
+                "description": "true to show, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "example": "// Show Japanese calendar\nCalendars.showJapanese(true);"
+    },
+    {
+        "name": "showKorean",
+        "category": "Calendars - Control",
+        "signature": "void showKorean(bool b)",
+        "type": "slot",
+        "description": "Shows or hides the Korean calendar in the overlay (based on Chinese calendar with Seoul location).",
+        "parameters": [
+            {
+                "name": "b",
+                "type": "bool",
+                "description": "true to show, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "example": "// Show Korean calendar\nCalendars.showKorean(true);"
+    },
+    {
+        "name": "showVietnamese",
+        "category": "Calendars - Control",
+        "signature": "void showVietnamese(bool b)",
+        "type": "slot",
+        "description": "Shows or hides the Vietnamese calendar in the overlay (based on Chinese calendar with Saigon location).",
+        "parameters": [
+            {
+                "name": "b",
+                "type": "bool",
+                "description": "true to show, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "example": "// Show Vietnamese calendar\nCalendars.showVietnamese(true);"
+    },
+    {
+        "name": "showMayaLongCount",
+        "category": "Calendars - Control",
+        "signature": "void showMayaLongCount(bool b)",
+        "type": "slot",
+        "description": "Shows or hides the Maya Long Count calendar in the overlay (baktun, katun, tun, uinal, kin).",
+        "parameters": [
+            {
+                "name": "b",
+                "type": "bool",
+                "description": "true to show, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "example": "// Show Maya Long Count\nCalendars.showMayaLongCount(true);"
+    },
+    {
+        "name": "showMayaHaab",
+        "category": "Calendars - Control",
+        "signature": "void showMayaHaab(bool b)",
+        "type": "slot",
+        "description": "Shows or hides the Maya Haab (solar) calendar in the overlay.",
+        "parameters": [
+            {
+                "name": "b",
+                "type": "bool",
+                "description": "true to show, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "example": "// Show Maya Haab calendar\nCalendars.showMayaHaab(true);"
+    },
+    {
+        "name": "showMayaTzolkin",
+        "category": "Calendars - Control",
+        "signature": "void showMayaTzolkin(bool b)",
+        "type": "slot",
+        "description": "Shows or hides the Maya Tzolkin (sacred) calendar in the overlay.",
+        "parameters": [
+            {
+                "name": "b",
+                "type": "bool",
+                "description": "true to show, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "example": "// Show Maya Tzolkin calendar\nCalendars.showMayaTzolkin(true);"
+    },
+    {
+        "name": "showNewHinduSolar",
+        "category": "Calendars - Control",
+        "signature": "void showNewHinduSolar(bool b)",
+        "type": "slot",
+        "description": "Shows or hides the New Hindu Solar calendar in the overlay.",
+        "parameters": [
+            {
+                "name": "b",
+                "type": "bool",
+                "description": "true to show, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "example": "// Show New Hindu Solar calendar\nCalendars.showNewHinduSolar(true);"
+    },
+    {
+        "name": "showNewHinduLunar",
+        "category": "Calendars - Control",
+        "signature": "void showNewHinduLunar(bool b)",
+        "type": "slot",
+        "description": "Shows or hides the New Hindu Lunar calendar (Panchang) in the overlay.",
+        "parameters": [
+            {
+                "name": "b",
+                "type": "bool",
+                "description": "true to show, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "example": "// Show New Hindu Lunar calendar with Panchang\nCalendars.showNewHinduLunar(true);"
+    },
+    {
+        "name": "showTibetan",
+        "category": "Calendars - Control",
+        "signature": "void showTibetan(bool b)",
+        "type": "slot",
+        "description": "Shows or hides the Tibetan (Phuglugs) calendar in the overlay.",
+        "parameters": [
+            {
+                "name": "b",
+                "type": "bool",
+                "description": "true to show, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "example": "// Show Tibetan calendar\nCalendars.showTibetan(true);"
+    },
+    {
+        "name": "setTextColor",
+        "category": "Calendars - Appearance",
+        "signature": "void setTextColor(const Vec3f& newColor)",
+        "type": "slot",
+        "description": "Sets the custom text color for the calendars overlay.",
+        "parameters": [
+            {
+                "name": "newColor",
+                "type": "Vec3f",
+                "description": "RGB color vector (values 0.0 to 1.0)",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "example": "// Set text color to bright white\nvar white = core.vec3f(1.0, 1.0, 1.0);\nCalendars.setTextColor(white);\nCalendars.setFlagTextColorOverride(true);"
+    },
+    {
+        "name": "getTextColor",
+        "category": "Calendars - Appearance",
+        "signature": "Vec3f getTextColor()",
+        "type": "slot",
+        "description": "Returns the current custom text color.",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "example": "var colorStr = core.getStelProperty(\"Calendars.textColor\");\ncore.debug(\"Text color:\", colorStr);"
+    },
+    {
+        "name": "setFlagTextColorOverride",
+        "category": "Calendars - Appearance",
+        "signature": "void setFlagTextColorOverride(bool b)",
+        "type": "slot",
+        "description": "Enables or disables custom text color override.",
+        "parameters": [
+            {
+                "name": "b",
+                "type": "bool",
+                "description": "true to use custom color, false to use default",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "example": "// Use custom text color\nCalendars.setFlagTextColorOverride(true);"
+    },
+    {
+        "name": "getFlagTextColorOverride",
+        "category": "Calendars - Appearance",
+        "signature": "bool getFlagTextColorOverride()",
+        "type": "slot",
+        "description": "Returns whether custom text color override is enabled.",
+        "parameters": [],
+        "returnType": "bool",
+        "example": "if (Calendars.getFlagTextColorOverride()) {\n    core.debug(\"Using custom text color\");\n}"
+    },
+    {
+        "name": "GregorianCalendar",
+        "category": "Calendars - Calendar Objects",
+        "signature": "GregorianCalendar",
+        "type": "calendar",
+        "description": "Functions for the Gregorian calendar (proleptic, with year zero).",
+        "example": "// Get current Gregorian date as array\nvar date = GregorianCalendar.getDate();\ncore.debug(\"Year:\", date[0], \"Month:\", date[1], \"Day:\", date[2]);\n\n// Check if year 2000 is leap\nvar isLeap = GregorianCalendar.isLeap(2000);\ncore.debug(\"2000 is leap:\", isLeap);\n\n// Get Easter date for a year\nvar easterRD = GregorianCalendar.easter(2024);\nvar easterDate = GregorianCalendar.getFormattedDateString();\n\n// Set Stellarium date from Gregorian date\nGregorianCalendar.setDate([2024, 12, 25]);\n\n// Convert Gregorian to RD (Rata Die) number\nvar rd = GregorianCalendar.fixedFromGregorian([2024, 3, 14]);\ncore.debug(\"RD number:\", rd);\n\n// Convert RD back to Gregorian\nvar greg = GregorianCalendar.gregorianFromFixed(rd);\ncore.debug(\"Date:\", greg[0], greg[1], greg[2]);"
+    },
+    {
+        "name": "JulianCalendar",
+        "category": "Calendars - Calendar Objects",
+        "signature": "JulianCalendar",
+        "type": "calendar",
+        "description": "Functions for the Julian calendar (no year zero).",
+        "example": "// Get current Julian date\nvar julian = JulianCalendar.getDate();\ncore.debug(\"Julian:\", julian[0], julian[1], julian[2]);\n\n// Check if Julian year is leap\nvar isLeap = JulianCalendar.isLeap(1700);\ncore.debug(\"Julian 1700 is leap:\", isLeap); // true (different from Gregorian)\n\n// Convert Gregorian to Julian date\nvar rd = GregorianCalendar.fixedFromGregorian([1582, 10, 4]);\nvar julianDate = JulianCalendar.julianFromFixed(rd);\ncore.debug(\"Last Julian date:\", julianDate);\n\n// Set Stellarium date using Julian calendar\nJulianCalendar.setDate([1582, 10, 4]);"
+    },
+    {
+        "name": "IslamicCalendar",
+        "category": "Calendars - Calendar Objects",
+        "signature": "IslamicCalendar",
+        "type": "calendar",
+        "description": "Functions for the Islamic (Hijri) calendar.",
+        "example": "// Get current Islamic date\nvar islamic = IslamicCalendar.getDate();\ncore.debug(\"Islamic year:\", islamic[0], \"month:\", islamic[1], \"day:\", islamic[2]);\n\n// Get formatted Islamic date string\nvar dateStr = IslamicCalendar.getFormattedDateString();\ncore.debug(\"Islamic date:\", dateStr);\n\n// Set Stellarium date using Islamic calendar\nIslamicCalendar.setDate([1445, 9, 1]); // First day of Ramadan"
+    },
+    {
+        "name": "HebrewCalendar",
+        "category": "Calendars - Calendar Objects",
+        "signature": "HebrewCalendar",
+        "type": "calendar",
+        "description": "Functions for the Hebrew calendar.",
+        "example": "// Get current Hebrew date\nvar hebrew = HebrewCalendar.getDate();\ncore.debug(\"Hebrew year:\", hebrew[0], \"month:\", hebrew[1], \"day:\", hebrew[2]);\n\n// Check if Hebrew year is leap (has Adar I)\n// Set date for Passover\nHebrewCalendar.setDate([5784, 7, 15]);\nvar passoverStr = HebrewCalendar.getFormattedDateString();"
+    },
+    {
+        "name": "ChineseCalendar",
+        "category": "Calendars - Calendar Objects",
+        "signature": "ChineseCalendar",
+        "type": "calendar",
+        "description": "Functions for the Chinese calendar (1645 Qing dynasty version). Returns {cycle, year, month, leap, day}.",
+        "example": "// Get current Chinese date\nvar chinese = ChineseCalendar.getDate();\ncore.debug(\"Cycle:\", chinese[0], \"Year:\", chinese[1], \"Month:\", chinese[2], \"Leap:\", chinese[3], \"Day:\", chinese[4]);\n\n// Get Chinese year name (e.g., \"Dragon\")\nvar yearName = ChineseCalendar.yearName(chinese[1]);\ncore.debug(\"Year animal:\", yearName.second);\n\n// Get Chinese day name\nvar dayName = ChineseCalendar.dayName(ChineseCalendar.getRD());\ncore.debug(\"Day name:\", dayName.second);\n\n// Get solar terms for current date\nvar solarTerms = ChineseCalendar.getSolarTermStrings();\ncore.debug(\"Major term:\", solarTerms.first, \"Minor term:\", solarTerms.second);\n\n// Set Stellarium date to Chinese New Year\nChineseCalendar.setDate([78, 1, 1, 0, 1]); // cycle 78, year 1, month 1, not leap, day 1\n\n// Get Chinese New Year in Gregorian year\nvar newYearRD = ChineseCalendar.newYearOnOrBefore(GregorianCalendar.fixedFromGregorian([2024, 1, 1]));"
+    },
+    {
+        "name": "JapaneseCalendar",
+        "category": "Calendars - Calendar Objects",
+        "signature": "JapaneseCalendar",
+        "type": "calendar",
+        "description": "Functions for the Japanese calendar (based on Chinese calendar with Tokyo location).",
+        "example": "// Get current Japanese date\nvar japanese = JapaneseCalendar.getDate();\ncore.debug(\"Japanese:\", japanese[0], japanese[1], japanese[2], japanese[3], japanese[4]);\n\n// Get Japanese year (Era system)\nvar yearNum = JapaneseCalendar.japaneseYear(japanese[0], japanese[1]);\ncore.debug(\"Japanese year number:\", yearNum);\n\n// Get solar terms\nvar terms = JapaneseCalendar.getSolarTermStrings();"
+    },
+    {
+        "name": "KoreanCalendar",
+        "category": "Calendars - Calendar Objects",
+        "signature": "KoreanCalendar",
+        "type": "calendar",
+        "description": "Functions for the Korean calendar (based on Chinese calendar with Seoul location).",
+        "example": "// Get current Korean date\nvar korean = KoreanCalendar.getDate();\ncore.debug(\"Korean:\", korean[0], korean[1], korean[2], korean[3], korean[4]);\n\n// Get Korean year in Danki system (2333 BCE +)\nvar dankiYear = KoreanCalendar.koreanYear(korean[0], korean[1]);\n\n// Calculate Korean age (different from Western age)\nvar birthdate = KoreanCalendar.koreanFromFixed(GregorianCalendar.fixedFromGregorian([2000, 1, 1]));\nvar age = KoreanCalendar.koreanAge(birthdate, GregorianCalendar.fixedFromGregorian([2024, 1, 1]));\ncore.debug(\"Korean age:\", age);"
+    },
+    {
+        "name": "VietnameseCalendar",
+        "category": "Calendars - Calendar Objects",
+        "signature": "VietnameseCalendar",
+        "type": "calendar",
+        "description": "Functions for the Vietnamese calendar (based on Chinese calendar with Saigon location).",
+        "example": "// Get current Vietnamese date\nvar viet = VietnameseCalendar.getDate();\ncore.debug(\"Vietnamese:\", viet[0], viet[1], viet[2], viet[3], viet[4]);\n\n// Get year name in 60-year cycle\nvar yearName = VietnameseCalendar.yearName(viet[1]);\ncore.debug(\"Year name:\", yearName.second);\n\n// Get solar terms\nvar terms = VietnameseCalendar.getSolarTermStrings();"
+    },
+    {
+        "name": "MayaLongCountCalendar",
+        "category": "Calendars - Calendar Objects",
+        "signature": "MayaLongCountCalendar",
+        "type": "calendar",
+        "description": "Functions for the Maya Long Count calendar (baktun, katun, tun, uinal, kin).",
+        "example": "// Get current Maya Long Count\nvar maya = MayaLongCountCalendar.getDate();\ncore.debug(\"Baktun:\", maya[0], \"Katun:\", maya[1], \"Tun:\", maya[2], \"Uinal:\", maya[3], \"Kin:\", maya[4]);\n\n// Get formatted Long Count string\nvar longCount = MayaLongCountCalendar.getFormattedDateString();\ncore.debug(\"Maya Long Count:\", longCount);\n\n// Set date to 13.0.0.0.0 (December 21, 2012)\nMayaLongCountCalendar.setDate([13, 0, 0, 0, 0]);"
+    },
+    {
+        "name": "MayaHaabCalendar",
+        "category": "Calendars - Calendar Objects",
+        "signature": "MayaHaabCalendar",
+        "type": "calendar",
+        "description": "Functions for the Maya Haab (solar) calendar.",
+        "example": "// Get current Maya Haab date\nvar haab = MayaHaabCalendar.getDate();\ncore.debug(\"Haab month:\", haab[0], \"Day:\", haab[1]);\nvar haabStr = MayaHaabCalendar.getFormattedDateString();"
+    },
+    {
+        "name": "MayaTzolkinCalendar",
+        "category": "Calendars - Calendar Objects",
+        "signature": "MayaTzolkinCalendar",
+        "type": "calendar",
+        "description": "Functions for the Maya Tzolkin (sacred) calendar.",
+        "example": "// Get current Maya Tzolkin date\nvar tzolkin = MayaTzolkinCalendar.getDate();\ncore.debug(\"Tzolkin number:\", tzolkin[0], \"Name:\", tzolkin[1]);\nvar tzolkinStr = MayaTzolkinCalendar.getFormattedDateString();"
+    },
+    {
+        "name": "NewHinduSolarCalendar",
+        "category": "Calendars - Calendar Objects",
+        "signature": "NewHinduSolarCalendar",
+        "type": "calendar",
+        "description": "Functions for the New Hindu Solar calendar.",
+        "example": "// Get current New Hindu Solar date\nvar hinduSolar = NewHinduSolarCalendar.getDate();\ncore.debug(\"Hindu year:\", hinduSolar[0], \"Month:\", hinduSolar[1], \"Day:\", hinduSolar[2]);\n\n// Get zodiac sign (rasi)\nvar zodiac = NewHinduSolarCalendar.hinduZodiac(NewHinduSolarCalendar.getRD());"
+    },
+    {
+        "name": "NewHinduLunarCalendar",
+        "category": "Calendars - Calendar Objects",
+        "signature": "NewHinduLunarCalendar",
+        "type": "calendar",
+        "description": "Functions for the New Hindu Lunar calendar (Panchang - tithi, nakshatra, yoga, karana).",
+        "example": "// Get current New Hindu Lunar date\nvar hinduLunar = NewHinduLunarCalendar.getDate();\ncore.debug(\"Year:\", hinduLunar[0], \"Month:\", hinduLunar[1], \"Day:\", hinduLunar[3]);\n\n// Get Panchang string (tithi, nakshatra, yoga, karana)\nvar panchang = NewHinduLunarCalendar.getFormattedPanchangString();\ncore.debug(\"Panchang:\", panchang);\n\n// Get nakshatra (lunar mansion) for today\nvar nakshatra = NewHinduLunarCalendar.hinduLunarStation(NewHinduLunarCalendar.getRD());"
+    },
+    {
+        "name": "TibetanCalendar",
+        "category": "Calendars - Calendar Objects",
+        "signature": "TibetanCalendar",
+        "type": "calendar",
+        "description": "Functions for the Tibetan (Phuglugs) calendar.",
+        "example": "// Get current Tibetan date\nvar tibetan = TibetanCalendar.getDate();\ncore.debug(\"Year:\", tibetan[0], \"Month:\", tibetan[1], \"Day:\", tibetan[3]);\n\n// Get Tibetan sexagesimal year name\nvar yearName = TibetanCalendar.tibetanSexagesimalYear(tibetan[0]);\ncore.debug(\"Tibetan year:\", yearName);\n\n// Get Losar (New Year) date for a Tibetan year\nvar losarRD = TibetanCalendar.losar(tibetan[0]);"
+    },
+    {
+        "name": "OldHinduSolarCalendar",
+        "category": "Calendars - Calendar Objects",
+        "signature": "OldHinduSolarCalendar",
+        "type": "calendar",
+        "description": "Functions for the Old Hindu Solar calendar (Arya Siddhanta).",
+        "example": "// Get current Old Hindu Solar date\nvar oldHindu = OldHinduSolarCalendar.getDate();\n\n// Set output style (0=Vedic, 1=Sanskrit, 2=Zodiacal)\nOldHinduSolarCalendar.setMonthStyle(2);\n\n// Get Jovian year (60-year cycle)\nvar jovian = OldHinduSolarCalendar.jovianYear(OldHinduSolarCalendar.getRD());"
+    },
+    {
+        "name": "Calendar",
+        "category": "Calendars - Calendar Objects",
+        "signature": "Calendar",
+        "type": "calendar",
+        "description": "Base class for all calendars providing astronomical calculation functions. All calendars inherit these static methods.",
+        "example": "// Get current RD (Rata Die) number\nvar rd = Calendar.rdNow();\ncore.debug(\"Current RD:\", rd);\n\n// Convert between JD and RD\nvar jd = Calendar.jdFromFixed(rd, true);\nvar rd2 = Calendar.fixedFromJD(jd, true);\n\n// Get day of week (0=Sunday to 6=Saturday)\nvar dow = Calendar.dayOfWeekFromFixed(rd);\nvar weekdays = [\"Sunday\", \"Monday\", \"Tuesday\", \"Wednesday\", \"Thursday\", \"Friday\", \"Saturday\"];\ncore.debug(\"Today is:\", weekdays[dow]);\n\n// Get sunrise/sunset times\nvar rdInt = Math.floor(rd);\nvar sunrise = Calendar.sunrise(rdInt);\nvar sunset = Calendar.sunset(rdInt);\ncore.debug(\"Sunrise fraction:\", sunrise, \"Sunset fraction:\", sunset);\n\n// Get moon phase (0=new, 90=first quarter, 180=full, 270=last quarter)\nvar moonPhase = Calendar.lunarPhase(rd);\ncore.debug(\"Moon phase degrees:\", moonPhase);\n\n// Get next new moon\nvar newMoon = Calendar.newMoonAtOrAfter(rd);\n\n// Get solar longitude (0=vernal equinox, 90=summer solstice, etc.)\nvar sunLng = Calendar.solarLongitude(rd);\ncore.debug(\"Solar longitude:\", sunLng);\n\n// Get equation of time (in days)\nvar eot = Calendar.equationOfTime(rd);\ncore.debug(\"Equation of time (days):\", eot);\n\n// Check if crescent moon is visible (Islamic criterion)\nvar visible = Calendar.visibleCrescent(rdInt);\n\n// Get Italian hour (from sunset)\nvar italianHour = Calendar.italianFromLocal(rd);\n\n// Convert between time systems\nvar localTime = Calendar.localFromUniversal(rd);\nvar universalTime = Calendar.universalFromLocal(rd);"
+    },
+    {
+        "name": "ISOCalendar",
+        "category": "Calendars - Calendar Objects",
+        "signature": "ISOCalendar",
+        "type": "calendar",
+        "description": "Functions for the ISO week calendar (year, week number, day of week).",
+        "example": "// Get current ISO week date\nvar iso = ISOCalendar.getDate();\ncore.debug(\"ISO year:\", iso[0], \"Week:\", iso[1], \"Day:\", iso[2]);\nvar isoStr = ISOCalendar.getFormattedDateString();\ncore.debug(\"ISO week date:\", isoStr);"
+    },
+    {
+        "name": "RevisedJulianCalendar",
+        "category": "Calendars - Calendar Objects",
+        "signature": "RevisedJulianCalendar",
+        "type": "calendar",
+        "description": "Functions for the Revised Julian calendar (used by some Orthodox churches).",
+        "example": "// Get current Revised Julian date\nvar revJulian = RevisedJulianCalendar.getDate();\ncore.debug(\"Revised Julian:\", revJulian[0], revJulian[1], revJulian[2]);"
+    },
+    {
+        "name": "EgyptianCalendar",
+        "category": "Calendars - Calendar Objects",
+        "signature": "EgyptianCalendar",
+        "type": "calendar",
+        "description": "Functions for the ancient Egyptian calendar (365 days, 3 seasons of 4 months of 30 days + 5 epagomenal days).",
+        "example": "// Get current Egyptian date\nvar egyptian = EgyptianCalendar.getDate();\ncore.debug(\"Egyptian year:\", egyptian[0], \"Month:\", egyptian[1], \"Day:\", egyptian[2]);"
+    },
+    {
+        "name": "RomanCalendar",
+        "category": "Calendars - Calendar Objects",
+        "signature": "RomanCalendar",
+        "type": "calendar",
+        "description": "Functions for the Roman calendar (pre-Julian, with Kalends, Nones, Ides).",
+        "example": "// Get current Roman date\nvar roman = RomanCalendar.getDate();\nvar romanStr = RomanCalendar.getFormattedDateString();\ncore.debug(\"Roman date:\", romanStr);"
+    },
+    {
+        "name": "AztecXihuitlCalendar",
+        "category": "Calendars - Calendar Objects",
+        "signature": "AztecXihuitlCalendar",
+        "type": "calendar",
+        "description": "Functions for the Aztec Xihuitl (solar) calendar.",
+        "example": "// Get current Aztec Xihuitl date\nvar aztec = AztecXihuitlCalendar.getDate();\ncore.debug(\"Aztec year:\", aztec[0], \"Month:\", aztec[1], \"Day:\", aztec[2]);"
+    },
+    {
+        "name": "AztecTonalpohualliCalendar",
+        "category": "Calendars - Calendar Objects",
+        "signature": "AztecTonalpohualliCalendar",
+        "type": "calendar",
+        "description": "Functions for the Aztec Tonalpohualli (260-day sacred) calendar.",
+        "example": "// Get current Aztec Tonalpohualli date\nvar tonal = AztecTonalpohualliCalendar.getDate();\ncore.debug(\"Tonalpohualli number:\", tonal[0], \"Day sign:\", tonal[1]);"
+    },
+    {
+        "name": "BalinesePawukonCalendar",
+        "category": "Calendars - Calendar Objects",
+        "signature": "BalinesePawukonCalendar",
+        "type": "calendar",
+        "description": "Functions for the Balinese Pawukon (210-day) calendar.",
+        "example": "// Get current Balinese Pawukon date\nvar balinese = BalinesePawukonCalendar.getDate();\nvar balineseStr = BalinesePawukonCalendar.getFormattedDateString();"
+    },
+    {
+        "name": "FrenchArithmeticCalendar",
+        "category": "Calendars - Calendar Objects",
+        "signature": "FrenchArithmeticCalendar",
+        "type": "calendar",
+        "description": "Functions for the French Revolutionary calendar (arithmetic version).",
+        "example": "// Get current French Revolutionary date\nvar french = FrenchArithmeticCalendar.getDate();\ncore.debug(\"French year:\", french[0], \"Month:\", french[1], \"Day:\", french[2]);"
+    },
+    {
+        "name": "PersianArithmeticCalendar",
+        "category": "Calendars - Calendar Objects",
+        "signature": "PersianArithmeticCalendar",
+        "type": "calendar",
+        "description": "Functions for the Persian (Jalali) calendar (arithmetic version).",
+        "example": "// Get current Persian date\nvar persian = PersianArithmeticCalendar.getDate();\ncore.debug(\"Persian year:\", persian[0], \"Month:\", persian[1], \"Day:\", persian[2]);\nvar nowruz = PersianArithmeticCalendar.persianNewYear(persian[0]);"
+    },
+    {
+        "name": "BahaiArithmeticCalendar",
+        "category": "Calendars - Calendar Objects",
+        "signature": "BahaiArithmeticCalendar",
+        "type": "calendar",
+        "description": "Functions for the Baháʼí calendar (arithmetic version).",
+        "example": "// Get current Baháʼí date\nvar bahai = BahaiArithmeticCalendar.getDate();\ncore.debug(\"Baháʼí year:\", bahai[0], \"Month:\", bahai[1], \"Day:\", bahai[2]);"
+    }
+]

@@ -1,0 +1,149 @@
+[
+    {
+        "name": "getZHR",
+        "category": "Sporadic Meteors - Settings",
+        "signature": "int getZHR()",
+        "description": "Returns the current Zenith Hourly Rate (ZHR) for sporadic meteors. ZHR represents the number of meteors a single observer would see per hour under ideal conditions (dark sky, radiant at zenith).",
+        "parameters": [],
+        "returnType": "int",
+        "returnDescription": "Zenith Hourly Rate (meteors per hour)",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "Introduced in Stellarium 0.15.0, works on all later versions"
+        },
+        "example": "var zhr = SporadicMeteorMgr.getZHR();\ncore.debug(\"Current meteor rate: \" + zhr + \" meteors per hour\");\n\nif(zhr < 5) {\n    core.debug(\"Low meteor activity\");\n} else if(zhr > 50) {\n    core.debug(\"High meteor activity - good for observing!\");\n}"
+    },
+    {
+        "name": "setZHR",
+        "category": "Sporadic Meteors - Settings",
+        "signature": "setZHR(int zhr)",
+        "description": "Sets the Zenith Hourly Rate (ZHR) for sporadic meteors. Higher values increase the number of visible meteors. Typical background sporadic rates range from 5 to 15 meteors per hour.",
+        "parameters": [
+            {
+                "name": "zhr",
+                "type": "int",
+                "description": "Zenith Hourly Rate (meteors per hour). Recommended range: 1 to 100.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "Introduced in Stellarium 0.15.0"
+        },
+        "example": "// Set low meteor activity for a quiet night\nSporadicMeteorMgr.setZHR(5);\n\n// Set high activity for a meteor-rich display\nSporadicMeteorMgr.setZHR(50);\n\n// Disable sporadic meteors completely\nSporadicMeteorMgr.setZHR(0);\n\n// Get the new value\nvar newZHR = SporadicMeteorMgr.getZHR();\ncore.debug(\"New meteor rate: \" + newZHR);"
+    },
+    {
+        "name": "getFlagShow",
+        "category": "Sporadic Meteors - Display",
+        "signature": "bool getFlagShow()",
+        "description": "Returns whether sporadic meteor rendering is currently enabled. When disabled, no sporadic meteors will be displayed regardless of ZHR settings.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if sporadic meteors are visible, false if hidden",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "if(SporadicMeteorMgr.getFlagShow()) {\n    core.debug(\"Sporadic meteors are visible\");\n} else {\n    core.debug(\"Sporadic meteors are hidden\");\n    SporadicMeteorMgr.setFlagShow(true);\n    core.debug(\"Enabled sporadic meteors\");\n}"
+    },
+    {
+        "name": "setFlagShow",
+        "category": "Sporadic Meteors - Display",
+        "signature": "setFlagShow(bool visible)",
+        "description": "Shows or hides sporadic meteors (background meteors not associated with any meteor shower). When disabled, no sporadic meteors will appear even if ZHR is set to a positive value.",
+        "parameters": [
+            {
+                "name": "visible",
+                "type": "bool",
+                "description": "true to show sporadic meteors, false to hide them",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "Works on all Stellarium versions"
+        },
+        "example": "// Enable sporadic meteor display\nSporadicMeteorMgr.setFlagShow(true);\n\n// Hide all sporadic meteors\nSporadicMeteorMgr.setFlagShow(false);\n\n// Toggle current state\nvar currentState = SporadicMeteorMgr.getFlagShow();\nSporadicMeteorMgr.setFlagShow(!currentState);"
+    },
+    {
+        "name": "setMaxVelocity",
+        "category": "Sporadic Meteors - Settings",
+        "signature": "setMaxVelocity(int maxVelocity)",
+        "description": "Sets the maximum velocity for sporadic meteors in kilometers per second. Meteor velocities typically range from 11 km/s (slow) to 72 km/s (very fast). Higher velocities produce longer, faster streaks.",
+        "parameters": [
+            {
+                "name": "maxVelocity",
+                "type": "int",
+                "description": "Maximum meteor velocity in km/s (recommended range: 11 to 72)",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "Introduced in Stellarium 0.15.0"
+        },
+        "example": "// Set slow meteors (like Draconids)\nSporadicMeteorMgr.setMaxVelocity(18);\n\n// Set fast meteors (like Leonids)\nSporadicMeteorMgr.setMaxVelocity(71);\n\n// Default speed range (11-72 km/s)\nSporadicMeteorMgr.setMaxVelocity(72);"
+    },
+    {
+        "name": "getFlagForcedMeteorsActivity",
+        "category": "Sporadic Meteors - Display",
+        "signature": "bool getFlagForcedMeteorsActivity()",
+        "description": "Returns whether forced meteor activity is enabled. When enabled, meteors will be displayed even when the atmosphere is disabled. Useful for planetarium shows where atmosphere might be turned off.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if meteors show when atmosphere is disabled, false otherwise",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "Introduced in Stellarium 0.15.0"
+        },
+        "example": "if(SporadicMeteorMgr.getFlagForcedMeteorsActivity()) {\n    core.debug(\"Meteors will show even when atmosphere is disabled\");\n} else {\n    core.debug(\"Meteors only show when atmosphere is enabled\");\n}"
+    },
+    {
+        "name": "setFlagForcedMeteorsActivity",
+        "category": "Sporadic Meteors - Display",
+        "signature": "setFlagForcedMeteorsActivity(bool enable)",
+        "description": "Enables or disables forced meteor activity. When enabled, sporadic meteors will be displayed even when the atmosphere is turned off. This is particularly useful for planetarium environments where the atmosphere may be disabled for technical reasons.",
+        "parameters": [
+            {
+                "name": "enable",
+                "type": "bool",
+                "description": "true to enable meteors when atmosphere is disabled, false to require atmosphere",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "Introduced in Stellarium 0.15.0"
+        },
+        "example": "// Force meteors to show even without atmosphere (planetarium mode)\nSporadicMeteorMgr.setFlagForcedMeteorsActivity(true);\n\n// Default behavior: meteors only when atmosphere is on\nSporadicMeteorMgr.setFlagForcedMeteorsActivity(false);\n\n// Disable atmosphere but keep meteors (with forced activity)\nLandscapeMgr.setFlagAtmosphere(false);\nSporadicMeteorMgr.setFlagForcedMeteorsActivity(true);\nSporadicMeteorMgr.setFlagShow(true);\nSporadicMeteorMgr.setZHR(20);"
+    }
+]

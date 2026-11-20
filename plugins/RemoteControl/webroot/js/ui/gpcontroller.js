@@ -80,7 +80,7 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
          * @param {...*} args - Optional arguments for string replacement
          * @returns {string} The translated or original text
          */
-				var _tr = function(text) {
+				var tr = function(text) {
 						// TEMPORARY: Skip translation if disabled
 						if (!TRANSLATION_ENABLED) {
 								if (arguments.length > 1) {
@@ -472,7 +472,7 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
             invertY: false,
             zoomInvertY: false,
             zoomSpeed: 0.05,
-            movementSpeed: 5.0,
+            movementSpeed: 3.0,
             vibrationFeedback: false,
             vibrationIntensity: 0.5
         };
@@ -733,7 +733,7 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
          */
         function handleEducationalAction(action) {
             // View directions with smooth transition using core.moveToAltAzi
-            // Duration set to 0.5 seconds for smooth but responsive movement
+            // Duration set to 3 seconds for smooth but responsive movement
             if (action === "view_north") {
                 // North = azimuth 180° (π radians), altitude 0°
                 rc.postCmd("/api/scripts/direct", { 
@@ -1435,7 +1435,6 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
                     
                     updateDeviceSelector();
                     updateConnectionStatus(true, device);
-                    populateButtonCustomization();
                 }
             });
 
@@ -2180,7 +2179,7 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
                     }
                     
                     showNotification(controllerSettings.vibrationFeedback ? 
-                            rc.tr("Vibration feedback enabled") : _tr("Vibration feedback disabled"));
+                            rc.tr("Vibration feedback enabled") : rc.tr("Vibration feedback disabled"));
                 });
                 
                 // Set initial visibility
@@ -2274,7 +2273,7 @@ define(["jquery", "settings", "api/remotecontrol", "api/viewcontrol", "api/actio
                     controllerSettings.vibrationFeedback = $(this).is(":checked");
                     saveSettings();
                     showNotification(controllerSettings.vibrationFeedback ? 
-                        rc.tr("Vibration feedback enabled") : _tr("Vibration feedback disabled"));
+                        rc.tr("Vibration feedback enabled") : rc.tr("Vibration feedback disabled"));
                 });
             }
             
