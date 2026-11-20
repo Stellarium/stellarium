@@ -53,6 +53,7 @@ public:
 					  const StelLocation& location, float temperature, float relativeHumidity,
 					  float extinctionCoefficient, bool noScatter) override;
 	void draw(StelCore* core) override;
+	bool getLocalLuminance(const Vec2f& screenPos, float& luminance) override;
 	bool isLoading() const override;
 	bool isReadyToRender() const override;
 	LoadingStatus stepDataLoading() override;
@@ -110,6 +111,7 @@ private:
 	Vec3d prevPos=Vec3d(0,0,0), prevSun=Vec3d(0,0,0);
 	int prevWidth_=0, prevHeight_=0, dynResTimer=0, prevRes=0, atmoRes=1;
 	GLuint mainVAO_=0, zenithProbeVAO_=0, vbo_=0;
+	GLuint luminanceReadFBO_=0; //!< Read attachment only; owns no texture storage.
 	std::unique_ptr<ShowMySky::AtmosphereRenderer> renderer_;
 	std::unique_ptr<ShowMySky::Settings> skySettings_;
 	std::function<void(QOpenGLShaderProgram&)> renderSurfaceFunc_;
