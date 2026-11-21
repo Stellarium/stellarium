@@ -2092,7 +2092,7 @@ void StelMainView::doScreenshot(void)
 
 #ifdef HAVE_EXIV2
 	// Write EXIF metadata only to JPG, PNG or TIF:
-	if (!flagScreenShotWriteExif || ! QStringList({"jpg", "jpeg", "png", "tif", "tiff"}).contains(screenShotFormat))
+	if (flagScreenShotWriteExif && QStringList({"jpg", "jpeg", "png", "tif", "tiff"}).contains(screenShotFormat))
 		writeExif(core, shotPath, im.width(), im.height(), centerPixelPerRadForMercator);
 #endif
 }
@@ -2108,8 +2108,7 @@ void StelMainView::writeExif(StelCore *core, QFileInfo shotPath, const int imWid
 		StelMovementMgr *movMgr=GETSTELMODULE(StelMovementMgr);
 		StelLocation loc=core->getCurrentLocation();
 		LandscapeMgr *landscapeMgr=dynamic_cast<LandscapeMgr*>(GETSTELMODULE(LandscapeMgr));
-		//GridLinesMgr *gridlinesMgr=dynamic_cast<GridLinesMgr*>(GETSTELMODULE(GridLinesMgr));
-		StelPropertyMgr *propMgr=dynamic_cast<StelPropertyMgr*>(GETSTELMODULE(StelPropertyMgr));
+		StelPropertyMgr *propMgr=StelApp::getInstance().getStelPropertyManager();
 		StelSkyDrawer *drawer=core->getSkyDrawer();
 
 		std::unique_ptr<Exiv2::Image> image = Exiv2::ImageFactory::open(shotPath.filePath().toStdString());
@@ -2117,7 +2116,7 @@ void StelMainView::writeExif(StelCore *core, QFileInfo shotPath, const int imWid
 		Exiv2::ExifData &exifData = image->exifData();
 		Exiv2::XmpData  &xmpData  = image->xmpData();
 
-		QVariantMap infoMap;
+		QVariantMap infoMap; // Container to store image and scene information
 		StelObjectMgr *objMgr=&StelApp::getInstance().getStelObjectMgr();
 		const auto sel=objMgr->getSelectedObject();
 		if (sel.length()>0)
@@ -2165,6 +2164,19 @@ void StelMainView::writeExif(StelCore *core, QFileInfo shotPath, const int imWid
 		//exifData["Exif.Image.TimeZoneOffset"]    = timeZone.toStdString();// Ill-defined. Better don't use!
 		xmpData["Xmp.exif.TimeZoneName"]           = loc.ianaTimeZone.toStdString(); // Use a customized XMP tag. Name is free!
 
+		// GPS Timestamp is always UTC.
+		int year, month, day, hour, minute, second;
+		StelUtils::getDateTimeFromJulianDay(core->getJD(), &year, &month, &day, &hour, &minute, &second);
+		// Caveat: Not sure if this works with negative years. See StelUtils::julianDayToISO8601String()
+		exifData["Exif.GPSInfo.GPSDateStamp"] = QString("%1:%2:%3")                    // String,  "YYYY:MM:DD"
+							.arg(year,4,10,QLatin1Char('0'))
+							.arg(month,2,10,QLatin1Char('0'))
+							.arg(day,2,10,QLatin1Char('0')).toStdString();
+		exifData["Exif.GPSInfo.GPSTimeStamp"] = QString("%1/1 %2/1 %3/1")            // 3 rational numbers, hh/1, mm/1, ss/1.
+							.arg(hour,2,10,QLatin1Char('0'))
+							.arg(minute,2,10,QLatin1Char('0'))
+							.arg(second,2,10,QLatin1Char('0')).toStdString();
+
 		// LOCATION
 		exifData["Exif.GPSInfo.GPSVersionID"]        = "2 2 0 0"; // mandatory.
 		if (loc.planetName=="Earth")
@@ -2206,9 +2218,6 @@ void StelMainView::writeExif(StelCore *core, QFileInfo shotPath, const int imWid
 		//exifData["Exif.GPSInfo.GPSDestLatitude"]     = lat); // 3 rational numbers dd/1,mm/1,ss/1 -- declination of target
 		//exifData["Exif.GPSInfo.GPSDestLongitudeRef"] = "E"); // "E"/"W" -- RA of target
 		//exifData["Exif.GPSInfo.GPSDestLongitude"]    = lng); // 3 rational numbers dd/1,mm/1,ss/1 -- RA of target
-		//
-		//exifData["Exif.GPSInfo.GPSDateStamp"]        = "2026:10:11"); // String,  "YYYY:MM:DD"
-		//exifData["Exif.GPSInfo.GPSTimeStamp"]        = time); // 3 rational numbers, hh/1, mm/1, ss/1.
 
 		// We may want to use Xmp.avm (Astronomy Visualization Metadata) to extend descriptions with astronomical coordinates.
 		// A full table is at https://noirlab.edu/public/media/archives/techdocs/pdf/techdoc115.pdf
@@ -2218,13 +2227,13 @@ void StelMainView::writeExif(StelCore *core, QFileInfo shotPath, const int imWid
 		xmpData["Xmp.avm.Type"]                    = "Simulation";
 		xmpData["Xmp.avm.Spatial.CoordinateFrame"] = "ICRS";
 		xmpData["Xmp.avm.Spatial.Equinox"]         = "J2000";
+		// Parallactic rotation where needed!
 		xmpData["Xmp.avm.Spatial.Rotation"]        = "0.0";
 		xmpData["Xmp.avm.Spatial.Quality"]         = "Full";
 		xmpData["Xmp.avm.MetadataDate"]            = StelUtils::julianDayToISO8601String(now.date().toJulianDay() + StelUtils::qTimeToJDFraction(now.time())).toStdString();
-
-		//// These may be correct only for Perspective!
-		//setSeq(xmpData, "Xmp.avm.Spatial.ReferenceValue",     {std::to_string(ra2000), std::to_string(dec2000)});
-		//setSeq(xmpData, "Xmp.avm.Spatial.ReferenceDimension", {std::to_string(im.width()),  std::to_string(im.height())});
+		setSeq(xmpData, "Xmp.avm.Spatial.ReferencePixel",     {std::to_string(imWidth / 2.0), std::to_string(imHeight / 2.0)});
+		setSeq(xmpData, "Xmp.avm.Spatial.ReferenceValue",     {std::to_string(ra2000), std::to_string(dec2000)});
+		setSeq(xmpData, "Xmp.avm.Spatial.ReferenceDimension", {std::to_string(imWidth),  std::to_string(imHeight)});
 
 		qDebug() << "EXIF: Projections...";
 		// BIG TOPIC: Projections. A few non-perspective projections are defined as panorama formats by Google. But for some, we can only specify projection name and our VFoV.
@@ -2243,7 +2252,6 @@ void StelMainView::writeExif(StelCore *core, QFileInfo shotPath, const int imWid
 
 				// Tentative first tags, suggested by Claude.
 				xmpData["Xmp.avm.Spatial.CoordsystemProjection"] = "TAN";
-				setSeq(xmpData, "Xmp.avm.Spatial.ReferencePixel",     {std::to_string(imWidth / 2.0), std::to_string(imHeight / 2.0)});
 				const double scale=fov/imHeight; // simple approximation formula for perspective views.
 				setSeq(xmpData, "Xmp.avm.Spatial.Scale",              {std::to_string(-scale), std::to_string(scale)});
 
@@ -2257,7 +2265,6 @@ void StelMainView::writeExif(StelCore *core, QFileInfo shotPath, const int imWid
 
 				// AVM
 				xmpData["Xmp.avm.Spatial.CoordsystemProjection"] = "CAR"; // Plate Carrée
-				setSeq(xmpData, "Xmp.avm.Spatial.ReferencePixel",  {std::to_string(imWidth / 2.0), std::to_string(imHeight / 2.0)});
 				setSeq(xmpData, "Xmp.avm.Spatial.Scale",           {std::to_string(-360./imWidth), std::to_string(180./imHeight)});
 
 				// GPano tags. These describe a full-size equirectangular.
@@ -2268,7 +2275,10 @@ void StelMainView::writeExif(StelCore *core, QFileInfo shotPath, const int imWid
 				xmpData["Xmp.GPano.FullPanoHeightPixels"] = std::to_string(imHeight);
 				// Unfortunately, if not 2:1 sized, GPano viewers will still not show it. So this requires custom screenshot sizes.
 				if (imWidth != 2*imHeight)
+				{
 					qInfo() << "EXIF Info: Image dimension skewed. This will not load as panorama in GPano aware viewers. Use custom size if needed.";
+					exifData["Exif.Photo.LensModel"] = "360x180-degree Rectangular Lens";
+				}
 				// TBD: We can offset viewport centre also here, but it may not be meaningful in XMP terms.
 				qDebug() << "EXIF: Done writing ProjectionCylinderFill data";
 				break;
@@ -2326,7 +2336,6 @@ void StelMainView::writeExif(StelCore *core, QFileInfo shotPath, const int imWid
 
 				// AVM
 				xmpData["Xmp.avm.Spatial.CoordsystemProjection"] = "CAR"; // Plate Carrée
-				setSeq(xmpData, "Xmp.avm.Spatial.ReferencePixel", {std::to_string(imWidth / 2.0), std::to_string(imHeight / 2.0)});
 				setSeq(xmpData, "Xmp.avm.Spatial.Scale",          {std::to_string(-360./(2.*hFull)), std::to_string(180./hFull)});
 
 				qDebug() << "EXIF: Done writing ProjectionCylinder data";
@@ -2390,47 +2399,6 @@ void StelMainView::writeExif(StelCore *core, QFileInfo shotPath, const int imWid
 				qDebug() << "EXIF: Done writing ProjectionMercator data";
 				break;
 			}
-			//case StelCore::ProjectionFisheye:
-			//{
-			//	// Set the human-readable string descriptive name
-			//	exifData["Exif.Photo.LensModel"] = QString("%1-degree Equidistant Fisheye Lens").arg(QString::number(fov, 'f', 1)).toStdString();
-			//	// 1. Register the Adobe Camera namespace
-			//	Exiv2::XmpProperties::registerNs("http://pix4d.com", "Camera");
-			//	xmpData["Xmp.Camera.ModelType"] = "fisheye";
-
-			//	// Optional: Define lens distortion coefficients if calculating polynomials
-			//	// Formatted as space-separated floats mapping radial distortion (e.g., k1, k2, k3)
-			//	//xmpData["Xmp.xmpCamera.PerspectiveModelRadialDistort"] = "0.124 -0.045 0.002";
-
-			//	// Focal Length Calculation: For an ideal azimuthal equidistant fisheye, the distance from the image center to a pixel is
-			//	// directly proportional to its angle of incidence (\(r = f \cdot \theta\)).
-			//	// If the height of the image bounds the vertical field of view (\(vFoV\) in radians):
-			//	const double f_pixels=im.height()/(fov*M_PI_180);
-			//	const double radius_pixels = f_pixels * ((fov * M_PI_180) / 2.0);
-
-			//	// Add specific field of view parameters for geometric parsers.
-			//	//xmpData["Xmp.Camera.FocalLengthX"] = std::to_string(f_pixels);
-			//	//xmpData["Xmp.Camera.FocalLengthY"] = std::to_string(f_pixels);
-			//	//xmpData["Xmp.Camera.ImageWidth"]   = std::to_string(im.width());
-			//	//xmpData["Xmp.Camera.ImageHeight"]  = std::to_string(im.height());
-			//	// Pix4D uses a 2D affine matrix string for focal specs rather than FocalLengthX/Y
-			//	// Format: "C,D,E,F" where C and F represent horizontal/vertical focal length in pixels
-			//	xmpData["Xmp.Camera.FisheyeAffineMatrix"] = std::to_string(f_pixels) + ",0,0," + std::to_string(f_pixels);
-
-			//	// 2. Off-Axis Center Shifting
-			//	double center_x = (im.width() / 2.0)  - core->getViewportHorizontalOffset()*im.width()/100.;
-			//	double center_y = (im.height() / 2.0) + core->getViewportVerticalOffset()*im.height()/100.; // VERIFY DIRECTION
-			//	//xmpData["Xmp.Camera.PrincipalPointX"] = std::to_string(center_x);
-			//	//xmpData["Xmp.Camera.PrincipalPointY"] = std::to_string(center_y);
-			//	// Pix4D expects a comma-separated single string string: "cx,cy"
-			//	xmpData["Xmp.Camera.PrincipalPoint"] = std::to_string(center_x) + "," + std::to_string(center_y);
-
-			//	//// 3. Define the Mask Circle Properties
-			//	//xmpData["Xmp.Camera.FisheyeCircleRadius"] = std::to_string(radius_pixels);
-			//	//xmpData["Xmp.Camera.FisheyeCircleCenter"] = std::to_string(center_x) + " " + std::to_string(center_y);
-			//	qDebug() << "EXIF: Done writing ProjectionFisheye data";
-			//	break;
-			//}
 			default:
 			{
 				const QMap<StelCore::ProjectionType, QString>pMap={
@@ -2481,20 +2449,26 @@ void StelMainView::writeExif(StelCore *core, QFileInfo shotPath, const int imWid
 		infoMap["nutation"]         = core->getUseNutation() ? "1" : "0";
 		infoMap["parallax"]         = core->getUseParallax() ?  QString::number(core->getParallaxFactor(), 'f', 1) : "0";
 		infoMap["aberration"]       = core->getUseAberration() ?  QString::number(core->getAberrationFactor(), 'f', 1) : "0";
+		infoMap["DeltaT"]           = core->getDeltaT();
+		infoMap["DeltaT_model"]     = core->getCurrentDeltaTAlgorithmKey();
 
 		// Gridlines. For now, only the full grids
-		infoMap["grid_azimuthal"] = propMgr->getStelPropertyValue("GridlinesMgr.azimuthalGridDisplayed").toBool();
-		infoMap["grid_eqJNow"]    = propMgr->getStelPropertyValue("GridlinesMgr.equatorGridDisplayed").toBool();
-		infoMap["grid_eqJ2000"]   = propMgr->getStelPropertyValue("GridlinesMgr.equatorJ2000GridDisplayed").toBool();
-		infoMap["grid_eqFixed"]   = propMgr->getStelPropertyValue("GridlinesMgr.fixedEquatorGridDisplayed").toBool();
-		infoMap["grid_eclJ2000"]  = propMgr->getStelPropertyValue("GridlinesMgr.eclipticJ2000GridDisplayed").toBool();
-		infoMap["grid_eclJNow"]   = propMgr->getStelPropertyValue("GridlinesMgr.eclipticGridDisplayed").toBool();
-		infoMap["grid_gal"]       = propMgr->getStelPropertyValue("GridlinesMgr.galacticGridDisplayed").toBool();
-		infoMap["grid_supergal"]  = propMgr->getStelPropertyValue("GridlinesMgr.supergalacticGridDisplayed").toBool();
+		infoMap["grid_azimuthal"] = propMgr->getStelPropertyValue("GridLinesMgr.azimuthalGridDisplayed").toBool();
+		infoMap["grid_eqJNow"]    = propMgr->getStelPropertyValue("GridLinesMgr.equatorGridDisplayed").toBool();
+		infoMap["grid_eqJ2000"]   = propMgr->getStelPropertyValue("GridLinesMgr.equatorJ2000GridDisplayed").toBool();
+		infoMap["grid_eqFixed"]   = propMgr->getStelPropertyValue("GridLinesMgr.fixedEquatorGridDisplayed").toBool();
+		infoMap["grid_eclJ2000"]  = propMgr->getStelPropertyValue("GridLinesMgr.eclipticJ2000GridDisplayed").toBool();
+		infoMap["grid_eclJNow"]   = propMgr->getStelPropertyValue("GridLinesMgr.eclipticGridDisplayed").toBool();
+		infoMap["grid_gal"]       = propMgr->getStelPropertyValue("GridLinesMgr.galacticGridDisplayed").toBool();
+		infoMap["grid_supergal"]  = propMgr->getStelPropertyValue("GridLinesMgr.supergalacticGridDisplayed").toBool();
 		// TBD: More Skyculture details?
 		infoMap["SC_id"]          = propMgr->getStelPropertyValue("StelSkyCultureMgr.currentSkyCultureID").toString();
 
-		// TBD: Ocular/Telescope details?
+		// TBD: Ocular/Telescope details? This should first be prepared in the Oculars plugin.
+		//#ifdef USE_STATIC_PLUGIN_OCULARS
+		//if (propMgr->getStelPropertyValue("Oculars.enableOcular").toBool()){...}
+		//exifData["Exif.Image.FNumber"]              = F_number;            // not meaningful, or maybe with Oculars.Telescope combo?
+		//#endif
 		// TBD: Other settings?
 
 		// Convert the QVariantMap to a JSON String
@@ -2506,10 +2480,6 @@ void StelMainView::writeExif(StelCore *core, QFileInfo shotPath, const int imWid
 										      qc_("FOV", "abbreviation"),
 										      QString::number(fov, 'g', 3)).toStdString();
 
-		//exifData["Exif.Image.ExposureTime"]         = exposureTimeSeconds; // not meaningful
-		//exifData["Exif.Image.FNumber"]              = F_number;            // not meaningful
-
-		qDebug() << "EXIF: Image description...done";
 		qDebug() << "WRITING EXIF ENTRIES DONE";
 
 		// *************************************************************************
