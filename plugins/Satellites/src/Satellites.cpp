@@ -2990,17 +2990,19 @@ void Satellites::updateSatellites(TleDataHash& newTleSets)
 		else
 		{
 			if (autoRemoveEnabled && !weHadAnErrorDuringLastUpdate)
+			{
 				toBeRemoved.append(sat->id);
+				missingCount++;
+			}
 			else
 				qWarning() << "[Satellites]" << sat->id << sat->name
 				           << "is missing in the update lists.";
-			missingCount++;
 		}
 		// All satellites, who has invalid orbit should be removed.
 		if (!sat->orbitValid)
 		{
 			toBeRemoved.append(sat->id);
-			qWarning() << "[Satellites]" << sat->id << sat->name
+			qInfo() << "[Satellites]" << sat->id << sat->name
 				   << "has invalid orbit and will be removed.";
 			missingCount++;
 		}
