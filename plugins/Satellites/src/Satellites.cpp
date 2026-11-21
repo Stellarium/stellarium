@@ -2173,7 +2173,7 @@ void Satellites::setTleSources(const QStringList &tleSources)
 	// Necessary 2026: Replace any Celestrak URL with TLE format to CSV format.
 	static const QRegularExpression celestrakURLre("https://celestrak.org/NORAD/elements/gp.php\?GROUP=(.*)&FORMAT=TLE");
 	QStringList csvCleanedSources;
-	for (auto url: tleSources)
+	for (const QString &url: tleSources)
 	{
 		QRegularExpressionMatch match=celestrakURLre.match(url);
 
@@ -2906,7 +2906,8 @@ void Satellites::updateFromFiles(const QStringList &paths, bool deleteFiles)
 			if (deleteFiles)
 				tleFile.remove();
 		}
-	}	
+	}
+	weHadAnErrorDuringLastUpdate=false; // reset, assuming a case when an online update has failed, and user calls update from local files instead.
 	updateSatellites(newTleSets);
 }
 
