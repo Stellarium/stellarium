@@ -2171,7 +2171,7 @@ int Satellites::getSecondsToUpdate(void)
 void Satellites::setTleSources(const QStringList &tleSources)
 {
 	// Necessary 2026: Replace any Celestrak URL with TLE format to CSV format.
-	static const QRegularExpression celestrakURLre("https://celestrak.org/NORAD/elements/gp.php\?GROUP=(.*)&FORMAT=TLE");
+	static const QRegularExpression celestrakURLre("https://celestrak.org/NORAD/elements/gp.php\\?GROUP=(.*)&FORMAT=TLE");
 	QStringList csvCleanedSources;
 	for (const QString &url: tleSources)
 	{
