@@ -192,7 +192,7 @@ void radToHms(double angle, unsigned int& h, unsigned int& m, double& s)
 /*************************************************************************
  Convert an angle in radian to dms
 *************************************************************************/
-void radToDms(double angle, bool& sign, unsigned int& d, unsigned int& m, double& s)
+void radToDms(double angle, bool& sign, unsigned int& d, unsigned int& m, double& s, int precision)
 {
 	angle = std::fmod(angle,2.0*M_PI);
 	sign=true;
@@ -202,6 +202,18 @@ void radToDms(double angle, bool& sign, unsigned int& d, unsigned int& m, double
 		sign = false;
 	}
 	angle *= M_180_PI;
+
+	if (precision >= 0)
+	{
+		// Round once at the requested precision and then split, so a carry always reaches
+		// the minutes and degrees.
+		const qint64 scale = static_cast<qint64>(std::pow(10., precision));
+		const qint64 units = std::llround(angle * 3600. * static_cast<double>(scale));
+		d = static_cast<unsigned int>(units / (3600 * scale));
+		m = static_cast<unsigned int>((units / (60 * scale)) % 60);
+		s = static_cast<double>(units % (60 * scale)) / static_cast<double>(scale);
+		return;
+	}
 
 	d = static_cast<unsigned int>(angle);
 	m = static_cast<unsigned int>((angle - d)*60);
@@ -408,15 +420,11 @@ QString radToDmsNarration(const double angle, const bool decimal, const bool use
 QString radToDmsPStr(const double angle, const int precision, const bool useD)
 {
 	const QChar degsign = (useD ? 'd' : QChar(0x00B0));
-	// Round to the shown precision before splitting into degrees, minutes and seconds,
-	// so that a value like 59.7 seconds at precision 0 carries over instead of showing 60.
-	const double reduced = std::fmod(angle, 2.0*M_PI);
-	const bool sign = !(reduced < 0.);
-	const qint64 scale = static_cast<qint64>(std::pow(10., qMax(precision, 0)));
-	const qint64 units = std::llround(std::fabs(reduced) * M_180_PI * 3600. * static_cast<double>(scale));
-	const qint64 d = units / (3600 * scale);
-	const qint64 m = (units / (60 * scale)) % 60;
-	const double s = static_cast<double>(units % (60 * scale)) / static_cast<double>(scale);
+	bool sign;
+	unsigned int d,m;
+	double s;
+	// Round at the shown precision, so that e.g. 59.7 seconds at precision 0 carries over instead of showing 60
+	StelUtils::radToDms(angle, sign, d, m, s, qMax(precision, 0));
 	QString str;
 	QTextStream os(&str);
 	os << (sign?'+':'-') << d << degsign;
