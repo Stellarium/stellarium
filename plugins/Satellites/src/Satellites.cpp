@@ -3028,7 +3028,7 @@ void Satellites::updateSatellites(TleDataHash& newTleSets)
 		removeWithoutModelReset(toBeRemoved);
 	}
 	
-	if (updatedCount > 0 ||
+	if (updatedCount > 0 || addedCount > 0 ||
 	        (autoRemoveEnabled && !weHadAnErrorDuringLastUpdate && missingCount > 0))
 	{
 		saveDataMap(createDataMap());
