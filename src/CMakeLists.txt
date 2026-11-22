@@ -659,13 +659,7 @@ endif()
 # EXIV2 (automatically inherits EXPAT::EXPAT)
 # ==============================================================================
 
-# Protect Windows, and discover native packages on BSD/macOS environments
-#if(NOT WIN32)
-     #if(CMAKE_SYSTEM_NAME STREQUAL "Haiku" OR CMAKE_SYSTEM_NAME STREQUAL "OpenBSD" OR CMAKE_SYSTEM_NAME STREQUAL "FreeBSD" OR BSD)
-         # On Haiku and *BSD, try finding the system-installed package first without tight version limits. An older V0.27 should still be OK.
-         find_package(exiv2 NAMES exiv2 Exiv2 QUIET)
-     #endif()
-#endif(NOT WIN32)
+find_package(exiv2 NAMES exiv2 Exiv2 QUIET)
 
 if(NOT exiv2_FOUND AND NOT TARGET Exiv2::exiv2lib AND NOT TARGET exiv2lib)
 
@@ -785,8 +779,6 @@ ENDIF(ENABLE_PCH)
 IF(ENABLE_SHOWMYSKY)
      TARGET_INCLUDE_DIRECTORIES(stelMain PRIVATE "${ShowMySky_INCLUDE_DIRECTORIES}")
 ENDIF()
-
-
 TARGET_INCLUDE_DIRECTORIES(stelMain PRIVATE "${md4c_SOURCE_DIR}/src")
 
 IF(HAIKU)
