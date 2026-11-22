@@ -956,28 +956,28 @@ void Satellites::restoreDefaultTleSources()
 	 */
 	// Format: group name, auto-add flag
 	const QMap<QString, bool> celestrak = {
-	        // Special-Interest Satellites
-	        { "last-30-days", true }, // new
+		// Special-Interest Satellites
+		{ "last-30-days", true }, // new
 		{ "stations", true },  // ISS, Tiangong, ...
 		{ "visual", true }, // 100 brightest
 		{ "active", true }, // all operational, but no dead rocket boosters or defunct satellites
 		{ "analyst", false }, // problematic
-	        // Weather & Earth Resources Satellites
-	        { "weather", false }, { "resource", false }, { "sarsat", false }, { "dmc", false }, { "tdrss", false },
-	        { "argos", false }, { "planet", false }, { "spire", false },
-	        // Communications Satellites
-	        { "geo", false }, { "intelsat", false }, { "eutelsat", false },
+		// Weather & Earth Resources Satellites
+		{ "weather", false }, { "resource", false }, { "sarsat", false }, { "dmc", false }, { "tdrss", false },
+		{ "argos", false }, { "planet", false }, { "spire", false },
+		// Communications Satellites
+		{ "geo", false }, { "intelsat", false }, { "eutelsat", false },
 		// { "starlink", true  },  // Taken out because already included in 'active'.
 		{ "qianfan", false },
-	        { "kuiper", false }, { "orbcomm", false }, { "amateur", true  }, { "x-comm", false }, { "ses", false }, 
-	        { "telesat", false }, { "oneweb", true  }, { "hulianwang", false }, { "iridium-NEXT", false }, { "globalstar", false }, 
-	        { "satnogs", false }, { "other-comm", false },
-	        // Navigation Satellites
-	        { "gnss", true  }, { "gps-ops", true  }, { "galileo", true  }, { "glo-ops", true  }, { "beidou", true  }, { "sbas", false },
-	        // Scientific Satellites
-	        { "science", true  }, { "geodetic", false },{ "engineering", false }, { "education", false },
-	        // Miscellaneous Satellites
-	        { "military", false }, { "radar", false }, { "cubesat", false }
+		{ "kuiper", false }, { "orbcomm", false }, { "amateur", true  }, { "x-comm", false }, { "ses", false },
+		{ "telesat", false }, { "oneweb", true  }, { "hulianwang", false }, { "iridium-NEXT", false }, { "globalstar", false },
+		{ "satnogs", false }, { "other-comm", false },
+		// Navigation Satellites
+		{ "gnss", true  }, { "gps-ops", true  }, { "galileo", true  }, { "glo-ops", true  }, { "beidou", true  }, { "sbas", false },
+		// Scientific Satellites
+		{ "science", true  }, { "geodetic", false },{ "engineering", false }, { "education", false },
+		// Miscellaneous Satellites
+		{ "military", false }, { "radar", false }, { "cubesat", false }
 	};
 	QStringList urls;
 	// Details: https://celestrak.org/NORAD/documentation/gp-data-formats.php
@@ -991,10 +991,9 @@ void Satellites::restoreDefaultTleSources()
 		else
 			urls << url;
 	}
-
 	// Other sources and supplemental data from Celestrack
 	urls << "https://www.amsat.org/amsat/ftp/keps/current/nasabare.txt"
-	      << "https://mmccants.org/tles/classfd.zip";
+	     << "https://mmccants.org/tles/classfd.zip";
 
 	saveTleSources(urls);
 }
