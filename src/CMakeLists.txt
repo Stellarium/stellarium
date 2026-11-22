@@ -579,80 +579,6 @@ IF(CMAKE_HOST_SOLARIS)
      SET(STELMAIN_DEPS ${STELMAIN_DEPS} kstat)
 ENDIF()
 
-# ------------------------------------------------------------------
-# ZLIB Target Bridge for Exiv2 (Global Directory Property Fix)
-# ------------------------------------------------------------------
-set(ZLIB_INC_DIR "${CMAKE_SOURCE_DIR}/src/external/zlib")
-
-if(TARGET zlib_stel)
-    # 1. Create a true namespaced IMPORTED target so export validation succeeds natively
-    if(NOT TARGET ZLIB::ZLIB)
-        add_library(ZLIB::ZLIB INTERFACE IMPORTED GLOBAL)
-        set_target_properties(ZLIB::ZLIB PROPERTIES
-            INTERFACE_LINK_LIBRARIES "zlib_stel"
-            INTERFACE_INCLUDE_DIRECTORIES "${ZLIB_INC_DIR}"
-        )
-    endif()
-
-    # THE CRITICAL FIX FOR INTERNAL OBJECT TARGETS (exiv2lib_int):
-    # Instead of relying on Exiv2 to pass the include paths to its sub-targets,
-    # we append Stellarium's bundled zlib path to the directory-level properties.
-    # Because CPM adds packages down-tree, all downstream subdirectories inherit this.
-    include_directories("${ZLIB_INC_DIR}")
-
-    # Create our custom mock FindZLIB module as a safe fallback match
-    set(MOCK_ZLIB_DIR "${CMAKE_BINARY_DIR}/cmake_zlib_bridge")
-    file(MAKE_DIRECTORY "${MOCK_ZLIB_DIR}")
-
-    file(WRITE "${MOCK_ZLIB_DIR}/FindZLIB.cmake" "
-        set(ZLIB_FOUND TRUE)
-        set(ZLIB_INCLUDE_DIRS \"${ZLIB_INC_DIR}\")
-        set(ZLIB_LIBRARIES ZLIB::ZLIB)
-    ")
-
-    # Force search lookup tracking to prefer our custom bridge folder
-    list(INSERT CMAKE_MODULE_PATH 0 "${MOCK_ZLIB_DIR}")
-
-    # Fully drop sticky old cache variables that can break generation mapping
-    unset(ZLIB_LIBRARY CACHE)
-    unset(ZLIB_LIBRARIES CACHE)
-    unset(ZLIB_INCLUDE_DIR CACHE)
-    unset(ZLIB_INCLUDE_DIRS CACHE)
-    unset(ZLIB_FOUND CACHE)
-endif()
-
-# ==============================================================================
-# EXPAT (for EXIV2; handled natively through CPM)
-# ==============================================================================
-# Disable internal expat tests and binaries to optimize compilation speeds
-set(EXPAT_BUILD_TOOLS OFF CACHE BOOL "Disable expat binaries" FORCE)
-set(EXPAT_BUILD_EXAMPLES OFF CACHE BOOL "Disable expat examples" FORCE)
-set(EXPAT_BUILD_TESTS OFF CACHE BOOL "Disable expat tests" FORCE)
-set(EXPAT_SHARED_LIBS OFF CACHE BOOL "Build expat statically" FORCE)
-set(EXPAT_MSVC_STATIC_CRT OFF CACHE BOOL "Use shared CRT (/MD) matching Stellarium" FORCE)
-
-CPMFindPackage(
-    NAME EXPAT
-    GITHUB_REPOSITORY libexpat/libexpat
-    GIT_TAG R_2_6_2
-    SOURCE_SUBDIR expat     # CRITICAL: Routes CMake directly to the inner source folder!
-)
-
-# Bridge modern target for compatibility with Exiv2 internally
-if(TARGET expat AND NOT TARGET EXPAT::EXPAT)
-    add_library(EXPAT::EXPAT INTERFACE IMPORTED GLOBAL)
-    target_link_libraries(EXPAT::EXPAT INTERFACE expat)
-endif()
-
-# We set the status flag so Exiv2 skips searching, but we completely
-# AVOID setting EXPAT_LIBRARIES or EXPAT_LIBRARY cache strings!
-# This forces CMake to use target propagation rather than raw text replacements.
-set(EXPAT_FOUND TRUE CACHE BOOL "Force true for Exiv2" FORCE)
-if(TARGET expat)
-    get_target_property(EXPAT_INC expat INTERFACE_INCLUDE_DIRECTORIES)
-    set(EXPAT_INCLUDE_DIRS "${EXPAT_INC}" CACHE PATH "Expat include directories" FORCE)
-    set(EXPAT_INCLUDE_DIR "${EXPAT_INC}" CACHE PATH "Expat include directory" FORCE)
-endif()
 
 
 # ==============================================================================
@@ -662,6 +588,82 @@ endif()
 find_package(exiv2 NAMES exiv2 Exiv2 QUIET)
 
 if(NOT exiv2_FOUND AND NOT TARGET Exiv2::exiv2lib AND NOT TARGET exiv2lib)
+
+     # This requires even more add-ons: zlib and expat
+     # ------------------------------------------------------------------
+     # ZLIB Target Bridge for Exiv2 (Global Directory Property Fix)
+     # ------------------------------------------------------------------
+     set(ZLIB_INC_DIR "${CMAKE_SOURCE_DIR}/src/external/zlib")
+
+     if(TARGET zlib_stel)
+         # 1. Create a true namespaced IMPORTED target so export validation succeeds natively
+         if(NOT TARGET ZLIB::ZLIB)
+             add_library(ZLIB::ZLIB INTERFACE IMPORTED GLOBAL)
+             set_target_properties(ZLIB::ZLIB PROPERTIES
+                 INTERFACE_LINK_LIBRARIES "zlib_stel"
+                 INTERFACE_INCLUDE_DIRECTORIES "${ZLIB_INC_DIR}"
+             )
+         endif()
+
+         # CRITICAL FIX FOR INTERNAL OBJECT TARGETS (exiv2lib_int):
+         # Instead of relying on Exiv2 to pass the include paths to its sub-targets,
+         # we append Stellarium's bundled zlib path to the directory-level properties.
+         # Because CPM adds packages down-tree, all downstream subdirectories inherit this.
+         include_directories("${ZLIB_INC_DIR}")
+
+         # Create our custom mock FindZLIB module as a safe fallback match
+         set(MOCK_ZLIB_DIR "${CMAKE_BINARY_DIR}/cmake_zlib_bridge")
+         file(MAKE_DIRECTORY "${MOCK_ZLIB_DIR}")
+
+         file(WRITE "${MOCK_ZLIB_DIR}/FindZLIB.cmake" "
+             set(ZLIB_FOUND TRUE)
+             set(ZLIB_INCLUDE_DIRS \"${ZLIB_INC_DIR}\")
+             set(ZLIB_LIBRARIES ZLIB::ZLIB)
+         ")
+
+         # Force search lookup tracking to prefer our custom bridge folder
+         list(INSERT CMAKE_MODULE_PATH 0 "${MOCK_ZLIB_DIR}")
+
+         # Fully drop sticky old cache variables that can break generation mapping
+         unset(ZLIB_LIBRARY CACHE)
+         unset(ZLIB_LIBRARIES CACHE)
+         unset(ZLIB_INCLUDE_DIR CACHE)
+         unset(ZLIB_INCLUDE_DIRS CACHE)
+         unset(ZLIB_FOUND CACHE)
+     endif()
+
+     # ==============================================================================
+     # EXPAT (for EXIV2; handled natively through CPM)
+     # ==============================================================================
+     # Disable internal expat tests and binaries to optimize compilation speeds
+     set(EXPAT_BUILD_TOOLS OFF CACHE BOOL "Disable expat binaries" FORCE)
+     set(EXPAT_BUILD_EXAMPLES OFF CACHE BOOL "Disable expat examples" FORCE)
+     set(EXPAT_BUILD_TESTS OFF CACHE BOOL "Disable expat tests" FORCE)
+     set(EXPAT_SHARED_LIBS OFF CACHE BOOL "Build expat statically" FORCE)
+     set(EXPAT_MSVC_STATIC_CRT OFF CACHE BOOL "Use shared CRT (/MD) matching Stellarium" FORCE)
+
+     CPMFindPackage(
+         NAME EXPAT
+         GITHUB_REPOSITORY libexpat/libexpat
+         GIT_TAG R_2_6_2
+         SOURCE_SUBDIR expat     # CRITICAL: Routes CMake directly to the inner source folder!
+     )
+
+     # Bridge modern target for compatibility with Exiv2 internally
+     if(TARGET expat AND NOT TARGET EXPAT::EXPAT)
+         add_library(EXPAT::EXPAT INTERFACE IMPORTED GLOBAL)
+         target_link_libraries(EXPAT::EXPAT INTERFACE expat)
+     endif()
+
+     # We set the status flag so Exiv2 skips searching, but we completely
+     # AVOID setting EXPAT_LIBRARIES or EXPAT_LIBRARY cache strings!
+     # This forces CMake to use target propagation rather than raw text replacements.
+     set(EXPAT_FOUND TRUE CACHE BOOL "Force true for Exiv2" FORCE)
+     if(TARGET expat)
+         get_target_property(EXPAT_INC expat INTERFACE_INCLUDE_DIRECTORIES)
+         set(EXPAT_INCLUDE_DIRS "${EXPAT_INC}" CACHE PATH "Expat include directories" FORCE)
+         set(EXPAT_INCLUDE_DIR "${EXPAT_INC}" CACHE PATH "Expat include directory" FORCE)
+     endif()
 
      # Inject -liconv directly into the global cache string variables *only* on Apple
      # systems right before CPM runs. This guarantees that when libexiv2.dylib builds
