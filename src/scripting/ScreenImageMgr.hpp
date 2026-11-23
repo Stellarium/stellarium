@@ -69,9 +69,8 @@ public:
 	//! Get the display status of the image
 	virtual bool getFlagShow(void) const;
 
-	//! Set the image alpha for when it is in full "on" (after fade in).
-	//! @param a the new alpha (transparency) for the image.  1.0 = totally transparent, 0.0 = fully opaque.
-	//! @param duration the time for the change in alpha to take effect.
+	//! Set the image opacity used after fade-in. If the image is visible, apply it immediately.
+	//! @param a Opacity from 0.0 (fully transparent) to 1.0 (fully opaque).
 	virtual void setAlpha(qreal a);
 
 	//! Set the x, y position of the image.
