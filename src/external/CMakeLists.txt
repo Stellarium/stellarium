@@ -125,12 +125,6 @@ IF(USE_PLUGIN_TELESCOPECONTROL AND ENABLE_INDI)
 	file(WRITE ${indiclient_SOURCE_DIR}/libs/indicore/indicom.c.new "${INDICOM_C}")
 	configure_file(${indiclient_SOURCE_DIR}/libs/indicore/indicom.c.new ${indiclient_SOURCE_DIR}/libs/indicore/indicom.c COPYONLY)
 
-        # Fix missing include
-	file(READ ${indiclient_SOURCE_DIR}/libs/indicore/indidevapi.h INDIDEVAPI_H)
-	string(REGEX REPLACE "#include .lilxml.h." "#include \"lilxml.h\"\n#include <stdarg.h>" INDIDEVAPI_H "${INDIDEVAPI_H}")
-	file(WRITE ${indiclient_SOURCE_DIR}/libs/indicore/indidevapi.h.new "${INDIDEVAPI_H}")
-	configure_file(${indiclient_SOURCE_DIR}/libs/indicore/indidevapi.h.new ${indiclient_SOURCE_DIR}/libs/indicore/indidevapi.h COPYONLY)
-	
 	# Fix missing include
 	file(READ ${indiclient_SOURCE_DIR}/libs/sockets/select.h INDISOCKETSELECT_H)
 	string(REGEX REPLACE "#include .sys/socket.h." "#include <cstring>\n#include <sys/socket.h>\n#include <sys/select.h>" INDISOCKETSELECT_H "${INDISOCKETSELECT_H}")
