@@ -389,7 +389,7 @@ Satellites::Satellites()
 	, autoAddEnabled(false)
 	, autoRemoveEnabled(false)
 	, autoDisplayEnabled(true)
-	, updateFrequencyHours(0)
+	, updateFrequencyHours(2)
 	, showDownloadErrorWarningBox(true)
 	, weHadAnErrorDuringLastUpdate(false)
 	, flagUmbraVisible(false)
@@ -1120,6 +1120,13 @@ void Satellites::loadSettings()
 				urlWasUpdated = true;
 			}
 
+			// replace obsolete TLE entry from older installations
+			if (url.contains("celestrak.org", Qt::CaseInsensitive) && url.contains("&FORMAT=TLE", Qt::CaseInsensitive))
+			{
+				url.replace("&FORMAT=TLE", "&FORMAT=CSV", Qt::CaseInsensitive);
+				urlWasUpdated = true;
+			}
+
 			urls << url;
 		}
 	}
@@ -1160,6 +1167,13 @@ void Satellites::loadSettings()
 					urlWasUpdated = true;
 				}
 
+				// replace obsolete TLE entry from older installations
+				if (url.contains("celestrak.org", Qt::CaseInsensitive) && url.contains("&FORMAT=TLE", Qt::CaseInsensitive))
+				{
+					url.replace("&FORMAT=TLE", "&FORMAT=CSV", Qt::CaseInsensitive);
+					urlWasUpdated = true;
+				}
+
 				if (conf->value("add_new").toBool())
 					url.prepend("1,");
 				updateUrls.append(url);
@@ -1178,7 +1192,7 @@ void Satellites::loadSettings()
 	// NOTE: Providing default values AND using restoreDefaultSettings() to create the section seems redundant. --BM 
 	
 	// updater related settings...
-	updateFrequencyHours = conf->value("update_frequency_hours", 72).toInt();
+	updateFrequencyHours = qMax(2, conf->value("update_frequency_hours", 72).toInt());
 	// last update default is the first Towel Day.  <3 DA
 	setLastUpdate(QDateTime::fromString(conf->value("last_update", "2001-05-25T12:00:00").toString(), Qt::ISODate));
 	setFlagHintsVisible(conf->value("show_satellite_hints", true).toBool());
@@ -2169,23 +2183,7 @@ int Satellites::getSecondsToUpdate(void)
 
 void Satellites::setTleSources(const QStringList &tleSources)
 {
-	// Necessary 2026: Replace any Celestrak URL with TLE format to CSV format.
-	static const QRegularExpression celestrakURLre("https://celestrak.org/NORAD/elements/gp.php\\?GROUP=(.*)&FORMAT=TLE");
-	QStringList csvCleanedSources;
-	for (const QString &url: tleSources)
-	{
-		QRegularExpressionMatch match=celestrakURLre.match(url);
-
-		if (match.hasMatch())
-		{
-			qWarning() << "[Satellites]: You are using Celestrak URL with TLE argument: " << url <<  " This format is outdated. Consider updating/resetting source URLs. Auto-fixing to CSV.";
-			csvCleanedSources.append(QString("https://celestrak.org/NORAD/elements/gp.php?GROUP=%1&FORMAT=CSV").arg(match.captured(1)));
-		}
-		else
-			csvCleanedSources.append(url);
-	}
-
-	updateUrls = csvCleanedSources;
+	updateUrls = tleSources;
 	saveTleSources(updateUrls);
 }
 
@@ -2634,7 +2632,8 @@ void Satellites::setUpdateFrequencyHours(int hours)
 {
 	if (updateFrequencyHours != hours)
 	{
-		updateFrequencyHours = hours;
+		// Update 2026: Celestrak requires 2-hour minimum!
+		updateFrequencyHours = qMax(2, hours);
 		emit updateFrequencyHoursChanged(hours);
 		emit settingsChanged();
 	}
