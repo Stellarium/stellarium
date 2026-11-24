@@ -127,7 +127,9 @@ IF(USE_PLUGIN_TELESCOPECONTROL AND ENABLE_INDI)
 
 	# Fix missing include
 	file(READ ${indiclient_SOURCE_DIR}/libs/sockets/select.h INDISOCKETSELECT_H)
-	string(REGEX REPLACE "#include .sys/socket.h." "#include <cstring>\n#include <sys/socket.h>\n#include <sys/select.h>" INDISOCKETSELECT_H "${INDISOCKETSELECT_H}")
+	string(REGEX REPLACE "\n#include .sys/socket.h. // select\ntypedef"
+	                     "\n#include <cstring>\n#include <sys/socket.h> // select\n#include <sys/select.h>\ntypedef"
+	       INDISOCKETSELECT_H "${INDISOCKETSELECT_H}")
 	file(WRITE ${indiclient_SOURCE_DIR}/libs/sockets/select.h.new "${INDISOCKETSELECT_H}")
 	configure_file(${indiclient_SOURCE_DIR}/libs/sockets/select.h.new ${indiclient_SOURCE_DIR}/libs/sockets/select.h COPYONLY)
 
