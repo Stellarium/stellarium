@@ -1131,8 +1131,9 @@ IF(NOT FROM_CHARS_WORKS)
           MESSAGE(STATUS "Using system-provided FastFloat ${FastFloat_VERSION}")
      ELSE()
           CPMAddPackage(NAME FastFloat
-               GIT_REPOSITORY https://github.com/fastfloat/fast_float
                VERSION 8.2.0
+               URL https://github.com/fastfloat/fast_float/archive/refs/tags/v8.2.0.tar.gz
+               URL_HASH SHA256=1c63903701c7aadbd47386752ab4efc3d324c9a2fbe230f461ff3806fa264d84
                EXCLUDE_FROM_ALL yes)
      ENDIF()
      GET_TARGET_PROPERTY(FastFloat_INCLUDE_DIRECTORIES
