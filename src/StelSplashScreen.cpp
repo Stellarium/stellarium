@@ -19,6 +19,7 @@
 #include "StelSplashScreen.hpp"
 #include "StelFileMgr.hpp"
 #include "StelUtils.hpp"
+#include "StelVersion.hpp"
 
 #include <QOpenGLContext>
 #include <QPainter>

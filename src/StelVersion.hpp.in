@@ -1,0 +1,9 @@
+#ifndef STELLARIUM_VERSION_H
+#define STELLARIUM_VERSION_H
+
+#if @STELLARIUM_HAS_REVISION@
+#define GIT_REVISION "@REVISION@"
+#define GIT_BRANCH "@GIT_BRANCH@"
+#endif
+
+#endif

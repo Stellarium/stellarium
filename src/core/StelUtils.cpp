@@ -20,6 +20,7 @@
 #include "StelUtils.hpp"
 #include "VecMath.hpp"
 #include "StelLocaleMgr.hpp"
+#include "StelVersion.hpp"
 #include <QBuffer>
 #include <QString>
 #include <QStringList>
