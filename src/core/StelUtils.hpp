@@ -112,6 +112,9 @@ namespace StelUtils
 	//! Return the version of stellarium, i.e. "23.1.0"
 	QString getApplicationVersion();
 
+	//! Return whether the version of stellarium contains a revision id
+	bool isApplicationVersionDetailed();
+
 	//! Return the public version of stellarium, i.e. "23.1"
 	QString getApplicationPublicVersion();
 

@@ -68,6 +68,16 @@ QString getApplicationVersion()
 	#endif
 }
 
+//! Return whether the version of stellarium contains a revision id
+bool isApplicationVersionDetailed()
+{
+	#ifdef GIT_REVISION
+	return true;
+	#else
+	return false;
+	#endif
+}
+
 //! Return the public version of stellarium, e.g. "23.1"
 QString getApplicationPublicVersion()
 {

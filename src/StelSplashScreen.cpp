@@ -19,7 +19,6 @@
 #include "StelSplashScreen.hpp"
 #include "StelFileMgr.hpp"
 #include "StelUtils.hpp"
-#include "StelVersion.hpp"
 
 #include <QOpenGLContext>
 #include <QPainter>
@@ -282,21 +281,24 @@ void SplashScreen::SplashScreenWidget::paintEvent(QPaintEvent* event)
 	p.drawText(QPoint(subtitleTextX, subtitleTextY), subtitleText);
 
 	// Add version text
-#if defined(GIT_REVISION)
-	QFontMetrics metrics(splashFont);
-	p.setFont(font());
-	const auto verStr = QString("%1+ (v%2)").arg(StelUtils::getApplicationPublicVersion(),
-	                                             StelUtils::getApplicationVersion());
-	p.drawText(QPointF(metrics.averageCharWidth(), 1.3*metrics.height()), verStr);
-#else
-	QString version = StelUtils::getApplicationPublicVersion();
-	QFontMetrics versionMetrics(versionFont);
-	p.setFont(versionFont);
-	const int versionTextX = titlePos.x() +
-		(titleHM.shift - versionHM.shift) +
-		(titleHM.width - versionHM.width);
-	p.drawText(versionTextX, 0.8 * height(), version);
-#endif
+	if(StelUtils::isApplicationVersionDetailed())
+	{
+		QFontMetrics metrics(splashFont);
+		p.setFont(font());
+		const auto verStr = QString("%1+ (v%2)").arg(StelUtils::getApplicationPublicVersion(),
+		                                             StelUtils::getApplicationVersion());
+		p.drawText(QPointF(metrics.averageCharWidth(), 1.3*metrics.height()), verStr);
+	}
+	else
+	{
+		QString version = StelUtils::getApplicationPublicVersion();
+		QFontMetrics versionMetrics(versionFont);
+		p.setFont(versionFont);
+		const int versionTextX = titlePos.x() +
+			(titleHM.shift - versionHM.shift) +
+			(titleHM.width - versionHM.width);
+		p.drawText(versionTextX, 0.8 * height(), version);
+	}
 
 	painted=true;
 }
