@@ -592,10 +592,10 @@ QString Constellation::getInfoString(const StelCore *core, const InfoStringGroup
 	if (flags&ObjectType)
 		oss << QString("%1: <b>%2</b>").arg(q_("Type"), getObjectTypeI18n()) << "<br />";
 
-	oss << getSolarLunarInfoString(core, flags);
-
 	if (flags&Extra && !narration.isEmpty())
 		oss << QString("%1: ").arg(qc_("Legend", "constellation origin")) << StelUtils::wrapText(StelSkyCultureMgr::markdownToHTML(narration).remove(br).remove(img));
+
+	oss << getSolarLunarInfoString(core, flags);
 	postProcessInfoString(str, flags);
 
 	return str;
