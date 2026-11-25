@@ -35,7 +35,6 @@
 #include "LandscapeMgr.hpp"
 #include "SpecificTimeMgr.hpp"
 #include "planetsephems/sidereal_time.h"
-#include <qforeach.h>
 
 #include <QRegularExpression>
 #include <QDebug>
