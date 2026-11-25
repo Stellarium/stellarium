@@ -2796,17 +2796,21 @@ void Satellites::saveDownloadedUpdate(QNetworkReply* reply)
 
 	// All files have been downloaded, finish the update
 	TleDataHash newData;
-	for (int i = 0; i < updateSources.count(); i++)
+	for (const auto& source : std::as_const(updateSources))
 	{
-		if (!updateSources[i].file)
-			continue;
-		if (updateSources[i].file->open(QFile::ReadOnly|QFile::Text))
+		QFile* file = source.file;
+		if (!file)
 		{
-			parseDataFile(*updateSources[i].file, newData, updateSources[i].addNew, updateSources[i].url.toString(QUrl::None));
-			updateSources[i].file->close();
-			delete updateSources[i].file;
-			updateSources[i].file = nullptr;
+			weHadAnErrorDuringLastUpdate = true;
+			continue;
 		}
+		if (!file->open(QFile::ReadOnly | QFile::Text) ||
+		    !parseDataFile(*file, newData, source.addNew, source.url.toString(QUrl::None)))
+		{
+			weHadAnErrorDuringLastUpdate = true;
+			qWarning() << "[Satellites] No usable orbital elements from" << source.url.toString(QUrl::RemoveUserInfo);
+		}
+		delete file;
 	}
 	updateSources.clear();
 	if (!newData.isEmpty())
@@ -3048,37 +3052,38 @@ void Satellites::updateSatellites(TleDataHash& newTleSets)
 }
 
 
-void Satellites::parseDataFile(QFile& openFile, TleDataHash& tleList, bool addFlagValue, const QString &tleURL)
+bool Satellites::parseDataFile(QFile& openFile, TleDataHash& tleList, bool addFlagValue, const QString &tleURL)
 {
 	const QString line = openFile.readLine();
 	if (line.contains("invalid query", Qt::CaseInsensitive) || line.contains("error", Qt::CaseInsensitive))
-		qWarning() << "[Satellites] Skipping parsing file" << openFile.fileName() << "due error:" << line;
-	else
 	{
-		const auto firstLineEntries = line.trimmed().split(QLatin1Char(','));
-		if (firstLineEntries.contains(L1S("ARG_OF_PERICENTER")) &&
-		    firstLineEntries.contains(L1S("MEAN_MOTION_DDOT")))
-		{
-			// Two rather long names from the CSV header are present,
-			// we must be handling a CSV file rather than TLE.
-			parseCsvFile(openFile, firstLineEntries, tleList, addFlagValue, tleURL);
-		}
-		else
-		{
-			openFile.seek(0);
-			parseTleFile(openFile, tleList, addFlagValue, tleURL);
-		}	
-	}	
+		qWarning() << "[Satellites] Skipping parsing file" << openFile.fileName() << "due error:" << line;
+		return false;
+	}
+
+	const auto firstLineEntries = line.trimmed().split(QLatin1Char(','));
+	if (firstLineEntries.contains(L1S("ARG_OF_PERICENTER")) &&
+	    firstLineEntries.contains(L1S("MEAN_MOTION_DDOT")))
+	{
+		// Two rather long names from the CSV header are present,
+		// we must be handling a CSV file rather than TLE.
+		return parseCsvFile(openFile, firstLineEntries, tleList, addFlagValue, tleURL);
+	}
+	// If rewinding fails, the remaining lines may still contain
+	// complete TLE sets, so don't check its return value.
+	openFile.seek(0);
+	return parseTleFile(openFile, tleList, addFlagValue, tleURL);
 }
 
-void Satellites::parseTleFile(QFile& openFile, TleDataHash& tleList, bool addFlagValue, const QString &tleURL)
+bool Satellites::parseTleFile(QFile& openFile, TleDataHash& tleList, bool addFlagValue, const QString &tleURL)
 {
 	if (!openFile.isOpen() || !openFile.isReadable())
-		return;
+		return false;
 	
 	// Code mostly re-used from updateFromFiles()
 	int lineNumber = 0;
 	TleData lastData;
+	bool parsedElements = false;
 
 	// Celestrak's "status code" list
 	const QMap<QString, Satellite::OptStatus> satOpStatusMap = {
@@ -3148,6 +3153,7 @@ void Satellites::parseTleFile(QFile& openFile, TleDataHash& tleList, bool addFla
 				// so if everything is OK, save the elements.
 				if (!lastData.name.isEmpty() && !lastData.first.isEmpty())
 				{
+					parsedElements = true;
 					// Some satellites can be listed in multiple files,
 					// and only some of those files may be marked for adding,
 					// so try to preserve the flag - if it's set,
@@ -3164,13 +3170,14 @@ void Satellites::parseTleFile(QFile& openFile, TleDataHash& tleList, bool addFla
 					<< QDir::toNativeSeparators(openFile.fileName()) << ": " << line;
 		}
 	}
+	return parsedElements;
 }
 
-void Satellites::parseCsvFile(QFile& openFile, const QStringList& headerEntries, TleDataHash& tleList,
+bool Satellites::parseCsvFile(QFile& openFile, const QStringList& headerEntries, TleDataHash& tleList,
                               bool addFlagValue, const QString &tleURL)
 {
 	if (!openFile.isOpen() || !openFile.isReadable())
-		return;
+		return false;
 
 	int OBJECT_NAME = -1;
 	int OBJECT_ID = -1;
@@ -3225,9 +3232,10 @@ void Satellites::parseCsvFile(QFile& openFile, const QStringList& headerEntries,
 	    MEAN_MOTION_DOT < 0 || MEAN_MOTION_DDOT < 0)
 	{
 		warn("Bad satellite CSV header", "not all required fields are present", {});
-		return;
+		return false;
 	}
 
+	bool parsedElements = false;
 	while (!openFile.atEnd())
 	{
 		const auto lineEntries = QString(openFile.readLine()).trimmed().split(QLatin1Char(','));
@@ -3287,6 +3295,7 @@ void Satellites::parseCsvFile(QFile& openFile, const QStringList& headerEntries,
 		data.second = generateTleLine2(entry, warnAboutLine);
 		if (data.second.isEmpty()) continue;
 
+		parsedElements = true;
 		// Some satellites can be listed in multiple files,
 		// and only some of those files may be marked for adding,
 		// so try to preserve the flag - if it's set,
@@ -3296,6 +3305,7 @@ void Satellites::parseCsvFile(QFile& openFile, const QStringList& headerEntries,
 		if (data.addThis || !tleList.contains(data.id))
 			tleList.insert(data.id, data); // Overwrite if necessary
 	}
+	return parsedElements;
 }
 
 QString Satellites::decodeSatIDFromAlpha5(QString& satId)

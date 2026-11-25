@@ -32,6 +32,8 @@ private slots:
     void testSpaceTrackFormattedLine2();
     void testNoSatDuplication();
     void testSatZero();
+    void testParseDataFileResult_data();
+    void testParseDataFileResult();
 };
 
 #endif // TESTSATELLITES_HPP
