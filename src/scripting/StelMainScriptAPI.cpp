@@ -1597,15 +1597,34 @@ void StelMainScriptAPI::goHome()
 	emit requestSetHomePosition();
 }
 
+double StelMainScriptAPI::getLightPollutionLuminance()
+{
+	return StelApp::getInstance().getCore()->getSkyDrawer()->getLightPollutionLuminance();
+}
+
+void StelMainScriptAPI::setLightPollutionLuminance(double luminance)
+{
+	StelApp::getInstance().getCore()->getSkyDrawer()->setLightPollutionLuminance(luminance);
+}
+
+int StelMainScriptAPI::luminanceToBortleScaleIndex(float luminance)
+{
+	return StelCore::luminanceToBortleScaleIndex(luminance);
+}
+
+float StelMainScriptAPI::bortleScaleIndexToLuminance(int index)
+{
+	return StelCore::bortleScaleIndexToLuminance(index);
+}
+
 int StelMainScriptAPI::getBortleScaleIndex()
 {
-	return StelApp::getInstance().getCore()->getSkyDrawer()->getBortleScaleIndex();
+	return luminanceToBortleScaleIndex(getLightPollutionLuminance());
 }
 
 void StelMainScriptAPI::setBortleScaleIndex(int index)
 {
-	const auto lum = StelCore::bortleScaleIndexToLuminance(index);
-	StelApp::getInstance().getCore()->getSkyDrawer()->setLightPollutionLuminance(lum);
+	setLightPollutionLuminance(bortleScaleIndexToLuminance(index));
 }
 
 double StelMainScriptAPI::refraction(double altitude, bool apparent)

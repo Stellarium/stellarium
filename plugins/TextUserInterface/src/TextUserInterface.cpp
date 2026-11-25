@@ -467,10 +467,11 @@ void TextUserInterface::init()
 	TuiNode* m6 = new TuiNode(N_("Effects"), Q_NULLPTR, m5);
 	m6->setParent(this);
 	m5->setNextNode(m6);
+	const int bortleIndex = StelCore::luminanceToBortleScaleIndex(skyDrawer->getLightPollutionLuminance());
 	TuiNode* m6_1 = new TuiNodeInt(N_("Light pollution:"),
 				       this,
 				       &TextUserInterface::setLightPollutionLevel,
-				       skyDrawer->getBortleScaleIndex(), 1, 9, 1,
+				       bortleIndex, 1, 9, 1,
 	                               m6);
 	TuiNode* m6_2 = new TuiNodeEnum(N_("Landscape"),
 	                                landscapeMgr,
@@ -906,7 +907,7 @@ void TextUserInterface::saveDefaultSettings(void)
 	conf->setValue("color/nebula_circle_color", colToConf(nmgr->getCirclesColor()));
 
 	// sub-menu 6: effects
-	conf->setValue("stars/init_bortle_scale", skyd->getBortleScaleIndex());
+	conf->setValue("stars/init_light_pollution_luminance", skyd->getLightPollutionLuminance());
 	lmgr->setDefaultLandscapeID(lmgr->getCurrentLandscapeID());
 	conf->setValue("navigation/auto_zoom_out_resets_direction", mvmgr->getFlagAutoZoomOutResetsDirection());
 	conf->setValue("astro/milky_way_intensity", milk->getIntensity());

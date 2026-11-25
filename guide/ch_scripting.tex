@@ -142,6 +142,29 @@ core.wait(3);
 LabelMgr.deleteLabel(label);
 \end{script}
 
+\section{Light Pollution}
+
+Use \texttt{core.getLightPollutionLuminance()} and \texttt{core.setLightPollutionLuminance()} to read and set
+the moonless zenith luminance in $\mathrm{cd/m^2}$.
+
+\texttt{core.luminanceToBortleScaleIndex()} estimates a Bortle class from a luminance in $\mathrm{cd/m^2}$, while
+\texttt{core.bortleScaleIndexToLuminance()} returns a representative luminance for a Bortle class from 1 to 9.
+
+Example usage:
+\begin{script}
+var previousLuminance = core.getLightPollutionLuminance();
+var ruralLuminance = core.bortleScaleIndexToLuminance(3);
+core.setLightPollutionLuminance(ruralLuminance);
+var luminance = core.getLightPollutionLuminance();
+var bortleClass = core.luminanceToBortleScaleIndex(luminance);
+core.output("Estimated Bortle class: " + bortleClass);
+core.setLightPollutionLuminance(previousLuminance);
+\end{script}
+
+Existing scripts can still use \texttt{core.getBortleScaleIndex()} to estimate the current class and
+\texttt{core.setBortleScaleIndex()} to set the luminance for a class from 1 to 9. The older spelling
+\texttt{StelSkyDrawer.getBortleScaleIndex()} also works in scripts, but its use is discouraged.
+
 \section{Critical Scripting Differences introduced with version 1.0}
 \label{sec:scripting:differences}
 
