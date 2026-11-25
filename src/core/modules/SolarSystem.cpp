@@ -3011,7 +3011,7 @@ QVector<QPair<QString,StelObjectP>> SolarSystem::listAllObjects(bool inEnglish) 
 			if (!p->culturalNames.isEmpty())
 			{
 				// Objects can have more than 1 name, e.g. Venus as Morning/Evening star.
-				for (const StelObject::CulturalName &cName : qAsConst(p->culturalNames))
+				for (const StelObject::CulturalName &cName : std::as_const(p->culturalNames))
 				{
 					map[cName.translatedI18n] = StelObjectP(p);
 					map[cName.native] = StelObjectP(p);
@@ -3072,7 +3072,7 @@ QVector<QPair<QString,StelObjectP>> SolarSystem::listAllObjectsByType(const QStr
 					map[p->getIAUDesignation()] = StelObjectP(p);
 				if (!p->culturalNames.isEmpty())
 				{
-					for (const StelObject::CulturalName &cName : qAsConst(p->culturalNames))
+					for (const StelObject::CulturalName &cName : std::as_const(p->culturalNames))
 					{
 						map[cName.native] = StelObjectP(p);
 						map[cName.pronounceI18n] = StelObjectP(p);

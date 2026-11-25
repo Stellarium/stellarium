@@ -312,7 +312,7 @@ void ConstellationMgr::deselectConstellations(void)
 void ConstellationMgr::selectAllConstellations()
 {
 	// We really must select in a loop! (GH:#4415)
-	for (auto* constellation : qAsConst(constellations))
+	for (auto* constellation : std::as_const(constellations))
 	{
 		QList<Constellation *>cList;
 		cList.append(constellation);
