@@ -792,11 +792,6 @@ void StelSkyDrawer::setLightPollutionLuminance(const double luminance)
 	emit lightPollutionLuminanceChanged(luminance);
 }
 
-int StelSkyDrawer::getBortleScaleIndex() const
-{
-	return StelCore::luminanceToBortleScaleIndex(lightPollutionLuminance);
-}
-
 void StelSkyDrawer::setFlagStarSpiky(bool b)
 {
 	if (b!=flagStarSpiky)

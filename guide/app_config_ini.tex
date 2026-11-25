@@ -882,7 +882,8 @@ flag\_star\_halo         & bool        & \emph{false} to not draw a halo around 
 mag\_converter\_max\_fov & float       & maximum field of view for which the magnitude conversion routine is used. Typical value: \emph{90.0}.\\%\midrule
 mag\_converter\_min\_fov & float       & minimum field of view for which the magnitude conversion routine is used. Typical value: \emph{0.001}.\\%\midrule
 labels\_amount           & float       & amount of labels. Typical value: \emph{3.0}\\%\midrule
-init\_bortle\_scale      & int         & initial value of light pollution on the Bortle scale. Typical value: \emph{3}.\\\bottomrule
+init\_light\_pollution\_luminance & float & initial zenith luminance for light pollution in $\mathrm{cd/m^2}$.
+                                          The default is the representative luminance for Bortle class~3.\\\bottomrule
 \end{tabularx}
 
 \subsection{\big[tui\big]}
@@ -1030,7 +1031,6 @@ asterism\_font\_size               & int   & font size for asterism labels\\%\mi
 asterism\_line\_thickness          & int   & thickness of the asterism lines [1\ldots5]. Typical value: \emph{1}\\%\midrule
 rayhelper\_line\_thickness         & int   & thickness of the ray helper lines [1\ldots5]. Typical value: \emph{1}\\\midrule
 flag\_night                        & bool  & Enable night mode (red-only mode) on startup\\\midrule
-light\_pollution\_luminance        & float & Sets the level of the light pollution simulation\\\midrule %% TODO: WHAT IS THIS?
 use\_luminance\_adaptation         & bool  & Enable dynamic eye adaptation\\\midrule %% TODO: DESCRIBE!
 sky\_brightness\_label\_threshold  & float & Sky brightness [$cd/m^2$] to show infotext in black \\\midrule  %% 
 flag\_landscape\_autoselection     & bool  & load fitting landscape after changing planet (use \emph{zero} landscape when no fitting found).\\

@@ -209,12 +209,11 @@ public slots:
 
 	//! Set the parameters so that the stars disappear at about the naked-eye limiting magnitude corresponding
 	//! to the given zenith luminance at moonless night.
-	//! The limit is valid only at a given zoom level (around 60 deg)
+	//! The limit is valid only at a given zoom level (around 60 deg).
+	//! @param luminance zenith luminance in cd/m².
 	void setLightPollutionLuminance(double luminance);
-	//! Get the current zenith luminance at moonless night.
+	//! Get the current zenith luminance at moonless night in cd/m².
 	double getLightPollutionLuminance() const {return lightPollutionLuminance;}
-
-	Q_DECL_DEPRECATED int getBortleScaleIndex() const;
 
 	//! Set flag for drawing a halo around bright stars.
 	void setFlagDrawBigStarHalo(bool b);

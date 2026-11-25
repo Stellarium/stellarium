@@ -125,15 +125,10 @@ private:
 //! I decided to put all these elements together in a single class because they are
 //! inherently linked, especially when we start moving the observer in altitude.
 //! \note
-//! The Bortle scale index setting was removed from this class, because it was duplicated
-//! from StelSkyDrawer, complicating code that changes it.
-//! It is now only in StelSkyDrawer and can be accessed
-//! with \link StelSkyDrawer::getBortleScaleIndex getBortleScaleIndex \endlink
-//! and \link StelSkyDrawer::setBortleScaleIndex setBortleScaleIndex \endlink.
-//! Slots setAtmosphereBortleLightPollution and getAtmosphereBortleLightPollution
-//! in this class have been removed/made private.
-//! If script access is desired, use
-//! \link StelMainScriptAPI::getBortleScaleIndex StelMainScriptAPI::get \endlink/\link StelMainScriptAPI::setBortleScaleIndex setBortleScaleIndex \endlink
+//! Use StelSkyDrawer::getLightPollutionLuminance() and StelSkyDrawer::setLightPollutionLuminance()
+//! to read and set the zenith luminance used for light pollution.
+//! Scripts can use StelMainScriptAPI::getLightPollutionLuminance() and
+//! StelMainScriptAPI::setLightPollutionLuminance().
 class LandscapeMgr : public StelModule
 {
 	Q_OBJECT
@@ -602,12 +597,6 @@ public slots:
 	//! Set a discoloration to simulate sunrise/sunset colors.
 	void setLandscapeTint(const Vec3f &c){landscapeTint=c;}
 	Vec3f getLandscapeTint() const {return landscapeTint;}
-
-	/*
-	//This method has been removed, use StelSkyDrawer::getBortleScaleIndex instead, or StelMainScriptAPI::getBortleScaleIndex in scripts
-	//Also, if required, please use StelSkyDrawer::setBortleScaleIndex or StelMainScriptAPI::setBortleScaleIndex instead of LandscapeMgr::setAtmosphereBortleLightPollution
-	int getAtmosphereBortleLightPollution() const;
-	*/
 
 	//! Set the rotation of the landscape about the z-axis.
 	//! This is intended for special uses such as when the landscape consists of

@@ -981,17 +981,38 @@ public slots:
 	//! Go to defaults position and direction of view
 	void goHome();
 
-	//! Returns the currently set Bortle scale index, which is used to simulate light pollution.
-	//! Wrapper for StelSkyDrawer::getBortleScaleIndex
+	//! Returns the current moonless zenith luminance in cd/m².
+	//! @see StelSkyDrawer::getLightPollutionLuminance()
+	static double getLightPollutionLuminance();
+
+	//! Sets the moonless zenith luminance used to simulate light pollution.
+	//! @param luminance non-negative zenith luminance in cd/m².
+	//! @see StelSkyDrawer::setLightPollutionLuminance()
+	static void setLightPollutionLuminance(double luminance);
+
+	//! Estimates the Bortle scale index for a given zenith luminance.
+	//! @param luminance non-negative zenith luminance in cd/m².
+	//! @return the estimated Bortle scale index in the range [1,9].
+	//! @see StelCore::luminanceToBortleScaleIndex()
+	static int luminanceToBortleScaleIndex(float luminance);
+
+	//! Returns the representative zenith luminance for a given Bortle class.
+	//! @param index the Bortle scale index in the range [1,9].
+	//! @return the representative zenith luminance in cd/m².
+	//! @see StelCore::bortleScaleIndexToLuminance()
+	static float bortleScaleIndexToLuminance(int index);
+
+	//! Estimates the Bortle scale index from the current zenith luminance.
+	//! @see getLightPollutionLuminance(), luminanceToBortleScaleIndex()
 	//! @see https://en.wikipedia.org/wiki/Bortle_scale
-	//! @return the Bortle scale index in range [1,9]
+	//! @return the estimated Bortle scale index in the range [1,9].
 	static int getBortleScaleIndex();
 
-	//! Changes the Bortle scale index, which is used to simulate light pollution.
-	//! Wrapper for StelSkyDrawer::setBortleScaleIndex
-	//! Valid values are in the range [1,9]
+	//! Sets the light pollution luminance to a representative value for the given Bortle class.
+	//! @see setLightPollutionLuminance()
+	//! @see bortleScaleIndexToLuminance()
 	//! @see https://en.wikipedia.org/wiki/Bortle_scale
-	//! @param index the new Bortle scale index, must be in range [1,9]
+	//! @param index the Bortle scale index in the range [1,9].
 	static void setBortleScaleIndex(int index);
 
 	//! Apply refraction with current atmospheric parameters to altitude.

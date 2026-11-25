@@ -493,6 +493,10 @@ StelScriptMgr::StelScriptMgr(QObject *parent): QObject(parent)
 
 	// For accessing star scale, twinkle etc.
 	objectValue = engine->newQObject(StelApp::getInstance().getCore()->getSkyDrawer());
+	// Preserve the old script entry point after removing the C++ slot.
+	// FIXME: maybe it's better to remove it?
+	objectValue.setProperty("getBortleScaleIndex", engine->evaluate(
+		"(function(api) { return function() { return api.getBortleScaleIndex(); }; })(core)"));
 	engine->globalObject().setProperty("StelSkyDrawer", objectValue);
 
 	setScriptRate(1.0);
