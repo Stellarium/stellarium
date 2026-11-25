@@ -117,9 +117,6 @@ public:
 	//! Gets the date of the next update.
 	QDateTime getNextUpdate();
 
-	//! It's useful to force the update() and draw().
-	void repaint();
-
 	//
 	// Methods defined in the StelModule class
 	//

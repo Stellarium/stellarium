@@ -91,6 +91,7 @@ InfoPanel::~InfoPanel()
 
 void InfoPanel::setTextFromObjects(const QList<StelObjectP>& selected)
 {
+	static StelObjectMgr* omgr=GETSTELMODULE(StelObjectMgr);
 	if (selected.isEmpty())
 	{
 		if (!document()->isEmpty())
@@ -145,6 +146,7 @@ void InfoPanel::setTextFromObjects(const QList<StelObjectP>& selected)
 
 		infoHTML = selected[0]->getInfoString(core, infoTextFilters);
 		selected[0]->removeExtraInfoStrings(StelObject::AllInfo);
+		omgr->removeExtraInfoStrings(StelObject::AllInfo);
 
 		document()->setDefaultStyleSheet(css.arg(color.toHtmlColor(), opacity));
 

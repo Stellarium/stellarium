@@ -35,6 +35,7 @@
 #include "LandscapeMgr.hpp"
 #include "SpecificTimeMgr.hpp"
 #include "planetsephems/sidereal_time.h"
+#include <qforeach.h>
 
 #include <QRegularExpression>
 #include <QDebug>
@@ -1989,7 +1990,8 @@ void StelObject::removeExtraInfoStrings(const InfoStringGroup& flags)
 	}
 }
 
-// Add horizontal coordinates of Sun and Moon where useful
+// Add horizontal coordinates of Sun and Moon where useful.
+// Other modules or plugins may have placed extra strings of interest to StelObjectMgr.
 QString StelObject::getSolarLunarInfoString(const StelCore *core, const InfoStringGroup& flags) const
 {
 	QString str;
@@ -2000,11 +2002,13 @@ QString StelObject::getSolarLunarInfoString(const StelCore *core, const InfoStri
 	{
 		const bool withTables = StelApp::getInstance().getFlagUseFormattingOutput();
 		const bool withDecimalDegree = StelApp::getInstance().getFlagUseDecDegreesCoords();
+		const bool useSouthAzimuth = StelApp::getInstance().getFlagSouthAzimuthUsage();
+		const bool withDesignations = StelApp::getInstance().getFlagUseCCSDesignation();
+		static StelObjectMgr* omgr=GETSTELMODULE(StelObjectMgr);
+		const QStringList extraStrings=omgr->getExtraInfoStrings(SolarLunarPosition);
 
 		if (withTables)
 			oss << "<table class='info-string'>";
-		const bool useSouthAzimuth = StelApp::getInstance().getFlagSouthAzimuthUsage();
-		const bool withDesignations = StelApp::getInstance().getFlagUseCCSDesignation();
 		double az, alt;
 		QString azStr, altStr;
 
@@ -2044,6 +2048,8 @@ QString StelObject::getSolarLunarInfoString(const StelCore *core, const InfoStri
 			else
 				oss << QString("%1: %2/%3<br/>").arg(LunarAzAlt, azStr, altStr);
 		}
+		for (const QString &s : extraStrings)
+			oss << s;
 		if (withTables)
 			oss << "</table>";
 	}

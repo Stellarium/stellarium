@@ -800,6 +800,16 @@ QVariantMap MeteorShower::getInfoMap(const StelCore *core) const
 			}
 			map.insert("zhr-max", varStr);
 		}
+
+		static StelApp& stelApp = StelApp::getInstance();
+		static const double eclJ2000=GETSTELMODULE(SolarSystem)->getEarth()->getRotObliquity(2451545.0);
+
+		PlanetP sun = GETSTELMODULE(SolarSystem)->getSun();
+		double ra_equ, dec_equ, lambda, beta;
+		StelUtils::rectToSphe(&ra_equ,&dec_equ,sun->getJ2000EquatorialPos(core));
+		StelUtils::equToEcl(ra_equ, dec_equ, eclJ2000, &lambda, &beta);
+		if (lambda<0) lambda+=2.0*M_PI;
+		map.insert("solar_long_J2000", lambda*M_180_PI);
 	}
 
 	return map;

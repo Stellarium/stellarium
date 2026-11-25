@@ -24,6 +24,7 @@
 #include <QTimer>
 
 #include "LabelMgr.hpp"
+#include "StelObjectMgr.hpp"
 #ifndef NO_GUI
 #include "MSConfigDialog.hpp"
 #include "MSSearchDialog.hpp"
@@ -296,12 +297,10 @@ bool MeteorShowersMgr::restoreDefaultCatalog(const QString& destination)
 
 void MeteorShowersMgr::update(double deltaTime)
 {
-	if (!m_enablePlugin || !m_onEarth)
+	if (m_enablePlugin && m_onEarth)
 	{
-		return;
+		m_meteorShowers->update(deltaTime);
 	}
-
-	m_meteorShowers->update(deltaTime);
 }
 
 void MeteorShowersMgr::draw(StelCore* core)
@@ -309,13 +308,30 @@ void MeteorShowersMgr::draw(StelCore* core)
 	if (m_enablePlugin && m_onEarth)
 	{
 		m_meteorShowers->draw(core);
-	}
-}
 
-void MeteorShowersMgr::repaint()
-{
-	update(1.0);
-	draw(StelApp::getInstance().getCore());
+		// Meteor observers need solar longitude (J2000). We can add it to the InfoString for any object. (#5078)
+		static StelApp& stelApp = StelApp::getInstance();
+		static StelObjectMgr* omgr=GETSTELMODULE(StelObjectMgr);
+		static const double eclJ2000=GETSTELMODULE(SolarSystem)->getEarth()->getRotObliquity(2451545.0);
+		static PlanetP sun = GETSTELMODULE(SolarSystem)->getSun();
+		const bool withTables = stelApp.getFlagUseFormattingOutput();
+		const bool withDesignations = stelApp.getFlagUseCCSDesignation();
+
+		double ra_equ, dec_equ, lambda, beta;
+		StelUtils::rectToSphe(&ra_equ,&dec_equ,sun->getJ2000EquatorialPos(core));
+		StelUtils::equToEcl(ra_equ, dec_equ, eclJ2000, &lambda, &beta);
+		if (lambda<0) lambda+=2.0*M_PI;
+
+		// Feed this info via ObjectMgr.
+		if (withTables)
+			omgr->addToExtraInfoString(StelObject::SolarLunarPosition,
+						   "<tr><td>" + (withDesignations ? " &lambda;<sub>&#x2609;, J2000</sub>" : qc_("Solar Lng.", "ecliptical longitude") )  + ":</td><td>" +
+						   StelUtils::radToDecDegStr(lambda, 2) + "</td></tr>");
+		else
+			omgr->addToExtraInfoString(StelObject::SolarLunarPosition,
+						   (withDesignations ? " &lambda;<sub>&#x2609;, J2000</sub>" : qc_("Solar Lng.", "ecliptical longitude") ) + ": " +
+						   StelUtils::radToDecDegStr(lambda, 2));
+	}
 }
 
 void MeteorShowersMgr::checkForUpdates()

@@ -107,13 +107,14 @@ public:
 
 	//! Return a map like StelObject, but with a few extra tags:
 	// TODO: Describe the fields!
-	//! - status
+	//! - status (generic-data|confirmed-data|inactive)
 	//! - id
 	//! - type (translated string "meteor shower")
-	//! - speed (km/s)
-	//! - pop-idx (population index)
+	//! - velocity (km/s)
+	//! - population-index
 	//! - parent
-	//! - zhr-max (information string)
+	//! - zhr-max
+	//! - solar_long_J2000: Solar ecliptical longitude, J2000
 	QVariantMap getInfoMap(const StelCore *core) const override;
 	QString getType(void) const override { return METEORSHOWER_TYPE; }
 	QString getObjectType(void) const override { return N_("meteor shower"); }
