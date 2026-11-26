@@ -2839,14 +2839,14 @@ void Satellites::handleErrorReply(QNetworkReply* reply)
 	const int httpCode = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
 	const QString urlStr = reply->url().toDisplayString();
 	const bool isCelestrak = urlStr.startsWith("https://celestrak.org/NORAD/elements/gp.php", Qt::CaseInsensitive);
-	QString message = QString(qc_("This source of satellite orbital elements has replied:", "Satellites plugin URL warning") +
+	QString message = QString(q_("This source of satellite orbital elements has replied:") +
 			" " + reply->url().toString(QUrl::RemoveUserInfo) + ". " + q_("Error") +
 			" " + QString(qt_getEnumName(reply->error())) + ": " + reply->errorString() +
-			" " + qc_("You may have to fix a bad URL (e.g. 'reset to defaults').", "Satellites plugin URL warning"));
+			" " + q_("You may have to fix a bad URL (e.g. 'reset to defaults')."));
 	if (QList<int>({301, 401, 403, 404, 500}).contains(httpCode) && isCelestrak)
 	{
-		message.append(" " + qc_("This warning is from Celestrak: you MUST wait 2 hours before retrying, else you may be banned from Celestrak!", "Satellites plugin URL warning") +
-			                 " " + qc_("See logfile for more details.", "Satellites plugin URL warning"));
+		message.append(" " + q_("This warning is from Celestrak: you MUST wait 2 hours before retrying, else you may be banned from Celestrak!") +
+			                 " " + q_("See logfile for more details."));
 
 		qWarning() << "[Satellites] download problem. Please see https://celestrak.org/NORAD/documentation/gp-data-formats.php";
 	}
@@ -2854,7 +2854,7 @@ void Satellites::handleErrorReply(QNetworkReply* reply)
 	{
 		// deactivate this panel for this update cycle.
 		showDownloadErrorWarningBox=false;
-		QMessageBox::warning(&StelMainView::getInstance(), qc_("Please read carefully!", "Satellites plugin URL warning"), message, QMessageBox::Ok);
+		QMessageBox::warning(&StelMainView::getInstance(), q_("Please read carefully!"), message, QMessageBox::Ok);
 	}
 }
 
