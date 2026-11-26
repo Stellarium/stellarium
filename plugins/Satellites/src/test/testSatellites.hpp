@@ -27,6 +27,7 @@ class TestSatellites : public QObject
 {
 Q_OBJECT
 private slots:
+    void testCsvEpochAcrossNewYear();
     void testCelestrackFormattedLine2();
     void testSpaceTrackFormattedLine2();
     void testNoSatDuplication();

@@ -21,6 +21,32 @@
 
 QTEST_GUILESS_MAIN(TestSatellites)
 
+void TestSatellites::testCsvEpochAcrossNewYear()
+{
+    const QByteArray csvHeader =
+        "OBJECT_NAME,OBJECT_ID,EPOCH,MEAN_MOTION,ECCENTRICITY,INCLINATION,RA_OF_ASC_NODE,"
+        "ARG_OF_PERICENTER,MEAN_ANOMALY,EPHEMERIS_TYPE,CLASSIFICATION_TYPE,NORAD_CAT_ID,"
+        "ELEMENT_SET_NO,REV_AT_EPOCH,BSTAR,MEAN_MOTION_DOT,MEAN_MOTION_DDOT\n";
+
+    const QByteArray contents = csvHeader +
+        "SATELLITE A,1974-089A,2024-12-31T12:00:00.123456,12.53641440,0.0012122,"
+        "101.7770,337.7317,318.4445,104.4962,0,U,7530,999,6562,0,0,0\n"
+        "SATELLITE B,1974-089B,2025-01-01T00:00:00.000000,12.53641440,0.0012122,"
+        "101.7770,337.7317,318.4445,104.4962,0,U,7531,999,6562,0,0,0\n";
+
+    QTemporaryFile file;
+    QVERIFY(file.open());
+    QCOMPARE(file.write(contents), qint64(contents.size()));
+    QVERIFY(file.seek(0));
+
+    TleDataHash elements;
+    Satellites::parseDataFile(file, elements);
+    QCOMPARE(elements.size(), 2);
+    // TLE line 1 stores the 14-character epoch at columns 19–32.
+    QCOMPARE(elements.value("7530").first.mid(18, 14), QStringLiteral("24366.50000143"));
+    QCOMPARE(elements.value("7531").first.mid(18, 14), QStringLiteral("25001.00000000"));
+}
+
 void TestSatellites::testCelestrackFormattedLine2()
 {
     QString Line = "2 07530 101.7770 337.7317 0012122 318.4445 104.4962 12.53641440 65623";

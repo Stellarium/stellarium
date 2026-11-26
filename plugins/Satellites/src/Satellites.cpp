@@ -55,7 +55,6 @@
 #include <QFile>
 #include <QFont>
 #include <QTimer>
-#include <QTimeZone>
 #include <QVariantMap>
 #include <QVariant>
 #include <QDir>
@@ -161,15 +160,13 @@ QString formatTleEpoch(const QString& epochFromCSV)
 	const auto microsecond = epochFromCSV.mid(20, 6).toUInt(&usOK);
 	if (!yOK|| !mthOK|| !dOK|| !hOK|| !minOK|| !sOK|| !usOK) return {};
 
-	const auto ms = microsecond / 1000;
-	const auto microsecTail = microsecond - ms * 1000;
-	const auto epoch = QDateTime(QDate(year, month, day), QTime(hour, minute, second, ms), QTimeZone(0));
-	if (!epoch.isValid()) return {};
-	static const auto epoch0 = QDateTime(QDate(year, 1, 1), QTime(0,0,0), QTimeZone(0));
-	// The +1 shifts refence to "Jan 0" instead of Jan 1
-	const auto diffInDays = 1 + (epoch0.msecsTo(epoch) + microsecTail * 1e-3) / 86400e3;
-	const auto epochYear = epoch.date().year();
-	const auto res = QString("%1%2").arg(epochYear % 100, 2, 10, QLatin1Char('0'))
+	const QDate date(year, month, day);
+	const QTime time(hour, minute, second, microsecond / 1000);
+	if (!date.isValid() || !time.isValid()) return {};
+
+	const auto usecSinceMidnight = qint64(time.msecsSinceStartOfDay()) * 1000 + microsecond % 1000;
+	const auto diffInDays = date.dayOfYear() + usecSinceMidnight / 86400e6;
+	const auto res = QString("%1%2").arg(year % 100, 2, 10, QLatin1Char('0'))
 	                                .arg(diffInDays, 12, 'f', 8, QLatin1Char('0'));
 	return res;
 }
