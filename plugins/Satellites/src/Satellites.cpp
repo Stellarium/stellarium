@@ -2145,7 +2145,7 @@ void Satellites::remove(const QStringList& idList)
 		satelliteListModel->endSatellitesChange();
 }
 
-void Satellites::removeWithoutModelReset(const QStringList& idList)
+int Satellites::removeWithoutModelReset(const QStringList& idList)
 {
 	StelObjectMgr* objMgr = GETSTELMODULE(StelObjectMgr);
 	int numRemoved = 0;
@@ -2170,6 +2170,7 @@ void Satellites::removeWithoutModelReset(const QStringList& idList)
 		 << idList.count() << "satellites proposed for removal, "
 		 << numRemoved << " removed, "
 		 << satellites.count() << " remain.";
+	return numRemoved;
 }
 
 int Satellites::getSecondsToUpdate(void)
@@ -2675,7 +2676,7 @@ void Satellites::updateFromOnlineSources()
 		// TODO: Do something saner, such as disabling internet updates,
 		// or stopping the timer. --BM
 		emit updateStateChanged(OtherError);
-		emit tleUpdateComplete(0, satellites.count(), 0, 0);
+		emit tleUpdateComplete(0, satellites.count(), 0, 0, 0);
 		return;
 	}
 
@@ -2934,7 +2935,8 @@ void Satellites::updateSatellites(TleDataHash& newTleSets)
 	int updatedCount = 0;
 	int totalCount = 0;
 	int addedCount = 0;
-	int missingCount = 0; // Also the number of removed sats, if any.
+	int missingCount = 0;
+	const bool canAutoRemove = autoRemoveEnabled && !weHadAnErrorDuringLastUpdate;
 	QStringList toBeRemoved;
 	for (const auto& sat : std::as_const(satellites))
 	{
@@ -2950,9 +2952,15 @@ void Satellites::updateSatellites(TleDataHash& newTleSets)
 		}
 		
 		QString id = sat->id;
-		TleData newTle = newTleSets.take(id);
-		if (!newTle.name.isEmpty())
+		const auto tle = newTleSets.constFind(id);
+		const bool missing = tle == newTleSets.cend();
+		if (!missing)
 		{
+			TleData newTle = tle.value();
+			newTleSets.erase(tle);
+			if (newTle.name.isEmpty())
+				newTle.name = sat->name;
+
 			if (sat->tleElements.first != newTle.first ||
 			    sat->tleElements.second != newTle.second ||
 			    sat->name != newTle.name)
@@ -2989,22 +2997,18 @@ void Satellites::updateSatellites(TleDataHash& newTleSets)
 		}
 		else
 		{
-			if (autoRemoveEnabled && !weHadAnErrorDuringLastUpdate)
-			{
-				toBeRemoved.append(sat->id);
-				missingCount++;
-			}
-			else
+			missingCount++;
+			if (!canAutoRemove)
 				qWarning() << "[Satellites]" << sat->id << sat->name
 				           << "is missing in the update lists.";
 		}
-		// All satellites, who has invalid orbit should be removed.
-		if (!sat->orbitValid)
+
+		if (canAutoRemove && (missing || !sat->orbitValid))
 		{
-			toBeRemoved.append(sat->id);
-			qInfo() << "[Satellites]" << sat->id << sat->name
-				   << "has invalid orbit and will be removed.";
-			missingCount++;
+			toBeRemoved.append(id);
+			if (!sat->orbitValid)
+				qInfo() << "[Satellites]" << sat->id << sat->name
+				        << "has invalid orbit and will be removed.";
 		}
 	}
 	
@@ -3022,14 +3026,14 @@ void Satellites::updateSatellites(TleDataHash& newTleSets)
 	if (addedCount)
 		std::sort(satellites.begin(), satellites.end());
 	
-	if (autoRemoveEnabled && !weHadAnErrorDuringLastUpdate && !toBeRemoved.isEmpty())
+	int removedCount = 0;
+	if (!toBeRemoved.isEmpty())
 	{
 		qWarning() << "[Satellites] purging objects that were not updated...";
-		removeWithoutModelReset(toBeRemoved);
+		removedCount = removeWithoutModelReset(toBeRemoved);
 	}
 	
-	if (updatedCount > 0 || addedCount > 0 ||
-	        (autoRemoveEnabled && !weHadAnErrorDuringLastUpdate && missingCount > 0))
+	if (updatedCount > 0 || addedCount > 0 || removedCount > 0)
 	{
 		saveDataMap(createDataMap());
 		updateState = CompleteUpdates;
@@ -3043,11 +3047,12 @@ void Satellites::updateSatellites(TleDataHash& newTleSets)
 	qDebug() << "[Satellites] update finished."
 	         << updatedCount << "/" << totalCount << "updated,"
 	         << addedCount << "added,"
-	         << missingCount << "missing or removed."
+	         << missingCount << "missing,"
+	         << removedCount << "removed."
 	         << sourceCount << "source entries parsed.";
 
 	emit updateStateChanged(updateState);
-	emit tleUpdateComplete(updatedCount, totalCount, addedCount, missingCount);
+	emit tleUpdateComplete(updatedCount, totalCount, addedCount, missingCount, removedCount);
 	weHadAnErrorDuringLastUpdate=false; // reset for next update cycle
 }
 
