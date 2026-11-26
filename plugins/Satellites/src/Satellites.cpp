@@ -2631,10 +2631,11 @@ void Satellites::setTleEpochAgeDays(int age)
 
 void Satellites::setUpdateFrequencyHours(int hours)
 {
+	hours = qMax(2, hours); // Since 2026, Celestrak requires 2-hour minimum!
+
 	if (updateFrequencyHours != hours)
 	{
-		// Update 2026: Celestrak requires 2-hour minimum!
-		updateFrequencyHours = qMax(2, hours);
+		updateFrequencyHours = hours;
 		emit updateFrequencyHoursChanged(hours);
 		emit settingsChanged();
 	}
