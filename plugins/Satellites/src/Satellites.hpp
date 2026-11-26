@@ -490,9 +490,9 @@ signals:
 	//! @param updated the number of updated satellites;
 	//! @param total the total number of satellites in the catalog;
 	//! @param added the number of newly added satellites;
-	//! @param missing the number of satellites that were not found in the
-	//! update source(s) (and were removed, if autoRemoveEnabled is set).
-	void tleUpdateComplete(int updated, int total, int added, int missing);
+	//! @param missing the number of satellites absent from the update source(s);
+	//! @param removed the number of satellites removed from the catalog.
+	void tleUpdateComplete(int updated, int total, int added, int missing, int removed);
 
 	void satGroupVisibleChanged();
 
@@ -790,7 +790,7 @@ private slots:
 private:
 	//! The actual implementation of #remove, but without resetting
 	//! #satelliteListModel.
-	void removeWithoutModelReset(const QStringList& idList);
+	int removeWithoutModelReset(const QStringList& idList);
 	//! Drawing the circles of Earth's umbra and penumbra
 	void drawCircles(StelCore* core, StelPainter& painter);
 	//! Add to the current collection the satellite described by the data.
