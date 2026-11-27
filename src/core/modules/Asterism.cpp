@@ -17,12 +17,14 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
+#include "StelLocaleMgr.hpp"
 #include "StelProjector.hpp"
 #include "Asterism.hpp"
 #include "StelModuleMgr.hpp"
 #include "StarMgr.hpp"
 #include "NebulaMgr.hpp"
 
+#include "StelSpeechMgr.hpp"
 #include "StelPainter.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
@@ -351,6 +353,30 @@ QString Asterism::getInfoLabel() const
 	return getCultureLabel(scMgr->getInfoLabelStyle());
 }
 
+void Asterism::setNarration(const QString &narration)
+{
+	this->narration=narration;
+}
+
+QString Asterism::getNarration(const StelCore *core, const InfoStringGroup &flags) const
+{
+	Q_UNUSED(core) Q_UNUSED(flags)
+	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyCultureDescriptionsTranslator();
+
+	QString toBeSpoken=trans.qtranslate(narration);
+	// Strip away HTML and markdown elements like underscores or stars.
+	static const QRegularExpression br("<br/?>");
+	static const QRegularExpression img("<img .*>");
+	static const QRegularExpression latin("_([^_]{0,50})_");
+	static const QRegularExpression star("\\*([^\\*]{0,50})\\*");
+	QString stripped=toBeSpoken.remove(br).remove(img).replace(latin, "\\1").replace(star, "\\1");
+
+	qCDebug(Speech) << "Asterism name" << getEnglishName() << "narration:" << stripped;
+
+	// Try to get a little break between title and story.
+	return getNameI18n() + ". . . " + stripped;
+}
+
 QString Asterism::getCultureLabel(StelObject::CulturalDisplayStyle style) const
 {
 	static StelSkyCultureMgr *scMgr=GETSTELMODULE(StelSkyCultureMgr);
@@ -437,12 +463,19 @@ QString Asterism::getInfoString(const StelCore *core, const InfoStringGroup &fla
 	Q_UNUSED(core)
 	QString str;
 	QTextStream oss(&str);
+	// Strip away HTML elements break and image.
+	static const QRegularExpression br("<br/?>");
+	static const QRegularExpression img("<img .*>");
+	static const QRegularExpression ref("\\[\\#.*\\]");
 
 	if (flags&Name)
 		oss << "<h2>" << getInfoLabel() << "</h2>";
 
 	if (flags&ObjectType)
 		oss << QString("%1: <b>%2</b>").arg(q_("Type"), getObjectTypeI18n()) << "<br />";
+
+	if (flags&Extra && !narration.isEmpty())
+		oss << QString("%1: ").arg(qc_("Origin", "asterism origin")) << StelUtils::wrapText(StelSkyCultureMgr::markdownToHTML(narration).remove(br).remove(img).remove(ref));
 
 	oss << getSolarLunarInfoString(core, flags);
 	postProcessInfoString(str, flags);

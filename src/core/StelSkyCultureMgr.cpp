@@ -27,6 +27,8 @@
 #include "StelLocaleMgr.hpp"
 #include "ConstellationMgr.hpp"
 #include "Constellation.hpp"
+#include "AsterismMgr.hpp"
+#include "Asterism.hpp"
 #include "StelApp.hpp"
 
 #include <md4c-html.h>
@@ -738,7 +740,7 @@ QMap<QString, QString> StelSkyCultureMgr::getDirToI18Map(void) const
 	return dirToTranslationMap;
 }
 
-std::vector<std::pair<QString, QString>> StelSkyCultureMgr::getConstellationsDescriptions(QString consSection) const
+std::vector<std::pair<QString, QString>> StelSkyCultureMgr::getConstellationOrAsterismDescriptions(QString consSection) const
 {
 	//qDebug() << "StelSkyCultureMgr::getConstellationsDescriptions: dissecting:" << consSection;
 	static const QRegularExpression startWithL5Section("^#####[^#]");
@@ -794,7 +796,7 @@ QString StelSkyCultureMgr::convertMarkdownLevel2Section(const QString& markdown,
 		// Legacy way of translating the whole Constellations section didn't work.
 		// Now try the correct way: split the section into descriptions of individual
 		// constellations and translate each of them.
-		const auto map = getConstellationsDescriptions(textEng);
+		const auto map = getConstellationOrAsterismDescriptions(textEng);
 		if (map.empty()) return markdownToHTML(textEng);
 		const auto cMgr = GETSTELMODULE(ConstellationMgr);
 		for (const auto& entry : map)
@@ -809,6 +811,31 @@ QString StelSkyCultureMgr::convertMarkdownLevel2Section(const QString& markdown,
 				reinterpret_cast<Constellation *>(cons.data())->setNarration(trans.qtranslate(entry.second.trimmed()));
 			else
 				qDebug() << "convertMarkdownLevel2Section: cons not found: " << consName;
+		}
+		return textTr;
+	}
+
+	if (textTr.isEmpty() && sectionName == "Asterisms")
+	{
+		//qDebug() << "Processing asterisms... ";
+
+		// Like for constellations, split the section into descriptions of individual
+		// asterisms and translate each of them.
+		const auto map = getConstellationOrAsterismDescriptions(textEng);
+		if (map.empty()) return markdownToHTML(textEng);
+		const auto cMgr = GETSTELMODULE(AsterismMgr);
+		for (const auto& entry : map)
+		{
+			const auto astEngName = entry.first;
+			const auto ast = cMgr->searchByName(astEngName);
+			const auto astName = ast ? ast->getNameI18n().trimmed() : astEngName;
+                        textTr += "<h4>" + astName + "</h4>\n";
+			textTr += markdownToHTML(trans.qtranslate(entry.second.trimmed()));
+
+			if (ast)
+				reinterpret_cast<Asterism *>(ast.data())->setNarration(trans.qtranslate(entry.second.trimmed()));
+			else
+				qDebug() << "convertMarkdownLevel2Section: ast not found: " << astName;
 		}
 		return textTr;
 	}

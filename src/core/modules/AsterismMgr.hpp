@@ -41,19 +41,19 @@ class StelPainter;
 class AsterismMgr : public StelObjectModule
 {
 	Q_OBJECT
-	Q_PROPERTY(int fontSize					READ getFontSize						WRITE setFontSize						NOTIFY fontSizeChanged)
-	Q_PROPERTY(Vec3f linesColor				READ getLinesColor					WRITE setLinesColor					NOTIFY linesColorChanged)
-	Q_PROPERTY(bool linesDisplayed			READ getFlagLines					WRITE setFlagLines					NOTIFY linesDisplayedChanged)
-	Q_PROPERTY(Vec3f rayHelpersColor			READ getRayHelpersColor				WRITE setRayHelpersColor				NOTIFY rayHelpersColorChanged)
-	Q_PROPERTY(bool rayHelpersDisplayed		READ getFlagRayHelpers				WRITE setFlagRayHelpers				NOTIFY rayHelpersDisplayedChanged)
-	Q_PROPERTY(Vec3f namesColor				READ getLabelsColor					WRITE setLabelsColor					NOTIFY namesColorChanged)
-	Q_PROPERTY(bool namesDisplayed			READ getFlagLabels					WRITE setFlagLabels					NOTIFY namesDisplayedChanged)
-	Q_PROPERTY(int asterismLineThickness		READ getAsterismLineThickness			WRITE setAsterismLineThickness			NOTIFY asterismLineThicknessChanged)
-	Q_PROPERTY(int rayHelperThickness			READ getRayHelperThickness			WRITE setRayHelperThickness			NOTIFY rayHelperThicknessChanged)
-	Q_PROPERTY(bool isolateAsterismSelected		READ getFlagIsolateAsterismSelected		WRITE setFlagIsolateAsterismSelected	NOTIFY isolateAsterismSelectedChanged)
-	Q_PROPERTY(float namesFadeDuration		READ getLabelsFadeDuration			WRITE setLabelsFadeDuration			NOTIFY namesFadeDurationChanged)
-	Q_PROPERTY(float linesFadeDuration			READ getLinesFadeDuration				WRITE setLinesFadeDuration			NOTIFY linesFadeDurationChanged)
-	Q_PROPERTY(float rayHelpersFadeDuration	READ getRayHelpersFadeDuration		WRITE setRayHelpersFadeDuration		NOTIFY rayHelpersFadeDurationChanged)
+	Q_PROPERTY(int fontSize                  READ getFontSize                     WRITE setFontSize                     NOTIFY fontSizeChanged)
+	Q_PROPERTY(Vec3f linesColor              READ getLinesColor                   WRITE setLinesColor                   NOTIFY linesColorChanged)
+	Q_PROPERTY(bool linesDisplayed           READ getFlagLines                    WRITE setFlagLines                    NOTIFY linesDisplayedChanged)
+	Q_PROPERTY(Vec3f rayHelpersColor         READ getRayHelpersColor              WRITE setRayHelpersColor              NOTIFY rayHelpersColorChanged)
+	Q_PROPERTY(bool rayHelpersDisplayed      READ getFlagRayHelpers               WRITE setFlagRayHelpers               NOTIFY rayHelpersDisplayedChanged)
+	Q_PROPERTY(Vec3f namesColor              READ getLabelsColor                  WRITE setLabelsColor                  NOTIFY namesColorChanged)
+	Q_PROPERTY(bool namesDisplayed           READ getFlagLabels                   WRITE setFlagLabels                   NOTIFY namesDisplayedChanged)
+	Q_PROPERTY(int asterismLineThickness     READ getAsterismLineThickness        WRITE setAsterismLineThickness        NOTIFY asterismLineThicknessChanged)
+	Q_PROPERTY(int rayHelperThickness        READ getRayHelperThickness           WRITE setRayHelperThickness           NOTIFY rayHelperThicknessChanged)
+	Q_PROPERTY(bool isolateAsterismSelected  READ getFlagIsolateAsterismSelected  WRITE setFlagIsolateAsterismSelected  NOTIFY isolateAsterismSelectedChanged)
+	Q_PROPERTY(float namesFadeDuration       READ getLabelsFadeDuration           WRITE setLabelsFadeDuration           NOTIFY namesFadeDurationChanged)
+	Q_PROPERTY(float linesFadeDuration       READ getLinesFadeDuration            WRITE setLinesFadeDuration            NOTIFY linesFadeDurationChanged)
+	Q_PROPERTY(float rayHelpersFadeDuration	 READ getRayHelpersFadeDuration       WRITE setRayHelpersFadeDuration       NOTIFY rayHelpersFadeDurationChanged)
 
 public:
 	//! Constructor
