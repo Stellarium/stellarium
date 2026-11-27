@@ -2,8 +2,8 @@
     {
         "name": "labelObject",
         "category": "Labels - Object Labels",
-        "signature": "labelObject(QString text, QString objectName, bool visible, float fontSize, QString fontColor, QString side, double labelDistance, QString style, bool autoDelete, int autoDeleteTimeoutMs)",
-        "description": "Creates a text label attached to a celestial object (star, planet, galaxy, constellation, etc.). The label follows the object as it moves across the sky and can be positioned relative to the object with an optional connection line.",
+        "signature": "int labelObject(QString text, QString objectName, bool visible, float fontSize, QString fontColor, QString side, double labelDistance, QString style, bool autoDelete, int autoDeleteTimeoutMs)",
+        "description": "Creates a text label attached to a celestial object (star, planet, galaxy, constellation, etc.) using an HTML-like color string. The label follows the object as it moves across the sky and can be positioned relative to the object with an optional connection line. This overload converts the color string to Vec3f internally and forwards to the Vec3f variant.",
         "parameters": [
             {
                 "name": "text",
@@ -34,14 +34,14 @@
             {
                 "name": "fontColor",
                 "type": "QString",
-                "description": "HTML-like color specification (e.g., '#ffff00' for yellow) or RGB values as '#RRGGBB'",
+                "description": "HTML-like color specification (e.g., '#ffff00' for yellow) or '#RRGGBB'",
                 "required": false,
                 "default": "\"#999999\""
             },
             {
                 "name": "side",
                 "type": "QString",
-                "description": "Position relative to object: 'N' (above), 'S' (below), 'E' (right), 'W' (left), 'NE', 'NW', 'SE', 'SW'",
+                "description": "Position relative to object: 'N' (above), 'S' (below), 'E' (right), 'W' (left), 'NE', 'NW', 'SE', 'SW', or 'C' (centered)",
                 "required": false,
                 "default": "\"E\""
             },
@@ -75,7 +75,7 @@
             }
         ],
         "returnType": "int",
-        "returnDescription": "Unique label ID (returns -1 if object not found)",
+        "returnDescription": "Unique label ID, or -1 if the object was not found",
         "type": "slot",
         "compatibility": {
             "qt5": true,
@@ -88,8 +88,8 @@
     {
         "name": "labelObject",
         "category": "Labels - Object Labels",
-        "signature": "labelObject(QString text, QString objectName, bool visible, float fontSize, Vec3f fontColor, QString side, double labelDistance, QString style, bool autoDelete, int autoDeleteTimeoutMs)",
-        "description": "Creates a text label attached to a celestial object using a Vec3f color vector. The label follows the object as it moves across the sky.",
+        "signature": "int labelObject(QString text, QString objectName, bool visible, float fontSize, Vec3f fontColor, QString side, double labelDistance, QString style, bool autoDelete, int autoDeleteTimeoutMs)",
+        "description": "Creates a text label attached to a celestial object using a Vec3f color vector. The label follows the object as it moves across the sky. This is the base overload; the QString-color variant forwards to it.",
         "parameters": [
             {
                 "name": "text",
@@ -124,7 +124,7 @@
             {
                 "name": "side",
                 "type": "QString",
-                "description": "Position relative to object: 'N', 'S', 'E', 'W', 'NE', 'NW', 'SE', 'SW'",
+                "description": "Position relative to object: 'N', 'S', 'E', 'W', 'NE', 'NW', 'SE', 'SW', or 'C'",
                 "required": false,
                 "default": "\"E\""
             },
@@ -158,7 +158,7 @@
             }
         ],
         "returnType": "int",
-        "returnDescription": "Unique label ID (returns -1 if object not found)",
+        "returnDescription": "Unique label ID, or -1 if the object was not found",
         "type": "slot",
         "compatibility": {
             "qt5": true,
@@ -166,13 +166,13 @@
             "minVersion": "0.10.0",
             "notes": "Works on all Stellarium versions"
         },
-        "example": "// Create a gold-colored label on Venus\nvar gold = core.vec3f(1.0, 0.84, 0.0);\nvar venusLabel = LabelMgr.labelObject(\"Evening Star\", \"Venus\", true, 16, gold, \"NW\");\n\n// Create a bright red label with a line to the Moon\nvar red = core.vec3f(1.0, 0.0, 0.0);\nvar moonLabel = LabelMgr.labelObject(\"🌙 Moon\", \"Moon\", true, 18, red, \"N\", -1, \"Line\");\n\n// Create a purple label for Jupiter\nvar purple = core.vec3f(0.7, 0.3, 0.8);\nvar jupiterLabel = LabelMgr.labelObject(\"Jupiter\", \"Jupiter\", true, 14, purple, \"SE\");"
+        "example": "// Create a gold-colored label on Venus\nvar gold = core.vec3f(1.0, 0.84, 0.0);\nvar venusLabel = LabelMgr.labelObject(\"Evening Star\", \"Venus\", true, 16, gold, \"NW\");\n\n// Create a bright red label with a line to the Moon\nvar red = core.vec3f(1.0, 0.0, 0.0);\nvar moonLabel = LabelMgr.labelObject(\"Moon\", \"Moon\", true, 18, red, \"N\", -1, \"Line\");\n\n// Create a purple label for Jupiter\nvar purple = core.vec3f(0.7, 0.3, 0.8);\nvar jupiterLabel = LabelMgr.labelObject(\"Jupiter\", \"Jupiter\", true, 14, purple, \"SE\");"
     },
     {
         "name": "labelHorizon",
         "category": "Labels - Horizon Labels",
-        "signature": "labelHorizon(QString text, float az, float alt, bool visible, float fontSize, QString fontColor, bool autoDelete, int autoDeleteTimeoutMs)",
-        "description": "Creates a text label fixed to a specific Altitude/Azimuth (horizontal) coordinate. The label stays at that compass direction and altitude as the sky rotates, useful for marking landscape features or cardinal directions.",
+        "signature": "int labelHorizon(QString text, float az, float alt, bool visible, float fontSize, QString fontColor, bool autoDelete, int autoDeleteTimeoutMs)",
+        "description": "Creates a text label fixed to a specific Altitude/Azimuth (horizontal) coordinate using an HTML-like color string. The label stays at that compass direction and altitude as the sky rotates, useful for marking landscape features or cardinal directions. This overload converts the color string to Vec3f internally.",
         "parameters": [
             {
                 "name": "text",
@@ -183,13 +183,13 @@
             {
                 "name": "az",
                 "type": "float",
-                "description": "Azimuth angle in degrees (0° = North, 90° = East, 180° = South, 270° = West)",
+                "description": "Azimuth angle in degrees (0 = North, 90 = East, 180 = South, 270 = West)",
                 "required": true
             },
             {
                 "name": "alt",
                 "type": "float",
-                "description": "Altitude angle in degrees (0° = horizon, 90° = zenith)",
+                "description": "Altitude angle in degrees (0 = horizon, 90 = zenith)",
                 "required": true
             },
             {
@@ -229,21 +229,21 @@
             }
         ],
         "returnType": "int",
-        "returnDescription": "Unique label ID (returns -1 if creation failed)",
+        "returnDescription": "Unique label ID, or -1 if creation failed",
         "type": "slot",
         "compatibility": {
             "qt5": true,
             "qt6": true,
             "minVersion": "0.15.0",
-            "notes": "Horizon labels introduced in Stellarium 0.15.0"
+            "notes": "Horizon labels introduced around Stellarium 0.14/0.15; verify exact version"
         },
-        "example": "// Label the North point on the horizon\nvar northLabel = LabelMgr.labelHorizon(\"North\", 0, 0, true, 16, \"#ffffff\");\n\n// Label the East point\nvar eastLabel = LabelMgr.labelHorizon(\"East\", 90, 0, true, 16, \"#ffffff\");\n\n// Label the South point\nvar southLabel = LabelMgr.labelHorizon(\"South\", 180, 0, true, 16, \"#ffffff\");\n\n// Label the West point\nvar westLabel = LabelMgr.labelHorizon(\"West\", 270, 0, true, 16, \"#ffffff\");\n\n// Label a mountain peak at 30° altitude toward the southwest\nvar mountainLabel = LabelMgr.labelHorizon(\"Mount Everest\", 225, 30, true, 14, \"#88ff88\");\n\n// Create a temporary zenith marker (disappears after 10 seconds)\nvar zenithLabel = LabelMgr.labelHorizon(\"ZENITH\", 0, 90, true, 12, \"#ffff00\", false, 10000);"
+        "example": "// Label the North point on the horizon\nvar northLabel = LabelMgr.labelHorizon(\"North\", 0, 0, true, 16, \"#ffffff\");\n\n// Label the East point\nvar eastLabel = LabelMgr.labelHorizon(\"East\", 90, 0, true, 16, \"#ffffff\");\n\n// Label the South point\nvar southLabel = LabelMgr.labelHorizon(\"South\", 180, 0, true, 16, \"#ffffff\");\n\n// Label the West point\nvar westLabel = LabelMgr.labelHorizon(\"West\", 270, 0, true, 16, \"#ffffff\");\n\n// Label a mountain peak at 30 degrees altitude toward the southwest\nvar mountainLabel = LabelMgr.labelHorizon(\"Mount Everest\", 225, 30, true, 14, \"#88ff88\");\n\n// Create a temporary zenith marker (disappears after 10 seconds)\nvar zenithLabel = LabelMgr.labelHorizon(\"ZENITH\", 0, 90, true, 12, \"#ffff00\", false, 10000);"
     },
     {
         "name": "labelHorizon",
         "category": "Labels - Horizon Labels",
-        "signature": "labelHorizon(QString text, float az, float alt, bool visible, float fontSize, Vec3f fontColor, bool autoDelete, int autoDeleteTimeoutMs)",
-        "description": "Creates a text label fixed to a specific Altitude/Azimuth (horizontal) coordinate using a Vec3f color vector.",
+        "signature": "int labelHorizon(QString text, float az, float alt, bool visible, float fontSize, Vec3f fontColor, bool autoDelete, int autoDeleteTimeoutMs)",
+        "description": "Creates a text label fixed to a specific Altitude/Azimuth (horizontal) coordinate using a Vec3f color vector. This is the base overload; the QString-color variant forwards to it.",
         "parameters": [
             {
                 "name": "text",
@@ -254,13 +254,13 @@
             {
                 "name": "az",
                 "type": "float",
-                "description": "Azimuth angle in degrees",
+                "description": "Azimuth angle in degrees (0 = North, 90 = East, 180 = South, 270 = West)",
                 "required": true
             },
             {
                 "name": "alt",
                 "type": "float",
-                "description": "Altitude angle in degrees",
+                "description": "Altitude angle in degrees (0 = horizon, 90 = zenith)",
                 "required": true
             },
             {
@@ -297,21 +297,21 @@
             }
         ],
         "returnType": "int",
-        "returnDescription": "Unique label ID (returns -1 if creation failed)",
+        "returnDescription": "Unique label ID, or -1 if creation failed",
         "type": "slot",
         "compatibility": {
             "qt5": true,
             "qt6": true,
             "minVersion": "0.15.0",
-            "notes": "Horizon labels introduced in Stellarium 0.15.0"
+            "notes": "Horizon labels introduced around Stellarium 0.14/0.15; verify exact version"
         },
         "example": "// Create a cyan-colored label at the celestial equator on the horizon\nvar cyan = core.vec3f(0.0, 0.8, 0.9);\nvar equatorLabel = LabelMgr.labelHorizon(\"Equator crossing\", 90, 0, true, 14, cyan);\n\n// Create a bright orange label for sunset direction\nvar orange = core.vec3f(1.0, 0.65, 0.0);\nvar sunsetLabel = LabelMgr.labelHorizon(\"Sunset\", 270, 0, true, 16, orange);\n\n// Create a green label for a landmark\nvar green = core.vec3f(0.3, 0.9, 0.3);\nvar landmarkLabel = LabelMgr.labelHorizon(\"My House\", 120, 5, true, 12, green);"
     },
     {
         "name": "labelEquatorial",
         "category": "Labels - Equatorial Labels",
-        "signature": "labelEquatorial(QString text, QString ra, QString dec, bool visible, float fontSize, QString fontColor, QString side, double labelDistance, bool autoDelete, int autoDeleteTimeoutMs, bool j2000epoch)",
-        "description": "Creates a text label fixed to a specific Equatorial coordinate (Right Ascension/Declination). Useful for marking deep-sky object positions or celestial coordinates that stay fixed relative to the stars.",
+        "signature": "int labelEquatorial(QString text, QString ra, QString dec, bool visible, float fontSize, QString fontColor, QString side, double labelDistance, bool autoDelete, int autoDeleteTimeoutMs, bool j2000epoch)",
+        "description": "Creates a text label fixed to a specific Equatorial coordinate (Right Ascension/Declination) using an HTML-like color string. Useful for marking deep-sky object positions or celestial coordinates that stay fixed relative to the stars. The ra and dec strings are parsed by StelUtils::getDecAngle and accept hms/dms forms such as '5h10m31s' and '25d30m30s'. This overload converts the color string to Vec3f internally.",
         "parameters": [
             {
                 "name": "text",
@@ -322,13 +322,13 @@
             {
                 "name": "ra",
                 "type": "QString",
-                "description": "Right Ascension (e.g., '5h10m31s', '82.5°', '2h30m')",
+                "description": "Right Ascension as a string (e.g., '5h10m31s', '2h30m')",
                 "required": true
             },
             {
                 "name": "dec",
                 "type": "QString",
-                "description": "Declination (e.g., '25d30m30s', '-45°', '+30d15m')",
+                "description": "Declination as a string (e.g., '25d30m30s', '-45d', '+30d15m')",
                 "required": true
             },
             {
@@ -355,7 +355,7 @@
             {
                 "name": "side",
                 "type": "QString",
-                "description": "Position relative to coordinate point: 'N', 'S', 'E', 'W', 'NE', 'NW', 'SE', 'SW'",
+                "description": "Position relative to coordinate point: 'N', 'S', 'E', 'W', 'NE', 'NW', 'SE', 'SW', or 'C'",
                 "required": false,
                 "default": "\"\""
             },
@@ -389,7 +389,7 @@
             }
         ],
         "returnType": "int",
-        "returnDescription": "Unique label ID (returns -1 if creation failed)",
+        "returnDescription": "Unique label ID, or -1 if creation failed",
         "type": "slot",
         "compatibility": {
             "qt5": true,
@@ -397,13 +397,13 @@
             "minVersion": "0.12.0",
             "notes": "Works on all Stellarium versions"
         },
-        "example": "// Mark the position of the Andromeda Galaxy (M31)\nvar m31Label = LabelMgr.labelEquatorial(\"Andromeda Galaxy (M31)\", \"0h42m44s\", \"+41°16′09″\", true, 14, \"#ffcc88\", \"NE\");\n\n// Mark the position of the Orion Nebula (M42)\nvar m42Label = LabelMgr.labelEquatorial(\"Orion Nebula (M42)\", \"5h35m17s\", \"-5°23′28″\", true, 12, \"#ff8888\", \"NW\");\n\n// Mark the North Celestial Pole (J2000)\nvar ncpLabel = LabelMgr.labelEquatorial(\"North Celestial Pole\", \"0h\", \"+90°\", true, 14, \"#ffffff\", \"C\");\n\n// Mark the Pleiades (M45)\nvar m45Label = LabelMgr.labelEquatorial(\"Pleiades (M45)\", \"3h47m24s\", \"+24°07′00″\", true, 13, \"#88ccff\", \"N\");\n\n// Mark a position in current date coordinates (not J2000)\nvar customLabel = LabelMgr.labelEquatorial(\"Custom Point\", \"12h30m\", \"+45°\", true, 12, \"#00ff00\", \"E\", -1, false, 0, false);"
+        "example": "// Mark the position of the Andromeda Galaxy (M31)\nvar m31Label = LabelMgr.labelEquatorial(\"Andromeda Galaxy (M31)\", \"0h42m44s\", \"41d16m09s\", true, 14, \"#ffcc88\", \"NE\");\n\n// Mark the position of the Orion Nebula (M42)\nvar m42Label = LabelMgr.labelEquatorial(\"Orion Nebula (M42)\", \"5h35m17s\", \"-5d23m28s\", true, 12, \"#ff8888\", \"NW\");\n\n// Mark the North Celestial Pole (J2000)\nvar ncpLabel = LabelMgr.labelEquatorial(\"North Celestial Pole\", \"0h\", \"90d\", true, 14, \"#ffffff\", \"C\");\n\n// Mark the Pleiades (M45)\nvar m45Label = LabelMgr.labelEquatorial(\"Pleiades (M45)\", \"3h47m24s\", \"24d07m00s\", true, 13, \"#88ccff\", \"N\");\n\n// Mark a position in current date coordinates (not J2000)\nvar customLabel = LabelMgr.labelEquatorial(\"Custom Point\", \"12h30m\", \"45d\", true, 12, \"#00ff00\", \"E\", -1, false, 0, false);"
     },
     {
         "name": "labelEquatorial",
         "category": "Labels - Equatorial Labels",
-        "signature": "labelEquatorial(QString text, QString ra, QString dec, bool visible, float fontSize, Vec3f fontColor, QString side, double labelDistance, bool autoDelete, int autoDeleteTimeoutMs, bool j2000epoch)",
-        "description": "Creates a text label fixed to a specific Equatorial coordinate using a Vec3f color vector.",
+        "signature": "int labelEquatorial(QString text, QString ra, QString dec, bool visible, float fontSize, Vec3f fontColor, QString side, double labelDistance, bool autoDelete, int autoDeleteTimeoutMs, bool j2000epoch)",
+        "description": "Creates a text label fixed to a specific Equatorial coordinate using a Vec3f color vector. The ra and dec strings are parsed by StelUtils::getDecAngle and accept hms/dms forms such as '5h10m31s' and '25d30m30s'. This is the base overload; the QString-color variant forwards to it.",
         "parameters": [
             {
                 "name": "text",
@@ -414,13 +414,13 @@
             {
                 "name": "ra",
                 "type": "QString",
-                "description": "Right Ascension (e.g., '5h10m31s' or '82.5°')",
+                "description": "Right Ascension as a string (e.g., '5h10m31s' or '2h30m')",
                 "required": true
             },
             {
                 "name": "dec",
                 "type": "QString",
-                "description": "Declination (e.g., '25d30m30s' or '-45°')",
+                "description": "Declination as a string (e.g., '25d30m30s' or '-45d')",
                 "required": true
             },
             {
@@ -444,7 +444,7 @@
             {
                 "name": "side",
                 "type": "QString",
-                "description": "Position relative to coordinate point",
+                "description": "Position relative to coordinate point: 'N', 'S', 'E', 'W', 'NE', 'NW', 'SE', 'SW', or 'C'",
                 "required": false,
                 "default": "\"\""
             },
@@ -478,7 +478,7 @@
             }
         ],
         "returnType": "int",
-        "returnDescription": "Unique label ID (returns -1 if creation failed)",
+        "returnDescription": "Unique label ID, or -1 if creation failed",
         "type": "slot",
         "compatibility": {
             "qt5": true,
@@ -486,13 +486,13 @@
             "minVersion": "0.12.0",
             "notes": "Works on all Stellarium versions"
         },
-        "example": "// Mark the galactic center position in gold\nvar gold = core.vec3f(1.0, 0.84, 0.0);\nvar galacticCenter = LabelMgr.labelEquatorial(\"Galactic Center\", \"17h45m40s\", \"-29°00′28″\", true, 16, gold, \"C\");\n\n// Mark the Vega position in light blue\nvar lightBlue = core.vec3f(0.5, 0.7, 1.0);\nvar vegaLabel = LabelMgr.labelEquatorial(\"Vega (α Lyrae)\", \"18h36m56s\", \"+38°47′01″\", true, 14, lightBlue, \"NE\");\n\n// Mark the Crab Nebula (M1) in orange\nvar orange = core.vec3f(1.0, 0.65, 0.0);\nvar crabLabel = LabelMgr.labelEquatorial(\"Crab Nebula (M1)\", \"5h34m32s\", \"+22°00′52″\", true, 12, orange, \"NW\");"
+        "example": "// Mark the galactic center position in gold\nvar gold = core.vec3f(1.0, 0.84, 0.0);\nvar galacticCenter = LabelMgr.labelEquatorial(\"Galactic Center\", \"17h45m40s\", \"-29d00m28s\", true, 16, gold, \"C\");\n\n// Mark the Vega position in light blue\nvar lightBlue = core.vec3f(0.5, 0.7, 1.0);\nvar vegaLabel = LabelMgr.labelEquatorial(\"Vega (alpha Lyrae)\", \"18h36m56s\", \"38d47m01s\", true, 14, lightBlue, \"NE\");\n\n// Mark the Crab Nebula (M1) in orange\nvar orange = core.vec3f(1.0, 0.65, 0.0);\nvar crabLabel = LabelMgr.labelEquatorial(\"Crab Nebula (M1)\", \"5h34m32s\", \"22d00m52s\", true, 12, orange, \"NW\");"
     },
     {
         "name": "labelScreen",
         "category": "Labels - Screen Labels",
-        "signature": "labelScreen(QString text, int x, int y, bool visible, float fontSize, QString fontColor, bool autoDelete, int autoDeleteTimeoutMs)",
-        "description": "Creates a text label fixed to a specific pixel position on the screen. The label stays at the same screen coordinates regardless of sky movement, useful for UI messages, headers, or status displays.",
+        "signature": "int labelScreen(QString text, int x, int y, bool visible, float fontSize, QString fontColor, bool autoDelete, int autoDeleteTimeoutMs)",
+        "description": "Creates a text label fixed to a specific pixel position on the screen using an HTML-like color string. The label stays at the same screen coordinates regardless of sky movement, useful for UI messages, headers, or status displays. The y coordinate is measured from the top edge of the screen. This overload converts the color string to Vec3f internally.",
         "parameters": [
             {
                 "name": "text",
@@ -549,7 +549,7 @@
             }
         ],
         "returnType": "int",
-        "returnDescription": "Unique label ID (returns -1 if creation failed)",
+        "returnDescription": "Unique label ID, or -1 if creation failed",
         "type": "slot",
         "compatibility": {
             "qt5": true,
@@ -557,13 +557,13 @@
             "minVersion": "0.10.0",
             "notes": "Works on all Stellarium versions"
         },
-        "example": "// Create a title banner at the top of the screen\nvar titleLabel = LabelMgr.labelScreen(\"★ My Stellarium Presentation ★\", 10, 10, true, 20, \"#ffcc00\");\n\n// Get screen dimensions using core functions\nvar screenWidth = core.getScreenWidth();\nvar screenHeight = core.getScreenHeight();\n\n// Create a status message at the bottom-left corner\nvar statusLabel = LabelMgr.labelScreen(\"Tracking Mars...\", 10, screenHeight - 30, true, 12, \"#88ff88\");\n\n// Create a centered title\nvar centeredTitle = LabelMgr.labelScreen(\"Welcome!\", screenWidth / 2 - 50, 50, true, 24, \"#ffffff\");\n\n// Create a temporary notification (auto-deletes after 3 seconds)\nvar notification = LabelMgr.labelScreen(\"Event recorded!\", 100, 100, true, 16, \"#ffffff\", false, 3000);\n\n// Hide the title later\nLabelMgr.setLabelShow(titleLabel, false);\n\n// Update label text dynamically\nLabelMgr.setLabelText(statusLabel, \"Tracking Jupiter...\");"
+        "example": "// Create a title banner at the top of the screen\nvar titleLabel = LabelMgr.labelScreen(\"My Stellarium Presentation\", 10, 10, true, 20, \"#ffcc00\");\n\n// Get screen dimensions using core functions\nvar screenWidth = core.getScreenWidth();\nvar screenHeight = core.getScreenHeight();\n\n// Create a status message at the bottom-left corner\nvar statusLabel = LabelMgr.labelScreen(\"Tracking Mars...\", 10, screenHeight - 30, true, 12, \"#88ff88\");\n\n// Create a centered title\nvar centeredTitle = LabelMgr.labelScreen(\"Welcome!\", screenWidth / 2 - 50, 50, true, 24, \"#ffffff\");\n\n// Create a temporary notification (auto-deletes after 3 seconds)\nvar notification = LabelMgr.labelScreen(\"Event recorded!\", 100, 100, true, 16, \"#ffffff\", false, 3000);\n\n// Hide the title later\nLabelMgr.setLabelShow(titleLabel, false);\n\n// Update label text dynamically\nLabelMgr.setLabelText(statusLabel, \"Tracking Jupiter...\");"
     },
     {
         "name": "labelScreen",
         "category": "Labels - Screen Labels",
-        "signature": "labelScreen(QString text, int x, int y, bool visible, float fontSize, Vec3f fontColor, bool autoDelete, int autoDeleteTimeoutMs)",
-        "description": "Creates a text label fixed to a specific pixel position on the screen using a Vec3f color vector.",
+        "signature": "int labelScreen(QString text, int x, int y, bool visible, float fontSize, Vec3f fontColor, bool autoDelete, int autoDeleteTimeoutMs)",
+        "description": "Creates a text label fixed to a specific pixel position on the screen using a Vec3f color vector. The y coordinate is measured from the top edge of the screen. This is the base overload; the QString-color variant forwards to it.",
         "parameters": [
             {
                 "name": "text",
@@ -617,7 +617,7 @@
             }
         ],
         "returnType": "int",
-        "returnDescription": "Unique label ID (returns -1 if creation failed)",
+        "returnDescription": "Unique label ID, or -1 if creation failed",
         "type": "slot",
         "compatibility": {
             "qt5": true,
@@ -625,7 +625,7 @@
             "minVersion": "0.10.0",
             "notes": "Works on all Stellarium versions"
         },
-        "example": "// Create a centered title in gold color\nvar gold = core.vec3f(1.0, 0.84, 0.0);\nvar screenWidth = core.getScreenWidth();\nvar titleLabel = LabelMgr.labelScreen(\"Welcome to Stellarium\", screenWidth / 2 - 100, 20, true, 24, gold);\n\n// Create a footer in cyan\nvar cyan = core.vec3f(0.0, 0.8, 0.9);\nvar screenHeight = core.getScreenHeight();\nvar footerLabel = LabelMgr.labelScreen(\"Press F1 for help\", 10, screenHeight - 25, true, 10, cyan);\n\n// Create a warning message in red\nvar red = core.vec3f(1.0, 0.2, 0.2);\nvar warningLabel = LabelMgr.labelScreen(\"⚠ Warning: Low Battery\", screenWidth - 200, 10, true, 12, red, false, 5000);"
+        "example": "// Create a centered title in gold color\nvar gold = core.vec3f(1.0, 0.84, 0.0);\nvar screenWidth = core.getScreenWidth();\nvar titleLabel = LabelMgr.labelScreen(\"Welcome to Stellarium\", screenWidth / 2 - 100, 20, true, 24, gold);\n\n// Create a footer in cyan\nvar cyan = core.vec3f(0.0, 0.8, 0.9);\nvar screenHeight = core.getScreenHeight();\nvar footerLabel = LabelMgr.labelScreen(\"Press F1 for help\", 10, screenHeight - 25, true, 10, cyan);\n\n// Create a warning message in red\nvar red = core.vec3f(1.0, 0.2, 0.2);\nvar warningLabel = LabelMgr.labelScreen(\"Warning: Low Battery\", screenWidth - 200, 10, true, 12, red, false, 5000);"
     },
     {
         "name": "getLabelShow",
@@ -654,8 +654,8 @@
     {
         "name": "setLabelShow",
         "category": "Labels - Control",
-        "signature": "setLabelShow(int id, bool show)",
-        "description": "Shows or hides an existing label by its ID. The label fades in/out smoothly.",
+        "signature": "void setLabelShow(int id, bool show)",
+        "description": "Shows or hides an existing label by its ID. The label fades in/out smoothly. Silently ignored if the ID does not exist.",
         "parameters": [
             {
                 "name": "id",
@@ -684,8 +684,8 @@
     {
         "name": "setLabelText",
         "category": "Labels - Control",
-        "signature": "setLabelText(int id, QString newText)",
-        "description": "Changes the text content of an existing label. Useful for updating status messages, counters, or dynamic information without creating a new label.",
+        "signature": "void setLabelText(int id, QString newText)",
+        "description": "Changes the text content of an existing label. Useful for updating status messages, counters, or dynamic information without creating a new label. Silently ignored if the ID does not exist.",
         "parameters": [
             {
                 "name": "id",
@@ -709,13 +709,13 @@
             "minVersion": "0.10.0",
             "notes": "Works on all Stellarium versions"
         },
-        "example": "// Create a label that updates dynamically\nvar counterLabel = LabelMgr.labelScreen(\"Count: 0\", 10, 10, true, 14, \"#ffffff\");\n\n// Simple counter using loop (Note: core.wait in loop may not work as expected in all versions)\nLabelMgr.setLabelText(counterLabel, \"Count: 1\");\ncore.wait(1);\nLabelMgr.setLabelText(counterLabel, \"Count: 2\");\ncore.wait(1);\nLabelMgr.setLabelText(counterLabel, \"Count: 3\");\n\n// Update an object label with current altitude information\nvar marsLabel = LabelMgr.labelObject(\"Mars\", \"Mars\", true);\nvar marsInfo = core.getObjectInfo(\"Mars\");\nif(marsInfo) {\n    var altDegrees = parseFloat(marsInfo[\"altitude\"]);\n    LabelMgr.setLabelText(marsLabel, \"Mars - Alt: \" + altDegrees.toFixed(1) + \"°\");\n}"
+        "example": "// Create a label that updates dynamically\nvar counterLabel = LabelMgr.labelScreen(\"Count: 0\", 10, 10, true, 14, \"#ffffff\");\n\nLabelMgr.setLabelText(counterLabel, \"Count: 1\");\ncore.wait(1);\nLabelMgr.setLabelText(counterLabel, \"Count: 2\");\ncore.wait(1);\nLabelMgr.setLabelText(counterLabel, \"Count: 3\");\n\n// Update an object label with current altitude information\nvar marsLabel = LabelMgr.labelObject(\"Mars\", \"Mars\", true);\nvar marsInfo = core.getObjectInfo(\"Mars\");\nif(marsInfo) {\n    var altDegrees = parseFloat(marsInfo[\"altitude\"]);\n    LabelMgr.setLabelText(marsLabel, \"Mars - Alt: \" + altDegrees.toFixed(1) + \" deg\");\n}"
     },
     {
         "name": "deleteLabel",
         "category": "Labels - Control",
-        "signature": "deleteLabel(int id)",
-        "description": "Permanently deletes a label by its ID. The label is removed from memory and will no longer be displayed. Useful for cleaning up labels that are no longer needed.",
+        "signature": "void deleteLabel(int id)",
+        "description": "Permanently deletes a label by its ID. The label is removed from memory and will no longer be displayed. Silently ignored if the ID does not exist. Useful for cleaning up labels that are no longer needed.",
         "parameters": [
             {
                 "name": "id",
@@ -725,7 +725,7 @@
             }
         ],
         "returnType": "void",
-        "returnDescription": "none",
+        "returnDescription": "none; silently ignored if the ID does not exist",
         "type": "slot",
         "compatibility": {
             "qt5": true,
@@ -733,7 +733,7 @@
             "minVersion": "0.10.0",
             "notes": "Works on all Stellarium versions"
         },
-        "example": "// Create a temporary label\nvar tempLabel = LabelMgr.labelObject(\"Temporary Note\", \"Saturn\", true);\n\n// Wait 5 seconds (simulate a long operation)\ncore.debug(\"Label created, waiting 5 seconds...\");\n\n// In a real script, you would use core.wait() or a timer\n// For this example, we assume 5 seconds have passed\n\n// Delete it\nLabelMgr.deleteLabel(tempLabel);\ncore.debug(\"Label deleted\");\n\n// Safe deletion with existence check (deleteLabel does nothing for invalid IDs)\nLabelMgr.deleteLabel(99999); // No error, just ignored"
+        "example": "// Create a temporary label\nvar tempLabel = LabelMgr.labelObject(\"Temporary Note\", \"Saturn\", true);\n\ncore.debug(\"Label created\");\n\n// Delete it\nLabelMgr.deleteLabel(tempLabel);\ncore.debug(\"Label deleted\");\n\n// Safe deletion with existence check (deleteLabel does nothing for invalid IDs)\nLabelMgr.deleteLabel(99999); // No error, just ignored"
     },
     {
         "name": "deleteAllLabels",

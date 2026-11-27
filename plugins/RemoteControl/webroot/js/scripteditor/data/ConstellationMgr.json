@@ -79,7 +79,7 @@
         "name": "setArtIntensity",
         "category": "Constellations - Display Control",
         "signature": "setArtIntensity(float intensity)",
-        "description": "Sets the maximum intensity (brightness/opacity) of constellation artwork. Values range from 0 (fully transparent) to 1 (fully opaque). The intensity also fades based on field of view settings.",
+        "description": "Sets the maximum intensity (brightness/opacity) of constellation artwork. Values range from 0 (fully transparent) to 1 (fully opaque). The intensity also fades based on field of view settings controlled by setArtIntensityMinimumFov() and setArtIntensityMaximumFov().",
         "parameters": [
             {
                 "name": "intensity",
@@ -117,7 +117,7 @@
         "name": "setArtIntensityMinimumFov",
         "category": "Constellations - Advanced Settings",
         "signature": "setArtIntensityMinimumFov(double fov)",
-        "description": "Sets the lower bound on the field of view (FOV) at which the art intensity fades to zero. Below this FOV, artwork becomes fully transparent.",
+        "description": "Sets the lower bound on the field of view (FOV) at which the art intensity fades to zero. Below this FOV, artwork becomes fully transparent. See LP:#1294483. The default is 1.0.",
         "parameters": [
             {
                 "name": "fov",
@@ -139,7 +139,7 @@
         "name": "getArtIntensityMinimumFov",
         "category": "Constellations - Advanced Settings",
         "signature": "double getArtIntensityMinimumFov()",
-        "description": "Returns the lower bound FOV at which artwork intensity fades to zero.",
+        "description": "Returns the lower bound FOV at which artwork intensity fades to zero. The default is 1.0.",
         "parameters": [],
         "returnType": "double",
         "returnDescription": "Minimum FOV in degrees",
@@ -149,13 +149,13 @@
             "qt6": true,
             "minVersion": "0.15.0"
         },
-        "example": "var minFov = ConstellationMgr.getArtIntensityMinimumFov();"
+        "example": "var minFov = ConstellationMgr.getArtIntensityMinimumFov();\ncore.debug(\"Art min FOV: \" + minFov);"
     },
     {
         "name": "setArtIntensityMaximumFov",
         "category": "Constellations - Advanced Settings",
         "signature": "setArtIntensityMaximumFov(double fov)",
-        "description": "Sets the upper bound on the field of view (FOV) at which the art intensity reaches its maximum value (set by setArtIntensity).",
+        "description": "Sets the upper bound on the field of view (FOV) at which the art intensity reaches its maximum value (set by setArtIntensity). See LP:#1294483. The default is 2.0.",
         "parameters": [
             {
                 "name": "fov",
@@ -171,13 +171,13 @@
             "qt6": true,
             "minVersion": "0.15.0"
         },
-        "example": "ConstellationMgr.setArtIntensityMaximumFov(3.0);\nvar maxFov = ConstellationMgr.getArtIntensityMaximumFov();"
+        "example": "ConstellationMgr.setArtIntensityMaximumFov(3.0);\nvar maxFov = ConstellationMgr.getArtIntensityMaximumFov();\ncore.debug(\"Art max FOV: \" + maxFov);"
     },
     {
         "name": "getArtIntensityMaximumFov",
         "category": "Constellations - Advanced Settings",
         "signature": "double getArtIntensityMaximumFov()",
-        "description": "Returns the upper bound FOV at which artwork intensity reaches maximum.",
+        "description": "Returns the upper bound FOV at which artwork intensity reaches maximum. The default is 2.0.",
         "parameters": [],
         "returnType": "double",
         "returnDescription": "Maximum FOV in degrees",
@@ -187,13 +187,13 @@
             "qt6": true,
             "minVersion": "0.15.0"
         },
-        "example": "var maxFov = ConstellationMgr.getArtIntensityMaximumFov();"
+        "example": "var maxFov = ConstellationMgr.getArtIntensityMaximumFov();\ncore.debug(\"Art max FOV: \" + maxFov);"
     },
     {
         "name": "setBoundariesColor",
         "category": "Constellations - Colors & Appearance",
         "signature": "setBoundariesColor(Vec3f color)",
-        "description": "Sets the color of constellation boundaries (the official IAU constellation borders).",
+        "description": "Sets the color of constellation boundaries (the official IAU constellation borders). Accepts a Vec3f RGB vector with components between 0.0 and 1.0.",
         "parameters": [
             {
                 "name": "color",
@@ -209,23 +209,23 @@
             "qt6": true,
             "minVersion": "0.10.0"
         },
-        "example": "var red = core.vec3f(1.0, 0.0, 0.0);\nConstellationMgr.setBoundariesColor(red);\n\nvar color = ConstellationMgr.getBoundariesColor();\ncore.debug(\"Boundaries color: RGB\" + color);"
+        "example": "// Method 1: simple literal via core.vec3f (both Qt5 and Qt6)\nConstellationMgr.setBoundariesColor(core.vec3f(1.0, 0.0, 0.0));\n\n// Method 2: Color wrapper (recommended when computing/modifying)\nvar c = new Color(0.8, 0.3, 0.3);\nConstellationMgr.setBoundariesColor(c.toVec3f());\n\n// Read back safely\nvar current = new Color(ConstellationMgr.getBoundariesColor());\ncore.debug(\"Boundaries color: \" + current.toRGBString());"
     },
     {
         "name": "getBoundariesColor",
         "category": "Constellations - Colors & Appearance",
         "signature": "Vec3f getBoundariesColor()",
-        "description": "Returns the current color of constellation boundaries.",
+        "description": "Returns the current color of constellation boundaries. The result is a Vec3f and MUST be wrapped in new Color(...) before reading its components on Qt6.",
         "parameters": [],
         "returnType": "Vec3f",
-        "returnDescription": "RGB color vector",
+        "returnDescription": "RGB color vector (wrap in new Color(...) to inspect)",
         "type": "method",
         "compatibility": {
             "qt5": true,
             "qt6": true,
             "minVersion": "0.10.0"
         },
-        "example": "var color = ConstellationMgr.getBoundariesColor();\ncore.debug(\"Boundaries color: RGB\" + color);"
+        "example": "var color = new Color(ConstellationMgr.getBoundariesColor());\ncore.debug(\"Boundaries color: \" + color.toRGBString());\ncore.debug(\"Hex: \" + color.toHex());\n\nvar r = color.getR();\nvar g = color.getG();\nvar b = color.getB();\ncore.debug(\"R=\" + r + \" G=\" + g + \" B=\" + b);"
     },
     {
         "name": "setFlagBoundaries",
@@ -281,11 +281,11 @@
         "returnType": "void",
         "type": "slot",
         "compatibility": {
-            "qt5": true,
+            "qt5": false,
             "qt6": true,
             "minVersion": "0.15.0"
         },
-        "example": "ConstellationMgr.setBoundariesFadeDuration(1.5);\nConstellationMgr.setFlagBoundaries(true);\n\nvar fade = ConstellationMgr.getBoundariesFadeDuration();"
+        "example": "ConstellationMgr.setBoundariesFadeDuration(1.5);\nConstellationMgr.setFlagBoundaries(true);\n\nvar fade = ConstellationMgr.getBoundariesFadeDuration();\ncore.debug(\"Boundaries fade: \" + fade);"
     },
     {
         "name": "getBoundariesFadeDuration",
@@ -301,13 +301,13 @@
             "qt6": true,
             "minVersion": "0.15.0"
         },
-        "example": "var fade = ConstellationMgr.getBoundariesFadeDuration();"
+        "example": "var fade = ConstellationMgr.getBoundariesFadeDuration();\ncore.debug(\"Boundaries fade: \" + fade);"
     },
     {
         "name": "setBoundariesThickness",
         "category": "Constellations - Colors & Appearance",
         "signature": "setBoundariesThickness(int thickness)",
-        "description": "Sets the thickness of constellation boundary lines in pixels.",
+        "description": "Sets the thickness of constellation boundary lines in pixels. Values below 1 are clamped to 1.",
         "parameters": [
             {
                 "name": "thickness",
@@ -339,13 +339,13 @@
             "qt6": true,
             "minVersion": "0.15.0"
         },
-        "example": "var thickness = ConstellationMgr.getBoundariesThickness();"
+        "example": "var thickness = ConstellationMgr.getBoundariesThickness();\ncore.debug(\"Boundaries thickness: \" + thickness);"
     },
     {
         "name": "setFlagIsolateSelected",
         "category": "Constellations - Selection & Isolation",
         "signature": "setFlagIsolateSelected(bool isolate)",
-        "description": "Enables or disables isolation mode for selected constellations. When enabled, only selected constellations are shown; all others are hidden.",
+        "description": "Enables or disables isolation mode for selected constellations. When enabled, only selected constellations are shown; all others are hidden. Note: selectConstellation() and selectConstellationByObjectName() automatically enable this mode.",
         "parameters": [
             {
                 "name": "isolate",
@@ -361,7 +361,7 @@
             "qt6": true,
             "minVersion": "0.10.0"
         },
-        "example": "ConstellationMgr.setFlagIsolateSelected(true);\nConstellationMgr.selectConstellation(\"Orion\");\n\nvar isIsolated = ConstellationMgr.getFlagIsolateSelected();"
+        "example": "ConstellationMgr.setFlagIsolateSelected(true);\nConstellationMgr.selectConstellation(\"Orion\");\n\nvar isIsolated = ConstellationMgr.getFlagIsolateSelected();\ncore.debug(\"Isolation active: \" + isIsolated);"
     },
     {
         "name": "getFlagIsolateSelected",
@@ -383,7 +383,7 @@
         "name": "setFlagConstellationPick",
         "category": "Constellations - Selection & Isolation",
         "signature": "setFlagConstellationPick(bool mode)",
-        "description": "Sets whether only one selected constellation should be displayed at a time when isolation mode is active. When enabled, selecting a new constellation replaces the previous selection.",
+        "description": "Sets whether only one selected constellation should be displayed at a time when isolation mode is active. When enabled, selecting a new constellation replaces the previous selection. Works together with setFlagIsolateSelected().",
         "parameters": [
             {
                 "name": "mode",
@@ -399,7 +399,7 @@
             "qt6": true,
             "minVersion": "0.15.0"
         },
-        "example": "ConstellationMgr.setFlagConstellationPick(true);\nConstellationMgr.setFlagIsolateSelected(true);\nConstellationMgr.selectConstellation(\"Orion\");\n\nvar pickMode = ConstellationMgr.getFlagConstellationPick();"
+        "example": "ConstellationMgr.setFlagConstellationPick(true);\nConstellationMgr.setFlagIsolateSelected(true);\nConstellationMgr.selectConstellation(\"Orion\");\n\nvar pickMode = ConstellationMgr.getFlagConstellationPick();\ncore.debug(\"Single pick mode: \" + pickMode);"
     },
     {
         "name": "getFlagConstellationPick",
@@ -437,23 +437,23 @@
             "qt6": true,
             "minVersion": "0.10.0"
         },
-        "example": "var cyan = core.vec3f(0.0, 0.8, 0.9);\nConstellationMgr.setLinesColor(cyan);\n\nvar color = ConstellationMgr.getLinesColor();\ncore.debug(\"Lines color: RGB\" + color);"
+        "example": "// Method 1: core.vec3f literal\nConstellationMgr.setLinesColor(core.vec3f(0.0, 0.8, 0.9));\n\n// Method 2: Color wrapper\nvar cyan = new Color(0.0, 0.8, 0.9);\nConstellationMgr.setLinesColor(cyan.toVec3f());\n\n// Read back\nvar current = new Color(ConstellationMgr.getLinesColor());\ncore.debug(\"Lines color: \" + current.toRGBString());"
     },
     {
         "name": "getLinesColor",
         "category": "Constellations - Colors & Appearance",
         "signature": "Vec3f getLinesColor()",
-        "description": "Returns the current color of constellation lines.",
+        "description": "Returns the current color of constellation lines. The result is a Vec3f and MUST be wrapped in new Color(...) before reading its components on Qt6.",
         "parameters": [],
         "returnType": "Vec3f",
-        "returnDescription": "RGB color vector",
+        "returnDescription": "RGB color vector (wrap in new Color(...) to inspect)",
         "type": "method",
         "compatibility": {
             "qt5": true,
             "qt6": true,
             "minVersion": "0.10.0"
         },
-        "example": "var color = ConstellationMgr.getLinesColor();\ncore.debug(\"Lines color: RGB\" + color);"
+        "example": "var color = new Color(ConstellationMgr.getLinesColor());\ncore.debug(\"Lines color: \" + color.toRGBString());\ncore.debug(\"Hex: \" + color.toHex());\n\nvar r = color.getR();\nvar g = color.getG();\nvar b = color.getB();\ncore.debug(\"R=\" + r + \" G=\" + g + \" B=\" + b);"
     },
     {
         "name": "setFlagLines",
@@ -513,7 +513,7 @@
             "qt6": true,
             "minVersion": "0.15.0"
         },
-        "example": "ConstellationMgr.setLinesFadeDuration(1.0);\nvar fade = ConstellationMgr.getLinesFadeDuration();"
+        "example": "ConstellationMgr.setLinesFadeDuration(1.0);\nvar fade = ConstellationMgr.getLinesFadeDuration();\ncore.debug(\"Lines fade: \" + fade);"
     },
     {
         "name": "getLinesFadeDuration",
@@ -529,13 +529,13 @@
             "qt6": true,
             "minVersion": "0.15.0"
         },
-        "example": "var fade = ConstellationMgr.getLinesFadeDuration();"
+        "example": "var fade = ConstellationMgr.getLinesFadeDuration();\ncore.debug(\"Lines fade: \" + fade);"
     },
     {
         "name": "setConstellationLineThickness",
         "category": "Constellations - Colors & Appearance",
         "signature": "setConstellationLineThickness(int thickness)",
-        "description": "Sets the thickness of constellation lines in pixels.",
+        "description": "Sets the thickness of constellation lines in pixels. Values below 1 are clamped to 1.",
         "parameters": [
             {
                 "name": "thickness",
@@ -567,7 +567,7 @@
             "qt6": true,
             "minVersion": "0.15.0"
         },
-        "example": "var thickness = ConstellationMgr.getConstellationLineThickness();"
+        "example": "var thickness = ConstellationMgr.getConstellationLineThickness();\ncore.debug(\"Line thickness: \" + thickness);"
     },
     {
         "name": "setLabelsColor",
@@ -589,23 +589,23 @@
             "qt6": true,
             "minVersion": "0.10.0"
         },
-        "example": "var white = core.vec3f(1.0, 1.0, 1.0);\nConstellationMgr.setLabelsColor(white);\n\nvar color = ConstellationMgr.getLabelsColor();\ncore.debug(\"Labels color: RGB\" + color);"
+        "example": "// Method 1: core.vec3f literal\nConstellationMgr.setLabelsColor(core.vec3f(1.0, 1.0, 1.0));\n\n// Method 2: Color wrapper\nvar white = new Color(1.0, 1.0, 1.0);\nConstellationMgr.setLabelsColor(white.toVec3f());\n\n// Read back\nvar current = new Color(ConstellationMgr.getLabelsColor());\ncore.debug(\"Labels color: \" + current.toRGBString());"
     },
     {
         "name": "getLabelsColor",
         "category": "Constellations - Colors & Appearance",
         "signature": "Vec3f getLabelsColor()",
-        "description": "Returns the current color of constellation labels.",
+        "description": "Returns the current color of constellation labels. The result is a Vec3f and MUST be wrapped in new Color(...) before reading its components on Qt6.",
         "parameters": [],
         "returnType": "Vec3f",
-        "returnDescription": "RGB color vector",
+        "returnDescription": "RGB color vector (wrap in new Color(...) to inspect)",
         "type": "method",
         "compatibility": {
             "qt5": true,
             "qt6": true,
             "minVersion": "0.10.0"
         },
-        "example": "var color = ConstellationMgr.getLabelsColor();"
+        "example": "var color = new Color(ConstellationMgr.getLabelsColor());\ncore.debug(\"Labels color: \" + color.toRGBString());\ncore.debug(\"Hex: \" + color.toHex());\n\nvar r = color.getR();\nvar g = color.getG();\nvar b = color.getB();\ncore.debug(\"R=\" + r + \" G=\" + g + \" B=\" + b);"
     },
     {
         "name": "setFlagLabels",
@@ -665,7 +665,7 @@
             "qt6": true,
             "minVersion": "0.15.0"
         },
-        "example": "ConstellationMgr.setLabelsFadeDuration(1.0);\nvar fade = ConstellationMgr.getLabelsFadeDuration();"
+        "example": "ConstellationMgr.setLabelsFadeDuration(1.0);\nvar fade = ConstellationMgr.getLabelsFadeDuration();\ncore.debug(\"Labels fade: \" + fade);"
     },
     {
         "name": "getLabelsFadeDuration",
@@ -681,7 +681,7 @@
             "qt6": true,
             "minVersion": "0.15.0"
         },
-        "example": "var fade = ConstellationMgr.getLabelsFadeDuration();"
+        "example": "var fade = ConstellationMgr.getLabelsFadeDuration();\ncore.debug(\"Labels fade: \" + fade);"
     },
     {
         "name": "setFontSize",
@@ -719,7 +719,7 @@
             "qt6": true,
             "minVersion": "0.10.0"
         },
-        "example": "var fontSize = ConstellationMgr.getFontSize();"
+        "example": "var fontSize = ConstellationMgr.getFontSize();\ncore.debug(\"Font size: \" + fontSize);"
     },
     {
         "name": "setFlagHulls",
@@ -779,23 +779,23 @@
             "qt6": true,
             "minVersion": "0.15.0"
         },
-        "example": "var red = core.vec3f(1.0, 0.0, 0.0);\nConstellationMgr.setHullsColor(red);\n\nvar color = ConstellationMgr.getHullsColor();"
+        "example": "// Method 1: core.vec3f literal\nConstellationMgr.setHullsColor(core.vec3f(0.6, 0.2, 0.2));\n\n// Method 2: Color wrapper\nvar red = new Color(1.0, 0.0, 0.0);\nConstellationMgr.setHullsColor(red.toVec3f());\n\n// Read back\nvar current = new Color(ConstellationMgr.getHullsColor());\ncore.debug(\"Hulls color: \" + current.toRGBString());"
     },
     {
         "name": "getHullsColor",
         "category": "Constellations - Colors & Appearance",
         "signature": "Vec3f getHullsColor()",
-        "description": "Returns the current color of constellation hulls.",
+        "description": "Returns the current color of constellation hulls. The result is a Vec3f and MUST be wrapped in new Color(...) before reading its components on Qt6.",
         "parameters": [],
         "returnType": "Vec3f",
-        "returnDescription": "RGB color vector",
+        "returnDescription": "RGB color vector (wrap in new Color(...) to inspect)",
         "type": "method",
         "compatibility": {
             "qt5": false,
             "qt6": true,
             "minVersion": "0.15.0"
         },
-        "example": "var color = ConstellationMgr.getHullsColor();"
+        "example": "var color = new Color(ConstellationMgr.getHullsColor());\ncore.debug(\"Hulls color: \" + color.toRGBString());\ncore.debug(\"Hex: \" + color.toHex());\n\nvar r = color.getR();\nvar g = color.getG();\nvar b = color.getB();\ncore.debug(\"R=\" + r + \" G=\" + g + \" B=\" + b);"
     },
     {
         "name": "setHullsFadeDuration",
@@ -817,7 +817,7 @@
             "qt6": true,
             "minVersion": "0.15.0"
         },
-        "example": "ConstellationMgr.setHullsFadeDuration(1.5);\nvar fade = ConstellationMgr.getHullsFadeDuration();"
+        "example": "ConstellationMgr.setHullsFadeDuration(1.5);\nvar fade = ConstellationMgr.getHullsFadeDuration();\ncore.debug(\"Hulls fade: \" + fade);"
     },
     {
         "name": "getHullsFadeDuration",
@@ -833,13 +833,13 @@
             "qt6": true,
             "minVersion": "0.15.0"
         },
-        "example": "var fade = ConstellationMgr.getHullsFadeDuration();"
+        "example": "var fade = ConstellationMgr.getHullsFadeDuration();\ncore.debug(\"Hulls fade: \" + fade);"
     },
     {
         "name": "setHullsThickness",
         "category": "Constellations - Colors & Appearance",
         "signature": "setHullsThickness(int thickness)",
-        "description": "Sets the thickness of constellation hull lines in pixels.",
+        "description": "Sets the thickness of constellation hull lines in pixels. Values below 1 are clamped to 1.",
         "parameters": [
             {
                 "name": "thickness",
@@ -855,7 +855,7 @@
             "qt6": true,
             "minVersion": "0.15.0"
         },
-        "example": "ConstellationMgr.setHullsThickness(2);\nvar thickness = ConstellationMgr.getHullsThickness();"
+        "example": "ConstellationMgr.setHullsThickness(2);\nvar thickness = ConstellationMgr.getHullsThickness();\ncore.debug(\"Hulls thickness: \" + thickness);"
     },
     {
         "name": "getHullsThickness",
@@ -871,7 +871,7 @@
             "qt6": true,
             "minVersion": "0.15.0"
         },
-        "example": "var thickness = ConstellationMgr.getHullsThickness();"
+        "example": "var thickness = ConstellationMgr.getHullsThickness();\ncore.debug(\"Hulls thickness: \" + thickness);"
     },
     {
         "name": "setZodiacColor",
@@ -893,23 +893,23 @@
             "qt6": true,
             "minVersion": "0.15.0"
         },
-        "example": "var gold = core.vec3f(1.0, 0.84, 0.0);\nConstellationMgr.setZodiacColor(gold);\n\nvar color = ConstellationMgr.getZodiacColor();"
+        "example": "// Method 1: core.vec3f literal\nConstellationMgr.setZodiacColor(core.vec3f(1.0, 0.84, 0.0));\n\n// Method 2: Color wrapper\nvar gold = new Color(1.0, 0.84, 0.0);\nConstellationMgr.setZodiacColor(gold.toVec3f());\n\n// Read back\nvar current = new Color(ConstellationMgr.getZodiacColor());\ncore.debug(\"Zodiac color: \" + current.toRGBString());"
     },
     {
         "name": "getZodiacColor",
         "category": "Constellations - Colors & Appearance (Cultural)",
         "signature": "Vec3f getZodiacColor()",
-        "description": "Returns the current color of zodiac lines.",
+        "description": "Returns the current color of zodiac lines. The result is a Vec3f and MUST be wrapped in new Color(...) before reading its components on Qt6.",
         "parameters": [],
         "returnType": "Vec3f",
-        "returnDescription": "RGB color vector",
+        "returnDescription": "RGB color vector (wrap in new Color(...) to inspect)",
         "type": "method",
         "compatibility": {
             "qt5": false,
             "qt6": true,
             "minVersion": "0.15.0"
         },
-        "example": "var color = ConstellationMgr.getZodiacColor();"
+        "example": "var color = new Color(ConstellationMgr.getZodiacColor());\ncore.debug(\"Zodiac color: \" + color.toRGBString());\ncore.debug(\"Hex: \" + color.toHex());\n\nvar r = color.getR();\nvar g = color.getG();\nvar b = color.getB();\ncore.debug(\"R=\" + r + \" G=\" + g + \" B=\" + b);"
     },
     {
         "name": "setFlagZodiac",
@@ -969,7 +969,7 @@
             "qt6": true,
             "minVersion": "0.15.0"
         },
-        "example": "ConstellationMgr.setZodiacFadeDuration(1.0);\nvar fade = ConstellationMgr.getZodiacFadeDuration();"
+        "example": "ConstellationMgr.setZodiacFadeDuration(1.0);\nvar fade = ConstellationMgr.getZodiacFadeDuration();\ncore.debug(\"Zodiac fade: \" + fade);"
     },
     {
         "name": "getZodiacFadeDuration",
@@ -985,13 +985,13 @@
             "qt6": true,
             "minVersion": "0.15.0"
         },
-        "example": "var fade = ConstellationMgr.getZodiacFadeDuration();"
+        "example": "var fade = ConstellationMgr.getZodiacFadeDuration();\ncore.debug(\"Zodiac fade: \" + fade);"
     },
     {
         "name": "setZodiacThickness",
         "category": "Constellations - Colors & Appearance (Cultural)",
         "signature": "setZodiacThickness(int thickness)",
-        "description": "Sets the thickness of zodiac lines in pixels.",
+        "description": "Sets the thickness of zodiac lines in pixels. Values below 1 are clamped to 1.",
         "parameters": [
             {
                 "name": "thickness",
@@ -1007,7 +1007,7 @@
             "qt6": true,
             "minVersion": "0.15.0"
         },
-        "example": "ConstellationMgr.setZodiacThickness(2);\nvar thickness = ConstellationMgr.getZodiacThickness();"
+        "example": "ConstellationMgr.setZodiacThickness(2);\nvar thickness = ConstellationMgr.getZodiacThickness();\ncore.debug(\"Zodiac thickness: \" + thickness);"
     },
     {
         "name": "getZodiacThickness",
@@ -1023,7 +1023,7 @@
             "qt6": true,
             "minVersion": "0.15.0"
         },
-        "example": "var thickness = ConstellationMgr.getZodiacThickness();"
+        "example": "var thickness = ConstellationMgr.getZodiacThickness();\ncore.debug(\"Zodiac thickness: \" + thickness);"
     },
     {
         "name": "setLunarSystemColor",
@@ -1045,23 +1045,23 @@
             "qt6": true,
             "minVersion": "0.15.0"
         },
-        "example": "var cyan = core.vec3f(0.0, 1.0, 0.5);\nConstellationMgr.setLunarSystemColor(cyan);\n\nvar color = ConstellationMgr.getLunarSystemColor();"
+        "example": "// Method 1: core.vec3f literal\nConstellationMgr.setLunarSystemColor(core.vec3f(0.0, 1.0, 0.5));\n\n// Method 2: Color wrapper\nvar cyan = new Color(0.0, 1.0, 0.5);\nConstellationMgr.setLunarSystemColor(cyan.toVec3f());\n\n// Read back\nvar current = new Color(ConstellationMgr.getLunarSystemColor());\ncore.debug(\"Lunar system color: \" + current.toRGBString());"
     },
     {
         "name": "getLunarSystemColor",
         "category": "Constellations - Colors & Appearance (Cultural)",
         "signature": "Vec3f getLunarSystemColor()",
-        "description": "Returns the current color of lunar system lines.",
+        "description": "Returns the current color of lunar system lines. The result is a Vec3f and MUST be wrapped in new Color(...) before reading its components on Qt6.",
         "parameters": [],
         "returnType": "Vec3f",
-        "returnDescription": "RGB color vector",
+        "returnDescription": "RGB color vector (wrap in new Color(...) to inspect)",
         "type": "method",
         "compatibility": {
             "qt5": false,
             "qt6": true,
             "minVersion": "0.15.0"
         },
-        "example": "var color = ConstellationMgr.getLunarSystemColor();"
+        "example": "var color = new Color(ConstellationMgr.getLunarSystemColor());\ncore.debug(\"Lunar system color: \" + color.toRGBString());\ncore.debug(\"Hex: \" + color.toHex());\n\nvar r = color.getR();\nvar g = color.getG();\nvar b = color.getB();\ncore.debug(\"R=\" + r + \" G=\" + g + \" B=\" + b);"
     },
     {
         "name": "setFlagLunarSystem",
@@ -1121,7 +1121,7 @@
             "qt6": true,
             "minVersion": "0.15.0"
         },
-        "example": "ConstellationMgr.setLunarSystemFadeDuration(1.0);\nvar fade = ConstellationMgr.getLunarSystemFadeDuration();"
+        "example": "ConstellationMgr.setLunarSystemFadeDuration(1.0);\nvar fade = ConstellationMgr.getLunarSystemFadeDuration();\ncore.debug(\"Lunar system fade: \" + fade);"
     },
     {
         "name": "getLunarSystemFadeDuration",
@@ -1137,13 +1137,13 @@
             "qt6": true,
             "minVersion": "0.15.0"
         },
-        "example": "var fade = ConstellationMgr.getLunarSystemFadeDuration();"
+        "example": "var fade = ConstellationMgr.getLunarSystemFadeDuration();\ncore.debug(\"Lunar system fade: \" + fade);"
     },
     {
         "name": "setLunarSystemThickness",
         "category": "Constellations - Colors & Appearance (Cultural)",
         "signature": "setLunarSystemThickness(int thickness)",
-        "description": "Sets the thickness of lunar system lines in pixels.",
+        "description": "Sets the thickness of lunar system lines in pixels. Values below 1 are clamped to 1.",
         "parameters": [
             {
                 "name": "thickness",
@@ -1159,7 +1159,7 @@
             "qt6": true,
             "minVersion": "0.15.0"
         },
-        "example": "ConstellationMgr.setLunarSystemThickness(2);\nvar thickness = ConstellationMgr.getLunarSystemThickness();"
+        "example": "ConstellationMgr.setLunarSystemThickness(2);\nvar thickness = ConstellationMgr.getLunarSystemThickness();\ncore.debug(\"Lunar system thickness: \" + thickness);"
     },
     {
         "name": "getLunarSystemThickness",
@@ -1175,7 +1175,7 @@
             "qt6": true,
             "minVersion": "0.15.0"
         },
-        "example": "var thickness = ConstellationMgr.getLunarSystemThickness();"
+        "example": "var thickness = ConstellationMgr.getLunarSystemThickness();\ncore.debug(\"Lunar system thickness: \" + thickness);"
     },
     {
         "name": "deselectConstellations",
@@ -1211,7 +1211,7 @@
         "name": "selectConstellation",
         "category": "Constellations - Selection & Isolation",
         "signature": "selectConstellation(QString englishName)",
-        "description": "Selects a constellation by its English name. Automatically enables isolation mode if not already active.",
+        "description": "Selects a constellation by its English name. Automatically enables isolation mode if not already active. Case-insensitive match.",
         "parameters": [
             {
                 "name": "englishName",
@@ -1233,7 +1233,7 @@
         "name": "selectConstellationByObjectName",
         "category": "Constellations - Selection & Isolation",
         "signature": "selectConstellationByObjectName(QString englishName)",
-        "description": "Selects the constellation where a celestial body (planet, star, etc.) is located. Automatically enables isolation mode if not already active.",
+        "description": "Selects the constellation where a celestial body (planet, star, etc.) is located. Automatically enables isolation mode if not already active. Note: works correctly for sky cultures with boundaries; otherwise you may use star names from constellation lines.",
         "parameters": [
             {
                 "name": "englishName",
@@ -1282,35 +1282,13 @@
         "returnType": "QStringList",
         "returnDescription": "List of constellation English names",
         "type": "method",
+        "readOnly": true,
         "compatibility": {
             "qt5": true,
             "qt6": true,
             "minVersion": "0.10.0"
         },
-        "example": "var constellations = ConstellationMgr.getConstellationsEnglishNames();\ncore.debug(\"Total constellations: \" + constellations.length);\n\nfor(var i=0; i<Math.min(5, constellations.length); i++) {\n    core.debug((i+1) + \". \" + constellations[i]);\n}"
-    },
-    {
-        "name": "getIAUconstellationName",
-        "category": "Constellations - Information & Utilities",
-        "signature": "QString getIAUconstellationName(QString abbreviation)",
-        "description": "Static method that returns the full IAU constellation name for a given three-letter abbreviation.",
-        "parameters": [
-            {
-                "name": "abbreviation",
-                "type": "QString",
-                "description": "Three-letter IAU constellation abbreviation (e.g., 'Ori', 'UMa', 'Leo')",
-                "required": true
-            }
-        ],
-        "returnType": "QString",
-        "returnDescription": "Full constellation name (e.g., 'Orion', 'Ursa Major', 'Leo')",
-        "type": "static method",
-        "compatibility": {
-            "qt5": false,
-            "qt6": true,
-            "minVersion": "0.15.0"
-        },
-        "example": "var fullName = ConstellationMgr.getIAUconstellationName(\"Ori\");\ncore.debug(\"Ori = \" + fullName);\n\nvar umaName = ConstellationMgr.getIAUconstellationName(\"UMa\");\ncore.debug(\"UMa = \" + umaName);"
+        "example": "var constellations = ConstellationMgr.getConstellationsEnglishNames();\nvar n = constellations.length;\ncore.debug(\"Total constellations: \" + n);\n\nfor(var i=0; i<5 && i<n; i++) {\n    core.debug((i+1) + \". \" + constellations[i]);\n}"
     },
     {
         "name": "outputHullAreas",
@@ -1328,6 +1306,7 @@
         ],
         "returnType": "void",
         "type": "method",
+        "readOnly": true,
         "compatibility": {
             "qt5": false,
             "qt6": true,
@@ -1340,12 +1319,12 @@
         "name": "starsInHullOf",
         "category": "Constellations - Debug & Development",
         "signature": "starsInHullOf(QString englishName, bool hipOnly, float maxMag, QString fileNamePrefix)",
-        "description": "Creates a CSV file listing all stars within the convex hull of a specified constellation. Useful for astronomical data analysis.",
+        "description": "Creates a CSV file listing all stars within the convex hull of a specified constellation. Useful for astronomical data analysis. File is written to the Stellarium user data directory as <fileNamePrefix>_<englishName>_<maxMag>.csv.",
         "parameters": [
             {
                 "name": "englishName",
                 "type": "QString",
-                "description": "English name of the constellation (e.g., 'Orion', 'Ursa Major')",
+                "description": "English name of the constellation (e.g., 'Orion', 'Ursa Major'). Either englishName or abbreviation accepted.",
                 "required": true
             },
             {
@@ -1372,6 +1351,7 @@
         ],
         "returnType": "void",
         "type": "method",
+        "readOnly": true,
         "compatibility": {
             "qt5": false,
             "qt6": true,
