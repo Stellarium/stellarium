@@ -33,6 +33,7 @@
 #include <QString>
 #include <QFile>
 #include <QDebug>
+#include <vector>
 
 #ifdef __OpenBSD__
 #include <unistd.h>
@@ -81,8 +82,11 @@ public:
 	//! loading.
 	//! @param extended_file_name path of the star catalog to load from
 	//! @param use_mmap whether or not to mmap the star catalog
+	//! @param use_compact_storage if true, load star catalogs without
+	//!        keeping a per-zone SpecialZoneData array (saves memory for
+	//!        high-level catalogs). Only used for SpecialZoneArray type 1/2.
 	//! @return an instance of SpecialZoneArray or HipZoneArray
-	static ZoneArray *create(const QString &extended_file_name, bool use_mmap);
+	static ZoneArray *create(const QString &extended_file_name, bool use_mmap, bool use_compact_storage = false);
 	virtual ~ZoneArray()
 	{
 		nr_of_zones = 0;
@@ -161,15 +165,19 @@ public:
 	//! @param use_mmap whether or not to mmap the star catalog
 	//! @param level level in StelGeodesicGrid
 	//! @param mag_min lower bound of magnitudes
-	SpecialZoneArray(QFile* file,bool byte_swap,bool use_mmap,int level,int mag_min);
+	//! @param use_compact_storage if true, do not keep a per-zone
+	//!        SpecialZoneData array; only zone counts and star data are stored.
+	//!        Compact storage is only applied for levels >= COMPACT_STORAGE_MIN_LEVEL.
+	SpecialZoneArray(QFile* file,bool byte_swap,bool use_mmap,int level,int mag_min,bool use_compact_storage = false);
 	~SpecialZoneArray(void) override;
-protected:
 	//! Get an array of all SpecialZoneData objects in this catalog.
+	//! Only valid when use_compact_storage is false.
 	SpecialZoneData<Star> *getZones(void) const
 	{
 		return static_cast<SpecialZoneData<Star>*>(zones);
 	}
 
+protected:
 	//! Draw stars and their names onto the viewport.
 	//! @param sPainter the painter to use 
 	//! @param index zone index to draw
@@ -193,6 +201,8 @@ protected:
 					  const Vec3d diffPos, double cosLimFov, QList<StelObjectP > &result) override;
 	void searchWithin(const StelCore* core, int index, const SphericalRegionP region, const double withParallax, const Vec3d diffPos, const bool hipOnly, const float maxMag,
 			  QList<StelObjectP > &result) const override;
+
+public:
 	StelObjectP searchGaiaID(int index, const StarId source_id, int& matched) const override;
  	void searchGaiaIDepochPos(const StarId source_id, float dyrs,
                                                   double & RA,
@@ -203,8 +213,28 @@ protected:
                                                   double & RV) const override;
 
 	Star *stars;
+	//! Access a zone's stars, size and global-zone flag without requiring
+	//! a SpecialZoneData array.
+	struct ZoneAccess
+	{
+		const Star* stars;
+		uint32_t size;
+		bool isGlobal;
+	};
+	ZoneAccess getZone(int index) const;
 private:
 	uchar *mmap_start;
+	bool use_compact_storage_;
+
+	// Compact-storage data (used only when use_compact_storage_ is true).
+	static constexpr int COMPACT_BLOCK_SIZE = 128;
+	// Minimum catalog level for which compact storage may be used.
+	// Levels below this always use the normal per-zone SpecialZoneData layout.
+	static constexpr int COMPACT_STORAGE_MIN_LEVEL = 9;
+	std::vector<uint64_t> block_offsets_;
+
+	uint64_t getZoneStarOffset(int index) const;
+	SpecialZoneData<Star> makeZoneData(int index) const;
 };
 
 //! @class HipZoneArray
