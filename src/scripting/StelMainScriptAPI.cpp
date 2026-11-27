@@ -1021,19 +1021,20 @@ void StelMainScriptAPI::waitForKeypress(const QString message)
 	StelScriptMgr* scriptMgr = &StelApp::getInstance().getScriptMgr();
 	LabelMgr* labelMgr = GETSTELMODULE(LabelMgr);
 	int labelId;
+	const bool mustShowContinueMessage = scriptMgr->getFlagShowContinueMessage();
 
 	QCoreApplication::processEvents();
 	QEventLoop* loop = scriptMgr->getWaitEventLoop();
 	KeypressFilter filter(loop);
 	qApp->installEventFilter(&filter);
-	if (scriptMgr->getFlagShowContinueMessage())
+	if (mustShowContinueMessage)
 		labelId = labelMgr->labelScreen(message, 30, 30, true, 20, "#ffffff", false, 0);
 
 	if( loop->exec() != 0 )
 	{
 		emit requestExit();
 	}
-	if (scriptMgr->getFlagShowContinueMessage())
+	if (mustShowContinueMessage)
 		labelMgr->deleteLabel(labelId);
 	qApp->removeEventFilter(&filter);
 }
