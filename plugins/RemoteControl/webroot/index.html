@@ -1413,16 +1413,16 @@
 														<!-- GROUP 1: File Operations (Open, Save, Clear, Copy)           -->
 														<!-- ============================================================ -->
 														<div class="toolbar-group">
-																<button id="btn-editor-open" class="pattern-btn" title="Open script from file (Ctrl+O)">
+																<button id="btn-editor-open" class="pattern-btn" title="<?= tr("Open script from file (Ctrl+O)")?>">
 																		<span class="ui-icon ui-icon-folder-open"></span> <?= tr("Open")?>
 																</button>
-																<button id="btn-editor-save" class="pattern-btn" title="Save script to file (Ctrl+S)">
+																<button id="btn-editor-save" class="pattern-btn" title="<?= tr("Save script to file (Ctrl+S)")?>">
 																		<span class="ui-icon ui-icon-disk"></span> <?= tr("Save")?>
 																</button>
-																<button id="btn-editor-clear" class="pattern-btn" title="Clear editor">
+																<button id="btn-editor-clear" class="pattern-btn" title="<?= tr("Clear editor")?>">
 																		<span class="ui-icon ui-icon-trash"></span> <?= tr("Clear")?>
 																</button>
-																<button id="btn-editor-copy" class="pattern-btn" title="Copy entire script to clipboard">
+																<button id="btn-editor-copy" class="pattern-btn" title="<?= tr("Copy entire script to clipboard")?>">
 																		<span class="ui-icon ui-icon-copy"></span> <?= tr("Copy")?>
 																</button>
 														</div>
@@ -1431,34 +1431,35 @@
 														<!-- GROUP 2: Script Control (Run, Stop, script status)        -->
 														<!-- ============================================================ -->
 														<div class="toolbar-group">
-																<button id="btn-editor-run" class="pattern-btn" title="Run script (Ctrl+Enter)">
+																<button id="btn-editor-run" class="pattern-btn" title="<?= tr("Run script (Ctrl+Enter)")?>">
 																		<span class="ui-icon ui-icon-play"></span> <?= tr("Run")?>
 																</button>
-																<button id="btn-editor-run-selection" class="pattern-btn" title="Run selected code (Ctrl+Shift+Enter)">
+																<button id="btn-editor-run-selection" class="pattern-btn" title="<?= tr("Run selected code (Ctrl+Shift+Enter)")?>">
 																		<span class="ui-icon ui-icon-play"></span> <?= tr("Run Selection")?>
 																</button>
-																<button id="btn-editor-stop" class="pattern-btn" title="Stop script" disabled>
+																<button id="btn-editor-stop" class="pattern-btn" title="<?= tr("Stop script")?>" disabled>
 																		<span class="ui-icon ui-icon-stop"></span> <?= tr("Stop")?>
 																</button>
 																<span id="script-status-indicator" class="script-status">
 																		<span id="script-status-text"><?= tr("No script running")?></span>
 																</span>
+																<button id="btn_script_resetview" class="script-control-btn icon32" title="<?= tr("Reset to natural sky appearance (South, 40°, FOV 90°)")?>"></button>
 														</div>
 														
 														<!-- ============================================================ -->
 														<!-- GROUP 3: Additional Tools (Metadata, Go to Line, Examples)   -->
 														<!-- ============================================================ -->
 														<div class="toolbar-group">
-																<button id="btn-editor-gotoline" class="pattern-btn" title="Go to line (Ctrl+G)">
+																<button id="btn-editor-gotoline" class="pattern-btn" title="<?= tr("Go to Line")?> (Ctrl+G)">
 																		<span class="ui-icon ui-icon-arrowstop-1-s"></span> <?= tr("Go to Line")?>
 																</button>
-																<button id="btn-editor-metadata" class="pattern-btn" title="Add script header/metadata">
+																<button id="btn-editor-metadata" class="pattern-btn" title="<?= tr("Add script header/metadata")?>">
 																		<span class="ui-icon ui-icon-document"></span> <?= tr("Header")?>
 																</button>
-																<button id="btn-collect-examples" class="pattern-btn" title="Load examples from module JSON files">
+																<button id="btn-collect-examples" class="pattern-btn" title="<?= tr("Load examples from module JSON files")?>">
 																		<span class="ui-icon ui-icon-copy"></span> <?= tr("Load Examples")?>
 																</button>
-																<button id="btn-show-all-shortcuts" class="pattern-btn" title="Show all keyboard shortcuts">
+																<button id="btn-show-all-shortcuts" class="pattern-btn" title="<?= tr("Show all keyboard shortcuts")?>">
 																		<span class="ui-icon ui-icon-help"></span>
 																</button>
 														</div>
@@ -1467,16 +1468,16 @@
 														<!-- GROUP 4: Edit Operations (Undo, Redo, Find, Replace)         -->
 														<!-- ============================================================ -->
 														<div class="toolbar-group">
-																<button id="btn-editor-undo" class="pattern-btn" title="Undo (Ctrl+Z)">
+																<button id="btn-editor-undo" class="pattern-btn" title="<?= tr("Undo")?> (Ctrl+Z)">
 																		<span class="ui-icon ui-icon-arrowreturnthick-1-w"></span> <?= tr("Undo")?>
 																</button>
-																<button id="btn-editor-redo" class="pattern-btn" title="Redo (Ctrl+Y)">
+																<button id="btn-editor-redo" class="pattern-btn" title="<?= tr("Redo")?> (Ctrl+Y)">
 																		<span class="ui-icon ui-icon-arrowreturnthick-1-e"></span> <?= tr("Redo")?>
 																</button>
-																<button id="btn-editor-find" class="pattern-btn" title="Find (Ctrl+F)">
+																<button id="btn-editor-find" class="pattern-btn" title="<?= tr("Find")?> (Ctrl+F)">
 																		<span class="ui-icon ui-icon-search"></span> <?= tr("Find")?>
 																</button>
-																<button id="btn-editor-replace" class="pattern-btn" title="Replace (Ctrl+H)">
+																<button id="btn-editor-replace" class="pattern-btn" title="<?= tr("Replace")?> (Ctrl+H)">
 																		<span class="ui-icon ui-icon-transfer-e-w"></span> <?= tr("Replace")?>
 																</button>
 														</div>
@@ -1485,16 +1486,16 @@
 														<!-- GROUP 5: Format Operations (Comment, Indent, Outdent, Format)-->
 														<!-- ============================================================ -->
 														<div class="toolbar-group">
-																<button id="btn-editor-comment" class="pattern-btn" title="Toggle Comment (Ctrl+/)">
+																<button id="btn-editor-comment" class="pattern-btn" title="<?= tr("Toggle Comment")?> (Ctrl+/)">
 																		<span class="ui-icon ui-icon-comment"></span> <?= tr("Comment")?>
 																</button>
-																<button id="btn-editor-indent" class="pattern-btn" title="Indent (Tab)">
+																<button id="btn-editor-indent" class="pattern-btn" title="<?= tr("Indent")?> (Tab)">
 																		<span class="ui-icon ui-icon-arrowthick-1-e"></span> <?= tr("Indent")?>
 																</button>
-																<button id="btn-editor-outdent" class="pattern-btn" title="Outdent (Shift+Tab)">
+																<button id="btn-editor-outdent" class="pattern-btn" title="<?= tr("Outdent")?> (Shift+Tab)">
 																		<span class="ui-icon ui-icon-arrowthick-1-w"></span> <?= tr("Outdent")?>
 																</button>
-																<button id="btn-editor-autoformat" class="pattern-btn" title="Auto Format">
+																<button id="btn-editor-autoformat" class="pattern-btn" title="<?= tr("Auto Format")?>">
 																		<span class="ui-icon ui-icon-magic"></span> <?= tr("Format")?>
 																</button>
 														</div>
@@ -1503,10 +1504,10 @@
 														<!-- GROUP 6: Code Folding (Fold All, Unfold All)                 -->
 														<!-- ============================================================ -->
 														<div class="toolbar-group">
-																<button id="btn-editor-foldall" class="pattern-btn" title="Fold All (Ctrl+Shift+Q)">
+																<button id="btn-editor-foldall" class="pattern-btn" title="<?= tr("Fold All")?> (Ctrl+Shift+Q)">
 																		<span class="ui-icon ui-icon-minus"></span> <?= tr("Fold All")?>
 																</button>
-																<button id="btn-editor-unfoldall" class="pattern-btn" title="Unfold All (Ctrl+Alt+Q)">
+																<button id="btn-editor-unfoldall" class="pattern-btn" title="<?= tr("Unfold All")?> (Ctrl+Alt+Q)">
 																		<span class="ui-icon ui-icon-plus"></span> <?= tr("Unfold All")?>
 																</button>
 														</div>
@@ -1594,10 +1595,10 @@
 														<!-- GROUP 8: Validation & Examples                               -->
 														<!-- ============================================================ -->
 														<div class="toolbar-group">
-																<button id="btn-editor-revalidate" class="pattern-btn" title="Revalidate all functions (refresh colors)">
+																<button id="btn-editor-revalidate" class="pattern-btn" title="<?= tr("Revalidate all functions (refresh colors)")?>">
 																		<span class="ui-icon ui-icon-refresh"></span> <?= tr("Revalidate")?>
 																</button>
-																<label id="auto-validation-toggle" class="auto-validation-label pattern-btn" title="Automatically validate functions while typing">
+																<label id="auto-validation-toggle" class="auto-validation-label pattern-btn" title="<?= tr("Automatically validate functions while typing")?>">
 																		<input type="checkbox" id="auto-validation-checkbox" checked>
 																		<span class="toggle-slider"></span>
 																		<span class="toggle-text"><?= tr("Auto Validation")?></span>
@@ -1748,7 +1749,7 @@
 									<select id="actionlist" class="scrollselect flex-expand" size="10"></select>
 								</section>
 							</div>
-						</div>
+						</div>
 
 						<!-- ========================================== -->
 						<!-- Tab 3: Installed Scripts (Legacy List)			-->
@@ -1775,7 +1776,7 @@
 										<!-- Script Information IFrame - Gets pulsing border when script is running -->
 										<iframe id="scriptinfo" class="flex-expand"></iframe>
 								</section>			
-						</div>
+						</div>
 						
 						<!-- ========================================== -->
 						<!-- Tab 4: Code Generator                      -->
@@ -2305,6 +2306,110 @@
 										<small class="tour-multiselect-hint">(<?= tr("reproducible sky")?>)</small>																
 										<span id="scriptsgenerator-lock-observer-info" class="tour-multiselect-hint" style="color:#FFE0C6;font-style:italic;"></span>
 									</div>
+									<!-- ============================================================ -->
+									<!-- SECTION 3a: Object Highlighting (marker + label)             -->
+									<!-- ============================================================ -->
+									<!-- Applies to ALL types. Placed BEFORE Deep Sky Options.        -->
+									<fieldset id="scriptsgenerator-highlight-options"	class="control-group visibility-control-group" style="margin-top:15px;">
+										<legend><?= tr("Object Highlighting")?></legend>
+
+										<!-- ─── Row 1: Marker ───────────────────────────── -->
+										<div class="tour-row">
+											<label class="btn-toggle-plain tour-control-group" style="cursor:pointer;">
+												<input type="checkbox" id="scriptsgenerator-use-marker" />
+												<span class="tour-control-label"><strong><?= tr("Draw marker on selected object")?></strong></span>
+											</label>
+
+											<div class="tour-control-group" id="scriptsgenerator-marker-options" style="display:none;">
+												<label for="scriptsgenerator-marker-type"><?= tr("Shape:")?></label>
+												<select id="scriptsgenerator-marker-type" class="stars-sort-select">
+													<option value="cross"><?= tr("Cross")?></option>
+													<option value="circle" selected><?= tr("Circle")?></option>
+													<option value="ellipse"><?= tr("Ellipse")?></option>
+													<option value="square"><?= tr("Square")?></option>
+													<option value="dotted-circle"><?= tr("Dotted Circle")?></option>
+													<option value="circled-cross"><?= tr("Circled Cross")?></option>
+													<option value="dashed-square"><?= tr("Dashed Square")?></option>
+													<option value="squared-dotted-circle"><?= tr("Squared Dotted Circle")?></option>
+													<option value="crossed-circle"><?= tr("Crossed Circle")?></option>
+													<option value="target"><?= tr("Target")?></option>
+													<option value="gear"><?= tr("Gear")?></option>
+													<option value="disk"><?= tr("Disk")?></option>
+												</select>
+
+												<label for="scriptsgenerator-marker-color"><?= tr("Color")?>:</label>
+												<input type="color" id="scriptsgenerator-marker-color" value="#ff6666" style="width:35px;height:24px;padding:0;border:1px solid #5D5F62;border-radius:3px;cursor:pointer;" />
+
+												<label for="scriptsgenerator-marker-size"><?= tr("Size")?>:</label>
+												<input id="scriptsgenerator-marker-size" class="tour-input-number spinner" value="12" data-min="4" data-max="30" data-step="1" data-numberformat="n0" />
+											</div>
+
+											<!-- Keep marker across the whole tour -->
+											<label class="btn-toggle-plain tour-control-group" id="scriptsgenerator-keep-marker-wrapper" style="cursor:pointer; display:none; margin-left:20px;">
+												<input type="checkbox" id="scriptsgenerator-keep-marker-per-object" />
+												<span class="tour-control-label"><?= tr("Keep marker after leaving object")?></span>
+											</label>
+											<small class="tour-multiselect-hint">(<?= tr("markers persist across the tour")?>)</small>											
+										</div>
+
+										<!-- ─── Row 2: Label ────────────────────────────── -->
+										<div class="tour-row">
+											<label class="btn-toggle-plain tour-control-group" style="cursor:pointer;">
+												<input type="checkbox" id="scriptsgenerator-use-obj-label" />
+												<span class="tour-control-label"><strong><?= tr("Show label next to selected object")?></strong></span>
+											</label>
+
+											<div class="tour-control-group" id="scriptsgenerator-obj-label-options" style="display:none;">
+												<label for="scriptsgenerator-obj-label-color"><?= tr("Color:")?></label>
+												<input type="color" id="scriptsgenerator-obj-label-color" value="#ffffff" style="width:35px;height:24px;padding:0;border:1px solid #5D5F62;border-radius:3px;cursor:pointer;" />
+
+												<label for="scriptsgenerator-obj-label-size"><?= tr("Size:")?></label>
+												<input id="scriptsgenerator-obj-label-size" class="tour-input-number spinner" value="14" data-min="8" data-max="30" data-step="1" data-numberformat="n0" />
+
+												<label for="scriptsgenerator-obj-label-pos"><?= tr("Position:")?></label>
+												<select id="scriptsgenerator-obj-label-pos" class="stars-sort-select" style="min-width:60px;">
+													<option value="N"><?= tr("North")?></option>
+													<option value="S"><?= tr("South")?></option>
+													<option value="E" selected><?= tr("East")?></option>
+													<option value="W"><?= tr("West")?></option>
+													<option value="NE"><?= tr("NE")?></option>
+													<option value="NW"><?= tr("NW")?></option>
+													<option value="SE"><?= tr("SE")?></option>
+													<option value="SW"><?= tr("SW")?></option>
+												</select>
+
+												<label for="scriptsgenerator-obj-label-connect"><?= tr("Connect:")?></label>
+												<select id="scriptsgenerator-obj-label-connect" class="stars-sort-select" style="min-width:80px;">
+													<option value=""><?= tr("None")?></option>
+													<option value="Line" selected><?= tr("Line")?></option>
+													<option value="TextOnly"><?= tr("Text only")?></option>
+												</select>
+											</div>
+
+											<!-- Keep label across the whole tour -->
+											<label class="btn-toggle-plain tour-control-group" id="scriptsgenerator-keep-label-wrapper" style="cursor:pointer; display:none; margin-left:20px;">
+												<input type="checkbox" id="scriptsgenerator-keep-label-per-object" />
+												<span class="tour-control-label"><?= tr("Keep label after leaving object")?></span>
+											</label>
+											<small class="tour-multiselect-hint">(<?= tr("labels persist across the tour")?>)</small>
+										</div>
+
+										<!-- ─── Row 3: End-of-tour cleanup ─────────────── -->
+										<div class="tour-row" style="border-top:1px solid rgba(180,183,176,0.2); padding-top:8px; margin-top:4px;">
+											<span class="tour-control-label-bold" style="margin-right:10px;"><?= tr("Cleanup at end of tour:")?></span>
+
+											<label class="btn-toggle-plain tour-control-group" style="cursor:pointer;">
+												<input type="checkbox" id="scriptsgenerator-cleanup-markers-end" checked />
+												<span class="tour-control-label">	<?= tr("Delete all markers at end")?></span>
+											</label>
+											<small class="tour-multiselect-hint">(MarkerMgr.deleteAllMarkers())</small>
+											<label class="btn-toggle-plain tour-control-group" style="cursor:pointer;">
+												<input type="checkbox" id="scriptsgenerator-cleanup-labels-end" checked />
+												<span class="tour-control-label"><?= tr("Delete all labels at end")?></span>
+											</label>
+											<small class="tour-multiselect-hint">(LabelMgr.deleteAllLabels())</small>
+										</div>
+									</fieldset>
 
 								<!-- ============================================================ -->
 								<!-- SECTION 3b: Deep Sky Options (conditional — DSO types only)  -->
@@ -2320,7 +2425,7 @@
 											<input type="checkbox" id="scriptsgenerator-show-hints" checked />
 											<span class="tour-control-label"><?= tr("Show DSO hints (markers)")?></span>
 										</label>
-										<small class="tour-multiselect-hint">(<?= tr("NebulaMgr.setFlagHints")?>)</small>											
+										<small class="tour-multiselect-hint">(NebulaMgr.setFlagHints)</small>											
 
 										<div class="tour-control-group">
 											<label class="tour-control-label-bold" for="scriptsgenerator-hints-amount"><?= tr("Hints amount:")?></label>
@@ -2356,13 +2461,13 @@
 											<input type="checkbox" id="scriptsgenerator-show-outlines" />
 											<span class="tour-control-label"><?= tr("Show outlines for large DSOs")?></span>
 										</label>
-										<small class="tour-multiselect-hint">(<?= tr("NebulaMgr.setFlagOutlines")?>)</small>										
+										<small class="tour-multiselect-hint">(NebulaMgr.setFlagOutlines)</small>										
 
 										<label class="btn-toggle-plain tour-control-group" style="cursor:pointer;">
 											<input type="checkbox" id="scriptsgenerator-proportional-hints" />
 											<span class="tour-control-label"><?= tr("Proportional hints (size = real angular size)")?></span>
 										</label>
-										<small class="tour-multiselect-hint">(<?= tr("NebulaMgr.setHintsProportional")?>)</small>										
+										<small class="tour-multiselect-hint">(NebulaMgr.setHintsProportional)</small>										
 									</div>
 
 								</fieldset>
@@ -2376,13 +2481,16 @@
 										<span class="ui-icon ui-icon-script"></span><?= tr("Generate Script")?>
 									</button>
 									<button id="scriptsgenerator-copy" class="pattern-btn jquerybutton">
-									<?= tr("Copy")?>
+										<?= tr("Copy")?>
 									</button>
 									<button id="scriptsgenerator-send-to-editor"	class="pattern-btn jquerybutton">
-										<span class="ui-icon ui-icon-pencil"></span>
-										<?= tr("Send to Script Editor")?>
+										<span class="ui-icon ui-icon-pencil"></span><?= tr("Send to Script Editor")?>
 									</button>
-									<span id="scriptsgenerator-status"	class="tour-multiselect-hint"	style="margin-left:10px;font-style:italic;"></span>
+									<!-- Tour Generator Help button (opens a modal, same style as tab_skyculture) -->
+									<button type="button" class="pattern-btn jquerybutton tour-help-btn" data-help-target="help-scriptsgenerator"	title="<?= tr('How to use the Scripts Generator')?>">
+											<span class="ui-icon ui-icon-help"></span><?= tr("Tour Generator Help")?>
+									</button>
+									<span id="scriptsgenerator-status" class="tour-multiselect-hint" style="margin-left:10px;font-style:italic;"></span>
 								</div>
 
 								<!-- Live preview area -->
@@ -2398,45 +2506,45 @@
 							<!-- ============================================================ -->
 							<aside id="scriptsgenerator-sidebar" class="scriptsgenerator-sidebar">
 
-											<!-- API Status -->
-											<div class="block">
-															<header><h3><?= tr("API Status")?></h3></header>
-															<div id="scriptsgenerator-api-status">
-																			<div class="loading-placeholder">
-																							<?= tr("Checking connection...")?>
-																			</div>
-															</div>
+								<!-- API Status -->
+								<div class="block">
+									<header><h3><?= tr("API Status")?></h3></header>
+										<div id="scriptsgenerator-api-status">
+											<div class="loading-placeholder">
+												<?= tr("Checking connection...")?>
 											</div>
+										</div>
+								</div>
 
-											<!-- Selection Summary -->
-											<div class="block">
-															<header><h3><?= tr("Current Selection")?></h3></header>
-															<div id="scriptsgenerator-summary">
-																			<div class="loading-placeholder">
-																							<?= tr("Nothing selected yet")?>
-																			</div>
-															</div>
+								<!-- Selection Summary -->
+								<div class="block">
+									<header><h3><?= tr("Current Selection")?></h3></header>
+										<div id="scriptsgenerator-summary">
+											<div class="loading-placeholder">
+												<?= tr("Nothing selected yet")?>
 											</div>
+										</div>
+								</div>
 
-											<!-- Help -->
-											<div class="block">
-															<header><h3><?= tr("Quick Help")?></h3></header>
-															<div class="tour-help-content" style="font-size:11px;">
-																			<p><strong><?= tr("How it works:")?></strong></p>
-																			<ol style="padding-left:18px;margin:6px 0;">
-																							<li><?= tr("Select an object type from panel 1 (e.g. Nebulae, Messier Catalogue).")?></li>
-																							<li><?= tr("The objects of that type load automatically in panel 2.")?></li>
-																							<li><?= tr("Either include ALL objects, or enable Multi-Select to pick specific ones.")?></li>
-																							<li><?= tr("Adjust options in panel 3 (duration, FOV, labels...).")?></li>
-																							<li><?= tr("Click Generate Script — the result appears in the preview.")?></li>
-																							<li><?= tr("Use 'Send to Script Editor' to open it in the editor and run it.")?></li>
-																			</ol>
-																			<p class="tour-help-note">
-																							<strong><?= tr("Tip:")?></strong>
-																							<?= tr("The i18n checkbox controls whether names appear in your UI language or in English. This affects both the generated script content and the preview.")?>
-																			</p>
-															</div>
-											</div>
+								<!-- Help -->
+								<div class="block">
+									<header><h3><?= tr("Quick Help")?></h3></header>
+										<div class="tour-help-content" style="font-size:11px;">
+											<p><strong><?= tr("How it works:")?></strong></p>
+												<ol style="padding-left:18px;margin:6px 0;">
+													<li><?= tr("Select an object type from panel 1 (e.g. Nebulae, Messier Catalogue).")?></li>
+													<li><?= tr("The objects of that type load automatically in panel 2.")?></li>
+													<li><?= tr("Either include ALL objects, or enable Multi-Select to pick specific ones.")?></li>
+													<li><?= tr("Adjust options in panel 3 (duration, FOV, labels...).")?></li>
+													<li><?= tr("Click Generate Script — the result appears in the preview.")?></li>
+													<li><?= tr("Use 'Send to Script Editor' to open it in the editor and run it.")?></li>
+												</ol>
+											<p class="tour-help-note">
+												<strong><?= tr("Tip:")?></strong>
+													<?= tr("The i18n checkbox controls whether names appear in your UI language or in English. This affects both the generated script content and the preview.")?>
+											</p>
+										</div>
+								</div>
 
 							</aside>
 
@@ -2599,1422 +2707,1422 @@
       
 			<div id="tab_plugins">
 				<div class="plugins-tabs" >
-						<ul>
-								<li class="stelplugin" data-plugin="Scenery3d"><a href="#sub_tab_Scenery3d"><?= tr("Scenery3d")?></a></li>
-								<li class="stelplugin" data-plugin="MeteorShowers"><a href="#sub_tab_MeteorShowers"><?= tr("Meteor Showers")?></a></li>
-								<li class="stelplugin" data-plugin="ArchaeoLines"><a href="#sub_tab_ArchaeoLines"><?= tr("ArchaeoLines")?></a></li>
-								<li class="stelplugin" data-plugin="Quasars"><a href="#sub_tab_Quasars"><?= tr("Quasars")?></a></li>
-								<li class="stelplugin" data-plugin="Pulsars"><a href="#sub_tab_Pulsars"><?= tr("Pulsars")?></a></li>
-								<li class="stelplugin" data-plugin="NavStars"><a href="#sub_tab_NavStars"><?= tr("Navigational Stars")?></a></li>
-								<li class="stelplugin" data-plugin="Exoplanets"><a href="#sub_tab_Exoplanets"><?= tr("Exoplanets")?></a></li>
-								<li class="stelplugin" data-plugin="PointerCoordinates"><a href="#sub_tab_PointerCoord"><?= tr("Pointer Coordinates")?></a></li>
-								<li class="stelplugin" data-plugin="EquationOfTime"><a href="#sub_tab_EquationOfTime"><?= tr("Equation of Time")?></a></li>
-								<li class="stelplugin" data-plugin="AngleMeasure"><a href="#sub_tab_AngleMeasure"><?= tr("Angle Measure")?></a></li>
-								<li class="stelplugin" data-plugin="TimeNavigator"><a href="#sub_tab_TimeNavigator"><?= tr("Time Navigator")?></a></li>
-								<li class="stelplugin" data-plugin="LensDistortionEstimator"><a href="#sub_tab_LensDistortionEstimator"><?= tr("Lens Distortion Estimator")?></a></li>
-						</ul>
+					<ul>
+							<li class="stelplugin" data-plugin="Scenery3d"><a href="#sub_tab_Scenery3d"><?= tr("Scenery3d")?></a></li>
+							<li class="stelplugin" data-plugin="MeteorShowers"><a href="#sub_tab_MeteorShowers"><?= tr("Meteor Showers")?></a></li>
+							<li class="stelplugin" data-plugin="ArchaeoLines"><a href="#sub_tab_ArchaeoLines"><?= tr("ArchaeoLines")?></a></li>
+							<li class="stelplugin" data-plugin="Quasars"><a href="#sub_tab_Quasars"><?= tr("Quasars")?></a></li>
+							<li class="stelplugin" data-plugin="Pulsars"><a href="#sub_tab_Pulsars"><?= tr("Pulsars")?></a></li>
+							<li class="stelplugin" data-plugin="NavStars"><a href="#sub_tab_NavStars"><?= tr("Navigational Stars")?></a></li>
+							<li class="stelplugin" data-plugin="Exoplanets"><a href="#sub_tab_Exoplanets"><?= tr("Exoplanets")?></a></li>
+							<li class="stelplugin" data-plugin="PointerCoordinates"><a href="#sub_tab_PointerCoord"><?= tr("Pointer Coordinates")?></a></li>
+							<li class="stelplugin" data-plugin="EquationOfTime"><a href="#sub_tab_EquationOfTime"><?= tr("Equation of Time")?></a></li>
+							<li class="stelplugin" data-plugin="AngleMeasure"><a href="#sub_tab_AngleMeasure"><?= tr("Angle Measure")?></a></li>
+							<li class="stelplugin" data-plugin="TimeNavigator"><a href="#sub_tab_TimeNavigator"><?= tr("Time Navigator")?></a></li>
+							<li class="stelplugin" data-plugin="LensDistortionEstimator"><a href="#sub_tab_LensDistortionEstimator"><?= tr("Lens Distortion Estimator")?></a></li>
+					</ul>
 
-			<div id="sub_tab_Scenery3d" class="stelplugin patterns-tab-content" data-plugin="Scenery3d" data-pluginjs="plugins/scenery3d">
-          <div class="flex flex-wrap">
-					
-						<section class="block">
-								<header><h3><?= tr("Interaction")?></h3></header>
-								<p class="margin-none textcenter"><?= tr("Current scene:")?></p>
-								<p id="s3d_curscene" class="bold margin-none  textcenter"><?= tr("-none-")?></p>
-								<div class="block inline-block">
-								<div class="innerblock inline-block">
-										<h3><?= tr("View controls")?></h3>
-										<div class="joystickcontainer">
-												<div class="joystick" data-joyurl="/api/main/move" data-joymax="5"></div>
+					<div id="sub_tab_Scenery3d" class="stelplugin patterns-tab-content" data-plugin="Scenery3d" data-pluginjs="plugins/scenery3d">
+							<div class="flex flex-wrap">
+							
+								<section class="block">
+										<header><h3><?= tr("Interaction")?></h3></header>
+										<p class="margin-none textcenter"><?= tr("Current scene:")?></p>
+										<p id="s3d_curscene" class="bold margin-none  textcenter"><?= tr("-none-")?></p>
+										<div class="block inline-block">
+										<div class="innerblock inline-block">
+												<h3><?= tr("View controls")?></h3>
+												<div class="joystickcontainer">
+														<div class="joystick" data-joyurl="/api/main/move" data-joymax="5"></div>
+												</div>
 										</div>
-								</div>
-								<div class="innerblock inline-block">
-										<h3><?= tr("Movement controls")?></h3>
-										<div class="joystickcontainer">
-												<div class="joystick" data-joyurl="/api/scenery3d/move" data-joymax="50"></div>
+										<div class="innerblock inline-block">
+												<h3><?= tr("Movement controls")?></h3>
+												<div class="joystickcontainer">
+														<div class="joystick" data-joyurl="/api/scenery3d/move" data-joymax="50"></div>
+												</div>
 										</div>
-								</div>
-								</div>
-							<div class="block blocklabel">
-								<header><h3><?= tr("Settings")?></h3></header>
+										</div>
+									<div class="block blocklabel">
+										<header><h3><?= tr("Settings")?></h3></header>
 
-									<!-- Checkbox for StelAction: actionShow_Scenery3d -->
-									<div class="block_row">
-									<label class="btn-toggle">
-											<input type="checkbox" class="stelaction" name="actionShow_Scenery3d"  />
-											<?= tr("Toggle 3D landscape")?>
-									</label>
-									</div>
-
-									<div class="block_row">
-									<!-- Checkbox for StelAction: actionShow_Scenery3d_dialog -->
-									<label class="btn-toggle">
-											<input type="checkbox" class="stelaction" name="actionShow_Scenery3d_dialog" />
-											<?= tr("Show settings dialog")?>
-									</label>
-									</div>
-
-									<!-- Checkbox for StelAction: actionShow_Scenery3d_storedViewDialog -->
-									<div class="block_row">
-									<label class="btn-toggle">
-											<input type="checkbox" class="stelaction" name="actionShow_Scenery3d_storedViewDialog"  />
-											<?= tr("Show viewpoint dialog")?>
-									</label>
-									</div>
-
-									<!-- Checkbox for StelAction: actionShow_Scenery3d_shadows -->
-									<div class="block_row">
-									<label class="btn-toggle">
-											<input type="checkbox" class="stelaction" name="actionShow_Scenery3d_shadows"  />
-											<?= tr("Toggle shadows")?>
-									</label>
-									</div>
-
-									<!-- Checkbox for StelAction: actionShow_Scenery3d_debuginfo -->
-									<div class="block_row">
-									<label class="btn-toggle">
-											<input type="checkbox" class="stelaction" name="actionShow_Scenery3d_debuginfo"  />
-											<?= tr("Toggle debug information")?>
-									</label>
-									</div>
-
-									<!-- Checkbox for StelAction: actionShow_Scenery3d_locationinfo -->
-									<div class="block_row">
-									<label class="btn-toggle">
-											<input type="checkbox" class="stelaction" name="actionShow_Scenery3d_locationinfo"  />
-											<?= tr("Toggle location text")?>
-									</label>
-									</div>
-
-									<!-- Checkbox for StelAction: actionShow_Scenery3d_torchlight -->
-									<div class="block_row">
-									<label class="btn-toggle">
-											<input type="checkbox" class="stelaction" name="actionShow_Scenery3d_torchlight"  />
-											<?= tr("Toggle torchlight")?>
-									</label>
-									</div>
-
-							</div>
-
-						</section>
-
-						<section class="block">
-								<header><h3><?= tr("Visual options")?></h3></header>
-								<div class="blocklabel">
-										<!-- label><input type="checkbox" class="stelproperty" name="Scenery3d.enableScene" /><?= tr("Toggle 3D landscape")?></label>
-										<label><input type="checkbox" class="stelproperty" name="Scenery3d.enableLocationInfo" /><?= tr("Toggle location text")?></label>
-										<label><input type="checkbox" class="stelproperty" name="Scenery3d.enableShadows"/><?= tr("Toggle shadows")?></label>
-										<label><input type="checkbox" class="stelproperty" name="Scenery3d.enableTorchLight"/><?= tr("Torchlight")?></label -->
-
-									<div class="block_row">									
-									<label class="btn-toggle">
-											<input type="checkbox" class="stelproperty" name="Scenery3d.enableTorchLight"/>
-											<?= tr("Torchlight")?>
-									</label>									
-									</div>
-
-									<div class="btn-gen-slider-wrap">
-											<div class="btn-gen-slider-header">
-													<label><?= tr("Torch strength:")?></label>
-													<span class="stelproperty" data-prop="Scenery3d.torchStrength" data-numberformat="n2"></span>
+											<!-- Checkbox for StelAction: actionShow_Scenery3d -->
+											<div class="block_row">
+											<label class="btn-toggle">
+													<input type="checkbox" class="stelaction" name="actionShow_Scenery3d"  />
+													<?= tr("Toggle 3D landscape")?>
+											</label>
 											</div>
-											<div class="slider stelproperty" data-prop="Scenery3d.torchStrength" data-min="0.01" data-max="1" data-step="0.01"></div>
-									</div>
 
-
-									<div class="btn-gen-slider-wrap">
-											<div class="btn-gen-slider-header">
-													<label><?= tr("Torch range:")?></label>
-													<span class="stelproperty" data-prop="Scenery3d.torchRange"data-numberformat="n0"></span>
+											<div class="block_row">
+											<!-- Checkbox for StelAction: actionShow_Scenery3d_dialog -->
+											<label class="btn-toggle">
+													<input type="checkbox" class="stelaction" name="actionShow_Scenery3d_dialog" />
+													<?= tr("Show settings dialog")?>
+											</label>
 											</div>
-											<div class="slider stelproperty" data-prop="Scenery3d.torchRange" data-min="0" data-max="100" data-step="1"></div>
+
+											<!-- Checkbox for StelAction: actionShow_Scenery3d_storedViewDialog -->
+											<div class="block_row">
+											<label class="btn-toggle">
+													<input type="checkbox" class="stelaction" name="actionShow_Scenery3d_storedViewDialog"  />
+													<?= tr("Show viewpoint dialog")?>
+											</label>
+											</div>
+
+											<!-- Checkbox for StelAction: actionShow_Scenery3d_shadows -->
+											<div class="block_row">
+											<label class="btn-toggle">
+													<input type="checkbox" class="stelaction" name="actionShow_Scenery3d_shadows"  />
+													<?= tr("Toggle shadows")?>
+											</label>
+											</div>
+
+											<!-- Checkbox for StelAction: actionShow_Scenery3d_debuginfo -->
+											<div class="block_row">
+											<label class="btn-toggle">
+													<input type="checkbox" class="stelaction" name="actionShow_Scenery3d_debuginfo"  />
+													<?= tr("Toggle debug information")?>
+											</label>
+											</div>
+
+											<!-- Checkbox for StelAction: actionShow_Scenery3d_locationinfo -->
+											<div class="block_row">
+											<label class="btn-toggle">
+													<input type="checkbox" class="stelaction" name="actionShow_Scenery3d_locationinfo"  />
+													<?= tr("Toggle location text")?>
+											</label>
+											</div>
+
+											<!-- Checkbox for StelAction: actionShow_Scenery3d_torchlight -->
+											<div class="block_row">
+											<label class="btn-toggle">
+													<input type="checkbox" class="stelaction" name="actionShow_Scenery3d_torchlight"  />
+													<?= tr("Toggle torchlight")?>
+											</label>
+											</div>
+
 									</div>
-									
-										<!-- Slider for StelProperty: Scenery3d.directionalLightPush -->
-									<div class="btn-gen-slider-wrap">
-											<div class="btn-gen-slider-header">
-										<label><?= tr("Directional light enhancement")?></label>
-										<span class="stelproperty" data-prop="Scenery3d.directionalLightPush" data-numberformat="n2"></span>
-										</div>
-										<input class="spinner stelproperty" name="Scenery3d.directionalLightPush" data-min="0" data-max="100" data-step="1" data-numberformat="n2" />
-										</div>										
-										
-										<!-- Checkbox for StelProperty: Scenery3d.forceHorizonPolyline -->
+
+								</section>
+
+								<section class="block">
+										<header><h3><?= tr("Visual options")?></h3></header>
+										<div class="blocklabel">
+												<!-- label><input type="checkbox" class="stelproperty" name="Scenery3d.enableScene" /><?= tr("Toggle 3D landscape")?></label>
+												<label><input type="checkbox" class="stelproperty" name="Scenery3d.enableLocationInfo" /><?= tr("Toggle location text")?></label>
+												<label><input type="checkbox" class="stelproperty" name="Scenery3d.enableShadows"/><?= tr("Toggle shadows")?></label>
+												<label><input type="checkbox" class="stelproperty" name="Scenery3d.enableTorchLight"/><?= tr("Torchlight")?></label -->
+
+											<div class="block_row">									
+											<label class="btn-toggle">
+													<input type="checkbox" class="stelproperty" name="Scenery3d.enableTorchLight"/>
+													<?= tr("Torchlight")?>
+											</label>									
+											</div>
+
+											<div class="btn-gen-slider-wrap">
+													<div class="btn-gen-slider-header">
+															<label><?= tr("Torch strength:")?></label>
+															<span class="stelproperty" data-prop="Scenery3d.torchStrength" data-numberformat="n2"></span>
+													</div>
+													<div class="slider stelproperty" data-prop="Scenery3d.torchStrength" data-min="0.01" data-max="1" data-step="0.01"></div>
+											</div>
+
+
+											<div class="btn-gen-slider-wrap">
+													<div class="btn-gen-slider-header">
+															<label><?= tr("Torch range:")?></label>
+															<span class="stelproperty" data-prop="Scenery3d.torchRange"data-numberformat="n0"></span>
+													</div>
+													<div class="slider stelproperty" data-prop="Scenery3d.torchRange" data-min="0" data-max="100" data-step="1"></div>
+											</div>
+											
+												<!-- Slider for StelProperty: Scenery3d.directionalLightPush -->
+											<div class="btn-gen-slider-wrap">
+													<div class="btn-gen-slider-header">
+												<label><?= tr("Directional light enhancement")?></label>
+												<span class="stelproperty" data-prop="Scenery3d.directionalLightPush" data-numberformat="n2"></span>
+												</div>
+												<input class="spinner stelproperty" name="Scenery3d.directionalLightPush" data-min="0" data-max="100" data-step="1" data-numberformat="n2" />
+												</div>										
+												
+												<!-- Checkbox for StelProperty: Scenery3d.forceHorizonPolyline -->
+												<div class="block_row">
+												<label class="btn-toggle">
+														<input type="checkbox" class="stelproperty" name="Scenery3d.forceHorizonPolyline"  />
+														<?= tr("Draw horizon polyline in foreground")?>
+												</label>
+												</div>
+
+
+												<!-- Checkbox for StelProperty: Scenery3d.enableLocationInfo -->
+												<div class="block_row">									
+												<label class="btn-toggle">
+														<input type="checkbox" class="stelproperty" name="Scenery3d.enableLocationInfo"  />
+														<?= tr("Toggle location text")?>
+												</label>
+												</div>
+												<!-- This handeled by manui.js  -->
+												<fieldset>
+														<legend><?= tr("Position on screen")?></legend>
+														<input type="radio" class="stelproperty" name="Scenery3d.locationInfoStyle" id="s3d-locinfo-topright" value="LocationInfoTopRight" /><!-- accept value="0" -->
+														<label for="s3d-locinfo-topright"><?= tr("Top Right")?></label>
+														<input type="radio" class="stelproperty" name="Scenery3d.locationInfoStyle" id="s3d-locinfo-bottomcenter" value="LocationInfoBottomCenter" /><!-- accept value="1" -->
+														<label for="s3d-locinfo-bottomcenter"><?= tr("Bottom Center")?></label>
+												</fieldset>
+											
+										</div>								
+								</section>
+
+								<section class="block">
+								<header><h3><?= tr("Quality/Performance settings")?></h3></header>
+								
+											<div class="block_row">
+											<label><?= tr("Cubemapping mode:")?></label>
+											<select class="stelproperty" name="Scenery3d.cubemappingMode">
+											<option value="CM_CUBEMAP_GSACCEL"><?= tr("Geometry shader")?></option>
+											<option value="CM_TEXTURES"><?= tr("6 Textures")?></option>
+											<option value="CM_CUBEMAP"><?= tr("Cubemap")?></option>
+											</select>
+											</div>
+
+										<!-- Checkbox for StelProperty: Scenery3d.useFullCubemapShadows -->
 										<div class="block_row">
 										<label class="btn-toggle">
-												<input type="checkbox" class="stelproperty" name="Scenery3d.forceHorizonPolyline"  />
-												<?= tr("Draw horizon polyline in foreground")?>
+												<input type="checkbox" class="stelproperty" name="Scenery3d.useFullCubemapShadows"  />
+												<?= tr("Full cubemap shadows")?>
 										</label>
 										</div>
 
+										
+											<!-- Checkbox for StelProperty: Scenery3d.enableLazyDrawing -->
+											<div class="block_row">									
+											<label class="btn-toggle">
+													<input type="checkbox" class="stelproperty" name="Scenery3d.enableLazyDrawing" />
+													<?= tr("Lazy cubemap re-rendering")?>
+											</label>
+											</div>
 
-										<!-- Checkbox for StelProperty: Scenery3d.enableLocationInfo -->
-										<div class="block_row">									
+											
+											<!-- Slider for StelProperty: Scenery3d.lazyDrawingInterval -->
+											<div class="btn-gen-slider-wrap">
+													<div class="btn-gen-slider-header">
+															<label><?= tr("Interval:")?></label>
+															<span class="stelproperty" data-prop="Scenery3d.lazyDrawingInterval" data-numberformat="n2"></span>
+													</div>
+													<div class="slider stelproperty" data-prop="Scenery3d.lazyDrawingInterval" data-min="0.1" data-max="600" data-step="0.1" data-numberformat="n2"></div>
+											</div>
+
+											<!-- Spinner for StelProperty: Scenery3d.lazyDrawingInterval -->
+											<div class="btn-gen-slider-wrap">
+													<div class="btn-gen-slider-header">
+															<label><?= tr("Interval:")?></label>
+															<span class="stelproperty" data-prop="Scenery3d.lazyDrawingInterval" data-numberformat="n2"></span>
+													</div>
+													<input class="spinner stelproperty" name="Scenery3d.lazyDrawingInterval" data-min="0.1" data-max="600" data-step="0.1" data-numberformat="n2" />
+											</div>
+											
+											<!-- Checkbox for StelProperty: Scenery3d.enablePixelLighting -->
+											<div class="block_row">
+											<label class="btn-toggle">
+													<input type="checkbox" class="stelproperty" name="Scenery3d.enablePixelLighting"  />
+													<?= tr("Per-Pixel lighting")?>
+											</label>
+											</div>
+
+
+											<!-- Checkbox for StelProperty: Scenery3d.enableShadows -->
+											<div class="block_row">									
+												<label class="btn-toggle">
+														<input type="checkbox" class="stelproperty" name="Scenery3d.enableShadows"  />
+														<?= tr("Shadows")?>
+												</label>
+											</div>
+
+
+											<!-- Checkbox for StelProperty: Scenery3d.useSimpleShadows -->
+											<div class="block_row">									
+											<label class="btn-toggle">
+													<input type="checkbox" class="stelproperty" name="Scenery3d.useSimpleShadows"  />
+													<?= tr("Simple shadows")?>
+											</label>
+											</div>								
+
+											<!-- Checkbox for StelProperty: Scenery3d.enableBumps -->
+											<div class="block_row">								
+											<label class="btn-toggle">
+													<input type="checkbox" class="stelproperty" name="Scenery3d.enableBumps"  />
+													<?= tr("Bump mapping")?>
+											</label>
+											</div>
+											
+											<!-- Cubemap size-->
+											<div class="block_row">
+											<label><?= tr("Cubemap size:")?></label>
+											<select class="stelproperty" name="Scenery3d.cubemapSize">
+											<option value="256">256</option>
+											<option value="512">512</option>
+											<option value="1024">1024</option>
+											<option value="2048">2048</option>
+											<option value="4096">4096</option>
+											<option value="8192">8192</option>
+											<option value="16384">16384</option>
+											</select>
+											</div>								
+
+											<div class="block_row">
+											<label><?= tr("Shadowmap size:")?></label>
+											<select class="stelproperty" name="Scenery3d.shadowmapSize">
+											<option value="256">256</option>
+											<option value="512">512</option>
+											<option value="1024">1024</option>
+											<option value="2048">2048</option>
+											<option value="4096">4096</option>
+											<option value="8192">8192</option>
+											<option value="16384">16384</option>
+											</select>
+											</div>
+
+											<div class="block_row">
+											<label><?= tr("Filtering Quality:")?></label>
+											<select class="stelproperty" name="Scenery3d.shadowFilterQuality">
+											<option value="SFQ_OFF"><?= tr("Off")?></option>
+											<option value="SFQ_HARDWARE"><?= tr("Hardware")?></option>
+											<option value="SFQ_LOW"><?= tr("Low")?></option>
+											<option value="SFQ_LOW_HARDWARE"><?= tr("Low + Hardware")?></option>
+											<option value="SFQ_HIGH"><?= tr("High (slow)")?></option>
+											<option value="SFQ_HIGH_HARDWARE"><?= tr("High + Hardware (slow)")?></option>
+											</select>
+											</div>
+										
+										<!-- Checkbox for StelProperty: Scenery3d.onlyDominantFaceWhenMoving -->
+										<div class="block_row">								
 										<label class="btn-toggle">
-												<input type="checkbox" class="stelproperty" name="Scenery3d.enableLocationInfo"  />
-												<?= tr("Toggle location text")?>
+												<input type="checkbox" class="stelproperty" name="Scenery3d.onlyDominantFaceWhenMoving"  />
+												<?= tr("Only update dominant face when moving")?>
 										</label>
 										</div>
-										<!-- This handeled by manui.js  -->
-										<fieldset>
-												<legend><?= tr("Position on screen")?></legend>
-												<input type="radio" class="stelproperty" name="Scenery3d.locationInfoStyle" id="s3d-locinfo-topright" value="LocationInfoTopRight" /><!-- accept value="0" -->
-												<label for="s3d-locinfo-topright"><?= tr("Top Right")?></label>
-												<input type="radio" class="stelproperty" name="Scenery3d.locationInfoStyle" id="s3d-locinfo-bottomcenter" value="LocationInfoBottomCenter" /><!-- accept value="1" -->
-												<label for="s3d-locinfo-bottomcenter"><?= tr("Bottom Center")?></label>
-										</fieldset>
-									
-								</div>								
-						</section>
 
-						<section class="block">
-						<header><h3><?= tr("Quality/Performance settings")?></h3></header>
+										<!-- Checkbox for StelProperty: Scenery3d.secondDominantFaceWhenMoving -->
+										<div class="block_row">
+										<label class="btn-toggle">
+												<input type="checkbox" class="stelproperty" name="Scenery3d.secondDominantFaceWhenMoving" />
+												<?= tr("Also update second-most dominant face")?>
+										</label>
+										</div>
+									
+										<!-- Checkbox for StelProperty: Scenery3d.enablePCSS -->
+										<div class="block_row">								
+										<label class="btn-toggle">
+												<input type="checkbox" class="stelproperty" name="Scenery3d.enablePCSS"  />
+												<?= tr("PCSS")?>
+										</label>
+										</div>
+										
+								</section>
+
+						</div>
 						
-									<div class="block_row">
-									<label><?= tr("Cubemapping mode:")?></label>
-									<select class="stelproperty" name="Scenery3d.cubemappingMode">
-									<option value="CM_CUBEMAP_GSACCEL"><?= tr("Geometry shader")?></option>
-									<option value="CM_TEXTURES"><?= tr("6 Textures")?></option>
-									<option value="CM_CUBEMAP"><?= tr("Cubemap")?></option>
-									</select>
+							<div class="smallblock flex landscapeblock">
+								<h3><?= tr("Scene selection")?></h3>
+									<div class="flex flex-column">
+										<select id="s3d_list" class="scrollselect flex-expand" size="5"></select>
+										<button id="s3d_load" class="jquerybutton"><?= tr("Load selected scene")?></button>
 									</div>
+								<iframe id="s3d_info" class="flex-expand">No scene selected</iframe>
+							</div>
+					</div>
 
-								<!-- Checkbox for StelProperty: Scenery3d.useFullCubemapShadows -->
-								<div class="block_row">
-								<label class="btn-toggle">
-										<input type="checkbox" class="stelproperty" name="Scenery3d.useFullCubemapShadows"  />
-										<?= tr("Full cubemap shadows")?>
-								</label>
-								</div>
+					<div id="sub_tab_MeteorShowers" class="stelplugin patterns-tab-content" data-plugin="MeteorShowers">
+						<div class="flex flex-wrap">
 
-								
-									<!-- Checkbox for StelProperty: Scenery3d.enableLazyDrawing -->
-									<div class="block_row">									
-									<label class="btn-toggle">
-											<input type="checkbox" class="stelproperty" name="Scenery3d.enableLazyDrawing" />
-											<?= tr("Lazy cubemap re-rendering")?>
-									</label>
-									</div>
-
-									
-									<!-- Slider for StelProperty: Scenery3d.lazyDrawingInterval -->
-									<div class="btn-gen-slider-wrap">
-											<div class="btn-gen-slider-header">
-													<label><?= tr("Interval:")?></label>
-													<span class="stelproperty" data-prop="Scenery3d.lazyDrawingInterval" data-numberformat="n2"></span>
-											</div>
-											<div class="slider stelproperty" data-prop="Scenery3d.lazyDrawingInterval" data-min="0.1" data-max="600" data-step="0.1" data-numberformat="n2"></div>
-									</div>
-
-									<!-- Spinner for StelProperty: Scenery3d.lazyDrawingInterval -->
-									<div class="btn-gen-slider-wrap">
-											<div class="btn-gen-slider-header">
-													<label><?= tr("Interval:")?></label>
-													<span class="stelproperty" data-prop="Scenery3d.lazyDrawingInterval" data-numberformat="n2"></span>
-											</div>
-											<input class="spinner stelproperty" name="Scenery3d.lazyDrawingInterval" data-min="0.1" data-max="600" data-step="0.1" data-numberformat="n2" />
-									</div>
-									
-									<!-- Checkbox for StelProperty: Scenery3d.enablePixelLighting -->
-									<div class="block_row">
-									<label class="btn-toggle">
-											<input type="checkbox" class="stelproperty" name="Scenery3d.enablePixelLighting"  />
-											<?= tr("Per-Pixel lighting")?>
-									</label>
-									</div>
-
-
-									<!-- Checkbox for StelProperty: Scenery3d.enableShadows -->
-									<div class="block_row">									
-										<label class="btn-toggle">
-												<input type="checkbox" class="stelproperty" name="Scenery3d.enableShadows"  />
-												<?= tr("Shadows")?>
-										</label>
-									</div>
-
-
-									<!-- Checkbox for StelProperty: Scenery3d.useSimpleShadows -->
-									<div class="block_row">									
-									<label class="btn-toggle">
-											<input type="checkbox" class="stelproperty" name="Scenery3d.useSimpleShadows"  />
-											<?= tr("Simple shadows")?>
-									</label>
-									</div>								
-
-									<!-- Checkbox for StelProperty: Scenery3d.enableBumps -->
-									<div class="block_row">								
-									<label class="btn-toggle">
-											<input type="checkbox" class="stelproperty" name="Scenery3d.enableBumps"  />
-											<?= tr("Bump mapping")?>
-									</label>
-									</div>
-									
-									<!-- Cubemap size-->
-									<div class="block_row">
-									<label><?= tr("Cubemap size:")?></label>
-									<select class="stelproperty" name="Scenery3d.cubemapSize">
-									<option value="256">256</option>
-									<option value="512">512</option>
-									<option value="1024">1024</option>
-									<option value="2048">2048</option>
-									<option value="4096">4096</option>
-									<option value="8192">8192</option>
-									<option value="16384">16384</option>
-									</select>
-									</div>								
-
-									<div class="block_row">
-									<label><?= tr("Shadowmap size:")?></label>
-									<select class="stelproperty" name="Scenery3d.shadowmapSize">
-									<option value="256">256</option>
-									<option value="512">512</option>
-									<option value="1024">1024</option>
-									<option value="2048">2048</option>
-									<option value="4096">4096</option>
-									<option value="8192">8192</option>
-									<option value="16384">16384</option>
-									</select>
-									</div>
-
-									<div class="block_row">
-									<label><?= tr("Filtering Quality:")?></label>
-									<select class="stelproperty" name="Scenery3d.shadowFilterQuality">
-									<option value="SFQ_OFF"><?= tr("Off")?></option>
-									<option value="SFQ_HARDWARE"><?= tr("Hardware")?></option>
-									<option value="SFQ_LOW"><?= tr("Low")?></option>
-									<option value="SFQ_LOW_HARDWARE"><?= tr("Low + Hardware")?></option>
-									<option value="SFQ_HIGH"><?= tr("High (slow)")?></option>
-									<option value="SFQ_HIGH_HARDWARE"><?= tr("High + Hardware (slow)")?></option>
-									</select>
-									</div>
-								
-								<!-- Checkbox for StelProperty: Scenery3d.onlyDominantFaceWhenMoving -->
-								<div class="block_row">								
-								<label class="btn-toggle">
-										<input type="checkbox" class="stelproperty" name="Scenery3d.onlyDominantFaceWhenMoving"  />
-										<?= tr("Only update dominant face when moving")?>
-								</label>
-								</div>
-
-								<!-- Checkbox for StelProperty: Scenery3d.secondDominantFaceWhenMoving -->
-								<div class="block_row">
-								<label class="btn-toggle">
-										<input type="checkbox" class="stelproperty" name="Scenery3d.secondDominantFaceWhenMoving" />
-										<?= tr("Also update second-most dominant face")?>
-								</label>
-								</div>
+							<div class="smallblock">
+							<h3><?= tr("Set radiant color")?></h3>
 							
-								<!-- Checkbox for StelProperty: Scenery3d.enablePCSS -->
-								<div class="block_row">								
-								<label class="btn-toggle">
-										<input type="checkbox" class="stelproperty" name="Scenery3d.enablePCSS"  />
-										<?= tr("PCSS")?>
-								</label>
+								<div class="inline-block">
+								<h4><?= tr("Confirmed")?></h4>
+										<!-- COLOR PICKER (jQuery UI spinners) for StelProperty: MeteorShowers.colorARC -->
+										<div class="color-picker-wrapper" data-prop="MeteorShowers.colorARC">
+												<div class="color-swatch" style="background-color: rgb(255,240,0);"></div>
+										</div>
+								</div>
+
+								<div class="inline-block">
+								<h4><?= tr("Generic")?></h4>
+										<!-- COLOR PICKER (jQuery UI spinners) for StelProperty: MeteorShowers.colorARG -->
+										<div class="color-picker-wrapper" data-prop="MeteorShowers.colorARG">
+												<div class="color-swatch" style="background-color: rgb(0,255,240);"></div>
+										</div>
+								</div>
+
+								<div class="inline-block">
+								<h4><?= tr("Inactive")?></h4>						
+										<!-- COLOR PICKER (jQuery UI spinners) for StelProperty: MeteorShowers.colorIR -->
+										<div class="color-picker-wrapper" data-prop="MeteorShowers.colorIR">
+												<div class="color-swatch" style="background-color: rgb(255,255,255);"></div>
+										</div>
+								</div>
+							</div>
+
+							<div class="smallblock">
+							<h3><?= tr("Settings")?></h3>
+							
+							<div class="inline-block blocklabel">
+							<!-- Checkbox for StelAction: actionShow_MeteorShowers -->
+							<label class="btn-toggle">
+									<input type="checkbox" class="stelaction" name="actionShow_MeteorShowers" />
+									<?= tr("Toggle meteor showers")?>
+							</label>
+							
+							<!-- Checkbox for StelAction: actionShow_MeteorShowers_labels -->
+							<label class="btn-toggle">
+									<input type="checkbox" class="stelaction" name="actionShow_MeteorShowers_labels" />
+									<?= tr("Toggle radiant labels")?>
+							</label>
+
+							<!-- Checkbox for StelAction: actionShow_MeteorShowers_config_dialog -->
+							<label class="btn-toggle">
+									<input type="checkbox" class="stelaction" name="actionShow_MeteorShowers_config_dialog" />
+									<?= tr("Show settings dialog")?>
+							</label>
+
+							<!-- Checkbox for StelAction: actionShow_MeteorShowers_search_dialog -->
+							<label class="btn-toggle">
+									<input type="checkbox" class="stelaction" name="actionShow_MeteorShowers_search_dialog" />
+									<?= tr("Show meteor showers search dialog")?>
+							</label>
+							</div>
+							</div>
+						</div>
+					</div>
+
+					<div id="sub_tab_ArchaeoLines" class="stelplugin patterns-tab-content" data-plugin="ArchaeoLines" data-pluginjs="plugins/archaeolines" data-pluginjs="plugins/archaeolines">
+						<div class="flex flex-wrap">
+
+							<div class="smallblock">
+							<h3><?= tr("ArchaeoLines Plug-in Configuration")?></h3>
+								<!-- Checkbox for StelProperty: actionShow_ArchaeoLines -->
+								<label class="btn-toggle"><input type="checkbox" class="stelproperty" name="actionShow_ArchaeoLines" /><?= tr("ArchaeoLines")?></label>
+								<!-- Checkbox for StelProperty: actionShow_ArchaeoLines_dialog -->
+								<label class="btn-toggle"><input type="checkbox" class="stelproperty" name="actionShow_ArchaeoLines_dialog" /><?= tr("Show settings dialog")?></label>						
+
+								<div class="smallblock blocklabel">
+								<h3>Custom Geographic Location</h3>
+									<div class="smallblock">
+									<h3><?= tr("Geographic Location 1")?></h3>
+									<div class="block_row">
+											<!-- COLOR PICKER (jQuery UI spinners) for StelProperty: ArchaeoLines.geographicLocation1Color -->
+											<div class="color-picker-wrapper" data-prop="ArchaeoLines.geographicLocation1Color">					
+											<div class="color-swatch" style="background-color: rgb(64,255,64);"></div>
+											</div>
+											<!-- Checkbox for StelProperty: ArchaeoLines.flagShowGeographicLocation1 -->
+											<label class="btn-toggle">
+													<input type="checkbox" class="stelproperty" name="ArchaeoLines.flagShowGeographicLocation1" />
+													<?= tr("Geographic Location 1")?>
+											</label>
+
+											<div class="text-input-row">
+													<input type="text" class="stelproperty-text" name="ArchaeoLines.geographicLocation1Label"
+															value="Makkah"
+															placeholder="Enter value..." />
+											</div>
+									</div>
+											<!-- Slider for StelProperty: ArchaeoLines.geographicLocation1Latitude -->
+											<div class="btn-gen-slider-wrap">
+													<div class="btn-gen-slider-header">
+															<label><?= tr("Latitude")?></label>
+															<span><input class="spinner stelproperty" name="ArchaeoLines.geographicLocation1Latitude" data-min="-90" data-max="90" data-step="0.0001" data-numberformat="n3" /></span>
+													</div>
+											</div>
+											<!-- Slider for StelProperty: ArchaeoLines.geographicLocation1Longitude -->
+											<div class="btn-gen-slider-wrap">
+													<div class="btn-gen-slider-header">
+															<label><?= tr("Longitude")?></label>
+															<span><input class="spinner stelproperty" name="ArchaeoLines.geographicLocation1Longitude" data-min="-180" data-max="180" data-step="0.0001" data-numberformat="n3" /></span>
+													</div>
+											</div>	
+									</div>					
+			
+									<div class="smallblock">
+										<h3><?= tr("Geographic Location 2")?></h3>
+										<div class="block_row">
+											<!-- COLOR PICKER (jQuery UI spinners) for StelProperty: ArchaeoLines.geographicLocation2Color -->
+											<div class="color-picker-wrapper" data-prop="ArchaeoLines.geographicLocation2Color">					
+											<div class="color-swatch" style="background-color: rgb(64,64,255);"></div>
+											</div>
+											<!-- Checkbox for StelProperty: ArchaeoLines.flagShowGeographicLocation2 -->
+											<label class="btn-toggle">
+													<input type="checkbox" class="stelproperty" name="ArchaeoLines.flagShowGeographicLocation2" />
+													<?= tr("Geographic Location 2")?>
+											</label>
+											<div class="text-input-row">
+													<input type="text" class="stelproperty-text" name="ArchaeoLines.geographicLocation2Label"
+															value="Jerusalem"
+															placeholder="Enter value..." />
+											</div>
+										</div>
+
+										<!-- Slider for StelProperty: ArchaeoLines.geographicLocation2Latitude -->
+										<div class="btn-gen-slider-wrap">
+												<div class="btn-gen-slider-header">
+														<label><?= tr("Latitude")?></label>
+														<span><input class="spinner stelproperty" name="ArchaeoLines.geographicLocation2Latitude" data-min="-90" data-max="90" data-step="0.0001" data-numberformat="n3" /></span>
+												</div>
+										</div>
+
+										<!-- Slider for StelProperty: ArchaeoLines.geographicLocation2Longitude -->
+										<div class="btn-gen-slider-wrap">
+												<div class="btn-gen-slider-header">
+														<label><?= tr("Longitude")?></label>
+														<span><input class="spinner stelproperty" name="ArchaeoLines.geographicLocation2Longitude" data-min="-180" data-max="180" data-step="0.0001" data-numberformat="n3" /></span>
+												</div>
+										</div>
+									</div>
+								</div><!-- geographic location -->
+							</div>
+
+						<!-- CUSTOM LINES -->
+						<div class="smallblock">
+								<?= tr("Custom Lines")?>
+
+								<div class="archaeo-custom-lines">
+
+										<!-- Row 1: Custom Azimuth 1 -->
+										<div class="archaeo-line-row">
+												<div class="archaeo-col-color">
+														<div class="color-picker-wrapper" data-prop="ArchaeoLines.customAzimuth1Color">
+																<div class="color-swatch" style="background-color: rgb(255,0,0);"></div>
+														</div>
+												</div>
+												<div class="archaeo-col-flag">
+														<label class="btn-toggle" title="<?= tr("Enable this line")?>">
+																<input type="checkbox" class="stelproperty"
+																			 name="ArchaeoLines.flagShowCustomAzimuth1" />
+																<span><?= tr("Custom Azimuth 1")?></span>
+														</label>
+												</div>
+												<div class="archaeo-col-value">
+														<input class="spinner stelproperty"
+																	 name="ArchaeoLines.customAzimuth1"
+																	 data-min="0" data-max="359"
+																	 data-step="0.0001" data-numberformat="n3"
+																	 title="<?= tr("Azimuth (degrees)")?>" />
+												</div>
+												<div class="archaeo-col-label">
+														<input type="text" class="stelproperty-text"
+																	 name="ArchaeoLines.customAzimuth1Label"
+																	 value="Alnair"
+																	 placeholder="<?= tr("Label")?>" />
+												</div>
+												<div class="archaeo-col-action">
+														<button type="button"
+																		class="archaeo-target-btn"
+																		data-coord-type="azimuth"
+																		data-spinner-prop="ArchaeoLines.customAzimuth1"
+																		data-label-prop="ArchaeoLines.customAzimuth1Label"
+																		title="<?= tr("From selected object (if any)")?>">
+																<span class="ui-icon ui-icon-circle-plus"></span>
+														</button>
+												</div>
+										</div>
+
+										<!-- Row 2: Custom Azimuth 2 -->
+										<div class="archaeo-line-row">
+												<div class="archaeo-col-color">
+														<div class="color-picker-wrapper" data-prop="ArchaeoLines.customAzimuth2Color">
+																<div class="color-swatch" style="background-color: rgb(64,128,191);"></div>
+														</div>
+												</div>
+												<div class="archaeo-col-flag">
+														<label class="btn-toggle" title="<?= tr("Enable this line")?>">
+																<input type="checkbox" class="stelproperty"
+																			 name="ArchaeoLines.flagShowCustomAzimuth2" />
+																<span><?= tr("Custom Azimuth 2")?></span>
+														</label>
+												</div>
+												<div class="archaeo-col-value">
+														<input class="spinner stelproperty"
+																	 name="ArchaeoLines.customAzimuth2"
+																	 data-min="0" data-max="359"
+																	 data-step="0.0001" data-numberformat="n3"
+																	 title="<?= tr("Azimuth (degrees)")?>" />
+												</div>
+												<div class="archaeo-col-label">
+														<input type="text" class="stelproperty-text"
+																	 name="ArchaeoLines.customAzimuth2Label"
+																	 value="Peacock"
+																	 placeholder="<?= tr("Label")?>" />
+												</div>
+												<div class="archaeo-col-action">
+														<button type="button"
+																		class="archaeo-target-btn"
+																		data-coord-type="azimuth"
+																		data-spinner-prop="ArchaeoLines.customAzimuth2"
+																		data-label-prop="ArchaeoLines.customAzimuth2Label"
+																		title="<?= tr("From selected object (if any)")?>">
+																<span class="ui-icon ui-icon-circle-plus"></span>
+														</button>
+												</div>
+										</div>
+
+										<!-- Row 3: Custom Altitude 1 -->
+										<div class="archaeo-line-row">
+												<!-- Column 1: Color picker -->
+												<div class="archaeo-col-color">
+														<div class="color-picker-wrapper" data-prop="ArchaeoLines.customAltitude1Color">
+																<div class="color-swatch" style="background-color: rgb(255,170,255);"></div>
+														</div>
+												</div>
+
+												<!-- Column 2: Enable checkbox -->
+												<div class="archaeo-col-flag">
+														<label class="btn-toggle" title="<?= tr("Enable this line")?>">
+																<input type="checkbox" class="stelproperty"
+																			 name="ArchaeoLines.flagShowCustomAltitude1" />
+																<span><?= tr("Custom Altitude 1")?></span>
+														</label>
+												</div>
+
+												<!-- Column 3: Value spinner -->
+												<div class="archaeo-col-value">
+														<input class="spinner stelproperty"
+																	 name="ArchaeoLines.customAltitude1"
+																	 data-min="0" data-max="90"
+																	 data-step="0.001" data-numberformat="n3"
+																	 title="<?= tr("Altitude (degrees)")?>" />
+												</div>
+
+												<!-- Column 4: Label text -->
+												<div class="archaeo-col-label">
+														<input type="text" class="stelproperty-text"
+																	 name="ArchaeoLines.customAltitude1Label"
+																	 value="Aldhanab"
+																	 placeholder="<?= tr("Label")?>"
+																	 title="<?= tr("Custom label")?>" />
+												</div>
+
+												<!-- Column 5: Target button (FIXED in HTML) -->
+												<div class="archaeo-col-action">
+														<button type="button"
+																		class="archaeo-target-btn"
+																		data-coord-type="altitude"
+																		data-spinner-prop="ArchaeoLines.customAltitude1"
+																		data-label-prop="ArchaeoLines.customAltitude1Label"
+																		title="<?= tr("From selected object (if any)")?>">
+																<span class="ui-icon ui-icon-circle-plus"></span>
+														</button>
+												</div>
+										</div>
+
+										<!-- Row 4: Custom Altitude 2 -->
+										<div class="archaeo-line-row">
+												<div class="archaeo-col-color">
+														<div class="color-picker-wrapper" data-prop="ArchaeoLines.customAltitude2Color">
+																<div class="color-swatch" style="background-color: rgb(150,173,77);"></div>
+														</div>
+												</div>
+												<div class="archaeo-col-flag">
+														<label class="btn-toggle" title="<?= tr("Enable this line")?>">
+																<input type="checkbox" class="stelproperty"
+																			 name="ArchaeoLines.flagShowCustomAltitude2" />
+																<span><?= tr("Custom Altitude 2")?></span>
+														</label>
+												</div>
+												<div class="archaeo-col-value">
+														<input class="spinner stelproperty"
+																	 name="ArchaeoLines.customAltitude2"
+																	 data-min="0" data-max="90"
+																	 data-step="0.001" data-numberformat="n3"
+																	 title="<?= tr("Altitude (degrees)")?>" />
+												</div>
+												<div class="archaeo-col-label">
+														<input type="text" class="stelproperty-text"
+																	 name="ArchaeoLines.customAltitude2Label"
+																	 value="Alnair"
+																	 placeholder="<?= tr("Label")?>" />
+												</div>
+												<div class="archaeo-col-action">
+														<button type="button"
+																		class="archaeo-target-btn"
+																		data-coord-type="altitude"
+																		data-spinner-prop="ArchaeoLines.customAltitude2"
+																		data-label-prop="ArchaeoLines.customAltitude2Label"
+																		title="<?= tr("From selected object (if any)")?>">
+																<span class="ui-icon ui-icon-circle-plus"></span>
+														</button>
+												</div>
+										</div>
+
+										<!-- Row 5: Custom Declination 1 -->
+										<div class="archaeo-line-row">
+												<div class="archaeo-col-color">
+														<div class="color-picker-wrapper" data-prop="ArchaeoLines.customDeclination1Color">
+																<div class="color-swatch" style="background-color: rgb(115,255,38);"></div>
+														</div>
+												</div>
+												<div class="archaeo-col-flag">
+														<label class="btn-toggle" title="<?= tr("Enable this line")?>">
+																<input type="checkbox" class="stelproperty"
+																			 name="ArchaeoLines.flagShowCustomDeclination1" />
+																<span><?= tr("Custom Declination 1")?></span>
+														</label>
+												</div>
+												<div class="archaeo-col-value">
+														<input class="spinner stelproperty"
+																	 name="ArchaeoLines.customDeclination1"
+																	 data-min="-90" data-max="90"
+																	 data-step="0.0001" data-numberformat="n3"
+																	 title="<?= tr("Declination (J2000 degrees)")?>" />
+												</div>
+												<div class="archaeo-col-label">
+														<input type="text" class="stelproperty-text"
+																	 name="ArchaeoLines.customDeclination1Label"
+																	 value="α Ind"
+																	 placeholder="<?= tr("Label")?>" />
+												</div>
+												<div class="archaeo-col-action">
+														<button type="button"
+																		class="archaeo-target-btn"
+																		data-coord-type="declination"
+																		data-spinner-prop="ArchaeoLines.customDeclination1"
+																		data-label-prop="ArchaeoLines.customDeclination1Label"
+																		title="<?= tr("From selected object (if any)")?>">
+																<span class="ui-icon ui-icon-circle-plus"></span>
+														</button>
+												</div>
+										</div>
+
+										<!-- Row 6: Custom Declination 2 -->
+										<div class="archaeo-line-row">
+												<div class="archaeo-col-color">
+														<div class="color-picker-wrapper" data-prop="ArchaeoLines.customDeclination2Color">
+																<div class="color-swatch" style="background-color: rgb(115,128,166);"></div>
+														</div>
+												</div>
+												<div class="archaeo-col-flag">
+														<label class="btn-toggle" title="<?= tr("Enable this line")?>">
+																<input type="checkbox" class="stelproperty"
+																			 name="ArchaeoLines.flagShowCustomDeclination2" />
+																<span><?= tr("Custom Declination 2")?></span>
+														</label>
+												</div>
+												<div class="archaeo-col-value">
+														<input class="spinner stelproperty"
+																	 name="ArchaeoLines.customDeclination2"
+																	 data-min="-90" data-max="90"
+																	 data-step="0.0001" data-numberformat="n3"
+																	 title="<?= tr("Declination (J2000 degrees)")?>" />
+												</div>
+												<div class="archaeo-col-label">
+														<input type="text" class="stelproperty-text"
+																	 name="ArchaeoLines.customDeclination2Label"
+																	 value="Deneb Algedi"
+																	 placeholder="<?= tr("Label")?>" />
+												</div>
+												<div class="archaeo-col-action">
+														<button type="button"
+																		class="archaeo-target-btn"
+																		data-coord-type="declination"
+																		data-spinner-prop="ArchaeoLines.customDeclination2"
+																		data-label-prop="ArchaeoLines.customDeclination2Label"
+																		title="<?= tr("From selected object (if any)")?>">
+																<span class="ui-icon ui-icon-circle-plus"></span>
+														</button>
+												</div>
+										</div>
+
+								</div><!-- .archaeo-custom-lines -->
+						</div><!-- .smallblock -->
+
+						<div class="smallblock">
+								<h3><?= tr("ArchaeoLines")?></h3>
+
+								<div class="inline-block blocklabel">
+
+										<div class="block_row">
+												<div class="color-picker-wrapper" data-prop="ArchaeoLines.equinoxColor">
+														<div class="color-swatch" style="background-color: rgb(255,255,128);"></div>
+												</div>
+												<label class="btn-toggle">
+														<input type="checkbox" class="stelproperty" name="ArchaeoLines.flagShowEquinox" />
+														<?= tr("Equinox line (Equator)")?>
+												</label>
+										</div>
+
+										<div class="block_row">
+												<div class="color-picker-wrapper" data-prop="ArchaeoLines.solsticesColor">
+														<div class="color-swatch" style="background-color: rgb(255,38,38);"></div>
+												</div>
+												<label class="btn-toggle">
+														<input type="checkbox" class="stelproperty" name="ArchaeoLines.flagShowSolstices" />
+														<?= tr("Solstice Lines")?>
+												</label>
+										</div>
+
+										<div class="block_row">
+												<div class="color-picker-wrapper" data-prop="ArchaeoLines.crossquartersColor">
+														<div class="color-swatch" style="background-color: rgb(255,191,64);"></div>
+												</div>
+												<label class="btn-toggle">
+														<input type="checkbox" class="stelproperty" name="ArchaeoLines.flagShowCrossquarters" />
+														<?= tr("Crossquarter Lines")?>
+												</label>
+										</div>
+
+										<div class="block_row">
+												<div class="color-picker-wrapper" data-prop="ArchaeoLines.majorStandstillColor">
+														<div class="color-swatch" style="background-color: rgb(64,255,64);"></div>
+												</div>
+												<label class="btn-toggle">
+														<input type="checkbox" class="stelproperty" name="ArchaeoLines.flagShowMajorStandstills" />
+														<?= tr("Major Lunar Standstill lines")?>
+												</label>
+										</div>
+
+										<div class="block_row">
+												<div class="color-picker-wrapper" data-prop="ArchaeoLines.minorStandstillColor">
+														<div class="color-swatch" style="background-color: rgb(51,191,51);"></div>
+												</div>
+												<label class="btn-toggle">
+														<input type="checkbox" class="stelproperty" name="ArchaeoLines.flagShowMinorStandstills" />
+														<?= tr("Minor Lunar Standstill lines")?>
+												</label>
+										</div>
+
+										<div class="block_row">
+												<div class="color-picker-wrapper" data-prop="ArchaeoLines.polarCirclesColor">
+														<div class="color-swatch" style="background-color: rgb(64,64,191);"></div>
+												</div>
+												<label class="btn-toggle">
+														<input type="checkbox" class="stelproperty" name="ArchaeoLines.flagShowPolarCircles" />
+														<?= tr("Polar Circles")?>
+												</label>
+										</div>
+
+										<div class="block_row">
+												<div class="color-picker-wrapper" data-prop="ArchaeoLines.zenithPassageColor">
+														<div class="color-swatch" style="background-color: rgb(191,191,191);"></div>
+												</div>
+												<label class="btn-toggle">
+														<input type="checkbox" class="stelproperty" name="ArchaeoLines.flagShowZenithPassage" />
+														<?= tr("Declination of Zenith passage")?>
+												</label>
+										</div>
+
+										<div class="block_row">
+												<div class="color-picker-wrapper" data-prop="ArchaeoLines.nadirPassageColor">
+														<div class="color-swatch" style="background-color: rgb(64,64,64);"></div>
+												</div>
+												<label class="btn-toggle">
+														<input type="checkbox" class="stelproperty" name="ArchaeoLines.flagShowNadirPassage" />
+														<?= tr("Declination of Nadir passage")?>
+												</label>
+										</div>
+
+								</div>
+
+								<div class="inline-block blocklabel">
+
+										<div class="block_row">
+												<div class="color-picker-wrapper" data-prop="ArchaeoLines.currentSunColor">
+														<div class="color-swatch" style="background-color: rgb(255,255,191);"></div>
+												</div>
+												<label class="btn-toggle">
+														<input type="checkbox" class="stelproperty" name="ArchaeoLines.flagShowCurrentSun" />
+														<?= tr("Current Sun")?>
+												</label>
+										</div>
+
+										<div class="block_row">
+												<div class="color-picker-wrapper" data-prop="ArchaeoLines.currentMoonColor">
+														<div class="color-swatch" style="background-color: rgb(128,255,128);"></div>
+												</div>
+												<label class="btn-toggle">
+														<input type="checkbox" class="stelproperty" name="ArchaeoLines.flagShowCurrentMoon" />
+														<?= tr("Current Moon")?>
+												</label>
+										</div>
+
+										<div class="block_row">
+												<div class="color-picker-wrapper" data-prop="ArchaeoLines.currentPlanetColor">
+														<div class="color-swatch" style="background-color: rgb(64,204,255);"></div>
+												</div>
+												<select id="select_ArchaeoLines_enumShowCurrentPlanet"
+																class="selectmenu stelproperty display-block"
+																name="ArchaeoLines.enumShowCurrentPlanet">
+														<option value="CurrentPlanetNone"><?= tr("Current Planet:")?> <?= tr("None")?></option>
+														<option value="CurrentPlanetMercury"><?= tr("Current Planet:")?> <?= tr("Mercury")?></option>
+														<option value="CurrentPlanetVenus"><?= tr("Current Planet:")?> <?= tr("Venus")?></option>
+														<option value="CurrentPlanetMars"><?= tr("Current Planet:")?> <?= tr("Mars")?></option>
+														<option value="CurrentPlanetJupiter"><?= tr("Current Planet:")?> <?= tr("Jupiter")?></option>
+														<option value="CurrentPlanetSaturn"><?= tr("Current Planet:")?> <?= tr("Saturn")?></option>
+												</select>
+										</div>
+
+										<div class="block_row">
+												<div class="color-picker-wrapper" data-prop="ArchaeoLines.selectedObjectColor">
+														<div class="color-swatch" style="background-color: rgb(15,228,228);"></div>
+												</div>
+												<label class="btn-toggle">
+														<input type="checkbox" class="stelproperty" name="ArchaeoLines.flagShowSelectedObject" />
+														<?= tr("Selected Object")?>
+												</label>
+										</div>
+
+										<div class="block_row">
+												<div class="color-picker-wrapper" data-prop="ArchaeoLines.selectedObjectAzimuthColor">
+														<div class="color-swatch" style="background-color: rgb(255,255,255);"></div>
+												</div>
+												<label class="btn-toggle">
+														<input type="checkbox" class="stelproperty" name="ArchaeoLines.flagShowSelectedObjectAzimuth" />
+														<?= tr("Selected Object Azimuth")?>
+												</label>
+										</div>
+
+										<div class="block_row">
+												<div class="color-picker-wrapper" data-prop="ArchaeoLines.selectedObjectHourAngleColor">
+														<div class="color-swatch" style="background-color: rgb(255,255,255);"></div>
+												</div>
+												<label class="btn-toggle">
+														<input type="checkbox" class="stelproperty" name="ArchaeoLines.flagShowSelectedObjectHourAngle" />
+														<?= tr("Selected Object Hour Angle")?>
+												</label>
+										</div>
+
+										<br />
+
+										<div class="flex-wrap">
+												<label><?= tr("Line width:")?></label>
+												<input class="spinner stelproperty"
+															 name="ArchaeoLines.lineWidth"
+															 data-min="1" data-max="5"
+															 data-step="1" data-numberformat="n0" />
+										</div>
+
+								</div>
+						</div><!-- .block reference lines -->
+
+					</div><!-- .flex.flex-wrap -->
+				</div><!-- #sub_tab_ArchaeoLines -->
+
+					<div id="sub_tab_Quasars" class="stelplugin patterns-tab-content" data-plugin="Quasars">
+						<div class="flex flex-wrap">
+							<div class="smallblock">
+							 <h3><?= tr("Settings for quasars")?></h3>
+								<div class="inline-block blocklabel">
+
+									<!-- Checkbox for StelProperty: Quasars.quasarsVisible -->
+									<label class="btn-toggle">
+											<input type="checkbox" class="stelproperty" name="Quasars.quasarsVisible" />
+											<?= tr("Show quasars")?>
+									</label>
+								
+									<!-- Checkbox for StelProperty: Quasars.flagDisplayMode -->
+									<label class="btn-toggle">
+											<input type="checkbox" class="stelproperty" name="Quasars.flagDisplayMode" />
+											<?= tr("Enable display of distribution for quasars")?>
+									</label>
+
+									<!-- Checkbox for StelProperty: Quasars.flagMarkersMode -->
+									<label class="btn-toggle">
+											<input type="checkbox" class="stelproperty" name="Quasars.flagMarkersMode" />
+											<?= tr("Use markers for quasars")?>
+									</label>
+
+									<!-- Checkbox for StelProperty: actionShow_Quasars_dialog -->
+									<label class="btn-toggle">
+											<input type="checkbox" class="stelproperty" name="actionShow_Quasars_dialog" />
+											<?= tr("Show settings dialog")?>
+									</label>
+
+									<label class="color-picker-wrapper" data-prop="Quasars.quasarsColor" style="justify-content: left !important;">
+											<div class="color-swatch" style="background-color: rgb(255,128,102);"></div>
+											<?= tr("Quasars marker color")?>
+									</label>
+									
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div id="sub_tab_Pulsars" class="stelplugin patterns-tab-content" data-plugin="Pulsars">
+						<div class="flex flex-wrap">
+							<div class="smallblock">
+							 <h3><?= tr("Settings for pulsars")?></h3>
+								<div class="inline-block blocklabel">
+								
+									<!-- Checkbox for StelProperty: Pulsars.flagDisplayMode -->
+									<label class="btn-toggle">
+											<input type="checkbox" class="stelproperty" name="Pulsars.flagDisplayMode" />
+											<?= tr("Enable display of distribution for pulsars")?>
+									</label>
+
+									<!-- Checkbox for StelProperty: Pulsars.pulsarsVisible -->
+									<label class="btn-toggle">
+											<input type="checkbox" class="stelproperty" name="Pulsars.pulsarsVisible" />
+											<?= tr("Show pulsars")?>
+									</label>
+
+
+									<!-- Checkbox for StelProperty: actionShow_Pulsars_dialog -->
+									<label class="btn-toggle">
+											<input type="checkbox" class="stelproperty" name="actionShow_Pulsars_dialog" />
+											<?= tr("Show settings dialog")?>							
+									</label>
+									
+								<div class="block_row">
+									<div class="color-picker-wrapper" data-prop="Pulsars.glitchColor">
+											<div class="color-swatch" style="background-color: rgb(51,77,255);"></div>
+									</div>
+									<!-- Checkbox for StelProperty: Pulsars.flagGlitchMode -->
+									<label class="btn-toggle">
+											<input type="checkbox" class="stelproperty" name="Pulsars.flagGlitchMode" />
+											<?= tr("Use separate color for pulsars with glitches")?>
+									</label>
 								</div>
 								
-						</section>
+								<div class="block_row">
+									<label class="color-picker-wrapper" data-prop="Pulsars.markerColor"style="justify-content: left !important;">
+											<div class="color-swatch" style="background-color: rgb(102,128,255);"></div>
+											<?= tr("Pulsars marker color")?>
+									</label>
+								</div>
+								
+								</div>
+							</div>
+						</div>
 
-				</div>
+					</div>
+
+					<div id="sub_tab_NavStars" class="stelplugin patterns-tab-content" data-plugin="NavStars">
+						<div class="flex flex-wrap">
+							<div class="smallblock">
+								<h3><?= tr("Settings")?></h3>
+								<div class="inline-block blocklabel">
+								<!-- Checkbox for StelAction: actionShow_NavStars -->
+								<label class="btn-toggle">
+									<input type="checkbox" class="stelaction" name="actionShow_NavStars"/>
+										<?= tr("Navigational Stars")?>
+								</label>
+
+								<!-- Checkbox for StelProperty: actionShow_NavStars_dialog -->
+								<label class="btn-toggle">
+										<input type="checkbox" class="stelproperty" name="actionShow_NavStars_dialog"  />
+										<?= tr("Show settings dialog")?>
+								</label>
+								
+								<!-- Checkbox for StelProperty: NavStars.displayAtStartup -->
+								<label class="btn-toggle">
+										<input type="checkbox" class="stelproperty" name="NavStars.displayAtStartup"  />
+										<?= tr("Enable display at startup")?>
+								</label>
+
+								<!-- Checkbox for StelProperty: NavStars.highlightWhenVisible -->
+								<label class="btn-toggle">
+										<input type="checkbox" class="stelproperty" name="NavStars.highlightWhenVisible"  />
+										<?= tr("Only highlight when visible")?>
+								</label>
+
+								<!-- Checkbox for StelProperty: NavStars.limitInfoToNavStars -->
+								<label class="btn-toggle">
+										<input type="checkbox" class="stelproperty" name="NavStars.limitInfoToNavStars"  />
+										<?= tr("Only show extra information for marked Navigation Stars")?>
+								</label>
+
+								<!-- Checkbox for StelProperty: NavStars.tabulatedDisplay -->
+								<label class="btn-toggle">
+										<input type="checkbox" class="stelproperty" name="NavStars.tabulatedDisplay"  />
+										<?= tr("Show information as a tabulated list")?>
+								</label>
+
+								<!-- Checkbox for StelProperty: NavStars.showExtraDecimals -->
+								<label class="btn-toggle">
+										<input type="checkbox" class="stelproperty" name="NavStars.showExtraDecimals"  />
+										<?= tr("Show extra decimals in info")?>
+								</label>
+
+								<!-- Checkbox for StelProperty: NavStars.upperLimb -->
+								<label class="btn-toggle">
+										<input type="checkbox" class="stelproperty" name="NavStars.upperLimb"  />
+										<?= tr("Use upper limb for Sun and Moon")?>
+								</label>
+
+								<!-- Checkbox for StelProperty: NavStars.useUTCTime -->
+								<label class="btn-toggle">
+										<input type="checkbox" class="stelproperty" name="NavStars.useUTCTime"  />
+										<?= tr("Use UTC time when navigational stars are displayed")?>
+								</label>
+								</div>
+
+							</div>
+						</div>				
+					</div>
+
+					<div id="sub_tab_Exoplanets" class="stelplugin patterns-tab-content" data-plugin="Exoplanets">
+						<div class="flex flex-wrap">
+							<div class="smallblock">
+							<h3><?= tr("Settings for exoplanets")?></h3>
+							
+								<div class="inline-block blocklabel">
+								<label class="btn-toggle">					
+								<input type="checkbox" class="stelaction" name="actionShow_Exoplanets"/>
+								<?= tr("Show exoplanets")?>
+								</label>
+
+								<!-- Checkbox for StelAction: actionShow_Exoplanets_ConfigDialog -->
+								<label class="btn-toggle">
+										<input type="checkbox" class="stelaction" name="actionShow_Exoplanets_ConfigDialog" />
+										<?= tr("Show settings dialog")?>
+								</label>
+
+								<!-- Checkbox for StelAction: actionShow_Exoplanets_Distribution -->
+								<label class="btn-toggle">
+										<input type="checkbox" class="stelaction" name="actionShow_Exoplanets_Distribution" />
+										<?= tr("Enable display of distribution for exoplanets")?>
+								</label>
+
+								<!-- Checkbox for StelAction: actionShow_Exoplanets_Timeline -->
+								<label class="btn-toggle">
+										<input type="checkbox" class="stelaction" name="actionShow_Exoplanets_Timeline" />
+										<?= tr("Enable timeline discovery of exoplanets")?>
+								</label>
+
+								<!-- Checkbox for StelAction: actionShow_Exoplanets_Habitable -->
+								<label class="btn-toggle">
+										<input type="checkbox" class="stelaction" name="actionShow_Exoplanets_Habitable" />
+										<?= tr("Enable display of the potential habitable exoplanets only")?>
+								</label>
+
+								<!-- Checkbox for StelAction: actionShow_Exoplanets_Designations -->
+								<label class="btn-toggle">
+										<input type="checkbox" class="stelaction" name="actionShow_Exoplanets_Designations" />
+										<?= tr("Enable display of designations for exoplanets")?>
+								</label>
+
+								<!-- Checkbox for StelAction: actionShow_Exoplanets_Numbers -->
+								<label class="btn-toggle">
+										<input type="checkbox" class="stelaction" name="actionShow_Exoplanets_Numbers" />
+										<?= tr("Enable display number of exoplanets in the system")?>
+								</label>
+								
+								<!-- COLOR PICKER (jQuery UI spinners) for StelProperty: Exoplanets.habitableColor -->
+								<label class="color-picker-wrapper" data-prop="Exoplanets.habitableColor" style="justify-content: left !important;">
+										<div class="color-swatch" style="background-color: rgb(255,128,0);"></div>
+										<?= tr("Marker color for potential habitable exoplanets")?>											
+								</label>
+
+								<!-- COLOR PICKER (jQuery UI spinners) for StelProperty: Exoplanets.markerColor -->
+								<label class="color-picker-wrapper" data-prop="Exoplanets.markerColor" style="justify-content: left !important;">
+										<div class="color-swatch" style="background-color: rgb(102,230,128);"></div>
+										<?= tr("Exoplanets marker color")?>											
+								</label>					
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div id="sub_tab_EquationOfTime" class="stelplugin patterns-tab-content" data-plugin="EquationOfTime">
+						<div class="flex flex-wrap">
+							<div class="smallblock">
+							<h3><?= tr("Equation of Time")?></h3>
+							
+								<div class="inline-block blocklabel">
+
+									<!-- Checkbox for StelProperty: EquationOfTime.showEOT -->
+									<label class="btn-toggle">
+											<input type="checkbox" class="stelproperty" name="EquationOfTime.showEOT" />
+											<?= tr("Show value of the equation of time")?>
+									</label>
+
+									<!-- Checkbox for StelProperty: actionShow_EquationOfTime_dialog -->
+									<label class="btn-toggle">
+											<input type="checkbox" class="stelproperty" name="actionShow_EquationOfTime_dialog" />
+											<?= tr("Show settings dialog")?>
+									</label>
+
+									<div class="color-picker-wrapper" data-prop="EquationOfTime.textColor" style="justify-content: left !important;">
+											<div class="color-swatch" style="background-color: rgb(0,128,255);"></div>
+									</div>
 				
-					<div class="smallblock flex landscapeblock">
-						<h3><?= tr("Scene selection")?></h3>
-							<div class="flex flex-column">
-								<select id="s3d_list" class="scrollselect flex-expand" size="5"></select>
-								<button id="s3d_load" class="jquerybutton"><?= tr("Load selected scene")?></button>
+								</div>
 							</div>
-						<iframe id="s3d_info" class="flex-expand">No scene selected</iframe>
-					</div>
-			</div>
-
-			<div id="sub_tab_MeteorShowers" class="stelplugin patterns-tab-content" data-plugin="MeteorShowers">
-				<div class="flex flex-wrap">
-
-					<div class="smallblock">
-					<h3><?= tr("Set radiant color")?></h3>
-					
-						<div class="inline-block">
-						<h4><?= tr("Confirmed")?></h4>
-								<!-- COLOR PICKER (jQuery UI spinners) for StelProperty: MeteorShowers.colorARC -->
-								<div class="color-picker-wrapper" data-prop="MeteorShowers.colorARC">
-										<div class="color-swatch" style="background-color: rgb(255,240,0);"></div>
-								</div>
-						</div>
-
-						<div class="inline-block">
-						<h4><?= tr("Generic")?></h4>
-								<!-- COLOR PICKER (jQuery UI spinners) for StelProperty: MeteorShowers.colorARG -->
-								<div class="color-picker-wrapper" data-prop="MeteorShowers.colorARG">
-										<div class="color-swatch" style="background-color: rgb(0,255,240);"></div>
-								</div>
-						</div>
-
-						<div class="inline-block">
-						<h4><?= tr("Inactive")?></h4>						
-								<!-- COLOR PICKER (jQuery UI spinners) for StelProperty: MeteorShowers.colorIR -->
-								<div class="color-picker-wrapper" data-prop="MeteorShowers.colorIR">
-										<div class="color-swatch" style="background-color: rgb(255,255,255);"></div>
-								</div>
 						</div>
 					</div>
 
-					<div class="smallblock">
-					<h3><?= tr("Settings")?></h3>
-					
-					<div class="inline-block blocklabel">
-					<!-- Checkbox for StelAction: actionShow_MeteorShowers -->
-					<label class="btn-toggle">
-							<input type="checkbox" class="stelaction" name="actionShow_MeteorShowers" />
-							<?= tr("Toggle meteor showers")?>
-					</label>
-					
-					<!-- Checkbox for StelAction: actionShow_MeteorShowers_labels -->
-					<label class="btn-toggle">
-							<input type="checkbox" class="stelaction" name="actionShow_MeteorShowers_labels" />
-							<?= tr("Toggle radiant labels")?>
-					</label>
-
-					<!-- Checkbox for StelAction: actionShow_MeteorShowers_config_dialog -->
-					<label class="btn-toggle">
-							<input type="checkbox" class="stelaction" name="actionShow_MeteorShowers_config_dialog" />
-							<?= tr("Show settings dialog")?>
-					</label>
-
-					<!-- Checkbox for StelAction: actionShow_MeteorShowers_search_dialog -->
-					<label class="btn-toggle">
-							<input type="checkbox" class="stelaction" name="actionShow_MeteorShowers_search_dialog" />
-							<?= tr("Show meteor showers search dialog")?>
-					</label>
-					</div>
-					</div>
-				</div>
-			</div>
-
-			<div id="sub_tab_ArchaeoLines" class="stelplugin patterns-tab-content" data-plugin="ArchaeoLines" data-pluginjs="plugins/archaeolines" data-pluginjs="plugins/archaeolines">
-				<div class="flex flex-wrap">
-
-					<div class="smallblock">
-					<h3><?= tr("ArchaeoLines Plug-in Configuration")?></h3>
-						<!-- Checkbox for StelProperty: actionShow_ArchaeoLines -->
-						<label class="btn-toggle"><input type="checkbox" class="stelproperty" name="actionShow_ArchaeoLines" /><?= tr("ArchaeoLines")?></label>
-						<!-- Checkbox for StelProperty: actionShow_ArchaeoLines_dialog -->
-						<label class="btn-toggle"><input type="checkbox" class="stelproperty" name="actionShow_ArchaeoLines_dialog" /><?= tr("Show settings dialog")?></label>						
-
-						<div class="smallblock blocklabel">
-						<h3>Custom Geographic Location</h3>
+					<div id="sub_tab_PointerCoord" class="stelplugin patterns-tab-content" data-plugin="PointerCoordinates">
+						<div class="flex flex-wrap">
 							<div class="smallblock">
-							<h3><?= tr("Geographic Location 1")?></h3>
-							<div class="block_row">
-									<!-- COLOR PICKER (jQuery UI spinners) for StelProperty: ArchaeoLines.geographicLocation1Color -->
-									<div class="color-picker-wrapper" data-prop="ArchaeoLines.geographicLocation1Color">					
-									<div class="color-swatch" style="background-color: rgb(64,255,64);"></div>
-									</div>
-									<!-- Checkbox for StelProperty: ArchaeoLines.flagShowGeographicLocation1 -->
+							<h3><?= tr("Pointer Coordinates")?></h3>
+							
+								<div class="inline-block blocklabel">
+
+									<!-- Checkbox for StelProperty: PointerCoordinates.enableAtStartup -->
 									<label class="btn-toggle">
-											<input type="checkbox" class="stelproperty" name="ArchaeoLines.flagShowGeographicLocation1" />
-											<?= tr("Geographic Location 1")?>
+											<input type="checkbox" class="stelproperty" name="PointerCoordinates.enableAtStartup" />
+											<?= tr("Enable display of coordinates at startup")?>
 									</label>
 
-									<div class="text-input-row">
-											<input type="text" class="stelproperty-text" name="ArchaeoLines.geographicLocation1Label"
-													value="Makkah"
-													placeholder="Enter value..." />
-									</div>
-							</div>
-									<!-- Slider for StelProperty: ArchaeoLines.geographicLocation1Latitude -->
-									<div class="btn-gen-slider-wrap">
-											<div class="btn-gen-slider-header">
-													<label><?= tr("Latitude")?></label>
-													<span><input class="spinner stelproperty" name="ArchaeoLines.geographicLocation1Latitude" data-min="-90" data-max="90" data-step="0.0001" data-numberformat="n3" /></span>
-											</div>
-									</div>
-									<!-- Slider for StelProperty: ArchaeoLines.geographicLocation1Longitude -->
-									<div class="btn-gen-slider-wrap">
-											<div class="btn-gen-slider-header">
-													<label><?= tr("Longitude")?></label>
-													<span><input class="spinner stelproperty" name="ArchaeoLines.geographicLocation1Longitude" data-min="-180" data-max="180" data-step="0.0001" data-numberformat="n3" /></span>
-											</div>
-									</div>	
-							</div>					
-	
-							<div class="smallblock">
-								<h3><?= tr("Geographic Location 2")?></h3>
-								<div class="block_row">
-									<!-- COLOR PICKER (jQuery UI spinners) for StelProperty: ArchaeoLines.geographicLocation2Color -->
-									<div class="color-picker-wrapper" data-prop="ArchaeoLines.geographicLocation2Color">					
-									<div class="color-swatch" style="background-color: rgb(64,64,255);"></div>
-									</div>
-									<!-- Checkbox for StelProperty: ArchaeoLines.flagShowGeographicLocation2 -->
+									<!-- Checkbox for StelProperty: PointerCoordinates.enabled -->
 									<label class="btn-toggle">
-											<input type="checkbox" class="stelproperty" name="ArchaeoLines.flagShowGeographicLocation2" />
-											<?= tr("Geographic Location 2")?>
+											<input type="checkbox" class="stelproperty" name="PointerCoordinates.enabled" />
+											<?= tr("Show coordinates of the mouse pointer")?>
 									</label>
-									<div class="text-input-row">
-											<input type="text" class="stelproperty-text" name="ArchaeoLines.geographicLocation2Label"
-													value="Jerusalem"
-													placeholder="Enter value..." />
-									</div>
-								</div>
-
-								<!-- Slider for StelProperty: ArchaeoLines.geographicLocation2Latitude -->
-								<div class="btn-gen-slider-wrap">
-										<div class="btn-gen-slider-header">
-												<label><?= tr("Latitude")?></label>
-												<span><input class="spinner stelproperty" name="ArchaeoLines.geographicLocation2Latitude" data-min="-90" data-max="90" data-step="0.0001" data-numberformat="n3" /></span>
-										</div>
-								</div>
-
-								<!-- Slider for StelProperty: ArchaeoLines.geographicLocation2Longitude -->
-								<div class="btn-gen-slider-wrap">
-										<div class="btn-gen-slider-header">
-												<label><?= tr("Longitude")?></label>
-												<span><input class="spinner stelproperty" name="ArchaeoLines.geographicLocation2Longitude" data-min="-180" data-max="180" data-step="0.0001" data-numberformat="n3" /></span>
-										</div>
-								</div>
-							</div>
-						</div><!-- geographic location -->
-					</div>
-
-				<!-- CUSTOM LINES -->
-				<div class="smallblock">
-						<?= tr("Custom Lines")?>
-
-						<div class="archaeo-custom-lines">
-
-								<!-- Row 1: Custom Azimuth 1 -->
-								<div class="archaeo-line-row">
-										<div class="archaeo-col-color">
-												<div class="color-picker-wrapper" data-prop="ArchaeoLines.customAzimuth1Color">
-														<div class="color-swatch" style="background-color: rgb(255,0,0);"></div>
-												</div>
-										</div>
-										<div class="archaeo-col-flag">
-												<label class="btn-toggle" title="<?= tr("Enable this line")?>">
-														<input type="checkbox" class="stelproperty"
-																	 name="ArchaeoLines.flagShowCustomAzimuth1" />
-														<span><?= tr("Custom Azimuth 1")?></span>
-												</label>
-										</div>
-										<div class="archaeo-col-value">
-												<input class="spinner stelproperty"
-															 name="ArchaeoLines.customAzimuth1"
-															 data-min="0" data-max="359"
-															 data-step="0.0001" data-numberformat="n3"
-															 title="<?= tr("Azimuth (degrees)")?>" />
-										</div>
-										<div class="archaeo-col-label">
-												<input type="text" class="stelproperty-text"
-															 name="ArchaeoLines.customAzimuth1Label"
-															 value="Alnair"
-															 placeholder="<?= tr("Label")?>" />
-										</div>
-										<div class="archaeo-col-action">
-												<button type="button"
-																class="archaeo-target-btn"
-																data-coord-type="azimuth"
-																data-spinner-prop="ArchaeoLines.customAzimuth1"
-																data-label-prop="ArchaeoLines.customAzimuth1Label"
-																title="<?= tr("From selected object (if any)")?>">
-														<span class="ui-icon ui-icon-circle-plus"></span>
-												</button>
-										</div>
-								</div>
-
-								<!-- Row 2: Custom Azimuth 2 -->
-								<div class="archaeo-line-row">
-										<div class="archaeo-col-color">
-												<div class="color-picker-wrapper" data-prop="ArchaeoLines.customAzimuth2Color">
-														<div class="color-swatch" style="background-color: rgb(64,128,191);"></div>
-												</div>
-										</div>
-										<div class="archaeo-col-flag">
-												<label class="btn-toggle" title="<?= tr("Enable this line")?>">
-														<input type="checkbox" class="stelproperty"
-																	 name="ArchaeoLines.flagShowCustomAzimuth2" />
-														<span><?= tr("Custom Azimuth 2")?></span>
-												</label>
-										</div>
-										<div class="archaeo-col-value">
-												<input class="spinner stelproperty"
-															 name="ArchaeoLines.customAzimuth2"
-															 data-min="0" data-max="359"
-															 data-step="0.0001" data-numberformat="n3"
-															 title="<?= tr("Azimuth (degrees)")?>" />
-										</div>
-										<div class="archaeo-col-label">
-												<input type="text" class="stelproperty-text"
-															 name="ArchaeoLines.customAzimuth2Label"
-															 value="Peacock"
-															 placeholder="<?= tr("Label")?>" />
-										</div>
-										<div class="archaeo-col-action">
-												<button type="button"
-																class="archaeo-target-btn"
-																data-coord-type="azimuth"
-																data-spinner-prop="ArchaeoLines.customAzimuth2"
-																data-label-prop="ArchaeoLines.customAzimuth2Label"
-																title="<?= tr("From selected object (if any)")?>">
-														<span class="ui-icon ui-icon-circle-plus"></span>
-												</button>
-										</div>
-								</div>
-
-								<!-- Row 3: Custom Altitude 1 -->
-								<div class="archaeo-line-row">
-										<!-- Column 1: Color picker -->
-										<div class="archaeo-col-color">
-												<div class="color-picker-wrapper" data-prop="ArchaeoLines.customAltitude1Color">
-														<div class="color-swatch" style="background-color: rgb(255,170,255);"></div>
-												</div>
-										</div>
-
-										<!-- Column 2: Enable checkbox -->
-										<div class="archaeo-col-flag">
-												<label class="btn-toggle" title="<?= tr("Enable this line")?>">
-														<input type="checkbox" class="stelproperty"
-																	 name="ArchaeoLines.flagShowCustomAltitude1" />
-														<span><?= tr("Custom Altitude 1")?></span>
-												</label>
-										</div>
-
-										<!-- Column 3: Value spinner -->
-										<div class="archaeo-col-value">
-												<input class="spinner stelproperty"
-															 name="ArchaeoLines.customAltitude1"
-															 data-min="0" data-max="90"
-															 data-step="0.001" data-numberformat="n3"
-															 title="<?= tr("Altitude (degrees)")?>" />
-										</div>
-
-										<!-- Column 4: Label text -->
-										<div class="archaeo-col-label">
-												<input type="text" class="stelproperty-text"
-															 name="ArchaeoLines.customAltitude1Label"
-															 value="Aldhanab"
-															 placeholder="<?= tr("Label")?>"
-															 title="<?= tr("Custom label")?>" />
-										</div>
-
-										<!-- Column 5: Target button (FIXED in HTML) -->
-										<div class="archaeo-col-action">
-												<button type="button"
-																class="archaeo-target-btn"
-																data-coord-type="altitude"
-																data-spinner-prop="ArchaeoLines.customAltitude1"
-																data-label-prop="ArchaeoLines.customAltitude1Label"
-																title="<?= tr("From selected object (if any)")?>">
-														<span class="ui-icon ui-icon-circle-plus"></span>
-												</button>
-										</div>
-								</div>
-
-								<!-- Row 4: Custom Altitude 2 -->
-								<div class="archaeo-line-row">
-										<div class="archaeo-col-color">
-												<div class="color-picker-wrapper" data-prop="ArchaeoLines.customAltitude2Color">
-														<div class="color-swatch" style="background-color: rgb(150,173,77);"></div>
-												</div>
-										</div>
-										<div class="archaeo-col-flag">
-												<label class="btn-toggle" title="<?= tr("Enable this line")?>">
-														<input type="checkbox" class="stelproperty"
-																	 name="ArchaeoLines.flagShowCustomAltitude2" />
-														<span><?= tr("Custom Altitude 2")?></span>
-												</label>
-										</div>
-										<div class="archaeo-col-value">
-												<input class="spinner stelproperty"
-															 name="ArchaeoLines.customAltitude2"
-															 data-min="0" data-max="90"
-															 data-step="0.001" data-numberformat="n3"
-															 title="<?= tr("Altitude (degrees)")?>" />
-										</div>
-										<div class="archaeo-col-label">
-												<input type="text" class="stelproperty-text"
-															 name="ArchaeoLines.customAltitude2Label"
-															 value="Alnair"
-															 placeholder="<?= tr("Label")?>" />
-										</div>
-										<div class="archaeo-col-action">
-												<button type="button"
-																class="archaeo-target-btn"
-																data-coord-type="altitude"
-																data-spinner-prop="ArchaeoLines.customAltitude2"
-																data-label-prop="ArchaeoLines.customAltitude2Label"
-																title="<?= tr("From selected object (if any)")?>">
-														<span class="ui-icon ui-icon-circle-plus"></span>
-												</button>
-										</div>
-								</div>
-
-								<!-- Row 5: Custom Declination 1 -->
-								<div class="archaeo-line-row">
-										<div class="archaeo-col-color">
-												<div class="color-picker-wrapper" data-prop="ArchaeoLines.customDeclination1Color">
-														<div class="color-swatch" style="background-color: rgb(115,255,38);"></div>
-												</div>
-										</div>
-										<div class="archaeo-col-flag">
-												<label class="btn-toggle" title="<?= tr("Enable this line")?>">
-														<input type="checkbox" class="stelproperty"
-																	 name="ArchaeoLines.flagShowCustomDeclination1" />
-														<span><?= tr("Custom Declination 1")?></span>
-												</label>
-										</div>
-										<div class="archaeo-col-value">
-												<input class="spinner stelproperty"
-															 name="ArchaeoLines.customDeclination1"
-															 data-min="-90" data-max="90"
-															 data-step="0.0001" data-numberformat="n3"
-															 title="<?= tr("Declination (J2000 degrees)")?>" />
-										</div>
-										<div class="archaeo-col-label">
-												<input type="text" class="stelproperty-text"
-															 name="ArchaeoLines.customDeclination1Label"
-															 value="α Ind"
-															 placeholder="<?= tr("Label")?>" />
-										</div>
-										<div class="archaeo-col-action">
-												<button type="button"
-																class="archaeo-target-btn"
-																data-coord-type="declination"
-																data-spinner-prop="ArchaeoLines.customDeclination1"
-																data-label-prop="ArchaeoLines.customDeclination1Label"
-																title="<?= tr("From selected object (if any)")?>">
-														<span class="ui-icon ui-icon-circle-plus"></span>
-												</button>
-										</div>
-								</div>
-
-								<!-- Row 6: Custom Declination 2 -->
-								<div class="archaeo-line-row">
-										<div class="archaeo-col-color">
-												<div class="color-picker-wrapper" data-prop="ArchaeoLines.customDeclination2Color">
-														<div class="color-swatch" style="background-color: rgb(115,128,166);"></div>
-												</div>
-										</div>
-										<div class="archaeo-col-flag">
-												<label class="btn-toggle" title="<?= tr("Enable this line")?>">
-														<input type="checkbox" class="stelproperty"
-																	 name="ArchaeoLines.flagShowCustomDeclination2" />
-														<span><?= tr("Custom Declination 2")?></span>
-												</label>
-										</div>
-										<div class="archaeo-col-value">
-												<input class="spinner stelproperty"
-															 name="ArchaeoLines.customDeclination2"
-															 data-min="-90" data-max="90"
-															 data-step="0.0001" data-numberformat="n3"
-															 title="<?= tr("Declination (J2000 degrees)")?>" />
-										</div>
-										<div class="archaeo-col-label">
-												<input type="text" class="stelproperty-text"
-															 name="ArchaeoLines.customDeclination2Label"
-															 value="Deneb Algedi"
-															 placeholder="<?= tr("Label")?>" />
-										</div>
-										<div class="archaeo-col-action">
-												<button type="button"
-																class="archaeo-target-btn"
-																data-coord-type="declination"
-																data-spinner-prop="ArchaeoLines.customDeclination2"
-																data-label-prop="ArchaeoLines.customDeclination2Label"
-																title="<?= tr("From selected object (if any)")?>">
-														<span class="ui-icon ui-icon-circle-plus"></span>
-												</button>
-										</div>
-								</div>
-
-						</div><!-- .archaeo-custom-lines -->
-				</div><!-- .smallblock -->
-
-        <div class="smallblock">
-            <h3><?= tr("ArchaeoLines")?></h3>
-
-            <div class="inline-block blocklabel">
-
-                <div class="block_row">
-                    <div class="color-picker-wrapper" data-prop="ArchaeoLines.equinoxColor">
-                        <div class="color-swatch" style="background-color: rgb(255,255,128);"></div>
-                    </div>
-                    <label class="btn-toggle">
-                        <input type="checkbox" class="stelproperty" name="ArchaeoLines.flagShowEquinox" />
-                        <?= tr("Equinox line (Equator)")?>
-                    </label>
-                </div>
-
-                <div class="block_row">
-                    <div class="color-picker-wrapper" data-prop="ArchaeoLines.solsticesColor">
-                        <div class="color-swatch" style="background-color: rgb(255,38,38);"></div>
-                    </div>
-                    <label class="btn-toggle">
-                        <input type="checkbox" class="stelproperty" name="ArchaeoLines.flagShowSolstices" />
-                        <?= tr("Solstice Lines")?>
-                    </label>
-                </div>
-
-                <div class="block_row">
-                    <div class="color-picker-wrapper" data-prop="ArchaeoLines.crossquartersColor">
-                        <div class="color-swatch" style="background-color: rgb(255,191,64);"></div>
-                    </div>
-                    <label class="btn-toggle">
-                        <input type="checkbox" class="stelproperty" name="ArchaeoLines.flagShowCrossquarters" />
-                        <?= tr("Crossquarter Lines")?>
-                    </label>
-                </div>
-
-                <div class="block_row">
-                    <div class="color-picker-wrapper" data-prop="ArchaeoLines.majorStandstillColor">
-                        <div class="color-swatch" style="background-color: rgb(64,255,64);"></div>
-                    </div>
-                    <label class="btn-toggle">
-                        <input type="checkbox" class="stelproperty" name="ArchaeoLines.flagShowMajorStandstills" />
-                        <?= tr("Major Lunar Standstill lines")?>
-                    </label>
-                </div>
-
-                <div class="block_row">
-                    <div class="color-picker-wrapper" data-prop="ArchaeoLines.minorStandstillColor">
-                        <div class="color-swatch" style="background-color: rgb(51,191,51);"></div>
-                    </div>
-                    <label class="btn-toggle">
-                        <input type="checkbox" class="stelproperty" name="ArchaeoLines.flagShowMinorStandstills" />
-                        <?= tr("Minor Lunar Standstill lines")?>
-                    </label>
-                </div>
-
-                <div class="block_row">
-                    <div class="color-picker-wrapper" data-prop="ArchaeoLines.polarCirclesColor">
-                        <div class="color-swatch" style="background-color: rgb(64,64,191);"></div>
-                    </div>
-                    <label class="btn-toggle">
-                        <input type="checkbox" class="stelproperty" name="ArchaeoLines.flagShowPolarCircles" />
-                        <?= tr("Polar Circles")?>
-                    </label>
-                </div>
-
-                <div class="block_row">
-                    <div class="color-picker-wrapper" data-prop="ArchaeoLines.zenithPassageColor">
-                        <div class="color-swatch" style="background-color: rgb(191,191,191);"></div>
-                    </div>
-                    <label class="btn-toggle">
-                        <input type="checkbox" class="stelproperty" name="ArchaeoLines.flagShowZenithPassage" />
-                        <?= tr("Declination of Zenith passage")?>
-                    </label>
-                </div>
-
-                <div class="block_row">
-                    <div class="color-picker-wrapper" data-prop="ArchaeoLines.nadirPassageColor">
-                        <div class="color-swatch" style="background-color: rgb(64,64,64);"></div>
-                    </div>
-                    <label class="btn-toggle">
-                        <input type="checkbox" class="stelproperty" name="ArchaeoLines.flagShowNadirPassage" />
-                        <?= tr("Declination of Nadir passage")?>
-                    </label>
-                </div>
-
-            </div>
-
-            <div class="inline-block blocklabel">
-
-                <div class="block_row">
-                    <div class="color-picker-wrapper" data-prop="ArchaeoLines.currentSunColor">
-                        <div class="color-swatch" style="background-color: rgb(255,255,191);"></div>
-                    </div>
-                    <label class="btn-toggle">
-                        <input type="checkbox" class="stelproperty" name="ArchaeoLines.flagShowCurrentSun" />
-                        <?= tr("Current Sun")?>
-                    </label>
-                </div>
-
-                <div class="block_row">
-                    <div class="color-picker-wrapper" data-prop="ArchaeoLines.currentMoonColor">
-                        <div class="color-swatch" style="background-color: rgb(128,255,128);"></div>
-                    </div>
-                    <label class="btn-toggle">
-                        <input type="checkbox" class="stelproperty" name="ArchaeoLines.flagShowCurrentMoon" />
-                        <?= tr("Current Moon")?>
-                    </label>
-                </div>
-
-                <div class="block_row">
-                    <div class="color-picker-wrapper" data-prop="ArchaeoLines.currentPlanetColor">
-                        <div class="color-swatch" style="background-color: rgb(64,204,255);"></div>
-                    </div>
-                    <select id="select_ArchaeoLines_enumShowCurrentPlanet"
-                            class="selectmenu stelproperty display-block"
-                            name="ArchaeoLines.enumShowCurrentPlanet">
-                        <option value="CurrentPlanetNone"><?= tr("Current Planet:")?> <?= tr("None")?></option>
-                        <option value="CurrentPlanetMercury"><?= tr("Current Planet:")?> <?= tr("Mercury")?></option>
-                        <option value="CurrentPlanetVenus"><?= tr("Current Planet:")?> <?= tr("Venus")?></option>
-                        <option value="CurrentPlanetMars"><?= tr("Current Planet:")?> <?= tr("Mars")?></option>
-                        <option value="CurrentPlanetJupiter"><?= tr("Current Planet:")?> <?= tr("Jupiter")?></option>
-                        <option value="CurrentPlanetSaturn"><?= tr("Current Planet:")?> <?= tr("Saturn")?></option>
-                    </select>
-                </div>
-
-                <div class="block_row">
-                    <div class="color-picker-wrapper" data-prop="ArchaeoLines.selectedObjectColor">
-                        <div class="color-swatch" style="background-color: rgb(15,228,228);"></div>
-                    </div>
-                    <label class="btn-toggle">
-                        <input type="checkbox" class="stelproperty" name="ArchaeoLines.flagShowSelectedObject" />
-                        <?= tr("Selected Object")?>
-                    </label>
-                </div>
-
-                <div class="block_row">
-                    <div class="color-picker-wrapper" data-prop="ArchaeoLines.selectedObjectAzimuthColor">
-                        <div class="color-swatch" style="background-color: rgb(255,255,255);"></div>
-                    </div>
-                    <label class="btn-toggle">
-                        <input type="checkbox" class="stelproperty" name="ArchaeoLines.flagShowSelectedObjectAzimuth" />
-                        <?= tr("Selected Object Azimuth")?>
-                    </label>
-                </div>
-
-                <div class="block_row">
-                    <div class="color-picker-wrapper" data-prop="ArchaeoLines.selectedObjectHourAngleColor">
-                        <div class="color-swatch" style="background-color: rgb(255,255,255);"></div>
-                    </div>
-                    <label class="btn-toggle">
-                        <input type="checkbox" class="stelproperty" name="ArchaeoLines.flagShowSelectedObjectHourAngle" />
-                        <?= tr("Selected Object Hour Angle")?>
-                    </label>
-                </div>
-
-                <br />
-
-                <div class="flex-wrap">
-                    <label><?= tr("Line width:")?></label>
-                    <input class="spinner stelproperty"
-                           name="ArchaeoLines.lineWidth"
-                           data-min="1" data-max="5"
-                           data-step="1" data-numberformat="n0" />
-                </div>
-
-            </div>
-        </div><!-- .block reference lines -->
-
-			</div><!-- .flex.flex-wrap -->
-		</div><!-- #sub_tab_ArchaeoLines -->
-
-			<div id="sub_tab_Quasars" class="stelplugin patterns-tab-content" data-plugin="Quasars">
-				<div class="flex flex-wrap">
-					<div class="smallblock">
-					 <h3><?= tr("Settings for quasars")?></h3>
-						<div class="inline-block blocklabel">
-
-							<!-- Checkbox for StelProperty: Quasars.quasarsVisible -->
-							<label class="btn-toggle">
-									<input type="checkbox" class="stelproperty" name="Quasars.quasarsVisible" />
-									<?= tr("Show quasars")?>
-							</label>
-						
-							<!-- Checkbox for StelProperty: Quasars.flagDisplayMode -->
-							<label class="btn-toggle">
-									<input type="checkbox" class="stelproperty" name="Quasars.flagDisplayMode" />
-									<?= tr("Enable display of distribution for quasars")?>
-							</label>
-
-							<!-- Checkbox for StelProperty: Quasars.flagMarkersMode -->
-							<label class="btn-toggle">
-									<input type="checkbox" class="stelproperty" name="Quasars.flagMarkersMode" />
-									<?= tr("Use markers for quasars")?>
-							</label>
-
-							<!-- Checkbox for StelProperty: actionShow_Quasars_dialog -->
-							<label class="btn-toggle">
-									<input type="checkbox" class="stelproperty" name="actionShow_Quasars_dialog" />
-									<?= tr("Show settings dialog")?>
-							</label>
-
-							<label class="color-picker-wrapper" data-prop="Quasars.quasarsColor" style="justify-content: left !important;">
-									<div class="color-swatch" style="background-color: rgb(255,128,102);"></div>
-									<?= tr("Quasars marker color")?>
-							</label>
-							
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<div id="sub_tab_Pulsars" class="stelplugin patterns-tab-content" data-plugin="Pulsars">
-				<div class="flex flex-wrap">
-					<div class="smallblock">
-					 <h3><?= tr("Settings for pulsars")?></h3>
-						<div class="inline-block blocklabel">
-						
-							<!-- Checkbox for StelProperty: Pulsars.flagDisplayMode -->
-							<label class="btn-toggle">
-									<input type="checkbox" class="stelproperty" name="Pulsars.flagDisplayMode" />
-									<?= tr("Enable display of distribution for pulsars")?>
-							</label>
-
-							<!-- Checkbox for StelProperty: Pulsars.pulsarsVisible -->
-							<label class="btn-toggle">
-									<input type="checkbox" class="stelproperty" name="Pulsars.pulsarsVisible" />
-									<?= tr("Show pulsars")?>
-							</label>
-
-
-							<!-- Checkbox for StelProperty: actionShow_Pulsars_dialog -->
-							<label class="btn-toggle">
-									<input type="checkbox" class="stelproperty" name="actionShow_Pulsars_dialog" />
-									<?= tr("Show settings dialog")?>							
-							</label>
-							
-						<div class="block_row">
-							<div class="color-picker-wrapper" data-prop="Pulsars.glitchColor">
-									<div class="color-swatch" style="background-color: rgb(51,77,255);"></div>
-							</div>
-							<!-- Checkbox for StelProperty: Pulsars.flagGlitchMode -->
-							<label class="btn-toggle">
-									<input type="checkbox" class="stelproperty" name="Pulsars.flagGlitchMode" />
-									<?= tr("Use separate color for pulsars with glitches")?>
-							</label>
-						</div>
-						
-						<div class="block_row">
-							<label class="color-picker-wrapper" data-prop="Pulsars.markerColor"style="justify-content: left !important;">
-									<div class="color-swatch" style="background-color: rgb(102,128,255);"></div>
-									<?= tr("Pulsars marker color")?>
-							</label>
-						</div>
-						
-						</div>
-					</div>
-				</div>
-
-			</div>
-
-			<div id="sub_tab_NavStars" class="stelplugin patterns-tab-content" data-plugin="NavStars">
-				<div class="flex flex-wrap">
-					<div class="smallblock">
-						<h3><?= tr("Settings")?></h3>
-						<div class="inline-block blocklabel">
-						<!-- Checkbox for StelAction: actionShow_NavStars -->
-						<label class="btn-toggle">
-							<input type="checkbox" class="stelaction" name="actionShow_NavStars"/>
-								<?= tr("Navigational Stars")?>
-						</label>
-
-						<!-- Checkbox for StelProperty: actionShow_NavStars_dialog -->
-						<label class="btn-toggle">
-								<input type="checkbox" class="stelproperty" name="actionShow_NavStars_dialog"  />
-								<?= tr("Show settings dialog")?>
-						</label>
-						
-						<!-- Checkbox for StelProperty: NavStars.displayAtStartup -->
-						<label class="btn-toggle">
-								<input type="checkbox" class="stelproperty" name="NavStars.displayAtStartup"  />
-								<?= tr("Enable display at startup")?>
-						</label>
-
-						<!-- Checkbox for StelProperty: NavStars.highlightWhenVisible -->
-						<label class="btn-toggle">
-								<input type="checkbox" class="stelproperty" name="NavStars.highlightWhenVisible"  />
-								<?= tr("Only highlight when visible")?>
-						</label>
-
-						<!-- Checkbox for StelProperty: NavStars.limitInfoToNavStars -->
-						<label class="btn-toggle">
-								<input type="checkbox" class="stelproperty" name="NavStars.limitInfoToNavStars"  />
-								<?= tr("Only show extra information for marked Navigation Stars")?>
-						</label>
-
-						<!-- Checkbox for StelProperty: NavStars.tabulatedDisplay -->
-						<label class="btn-toggle">
-								<input type="checkbox" class="stelproperty" name="NavStars.tabulatedDisplay"  />
-								<?= tr("Show information as a tabulated list")?>
-						</label>
-
-						<!-- Checkbox for StelProperty: NavStars.showExtraDecimals -->
-						<label class="btn-toggle">
-								<input type="checkbox" class="stelproperty" name="NavStars.showExtraDecimals"  />
-								<?= tr("Show extra decimals in info")?>
-						</label>
-
-						<!-- Checkbox for StelProperty: NavStars.upperLimb -->
-						<label class="btn-toggle">
-								<input type="checkbox" class="stelproperty" name="NavStars.upperLimb"  />
-								<?= tr("Use upper limb for Sun and Moon")?>
-						</label>
-
-						<!-- Checkbox for StelProperty: NavStars.useUTCTime -->
-						<label class="btn-toggle">
-								<input type="checkbox" class="stelproperty" name="NavStars.useUTCTime"  />
-								<?= tr("Use UTC time when navigational stars are displayed")?>
-						</label>
-						</div>
-
-					</div>
-				</div>				
-			</div>
-
-			<div id="sub_tab_Exoplanets" class="stelplugin patterns-tab-content" data-plugin="Exoplanets">
-				<div class="flex flex-wrap">
-					<div class="smallblock">
-					<h3><?= tr("Settings for exoplanets")?></h3>
-					
-						<div class="inline-block blocklabel">
-						<label class="btn-toggle">					
-						<input type="checkbox" class="stelaction" name="actionShow_Exoplanets"/>
-						<?= tr("Show exoplanets")?>
-						</label>
-
-						<!-- Checkbox for StelAction: actionShow_Exoplanets_ConfigDialog -->
-						<label class="btn-toggle">
-								<input type="checkbox" class="stelaction" name="actionShow_Exoplanets_ConfigDialog" />
-								<?= tr("Show settings dialog")?>
-						</label>
-
-						<!-- Checkbox for StelAction: actionShow_Exoplanets_Distribution -->
-						<label class="btn-toggle">
-								<input type="checkbox" class="stelaction" name="actionShow_Exoplanets_Distribution" />
-								<?= tr("Enable display of distribution for exoplanets")?>
-						</label>
-
-						<!-- Checkbox for StelAction: actionShow_Exoplanets_Timeline -->
-						<label class="btn-toggle">
-								<input type="checkbox" class="stelaction" name="actionShow_Exoplanets_Timeline" />
-								<?= tr("Enable timeline discovery of exoplanets")?>
-						</label>
-
-						<!-- Checkbox for StelAction: actionShow_Exoplanets_Habitable -->
-						<label class="btn-toggle">
-								<input type="checkbox" class="stelaction" name="actionShow_Exoplanets_Habitable" />
-								<?= tr("Enable display of the potential habitable exoplanets only")?>
-						</label>
-
-						<!-- Checkbox for StelAction: actionShow_Exoplanets_Designations -->
-						<label class="btn-toggle">
-								<input type="checkbox" class="stelaction" name="actionShow_Exoplanets_Designations" />
-								<?= tr("Enable display of designations for exoplanets")?>
-						</label>
-
-						<!-- Checkbox for StelAction: actionShow_Exoplanets_Numbers -->
-						<label class="btn-toggle">
-								<input type="checkbox" class="stelaction" name="actionShow_Exoplanets_Numbers" />
-								<?= tr("Enable display number of exoplanets in the system")?>
-						</label>
-						
-						<!-- COLOR PICKER (jQuery UI spinners) for StelProperty: Exoplanets.habitableColor -->
-						<label class="color-picker-wrapper" data-prop="Exoplanets.habitableColor" style="justify-content: left !important;">
-								<div class="color-swatch" style="background-color: rgb(255,128,0);"></div>
-								<?= tr("Marker color for potential habitable exoplanets")?>											
-						</label>
-
-						<!-- COLOR PICKER (jQuery UI spinners) for StelProperty: Exoplanets.markerColor -->
-						<label class="color-picker-wrapper" data-prop="Exoplanets.markerColor" style="justify-content: left !important;">
-								<div class="color-swatch" style="background-color: rgb(102,230,128);"></div>
-								<?= tr("Exoplanets marker color")?>											
-						</label>					
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<div id="sub_tab_EquationOfTime" class="stelplugin patterns-tab-content" data-plugin="EquationOfTime">
-				<div class="flex flex-wrap">
-					<div class="smallblock">
-					<h3><?= tr("Equation of Time")?></h3>
-					
-						<div class="inline-block blocklabel">
-
-							<!-- Checkbox for StelProperty: EquationOfTime.showEOT -->
-							<label class="btn-toggle">
-									<input type="checkbox" class="stelproperty" name="EquationOfTime.showEOT" />
-									<?= tr("Show value of the equation of time")?>
-							</label>
-
-							<!-- Checkbox for StelProperty: actionShow_EquationOfTime_dialog -->
-							<label class="btn-toggle">
-									<input type="checkbox" class="stelproperty" name="actionShow_EquationOfTime_dialog" />
-									<?= tr("Show settings dialog")?>
-							</label>
-
-							<div class="color-picker-wrapper" data-prop="EquationOfTime.textColor" style="justify-content: left !important;">
-									<div class="color-swatch" style="background-color: rgb(0,128,255);"></div>
-							</div>
-		
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<div id="sub_tab_PointerCoord" class="stelplugin patterns-tab-content" data-plugin="PointerCoordinates">
-				<div class="flex flex-wrap">
-					<div class="smallblock">
-					<h3><?= tr("Pointer Coordinates")?></h3>
-					
-						<div class="inline-block blocklabel">
-
-							<!-- Checkbox for StelProperty: PointerCoordinates.enableAtStartup -->
-							<label class="btn-toggle">
-									<input type="checkbox" class="stelproperty" name="PointerCoordinates.enableAtStartup" />
-									<?= tr("Enable display of coordinates at startup")?>
-							</label>
-
-							<!-- Checkbox for StelProperty: PointerCoordinates.enabled -->
-							<label class="btn-toggle">
-									<input type="checkbox" class="stelproperty" name="PointerCoordinates.enabled" />
-									<?= tr("Show coordinates of the mouse pointer")?>
-							</label>
-							
-							<!-- Checkbox for StelProperty: actionShow_MousePointer_Coordinates -->
-							<!-- label class="btn-toggle">
-									<input type="checkbox" class="stelproperty" name="actionShow_MousePointer_Coordinates" />
-									actionShow_MousePointer_Coordinates
-							</label -->
-							
-						<div class="block_row">
-							<div class="color-picker-wrapper" data-prop="PointerCoordinates.fontColor" style="justify-content: left !important;">
-									<div class="color-swatch" style="background-color: rgb(255,128,0);"></div>
-							</div>
-							<!-- Spinner for StelProperty: PointerCoordinates.fontSize -->
-							<div class="btn-gen-slider-wrap">
-									<label><?= tr("Font size")?></label>
-									<input class="spinner stelproperty" name="PointerCoordinates.fontSize" data-min="10" data-max="50" data-step="1" data-numberformat="n0" />
-							</div>	
-						</div>
-
-							<!-- Checkbox for StelProperty: PointerCoordinates.showConstellation -->
-							<label class="btn-toggle">
-									<input type="checkbox" class="stelproperty" name="PointerCoordinates.showConstellation" />
-									<?= tr("Show IAU constellation code")?>
-							</label>
-
-							<!-- Checkbox for StelProperty: PointerCoordinates.showCoordinatesButton -->
-							<label class="btn-toggle">
-									<input type="checkbox" class="stelproperty" name="PointerCoordinates.showCoordinatesButton" />
-									<?= tr("Show plug-in button on toolbar")?>
-							</label>
-
-							<!-- Checkbox for StelProperty: PointerCoordinates.showCrossedLines -->
-							<label class="btn-toggle">
-									<input type="checkbox" class="stelproperty" name="PointerCoordinates.showCrossedLines" />
-									<?= tr("Show crossed lines under mouse cursor")?>
-							</label>
-
-							<!-- Checkbox for StelProperty: PointerCoordinates.showElongation -->
-							<label class="btn-toggle">
-									<input type="checkbox" class="stelproperty" name="PointerCoordinates.showElongation" />
-									<?= tr("Show elongation from the Sun in ecliptic longitude")?>
-							</label>
-
-							<!-- Checkbox for StelProperty: actionShow_MousePointer_Coordinates_dialog -->
-							<label class="btn-toggle">
-									<input type="checkbox" class="stelproperty" name="actionShow_MousePointer_Coordinates_dialog" />
-									<?= tr("Show settings dialog")?>
-							</label>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<div id="sub_tab_AngleMeasure" class="stelplugin patterns-tab-content" data-plugin="AngleMeasure">
-				<div class="flex flex-wrap">
-					<div class="smallblock flex flex-wrap">
-					<h3><?= tr("Angle Measure")?></h3>
-						<div class="smallblock">
-							<div class="inline-block blocklabel">
-								<!-- Checkbox for StelProperty: AngleMeasure.enabled -->
-								<label class="btn-toggle">
-										<input type="checkbox" class="stelproperty" name="AngleMeasure.enabled" />
-										<?= tr("Angle measure")?>
-								</label>
-								<!-- Checkbox for StelAction: actionShow_Angle_Measure_dialog -->
-								<label class="btn-toggle">
-										<input type="checkbox" class="stelaction" name="actionShow_Angle_Measure_dialog" />
-										<?= tr("Angle measure settings")?>
-								</label>
-							</div>
-						</div>
-						<div class="smallblock">
-							<div class="inline-block blocklabel">
-								<!-- Checkbox for StelProperty: AngleMeasure.flagShowEquatorial -->
-								<label class="btn-toggle">
-										<input type="checkbox" class="stelproperty" name="AngleMeasure.flagShowEquatorial" />
-										<?= tr("Show in Equatorial Coordinates")?>
-								</label>
-
-								<!-- Checkbox for StelProperty: AngleMeasure.flagShowEquatorialPA -->
-								<label class="btn-toggle">
-										<input type="checkbox" class="stelproperty" name="AngleMeasure.flagShowEquatorialPA" />
-										<?= tr("Display with position angle")?>
-								</label>
-
-								<div class="color-picker-wrapper" data-prop="AngleMeasure.equatorialLineColor">
-										<div class="color-swatch" style="background-color: rgb(0,128,255);"></div>
-										<label><?= tr("Line")?></label>
-								</div>
-
-								<div class="color-picker-wrapper" data-prop="AngleMeasure.equatorialTextColor">
-										<div class="color-swatch" style="background-color: rgb(0,128,255);"></div>
-										<label><?= tr("Text")?></label>
-								</div>
-							</div>
-						</div>
-						<div class="smallblock">
-							<div class="inline-block blocklabel">
-								<!-- Checkbox for StelProperty: AngleMeasure.flagShowHorizontal -->
-								<label class="btn-toggle">
-										<input type="checkbox" class="stelproperty" name="AngleMeasure.flagShowHorizontal" />
-										<?= tr("Show in Horizontal Coordinates")?>
-								</label>
-
-								<!-- Checkbox for StelProperty: AngleMeasure.flagShowHorizontalPA -->
-								<label class="btn-toggle">
-										<input type="checkbox" class="stelproperty" name="AngleMeasure.flagShowHorizontalPA" />
-										<?= tr("Display with position angle")?>
-								</label>
-
-								<!-- Checkbox for StelProperty: AngleMeasure.flagShowHorizontalStartSkylinked -->
-								<label class="btn-toggle">
-										<input type="checkbox" class="stelproperty" name="AngleMeasure.flagShowHorizontalStartSkylinked" />
-										<?= tr("Attach start point to rotating sky")?>
-								</label>
-
-								<!-- Checkbox for StelProperty: AngleMeasure.flagShowHorizontalEndSkylinked -->
-								<label class="btn-toggle">
-										<input type="checkbox" class="stelproperty" name="AngleMeasure.flagShowHorizontalEndSkylinked" />
-										<?= tr("Attach end point to rotating sky")?>
-								</label>
-
-								<div class="color-picker-wrapper" data-prop="AngleMeasure.horizontalLineColor">
-										<div class="color-swatch" style="background-color: rgb(230,153,102);"></div>
-										<?= tr("Line")?>
-								</div>
-
-								<div class="color-picker-wrapper" data-prop="AngleMeasure.horizontalTextColor">
-										<div class="color-swatch" style="background-color: rgb(230,153,102);"></div>
-										<?= tr("Text")?>
-								</div>
-
-							</div>						
-						</div>
-						<div class="smallblock">
-						<h3><?= tr("Options")?></h3>
-							<div class="inline-block blocklabel">
-								<!-- Checkbox for StelProperty: AngleMeasure.dmsFormat -->
-								<label class="btn-toggle">
-										<input type="checkbox" class="stelproperty" name="AngleMeasure.dmsFormat" />
-										<?= tr("Use dms format for angles")?>
-								</label>
-
-								<!-- Checkbox for StelProperty: AngleMeasure.flagFollowCursor -->
-								<label class="btn-toggle">
-										<input type="checkbox" class="stelproperty" name="AngleMeasure.flagFollowCursor" />
-										<?= tr("Show measurements near mouse")?>
-								</label>
-
-								<!-- Checkbox for StelProperty: AngleMeasure.flagPanAndSelect -->
-								<label class="btn-toggle">
-										<input type="checkbox" class="stelproperty" name="AngleMeasure.flagPanAndSelect" />
-										<?= tr("Allow snap to selected object")?>
-								</label>
-							</div>						
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<div id="sub_tab_TimeNavigator" class="stelplugin patterns-tab-content" data-plugin="TimeNavigator">
-				<div class="flex flex-wrap">
-					<div class="smallblock flex flex-wrap">
-					<h3><?= tr("Time Navigator")?></h3>
-
-						<div class="smallblock">
-						<h3><?= tr("Settings")?></h3>
-							<div class="inline-block blocklabel">
-								<!-- Checkbox for StelProperty: actionShow_TimeNavigator_dialog -->
-								<label class="btn-toggle">
-										<input type="checkbox" class="stelproperty" name="actionShow_TimeNavigator_dialog" />
-										<?= tr("Show Time Navigator window")?>
-								</label>
-								<!-- Checkbox for StelProperty: TimeNavigator.flagShowButton -->
-								<label class="btn-toggle">
-										<input type="checkbox" class="stelproperty" name="TimeNavigator.flagShowButton" />
-										<?= tr("Show plug-in button on toolbar")?>
-								</label>
-								<!-- Checkbox for StelProperty: TimeNavigator.flagSelectObject -->
-								<label class="btn-toggle">
-										<input type="checkbox" class="stelproperty" name="TimeNavigator.flagSelectObject" />
-										<?= tr("Select object at event")?>
-								</label>
-								<!-- Checkbox for StelProperty: TimeNavigator.flagCenterView -->
-								<label class="btn-toggle">
-										<input type="checkbox" class="stelproperty" name="TimeNavigator.flagCenterView" />
-										<?= tr("Center view on object at event")?>
-								</label>
-							</div>						
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<div id="sub_tab_LensDistortionEstimator" class="stelplugin patterns-tab-content" data-plugin="LensDistortionEstimator">
-				<div class="flex flex-wrap">
-					<div class="smallblock flex flex-wrap">
-					<h3><?= tr("Lens Distortion Estimator")?></h3>
-						<div class="smallblock">
-						<h3><?= tr("Settings")?></h3>
-							<div class="inline-block blocklabel">
-								<!-- Checkbox for StelProperty: LensDistortionEstimator.imageEnabled -->
-								<label class="btn-toggle">
-										<input type="checkbox" class="stelproperty" name="LensDistortionEstimator.imageEnabled" />
-										<?= tr("Show image")?>
-								</label>
+									
+									<!-- Checkbox for StelProperty: actionShow_MousePointer_Coordinates -->
+									<!-- label class="btn-toggle">
+											<input type="checkbox" class="stelproperty" name="actionShow_MousePointer_Coordinates" />
+											actionShow_MousePointer_Coordinates
+									</label -->
+									
 								<div class="block_row">
-									<div class="color-picker-wrapper" data-prop="LensDistortionEstimator.pointMarkerColor">
-											<div class="color-swatch" style="background-color: rgb(255,0,0);"></div>
-											<label><?= tr("normal")?></label>
-									</div>
-									<div class="color-picker-wrapper" data-prop="LensDistortionEstimator.selectedPointMarkerColor">
-											<div class="color-swatch" style="background-color: rgb(0,191,0);"></div>
-											<label><?= tr("selected")?></label>
-									</div>
-									<!-- Checkbox for StelProperty: LensDistortionEstimator.pointMarkersEnabled -->
-									<label class="btn-toggle">
-											<input type="checkbox" class="stelproperty" name="LensDistortionEstimator.pointMarkersEnabled" />
-											<?= tr("Mark picked points")?>
-									</label>
-								</div>								
-								<div class="block_row">
-									<div class="color-picker-wrapper" data-prop="LensDistortionEstimator.projectionCenterMarkerColor">
-											<div class="color-swatch" style="background-color: rgb(64,128,128);"></div>
-									</div>
-									<!-- Checkbox for StelProperty: LensDistortionEstimator.projectionCenterMarkerEnabled -->
-									<label class="btn-toggle">
-											<input type="checkbox" class="stelproperty" name="LensDistortionEstimator.projectionCenterMarkerEnabled" />
-											<?= tr("Mark center of projection")?>
-									</label>
-								</div>
-								<div class="block_row">
-									<div class="color-picker-wrapper" data-prop="LensDistortionEstimator.imageAxesColor">
+									<div class="color-picker-wrapper" data-prop="PointerCoordinates.fontColor" style="justify-content: left !important;">
 											<div class="color-swatch" style="background-color: rgb(255,128,0);"></div>
 									</div>
-									<!-- Checkbox for StelProperty: LensDistortionEstimator.imageAxesEnabled -->
-									<label class="btn-toggle">
-											<input type="checkbox" class="stelproperty" name="LensDistortionEstimator.imageAxesEnabled" />
-											<?= tr("Mark image axes")?>
-									</label>		
+									<!-- Spinner for StelProperty: PointerCoordinates.fontSize -->
+									<div class="btn-gen-slider-wrap">
+											<label><?= tr("Font size")?></label>
+											<input class="spinner stelproperty" name="PointerCoordinates.fontSize" data-min="10" data-max="50" data-step="1" data-numberformat="n0" />
+									</div>	
 								</div>
-								<!-- Checkbox for StelProperty: LensDistortionEstimator.imgPosResetOnLoadingEnabled -->
-								<label class="btn-toggle">
-										<input type="checkbox" class="stelproperty" name="LensDistortionEstimator.imgPosResetOnLoadingEnabled" />
-										<?= tr("Reset image position on loading")?>
-								</label>
-								<!-- Checkbox for StelProperty: LensDistortionEstimator.dialogVisible -->
-								<label class="btn-toggle">
-										<input type="checkbox" class="stelproperty" name="LensDistortionEstimator.dialogVisible" />
-												<?= tr("Show lens distortion estimator dialog")?>
-								</label>
-							</div>						
+
+									<!-- Checkbox for StelProperty: PointerCoordinates.showConstellation -->
+									<label class="btn-toggle">
+											<input type="checkbox" class="stelproperty" name="PointerCoordinates.showConstellation" />
+											<?= tr("Show IAU constellation code")?>
+									</label>
+
+									<!-- Checkbox for StelProperty: PointerCoordinates.showCoordinatesButton -->
+									<label class="btn-toggle">
+											<input type="checkbox" class="stelproperty" name="PointerCoordinates.showCoordinatesButton" />
+											<?= tr("Show plug-in button on toolbar")?>
+									</label>
+
+									<!-- Checkbox for StelProperty: PointerCoordinates.showCrossedLines -->
+									<label class="btn-toggle">
+											<input type="checkbox" class="stelproperty" name="PointerCoordinates.showCrossedLines" />
+											<?= tr("Show crossed lines under mouse cursor")?>
+									</label>
+
+									<!-- Checkbox for StelProperty: PointerCoordinates.showElongation -->
+									<label class="btn-toggle">
+											<input type="checkbox" class="stelproperty" name="PointerCoordinates.showElongation" />
+											<?= tr("Show elongation from the Sun in ecliptic longitude")?>
+									</label>
+
+									<!-- Checkbox for StelProperty: actionShow_MousePointer_Coordinates_dialog -->
+									<label class="btn-toggle">
+											<input type="checkbox" class="stelproperty" name="actionShow_MousePointer_Coordinates_dialog" />
+											<?= tr("Show settings dialog")?>
+									</label>
+								</div>
+							</div>
 						</div>
 					</div>
-				</div>
-			</div>
+
+					<div id="sub_tab_AngleMeasure" class="stelplugin patterns-tab-content" data-plugin="AngleMeasure">
+						<div class="flex flex-wrap">
+							<div class="smallblock flex flex-wrap">
+							<h3><?= tr("Angle Measure")?></h3>
+								<div class="smallblock">
+									<div class="inline-block blocklabel">
+										<!-- Checkbox for StelProperty: AngleMeasure.enabled -->
+										<label class="btn-toggle">
+												<input type="checkbox" class="stelproperty" name="AngleMeasure.enabled" />
+												<?= tr("Angle measure")?>
+										</label>
+										<!-- Checkbox for StelAction: actionShow_Angle_Measure_dialog -->
+										<label class="btn-toggle">
+												<input type="checkbox" class="stelaction" name="actionShow_Angle_Measure_dialog" />
+												<?= tr("Angle measure settings")?>
+										</label>
+									</div>
+								</div>
+								<div class="smallblock">
+									<div class="inline-block blocklabel">
+										<!-- Checkbox for StelProperty: AngleMeasure.flagShowEquatorial -->
+										<label class="btn-toggle">
+												<input type="checkbox" class="stelproperty" name="AngleMeasure.flagShowEquatorial" />
+												<?= tr("Show in Equatorial Coordinates")?>
+										</label>
+
+										<!-- Checkbox for StelProperty: AngleMeasure.flagShowEquatorialPA -->
+										<label class="btn-toggle">
+												<input type="checkbox" class="stelproperty" name="AngleMeasure.flagShowEquatorialPA" />
+												<?= tr("Display with position angle")?>
+										</label>
+
+										<div class="color-picker-wrapper" data-prop="AngleMeasure.equatorialLineColor">
+												<div class="color-swatch" style="background-color: rgb(0,128,255);"></div>
+												<label><?= tr("Line")?></label>
+										</div>
+
+										<div class="color-picker-wrapper" data-prop="AngleMeasure.equatorialTextColor">
+												<div class="color-swatch" style="background-color: rgb(0,128,255);"></div>
+												<label><?= tr("Text")?></label>
+										</div>
+									</div>
+								</div>
+								<div class="smallblock">
+									<div class="inline-block blocklabel">
+										<!-- Checkbox for StelProperty: AngleMeasure.flagShowHorizontal -->
+										<label class="btn-toggle">
+												<input type="checkbox" class="stelproperty" name="AngleMeasure.flagShowHorizontal" />
+												<?= tr("Show in Horizontal Coordinates")?>
+										</label>
+
+										<!-- Checkbox for StelProperty: AngleMeasure.flagShowHorizontalPA -->
+										<label class="btn-toggle">
+												<input type="checkbox" class="stelproperty" name="AngleMeasure.flagShowHorizontalPA" />
+												<?= tr("Display with position angle")?>
+										</label>
+
+										<!-- Checkbox for StelProperty: AngleMeasure.flagShowHorizontalStartSkylinked -->
+										<label class="btn-toggle">
+												<input type="checkbox" class="stelproperty" name="AngleMeasure.flagShowHorizontalStartSkylinked" />
+												<?= tr("Attach start point to rotating sky")?>
+										</label>
+
+										<!-- Checkbox for StelProperty: AngleMeasure.flagShowHorizontalEndSkylinked -->
+										<label class="btn-toggle">
+												<input type="checkbox" class="stelproperty" name="AngleMeasure.flagShowHorizontalEndSkylinked" />
+												<?= tr("Attach end point to rotating sky")?>
+										</label>
+
+										<div class="color-picker-wrapper" data-prop="AngleMeasure.horizontalLineColor">
+												<div class="color-swatch" style="background-color: rgb(230,153,102);"></div>
+												<?= tr("Line")?>
+										</div>
+
+										<div class="color-picker-wrapper" data-prop="AngleMeasure.horizontalTextColor">
+												<div class="color-swatch" style="background-color: rgb(230,153,102);"></div>
+												<?= tr("Text")?>
+										</div>
+
+									</div>						
+								</div>
+								<div class="smallblock">
+								<h3><?= tr("Options")?></h3>
+									<div class="inline-block blocklabel">
+										<!-- Checkbox for StelProperty: AngleMeasure.dmsFormat -->
+										<label class="btn-toggle">
+												<input type="checkbox" class="stelproperty" name="AngleMeasure.dmsFormat" />
+												<?= tr("Use dms format for angles")?>
+										</label>
+
+										<!-- Checkbox for StelProperty: AngleMeasure.flagFollowCursor -->
+										<label class="btn-toggle">
+												<input type="checkbox" class="stelproperty" name="AngleMeasure.flagFollowCursor" />
+												<?= tr("Show measurements near mouse")?>
+										</label>
+
+										<!-- Checkbox for StelProperty: AngleMeasure.flagPanAndSelect -->
+										<label class="btn-toggle">
+												<input type="checkbox" class="stelproperty" name="AngleMeasure.flagPanAndSelect" />
+												<?= tr("Allow snap to selected object")?>
+										</label>
+									</div>						
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div id="sub_tab_TimeNavigator" class="stelplugin patterns-tab-content" data-plugin="TimeNavigator">
+						<div class="flex flex-wrap">
+							<div class="smallblock flex flex-wrap">
+							<h3><?= tr("Time Navigator")?></h3>
+
+								<div class="smallblock">
+								<h3><?= tr("Settings")?></h3>
+									<div class="inline-block blocklabel">
+										<!-- Checkbox for StelProperty: actionShow_TimeNavigator_dialog -->
+										<label class="btn-toggle">
+												<input type="checkbox" class="stelproperty" name="actionShow_TimeNavigator_dialog" />
+												<?= tr("Show Time Navigator window")?>
+										</label>
+										<!-- Checkbox for StelProperty: TimeNavigator.flagShowButton -->
+										<label class="btn-toggle">
+												<input type="checkbox" class="stelproperty" name="TimeNavigator.flagShowButton" />
+												<?= tr("Show plug-in button on toolbar")?>
+										</label>
+										<!-- Checkbox for StelProperty: TimeNavigator.flagSelectObject -->
+										<label class="btn-toggle">
+												<input type="checkbox" class="stelproperty" name="TimeNavigator.flagSelectObject" />
+												<?= tr("Select object at event")?>
+										</label>
+										<!-- Checkbox for StelProperty: TimeNavigator.flagCenterView -->
+										<label class="btn-toggle">
+												<input type="checkbox" class="stelproperty" name="TimeNavigator.flagCenterView" />
+												<?= tr("Center view on object at event")?>
+										</label>
+									</div>						
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div id="sub_tab_LensDistortionEstimator" class="stelplugin patterns-tab-content" data-plugin="LensDistortionEstimator">
+						<div class="flex flex-wrap">
+							<div class="smallblock flex flex-wrap">
+							<h3><?= tr("Lens Distortion Estimator")?></h3>
+								<div class="smallblock">
+								<h3><?= tr("Settings")?></h3>
+									<div class="inline-block blocklabel">
+										<!-- Checkbox for StelProperty: LensDistortionEstimator.imageEnabled -->
+										<label class="btn-toggle">
+												<input type="checkbox" class="stelproperty" name="LensDistortionEstimator.imageEnabled" />
+												<?= tr("Show image")?>
+										</label>
+										<div class="block_row">
+											<div class="color-picker-wrapper" data-prop="LensDistortionEstimator.pointMarkerColor">
+													<div class="color-swatch" style="background-color: rgb(255,0,0);"></div>
+													<label><?= tr("normal")?></label>
+											</div>
+											<div class="color-picker-wrapper" data-prop="LensDistortionEstimator.selectedPointMarkerColor">
+													<div class="color-swatch" style="background-color: rgb(0,191,0);"></div>
+													<label><?= tr("selected")?></label>
+											</div>
+											<!-- Checkbox for StelProperty: LensDistortionEstimator.pointMarkersEnabled -->
+											<label class="btn-toggle">
+													<input type="checkbox" class="stelproperty" name="LensDistortionEstimator.pointMarkersEnabled" />
+													<?= tr("Mark picked points")?>
+											</label>
+										</div>								
+										<div class="block_row">
+											<div class="color-picker-wrapper" data-prop="LensDistortionEstimator.projectionCenterMarkerColor">
+													<div class="color-swatch" style="background-color: rgb(64,128,128);"></div>
+											</div>
+											<!-- Checkbox for StelProperty: LensDistortionEstimator.projectionCenterMarkerEnabled -->
+											<label class="btn-toggle">
+													<input type="checkbox" class="stelproperty" name="LensDistortionEstimator.projectionCenterMarkerEnabled" />
+													<?= tr("Mark center of projection")?>
+											</label>
+										</div>
+										<div class="block_row">
+											<div class="color-picker-wrapper" data-prop="LensDistortionEstimator.imageAxesColor">
+													<div class="color-swatch" style="background-color: rgb(255,128,0);"></div>
+											</div>
+											<!-- Checkbox for StelProperty: LensDistortionEstimator.imageAxesEnabled -->
+											<label class="btn-toggle">
+													<input type="checkbox" class="stelproperty" name="LensDistortionEstimator.imageAxesEnabled" />
+													<?= tr("Mark image axes")?>
+											</label>		
+										</div>
+										<!-- Checkbox for StelProperty: LensDistortionEstimator.imgPosResetOnLoadingEnabled -->
+										<label class="btn-toggle">
+												<input type="checkbox" class="stelproperty" name="LensDistortionEstimator.imgPosResetOnLoadingEnabled" />
+												<?= tr("Reset image position on loading")?>
+										</label>
+										<!-- Checkbox for StelProperty: LensDistortionEstimator.dialogVisible -->
+										<label class="btn-toggle">
+												<input type="checkbox" class="stelproperty" name="LensDistortionEstimator.dialogVisible" />
+														<?= tr("Show lens distortion estimator dialog")?>
+										</label>
+									</div>						
+								</div>
+							</div>
+						</div>
+					</div>
 
 				</div><!-- close plugins-patterns-tabs -->
 			</div><!-- close plugins_tab -->
@@ -4742,6 +4850,86 @@
 					</ol>
 					<p class="tour-help-note">
 							<?= tr("Note: If Multi-Select is OFF, all visible objects (after filters) are included in the generated script.")?>
+					</p>
+			</div>
+	</div>
+
+	<!-- Tour Generator Help: Scripts Generator -->
+	<div id="help-scriptsgenerator" style="display:none;" title="<?= tr("Scripts Generator Tour Help")?>">
+			<div class="tour-help-content">
+					<p class="tour-help-intro">
+							<?= tr("The Scripts Generator creates a Stellarium Script (.ssc) that automates a guided tour through the objects of the selected type. The generated script is inserted into the Script Editor tab, where you can review, modify, and execute it.")?>
+					</p>
+
+					<h4><?= tr("1. Where the Script Goes")?></h4>
+					<p>
+							<?= tr("After clicking 'Generate Script', the SSC code is shown in the Preview area below the buttons. From there you can:")?>
+					</p>
+					<ul>
+							<li><strong><?= tr("Copy")?></strong> — <?= tr("Copies the entire script to your clipboard.")?></li>
+							<li><strong><?= tr("Send to Script Editor")?></strong> — <?= tr("Opens the script in the Script Editor tab. You can then run it by pressing the Run button, or continue editing it manually.")?></li>
+					</ul>
+					<p class="tour-help-note">
+							<?= tr("Note: the generated script uses Stellarium's standard scripting API (core.*, LabelMgr.*, MarkerMgr.*, StelMovementMgr.*, etc.). It can be saved, shared, or run on any Stellarium installation that supports the same API version.")?>
+					</p>
+
+					<h4><?= tr("2. Highlighting Objects (Marker and Label)")?></h4>
+					<p>
+							<?= tr("In the 'Object Highlighting' section of Script Options you can enable two optional aids that appear on every object during the tour:")?>
+					</p>
+					<ul>
+							<li><strong><?= tr("Marker")?></strong> — <?= tr("A shape drawn around the object. Choose from 12 shapes (circle, cross, target, gear, etc.), a color, and a size. The marker is drawn with MarkerMgr.markerObject().")?></li>
+							<li><strong><?= tr("Label")?></strong> — <?= tr("A text label attached to the object. Choose color, size, position (N/S/E/W/...), and whether to draw a connecting line. The label is drawn with LabelMgr.labelObject().")?></li>
+					</ul>
+					<p>
+							<?= tr("For each of them you can choose to keep it after the tour moves to the next object. If 'Keep ... after leaving object' is checked, the marker/label stays on screen for the rest of the tour. Otherwise it is removed as soon as the next object is visited. This is controlled by the per-object cleanup flags in the generated script.")?>
+					</p>
+
+					<h4><?= tr("3. Cleanup at End of Tour")?></h4>
+					<p>
+							<?= tr("Two additional checkboxes control whether the script calls MarkerMgr.deleteAllMarkers() and LabelMgr.deleteAllLabels() at the very end of the tour. This is useful when you have chosen to keep the markers/labels during the tour but want to start the next presentation with a clean slate.")?>
+					</p>
+
+					<h4><?= tr("4. Deep Sky Options (only for DSO types)")?></h4>
+					<p>
+							<?= tr("If the selected object type belongs to the deep-sky family (e.g. Messier Catalogue, Nebulae, Supernovae), an additional 'Deep Sky Options' section becomes visible. It controls:")?>
+					</p>
+					<ul>
+							<li><?= tr("Whether to show DSO hints (MarkerMgr-like markers drawn by NebulaMgr.setFlagHints).")?></li>
+							<li><?= tr("The amount of hints and labels (0 to 10).")?></li>
+							<li><?= tr("Whether to show outlines for large DSOs (NebulaMgr.setFlagOutlines).")?></li>
+							<li><?= tr("Whether to enable the Digitized Sky Survey background (ToastMgr.setFlagShow). The DSS visibility time controls how long the script waits for the survey image to load before moving on.")?></li>
+							<li><?= tr("Catalog filters: 'Show only Messier objects' (NebulaMgr.setCatalogFilters(4)) or 'Standard catalogs (M, NGC, IC)' (NebulaMgr.selectStandardCatalogs()).")?></li>
+					</ul>
+					<p class="tour-help-note">
+							<?= tr("Tip: the DSO options are ignored for non-DSO types (stars, constellations, planets, etc.). They do not appear in the generated script.")?>
+					</p>
+
+					<h4><?= tr("5. Common Options")?></h4>
+					<p>
+							<?= tr("The general Script Options control:")?>
+					</p>
+					<ul>
+							<li><?= tr("Duration per object, Zoom FOV, Overview FOV, Font size.")?></li>
+							<li><?= tr("Whether to show on-screen labels and selection markers (core.selectObjectByName).")?></li>
+							<li><?= tr("Whether to lock the current observer location and time (core.setObserverLocation / core.setJDay).")?></li>
+							<li><?= tr("Whether to save and restore the whole display state with save_state.inc.")?></li>
+							<li><?= tr("Whether to show the landscape/horizon at the beginning of the tour (LandscapeMgr.setFlagLandscape).")?></li>
+					</ul>
+
+					<h4><?= tr("6. Adaptive Behavior by Type Family")?></h4>
+					<p>
+							<?= tr("The script automatically adapts to the selected type:")?>
+					</p>
+					<ul>
+							<li><strong><?= tr("Deep-sky objects")?>:</strong> <?= tr("core.clear('deepspace'), NebulaMgr.setFlagShow(true), hints and labels.")?></li>
+							<li><strong><?= tr("Stars")?>:</strong> <?= tr("core.clear('deepspace').")?></li>
+							<li><strong><?= tr("Constellations")?>:</strong> <?= tr("core.clear('starchart').")?></li>
+							<li><strong><?= tr("Solar System objects")?>:</strong> <?= tr("core.clear('natural'), LandscapeMgr.setFlagLandscape(true).")?></li>
+							<li><strong><?= tr("Other")?>:</strong> <?= tr("core.clear('starchart').")?></li>
+					</ul>
+					<p class="tour-help-note">
+							<?= tr("This behavior mirrors the presets documented in StelMainScriptAPI.hpp and provides a natural starting point for each type of astronomical content.")?>
 					</p>
 			</div>
 	</div>
