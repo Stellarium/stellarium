@@ -27,6 +27,9 @@
 #include <QImage>
 #include <QLoggingCategory>
 
+#include <atomic>
+#include <functional>
+
 class QFile;
 class StelTextureMgr;
 class QNetworkReply;
@@ -131,6 +134,11 @@ public:
 	//! Return texture memory size
 	unsigned int getGlSize() const {return glSize;}
 
+	//! Return how many times bind() has returned false because the texture was not loaded yet.
+	//! Textures that are in view are bound every frame, so this grows fastest for them.
+	//! StelTextureMgr decodes and uploads textures with the highest count first.
+	unsigned getBindRequestCount() const { return bindRequestCount.load(std::memory_order_relaxed); }
+
 signals:
 	//! Emitted when the texture is ready to be bind(), i.e. when downloaded, imageLoading and	glLoading is over
 	//! or when an error occurred and the texture will never be available
@@ -224,6 +232,18 @@ private:
 
 	//! Size in GL memory
 	unsigned int glSize = 0;
+
+	//! Number of calls to bind() that returned false while the texture was still loading.
+	std::atomic<unsigned> bindRequestCount{0};
+
+	//! Decoding job waiting in the StelTextureMgr queue for a free loader thread.
+	//! Only accessed with StelTextureMgr::decodeMutex locked.
+	std::function<GLData()> decodeJob;
+	//! True while decodeJob is waiting in the queue.
+	std::atomic<bool> decodeQueued{false};
+
+	//! Frame number at which this texture was last put in the deferred upload queue.
+	quint64 uploadDeferredFrame = 0;
 };
 
 

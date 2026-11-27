@@ -33,7 +33,7 @@
 #include <QNetworkReply>
 #include <QtEndian>
 #include <QFuture>
-#include <QtConcurrent>
+#include <QBuffer>
 
 #ifndef GL_TEXTURE_MAX_ANISOTROPY
 # define GL_TEXTURE_MAX_ANISOTROPY 0x84FE
@@ -146,7 +146,7 @@ StelTexture::GLData StelTexture::imageToGLData(const QImage &image, const int de
 }
 
 /*************************************************************************
- Defined to be passed to QtConcurrent::run
+ Run in a loader thread (see StelTextureMgr::dispatchDecodes())
  *************************************************************************/
 StelTexture::GLData StelTexture::loadFromPath(const QString &path, const int decimateBy)
 {
@@ -228,8 +228,14 @@ bool StelTexture::bind(uint slot)
 		// but don't give up too much if it's very high.
 		const double maxTimeNS = std::max(1e9 / (2 * StelMainView::getInstance().getDesiredFps()),
 		                                  MAX_LOAD_NANOSEC_PER_FRAME);
-		if(textureMgr->getTotalLoadTimeTaken() > maxTimeNS)
+		// Within the time budget, textures that have been asked for more often go first,
+		// whatever order they are drawn in.
+		if(textureMgr->getTotalLoadTimeTaken() > maxTimeNS || !textureMgr->isUploadTurn(*this))
+		{
+			textureMgr->deferUpload(sharedFromThis());
+			++bindRequestCount;
 			return false;
+		}
 		gl = QOpenGLContext::currentContext()->functions();
 		// Finally load the data in the main thread.
 		gl->glActiveTexture(GL_TEXTURE0 + slot);
@@ -238,6 +244,7 @@ bool StelTexture::bind(uint slot)
 		delete loader;
 		loader = Q_NULLPTR;
 		textureMgr->reportTextureLoadEnd();
+		textureMgr->reportUploadDone(this);
 		if (id != 0)
 		{
 			// The texture is already fully loaded, just bind and return true;
@@ -247,6 +254,7 @@ bool StelTexture::bind(uint slot)
 		if (errorOccured)
 			return false;
 	}
+	++bindRequestCount;
 	return false;
 }
 
@@ -256,6 +264,16 @@ void StelTexture::waitForLoaded()
 	{
 		qCWarning(Tex) << "StelTexture::waitForLoaded called for a network-loaded texture"<<fullPath;
 		Q_ASSERT(0);
+	}
+	// If the decoding has not been started yet, do it right here.
+	if (textureMgr)
+	{
+		const auto job = textureMgr->takeDecodeJob(this);
+		if (job)
+		{
+			glLoad(job());
+			return;
+		}
 	}
 	if(loader)
 	{
@@ -272,13 +290,16 @@ void StelTexture::startAsyncLoader(T (*functionPointer)(FuncParams...), Args&&..
 {
 	Q_ASSERT(loader==Q_NULLPTR);
 	if (!textureMgr) return;
-	//own thread pool supported with Qt 5.4+
-	loader = new QFuture<GLData>(QtConcurrent::run(textureMgr->loaderThreadPool,
-	                                               functionPointer, std::forward<Args>(args)...));
+	// The manager starts the job when a loader thread is free, giving precedence
+	// to the textures that are requested most often (see getBindRequestCount()).
+	textureMgr->queueDecode(sharedFromThis(), std::bind(functionPointer, std::forward<Args>(args)...));
 }
 
 bool StelTexture::load()
 {
+	// The decoding is waiting for a free loader thread.
+	if (decodeQueued)
+		return false;
 	// If the file is remote, start a network connection.
 	if (loader == Q_NULLPTR && networkReply == Q_NULLPTR &&
 			(fullPath.startsWith("http", Qt::CaseInsensitive) ||

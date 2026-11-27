@@ -79,6 +79,7 @@ SET(stellarium_lib_SRCS
      core/StelSkyCultureSkyPartition.hpp
      core/StelTextureMgr.cpp
      core/StelTextureMgr.hpp
+     core/StelTextureLoadQueue.hpp
      core/StelTexture.cpp
      core/StelTexture.hpp
      core/StelTextureTypes.hpp
@@ -843,6 +844,16 @@ IF(ENABLE_TESTING)
      ADD_DEPENDENCIES(buildTests testStelIniParser)
      ADD_TEST(testStelIniParser testStelIniParser)
      SET_TARGET_PROPERTIES(testStelIniParser PROPERTIES FOLDER "src/tests")
+
+     SET(tests_testStelTextureLoadQueue_SRCS
+          tests/testStelTextureLoadQueue.hpp
+          tests/testStelTextureLoadQueue.cpp
+     )
+     ADD_EXECUTABLE(testStelTextureLoadQueue ${tests_testStelTextureLoadQueue_SRCS})
+     TARGET_LINK_LIBRARIES(testStelTextureLoadQueue ${TESTS_LIBRARIES})
+     ADD_DEPENDENCIES(buildTests testStelTextureLoadQueue)
+     ADD_TEST(testStelTextureLoadQueue testStelTextureLoadQueue)
+     SET_TARGET_PROPERTIES(testStelTextureLoadQueue PROPERTIES FOLDER "src/tests")
 
      SET(tests_testStelVertexArray_SRCS
           tests/testStelVertexArray.hpp

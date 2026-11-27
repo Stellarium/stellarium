@@ -21,12 +21,17 @@
 #define STELTEXTUREMGR_HPP
 
 #include "StelTexture.hpp"
+#include "StelTextureLoadQueue.hpp"
 #include "StelTextureTypes.hpp"
 #include <QObject>
 #include <QMap>
 #include <QWeakPointer>
 #include <QElapsedTimer>
 #include <QMutex>
+
+#include <atomic>
+#include <functional>
+#include <memory>
 
 class QThreadPool;
 
@@ -79,6 +84,24 @@ private:
 	//! Get total time taken by texture loads during current frame, in nanoseconds
 	quint64 getTotalLoadTimeTaken() const { return totalLoadTimeTaken; }
 
+	//! Queue the decoding of the image of @p tex. Queued jobs are started as soon as a loader thread is free,
+	//! those of the textures with the highest StelTexture::getBindRequestCount() first.
+	//! @note This method is safe to be called from threads other than the main thread.
+	void queueDecode(const StelTextureSP& tex, std::function<StelTexture::GLData()>&& job);
+	//! Start queued decoding jobs while loader threads are free. Runs in the main thread.
+	void dispatchDecodes();
+	//! Remove the decoding job of @p tex from the queue if it has not been started yet.
+	//! @return the job, or an empty function if there was none.
+	std::function<StelTexture::GLData()> takeDecodeJob(StelTexture* tex);
+
+	//! Whether @p tex, decoded and waiting for upload to OpenGL, may be uploaded now. This is the case if
+	//! no texture deferred in the previous frame has been requested more often (see StelTexture::getBindRequestCount()).
+	bool isUploadTurn(const StelTexture& tex);
+	//! Called by StelTexture when its upload is postponed, so that it competes for the next frame.
+	void deferUpload(const StelTextureSP& tex);
+	//! Called by StelTexture when it has been uploaded (or failed to).
+	void reportUploadDone(const StelTexture* tex);
+
 private:
 	friend class StelTexture;
 	friend class ImageLoader;
@@ -94,6 +117,23 @@ private:
 
 	//! We use our own thread pool to ensure only 1 texture is being loaded at a time
 	QThreadPool* loaderThreadPool;
+
+	//! Protects decodeQueue and StelTexture::decodeJob
+	QMutex decodeMutex;
+	//! Textures waiting for a free loader thread
+	StelTextureLoadQueue<StelTexture> decodeQueue;
+	//! Number of decoding jobs given to loaderThreadPool and not finished yet.
+	//! Shared with the jobs, which may outlive this object.
+	std::shared_ptr<std::atomic<int>> decodesInFlight;
+
+	//! Decoded textures that were bound but not uploaded during the current frame
+	StelTextureLoadQueue<StelTexture> deferredUploads;
+	//! Decoded textures that were bound but not uploaded during the previous frame
+	StelTextureLoadQueue<StelTexture> previousDeferredUploads;
+	//! Highest bind request count in previousDeferredUploads, valid if uploadPriorityFloorValid
+	unsigned uploadPriorityFloor = 0;
+	bool uploadPriorityFloorValid = false;
+	quint64 frameNumber = 1;
 
 	StelTextureSP lookupCache(const QString& file);
 	typedef QMap<QString,QWeakPointer<StelTexture> > TexCache;
