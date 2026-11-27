@@ -40,6 +40,7 @@
 #include "StelProgressController.hpp"
 #include "StelUtils.hpp"
 #include "StelActionMgr.hpp"
+#include "StelMainView.hpp"
 
 #if USE_BUNDLED_QTCOMPRESS
 #include "external/qtcompress/qzipreader.h"
@@ -49,6 +50,7 @@
 
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
+#include <QMessageBox>
 #include <QKeyEvent>
 #include <QDebug>
 #include <QFileInfo>
@@ -384,7 +386,9 @@ Satellites::Satellites()
 	, autoAddEnabled(false)
 	, autoRemoveEnabled(false)
 	, autoDisplayEnabled(true)
-	, updateFrequencyHours(0)
+	, updateFrequencyHours(2)
+	, showDownloadErrorWarningBox(true)
+	, weHadAnErrorDuringLastUpdate(false)
 	, flagUmbraVisible(false)
 	, flagUmbraAtFixedAltitude(false)
 	, umbraColor(1.0f, 0.0f, 0.0f)
@@ -939,28 +943,42 @@ void Satellites::restoreDefaults(void)
 
 void Satellites::restoreDefaultTleSources()
 {
+	/*
+	 * This list should contain all groups from https://celestrak.org/NORAD/elements/.
+	 * According to Celestrak's own docs, the 'active' group contains everything from starlink, so we should avoid fetching them twice.
+	 * Currently we cannot really deactivate satellites per file, the true/flag only controls whether new satellites in each file should be added.
+	 * Users could decide to delete 'active' and only keep e.g. the 100 brightest, a.k.a. 'visual'
+	 * which also include rocket boosters or bright defunct satellites not listed elsewhere.
+	 * An entirely different solution would be interfacing https://celestrak.org/satcat/
+	 */
 	// Format: group name, auto-add flag
 	const QMap<QString, bool> celestrak = {
-	        // Special-Interest Satellites
-	        { "last-30-days", false }, { "stations", true }, { "visual", true  }, { "active", false }, { "analyst", false },
-	        // Weather & Earth Resources Satellites
-	        { "weather", false }, { "resource", false }, { "sarsat", false }, { "dmc", false }, { "tdrss", false },
-	        { "argos", false }, { "planet", false }, { "spire", false },
-	        // Communications Satellites
-	        { "geo", false }, { "intelsat", false }, { "eutelsat", false }, { "starlink", true  },  { "qianfan", false }, 
-	        { "kuiper", false }, { "orbcomm", false }, { "amateur", true  }, { "x-comm", false }, { "ses", false }, 
-	        { "telesat", false }, { "oneweb", true  }, { "hulianwang", false }, { "iridium-NEXT", false }, { "globalstar", false }, 
-	        { "satnogs", false }, { "other-comm", false },
-	        // Navigation Satellites
-	        { "gnss", true  }, { "gps-ops", true  }, { "galileo", true  }, { "glo-ops", true  }, { "beidou", true  }, { "sbas", false },
-	        // Scientific Satellites
-	        { "science", true  }, { "geodetic", false },{ "engineering", false }, { "education", false },
-	        // Miscellaneous Satellites
-	        { "military", false }, { "radar", false }, { "cubesat", false }
+		// Special-Interest Satellites
+		{ "last-30-days", true }, // new
+		{ "stations", true },  // ISS, Tiangong, ...
+		{ "visual", true }, // 100 brightest
+		{ "active", true }, // all operational, but no dead rocket boosters or defunct satellites
+		{ "analyst", false }, // problematic
+		// Weather & Earth Resources Satellites
+		{ "weather", false }, { "resource", false }, { "sarsat", false }, { "dmc", false }, { "tdrss", false },
+		{ "argos", false }, { "planet", false }, { "spire", false },
+		// Communications Satellites
+		{ "geo", false }, { "intelsat", false }, { "eutelsat", false },
+		// { "starlink", true  },  // Taken out because already included in 'active'.
+		{ "qianfan", false },
+		{ "kuiper", false }, { "orbcomm", false }, { "amateur", true  }, { "x-comm", false }, { "ses", false },
+		{ "telesat", false }, { "oneweb", true  }, { "hulianwang", false }, { "iridium-NEXT", false }, { "globalstar", false },
+		{ "satnogs", false }, { "other-comm", false },
+		// Navigation Satellites
+		{ "gnss", true  }, { "gps-ops", true  }, { "galileo", true  }, { "glo-ops", true  }, { "beidou", true  }, { "sbas", false },
+		// Scientific Satellites
+		{ "science", true  }, { "geodetic", false },{ "engineering", false }, { "education", false },
+		// Miscellaneous Satellites
+		{ "military", false }, { "radar", false }, { "cubesat", false }
 	};
+	QStringList urls;
 	// Details: https://celestrak.org/NORAD/documentation/gp-data-formats.php
 	QString celestrackBaseURL = "https://celestrak.org/NORAD/elements/gp.php?GROUP=%1&FORMAT=CSV";
-	QStringList urls;
 	// TLE sources from Celestrak
 	for (auto group = celestrak.begin(); group != celestrak.end(); ++group)
 	{
@@ -972,7 +990,7 @@ void Satellites::restoreDefaultTleSources()
 	}
 	// Other sources and supplemental data from Celestrack
 	urls << "https://www.amsat.org/amsat/ftp/keps/current/nasabare.txt"
-	      << "https://mmccants.org/tles/classfd.zip";
+	     << "https://mmccants.org/tles/classfd.zip";
 
 	saveTleSources(urls);
 }
@@ -1099,6 +1117,13 @@ void Satellites::loadSettings()
 				urlWasUpdated = true;
 			}
 
+			// replace obsolete TLE entry from older installations
+			if (url.contains("celestrak.org", Qt::CaseInsensitive) && url.contains("&FORMAT=TLE", Qt::CaseInsensitive))
+			{
+				url.replace("&FORMAT=TLE", "&FORMAT=CSV", Qt::CaseInsensitive);
+				urlWasUpdated = true;
+			}
+
 			urls << url;
 		}
 	}
@@ -1139,6 +1164,13 @@ void Satellites::loadSettings()
 					urlWasUpdated = true;
 				}
 
+				// replace obsolete TLE entry from older installations
+				if (url.contains("celestrak.org", Qt::CaseInsensitive) && url.contains("&FORMAT=TLE", Qt::CaseInsensitive))
+				{
+					url.replace("&FORMAT=TLE", "&FORMAT=CSV", Qt::CaseInsensitive);
+					urlWasUpdated = true;
+				}
+
 				if (conf->value("add_new").toBool())
 					url.prepend("1,");
 				updateUrls.append(url);
@@ -1157,7 +1189,7 @@ void Satellites::loadSettings()
 	// NOTE: Providing default values AND using restoreDefaultSettings() to create the section seems redundant. --BM 
 	
 	// updater related settings...
-	updateFrequencyHours = conf->value("update_frequency_hours", 72).toInt();
+	updateFrequencyHours = qMax(2, conf->value("update_frequency_hours", 72).toInt());
 	// last update default is the first Towel Day.  <3 DA
 	setLastUpdate(QDateTime::fromString(conf->value("last_update", "2001-05-25T12:00:00").toString(), Qt::ISODate));
 	setFlagHintsVisible(conf->value("show_satellite_hints", true).toBool());
@@ -2595,6 +2627,8 @@ void Satellites::setTleEpochAgeDays(int age)
 
 void Satellites::setUpdateFrequencyHours(int hours)
 {
+	hours = qMax(2, hours); // Since 2026, Celestrak requires 2-hour minimum!
+
 	if (updateFrequencyHours != hours)
 	{
 		updateFrequencyHours = hours;
@@ -2705,13 +2739,13 @@ void Satellites::saveDownloadedUpdate(QNetworkReply* reply)
 		if (tmpFile->open(QIODevice::WriteOnly | QIODevice::Text))
 		{
 			QByteArray fd = reply->readAll();
-			// qWarning() << "[Satellites] Processing an URL:" << reply->url().toString();
+			//qInfo() << "[Satellites] Processing an URL:" << reply->url().toString();
 			if (reply->url().toString().contains(".zip", Qt::CaseInsensitive))
 				fd = unzipData(fd);
 			tmpFile->write(fd);
 			tmpFile->close();
 			
-			// The reply URL can be different form the requested one...
+			// The reply URL can be different from the requested one...
 			QUrl url = reply->request().url();
 			for (int i = 0; i < updateSources.count(); i++)
 			{
@@ -2723,7 +2757,12 @@ void Satellites::saveDownloadedUpdate(QNetworkReply* reply)
 				}
 			}
 			if (tmpFile) // Something strange just happened...
+			{
+				// Sorry Bogdan. If something strange/unexpected happened, you cannot just silently delete. Fix whatever was strange. For now, show at least a warning.
+				qWarning() << "[Satellites] Cannot insert newly fetched file to updateSources. Ignoring this file:" << tmpFile->fileName();
+				Q_ASSERT(0); // Can we even ever get here? Stop here to allow inspection of that file.
 				delete tmpFile; // ...so we have to clean.
+			}
 		}
 		else
 		{
@@ -2735,6 +2774,8 @@ void Satellites::saveDownloadedUpdate(QNetworkReply* reply)
 	else
 	{
 		qWarning().nospace() << "[Satellites] FAILED to download " << reply->url().toString(QUrl::RemoveUserInfo) << ". Error " << reply->error() << ": " << reply->errorString();
+		weHadAnErrorDuringLastUpdate=true;
+		handleErrorReply(reply);
 		emit updateStateChanged(DownloadError);
 	}
 
@@ -2772,6 +2813,42 @@ void Satellites::saveDownloadedUpdate(QNetworkReply* reply)
 		updateSatellites(newData);
 	else
 		emit updateStateChanged(OtherError);
+	// and re-arm the Celestrak warning panel
+	showDownloadErrorWarningBox=true;
+}
+
+// This is called from saveDownloadedUpdate() when a reply contains an error.
+// 2026: Celestrak is very picky and bans users who update too often. We must show their errors.
+// See https://celestrak.org/NORAD/documentation/gp-data-formats.php#update
+// When this is called, a qWarning including network error has already been written to logfile.
+void Satellites::handleErrorReply(QNetworkReply* reply)
+{
+	// Some sites, esp. Celestrak, have documented HTTP return codes to signal problems.
+	// 301/Moved Permanently
+	// 401/Access Denied
+	// 403/Service Unavailable
+	// 404/Not Found
+	// 500/Internal server error
+	const int httpCode = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
+	const QString urlStr = reply->url().toDisplayString();
+	const bool isCelestrak = urlStr.startsWith("https://celestrak.org/NORAD/elements/gp.php", Qt::CaseInsensitive);
+	QString message = QString(q_("This source of satellite orbital elements has replied:") +
+			" " + reply->url().toString(QUrl::RemoveUserInfo) + ". " + q_("Error") +
+			" " + QString(qt_getEnumName(reply->error())) + ": " + reply->errorString() +
+			" " + q_("You may have to fix a bad URL (e.g. 'reset to defaults')."));
+	if (QList<int>({301, 401, 403, 404, 500}).contains(httpCode) && isCelestrak)
+	{
+		message.append(" " + q_("This warning is from Celestrak: you MUST wait 2 hours before retrying, else you may be banned from Celestrak!") +
+			                 " " + q_("See logfile for more details."));
+
+		qWarning() << "[Satellites] download problem. Please see https://celestrak.org/NORAD/documentation/gp-data-formats.php";
+	}
+	if (showDownloadErrorWarningBox)
+	{
+		// deactivate this panel for this update cycle.
+		showDownloadErrorWarningBox=false;
+		QMessageBox::warning(&StelMainView::getInstance(), q_("Please read carefully!"), message, QMessageBox::Ok);
+	}
 }
 
 void Satellites::updateObserverLocation(const StelLocation &loc)
@@ -2825,7 +2902,8 @@ void Satellites::updateFromFiles(const QStringList &paths, bool deleteFiles)
 			if (deleteFiles)
 				tleFile.remove();
 		}
-	}	
+	}
+	weHadAnErrorDuringLastUpdate=false; // reset, assuming a case when an online update has failed, and user calls update from local files instead.
 	updateSatellites(newTleSets);
 }
 
@@ -2907,18 +2985,20 @@ void Satellites::updateSatellites(TleDataHash& newTleSets)
 		}
 		else
 		{
-			if (autoRemoveEnabled)
+			if (autoRemoveEnabled && !weHadAnErrorDuringLastUpdate)
+			{
 				toBeRemoved.append(sat->id);
+				missingCount++;
+			}
 			else
 				qWarning() << "[Satellites]" << sat->id << sat->name
 				           << "is missing in the update lists.";
-			missingCount++;
 		}
 		// All satellites, who has invalid orbit should be removed.
 		if (!sat->orbitValid)
 		{
 			toBeRemoved.append(sat->id);
-			qWarning() << "[Satellites]" << sat->id << sat->name
+			qInfo() << "[Satellites]" << sat->id << sat->name
 				   << "has invalid orbit and will be removed.";
 			missingCount++;
 		}
@@ -2938,14 +3018,14 @@ void Satellites::updateSatellites(TleDataHash& newTleSets)
 	if (addedCount)
 		std::sort(satellites.begin(), satellites.end());
 	
-	if (autoRemoveEnabled && !toBeRemoved.isEmpty())
+	if (autoRemoveEnabled && !weHadAnErrorDuringLastUpdate && !toBeRemoved.isEmpty())
 	{
 		qWarning() << "[Satellites] purging objects that were not updated...";
 		removeWithoutModelReset(toBeRemoved);
 	}
 	
-	if (updatedCount > 0 ||
-	        (autoRemoveEnabled && missingCount > 0))
+	if (updatedCount > 0 || addedCount > 0 ||
+	        (autoRemoveEnabled && !weHadAnErrorDuringLastUpdate && missingCount > 0))
 	{
 		saveDataMap(createDataMap());
 		updateState = CompleteUpdates;
@@ -2964,6 +3044,7 @@ void Satellites::updateSatellites(TleDataHash& newTleSets)
 
 	emit updateStateChanged(updateState);
 	emit tleUpdateComplete(updatedCount, totalCount, addedCount, missingCount);
+	weHadAnErrorDuringLastUpdate=false; // reset for next update cycle
 }
 
 
