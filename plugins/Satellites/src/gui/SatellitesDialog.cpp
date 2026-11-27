@@ -913,16 +913,15 @@ void SatellitesDialog::showUpdateState(Satellites::UpdateState state)
 	}
 }
 
-void SatellitesDialog::showUpdateCompleted(int updated, int total, int added, int missing, int removed)
+void SatellitesDialog::showUpdateCompleted(int updated, int total, int added, int missing)
 {
 	Satellites* plugin = GETSTELMODULE(Satellites);
-	const bool autoRemove = plugin->isAutoRemoveEnabled();
 	QString message;
-	if (autoRemove)
+	if (plugin->isAutoRemoveEnabled())
 		message = q_("Updated %1/%2 satellite(s); %3 added; %4 removed");
 	else
 		message = q_("Updated %1/%2 satellite(s); %3 added; %4 missing");
-	ui->nextUpdateLabel->setText(message.arg(updated).arg(total).arg(added).arg(autoRemove ? removed : missing));
+	ui->nextUpdateLabel->setText(message.arg(updated).arg(total).arg(added).arg(missing));
 	// display the status for another full interval before refreshing status
 	updateTimer->start();
 	ui->lastUpdateDateTimeEdit->setDateTime(plugin->getLastUpdate().first);

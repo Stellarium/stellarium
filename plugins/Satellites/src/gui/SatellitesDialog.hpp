@@ -90,7 +90,7 @@ private slots:
 	void selectFilteredSatellitesList();
 	void saveSatellites(void);
 	void showUpdateState(Satellites::UpdateState state);
-	void showUpdateCompleted(int updated, int total, int added, int missing, int removed);
+	void showUpdateCompleted(int updated, int total, int added, int missing);
 	void handleOrbitLinesGroup(bool state);
 	void handleUmbraGroup(bool state);
 	

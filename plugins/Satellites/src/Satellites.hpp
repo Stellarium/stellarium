@@ -392,8 +392,7 @@ public:
 	
 	//! Depending on file contents, calls either #parseTleFile or #parseCsvFile,
 	//! forwarding the arguments to the callee.
-	//! @return Whether the file yielded at least one element set, including duplicates already in tleList.
-	static bool parseDataFile(QFile& openFile, TleDataHash& tleList, bool addFlagValue = false, const QString& tleURL = "");
+	static void parseDataFile(QFile& openFile, TleDataHash& tleList, bool addFlagValue = false, const QString& tleURL = "");
 
 	//! Get a satellite (NORAD) identifier from second line from TLE
 	//! @param[in] line The second line from the TLE
@@ -489,9 +488,9 @@ signals:
 	//! @param updated the number of updated satellites;
 	//! @param total the total number of satellites in the catalog;
 	//! @param added the number of newly added satellites;
-	//! @param missing the number of satellites absent from the update source(s);
-	//! @param removed the number of satellites removed from the catalog.
-	void tleUpdateComplete(int updated, int total, int added, int missing, int removed);
+	//! @param missing the number of satellites that were not found in the
+	//! update source(s) (and were removed, if autoRemoveEnabled is set).
+	void tleUpdateComplete(int updated, int total, int added, int missing);
 
 	void satGroupVisibleChanged();
 
@@ -789,7 +788,7 @@ private slots:
 private:
 	//! The actual implementation of #remove, but without resetting
 	//! #satelliteListModel.
-	int removeWithoutModelReset(const QStringList& idList);
+	void removeWithoutModelReset(const QStringList& idList);
 	//! Drawing the circles of Earth's umbra and penumbra
 	void drawCircles(StelCore* core, StelPainter& painter);
 	//! Add to the current collection the satellite described by the data.
@@ -813,14 +812,13 @@ private:
 	//! @param[in,out] tleList a hash with satellite IDs as keys.
 	//! @param[in] addFlagValue value to be set to TleData::addThis for all.
 	//! @param[in] tleURL a URL of TLE's source (e.g. Celestrak URL)
-	//! @return Whether the file yielded at least one element set.
 	//! @todo If this can accept a QIODevice, it will be able to read directly
 	//! QNetworkReply-s... --BM
-	static bool parseTleFile(QFile& openFile, TleDataHash& tleList, bool addFlagValue, const QString& tleURL);
+	static void parseTleFile(QFile& openFile, TleDataHash& tleList, bool addFlagValue, const QString& tleURL);
 
 	//! Same as #parseTleFile, but for the CelesTrak's CSV format
-	static bool parseCsvFile(QFile& openFile, const QStringList& headerEntries, TleDataHash& tleList,
-	                         bool addFlagValue, const QString &tleURL);
+	static void parseCsvFile(QFile& openFile, const QStringList& headerEntries, TleDataHash& tleList,
+                                 bool addFlagValue, const QString &tleURL);
 	
 	//! Delete Satellites section in main config.ini, then create with default values.
 	void restoreDefaultSettings();

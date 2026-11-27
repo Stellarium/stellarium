@@ -2148,7 +2148,7 @@ void Satellites::remove(const QStringList& idList)
 		satelliteListModel->endSatellitesChange();
 }
 
-int Satellites::removeWithoutModelReset(const QStringList& idList)
+void Satellites::removeWithoutModelReset(const QStringList& idList)
 {
 	StelObjectMgr* objMgr = GETSTELMODULE(StelObjectMgr);
 	int numRemoved = 0;
@@ -2173,7 +2173,6 @@ int Satellites::removeWithoutModelReset(const QStringList& idList)
 		 << idList.count() << "satellites proposed for removal, "
 		 << numRemoved << " removed, "
 		 << satellites.count() << " remain.";
-	return numRemoved;
 }
 
 int Satellites::getSecondsToUpdate(void)
@@ -2679,7 +2678,7 @@ void Satellites::updateFromOnlineSources()
 		// TODO: Do something saner, such as disabling internet updates,
 		// or stopping the timer. --BM
 		emit updateStateChanged(OtherError);
-		emit tleUpdateComplete(0, satellites.count(), 0, 0, 0);
+		emit tleUpdateComplete(0, satellites.count(), 0, 0);
 		return;
 	}
 
@@ -2800,21 +2799,17 @@ void Satellites::saveDownloadedUpdate(QNetworkReply* reply)
 
 	// All files have been downloaded, finish the update
 	TleDataHash newData;
-	for (const auto& source : std::as_const(updateSources))
+	for (int i = 0; i < updateSources.count(); i++)
 	{
-		QFile* file = source.file;
-		if (!file)
-		{
-			weHadAnErrorDuringLastUpdate = true;
+		if (!updateSources[i].file)
 			continue;
-		}
-		if (!file->open(QFile::ReadOnly | QFile::Text) ||
-		    !parseDataFile(*file, newData, source.addNew, source.url.toString(QUrl::None)))
+		if (updateSources[i].file->open(QFile::ReadOnly|QFile::Text))
 		{
-			weHadAnErrorDuringLastUpdate = true;
-			qWarning() << "[Satellites] No usable orbital elements from" << source.url.toString(QUrl::RemoveUserInfo);
+			parseDataFile(*updateSources[i].file, newData, updateSources[i].addNew, updateSources[i].url.toString(QUrl::None));
+			updateSources[i].file->close();
+			delete updateSources[i].file;
+			updateSources[i].file = nullptr;
 		}
-		delete file;
 	}
 	updateSources.clear();
 	if (!newData.isEmpty())
@@ -2938,8 +2933,7 @@ void Satellites::updateSatellites(TleDataHash& newTleSets)
 	int updatedCount = 0;
 	int totalCount = 0;
 	int addedCount = 0;
-	int missingCount = 0;
-	const bool canAutoRemove = autoRemoveEnabled && !weHadAnErrorDuringLastUpdate;
+	int missingCount = 0; // Also the number of removed sats, if any.
 	QStringList toBeRemoved;
 	for (const auto& sat : std::as_const(satellites))
 	{
@@ -2955,15 +2949,9 @@ void Satellites::updateSatellites(TleDataHash& newTleSets)
 		}
 		
 		QString id = sat->id;
-		const auto tle = newTleSets.constFind(id);
-		const bool missing = tle == newTleSets.cend();
-		if (!missing)
+		TleData newTle = newTleSets.take(id);
+		if (!newTle.name.isEmpty())
 		{
-			TleData newTle = tle.value();
-			newTleSets.erase(tle);
-			if (newTle.name.isEmpty())
-				newTle.name = sat->name;
-
 			if (sat->tleElements.first != newTle.first ||
 			    sat->tleElements.second != newTle.second ||
 			    sat->name != newTle.name)
@@ -3000,18 +2988,22 @@ void Satellites::updateSatellites(TleDataHash& newTleSets)
 		}
 		else
 		{
-			missingCount++;
-			if (!canAutoRemove)
+			if (autoRemoveEnabled && !weHadAnErrorDuringLastUpdate)
+			{
+				toBeRemoved.append(sat->id);
+				missingCount++;
+			}
+			else
 				qWarning() << "[Satellites]" << sat->id << sat->name
 				           << "is missing in the update lists.";
 		}
-
-		if (canAutoRemove && (missing || !sat->orbitValid))
+		// All satellites, who has invalid orbit should be removed.
+		if (!sat->orbitValid)
 		{
-			toBeRemoved.append(id);
-			if (!sat->orbitValid)
-				qInfo() << "[Satellites]" << sat->id << sat->name
-				        << "has invalid orbit and will be removed.";
+			toBeRemoved.append(sat->id);
+			qInfo() << "[Satellites]" << sat->id << sat->name
+				   << "has invalid orbit and will be removed.";
+			missingCount++;
 		}
 	}
 	
@@ -3029,14 +3021,14 @@ void Satellites::updateSatellites(TleDataHash& newTleSets)
 	if (addedCount)
 		std::sort(satellites.begin(), satellites.end());
 	
-	int removedCount = 0;
-	if (!toBeRemoved.isEmpty())
+	if (autoRemoveEnabled && !weHadAnErrorDuringLastUpdate && !toBeRemoved.isEmpty())
 	{
 		qWarning() << "[Satellites] purging objects that were not updated...";
-		removedCount = removeWithoutModelReset(toBeRemoved);
+		removeWithoutModelReset(toBeRemoved);
 	}
 	
-	if (updatedCount > 0 || addedCount > 0 || removedCount > 0)
+	if (updatedCount > 0 || addedCount > 0 ||
+	        (autoRemoveEnabled && !weHadAnErrorDuringLastUpdate && missingCount > 0))
 	{
 		saveDataMap(createDataMap());
 		updateState = CompleteUpdates;
@@ -3050,48 +3042,46 @@ void Satellites::updateSatellites(TleDataHash& newTleSets)
 	qDebug() << "[Satellites] update finished."
 	         << updatedCount << "/" << totalCount << "updated,"
 	         << addedCount << "added,"
-	         << missingCount << "missing,"
-	         << removedCount << "removed."
+	         << missingCount << "missing or removed."
 	         << sourceCount << "source entries parsed.";
 
 	emit updateStateChanged(updateState);
-	emit tleUpdateComplete(updatedCount, totalCount, addedCount, missingCount, removedCount);
+	emit tleUpdateComplete(updatedCount, totalCount, addedCount, missingCount);
 	weHadAnErrorDuringLastUpdate=false; // reset for next update cycle
 }
 
 
-bool Satellites::parseDataFile(QFile& openFile, TleDataHash& tleList, bool addFlagValue, const QString &tleURL)
+void Satellites::parseDataFile(QFile& openFile, TleDataHash& tleList, bool addFlagValue, const QString &tleURL)
 {
 	const QString line = openFile.readLine();
 	if (line.contains("invalid query", Qt::CaseInsensitive) || line.contains("error", Qt::CaseInsensitive))
-	{
 		qWarning() << "[Satellites] Skipping parsing file" << openFile.fileName() << "due error:" << line;
-		return false;
-	}
-
-	const auto firstLineEntries = line.trimmed().split(QLatin1Char(','));
-	if (firstLineEntries.contains(L1S("ARG_OF_PERICENTER")) &&
-	    firstLineEntries.contains(L1S("MEAN_MOTION_DDOT")))
+	else
 	{
-		// Two rather long names from the CSV header are present,
-		// we must be handling a CSV file rather than TLE.
-		return parseCsvFile(openFile, firstLineEntries, tleList, addFlagValue, tleURL);
-	}
-	// If rewinding fails, the remaining lines may still contain
-	// complete TLE sets, so don't check its return value.
-	openFile.seek(0);
-	return parseTleFile(openFile, tleList, addFlagValue, tleURL);
+		const auto firstLineEntries = line.trimmed().split(QLatin1Char(','));
+		if (firstLineEntries.contains(L1S("ARG_OF_PERICENTER")) &&
+		    firstLineEntries.contains(L1S("MEAN_MOTION_DDOT")))
+		{
+			// Two rather long names from the CSV header are present,
+			// we must be handling a CSV file rather than TLE.
+			parseCsvFile(openFile, firstLineEntries, tleList, addFlagValue, tleURL);
+		}
+		else
+		{
+			openFile.seek(0);
+			parseTleFile(openFile, tleList, addFlagValue, tleURL);
+		}	
+	}	
 }
 
-bool Satellites::parseTleFile(QFile& openFile, TleDataHash& tleList, bool addFlagValue, const QString &tleURL)
+void Satellites::parseTleFile(QFile& openFile, TleDataHash& tleList, bool addFlagValue, const QString &tleURL)
 {
 	if (!openFile.isOpen() || !openFile.isReadable())
-		return false;
+		return;
 	
 	// Code mostly re-used from updateFromFiles()
 	int lineNumber = 0;
 	TleData lastData;
-	bool parsedElements = false;
 
 	// Celestrak's "status code" list
 	const QMap<QString, Satellite::OptStatus> satOpStatusMap = {
@@ -3161,7 +3151,6 @@ bool Satellites::parseTleFile(QFile& openFile, TleDataHash& tleList, bool addFla
 				// so if everything is OK, save the elements.
 				if (!lastData.name.isEmpty() && !lastData.first.isEmpty())
 				{
-					parsedElements = true;
 					// Some satellites can be listed in multiple files,
 					// and only some of those files may be marked for adding,
 					// so try to preserve the flag - if it's set,
@@ -3178,14 +3167,13 @@ bool Satellites::parseTleFile(QFile& openFile, TleDataHash& tleList, bool addFla
 					<< QDir::toNativeSeparators(openFile.fileName()) << ": " << line;
 		}
 	}
-	return parsedElements;
 }
 
-bool Satellites::parseCsvFile(QFile& openFile, const QStringList& headerEntries, TleDataHash& tleList,
+void Satellites::parseCsvFile(QFile& openFile, const QStringList& headerEntries, TleDataHash& tleList,
                               bool addFlagValue, const QString &tleURL)
 {
 	if (!openFile.isOpen() || !openFile.isReadable())
-		return false;
+		return;
 
 	int OBJECT_NAME = -1;
 	int OBJECT_ID = -1;
@@ -3240,10 +3228,9 @@ bool Satellites::parseCsvFile(QFile& openFile, const QStringList& headerEntries,
 	    MEAN_MOTION_DOT < 0 || MEAN_MOTION_DDOT < 0)
 	{
 		warn("Bad satellite CSV header", "not all required fields are present", {});
-		return false;
+		return;
 	}
 
-	bool parsedElements = false;
 	while (!openFile.atEnd())
 	{
 		const auto lineEntries = QString(openFile.readLine()).trimmed().split(QLatin1Char(','));
@@ -3303,7 +3290,6 @@ bool Satellites::parseCsvFile(QFile& openFile, const QStringList& headerEntries,
 		data.second = generateTleLine2(entry, warnAboutLine);
 		if (data.second.isEmpty()) continue;
 
-		parsedElements = true;
 		// Some satellites can be listed in multiple files,
 		// and only some of those files may be marked for adding,
 		// so try to preserve the flag - if it's set,
@@ -3313,7 +3299,6 @@ bool Satellites::parseCsvFile(QFile& openFile, const QStringList& headerEntries,
 		if (data.addThis || !tleList.contains(data.id))
 			tleList.insert(data.id, data); // Overwrite if necessary
 	}
-	return parsedElements;
 }
 
 QString Satellites::decodeSatIDFromAlpha5(QString& satId)
