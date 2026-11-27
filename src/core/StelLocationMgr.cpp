@@ -1050,7 +1050,7 @@ void StelLocationMgr::positionUpdatedFromOS(const QGeoPositionInfo &info)
 	loc.setLatitude  (static_cast<float>(gCoord.latitude()));
 	loc.setLongitude (static_cast<float>(gCoord.longitude()));
 	loc.altitude = gCoord.type() == QGeoCoordinate::Coordinate3D ? int(gCoord.altitude()) : 0;
-	loc.name = QString("%1%2, %3%4").arg(gCoord.latitude() <0 ? "S" : "N", QString::number(gCoord.latitude(), 'g', 6),
+	loc.name = QString("%1%2, %3%4").arg(gCoord.latitude() <0 ? "S" : "N", QString::number(fabs(gCoord.latitude()), 'g', 6),
 	                                     gCoord.longitude()<0 ? "W" : "E", QString::number(fabs(gCoord.longitude()), 'g', 6));
 	loc.role = 'X'; // User-defined
 	//loc.population = 0;
