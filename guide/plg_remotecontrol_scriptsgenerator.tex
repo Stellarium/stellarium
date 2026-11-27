@@ -80,6 +80,23 @@ The bottom section allows you to customize the generated tour script.
 \item \textbf{Use save\_state.inc:} If checked, the script uses Stellarium's standard include file to save and restore a wide range of display settings. If unchecked, it saves only the specific variables it changes, making the script self-contained.
 \end{itemize}
 
+\paragraph{Object Highlighting}
+The Scripts Generator can draw a marker and/or a label next to each object visited during the tour. Enable the \checkbox{Draw marker on selected object} and/or \checkbox{Show label next to selected object} checkboxes to activate these features.
+
+For each one, you can customize:
+\begin{itemize}
+    \item \textbf{Marker:} shape (12 shapes: circle, cross, target, gear, etc.), color, size.
+    \item \textbf{Label:} color, font size, position (North, South, East, West, or diagonal), and connector type (none, line, or text-only).
+\end{itemize}
+
+Two additional options control the persistence of these markers and labels:
+\begin{itemize}
+    \item \checkbox{Keep marker after leaving object} — if checked, the marker is not removed when the tour moves to the next object. It remains on screen for the rest of the tour.
+    \item \checkbox{Keep label after leaving object} — same behavior for the label.
+\end{itemize}
+
+Finally, the \checkbox{Delete all markers at end} and \checkbox{Delete all labels at end} checkboxes control whether the script calls \texttt{MarkerMgr.deleteAllMarkers()} and \texttt{LabelMgr.deleteAllLabels()} at the very end of the tour. This is useful when you have chosen to keep the markers/labels during the tour but want to start the next presentation with a clean slate.
+
 \paragraph{Deep Sky Options}
 This section appears only when a compatible object type (like a Messier catalogue or a nebula catalog) is selected. It provides specialized controls for deep-sky objects:
 \begin{itemize}

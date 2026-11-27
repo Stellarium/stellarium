@@ -304,6 +304,27 @@ define([
             showLandscape:    $("#sg-show-landscape"),
             showLandscapeWrap: $("#sg-show-landscape-wrapper"),
 
+            // v4.2.0: Highlight options
+            useMarker:              $("#scriptsgenerator-use-marker"),
+            markerOptions:          $("#scriptsgenerator-marker-options"),
+            markerType:             $("#scriptsgenerator-marker-type"),
+            markerColor:            $("#scriptsgenerator-marker-color"),
+            markerSize:             $("#scriptsgenerator-marker-size"),
+            keepMarkerWrapper:      $("#scriptsgenerator-keep-marker-wrapper"),
+            keepMarkerPerObject:    $("#scriptsgenerator-keep-marker-per-object"),
+            
+            useObjLabel:            $("#scriptsgenerator-use-obj-label"),
+            objLabelOptions:        $("#scriptsgenerator-obj-label-options"),
+            objLabelColor:          $("#scriptsgenerator-obj-label-color"),
+            objLabelSize:           $("#scriptsgenerator-obj-label-size"),
+            objLabelPos:            $("#scriptsgenerator-obj-label-pos"),
+            objLabelConnect:        $("#scriptsgenerator-obj-label-connect"),
+            keepLabelWrapper:       $("#scriptsgenerator-keep-label-wrapper"),
+            keepLabelPerObject:     $("#scriptsgenerator-keep-label-per-object"),
+            
+            cleanupMarkersEnd:      $("#scriptsgenerator-cleanup-markers-end"),
+            cleanupLabelsEnd:       $("#scriptsgenerator-cleanup-labels-end"),
+
             // DSO options (present in HTML — populated by initDsoSpinners)
             dsoFieldset:       $("#scriptsgenerator-dso-options"),
             showHints:         $("#scriptsgenerator-show-hints"),
@@ -801,7 +822,10 @@ define([
         if ($.fn.spinner) {
             $("#sg-nav-fov").spinner({ min: 0.1, max: 120, step: 0.1 });
         }
-
+        
+				// v4.2.0: bind highlight-option events
+        bindHighlightOptionEvents();
+				
         // v4.0.0: bind DSO-option events
         bindDsoOptionEvents();
     }
@@ -848,6 +872,55 @@ define([
                     $dom.catalogMessier.prop("checked", false);
                 }
             });
+        }
+    }
+
+    /**
+     * Bind highlight-options events (v4.2.0).
+     * 
+     * Handles:
+     *   - Show/hide marker options when marker checkbox toggles
+     *   - Show/hide keep-marker wrapper (only when marker is enabled)
+     *   - Show/hide label options when label checkbox toggles
+     *   - Show/hide keep-label wrapper (only when label is enabled)
+     * 
+     * @function bindHighlightOptionEvents
+     * @returns {void}
+     * @since 4.2.0
+     */
+    function bindHighlightOptionEvents() {
+        // ─── Marker toggle ─────────────────────────────────────
+        if ($dom.useMarker && $dom.useMarker.length) {
+            $dom.useMarker.off("change.sgMarker").on("change.sgMarker", function() {
+                var on = $(this).is(":checked");
+                if ($dom.markerOptions && $dom.markerOptions.length) {
+                    $dom.markerOptions.toggle(on);
+                }
+                if ($dom.keepMarkerWrapper && $dom.keepMarkerWrapper.length) {
+                    $dom.keepMarkerWrapper.toggle(on);
+                }
+            });
+            // Initial state
+            var initOn = $dom.useMarker.is(":checked");
+            $dom.markerOptions.toggle(initOn);
+            $dom.keepMarkerWrapper.toggle(initOn);
+        }
+
+        // ─── Label toggle ──────────────────────────────────────
+        if ($dom.useObjLabel && $dom.useObjLabel.length) {
+            $dom.useObjLabel.off("change.sgLabel").on("change.sgLabel", function() {
+                var on = $(this).is(":checked");
+                if ($dom.objLabelOptions && $dom.objLabelOptions.length) {
+                    $dom.objLabelOptions.toggle(on);
+                }
+                if ($dom.keepLabelWrapper && $dom.keepLabelWrapper.length) {
+                    $dom.keepLabelWrapper.toggle(on);
+                }
+            });
+            // Initial state
+            var initOn = $dom.useObjLabel.is(":checked");
+            $dom.objLabelOptions.toggle(initOn);
+            $dom.keepLabelWrapper.toggle(initOn);
         }
     }
 
@@ -1792,6 +1865,24 @@ define([
 
         // v4.0.0: DSO-specific options (only read if DSO family)
         if (state.currentTypeFamily === 'dso') {
+					
+						// v4.2.0: Highlight options (applies to ALL types)
+						opts.highlight = {
+								useMarker:           readBool($dom.useMarker, false),
+								markerType:          $dom.markerType && $dom.markerType.length ? $dom.markerType.val() : 'circle',
+								markerColor:         $dom.markerColor && $dom.markerColor.length ? $dom.markerColor.val() : '#ff6666',
+								markerSize:          readNum($dom.markerSize, 12),
+								keepMarkerPerObject: readBool($dom.keepMarkerPerObject, false),
+								useObjLabel:         readBool($dom.useObjLabel, false),
+								labelColor:          $dom.objLabelColor && $dom.objLabelColor.length ? $dom.objLabelColor.val() : '#ffffff',
+								labelSize:           readNum($dom.objLabelSize, 14),
+								labelPos:            $dom.objLabelPos && $dom.objLabelPos.length ? $dom.objLabelPos.val() : 'E',
+								labelConnect:        $dom.objLabelConnect && $dom.objLabelConnect.length ? $dom.objLabelConnect.val() : 'Line',
+								keepLabelPerObject:  readBool($dom.keepLabelPerObject, false),
+								cleanupMarkersAtEnd: readBool($dom.cleanupMarkersEnd, true),
+								cleanupLabelsAtEnd:  readBool($dom.cleanupLabelsEnd, true)
+						};
+
             opts.deepSky = {
                 showHints:         readBool($dom.showHints, true),
                 hintsAmount:       readNum($dom.hintsAmount, 8),
@@ -1923,6 +2014,12 @@ define([
                 $dom.labelsAmount.spinner({ min: 0, max: 10, step: 0.5 });
             if ($dom.dssDelay && $dom.dssDelay.length)
                 $dom.dssDelay.spinner({ min: 1, max: 30, step: 1 });
+
+            // v4.2.0: Highlight spinners
+            if ($dom.markerSize && $dom.markerSize.length)
+                $dom.markerSize.spinner({ min: 4, max: 30, step: 1 });
+            if ($dom.objLabelSize && $dom.objLabelSize.length)
+                $dom.objLabelSize.spinner({ min: 8, max: 30, step: 1 });							
         }
 
         initControlPanel();
