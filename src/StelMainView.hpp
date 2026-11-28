@@ -30,6 +30,7 @@ class QOpenGLDebugLogger;
 class QOpenGLDebugMessage;
 #endif
 #include "VecMath.hpp"
+#include "TopMost.hpp"
 #include "StelApp.hpp"
 
 class StelGLWidget;
@@ -45,6 +46,7 @@ class QSettings;
 //! It is the class creating the singleton GL Widget, the main StelApp instance as well as the main GUI.
 class StelMainView : public QGraphicsView
 {
+	friend class StelGui;
 	friend class StelGuiItem;
 	friend class StelRootItem;
 	friend class StelGraphicsScene;
@@ -236,6 +238,8 @@ public slots:
 	//! Get the sky background color. (Actually retrieves from the StelRootItem.)  Everything else than black creates a work of art!
 	Vec3f getSkyBackgroundColor() const;
 
+	void showToolTip(const QPoint& scenePos, const QString& text);
+
 protected:
 	//! Handle touchscreen pinch gestures.
 	bool event(QEvent* event) override;
@@ -310,6 +314,7 @@ private slots:
 	void updateNightModeProperty(bool b);
 
 	void reloadShaders();
+	void fullScreenExclusive();
 
 private:
 #ifdef Q_OS_ANDROID
@@ -373,6 +378,7 @@ private:
 	//! The minimum desired time between frames, in milliseconds.
 	int minTimeBetweenFrames;
 	QTimer* fpsTimer;
+	TopMost *topMost=Q_NULLPTR;
 
 	//! A timer that resets the screensaver when CLI option --no-screensaver (or -F) is given.
 	QTimer* screensaverInhibitorTimer;
