@@ -41,19 +41,20 @@ class StelPainter;
 class AsterismMgr : public StelObjectModule
 {
 	Q_OBJECT
-	Q_PROPERTY(int fontSize                  READ getFontSize                     WRITE setFontSize                     NOTIFY fontSizeChanged)
-	Q_PROPERTY(Vec3f linesColor              READ getLinesColor                   WRITE setLinesColor                   NOTIFY linesColorChanged)
-	Q_PROPERTY(bool linesDisplayed           READ getFlagLines                    WRITE setFlagLines                    NOTIFY linesDisplayedChanged)
-	Q_PROPERTY(Vec3f rayHelpersColor         READ getRayHelpersColor              WRITE setRayHelpersColor              NOTIFY rayHelpersColorChanged)
-	Q_PROPERTY(bool rayHelpersDisplayed      READ getFlagRayHelpers               WRITE setFlagRayHelpers               NOTIFY rayHelpersDisplayedChanged)
-	Q_PROPERTY(Vec3f namesColor              READ getLabelsColor                  WRITE setLabelsColor                  NOTIFY namesColorChanged)
-	Q_PROPERTY(bool namesDisplayed           READ getFlagLabels                   WRITE setFlagLabels                   NOTIFY namesDisplayedChanged)
-	Q_PROPERTY(int asterismLineThickness     READ getAsterismLineThickness        WRITE setAsterismLineThickness        NOTIFY asterismLineThicknessChanged)
-	Q_PROPERTY(int rayHelperThickness        READ getRayHelperThickness           WRITE setRayHelperThickness           NOTIFY rayHelperThicknessChanged)
-	Q_PROPERTY(bool isolateAsterismSelected  READ getFlagIsolateAsterismSelected  WRITE setFlagIsolateAsterismSelected  NOTIFY isolateAsterismSelectedChanged)
-	Q_PROPERTY(float namesFadeDuration       READ getLabelsFadeDuration           WRITE setLabelsFadeDuration           NOTIFY namesFadeDurationChanged)
-	Q_PROPERTY(float linesFadeDuration       READ getLinesFadeDuration            WRITE setLinesFadeDuration            NOTIFY linesFadeDurationChanged)
-	Q_PROPERTY(float rayHelpersFadeDuration	 READ getRayHelpersFadeDuration       WRITE setRayHelpersFadeDuration       NOTIFY rayHelpersFadeDurationChanged)
+	Q_PROPERTY(int fontSize                  READ getFontSize                WRITE setFontSize                NOTIFY fontSizeChanged)
+	Q_PROPERTY(Vec3f linesColor              READ getLinesColor              WRITE setLinesColor              NOTIFY linesColorChanged)
+	Q_PROPERTY(bool linesDisplayed           READ getFlagLines               WRITE setFlagLines               NOTIFY linesDisplayedChanged)
+	Q_PROPERTY(Vec3f rayHelpersColor         READ getRayHelpersColor         WRITE setRayHelpersColor         NOTIFY rayHelpersColorChanged)
+	Q_PROPERTY(bool rayHelpersDisplayed      READ getFlagRayHelpers          WRITE setFlagRayHelpers          NOTIFY rayHelpersDisplayedChanged)
+	Q_PROPERTY(Vec3f namesColor              READ getLabelsColor             WRITE setLabelsColor             NOTIFY namesColorChanged)
+	Q_PROPERTY(bool namesDisplayed           READ getFlagLabels              WRITE setFlagLabels              NOTIFY namesDisplayedChanged)
+	Q_PROPERTY(int asterismLineThickness     READ getAsterismLineThickness   WRITE setAsterismLineThickness   NOTIFY asterismLineThicknessChanged)
+	Q_PROPERTY(int rayHelperThickness        READ getRayHelperThickness      WRITE setRayHelperThickness      NOTIFY rayHelperThicknessChanged)
+	Q_PROPERTY(bool isolateSelected          READ getFlagIsolateSelected     WRITE setFlagIsolateSelected     NOTIFY isolateSelectedChanged)
+	Q_PROPERTY(bool flagAsterismPick         READ getFlagAsterismPick        WRITE setFlagAsterismPick	  NOTIFY flagAsterismPickChanged)
+	Q_PROPERTY(float namesFadeDuration       READ getLabelsFadeDuration      WRITE setLabelsFadeDuration      NOTIFY namesFadeDurationChanged)
+	Q_PROPERTY(float linesFadeDuration       READ getLinesFadeDuration       WRITE setLinesFadeDuration       NOTIFY linesFadeDurationChanged)
+	Q_PROPERTY(float rayHelpersFadeDuration	 READ getRayHelpersFadeDuration  WRITE setRayHelpersFadeDuration  NOTIFY rayHelpersFadeDurationChanged)
 
 public:
 	//! Constructor
@@ -169,9 +170,14 @@ public slots:
 	bool isLinesDefined() { return hasAsterism; }
 
 	//! Set whether selected asterism must be displayed alone
-	void setFlagIsolateAsterismSelected(const bool isolate);
+	void setFlagIsolateSelected(const bool isolate);
 	//! Get whether selected asterism is displayed alone
-	bool getFlagIsolateAsterismSelected(void) const;
+	bool getFlagIsolateSelected(void) const;
+
+	//! Set whether only one selected asterism must be displayed
+	void setFlagAsterismPick(const bool mode);
+	//! Get whether only one selected asterism is displayed
+	bool getFlagAsterismPick(void) const;
 
 	//! Select the asterism by his English name. Calling this method will enable
 	//! isolated selection for the asterisms if it is not enabled yet.
@@ -224,7 +230,8 @@ signals:
 	void rayHelpersColorChanged(const Vec3f & color);
 	void rayHelpersDisplayedChanged(const bool displayed);
 	void rayHelperThicknessChanged(int thickness);
-	void isolateAsterismSelectedChanged(const bool isolate);
+	void isolateSelectedChanged(const bool isolate);
+	void flagAsterismPickChanged(const bool mode);
 	void namesFadeDurationChanged(const float duration);
 	void linesFadeDurationChanged(const float duration);
 	void rayHelpersFadeDurationChanged(const float duration);
@@ -241,7 +248,7 @@ private slots:
 
 	//! Limit the number of asterisms to draw based on selected asterisms.
 	//! The selected objects changed, check if some asterism are selected and display the
-	//! matching asterisms if isolateAsterismSelected mode is activated.
+	//! matching asterisms if isolateSelected mode is activated.
 	//! @param action define whether to add to, replace, or remove from the existing selection
 	void selectedObjectChange(StelModule::StelModuleSelectAction action);
 
@@ -272,7 +279,8 @@ private:
 	bool rayHelpersDisplayed;
 	bool namesDisplayed;
 	bool hasAsterism;
-	bool isolateAsterismSelected; // true to pick individual asterisms.
+	bool isolateSelected; // true to pick individual asterisms.
+	bool flagAsterismPick; //!< flag to set whether only one selected asterism must be displayed
 
 	float linesFadeDuration;
 	float namesFadeDuration;

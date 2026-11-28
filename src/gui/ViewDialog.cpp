@@ -698,6 +698,8 @@ void ViewDialog::createDialogContent()
 
 	connectBoolProperty(ui->selectSingleConstellationCheckBox, "ConstellationMgr.isolateSelected");
 	connectBoolProperty(ui->constellationPickCheckBox,         "ConstellationMgr.flagConstellationPick");
+	connectBoolProperty(ui->selectSingleAsterismCheckBox,      "AsterismMgr.isolateSelected");
+	connectBoolProperty(ui->asterismPickCheckBox,              "AsterismMgr.flagAsterismPick");
 
 	ui->colorAsterismLabels->setup("AsterismMgr.namesColor",      "color/asterism_names_color");
 	ui->colorAsterismLines ->setup("AsterismMgr.linesColor",      "color/asterism_lines_color");

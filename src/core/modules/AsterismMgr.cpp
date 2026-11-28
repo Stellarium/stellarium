@@ -48,7 +48,8 @@ AsterismMgr::AsterismMgr(StarMgr *_hip_stars)
 	, rayHelpersDisplayed(false)
 	, namesDisplayed(false)
 	, hasAsterism(false)
-	, isolateAsterismSelected(false)
+	, isolateSelected(false)
+	, flagAsterismPick(false)
         , linesFadeDuration(1.f)
         , namesFadeDuration(1.f)
         , rayHelpersFadeDuration(1.f)
@@ -79,8 +80,8 @@ void AsterismMgr::init()
 	setFlagLabels(conf->value("viewing/flag_asterism_name").toBool());
 	setAsterismLineThickness(conf->value("viewing/asterism_line_thickness", 1).toInt());
 	setRayHelperThickness(conf->value("viewing/rayhelper_line_thickness", 1).toInt());
-	setFlagIsolateAsterismSelected(conf->value("viewing/flag_asterism_isolate_selected", false).toBool());
-
+	setFlagIsolateSelected(conf->value("viewing/flag_asterism_isolate_selected", false).toBool());
+	setFlagAsterismPick(conf->value("viewing/flag_asterism_pick", false).toBool());
 	setLinesFadeDuration(conf->value("viewing/asterism_lines_fade_duration", 1.0f).toFloat());
 	setLabelsFadeDuration(conf->value("viewing/asterism_labels_fade_duration", 1.0f).toFloat());
 	setRayHelpersFadeDuration(conf->value("viewing/rayhelper_lines_fade_duration", 1.0f).toFloat());
@@ -429,7 +430,7 @@ void AsterismMgr::setFlagLines(const bool displayed)
 	if(linesDisplayed != displayed)
 	{
 		linesDisplayed = displayed;
-		if (!selected.empty() && getFlagIsolateAsterismSelected())
+		if (!selected.empty() && getFlagIsolateSelected())
 		{
 			for (auto* asterism : selected)
 				asterism->setFlagLines(linesDisplayed);
@@ -473,7 +474,7 @@ void AsterismMgr::setFlagLabels(const bool displayed)
 	if (namesDisplayed != displayed)
 	{
 		namesDisplayed = displayed;
-		if (!selected.empty() && getFlagIsolateAsterismSelected())
+		if (!selected.empty() && getFlagIsolateSelected())
 		{
 			for (auto* asterism : selected)
 				asterism->setFlagLabels(namesDisplayed);
@@ -554,14 +555,14 @@ QString AsterismMgr::getStelObjectType() const
 	return Asterism::ASTERISM_TYPE;
 }
 
-void AsterismMgr::setFlagIsolateAsterismSelected(const bool isolate)
+void AsterismMgr::setFlagIsolateSelected(const bool isolate)
 {
-	if (isolateAsterismSelected != isolate)
+	if (isolateSelected != isolate)
 	{
-		isolateAsterismSelected = isolate;
+		isolateSelected = isolate;
 
 		// when turning off isolated selection mode, clear existing isolated selections.
-		if (!isolateAsterismSelected)
+		if (!isolateSelected)
 		{
 			for (auto* asterism : asterisms)
 			{
@@ -570,13 +571,25 @@ void AsterismMgr::setFlagIsolateAsterismSelected(const bool isolate)
 			}
 		}
 		StelApp::immediateSave("viewing/flag_asterism_isolate_selected", isolate);
-		emit isolateAsterismSelectedChanged(isolate);
+		emit isolateSelectedChanged(isolate);
 	}
 }
 
-bool AsterismMgr::getFlagIsolateAsterismSelected(void) const
+bool AsterismMgr::getFlagIsolateSelected(void) const
 {
-	return isolateAsterismSelected;
+	return isolateSelected;
+}
+
+void AsterismMgr::setFlagAsterismPick(const bool mode)
+{
+	StelApp::immediateSave("viewing/flag_asterism_pick", mode);
+	flagAsterismPick = mode;
+	emit flagAsterismPickChanged(mode);
+}
+
+bool AsterismMgr::getFlagAsterismPick(void) const
+{
+	return flagAsterismPick;
 }
 
 void AsterismMgr::setSelectedAsterism(Asterism *a)
@@ -586,7 +599,7 @@ void AsterismMgr::setSelectedAsterism(Asterism *a)
 	{
 		selected.push_back(a);
 
-		if (getFlagIsolateAsterismSelected())
+		if (getFlagIsolateSelected())
 		{
 			// Propagate current settings to newly selected asterism
 			a->setFlagLines(getFlagLines());
@@ -664,7 +677,7 @@ void AsterismMgr::unsetSelectedAsterism(Asterism *a)
 				asterism->setFlagLabels(getFlagLabels());
 			}
 		}
-		else if(isolateAsterismSelected)
+		else if(isolateSelected)
 		{
 			// No longer selected asterism
 			a->setFlagLines(false);
@@ -675,8 +688,8 @@ void AsterismMgr::unsetSelectedAsterism(Asterism *a)
 
 void AsterismMgr::selectAsterism(const QString &englishName)
 {
-	if (!getFlagIsolateAsterismSelected())
-		setFlagIsolateAsterismSelected(true); // Enable isolated selection
+	if (!getFlagIsolateSelected())
+		setFlagIsolateSelected(true); // Enable isolated selection
 
 	bool found = false;
 	for (auto* asterism : asterisms)
@@ -694,8 +707,8 @@ void AsterismMgr::selectAsterism(const QString &englishName)
 
 void AsterismMgr::deselectAsterism(const QString &englishName)
 {
-	if (!getFlagIsolateAsterismSelected())
-		setFlagIsolateAsterismSelected(true); // Enable isolated selection
+	if (!getFlagIsolateSelected())
+		setFlagIsolateSelected(true); // Enable isolated selection
 
 	bool found = false;
 	for (auto* asterism : asterisms)
@@ -726,7 +739,7 @@ void AsterismMgr::deselectAsterisms(void)
 {
 	StelObjectMgr* omgr = GETSTELMODULE(StelObjectMgr);
 	Q_ASSERT(omgr);
-	if (getFlagIsolateAsterismSelected())
+	if (getFlagIsolateSelected())
 	{
 		// The list of selected asterisms is empty, but...
 		if (selected.size()==0)
@@ -786,8 +799,8 @@ void AsterismMgr::selectedObjectChange(StelModule::StelModuleSelectAction action
 
 void AsterismMgr::switchSelectionMode()
 {
-	bool state = getFlagIsolateAsterismSelected();
-	setFlagIsolateAsterismSelected(!state);
+	bool state = getFlagIsolateSelected();
+	setFlagIsolateSelected(!state);
 	if (!state)
 		deselectAsterisms();
 }
