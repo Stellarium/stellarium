@@ -243,6 +243,19 @@ Planet::Planet(const QString& englishName,
 	  eclipticPos(0.,0.,0.),
 	  eclipticVelocity(0.,0.,0.),
 	  aberrationPush(0.,0.,0.),
+
+	  // (SS) 2026-07-14 Added a correction of Sun shifting position to achieve sub-mas precision
+	  // Barycentric displacement of the Sun between JDE and (JDE-lightTimeDays).
+	  // This compensates for the use of heliocentric vectors evaluated at different epochs.
+	  sunShift(0., 0., 0.),
+
+	  // (SS) 2026-09-11 Gravitational light deflection by the Sun (major planets and Pluto only).
+	  lightDeflection(0., 0., 0.),
+
+	  // (SS) 2026-09-14 Earth barycentric-epoch-mismatch correction, meaningful only for the Moon
+	  // observed from Earth (see Planet::setEarthShift()).
+	  earthShift(0., 0., 0.),
+
 	  haloColor(halocolor),
 	  absoluteMagnitude(-99.0f),
 	  massKg(0.),
@@ -2061,6 +2074,7 @@ QVariantMap Planet::getInfoMap(const StelCore *core) const
 	const double distanceKm = AU * distanceAu;
 	map.insert("distance", distanceAu);
 	map.insert("distance-km", distanceKm);
+	map.insert("light-time-s", distanceKm/SPEED_OF_LIGHT);	// (SS) 2026-11-12 light time in seconds, for the scripts (the panel shows it as HMS)
 
 	if (onEarth)
 	{
@@ -2075,7 +2089,9 @@ QVariantMap Planet::getInfoMap(const StelCore *core) const
 			// some users require not "modern elongation" but just the DeltaLambda (GH:#1786)
 			double raSun, deSun, ra, de, lSun, ecLong, bSun, ecLat;
 			double obl=earth->getRotObliquity(core->getJDE());
-			if (core->getUseNutation())
+			if (core->getHorizonsPrecNutActive())	// (SS) 2026-10-09 JPL Horizons path: true obliquity of the TIME ZONE (includes dEps)
+				obl=core->getHorizonsEpsTrue();
+			else if (core->getUseNutation())
 			{
 				double dEps, dPsi;
 				getNutationAngles(core->getJDE(), &dPsi, &dEps);
@@ -2524,12 +2540,56 @@ void Planet::setSiderealPeriod(const double siderealPeriod)
 // The end result is a non-normalized 3D vector which allows retrieving distances etc.
 // To apply aberration correction, we need the velocity vector of the observer's planet and apply a little correction in SolarSystem::computePositions()
 // prepare for aberration: Explan. Suppl. 2013, (7.38)
-Vec3d Planet::getJ2000EquatorialPos(const StelCore *core) const
+// (SS) 2026-07-14 Added a correction of Sun shifting position to achieve sub-mas precision
+// (SS) 2026-09-11 Added gravitational light deflection by the Sun (major planets and Pluto; see
+// SolarSystem::computePositions(), case 2, where lightDeflection is set). Applied unconditionally
+// for now, like sunShift; gate behind a StelCore property (e.g. getUseLightDeflection()) if a
+// user-facing toggle is desired later.
+Vec3d Planet::getJ2000EquatorialPos(const StelCore* core) const
 {
-	const bool withAberration=core->getUseAberration();
+	const bool withAberration = core->getUseAberration();
 	return StelCore::matVsop87ToJ2000.multiplyWithoutTranslation(getHeliocentricEclipticPos()
-	                                                             - core->getObserverHeliocentricEclipticPos()
-	                                                             + (withAberration ? aberrationPush : Vec3d(0.)));
+																 - core->getObserverHeliocentricEclipticPos()
+																 - sunShift
+																 - earthShift
+																 + lightDeflection
+																 + (withAberration ? aberrationPush : Vec3d(0.)));
+}
+
+//! (SS) 2026-11-13 Position of the Moon's visible disk center (center of figure), for DISPLAY ONLY. It is offset from the center-of-mass position
+//! (getJ2000EquatorialPos(), the p vectors of the pipeline, the same as JPL Horizons) by the standard mean corrections of the USNO/HMNAO "Astronomical
+//! Phenomena" (2020 ed., p.69, in the section on lunar eclipses): +0.5" in ecliptic longitude and -0.25" in ecliptic latitude, "to help correct for the
+//! difference between the center of figure and the center of mass".
+//!
+//! This position is NOT part of the pipeline and must not be used for the information panel, the scripts, the p vectors, the pointer or any
+//! calculation that has to agree with JPL Horizons (which gives the center of mass). It is used only to draw the disk, the halo and the label of the Moon
+//! when the check box "Lunar figure correction" is on. The shift is applied in the apparent ecliptic of date (precession and nutation of the active model,
+//! true obliquity of the JPL Horizons model when it is active) and the result is brought back to J2000. The same shift is used for a geocentric and a
+//! topocentric observer: their difference (libration, parallax) is far below 0.01". The real offset of the center of figure depends on the libration
+//! (it is about 2 km, up to about 1" as seen from the Earth): the fixed values are an average.
+//! Returns getJ2000EquatorialPos(core) unchanged for every body other than the Moon, or when the check box is off.
+Vec3d Planet::getApparentLimbCenterPos(const StelCore* core) const
+{
+	const Vec3d posJ2000 = getJ2000EquatorialPos(core);
+
+	if (englishName != L1S("Moon") || !core->getUseLunarFigureCorrection())
+		return posJ2000;
+
+	// apparent equatorial position of date and obliquity, as the "Ecl. long./lat. (on date)" of the information panel
+	static SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
+	double eps = ssystem->getEarth()->getRotObliquity(core->getJDE());
+	if (core->getHorizonsPrecNutActive())
+		eps = core->getHorizonsEpsTrue();
+	const Vec3d posDate = core->j2000ToEquinoxEqu(posJ2000, StelCore::RefractionOff);
+	double ra, dec, r, lambda, beta;
+	StelUtils::rectToSphe(&ra, &dec, &r, posDate);
+	StelUtils::equToEcl(ra, dec, eps, &lambda, &beta);
+	lambda += 0.50 / 3600. * M_PI_180;
+	beta   -= 0.25 / 3600. * M_PI_180;
+	StelUtils::eclToEqu(lambda, beta, eps, &ra, &dec);
+	Vec3d posDateShifted;
+	StelUtils::spheToRect(ra, dec, r, posDateShifted);
+	return core->equinoxEquToJ2000(posDateShifted, StelCore::RefractionOff);
 }
 
 // return value in radians!
@@ -3243,7 +3303,9 @@ double Planet::getElongationDLambda() const
 	static SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
 	double raSun, deSun, ra, de, lSun, ecLong, bSun, ecLat;
 	double obl=ssystem->getEarth()->getRotObliquity(core->getJDE());
-	if (core->getUseNutation())
+	if (core->getHorizonsPrecNutActive())	// (SS) 2026-10-09 JPL Horizons path: true obliquity of the TIME ZONE (includes dEps)
+		obl=core->getHorizonsEpsTrue();
+	else if (core->getUseNutation())
 	{
 		double dEps, dPsi;
 		getNutationAngles(core->getJDE(), &dPsi, &dEps);
@@ -3888,6 +3950,15 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 			break;
 	}
 	mat = Mat4d::translation(aberrationPush) * mat;
+
+	// (SS) 2026-11-13 Lunar figure correction, DISPLAY ONLY: when the check box is on, the disk of the Moon is drawn at its center of figure instead of its
+	// center of mass (see getApparentLimbCenterPos()). The shift is a difference of J2000 equatorial vectors, brought to the VSOP87 frame of this matrix.
+	// Nothing else uses it: the position of the Moon (info panel, scripts, p vectors) stays the center of mass, as JPL Horizons.
+	if (englishName==L1S("Moon") && core->getUseLunarFigureCorrection())
+	{
+		const Vec3d figureShift = getApparentLimbCenterPos(core) - getJ2000EquatorialPos(core);
+		mat = Mat4d::translation(StelCore::matJ2000ToVsop87.multiplyWithoutTranslation(figureShift)) * mat;
+	}
 
 	// This removed totally the Planet shaking bug!!!
 	StelProjector::ModelViewTranformP transfo = core->getHeliocentricEclipticModelViewTransform();
@@ -4632,7 +4703,7 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 		surfArcMin2 = surfArcMin2*surfArcMin2*M_PIf; // the total illuminated area in arcmin^2
 
 		StelPainter sPainter(core->getProjection(StelCore::FrameJ2000));
-		Vec3d tmp = getJ2000EquatorialPos(core);
+		Vec3d tmp = getApparentLimbCenterPos(core);	// (SS) 2026-11-13 display only: the center of figure of the Moon when the lunar figure correction is on, else the same as getJ2000EquatorialPos()
 
 		// Find new extincted color for halo. The method is again rather ad-hoc, but does not look too bad.
 		// For the sun, we have again to use the stronger extinction to avoid color mismatch.
