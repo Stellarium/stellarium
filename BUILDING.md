@@ -739,6 +739,8 @@ Then you can double-click this link, or even place it in your task bar.
 
 ## Code testing
 
+### Test suite
+
 There are several test programs in the repository. To build them, define `-DENABLE_TESTING=ON` (or 
 `-DENABLE_TESTING=1`), or configure cmake in QtCreator's Projects tab.
 
@@ -757,6 +759,12 @@ or
 ```
 $ ctest --output-on-failure
 ```
+
+### Manual testing
+
+Some functionality, especially that which requires additional hardware, is better tested manually.
+See [TESTING.md](TESTING.md) for some techniques to avoid the need to have the necessary hardware
+while still exercising Stellarium's support for it.
 
 ## Packaging
 
