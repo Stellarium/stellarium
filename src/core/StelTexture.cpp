@@ -34,6 +34,7 @@
 #include <QtEndian>
 #include <QFuture>
 #include <QBuffer>
+#include <QSettings>
 
 #ifndef GL_TEXTURE_MAX_ANISOTROPY
 # define GL_TEXTURE_MAX_ANISOTROPY 0x84FE
