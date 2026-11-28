@@ -4351,12 +4351,12 @@ msgstr "Seu tipo é %1."
 #: src/core/modules/StarWrapper.cpp:686
 #, qt-format
 msgid "The star has an absolute Magnitude of %1"
-msgstr "A estrela tem uma Magnitude absoluta de %1"
+msgstr "A estrela tem uma magnitude absoluta de %1"
 
 #: src/core/modules/StarWrapper.hpp:154
 #: plugins/Satellites/src/ui_satellitesDialog.h:1236
 msgid "Magnitude range"
-msgstr "Alcance da Magnitude"
+msgstr "Faixa de magnitude"
 
 #: src/core/modules/StarWrapper.hpp:154
 msgid "Photometric system"
@@ -7472,9 +7472,9 @@ msgid ""
 "Star count: %2 Million\n"
 "Magnitude range: %3 - %4"
 msgstr ""
-"Tamanho do arquivo a ser baixado: %1 MB\n"
-"Contagem de estrelas: %2 milhões\n"
-"Alcance da magnitude: %3 - %4"
+"Tamanho do download: %1 MB\n"
+"Número de estrelas: %2 milhões\n"
+"Faixa de magnitude: %3 - %4"
 
 #: src/gui/ConfigurationDialog.cpp:1901 src/gui/ConfigurationDialog.cpp:1942
 #, qt-format
@@ -8969,7 +8969,7 @@ msgstr "Aceleração temporal da Lua"
 #: src/gui/AstroCalcDialog.cpp:639 src/gui/AstroCalcDialog.cpp:640
 #: plugins/MeteorShowers/src/gui/MSSearchDialog.cpp:85
 msgid "Valid range years:"
-msgstr "Intervalo válido:"
+msgstr "Intervalo válido de anos:"
 
 #: src/gui/AstroCalcDialog.cpp:641 src/gui/AstroCalcDialog.cpp:1989
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1186
@@ -10601,7 +10601,7 @@ msgstr "Distância angular entre a Lua e o objeto celestial"
 #: src/gui/AstroCalcDialog.cpp:9332
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1617
 msgid "CSV (Comma delimited)"
-msgstr "CSV (Comma delimitada)"
+msgstr "CSV (separado por vírgula)"
 
 #: src/gui/AstroCalcDialog.cpp:9335
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1618
@@ -21991,7 +21991,7 @@ msgstr "últimos 30 dias"
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=stations&FORMAT=csv
 #: plugins/Satellites/src/Satellites.cpp:3963
 msgid "stations"
-msgstr "estação"
+msgstr "estações"
 
 #. TRANSLATORS: Satellite group: Bright/naked-eye-visible satellites
 #. TRANSLATORS: CelesTrak source [100 (or so) Brightest]:
@@ -23716,7 +23716,7 @@ msgstr "Magnitude padrão:"
 #: plugins/Satellites/src/ui_satellitesDialog.h:1315
 #: plugins/Satellites/src/ui_satellitesDialog.h:1319
 msgid "Perigee altitude in kilometers"
-msgstr "Altitude do perigeu em km"
+msgstr "Altitude do perigeu em quilômetros"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1317
 msgid "Perigee:"
