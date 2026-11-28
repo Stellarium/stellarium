@@ -6,6 +6,7 @@ add_subdirectory(gui)
 ENDIF (STELLARIUM_GUI_MODE STREQUAL "Standard")
 
 add_subdirectory(Lx200)
+add_subdirectory(Fs2)
 add_subdirectory(NexStar)
 add_subdirectory(Rts2)
 IF(ENABLE_INDI)
@@ -44,6 +45,7 @@ SET_TARGET_PROPERTIES(TelescopeControl-static PROPERTIES OUTPUT_NAME "TelescopeC
 
 TARGET_LINK_LIBRARIES(TelescopeControl-static
     TelescopeControl_Lx200
+    TelescopeControl_Fs2
     TelescopeControl_NexStar
     TelescopeControl_Rts2
     TelescopeControl_common
