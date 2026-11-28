@@ -325,7 +325,7 @@ define([
             cleanupMarkersEnd:      $("#scriptsgenerator-cleanup-markers-end"),
             cleanupLabelsEnd:       $("#scriptsgenerator-cleanup-labels-end"),
 
-            // DSO options (present in HTML — populated by initDsoSpinners)
+            // DSO options (present in HTML — populated by initSpinners)
             dsoFieldset:       $("#scriptsgenerator-dso-options"),
             showHints:         $("#scriptsgenerator-show-hints"),
             hintsAmount:       $("#scriptsgenerator-hints-amount"),
@@ -1863,26 +1863,25 @@ define([
             showLandscape: readBool($dom.showLandscape, false)
         };
 
+        // v4.2.0: Highlight options (applies to ALL types)
+        opts.highlight = {
+            useMarker:           readBool($dom.useMarker, false),
+            markerType:          $dom.markerType && $dom.markerType.length ? $dom.markerType.val() : 'circle',
+            markerColor:         $dom.markerColor && $dom.markerColor.length ? $dom.markerColor.val() : '#ff6666',
+            markerSize:          readNum($dom.markerSize, 12),
+            keepMarkerPerObject: readBool($dom.keepMarkerPerObject, false),
+            useObjLabel:         readBool($dom.useObjLabel, false),
+            labelColor:          $dom.objLabelColor && $dom.objLabelColor.length ? $dom.objLabelColor.val() : '#ffffff',
+            labelSize:           readNum($dom.objLabelSize, 14),
+            labelPos:            $dom.objLabelPos && $dom.objLabelPos.length ? $dom.objLabelPos.val() : 'E',
+            labelConnect:        $dom.objLabelConnect && $dom.objLabelConnect.length ? $dom.objLabelConnect.val() : 'Line',
+            keepLabelPerObject:  readBool($dom.keepLabelPerObject, false),
+            cleanupMarkersAtEnd: readBool($dom.cleanupMarkersEnd, true),
+            cleanupLabelsAtEnd:  readBool($dom.cleanupLabelsEnd, true)
+        };
+
         // v4.0.0: DSO-specific options (only read if DSO family)
         if (state.currentTypeFamily === 'dso') {
-					
-						// v4.2.0: Highlight options (applies to ALL types)
-						opts.highlight = {
-								useMarker:           readBool($dom.useMarker, false),
-								markerType:          $dom.markerType && $dom.markerType.length ? $dom.markerType.val() : 'circle',
-								markerColor:         $dom.markerColor && $dom.markerColor.length ? $dom.markerColor.val() : '#ff6666',
-								markerSize:          readNum($dom.markerSize, 12),
-								keepMarkerPerObject: readBool($dom.keepMarkerPerObject, false),
-								useObjLabel:         readBool($dom.useObjLabel, false),
-								labelColor:          $dom.objLabelColor && $dom.objLabelColor.length ? $dom.objLabelColor.val() : '#ffffff',
-								labelSize:           readNum($dom.objLabelSize, 14),
-								labelPos:            $dom.objLabelPos && $dom.objLabelPos.length ? $dom.objLabelPos.val() : 'E',
-								labelConnect:        $dom.objLabelConnect && $dom.objLabelConnect.length ? $dom.objLabelConnect.val() : 'Line',
-								keepLabelPerObject:  readBool($dom.keepLabelPerObject, false),
-								cleanupMarkersAtEnd: readBool($dom.cleanupMarkersEnd, true),
-								cleanupLabelsAtEnd:  readBool($dom.cleanupLabelsEnd, true)
-						};
-
             opts.deepSky = {
                 showHints:         readBool($dom.showHints, true),
                 hintsAmount:       readNum($dom.hintsAmount, 8),
