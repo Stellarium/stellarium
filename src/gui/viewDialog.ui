@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>996</width>
-    <height>570</height>
+    <height>584</height>
    </rect>
   </property>
   <property name="font">
@@ -5603,7 +5603,7 @@
                      </property>
                     </widget>
                    </item>
-                   <item row="0" column="10" colspan="2">
+                   <item row="0" column="4" colspan="2">
                     <widget class="QCheckBox" name="constellationPickCheckBox">
                      <property name="toolTip">
                       <string>Only one at a time</string>
@@ -5672,7 +5672,7 @@
                      </property>
                     </widget>
                    </item>
-                   <item row="0" column="1" colspan="5">
+                   <item row="0" column="1" colspan="2">
                     <widget class="QCheckBox" name="abbreviatedNamesCheckBox">
                      <property name="sizePolicy">
                       <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
@@ -5980,7 +5980,7 @@
                      </property>
                     </widget>
                    </item>
-                   <item row="0" column="7" colspan="2">
+                   <item row="0" column="3">
                     <widget class="QCheckBox" name="selectSingleConstellationCheckBox">
                      <property name="sizePolicy">
                       <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
@@ -6160,6 +6160,26 @@
                    </item>
                    <item row="6" column="9">
                     <widget class="QComboBox" name="lunarSystemLabelComboBox"/>
+                   </item>
+                   <item row="0" column="9">
+                    <widget class="QCheckBox" name="selectSingleAsterismCheckBox">
+                     <property name="toolTip">
+                      <string>Click on star to show its asterism</string>
+                     </property>
+                     <property name="text">
+                      <string>Select single asterism</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="0" column="10" colspan="2">
+                    <widget class="QCheckBox" name="asterismPickCheckBox">
+                     <property name="toolTip">
+                      <string>Only one at a time</string>
+                     </property>
+                     <property name="text">
+                      <string>Isolated</string>
+                     </property>
+                    </widget>
                    </item>
                   </layout>
                  </item>

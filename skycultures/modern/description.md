@@ -519,6 +519,320 @@ While the constellation only hosts dim stars, deep-sky observers will enjoy gala
 
 French astronomer Abbé Nicolas-Louis de la Caille created 14 new constellations in the southern sky in which he mostly commemorated scientific instruments of his time, the 18th century. _Pyxis_, the Mariner Compass, can be seen as a valuable addition to the old Ship Argo, which de la Caille has however broken up into three pieces: Carina (the keel), Vela (the sails), and Puppis (the stern). 
 
+## Asterisms
+
+##### Great Diamond
+
+A large diamond-shaped figure is formed from Arcturus in Bootes, Spica in Virgo, Denebola in Leo and Cor Caroli in Canes Venatici. The Galactic North Pole lies inside, and therefore also many galaxies can be observed in this area.
+
+##### Spring Triangle
+
+A large triangle formed from Arcturus in Bootes, Spica in Virgo, and Regulus in Leo. It contains many bright galaxies.
+
+##### Summer Triangle
+
+The Summer Triangle appears first mentioned in 1913 by Alice Mary Matlock Griffith. It connects the three bright stars Vega, Deneb and Altair. Despite its name it can be seen deep into autumn evenings on the northern hemisphere.
+
+##### Great Square of Pegasus
+
+Part of the Pegasus constellation.
+
+##### Winter Triangle
+
+The bright stars Sirius, Betelgeuse and Procyon form the Winter Triangle, a large asterism that encloses most of the faint constellation Monoceros with its rich collection of open star clusters. 
+
+##### Winter Hexagon (Winter Circle)
+
+Six bright stars, Rigel, Aldebaran, Capella, Pollux, Procyon and Sirius, form this figure. The brightest star near its center is Betelgeuse. 
+
+##### Heavenly G
+
+A different way to see the Winter Hexagon which includes its central star, Betelgeuse [#30,#32].
+
+##### Segment of Perseus
+
+Part of the Perseus constellation [#30].
+
+##### Northern Cross
+
+An alternative name of the central part of constellation Cygnus.
+
+##### W
+
+This is the Cassiopeia constellation seen as Heavenly W.
+
+##### Keystone
+
+The lower body of Hercules.
+
+##### Butterfly
+
+Another view of the body of Hercules.
+
+##### Kite
+
+Alternative view of the constellation of Bootes.
+
+##### Sail
+
+An alternative view of the constellation of Corvus.
+
+##### Coathanger
+
+A conspicuous figure which is best observed with binoculars.
+
+##### Job's Coffin
+
+The four stars forming the body of the pretty Delphinus constellation are seen as Job's Coffin in North American folk astronomy. Its origin is unknown.
+
+##### V of Taurus
+
+This is the V-shaped face of Taurus, the bull, formed by the brightest members of the Hyades open star cluster. [#34,#35]
+
+##### Lesser Triangle
+
+An obsolete constellation that was created by the Polish astronomer Johannes Hevelius from three dim stars found immediately below the constellation of Triagulum [#31].
+
+##### Charles' Oak
+
+An obsolete constellation created by English astronomer Edmund Halley in 1679, meant to honor King Charles II who is said to have hidden in an oak tree for 24 hours after he was defeated by Cromwell in the battle of Worcester. Few astronomers accepted it as it involved many bright stars from what was then Argo Navis, the ship [#31]. While Argo Navis was broken up into three constellations, this figure was abolished in 1930. 
+
+##### Ptolemy's Triangle
+
+This asterism was introduced in the Atlas of the Constellations [#24] by Austrian astronomy popularizer Oswald Thomas and artist Richard Teschner just after the war in late 1945.
+
+##### Ostrich quadrangle
+
+This asterism was introduced in the Atlas of the Constellations [#24] by Austrian astronomy popularizer Oswald Thomas and artist Richard Teschner just after the war in late 1945. Thomas refers to an Arab origin, so please compare to Arab skycultures. 
+
+##### Y figure
+
+This asterism was introduced in the Atlas of the Constellations [#24] by Austrian astronomy popularizer Oswald Thomas and artist Richard Teschner just after the war in late 1945.
+
+##### Theta-theta-line
+
+This asterism was introduced in the Atlas of the Constellations [#24] by Austrian astronomy popularizer Oswald Thomas and artist Richard Teschner just after the war in late 1945. 
+
+##### Quadrangle
+
+This asterism was introduced in the Atlas of the Constellations [#24] by Austrian astronomy popularizer Oswald Thomas and artist Richard Teschner just after the war in late 1945. 
+
+##### Bier
+
+The bowl of the Big Dipper can also be seen as a bier with mourning bereaved ones [#30].
+
+##### Guardians of the Pole (Guards)
+
+Kochab and Pherkad, the outer stars of the Little Dipper's bowl, are the bright end of the chain of stars hooked at the pole by Polaris [#30,#32,#60].
+
+##### Mini-Cassiopeia
+
+This asterism in Vulpecula, best seen as M in binoculars, is very helpful as guide towards M27, the Dumbbell Nebula.
+
+##### Big Dipper (Plough)
+
+The most famous asterism of the northern sky is this conspicuous figure of seven stars formed from the hindquarter of the Greater Bear. It is also seen as Plough in the UK and Greater Wagon in German-speaking countries. As the Seven Threshing Oxes (Septemtriones), they gave their name to the northern direction in Latin. 
+
+##### Little Dipper
+
+Formed in analogy to the Lesser Bear as accompanying the Greater Bear. Similarly, it is named Little Wagon in German-speaking countries. The tip of the handle is marked by Polaris. 
+
+##### Seven Stars Row
+
+Seven moderately bright stars form an important orientation line in the sky: Mirfak (&alpha; Per) - Almach (&gamma; And) - Mirach (&beta; And) - &delta And - Alpheratz (&alpha; And) - Scheat (&beta; Peg) - Matar (&eta; Peg).
+
+##### The Pointers
+
+The two bright stars Alpha and Beta Centauri nicely point to the Southern Cross constellation. 
+
+##### Dragon Head (Lozenge)
+
+This outlines the head of the Draco constellation.
+
+##### Head of Medusa Gorgon
+
+This outlines the head of the Gorgo Medusa, which Perseus had beheaded. Its eye is the variable star Algol.
+
+##### Goatlings (Kids)
+
+The kids surround Auriga, with Capella (the she-goat) being the brightest.
+
+##### The Y in Aquarius (The Urn or Water Jar)
+
+A conspicuous star group in the otherwise dim Aquarius.
+
+##### Orion's Belt
+
+This outlines the part of the Orion constellation.
+
+##### Orion's Sword
+
+This outlines the part of the Orion constellation.
+
+##### Orion's Shield
+
+This outlines the part of the Orion constellation.
+
+##### Orion's Cudgel
+
+This outlines the part of the Orion constellation.
+
+##### Head of Whale
+
+This outlines the part of the Orion constellation.
+
+##### Head of Serpent
+
+This outlines the head of the Serpent constellation.
+
+##### Head of Hydra
+
+This outlines the head of the Hydra constellation.
+
+##### Teapot
+
+The brightest stars of Sagittarius form a figure easily and widely recognized as "Teapot".
+
+##### Milk Dipper
+
+Just north the Teapot asterism, an auxiliary tool for teatime can be made out in the sky. [#30,#32]
+
+##### Auger
+
+Michael Scotus described Terebellum, the Auger, in the eastern part of Sagittarius.
+
+##### Egyptian Cross
+
+This asterism extends the Winter Triangle (Procyon - Sirius - Betelgeuse) with two southern extensions to Naos (&zeta; Pup) and Phacd (&alpha; Col).
+
+##### False Cross
+
+Navigators at sea were worried to identify the Southern Cross through a partially cloudy sky. Sometimes this figure, or even the diamond cross, mocked them. 
+
+##### Sickle
+
+The head of Leo can be seen as Sickle.
+
+##### Diamond Cross
+
+Four stars in Carina which form another cross-like figure next to the False Cross asterism can also be identified as the Southern Cross through a partially cloudy sky.
+
+##### Circlet
+
+This is the western of the two fishes.
+
+##### The Arc of the King
+
+If you like, this is the arc of King Kepheus [#25].
+
+##### Head of Centaurus
+
+This is just the head of the Centaurus constellation [#27].
+
+##### Sweat of Ophiuchus
+
+Also known as Lorenzin 2. Ophiuchus struggling with the snake appears to have splashed some sweat around [#59].
+
+##### Venus' Mirror
+
+Belt and sword of Orion form the asterism of Venus' Mirror [#60].
+
+##### The Butterfly of Orion
+
+Near equatorial latitudes, the well-known Orion figure appears to lie on its side, more representing a butterfly [#29].
+
+##### The Fish Hook
+
+[#29].
+
+##### The Bull of Poniatowski
+
+A modern constellation created in 1777 by the Abbe Poczobut of Wilna in order to honor the king of Poland, Stanislaus Poniatowski. The stars that were taken from Ophiuchus bear a resemblance to the v-shaped groups of stars (the Hyades) that make up the face of Taurus, the bull [#31]. 
+
+##### The Trapezoid
+
+[#29].
+
+##### The Three Patriarchs
+
+[#2].
+
+##### The Northern Fly
+
+The Northern Fly was depicted hovering over the back of Aries, the Ram, until 1930 [#31].
+
+##### Davis' Dog
+
+##### Frederick's Glory
+
+A modern constellation created by German astronomer Johann Ehlert Bode between 1787 and 1790 to honor Frederick the Great of Prussia, who had died in 1786. The meanwhile obsolete constellation is primarily composed of a royal staff and crown, surrounded by a wreath of laurel [#31].
+
+##### Mural quadrant
+
+A modern constellation created by the French astronomer Joseph Jerome le Francais de La Lande in 1795. The meanwhile obsolete constellation represents the mural quadrant, an astronomical instrument that he and his nephew used to plot and observe stars [#31]. Like many others it was abolished in 1930, but the Quadrantid meteor shower is still bearing its memory.
+
+##### Engagement ring of Polaris
+
+##### Christmas Goose
+
+##### The Arrow
+
+##### The Flying Minnow
+
+##### Harrington 7
+
+##### Shadow Cross
+
+Coined during an eclipse travel through Southern Africa [#58], it is formed from one star and three naked-eye deep-sky objects lying between the "Real" Cross constellation and the "False Cross" asterism.
+
+##### Kemble's Cascade (Kemble 1)
+
+A telescopic asterism.
+
+##### Mini-Cassiopeia (Kemble 2)
+
+A telescopic asterism.
+
+##### Kemble's Kite (Kemble 3)
+
+A telescopic asterism.
+
+##### Napoleon's Hat
+
+A telescopic asterism.
+
+##### The Hercules Keystone
+
+A telescopic asterism.
+
+##### Pouring Cup
+
+A telescopic asterism.
+
+##### Mini-Dipper
+
+A telescopic asterism.
+
+##### The Stargate
+
+A telescopic asterism [#29].
+
+##### The Jaws
+
+A telescopic asterism [#29].
+
+##### Red-Necked Emu
+
+A telescopic asterism [#29].
+
+##### Medium Bull
+
+A telescopic asterism.
+
+##### Minor Bull
+
+A telescopic asterism.
+
 ## References
 
  - [#1]: Kunitzsch, P.; Smart T. (2006). "A Dictionary of Modern star Names: A Short Guide to 254 Star Names and Their Derivations" (2nd rev. ed.). Cambridge, MA: Sky Pub. ISBN 978-1-931559-44-7.
@@ -549,9 +863,9 @@ French astronomer Abbé Nicolas-Louis de la Caille created 14 new constellations
  - [#26]: Gary Seronik (2017). "Binocular Highlights Revised & Expanded: 109 Celestial Sights for Binocular Users". F W Publications Inc. ISBN 9781940038445
  - [#27]: Tony Flanders (2019). "Constellation Close-up: Centaurus and Crux". Sky & Telescope, pp.22-27 (Apr 2019).
  - [#28]: Sue French (2019). "Deep-Sky Wonders: Heavenly Hero". Sky & Telescope, pp.54-56 (Jul 2019).
- - [#29]: [Software Bisque: A Complete List of Asterisms](https://www.bisque.com/tom/asterisms/list.asp)
+ - [#29]: [Software Bisque: A Complete List of Asterisms](https://www.bisque.com/tom/asterisms/list.asp) (defunct)
  - [#30]: [University of Northern Iowa, EARTHSCI 1100 - Astronomy, Asterisms.](https://sites.uni.edu/morgans/astro/asterisms.html)
- - [#31]: [Horvatin - Obsolete Constellations, Department of Physics and Astronomy, Michigan State University.](https://web.pa.msu.edu/people/horvatin/Astronomy_Facts/obsolete_pages/triangulum_minor.htm)
+ - [#31]: [Horvatin - Obsolete Constellations, Department of Physics and Astronomy, Michigan State University.](https://web.pa.msu.edu/people/horvatin/Astronomy_Facts/obsolete_constellations.html)
  - [#32]: [Donald H. Menzel (1964). A Field Guide to the Stars and Planets by Donald H. Menzel, Collins books - St. James's Place, London. ISBN: 0395934311, ISBN13: 9780395934319](http://www.arvindguptatoys.com/arvindgupta/menzel-fieldguide.pdf)
  - [#33]: [James B. (Jim) Kaler. Professor Emeritus of Astronomy, University of Illinois.](http://stars.astro.illinois.edu/sow/6tri.html)
  - [#34]: [Astronomy Club of Tulsa - Observer, December 2008.](http://www.astrotulsa.com/cms_files/200812.pdf)
@@ -579,6 +893,8 @@ French astronomer Abbé Nicolas-Louis de la Caille created 14 new constellations
  - [#56]: [Karlseiche](https://de.wikipedia.org/wiki/Karlseiche)
  - [#57]: [Mural Quadrant](https://de.wikipedia.org/wiki/Mauerquadrant_(Sternbild))
  - [#58]: WAA/Alexander Pikhard. Own creation, 2001. https://www.waa.at/bericht/2001/06_sofiexp/20010612/bb20010612.html. 
+ - [#59]: [Lorenzin asterisms](https://www.freunde-der-nacht.net/beobachtungsprojekte/tribut-an-tom/)
+ - [#60]: https://www.constellation-guide.com/asterisms/ 
 
 ## Authors
 

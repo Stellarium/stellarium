@@ -90,23 +90,24 @@ the history or background of sky culture research that provided this work, table
 links to external resources, whatever seems suitable.  The length of the description texts is not limited, 
 but of course if this is your PhD thesis work, there is no need to repeat all 500 pages, you can add a link to the references.
 
-The skyculture description should include the following Level 2 sections. Any other section must be a subsection (i.e. Level 3 or deeper) of one of these sections. 
-Each of these sections except \texttt{Constellations} will have its own entry in the translations files. 
-The \texttt{Constellations} section will be split, so that each constellation's description will be translated separately.
+Skyculture description should include the following Level 2 sections. Any other section must be a subsection (i.e. Level 3 or deeper) of one of these sections. 
+Each of these sections except \texttt{Constellations} and \texttt{Asterisms}\newFeature{26.4} will have its own entry in the translations files. 
+The \texttt{Constellations} and \texttt{Asterisms} sections will be split, so that each constellation's and asterism's description will be translated separately.
 
 \begin{description}
 \item[\texttt{Introduction}] -- a summary that could ideally be shown on a small screen entirely.
 \item[\texttt{Description}] -- the actual text of the description.
 \item[\texttt{Constellations}] -- a sequence of Level 5 sections, where the header is the \jtag{english} name of a constellation (as given in the \file{index.json} file), and the body gives some information on this constellation. This text is used\newFeature{25.4} for display and speech output when the constellation is selected.
+\item[\texttt{Asterisms}] -- (optional) a sequence of Level 5 sections, where the header is the \jtag{english} name of an asterism as given in the \file{index.json} file), and the body gives some information on this asterism. This text is used\newFeature{26.4} for display and speech output when the asterism is selected.
 \item[\texttt{References}] -- a list of references, see \ref{SC:references} for details.
 \item[\texttt{Authors}] -- all authors and acknowledgments go here.
 \item[\texttt{License}] -- either a license id (see \ref{SC:license}), or a sequence of lines separated by empty lines (i.e. Markdown paragraphs) describing which part of the culture has which license, in the format "Sky culture item: License-ID".
 \end{description}
 
-Note that the \texttt{Constellations} section has the strict format described above. 
-In particular, there's no place for an introduction for all the constellations, 
+Note that the \texttt{Constellations} and \texttt{Asterisms} sections have the strict format described above. 
+In particular, there's no place for an introduction for all the constellations (or asterisms), 
 or closing remarks or a similar deviation from the format of this section. 
-If this kind of text is desired, it can be placed in a subsection of the \texttt{Description} section.
+If this kind of text is desired, it can be placed in respective subsections of the \texttt{Description} section.
 
 To allow the correct display of special characters like ÄÖÜßáé you must provide the file in UTF-8 encoding. 
 If you write only English/ASCII, this may not be relevant.
@@ -1130,7 +1131,7 @@ An example (Norse (Edda) SC):
 \section{The Skyculture Converter}
 \label{ch:SkyCultures:converter}
 
-Many sky cultures have been created and maintained outside of Stellarium. They follow the old format, which is no longer supported since Stellarium version 25.1. 
+Many sky cultures have been created and maintained outside of Stellarium. All files from before 2025 follow the old format, which is no longer supported since Stellarium version 25.1. 
 To ease the transition we have developed a converter tool. It is a console application that takes a path to the old-format sky culture directory, 
 and a path where to put the converted sky culture. 
 
