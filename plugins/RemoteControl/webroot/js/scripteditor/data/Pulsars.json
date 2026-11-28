@@ -1,0 +1,792 @@
+[
+    {
+        "name": "getFlagShowPulsars",
+        "category": "Pulsars - Core",
+        "signature": "bool getFlagShowPulsars()",
+        "description": "Returns whether pulsars are displayed on the sky.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if pulsars are visible",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Introduced in Stellarium 0.12.0"
+        },
+        "example": "if (Pulsars.getFlagShowPulsars()) {\n    core.debug(\"Pulsars are visible\");\n}"
+    },
+    {
+        "name": "setFlagShowPulsars",
+        "category": "Pulsars - Core",
+        "signature": "void setFlagShowPulsars(bool visible)",
+        "description": "Shows or hides pulsars on the sky.",
+        "parameters": [
+            {
+                "name": "visible",
+                "type": "bool",
+                "description": "true to show pulsars",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Introduced in Stellarium 0.12.0"
+        },
+        "example": "Pulsars.setFlagShowPulsars(true);"
+    },
+    {
+        "name": "pulsarsVisible",
+        "category": "Pulsars - Properties",
+        "signature": "bool pulsarsVisible",
+        "description": "Property that controls whether pulsars are displayed. This is the recommended way to read/write this setting.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if pulsars are visible, false if hidden",
+        "type": "property",
+        "alternative": "Pulsars.getFlagShowPulsars() / Pulsars.setFlagShowPulsars()",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Q_PROPERTY exposed to scripting"
+        },
+        "example": "// Read using property\nvar visible = core.getStelProperty('Pulsars.pulsarsVisible');\n\n// Write using property\ncore.setStelProperty('Pulsars.pulsarsVisible', true);"
+    },
+    {
+        "name": "getFilteredMode",
+        "category": "Pulsars - Filtering",
+        "signature": "bool getFilteredMode()",
+        "description": "Returns whether filtering of pulsars is enabled. When enabled, only pulsars with DM (Dispersion Measure) less than the filter value are shown.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if filtering is enabled, false if disabled",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Introduced in Stellarium 0.12.0"
+        },
+        "example": "if (Pulsars.getFilteredMode()) {\n    core.debug(\"Pulsar filter is enabled\");\n}"
+    },
+    {
+        "name": "setFilteredMode",
+        "category": "Pulsars - Filtering",
+        "signature": "void setFilteredMode(bool enabled)",
+        "description": "Enables or disables filtering of pulsars. When enabled, only pulsars with DM (Dispersion Measure) less than the filter value are shown.",
+        "parameters": [
+            {
+                "name": "enabled",
+                "type": "bool",
+                "description": "true to enable filtering, false to disable",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Introduced in Stellarium 0.12.0"
+        },
+        "example": "// Show only nearby pulsars (DM < 150)\nPulsars.setFilteredMode(true);\nPulsars.setFilterValue(150);\n\n// Show all pulsars\nPulsars.setFilteredMode(false);"
+    },
+    {
+        "name": "getFilterValue",
+        "category": "Pulsars - Filtering",
+        "signature": "float getFilterValue()",
+        "description": "Returns the current DM (Dispersion Measure) filter value in pc/cm³. Only pulsars with DM less than this value are shown when filtering is enabled. Default is 150.",
+        "parameters": [],
+        "returnType": "float",
+        "returnDescription": "DM filter value in pc/cm³",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Introduced in Stellarium 0.12.0"
+        },
+        "example": "var filterValue = Pulsars.getFilterValue();\ncore.debug(\"DM filter value: \" + filterValue + \" pc/cm³\");"
+    },
+    {
+        "name": "setFilterValue",
+        "category": "Pulsars - Filtering",
+        "signature": "void setFilterValue(float value)",
+        "description": "Sets the DM (Dispersion Measure) filter value in pc/cm³. Only pulsars with DM less than this value are shown when filtering is enabled.",
+        "parameters": [
+            {
+                "name": "value",
+                "type": "float",
+                "description": "DM filter value in pc/cm³ (recommended: 0-1000)",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Introduced in Stellarium 0.12.0"
+        },
+        "example": "// Show only low DM pulsars (nearby)\nPulsars.setFilterValue(100);\n\n// Show higher DM pulsars\nPulsars.setFilterValue(300);"
+    },
+    {
+        "name": "getDisplayMode",
+        "category": "Pulsars - Display Mode",
+        "signature": "bool getDisplayMode()",
+        "description": "Returns whether distribution mode is enabled for pulsars (showing density distribution rather than individual markers).",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if distribution mode is enabled, false if not",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Introduced in Stellarium 0.12.0"
+        },
+        "example": "if (Pulsars.getDisplayMode()) {\n    core.debug(\"Pulsar distribution mode is enabled\");\n}"
+    },
+    {
+        "name": "setDisplayMode",
+        "category": "Pulsars - Display Mode",
+        "signature": "void setDisplayMode(bool enabled)",
+        "description": "Enables or disables distribution mode for pulsars (showing density distribution rather than individual markers).",
+        "parameters": [
+            {
+                "name": "enabled",
+                "type": "bool",
+                "description": "true to enable distribution mode, false to disable",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Introduced in Stellarium 0.12.0"
+        },
+        "example": "// Show pulsar distribution density\nPulsars.setDisplayMode(true);\n\n// Show individual pulsar markers\nPulsars.setDisplayMode(false);"
+    },
+    {
+        "name": "flagDisplayMode",
+        "category": "Pulsars - Properties",
+        "signature": "bool flagDisplayMode",
+        "description": "Property that controls whether pulsar distribution mode is enabled.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if distribution mode is enabled",
+        "type": "property",
+        "alternative": "Pulsars.getDisplayMode() / Pulsars.setDisplayMode()",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Q_PROPERTY exposed to scripting"
+        },
+        "example": "core.setStelProperty('Pulsars.flagDisplayMode', true);"
+    },
+    {
+        "name": "getGlitchFlag",
+        "category": "Pulsars - Appearance",
+        "signature": "bool getGlitchFlag()",
+        "description": "Returns whether a separate color is used for pulsars that have experienced glitches (sudden changes in rotation period).",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if separate color is used for glitching pulsars",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Introduced in Stellarium 0.12.0"
+        },
+        "example": "if (Pulsars.getGlitchFlag()) {\n    core.debug(\"Glitching pulsars have separate color\");\n}"
+    },
+    {
+        "name": "setGlitchFlag",
+        "category": "Pulsars - Appearance",
+        "signature": "void setGlitchFlag(bool enabled)",
+        "description": "Sets whether a separate color should be used for pulsars that have experienced glitches.",
+        "parameters": [
+            {
+                "name": "enabled",
+                "type": "bool",
+                "description": "true to use separate color for glitching pulsars, false to use same color",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Introduced in Stellarium 0.12.0"
+        },
+        "example": "// Highlight glitching pulsars with different color\nPulsars.setGlitchFlag(true);\n\n// Use same color for all pulsars\nPulsars.setGlitchFlag(false);"
+    },
+    {
+        "name": "flagGlitchMode",
+        "category": "Pulsars - Properties",
+        "signature": "bool flagGlitchMode",
+        "description": "Property that controls whether glitching pulsars have a separate color.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if separate color is used for glitching pulsars",
+        "type": "property",
+        "alternative": "Pulsars.getGlitchFlag() / Pulsars.setGlitchFlag()",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Q_PROPERTY exposed to scripting"
+        },
+        "example": "core.setStelProperty('Pulsars.flagGlitchMode', true);"
+    },
+    {
+        "name": "getMarkerColor",
+        "category": "Pulsars - Appearance",
+        "signature": "Vec3f getMarkerColor()",
+        "description": "Returns the color used for normal pulsar markers. Default is blue (0.4, 0.5, 1.0).",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "returnDescription": "RGB color vector with values from 0.0 to 1.0",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Introduced in Stellarium 0.12.0"
+        },
+        "example": "var color = Pulsars.getMarkerColor();\ncore.debug(\"Pulsar marker color: RGB(\" + color[0] + \", \" + color[1] + \", \" + color[2] + \")\");"
+    },
+    {
+        "name": "setMarkerColor",
+        "category": "Pulsars - Appearance",
+        "signature": "void setMarkerColor(Vec3f color)",
+        "description": "Sets the color for normal pulsar markers.",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector with values between 0.0 and 1.0",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Introduced in Stellarium 0.12.0"
+        },
+        "example": "// Set normal pulsars to green\nvar green = core.vec3f(0.2, 0.8, 0.2);\nPulsars.setMarkerColor(green);\n\n// Set to cyan\nvar cyan = core.vec3f(0.2, 0.7, 0.9);\nPulsars.setMarkerColor(cyan);"
+    },
+    {
+        "name": "markerColor",
+        "category": "Pulsars - Properties",
+        "signature": "Vec3f markerColor",
+        "description": "⚠️ Property that returns the normal pulsar marker color. For reading, use core.getStelProperty(). For writing, use Pulsars.setMarkerColor().",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "returnDescription": "RGB color vector",
+        "type": "property",
+        "alternative": "Pulsars.getMarkerColor() / Pulsars.setMarkerColor()",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Q_PROPERTY exposed to scripting (read via core.getStelProperty, write via method)"
+        },
+        "example": "// Read color using property\nvar colorStr = core.getStelProperty('Pulsars.markerColor');\nvar parts = colorStr.split(',');\nvar r = parseFloat(parts[0]);\nvar g = parseFloat(parts[1]);\nvar b = parseFloat(parts[2]);\n\n// Write using method\nvar newColor = core.vec3f(0.2, 0.8, 0.2);\nPulsars.setMarkerColor(newColor);"
+    },
+    {
+        "name": "getGlitchColor",
+        "category": "Pulsars - Appearance",
+        "signature": "Vec3f getGlitchColor()",
+        "description": "Returns the color used for pulsars with glitches (when glitch mode is enabled). Default is darker blue (0.2, 0.3, 1.0).",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "returnDescription": "RGB color vector with values from 0.0 to 1.0",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Introduced in Stellarium 0.12.0"
+        },
+        "example": "var color = Pulsars.getGlitchColor();\ncore.debug(\"Glitching pulsar color: RGB(\" + color[0] + \", \" + color[1] + \", \" + color[2] + \")\");"
+    },
+    {
+        "name": "setGlitchColor",
+        "category": "Pulsars - Appearance",
+        "signature": "void setGlitchColor(Vec3f color)",
+        "description": "Sets the color for pulsars with glitches.",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector with values between 0.0 and 1.0",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Introduced in Stellarium 0.12.0"
+        },
+        "example": "// Set glitching pulsars to orange\nvar orange = core.vec3f(1.0, 0.5, 0.2);\nPulsars.setGlitchColor(orange);\n\n// Reset to default darker blue\nvar darkBlue = core.vec3f(0.2, 0.3, 1.0);\nPulsars.setGlitchColor(darkBlue);"
+    },
+    {
+        "name": "glitchColor",
+        "category": "Pulsars - Properties",
+        "signature": "Vec3f glitchColor",
+        "description": "⚠️ Property that returns the glitching pulsar marker color. For reading, use core.getStelProperty(). For writing, use Pulsars.setGlitchColor().",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "returnDescription": "RGB color vector",
+        "type": "property",
+        "alternative": "Pulsars.getGlitchColor() / Pulsars.setGlitchColor()",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Q_PROPERTY exposed to scripting (read via core.getStelProperty, write via method)"
+        },
+        "example": "var colorStr = core.getStelProperty('Pulsars.glitchColor');"
+    },
+    {
+        "name": "getCountPulsars",
+        "category": "Pulsars - Information",
+        "signature": "int getCountPulsars()",
+        "description": "Returns the number of pulsars currently loaded in the catalog. The default ATNF catalog contains approximately 2,800 pulsars.",
+        "parameters": [],
+        "returnType": "int",
+        "returnDescription": "Number of pulsars in the catalog",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Introduced in Stellarium 0.12.0"
+        },
+        "example": "var count = Pulsars.getCountPulsars();\ncore.debug(\"Pulsars in catalog: \" + count);"
+    },
+    {
+        "name": "getUpdatesEnabled",
+        "category": "Pulsars - Updates",
+        "signature": "bool getUpdatesEnabled()",
+        "description": "Returns whether automatic updates of the pulsar catalog from the internet are enabled.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if automatic updates are enabled, false if disabled",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Requires internet connection for updates"
+        },
+        "example": "if (Pulsars.getUpdatesEnabled()) {\n    core.debug(\"Automatic pulsar catalog updates are enabled\");\n}"
+    },
+    {
+        "name": "setUpdatesEnabled",
+        "category": "Pulsars - Updates",
+        "signature": "void setUpdatesEnabled(bool enabled)",
+        "description": "Enables or disables automatic updates of the pulsar catalog from the internet.",
+        "parameters": [
+            {
+                "name": "enabled",
+                "type": "bool",
+                "description": "true to enable automatic updates, false to disable",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Introduced in Stellarium 0.12.0"
+        },
+        "example": "// Enable automatic catalog updates\nPulsars.setUpdatesEnabled(true);\n\n// Disable automatic updates\nPulsars.setUpdatesEnabled(false);"
+    },
+    {
+        "name": "updateJSON",
+        "category": "Pulsars - Updates",
+        "signature": "void updateJSON()",
+        "description": "Manually triggers an immediate update of the pulsar catalog JSON file from the configured online source (default: https://stellarium.org/json/pulsars.json).",
+        "parameters": [],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Requires internet connection"
+        },
+        "example": "// Manually update pulsar catalog\nPulsars.updateJSON();\ncore.debug(\"Pulsar catalog update started...\");\n\n// Wait for update to complete\ncore.wait(30);\ncore.debug(\"Pulsar catalog updated\");"
+    },
+    {
+        "name": "getLastUpdate",
+        "category": "Pulsars - Updates",
+        "signature": "QDateTime getLastUpdate()",
+        "description": "Returns the date and time of the last successful pulsar catalog update.",
+        "parameters": [],
+        "returnType": "QDateTime",
+        "returnDescription": "Date and time of last catalog update",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Introduced in Stellarium 0.12.0"
+        },
+        "example": "var lastUpdate = Pulsars.getLastUpdate();\ncore.debug(\"Last pulsar catalog update: \" + lastUpdate.toString());"
+    },
+    {
+        "name": "getUpdateFrequencyDays",
+        "category": "Pulsars - Updates",
+        "signature": "int getUpdateFrequencyDays()",
+        "description": "Returns the frequency of automatic catalog updates in days. Default is 100 days.",
+        "parameters": [],
+        "returnType": "int",
+        "returnDescription": "Update frequency in days",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Introduced in Stellarium 0.12.0"
+        },
+        "example": "var freq = Pulsars.getUpdateFrequencyDays();\ncore.debug(\"Update frequency: \" + freq + \" days\");"
+    },
+    {
+        "name": "setUpdateFrequencyDays",
+        "category": "Pulsars - Updates",
+        "signature": "void setUpdateFrequencyDays(int days)",
+        "description": "Sets the frequency of automatic catalog updates in days.",
+        "parameters": [
+            {
+                "name": "days",
+                "type": "int",
+                "description": "Update frequency in days (recommended: 30-365)",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Introduced in Stellarium 0.12.0"
+        },
+        "example": "// Update monthly\nPulsars.setUpdateFrequencyDays(30);\n\n// Update yearly\nPulsars.setUpdateFrequencyDays(365);"
+    },
+    {
+        "name": "getSecondsToUpdate",
+        "category": "Pulsars - Updates",
+        "signature": "int getSecondsToUpdate()",
+        "description": "Returns the number of seconds until the next scheduled automatic catalog update.",
+        "parameters": [],
+        "returnType": "int",
+        "returnDescription": "Seconds until next update",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Introduced in Stellarium 0.12.0"
+        },
+        "example": "var secs = Pulsars.getSecondsToUpdate();\ncore.debug(\"Next update in: \" + secs + \" seconds\");"
+    },
+    {
+        "name": "getUpdateState",
+        "category": "Pulsars - Updates",
+        "signature": "UpdateState getUpdateState()",
+        "description": "Returns the current update state. Values: 0=Updating, 1=CompleteNoUpdates, 2=CompleteUpdates, 3=DownloadError, 4=OtherError.",
+        "parameters": [],
+        "returnType": "UpdateState",
+        "returnDescription": "Update state (0-4)",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Introduced in Stellarium 0.12.0"
+        },
+        "example": "var state = Pulsars.getUpdateState();\nif (state === 0) core.debug(\"Updating catalog...\");\nelse if (state === 1) core.debug(\"No updates needed\");\nelse if (state === 2) core.debug(\"Catalog updated successfully\");\nelse if (state === 3) core.debug(\"Download error occurred\");"
+    },
+    {
+        "name": "getEnableAtStartup",
+        "category": "Pulsars - Configuration",
+        "signature": "bool getEnableAtStartup()",
+        "description": "Returns whether the Pulsars plugin should be enabled automatically when Stellarium starts.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if enabled at startup, false otherwise",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Introduced in Stellarium 0.12.0"
+        },
+        "example": "if (Pulsars.getEnableAtStartup()) {\n    core.debug(\"Pulsars will load on next startup\");\n}"
+    },
+    {
+        "name": "setEnableAtStartup",
+        "category": "Pulsars - Configuration",
+        "signature": "void setEnableAtStartup(bool enable)",
+        "description": "Sets whether the Pulsars plugin should be enabled automatically when Stellarium starts.",
+        "parameters": [
+            {
+                "name": "enable",
+                "type": "bool",
+                "description": "true to enable at startup, false to disable",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Introduced in Stellarium 0.12.0"
+        },
+        "example": "// Enable Pulsars on next startup\nPulsars.setEnableAtStartup(true);\n\n// Disable Pulsars on next startup\nPulsars.setEnableAtStartup(false);"
+    },
+    {
+        "name": "getFlagShowPulsarsButton",
+        "category": "Pulsars - GUI",
+        "signature": "bool getFlagShowPulsarsButton()",
+        "description": "Returns whether the Pulsars plugin toolbar button is visible in the Stellarium GUI.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if button is visible, false if hidden",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Introduced in Stellarium 0.12.0"
+        },
+        "example": "if (Pulsars.getFlagShowPulsarsButton()) {\n    core.debug(\"Pulsars toolbar button is visible\");\n}"
+    },
+    {
+        "name": "setFlagShowPulsarsButton",
+        "category": "Pulsars - GUI",
+        "signature": "void setFlagShowPulsarsButton(bool visible)",
+        "description": "Shows or hides the Pulsars plugin toolbar button in the Stellarium GUI.",
+        "parameters": [
+            {
+                "name": "visible",
+                "type": "bool",
+                "description": "true to show button, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Introduced in Stellarium 0.12.0"
+        },
+        "example": "// Show Pulsars button on toolbar\nPulsars.setFlagShowPulsarsButton(true);\n\n// Hide Pulsars button\nPulsars.setFlagShowPulsarsButton(false);"
+    },
+    {
+        "name": "restoreDefaults",
+        "category": "Pulsars - Configuration",
+        "signature": "void restoreDefaults()",
+        "description": "Restores all Pulsars plugin settings and catalog to their default values. This will reset visibility, colors, filter settings, and replace the catalog file.",
+        "parameters": [],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Introduced in Stellarium 0.12.0"
+        },
+        "example": "// Reset all Pulsars plugin settings to defaults\nPulsars.restoreDefaults();\ncore.debug(\"Pulsars settings restored to defaults\");"
+    },
+    {
+        "name": "getByID",
+        "category": "Pulsars - Information",
+        "signature": "PulsarP getByID(QString id)",
+        "description": "Returns a pulsar object by its designation ID (e.g., 'PSR J0534+2200' for Crab Pulsar, 'PSR B1919+21').",
+        "parameters": [
+            {
+                "name": "id",
+                "type": "QString",
+                "description": "Pulsar designation (J2000 or B1950 format)",
+                "required": true
+            }
+        ],
+        "returnType": "PulsarP",
+        "returnDescription": "Pulsar object, or null if not found",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Returns a PulsarP object with methods like getEnglishName(), getPeriod(), getDM(), etc."
+        },
+        "example": "// Get Crab Pulsar\nvar pulsar = Pulsars.getByID(\"PSR J0534+2200\");\nif (pulsar) {\n    core.debug(\"Found: \" + pulsar.getEnglishName());\n    core.debug(\"Period: \" + pulsar.getPeriod() + \" seconds\");\n    core.debug(\"DM: \" + pulsar.getDM() + \" pc/cm³\");\n    core.moveToObject(pulsar.getEnglishName(), 3);\n} else {\n    core.debug(\"Pulsar not found in catalog\");\n}"
+    },
+    {
+        "name": "getAllPulsars",
+        "category": "Pulsars - Information",
+        "signature": "QList<PulsarP> getAllPulsars()",
+        "description": "Returns the list of all pulsar objects currently loaded in the catalog.",
+        "parameters": [],
+        "returnType": "QList<PulsarP>",
+        "returnDescription": "List of all pulsar objects",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Introduced in Stellarium 0.12.0"
+        },
+        "example": "var allPulsars = Pulsars.getAllPulsars();\ncore.debug(\"Total pulsars: \" + allPulsars.length);\n\n// Print first 10 pulsar names\nfor (var i = 0; i < Math.min(10, allPulsars.length); i++) {\n    core.debug(allPulsars[i].getEnglishName());\n}"
+    },
+    {
+        "name": "searchByID",
+        "category": "Pulsars - Search",
+        "signature": "StelObjectP searchByID(QString id)",
+        "description": "Searches for a pulsar by its designation ID. Returns a StelObjectP that can be used with core.moveToObject() and other object functions.",
+        "parameters": [
+            {
+                "name": "id",
+                "type": "QString",
+                "description": "Pulsar designation (e.g., 'PSR J0534+2200', 'PSR B1919+21')",
+                "required": true
+            }
+        ],
+        "returnType": "StelObjectP",
+        "returnDescription": "Pulsar as StelObject, or null if not found",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Alternative to getByID() that returns StelObjectP"
+        },
+        "example": "var pulsar = Pulsars.searchByID(\"PSR J0534+2200\");\nif (pulsar) {\n    core.debug(\"Moving to Crab Pulsar\");\n    core.moveToObject(pulsar.getEnglishName(), 3);\n}"
+    },
+    {
+        "name": "searchByName",
+        "category": "Pulsars - Search",
+        "signature": "StelObjectP searchByName(QString name)",
+        "description": "Searches for a pulsar by its English name, J2000 designation, or B1950 designation.",
+        "parameters": [
+            {
+                "name": "name",
+                "type": "QString",
+                "description": "Pulsar name or designation (e.g., 'Crab Pulsar', 'PSR J0534+2200', 'PSR B1919+21')",
+                "required": true
+            }
+        ],
+        "returnType": "StelObjectP",
+        "returnDescription": "Pulsar object, or null if not found",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Case-insensitive search"
+        },
+        "example": "var pulsar = Pulsars.searchByName(\"Crab Pulsar\");\nif (pulsar) {\n    core.debug(\"Found Crab Pulsar\");\n    core.debug(\"Rotation period: \" + pulsar.getPeriod() + \" s\");\n    core.moveToObject(pulsar.getEnglishName(), 3);\n}"
+    },
+    {
+        "name": "listAllObjects",
+        "category": "Pulsars - Information",
+        "signature": "QVector<QPair<QString,StelObjectP>> listAllObjects(bool inEnglish)",
+        "description": "Returns a list of all pulsar objects with their names. This can be used for auto-completion and search.",
+        "parameters": [
+            {
+                "name": "inEnglish",
+                "type": "bool",
+                "description": "true to list English names, false for translated names",
+                "required": true
+            }
+        ],
+        "returnType": "QVector<QPair<QString,StelObjectP>>",
+        "returnDescription": "List of (name, object) pairs",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Introduced in Stellarium 0.12.0"
+        },
+        "example": "var objects = Pulsars.listAllObjects(false);\ncore.debug(\"Total pulsars in catalog: \" + objects.length);"
+    },
+    {
+        "name": "getName",
+        "category": "Pulsars - Information",
+        "signature": "QString getName()",
+        "description": "Returns the display name of the Pulsars plugin module.",
+        "parameters": [],
+        "returnType": "QString",
+        "returnDescription": "Module name ('Pulsars')",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Introduced in Stellarium 0.12.0"
+        },
+        "example": "var name = Pulsars.getName();\ncore.debug(\"Module: \" + name);"
+    },
+    {
+        "name": "getStelObjectType",
+        "category": "Pulsars - Information",
+        "signature": "QString getStelObjectType()",
+        "description": "Returns the object type identifier for pulsars. Used by StelObjectMgr to identify objects from this module.",
+        "parameters": [],
+        "returnType": "QString",
+        "returnDescription": "Object type ('Pulsar')",
+        "type": "method",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.12.0",
+            "notes": "Introduced in Stellarium 0.12.0"
+        },
+        "example": "var objType = Pulsars.getStelObjectType();\ncore.debug(\"Object type: \" + objType); // Returns 'Pulsar'"
+    }
+]

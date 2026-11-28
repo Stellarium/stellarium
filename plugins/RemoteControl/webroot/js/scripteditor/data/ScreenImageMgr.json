@@ -1,0 +1,436 @@
+[
+    {
+        "name": "createScreenImage",
+        "category": "Screen Images - Creation",
+        "signature": "createScreenImage(QString id, QString filename, qreal x, qreal y, qreal scale=1.0, bool visible=true, qreal alpha=1.0, float fadeDuration=1.0)",
+        "description": "Creates and displays an image on the screen at the specified coordinates. The image is loaded from a file in the 'scripts/' directory and can be animated, moved, scaled, and faded. If an image with the same ID already exists, it will be deleted first.\n\nIMPORTANT: The `scale` parameter affects the final resolution of the image! It is applied to the QPixmap BEFORE creating the graphics item. Using scale < 1 reduces resolution (saves memory but loses detail), while scale > 1 creates upsampling artifacts. For animations that grow/shrink an image, create at scale=1 and use setImageScale() for animated transitions.\n\nIf the file is not found, a qCWarning is emitted and NO image is created — the function does not throw or return an error.",
+        "parameters": [
+            {
+                "name": "id",
+                "type": "QString",
+                "description": "Unique identifier for the image (used to reference it later). If an image with this ID exists, it is deleted first.",
+                "required": true
+            },
+            {
+                "name": "filename",
+                "type": "QString",
+                "description": "Image file name, resolved via StelFileMgr with 'scripts/' prefix. Supports PNG, JPG, GIF, BMP.",
+                "required": true
+            },
+            {
+                "name": "x",
+                "type": "qreal",
+                "description": "X-coordinate in pixels from the left edge of the screen",
+                "required": true
+            },
+            {
+                "name": "y",
+                "type": "qreal",
+                "description": "Y-coordinate in pixels from the top edge of the screen",
+                "required": true
+            },
+            {
+                "name": "scale",
+                "type": "qreal",
+                "description": "Scale factor applied to the loaded pixmap (1.0 = original, 0.5 = 50%, 2.0 = double). Affects resolution permanently.",
+                "required": false,
+                "default": "1.0"
+            },
+            {
+                "name": "visible",
+                "type": "bool",
+                "description": "Initial visibility state (true = visible at maxAlpha, false = hidden at opacity 0)",
+                "required": false,
+                "default": "true"
+            },
+            {
+                "name": "alpha",
+                "type": "qreal",
+                "description": "Maximum opacity when visible (0.0 = fully transparent, 1.0 = fully opaque)",
+                "required": false,
+                "default": "1.0"
+            },
+            {
+                "name": "fadeDuration",
+                "type": "float",
+                "description": "Fade duration in seconds for show/hide transitions. Fixed at creation — there is no scripting way to change it later.",
+                "required": false,
+                "default": "1.0"
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "fadeDuration is clamped to ≥ 0.001s internally. File lookup uses StelFileMgr with 'scripts/' prefix. If the file is missing, qCWarning(Scripting) is logged and no image is created."
+        },
+        "example": "// Basic creation\nScreenImageMgr.createScreenImage(\"logo\", \"logo.png\", 10, 10, 1.0, true, 1.0, 1.0);\n\n// Semi-transparent watermark in bottom-right corner\nvar sw = core.getScreenWidth();\nvar sh = core.getScreenHeight();\nScreenImageMgr.createScreenImage(\"wm\", \"watermark.png\", sw - 200, sh - 100, 0.8, true, 0.5, 2.0);\n\n// Hidden image that will fade in later (fadeDuration=0.5s)\nScreenImageMgr.createScreenImage(\"overlay\", \"overlay.png\", 100, 100, 1.0, false, 1.0, 0.5);\nScreenImageMgr.showImage(\"overlay\", true);  // fades in over 0.5s\n\n// Cleanup\nScreenImageMgr.deleteImage(\"logo\");\nScreenImageMgr.deleteImage(\"wm\");\nScreenImageMgr.deleteImage(\"overlay\");"
+    },
+    {
+        "name": "getShowImage",
+        "category": "Screen Images - Control",
+        "signature": "bool getShowImage(QString id)",
+        "description": "Returns whether a screen image is currently visible (opacity > 0). Returns false if the image does not exist or is fully hidden.",
+        "parameters": [
+            {
+                "name": "id",
+                "type": "QString",
+                "description": "Unique identifier of the image",
+                "required": true
+            }
+        ],
+        "returnType": "bool",
+        "returnDescription": "true if opacity > 0, false if hidden or not found",
+        "type": "slot",
+        "readOnly": true,
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0"
+        },
+        "example": "if(ScreenImageMgr.getShowImage(\"logo\")) {\n    core.debug(\"Logo is visible\");\n} else {\n    core.debug(\"Logo is hidden or does not exist\");\n}\n\n// Toggle pattern\nScreenImageMgr.showImage(\"logo\", !ScreenImageMgr.getShowImage(\"logo\"));"
+    },
+    {
+        "name": "showImage",
+        "category": "Screen Images - Control",
+        "signature": "showImage(QString id, bool show)",
+        "description": "Shows or hides a screen image. The transition is animated over the image's fadeDuration (set at creation time via createScreenImage). When showing, opacity animates from current to maxAlpha; when hiding, from current to 0.",
+        "parameters": [
+            {
+                "name": "id",
+                "type": "QString",
+                "description": "Unique identifier of the image",
+                "required": true
+            },
+            {
+                "name": "show",
+                "type": "bool",
+                "description": "true to fade in, false to fade out",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Uses the fadeDuration set at creation. If the image is already in the target state, this is a no-op."
+        },
+        "example": "// Hide then re-show with fade\nScreenImageMgr.showImage(\"logo\", false);\ncore.wait(2);\nScreenImageMgr.showImage(\"logo\", true);\n\n// Toggle\nScreenImageMgr.showImage(\"logo\", !ScreenImageMgr.getShowImage(\"logo\"));\n\n// Sequence: fade in three images one after another\nvar ids = [\"img1\", \"img2\", \"img3\"];\nfor (var i = 0; i < ids.length; i++) {\n    ScreenImageMgr.createScreenImage(ids[i], ids[i] + \".png\", 100, 100 + i*120, 1.0, false, 1.0, 0.5);\n}\nfor (var i = 0; i < ids.length; i++) {\n    ScreenImageMgr.showImage(ids[i], true);\n    core.wait(1);\n}\n\n// Cleanup\nfor (var i = 0; i < ids.length; i++) {\n    ScreenImageMgr.deleteImage(ids[i]);\n}"
+    },
+    {
+        "name": "getImageWidth",
+        "category": "Screen Images - Information",
+        "signature": "int getImageWidth(QString id)",
+        "description": "Returns the width in pixels of the loaded QPixmap — i.e., the original image size AFTER the initial `scale` passed to createScreenImage. IMPORTANT: This does NOT reflect later setImageScale() calls (those change the graphics-item transformation, not the pixmap). To get the on-screen width, multiply this value by getImageScaleX().",
+        "parameters": [
+            {
+                "name": "id",
+                "type": "QString",
+                "description": "Unique identifier of the image",
+                "required": true
+            }
+        ],
+        "returnType": "int",
+        "returnDescription": "Loaded pixmap width in pixels (after initial createScreenImage scale), or 0 if the image does not exist",
+        "type": "slot",
+        "readOnly": true,
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Does NOT include setImageScale() transformations. Use getImageWidth() * getImageScaleX() for on-screen width."
+        },
+        "example": "var baseW = ScreenImageMgr.getImageWidth(\"logo\");\nvar sx = ScreenImageMgr.getImageScaleX(\"logo\");\nvar onScreenW = baseW * sx;\ncore.debug(\"Base: \" + baseW + \" px, scale X: \" + sx + \", on-screen: \" + onScreenW + \" px\");\n\n// Center based on base size (only correct if scaleX == 1)\nvar sw = core.getScreenWidth();\nvar sh = core.getScreenHeight();\nvar h = ScreenImageMgr.getImageHeight(\"logo\");\nScreenImageMgr.setImageXY(\"logo\", (sw - baseW*sx)/2, (sh - h*ScreenImageMgr.getImageScaleY(\"logo\"))/2, 0);"
+    },
+    {
+        "name": "getImageHeight",
+        "category": "Screen Images - Information",
+        "signature": "int getImageHeight(QString id)",
+        "description": "Returns the height in pixels of the loaded QPixmap — i.e., the original image size AFTER the initial `scale` passed to createScreenImage. IMPORTANT: This does NOT reflect later setImageScale() calls. To get the on-screen height, multiply by getImageScaleY().",
+        "parameters": [
+            {
+                "name": "id",
+                "type": "QString",
+                "description": "Unique identifier of the image",
+                "required": true
+            }
+        ],
+        "returnType": "int",
+        "returnDescription": "Loaded pixmap height in pixels, or 0 if the image does not exist",
+        "type": "slot",
+        "readOnly": true,
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Does NOT include setImageScale() transformations."
+        },
+        "example": "var baseH = ScreenImageMgr.getImageHeight(\"logo\");\nvar sy = ScreenImageMgr.getImageScaleY(\"logo\");\ncore.debug(\"Base height: \" + baseH + \", on-screen: \" + (baseH * sy) + \" px\");"
+    },
+    {
+        "name": "getImageScaleX",
+        "category": "Screen Images - Information",
+        "signature": "qreal getImageScaleX(QString id)",
+        "description": "Returns the TARGET horizontal scale factor of the image (the final value of the current scale animation), not the instantaneous scale during an animation. Returns 1.0 if setImageScale has never been called (the initial `scale` in createScreenImage is applied to the pixmap and does not affect this value).",
+        "parameters": [
+            {
+                "name": "id",
+                "type": "QString",
+                "description": "Unique identifier of the image",
+                "required": true
+            }
+        ],
+        "returnType": "qreal",
+        "returnDescription": "Target horizontal scale factor (1.0 = original loaded size), or 0 if image not found",
+        "type": "slot",
+        "readOnly": true,
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "Returns scaleAnim->horizontalScaleAt(1.) — the TARGET of the animation, not the current interpolated value. Returns 1.0 initially, even if createScreenImage was called with scale ≠ 1."
+        },
+        "example": "var sx = ScreenImageMgr.getImageScaleX(\"logo\");\nvar sy = ScreenImageMgr.getImageScaleY(\"logo\");\ncore.debug(\"Target scale: \" + sx + \" x \" + sy);\n\nif (Math.abs(sx - sy) > 0.01) {\n    core.debug(\"Image is non-uniformly scaled\");\n}\n\n// NOTE: during an animation this returns the target, not the current value\nScreenImageMgr.setImageScale(\"logo\", 2.0, 2.0, 3.0);\ncore.debug(\"During animation, target is already: \" + ScreenImageMgr.getImageScaleX(\"logo\"));"
+    },
+    {
+        "name": "getImageScaleY",
+        "category": "Screen Images - Information",
+        "signature": "qreal getImageScaleY(QString id)",
+        "description": "Returns the TARGET vertical scale factor of the image (the final value of the current scale animation), not the instantaneous scale during an animation. Returns 1.0 if setImageScale has never been called.",
+        "parameters": [
+            {
+                "name": "id",
+                "type": "QString",
+                "description": "Unique identifier of the image",
+                "required": true
+            }
+        ],
+        "returnType": "qreal",
+        "returnDescription": "Target vertical scale factor (1.0 = original loaded size), or 0 if image not found",
+        "type": "slot",
+        "readOnly": true,
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "Returns the target of the scale animation, not the current interpolated value."
+        },
+        "example": "var sy = ScreenImageMgr.getImageScaleY(\"logo\");\ncore.debug(\"Target vertical scale: \" + sy);"
+    },
+    {
+        "name": "setImageScale",
+        "category": "Screen Images - Animation",
+        "signature": "setImageScale(QString id, qreal scaleX, qreal scaleY, float duration=0.0)",
+        "description": "Sets the target scale of an image (relative to the loaded pixmap size), optionally animating the resize over a duration. This changes the QGraphicsItem transformation, NOT the underlying pixmap — getImageWidth()/getImageHeight() are unaffected. The pixmap is set to SmoothTransformation for the animation.\n\nIMPORTANT: Even with duration=0, the animation runs for at least 0.001s (internally clamped) — 'instant' is not truly possible. For a snap change, use a very small duration like 0.001.",
+        "parameters": [
+            {
+                "name": "id",
+                "type": "QString",
+                "description": "Unique identifier of the image",
+                "required": true
+            },
+            {
+                "name": "scaleX",
+                "type": "qreal",
+                "description": "Target horizontal scale factor relative to loaded size (1.0 = original, >1 = enlarge, <1 = shrink)",
+                "required": true
+            },
+            {
+                "name": "scaleY",
+                "type": "qreal",
+                "description": "Target vertical scale factor relative to loaded size",
+                "required": true
+            },
+            {
+                "name": "duration",
+                "type": "float",
+                "description": "Animation duration in seconds. Internally clamped to ≥ 0.001s — 'instant' is not possible.",
+                "required": false,
+                "default": "0.0"
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "Uses QGraphicsItemAnimation with SmoothTransformation. Clamps duration to ≥ 0.001s. getImageScaleX/Y return the TARGET immediately, not the current value."
+        },
+        "example": "// Zoom in over 2 seconds\nScreenImageMgr.setImageScale(\"logo\", 2.0, 2.0, 2.0);\ncore.wait(2);\n\n// Shrink back over 1 second\nScreenImageMgr.setImageScale(\"logo\", 0.5, 0.5, 1.0);\ncore.wait(1);\n\n// Stretch horizontally only\nScreenImageMgr.setImageScale(\"logo\", 3.0, 1.0, 1.5);\ncore.wait(1.5);\n\n// Read back the TARGET (not the current value during animation)\ncore.debug(\"Target scale X: \" + ScreenImageMgr.getImageScaleX(\"logo\"));\n\n// Reset\nScreenImageMgr.setImageScale(\"logo\", 1.0, 1.0, 0);"
+    },
+    {
+        "name": "setImageAlpha",
+        "category": "Screen Images - Appearance",
+        "signature": "setImageAlpha(QString id, qreal alpha)",
+        "description": "Sets the maximum opacity (alpha) of a screen image. This value determines the opacity when the image is fully visible. The change is applied INSTANTLY — the fade animation is stopped and the new opacity is set immediately. The fadeDuration only affects show/hide transitions via showImage(), not alpha changes.\n\nValues: 0.0 = fully transparent, 1.0 = fully opaque.\n\nNOTE: The .hpp documentation for the underlying C++ method has the values inverted (it says 1.0=transparent, 0.0=opaque), but the actual implementation follows Qt's setOpacity: 0=transparent, 1=opaque. This documentation follows the actual behavior.",
+        "parameters": [
+            {
+                "name": "id",
+                "type": "QString",
+                "description": "Unique identifier of the image",
+                "required": true
+            },
+            {
+                "name": "alpha",
+                "type": "qreal",
+                "description": "New maximum opacity (0.0 = fully transparent, 1.0 = fully opaque)",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Applied instantly (fadeTimer is stopped). Only effective when the image is currently visible (getShowImage() returns true) — if hidden, maxAlpha is stored and applied on next showImage(true)."
+        },
+        "example": "// Make semi-transparent\nScreenImageMgr.setImageAlpha(\"logo\", 0.6);\n\n// Fully opaque\nScreenImageMgr.setImageAlpha(\"logo\", 1.0);\n\n// Manual fade-out by stepping alpha (NOTE: instant steps, not smooth)\nfunction fadeOutManual(id, steps, stepDelay) {\n    for (var i = steps; i >= 0; i--) {\n        ScreenImageMgr.setImageAlpha(id, i / steps);\n        core.wait(stepDelay);\n    }\n    ScreenImageMgr.showImage(id, false);\n}\nfadeOutManual(\"logo\", 10, 0.1);\n\n// Restore\nScreenImageMgr.setImageAlpha(\"logo\", 1.0);"
+    },
+    {
+        "name": "setImageXY",
+        "category": "Screen Images - Animation",
+        "signature": "setImageXY(QString id, qreal x, qreal y, float duration=0.0)",
+        "description": "Moves an image to a specific screen position. Coordinates are measured in pixels from the top-left corner. With duration=0 (default) the move is instant; with duration>0 the movement is animated linearly over the given time.",
+        "parameters": [
+            {
+                "name": "id",
+                "type": "QString",
+                "description": "Unique identifier of the image",
+                "required": true
+            },
+            {
+                "name": "x",
+                "type": "qreal",
+                "description": "New X-coordinate in pixels from the left edge",
+                "required": true
+            },
+            {
+                "name": "y",
+                "type": "qreal",
+                "description": "New Y-coordinate in pixels from the top edge",
+                "required": true
+            },
+            {
+                "name": "duration",
+                "type": "float",
+                "description": "Animation duration in seconds (0 = instant, default 0)",
+                "required": false,
+                "default": "0.0"
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Uses QTimeLine with linear easing. Duration=0 is truly instant (no clamping). If the target position equals the current position, the call is a no-op."
+        },
+        "example": "// Instant move to top-right\nvar sw = core.getScreenWidth();\nvar w = ScreenImageMgr.getImageWidth(\"logo\") * ScreenImageMgr.getImageScaleX(\"logo\");\nScreenImageMgr.setImageXY(\"logo\", sw - w - 10, 10, 0);\n\n// Animated move to center over 1 second\nvar sh = core.getScreenHeight();\nvar h = ScreenImageMgr.getImageHeight(\"logo\") * ScreenImageMgr.getImageScaleY(\"logo\");\nScreenImageMgr.setImageXY(\"logo\", (sw - w)/2, (sh - h)/2, 1.0);\ncore.wait(1);\n\n// Slide-in from right\nScreenImageMgr.setImageXY(\"logo\", sw, 100, 0);\nScreenImageMgr.showImage(\"logo\", true);\nScreenImageMgr.setImageXY(\"logo\", sw - w - 10, 100, 1.5);"
+    },
+    {
+        "name": "addImageXY",
+        "category": "Screen Images - Animation",
+        "signature": "addImageXY(QString id, qreal x, qreal y, float duration=0.0)",
+        "description": "Moves an image by adding offsets to its current position. Equivalent to setImageXY(currentX + x, currentY + y, duration). Useful for relative movements without needing to track absolute positions.\n\nNOTE: If called during an ongoing setImageXY animation, the offset is applied to the CURRENT instantaneous position (tex->pos()), not the target. This may lead to cumulative drift if called rapidly during an animation.",
+        "parameters": [
+            {
+                "name": "id",
+                "type": "QString",
+                "description": "Unique identifier of the image",
+                "required": true
+            },
+            {
+                "name": "x",
+                "type": "qreal",
+                "description": "X offset in pixels (positive = right, negative = left)",
+                "required": true
+            },
+            {
+                "name": "y",
+                "type": "qreal",
+                "description": "Y offset in pixels (positive = down, negative = up)",
+                "required": true
+            },
+            {
+                "name": "duration",
+                "type": "float",
+                "description": "Animation duration in seconds (0 = instant)",
+                "required": false,
+                "default": "0.0"
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Internally calls setXY(currentPos + offset). During an ongoing animation, currentPos is the instantaneous position, not the target."
+        },
+        "example": "// Move 100 px right and 50 px down over 1s\nScreenImageMgr.addImageXY(\"logo\", 100, 50, 1.0);\ncore.wait(1);\n\n// Simple bounce loop\nfor (var i = 0; i < 3; i++) {\n    ScreenImageMgr.addImageXY(\"logo\", 0, -20, 0.2);\n    core.wait(0.2);\n    ScreenImageMgr.addImageXY(\"logo\", 0, 20, 0.2);\n    core.wait(0.2);\n}\n\n// Return to approximate original position (relative undo)\nScreenImageMgr.addImageXY(\"logo\", -100, -50, 1.0);"
+    },
+    {
+        "name": "deleteImage",
+        "category": "Screen Images - Control",
+        "signature": "deleteImage(QString id)",
+        "description": "Permanently removes a screen image from memory. The image will no longer be displayed or accessible. Any pending animations are stopped and all QTimeLine/QGraphicsItemAnimation objects are deleted.",
+        "parameters": [
+            {
+                "name": "id",
+                "type": "QString",
+                "description": "Unique identifier of the image to delete",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "No-op if the ID does not exist (no exception, no warning)."
+        },
+        "example": "// Delete one image\nScreenImageMgr.deleteImage(\"logo\");\n\n// Safe delete (check first)\nvar ids = ScreenImageMgr.getAllImageIDs();\nif (ids.indexOf(\"logo\") >= 0) {\n    ScreenImageMgr.deleteImage(\"logo\");\n}\n\n// Delete all images whose ID starts with 'temp_'\nvar all = ScreenImageMgr.getAllImageIDs();\nfor (var i = 0; i < all.length; i++) {\n    if (all[i].indexOf(\"temp_\") === 0) {\n        ScreenImageMgr.deleteImage(all[i]);\n    }\n}"
+    },
+    {
+        "name": "deleteAllImages",
+        "category": "Screen Images - Control",
+        "signature": "deleteAllImages()",
+        "description": "Removes all screen images from memory. Useful for cleanup at the end of a presentation or before loading a new set of images.",
+        "parameters": [],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "Does not save anything (no immediateSave). After this call, getAllImageIDs() returns an empty list."
+        },
+        "example": "// Count before cleanup\nvar count = ScreenImageMgr.getAllImageIDs().length;\ncore.debug(\"Images before: \" + count);\n\n// Clear everything\nScreenImageMgr.deleteAllImages();\ncore.debug(\"Images after: \" + ScreenImageMgr.getAllImageIDs().length);\n\n// Typical end-of-script cleanup\nfunction runSlideshow() {\n    ScreenImageMgr.createScreenImage(\"slide1\", \"slide1.png\", 0, 0);\n    core.wait(3);\n    ScreenImageMgr.createScreenImage(\"slide2\", \"slide2.png\", 0, 0);\n    core.wait(3);\n    ScreenImageMgr.deleteAllImages();\n}\nrunSlideshow();"
+    },
+    {
+        "name": "getAllImageIDs",
+        "category": "Screen Images - Information",
+        "signature": "QStringList getAllImageIDs()",
+        "description": "Returns a list of all currently loaded image identifiers, sorted alphabetically (QMap key order). Useful for iterating, existence checks, or debugging.",
+        "parameters": [],
+        "returnType": "QStringList",
+        "returnDescription": "Alphabetically sorted list of image IDs (empty if no images loaded)",
+        "type": "slot",
+        "readOnly": true,
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "QMap::keys() returns keys in sorted order (by QString locale-independent comparison)."
+        },
+        "example": "var ids = ScreenImageMgr.getAllImageIDs();\ncore.debug(\"Total images: \" + ids.length);\nfor (var i = 0; i < ids.length; i++) {\n    core.debug((i+1) + \". \" + ids[i]);\n}\n\n// Hide all images\nfor (var i = 0; i < ids.length; i++) {\n    ScreenImageMgr.showImage(ids[i], false);\n}\n\n// Existence check helper\nfunction imageExists(id) {\n    return ScreenImageMgr.getAllImageIDs().indexOf(id) >= 0;\n}\nif (imageExists(\"logo\")) {\n    core.debug(\"Logo exists\");\n} else {\n    ScreenImageMgr.createScreenImage(\"logo\", \"logo.png\", 10, 10);\n}"
+    }
+]

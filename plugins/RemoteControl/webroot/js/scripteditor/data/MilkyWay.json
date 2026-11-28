@@ -1,0 +1,170 @@
+[
+    {
+        "name": "setFlagShow",
+        "category": "Milky Way - Core",
+        "signature": "void setFlagShow(bool visible)",
+        "description": "Shows or hides the Milky Way galaxy rendering. When enabled, the band of our galaxy appears across the sky. The transition is animated via a linear fader, not instantaneous.",
+        "parameters": [
+            {
+                "name": "visible",
+                "type": "bool",
+                "description": "true to show the Milky Way, false to hide it.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "This is a public slot and is safe to use. Backed by Q_PROPERTY 'MilkyWay.flagMilkyWayDisplayed' (READ getFlagShow, WRITE setFlagShow, NOTIFY milkyWayDisplayedChanged)."
+        },
+        "example": "// Enable Milky Way rendering\nMilkyWay.setFlagShow(true);\n\n// Disable Milky Way rendering\nMilkyWay.setFlagShow(false);\n\n// Toggle current state\nMilkyWay.setFlagShow(!MilkyWay.getFlagShow());"
+    },
+    {
+        "name": "getFlagShow",
+        "category": "Milky Way - Core",
+        "signature": "bool getFlagShow()",
+        "description": "Returns whether the Milky Way galaxy is currently displayed.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if the Milky Way is visible, false otherwise.",
+        "type": "slot",
+        "readOnly": true,
+        "alternative": "Use core.getStelProperty('MilkyWay.flagMilkyWayDisplayed') to read the same value.",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "This is a public slot and is safe to use. Backed by Q_PROPERTY 'MilkyWay.flagMilkyWayDisplayed'."
+        },
+        "example": "if (MilkyWay.getFlagShow()) {\n    core.debug(\"Milky Way is visible\");\n}\n\n// Alternative read via Q_PROPERTY\nvar visible = core.getStelProperty('MilkyWay.flagMilkyWayDisplayed');\ncore.debug(\"Visible (property): \" + visible);"
+    },
+    {
+        "name": "setIntensity",
+        "category": "Milky Way - Appearance",
+        "signature": "void setIntensity(double intensity)",
+        "description": "Sets the intensity (brightness) of the Milky Way rendering. Values above 1.0 make it appear brighter, below 1.0 dimmer. Note: no clamping is applied internally; values outside 0.0-2.0 are accepted but may produce unrealistic results.",
+        "parameters": [
+            {
+                "name": "intensity",
+                "type": "double",
+                "description": "Intensity value (recommended range: 0.0 to 2.0, default: 1.0).",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "This is a public slot and is safe to use. Backed by Q_PROPERTY 'MilkyWay.intensity' (READ getIntensity, WRITE setIntensity, NOTIFY intensityChanged)."
+        },
+        "example": "// Make the Milky Way brighter\nMilkyWay.setIntensity(1.5);\n\n// Make the Milky Way dimmer\nMilkyWay.setIntensity(0.5);\n\n// Reset to default\nMilkyWay.setIntensity(1.0);\n\n// Read current value\nvar intensity = MilkyWay.getIntensity();\ncore.debug(\"Intensity: \" + intensity);"
+    },
+    {
+        "name": "getIntensity",
+        "category": "Milky Way - Appearance",
+        "signature": "double getIntensity()",
+        "description": "Returns the current intensity (brightness) of the Milky Way rendering.",
+        "parameters": [],
+        "returnType": "double",
+        "returnDescription": "Intensity value (default: 1.0).",
+        "type": "slot",
+        "readOnly": true,
+        "alternative": "Use core.getStelProperty('MilkyWay.intensity') to read the same value.",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.10.0",
+            "notes": "This is a public slot and is safe to use. Backed by Q_PROPERTY 'MilkyWay.intensity'."
+        },
+        "example": "var intensity = MilkyWay.getIntensity();\ncore.debug(\"Milky Way intensity: \" + intensity);"
+    },
+    {
+        "name": "setSaturation",
+        "category": "Milky Way - Appearance",
+        "signature": "void setSaturation(double saturation)",
+        "description": "Sets the color saturation of the Milky Way rendering. 0.0 = grayscale, 1.0 = natural colors, >1.0 = more vivid colors. Note: no clamping is applied internally; negative values are accepted but produce inverted colors.",
+        "parameters": [
+            {
+                "name": "saturation",
+                "type": "double",
+                "description": "Saturation value (recommended range: 0.0 to 2.0, default: 1.0).",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "This is a public slot and is safe to use. Backed by Q_PROPERTY 'MilkyWay.saturation' (READ getSaturation, WRITE setSaturation, NOTIFY saturationChanged)."
+        },
+        "example": "// Make Milky Way colors more vivid\nMilkyWay.setSaturation(1.3);\n\n// Make Milky Way black and white\nMilkyWay.setSaturation(0.0);\n\n// Reset to natural colors\nMilkyWay.setSaturation(1.0);\n\n// Read current value\nvar saturation = MilkyWay.getSaturation();\ncore.debug(\"Saturation: \" + saturation);"
+    },
+    {
+        "name": "getSaturation",
+        "category": "Milky Way - Appearance",
+        "signature": "double getSaturation()",
+        "description": "Returns the color saturation of the Milky Way rendering.",
+        "parameters": [],
+        "returnType": "double",
+        "returnDescription": "Saturation value (default: 1.0).",
+        "type": "slot",
+        "readOnly": true,
+        "alternative": "Use core.getStelProperty('MilkyWay.saturation') to read the same value.",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.15.0",
+            "notes": "This is a public slot and is safe to use. Backed by Q_PROPERTY 'MilkyWay.saturation'."
+        },
+        "example": "var saturation = MilkyWay.getSaturation();\ncore.debug(\"Milky Way saturation: \" + saturation);"
+    },
+    {
+        "name": "setColor",
+        "category": "Milky Way - Appearance",
+        "signature": "void setColor(Vec3f color)",
+        "description": "Sets the color tint for the Milky Way rendering. White (1, 1, 1) gives natural colors; other values create color casts. The color is further modulated by intensity, light pollution, and atmospheric extinction. Note: no per-component clamping is applied internally.",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector with values between 0.0 and 1.0.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "This is a public slot and is safe to use. Backed by Q_PROPERTY 'MilkyWay.color' (READ getColor, WRITE setColor, NOTIFY colorChanged). IMPORTANT: when reading via core.getStelProperty('MilkyWay.color'), the returned QVariant wraps a Vec3f and MUST be wrapped in new Color(...) before accessing components."
+        },
+        "example": "// Method 1: core.vec3f literal (both Qt5 and Qt6)\nMilkyWay.setColor(core.vec3f(1.0, 1.0, 1.0));   // natural white\nMilkyWay.setColor(core.vec3f(1.0, 0.95, 0.9));  // subtle warm tint\nMilkyWay.setColor(core.vec3f(0.85, 0.9, 1.0));  // bluish tint\n\n// Method 2: Color wrapper (recommended when computing/modifying)\nvar c = new Color(0.7, 1.0, 0.8);\nMilkyWay.setColor(c.toVec3f());\n\n// Read back safely\nvar current = new Color(MilkyWay.getColor());\ncore.debug(\"Milky Way color: \" + current.toRGBString());"
+    },
+    {
+        "name": "getColor",
+        "category": "Milky Way - Appearance",
+        "signature": "Vec3f getColor()",
+        "description": "Returns the current color tint applied to the Milky Way rendering. The result is a Vec3f and MUST be wrapped in new Color(...) before reading its components on Qt6.",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "returnDescription": "RGB color vector (wrap in new Color(...) to inspect).",
+        "type": "slot",
+        "readOnly": true,
+        "alternative": "Use core.getStelProperty('MilkyWay.color') but wrap the returned QVariant in new Color(...) before reading components.",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "This is a public slot and is safe to use. Backed by Q_PROPERTY 'MilkyWay.color'."
+        },
+        "example": "var color = new Color(MilkyWay.getColor());\ncore.debug(\"Milky Way color: \" + color.toRGBString());\ncore.debug(\"Hex: \" + color.toHex());\n\nvar r = color.getR();\nvar g = color.getG();\nvar b = color.getB();\ncore.debug(\"R=\" + r + \" G=\" + g + \" B=\" + b);\n\n// Alternative via Q_PROPERTY (wrap in Color!)\nvar propColor = new Color(core.getStelProperty('MilkyWay.color'));\ncore.debug(\"Color via property: \" + propColor.toRGBString());"
+    }
+]

@@ -1,0 +1,116 @@
+% ============================================================================
+% File: plg_remotecontrol_scriptsgenerator.tex
+% Part of Stellarium User Guide
+% Description: Scripts Generator Web Interface documentation
+% ============================================================================
+
+\subsection{Scripts Generator Interface}
+\label{sec:plugins:RemoteControl:scriptsgenerator}
+
+\noindent The Scripts Generator tab\newFeature{26.4} provides a powerful, visual interface for exploring Stellarium's vast catalogs and generating custom tour scripts. Unlike the Sky Culture tab, which focuses on cultural constellations and star names, this tab allows you to browse \emph{any} object type loaded by Stellarium (such as Messier objects, variable stars, asteroids, or nebulae), filter them by visibility, group them, and generate ready-to-run Stellarium Scripts (\file{.ssc}) in just a few clicks.
+
+The interface is divided into three logical steps: selecting an object type, picking specific objects, and configuring the script options.
+
+\begin{figure}[H]\centering
+\includegraphics[width=\textwidth]{Rc-sg-types.png}
+\caption{The Scripts Generator tab: Select Object Type (Step 1).}
+\label{fig:ScriptsGen:Types}
+\end{figure}
+
+% ----------------------------------------------------------------------------
+\subsubsection{Step 1: Select Object Type}
+\label{sec:ScriptsGen:SelectType}
+
+The top section displays a grid of buttons, each representing a different category of celestial objects. These types are pulled directly from Stellarium and include standard catalogs (e.g., \emph{Messier Catalogue}, \emph{NGC}, \emph{Index Catalogue}), object classifications (e.g., \emph{Galaxies}, \emph{Nebulae}, \emph{Supernovae}), and Solar System objects (e.g., \emph{Planets}, \emph{Asteroids}, \emph{Comets}).
+
+A checkbox labeled \checkbox{Use translated names (i18n)} allows you to toggle between the current UI language and English. The number in parentheses next to the title shows the total number of object types available.
+
+Clicking a type immediately fetches the corresponding list of objects from Stellarium, which populates the next section.
+
+% ----------------------------------------------------------------------------
+\subsubsection{Step 2: Select Objects}
+\label{sec:ScriptsGen:SelectObjects}
+
+This section displays all objects belonging to the type selected in Step 1. They are rendered as clickable buttons in a grid.
+
+\begin{figure}[H]\centering
+\includegraphics[width=\textwidth]{Rc-sg-objects.png}
+\caption{The Scripts Generator tab: Select Objects (Step 2).}
+\label{fig:ScriptsGen:Objects}
+\end{figure}
+
+\paragraph{Control Panel}
+Just above the object buttons, a control panel provides tools to filter and navigate the list:
+
+\begin{description}
+\item[Visibility Control] The \checkbox{Visible above horizon only} filter hides objects that are currently below the horizon. Because the sky rotates, this list is refreshed automatically at your chosen interval (60 seconds, 180 seconds, 7 minutes) or manually by clicking the \button{Refresh} button. A live snapshot displays the observer's location, UTC time, and Julian Day (JDay) of the last update, ensuring you know exactly what sky is being shown. The counter (e.g., \texttt{63/110}) indicates how many objects are currently visible.
+\item[Order and filter] Allows you to sort the objects by Name, Constellation, or Magnitude (Brightness). This is particularly useful for selecting the brightest objects or grouping them by their parent constellation. Click \button{Apply} to refresh the list.
+\item[Navigation Control] The \emph{Navigation FOV} spinner sets the zoom level applied when you click an object button, allowing for immediate visual inspection in the main Stellarium view.
+\item[Multi-Select] When enabled, clicking an object button does not navigate to it; instead, it adds or removes it from your selection set. A counter (e.g., \texttt{6 selected}) tracks your choices. In this mode, you can use \button{Select All} and \button{Clear} to quickly manage the list. If the list is grouped by Constellation, a \button{Select All} / \button{Deselect All} button will appear next to each group header.
+\end{description}
+
+\paragraph{Visual Navigation and Toggle}
+When Multi-Select is \emph{disabled}, clicking an object button will center the Stellarium view on that object and zoom to the selected FOV. The button becomes highlighted (\textit{active}). Clicking the \emph{same} button again will deactivate it, clearing the selection and automatically zooming out to restore the previous view.
+
+\begin{figure}[H]\centering
+\includegraphics[width=\textwidth]{Rc-sg-grouped-selected.png}
+\caption{The Scripts Generator interface with visibility filter, grouping by constellation, and multi-select active.}
+\label{fig:ScriptsGen:GroupedSelected}
+\end{figure}
+
+% ----------------------------------------------------------------------------
+\subsubsection{Step 3: Script Options and Generation}
+\label{sec:ScriptsGen:ScriptOptions}
+
+The bottom section allows you to customize the generated tour script.
+
+\begin{figure}[H]\centering
+\includegraphics[width=\textwidth]{Rc-sg-script-options.png}
+\caption{The Scripts Generator tab: Script Options (Step 3) and preview area.}
+\label{fig:ScriptsGen:Options}
+\end{figure}
+
+\paragraph{General Options}
+\begin{itemize}
+\item \textbf{Duration:} Time in seconds to spend on each object.
+\item \textbf{Zoom FOV:} The field of view used when zoomed in on an object.
+\item \textbf{Overview FOV:} The field of view used between objects.
+\item \textbf{Labels and Markers:} Toggles whether the object names and selection markers are shown during the tour.
+\item \textbf{Lock Observer:} If checked, the generated script will embed your current location and simulation time, ensuring the script always reproduces the exact same sky regardless of when or where it is run.
+\item \textbf{Use save\_state.inc:} If checked, the script uses Stellarium's standard include file to save and restore a wide range of display settings. If unchecked, it saves only the specific variables it changes, making the script self-contained.
+\end{itemize}
+
+\paragraph{Object Highlighting}
+The Scripts Generator can draw a marker and/or a label next to each object visited during the tour. Enable the \checkbox{Draw marker on selected object} and/or \checkbox{Show label next to selected object} checkboxes to activate these features.
+
+For each one, you can customize:
+\begin{itemize}
+    \item \textbf{Marker:} shape (12 shapes: circle, cross, target, gear, etc.), color, size.
+    \item \textbf{Label:} color, font size, position (North, South, East, West, or diagonal), and connector type (none, line, or text-only).
+\end{itemize}
+
+Two additional options control the persistence of these markers and labels:
+\begin{itemize}
+    \item \checkbox{Keep marker after leaving object} — if checked, the marker is not removed when the tour moves to the next object. It remains on screen for the rest of the tour.
+    \item \checkbox{Keep label after leaving object} — same behavior for the label.
+\end{itemize}
+
+Finally, the \checkbox{Delete all markers at end} and \checkbox{Delete all labels at end} checkboxes control whether the script calls \texttt{MarkerMgr.deleteAllMarkers()} and \texttt{LabelMgr.deleteAllLabels()} at the very end of the tour. This is useful when you have chosen to keep the markers/labels during the tour but want to start the next presentation with a clean slate.
+
+\paragraph{Deep Sky Options}
+This section appears only when a compatible object type (like a Messier catalogue or a nebula catalog) is selected. It provides specialized controls for deep-sky objects:
+\begin{itemize}
+\item \textbf{Show DSO hints:} Enables the visual markers for deep-sky objects. The \emph{Hints amount} and \emph{Labels amount} sliders control their density.
+\item \textbf{Enable DSS background survey:} Activates Stellarium's Digitized Sky Survey (DSS) background. The script will show the real photographic background for each object. The \emph{DSS visibility time} specifies how long to wait for the image to load before moving on.
+\item \textbf{Catalog Filters:} You can choose to show only \emph{Messier objects} or limit the view to \emph{Standard catalogs} (Messier, NGC, IC).
+\end{itemize}
+
+\paragraph{Generating and Using the Script}
+Once your options are set, click \button{Generate Script}. The generated \file{.ssc} code will appear in the preview area at the bottom.
+
+You can then use the three action buttons:
+\begin{description}
+\item[Copy] Copies the entire script to your clipboard.
+\item[Send to Script Editor] Transfers the script directly to the Script Editor tab. You can then review, modify, and run the tour by pressing the \button{Run} button in the editor.
+\item[Generate Script] (Re-generates the preview if you change options).
+\end{description}

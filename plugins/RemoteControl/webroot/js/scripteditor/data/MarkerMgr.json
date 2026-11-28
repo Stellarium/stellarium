@@ -1,0 +1,321 @@
+[
+    {
+        "name": "markerObject",
+        "category": "Markers - Object Markers",
+        "signature": "int markerObject(QString objectName, bool visible, QString mtype, QString color, float size, bool autoDelete, int autoDeleteTimeoutMs)",
+        "description": "Creates a visual marker attached to a celestial object (star, planet, galaxy, etc.) using an HTML-like color string. The marker follows the object as it moves across the sky, making it useful for highlighting specific objects in presentations or educational content. The objectName is the English name of the object as returned by StelObjectMgr::searchByName.\n\nNote: The marker is placed on the object's J2000 coordinates at creation time and will undergo aberration correction (the object position is fetched with aberration temporarily disabled, then the marker itself is drawn with aberration enabled).",
+        "parameters": [
+            {
+                "name": "objectName",
+                "type": "QString",
+                "description": "English name of the celestial object (e.g., 'Mars', 'Sirius', 'Andromeda Galaxy').",
+                "required": true
+            },
+            {
+                "name": "visible",
+                "type": "bool",
+                "description": "true to start visible, false to start hidden.",
+                "required": false,
+                "default": "true"
+            },
+            {
+                "name": "mtype",
+                "type": "QString",
+                "description": "Marker shape. Options: 'cross', 'circle', 'ellipse', 'square', 'dotted-circle', 'circled-cross' (or 'circled-plus'), 'dashed-square', 'squared-dotted-circle' (or 'squared-dcircle'), 'crossed-circle', 'target', 'gear', 'disk'.",
+                "required": false,
+                "default": "\"cross\""
+            },
+            {
+                "name": "color",
+                "type": "QString",
+                "description": "HTML-like color (e.g., '#ffff00' for yellow, '#ff6666' for light red).",
+                "required": false,
+                "default": "\"#ffff66\""
+            },
+            {
+                "name": "size",
+                "type": "float",
+                "description": "Marker size in pixels (recommended: 4-20).",
+                "required": false,
+                "default": "6.0"
+            },
+            {
+                "name": "autoDelete",
+                "type": "bool",
+                "description": "If true, the marker is deleted after being displayed once.",
+                "required": false,
+                "default": "false"
+            },
+            {
+                "name": "autoDeleteTimeoutMs",
+                "type": "int",
+                "description": "If non-zero, the marker is automatically deleted after this many milliseconds.",
+                "required": false,
+                "default": "0"
+            }
+        ],
+        "returnType": "int",
+        "returnDescription": "Unique marker ID, or -1 if the object was not found.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.19.0",
+            "notes": "MarkerMgr introduced in Stellarium 0.19.0; works on all versions since."
+        },
+        "example": "// Create a yellow cross marker on Mars\nvar marsMarker = MarkerMgr.markerObject(\"Mars\", true, \"cross\", \"#ffff00\", 8);\ncore.debug(\"Mars marker ID: \" + marsMarker);\n\n// Create a red circled-cross marker on Betelgeuse\nvar betelgeuseMarker = MarkerMgr.markerObject(\"Betelgeuse\", true, \"circled-cross\", \"#ff4444\", 10);\n\n// Create a temporary target marker that auto-deletes after 5 seconds\nvar tempMarker = MarkerMgr.markerObject(\"Jupiter\", true, \"target\", \"#ffaa00\", 12, false, 5000);\n\n// Hide the marker later\nMarkerMgr.setMarkerShow(marsMarker, false);"
+    },
+    {
+        "name": "markerEquatorial",
+        "category": "Markers - Equatorial Markers",
+        "signature": "int markerEquatorial(QString RA, QString Dec, bool j2000epoch, bool visible, QString mtype, QString color, float size, bool autoDelete, int autoDeleteTimeoutMs, bool withAberration)",
+        "description": "Creates a visual marker fixed to a specific Equatorial coordinate (Right Ascension/Declination) using an HTML-like color string. The marker stays at that celestial position, useful for marking deep-sky object positions, exoplanet host stars, or other points of interest. The RA and Dec strings are parsed by StelUtils::getDecAngle and accept hms/dms forms such as '5h10m31s' and '25d30m30s'.\n\nNote: The marker is placed at the converted J2000 coordinates at creation time. It is not possible to create a marker in the coordinates of the current date that changes with precession.",
+        "parameters": [
+            {
+                "name": "RA",
+                "type": "QString",
+                "description": "Right Ascension as a string (e.g., '5h10m31s', '2h30m').",
+                "required": true
+            },
+            {
+                "name": "Dec",
+                "type": "QString",
+                "description": "Declination as a string (e.g., '25d30m30s', '-45d', '+30d15m').",
+                "required": true
+            },
+            {
+                "name": "j2000epoch",
+                "type": "bool",
+                "description": "If true, coordinates are treated as J2000.0 epoch. If false, they represent the equinox of the current date and will be converted to J2000 at creation time.",
+                "required": false,
+                "default": "true"
+            },
+            {
+                "name": "visible",
+                "type": "bool",
+                "description": "true to start visible, false to start hidden.",
+                "required": false,
+                "default": "true"
+            },
+            {
+                "name": "mtype",
+                "type": "QString",
+                "description": "Marker shape (see markerObject for options).",
+                "required": false,
+                "default": "\"cross\""
+            },
+            {
+                "name": "color",
+                "type": "QString",
+                "description": "HTML-like color.",
+                "required": false,
+                "default": "\"#ffff66\""
+            },
+            {
+                "name": "size",
+                "type": "float",
+                "description": "Marker size in pixels.",
+                "required": false,
+                "default": "6.0"
+            },
+            {
+                "name": "autoDelete",
+                "type": "bool",
+                "description": "If true, the marker is deleted after being displayed once.",
+                "required": false,
+                "default": "false"
+            },
+            {
+                "name": "autoDeleteTimeoutMs",
+                "type": "int",
+                "description": "If non-zero, the marker is automatically deleted after this many milliseconds.",
+                "required": false,
+                "default": "0"
+            },
+            {
+                "name": "withAberration",
+                "type": "bool",
+                "description": "If true, coordinates are subject to aberration correction. If false, they represent strict frame coordinates.",
+                "required": false,
+                "default": "true"
+            }
+        ],
+        "returnType": "int",
+        "returnDescription": "Unique marker ID, or -1 if creation failed.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.19.0",
+            "notes": "MarkerMgr introduced in Stellarium 0.19.0; works on all versions since."
+        },
+        "example": "// Mark the position of the Orion Nebula (M42) with a circle\nvar m42Marker = MarkerMgr.markerEquatorial(\"5h35m17s\", \"-5d23m28s\", true, true, \"circle\", \"#ff8888\", 10);\n\n// Mark the position of the North Celestial Pole with a target\nvar ncpMarker = MarkerMgr.markerEquatorial(\"0h\", \"90d\", true, true, \"target\", \"#ffffff\", 12);\n\n// Mark the galactic center with a gear shape\nvar galacticCenter = MarkerMgr.markerEquatorial(\"17h45m40s\", \"-29d00m28s\", true, true, \"gear\", \"#ffcc66\", 14);\n\n// Create a precise marker without aberration\nvar preciseMarker = MarkerMgr.markerEquatorial(\"6h45m09s\", \"-16d43m06s\", true, true, \"cross\", \"#66ff66\", 6, false, 0, false);"
+    },
+    {
+        "name": "markerHorizon",
+        "category": "Markers - Horizon Markers",
+        "signature": "int markerHorizon(QString az, QString alt, bool visible, QString mtype, QString color, float size, bool autoDelete, int autoDeleteTimeoutMs)",
+        "description": "Creates a visual marker fixed to a specific Altitude/Azimuth (horizontal) coordinate using an HTML-like color string. The marker stays at that compass direction and altitude as the sky rotates, useful for marking landscape features, cardinal directions, or telescope pointing targets. The az and alt strings are parsed by StelUtils::getDecAngle and accept dms forms such as '125d30m30s' and '25d30m30s'.",
+        "parameters": [
+            {
+                "name": "az",
+                "type": "QString",
+                "description": "Azimuth angle. '0d' = North, '90d' = East, '180d' = South, '270d' = West. (e.g., '125d30m30s').",
+                "required": true
+            },
+            {
+                "name": "alt",
+                "type": "QString",
+                "description": "Altitude angle. '0d' = horizon, '90d' = zenith. (e.g., '25d30m30s').",
+                "required": true
+            },
+            {
+                "name": "visible",
+                "type": "bool",
+                "description": "true to start visible, false to start hidden.",
+                "required": false,
+                "default": "true"
+            },
+            {
+                "name": "mtype",
+                "type": "QString",
+                "description": "Marker shape (see markerObject for options).",
+                "required": false,
+                "default": "\"cross\""
+            },
+            {
+                "name": "color",
+                "type": "QString",
+                "description": "HTML-like color.",
+                "required": false,
+                "default": "\"#ffff66\""
+            },
+            {
+                "name": "size",
+                "type": "float",
+                "description": "Marker size in pixels.",
+                "required": false,
+                "default": "6.0"
+            },
+            {
+                "name": "autoDelete",
+                "type": "bool",
+                "description": "If true, the marker is deleted after being displayed once.",
+                "required": false,
+                "default": "false"
+            },
+            {
+                "name": "autoDeleteTimeoutMs",
+                "type": "int",
+                "description": "If non-zero, the marker is automatically deleted after this many milliseconds.",
+                "required": false,
+                "default": "0"
+            }
+        ],
+        "returnType": "int",
+        "returnDescription": "Unique marker ID, or -1 if creation failed.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.19.0",
+            "notes": "MarkerMgr introduced in Stellarium 0.19.0; works on all versions since."
+        },
+        "example": "// Mark the four cardinal points on the horizon\nvar northMarker = MarkerMgr.markerHorizon(\"0d\", \"0d\", true, \"target\", \"#ff0000\", 10);\nvar eastMarker = MarkerMgr.markerHorizon(\"90d\", \"0d\", true, \"circle\", \"#00ff00\", 8);\nvar southMarker = MarkerMgr.markerHorizon(\"180d\", \"0d\", true, \"square\", \"#ffff00\", 8);\nvar westMarker = MarkerMgr.markerHorizon(\"270d\", \"0d\", true, \"cross\", \"#ff8800\", 8);\n\n// Mark the zenith (point directly overhead)\nvar zenithMarker = MarkerMgr.markerHorizon(\"0d\", \"90d\", true, \"circled-cross\", \"#ffffff\", 12);\n\n// Mark a specific mountain peak at 30 degrees altitude toward the southwest\nvar mountainMarker = MarkerMgr.markerHorizon(\"225d\", \"30d\", true, \"dotted-circle\", \"#88ff88\", 9);\n\n// Create a temporary marker that disappears after 10 seconds\nvar tempMarker = MarkerMgr.markerHorizon(\"180d\", \"45d\", true, \"cross\", \"#ffaa66\", 7, false, 10000);"
+    },
+    {
+        "name": "getMarkerShow",
+        "category": "Markers - Control",
+        "signature": "bool getMarkerShow(int id)",
+        "description": "Returns whether a marker is currently visible. Returns false if the marker ID does not exist.",
+        "parameters": [
+            {
+                "name": "id",
+                "type": "int",
+                "description": "The unique marker ID returned by one of the marker creation functions.",
+                "required": true
+            }
+        ],
+        "returnType": "bool",
+        "returnDescription": "true if the marker is visible, false if hidden or the marker does not exist.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.19.0",
+            "notes": "MarkerMgr introduced in Stellarium 0.19.0; works on all versions since."
+        },
+        "example": "var markerId = MarkerMgr.markerObject(\"Mars\", true);\n\nif (MarkerMgr.getMarkerShow(markerId)) {\n    core.debug(\"Marker is visible\");\n} else {\n    core.debug(\"Marker is hidden or does not exist\");\n}\n\n// Check for an invalid ID (returns false)\nif (!MarkerMgr.getMarkerShow(99999)) {\n    core.debug(\"Marker ID 99999 does not exist\");\n}"
+    },
+    {
+        "name": "setMarkerShow",
+        "category": "Markers - Control",
+        "signature": "void setMarkerShow(int id, bool show)",
+        "description": "Shows or hides an existing marker. The marker fades in/out smoothly. Silently ignored if the ID does not exist.",
+        "parameters": [
+            {
+                "name": "id",
+                "type": "int",
+                "description": "The unique marker ID returned by one of the marker creation functions.",
+                "required": true
+            },
+            {
+                "name": "show",
+                "type": "bool",
+                "description": "true to show the marker, false to hide it.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none; silently ignored if the ID does not exist",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.19.0",
+            "notes": "MarkerMgr introduced in Stellarium 0.19.0; works on all versions since."
+        },
+        "example": "var markerId = MarkerMgr.markerObject(\"Jupiter\", true);\n\n// Hide the marker\nMarkerMgr.setMarkerShow(markerId, false);\n\n// Show it again later\nMarkerMgr.setMarkerShow(markerId, true);"
+    },
+    {
+        "name": "deleteMarker",
+        "category": "Markers - Control",
+        "signature": "void deleteMarker(int id)",
+        "description": "Permanently deletes a marker. The marker is removed from memory and will no longer be displayed. Silently ignored if the ID does not exist.",
+        "parameters": [
+            {
+                "name": "id",
+                "type": "int",
+                "description": "The unique marker ID to delete.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none; silently ignored if the ID does not exist",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.19.0",
+            "notes": "MarkerMgr introduced in Stellarium 0.19.0; works on all versions since."
+        },
+        "example": "var tempMarker = MarkerMgr.markerObject(\"Saturn\", true);\n\n// Delete the marker when it's no longer needed\nMarkerMgr.deleteMarker(tempMarker);\ncore.debug(\"Marker deleted\");\n\n// Deleting an invalid ID does nothing\nMarkerMgr.deleteMarker(99999);"
+    },
+    {
+        "name": "deleteAllMarkers",
+        "category": "Markers - Control",
+        "signature": "int deleteAllMarkers()",
+        "description": "Deletes all custom markers created by the script. Useful for cleaning up at the end of a presentation or script.",
+        "parameters": [],
+        "returnType": "int",
+        "returnDescription": "The number of markers that were deleted.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.19.0",
+            "notes": "MarkerMgr introduced in Stellarium 0.19.0; works on all versions since."
+        },
+        "example": "// Create multiple markers\nvar marker1 = MarkerMgr.markerObject(\"Mars\", true);\nvar marker2 = MarkerMgr.markerObject(\"Jupiter\", true);\n\n// Clean up all markers at the end\nvar deletedCount = MarkerMgr.deleteAllMarkers();\ncore.debug(\"Deleted \" + deletedCount + \" markers\");"
+    }
+]

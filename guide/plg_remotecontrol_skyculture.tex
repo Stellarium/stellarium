@@ -1,0 +1,139 @@
+% ============================================================================
+% File: plg_remotecontrol_skyculture.tex
+% Part of Stellarium User Guide
+% Description: Sky Culture Web Interface documentation
+% ============================================================================
+
+\subsection{Sky Culture Interface}
+\label{sec:plugins:RemoteControl:skyculture}
+
+\noindent The Sky Culture tab\newFeature{26.4} provides a complete, interactive interface for exploring the constellations, asterisms, zodiac signs, lunar mansions, and named stars of any sky culture installed in Stellarium. It replaces the simple culture dropdown of previous versions with a multi-panel tabbed view, live filtering, multi-select capabilities, and a tour script generator.
+
+\begin{figure}[H]\centering
+\includegraphics[width=\textwidth]{Rc-skyculture-overview.png}
+\caption{The Sky Culture tab showing the constellation patterns and its control panel.}
+\label{fig:SkyCulture:Overview}
+\end{figure}
+
+% ----------------------------------------------------------------------------
+\subsubsection{Culture Selection}
+\label{sec:SkyCulture:CultureSelection}
+
+The top section displays a grid of buttons, one for each available sky culture (usually more than 50). The currently active culture is highlighted. Clicking a different culture immediately updates the entire interface: it changes the active sky culture in Stellarium, reloads the lists of constellations, asterisms, stars, and artwork, and updates the description panel. The number in parentheses next to the tab title indicates the total number of available cultures.
+
+% ----------------------------------------------------------------------------
+\subsubsection{Pattern Tabs}
+\label{sec:SkyCulture:PatternTabs}
+
+The central part of the interface is organized into seven tabs, each representing a different type of cultural data:
+\begin{description}
+\item[Constellations] Lists all constellations defined in the current culture. The number in parentheses shows the total count.
+\item[Asterisms] Lists traditional star patterns (like the Big Dipper or the Summer Triangle). Ray helpers (auxiliary lines) are excluded from this list.
+\item[Zodiac Signs] Shows the 12 signs of the zodiac, if defined by the culture.
+\item[Lunar Mansions] Shows the lunar stations (mansions), used in Arabic, Chinese, Indian, and other traditions. The tab shows a dash (--) if the culture does not define them.
+\item[Notable Stars] Lists named stars and celestial objects. The counter shows the total number. This tab includes advanced sorting and filtering (see below).
+\item[Description] Displays the culture's HTML description in an embedded frame. A button at the top of this panel allows switching the text direction between Left-to-Right (LTR) and Right-to-Left (RTL). \textbf{Note:} This direction toggle applies globally; changing it here will also affect the description panels in other tabs (like Scenery3D or Projection).
+\item[Artwork] Shows constellation illustrations from the current culture. Clicking an image will navigate the sky view to that constellation and isolate it. The image gallery is responsive and displays the first row of images immediately, loading others as needed.
+\end{description}
+
+\begin{figure}[H]\centering
+\includegraphics[width=\textwidth]{Rc-skyculture-stars.png}
+\caption{The Notable Stars tab, showing live filtering, sorting, multi-select, and the Stars Tour Generator.}
+\label{fig:SkyCulture:Stars}
+\end{figure}
+
+\begin{figure}[H]\centering
+\includegraphics[width=\textwidth]{Rc-skyculture-artwork.png}
+\caption{The Artwork tab displaying constellation illustrations for the Modern culture.}
+\label{fig:SkyCulture:Artwork}
+\end{figure}
+
+% ----------------------------------------------------------------------------
+\subsubsection{Control Panel}
+\label{sec:SkyCulture:ControlPanel}
+
+Above the pattern buttons, every tab (except Zodiac) features a control panel that adapts to the data type. It is divided into three main groups:
+
+\begin{description}
+\item[Visibility Control] Contains the \checkbox{Visible above horizon only} filter, the refresh interval selector, and a live snapshot of the observer's location and time (see the next section).
+\item[Order and Filter] Provides options to change how names are displayed (Default, Translated, or Cultural) and how the list is sorted. For example, the Stars tab allows sorting by Name, Constellation, Magnitude, or Object Type. Clicking \button{Apply} re-renders the list according to the selected criteria.
+\item[Navigation Control] Includes the \emph{Navigation FOV} spinner, which sets the zoom level applied when you click an object. It also includes the \checkbox{Multi-Select} toggle and, for constellations, the \checkbox{Navigate without Isolation} option.
+\end{description}
+
+\begin{figure}[H]\centering
+\includegraphics[width=\textwidth]{Rc-skyculture-visibility.png}
+\caption{Displaying (36 visible/88 total) constellations currently above the observer's horizon .}
+\label{fig:SkyCulture:Visibility}
+\end{figure}
+
+A \button{Controls Help} button in the top right corner opens a detailed pop-up explaining every option available in the current tab.
+
+% ----------------------------------------------------------------------------
+\subsubsection{Visibility Filter and Live Snapshot}
+\label{sec:SkyCulture:VisibilityFilter}
+
+When \checkbox{Visible above horizon only} is enabled, the list is filtered to show only objects currently above the observer's horizon. Because the sky rotates, this data requires periodic refreshing:
+\begin{itemize}
+\item The interval can be set to 60 seconds, 180 seconds, 7 minutes, or Manual.
+\item In Manual mode, the list updates only when you click the \button{Refresh} button.
+\item A countdown timer displays the time remaining until the next automatic refresh.
+\item The item counter shows the number of visible objects versus the total (e.g., \texttt{38/88}).
+\end{itemize}
+
+Below the controls, a \textbf{live snapshot} displays the exact conditions at the time of the last refresh:
+\begin{itemize}
+\item The observer's location (name, latitude, longitude).
+\item The current UTC time and Julian Day (JDay).
+\end{itemize}
+This snapshot is shared across all tabs that have the visibility filter active, ensuring that the displayed data is always consistent.
+
+% ----------------------------------------------------------------------------
+\subsubsection{Multi-Select Mode}
+\label{sec:SkyCulture:MultiSelect}
+
+The \checkbox{Multi-Select} option allows you to build a custom list of objects for a tour. When enabled:
+\begin{itemize}
+\item Normal navigation is temporarily disabled. Clicking a button no longer moves the view; it simply selects or deselects the object.
+\item Selected objects are highlighted with a distinct color, and a counter shows how many have been picked (e.g., \texttt{9 selected}).
+\item In the Stars tab, when sorting by Constellation or Type, a \button{Select All} button appears next to each group header.
+\end{itemize}
+The generated tour script will contain exactly the selected objects, in the order they appear on screen.
+
+% ----------------------------------------------------------------------------
+\subsubsection{Tour Script Generation}
+\label{sec:SkyCulture:TourGenerator}
+
+Each tab includes a dedicated tour generator at the bottom. These generators create a Stellarium Script (\file{.ssc}) that automates a guided tour through the objects. The generated script is automatically inserted into the \textbf{Script Editor} tab (under \menu{Actions and scripts}), where it can be reviewed, modified, and executed.
+
+The generator offers extensive customization:
+\begin{description}
+\item[Timing and Framing] Set the duration per object, the zoomed-in Field of View (FOV), and the overview FOV between objects.
+\item[Appearance] Customize colors, line thicknesses, and fade durations for lines, labels, boundaries, and constellation artwork.
+\item[Save State] The \checkbox{Use save\_state.inc} option changes how the script restores your display settings. When checked, it uses Stellarium's standard include file to save and restore a broad range of settings (grids, landscapes, etc.). When unchecked, it manages only the settings modified by the tour, making the script self-contained.
+\end{description}
+
+A \button{Tour Generator Help} button explains these options in detail. The Constellations tab uniquely offers two variants:
+\begin{itemize}
+\item \textbf{Dynamic:} Fetches the constellation list at runtime from Stellarium. It is portable and works with any culture, but always includes \emph{all} constellations, ignoring Multi-Select.
+\item \textbf{Static:} Embeds the constellation names as a hard-coded array. It respects Multi-Select and the visibility filter, and is self-contained.
+\end{itemize}
+
+When the visibility filter is active, the generated script automatically includes a "locked snapshot" block. This locks the observer location and simulation time to the values shown in the control panel, ensuring that running the script later reproduces the exact same sky.
+
+% ----------------------------------------------------------------------------
+\subsubsection{Options Panel}
+\label{sec:SkyCulture:OptionsPanel}
+
+The bottom section of the tab contains general display options that apply directly to the Stellarium rendering engine. These include:
+\begin{itemize}
+\item Checkboxes to toggle labels, lines, boundaries, and artwork for constellations, asterisms, zodiac signs, lunar stations, and hulls.
+\item Sliders to adjust the thickness and color of these elements.
+\item Fade duration settings for smooth transitions.
+\item Global toggles for short labels, constellation isolation, and picking only the last selected object.
+\end{itemize}
+
+% ----------------------------------------------------------------------------
+\subsubsection{Synchronization}
+\label{sec:SkyCulture:Sync}
+
+The Sky Culture interface is fully synchronized with the rest of Stellarium. If you select an object using the search panel, a gamepad, or another tab, the corresponding button in the Sky Culture tab will be highlighted automatically. Conversely, clicking a constellation here will update the artwork panel and any other component that reflects the current selection.

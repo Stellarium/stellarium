@@ -1,0 +1,93 @@
+[
+    {
+        "name": "getFlagSelectedObjectPointer",
+        "category": "StelObjectMgr - Display",
+        "signature": "bool getFlagSelectedObjectPointer()",
+        "description": "Returns whether a pointer (crosshair/marker) is drawn over the currently selected object. When enabled, a visual indicator appears around the selected celestial object to highlight it on screen.\n\nThis setting persists across Stellarium sessions and is saved in the configuration file.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if the selected object pointer is visible, false otherwise",
+        "type": "slot",
+        "example": "var isVisible = StelObjectMgr.getFlagSelectedObjectPointer();\ncore.debug('Selected object pointer visible: ' + isVisible);\n\nif(!isVisible) {\n    StelObjectMgr.setFlagSelectedObjectPointer(true);\n    core.debug('Selection pointer enabled');\n}"
+    },
+    {
+        "name": "setFlagSelectedObjectPointer",
+        "category": "StelObjectMgr - Display",
+        "signature": "void setFlagSelectedObjectPointer(bool enabled)",
+        "description": "Sets whether a pointer (crosshair/marker) is drawn over the currently selected object. This controls the visibility of the visual selection indicator that highlights the selected celestial object on screen.\n\nWhen enabled, a crosshair or circle marker appears around the selected object. This is useful for presentations, tutorials, or when you need to clearly identify which object is currently selected.\n\nThis setting persists across Stellarium sessions and is saved in the configuration file.",
+        "parameters": [
+            {
+                "name": "enabled",
+                "type": "bool",
+                "description": "true to show the selection pointer, false to hide it",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "// Enable the selection pointer\nStelObjectMgr.setFlagSelectedObjectPointer(true);\n\n// Disable the selection pointer\nStelObjectMgr.setFlagSelectedObjectPointer(false);\n\n// Toggle the pointer visibility\nvar current = StelObjectMgr.getFlagSelectedObjectPointer();\nStelObjectMgr.setFlagSelectedObjectPointer(!current);"
+    },
+    {
+        "name": "addToExtraInfoString",
+        "category": "StelObjectMgr - Extra Info",
+        "signature": "void addToExtraInfoString(int flags, QString text)",
+        "description": "Appends additional text to the information panel for the currently selected object. This is useful for plugins or scripts that want to display custom information (debug data, astronomical calculations, cultural notes, etc.) without modifying Stellarium's core code.\n\n**Important - InfoStringGroup Flags (use these numeric values):**\n\n| Flag | Value | Description |\n|------|-------|-------------|\n| Name | 1 | Object name |\n| CatalogNumber | 2 | Catalog numbers |\n| Magnitude | 4 | Magnitude data |\n| RaDecJ2000 | 8 | J2000 equatorial position |\n| RaDecOfDate | 16 | Equatorial position of date |\n| AltAzi | 32 | Altitude/Azimuth position |\n| Distance | 64 | Distance information |\n| Elongation | 128 | Elongation, phase angle |\n| Size | 256 | Angular size |\n| Velocity | 512 | Velocity information |\n| ProperMotion | 1024 | Annual proper motion |\n| Extra | 2048 | General extra fields |\n| HourAngle | 4096 | Hour angle + Declination |\n| AbsoluteMagnitude | 8192 | Absolute magnitude |\n| GalacticCoord | 16384 | Galactic coordinates |\n| SupergalacticCoord | 32768 | Supergalactic coordinates |\n| OtherCoord | 65536 | Additional coordinates |\n| ObjectType | 131072 | Type of object |\n| EclipticCoordJ2000 | 262144 | Ecliptic J2000 position |\n| EclipticCoordOfDate | 524288 | Ecliptic position of date |\n| IAUConstellation | 1048576 | IAU constellation code |\n| CulturalConstellation | 2097152 | Culture-specific constellation |\n| SiderealTime | 4194304 | Sidereal time |\n| RTSTime | 8388608 | Rise/Transit/Set times |\n| SolarLunarPosition | 16777216 | Sun/Moon horizontal positions |\n| **Script** | **33554432** | **For script-generated info** |\n| **DebugAid** | **67108864** | **For debugging information** |\n| NoFont | 134217728 | Disable font formatting |\n| PlainText | 268435456 | Strip HTML tags |\n\n**Common flag combinations:**\n- Script + DebugAid = 100663296\n- Name + Magnitude = 5\n- Extra + Script = 33556480\n\n**Note:** The text supports HTML formatting. Use `<br/>` for line breaks.",
+        "parameters": [
+            {
+                "name": "flags",
+                "type": "int",
+                "description": "InfoStringGroup flag(s) determining where the text appears",
+                "required": true
+            },
+            {
+                "name": "text",
+                "type": "QString",
+                "description": "The text to append (supports HTML formatting and line breaks)",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "var Script = 33554432;\nvar DebugAid = 67108864;\n\n// Add a simple script message\nStelObjectMgr.addToExtraInfoString(Script, \"My script is running successfully<br/>\");\n\n// Add debugging information with HTML formatting\nStelObjectMgr.addToExtraInfoString(DebugAid, \"<span style='color:#ffaa00;'>DEBUG: Custom calculation</span><br/>\");\n\n// Add to multiple flag groups\nStelObjectMgr.addToExtraInfoString(Script | DebugAid, \"This appears in both sections<br/>\");\n\n// Add astronomical calculation results\nvar altitude = 45.5;\nStelObjectMgr.addToExtraInfoString(2048, \"Custom altitude: \" + altitude + \"°<br/>\");\n\n// Clear messages later\nStelObjectMgr.removeExtraInfoStrings(Script);"
+    },
+    {
+        "name": "setExtraInfoString",
+        "category": "StelObjectMgr - Extra Info",
+        "signature": "void setExtraInfoString(int flags, QString text)",
+        "description": "Replaces (overwrites) any existing extra information text for the specified flag group. Unlike addToExtraInfoString() which appends, this function replaces all existing text for the given flags.\n\nIf an empty string is provided, it removes all text for the specified flag group.\n\n**Important flag values:**\n- Script = 33554432 (for script-generated info)\n- DebugAid = 67108864 (for debugging information)\n- Extra = 2048 (for general extra fields)\n\nSee addToExtraInfoString() for complete list of flag values.",
+        "parameters": [
+            {
+                "name": "flags",
+                "type": "int",
+                "description": "InfoStringGroup flag(s) determining where the text appears",
+                "required": true
+            },
+            {
+                "name": "text",
+                "type": "QString",
+                "description": "The text to set (supports HTML formatting). Use empty string to clear.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "var Script = 33554432;\nvar DebugAid = 67108864;\n\n// Set a debug message (replaces any existing debug messages)\nStelObjectMgr.setExtraInfoString(DebugAid, \"<span style='color:#ff0000;'>[ERROR] Calculation failed</span><br/>\");\n\n// Set script info\nStelObjectMgr.setExtraInfoString(Script, \"<b>Custom Data:</b> Temperature: 25°C<br/>\");\n\n// Clear all script messages\nStelObjectMgr.setExtraInfoString(Script, \"\");\n\n// Update a status message\nStelObjectMgr.setExtraInfoString(Script, \"Processing... \" + step + \" of \" + total);"
+    },
+    {
+        "name": "removeExtraInfoStrings",
+        "category": "StelObjectMgr - Extra Info",
+        "signature": "void removeExtraInfoStrings(int flags)",
+        "description": "Removes all extra information strings that match the specified flag group(s). This is useful for cleaning up temporary debug messages or script output when they are no longer needed.\n\n**Important flag values:**\n- Script = 33554432 (for script-generated info)\n- DebugAid = 67108864 (for debugging information)\n- Extra = 2048 (for general extra fields)\n\nYou can combine multiple flags using the | operator to remove from multiple categories at once.\n\nSee addToExtraInfoString() for complete list of flag values.",
+        "parameters": [
+            {
+                "name": "flags",
+                "type": "int",
+                "description": "InfoStringGroup flag(s) indicating which messages to remove",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "example": "var Script = 33554432;\nvar DebugAid = 67108864;\n\n// Remove all script messages only\nStelObjectMgr.removeExtraInfoStrings(Script);\n\n// Remove all debug messages only\nStelObjectMgr.removeExtraInfoStrings(DebugAid);\n\n// Remove both script AND debug messages\nStelObjectMgr.removeExtraInfoStrings(Script | DebugAid);\n\n// Remove everything (all flag types)\nvar AllFlags = 536870911;\nStelObjectMgr.removeExtraInfoStrings(AllFlags);"
+    }
+]

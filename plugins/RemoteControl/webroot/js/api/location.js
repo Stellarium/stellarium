@@ -36,12 +36,27 @@ define(["jquery", "./remotecontrol", "./updatequeue"], function($, rc, UpdateQue
         });
     }
 
-    function performNearbySearch(lat, lon, callback) {
+    /**
+     * Perform a nearby-location search around a given point on a planet.
+     *
+     * The radius may be supplied explicitly through radiusOverride.
+     * When it is omitted, the native LocationDialog policy is used:
+     * 5° for Earth, 30° for other planets.
+     *
+     * @param {number} lat - Latitude in degrees.
+     * @param {number} lon - Longitude in degrees.
+     * @param {function} callback - Receives the JSON array of location IDs.
+     * @param {number} [radiusOverride] - Optional radius in degrees.
+     */
+    function performNearbySearch(lat, lon, callback, radiusOverride) {
         //kill old XHR if running (use the same one as the string-based search)
         locSearchXHR && locSearchXHR.abort();
 
-        //replicate LocationDialog behaviour
-        var radius = lastPlanet === "Earth" ? 3 : 30;
+        // Use an explicit override when provided, otherwise fall back to
+        // the planet-based default matching the native LocationDialog.
+        var radius = (typeof radiusOverride === "number" && radiusOverride > 0)
+            ? radiusOverride
+            : (lastPlanet === "Earth" ? 5 : 30);
 
         locSearchXHR = $.ajax({
             url: "/api/locationsearch/nearby",
@@ -114,26 +129,93 @@ define(["jquery", "./remotecontrol", "./updatequeue"], function($, rc, UpdateQue
         performNearbySearch: performNearbySearch,
         performLocationSearch: performLocationSearch,
 
-        loadRegionList: function(callback) {
+        /**
+         * Load the complete list of all known locations from the server.
+         *
+         * Mirrors LocationDialog::reloadLocations() which calls
+         * StelLocationMgr::getAllMap().keys(). The server endpoint
+         * /api/location/list returns exactly those keys (location IDs).
+         *
+         * This is the counterpart of loadRegionList() / loadPlanetList()
+         * and should be used whenever the full list is needed (e.g. to
+         * pre-populate the search box with the entire catalogue, or to
+         * reset after a planet change).
+         *
+         * @param {function} callback - Receives the JSON array of location IDs.
+         * @returns {void}
+         */
+        loadAllLocations: function(callback) {
+            $.ajax({
+                url: "/api/location/list",
+                method: 'GET',
+                dataType: 'json',
+                success: callback,
+                error: function(xhr, status, errorThrown) {
+                    console.log("Error updating location list");
+                    console.log("Error: " + errorThrown.message);
+                    console.log("Status: " + status);
+                    alert(rc.tr("Could not retrieve location list"));
+                }
+            });
+        },
+
+        /**
+         * Load the list of regions from the server.
+         * The regions are filtered by the currently selected planet.
+         * If no planet is specified, all regions from all planets are returned.
+         *
+         * Each entry is a {name, name_i18n} pair, matching the native
+         * LocationDialog::populateRegionList() contract where the item
+         * data stores the original name and the display text is the
+         * translated one.
+         *
+         * @param {function} callback - Function to call with the region data on success.
+         * The callback receives the JSON response (array of region objects).
+         * @param {string} [planet] - Optional planet name to filter regions.
+         * If not provided, regions for the current planet are used.
+         * @returns {void}
+         */
+        loadRegionList: function(callback, planet) {
             $.ajax({
                 url: "/api/location/regionlist",
+                method: 'GET',
+                data: { planet: planet },
+                dataType: 'json',
                 success: callback,
                 error: function(xhr, status, errorThrown) {
                     console.log("Error updating region list");
                     console.log("Error: " + errorThrown.message);
                     console.log("Status: " + status);
-                    alert(rc.tr("Could not retrieve region list"));
+                    // Fallback: try without planet parameter (backward compatibility)
+                    $.ajax({
+                        url: "/api/location/regionlist",
+                        method: 'GET',
+                        dataType: 'json',
+                        success: callback,
+                        error: function() {
+                            alert(rc.tr("Could not retrieve region list"));
+                        }
+                    });
                 }
             });
         },
 
+        /**
+         * Load the list of planets from the server.
+         *
+         * Each entry is a {name, name_i18n} pair, matching the native
+         * LocationDialog::populatePlanetList() contract.
+         *
+         * @param {function} callback - Receives the JSON array of planet objects.
+         * @returns {void}
+         */
         loadPlanetList: function(callback) {
             $.ajax({
                 url: "/api/location/planetlist",
                 success: callback,
                 error: function(xhr, status, errorThrown) {
                     console.log("Error updating planet list");
-                    console.log("Error: " + errorThrown);
+                    console.log("Error: " + errorThrown.message);
                     console.log("Status: " + status);
                     alert(rc.tr("Could not retrieve planet list"));
                 }

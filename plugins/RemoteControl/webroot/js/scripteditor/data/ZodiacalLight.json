@@ -1,0 +1,126 @@
+[
+    {
+        "name": "setFlagShow",
+        "category": "Zodiacal Light - Core",
+        "signature": "void setFlagShow(bool visible)",
+        "description": "Shows or hides the Zodiacal Light rendering. The Zodiacal Light is a faint, diffuse glow along the ecliptic plane, caused by sunlight scattering off interplanetary dust. It is best visible after sunset or before sunrise in very dark skies.",
+        "parameters": [
+            {
+                "name": "visible",
+                "type": "bool",
+                "description": "`true` to show the Zodiacal Light, `false` to hide it.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "alternative": "Use `core.getStelProperty('ZodiacalLight.flagZodiacalLightDisplayed')` to read the current state.",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "This is a `public slot` and is safe to use. The Zodiacal Light feature was introduced in Stellarium 0.14.0."
+        },
+        "example": "// Enable Zodiacal Light rendering\nZodiacalLight.setFlagShow(true);\n\n// Disable Zodiacal Light rendering\nZodiacalLight.setFlagShow(false);\n\n// Read current state (alternative method)\nvar visible = core.getStelProperty('ZodiacalLight.flagZodiacalLightDisplayed');"
+    },
+    {
+        "name": "getFlagShow",
+        "category": "Zodiacal Light - Core",
+        "signature": "bool getFlagShow()",
+        "description": "Returns whether the Zodiacal Light is currently displayed.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "`true` if the Zodiacal Light is visible, `false` otherwise.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "if (ZodiacalLight.getFlagShow()) {\n    core.debug(\"Zodiacal Light is visible\");\n}"
+    },
+    {
+        "name": "setIntensity",
+        "category": "Zodiacal Light - Appearance",
+        "signature": "void setIntensity(double intensity)",
+        "description": "Sets the intensity (brightness) of the Zodiacal Light rendering. Values above 1.0 make it appear brighter, below 1.0 dimmer.",
+        "parameters": [
+            {
+                "name": "intensity",
+                "type": "double",
+                "description": "Intensity value (recommended: 0.0 to 2.0, default: 1.0).",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "// Make the Zodiacal Light brighter\nZodiacalLight.setIntensity(1.5);\n\n// Make the Zodiacal Light dimmer\nZodiacalLight.setIntensity(0.5);\n\n// Reset to default\nZodiacalLight.setIntensity(1.0);"
+    },
+    {
+        "name": "getIntensity",
+        "category": "Zodiacal Light - Appearance",
+        "signature": "double getIntensity()",
+        "description": "Returns the current intensity (brightness) of the Zodiacal Light rendering.",
+        "parameters": [],
+        "returnType": "double",
+        "returnDescription": "Intensity value (default: 1.0).",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "var intensity = ZodiacalLight.getIntensity();\ncore.debug(\"Zodiacal Light intensity: \" + intensity);"
+    },
+    {
+        "name": "setColor",
+        "category": "Zodiacal Light - Appearance",
+        "signature": "void setColor(Vec3f color)",
+        "description": "Sets the color tint for the Zodiacal Light rendering. White `(1, 1, 1)` gives natural colors (sunlight); other values create color casts.",
+        "parameters": [
+            {
+                "name": "color",
+                "type": "Vec3f",
+                "description": "RGB color vector with values between 0.0 and 1.0.",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "None.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "// Set Zodiacal Light to natural white\nvar white = core.vec3f(1.0, 1.0, 1.0);\nZodiacalLight.setColor(white);\n\n// Set a subtle warm tint (sunlight-like)\nvar warm = core.vec3f(1.0, 0.95, 0.9);\nZodiacalLight.setColor(warm);\n\n// Set a reddish tint\nvar reddish = core.vec3f(1.0, 0.85, 0.8);\nZodiacalLight.setColor(reddish);"
+    },
+    {
+        "name": "getColor",
+        "category": "Zodiacal Light - Appearance",
+        "signature": "Vec3f getColor()",
+        "description": "Returns the current color tint applied to the Zodiacal Light rendering.",
+        "parameters": [],
+        "returnType": "Vec3f",
+        "returnDescription": "RGB color vector.",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.14.0",
+            "notes": "This is a `public slot` and is safe to use."
+        },
+        "example": "var color = ZodiacalLight.getColor();\ncore.debug(\"Zodiacal Light color: RGB(\" + color[0] + \", \" + color[1] + \", \" + color[2] + \")\");"
+    }
+]

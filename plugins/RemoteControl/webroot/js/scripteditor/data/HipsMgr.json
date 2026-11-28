@@ -1,0 +1,101 @@
+[
+    {
+        "name": "getFlagShow",
+        "category": "HiPS Manager - Core",
+        "signature": "bool getFlagShow()",
+        "description": "Returns whether Hierarchical Progressive Survey (HiPS) images are currently displayed.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if HiPS surveys are visible, false if hidden",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.17.0",
+            "notes": "Introduced in Stellarium 0.17.0"
+        },
+        "example": "if (HipsMgr.getFlagShow()) {\n    core.debug(\"HiPS surveys are visible\");\n} else {\n    HipsMgr.setFlagShow(true);\n}"
+    },    
+    {
+        "name": "setFlagShow",
+        "category": "HiPS Manager - Core",
+        "signature": "void setFlagShow(bool visible)",
+        "description": "Shows or hides all Hierarchical Progressive Survey (HiPS) images.",
+        "parameters": [
+            {
+                "name": "visible",
+                "type": "bool",
+                "description": "true to show HiPS surveys, false to hide",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.17.0",
+            "notes": "Introduced in Stellarium 0.17.0"
+        },
+        "example": "// Enable HiPS surveys\nHipsMgr.setFlagShow(true);\n\n// Disable HiPS surveys\nHipsMgr.setFlagShow(false);"
+    },
+    {
+        "name": "loadSources",
+        "category": "HiPS Manager - Core",
+        "signature": "void loadSources()",
+        "description": "Starts loading the default HiPS survey sources from the network. This is called automatically when Stellarium starts if at least one survey was visible in the previous session. Can be called manually to force a reload of the survey list.",
+        "parameters": [],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.17.0",
+            "notes": "Introduced in Stellarium 0.17.0"
+        },
+        "example": "// Force reload of HiPS survey sources\nHipsMgr.loadSources();\ncore.debug(\"HiPS survey sources reloaded\");"
+    },
+    {
+        "name": "getFlagShowAtmosphericExtinction",
+        "category": "HiPS Manager - Core",
+        "signature": "bool getFlagShowAtmosphericExtinction()",
+        "description": "Returns whether HiPS surveys are rendered with atmospheric extinction (they fade near the horizon based on the atmosphere model).",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if atmospheric extinction is applied to HiPS images, false otherwise",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.18.0",
+            "notes": "Introduced in Stellarium 0.18.0"
+        },
+        "example": "if (HipsMgr.getFlagShowAtmosphericExtinction()) {\n    core.debug(\"HiPS images fade near the horizon\");\n}"
+    },
+    {
+        "name": "setFlagShowAtmosphericExtinction",
+        "category": "HiPS Manager - Core",
+        "signature": "void setFlagShowAtmosphericExtinction(bool b)",
+        "description": "Enables or disables atmospheric extinction for HiPS surveys. When enabled, survey images fade near the horizon according to the current atmosphere model, which produces a more realistic blend with the sky.",
+        "parameters": [
+            {
+                "name": "b",
+                "type": "bool",
+                "description": "true to enable atmospheric extinction (realistic fading), false to disable (uniform brightness)",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "returnDescription": "none",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "minVersion": "0.18.0",
+            "notes": "Introduced in Stellarium 0.18.0"
+        },
+        "example": "// Realistic view: fade HiPS images near the horizon\nHipsMgr.setFlagShowAtmosphericExtinction(true);\n\n// Uniform brightness for the entire sky\nHipsMgr.setFlagShowAtmosphericExtinction(false);"
+    }
+]

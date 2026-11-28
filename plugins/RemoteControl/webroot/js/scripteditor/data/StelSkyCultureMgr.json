@@ -1,0 +1,773 @@
+[
+    {
+        "name": "getCurrentSkyCultureEnglishName",
+        "category": "Sky Culture - Information",
+        "signature": "QString getCurrentSkyCultureEnglishName()",
+        "description": "Returns the English name of the currently active sky culture. Sky cultures define how constellations, star names, and celestial artwork are presented based on different cultural traditions (e.g., 'Western', 'Chinese', 'Egyptian').",
+        "parameters": [],
+        "returnType": "QString",
+        "returnDescription": "English name of the current sky culture",
+        "type": "slot",
+        "readOnly": true,
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "notes": "Backed by Q_PROPERTY 'currentSkyCultureID' (indirectly). Read-only getter."
+        },
+        "example": "var cultureName = StelSkyCultureMgr.getCurrentSkyCultureEnglishName();\ncore.debug('Current sky culture: ' + cultureName);"
+    },
+    {
+        "name": "getCurrentSkyCultureNameI18",
+        "category": "Sky Culture - Information",
+        "signature": "QString getCurrentSkyCultureNameI18()",
+        "description": "Returns the translated name of the currently active sky culture in the current UI language. This is the localized display name shown in the GUI.",
+        "parameters": [],
+        "returnType": "QString",
+        "returnDescription": "Translated name of the current sky culture",
+        "type": "slot",
+        "readOnly": true,
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "notes": "Uses SkyCultureDescriptionsTranslator for translation."
+        },
+        "example": "var localizedName = StelSkyCultureMgr.getCurrentSkyCultureNameI18();\ncore.debug('Localized culture name: ' + localizedName);"
+    },
+    {
+        "name": "setCurrentSkyCultureNameI18",
+        "category": "Sky Culture - Control",
+        "signature": "bool setCurrentSkyCultureNameI18(QString cultureName)",
+        "description": "Sets the current sky culture using its translated name (as displayed in the GUI). If the name matches a valid sky culture, it will be loaded and applied. Internally converts the i18n name to a directory ID via skyCultureI18ToDirectory() and calls setCurrentSkyCultureID().",
+        "parameters": [
+            {
+                "name": "cultureName",
+                "type": "QString",
+                "description": "Translated name of the sky culture to activate (e.g., 'Modern', 'Chinese', 'Egyptian')",
+                "required": true
+            }
+        ],
+        "returnType": "bool",
+        "returnDescription": "true if the sky culture was successfully changed, false otherwise",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "notes": "Calls setCurrentSkyCultureID() internally. Emits currentSkyCultureChanged and currentSkyCultureIDChanged."
+        },
+        "example": "var success = StelSkyCultureMgr.setCurrentSkyCultureNameI18('Chinese');\nif(success) {\n    core.debug('Changed to Chinese sky culture');\n} else {\n    core.debug('Failed to change sky culture');\n}\n\nvar localized = StelSkyCultureMgr.getCurrentSkyCultureNameI18();\ncore.debug('Active culture (i18n): ' + localized);"
+    },
+    {
+        "name": "getCurrentSkyCultureID",
+        "category": "Sky Culture - Information",
+        "signature": "QString getCurrentSkyCultureID()",
+        "description": "Returns the unique identifier (directory name) of the currently active sky culture. This ID corresponds to the folder name in the skycultures directory.",
+        "parameters": [],
+        "returnType": "QString",
+        "returnDescription": "Sky culture ID (e.g., 'modern', 'chinese', 'egyptian')",
+        "type": "slot",
+        "readOnly": true,
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "notes": "Backed by Q_PROPERTY 'currentSkyCultureID'. Also accessible via core.getStelProperty('StelSkyCultureMgr.currentSkyCultureID')."
+        },
+        "example": "var cultureId = StelSkyCultureMgr.getCurrentSkyCultureID();\ncore.debug('Current culture ID: ' + cultureId);\n\n// Alternative via Q_PROPERTY\nvar propId = core.getStelProperty('StelSkyCultureMgr.currentSkyCultureID');\ncore.debug('ID via property: ' + propId);"
+    },
+    {
+        "name": "setCurrentSkyCultureID",
+        "category": "Sky Culture - Control",
+        "signature": "bool setCurrentSkyCultureID(QString id)",
+        "description": "Sets the current sky culture using its unique identifier (directory name). This is the programmatic way to change sky cultures, using IDs like 'modern', 'chinese', or 'egyptian'. If the ID is invalid, the function falls back to 'modern' and returns false. Emits currentSkyCultureChanged and currentSkyCultureIDChanged.",
+        "parameters": [
+            {
+                "name": "id",
+                "type": "QString",
+                "description": "Sky culture identifier (e.g., 'modern', 'chinese', 'egyptian', 'hawaiian')",
+                "required": true
+            }
+        ],
+        "returnType": "bool",
+        "returnDescription": "true if the sky culture was successfully changed, false if the ID was invalid (falls back to 'modern')",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "notes": "Backed by Q_PROPERTY 'currentSkyCultureID'. On invalid ID: qWarning() + fallback to 'modern' + returns false. NOTE: 'western' is NOT auto-converted here — that conversion happens only in init() for the default sky culture."
+        },
+        "example": "// Valid change\nvar ok = StelSkyCultureMgr.setCurrentSkyCultureID('egyptian');\ncore.debug('Egyptian activated: ' + ok);\n\n// Invalid change — falls back to 'modern', returns false\nvar bad = StelSkyCultureMgr.setCurrentSkyCultureID('nonexistent_culture');\ncore.debug('Change failed: ' + bad);\ncore.debug('Active now: ' + StelSkyCultureMgr.getCurrentSkyCultureID());\n\n// Restore\nStelSkyCultureMgr.setCurrentSkyCultureID('modern');"
+    },
+    {
+        "name": "reloadSkyCulture",
+        "category": "Sky Culture - Control",
+        "signature": "void reloadSkyCulture()",
+        "description": "Reloads the currently active sky culture from disk. Useful after making manual changes to sky culture definition files (index.json, description.md, constellation data, or artwork). Internally re-scans the skycultures directory and re-applies the current ID.",
+        "parameters": [],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "notes": "Preserves the current sky culture ID across the reload."
+        },
+        "example": "var currentId = StelSkyCultureMgr.getCurrentSkyCultureID();\ncore.debug('Reloading: ' + currentId);\nStelSkyCultureMgr.reloadSkyCulture();\ncore.debug('Reloaded. Active ID: ' + StelSkyCultureMgr.getCurrentSkyCultureID());"
+    },
+    {
+        "name": "getCurrentSkyCultureBoundariesType",
+        "category": "Sky Culture - Information",
+        "signature": "StelSkyCulture::BoundariesType getCurrentSkyCultureBoundariesType()",
+        "description": "Returns the type of constellation boundaries used in the current sky culture. The value corresponds to the StelSkyCulture::BoundariesType enum: -1=None (no boundaries), 0=IAU (official IAU boundaries), 1=Own (custom boundaries defined by the sky culture).",
+        "parameters": [],
+        "returnType": "StelSkyCulture::BoundariesType",
+        "returnDescription": "Boundary type enum: -1=None, 0=IAU, 1=Own",
+        "type": "slot",
+        "readOnly": true,
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "notes": "Enum defined in StelSkyCulture (Q_GADGET). Read from 'edges_type' in index.json; defaults to None if not specified."
+        },
+        "example": "var boundaryType = StelSkyCultureMgr.getCurrentSkyCultureBoundariesType();\nif(boundaryType === -1) {\n    core.debug('No constellation boundaries defined (None)');\n} else if(boundaryType === 0) {\n    core.debug('Using IAU constellation boundaries');\n} else if(boundaryType === 1) {\n    core.debug('Using custom sky culture boundaries (Own)');\n} else {\n    core.debug('Unknown boundary type: ' + boundaryType);\n}"
+    },
+    {
+        "name": "getCurrentSkyCultureClassificationIdx",
+        "category": "Sky Culture - Information",
+        "signature": "StelSkyCulture::CLASSIFICATION getCurrentSkyCultureClassificationIdx()",
+        "description": "Returns the classification index of the current sky culture. Classifications indicate the nature and origin of the sky culture: 0=Incomplete, 1=Personal, 2=Traditional, 3=Ethnographic, 4=Historical, 5=Single source, 6=Comparative. The value corresponds to the StelSkyCulture::CLASSIFICATION enum.",
+        "parameters": [],
+        "returnType": "StelSkyCulture::CLASSIFICATION",
+        "returnDescription": "Classification enum (0-6): 0=Incomplete, 1=Personal, 2=Traditional, 3=Ethnographic, 4=Historical, 5=Single, 6=Comparative",
+        "type": "slot",
+        "readOnly": true,
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "notes": "Enum defined in StelSkyCulture (Q_GADGET). Read from 'classification' array in index.json; first item is used. Defaults to INCOMPLETE if not specified."
+        },
+        "example": "var classification = StelSkyCultureMgr.getCurrentSkyCultureClassificationIdx();\nvar types = ['Incomplete', 'Personal', 'Traditional', 'Ethnographic', 'Historical', 'Single source', 'Comparative'];\ncore.debug('Sky culture classification: ' + types[classification]);\n\nif(classification === 0) {\n    core.debug('WARNING: This sky culture is marked as incomplete');\n}"
+    },
+    {
+        "name": "getCurrentSkyCultureHtmlClassification",
+        "category": "Sky Culture - HTML Description",
+        "signature": "QString getCurrentSkyCultureHtmlClassification()",
+        "description": "Returns an HTML-formatted description of the current sky culture's classification, including the classification name, a localized description, and a color-coded indicator dot. Colors: green for ethnographic/historical/single/traditional, blue for comparative, yellow for personal, red for incomplete.",
+        "parameters": [],
+        "returnType": "QString",
+        "returnDescription": "HTML string describing the sky culture classification",
+        "type": "slot",
+        "readOnly": true,
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "notes": "Returns empty string if classification is undefined. Uses <dl>/<dt>/<dd> HTML structure."
+        },
+        "example": "var htmlDesc = StelSkyCultureMgr.getCurrentSkyCultureHtmlClassification();\ncore.debug('Classification HTML: ' + htmlDesc);\n// Can be displayed in a GUI dialog or info panel"
+    },
+    {
+        "name": "getCurrentSkyCultureHtmlLicense",
+        "category": "Sky Culture - HTML Description",
+        "signature": "QString getCurrentSkyCultureHtmlLicense()",
+        "description": "Returns an HTML-formatted description of the license information for the current sky culture. Handles GPL, MIT, Public Domain, Creative Commons (CC-BY, CC-BY-SA, CC-BY-ND, CC-BY-NC, CC-BY-NC-SA, CC-BY-NC-ND, CC0), and Free Art License. Color-codes: green for free licenses, yellow for ND (weak restriction), red for NC (strong restriction).",
+        "parameters": [],
+        "returnType": "QString",
+        "returnDescription": "HTML string describing the license terms",
+        "type": "slot",
+        "readOnly": true,
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "notes": "Supports single-line and multi-line license sections. Returns empty string if license section is empty."
+        },
+        "example": "var licenseHtml = StelSkyCultureMgr.getCurrentSkyCultureHtmlLicense();\nif(licenseHtml) {\n    core.output('License information: ' + licenseHtml);\n} else {\n    core.debug('No license information available');\n}"
+    },
+    {
+        "name": "getCurrentSkyCultureHtmlRegion",
+        "category": "Sky Culture - HTML Description",
+        "signature": "QString getCurrentSkyCultureHtmlRegion()",
+        "description": "Returns an HTML-formatted description of the geographical region of origin for the current sky culture. For sky cultures whose ID contains 'modern' (e.g., 'modern', 'modern_iau'), returns 'World' as the region with a special description about IAU constellations.",
+        "parameters": [],
+        "returnType": "QString",
+        "returnDescription": "HTML string describing the region of origin",
+        "type": "slot",
+        "readOnly": true,
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "notes": "Region is read from the 'region' array in index.json. For 'modern*' cultures, overridden to 'World'."
+        },
+        "example": "var regionHtml = StelSkyCultureMgr.getCurrentSkyCultureHtmlRegion();\ncore.debug('Region info: ' + regionHtml);\n\n// Check current region via the active sky culture ID\nvar id = StelSkyCultureMgr.getCurrentSkyCultureID();\ncore.debug('Is modern: ' + id.contains('modern'));"
+    },
+    {
+        "name": "getCurrentSkyCultureHtmlDescription",
+        "category": "Sky Culture - HTML Description",
+        "signature": "QString getCurrentSkyCultureHtmlDescription()",
+        "description": "Returns a complete HTML-formatted description of the current sky culture. This includes the culture name, introduction, description sections, constellation details (converted from Markdown), license information, classification, and region information. Reads description.md from the sky culture directory and converts Markdown to HTML.",
+        "parameters": [],
+        "returnType": "QString",
+        "returnDescription": "Complete HTML description of the sky culture",
+        "type": "slot",
+        "readOnly": true,
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "notes": "Returns a fallback 'No description' HTML if description.md is missing. Appends license, classification, and region HTML blocks."
+        },
+        "example": "var fullDescription = StelSkyCultureMgr.getCurrentSkyCultureHtmlDescription();\ncore.debug('Full description (first 200 chars): ' + fullDescription.substring(0, 200));\n// Can be displayed in a dialog or info panel"
+    },
+    {
+        "name": "getCurrentSkyCultureNarration",
+        "category": "Sky Culture - Narration",
+        "signature": "QString getCurrentSkyCultureNarration()",
+        "description": "Returns a plain text narration of the current sky culture suitable for text-to-speech. This includes the culture name and introduction text, but EXCLUDES sections starting from '## Constellations' (constellation texts are narrated individually when selected) and excludes references/authors/license sections.",
+        "parameters": [],
+        "returnType": "QString",
+        "returnDescription": "Plain text narration of the sky culture",
+        "type": "slot",
+        "readOnly": true,
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "notes": "Truncates markdown at '## Constellations'. Uses SkyCultureDescriptionsTranslator for translation."
+        },
+        "example": "var narration = StelSkyCultureMgr.getCurrentSkyCultureNarration();\ncore.debug('Narration (first 200 chars): ' + narration.substring(0, 200));\n// core.say(narration); // if speech output is available"
+    },
+    {
+        "name": "getDefaultSkyCultureID",
+        "category": "Sky Culture - Configuration",
+        "signature": "QString getDefaultSkyCultureID()",
+        "description": "Returns the default sky culture ID as configured in Stellarium's settings (localization/sky_culture). This is the sky culture that will be loaded when the application starts.",
+        "parameters": [],
+        "returnType": "QString",
+        "returnDescription": "Default sky culture ID (e.g., 'modern')",
+        "type": "slot",
+        "readOnly": true,
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "notes": "Backed by Q_PROPERTY 'defaultSkyCultureID'. Read from settings key 'localization/sky_culture' (default: 'modern'). NOTE: 'western' is auto-converted to 'modern' during init() only."
+        },
+        "example": "var defaultId = StelSkyCultureMgr.getDefaultSkyCultureID();\ncore.debug('Default sky culture: ' + defaultId);\n\n// Compare with current\nvar currentId = StelSkyCultureMgr.getCurrentSkyCultureID();\ncore.debug('Current vs Default: ' + currentId + ' / ' + defaultId);"
+    },
+    {
+        "name": "setDefaultSkyCultureID",
+        "category": "Sky Culture - Configuration",
+        "signature": "bool setDefaultSkyCultureID(QString id)",
+        "description": "Sets the default sky culture ID that will be used when Stellarium starts. This setting is saved to the configuration file (localization/sky_culture) immediately by the C++ implementation — no additional save call is needed. If the ID is invalid, the function returns false and does not change the setting.",
+        "parameters": [
+            {
+                "name": "id",
+                "type": "QString",
+                "description": "Sky culture identifier to set as default (e.g., 'modern', 'chinese', 'egyptian')",
+                "required": true
+            }
+        ],
+        "returnType": "bool",
+        "returnDescription": "true if the default was successfully set, false if the ID is invalid",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "notes": "Backed by Q_PROPERTY 'defaultSkyCultureID'. Saves to QSettings('localization/sky_culture') internally. Does NOT change the CURRENT sky culture — use setCurrentSkyCultureID() for that. Emits defaultSkyCultureIDChanged."
+        },
+        "example": "// Set default for next startup\nvar success = StelSkyCultureMgr.setDefaultSkyCultureID('modern');\nif(success) {\n    core.debug('Default sky culture set to modern (saved automatically)');\n} else {\n    core.debug('Failed — invalid sky culture ID');\n}\n\n// Invalid case — returns false, no change\nvar bad = StelSkyCultureMgr.setDefaultSkyCultureID('does_not_exist');\ncore.debug('Invalid set returned: ' + bad);\ncore.debug('Default is still: ' + StelSkyCultureMgr.getDefaultSkyCultureID());"
+    },
+    {
+        "name": "getSkyCultureListEnglish",
+        "category": "Sky Culture - Lists",
+        "signature": "QStringList getSkyCultureListEnglish()",
+        "description": "Returns a list of all available sky culture names in English. The list order follows the internal QMap ordering (alphabetical by directory ID, not by English name).",
+        "parameters": [],
+        "returnType": "QStringList",
+        "returnDescription": "List of English sky culture names",
+        "type": "slot",
+        "readOnly": true,
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "notes": "Iterates dirToNameEnglish QMap in key order (directory ID). For alphabetically sorted I18N names, use getSkyCultureListI18()."
+        },
+        "example": "var cultures = StelSkyCultureMgr.getSkyCultureListEnglish();\ncore.debug('Available sky cultures: ' + cultures.length);\nfor (var i = 0; i < cultures.length; i++) {\n    core.debug('  ' + (i+1) + '. ' + cultures[i]);\n}"
+    },
+    {
+        "name": "getSkyCultureListI18",
+        "category": "Sky Culture - Lists",
+        "signature": "QStringList getSkyCultureListI18()",
+        "description": "Returns a list of all available sky culture names translated to the current UI language, SORTED alphabetically using locale-aware comparison (unlike getSkyCultureListEnglish which follows directory order).",
+        "parameters": [],
+        "returnType": "QStringList",
+        "returnDescription": "Sorted list of translated sky culture names",
+        "type": "slot",
+        "readOnly": true,
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "notes": "Sorted via QString::localeAwareCompare. Intended for GUI use."
+        },
+        "example": "var cultures = StelSkyCultureMgr.getSkyCultureListI18();\ncore.debug('Localized culture names (sorted):');\nfor (var i = 0; i < cultures.length; i++) {\n    core.debug('  ' + (i+1) + '. ' + cultures[i]);\n}"
+    },
+    {
+        "name": "getSkyCultureRegionMapI18",
+        "category": "Sky Culture - Lists",
+        "signature": "QMultiMap<QString, QString> getSkyCultureRegionMapI18()",
+        "description": "Returns a multimap from translated sky culture names to their geographical regions (UN M49 geoscheme). A sky culture may belong to multiple regions, hence QMultiMap. The legacy region key 'Southern America' is automatically corrected to 'South America' with a warning.",
+        "parameters": [],
+        "returnType": "QMultiMap<QString, QString>",
+        "returnDescription": "Multimap of translated culture name → region name",
+        "type": "slot",
+        "readOnly": true,
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "notes": "QMultiMap may be limited in QJSEngine; access via iteration is recommended. Legacy 'Southern America' → 'South America'."
+        },
+        "example": "// NOTE: QMultiMap support in JS may vary; use with caution on Qt6\nvar regionMap = StelSkyCultureMgr.getSkyCultureRegionMapI18();\ncore.debug('Region map retrieved. Type: ' + typeof regionMap);\n// Prefer setCurrentSkyCultureID() for actual switching"
+    },
+    {
+        "name": "getSkyCultureTimeLimitMapI18",
+        "category": "Sky Culture - Lists",
+        "signature": "QMap<QString, QPair<int, int>> getSkyCultureTimeLimitMapI18()",
+        "description": "Returns a map from translated sky culture names to their time limits (beginYear, endYear). The time span is derived from territory.geojson polygons. Special sentinel values: beginTime = -100000 means 'unknown/irrelevant', endTime = 9146 means 'present/∞'.",
+        "parameters": [],
+        "returnType": "QMap<QString, QPair<int, int>>",
+        "returnDescription": "Map of translated culture name → (beginYear, endYear)",
+        "type": "slot",
+        "readOnly": true,
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "notes": "Sentinels: unknownBeginTime = -100000, presentEndTime = 9146. QMap/QPair conversion may be limited in QJSEngine."
+        },
+        "example": "// NOTE: QMap<QString, QPair<int,int>> may not convert cleanly in QJSEngine\nvar timeMap = StelSkyCultureMgr.getSkyCultureTimeLimitMapI18();\ncore.debug('Time limit map retrieved. Type: ' + typeof timeMap);\n// Sentinels: -100000 = unknown, 9146 = present"
+    },
+    {
+        "name": "getSkyCultureListIDs",
+        "category": "Sky Culture - Lists",
+        "signature": "QStringList getSkyCultureListIDs()",
+        "description": "Returns a list of all available sky culture IDs (directory names). These are the values accepted by setCurrentSkyCultureID().",
+        "parameters": [],
+        "returnType": "QStringList",
+        "returnDescription": "List of sky culture directory IDs",
+        "type": "slot",
+        "readOnly": true,
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "notes": "Returns QMap keys in internal order."
+        },
+        "example": "var ids = StelSkyCultureMgr.getSkyCultureListIDs();\ncore.debug('Available IDs (' + ids.length + '):');\nfor (var i = 0; i < ids.length; i++) {\n    core.debug('  ' + ids[i]);\n}\n\n// Use one to switch\nif (ids.indexOf('egyptian') >= 0) {\n    StelSkyCultureMgr.setCurrentSkyCultureID('egyptian');\n}"
+    },
+    {
+        "name": "getDirToNameMap",
+        "category": "Sky Culture - Lists",
+        "signature": "QMap<QString, StelSkyCulture> getDirToNameMap()",
+        "description": "Returns the internal map from sky culture directory IDs to full StelSkyCulture objects (containing id, path, englishName, license, region, time span, constellations, boundaries, asterisms, classification, names, etc.). WARNING: StelSkyCulture is a Q_GADGET, not Q_DECLARE_METATYPE — conversion to a usable JS object may be limited or unavailable on Qt6/QJSEngine.",
+        "parameters": [],
+        "returnType": "QMap<QString, StelSkyCulture>",
+        "returnDescription": "Map of directory ID → StelSkyCulture gadget (limited JS usability)",
+        "type": "slot",
+        "readOnly": true,
+        "compatibility": {
+            "qt5": true,
+            "qt6": false,
+            "notes": "StelSkyCulture is Q_GADGET (not Q_DECLARE_METATYPE). QJSEngine (Qt6) may not expose its fields. NOT recommended for scripting — use getSkyCultureListIDs() + getCurrentSkyCulture*() accessors instead."
+        },
+        "example": "// NOT RECOMMENDED — StelSkyCulture is a Q_GADGET\n// Prefer the dedicated accessors instead:\nvar ids = StelSkyCultureMgr.getSkyCultureListIDs();\nvar english = StelSkyCultureMgr.getSkyCultureListEnglish();\ncore.debug('IDs: ' + ids.length + ', English names: ' + english.length);\n\n// The map itself may be opaque on Qt6:\n// var map = StelSkyCultureMgr.getDirToNameMap();  // avoid"
+    },
+    {
+        "name": "getDirToI18Map",
+        "category": "Sky Culture - Lists",
+        "signature": "QMap<QString, QString> getDirToI18Map()",
+        "description": "Returns a map from sky culture directory IDs to their translated names in the current UI language. Unlike getDirToNameMap, this returns plain QString values and is safe to use in scripts.",
+        "parameters": [],
+        "returnType": "QMap<QString, QString>",
+        "returnDescription": "Map of directory ID → translated name",
+        "type": "slot",
+        "readOnly": true,
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "notes": "QMap<QString,QString> converts to a JS object on QJSEngine. Safe for scripting."
+        },
+        "example": "var i18Map = StelSkyCultureMgr.getDirToI18Map();\ncore.debug('Retrieved ID→name map. Type: ' + typeof i18Map);\n\n// Access pattern depends on QJSEngine conversion\nvar currentId = StelSkyCultureMgr.getCurrentSkyCultureID();\ncore.debug('Current ID: ' + currentId);\ncore.debug('Current localized: ' + StelSkyCultureMgr.getCurrentSkyCultureNameI18());"
+    },
+    {
+        "name": "convertCulturalDisplayStyleFromCSVstring",
+        "category": "Sky Culture - Display Styles",
+        "signature": "static StelObject::CulturalDisplayStyle convertCulturalDisplayStyleFromCSVstring(QString csv)",
+        "description": "STATIC method. Converts a comma-separated string of display-style tokens into the combined StelObject::CulturalDisplayStyle bitflag enum. Valid tokens (case-insensitive): 'none', 'modern', 'byname', 'ipa', 'translated', 'translit', 'pronounce', 'native'. Multiple tokens can be combined with commas (e.g., 'Native,IPA,Translated'). Unknown tokens are ignored (mapped to NONE).",
+        "parameters": [
+            {
+                "name": "csv",
+                "type": "QString",
+                "description": "Comma-separated style tokens (e.g., 'Native,IPA,Translated')",
+                "required": true
+            }
+        ],
+        "returnType": "StelObject::CulturalDisplayStyle",
+        "returnDescription": "Combined bitflag enum value",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "notes": "STATIC method — callable as StelSkyCultureMgr.convertCulturalDisplayStyleFromCSVstring(...). Uses bitwise OR to combine tokens. Unknown tokens map to NONE."
+        },
+        "example": "// STATIC — can be called without an instance\nvar style = StelSkyCultureMgr.convertCulturalDisplayStyleFromCSVstring('Native,IPA,Translated');\ncore.debug('Combined style enum: ' + style);\n\n// Single token\nvar single = StelSkyCultureMgr.convertCulturalDisplayStyleFromCSVstring('native');\ncore.debug('Native only: ' + single);\n\n// Unknown tokens are ignored\nvar bogus = StelSkyCultureMgr.convertCulturalDisplayStyleFromCSVstring('native,garbage,ipa');\ncore.debug('Native+IPA (garbage ignored): ' + bogus);"
+    },
+    {
+        "name": "convertCulturalDisplayStyleToCSVstring",
+        "category": "Sky Culture - Display Styles",
+        "signature": "static QString convertCulturalDisplayStyleToCSVstring(StelObject::CulturalDisplayStyle style)",
+        "description": "STATIC method. Converts a StelObject::CulturalDisplayStyle bitflag enum back into a comma-separated string of tokens. Inverse of convertCulturalDisplayStyleFromCSVstring().",
+        "parameters": [
+            {
+                "name": "style",
+                "type": "StelObject::CulturalDisplayStyle",
+                "description": "Bitflag enum to convert",
+                "required": true
+            }
+        ],
+        "returnType": "QString",
+        "returnDescription": "Comma-separated style tokens",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "notes": "STATIC method. Internally uses QVariant::fromValue(style).toString().replace('_', ',')."
+        },
+        "example": "var style = StelSkyCultureMgr.convertCulturalDisplayStyleFromCSVstring('Native,IPA');\nvar csv = StelSkyCultureMgr.convertCulturalDisplayStyleToCSVstring(style);\ncore.debug('Round-trip: ' + csv);  // should contain native and ipa tokens\n\n// Round-trip from the getter\nvar current = StelSkyCultureMgr.getScreenLabelStyleString();\ncore.debug('Screen style CSV: ' + current);"
+    },
+    {
+        "name": "getScreenLabelStyle",
+        "category": "Sky Culture - Display Styles",
+        "signature": "StelObject::CulturalDisplayStyle getScreenLabelStyle()",
+        "description": "Returns the screen-label display style for the current sky culture as a bitflag enum. This controls how star/constellation names are formatted on screen (e.g., native, translated, IPA, pronunciation). Stored per-sky-culture under SCScreenLabelStyle/<id> in settings. Defaults to Translated if defaultSkyCultureID is empty (testing mode).",
+        "parameters": [],
+        "returnType": "StelObject::CulturalDisplayStyle",
+        "returnDescription": "Combined display-style enum",
+        "type": "slot",
+        "readOnly": true,
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "notes": "Backed by Q_PROPERTY 'screenLabelStyle'. Per-sky-culture settings key: SCScreenLabelStyle/<currentID>. Default: Translated."
+        },
+        "example": "var style = StelSkyCultureMgr.getScreenLabelStyle();\ncore.debug('Screen label style enum: ' + style);\n\n// Prefer the string version for readability\nvar styleStr = StelSkyCultureMgr.getScreenLabelStyleString();\ncore.debug('Screen label style: ' + styleStr);"
+    },
+    {
+        "name": "getScreenLabelStyleString",
+        "category": "Sky Culture - Display Styles",
+        "signature": "QString getScreenLabelStyleString()",
+        "description": "Scripting-friendly version of getScreenLabelStyle(). Returns the screen-label display style as a comma-separated string of tokens instead of an enum bitflag.",
+        "parameters": [],
+        "returnType": "QString",
+        "returnDescription": "Comma-separated style tokens (e.g., 'Native,Translated')",
+        "type": "slot",
+        "readOnly": true,
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "notes": "Calls convertCulturalDisplayStyleToCSVstring(getScreenLabelStyle()). RECOMMENDED for scripts over the enum getter."
+        },
+        "example": "var styleStr = StelSkyCultureMgr.getScreenLabelStyleString();\ncore.debug('Screen style: ' + styleStr);\nif (styleStr.indexOf('native') >= 0) {\n    core.debug('Native names are shown on screen');\n}"
+    },
+    {
+        "name": "setScreenLabelStyle",
+        "category": "Sky Culture - Display Styles",
+        "signature": "void setScreenLabelStyle(string style)",
+        "description": "Sets the screen-label display style for the current sky culture. Accepts either a comma-separated string of tokens ('native,ipa,translated') or an enum-like underscore string ('Native_IPA_Translated'). Saved per-sky-culture under SCScreenLabelStyle/<id> in settings. Emits screenLabelStyleChanged.",
+        "parameters": [
+            {
+                "name": "style",
+                "type": "string",
+                "description": "Comma-separated tokens or underscore-style string (e.g., 'Native,IPA' or 'Native_IPA')",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "notes": "Backed by Q_PROPERTY 'screenLabelStyle'. Two C++ overloads exist (enum + QString); scripts use the QString overload. Saved to QSettings('SCScreenLabelStyle/<currentID>'). NOTE: saved per sky culture — switching culture restores that culture's style."
+        },
+        "example": "// Read current\nvar before = StelSkyCultureMgr.getScreenLabelStyleString();\ncore.debug('Before: ' + before);\n\n// Set new style (string form)\nStelSkyCultureMgr.setScreenLabelStyle('Native,IPA,Translated');\ncore.debug('After: ' + StelSkyCultureMgr.getScreenLabelStyleString());\n\n// Restore\nStelSkyCultureMgr.setScreenLabelStyle(before);"
+    },
+    {
+        "name": "getInfoLabelStyle",
+        "category": "Sky Culture - Display Styles",
+        "signature": "StelObject::CulturalDisplayStyle getInfoLabelStyle()",
+        "description": "Returns the info-panel label display style for the current sky culture as a bitflag enum. Controls how names are formatted in the object information panel. Stored per-sky-culture under SCInfoLabelStyle/<id>. Defaults to Translated if defaultSkyCultureID is empty.",
+        "parameters": [],
+        "returnType": "StelObject::CulturalDisplayStyle",
+        "returnDescription": "Combined display-style enum",
+        "type": "slot",
+        "readOnly": true,
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "notes": "Backed by Q_PROPERTY 'infoLabelStyle'. Per-sky-culture key: SCInfoLabelStyle/<currentID>. Default: Translated."
+        },
+        "example": "var style = StelSkyCultureMgr.getInfoLabelStyle();\ncore.debug('Info label style enum: ' + style);\nvar styleStr = StelSkyCultureMgr.getInfoLabelStyleString();\ncore.debug('Info label style: ' + styleStr);"
+    },
+    {
+        "name": "getInfoLabelStyleString",
+        "category": "Sky Culture - Display Styles",
+        "signature": "QString getInfoLabelStyleString()",
+        "description": "Scripting-friendly version of getInfoLabelStyle(). Returns the info-panel display style as a comma-separated string of tokens.",
+        "parameters": [],
+        "returnType": "QString",
+        "returnDescription": "Comma-separated style tokens",
+        "type": "slot",
+        "readOnly": true,
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "notes": "RECOMMENDED for scripts over the enum getter."
+        },
+        "example": "var styleStr = StelSkyCultureMgr.getInfoLabelStyleString();\ncore.debug('Info style: ' + styleStr);"
+    },
+    {
+        "name": "setInfoLabelStyle",
+        "category": "Sky Culture - Display Styles",
+        "signature": "void setInfoLabelStyle(string style)",
+        "description": "Sets the info-panel label display style for the current sky culture. Accepts comma-separated tokens or underscore-style string. Saved per-sky-culture under SCInfoLabelStyle/<id>. Emits infoLabelStyleChanged.",
+        "parameters": [
+            {
+                "name": "style",
+                "type": "string",
+                "description": "Comma-separated tokens (e.g., 'Translated,Native')",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "notes": "Backed by Q_PROPERTY 'infoLabelStyle'. Saved per sky culture."
+        },
+        "example": "var before = StelSkyCultureMgr.getInfoLabelStyleString();\nStelSkyCultureMgr.setInfoLabelStyle('Native,Translated');\ncore.debug('Info style now: ' + StelSkyCultureMgr.getInfoLabelStyleString());\nStelSkyCultureMgr.setInfoLabelStyle(before);"
+    },
+    {
+        "name": "getZodiacLabelStyle",
+        "category": "Sky Culture - Display Styles",
+        "signature": "StelObject::CulturalDisplayStyle getZodiacLabelStyle()",
+        "description": "Returns the zodiac-label display style for the current sky culture as a bitflag enum. Controls how zodiac sign names are formatted. Stored per-sky-culture under SCZodiacLabelStyle/<id>. Defaults to Translated if defaultSkyCultureID is empty.",
+        "parameters": [],
+        "returnType": "StelObject::CulturalDisplayStyle",
+        "returnDescription": "Combined display-style enum",
+        "type": "slot",
+        "readOnly": true,
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "notes": "Backed by Q_PROPERTY 'zodiacLabelStyle'. Per-sky-culture key: SCZodiacLabelStyle/<currentID>."
+        },
+        "example": "var styleStr = StelSkyCultureMgr.getZodiacLabelStyleString();\ncore.debug('Zodiac label style: ' + styleStr);"
+    },
+    {
+        "name": "getZodiacLabelStyleString",
+        "category": "Sky Culture - Display Styles",
+        "signature": "QString getZodiacLabelStyleString()",
+        "description": "Scripting-friendly version of getZodiacLabelStyle(). Returns the zodiac display style as a comma-separated string of tokens.",
+        "parameters": [],
+        "returnType": "QString",
+        "returnDescription": "Comma-separated style tokens",
+        "type": "slot",
+        "readOnly": true,
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "notes": "RECOMMENDED for scripts over the enum getter."
+        },
+        "example": "var styleStr = StelSkyCultureMgr.getZodiacLabelStyleString();\ncore.debug('Zodiac style: ' + styleStr);"
+    },
+    {
+        "name": "setZodiacLabelStyle",
+        "category": "Sky Culture - Display Styles",
+        "signature": "void setZodiacLabelStyle(string style)",
+        "description": "Sets the zodiac-label display style for the current sky culture. Saved per-sky-culture under SCZodiacLabelStyle/<id>. Emits zodiacLabelStyleChanged.",
+        "parameters": [
+            {
+                "name": "style",
+                "type": "string",
+                "description": "Comma-separated tokens (e.g., 'Native,Translated')",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "notes": "Backed by Q_PROPERTY 'zodiacLabelStyle'. Saved per sky culture."
+        },
+        "example": "var before = StelSkyCultureMgr.getZodiacLabelStyleString();\nStelSkyCultureMgr.setZodiacLabelStyle('Native,IPA');\ncore.debug('Zodiac style now: ' + StelSkyCultureMgr.getZodiacLabelStyleString());\nStelSkyCultureMgr.setZodiacLabelStyle(before);"
+    },
+    {
+        "name": "getLunarSystemLabelStyle",
+        "category": "Sky Culture - Display Styles",
+        "signature": "StelObject::CulturalDisplayStyle getLunarSystemLabelStyle()",
+        "description": "Returns the lunar-system label display style for the current sky culture as a bitflag enum. Controls how lunar mansion / nakshatra names are formatted. Stored per-sky-culture under SCLunarSystemLabelStyle/<id>. Defaults to Translated if defaultSkyCultureID is empty.",
+        "parameters": [],
+        "returnType": "StelObject::CulturalDisplayStyle",
+        "returnDescription": "Combined display-style enum",
+        "type": "slot",
+        "readOnly": true,
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "notes": "Backed by Q_PROPERTY 'lunarSystemLabelStyle'. Per-sky-culture key: SCLunarSystemLabelStyle/<currentID>."
+        },
+        "example": "var styleStr = StelSkyCultureMgr.getLunarSystemLabelStyleString();\ncore.debug('Lunar system label style: ' + styleStr);"
+    },
+    {
+        "name": "getLunarSystemLabelStyleString",
+        "category": "Sky Culture - Display Styles",
+        "signature": "QString getLunarSystemLabelStyleString()",
+        "description": "Scripting-friendly version of getLunarSystemLabelStyle(). Returns the lunar-system display style as a comma-separated string of tokens.",
+        "parameters": [],
+        "returnType": "QString",
+        "returnDescription": "Comma-separated style tokens",
+        "type": "slot",
+        "readOnly": true,
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "notes": "RECOMMENDED for scripts over the enum getter."
+        },
+        "example": "var styleStr = StelSkyCultureMgr.getLunarSystemLabelStyleString();\ncore.debug('Lunar style: ' + styleStr);"
+    },
+    {
+        "name": "setLunarSystemLabelStyle",
+        "category": "Sky Culture - Display Styles",
+        "signature": "void setLunarSystemLabelStyle(string style)",
+        "description": "Sets the lunar-system label display style for the current sky culture. Saved per-sky-culture under SCLunarSystemLabelStyle/<id>. Emits lunarSystemLabelStyleChanged.",
+        "parameters": [
+            {
+                "name": "style",
+                "type": "string",
+                "description": "Comma-separated tokens (e.g., 'Native,Translated')",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "notes": "Backed by Q_PROPERTY 'lunarSystemLabelStyle'. Saved per sky culture."
+        },
+        "example": "var before = StelSkyCultureMgr.getLunarSystemLabelStyleString();\nStelSkyCultureMgr.setLunarSystemLabelStyle('Native,Translated');\ncore.debug('Lunar style now: ' + StelSkyCultureMgr.getLunarSystemLabelStyleString());\nStelSkyCultureMgr.setLunarSystemLabelStyle(before);"
+    },
+    {
+        "name": "getFlagOverrideUseCommonNames",
+        "category": "Sky Culture - Flags",
+        "signature": "bool getFlagOverrideUseCommonNames()",
+        "description": "Returns whether Stellarium ignores the sky culture author's 'fallback_to_international_names' setting and always shows common/international names in addition to cultural names.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if common-name override is active, false otherwise",
+        "type": "slot",
+        "readOnly": true,
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "notes": "Backed by Q_PROPERTY 'flagOverrideUseCommonNames'. Read from settings key 'viewing/flag_skyculture_always_fallback_to_international_names' during init()."
+        },
+        "example": "var override = StelSkyCultureMgr.getFlagOverrideUseCommonNames();\ncore.debug('Common-name override: ' + override);"
+    },
+    {
+        "name": "setFlagOverrideUseCommonNames",
+        "category": "Sky Culture - Flags",
+        "signature": "void setFlagOverrideUseCommonNames(bool override)",
+        "description": "Sets whether to ignore the sky culture's own 'fallback_to_international_names' setting and always show common/international names. NOTE: this setter does NOT save to settings — the change is lost on restart (unlike setFlagUseAbbreviatedNames). Emits flagOverrideUseCommonNamesChanged.",
+        "parameters": [
+            {
+                "name": "override",
+                "type": "bool",
+                "description": "true to force common names, false to respect the sky culture's setting",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "notes": "Backed by Q_PROPERTY 'flagOverrideUseCommonNames'. NOT saved to settings — contrast with setFlagUseAbbreviatedNames which IS saved."
+        },
+        "example": "// Toggle\nvar current = StelSkyCultureMgr.getFlagOverrideUseCommonNames();\nStelSkyCultureMgr.setFlagOverrideUseCommonNames(!current);\ncore.debug('Now: ' + StelSkyCultureMgr.getFlagOverrideUseCommonNames());\n\n// Restore (NOTE: not persisted across restarts)\nStelSkyCultureMgr.setFlagOverrideUseCommonNames(current);"
+    },
+    {
+        "name": "getFlagUseAbbreviatedNames",
+        "category": "Sky Culture - Flags",
+        "signature": "bool getFlagUseAbbreviatedNames()",
+        "description": "Returns whether shortest-name labels (constellation abbreviations like 'Ori', 'UMa') are shown instead of full cultural labels.",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if abbreviated names are used, false otherwise",
+        "type": "slot",
+        "readOnly": true,
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "notes": "Backed by Q_PROPERTY 'flagUseAbbreviatedNames'. Read from settings key 'viewing/flag_constellation_abbreviations' during init()."
+        },
+        "example": "var abbreviated = StelSkyCultureMgr.getFlagUseAbbreviatedNames();\ncore.debug('Abbreviated names: ' + abbreviated);"
+    },
+    {
+        "name": "setFlagUseAbbreviatedNames",
+        "category": "Sky Culture - Flags",
+        "signature": "void setFlagUseAbbreviatedNames(bool b)",
+        "description": "Sets whether to show shortest-name labels (constellation abbreviations) instead of full cultural labels. Saved to settings (viewing/flag_constellation_abbreviations) — persists across restarts. Emits flagUseAbbreviatedNamesChanged.",
+        "parameters": [
+            {
+                "name": "b",
+                "type": "bool",
+                "description": "true to use abbreviated names, false for full labels",
+                "required": true
+            }
+        ],
+        "returnType": "void",
+        "type": "slot",
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "notes": "Backed by Q_PROPERTY 'flagUseAbbreviatedNames'. Saved to QSettings('viewing/flag_constellation_abbreviations') via StelApp::immediateSave. Contrast with setFlagOverrideUseCommonNames which is NOT saved."
+        },
+        "example": "var before = StelSkyCultureMgr.getFlagUseAbbreviatedNames();\nStelSkyCultureMgr.setFlagUseAbbreviatedNames(!before);\ncore.debug('Abbreviated now: ' + StelSkyCultureMgr.getFlagUseAbbreviatedNames());\n// This change IS saved across restarts\nStelSkyCultureMgr.setFlagUseAbbreviatedNames(before);"
+    },
+    {
+        "name": "currentSkycultureUsesCommonNames",
+        "category": "Sky Culture - Flags",
+        "signature": "bool currentSkycultureUsesCommonNames()",
+        "description": "Returns whether the CURRENT sky culture incorporates common/international names, taking into account both the sky culture's own 'fallback_to_international_names' setting AND the global override flag. This is the effective value (not the raw setting).",
+        "parameters": [],
+        "returnType": "bool",
+        "returnDescription": "true if the effective behavior includes common names, false otherwise",
+        "type": "slot",
+        "readOnly": true,
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "notes": "Returns currentSkyCulture.fallbackToInternationalNames, which is set during makeCulturesList() as: (flagOverrideUseCommonNames || data['fallback_to_international_names'].toBool())."
+        },
+        "example": "var usesCommon = StelSkyCultureMgr.currentSkycultureUsesCommonNames();\ncore.debug('Current culture uses common names: ' + usesCommon);\n\n// Compare with the raw flags\ncore.debug('Override flag: ' + StelSkyCultureMgr.getFlagOverrideUseCommonNames());\ncore.debug('Culture ID: ' + StelSkyCultureMgr.getCurrentSkyCultureID());"
+    },
+    {
+        "name": "analyzeScreenLabel",
+        "category": "Sky Culture - Development",
+        "signature": "void analyzeScreenLabel()",
+        "description": "DEVELOPMENT/DEBUG function. Analyzes the Unicode properties of the currently selected object's screen label and prints a detailed character-by-character breakdown (category, script, direction, decomposition) to the debug console. Requires an object to be selected; does nothing if selection is empty. Not intended for production scripts.",
+        "parameters": [],
+        "returnType": "void",
+        "type": "slot",
+        "readOnly": true,
+        "compatibility": {
+            "qt5": true,
+            "qt6": true,
+            "notes": "DEBUG/DEVELOPMENT ONLY. Output goes to qDebug() console, not to core.output. Requires a selected object (via StelObjectMgr). For stars, attempts to resolve HIP number and use StarMgr.getCulturalScreenLabel()."
+        },
+        "example": "// DEVELOPMENT ONLY — requires a selected object\n// 1. Select an object first (e.g., via core.moveToObject or mouse)\n// 2. Then call:\nStelSkyCultureMgr.analyzeScreenLabel();\n\n// Output appears in the Stellarium debug console (stderr/log),\n// NOT in core.output(). Useful for investigating Unicode/RTL\n// issues in cultural labels."
+    }
+]
