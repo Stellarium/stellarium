@@ -39,6 +39,8 @@
 #include "StelCore.hpp"
 #include "StelPainter.hpp"
 
+#include <cmath>
+#include <limits>
 #include <vector>
 #include <QDebug>
 #include <QFile>
@@ -605,6 +607,23 @@ void NebulaMgr::storeCatalogFilters()
 	conf->endGroup();
 }
 
+void NebulaMgr::updateDrawLevels()
+{
+	// The draw level of a DSO is the faintest hints/labels magnitude limit at which it can still
+	// produce any output in DrawNebulaFuncObject: drawLabel() and drawHints() need
+	// getVisibilityLevelByMagnitude() to be within their limit, drawOutlines() 3 magnitudes within.
+	// It is used as the key of nebGrid, so that draw() does not even visit the DSOs which cannot
+	// be drawn with the current settings (GH #4437).
+	auto drawLevel = [](const StelRegionObject* obj) -> float
+	{
+		const Nebula* n = static_cast<const Nebula*>(obj);
+		const float level = n->getVisibilityLevelByMagnitude() - (n->outlineSegments.empty() ? 0.f : 3.f);
+		// Never skip a DSO with an undefined level, the magnitude tests would not reject it either.
+		return std::isnan(level) ? std::numeric_limits<float>::lowest() : level;
+	};
+	nebGrid.updateKeys(drawLevel);
+}
+
 struct DrawNebulaFuncObject
 {
 	DrawNebulaFuncObject(float amaxMagHints, float amaxMagLabels, StelPainter* p, StelCore* aCore, bool acheckMaxMagHints)
@@ -676,6 +695,7 @@ void NebulaMgr::setFlagSurfaceBrightnessUsage(const bool usage)
 	if (usage!=Nebula::surfaceBrightnessUsage)
 	{
 		Nebula::surfaceBrightnessUsage=usage;
+		updateDrawLevels();
 		StelApp::immediateSave("astro/flag_surface_brightness_usage", Nebula::surfaceBrightnessUsage);
 		emit flagSurfaceBrightnessUsageChanged(usage);
 	}
@@ -868,8 +888,13 @@ void NebulaMgr::draw(StelCore* core)
 		// Print all the nebulae of all the selected zones
 		float maxMagHints  = computeMaxMagHint(skyDrawer);
 		float maxMagLabels = skyDrawer->getLimitMagnitude()-2.f+static_cast<float>(labelsAmount*1.2)-2.f;
+		// DSOs with a draw level above this limit can draw neither a hint, a label nor an outline:
+		// skip them in the grid traversal instead of rejecting them one by one (GH #4437).
+		float maxDrawLevel = qMax(maxMagHints, maxMagLabels);
+		if (skyDrawer->getFlagNebulaMagnitudeLimit())
+			maxDrawLevel = qMin(maxDrawLevel, static_cast<float>(skyDrawer->getCustomNebulaMagnitudeLimit()));
 		DrawNebulaFuncObject func(maxMagHints, maxMagLabels, &sPainter, core, hintsFader.getInterstate()<=0.f);
-		nebGrid.processIntersectingPointInRegions(p.data(), func);
+		nebGrid.processIntersectingPointInRegions(p.data(), maxDrawLevel, func);
 	}
 
 	static StelObjectMgr *som=GETSTELMODULE(StelObjectMgr);
@@ -968,6 +993,9 @@ void NebulaMgr::loadNebulaSet(const QString& setName)
 
 	if (!dsoDiscoveryPath.isEmpty())
 		loadDSODiscoveryData(dsoDiscoveryPath);
+
+	// Outlines are known now: compute the draw levels used to cull the grid in draw()
+	updateDrawLevels();
 }
 
 // Look for a nebula by XYZ coords

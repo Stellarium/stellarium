@@ -30,9 +30,9 @@ StelSphericalIndex::~StelSphericalIndex()
 	delete rootNode;
 }
 
-void StelSphericalIndex::insert(StelRegionObjectP regObj)
+void StelSphericalIndex::insert(StelRegionObjectP regObj, float key)
 {
-	NodeElem el(regObj);
+	NodeElem el(regObj, key);
 	rootNode->insert(el, 0);
 }
 

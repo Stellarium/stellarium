@@ -22,6 +22,8 @@
 
 #include "StelRegionObject.hpp"
 
+#include <limits>
+
 //! @class StelSphericalIndex
 //! Container allowing to store and query SphericalRegion.
 class StelSphericalIndex
@@ -31,7 +33,16 @@ public:
 	virtual ~StelSphericalIndex();
 
 	//! Insert the given object in the StelSphericalIndex.
-	void insert(StelRegionObjectP obj);
+	//! @param key an optional value used by the key-limited process functions to skip elements
+	//! (and whole subtrees) whose key is above a threshold without visiting them.
+	void insert(StelRegionObjectP obj, float key=0.f);
+
+	//! Recompute the key of every element as keyFunc(const StelRegionObject*).
+	//! The tree structure, and hence the processing order, is left unchanged.
+	template<class KeyFunc> void updateKeys(const KeyFunc& keyFunc)
+	{
+		rootNode->updateKeys(keyFunc);
+	}
 
 	//! Process all the objects intersecting the given region using the passed function object.
 	template<class FuncObject> void processIntersectingRegions(const SphericalRegion* region, FuncObject& func) const
@@ -43,6 +54,14 @@ public:
 	template<class FuncObject> void processIntersectingPointInRegions(const SphericalRegion* region, FuncObject& func) const
 	{
 		rootNode->processIntersectingPointInRegions(region, func);
+	}
+
+	//! Same as processIntersectingPointInRegions(), but only for the objects whose key is <= maxKey.
+	//! Subtrees in which all keys are above maxKey are not visited at all. The remaining objects are
+	//! processed in the same order as by processIntersectingPointInRegions().
+	template<class FuncObject> void processIntersectingPointInRegions(const SphericalRegion* region, float maxKey, FuncObject& func) const
+	{
+		rootNode->processIntersectingPointInRegions(region, maxKey, func);
 	}
 	
 	//! Process all the objects intersecting the given region using the passed function object.
@@ -92,9 +111,10 @@ private:
 	struct NodeElem
 	{
 		NodeElem() {;}
-		NodeElem(StelRegionObjectP aobj) : obj(aobj), cap(obj->getRegion()->getBoundingCap()) {;}
+		NodeElem(StelRegionObjectP aobj, float akey=0.f) : obj(aobj), cap(obj->getRegion()->getBoundingCap()), key(akey) {;}
 		StelRegionObjectP obj;
 		SphericalCap cap;
+		float key = 0.f;
 	};
 
 	//! @class Node
@@ -106,6 +126,8 @@ private:
 		QVector<NodeElem> elements;
 		QVector<Node> children;
 		SphericalConvexPolygon triangle;
+		//! The smallest key of all the elements in this node and its children.
+		float minKey = std::numeric_limits<float>::max();
 		//! Split each triangles in to 4 subtriangles.
 		virtual void split()
 		{
@@ -141,6 +163,7 @@ private:
 		{
 			elements.clear();
 			children.clear();
+			minKey = std::numeric_limits<float>::max();
 		}
 	};
 
@@ -195,6 +218,16 @@ private:
 			{
 				processIntersectingPointInRegions(*this, region, func);
 			}
+
+			template<class FuncObject> void processIntersectingPointInRegions(const SphericalRegion* region, float maxKey, FuncObject& func) const
+			{
+				processIntersectingPointInRegions(*this, region, maxKey, func);
+			}
+
+			template<class KeyFunc> void updateKeys(const KeyFunc& keyFunc)
+			{
+				updateKeys(*this, keyFunc);
+			}
 			
 			template<class FuncObject> void processBoundingCapIntersectingRegions(const SphericalCap& cap, FuncObject& func) const
 			{
@@ -217,6 +250,7 @@ private:
 			//! Insert the given element in the given node.
 			void insert(Node& node, const NodeElem& el, int level)
 			{
+				node.minKey = qMin(node.minKey, el.key);
 				if (node.children.isEmpty())
 				{
 					node.elements.append(el);
@@ -282,6 +316,56 @@ private:
 				}
 			}
 			
+			//! Process the objects with point intersecting the given region and key <= maxKey.
+			template<class FuncObject> void processIntersectingPointInRegions(const Node& node, const SphericalRegion* region, float maxKey, FuncObject& func) const
+			{
+				for (const auto& el : node.elements)
+				{
+					if (el.key <= maxKey && region->contains(el.obj->getPointInRegion()))
+						func(&(*el.obj));
+				}
+				for (const auto& child : node.children)
+				{
+					if (child.minKey > maxKey)
+						continue;
+					if (region->contains(child.triangle))
+						processAll(child, maxKey, func);
+					else if (region->intersects(child.triangle))
+						processIntersectingPointInRegions(child, region, maxKey, func);
+				}
+			}
+
+			//! Process all the objects with key <= maxKey.
+			template<class FuncObject> void processAll(const Node& node, float maxKey, FuncObject& func) const
+			{
+				for (const auto& el : node.elements)
+				{
+					if (el.key <= maxKey)
+						func(&(*el.obj));
+				}
+				for (const auto& child : node.children)
+				{
+					if (child.minKey <= maxKey)
+						processAll(child, maxKey, func);
+				}
+			}
+
+			//! Recompute the keys of all the elements and the minimum keys of the nodes.
+			template<class KeyFunc> void updateKeys(Node& node, const KeyFunc& keyFunc)
+			{
+				node.minKey = std::numeric_limits<float>::max();
+				for (auto& el : node.elements)
+				{
+					el.key = keyFunc(&(*el.obj));
+					node.minKey = qMin(node.minKey, el.key);
+				}
+				for (auto& child : node.children)
+				{
+					updateKeys(child, keyFunc);
+					node.minKey = qMin(node.minKey, child.minKey);
+				}
+			}
+
 			template<class FuncObject> void processBoundingCapIntersectingRegions(const Node& node, const SphericalCap& cap, FuncObject& func) const
 			{
 				for (const auto& el : node.elements)
