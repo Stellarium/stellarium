@@ -1104,8 +1104,12 @@ private:
 	LinearFader hintsFader;
 	LinearFader flagShow;
 
-	//! The internal grid for fast positional lookup
+	//! The internal grid for fast positional lookup.
+	//! The key of each element is the DSO's draw level (see updateDrawLevels()).
 	StelSphericalIndex nebGrid;
+	//! Recompute the keys of nebGrid: the faintest hints/labels magnitude limit at which each
+	//! DSO may still be drawn. Must be called when the visibility levels may have changed.
+	void updateDrawLevels();
 
 	//! The amount of hints (between 0 and 10)
 	double hintsAmount;
