@@ -110,13 +110,30 @@ void StelSkyImageTile::draw(StelCore* core, StelPainter& sPainter, float opacity
 			++numToBeLoaded;
 	updatePercent(result.size(), numToBeLoaded);
 
+	// The tiles are selected on the whole sky (see above), but a tile is only drawn, and so its texture
+	// only requested, if it may be visible. Otherwise the textures of all the tiles of the sky whose
+	// resolution limit is reached would be requested in every frame, delaying textures that are in view.
+	// The margin covers the aberration shift.
+	const double margin = qMax(1., 20./3600.*core->getAberrationFactor()) * M_PI_180;
+	const SphericalRegionP viewport = prj->getViewportConvexPolygon(0, 0)->getEnlarged(margin);
+	const auto mayBeVisible = [&viewport](const StelSkyImageTile* tile)
+	{
+		if (tile->skyConvexPolygons.isEmpty())
+			return true;
+		for (const auto& poly : tile->skyConvexPolygons)
+			if (viewport->intersects(poly))
+				return true;
+		return false;
+	};
+
 	// Draw in the good order
 	sPainter.setBlending(true, GL_ONE, GL_ONE);
 	auto i = result.end();
 	while (i!=result.begin())
 	{
 		--i;
-		i.value()->drawTile(core, sPainter, vel);
+		if (mayBeVisible(i.value()))
+			i.value()->drawTile(core, sPainter, vel);
 	}
 
 	deleteUnusedSubTiles();

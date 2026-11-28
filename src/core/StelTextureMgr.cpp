@@ -26,9 +26,12 @@
 #include <cstdlib>
 #include <QOpenGLContext>
 #include <QThreadPool>
+#include <QCoreApplication>
+#include <QtConcurrent>
 
 StelTextureMgr::StelTextureMgr(QObject *parent)
 	: QObject(parent), glMemoryUsage(0), loaderThreadPool(new QThreadPool(this))
+	, decodesInFlight(std::make_shared<std::atomic<int>>(0))
 {
 #ifdef Q_PROCESSOR_X86_64
 	loaderThreadPool->setMaxThreadCount(QThread::idealThreadCount());
@@ -180,6 +183,95 @@ StelTextureSP StelTextureMgr::createTextureThread(const QString& url, const Stel
 void StelTextureMgr::onFrameFinished()
 {
 	totalLoadTimeTaken = 0;
+	previousDeferredUploads = std::move(deferredUploads);
+	deferredUploads.clear();
+	uploadPriorityFloorValid = false;
+	++frameNumber;
+}
+
+void StelTextureMgr::queueDecode(const StelTextureSP& tex, std::function<StelTexture::GLData()>&& job)
+{
+	{
+		QMutexLocker locker(&decodeMutex);
+		tex->decodeJob = std::move(job);
+		tex->decodeQueued = true;
+		decodeQueue.push(tex);
+	}
+	dispatchDecodes();
+}
+
+void StelTextureMgr::dispatchDecodes()
+{
+	if (QThread::currentThread() != thread())
+	{
+		QMetaObject::invokeMethod(this, &StelTextureMgr::dispatchDecodes, Qt::QueuedConnection);
+		return;
+	}
+
+	QMutexLocker locker(&decodeMutex);
+	while (*decodesInFlight < loaderThreadPool->maxThreadCount())
+	{
+		const StelTextureSP tex = decodeQueue.takeNext();
+		if (!tex)
+			break;
+		if (!tex->decodeJob)
+			continue; // already done by StelTexture::waitForLoaded()
+
+		auto job = std::move(tex->decodeJob);
+		tex->decodeJob = nullptr;
+		++*decodesInFlight;
+		const auto inFlight = decodesInFlight;
+		tex->loader = new QFuture<StelTexture::GLData>(QtConcurrent::run(loaderThreadPool, [job, inFlight]()
+		{
+			StelTexture::GLData data = job();
+			--*inFlight;
+			// Start the next queued job without waiting for the next frame
+			QMetaObject::invokeMethod(QCoreApplication::instance(), []()
+			{
+				if (StelTexture::textureMgr)
+					StelTexture::textureMgr->dispatchDecodes();
+			}, Qt::QueuedConnection);
+			return data;
+		}));
+		tex->decodeQueued = false;
+	}
+}
+
+std::function<StelTexture::GLData()> StelTextureMgr::takeDecodeJob(StelTexture* tex)
+{
+	QMutexLocker locker(&decodeMutex);
+	auto job = std::move(tex->decodeJob);
+	tex->decodeJob = nullptr;
+	if (tex->decodeQueued)
+	{
+		tex->decodeQueued = false;
+		decodeQueue.remove(tex);
+	}
+	return job;
+}
+
+bool StelTextureMgr::isUploadTurn(const StelTexture& tex)
+{
+	if (!uploadPriorityFloorValid)
+	{
+		uploadPriorityFloor = previousDeferredUploads.highestBindRequestCount();
+		uploadPriorityFloorValid = true;
+	}
+	return tex.getBindRequestCount() >= uploadPriorityFloor;
+}
+
+void StelTextureMgr::deferUpload(const StelTextureSP& tex)
+{
+	if (tex->uploadDeferredFrame == frameNumber)
+		return;
+	tex->uploadDeferredFrame = frameNumber;
+	deferredUploads.push(tex);
+}
+
+void StelTextureMgr::reportUploadDone(const StelTexture* tex)
+{
+	previousDeferredUploads.remove(tex);
+	uploadPriorityFloorValid = false;
 }
 
 void StelTextureMgr::reportTextureLoadStart()
