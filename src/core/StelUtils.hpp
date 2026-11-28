@@ -188,7 +188,10 @@ namespace StelUtils
 	//! @param d degree component
 	//! @param m minute component
 	//! @param s second component
-	void radToDms(double rad, bool& sign, unsigned int& d, unsigned int& m, double& s);
+	//! @param precision when 0 or more, the angle is rounded to this many decimals of a second
+	//! before it is split, so the seconds never round up to 60 when shown with that precision.
+	//! When negative (the default), seconds above 59.9 are carried into the minutes.
+	void radToDms(double rad, bool& sign, unsigned int& d, unsigned int& m, double& s, int precision = -1);
 
 	//! Convert an angle in radian to decimal degree.
 	//! @param rad input angle in radian
