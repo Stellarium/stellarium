@@ -2279,6 +2279,20 @@
 										</div>
 									</div>
 
+									<!-- Row 2: Auto-zoom toggle -->
+									<div class="tour-row" style="margin-top:4px;">
+										<label class="btn-toggle-plain tour-control-group" style="cursor:pointer;"
+										       title="<?= tr("When checked, Stellarium automatically chooses the zoom level for each object based on its angular size. This uses StelMovementMgr.autoZoomIn() and autoZoomOut() instead of the fixed Zoom FOV and Overview FOV values above. Recommended for tours that mix very different object sizes (e.g. large nebulae and compact planetary nebulae).")?>">
+											<input type="checkbox" id="scriptsgenerator-auto-zoom" />
+											<span class="tour-control-label">
+												<strong><?= tr("Auto-zoom (use object angular size)")?></strong>
+											</span>
+										</label>
+										<small class="tour-multiselect-hint" title="<?= tr("Uses StelMovementMgr.autoZoomIn() and autoZoomOut() instead of zoomTo()")?>">
+											(<?= tr("uses StelMovementMgr.autoZoomIn/autoZoomOut")?>)
+										</small>
+									</div>
+
 									<div class="tour-row">
 										<label class="btn-toggle-plain tour-control-group" style="cursor:pointer;">
 										 <input type="checkbox" id="scriptsgenerator-show-labels" checked />
@@ -2470,6 +2484,47 @@
 										<small class="tour-multiselect-hint">(NebulaMgr.setHintsProportional)</small>										
 									</div>
 
+									<!-- Row 4: Catalog filters -->
+									<div class="tour-row" style="border-top:1px solid rgba(180,183,176,0.2); padding-top:8px; margin-top:4px;">
+										<span class="tour-control-label-bold" style="margin-right:10px;"
+										      title="<?= tr("Filter which catalogs are visible. These options are mutually exclusive.")?>">
+											<?= tr("Catalog filters:")?>
+										</span><br/>
+
+										<label class="btn-toggle-plain tour-control-group" style="cursor:pointer;"
+										       title="<?= tr("Show only Messier objects. Equivalent to NebulaMgr.setCatalogFilters(4). Use this if you want the tour to contain only M1..M110. For more details on setCatalogFilters, see the Quick Reference panel in the Script Editor tab.")?>">
+											<input type="checkbox" id="scriptsgenerator-catalog-messier" />
+											<span class="tour-control-label">
+												<?= tr("Show only Messier objects")?>
+											</span>
+										</label>
+										<small class="tour-multiselect-hint" title="<?= tr('NebulaMgr.setCatalogFilters(4)')?>">
+											(NebulaMgr.setCatalogFilters(4))
+										</small>
+
+										<label class="btn-toggle-plain tour-control-group" style="cursor:pointer;"
+										       title="<?= tr("Show only the three standard catalogs: Messier, NGC, and IC. Equivalent to NebulaMgr.selectStandardCatalogs(). Recommended for traditional observing tours. See the Quick Reference panel in the Script Editor tab for other catalog combinations.")?>">
+											<input type="checkbox" id="scriptsgenerator-catalog-standard" />
+											<span class="tour-control-label">
+												<?= tr("Standard catalogs only (M, NGC, IC)")?>
+											</span>
+										</label>
+										<small class="tour-multiselect-hint" title="<?= tr('NebulaMgr.selectStandardCatalogs()')?>">
+											(NebulaMgr.selectStandardCatalogs())
+										</small>
+
+										<label class="btn-toggle-plain tour-control-group" style="cursor:pointer;"
+										       title="<?= tr("Show all deep-sky catalogs loaded by Stellarium (Messier, NGC, IC, and any other enabled catalogs). Equivalent to NebulaMgr.selectAllCatalogs(). Use this if you want the complete set of objects. For detailed information about selectAllCatalogs, see the Quick Reference panel in the Script Editor tab.")?>">
+											<input type="checkbox" id="scriptsgenerator-catalog-all" checked />
+											<span class="tour-control-label">
+												<?= tr("Show all catalogs")?>
+											</span>
+										</label>
+										<small class="tour-multiselect-hint" title="<?= tr('NebulaMgr.selectAllCatalogs()')?>">
+											(NebulaMgr.selectAllCatalogs())
+										</small>
+									</div>
+									
 								</fieldset>
 								</fieldset>								
 

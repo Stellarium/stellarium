@@ -871,116 +871,54 @@ define([
         return s;
     }
 
-    /**
-     * Generate the tour execution loop skeleton (common to all types).
-     * 
-     * IMPORTANT: The generated SSC script uses `tr("Visiting " + itemLabel)` 
-     * pattern where itemLabel is inserted as a literal string. This allows
-     * the translation system to work correctly.
-     * 
-     * Example generated line (for constellations):
-     *   core.debug(tr("Visiting constellation") + " " + currentNum + "/" + constellations.length + ": " + constName);
-     * 
-     * @function buildTourLoop
-     * @param {Object} opts - Options with:
-     *   - arrayName:           name of the array variable
-     *   - itemLabel:           literal string label (e.g. "constellation")
-     *   - selectFunction:      e.g. "core.selectConstellationByName", or null
-     *   - moveToFunction:      e.g. "core.moveToObject"
-     *   - deselectFunction:    optional (full line, e.g. 'core.selectObjectByName("", false);')
-     *   - useMarker:           (v4.2.0) whether to draw marker
-     *   - markerType:          (v4.2.0) marker shape
-     *   - markerColor:         (v4.2.0) marker color
-     *   - markerSize:          (v4.2.0) marker size
-     *   - keepMarkerPerObject: (v4.2.0) keep marker after leaving object
-     *   - useObjLabel:         (v4.2.0) whether to draw label
-     *   - labelColor:          (v4.2.0) label color
-     *   - labelSize:           (v4.2.0) label font size
-     *   - labelPos:            (v4.2.0) label position (N/S/E/W/...)
-     *   - labelConnect:        (v4.2.0) label connector type
-     *   - keepLabelPerObject:  (v4.2.0) keep label after leaving object
-     *   - cleanupMarkersAtEnd: (v4.2.0) delete all markers at end of tour
-     *   - cleanupLabelsAtEnd:  (v4.2.0) delete all labels at end of tour
-     * @returns {string}
-     */
-    function buildTourLoop(opts) {
-        var s = '';
-
-        // Extract highlight flags (v4.2.0)
-        var useMarker           = (opts.useMarker === true);
-        var keepMarkerPerObject = (opts.keepMarkerPerObject === true);
-        var useObjLabel         = (opts.useObjLabel === true);
-        var keepLabelPerObject  = (opts.keepLabelPerObject === true);
-        var cleanupMarkersAtEnd = (opts.cleanupMarkersAtEnd !== false);
-        var cleanupLabelsAtEnd  = (opts.cleanupLabelsAtEnd !== false);
-
-        // ─── Loop body ─────────────────────────────────────────
-        s += 'for (var i = 0; i < ' + opts.arrayName + '.length; i++) {\n';
-        s += '    var constName = ' + opts.arrayName + '[i];\n';
-        s += '    var currentNum = i + 1;\n';
-        s += '    \n';
-        s += '    core.debug(tr("Visiting ' + opts.itemLabel + '") + " " + currentNum + "/" + ' + opts.arrayName + '.length + ": " + constName);\n';
-        s += '    \n';
-        if (opts.selectFunction) {
-            s += '    ' + opts.selectFunction + '(constName);\n';
-            s += '    \n';
-        }
-        s += '    ' + opts.moveToFunction + '(constName, 2);\n';
-
-        // ═══ v4.2.0: Object highlighting (marker + label) ═══
-        s += '    \n';
-        s += '    // ─── Highlight marker & label (v4.2.0) ───\n';
-        s += '    var __objMarkerId = null;\n';
-        s += '    if (USE_MARKER) {\n';
-        s += '        __objMarkerId = MarkerMgr.markerObject(constName, true, MARKER_TYPE, MARKER_COLOR, MARKER_SIZE, false, 0);\n';
-        s += '    }\n';
-        s += '    var __objLabelId = null;\n';
-        s += '    if (USE_OBJ_LABEL) {\n';
-        s += '        __objLabelId = LabelMgr.labelObject(constName, constName, true, LABEL_SIZE, LABEL_COLOR, LABEL_POS, -1, LABEL_CONNECT);\n';
-        s += '    }\n';
-        // ════════════════════════════════════════════════════
-
-        s += '    core.wait(1);\n';
-        s += '    \n';
-        s += '    StelMovementMgr.zoomTo(ZOOM_FOV, 2);\n';
-        s += '    core.wait(1);\n';
-        s += '    \n';
-        s += '    var nameLabel = LabelMgr.labelScreen(constName, 50, 50, false, 16, "#ffaa66");\n';
-        s += '    LabelMgr.setLabelShow(nameLabel, true);\n';
-        s += '    core.wait(DURATION);\n';
-        s += '    LabelMgr.deleteLabel(nameLabel);\n';
-        s += '    \n';
-
-        // ═══ v4.2.0: Conditional cleanup per object ═══
-        s += '    // ─── Cleanup per-object markers/labels ───\n';
-        s += '    if (__objMarkerId !== null && !KEEP_MARKER_PER_OBJ) {\n';
-        s += '        MarkerMgr.deleteMarker(__objMarkerId);\n';
-        s += '    }\n';
-        s += '    if (__objLabelId !== null && !KEEP_LABEL_PER_OBJ) {\n';
-        s += '        LabelMgr.deleteLabel(__objLabelId);\n';
-        s += '    }\n';
-        // ═══════════════════════════════════════════
-
-        if (opts.deselectFunction) {
-            s += '    ' + opts.deselectFunction + '\n';
-            s += '    \n';
-        }
-        s += '    StelMovementMgr.zoomTo(OVERVIEW_FOV, 2);\n';
-        s += '    core.wait(1);\n';
-        s += '}\n\n';
-
-        // ═══ v4.2.0: End-of-tour cleanup ═══
-        s += '// ─── End-of-tour cleanup (v4.2.0) ───\n';
-        if (cleanupMarkersAtEnd) {
-            s += 'MarkerMgr.deleteAllMarkers();\n';
-        }
-        if (cleanupLabelsAtEnd) {
-            s += 'LabelMgr.deleteAllLabels();\n';
-        }
-        // ═════════════════════════════════════
-
-        return s;
-    }
+		/**
+		 * Generate the tour execution loop skeleton (common to all types).
+		 * 
+		 * IMPORTANT: The generated SSC script uses `tr("Visiting " + itemLabel)` 
+		 * pattern where itemLabel is inserted as a literal string. This allows
+		 * the translation system to work correctly.
+		 * 
+		 * Example generated line (for constellations):
+		 *   core.debug(tr("Visiting constellation") + " " + currentNum + "/" + constellations.length + ": " + constName);
+		 * 
+		 * @param {Object} opts - Options with:
+		 *   - arrayName: name of the array variable
+		 *   - itemLabel: literal string label (e.g. "constellation")
+		 *   - selectFunction: e.g. "core.selectConstellationByName"
+		 *   - moveToFunction: e.g. "core.moveToObject"
+		 *   - deselectFunction: optional
+		 * @returns {string}
+		 */
+		function buildTourLoop(opts) {
+				var s = '';
+				s += 'for (var i = 0; i < ' + opts.arrayName + '.length; i++) {\n';
+				s += '    var constName = ' + opts.arrayName + '[i];\n';
+				s += '    var currentNum = i + 1;\n';
+				s += '    \n';
+				s += '    core.debug(tr("Visiting ' + opts.itemLabel + '") + " " + currentNum + "/" + ' + opts.arrayName + '.length + ": " + constName);\n';
+				s += '    \n';
+				s += '    ' + opts.selectFunction + '(constName);\n';
+				s += '    \n';
+				s += '    ' + opts.moveToFunction + '(constName, 2);\n';
+				s += '    core.wait(1);\n';
+				s += '    \n';
+				s += '    StelMovementMgr.zoomTo(ZOOM_FOV, 2);\n';
+				s += '    core.wait(1);\n';
+				s += '    \n';
+				s += '    var nameLabel = LabelMgr.labelScreen(constName, 50, 50, false, 16, "#ffaa66");\n';
+				s += '    LabelMgr.setLabelShow(nameLabel, true);\n';
+				s += '    core.wait(DURATION);\n';
+				s += '    LabelMgr.deleteLabel(nameLabel);\n';
+				s += '    \n';
+				if (opts.deselectFunction) {
+						s += '    ' + opts.deselectFunction + '();\n';
+						s += '    \n';
+				}
+				s += '    StelMovementMgr.zoomTo(OVERVIEW_FOV, 2);\n';
+				s += '    core.wait(1);\n';
+				s += '}\n\n';
+				return s;
+		}
 
     /**
      * Generate the reset and cleanup footer.
@@ -2603,16 +2541,19 @@ define([
             s += 'NebulaMgr.setHintsProportional(false);\n';
         }
 
-        // Catalog filters
-        // NOTE: These two options are mutually exclusive.
-        //       If both are checked (shouldn't happen due to UI logic),
-        //       "Messier only" wins because it's more specific.
+        // Catalog filters (mutually exclusive — one of three should be active)
+        // Priority: Messier > Standard > All
+        // The UI guarantees only one is checked at a time, but we still
+        // handle the case defensively.
         if (deepSky.catalogMessier) {
             s += '// Catalog filter: Messier only\n';
             s += 'NebulaMgr.setCatalogFilters(4);   // CatM (4)\n';
         } else if (deepSky.catalogStandard) {
             s += '// Catalog filter: Standard (M, NGC, IC)\n';
             s += 'NebulaMgr.selectStandardCatalogs();\n';
+        } else if (deepSky.catalogAll) {
+            s += '// Catalog filter: All catalogs\n';
+            s += 'NebulaMgr.selectAllCatalogs();\n';
         }
 
         s += '\n';
@@ -2670,7 +2611,7 @@ define([
 
     /**
      * Unified tour script generator for ANY object type.
-     * 
+     *
      * @function generateObjectTypeTour
      * @param {Object} opts
      * @param {string} opts.typeKey
@@ -2679,11 +2620,9 @@ define([
      * @param {Array<string>} opts.objects
      * @param {Object} opts.options - { duration, zoomFov, overviewFov, fontSize,
      *                                  showLabels, showMarkers, useSaveState,
-     *                                  lockObserver, showLandscape,
-     *                                  deepSky: {...},
-     *                                  highlight: {...} }
+     *                                  lockObserver, showLandscape, deepSky: {...} }
      * @param {Object} [opts.status] - Observer status (from Api.fetchStatus)
-     * @returns {string|null}
+     * @returns {string|null} Generated SSC script, or null on error
      */
     function generateObjectTypeTour(opts) {
         // -----------------------------------------------------------------
@@ -2704,6 +2643,7 @@ define([
         var duration      = (typeof options.duration    === 'number') ? options.duration    : 4;
         var zoomFov       = (typeof options.zoomFov     === 'number') ? options.zoomFov     : 15;
         var overviewFov   = (typeof options.overviewFov === 'number') ? options.overviewFov : 90;
+        var autoZoom      = (options.autoZoom === true);
         var fontSize      = (typeof options.fontSize    === 'number') ? options.fontSize    : 16;
         var showLabels    = (options.showLabels    !== false);
         var showMarkers   = (options.showMarkers   !== false);
@@ -2762,10 +2702,10 @@ define([
         s += '// Duration per object: ' + duration + ' seconds\n';
         s += '// Zoom FOV: ' + zoomFov + ' degrees\n';
         s += '// Overview FOV: ' + overviewFov + ' degrees\n';
+        s += '// Auto-zoom: ' + (autoZoom ? 'YES (uses angular size)' : 'NO (fixed FOV)') + '\n';
         s += '// Font size: ' + fontSize + ' pixels\n';
         s += '// Clear preset: ' + clearPreset + '\n';
         s += '// Show labels: ' + (showLabels  ? 'YES' : 'NO') + '\n';
-        s += '// Show markers: ' + (showMarkers ? 'YES' : 'NO') + '\n';
         if (useMarker) {
             s += '// Highlight marker: ' + markerType + ' color=' + markerColor +
                  ' size=' + markerSize +
@@ -2778,7 +2718,8 @@ define([
                  ' keepPerObject=' + (keepLabelPerObject ? 'YES' : 'NO') + '\n';
         }
         if (cleanupMarkersAtEnd) s += '// Cleanup markers at end: YES\n';
-        if (cleanupLabelsAtEnd)  s += '// Cleanup labels at end: YES\n';
+        if (cleanupLabelsAtEnd)  s += '// Cleanup labels at end: YES\n';				
+        s += '// Show markers: ' + (showMarkers ? 'YES' : 'NO') + '\n';
         s += '// Use save_state.inc: ' + (useSaveState ? 'YES' : 'NO') + '\n';
         s += '// Lock observer/time: ' + (lockObserver ? 'YES' : 'NO') + '\n';
         s += '// Show landscape: ' + (showLandscape ? 'YES' : 'NO') + '\n';
@@ -2786,6 +2727,10 @@ define([
             s += '// Deep sky: hints=' + (deepSky.showHints ? 'ON' : 'OFF') +
                  ', hintsAmount=' + (deepSky.hintsAmount || 8) +
                  ', labelsAmount=' + (deepSky.labelsAmount || 7) + '\n';
+            s += '// Catalog filter: ' +
+                 (deepSky.catalogMessier ? 'Messier only' :
+                  deepSky.catalogStandard ? 'Standard (M, NGC, IC)' :
+                  deepSky.catalogAll ? 'All catalogs' : 'default') + '\n';
             s += '// DSS background: ' + (useDss ? 'YES' : 'NO') + '\n';
         }
         s += '// Generated: ' + new Date().toLocaleString() + '\n';
@@ -2893,11 +2838,12 @@ define([
         s += 'var objects = [\n';
         for (var i = 0; i < objects.length; i++) {
             var rawName = String(objects[i]);
+            // Escape backslashes and double quotes for SSC string literal
             var escName = rawName
                 .replace(/\\/g, '\\\\')
                 .replace(/"/g, '\\"')
                 .replace(/[\r\n]+/g, ' ');
-            s += '    "' + escName + '"' + (i < objects.length - 1 ? ',' : '') + '\n';
+            s += '"' + escName + '"' + (i < objects.length - 1 ? ',' : '');
         }
         s += '];\n\n';
 
@@ -2909,10 +2855,10 @@ define([
         s += 'var ZOOM_FOV     = ' + zoomFov + ';\n';
         s += 'var OVERVIEW_FOV = ' + overviewFov + ';\n';
         s += 'var FONT_SIZE    = ' + fontSize + ';\n';
+        s += 'var AUTO_ZOOM    = ' + (autoZoom ? 'true' : 'false') + ';\n';
         s += 'var SHOW_LABELS  = ' + (showLabels  ? 'true' : 'false') + ';\n';
         s += 'var SHOW_MARKERS = ' + (showMarkers ? 'true' : 'false') + ';\n';
-
-        // v4.2.0: Object highlighting configuration
+        // Object highlighting configuration
         if (useMarker) {
             s += 'var USE_MARKER           = true;\n';
             s += 'var MARKER_TYPE          = "' + markerType + '";\n';
@@ -2933,7 +2879,7 @@ define([
         } else {
             s += 'var USE_OBJ_LABEL        = false;\n';
         }
-
+        s += '\n';				
         if (isDso && useDss) {
             s += 'var DSS_DELAY    = ' + dssDelay + ';   // seconds of DSS visibility\n';
         }
@@ -2945,32 +2891,98 @@ define([
         s += '// ============================================================\n';
         s += 'core.debug(tr("Starting tour..."));\n';
         s += 'core.debug(tr("Total objects in array: ") + objects.length);\n\n';
+        s += 'for (var i = 0; i < objects.length; i++) {\n';
+        s += '    var objName = objects[i];\n';
+        s += '    var currentNum = i + 1;\n';
+        s += '    \n';
+        s += '    core.debug(tr("Visiting object") + " " + currentNum + "/" + objects.length + ": " + objName);\n';
+        s += '    \n';
+        s += '    // Select (if markers are enabled) and center on the object\n';
+        if (showMarkers) {
+            s += '    core.selectObjectByName(objName, true);\n';
+        }
+        s += '    core.moveToObject(objName, 2);\n';
+        // ═══ v4.2.0: Object highlighting (marker + label) ═══
+        s += '    \n';
+        s += '    // ─── Highlight marker & label  ───\n';
+        s += '    var __objMarkerId = null;\n';
+        s += '    if (USE_MARKER) {\n';
+        s += '        __objMarkerId = MarkerMgr.markerObject(objName, true, MARKER_TYPE, MARKER_COLOR, MARKER_SIZE, false, 0);\n';
+        s += '    }\n';
+        s += '    var __objLabelId = null;\n';
+        s += '    if (USE_OBJ_LABEL) {\n';
+        s += '        __objLabelId = LabelMgr.labelObject(objName, objName, true, LABEL_SIZE, LABEL_COLOR, LABEL_POS, -1, LABEL_CONNECT);\n';
+        s += '    }\n';
+        // ════════════════════════════════════════════════════				
+        s += '    core.wait(1);\n';
+        s += '    \n';
+        s += '    // Zoom to the tour FOV (fixed or automatic)\n';
+        s += '    if (AUTO_ZOOM) {\n';
+        s += '        StelMovementMgr.autoZoomIn();\n';
+        s += '    } else {\n';
+        s += '        StelMovementMgr.zoomTo(ZOOM_FOV, 2);\n';
+        s += '    }\n';
+        s += '    core.wait(1);\n';
+        s += '    \n';
 
-        // ═══ v4.2.0: Use the unified buildTourLoop with all options ═══
-        s += buildTourLoop({
-            arrayName:        'objects',
-            itemLabel:        'object',
-            selectFunction:   showMarkers ? 'core.selectObjectByName' : null,
-            moveToFunction:   'core.moveToObject',
-            deselectFunction: showMarkers ? 'core.selectObjectByName("", false);' : null,
+        // DSS delay (only for DSO types with DSS enabled)
+        if (isDso && useDss) {
+            s += '    // Wait for DSS image to load and render\n';
+            s += '    core.wait(DSS_DELAY);\n';
+            s += '    \n';
+        }
 
-            // v4.2.0: Highlight flags (consumed by buildTourLoop)
-            useMarker:           useMarker,
-            markerType:          markerType,
-            markerColor:         markerColor,
-            markerSize:          markerSize,
-            keepMarkerPerObject: keepMarkerPerObject,
+        // Label
+        s += '    // Optional on-screen label\n';
+        s += '    var nameLabel = null;\n';
+        s += '    if (SHOW_LABELS) {\n';
+        s += '        nameLabel = LabelMgr.labelScreen(objName, 50, 50, false, FONT_SIZE, "#ffaa66");\n';
+        s += '        LabelMgr.setLabelShow(nameLabel, true);\n';
+        s += '    }\n';
+        s += '    core.wait(DURATION);\n';
+        s += '    if (nameLabel !== null) {\n';
+        s += '        LabelMgr.deleteLabel(nameLabel);\n';
+        s += '    }\n';
+        s += '    \n';
 
-            useObjLabel:         useObjLabel,
-            labelColor:          labelColor,
-            labelSize:           labelSize,
-            labelPos:            labelPos,
-            labelConnect:        labelConnect,
-            keepLabelPerObject:  keepLabelPerObject,
+        // ═══ v4.2.0: Conditional cleanup per object ═══
+        s += '    // ─── Cleanup per-object markers/labels ───\n';
+        s += '    if (__objMarkerId !== null && !KEEP_MARKER_PER_OBJ) {\n';
+        s += '        MarkerMgr.deleteMarker(__objMarkerId);\n';
+        s += '    }\n';
+        s += '    if (__objLabelId !== null && !KEEP_LABEL_PER_OBJ) {\n';
+        s += '        LabelMgr.deleteLabel(__objLabelId);\n';
+        s += '    }\n';
+        // ═══════════════════════════════════════════				
+				
+        s += '    // Clear selection\n';
 
-            cleanupMarkersAtEnd: cleanupMarkersAtEnd,
-            cleanupLabelsAtEnd:  cleanupLabelsAtEnd
-        });
+        // Clear selection
+        if (showMarkers) {
+            s += '    core.selectObjectByName("", false);\n';
+            s += '    \n';
+        }
+        s += '    // Return to overview FOV\n';
+
+        // Return to overview FOV
+        s += '    // Return to overview FOV (fixed or automatic)\n';
+        s += '    if (AUTO_ZOOM) {\n';
+        s += '        StelMovementMgr.autoZoomOut();\n';
+        s += '    } else {\n';
+        s += '        StelMovementMgr.zoomTo(OVERVIEW_FOV, 2);\n';
+        s += '    }\n';
+        s += '    core.wait(1);\n';
+        s += '}\n\n';
+
+        // ═══ v4.2.0: End-of-tour cleanup ═══
+        s += '// ─── End-of-tour cleanup ───\n';
+        if (cleanupMarkersAtEnd) {
+            s += 'MarkerMgr.deleteAllMarkers();\n';
+        }
+        if (cleanupLabelsAtEnd) {
+            s += 'LabelMgr.deleteAllLabels();\n';
+        }
+        // ═════════════════════════════════════
 
         // ─── 2.12 Reset and cleanup ─────────────────────────────
         s += '// ============================================================\n';

@@ -275,6 +275,7 @@ define([
             zoomFov:          $("#scriptsgenerator-zoom-fov"),
             overviewFov:      $("#scriptsgenerator-overview-fov"),
             fontSize:         $("#scriptsgenerator-font-size"),
+            autoZoom:         $("#scriptsgenerator-auto-zoom"),
             showLabels:       $("#scriptsgenerator-show-labels"),
             showMarkers:      $("#scriptsgenerator-show-markers"),
             useSaveState:     $("#scriptsgenerator-use-savestate"),
@@ -336,7 +337,8 @@ define([
             showOutlines:      $("#scriptsgenerator-show-outlines"),
             proportionalHints: $("#scriptsgenerator-proportional-hints"),
             catalogMessier:    $("#scriptsgenerator-catalog-messier"),
-            catalogStandard:   $("#scriptsgenerator-catalog-standard")
+            catalogStandard:   $("#scriptsgenerator-catalog-standard"),
+            catalogAll:        $("#scriptsgenerator-catalog-all")
         };
     }
 
@@ -858,18 +860,63 @@ define([
             $dom.dssDelayGroup.toggle($dom.useDss.is(":checked"));
         }
 
-        // Catalog filters: mutually exclusive
+        // ─── Catalog filters: mutually exclusive (3-way) ──────
+        // Only one of the three catalog options can be active at a time.
+        // If the user checks one, the other two are unchecked automatically.
+        // Default: catalogAll is checked (all catalogs shown).
         if ($dom.catalogMessier && $dom.catalogMessier.length) {
             $dom.catalogMessier.off("change.sgCatM").on("change.sgCatM", function() {
-                if ($(this).is(":checked") && $dom.catalogStandard && $dom.catalogStandard.length) {
-                    $dom.catalogStandard.prop("checked", false);
+                if ($(this).is(":checked")) {
+                    if ($dom.catalogStandard && $dom.catalogStandard.length) {
+                        $dom.catalogStandard.prop("checked", false);
+                    }
+                    if ($dom.catalogAll && $dom.catalogAll.length) {
+                        $dom.catalogAll.prop("checked", false);
+                    }
+                } else {
+                    // User unchecked it — if no other is checked, fall back to "all"
+                    if (!$dom.catalogStandard.is(":checked") && !$dom.catalogAll.is(":checked")) {
+                        if ($dom.catalogAll && $dom.catalogAll.length) {
+                            $dom.catalogAll.prop("checked", true);
+                        }
+                    }
                 }
             });
         }
         if ($dom.catalogStandard && $dom.catalogStandard.length) {
             $dom.catalogStandard.off("change.sgCatStd").on("change.sgCatStd", function() {
-                if ($(this).is(":checked") && $dom.catalogMessier && $dom.catalogMessier.length) {
-                    $dom.catalogMessier.prop("checked", false);
+                if ($(this).is(":checked")) {
+                    if ($dom.catalogMessier && $dom.catalogMessier.length) {
+                        $dom.catalogMessier.prop("checked", false);
+                    }
+                    if ($dom.catalogAll && $dom.catalogAll.length) {
+                        $dom.catalogAll.prop("checked", false);
+                    }
+                } else {
+                    if (!$dom.catalogMessier.is(":checked") && !$dom.catalogAll.is(":checked")) {
+                        if ($dom.catalogAll && $dom.catalogAll.length) {
+                            $dom.catalogAll.prop("checked", true);
+                        }
+                    }
+                }
+            });
+        }
+        if ($dom.catalogAll && $dom.catalogAll.length) {
+            $dom.catalogAll.off("change.sgCatAll").on("change.sgCatAll", function() {
+                if ($(this).is(":checked")) {
+                    if ($dom.catalogMessier && $dom.catalogMessier.length) {
+                        $dom.catalogMessier.prop("checked", false);
+                    }
+                    if ($dom.catalogStandard && $dom.catalogStandard.length) {
+                        $dom.catalogStandard.prop("checked", false);
+                    }
+                } else {
+                    if (!$dom.catalogMessier.is(":checked") && !$dom.catalogStandard.is(":checked")) {
+                        // Prevent all three from being unchecked — force back to "all"
+                        if ($dom.catalogAll && $dom.catalogAll.length) {
+                            $dom.catalogAll.prop("checked", true);
+                        }
+                    }
                 }
             });
         }
@@ -1853,9 +1900,10 @@ define([
         // Base options
         var opts = {
             duration:      readNum($dom.duration, 4),
-            zoomFov:       readNum($("#sg-nav-fov"), 15),
+            zoomFov:       readNum($dom.zoomFov, 15),
             overviewFov:   readNum($dom.overviewFov, 90),
             fontSize:      readNum($dom.fontSize, 16),
+            autoZoom:      readBool($dom.autoZoom, false),
             showLabels:    readBool($dom.showLabels, true),
             showMarkers:   readBool($dom.showMarkers, true),
             useSaveState:  readBool($dom.useSaveState, false),
@@ -1890,6 +1938,7 @@ define([
                 proportionalHints: readBool($dom.proportionalHints, false),
                 catalogMessier:    readBool($dom.catalogMessier, false),
                 catalogStandard:   readBool($dom.catalogStandard, false),
+                catalogAll:        readBool($dom.catalogAll, true),
                 useDss:            readBool($dom.useDss, false),
                 dssDelay:          readNum($dom.dssDelay, 8)
             };
